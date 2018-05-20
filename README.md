@@ -1,2 +1,2 @@
-# yougroup.github.io
-Website of Yi-Zhuang You's Research Group
+# Yi-Zhuang You's Research Group
+Condensed Matter Thoery @ UCSD
