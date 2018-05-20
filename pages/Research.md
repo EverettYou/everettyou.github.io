@@ -1,9 +1,9 @@
 --- 
 layout: bootstrap 
-title : Portfolio 
-permalink: /portfolio/
+title : Research 
+permalink: /research/
 subtitle: "Projects I am working on" 
 feature-img: "assets/img/pexels/computer.jpeg"
 ---
 
-{% include portfolio.html %}
+{% include research.html %}
