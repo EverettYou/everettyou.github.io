@@ -1,2 +1,4 @@
-Group web page. (Under construction)
-
+---
+layout: home
+---
+Under construction...
