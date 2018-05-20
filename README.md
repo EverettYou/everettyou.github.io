@@ -1,5 +1,1 @@
----
-layout: page
----
-Group Website
-$$x^2$$
+# Yi-Zhuang You's Group Website
