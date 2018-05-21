@@ -18,9 +18,11 @@ Electrons and spins are microscopic degrees of freedoms governed by quantum mech
 
 #### Quantum Spin Liquid
 
-- Iridates
-  
+- Iridates and Kitaev spin liquid
 
+#### Non-Fermi Liquid
+
+- Sachdev-Ye-Kitaev model(s)
 
 ### Topological Phases of Matter
 
