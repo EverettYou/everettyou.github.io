@@ -3,7 +3,7 @@ layout: page
 title : Research 
 permalink: /research/
 subtitle: "past and present projects" 
-#feature-img: "assets/img/figures/research.png"
+feature-img: "assets/img/figures/research.png"
 ---
 
 ### Correlated Quantum Many-Body System
