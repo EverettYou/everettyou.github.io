@@ -10,13 +10,13 @@ permalink: /research/
 
 Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. Emergent collective phenomema in quantum many-body system.
 
-#### Unconvensional Superconductivity
+- **Unconvensional Superconductivity**
 
-Iron-based, Moire superlattice
+  Iron-based, Moire superlattice
 
-#### Quantum Spin Liquid
+- **Quantum Spin Liquid**
 
-Iridates
+  Iridates
 
 ### Topological Phases of Matter
 
