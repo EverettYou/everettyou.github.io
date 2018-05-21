@@ -66,6 +66,8 @@ Entanglement is the most intriguing phenomenon in quantum mechanics that bears n
 
 ### Machine Learning and Physics
 
+Artifitial intelligence (AI) is a trend of feature technology. It is finding more and more applications in all branches of scientific research, including physics. On the other hand, physicists are also bringing their intuitives and tools to the AI communites, trying to decipher the nature of intelligence.
+
 #### Deep Learning, Renormalization and Holography
 
 - Deep learning holography
