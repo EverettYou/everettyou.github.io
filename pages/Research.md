@@ -52,7 +52,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 #### Many-Body Localization (MBL) and Thermalization
 
-- MBL and marginal MBL phases
+- Spectrum bifurcation renormalization group
 
 - Localization-thermalization transition
 
