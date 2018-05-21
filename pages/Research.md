@@ -48,6 +48,8 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - Symmetric mass generation (SMG)
 
+- Field theory duality
+
 ### Quantum Enanglement: Structure and Dynamics
 
 #### Many-Body Localization (MBL) and Thermalization
