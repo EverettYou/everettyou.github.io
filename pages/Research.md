@@ -8,7 +8,7 @@ permalink: /research/
 
 ### Correlated Quantum Many-Body System
 
-Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. When they are put togeter and interact with each other strongly, exotic collective phenomema can emerge in the system. The study of quantum many-body systems underlies our understanding of correlated materials and quantum devices.
+Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. When they are put together and interact with each other strongly, exotic collective phenomema can emerge in the system. The study of quantum many-body systems underlies our understanding of correlated materials and quantum devices.
 
 #### Unconvensional Superconductor
 
