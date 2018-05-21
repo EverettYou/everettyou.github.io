@@ -9,9 +9,58 @@ layout: default
     {{ site.theme_settings.header_text }}
   </div>
   {% endif %}
-</div> 
-<article>
-  <section class="post-content">
-    We are a research group in theoretical condensed matter physics. We are interested in a broad varieties of topics related to emergent phenomena in quantum (and classical) many-body systems. We use both theoretical and numerical approaches in our research. The word cloud above gives a general picture of what we are currently interested in.
-  </section>
-</article>
+  
+  <article>
+    <section class="post-content">
+      We are a research group in theoretical condensed matter physics. We are interested in a broad varieties of topics related to emergent phenomena in quantum (and classical) many-body systems. We use both theoretical and numerical approaches in our research. The word cloud above gives a general picture of what we are currently interested in.
+    </section>
+  </article>
+
+  <div class="posts">
+    {% for post in paginator.posts %}
+    <div class="post-teaser">
+      {% if post.thumbnail %} 
+      <div class="post-img">
+         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
+      </div>
+      {% endif %}
+      <span>
+          <header>
+            <h1>
+              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+                {{ post.title }}
+              </a>
+            </h1>
+            <p class="meta">
+              {{ post.date | date: "%B %-d, %Y" }}
+            </p>
+          </header>
+          <div class="excerpt">
+              {{ post.excerpt | strip_html | escape }}
+            <!--{{ post.content | strip_html | truncate: "250" }}-->
+            <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
+              {{ site.theme_settings.str_continue_reading }}
+            </a>-->
+          </div>
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+  <div class="pagination">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
+      <i class="fa fa-chevron-left"></i>
+      {{ site.theme_settings.str_previous_page }}
+    </a>
+    {% endif %}
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
+      {{ site.theme_settings.str_next_page }}
+      <i class="fa fa-chevron-right"></i>
+    </a>
+    {% endif %}
+  </div>
+  {% endif %}
+ </div>
