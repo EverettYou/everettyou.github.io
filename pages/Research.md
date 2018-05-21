@@ -2,8 +2,8 @@
 layout: page 
 title : Research 
 permalink: /research/
-#subtitle: "Projects I am working on" 
-#feature-img: "assets/img/pexels/computer.jpeg"
+subtitle: "past and present projects" 
+#feature-img: "assets/img/figures/research.png"
 ---
 
 ### Correlated Quantum Many-Body System
@@ -60,7 +60,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 #### Entanglement and Tensor Network Holography
 
-#### Eantanglement Feature and Dynamics
+#### Eantanglement Feature Dynamics
 
 ### Machine Learning and Physics
 
