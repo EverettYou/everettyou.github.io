@@ -48,7 +48,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - Symmetric mass generation (SMG)
 
-- Field theory duality
+- Web of duality in quantum field theory
 
 ### Quantum Enanglement: Structure and Dynamics
 
