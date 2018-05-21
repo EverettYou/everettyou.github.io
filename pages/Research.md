@@ -12,11 +12,7 @@ Electrons and spins are microscopic degrees of freedoms governed by quantum mech
 
 #### Unconvensional Superconductor
 
-- Iron-based superconductors $$y=x^2$$
-
-$$
-y=x^2
-$$
+- Iron-based superconductors 
 
 - Moire superlattice (twisted multilayer graphene etc.)
 
