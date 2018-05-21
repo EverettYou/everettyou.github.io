@@ -8,15 +8,19 @@ permalink: /research/
 
 ### Correlated Quantum Many-Body System
 
-Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. Emergent collective phenomema in quantum many-body system.
+Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. When they are put togeter and interact with each other strongly, exotic collective phenomema can emerge in the system. The study of quantum many-body systems underlies our understanding of correlated materials and quantum devices.
 
-- **Unconvensional Superconductivity**
+#### Unconvensional Superconductor
 
-  Iron-based, Moire superlattice
+- Iron-based superconductors
 
-- **Quantum Spin Liquid**
+- Moire superlattice (twisted multilayer graphene etc.)
 
-  Iridates
+#### Quantum Spin Liquid
+
+- Iridates
+  
+
 
 ### Topological Phases of Matter
 
