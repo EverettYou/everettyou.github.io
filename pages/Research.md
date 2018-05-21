@@ -5,20 +5,20 @@ permalink: /research/
 subtitle: "Projects I am working on" 
 ---
 
-# Correlated Quantum Many-Body System
+### Correlated Quantum Many-Body System
 
 Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. Emergent collective phenomema in quantum many-body system.
 
-## Unconvensional Superconductivity
+#### Unconvensional Superconductivity
 
 Iron-based, Moire superlattice
 
-## Quantum Spin Liquid
+#### Quantum Spin Liquid
 
 Iridates
 
-# Topological Phases of Matter
+### Topological Phases of Matter
 
-# Quantum Enanglement: Structure and Dynamics
+### Quantum Enanglement: Structure and Dynamics
 
-# Machine Learning and Physics
+### Machine Learning and Physics
