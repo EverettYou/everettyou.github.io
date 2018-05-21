@@ -50,7 +50,9 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - Web of duality in quantum field theory
 
-### Quantum Enanglement: Structure and Dynamics
+### Quantum Enanglement
+
+Entanglement is the most intriguing phenomenon in quantum mechanics that bears no analogy in our classical experience. It is essentially a distributive storage of quantum information in the interrelations (other than the entities) of quantum bits. Quantum entanglement can become very complex in many-body systems. Understanding the structure and dynamics of quantum many-body entanglement may allow us to better answer the questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
 
 #### Many-Body Localization (MBL) and Thermalization
 
