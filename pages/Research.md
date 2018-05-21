@@ -5,10 +5,20 @@ permalink: /research/
 subtitle: "Projects I am working on" 
 ---
 
-## Correlated Quantum Many-Body System
+# Correlated Quantum Many-Body System
 
-## Topological Phases of Matter
+Electrons and spins are microscopic degrees of freedoms governed by quantum mechanics. Emergent collective phenomema in quantum many-body system.
 
-## Quantum Enanglement: Structure and Dynamics
+## Unconvensional Superconductivity
 
-## Machine Learning and Physics
+Iron-based, Moire superlattice
+
+## Quantum Spin Liquid
+
+Iridates
+
+# Topological Phases of Matter
+
+# Quantum Enanglement: Structure and Dynamics
+
+# Machine Learning and Physics
