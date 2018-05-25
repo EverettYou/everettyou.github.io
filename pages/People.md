@@ -4,7 +4,7 @@ title : People
 permalink: /people/
 ---
 
-### Principle Investigator
+### Principal Investigator
 
 Yi-Zhuang You ([CV]({{ site.baseurl }}/assets/pdf/CV.pdf))
 
