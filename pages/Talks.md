@@ -1,7 +1,7 @@
 --- 
 layout: page 
-title : Publications 
-permalink: /publication/
+title : Talks 
+permalink: /talk/
 ---
 
 ### Publications
