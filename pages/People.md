@@ -6,7 +6,7 @@ permalink: /people/
 
 ### Principle Investigator
 
-Yi-Zhuang You 
+Yi-Zhuang You ([CV]({{ site.baseurl }}/assets/pdf/CV.pdf))
 
 ### Graduate Students
 
