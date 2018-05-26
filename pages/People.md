@@ -8,8 +8,8 @@ permalink: /people/
 
 Yi-Zhuang You ([CV]({{ site.baseurl }}/assets/pdf/CV.pdf))
 
-### Graduate Students
+### Grad Students
 
-### Postdoctoral Researchers
+### Postdocs
 
 
