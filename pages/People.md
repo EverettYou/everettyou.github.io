@@ -6,7 +6,7 @@ permalink: /people/
 
 ### Principal Investigator
 
-|![Yi-Zhuang You]({{ site.baseurl }}/assets/img/photos/PI.png =50x)|Yi-Zhuang You ([CV]({{ site.baseurl }}/assets/pdf/CV.pdf))|
+|![Yi-Zhuang You]({{ site.baseurl }}/assets/img/photos/PI.png){:height="36px" width="36px"}|Yi-Zhuang You ([CV]({{ site.baseurl }}/assets/pdf/CV.pdf))|
 
 ### Grad Students
 
