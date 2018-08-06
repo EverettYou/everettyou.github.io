@@ -14,7 +14,8 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 - Iron-based superconductors 
 
-- [Moire superlattice]({{site.baseurl}}/2018/05/21/Moire.html)
+- [Moire superlattice](
+{{site.baseurl}}/2018/05/21/Moire.html)
 
 #### Quantum Spin Liquid
 
@@ -62,9 +63,10 @@ Entanglement is the most intriguing phenomenon in quantum mechanics that bears n
 
 #### Structure and Dynamics of Entanglement
 
-- [Entanglement feature learning]({{site.baseurl}}/2018/05/21/EFL.html) 
+- [Entanglement feature learning]({{site.baseurl}}/2018/01/31/EFL.html) 
 
-- Quantum information dynamics
+- [Quantum information dynamics](
+{{site.baseurl}}/2018/03/28/DynQ.html)
 
 ### Machine Learning and Physics
 
