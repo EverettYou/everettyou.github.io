@@ -60,9 +60,11 @@ Entanglement is the most intriguing phenomenon in quantum mechanics that bears n
 
 - Localization-thermalization transition
 
-#### Entanglement and Tensor Network Holography
+#### Structure and Dynamics of Entanglement
 
-#### Eantanglement Feature Dynamics
+- [Entanglement feature learning]({{site.baseurl}}/2018/05/21/EFL.html) 
+
+- Quantum information dynamics
 
 ### Machine Learning and Physics
 
@@ -75,3 +77,4 @@ Artificial intelligence (AI) is a promissing trend of future technology. It is f
 - Neural network renormalization
 
 #### Machine Learning and Quantum Physics
+
