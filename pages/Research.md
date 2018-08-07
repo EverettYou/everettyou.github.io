@@ -41,7 +41,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 #### Fracton Topological Order and Gauge Theory
 
-- Higher-form gauge theory
+- Higher-rank gauge theory with space group symmetry
 
 #### Topological Phase Transitions
 
@@ -51,7 +51,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - Web of duality in quantum field theory
 
-### Quantum Entanglement
+### Quantum Entanglement and Holography
 
 Quantum entanglement is the most intriguing phenomenon in quantum mechanics, underlying the discussion of topological order, many-body localization, and quantum chaos. It also shares a remarkable similarity with wormholes given their non-local character, which motivates the idea of holographic duality between entanglement and spacetime. Understanding the structure and dynamics of many-body entanglement could allow us to answer some most profound questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
 
