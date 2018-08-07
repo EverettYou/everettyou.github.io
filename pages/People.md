@@ -14,4 +14,4 @@ permalink: /people/
 
 ### Postdocs
 
-|![Wenbo Fu]({{site.baseurl}}/assets/img/photos/boy.png){:width="160px"}|**Wenbo Fu** <br>Mayer Hall, room 1623|
+|![Wenbo Fu]({{site.baseurl}}/assets/img/photos/WBFu.png){:width="160px"}|**Wenbo Fu** <br>Mayer Hall, room 1623|
