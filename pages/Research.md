@@ -8,7 +8,7 @@ feature-img: "assets/img/figures/research.png"
 
 ### Correlated Quantum Many-Body System
 
-Electrons and spins are microscopic degrees of freedom governed by quantum mechanics. When they are put together and interact with each other strongly, exotic collective phenomena can emerge in the system, which goes beyond the simple sum of the behavior of each individual. The study of quantum many-body systems also has important practical applications, ranging from designing correlated materials like high-temperature superconductors to making quantum devices for quantum computation.
+Electrons and spins are microscopic degrees of freedom governed by quantum mechanics. When they are put together and interact with each other strongly, exotic collective phenomena can emerge in the system, which goes beyond the simple sum of the behavior of each individual. The study of quantum many-body systems also has important practical applications, ranging from designing correlated materials to making quantum devices.
 
 #### Unconvensional Superconductor
 
@@ -27,7 +27,7 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 ### Topological Phases of Matter
 
-Discovering new phases of matter lies on the frontier of condensed matter physics. Topological phases are such exotic quantum phases that go beyond our traditional understanding. The study of topological phases and phase transitions not only deepen our understanding of phases of matter but also generate new developments in various directions including field theory duality and lattice gauge theory. The unique features of topological phases are being tested in the on-going numerical simulations and may also find experiemental realizations in the near future.
+Discovering new phases of matter lies on the frontier of condensed matter physics. Topological phases are such exotic quantum phases that go beyond our traditional understanding. The study of topological phases has led to many exciting developments in quantum many-body theory. The unique features of topological phases are being tested in current numerical simulations and may also find experimental realizations in the near future.
 
 #### Symmetry Protected ~~Topological~~Trivial (SPT) Phases
 
@@ -51,9 +51,9 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - Web of duality in quantum field theory
 
-### Quantum Enanglement
+### Quantum Entanglement
 
-Entanglement is the most intriguing phenomenon in quantum mechanics that bears no analogy in our classical experience. It is essentially a distributive storage of quantum information in the interrelations (other than the entities) of quantum bits. Quantum entanglement can become very complex in many-body systems. Understanding the structure and dynamics of quantum many-body entanglement would allow us to better answer questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
+Quantum entanglement is the most intriguing phenomenon in quantum mechanics, underlying the discussion of topological order, many-body localization, and quantum chaos. It also shares a remarkable similarity with wormholes given their non-local character, which motivates the idea of holographic duality between entanglement and spacetime. Understanding the structure and dynamics of many-body entanglement could allow us to answer some most profound questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
 
 #### Many-Body Localization (MBL) and Thermalization
 
@@ -70,7 +70,7 @@ Entanglement is the most intriguing phenomenon in quantum mechanics that bears n
 
 ### Machine Learning and Physics
 
-Artificial intelligence (AI) is a promissing trend of future technology. It is finding more and more applications in all branches of science (including physics). On the other hand, physicists are also bringing their intuitions and tools to the AI research, trying to decipher the nature of intelligence. The combination between machine learning and physics is just at its beigining stage, much potential is to be released.  
+Artificial intelligence (AI) is a promising trend of future technology. It is finding more and more applications in all branches of science (including physics). On the other hand, physicists are also bringing their intuitions and tools to the AI research, trying to decipher the nature of intelligence. The combination between machine learning and physics is just at its beginning stage, much potential is to be released.  
 
 #### Deep Learning, Renormalization, and Holography
 
