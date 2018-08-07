@@ -70,7 +70,7 @@ Quantum entanglement is the most intriguing phenomenon in quantum mechanics, und
 
 ### Machine Learning and Physics
 
-Artificial intelligence (AI) is a promising trend of future technology. It is finding more and more applications in all branches of science (including physics). On the other hand, physicists are also bringing their intuitions and tools to the AI research, trying to decipher the nature of intelligence. The combination between machine learning and physics is just at its beginning stage, much potential is to be released.  
+Artificial intelligence (AI) is a promising trend of future technology. It is finding more and more applications in all branches of science (including physics). On the other hand, physicists are also bringing their intuitions and tools to the AI research, trying to decipher the nature of intelligence. The combination between machine learning and physics is just at its beginning stage, and much potential is to be released.  
 
 #### Deep Learning, Renormalization, and Holography
 
