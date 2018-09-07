@@ -1,6 +1,7 @@
 ---
 layout: page 
-title : PHYS 212A 
+title : "PHYS 212A"
+subtitle: "Graduate Quantum Mechanics I"
 permalink: /teaching/PHYS212A
 hide: true
 ---
