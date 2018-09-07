@@ -1,7 +1,8 @@
 ---
-layout: post 
+layout: page 
 title : PHYS 212A 
 permalink: /teaching/PHYS212A
+hide: true
 ---
 
 * Schedule of Classes
