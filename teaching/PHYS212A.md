@@ -2,7 +2,6 @@
 layout: page 
 title : PHYS 212A 
 permalink: /teaching/PHYS212A
-hide: true
 ---
 
 * Schedule of Classes
@@ -11,5 +10,4 @@ hide: true
   * Final: December 14, 2018, 11:30-14:29
 * References
   * Leonard Susskind and Art Friedman, Quantum Mechanics (the Theoretical Minimum). Publisher: Basic Books, New York. (2014)
-
 * Lecture Notes
