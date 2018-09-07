@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: post 
 title : PHYS 212A 
 permalink: /teaching/PHYS212A
 ---
