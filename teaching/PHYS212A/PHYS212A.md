@@ -10,7 +10,9 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Office hour: Tuesday & Thursday 14:00-15:00, Mayer Hall 5202
+* Discuss section: Monday 15:00-16:30, (place TBA) 
+
+* Office hour: Tuesday & Thursday 14:00-14:45, Mayer Hall 5202
 
 * Final: December 14, 2018, 11:30-14:29
 
@@ -23,4 +25,12 @@ hide: true
 [3] J. J. Sakurai, Modern Quantum Mechanics. Addison-Wesley Publishing Company. (1994)
 
 ### Lecture Notes
+
+Part 1. Qubits and Entanglement ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.pdf))
+
+Part 2. Path Integral and Wave Mechancis
+
+Part 3. Algebraic Methods
+
+Part 4. Perturbation Theory
 
