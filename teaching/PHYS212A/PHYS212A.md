@@ -22,9 +22,15 @@ hide: true
 
 * Teaching Assistances
  
-  * Shauna Kravec <skravec@ucsd.edu>
+  * Shauna Kravec
 
-  * Yan Pei <yrpei@ucsd.edu>
+  	 * Email: <skravec@ucsd.edu>
+
+     * TA Office hour: Monday 14:00-15:00, Mayer Hall 4226
+
+  * Yan Pei
+  
+    * Email: <yrpei@ucsd.edu>
 
 ### Textbooks
 
