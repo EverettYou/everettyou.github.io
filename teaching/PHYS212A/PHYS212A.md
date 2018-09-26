@@ -10,11 +10,21 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Discuss section: Monday 15:00-16:30, (place TBA) 
-
-* Office hour: Tuesday & Thursday 14:00-14:45, Mayer Hall 5202
+* Discuss section: Monday 15:00-16:30, Mayer Hall Addition 2702 
 
 * Final: December 14, 2018, 11:30-14:29
+
+* Instructor: Yi-Zhuang You
+
+  * Email: <yzyou@ucsd.edu>
+
+  * Office hour: Tuesday & Thursday 14:00-14:45, Mayer Hall 5202
+
+* Teaching Assistances
+ 
+  * Shauna Kravec <skravec@ucsd.edu>
+
+  * Yan Pei <yrpei@ucsd.edu>
 
 ### Textbooks
 
