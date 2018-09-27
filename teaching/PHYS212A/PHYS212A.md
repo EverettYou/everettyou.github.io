@@ -28,7 +28,7 @@ hide: true
 
      * TA Office hour: Monday 14:00-15:00, Mayer Hall 4226
 
-  * Yan Pei
+  * Rudy Pei
   
     * Email: <yrpei@ucsd.edu>
 
