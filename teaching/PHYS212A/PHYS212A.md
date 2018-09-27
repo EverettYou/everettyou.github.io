@@ -14,7 +14,7 @@ hide: true
 
 * Final: December 14, 2018, 11:30-14:29
 
-* Instructor: Yi-Zhuang You
+* Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU)
 
   * Email: <yzyou@ucsd.edu>
 
