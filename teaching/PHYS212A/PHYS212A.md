@@ -32,6 +32,8 @@ hide: true
   
     * Email: <yrpei@ucsd.edu>
 
+* Course grade: homework 20%, quizzes 30%, final 50%.
+
 ### Textbooks
 
 [1] Leonard Susskind and Art Friedman, Quantum Mechanics (the Theoretical Minimum). Basic Books, New York. (2014)
