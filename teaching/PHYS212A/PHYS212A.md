@@ -10,7 +10,7 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Discuss section: Monday 15:00-16:30, Mayer Hall Addition 2702 
+* Discuss session: Monday 15:00-16:30, Mayer Hall Addition 2702 
 
 * Final: December 14, 2018, 11:30-14:29
 
@@ -51,3 +51,8 @@ Part 2. Path Integral and Wave Mechancis
 Part 3. Algebraic Methods
 
 (Part 4. Perturbation Theory)
+
+### Worksheets for Discussion Session
+
+[worksheet1]({{site.baseurl}}/teaching/PHYS212A/worksheet1.pdf)  
+[worksheet2]({{site.baseurl}}/teaching/PHYS212A/worksheet2.pdf)
