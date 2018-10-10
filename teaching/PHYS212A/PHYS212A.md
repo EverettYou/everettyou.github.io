@@ -20,7 +20,7 @@ hide: true
 
   * Office hour: Tuesday & Thursday 14:00-14:45, Mayer Hall 5202
 
-* Teaching Assistances
+* Teaching Assistants
  
   * Shauna Kravec
 
