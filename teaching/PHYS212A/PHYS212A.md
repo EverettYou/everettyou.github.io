@@ -58,5 +58,5 @@ Part 3. Algebraic Methods
 ### Worksheets for Discussion Session
 
 [worksheet1]({{site.baseurl}}/teaching/PHYS212A/worksheet1.pdf)  
-[worksheet2]({{site.baseurl}}/teaching/PHYS212A/worksheet2.pdf)
+[worksheet2]({{site.baseurl}}/teaching/PHYS212A/worksheet2.pdf)  
 [worksheet3]({{site.baseurl}}/teaching/PHYS212A/worksheet3.pdf)
