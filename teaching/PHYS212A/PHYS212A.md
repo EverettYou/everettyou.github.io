@@ -34,6 +34,8 @@ hide: true
 
 * Course grade: homework 20%, quizzes 30%, final 50%.
 
+  * Next homework due date: Oct. 23 (Part I: HW 3,4,5)
+
 ### Textbooks
 
 [1] Leonard Susskind and Art Friedman, Quantum Mechanics (the Theoretical Minimum). Basic Books, New York. (2014)
