@@ -63,7 +63,8 @@ Part 3. Algebraic Methods
 [worksheet2]({{site.baseurl}}/teaching/PHYS212A/worksheet2.pdf)  
 [worksheet3]({{site.baseurl}}/teaching/PHYS212A/worksheet3.pdf)  
 [worksheet4]({{site.baseurl}}/teaching/PHYS212A/worksheet4.pdf)  
-[worksheet5]({{site.baseurl}}/teaching/PHYS212A/worksheet5.pdf)
+[worksheet5]({{site.baseurl}}/teaching/PHYS212A/worksheet5.pdf)  
+[worksheet6]({{site.baseurl}}/teaching/PHYS212A/worksheet6.pdf)
 
 ### Homework Solutions
 
