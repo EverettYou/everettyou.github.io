@@ -53,7 +53,7 @@ hide: true
 *path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
 
 **Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Algebraic Methods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Algebraic Methods.pdf))  
-*harmonic oscillator, bosons, angular momentum, fusion category of spins, hydrogen atom and SO(4) symmetry*
+*harmonic oscillator, bosons, angular momentum, fusion category of spins, hydrogen atom and SO(4) symmetry* (... under construction ...)
 
 ### Worksheets for Discussion Session
 
