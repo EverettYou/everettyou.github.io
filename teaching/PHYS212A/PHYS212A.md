@@ -46,16 +46,14 @@ hide: true
 
 ### Lecture Notes
 
-Part 1. Qubits and Entanglement ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.pdf))  
+**Part 1. Qubits and Entanglement** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.pdf))  
 *states, observables, time evolution, measurement postulate, uncertainty relation, density matrix, pure and mixed state, composition of quantum systems, entanglement entropy and mutual information, Bell inequality, tensor network, quantum circuit, quantum decoherence, quantum error correction*
 
-Part 2. Path Integral and Wave Mechancis  
-*path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, quantum rotor*
+**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Path Integral Quantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Path Integral Quantization.pdf))  
+*path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
 
-Part 3. Algebraic Methods  
-*harmonic oscillator and bosons, angular momentum, fusion category of spins, hydrogen atom and SO(4) symmetry*
-
-(Part 4. Perturbation Theory)
+**Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Algebraic Methods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Algebraic Methods.pdf))  
+*harmonic oscillator, bosons, angular momentum, fusion category of spins, hydrogen atom and SO(4) symmetry*
 
 ### Worksheets for Discussion Session
 
