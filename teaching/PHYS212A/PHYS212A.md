@@ -44,6 +44,11 @@ hide: true
 
 [3] J. J. Sakurai, Modern Quantum Mechanics. Addison-Wesley Publishing Company. (1994)
 
+#### Other References
+
+[4] Daniel Gottesman, An Introduction to Quantum Error Correction and
+Fault-Tolerant Quantum Computation (https://arxiv.org/pdf/0904.2557.pdf)
+
 ### Lecture Notes
 
 **Part 1. Qubits and Entanglement** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.pdf))  
