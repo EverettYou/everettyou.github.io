@@ -47,7 +47,7 @@ hide: true
 #### Other References
 
 [4] Daniel Gottesman, An Introduction to Quantum Error Correction and
-Fault-Tolerant Quantum Computation (https://arxiv.org/pdf/0904.2557.pdf)
+Fault-Tolerant Quantum Computation [arXiv:0904.2557](https://arxiv.org/pdf/0904.2557.pdf)
 
 ### Lecture Notes
 
