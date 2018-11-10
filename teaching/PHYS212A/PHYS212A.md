@@ -10,7 +10,7 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Discuss session: Monday 15:00-16:30, Mayer Hall Addition 2702 
+* Discuss session: Monday 15:00-16:30 (cancled on Nov. 12 due to holidays), Mayer Hall Addition 2702 
 
 * Final: December 14, 2018, 11:30-14:29
 
