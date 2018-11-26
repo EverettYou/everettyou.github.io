@@ -10,7 +10,9 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Discuss session: Monday 15:00-16:30 (cancled on Nov. 12 due to holidays), Mayer Hall Addition 2702 
+* Discuss session: Monday 15:00-16:30, Mayer Hall Addition 2702 
+
+* Review session: December 10, 2018, 15:00-16:30, Mayer Hall Addition 2702
 
 * Final: December 14, 2018, 11:30-14:29
 
@@ -34,7 +36,7 @@ hide: true
 
 * Course grade: homework 20%, quizzes 30%, final 50%.
 
-  * Next homework due date: Nov. 20 (Part I: HW 15,16 + Part II: HW1)
+  * Next homework due date: Dec. 4 (Part II: HW2-6)
 
 ### Textbooks
 
