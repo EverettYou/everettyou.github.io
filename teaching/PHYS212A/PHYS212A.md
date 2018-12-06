@@ -14,7 +14,7 @@ hide: true
 
 * Review session: December 10, 2018, 15:00-16:30, Mayer Hall Addition 2702
 
-* Final: December 14, 2018, 11:30-14:29
+* Final: December 14, 2018, 11:30-14:29, Mayer Hall Addition 2702
 
 * Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU)
 
