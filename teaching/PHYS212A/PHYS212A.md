@@ -72,9 +72,9 @@ Fault-Tolerant Quantum Computation [arXiv:0904.2557](https://arxiv.org/pdf/0904.
 [worksheet6]({{site.baseurl}}/teaching/PHYS212A/worksheet6.pdf)  
 [worksheet7]({{site.baseurl}}/teaching/PHYS212A/worksheet7.pdf)  
 [worksheet8]({{site.baseurl}}/teaching/PHYS212A/worksheet8.pdf)  
-[worksheet9]({{site.baseurl}}/teaching/PHYS212A/worksheet9.pdf)
+[worksheet9]({{site.baseurl}}/teaching/PHYS212A/worksheet9.pdf)  
+[review]({{site.baseurl}}/teaching/PHYS212A/review.pdf)
 
 ### Homework Solutions
 
-[solutions1]({{site.baseurl}}/teaching/PHYS212A/solutions1.pdf) (HW 1-8)
-
+Homework solutions has been included in the lecture notes.
