@@ -47,9 +47,9 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - Deconfined quantum criticality
 
-- Symmetric mass generation (SMG)
+- Symmetric mass generation
 
-- Web of duality in quantum field theory
+- Duality in quantum field theory
 
 ### Quantum Entanglement and Holography
 
@@ -79,4 +79,7 @@ Artificial intelligence (AI) is a promising trend of future technology. It is fi
 - Neural network renormalization
 
 #### Machine Learning and Quantum Physics
+
+- [Machine assisted physics discovery](
+{{site.baseurl}}/2018/12/20/discoverQM.html)
 
