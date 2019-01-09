@@ -26,7 +26,7 @@ hide: true
 
   	 * Email: <skravec@ucsd.edu>
 
-     * TA Office hour: Monday 14:00-15:00, Mayer Hall 4226
+     * TA Office hour: Wednesday 14:00-15:00, Mayer Hall 4226
 
   * Hongye Hu (Homework grader)
   
@@ -52,5 +52,5 @@ hide: true
 
 ### Worksheets for Discussion Session
 
-[worksheet1]({{site.baseurl}}/teaching/PHYS212A/worksheet1.pdf)  
+[worksheet1]({{site.baseurl}}/teaching/PHYS212B/worksheet1.pdf)  
 
