@@ -47,7 +47,7 @@ hide: true
 
 ### Lecture Notes
 
-**Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/Algebraic Methods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/Algebraic Methods.pdf))  
+**Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.pdf))  
 *harmonic oscillator, bosons, angular momentum, fusion category of spins, hydrogen atom and SO(4) symmetry* 
 
 ### Worksheets for Discussion Session
