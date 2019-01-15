@@ -34,7 +34,7 @@ hide: true
 
 * Course grade: homework 20%, quizzes 30%, final 50%.
 
-  * Next homework due date: 
+  * Next homework due date: Jan. 22 (Part III: HW 1,2) 
 
 ### Textbooks
 
