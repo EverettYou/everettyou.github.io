@@ -36,6 +36,14 @@ hide: true
 
   * Next homework due date: Jan. 22 (Part III: HW 1,2) 
 
+  * Quiz schedule:
+
+  	* Quiz I: Jan. 29 (Tue)
+
+  	* Quiz II: Feb. 19 (Tue)
+
+  	* Quiz III: Mar. 5 (Tue)
+
 ### Textbooks
 
 [1] R. Shankar, Principles of Quantum Mechanics. Plenum Press, New York. (1994)

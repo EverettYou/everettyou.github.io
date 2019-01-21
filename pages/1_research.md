@@ -53,7 +53,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 ### Quantum Entanglement and Holography
 
-Quantum entanglement is the most intriguing phenomenon in quantum mechanics, underlying the discussion of topological order, many-body localization, and quantum chaos. It also shares a remarkable similarity with wormholes given their non-local character, which motivates the idea of holographic duality between entanglement and spacetime. Understanding the structure and dynamics of many-body entanglement could allow us to answer some most profound questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
+Quantum entanglement is the most intriguing phenomenon in quantum mechanics, connecting topics of topological order, many-body localization, and quantum chaos. It also shares a remarkable similarity with wormholes given their non-local nature, which motivates the idea of holographic duality between entanglement and spacetime. Understanding the structure and dynamics of many-body entanglement could allow us to answer some most profound questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
 
 #### Many-Body Localization (MBL) and Thermalization
 
