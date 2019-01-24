@@ -61,4 +61,5 @@ hide: true
 ### Worksheets for Discussion Session
 
 [worksheet1]({{site.baseurl}}/teaching/PHYS212B/worksheet1.pdf)  
+[worksheet2]({{site.baseurl}}/teaching/PHYS212B/worksheet2.pdf)  
 
