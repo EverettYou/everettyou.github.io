@@ -12,6 +12,8 @@ permalink: /people/
 |--|--|
 |![Hongye Hu]({{site.baseurl}}/assets/img/photos/HYHu.png){:width="160px"}|**Hongye Hu** <br>*Office:* Mayer Hall 1623|
 |--|--|
+|![Ahmed Akhtar]({{site.baseurl}}/assets/img/photos/AAkhtar.png){:width="160px"}|**Ahmed Akhtar** <br>*Office:* |
+|--|--|
 |**Postdocs**||
 |--|--|
 |![Wenbo Fu]({{site.baseurl}}/assets/img/photos/WBFu.png){:width="160px"}|**Wenbo Fu** <br>*Office:* Mayer Hall 1623|
