@@ -34,7 +34,7 @@ hide: true
 
 * Course grade: homework 20%, quizzes 30%, final 50%.
 
-  * Next homework due date: Jan. 22 (Part III: HW 1,2) 
+  * Next homework due date: Feb. 5 (Part III: HW 3) 
 
   * Quiz schedule:
 
@@ -58,10 +58,10 @@ hide: true
 **Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.pdf))  
 *harmonic oscillator, creation and annihilation operator, boson number operator, coherent state, angular momentum theory, SO(3) rotational symmetry, fusion category of spins, hydrogen atom and SO(4) symmetry* 
 
-**Part 4. Perturbation Theory**
+**Part 4. Perturbation Theory**  
 *non-degenerate perturbation, Hellmann-Feynman theorems, degenerate perturbation, effective Hamiltonian, time-dependent perturbation, Dyson series, Green's function, Feynman diagrams, transition rate, Fermi's golden rule*
 
-**Part 5. Second Quantization**
+**Part 5. Second Quantization**  
 *identical particle, Fock space and Fock state, creation and annihilation operator of bosons and fermions, quantum many-body system*
 
 ### Worksheets for Discussion Session
