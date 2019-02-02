@@ -81,5 +81,5 @@ Artificial intelligence (AI) is a promising trend of future technology. It is fi
 #### Machine Learning and Quantum Physics
 
 - [Machine assisted physics discovery](
-{{site.baseurl}}/2018/12/20/discoverQM.html)
+{{site.baseurl}}/2019/02/01/discoverQM.html)
 
