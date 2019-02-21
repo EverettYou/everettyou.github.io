@@ -72,4 +72,5 @@ hide: true
 [worksheet4]({{site.baseurl}}/teaching/PHYS212B/worksheet4.pdf)  
 [worksheet5]({{site.baseurl}}/teaching/PHYS212B/worksheet5.pdf)  
 [worksheet6]({{site.baseurl}}/teaching/PHYS212B/worksheet6.pdf)  
+[worksheet7]({{site.baseurl}}/teaching/PHYS212B/worksheet7.pdf)  
 
