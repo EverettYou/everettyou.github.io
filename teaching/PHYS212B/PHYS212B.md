@@ -44,7 +44,7 @@ hide: true
 
   	* Quiz III: Mar. 5 (Tue)
 
-  * Lecture on March 7 (Thu) cancled due to APS March Meeting.
+  * Lecture on March 7 (Thu) canceled due to APS March Meeting.
 
 ### Textbooks
 
