@@ -34,7 +34,7 @@ hide: true
 
 * Course grade: homework 20%, quizzes 30%, final 50%.
 
-  * Next homework due date: Feb. 5 (Part III: HW 3) 
+  * Next homework due date: March 5 (Part IV: HW1(optional), HW2) 
 
   * Quiz schedule:
 
@@ -43,6 +43,8 @@ hide: true
   	* Quiz II: Feb. 19 (Tue)
 
   	* Quiz III: Mar. 5 (Tue)
+
+  * Lecture on March 7 (Thu) cancled due to APS March Meeting.
 
 ### Textbooks
 
