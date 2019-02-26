@@ -44,7 +44,7 @@ hide: true
 
   	* Quiz III: Mar. 5 (Tue)
 
-  * Lecture on March 7 (Thu) canceled due to APS March Meeting.
+  * Formal lecture on March 7 (Thu) canceled due to APS March Meeting. But Shauna will give a brief review and answer questions.
 
 ### Textbooks
 
