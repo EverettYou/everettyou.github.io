@@ -63,7 +63,7 @@ hide: true
 **Part 4. Perturbation Theory** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/PerturbationTheory.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/PerturbationTheory.pdf))  
 *non-degenerate perturbation, Hellmann-Feynman theorems, degenerate perturbation, effective Hamiltonian, time-dependent perturbation, Dyson series, Green's function, Feynman diagrams, transition rate, Fermi's golden rule*
 
-**Part 5. Second Quantization** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.pdf))
+**Part 5. Second Quantization** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.pdf))  
 *identical particle, Fock space and Fock state, creation and annihilation operator of bosons and fermions, quantum many-body system*
 
 ### Worksheets for Discussion Session
@@ -78,3 +78,6 @@ hide: true
 [worksheet8]({{site.baseurl}}/teaching/PHYS212B/worksheet8.pdf)  
 [worksheet9]({{site.baseurl}}/teaching/PHYS212B/worksheet9.pdf)[notebook]({{site.baseurl}}/teaching/PHYS212B/SSH_Worksheet.nb)  
 
+### Final Reviews
+[Spin-orbit coupling problem]({{site.baseurl}}/teaching/PHYS212B/soc.pdf)  
+[Projection operator of angular momentum]({{site.baseurl}}/teaching/PHYS212B/projection.pdf)   
