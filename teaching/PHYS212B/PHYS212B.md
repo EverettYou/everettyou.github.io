@@ -79,5 +79,7 @@ hide: true
 [worksheet9]({{site.baseurl}}/teaching/PHYS212B/worksheet9.pdf)  [notebook]({{site.baseurl}}/teaching/PHYS212B/SSH_Worksheet.nb)  
 
 ### Final Reviews
+
 [Spin-orbit coupling problem]({{site.baseurl}}/teaching/PHYS212B/soc.pdf)  
 [Projection operator of angular momentum]({{site.baseurl}}/teaching/PHYS212B/projection.pdf)   
+[Spherical Coordinates and the Angular Momentum Operators](https://quantummechanics.ucsd.edu/ph130a/130_notes/node216.html)
