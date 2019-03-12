@@ -76,7 +76,7 @@ hide: true
 [worksheet6]({{site.baseurl}}/teaching/PHYS212B/worksheet6.pdf)  
 [worksheet7]({{site.baseurl}}/teaching/PHYS212B/worksheet7.pdf)  
 [worksheet8]({{site.baseurl}}/teaching/PHYS212B/worksheet8.pdf)  
-[worksheet9]({{site.baseurl}}/teaching/PHYS212B/worksheet9.pdf)[notebook]({{site.baseurl}}/teaching/PHYS212B/SSH_Worksheet.nb)  
+[worksheet9]({{site.baseurl}}/teaching/PHYS212B/worksheet9.pdf)  [notebook]({{site.baseurl}}/teaching/PHYS212B/SSH_Worksheet.nb)  
 
 ### Final Reviews
 [Spin-orbit coupling problem]({{site.baseurl}}/teaching/PHYS212B/soc.pdf)  
