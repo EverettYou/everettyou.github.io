@@ -10,7 +10,7 @@ You can find my publications on [Google Scholar](https://scholar.google.com/cita
 
 ### Talk Slides
 
-* [Machine Learning Physics]({{site.baseurl}}/assets/pdf/ML physics.pdf)
+* [Machine Learning Physics]({{site.baseurl}}/assets/pdf/ML_physics.pdf)
 
 * [Deconfined Quantum Critical Point]({{site.baseurl}}/assets/pdf/DQCP.pdf)
 
