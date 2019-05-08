@@ -45,7 +45,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 #### Topological Phase Transitions
 
-- Deconfined quantum criticality
+- [Deconfined quantum criticality]({{site.baseurl}}/2019/04/16/DQCP.html)
 
 - Symmetric mass generation
 
