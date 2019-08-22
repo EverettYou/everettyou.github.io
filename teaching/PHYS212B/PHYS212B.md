@@ -10,7 +10,7 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Discuss session: Wednesday 13:00-14:00, Mayer Hall Addition 2702 
+* Discuss session: Friday 15:00-16:30, Mayer Hall Addition 2702 
 
 * Final: March 19, 2018, 11:30-14:29, TBA
 
@@ -22,29 +22,15 @@ hide: true
 
 * Teaching Assistants
  
-  * Shauna Kravec
+  * TBA
 
-  	 * Email: <skravec@ucsd.edu>
+  	 * Email:
 
-     * TA Office hour: Wednesday 14:00-15:00, Mayer Hall 4226
+* Course grade: homework 30%, quizzes 20%, final 50%.
 
-  * Hongye Hu (Homework grader)
-  
-    * Email: <hoh017@ucsd.edu>
+  * Next homework due date: TBA 
 
-* Course grade: homework 20%, quizzes 30%, final 50%.
-
-  * Next homework due date: March 5 (Part IV: HW1(optional), HW2) 
-
-  * Quiz schedule:
-
-  	* Quiz I: Jan. 29 (Tue)
-
-  	* Quiz II: Feb. 19 (Tue)
-
-  	* Quiz III: Mar. 5 (Tue)
-
-  * Formal lecture on March 7 (Thu) canceled due to APS March Meeting. But Shauna will give a brief review and answer questions.
+  * Quiz schedule: TBA
 
 ### Textbooks
 
@@ -65,21 +51,3 @@ hide: true
 
 **Part 5. Second Quantization** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.pdf))  
 *identical particle, Fock space and Fock state, creation and annihilation operator of bosons and fermions, quantum many-body system*
-
-### Worksheets for Discussion Session
-
-[worksheet1]({{site.baseurl}}/teaching/PHYS212B/worksheet1.pdf)  
-[worksheet2]({{site.baseurl}}/teaching/PHYS212B/worksheet2.pdf)  
-[worksheet3]({{site.baseurl}}/teaching/PHYS212B/worksheet3.pdf)  
-[worksheet4]({{site.baseurl}}/teaching/PHYS212B/worksheet4.pdf)  
-[worksheet5]({{site.baseurl}}/teaching/PHYS212B/worksheet5.pdf)  
-[worksheet6]({{site.baseurl}}/teaching/PHYS212B/worksheet6.pdf)  
-[worksheet7]({{site.baseurl}}/teaching/PHYS212B/worksheet7.pdf)  
-[worksheet8]({{site.baseurl}}/teaching/PHYS212B/worksheet8.pdf)  
-[worksheet9]({{site.baseurl}}/teaching/PHYS212B/worksheet9.pdf)  [notebook]({{site.baseurl}}/teaching/PHYS212B/SSH_Worksheet.nb)  
-
-### Final Reviews
-
-[Spin-orbit coupling problem]({{site.baseurl}}/teaching/PHYS212B/soc.pdf)  
-[Projection operator of angular momentum]({{site.baseurl}}/teaching/PHYS212B/projection.pdf)   
-[Spherical Coordinates and the Angular Momentum Operators](https://quantummechanics.ucsd.edu/ph130a/130_notes/node216.html)

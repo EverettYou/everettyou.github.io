@@ -10,11 +10,9 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Discuss session: Monday 15:00-16:30, Mayer Hall Addition 2702 
+* Problem session: Friday 15:00-16:30, Mayer Hall Addition 2702
 
-* Review session: December 10, 2018, 15:00-16:30, Mayer Hall Addition 2702
-
-* Final: December 14, 2018, 11:30-14:29, Mayer Hall Addition 2702
+* Final: December 13, 2018, 11:30-14:29, [(?) Mayer Hall Addition 2702]
 
 * Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU)
 
@@ -24,23 +22,25 @@ hide: true
 
 * Teaching Assistants
  
-  * Shauna Kravec
+  * Honye Hu
 
-  	 * Email: <skravec@ucsd.edu>
+  	 * Email: <hoh017@ucsd.edu>
 
-     * TA Office hour: Monday 14:00-15:00, Mayer Hall 4226
-
-  * Rudy Pei
+  * Da-Chuan Lu
   
-    * Email: <yrpei@ucsd.edu>
+    * Email: <ldachuan@ucsd.edu>
 
-* Course grade: homework 20%, quizzes 30%, final 50%.
+* Course grade: homework 30%, quizzes 20%, final 50%.
 
-  * Next homework due date: Dec. 4 (Part II: HW2-6)
+  * Next homework due date: TBA
 
 ### Textbooks
 
+The lecture will closely follow this book:
+
 [1] Leonard Susskind and Art Friedman, Quantum Mechanics (the Theoretical Minimum). Basic Books, New York. (2014)
+
+But if you feel that [1] is too brief and want to learn more details, you can find them in the following two books:
 
 [2] R. Shankar, Principles of Quantum Mechanics. Plenum Press, New York. (1994)
 
@@ -48,28 +48,22 @@ hide: true
 
 #### Other References
 
-[4] Daniel Gottesman, An Introduction to Quantum Error Correction and
+To learn more about tensor networks, see:
+
+[4] Jacob C. Bridgeman, Christopher T. Chubb. Hand-waving and Interpretive Dance: An Introductory Course on Tensor Networks [arXiv:1603.03039](https://arxiv.org/pdf/1603.03039.pdf)
+
+To learn more about quantum error correction, see:
+
+[5] Daniel Gottesman, An Introduction to Quantum Error Correction and
 Fault-Tolerant Quantum Computation [arXiv:0904.2557](https://arxiv.org/pdf/0904.2557.pdf)
 
 ### Lecture Notes
 
-**Part 1. Qubits and Entanglement** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Qubits and Entanglement.pdf))  
+**Part 1. Qubits and Entanglement** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/QubitsAndEntanglement.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/QubitsAndEntanglement.pdf))  
 *states, observables, time evolution, measurement postulate, uncertainty relation, density matrix, pure and mixed state, composition of quantum systems, entanglement entropy and mutual information, Bell inequality, tensor network, quantum circuit, quantum decoherence, quantum error correction*
 
-**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/Path Integral Quantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/Path Integral Quantization.pdf))  
+**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.pdf))  
 *path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
 
 
-### Worksheets for Discussion Session
-
-[worksheet1]({{site.baseurl}}/teaching/PHYS212A/worksheet1.pdf)  
-[worksheet2]({{site.baseurl}}/teaching/PHYS212A/worksheet2.pdf)  
-[worksheet3]({{site.baseurl}}/teaching/PHYS212A/worksheet3.pdf)  
-[worksheet4]({{site.baseurl}}/teaching/PHYS212A/worksheet4.pdf)  
-[worksheet5]({{site.baseurl}}/teaching/PHYS212A/worksheet5.pdf)  
-[worksheet6]({{site.baseurl}}/teaching/PHYS212A/worksheet6.pdf)  
-[worksheet7]({{site.baseurl}}/teaching/PHYS212A/worksheet7.pdf)  
-[worksheet8]({{site.baseurl}}/teaching/PHYS212A/worksheet8.pdf)  
-[worksheet9]({{site.baseurl}}/teaching/PHYS212A/worksheet9.pdf)  
-[review]({{site.baseurl}}/teaching/PHYS212A/review.pdf)
 
