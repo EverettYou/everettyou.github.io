@@ -10,7 +10,7 @@ hide: true
 
 * Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
 
-* Problem session: Friday 15:00-16:30, Mayer Hall Addition 2702
+* Problem session: Friday 15:00-16:30, Mayer Hall Addition 2623
 
 * Final: December 13, 2018, 11:30-14:29, [(?) Mayer Hall Addition 2702]
 
