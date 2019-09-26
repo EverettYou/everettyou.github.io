@@ -22,13 +22,13 @@ hide: true
 
 * Teaching Assistants
  
-  * Honye Hu
+  * Hongye Hu
 
   	 * Email: <hoh017@ucsd.edu>
 
-  * Da-Chuan Lu
+  * Pan Xia
   
-    * Email: <ldachuan@ucsd.edu>
+    * Email: <paxia@ucsd.edu>
 
 * Course grade: homework 30%, quizzes 20%, final 50%.
 
