@@ -32,7 +32,7 @@ hide: true
 
 * Course grade: homework 30%, quizzes 20%, final 50%.
 
-  * Next homework due date: TBA
+  * Next homework due date: Oct. 8 (HW1)
 
 ### Textbooks
 
@@ -64,6 +64,10 @@ Fault-Tolerant Quantum Computation [arXiv:0904.2557](https://arxiv.org/pdf/0904.
 
 **Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.pdf))  
 *path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
+
+### Problem Session 
+
+Problem set can be downloaded here ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/problem_set.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/problem_set.pdf))
 
 
 
