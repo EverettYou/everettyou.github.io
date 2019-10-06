@@ -7,7 +7,7 @@ hide: true
 
 The GitHub repocitory [Mathematica-for-physics](https://github.com/EverettYou/Mathematica-for-physics) contains *Mathematica* packages and stylesheets that are useful to my daily research.
 
-For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl}}/teaching/Mathematica/Guide.nb)) ([PDF]({{site.baseurl}}/teaching/Mathematica/Guide.pdf))
+For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl}}/teaching/Mathematica/Guide.nb)) ([PDF]({{site.baseurl}}/teaching/Mathematica/Guide.pdf)).
 
 ### Contents
 
@@ -45,7 +45,7 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
 
   4. quit Mathematica and restart.
 
-- In order for the CMU Article style sheet to work properly, Computer Modern Unicode fonts must be installed. (The font files can be found in [./CMUfonts](https://github.com/EverettYou/Mathematica-for-physics/tree/master/CMUfonts))
+- In order for the CMU Article style sheet to work properly, Computer Modern Unicode fonts must be installed. (The font files can be found [here](https://github.com/EverettYou/Mathematica-for-physics/tree/master/CMUfonts).)
 
 
 
