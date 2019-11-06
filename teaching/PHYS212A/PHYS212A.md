@@ -32,7 +32,9 @@ hide: true
 
 * Course grade: homework 30%, quizzes 20%, final 50%.
 
-  * Next homework due date: Nov. 5 (HW3,HW4)
+  * Quiz I: Nov. 14 Thursday
+
+  * Next homework due date: Nov. 19 (HW5,HW7,HW8)
 
 ### Textbooks
 
