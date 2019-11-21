@@ -34,7 +34,7 @@ hide: true
 
   * Quiz I: Nov. 14 Thursday
 
-  * Next homework due date: Nov. 19 (HW5,HW7,HW8)
+  * Next homework due date: Dec. 3 (HW9,HW10,HW11)
 
 ### Textbooks
 
