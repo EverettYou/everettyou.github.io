@@ -10,7 +10,6 @@ permalink: /people/
 |--|--|
 |**Postdocs**||
 |--|--|
-|![Wenbo Fu]({{site.baseurl}}/assets/img/photos/WBFu.png){:width="160px"}|**Wenbo Fu** <br>*Office:* Mayer Hall 1623|
 |--|--|
 |**Grad Students**||
 |--|--|
@@ -26,16 +25,12 @@ permalink: /people/
 |--|--|
 |2018.08 - 2018.10|Run Ho (Najing Univ)|
 |--|--|
-|2019.06 - |Junyi Cao (UCSD)|
+|2019.07 - 2019.09 |Xiaoyang Huang (Xi'an Jiaotong Univ)|
 |--|--|
-|2019.06 - |Zehong Zhao (UCSD)|
+|2019.07 - 2019.09 |Jingsu Zhang (Tsinghua Univ)|
 |--|--|
-|2019.07 - |Xiaoyang Huang (Xi'an Jiaotong Univ)|
+|2019.08 - 2019.09 |Dian Wu (Peking Univ)|
 |--|--|
-|2019.07 - |Jingsu Zhang (Tsinghua Univ)|
-|--|--|
-|2019.08 - |Dian Wu (Peking Univ)|
-|--|--|
-|2019.08 - |Mingde Ren (SUSTech)|
+|2019.08 - 2019.09 |Mingde Ren (SUSTech)|
 |--|--|
 

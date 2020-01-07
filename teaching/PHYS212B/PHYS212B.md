@@ -8,23 +8,27 @@ hide: true
 
 ### Schedule of Classes
 
-* Lecture: Tuesday & Thursday 12:30-13:50, Mayer Hall Addition 2702
+* Lecture: Tuesday & Thursday 14:00-15:20, Mayer Hall Addition 2702
 
-* Discuss session: Friday 15:00-16:30, Mayer Hall Addition 2702 
+* Discussion session: Friday 15:00-16:30, Mayer Hall Addition 2702 
 
-* Final: March 19, 2018, 11:30-14:29, TBA
+* Final: March 19, 2020, 15:00-18:00, TBA
 
 * Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU)
 
   * Email: <yzyou@ucsd.edu>
 
-  * Office hour: Tuesday & Thursday 14:00-14:45, Mayer Hall 5202
+  * Office hour: Tuesday & Thursday 15:30-16:30, Mayer Hall 5202
 
 * Teaching Assistants
  
-  * TBA
+  * Da-Chuan Lu (Discussion session)
 
-  	 * Email:
+  	 * Email: ldachuan@ucsd.edu
+
+  * Jin-Long Huang (Grader)
+
+  	 * Email: jih002@ucsd.edu
 
 * Course grade: homework 30%, quizzes 20%, final 50%.
 
@@ -42,6 +46,9 @@ hide: true
 
 
 ### Lecture Notes
+
+**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.pdf))  
+*path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
 
 **Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.pdf))  
 *harmonic oscillator, creation and annihilation operator, boson number operator, coherent state, angular momentum theory, SO(3) rotational symmetry, fusion category of spins, hydrogen atom and SO(4) symmetry* 
