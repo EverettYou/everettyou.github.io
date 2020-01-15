@@ -47,7 +47,7 @@ hide: true
 
 ### Lecture Notes
 
-**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.pdf))  
+**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/PathIntegralQuantization.pdf))  
 *path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
 
 **Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.pdf))  
