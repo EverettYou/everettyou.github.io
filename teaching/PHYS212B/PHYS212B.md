@@ -34,7 +34,7 @@ hide: true
 
   * Next homework due date: Feb. 4 (Part2 HW 4,5,6,7) 
 
-  * Quiz schedule: TBA
+  * Quiz schedule: Feb. 20 
 
 ### Textbooks
 
