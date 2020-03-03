@@ -32,7 +32,7 @@ hide: true
 
 * Course grade: homework 30%, quizzes 20%, final 50%.
 
-  * Next homework due date: Feb. 18 (Part3 HW 1,2,3) 
+  * Next homework due date: March 10 (Part4 HW 2) 
 
   * Quiz schedule: Feb. 20 
 
