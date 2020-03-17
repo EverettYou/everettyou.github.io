@@ -12,7 +12,9 @@ hide: true
 
 * Discussion session: Friday 15:00-16:30, Mayer Hall Addition 2702 
 
-* Final: March 19, 2020, 15:00-18:00, TBA
+* **Final: Take-home exam, submit by 23:59, March 19, 2020**
+  * **Problem set:** [PDF download]({{site.baseurl}}/teaching/PHYS212B/PHYS212B_final_2020.pdf)
+  * Submit the answer to TA <ldachuan@ucsd.edu> and Prof. You <yzyou@ucsd.edu>
 
 * Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU)
 
@@ -24,11 +26,11 @@ hide: true
  
   * Da-Chuan Lu (Discussion session)
 
-  	 * Email: ldachuan@ucsd.edu
+  	 * Email: <ldachuan@ucsd.edu>
 
   * Jin-Long Huang (Grader)
 
-  	 * Email: jih002@ucsd.edu
+  	 * Email: <jih002@ucsd.edu>
 
 * Course grade: homework 30%, quizzes 20%, final 50%.
 
