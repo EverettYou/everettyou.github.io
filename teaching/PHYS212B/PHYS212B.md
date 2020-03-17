@@ -12,7 +12,7 @@ hide: true
 
 * Discussion session: Friday 15:00-16:30, Mayer Hall Addition 2702 
 
-* **Final: Take-home exam, submit by 23:59, March 19, 2020**
+* **Final: Take-home exam, deadline 23:59, March 19, 2020**
   * **Problem set:** [PDF download]({{site.baseurl}}/teaching/PHYS212B/PHYS212B_final_2020.pdf)
   * Submit the answer to TA <ldachuan@ucsd.edu> and Prof. You <yzyou@ucsd.edu>
 
