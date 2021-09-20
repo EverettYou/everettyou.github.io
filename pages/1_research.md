@@ -14,8 +14,7 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 - Iron-based superconductors 
 
-- [Moire superlattice](
-{{site.baseurl}}/2018/05/21/Moire.html)
+- [Moire superlattice](/2018/05/21/Moire.html)
 
 #### Quantum Spin Liquid
 
@@ -45,7 +44,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 #### Topological Phase Transitions
 
-- [Deconfined quantum criticality]({{site.baseurl}}/2019/04/16/DQCP.html)
+- [Deconfined quantum criticality](/2019/04/16/DQCP.html)
 
 - Symmetric mass generation
 
@@ -63,10 +62,9 @@ Quantum entanglement is the most intriguing phenomenon in quantum mechanics, con
 
 #### Structure and Dynamics of Entanglement
 
-- [Entanglement feature learning]({{site.baseurl}}/2018/01/31/EFL.html) 
+- [Entanglement feature learning](/2018/01/31/EFL.html) 
 
-- [Quantum information dynamics](
-{{site.baseurl}}/2018/03/28/DynQ.html)
+- [Quantum information dynamics](/2018/03/28/DynQ.html)
 
 ### Machine Learning and Physics
 
@@ -76,10 +74,9 @@ Artificial intelligence (AI) is a promising trend of future technology. It is fi
 
 - Deep learning holography
 
-- Neural network renormalization
+- [Neural network renormalization](/2020/06/25/NeuralRG.html)
 
 #### Machine Learning and Quantum Physics
 
-- [Machine assisted physics discovery](
-{{site.baseurl}}/2019/02/01/discoverQM.html)
+- [Machine assisted physics discovery](/2019/02/01/discoverQM.html)
 
