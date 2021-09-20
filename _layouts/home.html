@@ -1,66 +1,13 @@
 ---
 layout: default
 ---
-
 <div class="home">
-  {% if site.theme_settings.header_text %}
-  <header id="main" class="call-out"
-  style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
-    <h1>{{ site.theme_settings.header_text }}</h1>
-  </header>
-  {% endif %}
-  
-  <article>
-    <section class="post-content">
-      {{ content }}
-    </section>
-  </article>
 
-  <div class="posts">
-    {% for post in paginator.posts %}
-    <div class="post-teaser">
-      {% if post.thumbnail %} 
-      <div class="post-img">
-         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
-      </div>
-      {% endif %}
-      <span>
-          <header>
-            <h2>
-              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-                {{ post.title }}
-              </a>
-            </h2>
-            <p class="meta">
-              {{ post.date | date: "%B %-d, %Y" }}
-            </p>
-          </header>
-          <div class="excerpt">
-              {{ post.excerpt | strip_html | escape }}
-            <!--{{ post.content | strip_html | truncate: "250" }}-->
-            <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
-              {{ site.theme_settings.str_continue_reading }}
-            </a>-->
-          </div>
-      </span>
+    <div id="main" class="call-out"
+         style="background-image: url('{{ site.header_feature_image | relative_url }}')">
+        <h1> {{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
     </div>
-    {% endfor %}
-  </div>
 
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
-      <i class="fa fa-chevron-left"></i>
-      {{ site.theme_settings.str_previous_page }}
-    </a>
-    {% endif %}
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
-      {{ site.theme_settings.str_next_page }}
-      <i class="fa fa-chevron-right"></i>
-    </a>
-    {% endif %}
-  </div>
-  {% endif %}
- </div>
+    {% include blog/blog.html %}
+
+</div>
