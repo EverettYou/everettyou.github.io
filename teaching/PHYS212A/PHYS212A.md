@@ -1,7 +1,7 @@
 ---
 layout: page 
 title : "PHYS 212A"
-subtitle: "Graduate Quantum Mechanics II"
+subtitle: "Graduate Quantum Mechanics I"
 permalink: /teaching/PHYS212A
 hide: true
 ---
@@ -18,7 +18,7 @@ hide: true
 
   * Email: <yzyou@ucsd.edu>
 
-  * Office hour: Fri 14:00-15:00, Mayer Hall 5202
+  * Office hour: Fri 14:00-15:00, https://ucsd.zoom.us/my/yzyou
 
 * Teaching Assistants
  
@@ -26,7 +26,7 @@ hide: true
 
   * Yueqi Zhao (Grader) Email: <yuz289@ucsd.edu>
 
-* Course grade: homework 50%, quizzes 20%, final 30%.
+* Course grade: homework 50%, quizzes 30%, final 20%.
 
 
 ### Textbooks
@@ -53,7 +53,8 @@ To learn more about *quantum error correction*, see:
 
 ### Lecture Notes
 
-**Part 1. Qubits and Entanglement** ([Mathematica]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212A/PathIntegralQuantization.pdf))  
-states, observables, time evolution, measurement postulate, uncertainty relation, density matrix, pure and mixed state, composition of quantum systems, entanglement entropy and mutual information, Bell inequality, tensor network, quantum circuit, quantum decoherence, quantum error correction
+**Part 1. Qubits and Entanglement** ([Mathematica](/teaching/PHYS212A/QubitsAndEntanglement.nb)) ([PDF](/teaching/PHYS212A/QubitsAndEntanglement.pdf))  
+states, observables, time evolution, measurement postulate, uncertainty relation, density matrix, pure and mixed state, the composition of quantum systems, entanglement entropy and mutual information, Bell inequality, tensor network, quantum circuit, quantum decoherence, quantum error correction
 
-
+**Exercises** ([Mathematica](/teaching/PHYS212A/Exercises.nb)) ([PDF](/teaching/PHYS212A/Exercises.pdf))  
+Exercises are not required. For homework, see lecture note.
