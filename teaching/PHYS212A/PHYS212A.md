@@ -18,7 +18,7 @@ hide: true
 
   * Email: <yzyou@ucsd.edu>
 
-  * Office hour: Fri 14:00-15:00, https://ucsd.zoom.us/my/yzyou
+  * Office hour: Fri 14:00-15:00, <https://ucsd.zoom.us/my/yzyou>
 
 * Teaching Assistants
  
