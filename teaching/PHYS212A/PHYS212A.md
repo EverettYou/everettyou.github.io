@@ -14,11 +14,11 @@ hide: true
 
 * Final: Dec. 6, 2021, 11:30-14:29 
 
-* Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU)
+* Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
   * Email: <yzyou@ucsd.edu>
 
-  * Office hour: Fri 14:00-15:00, <https://ucsd.zoom.us/my/yzyou>
+  * Office hour: by schedule, <https://ucsd.zoom.us/my/yzyou>
 
 * Teaching Assistants
  
