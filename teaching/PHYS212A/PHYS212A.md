@@ -8,7 +8,7 @@ hide: true
 
 ### Schedule of Classes
 
-* Lecture: Mon, Wed, Fri 13:00-13:50, Cognitive Science Building 005
+* Lecture: Mon, Wed, Fri 13:00-13:50, York Hall 4080A
 
 * Discussion session: Mon 16:00-16:50, York Hall 4080A 
 
