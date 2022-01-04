@@ -1,0 +1,64 @@
+---
+layout: page 
+title : "PHYS 152A"
+subtitle: "Undergraduate Condensed Matter Physics"
+permalink: /teaching/PHYS152A
+hide: true
+---
+
+### Schedule of Classes
+
+* Lecture: Tue, Thu 12:30-13:50, University Center 301
+
+  * ​Zoom link: <https://ucsd.zoom.us/j/99196194203>
+
+* Discussion session: Wed 19:00-19:50, University Center 301 
+
+* Final: Mar. 15, 2022, 11:30-14:29 
+
+* Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
+
+  * Email: <yzyou@ucsd.edu>
+
+  * Office hour: by schedule, <https://ucsd.zoom.us/my/yzyou>
+
+* Teaching Assistants
+
+  * ?  (Discussion session) Email: 
+
+  * Wanda Hou (Grader) Email: <hwanda@ucsd.edu>
+
+* Course grade: homework 50%, final paper 50%.
+
+
+### Textbooks
+
+The lecture will closely follow this book:
+
+[1] Steven H. Simon, *The Oxford Solid State Basics*. Oxford University Press. (2013)
+
+### Lecture Notes
+
+**Part 0. Introduction** ([Mathematica](/teaching/PHYS152A/Introduction.nb)) ([PDF](/teaching/PHYS152A/Introduction.pdf)) 
+
+- Introduction
+  - What is Condensed Matter Physics?
+  - Why do we Study Condensed Matter Physics?
+  - Central Themes of Condensed Matter Physics
+
+**Part 1. Atomic System** ([Mathematica](/teaching/PHYS152A/AtomicSystem.nb)) ([PDF](/teaching/PHYS152A/AtomicSystem.pdf)) 
+
+- Crystal Geometry
+  - Crystal Formation
+  - Lattice Structure
+  - Reciprocal Lattice
+  - Scattering Experiment
+  - Summary
+- Phonon
+  - Lattice Vibration
+  - Specific Heat of Solid
+  - Stability of Crystal Order
+
+**Part 2. Electronic System**
+
+**Part 3. Spin System**
