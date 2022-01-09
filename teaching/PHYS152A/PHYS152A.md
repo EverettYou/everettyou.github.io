@@ -10,7 +10,7 @@ hide: true
 
 * Lecture: Tue, Thu 12:30-13:50, University Center 301
 
-  * ​Zoom link: <https://ucsd.zoom.us/j/99196194203>
+  * Zoom link: <https://ucsd.zoom.us/j/99196194203>
 
 * Discussion session: Wed 19:00-19:50, University Center 301 
 
@@ -59,6 +59,15 @@ The lecture will closely follow this book:
   - Specific Heat of Solid
   - Stability of Crystal Order
 
-**Part 2. Electronic System**
+**Part 2. Electronic System** ([Mathematica](/teaching/PHYS152A/ElectronicSystem.nb)) ([PDF](/teaching/PHYS152A/ElectronicSystem.pdf)) 
+
+- Electrons in Solids
+  - Quantum Mechanics of Electrons
+  - 1D Electronic Systems
+  - 2D Electronic Systems
+  - General Theory of Electrons in Crystals
+- Properties of Metals
+  - Thermodynamic Properties
+  - Transport Properties
 
 **Part 3. Spin System**
