@@ -28,19 +28,15 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 Discovering new phases of matter lies on the frontier of condensed matter physics. Topological phases are such exotic quantum phases that go beyond our traditional understanding. The study of topological phases has led to many exciting developments in quantum many-body theory. The unique features of topological phases are being tested in current numerical simulations and may also find experimental realizations in the near future.
 
-#### Symmetry Protected ~~Topological~~Trivial (SPT) Phases
+#### Topological Phases
 
 - Classification of bosonic and fermionic SPT phases
 
 - Bulk SPT order and surface anomaly
 
-#### Intrinsic and Symmetry Enriched Topological (SET) Phases
-
 - Topological order and twist defects
 
-#### Fracton Topological Order and Gauge Theory
-
-- Higher-rank gauge theory with space group symmetry
+- Higher-rank gauge theory
 
 #### Topological Phase Transitions
 
@@ -54,11 +50,14 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 Quantum entanglement is the most intriguing phenomenon in quantum mechanics, connecting topics of topological order, many-body localization, and quantum chaos. It also shares a remarkable similarity with wormholes given their non-local nature, which motivates the idea of holographic duality between entanglement and spacetime. Understanding the structure and dynamics of many-body entanglement could allow us to answer some most profound questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
 
-#### Many-Body Localization (MBL) and Thermalization
+#### Many-Body Localization (MBL)
 
 - Spectrum bifurcation renormalization group
 
-- Localization-thermalization transition
+
+#### Measurement-Induced Phases and Phase Transitions
+
+- Entanglement transitions
 
 #### Structure and Dynamics of Entanglement
 
