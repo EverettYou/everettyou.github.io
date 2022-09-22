@@ -8,11 +8,11 @@ hide: true
 
 ### Schedule of Classes
 
-* Lecture: Mon, Wed, Fri 13:00-13:50, York Hall 4080A
+* Lecture: Tue, Thu 12:30-13:50, Mayer Hall-A 2702
 
-* Discussion session: Mon 16:00-16:50, York Hall 4080A 
+* Discussion session: Thu 14:00-14:50, Mayer Hall-A 2702
 
-* Final: Dec. 6, 2021, 11:30-14:29 
+* Final: Dec. 9, 2022 (TBA)
 
 * Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
@@ -22,24 +22,26 @@ hide: true
 
 * Teaching Assistants
  
-  * Yiheng Xu  (Discussion session) Email: <y7xu@ucsd.edu>
+  * Dachuan Lu  (Discussion session) Email: <ldachuan@ucsd.edu>
 
-  * Yueqi Zhao (Grader) Email: <yuz289@ucsd.edu>
+  * Zhiwen Zhou (Grader) Email: <zhz300@ucsd.edu>
 
-* Course grade: homework 50%, quizzes 30%, final 20%.
+* Course grade: homework 60%, quizzes 20%, final 20%.
 
 
 ### Textbooks
 
-The lecture will closely follow this book:
+The lecture will follow these books:
 
-[1] Leonard Susskind and Art Friedman, *Quantum Mechanics (the Theoretical Minimum)*. Basic Books, New York. (2014)
+[1] Arjun Berera and Luigi Del Debbio, *Quantum Mechanics*. Cambridge University Press, New York (2021).
 
-But if you feel that [1] is too brief and want to learn more details, you can find them in the following two books:
+[2] Leonard Susskind and Art Friedman, *Quantum Mechanics (the Theoretical Minimum)*. Basic Books, New York. (2014).
 
-[2] R. Shankar, *Principles of Quantum Mechanics*. Plenum Press, New York. (1994)
+Some other books for reference:
 
-[3] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994)
+[3] R. Shankar, *Principles of Quantum Mechanics*. Plenum Press, New York. (1994)
+
+[4] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994)
 
 #### Other References
 
@@ -47,14 +49,26 @@ To learn more about *tensor networks*, see:
 
 [4] Jacob C. Bridgeman, Christopher T. Chubb. Hand-waving and Interpretive Dance: An Introductory Course on Tensor Networks [arXiv:1603.03039](https://arxiv.org/abs/1603.03039)
 
-To learn more about *quantum error correction*, see:
-
-[5] Daniel Gottesman, An Introduction to Quantum Error Correction and Fault-Tolerant Quantum Computation [arXiv:0904.2557](https://arxiv.org/abs/0904.2557)
 
 ### Lecture Notes
 
-**Part 1. Qubits and Entanglement** ([Mathematica](/teaching/PHYS212A/QubitsAndEntanglement.nb)) ([PDF](/teaching/PHYS212A/QubitsAndEntanglement.pdf))  
-states, observables, time evolution, measurement postulate, uncertainty relation, density matrix, pure and mixed state, the composition of quantum systems, entanglement entropy and mutual information, Bell inequality, tensor network, quantum circuit, quantum decoherence, quantum error correction
+**Part 1. State and Operator** ([Mathematica](/teaching/PHYS212A/StateAndOperator.nb)) ([PDF](/teaching/PHYS212A/StateAndOperator.pdf))  
+* Quantum States
+  * Ket and Bra
+  * Basis
+* Quantum Operators
+  * Operator and Matrix
+  * Operator Algebra
+  * Projection Operators
+* Measurement
+  * Hermitian Operators
+  * Observables
+  * Sequential Measurements
+  * Repeated Measurements
+* Dynamics
+  * Unitary Operators
+  * Time Evolution
+
 
 **Exercises** ([Mathematica](/teaching/PHYS212A/Exercises.nb)) ([PDF](/teaching/PHYS212A/Exercises.pdf))  
 Exercises are not required. For homework, see lecture note.
