@@ -14,7 +14,7 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 - Iron-based superconductors 
 
-- [Moire superlattice](/2018/05/21/Moire.html)
+- [Multilayer graphene and Moire materials](/2018/05/21/Moire.html)
 
 #### Quantum Spin Liquid
 
@@ -42,7 +42,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 - [Deconfined quantum criticality](/2019/04/16/DQCP.html)
 
-- Symmetric mass generation
+- [Symmetric mass generation](/2022/08/19/SMG.html)
 
 - Duality in quantum field theory
 
@@ -55,9 +55,11 @@ Quantum entanglement is the most intriguing phenomenon in quantum mechanics, con
 - Spectrum bifurcation renormalization group
 
 
-#### Measurement-Induced Phases and Phase Transitions
+#### Random Quantum Circuits and Measurements
 
-- Entanglement transitions
+- Measurement-induced entanglement transition
+
+- [Classical shadow tomography](/2022/09/07/CST.html)
 
 #### Structure and Dynamics of Entanglement
 

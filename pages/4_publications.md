@@ -10,6 +10,12 @@ You can find my papers on [Google Scholar](https://scholar.google.com/citations?
 
 ### Talk Slides
 
+* [Scalable and Flexible Classical Shadow Tomography]({{site.baseurl}}/assets/pdf/Shadow.pdf)
+
+* [Symmetric Mass Generation]({{site.baseurl}}/assets/pdf/SMG.pdf)
+
+* [Renormalization Group Flow and Genertive Modeling]({{site.baseurl}}/assets/pdf/RG-Flow.pdf)
+
 * [Machine Learning Physics]({{site.baseurl}}/assets/pdf/ML_physics.pdf)
 
 * [Deconfined Quantum Critical Point]({{site.baseurl}}/assets/pdf/DQCP.pdf)
