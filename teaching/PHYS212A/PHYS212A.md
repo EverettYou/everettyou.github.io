@@ -69,6 +69,12 @@ To learn more about *tensor networks*, see:
   * Unitary Operators
   * Time Evolution
 
+**Part 2. Quantum Entanglement** ([Mathematica](/teaching/PHYS212A/QuantumEntanglement.nb)) ([PDF](/teaching/PHYS212A/QuantumEntanglement.pdf))  
+* Information Theory
+  * Classical Information
+  * Quantum Information
+* Quantum Entanglement
+
 
 **Exercises** ([Mathematica](/teaching/PHYS212A/Exercises.nb)) ([PDF](/teaching/PHYS212A/Exercises.pdf))  
 Exercises are not required. For homework, see lecture note.
