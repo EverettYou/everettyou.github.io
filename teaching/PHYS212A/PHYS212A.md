@@ -76,5 +76,14 @@ To learn more about *tensor networks*, see:
 * Quantum Entanglement
 
 
+**Part 3. Quantum Bootstrap** ([Mathematica](/teaching/PHYS212A/QuantumBootstrap.nb)) ([PDF](/teaching/PHYS212A/QuantumBootstrap.pdf))  
+* Harmonic Oscillator
+  * Position and Momentum
+  * Operator Algebra
+  * Quantum Bootstrap
+* Angular Momentum
+  * Operator Algebra
+  * Quantum Bootstrap
+
 **Exercises** ([Mathematica](/teaching/PHYS212A/Exercises.nb)) ([PDF](/teaching/PHYS212A/Exercises.pdf))  
 Exercises are not required. For homework, see lecture note.
