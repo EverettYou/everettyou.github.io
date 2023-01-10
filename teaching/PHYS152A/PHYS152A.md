@@ -8,13 +8,11 @@ hide: true
 
 ### Schedule of Classes
 
-* Lecture: Tue, Thu 12:30-13:50, University Center 301
+* Lecture: Tue, Thu 12:30-13:50, Mayer-A 2623
 
-  * Zoom link: <https://ucsd.zoom.us/j/99196194203>
+* Discussion session: Tue 14:00-14:50, Mayer 5301 
 
-* Discussion session: Wed 19:00-19:50, University Center 301 
-
-* Final: Mar. 15, 2022, 11:30-14:29 
+* No final exam
 
 * Instructor: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
@@ -24,9 +22,7 @@ hide: true
 
 * Teaching Assistants
 
-  * ?  (Discussion session) Email: 
-
-  * Wanda Hou (Grader) Email: <hwanda@ucsd.edu>
+  * Dachuan Lu  (Discussion session) Email: <ldachuan@ucsd.edu>
 
 * Course grade: homework 50%, final paper 50%.
 
@@ -70,4 +66,3 @@ The lecture will closely follow this book:
   - Thermodynamic Properties
   - Transport Properties
 
-**Part 3. Spin System**
