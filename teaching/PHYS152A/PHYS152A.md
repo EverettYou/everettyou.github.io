@@ -66,3 +66,5 @@ The lecture will closely follow this book:
   - Thermodynamic Properties
   - Transport Properties
 
+What is next? Consider register PHYS 230 [syllabus](/teaching/PHYS152A/Phys230syllabus_2023.pdf).
+
