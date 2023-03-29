@@ -25,6 +25,14 @@ hide: true
   * Dachuan Lu  (Discussion session) Email: <ldachuan@ucsd.edu>
 
 * Course grade: homework 50%, final paper 50%.
+  
+  * **Final paper topic**: choose any topic related to condensed matter physics, expand a bit more beyond what has been covered in the class, or write a summary of what you found interesting, or make connections to topics in your major/research.
+
+    * **AI language model policy**: You are allowed to work with ChatGPT to prepare your final paper. See more at [How to use ChatGPT for your final paper](/teaching/PHYS152A/chatGPT)?
+
+  * **Final paper format**: PDF file. Title, your name, introduction, ..., summary, reference.  **Paper length**: about 4 pages (PRL length) or around 4000 words.
+
+  * **Final paper deadline**: March 24th (the end of the quarter).
 
 
 ### Textbooks
