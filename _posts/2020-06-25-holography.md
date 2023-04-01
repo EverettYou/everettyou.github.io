@@ -9,7 +9,7 @@ tags: [Machine Learning, Holography, Quantum Field Theory]
 The known universe consists of four fundamental forces: electromagnetic force, weak force, strong force, and gravity. The first three forces can be described theoretically. Gravity, however—which makes up the vast space of the universe—lacks a quantum theory. For three decades, scientists have tried to understand quantum gravity by using a model called the holographic universe. 
 
 
-![Artificial intelligence deciphers the holographic universe as virtual reality.](/assets/img/figures/virtual_reality.jpeg)
+![Artificial intelligence deciphers the holographic universe as virtual reality.](/assets/img/figures/virtual_reality.png)
 
 According to University of California San Diego Assistant Professor of Physics Yi-Zhuang You, the holographic universe can be thought of as a universe in virtual reality. All the information about this three-dimensional universe is projected from a two-dimensional screen of quantum pixels. The quantum physics on the two-dimensional screen gives rise to the quantum gravity behavior in the virtual universe. Between the two—the quantum boundary and the bulk gravity—lie dual theories known as the “holographic duality.”
 
@@ -25,7 +25,7 @@ According to You and Hu, at first the neural network “does not have a clue,”
 
 The structure of the neural network is inspired by the idea of renormalization group—an iterative approach to remove detail features in the physical system and extract overall structures at progressively larger scales—which gives the artificial intelligence the power to grasp and analyze the information at different length scales.
 
-![One of the popular cartoon pictures about holographic universe from Google.One of the popular cartoon pictures about holographic universe from Google.](/assets/img/figures/holography.jpg)
+![One of the popular cartoon pictures about holographic universe from Google.One of the popular cartoon pictures about holographic universe from Google.](/assets/img/figures/holography.png)
 
 
 “One of our epiphanies in this research was to realize that if the process of renormalization were reversed, it would constitute a generative procedure, which could reconstruct the physical system in a hierarchical manner,” said You.

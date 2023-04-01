@@ -20,7 +20,9 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 - Iridates and Kitaev spin liquid
 
-#### Non-Fermi Liquid
+#### Fermi Liquid and Non-Fermi Liquid
+
+- [Fermi surface anomaly](/2023/03/20/FSAnomaly.html)
 
 - Sachdev-Ye-Kitaev model(s)
 
@@ -73,9 +75,9 @@ Artificial intelligence (AI) is a promising trend of future technology. It is fi
 
 #### Deep Learning, Renormalization, and Holography
 
-- Deep learning holography
+- [Deep learning holography](/2020/06/25/holography.html)
 
-- [Neural network renormalization](/2020/06/25/NeuralRG.html)
+- Neural network renormalization
 
 #### Machine Learning and Quantum Physics
 
