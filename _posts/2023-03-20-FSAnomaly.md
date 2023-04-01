@@ -4,7 +4,9 @@ title: Unlocking the Secrets of Fermi Surface Anomalies -- A New Topological Per
 tags: [Topological Phase, Fermi Liquid, Quantum Field Theory]
 ---
 
-In the fascinating world of condensed matter physics, a seemingly familiar topic like Fermi liquids still holds intriguing secrets waiting to be uncovered. Although every undergraduate student learns about Fermi liquids, their stability under interactions has remained an intriguing puzzle. Recently, our research ([arXiv:2302.12731](https://arxiv.org/abs/2302.12731)) has shed new light on this mystery by unraveling a profound topological reason behind the stability of Fermi liquids. In this post, we will take you on an exciting journey into the uncharted territories of phase space, where we have discovered new ways to understand and classify Fermi surface anomalies.
+In the fascinating world of condensed matter physics, a seemingly familiar topic like Fermi liquids still holds intriguing secrets waiting to be uncovered. Although every undergraduate student learns about Fermi liquids, their surprising stability under interactions has remained fascinating. Recently, our research ([arXiv:2302.12731](https://arxiv.org/abs/2302.12731)) has shed new light on this mystery by unraveling a profound topological reason behind the stability of Fermi liquids. In this post, we will take you on an exciting journey into the uncharted territories of phase space, where we have discovered new ways to understand and classify Fermi surface anomalies.
+
+![Abstract art of Fermi surface.](/assets/img/figures/fermi_surface.png)
 
 #### The Quest for Stability
 
@@ -27,5 +29,5 @@ The quest for understanding Fermi liquids has taken us to the exhilarating new f
 
 Our research not only contributes to the understanding of Fermi surface anomalies but also offers a more coherent and streamlined framework for studying them. Our works pave the way for further advances in condensed matter physics and inspires investigations into Fermi liquids, non-Fermi liquids, and topological phases.
 
-
+（*By GPT4 OpenAI*）
 
