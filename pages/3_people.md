@@ -2,6 +2,7 @@
 layout: page 
 title : People 
 permalink: /people/
+feature-img: "assets/img/figures/people.png"
 ---
 
 |**Principal Investigator**|

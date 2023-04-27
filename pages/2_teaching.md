@@ -2,6 +2,7 @@
 layout: page 
 title : Teaching 
 permalink: /teaching/
+feature-img: "assets/img/figures/teaching.png"
 ---
 
 ### Courses

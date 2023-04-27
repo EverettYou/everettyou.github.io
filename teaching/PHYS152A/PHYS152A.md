@@ -43,6 +43,8 @@ The lecture will closely follow this book:
 
 ### Lecture Notes
 
+As a UCSD student, you have free access to Mathematica ([see how](/teaching/Mathematica_UCSD)).
+
 **Part 0. Introduction** ([Mathematica](/teaching/PHYS152A/Introduction.nb)) ([PDF](/teaching/PHYS152A/Introduction.pdf)) 
 
 - Introduction

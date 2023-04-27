@@ -5,6 +5,20 @@ permalink: /teaching/PHYS152A/chatGPT
 hide: true
 ---
 
+**Do use ChatGPT to**:
+
+- Summarize existing papers. Use handy tricks like “Give me 5 bullet points with a 300 word maximum” to get swift responses.
+- Create a paper outline
+- Rephrase and fix grammar. Plus, you can ask for explanations.
+- Write code
+
+**Don’t use ChatGPT to**:
+
+- To find references or papers. ChatGPT is notorious for making up references, including author names, titles, and years of publication. You can even accuse it of doing so, and it happily fesses up.
+- Learn new information. Use summaries as guidelines or pointers to prioritize. Not checking ChatGPT’s responses means potentially trusting its hallucinations.
+- Write your finished text for you.
+- Math, maybe. This was a more serious issue at the launch of ChatGPT, but has potentially since been resolved with recent updates.
+
 Here is an example:
 
 **User**: Give me 10 titles for a condensed matter physics course final paper.
