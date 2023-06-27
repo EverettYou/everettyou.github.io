@@ -77,9 +77,11 @@ Artificial intelligence (AI) is a promising trend of future technology. It is fi
 
 - [Deep learning holography](/2020/06/25/holography.html)
 
-- Neural network renormalization
+- Machine learning renormalization group
 
 #### Machine Learning and Quantum Physics
 
 - [Machine assisted physics discovery](/2019/02/01/discoverQM.html)
+
+- [Emergent classicality in language models](/2023/06/27/Classicality.html)
 
