@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Decoding Schrödinger’s Cat -- A Novel Intersection of Quantum Physics and Artificial Intelligence
-tags: [Topological Phase, Fermi Liquid, Quantum Field Theory]
+tags: [Quantum Mechanics, Machine Learning, Language Models]
 ---
 
 Today, I am thrilled to share with you an exciting journey into the heart of quantum mechanics, where we tackle an enduring conundrum in physics -- the quantum-to-classical transition. Our research team leveraged the power of artificial intelligence to provide a fresh perspective on this age-old question. We've combined innovative artificial intelligence technology with quantum physics to model one of the most paradoxical concepts in quantum mechanics - Schrödinger’s Cat!
@@ -18,7 +18,7 @@ To tackle this problem, we sought the assistance of a powerful ally - Artificial
 
 ### Unveiling Quantum Coherence through Language Models
 
-The idea was to see if these language models could 'understand' and reproduce the quantum coherence encoded in the classical shadow data. Quantum coherence is a central feature of quantum mechanics and a key for quantum information processing. It describes the quantum superposition and interference between distinct states in a wave-like manner, much like Schrödinger's simultaneously dead and alive cat. We find that for smaller quantum systems, a strong enough language model can learn to capture quantum coherence and understand the full quantum reality. However, as the size of the quantum system increases, the model quickly fails to decode the quantum coherence as it is encoded in high-order correlations whose variance grows exponentially with the system size. Therefore, the model can only infer the classical reality from the data.
+The idea was to see if these language models could 'understand' and reproduce the quantum coherence encoded in the classical shadow data. Quantum coherence is a central feature of quantum mechanics and a key for quantum information processing. It describes the quantum superposition and interference between distinct states in a wave-like manner, encoded in the transition amplitude between the states of alive and dead cat. We find that for smaller quantum systems, a strong enough language model can learn to capture quantum coherence and understand the full quantum reality. However, as the size of the quantum system increases, the model quickly fails to decode the quantum coherence as it is encoded in high-order correlations whose variance grows exponentially with the system size. Therefore, the model can only infer the classical reality from the data.
 
 ### Unraveling the Quantum Mysteries
 
@@ -28,7 +28,7 @@ This is just the tip of the quantum iceberg! We invite you to dive deeper into t
 
 (*Written by GPT4 OpenAI*)
 
-GitHub repository: https://github.com/EverettYou/EmergentClassicality
+**GitHub repository**: [EverettYou/EmergentClassicality](https://github.com/EverettYou/EmergentClassicality) (code and data)
 
-Talk recording: https://pirsa.org/23060044
+**Talk recording**: [[VIRTUAL] Emergent Classicality from Information Bottleneck](https://pirsa.org/23060044) (on *Machine Learning for Quantum Many-Body Systems* @ Perimeter Institute, June 2023)
 

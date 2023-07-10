@@ -5,9 +5,10 @@ permalink: /people/
 feature-img: "assets/img/figures/people.png"
 ---
 
-|**Principal Investigator**|
-|--|--|
-| Yi-Zhuang You ([CV]({{site.baseurl}}/YZYou/)) | *Email:* yzyou(at)ucsd.edu<br>*Phone:* (858)822-4462<br>*Office:* Mayer Hall 5202<br>*Address:* 9500 Gilman Drive<br>University of California, San Diego<br>La Jolla, CA 92093-0021 ([Google maps](https://www.google.com/maps/place/Mayer+Hall,+San+Diego,+CA/@32.876035,-117.2416914,17z)) |
+| --                             | --                                                                    |
+| **Principal Investigator** |               |
+| --                             | --                                                                    |
+| Yi-Zhuang You ([CV]({{site.baseurl}}/YZYou/))<br>([Profile on UCSD Physics](https://www.physics.ucsd.edu/Directory/Person/536)) | *Email:* yzyou(at)ucsd.edu<br>*Phone:* (858)822-4462<br>*Office:* Mayer Hall 5202<br>*Address:* 9500 Gilman Drive<br>University of California, San Diego<br>La Jolla, CA 92093-0021 ([Google maps](https://www.google.com/maps/place/Mayer+Hall,+San+Diego,+CA/@32.876035,-117.2416914,17z)) |
 | --                             | --                                                                    |
 | **Postdoctoral Researchers**   |                                                                       |
 | --                             | --                                                                    |
@@ -27,11 +28,13 @@ feature-img: "assets/img/figures/people.png"
 | --  | --                      | --                                      |
 |2019 |Wenbo Fu (postdoc)       | University of Illinois Urbana-Champaign |
 | --  | --                      | --                                      |
-|2021 |Xiao-Yan Xu (postdoc)    | Shanghai Jiao Tong Univ.                |
+|2020 |Lun-Hui Hu (postdoc)     | Zhejiang University                |
 | --  | --                      | --                                      |
-|2021 |Jonathan Lam (PhD)       |                                         |
+|2021 |[Xiao-Yan Xu](https://www.physics.sjtu.edu.cn/en/jsml/xuxiaoyan.html) (postdoc)    | Shanghai Jiao Tong University                |
 | --  | --                      | --                                      |
-|2022 | Hongye Hu (PhD)         | Harvard University                      |
+|2021 |Jonathan Lam (PhD)       | Quantlab                        |
+| --  | --                      | --                                      |
+|2022 | [Hong-Ye Hu](https://scholar.harvard.edu/hongyehu/home) (PhD)         | Harvard University                      |
 | --  | --                      | --                                      |
 
 
