@@ -14,7 +14,9 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 - Iron-based superconductors 
 
-- [Multilayer graphene and Moire materials](/2018/05/21/Moire.html)
+- [Graphene and Moire materials](/2018/05/21/Moire.html)
+
+- [Nickel-based superconductors](/2023/08/23/Nickelate.html)
 
 #### Quantum Spin Liquid
 
@@ -24,7 +26,7 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 - [Fermi surface anomaly](/2023/03/20/FSAnomaly.html)
 
-- Sachdev-Ye-Kitaev model(s)
+- Sachdev-Ye-Kitaev model
 
 ### Topological Phases of Matter
 

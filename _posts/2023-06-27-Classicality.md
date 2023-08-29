@@ -26,7 +26,7 @@ This research bridges the gap between the arcane world of quantum mechanics and 
 
 This is just the tip of the quantum iceberg! We invite you to dive deeper into the quantum realm with us by reading our full research paper at ([arXiv: 2306.14838](https://arxiv.org/abs/2306.14838)). Together, let's explore the fascinating quantum-classical transition and how artificial intelligence can illuminate our path through this complex landscape!
 
-(*Written by GPT4 OpenAI*)
+(Written by OpenAI GPT4)
 
 **GitHub repository**: [EverettYou/EmergentClassicality](https://github.com/EverettYou/EmergentClassicality) (code and data)
 
