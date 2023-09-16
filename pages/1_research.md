@@ -8,7 +8,7 @@ feature-img: "assets/img/figures/research.png"
 
 ### Correlated Quantum Many-Body System
 
-Electrons and spins are microscopic degrees of freedom governed by quantum mechanics. When they are put together and interact with each other strongly, exotic collective phenomena can emerge in the system, which goes beyond the simple sum of the behavior of each individual. The study of quantum many-body systems also has important practical applications, ranging from designing correlated materials to making quantum devices.
+Quantum mechanics governs the microscopic degrees of freedom of electrons and spins. When strongly interacting, these systems can exhibit exotic collective phenomena beyond the simple sum of individual behaviors. Studying quantum many-body systems has important practical applications, from designing new materials to building quantum devices.
 
 #### Unconvensional Superconductor
 
@@ -30,7 +30,7 @@ Electrons and spins are microscopic degrees of freedom governed by quantum mecha
 
 ### Topological Phases of Matter
 
-Discovering new phases of matter lies on the frontier of condensed matter physics. Topological phases are such exotic quantum phases that go beyond our traditional understanding. The study of topological phases has led to many exciting developments in quantum many-body theory. The unique features of topological phases are being tested in current numerical simulations and may also find experimental realizations in the near future.
+Discovering new quantum phases is an exciting frontier of condensed matter physics. Topological phases exhibit exotic properties beyond traditional paradigms. Studying them has advanced quantum many-body theory and may enable new experimental realizations.
 
 #### Topological Phases
 
@@ -52,7 +52,7 @@ Discovering new phases of matter lies on the frontier of condensed matter physic
 
 ### Quantum Entanglement Dynamics
 
-Quantum entanglement is the most intriguing phenomenon in quantum mechanics, connecting topics of topological order, many-body localization, and quantum chaos. It also shares a remarkable similarity with wormholes given their non-local nature, which motivates the idea of holographic duality between entanglement and spacetime. Understanding the structure and dynamics of many-body entanglement could allow us to answer some most profound questions about decoherence, thermalization, and (maybe eventually) the nature of gravity.
+Quantum entanglement connects topics of topological order, localization, and quantum chaos. It shares similarities with wormholes, motivating holographic duality ideas. Understanding entanglement structure and dynamics may provide insights into fundamental questions of decoherence, thermalization, and gravity.
 
 #### Many-Body Localization (MBL)
 
@@ -73,7 +73,7 @@ Quantum entanglement is the most intriguing phenomenon in quantum mechanics, con
 
 ### Machine Learning and Physics
 
-Artificial intelligence (AI) is a promising trend of future technology. It is finding more and more applications in all branches of science (including physics). On the other hand, physicists are also bringing their intuitions and tools to the AI research, trying to decipher the nature of intelligence. The combination between machine learning and physics is just at its beginning stage, and much potential is to be released.  
+Artificial intelligence is influencing all scientific fields, including physics. Physicists are also providing insights into the nature of intelligence. The combination of machine learning and physics is just beginning, with much potential still to be explored.
 
 #### Deep Learning, Renormalization, and Holography
 
