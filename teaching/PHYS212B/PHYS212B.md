@@ -49,14 +49,14 @@ hide: true
 
 ### Lecture Notes
 
-**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/PathIntegralQuantization.pdf))  
+**Part 2. Path Integral and Wave Mechancis** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/PathIntegralQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/PathIntegralQuantization.pdf){:target="_blank"})  
 *path integral, wave function, Schrödinger equation, position and momentum, Fourier transform, symmetry and conservation laws, quantum planar rotor, energy level, density of states*
 
-**Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.pdf))  
+**Part 3. Algebraic Methods** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/AlgebraicMethods.pdf){:target="_blank"})  
 *harmonic oscillator, creation and annihilation operator, boson number operator, coherent state, angular momentum theory, SO(3) rotational symmetry, fusion category of spins, hydrogen atom and SO(4) symmetry* 
 
-**Part 4. Perturbation Theory** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/PerturbationTheory.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/PerturbationTheory.pdf))  
+**Part 4. Perturbation Theory** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/PerturbationTheory.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/PerturbationTheory.pdf){:target="_blank"})  
 *non-degenerate perturbation, Hellmann-Feynman theorems, degenerate perturbation, effective Hamiltonian, time-dependent perturbation, Dyson series, Green's function, Feynman diagrams, transition rate, Fermi's golden rule*
 
-**Part 5. Second Quantization** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.pdf))  
+**Part 5. Second Quantization** ([Mathematica]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.nb)) ([PDF]({{site.baseurl}}/teaching/PHYS212B/SecondQuantization.pdf){:target="_blank"})  
 *identical particle, Fock space and Fock state, creation and annihilation operator of bosons and fermions, quantum many-body system*

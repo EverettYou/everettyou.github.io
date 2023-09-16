@@ -7,7 +7,7 @@ hide: true
 
 The GitHub repocitory [Mathematica-for-physics](https://github.com/EverettYou/Mathematica-for-physics){:target="_blank"} contains *Mathematica* packages and stylesheets that are useful to my daily research.
 
-For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl}}/teaching/Mathematica/Guide.nb){:target="_blank"}) ([PDF]({{site.baseurl}}/teaching/Mathematica/Guide.pdf){:target="_blank"}).
+For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl}}/teaching/Mathematica/Guide.nb)) ([PDF]({{site.baseurl}}/teaching/Mathematica/Guide.pdf){:target="_blank"}).
 
 ### Contents
 

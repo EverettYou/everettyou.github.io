@@ -45,14 +45,14 @@ The lecture will closely follow this book:
 
 As a UCSD student, you have free access to Mathematica ([see how](/teaching/Mathematica_UCSD)).
 
-**Part 0. Introduction** ([Mathematica](/teaching/PHYS152A/Introduction.nb)) ([PDF](/teaching/PHYS152A/Introduction.pdf)) 
+**Part 0. Introduction** ([Mathematica](/teaching/PHYS152A/Introduction.nb)) ([PDF](/teaching/PHYS152A/Introduction.pdf){:target="_blank"}) 
 
 - Introduction
   - What is Condensed Matter Physics?
   - Why do we Study Condensed Matter Physics?
   - Central Themes of Condensed Matter Physics
 
-**Part 1. Atomic System** ([Mathematica](/teaching/PHYS152A/AtomicSystem.nb)) ([PDF](/teaching/PHYS152A/AtomicSystem.pdf)) 
+**Part 1. Atomic System** ([Mathematica](/teaching/PHYS152A/AtomicSystem.nb)) ([PDF](/teaching/PHYS152A/AtomicSystem.pdf){:target="_blank"}) 
 
 - Crystal Geometry
   - Crystal Formation
@@ -65,7 +65,7 @@ As a UCSD student, you have free access to Mathematica ([see how](/teaching/Math
   - Specific Heat of Solid
   - Stability of Crystal Order
 
-**Part 2. Electronic System** ([Mathematica](/teaching/PHYS152A/ElectronicSystem.nb)) ([PDF](/teaching/PHYS152A/ElectronicSystem.pdf)) 
+**Part 2. Electronic System** ([Mathematica](/teaching/PHYS152A/ElectronicSystem.nb)) ([PDF](/teaching/PHYS152A/ElectronicSystem.pdf){:target="_blank"}) 
 
 - Electrons in Solids
   - Quantum Mechanics of Electrons
@@ -76,5 +76,5 @@ As a UCSD student, you have free access to Mathematica ([see how](/teaching/Math
   - Thermodynamic Properties
   - Transport Properties
 
-What is next? Consider register PHYS 230 [syllabus](/teaching/PHYS152A/Phys230syllabus_2023.pdf).
+What is next? Consider register PHYS 230 [syllabus](/teaching/PHYS152A/Phys230syllabus_2023.pdf){:target="_blank"}.
 

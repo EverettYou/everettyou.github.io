@@ -47,12 +47,12 @@ Some other books for reference:
 
 To learn more about *tensor networks*, see:
 
-[4] Jacob C. Bridgeman, Christopher T. Chubb. Hand-waving and Interpretive Dance: An Introductory Course on Tensor Networks [arXiv:1603.03039](https://arxiv.org/abs/1603.03039)
+[4] Jacob C. Bridgeman, Christopher T. Chubb. Hand-waving and Interpretive Dance: An Introductory Course on Tensor Networks [arXiv:1603.03039](https://arxiv.org/abs/1603.03039){:target="_blank"}
 
 
 ### Lecture Notes
 
-**Part 1. State and Operator** ([Mathematica](/teaching/PHYS212A/StateAndOperator.nb)) ([PDF](/teaching/PHYS212A/StateAndOperator.pdf))  
+**Part 1. State and Operator** ([Mathematica](/teaching/PHYS212A/StateAndOperator.nb)) ([PDF](/teaching/PHYS212A/StateAndOperator.pdf){:target="_blank"})  
 * Quantum States
   * Ket and Bra
   * Basis
@@ -69,14 +69,14 @@ To learn more about *tensor networks*, see:
   * Unitary Operators
   * Time Evolution
 
-**Part 2. Quantum Entanglement** ([Mathematica](/teaching/PHYS212A/QuantumEntanglement.nb)) ([PDF](/teaching/PHYS212A/QuantumEntanglement.pdf))  
+**Part 2. Quantum Entanglement** ([Mathematica](/teaching/PHYS212A/QuantumEntanglement.nb)) ([PDF](/teaching/PHYS212A/QuantumEntanglement.pdf){:target="_blank"})  
 * Information Theory
   * Classical Information
   * Quantum Information
 * Quantum Entanglement
 
 
-**Part 3. Quantum Bootstrap** ([Mathematica](/teaching/PHYS212A/QuantumBootstrap.nb)) ([PDF](/teaching/PHYS212A/QuantumBootstrap.pdf))  
+**Part 3. Quantum Bootstrap** ([Mathematica](/teaching/PHYS212A/QuantumBootstrap.nb)) ([PDF](/teaching/PHYS212A/QuantumBootstrap.pdf){:target="_blank"})  
 * Harmonic Oscillator
   * Position and Momentum
   * Operator Algebra
@@ -85,5 +85,5 @@ To learn more about *tensor networks*, see:
   * Operator Algebra
   * Quantum Bootstrap
 
-**Exercises** ([Mathematica](/teaching/PHYS212A/Exercises.nb)) ([PDF](/teaching/PHYS212A/Exercises.pdf))  
+**Exercises** ([Mathematica](/teaching/PHYS212A/Exercises.nb)) ([PDF](/teaching/PHYS212A/Exercises.pdf){:target="_blank"})  
 Exercises are not required. For homework, see lecture note.
