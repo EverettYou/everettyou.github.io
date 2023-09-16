@@ -7,22 +7,22 @@ feature-img: "assets/img/figures/publications.png"
 
 ### Research Papers
 
-You can find my papers on [Google Scholar](https://scholar.google.com/citations?user=jXdbhiQAAAAJ)
+You can find my papers on [Google Scholar](https://scholar.google.com/citations?user=jXdbhiQAAAAJ){:target="_blank"} or on [arXiv](https://arxiv.org/search/?query=Yi-Zhuang+You&searchtype=all&source=header){:target="_blank"}
 
 ### Talk Slides
 
-* [Emergent Classicality from Information Bottleneck]({{site.baseurl}}/assets/pdf/EmergentClassicality.pdf)
+* [Emergent Classicality from Information Bottleneck]({{site.baseurl}}/assets/pdf/EmergentClassicality.pdf){:target="_blank"}
 
-* [Scalable and Flexible Classical Shadow Tomography]({{site.baseurl}}/assets/pdf/Shadow.pdf)
+* [Scalable and Flexible Classical Shadow Tomography]({{site.baseurl}}/assets/pdf/Shadow.pdf){:target="_blank"}
 
-* [Symmetric Mass Generation]({{site.baseurl}}/assets/pdf/SMG.pdf)
+* [Symmetric Mass Generation]({{site.baseurl}}/assets/pdf/SMG.pdf){:target="_blank"}
 
-* [Renormalization Group Flow and Genertive Modeling]({{site.baseurl}}/assets/pdf/RG-Flow.pdf)
+* [Renormalization Group Flow and Genertive Modeling]({{site.baseurl}}/assets/pdf/RG-Flow.pdf){:target="_blank"}
 
-* [Machine Learning Physics]({{site.baseurl}}/assets/pdf/ML_physics.pdf)
+* [Machine Learning Physics]({{site.baseurl}}/assets/pdf/ML_physics.pdf){:target="_blank"}
 
-* [Deconfined Quantum Critical Point]({{site.baseurl}}/assets/pdf/DQCP.pdf)
+* [Deconfined Quantum Critical Point]({{site.baseurl}}/assets/pdf/DQCP.pdf){:target="_blank"}
 
-* [Twisted Bilayer Graphene]({{site.baseurl}}/assets/pdf/tBLG.pdf)
+* [Twisted Bilayer Graphene]({{site.baseurl}}/assets/pdf/tBLG.pdf){:target="_blank"}
 
-* [Spectrum Bifurcation Renormalization Group]({{site.baseurl}}/assets/pdf/SBRG.pdf)
+* [Spectrum Bifurcation Renormalization Group]({{site.baseurl}}/assets/pdf/SBRG.pdf){:target="_blank"}

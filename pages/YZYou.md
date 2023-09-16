@@ -5,7 +5,7 @@ permalink: /YZYou/
 hide: true
 ---
 
-You can find a printable version of my CV [here]({{site.baseurl}}/assets/pdf/CV.pdf).
+You can find a printable version of my CV [here]({{site.baseurl}}/assets/pdf/CV.pdf){:target="_blank"}.
 
 ----
 
@@ -13,8 +13,8 @@ You can find a printable version of my CV [here]({{site.baseurl}}/assets/pdf/CV.
 
 - Tel: +1(858)822-4462 (Office)
 - Email: yzyou(at)ucsd.edu
-- GitHub: [Everett You](https://github.com/EverettYou)
-- StackExchange: [Everett You](https://physics.stackexchange.com/users/7616/everett-you)
+- GitHub: [Everett You](https://github.com/EverettYou){:target="_blank"}
+- StackExchange: [Everett You](https://physics.stackexchange.com/users/7616/everett-you){:target="_blank"}
 
 ## Research Interests
 

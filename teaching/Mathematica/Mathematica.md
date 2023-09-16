@@ -5,9 +5,9 @@ permalink: /teaching/Mathematica
 hide: true
 ---
 
-The GitHub repocitory [Mathematica-for-physics](https://github.com/EverettYou/Mathematica-for-physics) contains *Mathematica* packages and stylesheets that are useful to my daily research.
+The GitHub repocitory [Mathematica-for-physics](https://github.com/EverettYou/Mathematica-for-physics){:target="_blank"} contains *Mathematica* packages and stylesheets that are useful to my daily research.
 
-For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl}}/teaching/Mathematica/Guide.nb)) ([PDF]({{site.baseurl}}/teaching/Mathematica/Guide.pdf)).
+For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl}}/teaching/Mathematica/Guide.nb){:target="_blank"}) ([PDF]({{site.baseurl}}/teaching/Mathematica/Guide.pdf){:target="_blank"}).
 
 ### Contents
 
@@ -21,7 +21,7 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
   
   - **DiagramEditor**: an interactive editor of Feynman diagrams (no diagrammatic evaluation)
   
-  - **Themes**: a self-made plot theme for Mathematica, called "Academic" (see the StackExchange discussion [Is it possible to define a new PlotTheme?](https://mathematica.stackexchange.com/questions/54545/is-it-possible-to-define-a-new-plottheme))
+  - **Themes**: a self-made plot theme for Mathematica, called "Academic" (see the StackExchange discussion [Is it possible to define a new PlotTheme?](https://mathematica.stackexchange.com/questions/54545/is-it-possible-to-define-a-new-plottheme){:target="_blank"})
   
   - **Toolkit**: miscellaneous functions, including `BZPlot` for plotting band structure, `tTr` for tensor network contraction, `ComplexMatrixPlot` for complex matrix visualization, `Pf` for matrix Pfaffian
   
@@ -33,7 +33,7 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
 
 ### Installation 
 
-- To download, visit the GitHub repository [Mathematica-for-physics](https://github.com/EverettYou/Mathematica-for-physics), click "Clone or download" button to the right and choose "Download ZIP".
+- To download, visit the GitHub repository [Mathematica-for-physics](https://github.com/EverettYou/Mathematica-for-physics){:target="_blank"}, click "Clone or download" button to the right and choose "Download ZIP".
 
 - To install everything:
 
@@ -45,7 +45,7 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
 
   4. quit Mathematica and restart.
 
-- In order for the CMU Article style sheet to work properly, Computer Modern Unicode fonts must be installed. (The font files can be found [here](https://github.com/EverettYou/Mathematica-for-physics/tree/master/CMUfonts).)
+- In order for the CMU Article style sheet to work properly, Computer Modern Unicode fonts must be installed. (The font files can be found [here](https://github.com/EverettYou/Mathematica-for-physics/tree/master/CMUfonts){:target="_blank"}.)
 
 
 
