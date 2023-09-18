@@ -24,11 +24,11 @@ The idea was to see if these language models could 'understand' and reproduce th
 
 This research bridges the gap between the arcane world of quantum mechanics and the familiar classical world, revealing that our perception of the universe's quantum nature may be limited by our capacity to process classical information. As we continue to refine these models and techniques, we are slowly but surely uncovering the mysteries of the quantum world, bringing us closer to the day when we can fully comprehend and harness the power of quantum mechanics.
 
-This is just the tip of the quantum iceberg! We invite you to dive deeper into the quantum realm with us by reading our full research paper at ([arXiv: 2306.14838](https://arxiv.org/abs/2306.14838)). Together, let's explore the fascinating quantum-classical transition and how artificial intelligence can illuminate our path through this complex landscape!
+This is just the tip of the quantum iceberg! We invite you to dive deeper into the quantum realm with us by reading our full research paper at ([arXiv: 2306.14838](https://arxiv.org/abs/2306.14838){:target="_blank"}). Together, let's explore the fascinating quantum-classical transition and how artificial intelligence can illuminate our path through this complex landscape!
 
 (Written by OpenAI GPT4)
 
-**GitHub repository**: [EverettYou/EmergentClassicality](https://github.com/EverettYou/EmergentClassicality) (code and data)
+**GitHub repository**: [EverettYou/EmergentClassicality](https://github.com/EverettYou/EmergentClassicality){:target="_blank"} (code and data)
 
-**Talk recording**: [[VIRTUAL] Emergent Classicality from Information Bottleneck](https://pirsa.org/23060044) (on *Machine Learning for Quantum Many-Body Systems* @ Perimeter Institute, June 2023)
+**Talk recording**: [[VIRTUAL] Emergent Classicality from Information Bottleneck](https://pirsa.org/23060044){:target="_blank"} (on *Machine Learning for Quantum Many-Body Systems* @ Perimeter Institute, June 2023)
 

@@ -15,7 +15,7 @@ According to University of California San Diego Assistant Professor of Physics Y
 
 To reveal this elusive duality, You and his team developed a novel machine-learning algorithm that enables artificial intelligence (AI) to learn from the boundary quantum theory and propose the corresponding bulk gravity dual. The results of their study are published in Physical Review Research, an American peer-reviewed scientific journal established in 1893 and published by the American Physical Society. According to the scientists, their outcome may shed light on a better understanding of the holographic duality, and it could result in new tools for exploring quantum gravity.
 
-You and Hong-Ye Hu, a physics graduate student at UC San Diego, collaborated with Shuo-Hui Li and Lei Wang (Institute of Physics, Chinese Academy of Sciences, Beijing) to develop the machine-learning algorithm based on a deep artificial neural network—an interconnected group of nodes that mimic simple brain neurons. 
+You and Hong-Ye Hu, a physics graduate student at UC San Diego, collaborated with Shuo-Hui Li and Lei Wang (Institute of Physics, Chinese Academy of Sciences, Beijing) to develop the machine-learning algorithm based on a deep artificial neural network—an interconnected group of nodes that mimic simple brain neurons. ([arXiv:1903.00804](https://arxiv.org/abs/1903.00804){:target="_blank"}) 
 
 “By arranging the artificial neurons in a hierarchical structure, the neural network is able to generate quantum field configurations as an artist creating a painting, level-by-level, from general composition to specific details. In this way, the artificial intelligence learns to identify the features at different scales in the quantum system and present them at different depths in the holographic bulk such that it can serve as a translator that can interpret the quantum theory in terms of the gravity theory and vice versa,” explained You. “The artificial intelligence not only learns to propose physics theories but also learns to find the connection between different theories that are dual to each other.” 
 
@@ -40,4 +40,4 @@ Another usage of the holographic duality established by the AI is to simulate th
 
 The UC San Diego researchers are supported by a startup fund from the university. Li and Wang are supported by the National Natural Science Foundation of China (grant no. 11774398) and the Strategic Priority Research Program of the Chinese Academy of Sciences (grant no. XDB28000000).
 
-*(By Cynthia Dillon, reprinted from [UCSD Physical Science News](https://physicalsciences.ucsd.edu/media-events/articles/2020/using-artificial-intelligence-to-paint-the-holographic-universe.html))*
+*(By Cynthia Dillon, reprinted from [UCSD Physical Science News](https://physicalsciences.ucsd.edu/media-events/articles/2020/using-artificial-intelligence-to-paint-the-holographic-universe.html){:target="_blank"})*
