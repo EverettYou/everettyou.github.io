@@ -6,7 +6,7 @@ hide: true
 feature-img: "assets/img/figures/LGBT.png"
 ---
 
-You can find a printable version of my CV [here]({{site.baseurl}}/assets/pdf/CV.pdf){:target="_blank"}.
+You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/assets/pdf/CV.pdf){:target="_blank"}.
 
 ----
 
