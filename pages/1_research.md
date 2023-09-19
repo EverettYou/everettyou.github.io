@@ -46,7 +46,7 @@ Discovering new quantum phases is an exciting frontier of condensed matter physi
 
 - [Deconfined quantum criticality](/2019/04/16/DQCP.html)
 
-- [Symmetric mass generation](/2022/08/19/SMG.html)
+- [Symmetric mass generation](/2023/09/18/VMC_SMG.html)
 
 - Duality in quantum field theory
 

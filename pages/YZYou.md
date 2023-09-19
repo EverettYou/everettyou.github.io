@@ -1,8 +1,9 @@
 --- 
 layout: page 
-title : Yi-Zhuang You 
+title : Yi-Zhuang You (He/Him/His)
 permalink: /YZYou/
 hide: true
+feature-img: "assets/img/figures/LGBT.png"
 ---
 
 You can find a printable version of my CV [here]({{site.baseurl}}/assets/pdf/CV.pdf){:target="_blank"}.
@@ -14,7 +15,7 @@ You can find a printable version of my CV [here]({{site.baseurl}}/assets/pdf/CV.
 - Tel: +1(858)822-4462 (Office)
 - Email: yzyou(at)ucsd.edu
 - GitHub: [Everett You](https://github.com/EverettYou){:target="_blank"}
-- StackExchange: [Everett You](https://physics.stackexchange.com/users/7616/everett-you){:target="_blank"}
+- Physics StackExchange: [Everett You](https://physics.stackexchange.com/users/7616/everett-you){:target="_blank"}
 
 ## Research Interests
 
@@ -70,6 +71,7 @@ Theoretical investigation on correlated topological phases and phase transitions
 
 ## Services
 
+- UCSD Chancellor’s Advisory Committee on Gender Identity and Sexual Orientation Issues (2023 - present)
 - Editorial Board Member for Machine Learning: Science and Technology (2019 - present)
 - Referee for journals including Nature Physics, Physical Review Letters, Physical Review X, Physical Review B, etc.
 
