@@ -29,5 +29,5 @@ The quest for understanding Fermi liquids has taken us to the exhilarating new f
 
 Our research not only contributes to the understanding of Fermi surface anomalies but also offers a more coherent and streamlined framework for studying them. Our works pave the way for further advances in condensed matter physics and inspires investigations into Fermi liquids, non-Fermi liquids, and topological phases.
 
-（*By GPT4 OpenAI*）
+（Written by OpenAI GPT4）
 
