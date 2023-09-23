@@ -4,6 +4,7 @@ title : "PHYS 152A"
 subtitle: "Undergraduate Condensed Matter Physics"
 permalink: /teaching/PHYS152A
 hide: true
+feature-img: "/teaching/PHYS152A/title.png"
 ---
 
 ### Schedule of Classes
