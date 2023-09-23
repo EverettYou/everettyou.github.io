@@ -1,0 +1,101 @@
+---
+layout: page 
+title : "PHYS 130B"
+subtitle: "Undergraduate Quantum Mechanics II"
+permalink: /teaching/PHYS130B
+hide: true
+feature-img: "/teaching/PHYS130B/title.png"
+---
+
+### Schedule of Classes
+
+* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, CENTR 212
+
+* *Discussion session*: Mon. 4:00 PM - 4:50 PM, CENTR 113
+
+* *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
+
+  * *Email*: <yzyou@ucsd.edu>
+
+  * *Office hour*: by schedule, Mayer 5202 or Zoom <https://ucsd.zoom.us/my/yzyou>
+
+* *Teaching Assistants*: Wanda Hou.  *Email*: <hwanda@ucsd.edu>
+
+* **Course Grade Allocation**: 
+  - Homework: 70% 
+  - Mid-term Exam: 10%
+  - Final Exam: 20%
+
+* **Assignment and Submission Platform**: 
+  - Homework and exams will be assigned and submitted via Canvas.
+
+* **Homework Guidelines**:
+
+  - Assignments will occur irregularly, depending on when the homework problem is encountered in the lecture.
+  
+  - A recommended deadline will be provided for each assignment. However, there are no penalties for late submission (meaning that submissions are accepted until the end of the quarter). But please kindly manage your submissions to alleviate the TA's workload.
+  
+  - For homework, discussion among students and consulting with the TA are allowed. You may utilize all educational resources (including AI language models). Nevertheless, you are required to complete your assignments by yourself to maintain academic integrity. You are encouraged to acknowledge in your homework the resources that are helpful to you.
+
+* **Examination Policies**:
+
+  - The scheduling for the mid-term and final exams has yet to be determined. Your input regarding preferred time slots is welcome.
+  
+  - Exams will be announced online, and you will typically be given a two-day window for completion. Extensions may be granted under exceptional circumstances.
+  
+  - All exams are take-home and open-book in nature. You are permitted to consult textbooks, lecture notes, employ computational tools, browse online resources, and interact with AI language models. However, discussing the exam content with other humans is not allowed.
+
+### Textbooks
+
+The lecture will follow these books:
+
+[1] Leonard Susskind and Art Friedman, *Quantum Mechanics (the Theoretical Minimum)*. Basic Books, New York. (2014). ([PDF](/teaching/PHYS130B/QuantumMechanics-TheTheoreticalMinimum.pdf){:target="_blank"})
+
+[2] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994).
+
+### Lecture Notes
+
+As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Mathematica_UCSD)).
+
+**Part I. Matrix Mechanics** ([Mathematica](/teaching/PHYS130B/MatrixMechanics.nb)) ([PDF](/teaching/PHYS130B/MatrixMechanics.pdf){:target="_blank"}) 
+
+- Introduction
+  - Everything is Vector
+  - Complex Algebra
+  - Linear Algebra
+- Quantum States
+  - Ket and Bra
+  - Scalar Product
+  - Basis and Hilbert Space
+  - Born's Rule
+- Quantum Operator
+  - Matrix Representation
+  - Operator Algebra
+- Measurement
+  - Hermitian Operators
+  - Observables
+- Dynamics
+  - Unitary Operators
+  - Time Evolution
+
+**Part II. Algebraic Methods** ([Mathematica](/teaching/PHYS130B/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130B/AlgebraicMethods.pdf){:target="_blank"}) 
+
+- Introduction
+  - Function is Vector
+  - Position and Momentum
+- Harmonic Oscillator
+  - Operator Algebra
+  - Quantum Bootstrap
+  - Represenation Theory
+- Angular Momentum
+  - Operator Algebra
+  - Quantum Bootstrap
+  - Representation Theory
+  - Fusion Category
+- Hydrogen Atom
+  - Background: Classical Mechanics
+  - SO(4) Symmetry
+  - Spectrum
+
+Feel too simple? Consider register PHYS 212A by Prof. Grover.
+
