@@ -51,7 +51,14 @@ The lecture will follow these books:
 
 [1] Leonard Susskind and Art Friedman, *Quantum Mechanics (the Theoretical Minimum)*. Basic Books, New York. (2014). ([PDF](/teaching/PHYS130B/QuantumMechanics-TheTheoreticalMinimum.pdf){:target="_blank"})
 
-[2] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994).
+[2] Arjun Berera and Luigi Del Debbio, *Quantum Mechanics*. Cambridge University Press, New York (2021).
+
+Some other books for reference:
+
+[3] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994).
+
+[4] R. Shankar, *Principles of Quantum Mechanics*. Plenum Press, New York. (1994)
+
 
 ### Lecture Notes
 
@@ -60,7 +67,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
 **Part I. Matrix Mechanics** ([Mathematica](/teaching/PHYS130B/MatrixMechanics.nb)) ([PDF](/teaching/PHYS130B/MatrixMechanics.pdf){:target="_blank"}) 
 
 - Introduction
-  - Everything is Vector
+  - Everything is a Vector
   - Complex Algebra
   - Linear Algebra
 - Quantum States
@@ -81,7 +88,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
 **Part II. Algebraic Methods** ([Mathematica](/teaching/PHYS130B/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130B/AlgebraicMethods.pdf){:target="_blank"}) 
 
 - Introduction
-  - Function is Vector
+  - Functions are Vectors
   - Position and Momentum
 - Harmonic Oscillator
   - Operator Algebra
@@ -96,6 +103,19 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Background: Classical Mechanics
   - SO(4) Symmetry
   - Spectrum
+
+**Part III. Quantum Statistics** ([Mathematica](/teaching/PHYS130B/QuantumStatistics.nb)) ([PDF](/teaching/PHYS130B/QuantumStatistics.pdf){:target="_blank"}) 
+
+- Introduction
+  - Tensors are Vectors
+  - Quantum Many-Body States
+- Second Quantization
+  - Fock Space
+  - Creation and Annihilation Operators
+- Quantum Statistical Physics
+  - General Principles
+  - Bose-Einstein Statistics
+  - Fermi-Dirac Statistics
 
 Feel too simple? Consider register PHYS 212A by Prof. Grover.
 
