@@ -19,7 +19,7 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 
 ## Research Interests
 
-Theoretical investigation on correlated topological phases and phase transitions in condensed matter and high-energy physics, understanding dynamics of quantum entanglement, and application of machine learning in quantum many-body problems.
+Theoretical investigation on correlated topological phases and phase transitions in condensed matter and high-energy physics, understanding dynamics of quantum entanglement, and application of machine learning in many-body problems.
 
 ## Education
 
