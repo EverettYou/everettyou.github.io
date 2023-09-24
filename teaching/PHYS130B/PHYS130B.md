@@ -17,7 +17,7 @@ feature-img: "/teaching/PHYS130B/title.png"
 
   * *Email*: <yzyou@ucsd.edu>
 
-  * *Office hour*: by schedule, Mayer 5202 or Zoom <https://ucsd.zoom.us/my/yzyou>
+  * *Office hours*: by schedule, Mayer 5202 or Zoom <https://ucsd.zoom.us/my/yzyou>
 
 * *Teaching Assistants*: Wanda Hou.  *Email*: <hwanda@ucsd.edu>
 
@@ -27,13 +27,13 @@ feature-img: "/teaching/PHYS130B/title.png"
   - Final Exam: 20%
 
 * **Assignment and Submission Platform**: 
-  - Homework and exams will be assigned and submitted via Canvas.
+  - Homework and exams are online. They will all be assigned and submitted via the [UCSD Canvas](https://canvas.ucsd.edu/courses/49926){:target="_blank"} platform.
 
 * **Homework Guidelines**:
 
   - Assignments will occur irregularly, depending on when the homework problem is encountered in the lecture.
   
-  - A recommended deadline will be provided for each assignment. However, there are no penalties for late submission (meaning that submissions are accepted until the end of the quarter). But please kindly manage your submissions to alleviate the TA's workload.
+  - A recommended deadline will be provided for each assignment. However, there are no penalties for late submissions (meaning that submissions are accepted until the end of the quarter). But please kindly manage your submissions to alleviate the TA's workload.
   
   - For homework, discussion among students and consulting with the TA are allowed. You may utilize all educational resources (including AI language models). Nevertheless, you are required to complete your assignments by yourself to maintain academic integrity. You are encouraged to acknowledge in your homework the resources that are helpful to you.
 
@@ -43,7 +43,7 @@ feature-img: "/teaching/PHYS130B/title.png"
   
   - Exams will be announced online, and you will typically be given a two-day window for completion. Extensions may be granted under exceptional circumstances.
   
-  - All exams are take-home and open-book in nature. You are permitted to consult textbooks, lecture notes, employ computational tools, browse online resources, and interact with AI language models. However, discussing the exam content with other humans is not allowed.
+  - All exams are take-home and open-book in nature. You are permitted to consult textbooks and lecture notes, employ computational tools, browse online resources, and interact with AI language models. However, discussing the exam content with other humans is not allowed.
 
 ### Textbooks
 
