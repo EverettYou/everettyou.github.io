@@ -48,4 +48,6 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
 - In order for the CMU Article style sheet to work properly, Computer Modern Unicode fonts must be installed. (The font files can be found [here](https://github.com/EverettYou/Mathematica-for-physics/tree/master/CMUfonts){:target="_blank"}.)
 
 
-
+<div style="text-align: center;">
+  <img src="/assets/img/logos/Mathematica.png" alt="Mathematica" width="30%">
+</div>

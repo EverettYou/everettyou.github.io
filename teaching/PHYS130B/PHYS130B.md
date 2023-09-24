@@ -93,7 +93,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
 - Harmonic Oscillator
   - Operator Algebra
   - Quantum Bootstrap
-  - Represenation Theory
+  - Representation Theory
 - Angular Momentum
   - Operator Algebra
   - Quantum Bootstrap

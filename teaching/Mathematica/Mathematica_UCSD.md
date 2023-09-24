@@ -8,9 +8,13 @@ hide: true
 
 Please go to [UCSD Wolfram portal](https://www.wolfram.com/siteinfo/){:target="_blank"}.
 
-* Type in your UC San Diego email address and click Continue
+* Type in your UC San Diego email address (????@ucsd.edu) and click Continue
+
+  ![Sign in page](/teaching/Mathematica/figs/signin.png)
 
 * Click the link to download Mathematica for your operating system 
+  
+  ![Download page](/teaching/Mathematica/figs/download.png)
 
 * When prompted to activate through your organization (SSO), sign in with your UC San Diego login (for details, see instructions [here](https://support.wolfram.com/54713){:target="_blank"}.)
 
