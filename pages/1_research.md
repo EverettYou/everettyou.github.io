@@ -79,7 +79,7 @@ Artificial intelligence is influencing all scientific fields, including physics.
 
 - [Deep learning holography](/2020/06/25/holography.html)
 
-- Machine learning renormalization group
+- [Machine learning renormalization group](/2023/10/04/MLRG.html)
 
 #### Machine Learning and Quantum Physics
 
