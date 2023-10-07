@@ -1,6 +1,6 @@
 --- 
 layout: page 
-title : Yi-Zhuang You (He/Him/His)
+title : Yi-Zhuang You 尤亦庄 (He/Him)
 permalink: /YZYou/
 hide: true
 feature-img: "assets/img/figures/LGBT.png"
