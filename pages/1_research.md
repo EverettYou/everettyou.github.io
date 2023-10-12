@@ -6,7 +6,7 @@ feature-img: "assets/img/figures/research.png"
 ---
 
 <div style="text-align: right"> 
-欲穷千里目，更上一层楼。------ 唐 · 王之涣
+欲穷千里目，更上一层楼。—— 唐 · 王之涣
 </div>
 
 ---

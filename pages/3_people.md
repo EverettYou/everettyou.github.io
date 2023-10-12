@@ -6,7 +6,7 @@ feature-img: "assets/img/figures/people.png"
 ---
 
 <div style="text-align: right"> 
-海内存知己，天涯若比邻。------ 唐 · 王勃
+海内存知己，天涯若比邻。—— 唐 · 王勃
 </div> 
 
 
