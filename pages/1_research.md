@@ -9,6 +9,8 @@ feature-img: "assets/img/figures/research.png"
 欲穷千里目，更上一层楼。------ 唐 · 王之涣
 </div>
 
+---
+
 ### Correlated Quantum Many-Body System
 
 Quantum mechanics governs the microscopic degrees of freedom of electrons and spins. When strongly interacting, these systems can exhibit exotic collective phenomena beyond the simple sum of individual behaviors. Studying quantum many-body systems has important practical applications, from designing new materials to building quantum devices.
@@ -30,6 +32,8 @@ Quantum mechanics governs the microscopic degrees of freedom of electrons and sp
 - [Fermi surface anomaly](/2023/03/20/FSAnomaly.html)
 
 - Sachdev-Ye-Kitaev model
+
+---
 
 ### Topological Phases of Matter
 
@@ -53,6 +57,8 @@ Discovering new quantum phases is an exciting frontier of condensed matter physi
 
 - Duality in quantum field theory
 
+---
+
 ### Quantum Entanglement Dynamics
 
 Quantum entanglement connects topics of topological order, localization, and quantum chaos. It shares similarities with wormholes, motivating holographic duality ideas. Understanding entanglement structure and dynamics may provide insights into fundamental questions of decoherence, thermalization, and gravity.
@@ -73,6 +79,8 @@ Quantum entanglement connects topics of topological order, localization, and qua
 - [Entanglement feature learning](/2018/01/31/EFL.html) 
 
 - [Quantum information dynamics](/2018/03/28/DynQ.html)
+
+---
 
 ### Machine Learning and Physics
 
