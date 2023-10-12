@@ -3,12 +3,7 @@ layout: page
 title : Publications 
 permalink: /publications/
 feature-img: "assets/img/figures/publications.png"
----
-
-<div style="text-align: right"> 
-文章千古事，得失寸心知。—— 唐 · 杜甫 
-</div>
-
+inscription: 文章千古事，得失寸心知。—— 唐 · 杜甫 
 ---
 
 ### Research Papers

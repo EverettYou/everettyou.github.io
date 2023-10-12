@@ -3,12 +3,7 @@ layout: page
 title : Teaching 
 permalink: /teaching/
 feature-img: "assets/img/figures/teaching.png"
----
-
-<div style="text-align: right"> 
-随风潜入夜，润物细无声。—— 唐 · 杜甫 
-</div>
-
+inscription: 随风潜入夜，润物细无声。—— 唐 · 杜甫
 ---
 
 ### Courses
