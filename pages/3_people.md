@@ -5,6 +5,11 @@ permalink: /people/
 feature-img: "assets/img/figures/people.png"
 ---
 
+海内存知己，天涯若比邻。------ 唐 · 王勃 
+
+---
+
+
 | --                             | --                                 |
 | **Principal Investigator**     |                                    |
 | --                             | --                                 |

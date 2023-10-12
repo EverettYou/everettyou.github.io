@@ -5,6 +5,10 @@ permalink: /teaching/
 feature-img: "assets/img/figures/teaching.png"
 ---
 
+随风潜入夜，润物细无声。------ 唐 · 杜甫 
+
+---
+
 ### Courses
 
 - [PHYS 130B]({{site.baseurl}}/teaching/PHYS130B) Undergraduate Quantum Mechanics II (Fall 2023)
