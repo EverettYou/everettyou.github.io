@@ -16,7 +16,7 @@ You can find my papers on [Google Scholar](https://scholar.google.com/citations?
 
 * [Emergent Classicality from Information Bottleneck]({{site.baseurl}}/assets/pdf/EmergentClassicality.pdf){:target="_blank"}
 
-* [Scalable and Flexible Classical Shadow Tomography]({{site.baseurl}}/assets/pdf/Shadow.pdf){:target="_blank"}
+* [Classical Shadow Tomography]({{site.baseurl}}/assets/pdf/Shadow.pdf){:target="_blank"}
 
 * [Symmetric Mass Generation]({{site.baseurl}}/assets/pdf/SMG.pdf){:target="_blank"}
 
