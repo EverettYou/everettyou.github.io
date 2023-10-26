@@ -1,7 +1,7 @@
 --- 
 layout: page 
 title : Yi-Zhuang You 尤亦庄 (He/Him)
-permalink: /YZYou/
+permalink: /people/YZYou.html
 hide: true
 feature-img: "assets/img/figures/LGBT-min.png"
 ---
