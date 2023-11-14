@@ -117,5 +117,15 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Bose-Einstein Statistics
   - Fermi-Dirac Statistics
 
+**Part IV. Perturbation Theory** ([Mathematica](/teaching/PHYS130B/PerturbationTheory.nb)) ([PDF](/teaching/PHYS130B/PerturbationTheory.pdf){:target="_blank"}) 
+
+- Time-Independent Perturbation
+  - A Toy Model of Qubit
+  - Non-Degenerate Perturbation Theory
+  - Degenerate Perturbation Theory
+- Time-Dependent Perturbation
+  - Time-Dependent Perturbation Theory
+  - Energy Level Transitions
+
 Feel too simple? Consider register PHYS 212A by Prof. Grover.
 
