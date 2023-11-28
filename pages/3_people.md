@@ -9,7 +9,7 @@ inscription: 海内存知己，天涯若比邻。—— 唐 · 王勃
 | --                             | --                                 |
 | **Principal Investigator**     |                                    |
 | --                             | --                                 |
-| Yi-Zhuang You ([CV]({{site.baseurl}}/people/YZYou.html))<br>([Profile on UCSD Physics](https://physics.ucsd.edu/people/profile?profile_id=597){:target="_blank"}) | *Email:* yzyou(at)ucsd.edu<br>*Phone:* (858)822-4462<br>*Office:* Mayer Hall 5202<br>*Lab:* Mayer Hall Adition 1623<br>*Address:* 9500 Gilman Drive<br>University of California, San Diego<br>La Jolla, CA 92093-0021 ([Google maps](https://maps.app.goo.gl/bDccvkxKPGRJtTW79){:target="_blank"}) |
+| Yi-Zhuang You ([CV](/people/YZYou))<br>([Profile on UCSD Physics](https://physics.ucsd.edu/people/profile?profile_id=597){:target="_blank"}) | *Email:* yzyou(at)ucsd.edu<br>*Phone:* (858)822-4462<br>*Office:* Mayer Hall 5202<br>*Lab:* Mayer Hall Adition 1623<br>*Address:* 9500 Gilman Drive<br>University of California, San Diego<br>La Jolla, CA 92093-0021 ([Google maps](https://maps.app.goo.gl/bDccvkxKPGRJtTW79){:target="_blank"}) |
 | --                             | --                                 |
 | **Postdoctoral Researchers**   |                                    |
 | --                             | --                                 |

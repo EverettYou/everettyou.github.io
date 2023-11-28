@@ -1,9 +1,12 @@
 --- 
 layout: page 
 title : Yi-Zhuang You 尤亦庄 (He/Him)
-permalink: /people/YZYou.html
+permalink: /people/YZYou
 hide: true
 feature-img: "assets/img/figures/LGBT-min.png"
+redirect_from:
+  - /YZYou/
+  - /YZYou
 ---
 
 You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/assets/pdf/CV.pdf){:target="_blank"}.
