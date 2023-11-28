@@ -17,7 +17,7 @@ inscription: 海内存知己，天涯若比邻。—— 唐 · 王勃
 | --                             | --                                 |
 | Meng Zeng                      | *Email:* m8zeng(at)ucsd.edu<br>*Office:* Mayer Hall Adition 4671      |
 | --                             | --                                 |
-| Da-Chuan Lu                    | *Email:* ldachuan(at)ucsd.edu<br>*Office:* Mayer Hall Adition 4671    |
+| [Da-Chuan Lu](https://dclu.github.io/){:target="_blank"}                    | *Email:* ldachuan(at)ucsd.edu<br>*Office:* Mayer Hall Adition 4671    |
 | --                             | --                                 |
 | Wanda Hou                      | *Email:* hwanda(at)ucsd.edu<br>*Office:* Mayer Hall Adition 1623                              |
 | --                             | --                                 |
