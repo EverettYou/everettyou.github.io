@@ -5,7 +5,7 @@ subtitle: "Undergraduate Quantum Mechanics II"
 permalink: /teaching/PHYS130B
 hide: true
 feature-img: "/teaching/PHYS130B/title.png"
-tags: [Syllabus]
+tags: [Course Syllabus]
 ---
 
 ### Schedule of Classes
