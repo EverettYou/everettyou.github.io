@@ -1,9 +1,9 @@
 ---
 layout: tags
 title: Tags
-permalink: /tags.html
+permalink: /tags/
 icon: "fa-tags"
 redirect_from:
-  - /tags/
+  - /tags.html
 ---
 

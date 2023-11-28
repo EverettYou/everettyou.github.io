@@ -1,11 +1,11 @@
 ---
 layout: search
 title: Search
-permalink: /search.html
+permalink: /search/
 icon: "fa-search"
 feature-img: "assets/img/figures/search-min.png"
 redirect_from:
-  - /search/
+  - /search.html
 search_prompt: Enter keywords here ...
 ---
 
