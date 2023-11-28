@@ -4,6 +4,7 @@ title : "PHYS 212A"
 subtitle: "Graduate Quantum Mechanics I"
 permalink: /teaching/PHYS212A
 hide: true
+tags: [Syllabus]
 ---
 
 ### Schedule of Classes

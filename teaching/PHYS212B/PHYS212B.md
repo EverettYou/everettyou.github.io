@@ -4,6 +4,7 @@ title : "PHYS 212B"
 subtitle: "Graduate Quantum Mechanics II"
 permalink: /teaching/PHYS212B
 hide: true
+tags: [Syllabus]
 ---
 
 ### Schedule of Classes
