@@ -2,8 +2,11 @@
 layout: search
 title: Search
 permalink: /search.html
-subtitle: "What are you looking for?"
 icon: "fa-search"
+feature-img: "assets/img/figures/search.png"
 redirect_from:
   - /search/
+search_prompt: Enter keywords here ...
 ---
+
+#### What are you looking for?
