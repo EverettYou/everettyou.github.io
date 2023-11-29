@@ -1,6 +1,7 @@
 ---
 layout: page 
 title : "How to Install Mathematica Desktop"
+subtitle: "(Instructions for UCSD students only)"
 permalink: /teaching/Mathematica_UCSD
 hide: true
 ---
