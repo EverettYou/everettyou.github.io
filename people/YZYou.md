@@ -13,6 +13,8 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 
 ----
 
+<img src="/assets/img/photos/YZYou.jpg" style="float: right; max-width: 50%;">
+
 ## Contact Information
 
 - Tel: +1(858)822-4462 (Office)
