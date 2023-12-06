@@ -128,5 +128,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Time-Dependent Perturbation Theory
   - Energy Level Transitions
 
+**Final Review** ([Mathematica](/teaching/PHYS130B/Final_Review.nb)) ([PDF](/teaching/PHYS130B/Final_Review.pdf){:target="_blank"}) 
+
 Feel too simple? Consider register PHYS 212A by Prof. Grover.
 
