@@ -1,7 +1,7 @@
 ---
 layout: page 
 title : "PHYS 130B"
-subtitle: "Undergraduate Quantum Mechanics II"
+subtitle: "Quantum Physics II"
 permalink: /teaching/PHYS130B
 hide: true
 feature-img: "/teaching/PHYS130B/title.png"
@@ -130,5 +130,4 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
 
 **Final Review** ([Mathematica](/teaching/PHYS130B/Final_Review.nb)) ([PDF](/teaching/PHYS130B/Final_Review.pdf){:target="_blank"}) 
 
-Feel too simple? Consider register PHYS 212A by Prof. Grover.
 

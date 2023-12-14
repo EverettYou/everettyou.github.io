@@ -78,5 +78,5 @@ As a UCSD student, you have free access to Mathematica ([see how](/teaching/Math
   - Thermodynamic Properties
   - Transport Properties
 
-What is next? Consider register PHYS 230 [syllabus](/teaching/PHYS152A/Phys230syllabus_2023.pdf){:target="_blank"}.
+
 
