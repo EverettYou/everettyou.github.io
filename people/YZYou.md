@@ -20,7 +20,7 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 
 ## Contact Information
 
-- **Email**: yzyou(at)ucsd.edu
+- **Email**: yzyou@physics.ucsd.edu
 - **Phone**: +1(858)822-4462 (Office)
 - **Office**: Mayer Hall 5202
 - **Affiliation**: Department of Physics, University of California, San Diego, California 92093, USA
