@@ -19,8 +19,6 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
   
   - **MatsubaraSum**: performing Matsubara summation analytically
   
-  - **DiagramEditor**: an interactive editor of Feynman diagrams (no diagrammatic evaluation)
-  
   - **Themes**: a self-made plot theme for Mathematica, called "Academic" (see the StackExchange discussion [Is it possible to define a new PlotTheme?](https://mathematica.stackexchange.com/questions/54545/is-it-possible-to-define-a-new-plottheme){:target="_blank"})
   
   - **Toolkit**: miscellaneous functions, including `BZPlot` for plotting band structure, `tTr` for tensor network contraction, `ComplexMatrixPlot` for complex matrix visualization, `Pf` for matrix Pfaffian
@@ -28,8 +26,6 @@ For more details, please read the **User's Guide** ([Mathematica]({{site.baseurl
 - Stylesheets
 
   - **CMU Article**: a Mathematica style sheet based on Computer Modern Unicode fonts (the CMU fonts need to be installed separately to the operating system)
-  
-- FrontEnd Configuration
 
 ### Installation 
 
