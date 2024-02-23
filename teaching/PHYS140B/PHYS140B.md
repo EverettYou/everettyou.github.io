@@ -88,5 +88,24 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Black-Body Radiation
   - Degenerated Fermi Gas
 
-**Part III. Phase Transitions**
+**Part III. Phase Transitions** ([Mathematica](/teaching/PHYS140B/PhaseTransitions.nb)) ([PDF](/teaching/PHYS140B/PhaseTransitions.pdf){:target="_blank"}) 
+
+- Liquid-Gas Transition
+  - Phases and Phase Transitions
+  - Lattice Gas Model
+  - Markov Chain Monte Carlo
+- Magnetic Transition
+  - Ising Model
+  - Mean Field Theory
+  - Landau Theory of Phase Transition
+- Renormalization Group
+  - Overview
+  - Representation Learning
+  - Coarse Graining
+  - Renomalization Group Flow
+  - Universal Scaling Behaviors
+  - Critical Exponent Estimations
+
+
+
 
