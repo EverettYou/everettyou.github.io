@@ -43,7 +43,9 @@ Theoretical investigation on correlated topological phases and phase transitions
 
 ## Professional Experience
 
-- Assistant Professor, University of California, San Diego (2018 - present)
+- Associate Professor, University of California, San Diego (2024 - present)
+
+- Assistant Professor, University of California, San Diego (2018 - 2024)
 
 ## Awards and Honors
 
