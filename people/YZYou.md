@@ -26,6 +26,7 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 - **Affiliation**: Department of Physics, University of California, San Diego, California 92093, USA
 - **GitHub**: [Everett You](https://github.com/EverettYou){:target="_blank"}
 - **StackExchange**: [Everett You](https://physics.stackexchange.com/users/7616/everett-you){:target="_blank"}
+- **ORCiD**: [0000-0003-4080-5340](https://orcid.org/0000-0003-4080-5340){:target="_blank"}
 
 ## Research Interests
 
