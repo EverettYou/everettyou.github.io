@@ -1,6 +1,6 @@
 ---
 layout: page 
-title : People 
+title : PEOPLE 
 permalink: /people/
 feature-img: "assets/img/figures/people-min.png"
 inscription: 海内存知己，天涯若比邻。—— 唐 · 王勃

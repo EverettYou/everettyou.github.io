@@ -1,6 +1,6 @@
 --- 
 layout: page 
-title : Research 
+title : RESEARCH 
 permalink: /research/ 
 feature-img: "assets/img/figures/research-min.png"
 inscription: 欲穷千里目，更上一层楼。—— 唐 · 王之涣
