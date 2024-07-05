@@ -8,7 +8,7 @@ inscription: 文章千古事，得失寸心知。—— 唐 · 杜甫
 
 ### Research Papers
 
-You can find my papers on [Google Scholar](https://scholar.google.com/citations?user=jXdbhiQAAAAJ){:target="_blank"} or on [arXiv](https://arxiv.org/search/?query=Yi-Zhuang+You&searchtype=all&source=header){:target="_blank"}
+You can find my papers on [Google Scholar](https://scholar.google.com/citations?hl=en&user=PLFbeHMAAAAJ){:target="_blank"} or on [arXiv](https://arxiv.org/search/?query=Yi-Zhuang+You&searchtype=all&source=header){:target="_blank"}
 
 ---
 
