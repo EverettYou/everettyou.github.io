@@ -13,12 +13,12 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 
 ----
 
-<figure style="float: right; max-width: 40%;">
-  <img src="/assets/img/photos/YZYou.jpg" style="width: 100%;">
+<figure style="float: right; max-width: 33%;">
+  <img src="YZYou.jpg" style="width: 100%;">
   <figcaption style="text-align: right; color: gray; font-size: 80%">Credit: <a href="https://www.flickr.com/photos/160961487@N08/albums" target="blank">UCSD Division of Physical Sciences</a></figcaption>
 </figure>
 
-## Contact Information
+### Contact Information
 
 - **Email**: yzyou@physics.ucsd.edu
 - **Phone**: +1(858)822-4462 (Office)
@@ -29,11 +29,17 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 - **ORCiD**: [0000-0003-4080-5340](https://orcid.org/0000-0003-4080-5340){:target="_blank"}
 - **Google Scholar**: [Yi-Zhuang You (尤亦庄)](https://scholar.google.com/citations?hl=en&user=PLFbeHMAAAAJ){:target="_blank"}
 
-## Research Interests
+### Research Interests
 
 Theoretical investigation on correlated topological phases and phase transitions in condensed matter and high-energy physics, understanding dynamics of quantum entanglement, and application of machine learning in many-body problems.
 
-## Education
+### Professional Appointments
+
+- Associate Professor, University of California, San Diego (2024 - present)
+
+- Assistant Professor, University of California, San Diego (2018 - 2024)
+
+### Academic Background
 
 - B.Sc. Physics, Nanjing University (2004 - 2008)
 
@@ -43,13 +49,8 @@ Theoretical investigation on correlated topological phases and phase transitions
 
 - Postdoc, Harvard University (2016 - 2018)
 
-## Professional Experience
 
-- Associate Professor, University of California, San Diego (2024 - present)
-
-- Assistant Professor, University of California, San Diego (2018 - 2024)
-
-## Awards and Honors
+### Awards and Honors
 
 - National Science Foundation, CAREER award (2022)
 - University of California Hellman Fellow (2021)  
@@ -58,9 +59,9 @@ Theoretical investigation on correlated topological phases and phase transitions
 - C.N. Yang Fellowship –Tsinghua University (2009)
 - Honor Graduate –Nanjing University (2008)
 
-## Publications
+### Publications
 
-### Selected Articles
+#### Selected Articles
 
 1. Chao-Ming Jian, Yi-Zhuang You, Romain Vasseur, Andreas W. W. Ludwig. *Measurement-induced criticality in random quantum circuits*. Physical Review B **101**(10), 104302 (2020). [arXiv:1908.08051](https://arxiv.org/abs/1908.08051){:target="_blank"}
 
@@ -72,25 +73,25 @@ Theoretical investigation on correlated topological phases and phase transitions
 
 5. Yi-Zhuang You, Cenke Xu. *Interacting topological insulator and emergent grand unification theory*. Physical Review B **91**, 125147 (2015). [arXiv:1412.4784](https://arxiv.org/abs/1412.4784){:target="_blank"}
 
-### Book Chapters
+#### Book Chapters
 
 1. Yi-Zhuang You, Zheng-Yu Weng. *Coexisting Itinerant and Localized Electrons*. In: Iron-Based Superconductivity, P. D. Johnson ed., Springer International Publishing, Springer Series in Material Science 211, Chap. 10, p. 377-408 (2015). [arXiv:1311.4094](https://arxiv.org/abs/1311.4094){:target="_blank"}
 
 
-## Selected Invited Talks
+### Selected Invited Talks
 
 - Emergent classicality of information bottleneck. Perimeter Institute (2023). ([video](https://pirsa.org/23060044){:target="_blank"})
 - Machine learning physics: from quantum mechanics to holographic geometry. Perimeter Institute (2019). ([video](https://pirsa.org/19070014){:target="_blank"})
 - Entanglement features of random Hamiltonian dynamics. Kavli Institute for Theoretical Physics (2018). ([video](https://online.kitp.ucsb.edu/online/dynq-c18/you/){:target="_blank"})
 
-## Services
+### Services
 
 - UCSD Chancellor’s Advisory Committee on Gender Identity and Sexual Orientation Issues ([GISOI](https://gisoi.ucsd.edu/index.html){:target="_blank"}) (2023 - present) 
 - Editorial Board Member for Machine Learning: Science and Technology (2019 - present)
 - Referee for journals including Nature Physics, Physical Review Letters, Physical Review X, Physical Review B, etc.
 
-## Teaching Experience
+### Teaching Experience
 
-- Quantum Mechanics, University of California San Diego (2018-2022)
-- Condensed Matter Physics, University of California San Diego (2022-2023)
-
+- Quantum Mechanics, UCSD (2018-2025)
+- Statistical Mechanics, UCSD (2024)
+- Condensed Matter Physics, UCSD (2022-2023)
