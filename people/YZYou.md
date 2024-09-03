@@ -23,7 +23,8 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/a
 - **Email**: yzyou@physics.ucsd.edu
 - **Phone**: +1(858)822-4462 (Office)
 - **Office**: Mayer Hall 5202
-- **Affiliation**: Department of Physics, University of California, San Diego, California 92093, USA
+- **Affiliation**: <br>
+  Department of Physics, University of California, San Diego, San Diego, CA 92093, USA
 - **GitHub**: [Everett You](https://github.com/EverettYou){:target="_blank"}
 - **StackExchange**: [Everett You](https://physics.stackexchange.com/users/7616/everett-you){:target="_blank"}
 - **ORCiD**: [0000-0003-4080-5340](https://orcid.org/0000-0003-4080-5340){:target="_blank"}
@@ -86,7 +87,7 @@ Theoretical investigation on correlated topological phases and phase transitions
 
 ### Services
 
-- UCSD Chancellor’s Advisory Committee on Gender Identity and Sexual Orientation Issues ([GISOI](https://gisoi.ucsd.edu/index.html){:target="_blank"}) (2023 - present) 
+- UCSD Chancellor’s Advisory Committee on Gender Identity and Sexual Orientation Issues ([GISOI](https://gisoi.ucsd.edu/about/index.html){:target="_blank"}) (2023 - present) 
 - Editorial Board Member for Machine Learning: Science and Technology (2019 - present)
 - Referee for journals including Nature Physics, Physical Review Letters, Physical Review X, Physical Review B, etc.
 
