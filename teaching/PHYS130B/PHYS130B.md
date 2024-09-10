@@ -10,9 +10,9 @@ tags: [Course Syllabus]
 
 ### Schedule of Classes
 
-* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, CENTR 212
+* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, PETER 102
 
-* *Discussion session*: Mon. 4:00 PM - 4:50 PM, CENTR 113
+* *Discussion session*: Thu. 5:00 PM - 5:50 PM, Zoom: TBA
 
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
