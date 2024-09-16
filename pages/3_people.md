@@ -46,6 +46,7 @@ inscription: 海内存知己，天涯若比邻。—— 唐 · 王勃
 {% endfor %}
 {% endfor %}
 
+---
 <h3>Past Group Members</h3>
 <ul>
 {% for alumni in site.data.people.past_members %}
