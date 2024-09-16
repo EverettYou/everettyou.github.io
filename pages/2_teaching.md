@@ -1,6 +1,6 @@
 ---
 layout: page 
-title : TEACHING 
+title : Teaching 
 permalink: /teaching/
 feature-img: "assets/img/figures/teaching-min.png"
 inscription: 随风潜入夜，润物细无声。—— 唐 · 杜甫

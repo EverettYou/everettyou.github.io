@@ -1,6 +1,6 @@
 --- 
 layout: page 
-title : PUBLICATION 
+title : Publication 
 permalink: /publications/
 feature-img: "assets/img/figures/publications-min.png"
 inscription: 文章千古事，得失寸心知。—— 唐 · 杜甫 
