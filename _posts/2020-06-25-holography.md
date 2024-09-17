@@ -27,7 +27,7 @@ According to You and Hu, at first the neural network “does not have a clue,”
 
 The structure of the neural network is inspired by the idea of renormalization group—an iterative approach to remove detail features in the physical system and extract overall structures at progressively larger scales—which gives the artificial intelligence the power to grasp and analyze the information at different length scales.
 
-![One of the popular cartoon pictures about holographic universe from Google.One of the popular cartoon pictures about holographic universe from Google.](/assets/img/figures/holography.png)
+![One of the popular cartoon pictures about holographic universe from Google.One of the popular cartoon pictures about holographic universe from Google.](/assets/img/figures/holography.jpg)
 
 
 “One of our epiphanies in this research was to realize that if the process of renormalization were reversed, it would constitute a generative procedure, which could reconstruct the physical system in a hierarchical manner,” said You.
