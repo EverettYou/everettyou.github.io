@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Decoding Schrödinger's Cat -- A Novel Intersection of Quantum Physics and Artificial Intelligence
+title: Decoding Schrödinger's Cat --- A Novel Intersection of Quantum Physics and Artificial Intelligence
 tags: [Quantum Mechanics, Machine Learning, Language Models]
 ---
 
