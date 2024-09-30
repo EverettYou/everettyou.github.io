@@ -10,7 +10,7 @@ tags: [Course Syllabus]
 
 ### Schedule of Classes
 
-* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, PETER 102
+* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, PODEM 1A19
 
 * *Discussion session*: Thu. 5:00 PM - 5:50 PM, Zoom: TBA
 
