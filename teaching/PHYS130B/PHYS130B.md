@@ -12,7 +12,7 @@ tags: [Course Syllabus]
 
 * *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, PODEM 1A19
 
-* *Discussion session*: Thu. 5:00 PM - 5:50 PM, Zoom: TBA
+* *Discussion session*: Thu. 5:10 PM - 6:00 PM, WLH 2111
 
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
