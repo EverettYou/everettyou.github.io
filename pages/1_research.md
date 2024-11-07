@@ -93,3 +93,5 @@ Artificial intelligence is influencing all scientific fields, including physics.
 
 - [Emergent classicality in language models](/2023/06/27/Classicality.html)
 
+- [Generative modeling of classical shadows](/2024/11/07/ShadowGPT.html)
+
