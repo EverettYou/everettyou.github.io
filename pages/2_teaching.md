@@ -9,6 +9,7 @@ inscription: 随风潜入夜，润物细无声。—— 唐 · 杜甫
 ### Courses
 
 - [PHYS 130B](/teaching/PHYS130B) Undergraduate Quantum Physics II (Fall 2024, 23)
+- [PHYS 130C](/teaching/PHYS130C) Undergraduate Quantum Physics III (Winter 2025)
 - [PHYS 140B](/teaching/PHYS140B) Undergraduate Statistical and Thermal Physics II (Winter 2024)
 - [PHYS 152A](/teaching/PHYS152A) Undergraduate Condensed Matter Physics I (Winter 2023, 22)
 - [PHYS 212A](/teaching/PHYS212A) Graduate Quantum Mechanics I (Fall 2022, 21, 20, 19, 18) 
