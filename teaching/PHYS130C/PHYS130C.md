@@ -10,9 +10,9 @@ tags: [Course Syllabus]
 
 ### Schedule of Classes
 
-* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, Mandeville Center (MANDE) B-104
+* *Lecture*: Mon, Wed, Fri. 9:00 AM - 9:50 AM, Pepper Canyon Hall room 121.
 
-* *Discussion session*: Thu. 6:00 PM - 6:50 PM, Humanities and Social Sciences Building (HSS) 1128A
+* *Discussion session*: Thu. 6:00 PM - 6:50 PM, Warren Lecture Hall room 2111. 
 
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
