@@ -65,7 +65,20 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Overview
   - Transverse-Field Ising Model
   - Bose-Hubbard Model
-  - Sachdev-Ye-Kitaev 
+  - Sachdev-Ye-Kitaev Model
+
+**Part II. Quantum Information Theory** ([Mathematica](/teaching/PHYS130C/QuantumInformation.nb)) ([PDF](/teaching/PHYS130C/QuantumInformation.pdf){:target="_blank"}) 
+
+- From Classical to Quantum Information
+  - Classical Probability
+  - Quantum Density Matrix
+  - Quantum Entanglement
+- Quantum Information Processing
+  - Unitary Operations
+  - Quantum Measurements
+  - Quantum Channels
+  - Quantum Protocols
+  - Quantum Error Correction
   
 [to be continued ...]
 
