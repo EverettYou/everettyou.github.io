@@ -54,7 +54,7 @@ tags: [Course Syllabus]
 
 As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Mathematica_UCSD)).
 
-**Part I. Quantum Many-Body Physics** ([Mathematica](/teaching/PHYS130C/QuantumManyBody.nb)) ([PDF](/teaching/PHYS130C/QuantumManyBody.pdf){:target="_blank"}) 
+**Part 1. Quantum Many-Body Physics** ([Mathematica](/teaching/PHYS130C/QuantumManyBody.nb)) ([PDF](/teaching/PHYS130C/QuantumManyBody.pdf){:target="_blank"}) 
 
 - Qubits, Bosons and Fermions
   - Introduction
@@ -67,7 +67,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Bose-Hubbard Model
   - Sachdev-Ye-Kitaev Model
 
-**Part II. Quantum Information Theory** ([Mathematica](/teaching/PHYS130C/QuantumInformation.nb)) ([PDF](/teaching/PHYS130C/QuantumInformation.pdf){:target="_blank"}) 
+**Part 2. Quantum Information Theory** ([Mathematica](/teaching/PHYS130C/QuantumInformation.nb)) ([PDF](/teaching/PHYS130C/QuantumInformation.pdf){:target="_blank"}) 
 
 - From Classical to Quantum Information
   - Classical Probability
@@ -80,5 +80,14 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Quantum Protocols
   - Quantum Error Correction
   
-[to be continued ...]
+**Part 3. Quantum Optics** ([Mathematica](/teaching/PHYS130C/QuantumOptics.nb)) ([PDF](/teaching/PHYS130C/QuantumOptics.pdf){:target="_blank"}) 
+
+- Quantization of Light
+  - Classical Electromagnetic Wave
+  - Quantization of Electromagnetic Field
+  - Quantum Vacuum Fluctuations
+- Quantum Coherence of Light
+  - Light-Matter Interaction
+  - Coherent State
+  - Superradiant Light
 
