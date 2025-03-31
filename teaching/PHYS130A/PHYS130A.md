@@ -1,18 +1,18 @@
 ---
 layout: page 
-title : "PHYS 130B"
-subtitle: "Quantum Physics II"
-permalink: /teaching/PHYS130B
+title : "PHYS 130A"
+subtitle: "Quantum Physics I"
+permalink: /teaching/PHYS130A
 hide: true
-feature-img: "/teaching/PHYS130B/title.png"
+feature-img: "/teaching/PHYS130A/title.png"
 tags: [Course Syllabus]
 ---
 
 ### Schedule of Classes
 
-* *Lecture*: Mon, Wed, Fri. 3:00 PM - 3:50 PM, RWAC 0115
+* *Lecture*: Mon, Wed, Fri. 11:00 AM - 11:50 AM, PODEM 1A18
 
-* *Discussion session*: Thu. 7:00 PM - 7:50 PM, YORK 4080A
+* *Discussion session*: Mon. 5:00 PM - 5:50 PM, PODEM 1A18
 
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
@@ -20,8 +20,7 @@ tags: [Course Syllabus]
 
   * *Office hours*: by schedule, Mayer 5202 or Zoom <https://ucsd.zoom.us/my/yzyou>
 
-* *Teaching Assistants*: Pathak Parashar.  *Email*: <psparash@ucsd.edu>
-* *Grader*: Shuhan Zhang. *Email*: <shz091@ucsd.edu>
+* *Teaching Assistants*: Jaipratap Grewal.  *Email*: <j1grewal@ucsd.edu>
 
 * **Course Grade Allocation**: 
   - Homework: 70% 
@@ -29,7 +28,7 @@ tags: [Course Syllabus]
   - Final Exam: 20%
 
 * **Assignment and Submission Platform**: 
-  - Homework and exams are online. They will all be assigned and submitted via the [UCSD Canvas](https://canvas.ucsd.edu/courses/65704){:target="_blank"} platform.
+  - Homework and exams are online. They will all be assigned and submitted via the [UCSD Canvas](https://canvas.ucsd.edu/courses/65584){:target="_blank"} platform.
 
 * **Homework Guidelines**:
 
@@ -49,13 +48,15 @@ tags: [Course Syllabus]
 
 ### Textbooks
 
-Text books for reference:
+The lecture will follow these books:
 
-[1] Arjun Berera and Luigi Del Debbio, *Quantum Mechanics*. Cambridge University Press, New York (2021).
+[1] Leonard Susskind and Art Friedman, *Quantum Mechanics (the Theoretical Minimum)*. Basic Books, New York. (2014). ([PDF](/teaching/PHYS130B/QuantumMechanics-TheTheoreticalMinimum.pdf){:target="_blank"})
 
-[2] Andrew J. Larkoski. *Quantum Mechanics -- A Mathematical Introduction*. Cambridge University Press, New York. (2023)
+[2] Arjun Berera and Luigi Del Debbio, *Quantum Mechanics*. Cambridge University Press, New York (2021).
 
-[3] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994)
+Some other books for reference:
+
+[3] J. J. Sakurai, *Modern Quantum Mechanics*. Addison-Wesley Publishing Company. (1994).
 
 [4] R. Shankar, *Principles of Quantum Mechanics*. Plenum Press, New York. (1994)
 
@@ -64,19 +65,45 @@ Text books for reference:
 
 As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Mathematica_UCSD)).
 
-**Part 1. Path Integral Quantization** ([Mathematica](/teaching/PHYS130B/PathIntegral.nb)) ([PDF](/teaching/PHYS130B/PathIntegral.pdf){:target="_blank"}) 
+**Part 1. Matrix Mechanics** ([Mathematica](/teaching/PHYS130B/MatrixMechanics.nb)) ([PDF](/teaching/PHYS130B/MatrixMechanics.pdf){:target="_blank"}) 
 
-- From Classical to Quantum
-  - Historical Review
-  - Quantization of Light
-- Path Integral Quantization
-  - Quantization of Matter
-  - Deriving the Schrödinger Equation
-  - Semiclassical Approach
-- Path Integral with Gauge Background
-  - Gauge Structure and Berry Phase
-  - Gauge Field and Electrodynamics
-- Path Integral of Spin
+- Introduction
+  - Everything is a Vector
+  - Complex Algebra
+  - Linear Algebra
+- Quantum States
+  - Ket and Bra
+  - Scalar Product
+  - Basis and Hilbert Space
+  - Born's Rule
+- Quantum Operator
+  - Matrix Representation
+  - Operator Algebra
+- Measurement
+  - Hermitian Operators
+  - Observables
+- Dynamics
+  - Unitary Operators
+  - Time Evolution
+
+**Part 2. Algebraic Methods** ([Mathematica](/teaching/PHYS130B/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130B/AlgebraicMethods.pdf){:target="_blank"}) 
+
+- Introduction
+  - Functions are Vectors
+  - Position and Momentum
+- Harmonic Oscillator
+  - Operator Algebra
+  - Quantum Bootstrap
+  - Representation Theory
+- Angular Momentum
+  - Operator Algebra
+  - Quantum Bootstrap
+  - Representation Theory
+  - Fusion Category
+- Hydrogen Atom
+  - Background: Classical Mechanics
+  - SO(4) Symmetry
+  - Spectrum
 
 [To be continued ...]
 
