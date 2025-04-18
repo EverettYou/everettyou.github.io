@@ -10,9 +10,9 @@ tags: [Course Syllabus]
 
 ### Schedule of Classes
 
-* *Lecture*: Mon, Wed, Fri. 11:00 AM - 11:50 AM, PODEM 1A18
+* *Lecture*: Mon, Wed, Fri. 11:00 AM - 11:50 AM, CENTR 220
 
-* *Discussion session*: Mon. 5:00 PM - 5:50 PM, PODEM 1A18
+* *Discussion session*: Mon. 5:00 PM - 5:50 PM, CENTR 203
 
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
@@ -20,7 +20,8 @@ tags: [Course Syllabus]
 
   * *Office hours*: by schedule, Mayer 5202 or Zoom <https://ucsd.zoom.us/my/yzyou>
 
-* *Teaching Assistants*: Jaipratap Grewal.  *Email*: <j1grewal@ucsd.edu>
+* *Teaching Assistants*: Pathak Parashar. *Email*: <psparash@ucsd.edu>
+* *Grader*: Jaipratap Grewal. *Email*: <j1grewal@ucsd.edu>
 
 * **Course Grade Allocation**: 
   - Homework: 70% 

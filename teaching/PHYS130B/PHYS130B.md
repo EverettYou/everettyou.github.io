@@ -73,10 +73,62 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Quantization of Matter
   - Deriving the Schrödinger Equation
   - Semiclassical Approach
-- Path Integral with Gauge Background
+
+**Part 2. Piecewise Potentials** ([Mathematica](/teaching/PHYS130B/PiecewisePotentials.nb)) ([PDF](/teaching/PHYS130B/PiecewisePotentials.pdf){:target="_blank"}) 
+
+- Basic Piecewise Potentials
+  - General Setup
+  - Free Particle (Flat Potential)
+  - Hard-Wall Potential
+  - Infinite Square Well
+  - Step Potential
+  - Square Potential
+  - Dirac Potential
+  - Double Dirac Potential
+  - Periodic Dirac Potential
+- General Piecewise Potentials
+  - Transfer Matrix Method
+  - Applications
+
+**Part 3. Algebraic Methods** ([Mathematica](/teaching/PHYS130B/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130B/AlgebraicMethods.pdf){:target="_blank"}) 
+
+- Introduction
+  - Functions are Vectors
+  - Position and Momentum
+- Harmonic Oscillator
+  - Operator Algebra
+  - Quantum Bootstrap
+  - Representation Theory
+- Angular Momentum
+  - Operator Algebra
+  - Quantum Bootstrap
+  - Representation Theory
+  - Fusion Category
+- Hydrogen Atom
+  - Background: Classical Mechanics
+  - SO(4) Symmetry
+  - Spectrum
+
+**Part 4. Perturbation Theory** ([Mathematica](/teaching/PHYS130B/PerturbationTheory.nb)) ([PDF](/teaching/PHYS130B/PerturbationTheory.pdf){:target="_blank"}) 
+
+- Time-Independent Perturbation
+  - A Toy Model of Qubit
+  - Non-Degenerate Perturbation Theory
+  - Degenerate Perturbation Theory
+- Time-Dependent Perturbation
+  - Time-Dependent Perturbation Theory
+  - Energy Level Transitions
+
+**Part 5. Phase and Gauge** ([Mathematica](/teaching/PHYS130B/PhaseAndGauge.nb)) ([PDF](/teaching/PHYS130B/PhaseAndGauge.pdf){:target="_blank"}) 
+
+- Gauge Principles
   - Gauge Structure and Berry Phase
-  - Gauge Field and Electrodynamics
-- Path Integral of Spin
-
-[To be continued ...]
-
+  - Gauge Field and Electromagnetism
+- Uniform Magnetic Field
+  - Classical Dynamics
+  - Landau Level Quantization
+  - Quantum Hall Effect
+- Spin and Monopole
+  - Classical Spin
+  - Magnetic Monopole
+  - Quantum Spin
