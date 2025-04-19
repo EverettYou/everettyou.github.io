@@ -106,5 +106,14 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - SO(4) Symmetry
   - Spectrum
 
-[To be continued ...]
+**Part 3. Quantum Statistics** ([Mathematica](/teaching/PHYS130B/QuantumStatistics.nb)) ([PDF](/teaching/PHYS130B/QuantumStatistics.pdf){:target="_blank"}) 
+
+- Introduction
+  - Tensors are Vectors
+  - Quantum Many-Body States
+- Second Quantization
+  - Fock Space
+  - Creation and Annihilation Operators
+- Quantum Statistical Physics
+  - General Principles
 
