@@ -90,26 +90,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Transfer Matrix Method
   - Applications
 
-**Part 3. Algebraic Methods** ([Mathematica](/teaching/PHYS130B/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130B/AlgebraicMethods.pdf){:target="_blank"}) 
-
-- Introduction
-  - Functions are Vectors
-  - Position and Momentum
-- Harmonic Oscillator
-  - Operator Algebra
-  - Quantum Bootstrap
-  - Representation Theory
-- Angular Momentum
-  - Operator Algebra
-  - Quantum Bootstrap
-  - Representation Theory
-  - Fusion Category
-- Hydrogen Atom
-  - Background: Classical Mechanics
-  - SO(4) Symmetry
-  - Spectrum
-
-**Part 4. Perturbation Theory** ([Mathematica](/teaching/PHYS130B/PerturbationTheory.nb)) ([PDF](/teaching/PHYS130B/PerturbationTheory.pdf){:target="_blank"}) 
+**Part 3. Perturbation Theory** ([Mathematica](/teaching/PHYS130B/PerturbationTheory.nb)) ([PDF](/teaching/PHYS130B/PerturbationTheory.pdf){:target="_blank"}) 
 
 - Time-Independent Perturbation
   - A Toy Model of Qubit
@@ -119,7 +100,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Time-Dependent Perturbation Theory
   - Energy Level Transitions
 
-**Part 5. Phase and Gauge** ([Mathematica](/teaching/PHYS130B/PhaseAndGauge.nb)) ([PDF](/teaching/PHYS130B/PhaseAndGauge.pdf){:target="_blank"}) 
+**Part 4. Phase and Gauge** ([Mathematica](/teaching/PHYS130B/PhaseAndGauge.nb)) ([PDF](/teaching/PHYS130B/PhaseAndGauge.pdf){:target="_blank"}) 
 
 - Gauge Principles
   - Gauge Structure and Berry Phase

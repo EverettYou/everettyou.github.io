@@ -116,4 +116,6 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Creation and Annihilation Operators
 - Quantum Statistical Physics
   - General Principles
+  - Bose-Einstein Statistics
+  - Fermi-Dirac Statistics
 
