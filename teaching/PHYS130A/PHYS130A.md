@@ -66,7 +66,7 @@ Some other books for reference:
 
 As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Mathematica_UCSD)).
 
-**Part 1. Matrix Mechanics** ([Mathematica](/teaching/PHYS130B/MatrixMechanics.nb)) ([PDF](/teaching/PHYS130B/MatrixMechanics.pdf){:target="_blank"}) 
+**Part 1. Matrix Mechanics** ([Mathematica](/teaching/PHYS130A/MatrixMechanics.nb)) ([PDF](/teaching/PHYS130A/MatrixMechanics.pdf){:target="_blank"}) 
 
 - Introduction
   - Everything is a Vector
@@ -87,7 +87,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - Unitary Operators
   - Time Evolution
 
-**Part 2. Algebraic Methods** ([Mathematica](/teaching/PHYS130B/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130B/AlgebraicMethods.pdf){:target="_blank"}) 
+**Part 2. Algebraic Methods** ([Mathematica](/teaching/PHYS130A/AlgebraicMethods.nb)) ([PDF](/teaching/PHYS130A/AlgebraicMethods.pdf){:target="_blank"}) 
 
 - Introduction
   - Functions are Vectors
@@ -106,7 +106,7 @@ As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Ma
   - SO(4) Symmetry
   - Spectrum
 
-**Part 3. Quantum Statistics** ([Mathematica](/teaching/PHYS130B/QuantumStatistics.nb)) ([PDF](/teaching/PHYS130B/QuantumStatistics.pdf){:target="_blank"}) 
+**Part 3. Quantum Statistics** ([Mathematica](/teaching/PHYS130A/QuantumStatistics.nb)) ([PDF](/teaching/PHYS130A/QuantumStatistics.pdf){:target="_blank"}) 
 
 - Introduction
   - Tensors are Vectors
