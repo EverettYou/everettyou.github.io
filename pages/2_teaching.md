@@ -24,3 +24,4 @@ A list of all Physics courses offered by UCSD can be found [here](https://ucsd.e
 ### Other Stuff
 
 - [Mathematica Packages for Physicists]({{site.baseurl}}/teaching/Mathematica)
+- [Mathematica Stylesheet: CMU Article]({{site.baseurl}}/teaching/Mathematica_Stylesheet)

@@ -21,6 +21,8 @@ Please go to [UCSD Wolfram portal](https://www.wolfram.com/siteinfo/){:target="_
 
 	- Note: The first time that you sign in using your school login, you will be prompted to link it to your Wolfram ID.
 
+---
+
 <div style="text-align: center;">
 	<img src="/assets/img/logos/Mathematica.png" alt="Mathematica" width="30%">
 </div>
