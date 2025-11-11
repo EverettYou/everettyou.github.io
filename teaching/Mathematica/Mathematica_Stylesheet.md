@@ -7,7 +7,7 @@ hide: true
 
 ## Introduction
 
-The **CMU Article** stylesheet is a custom Mathematica stylesheet designed specifically for academic writing and publication. It is based on the Computer Modern Unicode (CMU) fonts, which are the digital versions of the classic Computer Modern fonts designed by Donald Knuth for the TeX typesetting system.
+The **CMU Article** stylesheet is a custom *Mathematica stylesheet* designed specifically for academic writing and publication. It is based on the Computer Modern Unicode (CMU) fonts, which are the digital versions of the classic Computer Modern fonts designed by Donald Knuth for the TeX typesetting system.
 
 ### Features
 
@@ -52,7 +52,7 @@ Before installing the stylesheet, you should install the CMU fonts on your syste
     - **Type of Item to Install**: Select **Stylesheet** from the dropdown menu.
     - **Source**: Click the dropdown and select or browse to your downloaded `CMU Article.nb` file.
     - **Install Name**: This will usually auto-fill as “CMU Article”, but you can edit it if you wish.
-    - **Install for this user only (home)**: This is the default and recommended option for most users. If you want all users on the computer to have access, select the second option.
+    - **Install for this user only**: This is the default and recommended option for most users. If you want all users on the computer to have access, select the second option.
     - Click **OK** to complete the installation.
 
 ### Step 4: Apply the Stylesheet
