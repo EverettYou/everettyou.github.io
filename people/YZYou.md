@@ -81,7 +81,7 @@ Theoretical investigation on correlated topological phases and phase transitions
 
 ### Selected Invited Talks
 
-- Can large language model learn to speak the quantum language (2025). ([video](https://www.youtube.com/watch?v=Nrbm5ULUyC4){:target="_blank"})
+- Can large language model learn to speak the quantum language. Kavli Institute for Theoretical Physics (2025). ([video](https://www.youtube.com/watch?v=Nrbm5ULUyC4){:target="_blank"})
 - Emergent classicality of information bottleneck. Perimeter Institute (2023). ([video](https://pirsa.org/23060044){:target="_blank"})
 - Machine learning physics: from quantum mechanics to holographic geometry. Perimeter Institute (2019). ([video](https://pirsa.org/19070014){:target="_blank"})
 - Entanglement features of random Hamiltonian dynamics. Kavli Institute for Theoretical Physics (2018). ([video](https://online.kitp.ucsb.edu/online/dynq-c18/you/){:target="_blank"})
