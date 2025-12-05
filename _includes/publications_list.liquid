@@ -1,0 +1,244 @@
+{% comment %}
+  Publications List Component - Minimalist List
+  Usage: {% include publications_list.liquid %}
+{% endcomment %}
+
+<div class="publications-container">
+  <!-- Search Controls -->
+  <div class="publications-controls">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input 
+        type="text" 
+        id="publication-search" 
+        class="search-input" 
+        placeholder="Search publications..." 
+        aria-label="Search publications"
+      />
+    </div>
+  </div>
+
+  <!-- No Results Message -->
+  <div id="no-results" class="no-results" style="display: none;">
+    <p>No publications found matching your search.</p>
+  </div>
+
+  <!-- Publications List -->
+  <ul id="publications-list" class="publications-list">
+    {% assign pubs = site.data.publications %}
+    {% if pubs and pubs.size > 0 %}
+      {% for pub in pubs %}
+        {% assign paper_url = '' %}
+        {% if pub.url %}
+          {% assign paper_url = pub.url %}
+        {% elsif pub.doi %}
+          {% assign paper_url = pub.doi | prepend: 'https://doi.org/' %}
+        {% endif %}
+        
+        {% assign pub_title = pub.title | default: '' %}
+        {% assign pub_id = pub.id | default: '' %}
+        {% assign pub_journal = pub.journal | default: '' %}
+        {% assign pub_doi = pub.doi | default: '' %}
+        {% assign pub_authors_str = '' %}
+        {% if pub.authors %}
+          {% assign pub_authors_str = pub.authors | map: 'name' | join: ' ' %}
+        {% endif %}
+        
+        <li 
+          class="publication-item" 
+          data-title="{{ pub_title | downcase }}"
+          data-authors="{{ pub_authors_str | downcase }}"
+          data-journal="{{ pub_journal | downcase }}"
+          data-doi="{{ pub_doi | downcase }}"
+          data-pub-id="{{ pub_id }}"
+        >
+          <div class="publication-figure">
+            {% if pub_id %}
+              {% assign figure_path_png = pub_id | prepend: 'assets/img/papers/' | append: '.png' %}
+              {% assign figure_path_jpg = pub_id | prepend: 'assets/img/papers/' | append: '.jpg' %}
+              {% assign figure_path_jpeg = pub_id | prepend: 'assets/img/papers/' | append: '.jpeg' %}
+              <img 
+                src="{{ site.baseurl }}/{{ figure_path_png }}" 
+                alt="{{ pub_title }}"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpg }}'; this.onerror=function(){this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpeg }}'; this.onerror=function(){this.style.display='none';};};"
+                class="publication-figure-img"
+              />
+            {% endif %}
+          </div>
+          <div class="publication-item-content">
+            {% if pub_title %}
+              <h3 class="publication-title">
+                {% if paper_url != '' %}
+                  <a href="{{ paper_url }}" target="_blank" rel="noopener noreferrer">
+                    {{ pub_title }}
+                  </a>
+                {% else %}
+                  {{ pub_title }}
+                {% endif %}
+              </h3>
+            {% endif %}
+            
+            <p class="publication-authors">
+              {% if pub.authors %}
+                {% for author in pub.authors %}
+                  <span>{{ author.name }}</span>
+                  {% unless forloop.last %}, {% endunless %}
+                {% endfor %}
+              {% endif %}
+            </p>
+
+            <p class="publication-venue">
+              {% if pub_journal %}{{ pub_journal }}{% endif %}
+            </p>
+
+            {% if pub.abstract %}
+            <div class="publication-abstract-toggle">
+              <button 
+                class="abstract-toggle-link" 
+                data-pub-id="{{ pub_id }}"
+                aria-label="Toggle abstract"
+              >
+                Abstract
+              </button>
+            </div>
+            
+            <div 
+              id="abstract-{{ pub_id }}" 
+              class="publication-abstract" 
+              style="display: none;"
+            >
+              <p>{{ pub.abstract }}</p>
+            </div>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    {% else %}
+      <li><p>No publications data found. Please check _data/publications.yml</p></li>
+    {% endif %}
+  </ul>
+
+  <!-- Pagination -->
+  <div id="pagination" class="pagination" style="display: none;">
+    <button id="prev-page" class="pagination-link" disabled>&lt;&lt; Previous</button>
+    <span id="page-info" class="page-info"></span>
+    <button id="next-page" class="pagination-link">Next &gt;&gt;</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  const searchInput = document.getElementById('publication-search');
+  const publicationsList = document.getElementById('publications-list');
+  const noResults = document.getElementById('no-results');
+  const pagination = document.getElementById('pagination');
+  const prevButton = document.getElementById('prev-page');
+  const nextButton = document.getElementById('next-page');
+  const pageInfo = document.getElementById('page-info');
+  
+  let filteredItems = [];
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  function filterPublications() {
+    const searchQuery = searchInput.value.toLowerCase().trim();
+    const items = document.querySelectorAll('.publication-item');
+    filteredItems = [];
+
+    items.forEach(item => {
+      const title = item.dataset.title || '';
+      const authors = item.dataset.authors || '';
+      const journal = item.dataset.journal || '';
+      const doi = item.dataset.doi || '';
+
+      const matchesSearch = !searchQuery || 
+        title.includes(searchQuery) || 
+        authors.includes(searchQuery) || 
+        journal.includes(searchQuery) || 
+        doi.includes(searchQuery);
+
+      if (matchesSearch) {
+        filteredItems.push(item);
+      }
+    });
+
+    currentPage = 1;
+    updatePagination(filteredItems.length);
+    
+    if (filteredItems.length === 0) {
+      noResults.style.display = 'block';
+      publicationsList.style.display = 'none';
+      pagination.style.display = 'none';
+    } else {
+      noResults.style.display = 'none';
+      publicationsList.style.display = 'block';
+      pagination.style.display = filteredItems.length > itemsPerPage ? 'flex' : 'none';
+      displayPage();
+    }
+  }
+
+  function updatePagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage >= totalPages;
+  }
+
+  function displayPage() {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    // First, hide all items
+    filteredItems.forEach((item) => {
+      item.style.display = 'none';
+    });
+
+    // Then, show only items for current page
+    filteredItems.forEach((item, index) => {
+      if (index >= start && index < end) {
+        item.style.display = 'flex';
+      }
+    });
+
+    // Hide items not in filteredItems
+    const allItems = document.querySelectorAll('.publication-item');
+    allItems.forEach((item) => {
+      if (!filteredItems.includes(item)) {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  function goToPage(page) {
+    const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+    if (page >= 1 && page <= totalPages) {
+      currentPage = page;
+      updatePagination(filteredItems.length);
+      displayPage();
+    }
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', filterPublications);
+  prevButton.addEventListener('click', () => goToPage(currentPage - 1));
+  nextButton.addEventListener('click', () => goToPage(currentPage + 1));
+
+  // Abstract toggles
+  document.querySelectorAll('.abstract-toggle-link').forEach(button => {
+    button.addEventListener('click', function() {
+      const pubId = this.dataset.pubId;
+      const abstractDiv = document.getElementById(`abstract-${pubId}`);
+      
+      if (abstractDiv) {
+        const isVisible = abstractDiv.style.display !== 'none';
+        abstractDiv.style.display = isVisible ? 'none' : 'block';
+        this.textContent = isVisible ? 'Abstract' : 'Hide Abstract';
+      }
+    });
+  });
+
+  // Initialize
+  filterPublications();
+})();
+</script>

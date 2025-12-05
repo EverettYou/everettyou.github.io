@@ -6,7 +6,10 @@ feature-img: "assets/img/figures/research-min.png"
 inscription: 欲穷千里目，更上一层楼。—— 唐 · 王之涣
 ---
 
-### Correlated Quantum Many-Body System
+
+<div class="research-section-image">
+  <img src="{{site.baseurl}}/assets/img/figures/correlated_quantum_manybody.png" alt="Correlated Quantum Many-Body Systems" />
+</div>
 
 Quantum mechanics governs the microscopic degrees of freedom of electrons and spins. When strongly interacting, these systems can exhibit exotic collective phenomena beyond the simple sum of individual behaviors. Studying quantum many-body systems has important practical applications, from designing new materials to building quantum devices.
 
@@ -30,7 +33,10 @@ Quantum mechanics governs the microscopic degrees of freedom of electrons and sp
 
 ---
 
-### Topological Phases of Matter
+
+<div class="research-section-image">
+  <img src="{{site.baseurl}}/assets/img/figures/topological_phases_of_matter.png" alt="Topological Phases of Matter" />
+</div>
 
 Discovering new quantum phases is an exciting frontier of condensed matter physics. Topological phases exhibit exotic properties beyond traditional paradigms. Studying them has advanced quantum many-body theory and may enable new experimental realizations.
 
@@ -54,7 +60,10 @@ Discovering new quantum phases is an exciting frontier of condensed matter physi
 
 ---
 
-### Quantum Entanglement Dynamics
+
+<div class="research-section-image">
+  <img src="{{site.baseurl}}/assets/img/figures/quantum_infomation_dynamics.png" alt="Quantum Information Dynamics" />
+</div>
 
 Quantum entanglement connects topics of topological order, localization, and quantum chaos. It shares similarities with wormholes, motivating holographic duality ideas. Understanding entanglement structure and dynamics may provide insights into fundamental questions of decoherence, thermalization, and gravity.
 
@@ -77,7 +86,10 @@ Quantum entanglement connects topics of topological order, localization, and qua
 
 ---
 
-### Machine Learning and Physics
+
+<div class="research-section-image">
+  <img src="{{site.baseurl}}/assets/img/figures/machine_learning_physics.png" alt="Machine Learning and Physics" />
+</div>
 
 Artificial intelligence is influencing all scientific fields, including physics. Physicists are also providing insights into the nature of intelligence. The combination of machine learning and physics is just beginning, with much potential still to be explored.
 

@@ -1,0 +1,33 @@
+{% comment %}
+  Talks Gallery Component
+  Usage: {% include talks_gallery.liquid %}
+  
+  Reads talks from _data/talks.yml and displays them in a gallery format.
+  Each talk should have: id, title, pdf, cover
+{% endcomment %}
+
+<div class="talks-gallery">
+  {% if site.data.talks %}
+    {% for talk in site.data.talks %}
+      <div class="talk-item">
+        <a href="{{site.baseurl}}/assets/pdf/talks/{{ talk.pdf }}" target="_blank" rel="noopener noreferrer">
+          <div class="talk-preview">
+            {% if talk.cover %}
+              {% assign cover_path = talk.cover | prepend: 'assets/img/talks/' %}
+              <img 
+                src="{{site.baseurl}}/{{ cover_path }}" 
+                alt="{{ talk.title }}"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('no-image');"
+              />
+            {% endif %}
+          </div>
+          <h4 class="talk-title">{{ talk.title }}</h4>
+        </a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No talks data found. Please check _data/talks.yml</p>
+  {% endif %}
+</div>
+
