@@ -8,8 +8,8 @@ inscription: 随风潜入夜，润物细无声。—— 唐 · 杜甫
 
 ### Courses
 
-| Course | Title | Terms |
-|--------|-------|-------|
+| Course | Title | Quarters |
+|--------|-------|----------|
 | [PHYS 130A](/teaching/PHYS130A) | Undergraduate Quantum Physics I | Spring 2025 |
 | [PHYS 130B](/teaching/PHYS130B) | Undergraduate Quantum Physics II | Spring 2025, Fall 2024, 23 |
 | [PHYS 130C](/teaching/PHYS130C) | Undergraduate Quantum Physics III | Winter 2025 |

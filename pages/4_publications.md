@@ -14,6 +14,6 @@ You can find my papers on [Google Scholar](https://scholar.google.com/citations?
 
 ---
 
-### Talk Slides
+### Selected Talk Slides
 
 {% include talks_gallery.liquid %}
