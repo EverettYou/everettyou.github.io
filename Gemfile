@@ -6,7 +6,7 @@ gemspec
 
 gem "jekyll", "~> 4.2"
 
-gem "webrick", "~> 1.7"
+gem "webrick", "~> 1.8"
 
 gem "liquid", "~> 4.0", ">= 4.0.4"
 
