@@ -5,6 +5,15 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem 0;
+  
+  // Add horizontal padding on mobile for better readability
+  @media screen and (max-width: $break) {
+    padding: 2rem 1rem;
+  }
+  
+  @media screen and (max-width: $sm-break) {
+    padding: 1.5rem 0.75rem;
+  }
 }
 
 // Search Controls
@@ -67,6 +76,12 @@
   &[style*="display: none"] {
     display: none !important;
   }
+  
+  // Mobile: stack image on top of content
+  @media screen and (max-width: $break) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .publication-figure {
@@ -108,6 +123,14 @@
   flex-grow: 0 !important;
   order: 1;
   
+  // Mobile: full width, image on top
+  @media screen and (max-width: $break) {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    order: 1;
+  }
+  
   @media (min-width: 768px) {
     width: 12rem !important;
     min-width: 12rem !important;
@@ -131,6 +154,12 @@
   display: flex;
   flex-direction: column;
   order: 2;
+  
+  // Mobile: full width, below image
+  @media screen and (max-width: $break) {
+    width: 100%;
+    order: 2;
+  }
 }
 
 .publication-title {
@@ -176,6 +205,11 @@
   margin: 0;
   margin-bottom: 0.25rem;
   line-height: 1.2;
+  
+  // Ensure black color on mobile devices
+  @media screen and (max-width: $break) {
+    color: #000 !important;
+  }
 }
 
 .publication-description {
@@ -185,6 +219,7 @@
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -436,10 +471,6 @@
   .publication-card {
     background-color: #1a1a1a;
     border-color: #333;
-    
-    &.expanded {
-      // Remove expanded styling if any remains
-    }
   }
   
   .publication-title .title-link:hover {
@@ -486,6 +517,11 @@
   
   .publication-venue {
     color: #f0f0f0;
+    
+    // Override dark mode for mobile to keep black
+    @media screen and (max-width: $break) {
+      color: #000 !important;
+    }
   }
   
   .publication-description {
