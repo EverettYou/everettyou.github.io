@@ -107,3 +107,6 @@ Artificial intelligence is influencing all scientific fields, including physics.
 
 - [Generative modeling of classical shadows](/2024/11/07/ShadowGPT.html)
 
+#### Physics of Artificial Intelligence
+
+- [Focus range of large languge models](/2025/11/24/LLMFocus.html)
