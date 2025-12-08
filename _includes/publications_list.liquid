@@ -57,13 +57,25 @@
               {% assign figure_path_png = pub_id | prepend: 'assets/img/papers/' | append: '.png' %}
               {% assign figure_path_jpg = pub_id | prepend: 'assets/img/papers/' | append: '.jpg' %}
               {% assign figure_path_jpeg = pub_id | prepend: 'assets/img/papers/' | append: '.jpeg' %}
-              <img 
-                src="{{ site.baseurl }}/{{ figure_path_png }}" 
-                alt="{{ pub_title }}"
-                loading="lazy"
-                onerror="this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpg }}'; this.onerror=function(){this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpeg }}'; this.onerror=function(){this.style.display='none';};};"
-                class="publication-figure-img"
-              />
+              {% if paper_url != '' %}
+                <a href="{{ paper_url }}" target="_blank" rel="noopener noreferrer" class="publication-figure-link">
+                  <img 
+                    src="{{ site.baseurl }}/{{ figure_path_png }}" 
+                    alt="{{ pub_title }}"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpg }}'; this.onerror=function(){this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpeg }}'; this.onerror=function(){this.style.display='none';};};"
+                    class="publication-figure-img"
+                  />
+                </a>
+              {% else %}
+                <img 
+                  src="{{ site.baseurl }}/{{ figure_path_png }}" 
+                  alt="{{ pub_title }}"
+                  loading="lazy"
+                  onerror="this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpg }}'; this.onerror=function(){this.onerror=null; this.src='{{ site.baseurl }}/{{ figure_path_jpeg }}'; this.onerror=function(){this.style.display='none';};};"
+                  class="publication-figure-img"
+                />
+              {% endif %}
             {% endif %}
           </div>
           <div class="publication-item-content">
