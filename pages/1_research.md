@@ -109,4 +109,4 @@ Artificial intelligence is influencing all scientific fields, including physics.
 
 #### Physics of Artificial Intelligence
 
-- [Focus range of large languge models](/2025/11/24/LLMFocus.html)
+- [Hallucination mechanism in large languge models](/2025/11/24/LLMFocus.html)
