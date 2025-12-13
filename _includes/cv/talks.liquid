@@ -1,0 +1,34 @@
+{%- comment -%}
+  Generate talks list from talks.yml
+  Formats: *Title.* Location. Date (Year).
+  Sorted by year descending, then by date descending (most recent first)
+  Groups by type (Invited Talks and Seminar Talks)
+  
+  Note: talks.yml is already sorted by date (most recent first), so we just filter by type
+{%- endcomment -%}
+### Invited Talks:
+
+{% for talk in site.data.talks %}
+{% if talk.type == "invited" %}
+{% assign title_end = talk.title | slice: -1 %}
+{% if title_end == "." or title_end == "?" or title_end == "!" %}
+- *{{ talk.title }}* {{ talk.location }}. {{ talk.date }} ({{ talk.year }}).
+{% else %}
+- *{{ talk.title }}.* {{ talk.location }}. {{ talk.date }} ({{ talk.year }}).
+{% endif %}
+{% endif %}
+{% endfor %}
+
+### Seminar Talks:
+
+{% for talk in site.data.talks %}
+{% if talk.type == "seminar" %}
+{% assign title_end = talk.title | slice: -1 %}
+{% if title_end == "." or title_end == "?" or title_end == "!" %}
+- *{{ talk.title }}* {{ talk.location }}. {{ talk.date }} ({{ talk.year }}).
+{% else %}
+- *{{ talk.title }}.* {{ talk.location }}. {{ talk.date }} ({{ talk.year }}).
+{% endif %}
+{% endif %}
+{% endfor %}
+

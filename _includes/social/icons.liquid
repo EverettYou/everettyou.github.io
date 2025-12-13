@@ -11,7 +11,7 @@
 </li>
 {% endif %}
 
-{% for footer in site.data.icons %}
+{% for footer in site.data.contacts %}
     {% unless footer[1] == nil %}
         {% assign brand = footer[0] %}
         {% assign id = footer[1] %}
@@ -22,8 +22,13 @@
             {% assign icon = data.icon %}
         {% endif %}
         <li>
+            {% if data.display %}
+                {% assign brand_display = data.display %}
+            {% else %}
+                {% assign brand_display = brand | remove: '-' | capitalize %}
+            {% endif %}
             <a href="{{ data.pre | append: id | append: data.pos }}"
-               title="{{ site.data.language.str_follow_on }} {{ brand | remove: '-' | capitalize }}"
+               title="{{ site.data.language.str_follow_on }} {{ brand_display }}"
                target="_blank"
                rel="me">
             <span class="fa-stack fa-lg">

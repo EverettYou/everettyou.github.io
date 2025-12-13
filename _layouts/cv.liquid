@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+<article>
+  <section class="page-content">
+    {% comment %}
+      Curriculum Vitae Layout
+      Reads CV content from page front matter and content
+    {% endcomment %}
+
+    <div class="cv-container">
+      <div class="cv-header">
+        <div class="cv-header-content">
+          <div class="cv-photo">
+            <img src="{{ site.baseurl }}/assets/img/photos/YZYou2.png" alt="{{ page.cv_name | default: 'Name' }}">
+          </div>
+          <div class="cv-header-right">
+            <h1 class="cv-name"><strong>{{ page.cv_name | default: "Name" }}, Ph. D.</strong></h1>
+            <div class="cv-contact">
+              {% comment %} Loop through contacts defined in CV.md front matter {% endcomment %}
+              {% if page.contacts %}
+                {% assign contacts_list = page.contacts | split: "," %}
+                {% for contact_key_raw in contacts_list %}
+                  {% assign contact_key = contact_key_raw | strip %}
+                  {% assign contact_id = site.data.contacts[contact_key] %}
+                  {% assign contact_data = site.data.icons_builder[contact_key] %}
+                  {% if contact_data %}
+                    {% if contact_data.use_site_url %}
+                      {% comment %} Website uses site.url {% endcomment %}
+                      {% assign contact_url = site.config.url | default: site.data.site.url | default: site.url %}
+                      <div class="cv-contact-line">
+                        <strong>{{ contact_data.label }}</strong>
+                        <a href="{{ contact_url }}" target="_blank">{{ contact_url }}</a>
+                      </div>
+                    {% elsif contact_id %}
+                      {% comment %} Other contacts use contact_id from contacts.yml {% endcomment %}
+                      {% if contact_data.type == "link" %}
+                        {% assign contact_url = contact_data.pre | append: contact_id | append: contact_data.pos %}
+                        <div class="cv-contact-line">
+                          <strong>{{ contact_data.label }}</strong>
+                          <a href="{{ contact_url }}" target="_blank">{{ contact_id }}</a>
+                        </div>
+                      {% else %}
+                        {% comment %} Text type (address, phone) {% endcomment %}
+                        <div class="cv-contact-line">
+                          <strong>{{ contact_data.label }}</strong>
+                          {{ contact_id }}
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% comment %} 
+        Render the content - Jekyll has already converted Markdown to HTML
+        We'll wrap it in a div and let CSS handle the styling
+      {% endcomment %}
+      <div class="cv-content-wrapper">
+        {{ content }}
+      </div>
+
+      {% comment %} Certification section - always at the end with gray text {% endcomment %}
+      <div class="cv-certification">
+        <p>I hereby certify that the above information is true and correct to the best of my knowledge and belief.</p>
+        <p>{{ page.cv_name }}</p>
+        <p>{{ page.cv_date }}</p>
+      </div>
+    </div>
+  </section>
+</article>

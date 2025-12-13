@@ -1,0 +1,24 @@
+{%- comment -%}
+  Generate preprints from publications.yml
+  Formats: Authors. *Title.* ArXiv Preprint arXiv:XXXX.XXXXX (Year).
+  Sorted by year descending
+{%- endcomment -%}
+{%- assign sorted_pubs = site.data.publications | sort: "year" | reverse -%}
+{%- assign pub_counter = 0 -%}
+{%- for pub in sorted_pubs -%}
+  {%- if pub.type == "preprint" -%}
+    {%- assign pub_counter = pub_counter | plus: 1 -%}
+    {%- assign author_list = "" | split: "" -%}
+    {%- for author in pub.authors -%}
+      {%- assign author_list = author_list | push: author.name -%}
+    {%- endfor -%}
+    {%- assign authors_str = author_list | join: ", " -%}
+    {%- if pub.journal -%}
+      {%- assign venue = pub.journal -%}
+    {%- else -%}
+      {%- assign venue = "" -%}
+    {%- endif -%}
+{{ pub_counter }}. {{ authors_str }}. *{{ pub.title }}.* {% if venue %}{{ venue }}{% endif %}.
+  {% endif %}
+{%- endfor -%}
+

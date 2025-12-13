@@ -1,0 +1,52 @@
+{% comment %}
+  Generate publication list from publications.yml
+  Formats: Authors. *Title.* Journal/Conference info (Year).
+  Sorted by year descending, then by order in file
+  
+  Parameters:
+  - pub_type: filter by publication type (journal-article, conference-paper, preprint, etc.)
+    If not specified, includes journal-article and conference-paper
+{% endcomment %}
+
+{% comment %} Get all publications and sort by year descending {% endcomment %}
+{% assign sorted_pubs = site.data.publications | sort: "year" | reverse %}
+
+{% assign pub_counter = 0 %}
+{% for pub in sorted_pubs %}
+  {% comment %} Filter by type {% endcomment %}
+  {% assign include_pub = false %}
+  {% if include.pub_type %}
+    {% if pub.type == include.pub_type %}
+      {% assign include_pub = true %}
+    {% endif %}
+  {% else %}
+    {% if pub.type == "journal-article" or pub.type == "conference-paper" %}
+      {% assign include_pub = true %}
+    {% endif %}
+  {% endif %}
+  
+  {% if include_pub %}
+    {% assign pub_counter = pub_counter | plus: 1 %}
+    
+    {% comment %} Format authors {% endcomment %}
+    {% assign author_list = "" | split: "" %}
+    {% for author in pub.authors %}
+      {% assign author_list = author_list | push: author.name %}
+    {% endfor %}
+    {% assign authors_str = author_list | join: ", " %}
+    
+    {% comment %} Format journal/conference/preprint info - use journal field as-is since it contains formatted citation {% endcomment %}
+    {% if pub.journal %}
+      {% assign venue = pub.journal %}
+    {% elsif pub.conference %}
+      {% assign venue = pub.conference %}
+    {% else %}
+      {% assign venue = "" %}
+    {% endif %}
+    
+    {% comment %} Output formatted publication - journal field already contains year in parentheses {% endcomment %}
+    {{ pub_counter }}. {{ authors_str }}. *{{ pub.title }}.* {% if venue %}{{ venue }}{% endif %}.
+    
+  {% endif %}
+{% endfor %}
+
