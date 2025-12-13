@@ -14,7 +14,7 @@ You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/p
 ----
 
 <figure style="float: right; max-width: 33%;">
-  <img src="./YZYou.jpg" style="width: 100%;">
+  <img src="{{site.baseurl}}/people/YZYou/YZYou.jpg" style="width: 100%;">
   <figcaption style="text-align: right; color: gray; font-size: 80%">Credit: <a href="https://www.flickr.com/photos/160961487@N08/albums" target="blank">UCSD Division of Physical Sciences</a></figcaption>
 </figure>
 
