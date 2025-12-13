@@ -3,7 +3,7 @@ layout: cv
 permalink: /people/YZYou/CV
 cv_name: "Yi-Zhuang You"
 cv_date: "San Diego, 2025/12/15"
-contacts: "address, phone, mail, website, google-scholar, orcid"
+contacts: "mail, website, google-scholar, orcid"
 hide: true
 ---
 
