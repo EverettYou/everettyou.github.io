@@ -2,20 +2,30 @@
   Generate PhD students list from people.yml
   Shows current graduate students and graduated PhD students
   Format: year (left) | name (right) as a table
-  Current students first (no year), then graduated students sorted by year (descending)
+  Graduated students sorted by year (earliest first), then current students at the end
 {% endcomment %}
 
-{% comment %} Collect all PhD graduates and sort by year descending {% endcomment %}
+{% comment %} Collect all PhD graduates and sort by year ascending (earliest first) {% endcomment %}
 {% assign phd_graduates = "" | split: "" %}
 {% for past_member in site.data.people.past_members %}
   {% if past_member.role == "PhD" %}
     {% assign phd_graduates = phd_graduates | push: past_member %}
   {% endif %}
 {% endfor %}
-{% assign sorted_graduates = phd_graduates | sort: "year" | reverse %}
+{% assign sorted_graduates = phd_graduates | sort: "year" %}
 
 <ul class="cv-students-list">
-  {% comment %} Current graduate students (show "current" as year) {% endcomment %}
+  {% comment %} Past members who are PhD graduates (sorted by year, earliest first) {% endcomment %}
+  {% for past_member in sorted_graduates %}
+    <li>
+      <span class="cv-student-year">{{ past_member.year }}</span>
+      <ul>
+        <li>{{ past_member.name }}{% if past_member.affiliation %} ({{ past_member.affiliation }}){% endif %}</li>
+      </ul>
+    </li>
+  {% endfor %}
+  
+  {% comment %} Current graduate students (show "current" as year, at the end) {% endcomment %}
   {% for role_section in site.data.people.current_members %}
     {% if role_section.role == "Graduate Students" %}
       {% for member in role_section.members %}
@@ -27,16 +37,6 @@
         </li>
       {% endfor %}
     {% endif %}
-  {% endfor %}
-  
-  {% comment %} Past members who are PhD graduates (sorted by year, most recent first) {% endcomment %}
-  {% for past_member in sorted_graduates %}
-    <li>
-      <span class="cv-student-year">{{ past_member.year }}</span>
-      <ul>
-        <li>{{ past_member.name }}{% if past_member.affiliation %} ({{ past_member.affiliation }}){% endif %}</li>
-      </ul>
-    </li>
   {% endfor %}
 </ul>
 

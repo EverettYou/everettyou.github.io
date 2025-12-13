@@ -3,9 +3,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=5">
         
     <!-- Theme Mode-->
+    {% assign lang = site.data.language.cusdis_lang | default: "en" %}
+    {% assign lang_data = site.data.language[lang] %}
     <script>
-        const darkBtn = "{{ site.data.language.str_dark | default: "Dark" }}"
-        const lightBtn = "{{ site.data.language.str_light | default: "Light" }}"
+        const darkBtn = "{{ lang_data.str_dark | default: "Dark" }}"
+        const lightBtn = "{{ lang_data.str_light | default: "Light" }}"
         const isAutoTheme = {% if site.color_theme == 'auto' %}true{% else %}false{% endif %}
         const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         if (isAutoTheme) {
@@ -61,8 +63,8 @@
     </script>
 
     {% if site.cookie_consent %}
-        <span id="cookie-notice"><span>{{ site.data.language.str_cookie_disclaimer | default: "We would like to use third party cookies and scripts to improve the functionality of this website." }}
-          </span><a id="cookie-notice-accept" class="button">{{ site.data.language.str_cookie_approve | default: "Approve" }}</a>
+        <span id="cookie-notice"><span>{{ lang_data.str_cookie_disclaimer | default: "We would like to use third party cookies and scripts to improve the functionality of this website." }}
+          </span><a id="cookie-notice-accept" class="button">{{ lang_data.str_cookie_approve | default: "Approve" }}</a>
         </span>
     {% endif %}
     {% if site.google_analytics %}

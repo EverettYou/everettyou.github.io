@@ -1,3 +1,5 @@
+{% assign lang = site.data.language.cusdis_lang | default: "en" %}
+{% assign lang_data = site.data.language[lang] %}
 {% assign author = site.data.authors[include.author] %}
 {% assign date = include.date | default: "today" | date: "%B %-d, %Y" %}
 
@@ -9,7 +11,7 @@
     <p class="meta">
       {% if author.name %}{{ author.name }} - {% endif %}
       {% assign x = date | date: "%m" | minus: 1 %}
-      {{ site.data.language.str_months[x] | default: date | date: "%B" }} {{ date | date: "%d, %Y" }}
+      {{ lang_data.str_months[x] | default: date | date: "%B" }} {{ date | date: "%d, %Y" }}
     </p>
   {%- if author.url -%}</a>{%- endif -%}
 </div>

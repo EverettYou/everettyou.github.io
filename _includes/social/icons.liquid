@@ -1,7 +1,9 @@
+{% assign lang = site.data.language.cusdis_lang | default: "en" %}
+{% assign lang_data = site.data.language[lang] %}
 {% if site.data.social.rss or site.theme_settings.rss %}
 <li>
     <a feed.xml href="{{ site.data.social.feed.path | default: 'feed.xml' | relative_url }}"
-       title="{{ site.data.language.str_rss_follow | default: 'Follow RSS feed' }}"
+       title="{{ lang_data.str_rss_follow | default: 'Follow RSS feed' }}"
        target="_blank">
         <span class="fa-stack fa-lg">
             <i class="fas fa-circle fa-stack-2x"></i>
@@ -11,31 +13,40 @@
 </li>
 {% endif %}
 
-{% for footer in site.data.contacts %}
-    {% unless footer[1] == nil %}
-        {% assign brand = footer[0] %}
-        {% assign id = footer[1] %}
-        {% assign data = site.data.icons_builder[brand] %}
-        {% if data.icon == nil %}
-            {% assign icon = "fab fa-" | append: brand %}
-        {% else %}
-            {% assign icon = data.icon %}
-        {% endif %}
-        <li>
-            {% if data.display %}
-                {% assign brand_display = data.display %}
-            {% else %}
-                {% assign brand_display = brand | remove: '-' | capitalize %}
-            {% endif %}
-            <a href="{{ data.pre | append: id | append: data.pos }}"
-               title="{{ site.data.language.str_follow_on }} {{ brand_display }}"
-               target="_blank"
-               rel="me">
-            <span class="fa-stack fa-lg">
-              <i class="fas fa-circle fa-stack-2x"></i>
-              <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
-            </span>
-            </a>
-        </li>
-    {% endunless %}
+{% for item in site.data.social.footer %}
+  {% assign key = item[0] %}
+  {% assign value = item[1] %}
+  {% if value %}    
+    {% assign info = site.data.info[key] %}
+    {% assign builder = site.data.builder[key] %}
+    {% if builder.icon == nil %}
+        {% assign icon = "fab fa-" | append: key %}
+    {% else %}
+        {% assign icon = builder.icon %}
+    {% endif %}
+    {% if builder.label %}
+      {% assign label = builder.label %}
+    {% else %}
+      {% assign label = key | capitalize %}
+    {% endif %}
+    {% if builder.action == "follow" %}
+        {% assign action_str = lang_data.str_follow_on %}
+    {% elsif builder.action == "contact" %}
+        {% assign action_str = lang_data.str_contact %}
+    {% else %}
+        {% assign action_str = "" %}
+    {% endif %}
+    <li>
+      <a href="{{ builder.pre | append: info | append: builder.pos }}"
+         title="{{ action_str }} {{ label }}"
+         target="_blank"
+         rel="me">
+        <span class="fa-stack fa-lg">
+          <i class="fas fa-circle fa-stack-2x"></i>
+          <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
+        </span>
+      </a>
+    </li>
+  {% endif %}
 {% endfor %}
+

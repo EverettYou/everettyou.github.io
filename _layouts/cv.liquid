@@ -18,49 +18,38 @@ layout: default
           <div class="cv-header-right">
             <h1 class="cv-name"><strong>{{ page.cv_name | default: "Name" }}, Ph. D.</strong></h1>
             <div class="cv-contact">
-              {% comment %} Address and Phone - explicitly defined {% endcomment %}
-              <div class="cv-contact-line">
-                <strong>Address:</strong>
-                Mayer Hall 5202, 9500 Gilman Drive, La Jolla, CA 92093-0021
-              </div>
-              <div class="cv-contact-line">
-                <strong>Phone:</strong>
-                +1(858)822-4462
-              </div>
-              {% comment %} Loop through contacts defined in CV.md front matter {% endcomment %}
-              {% if page.contacts %}
-                {% assign contacts_list = page.contacts | split: "," %}
-                {% for contact_key_raw in contacts_list %}
-                  {% assign contact_key = contact_key_raw | strip %}
-                  {% assign contact_id = site.data.contacts[contact_key] %}
-                  {% assign contact_data = site.data.icons_builder[contact_key] %}
-                  {% if contact_data %}
-                    {% if contact_data.use_site_url %}
-                      {% comment %} Website uses site.url {% endcomment %}
-                      {% assign contact_url = site.config.url | default: site.data.site.url | default: site.url %}
-                      <div class="cv-contact-line">
-                        <strong>{{ contact_data.label }}</strong>
-                        <a href="{{ contact_url }}" target="_blank">{{ contact_url }}</a>
-                      </div>
-                    {% elsif contact_id %}
-                      {% comment %} Other contacts use contact_id from contacts.yml {% endcomment %}
-                      {% if contact_data.type == "link" %}
-                        {% assign contact_url = contact_data.pre | append: contact_id | append: contact_data.pos %}
-                        <div class="cv-contact-line">
-                          <strong>{{ contact_data.label }}</strong>
-                          <a href="{{ contact_url }}" target="_blank">{{ contact_id }}</a>
-                        </div>
+              {% for item in site.data.social.cv %}
+                {% assign key = item[0] %}
+                {% assign value = item[1] %}
+                {% if value %}
+                  {% assign info = site.data.info[key] %}
+                  {% assign builder = site.data.builder[key] %}
+                  {% if builder %}
+                    {% if builder.label %}
+                      {% assign label = builder.label %}
+                    {% else %}
+                      {% assign label = key | capitalize %}
+                    {% endif %}
+                    {% if builder.type == "link" %}
+                      {% if key == "website" %}
+                        {% assign url = site.data.site.url | default: site.url %}
+                        {% assign info = url %}
                       {% else %}
-                        {% comment %} Text type (address, phone) {% endcomment %}
-                        <div class="cv-contact-line">
-                          <strong>{{ contact_data.label }}</strong>
-                          {{ contact_id }}
-                        </div>
+                        {% assign url = builder.pre | append: info | append: builder.pos %}
                       {% endif %}
+                      <div class="cv-contact-line">
+                        <strong>{{ label }}</strong>:
+                        <a href="{{ url }}" target="_blank">{{ info }}</a>
+                      </div>
+                    {% elsif builder.type == "text" %}
+                      <div class="cv-contact-line">
+                        <strong>{{ label }}</strong>:
+                        {{ info }}
+                      </div>
                     {% endif %}
                   {% endif %}
-                {% endfor %}
-              {% endif %}
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
