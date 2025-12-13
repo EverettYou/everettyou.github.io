@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Can GPT Speak the Quantum Language?
+author: openai-gpt4o
 tags: [Machine Learning, Quantum Information, Language Models]
 ---
 

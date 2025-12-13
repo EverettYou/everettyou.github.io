@@ -9,7 +9,7 @@ redirect_from:
   - /YZYou
 ---
 
-You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/people/YZYou/CV){:target="_blank"}.
+You can find a printable (and longer) version of my CV [here]({{site.baseurl}}/people/YZYou/CV).
 
 ----
 

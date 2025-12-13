@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Decipher the Holographic Universe with Artificial Intelligence
-author: Cynthia Dillon
+author: cynthia-dillon
 tags: [Machine Learning, Holography, Quantum Field Theory]
 redirect_from:
   - /2020/06/25/NeuralRG.html

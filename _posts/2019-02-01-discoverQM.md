@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rediscover Quantum Mechanics in Machine Learning
+author: yzyou
 tags: [Quantum Mechanics, Machine Learning, Recurrent Neural Network]
 ---
 

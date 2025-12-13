@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The Fascinating World of Nickelate High-Temperature Superconductors
+author: openai-gpt4
 tags: [Superconductivity, Correlated Systems]
 ---
 
