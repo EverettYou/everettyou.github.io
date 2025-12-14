@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Decoding Schrödinger's Cat --- A Novel Intersection of Quantum Physics and Artificial Intelligence
-author: openai-gpt4
+author: gpt4
 tags: [Quantum Mechanics, Machine Learning, Language Models]
 ---
 

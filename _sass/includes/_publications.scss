@@ -39,11 +39,24 @@
 .search-input {
   width: 100%;
   padding: 0.5rem 1rem 0.5rem 2.5rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border, #e5e5e5);
   border-radius: 0.5rem;
   font-size: 1rem;
   transition: all 0.2s;
-  background-color: #fff;
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  // Ensure background color is applied on mobile devices
+  @media screen and (max-width: $break) {
+    background-color: var(--background) !important;
+    color: var(--text) !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
   
   &:focus {
     outline: none;
@@ -237,7 +250,7 @@
 
 .publication-authors {
   font-size: 1rem;
-  color: #666;
+  color: var(--meta);
   margin: 0;
   margin-bottom: 0.25rem;
   line-height: 1.2;
@@ -245,20 +258,15 @@
 
 .publication-venue {
   font-size: 1rem;
-  color: #000;
+  color: var(--text);
   margin: 0;
   margin-bottom: 0.25rem;
   line-height: 1.2;
-  
-  // Ensure black color on mobile devices
-  @media screen and (max-width: $break) {
-    color: #000 !important;
-  }
 }
 
 .publication-description {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--meta);
   margin-bottom: 1rem;
   line-height: 1.6;
   display: -webkit-box;
@@ -276,7 +284,7 @@
 .abstract-toggle-link {
   background: none;
   border: none;
-  color: #666;
+  color: var(--meta);
   cursor: pointer;
   font-size: 0.875rem;
   text-decoration: underline;
@@ -290,9 +298,9 @@
 .publication-abstract {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--border);
   font-size: 0.9375rem;
-  color: #555;
+  color: var(--meta);
   line-height: 1.6;
 }
 
@@ -502,9 +510,21 @@
   }
   
   .search-input {
-    background-color: #1a1a1a;
-    border-color: #333;
-    color: #f0f0f0;
+    background-color: var(--background) !important;
+    border-color: var(--border, #333);
+    color: var(--text) !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    // Ensure background color is applied on mobile devices in dark mode
+    @media screen and (max-width: $break) {
+      background-color: var(--background) !important;
+      color: var(--text) !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
     
     &:focus {
       border-color: var(--accent, #007bff);
@@ -552,24 +572,32 @@
   }
   
   .publication-title {
-    color: #f0f0f0;
+    color: var(--text);
   }
   
   .publication-authors {
-    color: #999;
+    color: var(--meta);
   }
   
   .publication-venue {
-    color: #f0f0f0;
-    
-    // Override dark mode for mobile to keep black
-    @media screen and (max-width: $break) {
-      color: #000 !important;
-    }
+    color: var(--text);
   }
   
   .publication-description {
-    color: #999;
+    color: var(--meta);
+  }
+  
+  .abstract-toggle-link {
+    color: var(--meta);
+    
+    &:hover {
+      color: var(--accent, #007bff);
+    }
+  }
+  
+  .publication-abstract {
+    border-top-color: var(--border);
+    color: var(--meta);
   }
   
   .action-button {

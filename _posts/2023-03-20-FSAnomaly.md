@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Unlocking the Secrets of Fermi Surface Anomalies --- A New Topological Perspective
-author: openai-gpt4
+author: gpt4
 tags: [Topological Phase, Fermi Liquid, Quantum Field Theory]
 ---
 

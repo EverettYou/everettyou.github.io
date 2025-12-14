@@ -12,33 +12,52 @@
         </a>
     </div>
 
-    <!-- Toggle menu -->
-    <nav class="clear">
+    <!-- Toggle menu button -->
     <a aria-label="pull" id="pull" class="toggle" href="#">
     <i class="fas fa-bars fa-lg"></i>
     </a>
 
-    <!-- Menu -->
+    <!-- Navigation menu -->
+    <nav class="clear">
     <ul class="hide">
         {% assign name_page = "" %}
 
+        <!-- First pass: render non-icon pages -->
         {% for page in site.pages %}
             {% unless page.title == null or page.hide or name_page contains page.title %}
-            <li class="separator"> | </li>
-            <li>
-                <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
-                    {% if page.icon %} <i class="fas {{ page.icon }}" aria-hidden="true"></i>
-                    {% else %} {{ page.title }} {% endif%}
-                </a>
-            </li>
+                {% unless page.icon %}
+                    <li class="separator"> | </li>
+                    <li>
+                        <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
+                            {{ page.title }}
+                        </a>
+                    </li>
+                {% endunless %}
             {% endunless %}
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
 
-        {% if site.color_theme == 'auto' %}
+        <!-- Second pass: render icon pages and theme-toggle grouped together in a single li -->
         <li class="separator"> | </li>
-        <li><a id="theme-toggle" title="{{ page.title }} " aria-label="{{ page.title }}" onclick="themeToggle()"></a></li>
-        {% endif %}
+        <li class="icon-menu-group">
+            {% assign name_page_icons = "" %}
+            {% for page in site.pages %}
+                {% unless page.title == null or page.hide or name_page_icons contains page.title %}
+                    {% if page.icon %}
+                        <a class="clear icon-menu-item" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
+                            <i class="fas {{ page.icon }}" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+                {% endunless %}
+                {% if page.icon %}
+                    {% assign name_page_icons = page.title | append: name_page_icons %}
+                {% endif %}
+            {% endfor %}
+            
+            {% if site.color_theme == 'auto' %}
+            <a id="theme-toggle" class="clear icon-menu-item" title="Light/Dark" aria-label="Light/Dark" onclick="themeToggle()"></a>
+            {% endif %}
+        </li>
     </ul>
 
     </nav>

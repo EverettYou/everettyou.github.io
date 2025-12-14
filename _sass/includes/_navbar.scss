@@ -18,13 +18,15 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; // Ensure it stays above other elements
-  padding: 2% 2% 1% 2%;
+  z-index: 1000;
+  padding: 1% 2%;
   background: var(--background);
-  border-bottom: 1px solid var(--border); // Add a border to separate the header from the content
+  border-bottom: 1px solid var(--border);
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  flex-wrap: nowrap; // Ensure the site title and nav stay on the same line
 
   .separator {
     user-select: none;
@@ -39,22 +41,46 @@
     color: var(--header-link);
   }
 
+  .branding {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+  }
+
   .avatar {
-    height: 3em;
-    width: 3em;
-    float: left;
-    margin-top: -0.75em;
+    height: 2.2em;
+    width: 2.2em;
+    flex-shrink: 0;
     border-radius: 0.2em;
     margin-right: 0.5em;
-    padding: 10px 10px;
-
+    padding: 2px;
+    box-sizing: border-box;
+    display: block;
+    object-fit: contain;
   }
 
   .site-title {
-    float: left;
     font-weight: bold;
     font-family: $font-family-logo;
     font-size: 1.3em;
+    display: block;
+  }
+}
+
+// Toggle button (separate from nav)
+a#pull {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+  height: 1.5em;
+  flex: 0 0 auto;
+  
+  i {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 
@@ -62,87 +88,150 @@ nav {
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
 
   ul {
     margin: 0;
     padding: 0;
     list-style: none;
     line-height: 1.5;
-    float: right;
-    text-align: right;
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4em;
   }
 
   li {
     display: inline;
-    float: left;
     margin-right: 0.4em;
+
+    // Icon menu group: container for grouped icon items
+    &.icon-menu-group {
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      flex-shrink: 0;
+      min-width: max-content;
+      line-height: 1.5;
+      height: 1.5em;
+      
+      .icon-menu-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 0 0.3em;
+        
+        &:not(:last-child) {
+          margin-right: 0.3em;
+        }
+      }
+    }
   }
 
   a {
     &:hover {
       color: var(--link);
     }
-
-    &#pull {
-      i {
-        margin-top: 13px;
-        margin-right: 10px;
-        float: right;
-      }
-
-    }
-
   }
 }
 
 /* ---- Responsive ---- */
 
 @media (min-width: $break) {
-  a#pull {
-    display: none;
+  // Normal mode: menu always visible, toggle hidden
+  nav {
+    ul {
+      display: flex;
+    }
+    
+    a#pull {
+      display: none;
+    }
   }
 }
 
 @media screen and (max-width: $break) {
-  nav {
-    height: auto;
-
-    .separator {
-      display: none !important;
+  // Mobile mode: toggle visible, menu collapsed by default
+  .site-header {
+    flex-wrap: wrap;
+    
+    .branding {
+      flex: 0 0 auto;
     }
-
-    ul {
-      display: flex;
-      flex-direction: column;
+    
+    // Toggle button in top row, right side
+    a#pull {
+      display: inline-flex;
+      flex: 0 0 auto;
+      order: 2;
+    }
+    
+    // Nav menu expands as next row
+    nav {
+      flex: 1 1 100%;
+      order: 3;
       width: 100%;
-      overflow: hidden;
-      padding-top: $padding-medium;
-
-      /* fade out, then shrink */
-      transition: opacity .25s 0s, font-size .25s 0s;
-      transition-delay: 0s;
-
-      &.hide {
-        font-size: 0;
-        margin: 0;
-        opacity: 0;
-        padding: 0;
+      margin-top: 0.5rem;
+      min-height: 0;
+      height: auto;
+      
+      .separator {
+        display: none !important;
       }
-    }
 
-    li {
-      width: 100%;
-      text-align: center;
-      position: relative;
-      background-color: var(--background);
-
-      a {
+      ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         width: 100%;
+        justify-content: flex-end;
+        gap: 0.15em;
+        line-height: 1.2;
+        padding: 0;
         margin: 0;
-        display: block;
+        border-top: 1px solid var(--border);
+        padding-top: 0.5rem;
+
+        /* fade out, then shrink */
+        transition: opacity .25s 0s, font-size .25s 0s;
+        transition-delay: 0s;
+
+        &.hide {
+          display: none;
+        }
+      }
+      
+      // Hide nav when menu is collapsed to remove vertical space
+      &:has(ul.hide) {
+        display: none;
+        margin-top: 0;
+        height: 0;
+        min-height: 0;
       }
 
+      li {
+        width: auto;
+        text-align: center;
+        position: relative;
+        background-color: var(--background);
+        flex-shrink: 0;
+        min-width: 0;
+
+        a {
+          width: auto;
+          margin: 0;
+          display: inline-block;
+          padding: 0.15em 0.3em;
+          font-size: inherit;
+          line-height: 1.5;
+          white-space: nowrap;
+        }
+      }
     }
   }
 }
