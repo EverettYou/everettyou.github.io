@@ -6,14 +6,23 @@
     {% assign lang = site.data.language.cusdis_lang | default: "en" %}
     {% assign lang_data = site.data.language[lang] %}
     <script>
-        const darkBtn = "{{ lang_data.str_dark | default: "Dark" }}"
-        const lightBtn = "{{ lang_data.str_light | default: "Light" }}"
-        const isAutoTheme = {% if site.color_theme == 'auto' %}true{% else %}false{% endif %}
-        const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const strSystem = "{{ lang_data.str_system | default: "System" }}";
+        const strLight = "{{ lang_data.str_light | default: "Light" }}";
+        const strDark = "{{ lang_data.str_dark | default: "Dark" }}";
+        const strSwitchTo = "{{ lang_data.str_switch_to | default: "Switch to" }}";
+        const isAutoTheme = {% if site.color_theme == 'auto' %}true{% else %}false{% endif %};
         if (isAutoTheme) {
-            document.documentElement.setAttribute('data-theme', sessionStorage.getItem('theme') ?? preferredTheme)
+            var savedPreference = sessionStorage.getItem('theme');
+            var preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            if (savedPreference) {
+                document.documentElement.setAttribute('data-theme-preference', savedPreference);
+                document.documentElement.setAttribute('data-theme', savedPreference === 'system' ? preferredTheme : savedPreference);
+            } else {
+                document.documentElement.setAttribute('data-theme-preference', 'system');
+                document.documentElement.setAttribute('data-theme', preferredTheme);
+            }
         } else {
-            document.documentElement.setAttribute('data-theme', "{{ site.color_theme | default: 'light' }}")
+            document.documentElement.setAttribute('data-theme', "{{ site.color_theme | default: 'light' }}");
         }
     </script>
 
@@ -22,6 +31,10 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- Font Awesome 6.7.0 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.favicon | relative_url }}" type="image/x-icon">
@@ -51,15 +64,17 @@
     });"></script>
     {% endif %}
 
-    <!-- Simple Jekyll Search 1.10.0 -->
+    <!-- Simple Jekyll Search 1.10.0 (only load on search page) -->
+    {% if page.layout == 'search' %}
     <script src="{{ '/assets/js/vendor/simple-jekyll-search.min.js' | relative_url }}" type="text/javascript"></script>
+    {% endif %}
 
     <!-- Google Analytics / Cookie Consent -->
     <script>
       const cookieName = 'cookie-notice-dismissed-{{ site.url }}';
-      const isCookieConsent = '{{ site.cookie_consent }}';
-      const analyticsName = '{{ site.google_analytics }}';
-      const analyticsNameGA4 = '{{ site.google_analytics_ga4 }}';
+      const isCookieConsent = '{{ site.cookie_consent | default: "" }}';
+      const analyticsName = '{{ site.google_analytics | default: "" }}';
+      const analyticsNameGA4 = '{{ site.google_analytics_ga4 | default: "" }}';
     </script>
 
     {% if site.cookie_consent %}

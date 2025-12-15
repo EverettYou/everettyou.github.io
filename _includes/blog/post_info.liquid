@@ -1,7 +1,14 @@
 {% assign lang = site.data.language.cusdis_lang | default: "en" %}
 {% assign lang_data = site.data.language[lang] %}
 {% assign author = site.data.authors[include.author] %}
-{% assign date = include.date | default: "today" | date: "%B %-d, %Y" %}
+{% comment %}Only use date if it exists and is not empty/nil{% endcomment %}
+{% assign date = "" %}
+{% unless include.date == nil or include.date == "" %}
+  {% assign test_date = include.date | date: "%B %-d, %Y" %}
+  {% if test_date and test_date != "" and test_date != nil %}
+    {% assign date = test_date %}
+  {% endif %}
+{% endunless %}
 
 <div class="post-info">
   {%- if author.url -%}<a href="{{ author.url | relative_url }}" target="_blank">{%- endif -%}
@@ -9,9 +16,18 @@
       <img alt="Author's avatar" src="{{ author.avatar | relative_url }}">
     {% endif %}
     <p class="meta">
-      {% if author.name %}{{ author.name }} - {% endif %}
-      {% assign x = date | date: "%m" | minus: 1 %}
-      {{ lang_data.str_months[x] | default: date | date: "%B" }} {{ date | date: "%d, %Y" }}
+      {% if author.name %}{{ author.name }}{% if date %} - {% endif %}{% endif %}
+      {% if date and date != "" and include.date and include.date != nil %}
+        {% comment %}Use original date object for parsing month index{% endcomment %}
+        {% assign month_num = include.date | date: "%m" | minus: 1 %}
+        {% assign month_index = month_num | plus: 0 %}
+        {% assign month_name = lang_data.str_months[month_index] %}
+        {% if month_name %}
+          {{ month_name }} {{ include.date | date: "%d, %Y" }}
+        {% else %}
+          {{ include.date | date: "%B %d, %Y" }}
+        {% endif %}
+      {% endif %}
     </p>
   {%- if author.url -%}</a>{%- endif -%}
 </div>

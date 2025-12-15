@@ -14,7 +14,7 @@
 
     <!-- Toggle menu button -->
     <a aria-label="pull" id="pull" class="toggle" href="#">
-    <i class="fas fa-bars fa-lg"></i>
+    <i class="fa-solid fa-bars fa-lg"></i>
     </a>
 
     <!-- Navigation menu -->
@@ -45,7 +45,7 @@
                 {% unless page.title == null or page.hide or name_page_icons contains page.title %}
                     {% if page.icon %}
                         <a class="clear icon-menu-item" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
-                            <i class="fas {{ page.icon }}" aria-hidden="true"></i>
+                            <i class="fa-solid {{ page.icon }}" aria-hidden="true"></i>
                         </a>
                     {% endif %}
                 {% endunless %}
@@ -55,7 +55,12 @@
             {% endfor %}
             
             {% if site.color_theme == 'auto' %}
-            <a id="theme-toggle" class="clear icon-menu-item" title="Light/Dark" aria-label="Light/Dark" onclick="themeToggle()"></a>
+            {% assign lang = site.data.language.cusdis_lang | default: "en" %}
+            {% assign lang_data = site.data.language[lang] %}
+            {% assign next_mode = "system" %}
+            {% assign switch_to_text = lang_data.str_switch_to | default: "Switch to" %}
+            {% assign system_text = lang_data.str_system | default: "System" %}
+            <a id="theme-toggle" class="clear icon-menu-item" title="{{ switch_to_text }} {{ system_text }}" aria-label="{{ switch_to_text }} {{ system_text }}" onclick="themeToggle()"></a>
             {% endif %}
         </li>
     </ul>
