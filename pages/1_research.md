@@ -5,13 +5,11 @@ permalink: /research/
 feature-img: "assets/img/figures/research-min.png"
 inscription: 欲穷千里目，更上一层楼。—— 唐 · 王之涣
 ---
-
-
-<div class="research-section-image">
-  <img src="{{site.baseurl}}/assets/img/figures/correlated_quantum_manybody.png" alt="Correlated Quantum Many-Body Systems" />
-</div>
+### Correlated Quantum Many-Body Systems
 
 Quantum mechanics governs the microscopic degrees of freedom of electrons and spins. When strongly interacting, these systems can exhibit exotic collective phenomena beyond the simple sum of individual behaviors. Studying quantum many-body systems has important practical applications, from designing new materials to building quantum devices.
+
+![Correlated Quantum Many-Body Systems](/assets/img/figures/correlated_quantum_manybody.png)
 
 #### Unconvensional Superconductor
 
@@ -32,13 +30,11 @@ Quantum mechanics governs the microscopic degrees of freedom of electrons and sp
 - Sachdev-Ye-Kitaev model
 
 ---
-
-
-<div class="research-section-image">
-  <img src="{{site.baseurl}}/assets/img/figures/topological_phases_of_matter.png" alt="Topological Phases of Matter" />
-</div>
+### Topological Phases of Matter
 
 Discovering new quantum phases is an exciting frontier of condensed matter physics. Topological phases exhibit exotic properties beyond traditional paradigms. Studying them has advanced quantum many-body theory and may enable new experimental realizations.
+
+![Topological Phases of Matter](/assets/img/figures/topological_phases_of_matter.png)
 
 #### Topological Phases
 
@@ -59,13 +55,11 @@ Discovering new quantum phases is an exciting frontier of condensed matter physi
 - Duality in quantum field theory
 
 ---
-
-
-<div class="research-section-image">
-  <img src="{{site.baseurl}}/assets/img/figures/quantum_infomation_dynamics.png" alt="Quantum Information Dynamics" />
-</div>
+### Quantum Information Dynamics
 
 Quantum entanglement connects topics of topological order, localization, and quantum chaos. It shares similarities with wormholes, motivating holographic duality ideas. Understanding entanglement structure and dynamics may provide insights into fundamental questions of decoherence, thermalization, and gravity.
+
+![Quantum Information Dynamics](/assets/img/figures/quantum_infomation_dynamics.png)
 
 #### Many-Body Localization (MBL)
 
@@ -85,13 +79,11 @@ Quantum entanglement connects topics of topological order, localization, and qua
 - [Quantum information dynamics](/2018/03/28/DynQ.html)
 
 ---
-
-
-<div class="research-section-image">
-  <img src="{{site.baseurl}}/assets/img/figures/machine_learning_physics.png" alt="Machine Learning and Physics" />
-</div>
+### Machine Learning and Physics
 
 Artificial intelligence is influencing all scientific fields, including physics. Physicists are also providing insights into the nature of intelligence. The combination of machine learning and physics is just beginning, with much potential still to be explored.
+
+![Machine Learning and Physics](/assets/img/figures/machine_learning_physics.png)
 
 #### Deep Learning, Renormalization, and Holography
 
@@ -109,4 +101,4 @@ Artificial intelligence is influencing all scientific fields, including physics.
 
 #### Physics of Artificial Intelligence
 
-- [Hallucination mechanism in large languge models](/2025/11/24/LLMFocus.html)
+- [Hallucination in large languge models](/2025/11/24/LLMFocus.html)
