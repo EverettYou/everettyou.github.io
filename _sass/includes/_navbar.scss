@@ -76,11 +76,47 @@ a#pull {
   line-height: 1.5;
   height: 1.5em;
   flex: 0 0 auto;
+  position: relative;
   
   i {
     margin: 0;
     display: inline-block;
     vertical-align: middle;
+    position: relative;
+  }
+  
+  // Default: show hamburger icon, hide X icon (menu starts collapsed)
+  .menu-icon-open {
+    display: inline-block;
+  }
+  
+  .menu-icon-close {
+    display: none;
+  }
+}
+
+// Change icon visibility based on menu state using :has() selector
+// When menu is expanded (nav ul doesn't have .hide class)
+.site-header:has(nav ul:not(.hide)) a#pull {
+  // Show X icon, hide hamburger icon (tooltip follows automatically)
+  .menu-icon-open {
+    display: none;
+  }
+  
+  .menu-icon-close {
+    display: inline-block;
+  }
+}
+
+// When menu is collapsed (nav ul has .hide class) - default state
+.site-header:has(nav ul.hide) a#pull {
+  // Show hamburger icon, hide X icon (tooltip follows automatically)
+  .menu-icon-open {
+    display: inline-block;
+  }
+  
+  .menu-icon-close {
+    display: none;
   }
 }
 
