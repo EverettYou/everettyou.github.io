@@ -1,0 +1,25 @@
+<table style="margin-bottom: 0;">
+  <thead>
+    <tr>
+      <th style="width: 6em; white-space: nowrap;">Course</th>
+      <th>Title</th>
+      <th>Quarters</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course_pair in site.data.courses %}
+    {% assign course_code = course_pair[0] %}
+    {% assign course = course_pair[1] %}
+    <tr>
+      {% assign course_code_display = course_code | replace: "PHYS", "PHYS " %}
+      <td style="white-space: nowrap;"><a href="/teaching/{{ course_code }}">{{ course_code_display }}</a></td>
+      <td>{{ course.title }}</td>
+      <td>{{ course.quarters }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p style="font-size: 0.9em; color: var(--meta, #666); margin-top: 0; margin-bottom: 2em;">
+© {{ site.time | date: "%Y" }} Yi-Zhuang You. All course materials licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC-4.0</a>.
+</p>

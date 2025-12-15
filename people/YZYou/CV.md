@@ -1,9 +1,12 @@
 ---
 layout: cv
-permalink: /people/YZYou/CV
+permalink: /people/YZYou
 cv_name: "Yi-Zhuang You"
 cv_date: "San Diego, 2025/12/15"
 hide: true
+redirect_from:
+  - /YZYou/
+  - /YZYou
 ---
 
 Yi-Zhuang You is an Associate Professor of Physics at the University of California, San Diego. His research lies at the intersection of quantum many-body physics, quantum information science, and machine learning. He is known for pioneering work on symmetric mass generation, entanglement dynamics in quantum circuits, and AI-assisted quantum state learning. Recent efforts focus on developing machine learning algorithms for quantum error correction, quantum tomography, and representation learning of quantum systems. He is a recipient of the NSF CAREER Award and UC Hellman Fellowship, and he serves on the editorial board of *Machine Learning: Science and Technology*. 
@@ -71,3 +74,13 @@ Yi-Zhuang You is an Associate Professor of Physics at the University of Californ
 ## Talks
 
 {% include cv/talks.liquid %}
+
+## Teaching
+
+{% include cv/courses.liquid %}
+
+## Services
+
+- UCSD Chancellor’s Advisory Committee on Gender Identity and Sexual Orientation Issues ([GISOI](https://gisoi.ucsd.edu/about/index.html){:target="_blank"}) (2023 - present) 
+- Editorial Board Member for Machine Learning: Science and Technology (2019 - present)
+- Referee for journals including Nature Physics, Physical Review Letters, Physical Review X, Physical Review B, etc.
