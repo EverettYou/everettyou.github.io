@@ -1,4 +1,4 @@
-# PHYS 2C Course Notes
+# PHYS 2C Lecture Notes
 
 Welcome to the course notes for Fluids, Waves, Thermodynamics, and Optics.
 

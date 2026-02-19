@@ -1,6 +1,4 @@
-# Build Jekyll and deploy by pushing _site to the gh-pages branch.
-# Pages then serves from that branch (no "GitHub Actions" source needed).
-# After first run: Settings → Pages → Source: "Deploy from a branch" → Branch: gh-pages, Folder: / (root).
+# Build Jekyll and push _site to gh-pages. Set Settings → Pages → Source: Deploy from branch → gh-pages.
 name: Jekyll build and deploy
 
 on:
@@ -9,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # push built site to gh-pages
+  contents: write
   pages: write
   id-token: write
 
@@ -28,6 +26,9 @@ jobs:
 
       - name: Build with Jekyll
         run: bundle exec jekyll build
+
+      - name: Add .nojekyll for static serving
+        run: touch _site/.nojekyll
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
