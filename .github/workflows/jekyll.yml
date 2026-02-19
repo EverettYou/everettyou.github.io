@@ -1,8 +1,6 @@
-# Build Jekyll site and deploy to GitHub Pages.
-# If deploy fails with 404 / "Ensure GitHub Pages has been enabled":
-#   1. Go to: https://github.com/EverettYou/everettyou.github.io/settings/pages
-#   2. Under "Build and deployment" → "Source", choose "GitHub Actions" (not "Deploy from a branch").
-#   3. Save, then re-run this workflow.
+# Build Jekyll and deploy by pushing _site to the gh-pages branch.
+# Pages then serves from that branch (no "GitHub Actions" source needed).
+# After first run: Settings → Pages → Source: "Deploy from a branch" → Branch: gh-pages, Folder: / (root).
 name: Jekyll build and deploy
 
 on:
@@ -11,16 +9,12 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # push built site to gh-pages
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,25 +29,9 @@ jobs:
       - name: Build with Jekyll
         run: bundle exec jekyll build
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./_site
-
-  deploy:
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
