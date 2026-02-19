@@ -1,5 +1,8 @@
 # Build Jekyll site and deploy to GitHub Pages.
-# The site must be built first; deploying the repo root would show raw "--- layout: home ---".
+# If deploy fails with 404 / "Ensure GitHub Pages has been enabled":
+#   1. Go to: https://github.com/EverettYou/everettyou.github.io/settings/pages
+#   2. Under "Build and deployment" → "Source", choose "GitHub Actions" (not "Deploy from a branch").
+#   3. Save, then re-run this workflow.
 name: Jekyll build and deploy
 
 on:
@@ -42,6 +45,9 @@ jobs:
           path: ./_site
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
