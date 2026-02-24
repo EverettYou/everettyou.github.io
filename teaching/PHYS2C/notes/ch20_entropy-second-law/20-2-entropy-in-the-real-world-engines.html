@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch20_entropy-second-law/20-2-entropy-in-the-real-world-engines';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch20_entropy-second-law/20-2-entropy-in-the-real-world-engines.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-heat-engines">Overview: Heat engines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-engine-and-efficiency">Heat engine and efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carnot-engine">Carnot engine</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-and-engines">Entropy and engines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,34 +572,88 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="entropy-in-the-real-world-engines">
 <h1>20-2 Entropy in the Real World: Engines<a class="headerlink" href="#entropy-in-the-real-world-engines" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>20.01</strong> Identify the second law of thermodynamics: If a process occurs in a closed system, the entropy of the system increases for irreversible processes and remains constant for reversible processes; it never decreases.</p></li>
-<li><p><strong>20.02</strong> Identify that entropy is a state function (the value for a particular state of the system does not depend on how that state is reached).</p></li>
-<li><p><strong>20.03</strong> Calculate the change in entropy for a process by integrating the inverse of the temperature (in kelvins) with respect to the heat <em>Q</em> transferred during the process.</p></li>
-<li><p><strong>20.04</strong> For a phase change with a constant temperature process, apply the relationship between the entropy change � <em>S</em> , the total transferred heat <em>Q</em> , and the temperature <em>T</em> (in kelvins).</p></li>
-<li><p><strong>20.05</strong> For a temperature change � <em>T</em> that is small relative to the temperature <em>T</em> , apply the relationship between the entropy change � <em>S</em> , the transferred heat <em>Q</em> , and the average temperature <em>T</em> avg (in kelvins).</p></li>
-<li><p><strong>20.06</strong> For an ideal gas, apply the relationship between the entropy change � <em>S</em> and the initial and final values of the pressure and volume.</p></li>
-<li><p><strong>20.07</strong> Identify that if a process is an irreversible one, the integration for the entropy change must be done for a reversible process that takes the system between the same initial and final states as the irreversible process.</p></li>
-<li><p><strong>20.08</strong> For stretched rubber, relate the elastic force to the rate at which the rubber’s entropy changes with the change in the stretching distance.</p></li>
+<li><p>What is a heat engine? Write the first-law relation between <span class="math notranslate nohighlight">\(Q_H\)</span>, <span class="math notranslate nohighlight">\(Q_C\)</span>, and <span class="math notranslate nohighlight">\(W\)</span> for one cycle.</p></li>
+<li><p>Define thermal efficiency <span class="math notranslate nohighlight">\(\varepsilon\)</span>. Why can no engine have <span class="math notranslate nohighlight">\(\varepsilon = 1\)</span>?</p></li>
+<li><p>What is a Carnot engine? Write the Carnot efficiency <span class="math notranslate nohighlight">\(\varepsilon_C\)</span> in terms of <span class="math notranslate nohighlight">\(T_H\)</span> and <span class="math notranslate nohighlight">\(T_C\)</span>.</p></li>
+<li><p>For a Carnot engine, how does <span class="math notranslate nohighlight">\(Q_C/Q_H\)</span> relate to <span class="math notranslate nohighlight">\(T_C/T_H\)</span>? What is the total entropy change of the reservoirs per cycle?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-heat-engines">
+<h3>Overview: Heat engines<a class="headerlink" href="#overview-heat-engines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>heat engine</strong> converts thermal energy into mechanical work by operating in a cycle: absorbs heat <span class="math notranslate nohighlight">\(Q_H\)</span> from a hot reservoir, does work <span class="math notranslate nohighlight">\(W\)</span>, rejects heat <span class="math notranslate nohighlight">\(Q_C\)</span> to a cold reservoir.</p></li>
+<li><p><strong>Thermal efficiency</strong> <span class="math notranslate nohighlight">\(\varepsilon = W/Q_H = 1 - Q_C/Q_H\)</span>; always <span class="math notranslate nohighlight">\(&lt; 1\)</span> (second law).</p></li>
+<li><p>The <strong>Carnot engine</strong> (reversible) achieves the <strong>maximum</strong> efficiency between two temperatures: <span class="math notranslate nohighlight">\(\varepsilon_C = 1 - T_C/T_H\)</span>.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● An irreversible process is one that cannot be reversed by means of small changes in the environment. The direction in which an irreversible process proceeds is set by the change in entropy � <em>S</em> of the system undergoing the process. Entropy <em>S</em> is a state property (or state function) of the system; that is, it depends only on the state of the system and not on the way in which the system reached that state. The entropy postulate states (in part): If an irreversible process occurs in a closed system, the entropy of the system always increases.</p>
-<p>● The entropy change � <em>S</em> for an irreversible process that takes a system from an initial state <em>i</em> to a final state <em>f</em> is exactly equal to the entropy change � <em>S</em> for any reversible process that takes the system between those same two states. We can compute the latter (but not the former) with</p>
-<p>Here <em>Q</em> is the energy transferred as heat to or from the system during the process, and <em>T</em> is the temperature of the system in kelvins during the process.</p>
-<p>● For a reversible isothermal process, the expression for an entropy change reduces to</p>
-<p>� <em>S</em> � <em>Sf</em> � <em>Si</em> � <em>[Q] T</em>[.] ● When the temperature change � <em>T</em> of a system is small relative to the temperature (in kelvins) before and after the process, the entropy change can be approximated as</p>
-<p>where <em>T</em> avg is the system’s average temperature during the process.</p>
-<p>● When an ideal gas changes reversibly from an initial state with temperature <em>Ti</em> and volume <em>Vi</em> to a final state with temperature <em>Tf</em> and volume <em>Vf</em> , the change � <em>S</em> in the entropy of the gas is</p>
-<p>� <em>S</em> � <em>Sf</em> � <em>Si</em> � <em>nR</em> ln <em>[V] V[f] i</em> � <em>nCV</em> ln <em>T[T] i[f]</em> . ● The second law of thermodynamics, which is an extension of the entropy postulate, states: If a process occurs in a closed system, the entropy of the system increases for irreversible processes and remains constant for reversible processes. It never decreases. In equation form,</p>
-<p>� <em>S</em> � 0.</p>
-<p><strong>583</strong>
-CHAPTER 20</p>
-<p>ENTROPY AND THE SECOND LAW OF THERMODYNAMICS</p>
+<hr class="docutils" />
+<section id="heat-engine-and-efficiency">
+<h3>Heat engine and efficiency<a class="headerlink" href="#heat-engine-and-efficiency" title="Link to this heading">#</a></h3>
+<p><strong>First law</strong> (one cycle; <span class="math notranslate nohighlight">\(\Delta E_{\text{int}} = 0\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-engine-first-law">
+<span class="eqno">(185)<a class="headerlink" href="#equation-eq-engine-first-law" title="Link to this equation">#</a></span>\[
+Q_H = W + Q_C \quad \Rightarrow \quad W = Q_H - Q_C
+\]</div>
+<p><strong>Thermal efficiency:</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-efficiency">
+<span class="eqno">(186)<a class="headerlink" href="#equation-eq-efficiency" title="Link to this equation">#</a></span>\[
+\varepsilon = \frac{W}{Q_H} = 1 - \frac{Q_C}{Q_H}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\varepsilon = 1\)</span> would require <span class="math notranslate nohighlight">\(Q_C = 0\)</span>—no heat rejected. The <strong>second law</strong> forbids this: heat cannot be fully converted to work in a cyclic process.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="carnot-engine">
+<h3>Carnot engine<a class="headerlink" href="#carnot-engine" title="Link to this heading">#</a></h3>
+<p>A <strong>Carnot engine</strong> uses only <strong>reversible</strong> processes. Its cycle: isothermal expansion at <span class="math notranslate nohighlight">\(T_H\)</span> → adiabatic expansion → isothermal compression at <span class="math notranslate nohighlight">\(T_C\)</span> → adiabatic compression.</p>
+<p><strong>Carnot relations:</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-carnot">
+<span class="eqno">(187)<a class="headerlink" href="#equation-eq-carnot" title="Link to this equation">#</a></span>\[
+\frac{Q_C}{Q_H} = \frac{T_C}{T_H} \quad \Rightarrow \quad \varepsilon_C = 1 - \frac{T_C}{T_H}
+\]</div>
+<ul class="simple">
+<li><p>Efficiency depends only on <strong>reservoir temperatures</strong>, not on the working substance.</p></li>
+<li><p><strong>Higher <span class="math notranslate nohighlight">\(T_H\)</span> and lower <span class="math notranslate nohighlight">\(T_C\)</span></strong> → higher efficiency.</p></li>
+<li><p><strong>100% efficiency</strong> would require <span class="math notranslate nohighlight">\(T_C = 0\)</span> K (unattainable).</p></li>
+<li><p>Real engines are <strong>less efficient</strong> than Carnot engines (irreversibilities: friction, heat loss).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="entropy-and-engines">
+<h3>Entropy and engines<a class="headerlink" href="#entropy-and-engines" title="Link to this heading">#</a></h3>
+<p>For a <strong>reversible</strong> (Carnot) engine per cycle:</p>
+<ul class="simple">
+<li><p>Hot reservoir: <span class="math notranslate nohighlight">\(\Delta S_H = -Q_H/T_H\)</span> (loses heat).</p></li>
+<li><p>Cold reservoir: <span class="math notranslate nohighlight">\(\Delta S_C = +Q_C/T_C\)</span> (gains heat).</p></li>
+<li><p>With <span class="math notranslate nohighlight">\(Q_C/Q_H = T_C/T_H\)</span>: <span class="math notranslate nohighlight">\(\Delta S_{\text{total}} = -Q_H/T_H + Q_C/T_C = 0\)</span>.</p></li>
+</ul>
+<p>For an <strong>irreversible</strong> engine: <span class="math notranslate nohighlight">\(\Delta S_{\text{total}} &gt; 0\)</span> (second law).</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Checkpoint: Efficiency</p>
+<p>A Carnot engine operates between 400 K and 300 K. Its efficiency is:</p>
+<ul class="simple">
+<li><p>(A) 25%</p></li>
+<li><p>(B) 75%</p></li>
+<li><p>(C) 100%</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(W = Q_H - Q_C\)</span></strong>; <strong><span class="math notranslate nohighlight">\(\varepsilon = 1 - Q_C/Q_H\)</span></strong>.</p></li>
+<li><p><strong>Carnot</strong>: <span class="math notranslate nohighlight">\(\varepsilon_C = 1 - T_C/T_H\)</span> (maximum efficiency).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(Q_C/Q_H = T_C/T_H\)</span></strong> for Carnot.</p></li>
+<li><p>Reversible cycle: <span class="math notranslate nohighlight">\(\Delta S_{\text{total}} = 0\)</span>; irreversible: <span class="math notranslate nohighlight">\(\Delta S_{\text{total}} &gt; 0\)</span>.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -659,8 +721,14 @@ CHAPTER 20</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-heat-engines">Overview: Heat engines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-engine-and-efficiency">Heat engine and efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carnot-engine">Carnot engine</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-and-engines">Entropy and engines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

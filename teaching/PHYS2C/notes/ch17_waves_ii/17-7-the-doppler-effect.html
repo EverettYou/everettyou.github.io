@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch17_waves_ii/17-7-the-doppler-effect';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch17_waves_ii/17-7-the-doppler-effect.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-the-doppler-effect">Overview: The Doppler effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-doppler-formula">General Doppler formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detector-moving-source-stationary">Detector moving, source stationary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-moving-detector-stationary">Source moving, detector stationary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#both-source-and-detector-moving">Both source and detector moving</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,29 +573,133 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-doppler-effect">
 <h1>17-7 The Doppler Effect<a class="headerlink" href="#the-doppler-effect" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>17.31</strong> Identify that the Doppler effect is the shift in the detected frequency from the frequency emitted by a sound source due to the relative motion between the source and the detector.</p></li>
-<li><p><strong>17.32</strong> Identify that in calculating the Doppler shift in sound, the speeds are measured relative to the medium (such as air or water), which may be moving.</p></li>
-<li><p><strong>17.33</strong> Calculate the shift in sound frequency for (a) a source</p></li>
+<li><p>What is the Doppler effect? Does motion toward the other object increase or decrease the detected frequency?</p></li>
+<li><p>Write the general Doppler formula <span class="math notranslate nohighlight">\(f' = f \frac{v \pm v_D}{v \mp v_S}\)</span>. What do <span class="math notranslate nohighlight">\(v\)</span>, <span class="math notranslate nohighlight">\(v_D\)</span>, and <span class="math notranslate nohighlight">\(v_S\)</span> mean? How do you choose the <span class="math notranslate nohighlight">\(\pm\)</span> signs?</p></li>
+<li><p>A car horn (source) moves toward you (stationary detector). Does the wavelength in front of the car increase or decrease? What happens to <span class="math notranslate nohighlight">\(f'\)</span>?</p></li>
+<li><p>You (detector) run toward a stationary siren. Does <span class="math notranslate nohighlight">\(f'\)</span> increase or decrease? Write the formula for this case.</p></li>
+<li><p>Speeds in the Doppler formula are measured relative to what? Why does the medium matter for sound?</p></li>
 </ul>
-<p>moving either directly toward or away from a stationary detector, (b) a detector moving either directly toward or away from a stationary source, and (c) both source and detector moving either directly toward each other or directly away from each other.</p>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-the-doppler-effect">
+<h3>Overview: The Doppler effect<a class="headerlink" href="#overview-the-doppler-effect" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>17.34</strong> Identify that for relative motion between a sound source and a sound detector, motion <em>toward</em> tends to shift the frequency up and motion <em>away</em> tends to shift it down.</p></li>
+<li><p>The <strong>Doppler effect</strong> is the change in the <strong>detected frequency</strong> <span class="math notranslate nohighlight">\(f'\)</span> when the source or detector moves relative to the <strong>medium</strong> (e.g., air).</p></li>
+<li><p><strong>Motion toward</strong> the other object → <span class="math notranslate nohighlight">\(f' &gt; f\)</span> (higher pitch).</p></li>
+<li><p><strong>Motion away</strong> → <span class="math notranslate nohighlight">\(f' &lt; f\)</span> (lower pitch).</p></li>
+<li><p>Speeds are measured <strong>relative to the medium</strong>, not the ground.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● The Doppler effect is a change in the observed frequency of a wave when the source or the detector moves relative to the transmitting medium (such as air). For sound the observed frequency <em>f</em> � is given in terms of the source frequency <em>f</em> by</p>
-<p>(general Doppler effect),</p>
-<p>where <em>vD</em> is the speed of the detector relative to the medium, <em>vS</em> is that of the source, and <em>v</em> is the speed of sound in the medium.</p>
+<hr class="docutils" />
+<section id="general-doppler-formula">
+<h3>General Doppler formula<a class="headerlink" href="#general-doppler-formula" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-general">
+<span class="eqno">(125)<a class="headerlink" href="#equation-eq-doppler-general" title="Link to this equation">#</a></span>\[
+f' = f\,\frac{v \pm v_D}{v \mp v_S}
+\]</div>
 <ul class="simple">
-<li><p>The signs are chosen such that <em>f</em> � tends to be <em>greater</em> for</p></li>
-<li><p>relative motion toward (one of the objects moves toward the other) and <em>less</em> for motion away.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(v\)</span></strong>: speed of sound in the medium.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(v_D\)</span></strong>: speed of the detector relative to the medium.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(v_S\)</span></strong>: speed of the source relative to the medium.</p></li>
 </ul>
-<p><em>f</em> �� <em>f[v]</em>[ �] <em>[v][D] v</em> � <em>vS</em></p>
+<p><strong>Sign rule:</strong> Choose signs so that <strong>motion toward</strong> increases <span class="math notranslate nohighlight">\(f'\)</span> and <strong>motion away</strong> decreases <span class="math notranslate nohighlight">\(f'\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Who moves</p></th>
+<th class="head"><p>Direction</p></th>
+<th class="head"><p>Effect on <span class="math notranslate nohighlight">\(f'\)</span></p></th>
+<th class="head"><p>Sign</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Detector</p></td>
+<td><p>Toward source</p></td>
+<td><p><span class="math notranslate nohighlight">\(f' &gt; f\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+v_D\)</span> in numerator</p></td>
+</tr>
+<tr class="row-odd"><td><p>Detector</p></td>
+<td><p>Away from source</p></td>
+<td><p><span class="math notranslate nohighlight">\(f' &lt; f\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-v_D\)</span> in numerator</p></td>
+</tr>
+<tr class="row-even"><td><p>Source</p></td>
+<td><p>Toward detector</p></td>
+<td><p><span class="math notranslate nohighlight">\(f' &gt; f\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-v_S\)</span> in denominator</p></td>
+</tr>
+<tr class="row-odd"><td><p>Source</p></td>
+<td><p>Away from detector</p></td>
+<td><p><span class="math notranslate nohighlight">\(f' &lt; f\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+v_S\)</span> in denominator</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="detector-moving-source-stationary">
+<h3>Detector moving, source stationary<a class="headerlink" href="#detector-moving-source-stationary" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-detector">
+<span class="eqno">(126)<a class="headerlink" href="#equation-eq-doppler-detector" title="Link to this equation">#</a></span>\[
+f' = f\,\frac{v \pm v_D}{v}
+\]</div>
+<ul class="simple">
+<li><p><strong>Toward</strong> source: <span class="math notranslate nohighlight">\(f' = f(v + v_D)/v\)</span> → <span class="math notranslate nohighlight">\(f' &gt; f\)</span>.</p></li>
+<li><p><strong>Away</strong> from source: <span class="math notranslate nohighlight">\(f' = f(v - v_D)/v\)</span> → <span class="math notranslate nohighlight">\(f' &lt; f\)</span>.</p></li>
+</ul>
+<p><strong>Physical picture:</strong> A detector moving toward the source intercepts wavefronts more often → higher frequency.</p>
+</section>
+<hr class="docutils" />
+<section id="source-moving-detector-stationary">
+<h3>Source moving, detector stationary<a class="headerlink" href="#source-moving-detector-stationary" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-source">
+<span class="eqno">(127)<a class="headerlink" href="#equation-eq-doppler-source" title="Link to this equation">#</a></span>\[
+f' = f\,\frac{v}{v \mp v_S}
+\]</div>
+<ul class="simple">
+<li><p><strong>Toward</strong> detector: <span class="math notranslate nohighlight">\(f' = f\,v/(v - v_S)\)</span> → <span class="math notranslate nohighlight">\(f' &gt; f\)</span> (wavefronts compressed in front).</p></li>
+<li><p><strong>Away</strong> from detector: <span class="math notranslate nohighlight">\(f' = f\,v/(v + v_S)\)</span> → <span class="math notranslate nohighlight">\(f' &lt; f\)</span> (wavefronts stretched behind).</p></li>
+</ul>
+<p><strong>Physical picture:</strong> A source moving toward the detector bunches wavefronts in front → shorter <span class="math notranslate nohighlight">\(\lambda'\)</span> → higher <span class="math notranslate nohighlight">\(f'\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Symmetry?</p>
+<p>Detector moving and source moving give <strong>different</strong> formulas for the same relative speed. The asymmetry arises because the medium is the reference frame—the source alters the wavelength in the medium; the detector does not.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="both-source-and-detector-moving">
+<h3>Both source and detector moving<a class="headerlink" href="#both-source-and-detector-moving" title="Link to this heading">#</a></h3>
+<p>Use the general formula and apply the sign rule to each:</p>
+<ul class="simple">
+<li><p>Detector toward source → <span class="math notranslate nohighlight">\(+v_D\)</span>.</p></li>
+<li><p>Detector away → <span class="math notranslate nohighlight">\(-v_D\)</span>.</p></li>
+<li><p>Source toward detector → <span class="math notranslate nohighlight">\(-v_S\)</span>.</p></li>
+<li><p>Source away → <span class="math notranslate nohighlight">\(+v_S\)</span>.</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Checkpoint: Doppler shift</p>
+<p>A train whistle (source) moves away from you (stationary detector). The detected frequency <span class="math notranslate nohighlight">\(f'\)</span> is:</p>
+<ul class="simple">
+<li><p>(A) Greater than the emitted frequency <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p>(B) Less than <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p>(C) Equal to <span class="math notranslate nohighlight">\(f\)</span></p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(f' = f\,\frac{v \pm v_D}{v \mp v_S}\)</span></strong>—general Doppler formula for sound.</p></li>
+<li><p><strong>Toward</strong> → higher <span class="math notranslate nohighlight">\(f'\)</span>; <strong>away</strong> → lower <span class="math notranslate nohighlight">\(f'\)</span>.</p></li>
+<li><p>Speeds relative to <strong>medium</strong> (air).</p></li>
+<li><p>Assumes motion along the line joining source and detector; <span class="math notranslate nohighlight">\(v_S &lt; v\)</span> (see section 17-8 for supersonic).</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -654,8 +767,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-the-doppler-effect">Overview: The Doppler effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-doppler-formula">General Doppler formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detector-moving-source-stationary">Detector moving, source stationary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-moving-detector-stationary">Source moving, detector stationary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#both-source-and-detector-moving">Both source and detector moving</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

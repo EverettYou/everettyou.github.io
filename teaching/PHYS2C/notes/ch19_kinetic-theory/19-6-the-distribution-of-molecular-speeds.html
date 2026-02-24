@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch19_kinetic-theory/19-6-the-distribution-of-molecular-speeds';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch19_kinetic-theory/19-6-the-distribution-of-molecular-speeds.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-the-distribution-of-molecular-speeds">Overview: The distribution of molecular speeds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-speed-distribution">Maxwell speed distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-characteristic-speeds">Three characteristic speeds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-high-speed-tail">The high-speed tail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,32 +572,94 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-distribution-of-molecular-speeds">
 <h1>19-6 The Distribution of Molecular Speeds<a class="headerlink" href="#the-distribution-of-molecular-speeds" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>19.24</strong> Explain how Maxwell’s speed distribution law is used to find the fraction of molecules with speeds in a certain speed range.</p></li>
-<li><p><strong>19.25</strong> Sketch a graph of Maxwell’s speed distribution, showing the probability distribution versus speed and indicating the relative positions of the average speed <em>v</em> avg, the most probable speed <em>vP</em> , and the rms speed <em>v</em> rms.</p></li>
-<li><p><strong>19.26</strong> Explain how Maxwell’s speed distribution is used to find the average speed, the rms speed, and the most probable speed.</p></li>
-<li><p><strong>19.27</strong> For a given temperature <em>T</em> and molar mass <em>M</em> , calculate the average speed <em>v</em> avg, the most probable speed <em>vP</em> , and the rms speed <em>v</em> rms.</p></li>
+<li><p>What does <span class="math notranslate nohighlight">\(P(v)\,dv\)</span> represent in the Maxwell speed distribution? How do you find the fraction of molecules with speeds between <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span>?</p></li>
+<li><p>Write formulas for <span class="math notranslate nohighlight">\(v_P\)</span>, <span class="math notranslate nohighlight">\(v_{\text{avg}}\)</span>, and <span class="math notranslate nohighlight">\(v_{\text{rms}}\)</span>. Which is largest? Why?</p></li>
+<li><p>Sketch <span class="math notranslate nohighlight">\(P(v)\)</span> vs <span class="math notranslate nohighlight">\(v\)</span>. Where do <span class="math notranslate nohighlight">\(v_P\)</span>, <span class="math notranslate nohighlight">\(v_{\text{avg}}\)</span>, and <span class="math notranslate nohighlight">\(v_{\text{rms}}\)</span> lie on the curve?</p></li>
+<li><p>Why does evaporation depend on the high-speed tail of the distribution? What about nuclear fusion in the Sun?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-the-distribution-of-molecular-speeds">
+<h3>Overview: The distribution of molecular speeds<a class="headerlink" href="#overview-the-distribution-of-molecular-speeds" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Molecules in a gas have a <strong>range of speeds</strong>—they are not all moving at <span class="math notranslate nohighlight">\(v_{\text{rms}}\)</span>.</p></li>
+<li><p>The <strong>Maxwell speed distribution</strong> <span class="math notranslate nohighlight">\(P(v)\)</span> gives the probability density: <span class="math notranslate nohighlight">\(P(v)\,dv\)</span> = fraction of molecules with speeds in <span class="math notranslate nohighlight">\(dv\)</span> at speed <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
+<li><p>Three characteristic speeds: <strong>most probable</strong> <span class="math notranslate nohighlight">\(v_P\)</span>, <strong>average</strong> <span class="math notranslate nohighlight">\(v_{\text{avg}}\)</span>, <strong>rms</strong> <span class="math notranslate nohighlight">\(v_{\text{rms}}\)</span>, with <span class="math notranslate nohighlight">\(v_P &lt; v_{\text{avg}} &lt; v_{\text{rms}}\)</span>.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="maxwell-speed-distribution">
+<h3>Maxwell speed distribution<a class="headerlink" href="#maxwell-speed-distribution" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(P(v)\)</span> is a probability distribution; the fraction of molecules with speeds between <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-fraction">
+<span class="eqno">(169)<a class="headerlink" href="#equation-eq-fraction" title="Link to this equation">#</a></span>\[
+\text{fraction} = \int_{v_1}^{v_2} P(v)\,dv
+\]</div>
 <ul class="simple">
-<li><p>The Maxwell speed distribution <em>P</em> ( <em>v</em> ) is a function such that</p></li>
-<li><p><em>P</em> ( <em>v</em> ) <em>dv</em> gives the fraction of molecules with speeds in the interval <em>dv</em> at speed <em>v</em> :</p></li>
-<li><p>Three measures of the distribution of speeds among the</p></li>
-<li><p>molecules of a gas are</p></li>
+<li><p>The total area under <span class="math notranslate nohighlight">\(P(v)\)</span> is 1.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(v)\)</span> depends on temperature <span class="math notranslate nohighlight">\(T\)</span> and molar mass <span class="math notranslate nohighlight">\(M\)</span>: at lower <span class="math notranslate nohighlight">\(T\)</span>, the distribution narrows and shifts to lower speeds.</p></li>
 </ul>
+</section>
+<hr class="docutils" />
+<section id="three-characteristic-speeds">
+<h3>Three characteristic speeds<a class="headerlink" href="#three-characteristic-speeds" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>and<br>_v_rms �~~A~~<br><em>vP</em> �~~A~~<br>_v_avg �~~A~~</p></th>
-<th class="head"><p>(average speed),<br>(most probable speed),<br>(rms speed).<br><br>3_RT_<br><em>M</em><br><br>2_RT_<br><em>M</em><br><br>8_RT_<br>p_M_</p></th>
+<tr class="row-odd"><th class="head"><p>Speed</p></th>
+<th class="head"><p>Formula</p></th>
 </tr>
 </thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Most probable</strong> <span class="math notranslate nohighlight">\(v_P\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(v_P = \sqrt{\dfrac{2RT}{M}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Average</strong> <span class="math notranslate nohighlight">\(v_{\text{avg}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(v_{\text{avg}} = \sqrt{\dfrac{8RT}{\pi M}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>RMS</strong> <span class="math notranslate nohighlight">\(v_{\text{rms}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(v_{\text{rms}} = \sqrt{\dfrac{3RT}{M}}\)</span></p></td>
+</tr>
+</tbody>
 </table>
 </div>
+<p><strong>Order on the <span class="math notranslate nohighlight">\(P(v)\)</span> curve:</strong> <span class="math notranslate nohighlight">\(v_P\)</span> is at the <strong>peak</strong>; <span class="math notranslate nohighlight">\(v_{\text{avg}}\)</span> is to the right (average pulled by high-speed tail); <span class="math notranslate nohighlight">\(v_{\text{rms}}\)</span> is farthest right (squaring emphasizes high speeds).</p>
+<div class="math notranslate nohighlight" id="equation-eq-speed-order">
+<span class="eqno">(170)<a class="headerlink" href="#equation-eq-speed-order" title="Link to this equation">#</a></span>\[
+v_P &lt; v_{\text{avg}} &lt; v_{\text{rms}}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="the-high-speed-tail">
+<h3>The high-speed tail<a class="headerlink" href="#the-high-speed-tail" title="Link to this heading">#</a></h3>
+<p>A small fraction of molecules have speeds <strong>much larger</strong> than <span class="math notranslate nohighlight">\(v_P\)</span>. This tail is important for:</p>
+<ul class="simple">
+<li><p><strong>Evaporation</strong>: Molecules in the high-speed tail have enough energy to escape the liquid surface.</p></li>
+<li><p><strong>Nuclear fusion</strong>: In the Sun, protons in the high-speed tail can overcome Coulomb repulsion and fuse; typical speeds are too low.</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Checkpoint: Distribution</p>
+<p>When you raise the temperature of a gas, the Maxwell distribution <span class="math notranslate nohighlight">\(P(v)\)</span>:</p>
+<ul class="simple">
+<li><p>(A) Shifts to higher speeds and narrows</p></li>
+<li><p>(B) Shifts to higher speeds and broadens</p></li>
+<li><p>(C) Stays the same</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(P(v)\,dv\)</span></strong> = fraction of molecules with speeds in <span class="math notranslate nohighlight">\(dv\)</span> at <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(v_P &lt; v_{\text{avg}} &lt; v_{\text{rms}}\)</span></strong>; all <span class="math notranslate nohighlight">\(\propto \sqrt{T/M}\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(v_P = \sqrt{2RT/M}\)</span></strong>, <strong><span class="math notranslate nohighlight">\(v_{\text{avg}} = \sqrt{8RT/(\pi M)}\)</span></strong>, <strong><span class="math notranslate nohighlight">\(v_{\text{rms}} = \sqrt{3RT/M}\)</span></strong>.</p></li>
+<li><p>High-speed tail: evaporation, fusion.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -657,8 +727,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-the-distribution-of-molecular-speeds">Overview: The distribution of molecular speeds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-speed-distribution">Maxwell speed distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-characteristic-speeds">Three characteristic speeds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-high-speed-tail">The high-speed tail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

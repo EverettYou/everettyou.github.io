@@ -28,7 +28,7 @@ def split_textbook_pdf(
 ) -> str:
     """
     Extract a page range from the textbook PDF and save to a named file.
-    Source: textbook.pdf. Output saved in _textbooks/ (working directory).
+    Source: textbook.pdf. Output saved in _references/ (working directory).
 
     Args:
         start_page: First page (1-indexed, inclusive).
@@ -91,7 +91,7 @@ def extract_figure_tool(
     Args:
         pdf_path: Path to PDF file.
         figure_label: Figure numbering only, e.g. "14-1", "4-19".
-        output_dir: Where to save. Default: _textbooks/figs.
+        output_dir: Where to save. Default: _references/figs.
         include_caption: If True, return caption text.
 
     Returns:
@@ -117,7 +117,7 @@ def collect_all_figures_tool(
 
     Args:
         pdf_path: Path to PDF file.
-        output_dir: Where to save. Default: _textbooks/figs.
+        output_dir: Where to save. Default: _references/figs.
         extract_figures: If True, extract each figure. Default False.
 
     Returns:
@@ -145,7 +145,7 @@ def extract_section_tool(
     Args:
         chapter_pdf_path: Path to chapter PDF (e.g. ch14_fluids.pdf).
         section_title: Section title or number (e.g. "14-1" or "14-1 FLUIDS, DENSITY, AND PRESSURE").
-        forematter_path: Path to forematter.pdf. Default: _textbooks/forematter.pdf.
+        forematter_path: Path to forematter.pdf. Default: _references/forematter.pdf.
         output_markdown: If True, return markdown text.
         extract_images: If True, extract images.
 

@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch15_oscillations/15-3-an-angular-simple-harmonic-oscillator';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch15_oscillations/15-3-an-angular-simple-harmonic-oscillator.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-angular-shm">Overview: Angular SHM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-torsion-pendulum">The torsion pendulum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#period-and-angular-frequency">Period and angular frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-torsion-pendulums">Comparing two torsion pendulums</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +572,127 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="an-angular-simple-harmonic-oscillator">
 <h1>15-3 An Angular Simple Harmonic Oscillator<a class="headerlink" href="#an-angular-simple-harmonic-oscillator" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is a torsion pendulum? Where does the “springiness” come from, and what provides the inertia?</p></li>
+<li><p>Write the angular analog of Hooke’s law. How does the restoring torque <span class="math notranslate nohighlight">\(\tau\)</span> depend on angular displacement <span class="math notranslate nohighlight">\(\theta\)</span>?</p></li>
+<li><p>For an angular SHM oscillator, how does the period <span class="math notranslate nohighlight">\(T\)</span> depend on rotational inertia <span class="math notranslate nohighlight">\(I\)</span> and torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span>? Compare with the linear spring–block case.</p></li>
+<li><p>Two objects hang from the same torsion wire. Object A has period 2.5 s; object B has period 4.8 s. Which has the larger rotational inertia? By what factor?</p></li>
+<li><p>The angular acceleration <span class="math notranslate nohighlight">\(\alpha\)</span> in angular SHM satisfies <span class="math notranslate nohighlight">\(\alpha = -\omega^2 \theta\)</span>. How do you derive this from <span class="math notranslate nohighlight">\(\tau = I\alpha\)</span> and the restoring torque?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-angular-shm">
+<h3>Overview: Angular SHM<a class="headerlink" href="#overview-angular-shm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>torsion pendulum</strong> is the angular analog of a spring–block oscillator: a disk or object suspended by a wire that twists.</p></li>
+<li><p><strong>Springiness</strong> comes from the wire’s resistance to twisting; <strong>inertia</strong> comes from the object’s rotational inertia <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+<li><p>The same SHM structure applies: restoring torque <span class="math notranslate nohighlight">\(\tau \propto -\theta\)</span>, with period <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span>.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Linear</p></th>
+<th class="head"><p>Angular</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Displacement <span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td><p>Angular displacement <span class="math notranslate nohighlight">\(\theta\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Force <span class="math notranslate nohighlight">\(F = -kx\)</span></p></td>
+<td><p>Torque <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mass <span class="math notranslate nohighlight">\(m\)</span></p></td>
+<td><p>Rotational inertia <span class="math notranslate nohighlight">\(I\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Spring constant <span class="math notranslate nohighlight">\(k\)</span></p></td>
+<td><p>Torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{m/k}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="the-torsion-pendulum">
+<h3>The torsion pendulum<a class="headerlink" href="#the-torsion-pendulum" title="Link to this heading">#</a></h3>
+<p>A <strong>torsion pendulum</strong> consists of an object (e.g., a disk) suspended from a wire. When the wire is twisted and released, the object oscillates in angular simple harmonic motion.</p>
+<ul class="simple">
+<li><p><strong>Restoring torque</strong>: twisting the wire produces a torque that opposes the displacement:</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-torsion-torque">
+<span class="eqno">(55)<a class="headerlink" href="#equation-eq-torsion-torque" title="Link to this equation">#</a></span>\[
+\tau = -\kappa\theta
+\]</div>
+<ul class="simple">
+<li><p><strong>κ (kappa)</strong> is the <strong>torsion constant</strong>—a property of the wire (length, diameter, material). It plays the analog of the spring constant <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Angular form of Hooke’s law</p>
+<p>Just as <span class="math notranslate nohighlight">\(F = -kx\)</span> gives restoring force proportional to displacement, <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span> gives restoring torque proportional to angular displacement. Both are linear (first power) restoring laws.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="period-and-angular-frequency">
+<h3>Period and angular frequency<a class="headerlink" href="#period-and-angular-frequency" title="Link to this heading">#</a></h3>
+<p>From <span class="math notranslate nohighlight">\(\tau = I\alpha\)</span> (Newton’s second law for rotation) and <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-alpha-theta">
+<span class="eqno">(56)<a class="headerlink" href="#equation-eq-alpha-theta" title="Link to this equation">#</a></span>\[
+I\alpha = -\kappa\theta \quad \Rightarrow \quad \alpha = -\frac{\kappa}{I} \theta
+\]</div>
+<p>Comparing with the hallmark of SHM, <span class="math notranslate nohighlight">\(\alpha = -\omega^2\theta\)</span>, we identify:</p>
+<div class="math notranslate nohighlight" id="equation-eq-omega-torsion">
+<span class="eqno">(57)<a class="headerlink" href="#equation-eq-omega-torsion" title="Link to this equation">#</a></span>\[
+\omega = \sqrt{\frac{\kappa}{I}}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-period-torsion">
+<span class="eqno">(58)<a class="headerlink" href="#equation-eq-period-torsion" title="Link to this equation">#</a></span>\[
+T = 2\pi\sqrt{\frac{I}{\kappa}}
+\]</div>
+<ul class="simple">
+<li><p><strong>Larger inertia</strong> <span class="math notranslate nohighlight">\(I\)</span> → longer period (slower oscillations).</p></li>
+<li><p><strong>Stiffer wire</strong> (larger <span class="math notranslate nohighlight">\(\kappa\)</span>) → shorter period (faster oscillations).</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span> depends only on the wire. If two different objects hang from the <strong>same wire</strong>, <span class="math notranslate nohighlight">\(\kappa\)</span> is the same; only <span class="math notranslate nohighlight">\(I\)</span> differs. So <span class="math notranslate nohighlight">\(T \propto \sqrt{I}\)</span>—measuring periods lets you compare rotational inertias.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="comparing-two-torsion-pendulums">
+<h3>Comparing two torsion pendulums<a class="headerlink" href="#comparing-two-torsion-pendulums" title="Link to this heading">#</a></h3>
+<p>Same wire (same <span class="math notranslate nohighlight">\(\kappa\)</span>), different objects <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-compare-i">
+<span class="eqno">(59)<a class="headerlink" href="#equation-eq-compare-i" title="Link to this equation">#</a></span>\[
+\frac{T_b}{T_a} = \sqrt{\frac{I_b}{I_a}} \quad \Rightarrow \quad I_b = I_a \left(\frac{T_b}{T_a}\right)^2
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(T_b &gt; T_a\)</span>, then <span class="math notranslate nohighlight">\(I_b &gt; I_a\)</span>—the object with the longer period has the larger rotational inertia.</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Period and inertia</p>
+<p>A thin rod and an irregular object hang from the same torsion wire. The rod has period 2.5 s; the object has period 4.8 s. The rotational inertia of the object is about how many times that of the rod?</p>
+<ul class="simple">
+<li><p>(A) 1.9</p></li>
+<li><p>(B) 2.3</p></li>
+<li><p>(C) 3.7</p></li>
+<li><p>(D) 9.2</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Torsion pendulum</strong>: object on a twisted wire; restoring torque <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span> (angular Hooke’s law).</p></li>
+<li><p><strong>Torsion constant</strong> <span class="math notranslate nohighlight">\(\kappa\)</span>: property of the wire; plays the role of spring constant <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><strong>Period</strong> <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span>; <strong>angular frequency</strong> <span class="math notranslate nohighlight">\(\omega = \sqrt{\kappa/I}\)</span>.</p></li>
+<li><p><strong>Same wire, different objects</strong>: <span class="math notranslate nohighlight">\(I_b/I_a = (T_b/T_a)^2\)</span>—measure periods to compare rotational inertias.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +749,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-angular-shm">Overview: Angular SHM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-torsion-pendulum">The torsion pendulum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#period-and-angular-frequency">Period and angular frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-torsion-pendulums">Comparing two torsion pendulums</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

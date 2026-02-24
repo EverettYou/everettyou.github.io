@@ -50,7 +50,7 @@ Each lecture note notebook follows this structure:
 
 **Cell 2 (Lecture Notes):** Base the content on the textbook PDF. Apply the Content Selection and Presentation Principles (Section 0). If the notebook contains a Key Ideas section, use it as the structural backbone for the lecture notes. After writing the notes, remove the Key Ideas section; the lecture notes replace it.
 
-**Discussions** or **Projects** should start with a new cell.
+Do not need to prepare **Discussions** or **Projects**, unless given explicit instruction. These sections should start with a new cell.
 
 ---
 
@@ -105,7 +105,6 @@ Clarification or physical intuition.
 
 ## 3. Admonition Types and When to Use
 
-
 ```markdown
 :::{admonition} [Title]
 :class: [class]
@@ -120,8 +119,9 @@ Class options and suggested use cases:
 | `note` | Background, clarifications, physical intuition, paradox setup/resolution  |
 | `important` | Core takeaways, definitions students must remember, essential conditions |
 | `hint` | Nudge toward a solution without giving it away, "think about..." prompts |
-| `seealso` | Related content, animations, videos, links to other sections or resources, exercises, examples |
-| `tip` | Best practices, general approach, step-by-step methods, shortcuts, pre-class prompts, study suggestions |
+| `seealso` | Exercises, examples, additional info, animations, videos, links to other sections or resources |
+| `tip` | Pre-class prompts, best practices, general approach, step-by-step methods, shortcuts, study suggestions |
+| `poll dropdown` | In-class clicker/poll questions (folded by default; students click to reveal) |
 | `attention` | Things students often overlook, subtle distinctions worth noticing |
 | `caution` | Sign conventions, common pitfalls, Lenz's law, minus signs, easy-to-make mistakes |
 | `warning` | Stronger than caution: serious misconceptions, conceptual traps |
@@ -142,6 +142,20 @@ Class options and suggested use cases:
 
 - **`:::{dropdown}`** — Collapsible content. Use for **worked examples**: show the problem first, hide the full derivation behind a click so students try on their own.
 - **`:::{tab-set}`** — Tab switching. Use for comparing alternatives (e.g., theory vs. experiment, different solution methods).
+
+**Jupyter widgets with Matplotlib:**
+
+When building interactive widgets (e.g., `ipywidgets` sliders) that display or update matplotlib figures, follow these practices to avoid figure leakage and double-display bugs:
+
+- **Display strategy**: Use `display(fig)` and `plt.close(fig)` instead of `plt.show()`. `plt.show()` displays *all* open figures and can leak figures from one cell into another. Use only one display path—never both `display(fig)` and `plt.show()`.
+- **Avoid double figures**: `interactive_output` and `@interact` capture callback output; if the callback also calls `display(fig)`, you get two copies. Either let the decorator show the return value (return `fig`) or call `display(fig)` inside—not both. Add `plt.figure(); plt.close()` at cell end so the inline backend does not auto-display your figure again.
+- **`@interact` vs manual wiring**: Use `@interact` for simple sliders when each callback creates a new figure. Use manual `observe` + `Output` when reusing a figure in place or when wiring Play + sliders + buttons together.
+- **Output duplicates**: Use `clear_output(wait=True)` before every `display(fig)` in the callback. `wait=True` reduces flicker. This only clears the specific `Output` used in `with out:`.
+- **`plt.ioff` / `plt.ion`**: Wrap visualization callbacks with `plt.ioff()` at the start and `plt.ion()` at the end to suppress auto-display during updates. Use `plt.ioff()` at cell start when reusing figures.
+- **Figure reuse**: If a widget updates a figure in place, set `%config InlineBackend.close_figures = False` in the setup cell so the figure stays alive for callbacks.
+- **Definition order**: Define `Output` widgets and control widgets *before* any callback that uses them. Callbacks close over names at call time—`NameError` occurs if `out` is referenced before it exists.
+- **Simplify controls**: Prefer `@interact` when it fits; use one update function for all widgets; set `continuous_update=False` on sliders; group controls in `VBox`/`HBox`.
+- **Re-run behavior**: Re-running a cell that creates widgets produces new instances; old ones may remain. Document that users should restart the kernel to reset, or design for a single persistent widget.
 
 **Cross-referencing and footnotes:**
 
@@ -223,3 +237,4 @@ In the AI era, **prompt engineering** is not merely a technique but a tool for l
 - [ ] Summary subsection at end
 - [ ] Figures: margin or grid as needed; dropdown/tab-set for examples or comparisons
 - [ ] Math: use `\oint`, `\vert`, `\text{}` for subscripts
+- [ ] Widgets (if any): use `display(fig)` + `plt.close(fig)`; define `Output` before callbacks; avoid `plt.show()`

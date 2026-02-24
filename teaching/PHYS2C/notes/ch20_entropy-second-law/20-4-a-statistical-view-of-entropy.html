@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch20_entropy-second-law/20-4-a-statistical-view-of-entropy';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch20_entropy-second-law/20-4-a-statistical-view-of-entropy.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-statistical-view-of-entropy">Overview: Statistical view of entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicity">Multiplicity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmann-s-entropy-equation">Boltzmann’s entropy equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-entropy-increases">Why entropy increases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-thermodynamics">Connection to thermodynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,24 +573,95 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="a-statistical-view-of-entropy">
 <h1>20-4 A Statistical View of Entropy<a class="headerlink" href="#a-statistical-view-of-entropy" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
-<p><strong>20.21</strong> Explain what is meant by the configurations of a system of molecules.</p>
-<p><strong>20.22</strong> Calculate the multiplicity of a given configuration. <strong>20.23</strong> Identify that all microstates are equally probable but</p>
-<p>the configurations with more microstates are more probable than the other configurations.</p>
-<p><strong>20.24</strong> Apply Boltzmann’s entropy equation to calculate the entropy associated with a multiplicity.</p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is a microstate? A configuration? The multiplicity <span class="math notranslate nohighlight">\(W\)</span>?</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(N\)</span> molecules with <span class="math notranslate nohighlight">\(n_1\)</span> in one half and <span class="math notranslate nohighlight">\(n_2\)</span> in the other, write the multiplicity <span class="math notranslate nohighlight">\(W\)</span>. Which configuration has the largest <span class="math notranslate nohighlight">\(W\)</span>?</p></li>
+<li><p>State Boltzmann’s entropy equation. Why does entropy increase when a system moves to a more probable configuration?</p></li>
+<li><p>For a free expansion (gas doubles its volume), show that the statistical definition <span class="math notranslate nohighlight">\(S = k \ln W\)</span> gives <span class="math notranslate nohighlight">\(\Delta S = nR \ln 2\)</span>, matching thermodynamics.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-statistical-view-of-entropy">
+<h3>Overview: Statistical view of entropy<a class="headerlink" href="#overview-statistical-view-of-entropy" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Entropy</strong> can be defined in terms of the number of ways a system can be arranged microscopically.</p></li>
+<li><p><strong>Microstate</strong>: a specific arrangement of molecules. <strong>Configuration</strong>: a group of microstates with the same macroscopic distribution (e.g., <span class="math notranslate nohighlight">\(n_1\)</span> in left half, <span class="math notranslate nohighlight">\(n_2\)</span> in right).</p></li>
+<li><p><strong>Multiplicity</strong> <span class="math notranslate nohighlight">\(W\)</span>: number of microstates in a configuration.</p></li>
+<li><p><strong>Boltzmann</strong>: <span class="math notranslate nohighlight">\(S = k \ln W\)</span>—entropy is the logarithm of the number of ways to achieve a state.</p></li>
+</ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● The entropy of a system can be defined in terms of the possible distributions of its molecules. For identical molecules, each possible distribution of molecules is called a microstate of the system. All equivalent microstates are grouped into a configuration of the system. The number of microstates in a configuration is the multiplicity <em>W</em> of the configuration.</p>
-<p>● For a system of <em>N</em> molecules that may be distributed between the two halves of a box, the multiplicity is given by</p>
-<p>in which <em>n</em> 1 is the number of molecules in one half of the box and <em>n</em> 2 is the number in the other half. A basic assumption of statistical mechanics is that all the microstates are equally probable.</p>
-<p>Thus, configurations with a large multiplicity occur most often. When <em>N</em> is very large (say, <em>N</em> � 10[22] molecules or more), the molecules are nearly always in the configuration in which</p>
-<p><em>n</em> 1 � <em>n</em> 2.</p>
-<p>● The multiplicity <em>W</em> of a configuration of a system and the entropy <em>S</em> of the system in that configuration are related by Boltzmann’s entropy equation:</p>
-<p>where <em>k</em> � 1.38 � 10[�][23] J/K is the Boltzmann constant.</p>
-<p>● When <em>N</em> is very large (the usual case), we can approximate ln <em>N</em> ! with Stirling’s approximation: ln <em>N</em> ! � <em>N</em> (ln <em>N</em> ) � <em>N.</em></p>
+<hr class="docutils" />
+<section id="multiplicity">
+<h3>Multiplicity<a class="headerlink" href="#multiplicity" title="Link to this heading">#</a></h3>
+<p>For <span class="math notranslate nohighlight">\(N\)</span> identical molecules with <span class="math notranslate nohighlight">\(n_1\)</span> in one half of a box and <span class="math notranslate nohighlight">\(n_2\)</span> in the other (<span class="math notranslate nohighlight">\(n_1 + n_2 = N\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-multiplicity">
+<span class="eqno">(190)<a class="headerlink" href="#equation-eq-multiplicity" title="Link to this equation">#</a></span>\[
+W = \frac{N!}{n_1!\,n_2!}
+\]</div>
+<ul class="simple">
+<li><p>Example: 6 molecules, <span class="math notranslate nohighlight">\(n_1 = 4\)</span>, <span class="math notranslate nohighlight">\(n_2 = 2\)</span> → <span class="math notranslate nohighlight">\(W = 6!/(4!\,2!) = 15\)</span>.</p></li>
+<li><p>The <strong>most probable</strong> configuration has <span class="math notranslate nohighlight">\(n_1 \approx n_2\)</span> (equal division)—it has the <strong>largest</strong> <span class="math notranslate nohighlight">\(W\)</span>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="boltzmann-s-entropy-equation">
+<h3>Boltzmann’s entropy equation<a class="headerlink" href="#boltzmann-s-entropy-equation" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight" id="equation-eq-boltzmann">
+<span class="eqno">(191)<a class="headerlink" href="#equation-eq-boltzmann" title="Link to this equation">#</a></span>\[
+S = k \ln W
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(k\)</span></strong>: Boltzmann constant. <strong><span class="math notranslate nohighlight">\(W\)</span></strong>: multiplicity.</p></li>
+<li><p>Entropy is additive; probabilities multiply; <span class="math notranslate nohighlight">\(\ln\)</span> converts multiplication to addition.</p></li>
+<li><p><strong>Higher <span class="math notranslate nohighlight">\(W\)</span></strong> → higher <span class="math notranslate nohighlight">\(S\)</span> → more probable configuration.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="why-entropy-increases">
+<h3>Why entropy increases<a class="headerlink" href="#why-entropy-increases" title="Link to this heading">#</a></h3>
+<p><strong>Assumption:</strong> All microstates are equally probable.</p>
+<ul class="simple">
+<li><p>Configurations with <strong>larger <span class="math notranslate nohighlight">\(W\)</span></strong> are more probable (more microstates).</p></li>
+<li><p>For large <span class="math notranslate nohighlight">\(N\)</span> (e.g., <span class="math notranslate nohighlight">\(10^{22}\)</span>), almost all microstates have <span class="math notranslate nohighlight">\(n_1 \approx n_2\)</span>—the system is almost always in the central configuration.</p></li>
+<li><p>The <strong>second law</strong> reflects the tendency to move toward more probable (higher <span class="math notranslate nohighlight">\(W\)</span>, higher <span class="math notranslate nohighlight">\(S\)</span>) states.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="connection-to-thermodynamics">
+<h3>Connection to thermodynamics<a class="headerlink" href="#connection-to-thermodynamics" title="Link to this heading">#</a></h3>
+<p>For <strong>free expansion</strong> (gas doubles volume): <span class="math notranslate nohighlight">\(N\)</span> molecules initially all in left half → finally <span class="math notranslate nohighlight">\(N/2\)</span> in each half.</p>
+<ul class="simple">
+<li><p><strong>Initial</strong>: <span class="math notranslate nohighlight">\(W_i = 1\)</span> → <span class="math notranslate nohighlight">\(S_i = 0\)</span>.</p></li>
+<li><p><strong>Final</strong>: <span class="math notranslate nohighlight">\(W_f = N!/[(N/2)!]^2\)</span> → using Stirling’s approximation, <span class="math notranslate nohighlight">\(S_f = Nk \ln 2 = nR \ln 2\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta S = nR \ln 2\)</span></strong>—matches the thermodynamic result from section 20-1.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Stirling’s approximation</p>
+<p>For large <span class="math notranslate nohighlight">\(N\)</span>: <span class="math notranslate nohighlight">\(\ln N! \approx N(\ln N) - N\)</span>. Used when factorials are too large to compute directly.</p>
+</div>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Checkpoint: Multiplicity</p>
+<p>For 4 molecules in a box, which configuration has the largest multiplicity?</p>
+<ul class="simple">
+<li><p>(A) All 4 in left half</p></li>
+<li><p>(B) 3 in left, 1 in right</p></li>
+<li><p>(C) 2 in left, 2 in right</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(W = N!/(n_1!\,n_2!)\)</span></strong>—multiplicity for two halves.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(S = k \ln W\)</span></strong>—Boltzmann entropy.</p></li>
+<li><p><strong>Equal division</strong> (<span class="math notranslate nohighlight">\(n_1 \approx n_2\)</span>) has the largest <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(S\)</span> for large <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p><strong>Second law</strong>: systems tend toward more probable (higher <span class="math notranslate nohighlight">\(S\)</span>) states.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -649,8 +729,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-statistical-view-of-entropy">Overview: Statistical view of entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicity">Multiplicity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmann-s-entropy-equation">Boltzmann’s entropy equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-entropy-increases">Why entropy increases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-thermodynamics">Connection to thermodynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

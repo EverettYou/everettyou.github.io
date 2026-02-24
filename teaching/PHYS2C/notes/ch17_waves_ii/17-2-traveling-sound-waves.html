@@ -30,12 +30,12 @@
 
     <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch17_waves_ii/17-2-traveling-sound-waves';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch17_waves_ii/17-2-traveling-sound-waves.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-traveling-sound-waves">Overview: Traveling sound waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displacement">Displacement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pressure-variation">Pressure variation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-relationship-and-amplitude-link">Phase relationship and amplitude link</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,33 +572,85 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="traveling-sound-waves">
 <h1>17-2 Traveling Sound Waves<a class="headerlink" href="#traveling-sound-waves" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>17.05</strong> For any particular time and position, calculate the displacement <em>s</em> ( <em>x</em> , <em>t</em> ) of an element of air as a sound wave travels through its location.</p></li>
-<li><p><strong>17.06</strong> Given a displacement function <em>s</em> ( <em>x</em> , <em>t</em> ) for a sound wave, calculate the time between two given displacements.</p></li>
-<li><p><strong>17.07</strong> Apply the relationships between wave speed <em>v</em> , angular frequency v, angular wave number <em>k</em> , wavelength l, period <em>T</em> , and frequency <em>f</em> .</p></li>
-<li><p><strong>17.08</strong> Sketch a graph of the displacement <em>s</em> ( <em>x</em> ) of an element of air as a function of position, and identify the amplitude <em>sm</em> and wavelength l.</p></li>
-<li><p><strong>17.09</strong> For any particular time and position, calculate the pres-</p></li>
+<li><p>Write the displacement <span class="math notranslate nohighlight">\(s(x,t)\)</span> for a sinusoidal sound wave traveling in the +<span class="math notranslate nohighlight">\(x\)</span> direction. What is <span class="math notranslate nohighlight">\(s_m\)</span>? How does an air element move?</p></li>
+<li><p>Write the pressure variation <span class="math notranslate nohighlight">\(\Delta p(x,t)\)</span>. How does <span class="math notranslate nohighlight">\(\Delta p\)</span> relate to compression vs expansion? What is <span class="math notranslate nohighlight">\(\Delta p_m\)</span>?</p></li>
+<li><p>How are <span class="math notranslate nohighlight">\(s(x,t)\)</span> and <span class="math notranslate nohighlight">\(\Delta p(x,t)\)</span> related in phase? When the displacement is maximum, what is the pressure variation? When the element passes through equilibrium?</p></li>
+<li><p>Derive or state the relationship <span class="math notranslate nohighlight">\(\Delta p_m = \rho v \omega s_m\)</span>. What does it tell you about loud sounds?</p></li>
 </ul>
-<p>sure variation � <em>p</em> (variation from atmospheric pressure) of an element of air as a sound wave travels through its location.</p>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-traveling-sound-waves">
+<h3>Overview: Traveling sound waves<a class="headerlink" href="#overview-traveling-sound-waves" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>17.10</strong> Sketch a graph of the pressure variation � <em>p</em> ( <em>x</em> ) of an element as a function of position, and identify the amplitude � <em>pm</em> and wavelength l.</p></li>
-<li><p><strong>17.11</strong> Apply the relationship between pressure-variation amplitude � <em>pm</em> and displacement amplitude <em>sm</em> .</p></li>
-<li><p><strong>17.12</strong> Given a graph of position <em>s</em> versus time for a sound wave, determine the amplitude <em>sm</em> and the period <em>T</em> .</p></li>
-<li><p><strong>17.13</strong> Given a graph of pressure variation � <em>p</em> versus time for a sound wave, determine the amplitude � <em>pm</em> and the period <em>T</em> .</p></li>
+<li><p>A <strong>sinusoidal sound wave</strong> produces <strong>displacement</strong> <span class="math notranslate nohighlight">\(s(x,t)\)</span> and <strong>pressure variation</strong> <span class="math notranslate nohighlight">\(\Delta p(x,t)\)</span> that vary sinusoidally in space and time.</p></li>
+<li><p><strong>Displacement</strong> <span class="math notranslate nohighlight">\(s\)</span>: longitudinal position of an air element relative to equilibrium. <strong>Pressure variation</strong> <span class="math notranslate nohighlight">\(\Delta p\)</span>: deviation from atmospheric pressure.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(\Delta p\)</span> are <strong>90° out of phase</strong>—when displacement is maximum, pressure is at equilibrium; when the element passes through equilibrium, pressure is at its extreme.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="displacement">
+<h3>Displacement<a class="headerlink" href="#displacement" title="Link to this heading">#</a></h3>
+<p>For a sound wave traveling in the <span class="math notranslate nohighlight">\(+x\)</span> direction:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sound-displacement">
+<span class="eqno">(109)<a class="headerlink" href="#equation-eq-sound-displacement" title="Link to this equation">#</a></span>\[
+s(x,t) = s_m \cos(kx - \omega t)
+\]</div>
 <ul class="simple">
-<li><p>A sound wave causes a longitudinal displacement <em>s</em> of a</p></li>
-<li><p>mass element in a medium as given by</p></li>
-<li><p>The sound wave also causes a pressure change � <em>p</em> of the</p></li>
-<li><p>medium from the equilibrium pressure:</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(s_m\)</span></strong>: displacement amplitude—maximum displacement of an air element from equilibrium.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(k = 2\pi/\lambda\)</span></strong>, <strong><span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span></strong>; same definitions as for transverse waves (section 16-1).</p></li>
+<li><p>Each air element oscillates <strong>left and right</strong> (along <span class="math notranslate nohighlight">\(x\)</span>) in SHM as the wave passes.</p></li>
 </ul>
-<p>where <em>sm</em> is the displacement amplitude (maximum displacement) from equilibrium, <em>k</em> � 2p/l, and v � 2p <em>f</em> , l and <em>f</em> being the wavelength and frequency, respectively, of the sound wave.</p>
+</section>
+<hr class="docutils" />
+<section id="pressure-variation">
+<h3>Pressure variation<a class="headerlink" href="#pressure-variation" title="Link to this heading">#</a></h3>
+<p>The pressure at position <span class="math notranslate nohighlight">\(x\)</span> varies from the equilibrium (atmospheric) pressure:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sound-pressure">
+<span class="eqno">(110)<a class="headerlink" href="#equation-eq-sound-pressure" title="Link to this equation">#</a></span>\[
+\Delta p(x,t) = \Delta p_m \sin(kx - \omega t)
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta p_m\)</span></strong>: pressure amplitude—maximum increase or decrease in pressure.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta p &gt; 0\)</span></strong>: compression (density increased).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta p &lt; 0\)</span></strong>: expansion (rarefaction; density decreased).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="phase-relationship-and-amplitude-link">
+<h3>Phase relationship and amplitude link<a class="headerlink" href="#phase-relationship-and-amplitude-link" title="Link to this heading">#</a></h3>
+<p><strong><span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(\Delta p\)</span> are 90° out of phase.</strong> When <span class="math notranslate nohighlight">\(s\)</span> is maximum (element at extreme displacement), <span class="math notranslate nohighlight">\(\Delta p = 0\)</span>—the element is momentarily at rest and the pressure has returned to equilibrium. When <span class="math notranslate nohighlight">\(s = 0\)</span> (element passing through equilibrium, moving fastest), <span class="math notranslate nohighlight">\(\Delta p\)</span> is at its maximum magnitude—compression or rarefaction is greatest there.</p>
+<p>The pressure amplitude and displacement amplitude are related by</p>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-amplitude">
+<span class="eqno">(111)<a class="headerlink" href="#equation-eq-pressure-amplitude" title="Link to this equation">#</a></span>\[
+\Delta p_m = \rho v \omega s_m
+\]</div>
+<ul class="simple">
+<li><p><strong>Louder</strong> sound → larger <span class="math notranslate nohighlight">\(s_m\)</span> and <span class="math notranslate nohighlight">\(\Delta p_m\)</span>. For typical loud sounds, <span class="math notranslate nohighlight">\(s_m\)</span> is still very small (e.g., ~10 µm at the threshold of pain).</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Checkpoint: Element at equilibrium</p>
+<p>When an air element is moving rightward through its equilibrium position (<span class="math notranslate nohighlight">\(s = 0\)</span>), is the pressure in the element at equilibrium, just beginning to increase, or just beginning to decrease?</p>
+<ul class="simple">
+<li><p>(A) At equilibrium</p></li>
+<li><p>(B) Just beginning to increase</p></li>
+<li><p>(C) Just beginning to decrease</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Displacement</strong>: <span class="math notranslate nohighlight">\(s = s_m \cos(kx - \omega t)\)</span>; air elements oscillate longitudinally.</p></li>
+<li><p><strong>Pressure variation</strong>: <span class="math notranslate nohighlight">\(\Delta p = \Delta p_m \sin(kx - \omega t)\)</span>; <span class="math notranslate nohighlight">\(\Delta p &gt; 0\)</span> = compression.</p></li>
+<li><p><strong>Phase</strong>: <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(\Delta p\)</span> are 90° out of phase.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta p_m = \rho v \omega s_m\)</span></strong>—links pressure and displacement amplitudes.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -658,8 +718,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-traveling-sound-waves">Overview: Traveling sound waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displacement">Displacement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pressure-variation">Pressure variation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-relationship-and-amplitude-link">Phase relationship and amplitude link</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

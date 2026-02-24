@@ -133,7 +133,7 @@ def extract_figure(
         figure_label: Figure numbering only, e.g. "14-1", "4-19". The program
             prepends "Figure " automatically; do not include the prefix.
         output_dir: Where to save extracted figures. Default: WORK_DIR / "figs"
-            (i.e. _textbooks/figs).
+            (i.e. _references/figs).
         include_caption: If True, return caption text in result.
 
     Returns:
@@ -444,7 +444,7 @@ def collect_all_figures(
     Args:
         pdf_path: Path to chapter PDF or full textbook.
         output_dir: Folder for extracted figures. Default: WORK_DIR / "figs"
-            (i.e. _textbooks/figs).
+            (i.e. _references/figs).
         extract_figures: If True, call extract_figure for each. Default False.
 
     Returns:

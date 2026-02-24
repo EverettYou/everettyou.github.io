@@ -79,7 +79,7 @@ Flow of Ideal Fluids
 
   $$
   R_V = A v = \mathrm{constant}
-  $$ (eq-continuity)
+  $$ (eq-14-continuity)
 
   in which $R_V$ is the **volume flow rate**, $A$ is the cross-sectional area of the tube of flow at any point, and $v$ is the speed of the fluid at that point. The **mass flow rate** $R_m$ is
 
@@ -92,5 +92,5 @@ Bernoulli's Equation
 
   $$
   p + \frac{1}{2} \rho v^2 + \rho g y = \mathrm{constant}
-  $$ (eq-bernoulli)
+  $$ (eq-14-bernoulli)
 :::
