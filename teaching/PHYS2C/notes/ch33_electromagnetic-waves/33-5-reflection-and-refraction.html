@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch33_electromagnetic-waves/33-5-reflection-and-refraction';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch33_electromagnetic-waves/33-5-reflection-and-refraction.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection">Reflection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refraction-and-snell-s-law">Refraction and Snell’s law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chromatic-dispersion">Chromatic dispersion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rainbows">Rainbows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,34 +572,115 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reflection-and-refraction">
 <h1>33-5 Reflection and Refraction<a class="headerlink" href="#reflection-and-refraction" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>33.36</strong> With a sketch, show the reflection of a light ray from an interface and identify the incident ray, the reflected ray, the normal, the angle of incidence, and the angle of reflection.</p></li>
-<li><p><strong>33.37</strong> For a reflection, relate the angle of incidence and the angle of reflection.</p></li>
-<li><p><strong>33.38</strong> With a sketch, show the refraction of a light ray at an interface and identify the incident ray, the refracted ray, the normal on each side of the interface, the angle of incidence, and the angle of refraction.</p></li>
-<li><p><strong>33.39</strong> For refraction of light, apply Snell’s law to relate the index of refraction and the angle of the ray on one side of the interface to those quantities on the other side.</p></li>
-<li><p><strong>33.40</strong> In a sketch and using a line along the undeflected direction, show the refraction of light from one material into</p>
-<ul>
-<li><p>a second material that has a greater index, a smaller index, and the same index, and, for each situation, describe the refraction in terms of the ray being bent toward the normal, away from the normal, or not at all.</p></li>
+<li><p>Sketch a light ray reflecting from an interface. Identify the incident ray, reflected ray, normal, angle of incidence, and angle of reflection. State the law of reflection.</p></li>
+<li><p>Sketch refraction at an interface. What is <strong>Snell’s law</strong>? Define the <strong>index of refraction</strong>.</p></li>
+<li><p>When light goes from medium 1 to medium 2: if <span class="math notranslate nohighlight">\(n_2 &gt; n_1\)</span>, which way does the ray bend? What if <span class="math notranslate nohighlight">\(n_2 &lt; n_1\)</span>? What if <span class="math notranslate nohighlight">\(n_2 = n_1\)</span>?</p></li>
+<li><p>What is <strong>chromatic dispersion</strong>? For red and blue light entering glass from air, which bends more? Which has the larger angle of refraction?</p></li>
+<li><p>How are the primary and secondary rainbows formed? Why are they circular arcs? At what angles from the antisolar point do they appear?</p></li>
 </ul>
-</li>
-<li><p><strong>33.41</strong> Identify that refraction occurs only at an interface and not in the interior of a material.</p></li>
-<li><p><strong>33.42</strong> Identify chromatic dispersion.</p></li>
-<li><p><strong>33.43</strong> For a beam of red and blue light (or other colors) refracting at an interface, identify which color has the greater bending and which has the greater angle of refraction when they enter a material with a lower index than the initial material and a greater index.</p></li>
-<li><p><strong>33.44</strong> Describe how the primary and secondary rainbows are formed and explain why they are circular arcs.</p></li>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Geometrical optics</strong>: light represented as straight-line rays (valid when wavelength <span class="math notranslate nohighlight">\(\ll\)</span> feature sizes).</p></li>
+<li><p>At a boundary between two transparent media: <strong>reflected</strong> ray and <strong>refracted</strong> ray; both lie in the <strong>plane of incidence</strong> (containing incident ray and normal).</p></li>
+<li><p><strong>Reflection</strong>: angle of reflection = angle of incidence.</p></li>
+<li><p><strong>Refraction</strong>: Snell’s law relates angles via indices of refraction; bending occurs only at the interface.</p></li>
+<li><p><strong>Chromatic dispersion</strong>: index depends on wavelength; white light spreads into colors (e.g., prism, rainbow).</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="reflection">
+<h3>Reflection<a class="headerlink" href="#reflection" title="Link to this heading">#</a></h3>
+<p><strong>Law of reflection</strong>: The reflected ray lies in the plane of incidence and makes an angle with the normal equal to the <strong>angle of incidence</strong> <span class="math notranslate nohighlight">\(\theta_1\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-reflection">
+<span class="eqno">(230)<a class="headerlink" href="#equation-eq-reflection" title="Link to this equation">#</a></span>\[
+\theta_1' = \theta_1
+\]</div>
+<p>The incident ray, reflected ray, and normal all lie in one plane.</p>
+</section>
+<hr class="docutils" />
+<section id="refraction-and-snell-s-law">
+<h3>Refraction and Snell’s law<a class="headerlink" href="#refraction-and-snell-s-law" title="Link to this heading">#</a></h3>
+<p><strong>Refraction</strong> is the change in direction when light crosses an interface. Bending occurs <strong>only at the interface</strong>; inside a uniform medium, light travels in straight lines.</p>
+<p><strong>Index of refraction</strong> <span class="math notranslate nohighlight">\(n\)</span>: <span class="math notranslate nohighlight">\(n = c/v\)</span>, where <span class="math notranslate nohighlight">\(v\)</span> is the speed of light in the medium and <span class="math notranslate nohighlight">\(c\)</span> is the speed in vacuum. Vacuum: <span class="math notranslate nohighlight">\(n = 1\)</span>; air: <span class="math notranslate nohighlight">\(n \approx 1\)</span>; typical glass: <span class="math notranslate nohighlight">\(n \approx 1.5\)</span>; water: <span class="math notranslate nohighlight">\(n \approx 1.33\)</span>.</p>
+<p><strong>Snell’s law</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-snell">
+<span class="eqno">(231)<a class="headerlink" href="#equation-eq-snell" title="Link to this equation">#</a></span>\[
+n_1 \sin\theta_1 = n_2 \sin\theta_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta_1\)</span> is the angle of incidence (in medium 1) and <span class="math notranslate nohighlight">\(\theta_2\)</span> is the angle of refraction (in medium 2), both measured from the normal.</p>
+<p><strong>Direction of bending</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(n_2\)</span> vs <span class="math notranslate nohighlight">\(n_1\)</span></p></th>
+<th class="head"><p>Bending</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n_2 = n_1\)</span></p></td>
+<td><p>No bending; ray continues straight</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(n_2 &gt; n_1\)</span></p></td>
+<td><p>Ray bends <strong>toward</strong> the normal (<span class="math notranslate nohighlight">\(\theta_2 &lt; \theta_1\)</span>)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n_2 &lt; n_1\)</span></p></td>
+<td><p>Ray bends <strong>away from</strong> the normal (<span class="math notranslate nohighlight">\(\theta_2 &gt; \theta_1\)</span>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Refraction occurs only at an <strong>interface</strong> between two media—not in the interior of a uniform material.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="chromatic-dispersion">
+<h3>Chromatic dispersion<a class="headerlink" href="#chromatic-dispersion" title="Link to this heading">#</a></h3>
+<p>The index of refraction <span class="math notranslate nohighlight">\(n\)</span> depends on <strong>wavelength</strong> (except in vacuum). Shorter wavelengths (blue) typically have larger <span class="math notranslate nohighlight">\(n\)</span> than longer wavelengths (red).</p>
+<p><strong>Chromatic dispersion</strong>: When white light (many wavelengths) refracts at an interface, different colors bend by different amounts—the light spreads into a spectrum.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Direction</p></th>
+<th class="head"><p>Blue vs red bending</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Air → glass</p></td>
+<td><p>Blue bends <strong>more</strong> (smaller <span class="math notranslate nohighlight">\(\theta_2\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Glass → air</p></td>
+<td><p>Blue bends <strong>more</strong> (larger <span class="math notranslate nohighlight">\(\theta_2\)</span>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <strong>prism</strong> enhances the separation by refracting at two surfaces.</p>
+</section>
+<hr class="docutils" />
+<section id="rainbows">
+<h3>Rainbows<a class="headerlink" href="#rainbows" title="Link to this heading">#</a></h3>
+<p><strong>Primary rainbow</strong>: Sunlight enters a raindrop, reflects once from the inner surface, and refracts out. Colors appear at <strong>42°</strong> from the <strong>antisolar point</strong> <span class="math notranslate nohighlight">\(A\)</span> (the point directly opposite the Sun).</p>
+<p><strong>Secondary rainbow</strong>: Two reflections inside the drop; colors at <strong>52°</strong> from <span class="math notranslate nohighlight">\(A\)</span>. Order of colors is <strong>reversed</strong> compared to the primary; secondary is wider and dimmer.</p>
+<p><strong>Circular arcs</strong>: Drops at 42° (or 52°) from <span class="math notranslate nohighlight">\(A\)</span> in <em>any</em> direction contribute to the rainbow. The locus of such directions is a cone—hence a circular arc. The top of a rainbow is never more than 42° above the horizon.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Geometrical optics is an approximate treatment of light in</p></li>
-<li><p>which light waves are represented as straight-line rays.</p></li>
+<li><p><strong>Reflection</strong>: <span class="math notranslate nohighlight">\(\theta_1' = \theta_1\)</span>; both rays in plane of incidence.</p></li>
+<li><p><strong>Refraction</strong>: Snell’s law <span class="math notranslate nohighlight">\(n_1\sin\theta_1 = n_2\sin\theta_2\)</span>; bending only at interface.</p></li>
+<li><p><strong>Bending</strong>: <span class="math notranslate nohighlight">\(n_2 &gt; n_1\)</span> → toward normal; <span class="math notranslate nohighlight">\(n_2 &lt; n_1\)</span> → away from normal.</p></li>
+<li><p><strong>Chromatic dispersion</strong>: <span class="math notranslate nohighlight">\(n\)</span> depends on <span class="math notranslate nohighlight">\(\lambda\)</span>; blue bends more than red.</p></li>
+<li><p><strong>Rainbows</strong>: Primary at 42° from antisolar point (one reflection); secondary at 52° (two reflections, reversed colors).</p></li>
 </ul>
-<p>● When a light ray encounters a boundary between two transparent media, a reflected ray and a refracted ray generally appear. Both rays remain in the plane of incidence. The angle of reflection is equal to the angle of incidence, and</p>
-<p>the angle of refraction is related to the angle of incidence by Snell’s law,</p>
-<p>where <em>n</em> 1 and <em>n</em> 2 are the indexes of refraction of the media in which the incident and refracted rays travel.</p>
+</section>
 </section>
 </section>
 
@@ -658,8 +748,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection">Reflection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refraction-and-snell-s-law">Refraction and Snell’s law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chromatic-dispersion">Chromatic dispersion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rainbows">Rainbows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

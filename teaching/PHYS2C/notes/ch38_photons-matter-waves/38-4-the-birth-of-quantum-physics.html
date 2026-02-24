@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch38_photons-matter-waves/38-4-the-birth-of-quantum-physics';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch38_photons-matter-waves/38-4-the-birth-of-quantum-physics.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackbody-radiation-and-spectral-radiancy">Blackbody radiation and spectral radiancy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-failure-the-ultraviolet-catastrophe">Classical failure: the ultraviolet catastrophe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planck-s-radiation-law">Planck’s radiation law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wien-s-law">Wien’s law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +572,96 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-birth-of-quantum-physics">
 <h1>38-4 The Birth of Quantum Physics<a class="headerlink" href="#the-birth-of-quantum-physics" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is an <strong>ideal blackbody radiator</strong>? Define <strong>spectral radiancy</strong> <span class="math notranslate nohighlight">\(S(\lambda)\)</span> and its physical meaning.</p></li>
+<li><p><strong>Classical puzzle</strong>: The classical radiation law predicts <span class="math notranslate nohighlight">\(S(\lambda) \propto 1/\lambda^4\)</span> at short wavelengths. What goes wrong? Why was this called the “ultraviolet catastrophe”?</p></li>
+<li><p>Write <strong>Planck’s radiation law</strong> for <span class="math notranslate nohighlight">\(S(\lambda)\)</span>. What role does the factor <span class="math notranslate nohighlight">\(hc/(\lambda kT)\)</span> play? How did Planck’s law suggest that oscillator energies are <strong>quantized</strong>?</p></li>
+<li><p><strong>Wien’s law</strong> states <span class="math notranslate nohighlight">\(\lambda_{\max} T = 2898\ \mu\text{m}\cdot\text{K}\)</span>. For a cavity at 2000 K, where is the peak wavelength? Is it in the visible or infrared?</p></li>
+<li><p>For a narrow wavelength range <span class="math notranslate nohighlight">\(\Delta\lambda\)</span> at wavelength <span class="math notranslate nohighlight">\(\lambda\)</span>, how do you approximate the power emitted in that range from a blackbody of area <span class="math notranslate nohighlight">\(A\)</span>?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>blackbody radiator</strong> emits thermal radiation that depends only on its temperature. The <strong>spectral radiancy</strong> <span class="math notranslate nohighlight">\(S(\lambda)\)</span> describes intensity per unit wavelength.</p></li>
+<li><p><strong>Classical physics</strong> predicted <span class="math notranslate nohighlight">\(S(\lambda) \propto 1/\lambda^4\)</span> at short wavelengths—the radiation “blows up” to infinity (the <strong>ultraviolet catastrophe</strong>), contradicting experiment.</p></li>
+<li><p><strong>Planck’s radiation law</strong> (1900) fits all wavelengths and temperatures. Its form implied that <strong>oscillator energies are quantized</strong>—the first hint of quantum physics.</p></li>
+<li><p><strong>Wien’s law</strong> <span class="math notranslate nohighlight">\(\lambda_{\max} T = 2898\ \mu\text{m}\cdot\text{K}\)</span> relates peak wavelength to temperature.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="blackbody-radiation-and-spectral-radiancy">
+<h3>Blackbody radiation and spectral radiancy<a class="headerlink" href="#blackbody-radiation-and-spectral-radiancy" title="Link to this heading">#</a></h3>
+<p>An <strong>ideal blackbody radiator</strong> emits thermal radiation that depends <em>only</em> on temperature—not on the material, surface, or geometry. The setup: a cavity with walls at uniform temperature <span class="math notranslate nohighlight">\(T\)</span>. Atoms on the walls oscillate (thermal energy) and emit electromagnetic waves. A small hole samples the radiation without altering it.</p>
+<p><strong>Spectral radiancy</strong> <span class="math notranslate nohighlight">\(S(\lambda)\)</span> is the intensity per unit wavelength at wavelength <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-spectral-radiancy">
+<span class="eqno">(345)<a class="headerlink" href="#equation-eq-spectral-radiancy" title="Link to this equation">#</a></span>\[
+S(\lambda) = \frac{\text{intensity}}{\text{unit wavelength}} = \frac{\text{power per unit area}}{\text{unit wavelength}}
+\]</div>
+<p>For a narrow wavelength range <span class="math notranslate nohighlight">\(d\lambda\)</span>, the power per unit area emitted in that range is <span class="math notranslate nohighlight">\(S(\lambda)\,d\lambda\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="classical-failure-the-ultraviolet-catastrophe">
+<h3>Classical failure: the ultraviolet catastrophe<a class="headerlink" href="#classical-failure-the-ultraviolet-catastrophe" title="Link to this heading">#</a></h3>
+<p>Classical physics (equipartition of energy among oscillators) predicted the <strong>Rayleigh–Jeans law</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-jeans">
+<span class="eqno">(346)<a class="headerlink" href="#equation-eq-rayleigh-jeans" title="Link to this equation">#</a></span>\[
+S(\lambda) = \frac{2\pi c k T}{\lambda^4}
+\]</div>
+<p>At long wavelengths, this agrees with experiment. But at short wavelengths, <span class="math notranslate nohighlight">\(S(\lambda) \to \infty\)</span> as <span class="math notranslate nohighlight">\(\lambda \to 0\)</span>—the total radiated power would be infinite. This is the <strong>ultraviolet catastrophe</strong>: classical theory predicted that any hot object would radiate infinite energy at short wavelengths, which is absurd.</p>
+<div class="note admonition">
+<p class="admonition-title">Physical intuition</p>
+<p>Classical equipartition gives each oscillator mode an average energy <span class="math notranslate nohighlight">\(kT\)</span>, independent of frequency. The number of modes per unit wavelength grows as <span class="math notranslate nohighlight">\(1/\lambda^4\)</span> at short <span class="math notranslate nohighlight">\(\lambda\)</span>, so the predicted intensity grows without bound. Planck’s fix: restrict oscillator energies to discrete multiples of <span class="math notranslate nohighlight">\(hf\)</span>, which suppresses high-frequency modes at low <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="planck-s-radiation-law">
+<h3>Planck’s radiation law<a class="headerlink" href="#planck-s-radiation-law" title="Link to this heading">#</a></h3>
+<p>In 1900, Planck devised a formula that fit all experimental data:</p>
+<div class="math notranslate nohighlight" id="equation-eq-planck-radiation">
+<span class="eqno">(347)<a class="headerlink" href="#equation-eq-planck-radiation" title="Link to this equation">#</a></span>\[
+S(\lambda) = \frac{2\pi c^2 h}{\lambda^5} \cdot \frac{1}{e^{hc/(\lambda k T)} - 1}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h\)</span> is the Planck constant, <span class="math notranslate nohighlight">\(k\)</span> is the Boltzmann constant, and <span class="math notranslate nohighlight">\(T\)</span> is the temperature in kelvins. The key factor is <span class="math notranslate nohighlight">\(hc/(\lambda k T) = hf/(kT)\)</span>—the ratio of photon energy <span class="math notranslate nohighlight">\(hf\)</span> to thermal energy <span class="math notranslate nohighlight">\(kT\)</span>.</p>
+<p>Planck’s derivation implied that the <strong>atomic oscillators</strong> in the cavity wall can have only discrete energies—integer multiples of <span class="math notranslate nohighlight">\(hf\)</span>. This was the first suggestion that energies are <strong>quantized</strong>. Planck himself was reluctant to accept this; Einstein later explained it with the photon model (quantized radiation itself).</p>
+<p><strong>Radiated power:</strong> Integrating <a class="reference internal" href="#equation-eq-planck-radiation">(347)</a> over all wavelengths gives the total power per unit area. For an ideal blackbody of area <span class="math notranslate nohighlight">\(A\)</span> and emissivity <span class="math notranslate nohighlight">\(\varepsilon = 1\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefan-boltzmann">
+<span class="eqno">(348)<a class="headerlink" href="#equation-eq-stefan-boltzmann" title="Link to this equation">#</a></span>\[
+P = \sigma A T^4
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma \approx 5.67 \times 10^{-8}\ \text{W/m}^2\cdot\text{K}^4\)</span> is the Stefan–Boltzmann constant (see Eq. 18-38).</p>
+<p>For a narrow range <span class="math notranslate nohighlight">\(\Delta\lambda\)</span> at wavelength <span class="math notranslate nohighlight">\(\lambda\)</span>, the power in that range is approximately <span class="math notranslate nohighlight">\(S(\lambda)\,A\,\Delta\lambda\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="wien-s-law">
+<h3>Wien’s law<a class="headerlink" href="#wien-s-law" title="Link to this heading">#</a></h3>
+<p>The wavelength <span class="math notranslate nohighlight">\(\lambda_{\max}\)</span> at which <span class="math notranslate nohighlight">\(S(\lambda)\)</span> is maximum (for a given <span class="math notranslate nohighlight">\(T\)</span>) satisfies <strong>Wien’s law</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wien">
+<span class="eqno">(349)<a class="headerlink" href="#equation-eq-wien" title="Link to this equation">#</a></span>\[
+\lambda_{\max} T = 2898\ \mu\text{m}\cdot\text{K}
+\]</div>
+<p>For example, at <span class="math notranslate nohighlight">\(T = 2000\ \text{K}\)</span>, <span class="math notranslate nohighlight">\(\lambda_{\max} \approx 1.5\ \mu\text{m}\)</span>—in the infrared. As the temperature increases, the peak shifts to shorter wavelengths.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example</p>
+<p><strong>Sun’s surface:</strong> If the Sun’s surface temperature is about 5800 K, then <span class="math notranslate nohighlight">\(\lambda_{\max} \approx 2898/5800 \approx 0.5\ \mu\text{m}\)</span>, which is in the visible (green) range. That is why the Sun’s spectrum peaks in the visible.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Blackbody radiator</strong>: emission depends only on <span class="math notranslate nohighlight">\(T\)</span>; cavity with small hole samples thermal radiation.</p></li>
+<li><p><strong>Spectral radiancy</strong> <span class="math notranslate nohighlight">\(S(\lambda)\)</span>: intensity per unit wavelength.</p></li>
+<li><p><strong>Classical failure</strong>: Rayleigh–Jeans predicts <span class="math notranslate nohighlight">\(S \propto 1/\lambda^4\)</span> at short <span class="math notranslate nohighlight">\(\lambda\)</span> → ultraviolet catastrophe.</p></li>
+<li><p><strong>Planck’s law</strong> <a class="reference internal" href="#equation-eq-planck-radiation">(347)</a>: fits all data; first use of quantized oscillator energies.</p></li>
+<li><p><strong>Wien’s law</strong> <span class="math notranslate nohighlight">\(\lambda_{\max} T = 2898\ \mu\text{m}\cdot\text{K}\)</span>: peak wavelength shifts with temperature.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +718,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackbody-radiation-and-spectral-radiancy">Blackbody radiation and spectral radiancy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-failure-the-ultraviolet-catastrophe">Classical failure: the ultraviolet catastrophe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planck-s-radiation-law">Planck’s radiation law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wien-s-law">Wien’s law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

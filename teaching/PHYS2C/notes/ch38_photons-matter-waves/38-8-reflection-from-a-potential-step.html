@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch38_photons-matter-waves/38-8-reflection-from-a-potential-step';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch38_photons-matter-waves/38-8-reflection-from-a-potential-step.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-potential-step">Setup: potential step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wave-functions-and-boundary-conditions">Wave functions and boundary conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-and-transmission-coefficients">Reflection and transmission coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quantum-surprise">The quantum surprise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +572,103 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reflection-from-a-potential-step">
 <h1>38-8 Reflection from a Potential Step<a class="headerlink" href="#reflection-from-a-potential-step" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Describe a <strong>potential step</strong>: electron in region 1 (<span class="math notranslate nohighlight">\(U=0\)</span>) approaches a boundary at <span class="math notranslate nohighlight">\(x=0\)</span> beyond which <span class="math notranslate nohighlight">\(U = U_b &gt; 0\)</span>. If <span class="math notranslate nohighlight">\(E &gt; U_b\)</span>, what does <strong>classical</strong> physics predict? What does <strong>quantum</strong> physics predict?</p></li>
+<li><p>Write the <strong>wave functions</strong> in region 1 and region 2. Why do we set <span class="math notranslate nohighlight">\(D=0\)</span> in region 2? What are the <strong>boundary conditions</strong> at <span class="math notranslate nohighlight">\(x=0\)</span>?</p></li>
+<li><p>Define the <strong>reflection coefficient</strong> <span class="math notranslate nohighlight">\(R\)</span> and <strong>transmission coefficient</strong> <span class="math notranslate nohighlight">\(T\)</span>. How do we find <span class="math notranslate nohighlight">\(R\)</span> from the wave function coefficients? What is <span class="math notranslate nohighlight">\(T\)</span> in terms of <span class="math notranslate nohighlight">\(R\)</span>?</p></li>
+<li><p>Interpret <span class="math notranslate nohighlight">\(R\)</span>: (a) for a single electron, (b) for a beam of many electrons. If <span class="math notranslate nohighlight">\(R = 0.01\)</span>, what can we say about 10,000 electrons incident on the step?</p></li>
+<li><p>Why is quantum reflection from a potential step <em>surprising</em>? A classical particle with <span class="math notranslate nohighlight">\(E &gt; U_b\)</span> would never reflect.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>potential step</strong> is a boundary at which the potential energy <span class="math notranslate nohighlight">\(U\)</span> changes abruptly (e.g., from <span class="math notranslate nohighlight">\(U=0\)</span> to <span class="math notranslate nohighlight">\(U = U_b\)</span>).</p></li>
+<li><p><strong>Classically</strong>: If <span class="math notranslate nohighlight">\(E &gt; U_b\)</span>, the particle has enough energy—it always passes through. No reflection.</p></li>
+<li><p><strong>Quantum</strong>: Because electrons are <strong>matter waves</strong>, some reflect even when <span class="math notranslate nohighlight">\(E &gt; U_b\)</span>. Wave reflection at a boundary is natural; particle reflection when “there’s enough energy” is not.</p></li>
+<li><p>The <strong>reflection coefficient</strong> <span class="math notranslate nohighlight">\(R\)</span> gives the probability of reflection; the <strong>transmission coefficient</strong> <span class="math notranslate nohighlight">\(T = 1 - R\)</span> gives the probability of transmission.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="setup-potential-step">
+<h3>Setup: potential step<a class="headerlink" href="#setup-potential-step" title="Link to this heading">#</a></h3>
+<p>Consider an electron moving along the <span class="math notranslate nohighlight">\(x\)</span> axis. In <strong>region 1</strong> (<span class="math notranslate nohighlight">\(x &lt; 0\)</span>), <span class="math notranslate nohighlight">\(U = 0\)</span>. At <span class="math notranslate nohighlight">\(x = 0\)</span> the potential steps up to <span class="math notranslate nohighlight">\(U = U_b &gt; 0\)</span> (region 2, <span class="math notranslate nohighlight">\(x &gt; 0\)</span>). The electron has total energy <span class="math notranslate nohighlight">\(E &gt; U_b\)</span>.</p>
+<p>Classically, the electron would simply slow down and continue into region 2—its kinetic energy would drop from <span class="math notranslate nohighlight">\(E\)</span> to <span class="math notranslate nohighlight">\(E - U_b\)</span>, but it would keep going. <strong>No reflection.</strong></p>
+<p>Quantum mechanically, we solve Schrödinger’s equation in each region and match the wave functions at the boundary. The result: <strong>some electrons reflect</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">Why reflection?</p>
+<p>Waves reflect at boundaries where the wave speed (or wavelength) changes—like light at a glass surface. The matter wave “sees” a change in the potential energy (and thus in <span class="math notranslate nohighlight">\(k\)</span>). Reflection is a wave phenomenon; the classical particle picture misses it.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="wave-functions-and-boundary-conditions">
+<h3>Wave functions and boundary conditions<a class="headerlink" href="#wave-functions-and-boundary-conditions" title="Link to this heading">#</a></h3>
+<p>In <strong>region 1</strong> (<span class="math notranslate nohighlight">\(U = 0\)</span>), the angular wave number is <span class="math notranslate nohighlight">\(k = 2\pi\sqrt{2mE}/h\)</span>. The general solution is</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi1">
+<span class="eqno">(362)<a class="headerlink" href="#equation-eq-psi1" title="Link to this equation">#</a></span>\[
+\psi_1(x) = A e^{ikx} + B e^{-ikx}
+\]</div>
+<p>The term <span class="math notranslate nohighlight">\(Ae^{ikx}\)</span> represents the incident wave (moving <span class="math notranslate nohighlight">\(+x\)</span>); <span class="math notranslate nohighlight">\(Be^{-ikx}\)</span> represents the reflected wave (moving <span class="math notranslate nohighlight">\(-x\)</span>).</p>
+<p>In <strong>region 2</strong> (<span class="math notranslate nohighlight">\(U = U_b\)</span>), the angular wave number is <span class="math notranslate nohighlight">\(k_b = 2\pi\sqrt{2m(E-U_b)}/h\)</span> (smaller than <span class="math notranslate nohighlight">\(k\)</span> because kinetic energy is less). The general solution would be</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_2(x) = C e^{ik_b x} + D e^{-ik_b x}
+\]</div>
+<p>But there is no electron source to the right—no wave traveling left. So we set <span class="math notranslate nohighlight">\(D = 0\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi2">
+<span class="eqno">(363)<a class="headerlink" href="#equation-eq-psi2" title="Link to this equation">#</a></span>\[
+\psi_2(x) = C e^{ik_b x}
+\]</div>
+<p><strong>Boundary conditions</strong> at <span class="math notranslate nohighlight">\(x = 0\)</span>: the wave function and its derivative must be continuous (matching values and slopes):</p>
+<div class="math notranslate nohighlight" id="equation-eq-bc1">
+<span class="eqno">(364)<a class="headerlink" href="#equation-eq-bc1" title="Link to this equation">#</a></span>\[
+A + B = C \quad \text{(matching values)}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-bc2">
+<span class="eqno">(365)<a class="headerlink" href="#equation-eq-bc2" title="Link to this equation">#</a></span>\[
+Ak - Bk = Ck_b \quad \text{(matching slopes)}
+\]</div>
+<p>Solving these determines <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> in terms of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="reflection-and-transmission-coefficients">
+<h3>Reflection and transmission coefficients<a class="headerlink" href="#reflection-and-transmission-coefficients" title="Link to this heading">#</a></h3>
+<p>The probability density is proportional to <span class="math notranslate nohighlight">\(|\psi|^2\)</span>. The incident amplitude is <span class="math notranslate nohighlight">\(|A|^2\)</span>; the reflected amplitude is <span class="math notranslate nohighlight">\(|B|^2\)</span>. The <strong>reflection coefficient</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-r">
+<span class="eqno">(366)<a class="headerlink" href="#equation-eq-r" title="Link to this equation">#</a></span>\[
+R = \frac{|B|^2}{|A|^2}
+\]</div>
+<ul class="simple">
+<li><p><strong>Single electron</strong>: <span class="math notranslate nohighlight">\(R\)</span> is the probability that this electron will reflect.</p></li>
+<li><p><strong>Beam of many electrons</strong>: <span class="math notranslate nohighlight">\(R\)</span> is the average fraction that reflect.</p></li>
+</ul>
+<p>The <strong>transmission coefficient</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-t">
+<span class="eqno">(367)<a class="headerlink" href="#equation-eq-t" title="Link to this equation">#</a></span>\[
+T = 1 - R
+\]</div>
+<p>For example, if <span class="math notranslate nohighlight">\(R = 0.01\)</span>, then of 10,000 electrons incident on the step, about 100 reflect and 9,900 transmit. We cannot predict which ones—only probabilities.</p>
+</section>
+<hr class="docutils" />
+<section id="the-quantum-surprise">
+<h3>The quantum surprise<a class="headerlink" href="#the-quantum-surprise" title="Link to this heading">#</a></h3>
+<p>For <span class="math notranslate nohighlight">\(E &gt; U_b\)</span>, classical physics says <span class="math notranslate nohighlight">\(R = 0\)</span> and <span class="math notranslate nohighlight">\(T = 1\)</span>. Schrödinger’s equation gives <span class="math notranslate nohighlight">\(R &gt; 0\)</span> and <span class="math notranslate nohighlight">\(T &lt; 1\)</span> (except in special cases). The reflection probability depends on <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(U_b\)</span>, and <span class="math notranslate nohighlight">\(m\)</span>—it follows from the boundary conditions. The key point: <strong>electrons are matter waves</strong>; they reflect at potential steps just as light reflects at interfaces, even when classically “they have enough energy to pass.”</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Potential step</strong>: <span class="math notranslate nohighlight">\(U\)</span> jumps from 0 to <span class="math notranslate nohighlight">\(U_b\)</span> at <span class="math notranslate nohighlight">\(x = 0\)</span>; electron with <span class="math notranslate nohighlight">\(E &gt; U_b\)</span>.</p></li>
+<li><p><strong>Classical</strong>: no reflection. <strong>Quantum</strong>: some reflection (<span class="math notranslate nohighlight">\(R &gt; 0\)</span>).</p></li>
+<li><p><strong>Wave functions</strong>: <span class="math notranslate nohighlight">\(\psi_1 = Ae^{ikx} + Be^{-ikx}\)</span>, <span class="math notranslate nohighlight">\(\psi_2 = Ce^{ik_b x}\)</span>; boundary conditions match <span class="math notranslate nohighlight">\(A+B=C\)</span> and <span class="math notranslate nohighlight">\(Ak-Bk=Ck_b\)</span>.</p></li>
+<li><p><strong>Reflection coefficient</strong> <span class="math notranslate nohighlight">\(R = |B|^2/|A|^2\)</span> = probability of reflection; <strong>transmission</strong> <span class="math notranslate nohighlight">\(T = 1 - R\)</span>.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +725,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-potential-step">Setup: potential step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wave-functions-and-boundary-conditions">Wave functions and boundary conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-and-transmission-coefficients">Reflection and transmission coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quantum-surprise">The quantum surprise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch37_relativity/37-3-the-lorentz-transformation';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch37_relativity/37-3-the-lorentz-transformation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-galilean-transformation">Setup and Galilean transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-transformation-equations">Lorentz transformation equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-form-for-pairs-of-events">Difference form for pairs of events</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-simultaneity-time-dilation-length-contraction">Consequences: simultaneity, time dilation, length contraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +572,103 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-lorentz-transformation">
 <h1>37-3 The Lorentz Transformation<a class="headerlink" href="#the-lorentz-transformation" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Write the <strong>Galilean transformation</strong> equations. Why do they fail at high speeds? What replaces them?</p></li>
+<li><p>Write the <strong>Lorentz transformation</strong> equations for <span class="math notranslate nohighlight">\((x,t) \to (x',t')\)</span> when frame <span class="math notranslate nohighlight">\(S'\)</span> moves at speed <span class="math notranslate nohighlight">\(v\)</span> along <span class="math notranslate nohighlight">\(+x\)</span>. How is time “entangled” with space?</p></li>
+<li><p>From the Lorentz equations, show that two events <strong>simultaneous</strong> in <span class="math notranslate nohighlight">\(S'\)</span> (<span class="math notranslate nohighlight">\(\Delta t' = 0\)</span>) but spatially separated (<span class="math notranslate nohighlight">\(\Delta x' \neq 0\)</span>) are <em>not</em> simultaneous in <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Derive <strong>time dilation</strong> <span class="math notranslate nohighlight">\(\Delta t = \gamma\,\Delta t_0\)</span> from the Lorentz transformation. (Hint: two events at same place in <span class="math notranslate nohighlight">\(S'\)</span>.)</p></li>
+<li><p>Derive <strong>length contraction</strong> <span class="math notranslate nohighlight">\(L = L_0/\gamma\)</span> from the Lorentz transformation. (Hint: rod at rest in <span class="math notranslate nohighlight">\(S'\)</span>; measure simultaneously in <span class="math notranslate nohighlight">\(S\)</span>.)</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>Lorentz transformation</strong> equations relate the spacetime coordinates <span class="math notranslate nohighlight">\((x,y,z,t)\)</span> of an event as measured in one inertial frame to the coordinates <span class="math notranslate nohighlight">\((x',y',z',t')\)</span> in another frame moving at speed <span class="math notranslate nohighlight">\(v\)</span> along the common <span class="math notranslate nohighlight">\(x\)</span>-axis.</p></li>
+<li><p>They replace the <strong>Galilean transformation</strong> (<span class="math notranslate nohighlight">\(x' = x - vt\)</span>, <span class="math notranslate nohighlight">\(t' = t\)</span>), which is only approximate for <span class="math notranslate nohighlight">\(v \ll c\)</span>.</p></li>
+<li><p>Time and space are <strong>entangled</strong>: <span class="math notranslate nohighlight">\(x'\)</span> depends on <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(t'\)</span> depends on <span class="math notranslate nohighlight">\(x\)</span>. As <span class="math notranslate nohighlight">\(c \to \infty\)</span>, the Lorentz equations reduce to the Galilean ones.</p></li>
+<li><p>Time dilation and length contraction follow directly from the Lorentz transformation.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="setup-and-galilean-transformation">
+<h3>Setup and Galilean transformation<a class="headerlink" href="#setup-and-galilean-transformation" title="Link to this heading">#</a></h3>
+<p>Consider two inertial frames <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S'\)</span> with <span class="math notranslate nohighlight">\(S'\)</span> moving at speed <span class="math notranslate nohighlight">\(v\)</span> in the positive <span class="math notranslate nohighlight">\(x\)</span>-direction relative to <span class="math notranslate nohighlight">\(S\)</span>. The axes are parallel; origins coincide at <span class="math notranslate nohighlight">\(t = t' = 0\)</span>. An event has coordinates <span class="math notranslate nohighlight">\((x,y,z,t)\)</span> in <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\((x',y',z',t')\)</span> in <span class="math notranslate nohighlight">\(S'\)</span>.</p>
+<p><strong>Galilean transformation</strong> (pre-Einstein, valid only for <span class="math notranslate nohighlight">\(v \ll c\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-galilean">
+<span class="eqno">(310)<a class="headerlink" href="#equation-eq-galilean" title="Link to this equation">#</a></span>\[
+x' = x - vt, \quad y' = y, \quad z' = z, \quad t' = t
+\]</div>
+<p>It assumes time is universal (<span class="math notranslate nohighlight">\(t' = t\)</span>) and space is separate. For <span class="math notranslate nohighlight">\(v\)</span> approaching <span class="math notranslate nohighlight">\(c\)</span>, these equations are wrong.</p>
+</section>
+<hr class="docutils" />
+<section id="lorentz-transformation-equations">
+<h3>Lorentz transformation equations<a class="headerlink" href="#lorentz-transformation-equations" title="Link to this heading">#</a></h3>
+<p>The <strong>Lorentz transformation</strong> equations are correct for any physically possible speed:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lorentz">
+<span class="eqno">(311)<a class="headerlink" href="#equation-eq-lorentz" title="Link to this equation">#</a></span>\[
+x' = \gamma(x - vt), \quad y' = y, \quad z' = z, \quad t' = \gamma\left(t - \frac{vx}{c^2}\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma = 1/\sqrt{1 - v^2/c^2}\)</span>. Note that <span class="math notranslate nohighlight">\(x'\)</span> involves <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(t'\)</span> involves <span class="math notranslate nohighlight">\(x\)</span>—<strong>space and time are entangled</strong>.</p>
+<p><strong>Inverse</strong> (from <span class="math notranslate nohighlight">\(S'\)</span> to <span class="math notranslate nohighlight">\(S\)</span>): interchange primed and unprimed quantities and replace <span class="math notranslate nohighlight">\(v\)</span> by <span class="math notranslate nohighlight">\(-v\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lorentz-inv">
+<span class="eqno">(312)<a class="headerlink" href="#equation-eq-lorentz-inv" title="Link to this equation">#</a></span>\[
+x = \gamma(x' + vt'), \quad t = \gamma\left(t' + \frac{vx'}{c^2}\right)
+\]</div>
+<p><strong>Limit</strong> <span class="math notranslate nohighlight">\(c \to \infty\)</span>: <span class="math notranslate nohighlight">\(\gamma \to 1\)</span>, and the Lorentz equations reduce to the Galilean ones.</p>
+</section>
+<hr class="docutils" />
+<section id="difference-form-for-pairs-of-events">
+<h3>Difference form for pairs of events<a class="headerlink" href="#difference-form-for-pairs-of-events" title="Link to this heading">#</a></h3>
+<p>For two events with separations <span class="math notranslate nohighlight">\(\Delta x = x_2 - x_1\)</span>, <span class="math notranslate nohighlight">\(\Delta t = t_2 - t_1\)</span> in <span class="math notranslate nohighlight">\(S\)</span>, and <span class="math notranslate nohighlight">\(\Delta x'\)</span>, <span class="math notranslate nohighlight">\(\Delta t'\)</span> in <span class="math notranslate nohighlight">\(S'\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lorentz-diff">
+<span class="eqno">(313)<a class="headerlink" href="#equation-eq-lorentz-diff" title="Link to this equation">#</a></span>\[
+\Delta x' = \gamma(\Delta x - v\,\Delta t), \quad \Delta t' = \gamma\left(\Delta t - \frac{v\,\Delta x}{c^2}\right)
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-lorentz-diff-inv">
+<span class="eqno">(314)<a class="headerlink" href="#equation-eq-lorentz-diff-inv" title="Link to this equation">#</a></span>\[
+\Delta x = \gamma(\Delta x' + v\,\Delta t'), \quad \Delta t = \gamma\left(\Delta t' + \frac{v\,\Delta x'}{c^2}\right)
+\]</div>
+<p>Use the same frame consistently for both events when substituting values.</p>
+</section>
+<hr class="docutils" />
+<section id="consequences-simultaneity-time-dilation-length-contraction">
+<h3>Consequences: simultaneity, time dilation, length contraction<a class="headerlink" href="#consequences-simultaneity-time-dilation-length-contraction" title="Link to this heading">#</a></h3>
+<p><strong>Simultaneity.</strong> If two events are simultaneous in <span class="math notranslate nohighlight">\(S'\)</span> (<span class="math notranslate nohighlight">\(\Delta t' = 0\)</span>) but spatially separated (<span class="math notranslate nohighlight">\(\Delta x' \neq 0\)</span>), then from <a class="reference internal" href="#equation-eq-lorentz-diff-inv">(314)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-simultaneity">
+<span class="eqno">(315)<a class="headerlink" href="#equation-eq-simultaneity" title="Link to this equation">#</a></span>\[
+\Delta t = \gamma\left(0 + \frac{v\,\Delta x'}{c^2}\right) = \gamma\,\frac{v\,\Delta x'}{c^2} \neq 0
+\]</div>
+<p>They are <em>not</em> simultaneous in <span class="math notranslate nohighlight">\(S\)</span>. Spatial separation in one frame implies temporal separation in the other.</p>
+<p><strong>Time dilation.</strong> If two events occur at the same place in <span class="math notranslate nohighlight">\(S'\)</span> (<span class="math notranslate nohighlight">\(\Delta x' = 0\)</span>) but at different times (<span class="math notranslate nohighlight">\(\Delta t' = \Delta t_0\)</span>, proper time):</p>
+<div class="math notranslate nohighlight" id="equation-eq-time-dilation-lorentz">
+<span class="eqno">(316)<a class="headerlink" href="#equation-eq-time-dilation-lorentz" title="Link to this equation">#</a></span>\[
+\Delta t = \gamma(\Delta t' + 0) = \gamma\,\Delta t_0
+\]</div>
+<p><strong>Length contraction.</strong> A rod at rest in <span class="math notranslate nohighlight">\(S'\)</span> has proper length <span class="math notranslate nohighlight">\(\Delta x' = L_0\)</span>. In <span class="math notranslate nohighlight">\(S\)</span>, we measure its length by marking both ends <em>simultaneously</em> (<span class="math notranslate nohighlight">\(\Delta t = 0\)</span>). From <a class="reference internal" href="#equation-eq-lorentz-diff">(313)</a>: <span class="math notranslate nohighlight">\(\Delta x' = \gamma(\Delta x - v\cdot 0) = \gamma\,\Delta x\)</span>, so</p>
+<div class="math notranslate nohighlight" id="equation-eq-length-contraction-lorentz">
+<span class="eqno">(317)<a class="headerlink" href="#equation-eq-length-contraction-lorentz" title="Link to this equation">#</a></span>\[
+L = \Delta x = \frac{\Delta x'}{\gamma} = \frac{L_0}{\gamma}
+\]</div>
+<div class="caution admonition">
+<p class="admonition-title">Sign of <span class="math notranslate nohighlight">\(v\)</span></p>
+<p><span class="math notranslate nohighlight">\(v\)</span> is the velocity of <span class="math notranslate nohighlight">\(S'\)</span> relative to <span class="math notranslate nohighlight">\(S\)</span> (positive when <span class="math notranslate nohighlight">\(S'\)</span> moves in <span class="math notranslate nohighlight">\(+x\)</span>). If <span class="math notranslate nohighlight">\(S\)</span> moves relative to <span class="math notranslate nohighlight">\(S'\)</span>, use <span class="math notranslate nohighlight">\(-v\)</span> in the inverse transformation.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Lorentz transformation</strong>: <span class="math notranslate nohighlight">\(x' = \gamma(x - vt)\)</span>, <span class="math notranslate nohighlight">\(t' = \gamma(t - vx/c^2)\)</span>; <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> unchanged.</p></li>
+<li><p><strong>Entanglement</strong>: <span class="math notranslate nohighlight">\(x'\)</span> depends on <span class="math notranslate nohighlight">\(t\)</span>; <span class="math notranslate nohighlight">\(t'\)</span> depends on <span class="math notranslate nohighlight">\(x\)</span>. Galilean form recovered as <span class="math notranslate nohighlight">\(c \to \infty\)</span>.</p></li>
+<li><p><strong>Difference form</strong> for event pairs: use <a class="reference internal" href="#equation-eq-lorentz-diff">(313)</a> or <a class="reference internal" href="#equation-eq-lorentz-diff-inv">(314)</a>; keep both events in the same frame.</p></li>
+<li><p><strong>Derived</strong>: relativity of simultaneity, time dilation <span class="math notranslate nohighlight">\(\Delta t = \gamma\,\Delta t_0\)</span>, length contraction <span class="math notranslate nohighlight">\(L = L_0/\gamma\)</span>.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +725,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-galilean-transformation">Setup and Galilean transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-transformation-equations">Lorentz transformation equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-form-for-pairs-of-events">Difference form for pairs of events</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-simultaneity-time-dilation-length-contraction">Consequences: simultaneity, time dilation, length contraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

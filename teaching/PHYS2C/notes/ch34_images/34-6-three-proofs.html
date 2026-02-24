@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch34images/34-6-three-proofs';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch34images/34-6-three-proofs.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-1-spherical-mirror-formula">Proof 1: Spherical mirror formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-2-refracting-surface-formula">Proof 2: Refracting surface formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-3-thin-lens-formulas">Proof 3: Thin lens formulas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +571,85 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="three-proofs">
 <h1>34-6 Three Proofs<a class="headerlink" href="#three-proofs" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>For the <strong>spherical mirror</strong> proof: what geometric theorem relates the angles <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, and <span class="math notranslate nohighlight">\(\theta\)</span>? Why is the <strong>paraxial approximation</strong> needed?</p></li>
+<li><p>For the <strong>refracting surface</strong> proof: how does Snell’s law simplify for small angles? How do the triangle relations <span class="math notranslate nohighlight">\(\theta_1 = \alpha + \beta\)</span> and <span class="math notranslate nohighlight">\(\beta = \theta_2 + \gamma\)</span> arise?</p></li>
+<li><p>For the <strong>thin lens</strong> proof: why can we treat the lens as two separate refracting surfaces? What role does the <strong>thin-lens approximation</strong> (<span class="math notranslate nohighlight">\(L \approx 0\)</span>) play?</p></li>
+<li><p>What is the <strong>exterior angle theorem</strong>? How is it used in all three proofs?</p></li>
+<li><p>Why is only the relation <span class="math notranslate nohighlight">\(\beta = \text{arc}/r\)</span> exact in the mirror and refracting-surface proofs, while <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> are approximate?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>This section derives the three main formulas of geometrical optics:</p>
+<ol class="arabic simple">
+<li><p><strong>Spherical mirror</strong>: <span class="math notranslate nohighlight">\(1/p + 1/i = 1/f = 2/r\)</span></p></li>
+<li><p><strong>Refracting surface</strong>: <span class="math notranslate nohighlight">\(n_1/p + n_2/i = (n_2 - n_1)/r\)</span></p></li>
+<li><p><strong>Thin lens</strong>: <span class="math notranslate nohighlight">\(1/p + 1/i = 1/f = (n-1)(1/r_1 - 1/r_2)\)</span></p></li>
+</ol>
+<p>All three proofs rely on <strong>paraxial rays</strong> (small angles with the central axis), the <strong>exterior angle theorem</strong> (exterior angle = sum of opposite interior angles), and geometry of similar arcs.</p>
+</section>
+<hr class="docutils" />
+<section id="proof-1-spherical-mirror-formula">
+<h3>Proof 1: Spherical mirror formula<a class="headerlink" href="#proof-1-spherical-mirror-formula" title="Link to this heading">#</a></h3>
+<p><strong>Setup</strong>: Point object O on the axis of a concave mirror; a ray from O reflects at point <span class="math notranslate nohighlight">\(a\)</span> and crosses the axis at image I. Angles: <span class="math notranslate nohighlight">\(\alpha\)</span> (at O), <span class="math notranslate nohighlight">\(\beta\)</span> (at C), <span class="math notranslate nohighlight">\(\gamma\)</span> (at I), <span class="math notranslate nohighlight">\(\theta\)</span> (incidence/reflection at <span class="math notranslate nohighlight">\(a\)</span>).</p>
+<p><strong>Key steps</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Exterior angle theorem</strong> on triangles O<span class="math notranslate nohighlight">\(a\)</span>C and O<span class="math notranslate nohighlight">\(a\)</span>I: <span class="math notranslate nohighlight">\(\beta = \alpha + \theta\)</span>, <span class="math notranslate nohighlight">\(\gamma = \alpha + 2\theta\)</span>.</p></li>
+<li><p>Eliminate <span class="math notranslate nohighlight">\(\theta\)</span>: <span class="math notranslate nohighlight">\(\alpha + \gamma = 2\beta\)</span>.</p></li>
+<li><p><strong>Small-angle approximation</strong> (paraxial rays): <span class="math notranslate nohighlight">\(\alpha \approx \text{arc}/p\)</span>, <span class="math notranslate nohighlight">\(\beta = \text{arc}/r\)</span> (exact—arc is part of circle centered at C), <span class="math notranslate nohighlight">\(\gamma \approx \text{arc}/i\)</span>.</p></li>
+<li><p>Substitute and use <span class="math notranslate nohighlight">\(f = r/2\)</span> <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(1/p + 1/i = 1/f\)</span>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only <span class="math notranslate nohighlight">\(\beta = \text{arc}/r\)</span> is exact because the arc at <span class="math notranslate nohighlight">\(a\)</span> is part of a circle centered at C. The arcs for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> are not centered at O or I, so the relations are approximate for small angles.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="proof-2-refracting-surface-formula">
+<h3>Proof 2: Refracting surface formula<a class="headerlink" href="#proof-2-refracting-surface-formula" title="Link to this heading">#</a></h3>
+<p><strong>Setup</strong>: Point object O in medium <span class="math notranslate nohighlight">\(n_1\)</span>; ray refracts at point <span class="math notranslate nohighlight">\(a\)</span> on a spherical surface into medium <span class="math notranslate nohighlight">\(n_2\)</span>, crossing the axis at image I. Angles: <span class="math notranslate nohighlight">\(\theta_1\)</span> (incidence), <span class="math notranslate nohighlight">\(\theta_2\)</span> (refraction), <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span> as before.</p>
+<p><strong>Key steps</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Snell’s law</strong> for small angles: <span class="math notranslate nohighlight">\(n_1 \sin\theta_1 \approx n_2 \sin\theta_2\)</span> <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(n_1 \theta_1 \approx n_2 \theta_2\)</span>.</p></li>
+<li><p><strong>Exterior angle theorem</strong> on triangles C O <span class="math notranslate nohighlight">\(a\)</span> and I C <span class="math notranslate nohighlight">\(a\)</span>: <span class="math notranslate nohighlight">\(\theta_1 = \alpha + \beta\)</span>, <span class="math notranslate nohighlight">\(\beta = \theta_2 + \gamma\)</span>.</p></li>
+<li><p>Eliminate <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>: <span class="math notranslate nohighlight">\(n_1 \alpha + n_2 \gamma = (n_2 - n_1)\beta\)</span>.</p></li>
+<li><p><strong>Small-angle approximation</strong>: <span class="math notranslate nohighlight">\(\alpha \approx \text{arc}/p\)</span>, <span class="math notranslate nohighlight">\(\beta = \text{arc}/r\)</span>, <span class="math notranslate nohighlight">\(\gamma \approx \text{arc}/i\)</span>.</p></li>
+<li><p>Substitute <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(n_1/p + n_2/i = (n_2 - n_1)/r\)</span>.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="proof-3-thin-lens-formulas">
+<h3>Proof 3: Thin lens formulas<a class="headerlink" href="#proof-3-thin-lens-formulas" title="Link to this heading">#</a></h3>
+<p><strong>Strategy</strong>: Treat the lens as <strong>two refracting surfaces</strong> in sequence. The image from the first surface becomes the object for the second.</p>
+<p><strong>Setup</strong>: Object O<span class="math notranslate nohighlight">\('\)</span> in air; left surface (radius <span class="math notranslate nohighlight">\(r'\)</span>) forms virtual image I<span class="math notranslate nohighlight">\('\)</span> in glass; right surface (radius <span class="math notranslate nohighlight">\(r''\)</span>) has I<span class="math notranslate nohighlight">\('\)</span> as object O<span class="math notranslate nohighlight">\(''\)</span> (effectively in glass) and forms final image I<span class="math notranslate nohighlight">\(''\)</span> in air.</p>
+<p><strong>Key steps</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>First surface</strong> (air <span class="math notranslate nohighlight">\(\to\)</span> glass): <span class="math notranslate nohighlight">\(1/p' - n/i' = (n-1)/r'\)</span> (negative <span class="math notranslate nohighlight">\(i'\)</span> for virtual image).</p></li>
+<li><p><strong>Second surface</strong> (glass <span class="math notranslate nohighlight">\(\to\)</span> air): Object distance <span class="math notranslate nohighlight">\(p'' = i' + L \approx i'\)</span> when <strong><span class="math notranslate nohighlight">\(L \approx 0\)</span></strong> (thin lens). Apply refracting-surface equation with <span class="math notranslate nohighlight">\(n_1 = n\)</span>, <span class="math notranslate nohighlight">\(n_2 = 1\)</span>.</p></li>
+<li><p><strong>Add</strong> the two equations: the <span class="math notranslate nohighlight">\(n/i'\)</span> terms cancel, yielding <span class="math notranslate nohighlight">\(1/p' + 1/i'' = (n-1)(1/r' - 1/r'')\)</span>.</p></li>
+<li><p>Relabel <span class="math notranslate nohighlight">\(p' \to p\)</span>, <span class="math notranslate nohighlight">\(i'' \to i\)</span>, <span class="math notranslate nohighlight">\(r' \to r_1\)</span>, <span class="math notranslate nohighlight">\(r'' \to r_2\)</span> <span class="math notranslate nohighlight">\(\to\)</span> thin lens equation and lens maker’s equation.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <strong>thin-lens approximation</strong> <span class="math notranslate nohighlight">\(L \approx 0\)</span> is essential: it lets the object distance for the second surface equal the image distance from the first, so the intermediate terms cancel when the equations are combined.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Spherical mirror</strong>: Exterior angle theorem + small-angle geometry <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(1/p + 1/i = 2/r\)</span>.</p></li>
+<li><p><strong>Refracting surface</strong>: Snell’s law (small angles) + exterior angle theorem + geometry <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(n_1/p + n_2/i = (n_2 - n_1)/r\)</span>.</p></li>
+<li><p><strong>Thin lens</strong>: Two refracting surfaces in sequence; thin-lens approximation (<span class="math notranslate nohighlight">\(L \approx 0\)</span>) <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(1/p + 1/i = (n-1)(1/r_1 - 1/r_2)\)</span>.</p></li>
+<li><p><strong>Common thread</strong>: Paraxial rays, exterior angle theorem, and arc-length approximations.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +706,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-1-spherical-mirror-formula">Proof 1: Spherical mirror formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-2-refracting-surface-formula">Proof 2: Refracting surface formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-3-thin-lens-formulas">Proof 3: Thin lens formulas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch36_diffraction/36-2-intensity-in-single-slit-diffraction';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch36_diffraction/36-2-intensity-in-single-slit-diffraction.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-intensity-formula">The Intensity Formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minima">Minima</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#central-maximum">Central Maximum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#secondary-maxima">Secondary Maxima</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-vs-angle">Intensity vs. Angle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +573,119 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="intensity-in-single-slit-diffraction">
 <h1>36-2 Intensity in Single-Slit Diffraction<a class="headerlink" href="#intensity-in-single-slit-diffraction" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>For single-slit diffraction, what is the intensity formula <span class="math notranslate nohighlight">\(I(\theta)\)</span> in terms of <span class="math notranslate nohighlight">\(I_m\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, and the angle <span class="math notranslate nohighlight">\(\theta\)</span>? What is <span class="math notranslate nohighlight">\(\alpha\)</span>?</p></li>
+<li><p>At what values of <span class="math notranslate nohighlight">\(\alpha\)</span> do the <strong>minima</strong> occur? Show that this reproduces <span class="math notranslate nohighlight">\(a\sin\theta = m\lambda\)</span> from Section 36-1.</p></li>
+<li><p>Where are the <strong>secondary maxima</strong> approximately located? Why is the central maximum much brighter than the secondary maxima?</p></li>
+<li><p>Why does the factor <span class="math notranslate nohighlight">\((\sin\alpha/\alpha)^2\)</span> approach 1 as <span class="math notranslate nohighlight">\(\alpha \to 0\)</span>? What does that tell you about the center of the pattern?</p></li>
+<li><p>In the double-slit pattern (Section 36-4), the single-slit factor <span class="math notranslate nohighlight">\((\sin\alpha/\alpha)^2\)</span> acts as an envelope. What does that mean for the relative intensities of the interference fringes?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>intensity</strong> <span class="math notranslate nohighlight">\(I(\theta)\)</span> in the single-slit diffraction pattern varies with angle <span class="math notranslate nohighlight">\(\theta\)</span> according to <span class="math notranslate nohighlight">\(I = I_m (\sin\alpha/\alpha)^2\)</span>, where <span class="math notranslate nohighlight">\(\alpha = (\pi a/\lambda)\sin\theta\)</span> and <span class="math notranslate nohighlight">\(I_m\)</span> is the intensity at the center.</p></li>
+<li><p><strong>Minima</strong> occur when <span class="math notranslate nohighlight">\(\alpha = m\pi\)</span> (<span class="math notranslate nohighlight">\(m = \pm 1, \pm 2, \ldots\)</span>), reproducing <span class="math notranslate nohighlight">\(a\sin\theta = m\lambda\)</span> from Section 36-1.</p></li>
+<li><p><strong>Secondary maxima</strong> lie roughly halfway between minima; they are much weaker than the central maximum (the first is at <span class="math notranslate nohighlight">\(\sim 4.5\%\)</span> of <span class="math notranslate nohighlight">\(I_m\)</span>).</p></li>
+<li><p>This diffraction factor appears as an <strong>envelope</strong> in the double-slit pattern (Section 36-4), modulating the intensity of the interference fringes.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-intensity-formula">
+<h3>The Intensity Formula<a class="headerlink" href="#the-intensity-formula" title="Link to this heading">#</a></h3>
+<p>For monochromatic light of wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> passing through a slit of width <span class="math notranslate nohighlight">\(a\)</span>, the intensity at angle <span class="math notranslate nohighlight">\(\theta\)</span> from the central axis is</p>
+<div class="math notranslate nohighlight" id="equation-eq-intensity-slit">
+<span class="eqno">(287)<a class="headerlink" href="#equation-eq-intensity-slit" title="Link to this equation">#</a></span>\[
+I(\theta) = I_m \left(\frac{\sin\alpha}{\alpha}\right)^2
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight" id="equation-eq-alpha">
+<span class="eqno">(288)<a class="headerlink" href="#equation-eq-alpha" title="Link to this equation">#</a></span>\[
+\alpha = \frac{\pi a}{\lambda}\sin\theta
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(I_m\)</span> is the intensity at the center of the pattern (<span class="math notranslate nohighlight">\(\theta = 0\)</span>).</p>
+<div class="note admonition">
+<p class="admonition-title">Physical origin</p>
+<p>The slit is treated as a continuous distribution of Huygens sources. Adding their contributions (e.g., via a phasor diagram) yields a resultant amplitude proportional to <span class="math notranslate nohighlight">\(\sin\alpha/\alpha\)</span>. Since intensity <span class="math notranslate nohighlight">\(\propto\)</span> (amplitude)<span class="math notranslate nohighlight">\(^2\)</span>, we obtain <span class="math notranslate nohighlight">\(I \propto (\sin\alpha/\alpha)^2\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="minima">
+<h3>Minima<a class="headerlink" href="#minima" title="Link to this heading">#</a></h3>
+<p>Intensity is zero when <span class="math notranslate nohighlight">\(\sin\alpha = 0\)</span> and <span class="math notranslate nohighlight">\(\alpha \neq 0\)</span> — i.e., when <span class="math notranslate nohighlight">\(\alpha = m\pi\)</span> for <span class="math notranslate nohighlight">\(m = \pm 1, \pm 2, \ldots\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-minima">
+<span class="eqno">(289)<a class="headerlink" href="#equation-eq-minima" title="Link to this equation">#</a></span>\[
+\alpha = m\pi \quad \Rightarrow \quad \frac{\pi a}{\lambda}\sin\theta = m\pi \quad \Rightarrow \quad a\sin\theta = m\lambda
+\]</div>
+<p>This matches the <strong>minima</strong> condition from Section 36-1 (zone method).</p>
+</section>
+<hr class="docutils" />
+<section id="central-maximum">
+<h3>Central Maximum<a class="headerlink" href="#central-maximum" title="Link to this heading">#</a></h3>
+<p>At <span class="math notranslate nohighlight">\(\theta = 0\)</span>, we have <span class="math notranslate nohighlight">\(\alpha = 0\)</span>. The limit <span class="math notranslate nohighlight">\(\lim_{\alpha \to 0} (\sin\alpha/\alpha) = 1\)</span>, so <span class="math notranslate nohighlight">\(I(0) = I_m\)</span>. The central maximum is the brightest part of the pattern.</p>
+</section>
+<hr class="docutils" />
+<section id="secondary-maxima">
+<h3>Secondary Maxima<a class="headerlink" href="#secondary-maxima" title="Link to this heading">#</a></h3>
+<p>The <strong>secondary maxima</strong> occur roughly halfway between adjacent minima. They are found where <span class="math notranslate nohighlight">\(d/d\alpha\,(\sin\alpha/\alpha)^2 = 0\)</span> (excluding <span class="math notranslate nohighlight">\(\alpha = 0\)</span>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Maximum</p></th>
+<th class="head"><p>Approximate <span class="math notranslate nohighlight">\(\alpha\)</span></p></th>
+<th class="head"><p>Relative intensity <span class="math notranslate nohighlight">\(I/I_m\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Central</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>First side</p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 1.43\pi\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 0.047\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Second side</p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 2.46\pi\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 0.017\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Third side</p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 3.47\pi\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\approx 0.008\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The secondary maxima are much weaker than the central maximum (the first is only about 4.5% of the central intensity).</p>
+</section>
+<hr class="docutils" />
+<section id="intensity-vs-angle">
+<h3>Intensity vs. Angle<a class="headerlink" href="#intensity-vs-angle" title="Link to this heading">#</a></h3>
+<p>The intensity pattern has:</p>
+<ul class="simple">
+<li><p>A <strong>broad central maximum</strong> at <span class="math notranslate nohighlight">\(\theta = 0\)</span>;</p></li>
+<li><p><strong>Minima</strong> at <span class="math notranslate nohighlight">\(a\sin\theta = m\lambda\)</span> (<span class="math notranslate nohighlight">\(m = \pm 1, \pm 2, \ldots\)</span>);</p></li>
+<li><p><strong>Secondary maxima</strong> between the minima, with decreasing height as <span class="math notranslate nohighlight">\(|\theta|\)</span> increases.</p></li>
+</ul>
+<div class="seealso admonition">
+<p class="admonition-title">Connection to double-slit</p>
+<p>In the double-slit pattern (Section 36-4), the intensity is <span class="math notranslate nohighlight">\(I = I_m (\cos\beta)^2 (\sin\alpha/\alpha)^2\)</span>, where <span class="math notranslate nohighlight">\(\beta = (\pi d/\lambda)\sin\theta\)</span>. The factor <span class="math notranslate nohighlight">\((\sin\alpha/\alpha)^2\)</span> is the <strong>diffraction envelope</strong> — it limits the intensity of the interference fringes and can eliminate some of them when a diffraction minimum coincides with an interference maximum.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The single-slit intensity is <span class="math notranslate nohighlight">\(I = I_m (\sin\alpha/\alpha)^2\)</span> with <span class="math notranslate nohighlight">\(\alpha = (\pi a/\lambda)\sin\theta\)</span>.</p></li>
+<li><p>Minima occur at <span class="math notranslate nohighlight">\(\alpha = m\pi\)</span> <span class="math notranslate nohighlight">\(\Leftrightarrow\)</span> <span class="math notranslate nohighlight">\(a\sin\theta = m\lambda\)</span>.</p></li>
+<li><p>The central maximum is brightest; secondary maxima are much weaker (~4.5%, 1.7%, 0.8%, …).</p></li>
+<li><p>This diffraction factor acts as an envelope in the double-slit pattern.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +742,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-intensity-formula">The Intensity Formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minima">Minima</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#central-maximum">Central Maximum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#secondary-maxima">Secondary Maxima</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-vs-angle">Intensity vs. Angle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

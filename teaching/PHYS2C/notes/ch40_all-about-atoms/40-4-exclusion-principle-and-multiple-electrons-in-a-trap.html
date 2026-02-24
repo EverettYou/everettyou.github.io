@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch40_all-about-atoms/40-4-exclusion-principle-and-multiple-electrons-in-a-trap';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch40_all-about-atoms/40-4-exclusion-principle-and-multiple-electrons-in-a-trap.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,24 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pauli-exclusion-principle">The Pauli Exclusion Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-electrons-in-rectangular-traps">Multiple Electrons in Rectangular Traps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupancy-terminology">Occupancy Terminology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-total-energy">Finding the Total Energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-seven-electrons-in-a-square-corral">Example: Seven Electrons in a Square Corral</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-level-diagrams-for-the-system">Energy-Level Diagrams for the System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +574,139 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exclusion-principle-and-multiple-electrons-in-a-trap">
 <h1>40-4 Exclusion Principle and Multiple Electrons in a Trap<a class="headerlink" href="#exclusion-principle-and-multiple-electrons-in-a-trap" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>State the Pauli exclusion principle. Why would atoms collapse if it did not hold?</p></li>
+<li><p>For a 1D infinite well, how many quantum numbers does each electron have? How many electrons can occupy the lowest energy level? Explain using the exclusion principle.</p></li>
+<li><p>In a 2D rectangular corral, energy levels can be degenerate (e.g., <span class="math notranslate nohighlight">\(E_{2,1} = E_{1,2}\)</span>). How many distinct quantum states share that energy? How many electrons can occupy that level?</p></li>
+<li><p>Describe the procedure for building the ground-state configuration of <span class="math notranslate nohighlight">\(N\)</span> electrons in a trap: add electrons one by one, fill lowest levels first, obey the exclusion principle. What do <em>empty</em>, <em>partially occupied</em>, and <em>fully occupied</em> mean?</p></li>
+<li><p>For multiple electrons in a trap (neglecting electron–electron interaction), how do you find the total energy? How do you identify the first excited state and the energy required to reach it?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>Pauli exclusion principle</strong> forbids two electrons in the same trap from having the same set of quantum numbers — a fundamental rule that explains atomic structure and stability.</p></li>
+<li><p>Electrons are placed in traps <strong>one by one</strong>, filling the lowest available states; each state can hold at most one electron (or two if they differ only by spin).</p></li>
+<li><p>Levels are <strong>empty</strong>, <strong>partially occupied</strong>, or <strong>fully occupied</strong>; the <strong>electron configuration</strong> is the listing of occupied states.</p></li>
+<li><p>For multiple electrons (neglecting interaction), the <strong>total energy</strong> is the sum of single-electron energies; the <strong>first excited state</strong> is the lowest-energy configuration that differs from the ground state by one electron jump.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-pauli-exclusion-principle">
+<h3>The Pauli Exclusion Principle<a class="headerlink" href="#the-pauli-exclusion-principle" title="Link to this heading">#</a></h3>
+<p><strong>No two electrons confined to the same trap can have the same set of values for their quantum numbers.</strong></p>
+<p>For atoms (Section 40-5), this means no two electrons can share the same <span class="math notranslate nohighlight">\((n, \ell, m_\ell, m_s)\)</span>. All electrons have <span class="math notranslate nohighlight">\(s = \tfrac{1}{2}\)</span>, so any two must differ in at least one of <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\ell\)</span>, <span class="math notranslate nohighlight">\(m_\ell\)</span>, or <span class="math notranslate nohighlight">\(m_s\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Why it matters</p>
+<p>Without the exclusion principle, all electrons would collapse into the lowest energy level. Atoms would not have the structure they do, and matter as we know it could not exist.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="multiple-electrons-in-rectangular-traps">
+<h3>Multiple Electrons in Rectangular Traps<a class="headerlink" href="#multiple-electrons-in-rectangular-traps" title="Link to this heading">#</a></h3>
+<p>To prepare for atoms, consider electrons in the traps of Chapter 39, now including <strong>spin</strong> (<span class="math notranslate nohighlight">\(m_s = \pm\tfrac{1}{2}\)</span>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Trap</p></th>
+<th class="head"><p>Quantum numbers</p></th>
+<th class="head"><p>Max electrons per level</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1D (<span class="math notranslate nohighlight">\(L\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(m_s\)</span></p></td>
+<td><p>2 (opposite spins)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2D corral (<span class="math notranslate nohighlight">\(L_x \times L_y\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_x\)</span>, <span class="math notranslate nohighlight">\(n_y\)</span>, <span class="math notranslate nohighlight">\(m_s\)</span></p></td>
+<td><p>2 per distinct <span class="math notranslate nohighlight">\((n_x,n_y)\)</span>; degenerate levels hold more</p></td>
+</tr>
+<tr class="row-even"><td><p>3D box (<span class="math notranslate nohighlight">\(L_x \times L_y \times L_z\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_x\)</span>, <span class="math notranslate nohighlight">\(n_y\)</span>, <span class="math notranslate nohighlight">\(n_z\)</span>, <span class="math notranslate nohighlight">\(m_s\)</span></p></td>
+<td><p>2 per distinct <span class="math notranslate nohighlight">\((n_x,n_y,n_z)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Procedure:</strong> Add electrons one by one. Each goes into the <strong>lowest energy level</strong> that still has an available state (i.e., a unique set of quantum numbers not yet used).</p>
+</section>
+<hr class="docutils" />
+<section id="occupancy-terminology">
+<h3>Occupancy Terminology<a class="headerlink" href="#occupancy-terminology" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Empty (unoccupied)</strong>: No electrons in that level.</p></li>
+<li><p><strong>Partially occupied</strong>: Some states in that level are filled, others are available.</p></li>
+<li><p><strong>Fully occupied</strong>: No more electrons can be added to that level without violating the exclusion principle.</p></li>
+</ul>
+<p>The <strong>electron configuration</strong> is a listing (or diagram) of which levels the electrons occupy, or of the quantum numbers of each electron.</p>
+</section>
+<hr class="docutils" />
+<section id="finding-the-total-energy">
+<h3>Finding the Total Energy<a class="headerlink" href="#finding-the-total-energy" title="Link to this heading">#</a></h3>
+<p>We assume electrons <strong>do not electrically interact</strong> with each other. Then:</p>
+<ol class="arabic simple">
+<li><p>Use the <strong>one-electron</strong> energy-level diagram (from Chapter 39).</p></li>
+<li><p>Place electrons according to the exclusion principle.</p></li>
+<li><p><strong>Total energy</strong> = sum of the energies of the individual electrons.</p></li>
+</ol>
+<div class="math notranslate nohighlight" id="equation-eq-e-total">
+<span class="eqno">(408)<a class="headerlink" href="#equation-eq-e-total" title="Link to this equation">#</a></span>\[
+E_{\text{total}} = E_1 + E_2 + \cdots + E_N
+\]</div>
+<p>The <strong>ground state</strong> of the system is the configuration with the lowest total energy. The <strong>first excited state</strong> is the next-lowest configuration, reached by moving one electron to a higher level (the jump must be to a level that is not fully occupied).</p>
+</section>
+<hr class="docutils" />
+<section id="example-seven-electrons-in-a-square-corral">
+<h3>Example: Seven Electrons in a Square Corral<a class="headerlink" href="#example-seven-electrons-in-a-square-corral" title="Link to this heading">#</a></h3>
+<p>For a square corral (<span class="math notranslate nohighlight">\(L_x = L_y = L\)</span>), energies are <span class="math notranslate nohighlight">\(E_{n_x,n_y} = (n_x^2 + n_y^2)h^2/(8mL^2)\)</span>. The lowest levels (in units of <span class="math notranslate nohighlight">\(h^2/8mL^2\)</span>) are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E_{1,1} = 2\)</span> — 1 distinct state, 2 electrons max (opposite spins)</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{2,1} = E_{1,2} = 5\)</span> — 2 distinct states, 4 electrons max</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{2,2} = 8\)</span> — 1 distinct state, 2 electrons max</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{3,1} = E_{1,3} = 10\)</span> — 2 distinct states, 4 electrons max</p></li>
+</ul>
+<p><strong>Ground state for 7 electrons:</strong></p>
+<ul class="simple">
+<li><p>2 in <span class="math notranslate nohighlight">\(E_{1,1}\)</span>, 4 in <span class="math notranslate nohighlight">\(E_{2,1}/E_{1,2}\)</span>, 1 in <span class="math notranslate nohighlight">\(E_{2,2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{\text{gr}} = 2(2) + 4(5) + 1(8) = 32\,h^2/8mL^2\)</span></p></li>
+</ul>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">First excited state</p>
+<p><strong>Question:</strong> What is the smallest energy input needed to reach the first excited state?</p>
+<p><strong>Answer:</strong> An electron must jump to a level that is not fully occupied. The three smallest possible jumps are:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(E_{1,1} \to E_{2,2}\)</span>: <span class="math notranslate nohighlight">\(\Delta E = 6\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{2,1}/E_{1,2} \to E_{2,2}\)</span>: <span class="math notranslate nohighlight">\(\Delta E = 3\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{2,2} \to E_{3,1}/E_{1,3}\)</span>: <span class="math notranslate nohighlight">\(\Delta E = 2\)</span></p></li>
+</ol>
+<p>The <strong>minimum</strong> is <span class="math notranslate nohighlight">\(\Delta E = 2\,h^2/8mL^2\)</span>. The electron in <span class="math notranslate nohighlight">\(E_{2,2}\)</span> jumps to the empty <span class="math notranslate nohighlight">\(E_{3,1}/E_{1,3}\)</span> level. The first excited state has energy <span class="math notranslate nohighlight">\(E_{\text{fe}} = E_{\text{gr}} + \Delta E = 34\,h^2/8mL^2\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="energy-level-diagrams-for-the-system">
+<h3>Energy-Level Diagrams for the System<a class="headerlink" href="#energy-level-diagrams-for-the-system" title="Link to this heading">#</a></h3>
+<p>One can draw either:</p>
+<ul class="simple">
+<li><p><strong>One-electron diagram</strong>: Show each electron on the single-particle energy levels (arrows for spin).</p></li>
+<li><p><strong>System diagram</strong>: Show the total energies <span class="math notranslate nohighlight">\(E_{\text{gr}}\)</span>, <span class="math notranslate nohighlight">\(E_{\text{fe}}\)</span>, <span class="math notranslate nohighlight">\(E_{\text{se}}\)</span>, … of the system as a whole.</p></li>
+</ul>
+<p>The ground state is the lowest total energy; the first excited state is the next; and so on.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>Pauli exclusion principle</strong> forbids two electrons from sharing the same quantum numbers; it is essential for atomic structure.</p></li>
+<li><p>Electrons fill traps <strong>one by one</strong> into the lowest available states; levels can be empty, partially occupied, or fully occupied.</p></li>
+<li><p>With <strong>no electron–electron interaction</strong>, total energy is the sum of single-electron energies.</p></li>
+<li><p>The <strong>first excited state</strong> is reached by the smallest-energy single-electron jump to a non-full level.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +763,31 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pauli-exclusion-principle">The Pauli Exclusion Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-electrons-in-rectangular-traps">Multiple Electrons in Rectangular Traps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupancy-terminology">Occupancy Terminology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-total-energy">Finding the Total Energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-seven-electrons-in-a-square-corral">Example: Seven Electrons in a Square Corral</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-level-diagrams-for-the-system">Energy-Level Diagrams for the System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

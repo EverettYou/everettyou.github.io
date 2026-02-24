@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch40_all-about-atoms/40-3-magnetic-resonance';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch40_all-about-atoms/40-3-magnetic-resonance.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proton-spin-and-magnetic-moment">Proton Spin and Magnetic Moment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-levels-and-spin-flip">Energy Levels and Spin-Flip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resonance-condition">Resonance Condition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nmr-spectra-and-chemical-shifts">NMR Spectra and Chemical Shifts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +572,118 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="magnetic-resonance">
 <h1>40-3 Magnetic Resonance<a class="headerlink" href="#magnetic-resonance" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>A proton has spin and a magnetic dipole moment. How does the proton differ from an electron in terms of the direction of <span class="math notranslate nohighlight">\(\vec{\mu}\)</span> relative to <span class="math notranslate nohighlight">\(\vec{S}\)</span>, and which spin orientation (up or down) has lower energy?</p></li>
+<li><p>For a proton in a magnetic field <span class="math notranslate nohighlight">\(B\)</span>, what is the energy difference between the spin-up and spin-down states? What photon energy is needed to flip the spin?</p></li>
+<li><p>What is magnetic resonance (NMR)? How is the RF field applied, and what happens when its frequency matches the spin-flip energy?</p></li>
+<li><p>The effective field at a proton is the sum of an external field and an internal field from nearby atoms. Why does this allow NMR to identify different chemical environments?</p></li>
+<li><p>For a given magnetic field, estimate the frequency of photons needed for proton NMR. Why is it in the radio-frequency range?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>proton</strong> has intrinsic spin <span class="math notranslate nohighlight">\(\vec{S}\)</span> and a magnetic dipole moment <span class="math notranslate nohighlight">\(\vec{\mu}\)</span> that are <strong>in the same direction</strong> (unlike the electron, because the proton is positively charged).</p></li>
+<li><p>In a magnetic field <span class="math notranslate nohighlight">\(\vec{B}\)</span>, the proton has two energy levels; <strong>spin up</strong> (aligned with <span class="math notranslate nohighlight">\(\vec{B}\)</span>) is the lower-energy state.</p></li>
+<li><p><strong>Magnetic resonance</strong> (NMR) occurs when a proton absorbs a photon whose energy equals the spin-flip energy <span class="math notranslate nohighlight">\(\Delta E = 2\mu_z B\)</span>; the required frequency is in the <strong>radio-frequency</strong> range.</p></li>
+<li><p>The effective field at a proton includes contributions from nearby atoms; this <strong>chemical shift</strong> allows NMR to identify different substances and is the basis of <strong>MRI</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="proton-spin-and-magnetic-moment">
+<h3>Proton Spin and Magnetic Moment<a class="headerlink" href="#proton-spin-and-magnetic-moment" title="Link to this heading">#</a></h3>
+<p>Like the electron, a proton has an intrinsic <strong>spin angular momentum</strong> <span class="math notranslate nohighlight">\(\vec{S}\)</span> and an associated <strong>spin magnetic dipole moment</strong> <span class="math notranslate nohighlight">\(\vec{\mu}\)</span>. The key difference:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Electron</p></th>
+<th class="head"><p>Proton</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Charge</p></td>
+<td><p>Negative</p></td>
+<td><p>Positive</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vec{\mu}\)</span> vs. <span class="math notranslate nohighlight">\(\vec{S}\)</span></p></td>
+<td><p>Opposite directions</p></td>
+<td><p>Same direction</p></td>
+</tr>
+<tr class="row-even"><td><p>Lower energy in <span class="math notranslate nohighlight">\(\vec{B}\)</span></p></td>
+<td><p>Spin down (<span class="math notranslate nohighlight">\(\vec{\mu}\)</span> opposite <span class="math notranslate nohighlight">\(\vec{B}\)</span>)</p></td>
+<td><p>Spin up (<span class="math notranslate nohighlight">\(\vec{\mu}\)</span> aligned with <span class="math notranslate nohighlight">\(\vec{B}\)</span>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Proton vs. electron</p>
+<p>For an <strong>electron</strong>, <span class="math notranslate nohighlight">\(U = -\vec{\mu}\cdot\vec{B}\)</span> with <span class="math notranslate nohighlight">\(\vec{\mu}\)</span> opposite <span class="math notranslate nohighlight">\(\vec{S}\)</span>: spin down (<span class="math notranslate nohighlight">\(\mu_z &gt; 0\)</span> when <span class="math notranslate nohighlight">\(S_z &lt; 0\)</span>) gives lower <span class="math notranslate nohighlight">\(U\)</span>. For a <strong>proton</strong>, <span class="math notranslate nohighlight">\(\vec{\mu}\)</span> and <span class="math notranslate nohighlight">\(\vec{S}\)</span> point the same way: spin up (aligned with <span class="math notranslate nohighlight">\(\vec{B}\)</span>) gives lower <span class="math notranslate nohighlight">\(U\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="energy-levels-and-spin-flip">
+<h3>Energy Levels and Spin-Flip<a class="headerlink" href="#energy-levels-and-spin-flip" title="Link to this heading">#</a></h3>
+<p>In a magnetic field <span class="math notranslate nohighlight">\(\vec{B}\)</span> along the <span class="math notranslate nohighlight">\(z\)</span> axis, the proton has two quantized orientations:</p>
+<ul class="simple">
+<li><p><strong>Spin up</strong>: <span class="math notranslate nohighlight">\(\mu_z\)</span> in the direction of <span class="math notranslate nohighlight">\(\vec{B}\)</span>; energy <span class="math notranslate nohighlight">\(U = -\mu_z B\)</span> (lower).</p></li>
+<li><p><strong>Spin down</strong>: <span class="math notranslate nohighlight">\(\mu_z\)</span> opposite <span class="math notranslate nohighlight">\(\vec{B}\)</span>; energy <span class="math notranslate nohighlight">\(U = +\mu_z B\)</span> (higher).</p></li>
+</ul>
+<p>The energy difference is</p>
+<div class="math notranslate nohighlight" id="equation-eq-delta-e">
+<span class="eqno">(405)<a class="headerlink" href="#equation-eq-delta-e" title="Link to this equation">#</a></span>\[
+\Delta E = 2\mu_z B
+\]</div>
+<p>A proton can jump from the lower to the higher state by <strong>absorbing a photon</strong> with energy</p>
+<div class="math notranslate nohighlight" id="equation-eq-resonance-magnetic">
+<span class="eqno">(406)<a class="headerlink" href="#equation-eq-resonance-magnetic" title="Link to this equation">#</a></span>\[
+hf = 2\mu_z B
+\]</div>
+<p>This absorption is called <strong>magnetic resonance</strong> or <strong>nuclear magnetic resonance (NMR)</strong>; the reversal of <span class="math notranslate nohighlight">\(S_z\)</span> is called <strong>spin-flipping</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="resonance-condition">
+<h3>Resonance Condition<a class="headerlink" href="#resonance-condition" title="Link to this heading">#</a></h3>
+<p>For resonance to occur, the photon frequency must satisfy</p>
+<div class="math notranslate nohighlight" id="equation-eq-f-resonance">
+<span class="eqno">(407)<a class="headerlink" href="#equation-eq-f-resonance" title="Link to this equation">#</a></span>\[
+f = \frac{2\mu_z B}{h}
+\]</div>
+<ul class="simple">
+<li><p>The proton’s magnetic moment <span class="math notranslate nohighlight">\(\mu_z\)</span> is much smaller than the Bohr magneton (nuclear magneton scale).</p></li>
+<li><p>Typical fields <span class="math notranslate nohighlight">\(B \sim 1\)</span>–3 T give frequencies in the <strong>radio-frequency (RF)</strong> range (tens of MHz).</p></li>
+</ul>
+<p>In practice, an <strong>RF source</strong> drives a coil wrapped around the sample. The oscillating EM field in the coil provides photons at frequency <span class="math notranslate nohighlight">\(f\)</span>. When <span class="math notranslate nohighlight">\(f\)</span> matches the resonance condition, protons absorb energy and flip spin; the absorption is detected.</p>
+</section>
+<hr class="docutils" />
+<section id="nmr-spectra-and-chemical-shifts">
+<h3>NMR Spectra and Chemical Shifts<a class="headerlink" href="#nmr-spectra-and-chemical-shifts" title="Link to this heading">#</a></h3>
+<p>The field <span class="math notranslate nohighlight">\(\vec{B}\)</span> at a proton is not purely the external field. It is the <strong>vector sum</strong> of:</p>
+<ol class="arabic simple">
+<li><p>The <strong>external field</strong> from the magnet.</p></li>
+<li><p>The <strong>internal field</strong> from nearby atoms and nuclei.</p></li>
+</ol>
+<p>Different chemical environments (e.g., protons in water vs. in organic molecules) experience slightly different effective fields. The resonance frequency shifts accordingly — a <strong>chemical shift</strong>. By scanning the RF frequency (or the field) and recording absorption, one obtains an <strong>NMR spectrum</strong> that identifies specific substances and molecular structure.</p>
+<div class="seealso admonition">
+<p class="admonition-title">MRI</p>
+<p><strong>Magnetic resonance imaging (MRI)</strong> uses the same physics. A gradient in the magnetic field encodes spatial position into the resonance frequency, allowing construction of 3D images of proton density (e.g., in soft tissue). See Module 32-5 for a brief discussion.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A proton’s spin and magnetic moment are aligned (positive charge); spin up in <span class="math notranslate nohighlight">\(\vec{B}\)</span> is the lower-energy state.</p></li>
+<li><p>The spin-flip energy is <span class="math notranslate nohighlight">\(\Delta E = 2\mu_z B\)</span>; resonance occurs when <span class="math notranslate nohighlight">\(hf = 2\mu_z B\)</span>.</p></li>
+<li><p>NMR uses RF photons to induce spin-flips; detection of absorption yields spectra.</p></li>
+<li><p>Chemical shifts from the internal field allow identification of different substances and support applications such as MRI.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +740,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proton-spin-and-magnetic-moment">Proton Spin and Magnetic Moment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-levels-and-spin-flip">Energy Levels and Spin-Flip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resonance-condition">Resonance Condition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nmr-spectra-and-chemical-shifts">NMR Spectra and Chemical Shifts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

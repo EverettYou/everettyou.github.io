@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch38_photons-matter-waves/38-6-schrodingers-equation';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch38_photons-matter-waves/38-6-schrodingers-equation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wave-function">The wave function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Schrödinger’s equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-solution-for-uniform-potential">General solution for uniform potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-free-particle">Probability density: free particle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +572,110 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="schrodinger-s-equation">
 <h1>38-6 Schrödinger’s Equation<a class="headerlink" href="#schrodinger-s-equation" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is the <strong>wave function</strong> <span class="math notranslate nohighlight">\(\Psi(x,y,z,t)\)</span> for a matter wave? How is it separated into a space part <span class="math notranslate nohighlight">\(\psi\)</span> and a time part? What is the <strong>probability density</strong> and how do you compute it from <span class="math notranslate nohighlight">\(\psi\)</span>?</p></li>
+<li><p>Write <strong>Schrödinger’s equation</strong> for a particle moving along the <span class="math notranslate nohighlight">\(x\)</span> axis with potential energy <span class="math notranslate nohighlight">\(U(x)\)</span>. What is the <strong>angular wave number</strong> <span class="math notranslate nohighlight">\(k\)</span> in terms of <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(U\)</span>, <span class="math notranslate nohighlight">\(m\)</span>, and <span class="math notranslate nohighlight">\(h\)</span>?</p></li>
+<li><p>For <strong>uniform</strong> <span class="math notranslate nohighlight">\(U\)</span> (including <span class="math notranslate nohighlight">\(U=0\)</span>), Schrödinger’s equation becomes <span class="math notranslate nohighlight">\(d^2\psi/dx^2 + k^2\psi = 0\)</span>. What is the <strong>general solution</strong>? What do the two terms represent (direction of motion)?</p></li>
+<li><p>For a <strong>free particle</strong> (<span class="math notranslate nohighlight">\(U=0\)</span>), if we set <span class="math notranslate nohighlight">\(B=0\)</span> so <span class="math notranslate nohighlight">\(\psi = Ae^{ikx}\)</span>, what is <span class="math notranslate nohighlight">\(|\psi|^2\)</span>? What does this imply about the particle’s location before measurement?</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(\psi\)</span>, how do you find the <strong>complex conjugate</strong> <span class="math notranslate nohighlight">\(\psi^*\)</span>? Why is <span class="math notranslate nohighlight">\(|\psi|^2 = \psi\psi^*\)</span> always real and nonnegative?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>matter wave</strong> is described by a <strong>wave function</strong> <span class="math notranslate nohighlight">\(\Psi(x,y,z,t)\)</span>, which can be separated into a space-dependent part <span class="math notranslate nohighlight">\(\psi\)</span> and a time factor <span class="math notranslate nohighlight">\(e^{-i\omega t}\)</span>.</p></li>
+<li><p><strong>Schrödinger’s equation</strong> (1926) determines <span class="math notranslate nohighlight">\(\psi\)</span> for a nonrelativistic particle. It is a basic principle—not derivable from more fundamental laws.</p></li>
+<li><p>The <strong>probability density</strong> <span class="math notranslate nohighlight">\(|\psi|^2\)</span> gives the probability per unit volume of detecting the particle. The particle does not have a definite location until it is measured.</p></li>
+<li><p>For uniform potential <span class="math notranslate nohighlight">\(U\)</span>, the general solution is <span class="math notranslate nohighlight">\(\psi = Ae^{ikx} + Be^{-ikx}\)</span>, with <span class="math notranslate nohighlight">\(k\)</span> related to momentum and kinetic energy.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-wave-function">
+<h3>The wave function<a class="headerlink" href="#the-wave-function" title="Link to this heading">#</a></h3>
+<p>Just as light waves are described by an electric field <span class="math notranslate nohighlight">\(\vec{E}(x,y,z,t)\)</span> and sound waves by pressure <span class="math notranslate nohighlight">\(p(x,y,z,t)\)</span>, <strong>matter waves</strong> are described by a <strong>wave function</strong> <span class="math notranslate nohighlight">\(\Psi(x,y,z,t)\)</span> (uppercase psi). The wave function is generally <strong>complex</strong>—its values have the form <span class="math notranslate nohighlight">\(a + ib\)</span> with <span class="math notranslate nohighlight">\(i^2 = -1\)</span>.</p>
+<p>For the situations we consider, space and time separate:</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-sep">
+<span class="eqno">(352)<a class="headerlink" href="#equation-eq-psi-sep" title="Link to this equation">#</a></span>\[
+\Psi(x,y,z,t) = \psi(x,y,z)\, e^{-i\omega t}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span> is the angular frequency. The <strong>spatial part</strong> <span class="math notranslate nohighlight">\(\psi\)</span> (lowercase psi) is what we find from Schrödinger’s equation.</p>
+<p><strong>Physical meaning:</strong> The probability of detecting the particle in a small volume centered at a point is proportional to <span class="math notranslate nohighlight">\(|\psi|^2\)</span> at that point. Because <span class="math notranslate nohighlight">\(\psi\)</span> is complex, we compute <span class="math notranslate nohighlight">\(|\psi|^2 = \psi\psi^*\)</span>, where <span class="math notranslate nohighlight">\(\psi^*\)</span> is the <strong>complex conjugate</strong> of <span class="math notranslate nohighlight">\(\psi\)</span> (replace <span class="math notranslate nohighlight">\(i\)</span> by <span class="math notranslate nohighlight">\(-i\)</span> everywhere). The result is always real and nonnegative—it is the <strong>probability density</strong>.</p>
+<div class="important admonition">
+<p class="admonition-title">Key point</p>
+<p>A particle does <em>not</em> have a specific location until its position is actually measured. Before measurement, we only have probabilities given by <span class="math notranslate nohighlight">\(|\psi|^2\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h3>Schrödinger’s equation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Sound waves obey the wave equation from mechanics; light obeys Maxwell’s equations. <strong>Matter waves</strong> for nonrelativistic particles obey <strong>Schrödinger’s equation</strong>, proposed by Erwin Schrödinger in 1926. We cannot derive it from more basic principles—it <em>is</em> the basic principle.</p>
+<p>For a particle of mass <span class="math notranslate nohighlight">\(m\)</span> moving along the <span class="math notranslate nohighlight">\(x\)</span> axis with total energy <span class="math notranslate nohighlight">\(E\)</span> and potential energy <span class="math notranslate nohighlight">\(U(x)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-schrodinger-1d">
+<span class="eqno">(353)<a class="headerlink" href="#equation-eq-schrodinger-1d" title="Link to this equation">#</a></span>\[
+\frac{d^2\psi}{dx^2} + \frac{8\pi^2 m}{h^2}\bigl[E - U(x)\bigr]\psi = 0
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(E - U(x)\)</span> is the <strong>kinetic energy</strong> at position <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>For <strong>uniform</strong> potential energy <span class="math notranslate nohighlight">\(U\)</span> (constant, possibly zero), we define the <strong>angular wave number</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-k">
+<span class="eqno">(354)<a class="headerlink" href="#equation-eq-k" title="Link to this equation">#</a></span>\[
+k = \frac{2\pi}{\lambda} = \frac{2\pi p}{h} = \frac{2\pi\sqrt{2m(E-U)}}{h}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is the de Broglie wavelength and <span class="math notranslate nohighlight">\(p\)</span> is the momentum magnitude. Schrödinger’s equation simplifies to</p>
+<div class="math notranslate nohighlight" id="equation-eq-schrodinger-uniform">
+<span class="eqno">(355)<a class="headerlink" href="#equation-eq-schrodinger-uniform" title="Link to this equation">#</a></span>\[
+\frac{d^2\psi}{dx^2} + k^2\psi = 0
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="general-solution-for-uniform-potential">
+<h3>General solution for uniform potential<a class="headerlink" href="#general-solution-for-uniform-potential" title="Link to this heading">#</a></h3>
+<p>The general solution of <a class="reference internal" href="#equation-eq-schrodinger-uniform">(355)</a> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-general">
+<span class="eqno">(356)<a class="headerlink" href="#equation-eq-psi-general" title="Link to this equation">#</a></span>\[
+\psi(x) = A e^{ikx} + B e^{-ikx}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are constants. Using Euler’s formula <span class="math notranslate nohighlight">\(e^{i\theta} = \cos\theta + i\sin\theta\)</span>, the first term <span class="math notranslate nohighlight">\(Ae^{ikx}\)</span> represents a wave traveling in the <span class="math notranslate nohighlight">\(+x\)</span> direction; the second <span class="math notranslate nohighlight">\(Be^{-ikx}\)</span> represents a wave traveling in the <span class="math notranslate nohighlight">\(-x\)</span> direction.</p>
+<p>To include time dependence, multiply by <span class="math notranslate nohighlight">\(e^{-i\omega t}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-full">
+<span class="eqno">(357)<a class="headerlink" href="#equation-eq-psi-full" title="Link to this equation">#</a></span>\[
+\Psi(x,t) = \psi(x)\, e^{-i\omega t} = A e^{i(kx-\omega t)} + B e^{-i(kx+\omega t)}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="probability-density-free-particle">
+<h3>Probability density: free particle<a class="headerlink" href="#probability-density-free-particle" title="Link to this heading">#</a></h3>
+<p>For a <strong>free particle</strong> (<span class="math notranslate nohighlight">\(U=0\)</span>) moving only in the <span class="math notranslate nohighlight">\(+x\)</span> direction, we set <span class="math notranslate nohighlight">\(B=0\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-free">
+<span class="eqno">(358)<a class="headerlink" href="#equation-eq-psi-free" title="Link to this equation">#</a></span>\[
+\psi(x) = A e^{ikx}
+\]</div>
+<p>The probability density is</p>
+<div class="math notranslate nohighlight" id="equation-eq-prob-free">
+<span class="eqno">(359)<a class="headerlink" href="#equation-eq-prob-free" title="Link to this equation">#</a></span>\[
+|\psi|^2 = |Ae^{ikx}|^2 = A^2 |e^{ikx}|^2 = A^2
+\]</div>
+<p>because <span class="math notranslate nohighlight">\(|e^{ikx}|^2 = e^{ikx}(e^{ikx})^* = e^{ikx}e^{-ikx} = 1\)</span>. Thus <span class="math notranslate nohighlight">\(|\psi|^2\)</span> is <strong>constant</strong>—the particle has the same probability of being detected at any point along the <span class="math notranslate nohighlight">\(x\)</span> axis.</p>
+<div class="note admonition">
+<p class="admonition-title">Interpretation</p>
+<p>We cannot say the particle is “moving along” the axis like a classical object. Before measurement, it has no definite position; it could be found anywhere. The wave function describes a probability distribution, not a trajectory.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Wave function</strong> <span class="math notranslate nohighlight">\(\Psi = \psi\, e^{-i\omega t}\)</span>; spatial part <span class="math notranslate nohighlight">\(\psi\)</span> satisfies Schrödinger’s equation.</p></li>
+<li><p><strong>Schrödinger’s equation</strong>: <span class="math notranslate nohighlight">\(d^2\psi/dx^2 + (8\pi^2 m/h^2)[E-U]\psi = 0\)</span>; for uniform <span class="math notranslate nohighlight">\(U\)</span>, <span class="math notranslate nohighlight">\(d^2\psi/dx^2 + k^2\psi = 0\)</span>.</p></li>
+<li><p><strong>Angular wave number</strong> <span class="math notranslate nohighlight">\(k = 2\pi/\lambda = 2\pi\sqrt{2m(E-U)}/h\)</span>.</p></li>
+<li><p><strong>General solution</strong> (uniform <span class="math notranslate nohighlight">\(U\)</span>): <span class="math notranslate nohighlight">\(\psi = Ae^{ikx} + Be^{-ikx}\)</span>.</p></li>
+<li><p><strong>Probability density</strong> <span class="math notranslate nohighlight">\(|\psi|^2 = \psi\psi^*\)</span>; free particle has constant <span class="math notranslate nohighlight">\(|\psi|^2\)</span>—no definite location until measured.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +732,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wave-function">The wave function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Schrödinger’s equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-solution-for-uniform-potential">General solution for uniform potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-free-particle">Probability density: free particle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

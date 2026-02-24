@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch39_more-about-matter-waves/39-2-wave-functions-of-a-trapped-electron';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch39_more-about-matter-waves/39-2-wave-functions-of-a-trapped-electron.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wave-functions-for-the-infinite-well">Wave functions for the infinite well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-and-detection-probability">Probability density and detection probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correspondence-principle">Correspondence principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +571,90 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="wave-functions-of-a-trapped-electron">
 <h1>39-2 Wave Functions of a Trapped Electron<a class="headerlink" href="#wave-functions-of-a-trapped-electron" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>For an electron in a <strong>one-dimensional infinite potential well</strong> of length <span class="math notranslate nohighlight">\(L\)</span>, write the <strong>wave function</strong> <span class="math notranslate nohighlight">\(\psi_n(x)\)</span> for quantum number <span class="math notranslate nohighlight">\(n\)</span>. What is the <strong>normalized</strong> form? (Hint: <span class="math notranslate nohighlight">\(\int_0^L \psi_n^2\,dx = 1\)</span>.)</p></li>
+<li><p>Define <strong>probability density</strong> <span class="math notranslate nohighlight">\(|\psi_n|^2\)</span>. What does <span class="math notranslate nohighlight">\(|\psi_n(x)|^2\,dx\)</span> represent? How do you find the probability of detecting the electron between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>?</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(n=2\)</span>, where is the electron <em>most</em> likely to be found? Where is it <em>least</em> likely? Sketch <span class="math notranslate nohighlight">\(|\psi_n|^2\)</span> for <span class="math notranslate nohighlight">\(n=1\)</span> and <span class="math notranslate nohighlight">\(n=2\)</span>.</p></li>
+<li><p>State the <strong>correspondence principle</strong>. As <span class="math notranslate nohighlight">\(n\)</span> increases, what happens to the probability density across the well?</p></li>
+<li><p><strong>Normalize</strong> the wave function <span class="math notranslate nohighlight">\(\psi_n = A\sin(n\pi x/L)\)</span>: find <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(\int_0^L \psi_n^2\,dx = 1\)</span>.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Solving <strong>Schrödinger’s equation</strong> for an electron in a one-dimensional infinite potential well yields <strong>wave functions</strong> <span class="math notranslate nohighlight">\(\psi_n(x) = \sqrt{2/L}\,\sin(n\pi x/L)\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>.</p></li>
+<li><p>The <strong>probability density</strong> <span class="math notranslate nohighlight">\(|\psi_n|^2\)</span> gives the probability per unit length of detecting the electron. The probability of detection between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> is <span class="math notranslate nohighlight">\(\int_{x_1}^{x_2} |\psi_n|^2\,dx\)</span>.</p></li>
+<li><p><strong>Normalization</strong> requires <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} |\psi_n|^2\,dx = 1\)</span>; this fixes the amplitude <span class="math notranslate nohighlight">\(A = \sqrt{2/L}\)</span>.</p></li>
+<li><p>The <strong>correspondence principle</strong>: at large quantum numbers <span class="math notranslate nohighlight">\(n\)</span>, quantum predictions merge with classical ones (e.g., probability becomes more uniform across the well).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="wave-functions-for-the-infinite-well">
+<h3>Wave functions for the infinite well<a class="headerlink" href="#wave-functions-for-the-infinite-well" title="Link to this heading">#</a></h3>
+<p>Solving Schrödinger’s equation for an electron in a one-dimensional infinite potential well (section 39-1) with boundary conditions <span class="math notranslate nohighlight">\(\psi = 0\)</span> at <span class="math notranslate nohighlight">\(x = 0\)</span> and <span class="math notranslate nohighlight">\(x = L\)</span> yields</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-raw">
+<span class="eqno">(375)<a class="headerlink" href="#equation-eq-psi-raw" title="Link to this equation">#</a></span>\[
+\psi_n(x) = A\sin\left(\frac{n\pi x}{L}\right), \quad n = 1, 2, 3, \ldots
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>; <span class="math notranslate nohighlight">\(\psi_n = 0\)</span> outside. This has the same form as the displacement of a <strong>standing wave</strong> on a string with fixed ends—the electron is a standing matter wave.</p>
+<p><strong>Normalization</strong> requires that the total probability of finding the electron somewhere is 1:</p>
+<div class="math notranslate nohighlight" id="equation-eq-norm">
+<span class="eqno">(376)<a class="headerlink" href="#equation-eq-norm" title="Link to this equation">#</a></span>\[
+\int_{-\infty}^{\infty} |\psi_n|^2\,dx = \int_0^L \psi_n^2\,dx = 1
+\]</div>
+<p>Evaluating the integral gives <span class="math notranslate nohighlight">\(A = \sqrt{2/L}\)</span>. The <strong>normalized</strong> wave functions are</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-norm">
+<span class="eqno">(377)<a class="headerlink" href="#equation-eq-psi-norm" title="Link to this equation">#</a></span>\[
+\psi_n(x) = \sqrt{\frac{2}{L}}\,\sin\left(\frac{n\pi x}{L}\right), \quad 0 &lt; x &lt; L
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="probability-density-and-detection-probability">
+<h3>Probability density and detection probability<a class="headerlink" href="#probability-density-and-detection-probability" title="Link to this heading">#</a></h3>
+<p>The <strong>probability density</strong> <span class="math notranslate nohighlight">\(|\psi_n(x)|^2\)</span> is the probability per unit length of detecting the electron at position <span class="math notranslate nohighlight">\(x\)</span>. For the infinite well, <span class="math notranslate nohighlight">\(\psi_n\)</span> is real, so <span class="math notranslate nohighlight">\(|\psi_n|^2 = \psi_n^2\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-prob-density">
+<span class="eqno">(378)<a class="headerlink" href="#equation-eq-prob-density" title="Link to this equation">#</a></span>\[
+|\psi_n(x)|^2 = \frac{2}{L}\sin^2\left(\frac{n\pi x}{L}\right), \quad 0 &lt; x &lt; L
+\]</div>
+<p>The probability of detecting the electron between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-prob-interval">
+<span class="eqno">(379)<a class="headerlink" href="#equation-eq-prob-interval" title="Link to this equation">#</a></span>\[
+P(x_1 \leq x \leq x_2) = \int_{x_1}^{x_2} |\psi_n(x)|^2\,dx
+\]</div>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(n = 1\)</span> (ground state): maximum at center (<span class="math notranslate nohighlight">\(x = L/2\)</span>); zero at walls.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(n = 2\)</span>: two maxima near <span class="math notranslate nohighlight">\(x = L/4\)</span> and <span class="math notranslate nohighlight">\(3L/4\)</span>; zero at <span class="math notranslate nohighlight">\(x = 0\)</span>, <span class="math notranslate nohighlight">\(L/2\)</span>, <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>As <span class="math notranslate nohighlight">\(n\)</span> increases, the number of maxima increases; the probability becomes more evenly distributed.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Physical meaning</p>
+<p>We cannot “see” the wave function. We can only probe for the electron; each detection finds it at a point. Repeated detections build up a distribution matching <span class="math notranslate nohighlight">\(|\psi_n|^2\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="correspondence-principle">
+<h3>Correspondence principle<a class="headerlink" href="#correspondence-principle" title="Link to this heading">#</a></h3>
+<p>For large quantum number <span class="math notranslate nohighlight">\(n\)</span>, the probability density <span class="math notranslate nohighlight">\(|\psi_n|^2\)</span> has many oscillations across the well and becomes nearly uniform. <strong>Correspondence principle</strong> (Bohr): at large enough <span class="math notranslate nohighlight">\(n\)</span>, quantum predictions merge with classical physics. Classically, we would expect the electron to be equally likely anywhere in the well; quantum mechanics gives that result in the limit of large <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example</p>
+<p><strong>Ground state, left one-third:</strong> For <span class="math notranslate nohighlight">\(n=1\)</span> and <span class="math notranslate nohighlight">\(L=100\)</span> pm, the probability of detection in <span class="math notranslate nohighlight">\(0 \leq x \leq L/3\)</span> is <span class="math notranslate nohighlight">\(\int_0^{L/3} (2/L)\sin^2(\pi x/L)\,dx\)</span>. With <span class="math notranslate nohighlight">\(y = \pi x/L\)</span>, this becomes <span class="math notranslate nohighlight">\((2/\pi)\int_0^{\pi/3}\sin^2 y\,dy = 2/\pi \cdot (y/2 - \sin(2y)/4)\big|_0^{\pi/3} \approx 0.20\)</span>. So about 20% of detections fall in the left third. By symmetry, 20% in the right third; 60% in the middle third.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Wave functions</strong> <span class="math notranslate nohighlight">\(\psi_n(x) = \sqrt{2/L}\,\sin(n\pi x/L)\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>; zero outside.</p></li>
+<li><p><strong>Probability density</strong> <span class="math notranslate nohighlight">\(|\psi_n|^2 = (2/L)\sin^2(n\pi x/L)\)</span>; probability between <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> is <span class="math notranslate nohighlight">\(\int_{x_1}^{x_2} |\psi_n|^2\,dx\)</span>.</p></li>
+<li><p><strong>Normalization</strong> <span class="math notranslate nohighlight">\(\int |\psi_n|^2\,dx = 1\)</span> fixes <span class="math notranslate nohighlight">\(A = \sqrt{2/L}\)</span>.</p></li>
+<li><p><strong>Correspondence principle</strong>: large <span class="math notranslate nohighlight">\(n\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> probability approaches uniform (classical).</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +711,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wave-functions-for-the-infinite-well">Wave functions for the infinite well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-and-detection-probability">Probability density and detection probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correspondence-principle">Correspondence principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

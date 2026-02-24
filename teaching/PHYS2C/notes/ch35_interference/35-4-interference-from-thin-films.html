@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch35_interference/35-4-interference-from-thin-films';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch35_interference/35-4-interference-from-thin-films.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-phase-shifts">Reflection phase shifts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#film-in-air">Film in air</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#films-between-other-media">Films between other media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-reflection-coating">Anti-reflection coating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wedge-shaped-films">Wedge-shaped films</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,34 +574,140 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="interference-from-thin-films">
 <h1>35-4 Interference from Thin Films<a class="headerlink" href="#interference-from-thin-films" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>35.29</strong> Sketch the setup for thin-film interference, showing the incident ray and reflected rays (perpendicular to the film but drawn slightly slanted for clarity) and identifying the thickness and the three indexes of refraction.</p></li>
-<li><p><strong>35.30</strong> Identify the condition in which a reflection can result in a phase shift, and give the value of that phase shift.</p></li>
-<li><p><strong>35.31</strong> Identify the three factors that determine the interference of the reflected waves: reflection shifts, path length difference, and internal wavelength (set by the film’s index of refraction).</p></li>
-<li><p><strong>35.32</strong> For a thin film, use the reflection shifts and the desired result (the <em>reflected</em> waves are in phase or out of phase, or</p>
-<ul>
-<li><p>the <em>transmitted</em> waves are in phase or out of phase) to determine and then apply the necessary equation relating the thickness <em>L</em> , the wavelength l (measured in air), and the index of refraction <em>n</em> of the film.</p></li>
+<li><p>Sketch the thin-film setup: incident ray, reflected rays <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>, thickness <span class="math notranslate nohighlight">\(L\)</span>, indices <span class="math notranslate nohighlight">\(n_1\)</span>, <span class="math notranslate nohighlight">\(n_2\)</span>, <span class="math notranslate nohighlight">\(n_3\)</span>. When does <strong>reflection</strong> cause a phase shift of <span class="math notranslate nohighlight">\(\pi\)</span> (half-wavelength)?</p></li>
+<li><p>For a <strong>film in air</strong> (<span class="math notranslate nohighlight">\(n_1 = n_3 = 1 &lt; n_2\)</span>): which reflected ray(s) get a phase shift? Why is a very thin film (<span class="math notranslate nohighlight">\(L \ll \lambda\)</span>) always <strong>dark</strong> in reflected light?</p></li>
+<li><p>What are the three factors that determine the interference of reflected waves? Write the conditions for <strong>bright</strong> and <strong>dark</strong> reflected light for a film in air.</p></li>
+<li><p>How does an <strong>anti-reflection coating</strong> (e.g., MgF<span class="math notranslate nohighlight">\(_2\)</span> on glass) work? Why is the optimal thickness <span class="math notranslate nohighlight">\(L = \lambda/(4n)\)</span>?</p></li>
+<li><p>For a <strong>wedge</strong> of varying thickness: how do you count bright and dark fringes? What determines the number of bands?</p></li>
 </ul>
-</li>
-<li><p><strong>35.33</strong> For a very thin film in air (with thickness much less than the wavelength of visible light), explain why the film is always dark.</p></li>
-<li><p><strong>35.34</strong> At each end of a thin film in the form of a wedge, determine and then apply the necessary equation relating the thickness <em>L</em> , the wavelength l (measured in air), and the index of refraction <em>n</em> of the film, and then count the number of bright bands and dark bands across the film.</p></li>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Thin-film interference</strong> causes the colors on soap bubbles, oil slicks, and anti-reflection coatings. Light reflected from the <strong>front</strong> and <strong>back</strong> surfaces of a thin transparent film interferes.</p></li>
+<li><p>The phase difference between the two reflected waves depends on <strong>three factors</strong>: (1) reflection phase shifts at each interface, (2) path length difference <span class="math notranslate nohighlight">\(2L\)</span> (ray <span class="math notranslate nohighlight">\(r_2\)</span> travels through the film twice), and (3) the <strong>internal wavelength</strong> <span class="math notranslate nohighlight">\(\lambda_n = \lambda/n\)</span> in the film.</p></li>
+<li><p><strong>Reflection</strong> can add a phase shift of <span class="math notranslate nohighlight">\(\pi\)</span> (half-wavelength); <strong>refraction</strong> never does.</p></li>
 </ul>
-<p>1064 CHAPTER 35 INTERFERENCE</p>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● When light is incident on a thin transparent film, the light waves reflected from the front and back surfaces interfere. For near-normal incidence, the wavelength conditions for maximum and minimum intensity of the light reflected from a <em>film in air</em> are</p>
-<p>where <em>n</em> 2 is the index of refraction of the film, <em>L</em> is its thickness, and l is the wavelength of the light in air.</p>
+<hr class="docutils" />
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
+<p>Light is incident on a thin film of thickness <span class="math notranslate nohighlight">\(L\)</span> and index <span class="math notranslate nohighlight">\(n_2\)</span>, with media <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_3\)</span> on either side. Ray <span class="math notranslate nohighlight">\(r_1\)</span> reflects from the front surface; ray <span class="math notranslate nohighlight">\(r_2\)</span> reflects from the back surface and emerges. Both reach the observer. For near-normal incidence, the path length difference is <span class="math notranslate nohighlight">\(2L\)</span> (the extra distance <span class="math notranslate nohighlight">\(r_2\)</span> travels in the film).</p>
+</section>
+<hr class="docutils" />
+<section id="reflection-phase-shifts">
+<h3>Reflection phase shifts<a class="headerlink" href="#reflection-phase-shifts" title="Link to this heading">#</a></h3>
+<p><strong>Rule</strong>: Reflection causes a phase shift of <span class="math notranslate nohighlight">\(\pi\)</span> rad (equivalent to half-wavelength) <strong>only</strong> when the incident light is in the medium with the <strong>smaller</strong> index of refraction (i.e., reflecting off a “denser” medium).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Incident side</p></th>
+<th class="head"><p>Reflected side</p></th>
+<th class="head"><p>Phase shift</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Lower <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p>Higher <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\pi\)</span> (0.5<span class="math notranslate nohighlight">\(\lambda\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Higher <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p>Lower <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Refraction</strong> never causes a phase shift.</p>
+<div class="note admonition">
+<p class="admonition-title">String analogy</p>
+<p>A pulse on a light string reflecting from a dense string inverts (phase shift <span class="math notranslate nohighlight">\(\pi\)</span>); a pulse on a dense string reflecting from a light string does not invert.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="film-in-air">
+<h3>Film in air<a class="headerlink" href="#film-in-air" title="Link to this heading">#</a></h3>
+<p>For a film in air: <span class="math notranslate nohighlight">\(n_1 = n_3 = 1\)</span>, <span class="math notranslate nohighlight">\(n_2 = n &gt; 1\)</span>.</p>
 <ul class="simple">
-<li><p>If a film is sandwiched between media other than air, these</p></li>
-<li><p>equations for bright and dark films may be interchanged, depending on the relative indexes of refraction.</p></li>
-<li><p>If the light incident at an interface between media with</p></li>
-<li><p>different indexes of refraction is in the medium with the smaller index of refraction, the reflection causes a phase change of p rad, or half a wavelength, in the reflected wave. Otherwise, there is no phase change due to the reflection. Refraction causes no phase shift.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(r_1\)</span></strong> (front surface): air <span class="math notranslate nohighlight">\(\to\)</span> film, <span class="math notranslate nohighlight">\(n_1 &lt; n_2\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <strong>phase shift 0.5<span class="math notranslate nohighlight">\(\lambda\)</span></strong>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(r_2\)</span></strong> (back surface): film <span class="math notranslate nohighlight">\(\to\)</span> air, <span class="math notranslate nohighlight">\(n_2 &gt; n_3\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <strong>no phase shift</strong>.</p></li>
 </ul>
-<p><strong>Figure 35-15</strong> Light waves, represented with ray <em>i</em> , are incident on a thin film of thickness <em>L</em> and index of refraction <em>n</em> 2. Rays <em>r</em> 1 and <em>r</em> 2 represent light waves that have been reflected by the front and back surfaces of the film, respectively. (All three rays are actually nearly perpendicular to the film.) The interference of the waves of <em>r</em> 1 and <em>r</em> 2 with each other depends on their phase difference. The index of refraction <em>n</em> 1 of the medium at the left can differ from the index of refraction <em>n</em> 3 of the medium at the right, but for now we assume that both media are air, with <em>n</em> 1 � <em>n</em> 3 � 1.0, which is less than <em>n</em> 2.</p>
+<p>So the reflection shifts contribute <strong>0.5<span class="math notranslate nohighlight">\(\lambda\)</span></strong> to the phase difference between <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>. The path adds <span class="math notranslate nohighlight">\(2L\)</span> in the film, i.e., <span class="math notranslate nohighlight">\(2L/\lambda_n = 2nL/\lambda\)</span> wavelengths.</p>
+<p><strong>Total phase difference</strong> (in wavelengths) <span class="math notranslate nohighlight">\(= 0.5 + 2nL/\lambda\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Result</p></th>
+<th class="head"><p>Condition</p></th>
+<th class="head"><p>Equation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Bright</strong> (constructive)</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.5 + 2nL/\lambda = m\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2nL = (m + \frac{1}{2})\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Dark</strong> (destructive)</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.5 + 2nL/\lambda = m + 0.5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2nL = m\lambda\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Very thin film</strong> (<span class="math notranslate nohighlight">\(L \ll \lambda\)</span>): <span class="math notranslate nohighlight">\(2nL/\lambda \approx 0\)</span>, so total phase <span class="math notranslate nohighlight">\(\approx 0.5\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <strong>destructive</strong> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> film appears <strong>dark</strong> in reflected light.</p>
+</section>
+<hr class="docutils" />
+<section id="films-between-other-media">
+<h3>Films between other media<a class="headerlink" href="#films-between-other-media" title="Link to this heading">#</a></h3>
+<p>When <span class="math notranslate nohighlight">\(n_1\)</span>, <span class="math notranslate nohighlight">\(n_2\)</span>, <span class="math notranslate nohighlight">\(n_3\)</span> differ (e.g., coating on glass), the bright and dark equations may <strong>interchange</strong>. Use an organizing table:</p>
+<ol class="arabic simple">
+<li><p>For <span class="math notranslate nohighlight">\(r_1\)</span>: does reflection at the front interface cause a phase shift? (Yes if <span class="math notranslate nohighlight">\(n_1 &lt; n_2\)</span>.)</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(r_2\)</span>: does reflection at the back interface cause a phase shift? (Yes if <span class="math notranslate nohighlight">\(n_2 &lt; n_3\)</span>.)</p></li>
+<li><p>If the <strong>reflection shifts differ</strong> (one yes, one no): use the film-in-air formulas above.</p></li>
+<li><p>If the <strong>reflection shifts are the same</strong> (both yes or both no): the path alone determines relative phase; bright and dark conditions swap.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="anti-reflection-coating">
+<h3>Anti-reflection coating<a class="headerlink" href="#anti-reflection-coating" title="Link to this heading">#</a></h3>
+<p>A thin layer (e.g., MgF<span class="math notranslate nohighlight">\(_2\)</span>, <span class="math notranslate nohighlight">\(n_2 = 1.38\)</span>) on glass (<span class="math notranslate nohighlight">\(n_3 = 1.50\)</span>) can <strong>eliminate</strong> reflection at a chosen wavelength. Both interfaces give a phase shift (air<span class="math notranslate nohighlight">\(\to\)</span>MgF<span class="math notranslate nohighlight">\(_2\)</span> and MgF<span class="math notranslate nohighlight">\(_2\)</span><span class="math notranslate nohighlight">\(\to\)</span>glass: <span class="math notranslate nohighlight">\(n_2 &lt; n_3\)</span>). For <strong>destructive</strong> interference of reflected light:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ar-coating">
+<span class="eqno">(274)<a class="headerlink" href="#equation-eq-ar-coating" title="Link to this equation">#</a></span>\[
+2n_2 L = \left(m + \frac{1}{2}\right)\lambda
+\]</div>
+<p><strong>Minimum thickness</strong> (<span class="math notranslate nohighlight">\(m = 0\)</span>): <span class="math notranslate nohighlight">\(L = \lambda/(4n_2)\)</span>. For <span class="math notranslate nohighlight">\(\lambda = 550\)</span> nm: <span class="math notranslate nohighlight">\(L \approx 100\)</span> nm.</p>
+</section>
+<hr class="docutils" />
+<section id="wedge-shaped-films">
+<h3>Wedge-shaped films<a class="headerlink" href="#wedge-shaped-films" title="Link to this heading">#</a></h3>
+<p>For a wedge (thickness varies from <span class="math notranslate nohighlight">\(L_L\)</span> to <span class="math notranslate nohighlight">\(L_R\)</span>), the brightness varies along the film. Apply the same equations at each point; <span class="math notranslate nohighlight">\(L\)</span> changes, so different regions satisfy bright or dark conditions.</p>
+<ul class="simple">
+<li><p>At each end, determine whether that thickness gives bright or dark.</p></li>
+<li><p>Count how many times <span class="math notranslate nohighlight">\(2nL/\lambda\)</span> increases by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> (or 1) between the ends to find the number of fringes.</p></li>
+</ul>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example: Water film in air</p>
+<p>Water film (<span class="math notranslate nohighlight">\(n = 1.33\)</span>, <span class="math notranslate nohighlight">\(L = 320\)</span> nm) in air. Bright reflected: <span class="math notranslate nohighlight">\(2nL = (m+\frac{1}{2})\lambda\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(\lambda = 2nL/(m+\frac{1}{2})\)</span>. For <span class="math notranslate nohighlight">\(m=1\)</span>: <span class="math notranslate nohighlight">\(\lambda \approx 567\)</span> nm (yellow-green). For <span class="math notranslate nohighlight">\(m=0\)</span>: <span class="math notranslate nohighlight">\(\lambda \approx 1700\)</span> nm (IR).</p>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example: Wedge</p>
+<p>Air wedge: six dark and five bright fringes. Dark at both ends <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(2L_L = m\lambda\)</span> and <span class="math notranslate nohighlight">\(2L_R = (m+5)\lambda\)</span> (for air, <span class="math notranslate nohighlight">\(n\approx 1\)</span>). So <span class="math notranslate nohighlight">\(\Delta L = L_R - L_L = 2.5\lambda\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Reflection phase shift</strong>: <span class="math notranslate nohighlight">\(\pi\)</span> when incident from lower <span class="math notranslate nohighlight">\(n\)</span> to higher <span class="math notranslate nohighlight">\(n\)</span>; otherwise 0.</p></li>
+<li><p><strong>Film in air</strong>: Bright <span class="math notranslate nohighlight">\(2nL = (m+\frac{1}{2})\lambda\)</span>; dark <span class="math notranslate nohighlight">\(2nL = m\lambda\)</span>. Very thin <span class="math notranslate nohighlight">\(\Rightarrow\)</span> dark.</p></li>
+<li><p><strong>Other configurations</strong>: Use reflection rules; bright/dark may swap.</p></li>
+<li><p><strong>Anti-reflection</strong>: <span class="math notranslate nohighlight">\(L = \lambda/(4n)\)</span> for destructive reflection.</p></li>
+<li><p><strong>Wedge</strong>: Thickness varies; count fringes by applying conditions along the film.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -658,8 +775,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-phase-shifts">Reflection phase shifts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#film-in-air">Film in air</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#films-between-other-media">Films between other media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-reflection-coating">Anti-reflection coating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wedge-shaped-films">Wedge-shaped films</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

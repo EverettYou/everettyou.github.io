@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch36_diffraction/36-7-x-ray-diffraction';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch36_diffraction/36-7-x-ray-diffraction.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#x-rays-and-the-need-for-crystals">X rays and the need for crystals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bragg-scattering-and-reflecting-planes">Bragg scattering and reflecting planes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bragg-s-law">Bragg’s law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-cell-and-interplanar-spacing">Unit cell and interplanar spacing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +573,99 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="x-ray-diffraction">
 <h1>36-7 X-Ray Diffraction<a class="headerlink" href="#x-ray-diffraction" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Why can’t a standard optical grating be used to analyze <strong>x-ray</strong> wavelengths? What is the wavelength scale of x rays compared to visible light?</p></li>
+<li><p>Explain <strong>Bragg’s law</strong> <span class="math notranslate nohighlight">\(2d\sin\theta = m\lambda\)</span>. What is <span class="math notranslate nohighlight">\(\theta\)</span> measured from? What are <span class="math notranslate nohighlight">\(d\)</span> and the reflecting planes?</p></li>
+<li><p>Sketch two rays scattering from adjacent crystal planes. Where does the path length difference <span class="math notranslate nohighlight">\(2d\sin\theta\)</span> come from?</p></li>
+<li><p>A crystal has interplanar spacing <span class="math notranslate nohighlight">\(d = 0.25\)</span> nm. What is the smallest <strong>Bragg angle</strong> for first-order reflection of x rays with <span class="math notranslate nohighlight">\(\lambda = 0.10\)</span> nm?</p></li>
+<li><p>How does x-ray diffraction allow us to determine (a) x-ray wavelengths and (b) crystal structure?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>X rays</strong> are electromagnetic waves with wavelengths <span class="math notranslate nohighlight">\(\sim 1\)</span> Å (<span class="math notranslate nohighlight">\(10^{-10}\)</span> m)—comparable to atomic spacing. Optical gratings cannot resolve them.</p></li>
+<li><p>A <strong>crystal</strong> acts as a natural three-dimensional diffraction grating: its regular array of atoms scatters x rays and produces constructive interference at specific angles.</p></li>
+<li><p><strong>Bragg’s law</strong> <span class="math notranslate nohighlight">\(2d\sin\theta = m\lambda\)</span> gives the angles for intensity maxima. Here <span class="math notranslate nohighlight">\(d\)</span> is the <strong>interplanar spacing</strong> between parallel crystal planes, and <span class="math notranslate nohighlight">\(\theta\)</span> is measured from the plane surface.</p></li>
+<li><p>X-ray diffraction is used to determine both x-ray spectra and crystal structure.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="x-rays-and-the-need-for-crystals">
+<h3>X rays and the need for crystals<a class="headerlink" href="#x-rays-and-the-need-for-crystals" title="Link to this heading">#</a></h3>
+<p>X rays have wavelengths of order 1 Å (<span class="math notranslate nohighlight">\(\sim 0.1\)</span> nm), compared to visible light at <span class="math notranslate nohighlight">\(\sim 550\)</span> nm. For an optical grating with <span class="math notranslate nohighlight">\(d \sim 3000\)</span> nm and <span class="math notranslate nohighlight">\(\lambda \sim 0.1\)</span> nm, the first-order maximum occurs at <span class="math notranslate nohighlight">\(\sin\theta = \lambda/d \approx 3\times 10^{-5}\)</span>—too close to the central maximum to be useful. A grating with <span class="math notranslate nohighlight">\(d \sim \lambda\)</span> would be ideal, but x-ray wavelengths match atomic diameters; such gratings cannot be made mechanically.</p>
+<p><strong>von Laue’s insight (1912)</strong>: A crystalline solid—a regular array of atoms—forms a natural three-dimensional “diffraction grating” for x rays. In crystals such as NaCl, a basic repeating unit called the <strong>unit cell</strong> (e.g., a cube of side <span class="math notranslate nohighlight">\(a_0\)</span>) repeats throughout the structure.</p>
+</section>
+<hr class="docutils" />
+<section id="bragg-scattering-and-reflecting-planes">
+<h3>Bragg scattering and reflecting planes<a class="headerlink" href="#bragg-scattering-and-reflecting-planes" title="Link to this heading">#</a></h3>
+<p>When an x-ray beam enters a crystal, x rays are <strong>scattered</strong> (redirected) in all directions by the atoms. In some directions the scattered waves interfere destructively (minima); in others constructively (maxima). This is a form of diffraction.</p>
+<p><strong>Reflecting planes.</strong> The maxima occur in directions <em>as if</em> the x rays were reflected by a family of parallel <strong>reflecting planes</strong> (or <strong>crystal planes</strong>) that extend through the atoms. (The x rays are not actually reflected; this is a simplifying model.) The spacing between adjacent planes is the <strong>interplanar spacing</strong> <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p>The angle <span class="math notranslate nohighlight">\(\theta\)</span> is defined <strong>relative to the plane surface</strong> (not the normal), unlike in optics. At each “reflection,” the angle of incidence equals the angle of reflection, both <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="bragg-s-law">
+<h3>Bragg’s law<a class="headerlink" href="#bragg-s-law" title="Link to this heading">#</a></h3>
+<p>Consider two rays that scatter from adjacent planes (Fig. 36-28c). The path length difference between them is <span class="math notranslate nohighlight">\(2d\sin\theta\)</span>. For constructive interference (intensity maximum), this must equal an integer number of wavelengths:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bragg">
+<span class="eqno">(303)<a class="headerlink" href="#equation-eq-bragg" title="Link to this equation">#</a></span>\[
+2d\sin\theta = m\lambda, \quad m = 1, 2, 3, \ldots
+\]</div>
+<p>This is <strong>Bragg’s law</strong>. The angle <span class="math notranslate nohighlight">\(\theta\)</span> is called a <strong>Bragg angle</strong>.</p>
+<div class="attention admonition">
+<p class="admonition-title">Angle convention</p>
+<p>In Bragg’s law, <span class="math notranslate nohighlight">\(\theta\)</span> is measured from the <em>plane surface</em>, not from the normal. The path length difference for rays “reflecting” from two adjacent planes is <span class="math notranslate nohighlight">\(2d\sin\theta\)</span>, where <span class="math notranslate nohighlight">\(d\)</span> is the perpendicular distance between the planes.</p>
+</div>
+<p>For a given crystal orientation, many families of planes exist—each with its own <span class="math notranslate nohighlight">\(d\)</span> and Bragg angle. As the incident angle changes, a different family of planes may satisfy Bragg’s law.</p>
+</section>
+<hr class="docutils" />
+<section id="unit-cell-and-interplanar-spacing">
+<h3>Unit cell and interplanar spacing<a class="headerlink" href="#unit-cell-and-interplanar-spacing" title="Link to this heading">#</a></h3>
+<p>The <strong>unit cell</strong> is the smallest repeating unit that defines the crystal structure. For NaCl, it is a cube of side <span class="math notranslate nohighlight">\(a_0\)</span>. Different families of planes have different interplanar spacings <span class="math notranslate nohighlight">\(d\)</span>, which can be related to <span class="math notranslate nohighlight">\(a_0\)</span> using geometry.</p>
+<p><strong>Example</strong>: For a family of planes that cut the cube diagonally, the Pythagorean theorem gives <span class="math notranslate nohighlight">\(d = a_0/\sqrt{h^2 + k^2 + \ell^2}\)</span> for certain integer indices <span class="math notranslate nohighlight">\((h,k,\ell)\)</span>. Once <span class="math notranslate nohighlight">\(d\)</span> is measured via x-ray diffraction, the unit cell dimensions can be determined.</p>
+</section>
+<hr class="docutils" />
+<section id="applications">
+<h3>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Goal</p></th>
+<th class="head"><p>Known</p></th>
+<th class="head"><p>Measured</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>X-ray spectrum</strong></p></td>
+<td><p>Crystal planes with known <span class="math notranslate nohighlight">\(d\)</span></p></td>
+<td><p>Bragg angles <span class="math notranslate nohighlight">\(\theta\)</span> → wavelength <span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Crystal structure</strong></p></td>
+<td><p>Monochromatic x-ray wavelength <span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+<td><p>Bragg angles → interplanar spacings <span class="math notranslate nohighlight">\(d\)</span> → unit cell</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example: smallest Bragg angle</p>
+<p>For <span class="math notranslate nohighlight">\(d = 0.25\)</span> nm and <span class="math notranslate nohighlight">\(\lambda = 0.10\)</span> nm, first order (<span class="math notranslate nohighlight">\(m=1\)</span>): <span class="math notranslate nohighlight">\(\sin\theta = \lambda/(2d) = 0.10/(0.50) = 0.20\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(\theta \approx 11.5°\)</span>. The smallest Bragg angle occurs for the largest <span class="math notranslate nohighlight">\(d\)</span> (most widely spaced planes) and smallest <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>X rays</strong> (<span class="math notranslate nohighlight">\(\lambda \sim 1\)</span> Å) require crystals as natural gratings; optical gratings cannot resolve them.</p></li>
+<li><p><strong>Bragg’s law</strong> <span class="math notranslate nohighlight">\(2d\sin\theta = m\lambda\)</span>: intensity maxima when path length difference <span class="math notranslate nohighlight">\(2d\sin\theta\)</span> equals <span class="math notranslate nohighlight">\(m\lambda\)</span>.</p></li>
+<li><p><strong>Reflecting planes</strong> and <strong>interplanar spacing</strong> <span class="math notranslate nohighlight">\(d\)</span> are defined by the crystal structure; <span class="math notranslate nohighlight">\(\theta\)</span> is measured from the plane.</p></li>
+<li><p>X-ray diffraction determines either wavelengths (known <span class="math notranslate nohighlight">\(d\)</span>) or crystal structure (known <span class="math notranslate nohighlight">\(\lambda\)</span>).</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +722,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#x-rays-and-the-need-for-crystals">X rays and the need for crystals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bragg-scattering-and-reflecting-planes">Bragg scattering and reflecting planes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bragg-s-law">Bragg’s law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-cell-and-interplanar-spacing">Unit cell and interplanar spacing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

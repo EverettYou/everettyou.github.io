@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch43_energy-from-nucleus/43-6-controlled-thermonuclear-fusion';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch43_energy-from-nucleus/43-6-controlled-thermonuclear-fusion.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -524,7 +526,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -540,6 +544,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-confinement-challenge">The Confinement Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-confinement-tokamaks">Magnetic Confinement: Tokamaks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inertial-confinement">Inertial Confinement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lawson-criterion">The Lawson Criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-vs-fission-benefits-and-challenges">Fusion vs Fission: Benefits and Challenges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -551,6 +572,107 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="controlled-thermonuclear-fusion">
 <h1>43-6 Controlled Thermonuclear Fusion<a class="headerlink" href="#controlled-thermonuclear-fusion" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>On Earth we lack <strong>gravitational confinement</strong> (section 43-5). What are the two main approaches to confining a fusion plasma? How does each work in one sentence?</p></li>
+<li><p><strong>Magnetic confinement</strong> (tokamaks): charged particles follow magnetic field lines. Why does a <strong>toroidal</strong> (doughnut) geometry help? What prevents the plasma from drifting to the walls?</p></li>
+<li><p><strong>Inertial confinement</strong>: lasers or particle beams compress a fuel pellet. Why is the confinement time <span class="math notranslate nohighlight">\(\tau\)</span> very short? How does compression achieve the needed density and temperature?</p></li>
+<li><p>The <strong>Lawson criterion</strong> requires <span class="math notranslate nohighlight">\(n\tau T\)</span> above a threshold for <strong>ignition</strong> (fusion power <span class="math notranslate nohighlight">\(\geq\)</span> losses). What do <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\tau\)</span>, and <span class="math notranslate nohighlight">\(T\)</span> represent? Why does “triple product” <span class="math notranslate nohighlight">\(n\tau T\)</span> matter?</p></li>
+<li><p>What advantages does fusion offer over fission (fuel, waste)? What are the main challenges to achieving net power?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Controlled fusion</strong> on Earth requires confining and heating a plasma without gravity (section 43-5). Two main approaches: <strong>magnetic confinement</strong> (tokamaks) and <strong>inertial confinement</strong> (laser/beam compression).</p></li>
+<li><p><strong>Ignition</strong> — fusion power exceeds losses — requires the <strong>Lawson criterion</strong>: <span class="math notranslate nohighlight">\(n\tau T\)</span> above a threshold, where <span class="math notranslate nohighlight">\(n\)</span> is density, <span class="math notranslate nohighlight">\(\tau\)</span> is confinement time, and <span class="math notranslate nohighlight">\(T\)</span> is temperature.</p></li>
+<li><p>Fusion offers abundant fuel (deuterium from seawater) and less long-lived radioactive waste than fission (section 43-1).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-confinement-challenge">
+<h3>The Confinement Challenge<a class="headerlink" href="#the-confinement-challenge" title="Link to this heading">#</a></h3>
+<p>Stars use gravitational confinement (section 43-5). On Earth, we must create <span class="math notranslate nohighlight">\(T \sim 10^8\)</span> K and sufficient density by other means. A hot plasma cannot touch solid walls (it would cool and contaminate). Two strategies:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Approach</p></th>
+<th class="head"><p>Idea</p></th>
+<th class="head"><p>Confinement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Magnetic</strong></p></td>
+<td><p>Charged particles follow <span class="math notranslate nohighlight">\(\vec{B}\)</span>; field keeps plasma away from walls</p></td>
+<td><p>Long <span class="math notranslate nohighlight">\(\tau\)</span>, moderate <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Inertial</strong></p></td>
+<td><p>Compress a pellet so fast that fusion occurs before it explodes</p></td>
+<td><p>Short <span class="math notranslate nohighlight">\(\tau\)</span>, very high <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="magnetic-confinement-tokamaks">
+<h3>Magnetic Confinement: Tokamaks<a class="headerlink" href="#magnetic-confinement-tokamaks" title="Link to this heading">#</a></h3>
+<p>A <strong>tokamak</strong> uses a <strong>toroidal</strong> (doughnut-shaped) magnetic field. Charged particles spiral along field lines and are trapped in the torus. Additional <strong>poloidal</strong> field (from a plasma current) twists the field lines into a helix, reducing drifts that would push the plasma to the walls.</p>
+<p><strong>Key parameters:</strong> Large volume, strong magnetic field (<span class="math notranslate nohighlight">\(B \sim\)</span> several tesla), heating by neutral beams or radio waves. Experiments (e.g., ITER, JET) aim to reach the Lawson criterion for D–T (section 43-4).</p>
+<div class="note admonition">
+<p class="admonition-title">Why toroidal?</p>
+<p>A simple solenoid would have particles drifting to the ends. Bending into a torus closes the geometry. The twist (rotational transform) prevents another instability (the “bad curvature” of a simple torus).</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="inertial-confinement">
+<h3>Inertial Confinement<a class="headerlink" href="#inertial-confinement" title="Link to this heading">#</a></h3>
+<p><strong>Inertial confinement</strong> compresses a small fuel pellet (D–T) with intense lasers or particle beams. The outer layer ablates and blows off; reaction forces compress the core to very high density and temperature. Fusion occurs in a brief burst (~nanoseconds) before the pellet explodes — confinement is by the inertia of the imploding fuel.</p>
+<p><strong>National Ignition Facility (NIF):</strong> Lasers compress a capsule; recent experiments have achieved <strong>ignition</strong> (fusion energy out <span class="math notranslate nohighlight">\(\geq\)</span> laser energy in) in the lab.</p>
+</section>
+<hr class="docutils" />
+<section id="the-lawson-criterion">
+<h3>The Lawson Criterion<a class="headerlink" href="#the-lawson-criterion" title="Link to this heading">#</a></h3>
+<p>For a fusion plasma to sustain itself, the fusion power must at least balance the power lost (radiation, conduction, etc.). This leads to the <strong>Lawson criterion</strong> (or triple product):</p>
+<div class="math notranslate nohighlight" id="equation-eq-lawson">
+<span class="eqno">(453)<a class="headerlink" href="#equation-eq-lawson" title="Link to this equation">#</a></span>\[
+n\tau T \gtrsim \text{threshold}
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(n\)</span>:</strong> particle density (m<span class="math notranslate nohighlight">\(^{-3}\)</span>)</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\tau\)</span>:</strong> energy confinement time (s)</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(T\)</span>:</strong> temperature (K or keV)</p></li>
+</ul>
+<p>For D–T, the threshold is <span class="math notranslate nohighlight">\(n\tau T \sim 10^{21}\)</span> m<span class="math notranslate nohighlight">\(^{-3}\cdot\)</span>s<span class="math notranslate nohighlight">\(\cdot\)</span>keV (order of magnitude). Magnetic confinement seeks high <span class="math notranslate nohighlight">\(\tau\)</span> at moderate <span class="math notranslate nohighlight">\(n\)</span>; inertial confinement uses very high <span class="math notranslate nohighlight">\(n\)</span> and short <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="fusion-vs-fission-benefits-and-challenges">
+<h3>Fusion vs Fission: Benefits and Challenges<a class="headerlink" href="#fusion-vs-fission-benefits-and-challenges" title="Link to this heading">#</a></h3>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p><strong>Fuel:</strong> Deuterium is abundant in seawater (~0.015% of H); tritium can be bred from lithium.</p></li>
+<li><p><strong>Waste:</strong> No long-lived actinides; neutron activation of structural materials is the main waste concern, generally less severe than fission.</p></li>
+</ul>
+<p><strong>Challenges:</strong></p>
+<ul class="simple">
+<li><p>Reaching and sustaining the Lawson criterion.</p></li>
+<li><p>Materials that withstand neutron flux and heat.</p></li>
+<li><p>Tritium breeding and handling.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Magnetic confinement</strong> (tokamaks): toroidal <span class="math notranslate nohighlight">\(B\)</span> traps plasma; long <span class="math notranslate nohighlight">\(\tau\)</span>, moderate <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>Inertial confinement:</strong> lasers/beams compress pellet; short <span class="math notranslate nohighlight">\(\tau\)</span>, very high <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>Lawson criterion:</strong> <span class="math notranslate nohighlight">\(n\tau T \gtrsim\)</span> threshold for ignition.</p></li>
+<li><p>Fusion: abundant D, less long-lived waste; challenges remain for net power.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -598,6 +720,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-confinement-challenge">The Confinement Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-confinement-tokamaks">Magnetic Confinement: Tokamaks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inertial-confinement">Inertial Confinement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lawson-criterion">The Lawson Criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-vs-fission-benefits-and-challenges">Fusion vs Fission: Benefits and Challenges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
