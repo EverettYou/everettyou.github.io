@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch19_kinetic-theory/19-2-ideal-gases';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch19_kinetic-theory/19-2-ideal-gases.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-ideal-gases">Overview: Ideal gases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ideal-gas-law">The ideal gas law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotherms-and-work">Isotherms and work</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,30 +570,97 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ideal-gases">
 <h1>19-2 Ideal Gases<a class="headerlink" href="#ideal-gases" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>19.04</strong> Identify why an ideal gas is said to be ideal.</p></li>
-<li><p><strong>19.05</strong> Apply either of the two forms of the ideal gas law, written in terms of the number of moles <em>n</em> or the number of molecules <em>N</em> .</p></li>
-<li><p><strong>19.06</strong> Relate the ideal gas constant <em>R</em> and the Boltzmann constant <em>k</em> .</p></li>
-<li><p><strong>19.07</strong> Identify that the temperature in the ideal gas law must be in kelvins.</p></li>
-<li><p><strong>19.08</strong> Sketch <em>p-V</em> diagrams for a constant-temperature expansion of a gas and a constant-temperature contraction.</p></li>
-<li><p><strong>19.09</strong> Identify the term isotherm.</p></li>
-<li><p><strong>19.10</strong> Calculate the work done by a gas, including the algebraic sign, for an expansion and a contraction along an isotherm.</p></li>
-<li><p><strong>19.11</strong> For an isothermal process, identify that the change in internal energy � <em>E</em> is zero and that the energy <em>Q</em> transferred as heat is equal to the work <em>W</em> done.</p></li>
-<li><p><strong>19.12</strong> On a <em>p-V</em> diagram, sketch a constant-volume process and identify the amount of work done in terms of area on the diagram.</p></li>
-<li><p><strong>19.13</strong> On a <em>p-V</em> diagram, sketch a constant-pressure process and determine the work done in terms of area on the diagram.</p></li>
+<li><p>State the ideal gas law in terms of moles (<span class="math notranslate nohighlight">\(n\)</span>) and in terms of number of molecules (<span class="math notranslate nohighlight">\(N\)</span>). How are <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(k\)</span> related?</p></li>
+<li><p>Why is the gas called “ideal”? Under what conditions do real gases approximate ideal behavior?</p></li>
+<li><p>On a <span class="math notranslate nohighlight">\(p\)</span>-<span class="math notranslate nohighlight">\(V\)</span> diagram, what is an isotherm? For an isothermal expansion, is the work <span class="math notranslate nohighlight">\(W\)</span> positive or negative?</p></li>
+<li><p>For an isothermal process, what is <span class="math notranslate nohighlight">\(\Delta E_{\text{int}}\)</span>? How does <span class="math notranslate nohighlight">\(Q\)</span> relate to <span class="math notranslate nohighlight">\(W\)</span>?</p></li>
+<li><p>A gas expands at constant pressure. Write the work done by the gas in terms of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(\Delta V\)</span>.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-ideal-gases">
+<h3>Overview: Ideal gases<a class="headerlink" href="#overview-ideal-gases" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An <strong>ideal gas</strong> obeys <span class="math notranslate nohighlight">\(pV = nRT\)</span> (or <span class="math notranslate nohighlight">\(pV = NkT\)</span>)—a simple relation between pressure, volume, and temperature.</p></li>
+<li><p>Real gases approximate ideal behavior at <strong>low density</strong> (molecules far apart, negligible interactions).</p></li>
+<li><p>The ideal gas law links macroscopic quantities (<span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(V\)</span>, <span class="math notranslate nohighlight">\(T\)</span>) to the amount of gas (<span class="math notranslate nohighlight">\(n\)</span> or <span class="math notranslate nohighlight">\(N\)</span>).</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● An ideal gas is one for which the pressure <em>p</em> , volume <em>V</em> , and temperature <em>T</em> are related by</p>
-<p>where the Boltzmann constant <em>k</em> is</p>
-<p>Here <em>n</em> is the number of moles of the gas present and <em>R</em> is a constant (8.31 J/mol �K) called the gas constant.</p>
-<p>● The work done <em>by</em> an ideal gas during an isothermal (constant-temperature) change from volume <em>Vi</em> to volume <em>Vf</em> is</p>
-<p>● The ideal gas law can also be written as</p>
-<p><em>V f W</em> � <em>nRT</em> ln (ideal gas, isothermal process). <em>pV</em> � <em>NkT</em> , <em>Vi</em></p>
+<hr class="docutils" />
+<section id="the-ideal-gas-law">
+<h3>The ideal gas law<a class="headerlink" href="#the-ideal-gas-law" title="Link to this heading">#</a></h3>
+<p><strong>In terms of moles:</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-ideal-gas-moles">
+<span class="eqno">(159)<a class="headerlink" href="#equation-eq-ideal-gas-moles" title="Link to this equation">#</a></span>\[
+pV = nRT
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(p\)</span></strong>: absolute pressure; <strong><span class="math notranslate nohighlight">\(V\)</span></strong>: volume; <strong><span class="math notranslate nohighlight">\(n\)</span></strong>: number of moles; <strong><span class="math notranslate nohighlight">\(T\)</span></strong>: temperature (kelvins).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(R = 8.31\)</span> J/(mol·K)</strong>—gas constant.</p></li>
+</ul>
+<p><strong>In terms of molecules:</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-ideal-gas-molecules">
+<span class="eqno">(160)<a class="headerlink" href="#equation-eq-ideal-gas-molecules" title="Link to this equation">#</a></span>\[
+pV = NkT
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(N\)</span></strong>: number of molecules; <strong><span class="math notranslate nohighlight">\(k = R/N_A = 1.38 \times 10^{-23}\)</span> J/K</strong>—Boltzmann constant.</p></li>
+<li><p>Relation: <span class="math notranslate nohighlight">\(nR = Nk\)</span>.</p></li>
+</ul>
+<div class="caution admonition">
+<p class="admonition-title">Temperature in kelvins</p>
+<p>The ideal gas law requires <strong>absolute temperature</strong> <span class="math notranslate nohighlight">\(T\)</span> in kelvins. Convert from Celsius: <span class="math notranslate nohighlight">\(T = T_C + 273.15\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="isotherms-and-work">
+<h3>Isotherms and work<a class="headerlink" href="#isotherms-and-work" title="Link to this heading">#</a></h3>
+<p>An <strong>isotherm</strong> is a curve of constant <span class="math notranslate nohighlight">\(T\)</span> on a <span class="math notranslate nohighlight">\(p\)</span>–<span class="math notranslate nohighlight">\(V\)</span> diagram. For an ideal gas, <span class="math notranslate nohighlight">\(p \propto 1/V\)</span> along an isotherm.</p>
+<p><strong>Work done by the gas</strong> (general): <span class="math notranslate nohighlight">\(W = \int_{V_i}^{V_f} p\,dV\)</span>—area under the curve.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Work</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Isothermal</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(W = nRT\,\ln(V_f/V_i)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Constant volume</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(W = 0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Constant pressure</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(W = p\,\Delta V\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Isothermal process:</strong> <span class="math notranslate nohighlight">\(\Delta E_{\text{int}} = 0\)</span> (internal energy of ideal gas depends only on <span class="math notranslate nohighlight">\(T\)</span>). By the first law, <span class="math notranslate nohighlight">\(Q = W\)</span>.</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Ideal gas</p>
+<p>A fixed amount of ideal gas is compressed at constant temperature. The work <span class="math notranslate nohighlight">\(W\)</span> done by the gas is:</p>
+<ul class="simple">
+<li><p>(A) Positive</p></li>
+<li><p>(B) Negative</p></li>
+<li><p>(C) Zero</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(pV = nRT\)</span></strong> or <strong><span class="math notranslate nohighlight">\(pV = NkT\)</span></strong>—ideal gas law; <span class="math notranslate nohighlight">\(k = R/N_A\)</span>.</p></li>
+<li><p><strong>Isotherm</strong>: <span class="math notranslate nohighlight">\(p \propto 1/V\)</span> at constant <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p><strong>Isothermal</strong>: <span class="math notranslate nohighlight">\(W = nRT\,\ln(V_f/V_i)\)</span>; <span class="math notranslate nohighlight">\(\Delta E_{\text{int}} = 0\)</span>, <span class="math notranslate nohighlight">\(Q = W\)</span>.</p></li>
+<li><p><strong>Constant pressure</strong>: <span class="math notranslate nohighlight">\(W = p\,\Delta V\)</span>.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -654,8 +728,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-ideal-gases">Overview: Ideal gases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ideal-gas-law">The ideal gas law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotherms-and-work">Isotherms and work</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch19_kinetic-theory/19-9-the-adiabatic-expansion-of-an-ideal-gas';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch19_kinetic-theory/19-9-the-adiabatic-expansion-of-an-ideal-gas.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-adiabatic-expansion">Overview: Adiabatic expansion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-relations">Adiabatic relations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-picture">Physical picture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#free-expansion-exception">Free expansion (exception)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,38 +571,80 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-adiabatic-expansion-of-an-ideal-gas">
 <h1>19-9 The Adiabatic Expansion of an Ideal Gas<a class="headerlink" href="#the-adiabatic-expansion-of-an-ideal-gas" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>19.44</strong> On a <em>p-V</em> diagram, sketch an adiabatic expansion (or contraction) and identify that there is no heat exchange <em>Q</em> with the environment.</p></li>
-<li><p><strong>19.45</strong> Identify that in an adiabatic expansion, the gas does work on the environment, decreasing the gas’s internal energy, and that in an adiabatic contraction, work is done on the gas, increasing the internal energy.</p></li>
-<li><p><strong>19.46</strong> In an adiabatic expansion or contraction, relate the initial pressure and volume to the final pressure and volume.</p></li>
+<li><p>In an adiabatic process, <span class="math notranslate nohighlight">\(Q = 0\)</span>. What happens to the temperature when an ideal gas expands adiabatically? Why?</p></li>
+<li><p>Write <span class="math notranslate nohighlight">\(pV^\gamma = \text{constant}\)</span> for an adiabatic process. What is <span class="math notranslate nohighlight">\(\gamma\)</span>? What is <span class="math notranslate nohighlight">\(\gamma\)</span> for a monatomic gas?</p></li>
+<li><p>Derive or state the relation <span class="math notranslate nohighlight">\(TV^{\gamma-1} = \text{constant}\)</span>. How does <span class="math notranslate nohighlight">\(T\)</span> change when <span class="math notranslate nohighlight">\(V\)</span> increases adiabatically?</p></li>
+<li><p>Why does the relation <span class="math notranslate nohighlight">\(pV^\gamma = \text{constant}\)</span> NOT apply to a free expansion? What happens to <span class="math notranslate nohighlight">\(T\)</span> in a free expansion?</p></li>
 </ul>
-<p><strong>19.47</strong> In an adiabatic expansion or contraction, relate the initial temperature and volume to the final temperature and volume. <strong>19.48</strong> Calculate the work done in an adiabatic process by integrating the pressure with respect to volume. <strong>19.49</strong> Identify that a free expansion of a gas into a vacuum is adiabatic but no work is done and thus, by the first law of thermodynamics, the internal energy and temperature of the gas do not change.</p>
-</section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>When an ideal gas undergoes a slow adiabatic volume</p></li>
-<li><p>change (a change for which <em>Q</em> � 0),</p></li>
-</ul>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><br>s, increasing the internal energy.<br>adiabatic expansion or contraction, relate the ini-<br>ure and volume to the final pressure and volume.<br> <br></p></th>
-<th class="head"><p>adiabatic but no work is done and thus, by the first law o<br>thermodynamics, the internal energy and temperature of<br>the gas do not change.</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>deal gas undergoes a slow adiabatic volume<br>hange for which_Q_�0),</p></td>
-<td><p>in whichg(�_Cp_/<em>CV</em>)is the ratio of molar specific heats for<br>the gas.</p></td>
-</tr>
-<tr class="row-odd"><td><p>_pV_g �a constant<br>(adiabatic process),</p></td>
-<td><p>●For a free expansion,_pV_�a constant.</p></td>
-</tr>
-</tbody>
-</table>
 </div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-adiabatic-expansion">
+<h3>Overview: Adiabatic expansion<a class="headerlink" href="#overview-adiabatic-expansion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An <strong>adiabatic</strong> process has <strong><span class="math notranslate nohighlight">\(Q = 0\)</span></strong>—no heat exchange with the surroundings.</p></li>
+<li><p>Achieved by rapid expansion/compression or a well-insulated container.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(pV^\gamma = \text{constant}\)</span></strong> and <strong><span class="math notranslate nohighlight">\(TV^{\gamma-1} = \text{constant}\)</span></strong>, where <span class="math notranslate nohighlight">\(\gamma = C_P/C_V\)</span>.</p></li>
+<li><p><strong>Adiabatic expansion</strong> → gas does work → internal energy decreases → <strong>temperature drops</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="adiabatic-relations">
+<h3>Adiabatic relations<a class="headerlink" href="#adiabatic-relations" title="Link to this heading">#</a></h3>
+<p><strong>Pressure–volume:</strong>
+$<span class="math notranslate nohighlight">\(
+p_i V_i^\gamma = p_f V_f^\gamma \quad \text{(adiabatic)}
+\)</span>$ (eq-adiabatic-pV)</p>
+<p><strong>Temperature–volume:</strong>
+$<span class="math notranslate nohighlight">\(
+T_i V_i^{\gamma-1} = T_f V_f^{\gamma-1} \quad \text{(adiabatic)}
+\)</span>$ (eq-adiabatic-TV)</p>
+<p><strong><span class="math notranslate nohighlight">\(\gamma = C_P/C_V\)</span></strong> (ratio of molar specific heats):</p>
+<ul class="simple">
+<li><p><strong>Monatomic</strong>: <span class="math notranslate nohighlight">\(\gamma = 5/3 \approx 1.67\)</span></p></li>
+<li><p><strong>Diatomic</strong>: <span class="math notranslate nohighlight">\(\gamma = 7/5 = 1.4\)</span></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="physical-picture">
+<h3>Physical picture<a class="headerlink" href="#physical-picture" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Expansion</strong> (<span class="math notranslate nohighlight">\(V_f &gt; V_i\)</span>): Gas does work on surroundings; <span class="math notranslate nohighlight">\(W &gt; 0\)</span>. With <span class="math notranslate nohighlight">\(Q = 0\)</span>, first law gives <span class="math notranslate nohighlight">\(\Delta E_{\text{int}} = -W &lt; 0\)</span> → internal energy decreases → <strong>temperature drops</strong>.</p></li>
+<li><p><strong>Compression</strong> (<span class="math notranslate nohighlight">\(V_f &lt; V_i\)</span>): Work done on gas; <span class="math notranslate nohighlight">\(W &lt; 0\)</span> → <span class="math notranslate nohighlight">\(\Delta E_{\text{int}} &gt; 0\)</span> → <strong>temperature rises</strong>.</p></li>
+</ul>
+<p>On a <span class="math notranslate nohighlight">\(p\)</span>–<span class="math notranslate nohighlight">\(V\)</span> diagram, an <strong>adiabat</strong> is <strong>steeper</strong> than an isotherm: <span class="math notranslate nohighlight">\(p \propto 1/V^\gamma\)</span> vs <span class="math notranslate nohighlight">\(p \propto 1/V\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="free-expansion-exception">
+<h3>Free expansion (exception)<a class="headerlink" href="#free-expansion-exception" title="Link to this heading">#</a></h3>
+<p>In a <strong>free expansion</strong> (gas expands into a vacuum), <span class="math notranslate nohighlight">\(Q = 0\)</span> and <strong><span class="math notranslate nohighlight">\(W = 0\)</span></strong> (no external pressure to work against). So <span class="math notranslate nohighlight">\(\Delta E_{\text{int}} = 0\)</span> → <strong><span class="math notranslate nohighlight">\(T\)</span> stays constant</strong>.</p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(p_i V_i = p_f V_f\)</span></strong> (ideal gas law; <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(n\)</span> unchanged).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(pV^\gamma = \text{constant}\)</span></strong> does <strong>not</strong> apply—free expansion is not a quasi-static process.</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Adiabatic expansion</p>
+<p>An ideal gas expands adiabatically. The final temperature <span class="math notranslate nohighlight">\(T_f\)</span> is ___ the initial temperature <span class="math notranslate nohighlight">\(T_i\)</span>.</p>
+<ul class="simple">
+<li><p>(A) Greater than</p></li>
+<li><p>(B) Less than</p></li>
+<li><p>(C) Equal to</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Adiabatic</strong>: <span class="math notranslate nohighlight">\(Q = 0\)</span>; <strong><span class="math notranslate nohighlight">\(pV^\gamma = \text{constant}\)</span></strong>; <strong><span class="math notranslate nohighlight">\(TV^{\gamma-1} = \text{constant}\)</span></strong>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\gamma = C_P/C_V\)</span></strong>; monatomic <span class="math notranslate nohighlight">\(\gamma = 5/3\)</span>, diatomic <span class="math notranslate nohighlight">\(\gamma = 7/5\)</span>.</p></li>
+<li><p><strong>Expansion</strong> → cooling; <strong>compression</strong> → heating.</p></li>
+<li><p><strong>Free expansion</strong>: <span class="math notranslate nohighlight">\(Q = W = 0\)</span> → <span class="math notranslate nohighlight">\(T\)</span> constant; <span class="math notranslate nohighlight">\(pV^\gamma\)</span> does not apply.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -662,8 +712,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-adiabatic-expansion">Overview: Adiabatic expansion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-relations">Adiabatic relations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-picture">Physical picture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#free-expansion-exception">Free expansion (exception)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

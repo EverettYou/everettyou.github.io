@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch16_waves_i/16-4-the-wave-equation';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch16_waves_i/16-4-the-wave-equation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-the-wave-equation">Overview: The wave equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-wave-equation">Deriving the wave equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">The wave equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#superposition">Superposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +571,76 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-wave-equation">
 <h1>16-4 The Wave Equation<a class="headerlink" href="#the-wave-equation" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What differential equation governs waves on a string? Write it in terms of <span class="math notranslate nohighlight">\(\partial^2 y/\partial x^2\)</span> and <span class="math notranslate nohighlight">\(\partial^2 y/\partial t^2\)</span>.</p></li>
+<li><p>How does applying Newton’s second law to a string element lead to the wave equation? What role do the tension forces play?</p></li>
+<li><p>Verify that <span class="math notranslate nohighlight">\(y(x,t) = y_m \sin(kx - \omega t)\)</span> satisfies the wave equation. What condition relates <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, and <span class="math notranslate nohighlight">\(v\)</span>?</p></li>
+<li><p>The wave equation is linear. What does that imply when two waves overlap on the same string?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-the-wave-equation">
+<h3>Overview: The wave equation<a class="headerlink" href="#overview-the-wave-equation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>wave equation</strong> is the differential equation that governs wave propagation. For a string, it follows from Newton’s second law applied to a string element.</p></li>
+<li><p><strong>Key idea</strong>: The curvature of the string (second derivative in <span class="math notranslate nohighlight">\(x\)</span>) produces a net force; that force accelerates the element (second derivative in <span class="math notranslate nohighlight">\(t\)</span>). The wave speed <span class="math notranslate nohighlight">\(v\)</span> ties the two together.</p></li>
+<li><p>The equation is <strong>linear</strong>—solutions can be added (superposition), which underlies interference (section 16-5).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="deriving-the-wave-equation">
+<h3>Deriving the wave equation<a class="headerlink" href="#deriving-the-wave-equation" title="Link to this heading">#</a></h3>
+<p>Consider a short string element of length <span class="math notranslate nohighlight">\(dx\)</span> and mass <span class="math notranslate nohighlight">\(dm = \mu\,dx\)</span> as a wave passes. The tension <span class="math notranslate nohighlight">\(\tau\)</span> pulls at both ends.</p>
+<ul class="simple">
+<li><p><strong>Forces</strong>: At each end, the tension force has a vertical component <span class="math notranslate nohighlight">\(F_y = \tau S\)</span>, where <span class="math notranslate nohighlight">\(S = dy/dx\)</span> is the slope. The slopes differ slightly at the two ends because of the curvature.</p></li>
+<li><p><strong>Net force</strong>: <span class="math notranslate nohighlight">\(F_{2y} - F_{1y} = \tau(S_2 - S_1) = \tau\,\frac{dS}{dx}dx = \tau\,\frac{\partial^2 y}{\partial x^2}dx\)</span>.</p></li>
+<li><p><strong>Newton’s second law</strong>: <span class="math notranslate nohighlight">\(\mu\,dx\,\frac{\partial^2 y}{\partial t^2} = \tau\,\frac{\partial^2 y}{\partial x^2}dx\)</span>.</p></li>
+</ul>
+<p>Rearranging and using <span class="math notranslate nohighlight">\(v = \sqrt{\tau/\mu}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wave-equation">
+<span class="eqno">(86)<a class="headerlink" href="#equation-eq-wave-equation" title="Link to this equation">#</a></span>\[
+\frac{\partial^2 y}{\partial x^2} = \frac{1}{v^2}\,\frac{\partial^2 y}{\partial t^2}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h3>The wave equation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Physical meaning</strong>: The spatial curvature (<span class="math notranslate nohighlight">\(\partial^2 y/\partial x^2\)</span>) drives the temporal acceleration (<span class="math notranslate nohighlight">\(\partial^2 y/\partial t^2\)</span>). The factor <span class="math notranslate nohighlight">\(1/v^2\)</span> sets the wave speed.</p></li>
+<li><p><strong>Any</strong> function of the form <span class="math notranslate nohighlight">\(y(x,t) = h(kx \pm \omega t)\)</span> with <span class="math notranslate nohighlight">\(v = \omega/k\)</span> satisfies this equation—it describes traveling waves of arbitrary shape.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Checking a sinusoidal wave</p>
+<p>For <span class="math notranslate nohighlight">\(y = y_m \sin(kx - \omega t)\)</span>: <span class="math notranslate nohighlight">\(\partial^2 y/\partial x^2 = -k^2 y\)</span> and <span class="math notranslate nohighlight">\(\partial^2 y/\partial t^2 = -\omega^2 y\)</span>. The wave equation gives <span class="math notranslate nohighlight">\(-k^2 = -\omega^2/v^2\)</span>, so <span class="math notranslate nohighlight">\(v = \omega/k\)</span>—consistent with section 16-1.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="superposition">
+<h3>Superposition<a class="headerlink" href="#superposition" title="Link to this heading">#</a></h3>
+<p>The wave equation is <strong>linear</strong> (no <span class="math notranslate nohighlight">\(y^2\)</span> or other nonlinear terms). Therefore, if <span class="math notranslate nohighlight">\(y_1\)</span> and <span class="math notranslate nohighlight">\(y_2\)</span> are solutions, so is <span class="math notranslate nohighlight">\(y_1 + y_2\)</span>.</p>
+<p><strong>Principle of superposition</strong>: When two waves overlap, the net displacement is the sum of the individual displacements:</p>
+<div class="math notranslate nohighlight" id="equation-eq-superposition">
+<span class="eqno">(87)<a class="headerlink" href="#equation-eq-superposition" title="Link to this equation">#</a></span>\[
+y(x,t) = y_1(x,t) + y_2(x,t)
+\]</div>
+<ul class="simple">
+<li><p>Overlapping waves <strong>add</strong>; they do not alter each other’s propagation.</p></li>
+<li><p>This principle underlies interference (section 16-5).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Wave equation</strong>: <span class="math notranslate nohighlight">\(\frac{\partial^2 y}{\partial x^2} = \frac{1}{v^2}\,\frac{\partial^2 y}{\partial t^2}\)</span>—derived from Newton’s second law for a string element.</p></li>
+<li><p><strong>Traveling waves</strong> <span class="math notranslate nohighlight">\(y = h(kx \pm \omega t)\)</span> with <span class="math notranslate nohighlight">\(v = \omega/k\)</span> are solutions.</p></li>
+<li><p><strong>Superposition</strong>: Linear equation <span class="math notranslate nohighlight">\(\Rightarrow\)</span> waves add when they overlap.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +697,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-the-wave-equation">Overview: The wave equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-wave-equation">Deriving the wave equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">The wave equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#superposition">Superposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

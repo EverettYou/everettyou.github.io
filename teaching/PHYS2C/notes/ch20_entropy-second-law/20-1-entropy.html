@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch20_entropy-second-law/20-1-entropy';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch20_entropy-second-law/20-1-entropy.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-entropy">Overview: Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-change">Entropy change</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal gas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-law-of-thermodynamics">Second law of thermodynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,34 +571,89 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="entropy">
 <h1>20-1 Entropy<a class="headerlink" href="#entropy" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>20.01</strong> Identify the second law of thermodynamics: If a process occurs in a closed system, the entropy of the system increases for irreversible processes and remains constant for reversible processes; it never decreases.</p></li>
-<li><p><strong>20.02</strong> Identify that entropy is a state function (the value for a particular state of the system does not depend on how that state is reached).</p></li>
-<li><p><strong>20.03</strong> Calculate the change in entropy for a process by integrating the inverse of the temperature (in kelvins) with respect to the heat <em>Q</em> transferred during the process.</p></li>
-<li><p><strong>20.04</strong> For a phase change with a constant temperature process, apply the relationship between the entropy change � <em>S</em> , the total transferred heat <em>Q</em> , and the temperature <em>T</em> (in kelvins).</p></li>
-<li><p><strong>20.05</strong> For a temperature change � <em>T</em> that is small relative to the temperature <em>T</em> , apply the relationship between the entropy change � <em>S</em> , the transferred heat <em>Q</em> , and the average temperature <em>T</em> avg (in kelvins).</p></li>
-<li><p><strong>20.06</strong> For an ideal gas, apply the relationship between the entropy change � <em>S</em> and the initial and final values of the pressure and volume.</p></li>
-<li><p><strong>20.07</strong> Identify that if a process is an irreversible one, the integration for the entropy change must be done for a reversible process that takes the system between the same initial and final states as the irreversible process.</p></li>
-<li><p><strong>20.08</strong> For stretched rubber, relate the elastic force to the rate at which the rubber’s entropy changes with the change in the stretching distance.</p></li>
+<li><p>Define entropy change <span class="math notranslate nohighlight">\(\Delta S\)</span>. Write the integral form. Why must <span class="math notranslate nohighlight">\(T\)</span> be in kelvins?</p></li>
+<li><p>For a reversible isothermal process, what is <span class="math notranslate nohighlight">\(\Delta S\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(T\)</span>?</p></li>
+<li><p>An ideal gas undergoes free expansion (irreversible). How do you calculate <span class="math notranslate nohighlight">\(\Delta S\)</span>? Why can’t you use <span class="math notranslate nohighlight">\(\Delta S = Q/T\)</span> directly?</p></li>
+<li><p>State the second law of thermodynamics. Does entropy ever decrease in a closed system?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-entropy">
+<h3>Overview: Entropy<a class="headerlink" href="#overview-entropy" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Entropy</strong> <span class="math notranslate nohighlight">\(S\)</span> is a <strong>state function</strong>—it depends only on the state of the system, not on how that state was reached.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta S = \int dQ/T\)</span></strong> for a reversible process; <span class="math notranslate nohighlight">\(T\)</span> must be in kelvins.</p></li>
+<li><p><strong>Second law</strong>: In a closed system, <span class="math notranslate nohighlight">\(\Delta S \ge 0\)</span>—entropy increases for irreversible processes and stays constant for reversible processes; it never decreases.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● An irreversible process is one that cannot be reversed by means of small changes in the environment. The direction in which an irreversible process proceeds is set by the change in entropy � <em>S</em> of the system undergoing the process. Entropy <em>S</em> is a state property (or state function) of the system; that is, it depends only on the state of the system and not on the way in which the system reached that state. The entropy postulate states (in part): If an irreversible process occurs in a closed system, the entropy of the system always increases.</p>
-<p>● The entropy change � <em>S</em> for an irreversible process that takes a system from an initial state <em>i</em> to a final state <em>f</em> is exactly equal to the entropy change � <em>S</em> for any reversible process that takes the system between those same two states. We can compute the latter (but not the former) with</p>
-<p>Here <em>Q</em> is the energy transferred as heat to or from the system during the process, and <em>T</em> is the temperature of the system in kelvins during the process.</p>
-<p>● For a reversible isothermal process, the expression for an entropy change reduces to</p>
-<p>� <em>S</em> � <em>Sf</em> � <em>Si</em> � <em>[Q] T</em>[.] ● When the temperature change � <em>T</em> of a system is small relative to the temperature (in kelvins) before and after the process, the entropy change can be approximated as</p>
-<p>where <em>T</em> avg is the system’s average temperature during the process.</p>
-<p>● When an ideal gas changes reversibly from an initial state with temperature <em>Ti</em> and volume <em>Vi</em> to a final state with temperature <em>Tf</em> and volume <em>Vf</em> , the change � <em>S</em> in the entropy of the gas is</p>
-<p>� <em>S</em> � <em>Sf</em> � <em>Si</em> � <em>nR</em> ln <em>[V] V[f] i</em> � <em>nCV</em> ln <em>T[T] i[f]</em> . ● The second law of thermodynamics, which is an extension of the entropy postulate, states: If a process occurs in a closed system, the entropy of the system increases for irreversible processes and remains constant for reversible processes. It never decreases. In equation form,</p>
-<p>� <em>S</em> � 0.</p>
-<p><strong>583</strong>
-CHAPTER 20</p>
-<p>ENTROPY AND THE SECOND LAW OF THERMODYNAMICS</p>
+<hr class="docutils" />
+<section id="entropy-change">
+<h3>Entropy change<a class="headerlink" href="#entropy-change" title="Link to this heading">#</a></h3>
+<p>For a <strong>reversible</strong> process from state <span class="math notranslate nohighlight">\(i\)</span> to state <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-entropy-def">
+<span class="eqno">(181)<a class="headerlink" href="#equation-eq-entropy-def" title="Link to this equation">#</a></span>\[
+\Delta S = S_f - S_i = \int_i^f \frac{dQ}{T}
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(Q\)</span></strong>: heat transferred to the system. <strong><span class="math notranslate nohighlight">\(T\)</span></strong>: temperature (kelvins).</p></li>
+<li><p><strong>Units</strong>: J/K.</p></li>
+<li><p>For an <strong>irreversible</strong> process, <span class="math notranslate nohighlight">\(\Delta S\)</span> is computed using any <strong>reversible path</strong> between the same initial and final states.</p></li>
+</ul>
+<p><strong>Reversible isothermal</strong> (<span class="math notranslate nohighlight">\(T\)</span> constant):</p>
+<div class="math notranslate nohighlight" id="equation-eq-entropy-isothermal">
+<span class="eqno">(182)<a class="headerlink" href="#equation-eq-entropy-isothermal" title="Link to this equation">#</a></span>\[
+\Delta S = \frac{Q}{T}
+\]</div>
+<p><strong>Small <span class="math notranslate nohighlight">\(\Delta T\)</span></strong>: <span class="math notranslate nohighlight">\(\Delta S \approx Q/T_{\text{avg}}\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="ideal-gas">
+<h3>Ideal gas<a class="headerlink" href="#ideal-gas" title="Link to this heading">#</a></h3>
+<p>For an ideal gas undergoing a reversible process from <span class="math notranslate nohighlight">\((T_i, V_i)\)</span> to <span class="math notranslate nohighlight">\((T_f, V_f)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-entropy-ideal-gas">
+<span class="eqno">(183)<a class="headerlink" href="#equation-eq-entropy-ideal-gas" title="Link to this equation">#</a></span>\[
+\Delta S = nR\,\ln\frac{V_f}{V_i} + nC_V\,\ln\frac{T_f}{T_i}
+\]</div>
+<p><strong>Free expansion</strong> (irreversible): <span class="math notranslate nohighlight">\(Q = 0\)</span> along the actual path, but <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> are not well defined. Use a reversible isothermal expansion between the same <span class="math notranslate nohighlight">\(V_i\)</span> and <span class="math notranslate nohighlight">\(V_f\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-entropy-free-expansion">
+<span class="eqno">(184)<a class="headerlink" href="#equation-eq-entropy-free-expansion" title="Link to this equation">#</a></span>\[
+\Delta S = nR\,\ln\frac{V_f}{V_i} \quad \text{(free expansion)}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="second-law-of-thermodynamics">
+<h3>Second law of thermodynamics<a class="headerlink" href="#second-law-of-thermodynamics" title="Link to this heading">#</a></h3>
+<p><strong>Entropy postulate / Second law:</strong> If a process occurs in a <strong>closed system</strong>, the entropy of the system:</p>
+<ul class="simple">
+<li><p><strong>Increases</strong> for irreversible processes (<span class="math notranslate nohighlight">\(\Delta S &gt; 0\)</span>).</p></li>
+<li><p><strong>Remains constant</strong> for reversible processes (<span class="math notranslate nohighlight">\(\Delta S = 0\)</span>).</p></li>
+<li><p><strong>Never decreases</strong> (<span class="math notranslate nohighlight">\(\Delta S \ge 0\)</span>).</p></li>
+</ul>
+<p>The direction of irreversible processes is set by entropy increase—the “arrow of time.”</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Entropy</p>
+<p>Heat flows from a hot block to a cold block until they reach the same temperature. The total entropy of the two blocks:</p>
+<ul class="simple">
+<li><p>(A) Decreases</p></li>
+<li><p>(B) Increases</p></li>
+<li><p>(C) Stays the same</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta S = \int dQ/T\)</span></strong> for reversible process; <span class="math notranslate nohighlight">\(\Delta S = Q/T\)</span> for isothermal.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta S = nR\ln(V_f/V_i) + nC_V\ln(T_f/T_i)\)</span></strong> for ideal gas.</p></li>
+<li><p><strong>Irreversible</strong>: use a reversible path between same states to compute <span class="math notranslate nohighlight">\(\Delta S\)</span>.</p></li>
+<li><p><strong>Second law</strong>: <span class="math notranslate nohighlight">\(\Delta S \ge 0\)</span> in a closed system.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -658,8 +721,14 @@ CHAPTER 20</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-entropy">Overview: Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-change">Entropy change</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal gas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-law-of-thermodynamics">Second law of thermodynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

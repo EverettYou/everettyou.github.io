@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch16_waves_i/16-1-transverse-waves';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch16_waves_i/16-1-transverse-waves.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-transverse-waves">Overview: Transverse waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-waves">Types of waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transverse-vs-longitudinal">Transverse vs longitudinal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sinusoidal-wave-displacement-function">Sinusoidal wave: displacement function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wave-speed-and-direction">Wave speed and direction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transverse-velocity-and-acceleration">Transverse velocity and acceleration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,41 +573,153 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="transverse-waves">
 <h1>16-1 Transverse Waves<a class="headerlink" href="#transverse-waves" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>16.01</strong> Identify the three main types of waves.</p></li>
-<li><p><strong>16.02</strong> Distinguish between transverse waves and longitudinal waves.</p></li>
-<li><p><strong>16.03</strong> Given a displacement function for a traverse wave, determine amplitude <em>ym</em> , angular wave number <em>k</em> , angular frequency v, phase constant f, and direction of travel, and calculate the phase <em>kx</em> � v <em>t</em> � f and the displacement at any given time and position.</p></li>
-<li><p><strong>16.04</strong> Given a displacement function for a traverse wave, calculate the time between two given displacements.</p></li>
-<li><p><strong>16.05</strong> Sketch a graph of a transverse wave as a function of position, identifying amplitude <em>ym</em> , wavelength l, where the slope is greatest, where it is zero, and where the string elements have positive velocity, negative velocity, and zero velocity.</p></li>
-<li><p><strong>16.06</strong> Given a graph of displacement versus time for a transverse wave, determine amplitude <em>ym</em> and period <em>T</em> .</p></li>
-<li><p><strong>16.07</strong> Describe the effect on a transverse wave of changing phase constant f.</p></li>
-<li><p><strong>16.08</strong> Apply the relation between the wave speed <em>v</em> , the distance traveled by the wave, and the time required for that travel.</p></li>
-<li><p><strong>16.09</strong> Apply the relationships between wave speed <em>v</em> , angular frequency v, angular wave number <em>k</em> , wavelength l, period <em>T</em> , and frequency <em>f</em> .</p></li>
-<li><p><strong>16.10</strong> Describe the motion of a string element as a transverse wave moves through its location, and identify when its transverse speed is zero and when it is maximum.</p></li>
-<li><p><strong>16.11</strong> Calculate the transverse velocity <em>u</em> ( <em>t</em> ) of a string element as a transverse wave moves through its location.</p></li>
-<li><p><strong>16.12</strong> Calculate the transverse acceleration <em>a</em> ( <em>t</em> ) of a string element as a transverse wave moves through its location.</p></li>
-<li><p><strong>16.13</strong> Given a graph of displacement, transverse velocity, or transverse acceleration, determine the phase constant f.</p></li>
+<li><p>What are the three main types of waves? Which require a material medium?</p></li>
+<li><p>Distinguish transverse and longitudinal waves. For a wave on a string, which way do the string elements move relative to the wave’s direction of travel?</p></li>
+<li><p>Write the displacement <span class="math notranslate nohighlight">\(y(x,t)\)</span> for a sinusoidal wave traveling in the <span class="math notranslate nohighlight">\(+x\)</span> direction. Identify amplitude <span class="math notranslate nohighlight">\(y_m\)</span>, angular wave number <span class="math notranslate nohighlight">\(k\)</span>, angular frequency <span class="math notranslate nohighlight">\(\omega\)</span>, and phase. How are <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, <span class="math notranslate nohighlight">\(T\)</span>, and <span class="math notranslate nohighlight">\(f\)</span> related?</p></li>
+<li><p>A wave has <span class="math notranslate nohighlight">\(y(x,t) = y_m \sin(kx - \omega t)\)</span>. What is the wave speed <span class="math notranslate nohighlight">\(v\)</span>? How do you tell if a wave travels in the <span class="math notranslate nohighlight">\(+x\)</span> or <span class="math notranslate nohighlight">\(-x\)</span> direction from its equation?</p></li>
+<li><p>For a string element at fixed <span class="math notranslate nohighlight">\(x\)</span>, how does its transverse velocity <span class="math notranslate nohighlight">\(u = \partial y/\partial t\)</span> vary with time? When is <span class="math notranslate nohighlight">\(u\)</span> maximum? When is it zero?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-transverse-waves">
+<h3>Overview: Transverse waves<a class="headerlink" href="#overview-transverse-waves" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Waves</strong> propagate disturbances through a medium (or vacuum for EM waves). The <strong>wave form</strong> moves; the medium oscillates in place.</p></li>
+<li><p><strong>Transverse wave</strong>: particles oscillate <strong>perpendicular</strong> to the direction of travel (e.g., string waves).</p></li>
+<li><p><strong>Longitudinal wave</strong>: particles oscillate <strong>parallel</strong> to the direction of travel (e.g., sound in air).</p></li>
+<li><p>A <strong>sinusoidal</strong> wave has the form <span class="math notranslate nohighlight">\(y(x,t) = y_m \sin(kx - \omega t + \phi)\)</span>; its speed is <span class="math notranslate nohighlight">\(v = \omega/k = \lambda f\)</span>.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Transverse</p></th>
+<th class="head"><p>Longitudinal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Displacement <span class="math notranslate nohighlight">\(\perp\)</span> propagation</p></td>
+<td><p>Displacement <span class="math notranslate nohighlight">\(\parallel\)</span> propagation</p></td>
+</tr>
+<tr class="row-odd"><td><p>String, EM waves</p></td>
+<td><p>Sound, slinky compression</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="types-of-waves">
+<h3>Types of waves<a class="headerlink" href="#types-of-waves" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Mechanical</strong>: require a material medium (string, water, air); governed by Newton’s laws.</p></li>
+<li><p><strong>Electromagnetic</strong>: no medium needed; travel at <span class="math notranslate nohighlight">\(c\)</span> in vacuum.</p></li>
+<li><p><strong>Matter waves</strong>: associated with particles (quantum).</p></li>
+</ul>
+<p>This chapter focuses on <strong>mechanical waves</strong> on a string.</p>
+</section>
+<hr class="docutils" />
+<section id="transverse-vs-longitudinal">
+<h3>Transverse vs longitudinal<a class="headerlink" href="#transverse-vs-longitudinal" title="Link to this heading">#</a></h3>
+<p><strong>Transverse</strong> (e.g., string): Pluck the string; a pulse travels along it. Each string element moves <strong>up and down</strong> while the pulse moves <strong>horizontally</strong>. The displacement is perpendicular to the wave velocity.</p>
+<p><strong>Longitudinal</strong> (e.g., sound in a pipe): A piston compresses air; the compression travels along the pipe. Air elements move <strong>back and forth</strong> along the direction of travel.</p>
+<div class="note admonition">
+<p class="admonition-title">Wave vs medium</p>
+<p><strong>The wave moves; the medium does not.</strong> A string element oscillates about its equilibrium position. The wave form (the pattern) travels from one end to the other. Same for sound: air molecules oscillate; the compression wave propagates.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="sinusoidal-wave-displacement-function">
+<h3>Sinusoidal wave: displacement function<a class="headerlink" href="#sinusoidal-wave-displacement-function" title="Link to this heading">#</a></h3>
+<p>A sinusoidal wave traveling in the <strong>positive</strong> <span class="math notranslate nohighlight">\(x\)</span> direction:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wave-displacement">
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-wave-displacement" title="Link to this equation">#</a></span>\[
+y(x,t) = y_m \sin(kx - \omega t + \phi)
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(y_m\)</span></p></td>
+<td><p>Amplitude</p></td>
+<td><p>Maximum displacement (always positive)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(k\)</span></p></td>
+<td><p>Angular wave number</p></td>
+<td><p><span class="math notranslate nohighlight">\(k = 2\pi/\lambda\)</span> (rad/m)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\omega\)</span></p></td>
+<td><p>Angular frequency</p></td>
+<td><p><span class="math notranslate nohighlight">\(\omega = 2\pi/T = 2\pi f\)</span> (rad/s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(kx - \omega t + \phi\)</span></p></td>
+<td><p>Phase</p></td>
+<td><p>Argument of the sine</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>Phase constant</p></td>
+<td><p>Sets <span class="math notranslate nohighlight">\(y\)</span> and slope at <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(t=0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wavelength</strong> <span class="math notranslate nohighlight">\(\lambda\)</span>: distance over which the pattern repeats. <strong>Period</strong> <span class="math notranslate nohighlight">\(T\)</span>: time for one full oscillation of a string element.</p>
+</section>
+<hr class="docutils" />
+<section id="wave-speed-and-direction">
+<h3>Wave speed and direction<a class="headerlink" href="#wave-speed-and-direction" title="Link to this heading">#</a></h3>
+<p>For a point of constant phase: <span class="math notranslate nohighlight">\(kx - \omega t = \text{const}\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(k\,dx/dt - \omega = 0\)</span>, so</p>
+<div class="math notranslate nohighlight" id="equation-eq-wave-speed">
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-wave-speed" title="Link to this equation">#</a></span>\[
+v = \frac{dx}{dt} = \frac{\omega}{k} = \frac{\lambda}{T} = \lambda f
+\]</div>
+<p><strong>Direction of travel</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y = h(kx - \omega t)\)</span>: wave travels in <strong><span class="math notranslate nohighlight">\(+x\)</span></strong> direction.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y = h(kx + \omega t)\)</span>: wave travels in <strong><span class="math notranslate nohighlight">\(-x\)</span></strong> direction.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Any function of the form <span class="math notranslate nohighlight">\(y(x,t) = h(kx \pm \omega t)\)</span> represents a <strong>traveling wave</strong> with speed <span class="math notranslate nohighlight">\(v = \omega/k\)</span>. The shape is given by <span class="math notranslate nohighlight">\(h\)</span>; the <span class="math notranslate nohighlight">\(\pm\)</span> fixes the direction.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="transverse-velocity-and-acceleration">
+<h3>Transverse velocity and acceleration<a class="headerlink" href="#transverse-velocity-and-acceleration" title="Link to this heading">#</a></h3>
+<p>For a string element at <strong>fixed</strong> <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> varies with <span class="math notranslate nohighlight">\(t\)</span>—the element undergoes SHM. Its <strong>transverse velocity</strong> and <strong>acceleration</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-transverse-velocity">
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-transverse-velocity" title="Link to this equation">#</a></span>\[
+u = \frac{\partial y}{\partial t} = -\omega y_m \cos(kx - \omega t + \phi)
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-transverse-accel">
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-transverse-accel" title="Link to this equation">#</a></span>\[
+a_y = \frac{\partial u}{\partial t} = -\omega^2 y_m \sin(kx - \omega t + \phi) = -\omega^2 y
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(u\)</span> maximum</strong> when <span class="math notranslate nohighlight">\(y = 0\)</span> (element at equilibrium, moving fastest).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(u = 0\)</span></strong> when <span class="math notranslate nohighlight">\(y = \pm y_m\)</span> (element at extremes, momentarily at rest).</p></li>
+</ul>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Do not confuse <strong><span class="math notranslate nohighlight">\(v\)</span></strong> (wave speed, along <span class="math notranslate nohighlight">\(x\)</span>) with <strong><span class="math notranslate nohighlight">\(u\)</span></strong> (transverse velocity of a string element, along <span class="math notranslate nohighlight">\(y\)</span>).</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Transverse</strong>: displacement <span class="math notranslate nohighlight">\(\perp\)</span> propagation; <strong>longitudinal</strong>: displacement <span class="math notranslate nohighlight">\(\parallel\)</span> propagation.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(y(x,t) = y_m \sin(kx - \omega t + \phi)\)</span></strong>; <span class="math notranslate nohighlight">\(k = 2\pi/\lambda\)</span>, <span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span>.</p></li>
+<li><p><strong>Wave speed</strong> <span class="math notranslate nohighlight">\(v = \omega/k = \lambda f\)</span>; <span class="math notranslate nohighlight">\(kx - \omega t\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(+x\)</span>; <span class="math notranslate nohighlight">\(kx + \omega t\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(-x\)</span>.</p></li>
+<li><p><strong>Transverse velocity</strong> <span class="math notranslate nohighlight">\(u = \partial y/\partial t\)</span>; maximum at <span class="math notranslate nohighlight">\(y=0\)</span>, zero at <span class="math notranslate nohighlight">\(y = \pm y_m\)</span>.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● Mechanical waves can exist only in material media and are governed by Newton’s laws. Transverse mechanical waves, like those on a stretched string, are waves in which the particles of the medium oscillate perpendicular to the wave’s direction of travel. Waves in which the particles of the medium oscillate parallel to the wave’s direction of travel are longitudinal waves.</p>
-<ul class="simple">
-<li><p>A sinusoidal wave moving in the positive direction of an</p></li>
-<li><p><em>x</em> axis has the mathematical form</p></li>
-</ul>
-<p>where <em>ym</em> is the amplitude (magnitude of the maximum displacement) of the wave, <em>k</em> is the angular wave number, v is the angular frequency, and <em>kx</em> � v <em>t</em> is the phase. The wavelength l is related to <em>k</em> by</p>
-<ul class="simple">
-<li><p>The period <em>T</em> and frequency <em>f</em> of the wave are related to v by</p></li>
-<li><p>The wave speed <em>v</em> (the speed of the wave along the string) is</p></li>
-<li><p>related to these other parameters by</p></li>
-<li><p>Any function of the form</p></li>
-</ul>
-<p>can represent a traveling wave with a wave speed as given above and a wave shape given by the mathematical form of <em>h</em> . The plus sign denotes a wave traveling in the negative direction of the <em>x</em> axis, and the minus sign a wave traveling in the positive direction.
-445</p>
 </section>
 </section>
 
@@ -665,8 +787,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-transverse-waves">Overview: Transverse waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-waves">Types of waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transverse-vs-longitudinal">Transverse vs longitudinal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sinusoidal-wave-displacement-function">Sinusoidal wave: displacement function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wave-speed-and-direction">Wave speed and direction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transverse-velocity-and-acceleration">Transverse velocity and acceleration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

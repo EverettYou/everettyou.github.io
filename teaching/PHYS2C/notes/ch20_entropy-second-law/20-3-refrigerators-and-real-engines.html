@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch20_entropy-second-law/20-3-refrigerators-and-real-engines';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch20_entropy-second-law/20-3-refrigerators-and-real-engines.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-refrigerators-and-real-engines">Overview: Refrigerators and real engines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refrigerator-operation">Refrigerator operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-of-performance">Coefficient of performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perfect-refrigerator-impossible">Perfect refrigerator (impossible)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-engines-vs-carnot">Real engines vs Carnot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,31 +572,86 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="refrigerators-and-real-engines">
 <h1>20-3 Refrigerators and Real Engines<a class="headerlink" href="#refrigerators-and-real-engines" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>20.16</strong> Identify that a refrigerator is a device that uses work to transfer energy from a low-temperature reservoir to a high-temperature reservoir, and that an ideal refrigerator is one that does this with reversible processes and no wasteful losses.</p></li>
-<li><p><strong>20.17</strong> Sketch a <em>p-V</em> diagram for the cycle of a Carnot refrigerator, indicating the direction of cycling, the nature of the processes involved, the work done during each process (including algebraic sign), the net work done in the cycle,</p></li>
+<li><p>How does a refrigerator differ from a heat engine? What is the direction of energy flow?</p></li>
+<li><p>Define the coefficient of performance <span class="math notranslate nohighlight">\(K\)</span> for a refrigerator. What do we “want” and what do we “pay for”?</p></li>
+<li><p>Write <span class="math notranslate nohighlight">\(K_C\)</span> for a Carnot refrigerator in terms of <span class="math notranslate nohighlight">\(T_L\)</span> and <span class="math notranslate nohighlight">\(T_H\)</span>. When is <span class="math notranslate nohighlight">\(K\)</span> larger?</p></li>
+<li><p>Why is a “perfect refrigerator” (transferring heat from cold to hot with no work) impossible?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-refrigerators-and-real-engines">
+<h3>Overview: Refrigerators and real engines<a class="headerlink" href="#overview-refrigerators-and-real-engines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>refrigerator</strong> uses <strong>work</strong> to transfer heat from a cold reservoir to a hot reservoir—the reverse of a heat engine.</p></li>
+<li><p><strong>Coefficient of performance</strong> <span class="math notranslate nohighlight">\(K = |Q_L|/|W|\)</span>—heat removed per unit work input.</p></li>
+<li><p>A <strong>Carnot refrigerator</strong> (reversible) has maximum <span class="math notranslate nohighlight">\(K_C = T_L/(T_H - T_L)\)</span>.</p></li>
+<li><p>A <strong>perfect refrigerator</strong> (no work) is impossible—violates the second law.</p></li>
+<li><p><strong>Real engines</strong> cannot exceed Carnot efficiency.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="refrigerator-operation">
+<h3>Refrigerator operation<a class="headerlink" href="#refrigerator-operation" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A refrigerator is a device that, operating in a cycle, has</p></li>
-<li><p>work <em>W</em> done on it as it extracts energy � <em>Q</em> L� as heat from a low-temperature reservoir. The coefficient of performance <em>K</em> of a refrigerator is defined as</p></li>
-<li><p>A Carnot refrigerator is a Carnot engine operating in</p></li>
-<li><p>reverse. Its coefficient of performance is</p></li>
-<li><p>and the heat transferred during each process (including algebraic sign).</p></li>
-<li><p><strong>20.18</strong> Apply the relationship between the coefficient of performance <em>K</em> and the heat exchanges with the reservoirs and the temperatures of the reservoirs.</p></li>
-<li><p><strong>20.19</strong> Identify that there is no ideal refrigerator in which all of the energy extracted from the low-temperature reservoir is transferred to the high-temperature reservoir.</p></li>
-<li><p><strong>20.20</strong> Identify that the efficiency of a real engine is less than that of the ideal Carnot engine.</p></li>
+<li><p><strong>Work <span class="math notranslate nohighlight">\(W\)</span></strong> is done <em>on</em> the refrigerator.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(|Q_L|\)</span></strong> is extracted as heat from the <strong>cold</strong> reservoir.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(|Q_H|\)</span></strong> is discharged as heat to the <strong>hot</strong> reservoir.</p></li>
 </ul>
-<p>● A perfect refrigerator is an entirely imaginary refrigerator in which energy extracted as heat from the low-temperature reservoir is somehow converted completely to heat discharged to the high-temperature reservoir without any need for work.</p>
-<p>● A perfect refrigerator would violate the second law of thermodynamics, which can be restated as follows: No series of processes is possible whose sole result is the transfer of energy as heat from a reservoir at a given temperature to a reservoir at a higher temperature (without work being involved).
-CHAPTER 20</p>
-<p>ENTROPY AND THE SECOND LAW OF THERMODYNAMICS</p>
-<p><strong>Figure 20-14</strong> The elements of a refrigerator. The two black arrowheads on the central loop suggest the working substance operating in a cycle, as if on a <em>p-V</em> plot. Energy is transferred as heat <em>Q</em> L to the working substance from the low-temperature reservoir. Energy is transferred as heat <em>Q</em> H to the high-temperature reservoir from the working substance. Work <em>W</em> is done on the refrigerator (on the working substance) by something in the environment.</p>
+<p><strong>First law</strong> (one cycle): <span class="math notranslate nohighlight">\(|W| = |Q_H| - |Q_L|\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="coefficient-of-performance">
+<h3>Coefficient of performance<a class="headerlink" href="#coefficient-of-performance" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight" id="equation-eq-k-refrigerator">
+<span class="eqno">(188)<a class="headerlink" href="#equation-eq-k-refrigerator" title="Link to this equation">#</a></span>\[
+K = \frac{|Q_L|}{|W|} = \frac{\text{heat removed}}{\text{work input}}
+\]</div>
+<ul class="simple">
+<li><p><strong>Carnot refrigerator</strong> (reversible; maximum <span class="math notranslate nohighlight">\(K\)</span>):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-k-carnot">
+<span class="eqno">(189)<a class="headerlink" href="#equation-eq-k-carnot" title="Link to this equation">#</a></span>\[
+K_C = \frac{|Q_L|}{|Q_H| - |Q_L|} = \frac{T_L}{T_H - T_L}
+\]</div>
+<ul class="simple">
+<li><p><strong>Larger <span class="math notranslate nohighlight">\(K\)</span></strong> when <span class="math notranslate nohighlight">\(T_L\)</span> and <span class="math notranslate nohighlight">\(T_H\)</span> are <strong>closer</strong> (smaller <span class="math notranslate nohighlight">\(T_H - T_L\)</span>).</p></li>
+<li><p>Typical: household refrigerator <span class="math notranslate nohighlight">\(K \approx 5\)</span>; room air conditioner <span class="math notranslate nohighlight">\(K \approx 2.5\)</span>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="perfect-refrigerator-impossible">
+<h3>Perfect refrigerator (impossible)<a class="headerlink" href="#perfect-refrigerator-impossible" title="Link to this heading">#</a></h3>
+<p>A <strong>perfect refrigerator</strong> would transfer heat from cold to hot with <strong>no work</strong> input. That would give <span class="math notranslate nohighlight">\(\Delta S &lt; 0\)</span> (entropy of cold reservoir decreases more than hot increases), violating the second law.</p>
+<p><strong>Clausius statement of the second law:</strong> No process is possible whose sole result is the transfer of heat from a colder to a hotter body without work.</p>
+</section>
+<hr class="docutils" />
+<section id="real-engines-vs-carnot">
+<h3>Real engines vs Carnot<a class="headerlink" href="#real-engines-vs-carnot" title="Link to this heading">#</a></h3>
+<p><strong>No real engine</strong> operating between <span class="math notranslate nohighlight">\(T_H\)</span> and <span class="math notranslate nohighlight">\(T_C\)</span> can have efficiency <strong>greater</strong> than a Carnot engine. Irreversibilities (friction, heat loss) always reduce efficiency below <span class="math notranslate nohighlight">\(\varepsilon_C\)</span>.</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Refrigerator</p>
+<p>To increase the coefficient of performance of a Carnot refrigerator, you could:</p>
+<ul class="simple">
+<li><p>(A) Lower <span class="math notranslate nohighlight">\(T_L\)</span> (make cold reservoir colder)</p></li>
+<li><p>(B) Raise <span class="math notranslate nohighlight">\(T_L\)</span> (make cold reservoir warmer)</p></li>
+<li><p>(C) Lower <span class="math notranslate nohighlight">\(T_H\)</span> (make room cooler)</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Refrigerator</strong>: <span class="math notranslate nohighlight">\(|W| = |Q_H| - |Q_L|\)</span>; work moves heat from cold to hot.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(K = |Q_L|/|W|\)</span></strong>; <strong><span class="math notranslate nohighlight">\(K_C = T_L/(T_H - T_L)\)</span></strong> for Carnot.</p></li>
+<li><p><strong>Perfect refrigerator</strong> (no work) violates the second law.</p></li>
+<li><p><strong>Real engines</strong> <span class="math notranslate nohighlight">\(\varepsilon &lt; \varepsilon_C\)</span>; real refrigerators <span class="math notranslate nohighlight">\(K &lt; K_C\)</span>.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -655,8 +719,15 @@ CHAPTER 20</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-refrigerators-and-real-engines">Overview: Refrigerators and real engines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refrigerator-operation">Refrigerator operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-of-performance">Coefficient of performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perfect-refrigerator-impossible">Perfect refrigerator (impossible)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-engines-vs-carnot">Real engines vs Carnot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

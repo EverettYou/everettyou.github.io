@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch15_oscillations/15-2-energy-in-simple-harmonic-motion';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch15_oscillations/15-2-energy-in-simple-harmonic-motion.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-energy-in-shm">Overview: Energy in SHM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-and-potential-energy">Kinetic and potential energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conservation-of-mechanical-energy">Conservation of mechanical energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-a-function-of-position-and-time">Energy as a function of position and time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +571,125 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="energy-in-simple-harmonic-motion">
 <h1>15-2 Energy in Simple Harmonic Motion<a class="headerlink" href="#energy-in-simple-harmonic-motion" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>For a spring–block oscillator, where is the energy stored? How does kinetic energy <span class="math notranslate nohighlight">\(K\)</span> and potential energy <span class="math notranslate nohighlight">\(U\)</span> change as the block moves?</p></li>
+<li><p>Why is mechanical energy <span class="math notranslate nohighlight">\(E = K + U\)</span> constant in undamped SHM? At what positions is <span class="math notranslate nohighlight">\(E\)</span> entirely kinetic? Entirely potential?</p></li>
+<li><p>Sketch how <span class="math notranslate nohighlight">\(K(t)\)</span>, <span class="math notranslate nohighlight">\(U(t)\)</span>, and <span class="math notranslate nohighlight">\(E\)</span> look versus time. How many times per period does each of <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(U\)</span> peak?</p></li>
+<li><p>Given amplitude <span class="math notranslate nohighlight">\(x_m\)</span> and spring constant <span class="math notranslate nohighlight">\(k\)</span>, how do you find the maximum speed <span class="math notranslate nohighlight">\(v_m\)</span> of the block? Use energy conservation.</p></li>
+<li><p>A block has <span class="math notranslate nohighlight">\(K = 3\;\text{J}\)</span> and <span class="math notranslate nohighlight">\(U = 2\;\text{J}\)</span> at <span class="math notranslate nohighlight">\(x = 2\;\text{cm}\)</span>. What is <span class="math notranslate nohighlight">\(K\)</span> at <span class="math notranslate nohighlight">\(x = 0\)</span>? What is <span class="math notranslate nohighlight">\(U\)</span> at <span class="math notranslate nohighlight">\(x = -x_m\)</span>?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-energy-in-shm">
+<h3>Overview: Energy in SHM<a class="headerlink" href="#overview-energy-in-shm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In a <strong>spring–block oscillator</strong>, energy shuttles between <strong>kinetic</strong> (block) and <strong>elastic potential</strong> (spring); the <strong>mechanical energy</strong> <span class="math notranslate nohighlight">\(E = K + U\)</span> is <strong>constant</strong> (no friction).</p></li>
+<li><p><strong>Kinetic energy</strong> <span class="math notranslate nohighlight">\(K = \frac{1}{2}mv^2\)</span> peaks when the block passes through equilibrium (<span class="math notranslate nohighlight">\(x = 0\)</span>); <strong>potential energy</strong> <span class="math notranslate nohighlight">\(U = \frac{1}{2}kx^2\)</span> peaks at the extremes (<span class="math notranslate nohighlight">\(x = \pm x_m\)</span>).</p></li>
+<li><p>Energy conservation gives a direct path to relate amplitude, maximum speed, and spring constant—often simpler than using <span class="math notranslate nohighlight">\(x(t)\)</span> and <span class="math notranslate nohighlight">\(v(t)\)</span>.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Location</p></th>
+<th class="head"><p>Kinetic <span class="math notranslate nohighlight">\(K\)</span></p></th>
+<th class="head"><p>Potential <span class="math notranslate nohighlight">\(U\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x = 0\)</span> (center)</p></td>
+<td><p>Maximum</p></td>
+<td><p>Zero</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x = \pm x_m\)</span> (extremes)</p></td>
+<td><p>Zero</p></td>
+<td><p>Maximum</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="kinetic-and-potential-energy">
+<h3>Kinetic and potential energy<a class="headerlink" href="#kinetic-and-potential-energy" title="Link to this heading">#</a></h3>
+<p>For a spring–block oscillator (see section 15-1):</p>
+<ul class="simple">
+<li><p><strong>Potential energy</strong> (stored in the spring):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-u-spring">
+<span class="eqno">(49)<a class="headerlink" href="#equation-eq-u-spring" title="Link to this equation">#</a></span>\[
+U = \frac{1}{2}kx^2
+\]</div>
+<ul class="simple">
+<li><p><strong>Kinetic energy</strong> (stored in the block):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-k-block">
+<span class="eqno">(50)<a class="headerlink" href="#equation-eq-k-block" title="Link to this equation">#</a></span>\[
+K = \frac{1}{2}mv^2
+\]</div>
+<p>Both <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(K\)</span> vary with time as the block oscillates. At any instant, their sum is the <strong>mechanical energy</strong> <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Two elements of any oscillator</p>
+<p>Every oscillating system needs (1) <strong>springiness</strong>—to store potential energy—and (2) <strong>inertia</strong>—to store kinetic energy. In the spring–block model, these are separated: the spring holds <span class="math notranslate nohighlight">\(U\)</span>, the block holds <span class="math notranslate nohighlight">\(K\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="conservation-of-mechanical-energy">
+<h3>Conservation of mechanical energy<a class="headerlink" href="#conservation-of-mechanical-energy" title="Link to this heading">#</a></h3>
+<p>With no friction, <span class="math notranslate nohighlight">\(E = K + U\)</span> is <strong>constant</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-e-conserved">
+<span class="eqno">(51)<a class="headerlink" href="#equation-eq-e-conserved" title="Link to this equation">#</a></span>\[
+E = \frac{1}{2}kx^2 + \frac{1}{2}mv^2 = \text{constant}
+\]</div>
+<p>The simplest way to evaluate <span class="math notranslate nohighlight">\(E\)</span> is at an extreme, where <span class="math notranslate nohighlight">\(v = 0\)</span> and <span class="math notranslate nohighlight">\(x = x_m\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-e-amplitude">
+<span class="eqno">(52)<a class="headerlink" href="#equation-eq-e-amplitude" title="Link to this equation">#</a></span>\[
+E = \frac{1}{2}kx_m^2
+\]</div>
+<p>Alternatively, at the center (<span class="math notranslate nohighlight">\(x = 0\)</span>) where speed is maximum (<span class="math notranslate nohighlight">\(v = v_m\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-e-velocity">
+<span class="eqno">(53)<a class="headerlink" href="#equation-eq-e-velocity" title="Link to this equation">#</a></span>\[
+E = \frac{1}{2}mv_m^2
+\]</div>
+<p>Equating the two expressions links amplitude and maximum speed:</p>
+<div class="math notranslate nohighlight" id="equation-eq-vm-omega-xm">
+<span class="eqno">(54)<a class="headerlink" href="#equation-eq-vm-omega-xm" title="Link to this equation">#</a></span>\[
+\frac{1}{2}kx_m^2 = \frac{1}{2}mv_m^2 \quad \Rightarrow \quad v_m = \omega x_m
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\omega = \sqrt{k/m}\)</span>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Energy method</strong>: Given <span class="math notranslate nohighlight">\(x_m\)</span> and <span class="math notranslate nohighlight">\(k\)</span>, you can find <span class="math notranslate nohighlight">\(v_m\)</span> (or vice versa) using <span class="math notranslate nohighlight">\(E = \frac{1}{2}kx_m^2 = \frac{1}{2}mv_m^2\)</span>—no need to solve the equations of motion.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="energy-as-a-function-of-position-and-time">
+<h3>Energy as a function of position and time<a class="headerlink" href="#energy-as-a-function-of-position-and-time" title="Link to this heading">#</a></h3>
+<p><strong>Versus position <span class="math notranslate nohighlight">\(x\)</span></strong>: <span class="math notranslate nohighlight">\(U(x) = \frac{1}{2}kx^2\)</span> is a parabola; <span class="math notranslate nohighlight">\(K(x) = E - U(x)\)</span> is the complement. At <span class="math notranslate nohighlight">\(x = 0\)</span> the energy is all kinetic; at <span class="math notranslate nohighlight">\(x = \pm x_m\)</span> it is all potential.</p>
+<p><strong>Versus time <span class="math notranslate nohighlight">\(t\)</span></strong>: <span class="math notranslate nohighlight">\(U(t)\)</span> and <span class="math notranslate nohighlight">\(K(t)\)</span> oscillate—each peaks <strong>twice</strong> per period (at <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t + T/2\)</span>). Their sum <span class="math notranslate nohighlight">\(E\)</span> stays constant.</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Energy at different positions</p>
+<p>A block has kinetic energy 3 J and potential energy 2 J when at <span class="math notranslate nohighlight">\(x = +2\;\text{cm}\)</span>. What is the kinetic energy when the block is at <span class="math notranslate nohighlight">\(x = 0\)</span>?</p>
+<ul class="simple">
+<li><p>(A) 0 J</p></li>
+<li><p>(B) 2 J</p></li>
+<li><p>(C) 3 J</p></li>
+<li><p>(D) 5 J</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(U = \frac{1}{2}kx^2\)</span></strong>, <strong><span class="math notranslate nohighlight">\(K = \frac{1}{2}mv^2\)</span></strong>; mechanical energy <strong><span class="math notranslate nohighlight">\(E = K + U\)</span></strong> is constant in undamped SHM.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(E = \frac{1}{2}kx_m^2 = \frac{1}{2}mv_m^2\)</span></strong>—evaluate at extremes or center to relate amplitude and max speed.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(v_m = \omega x_m\)</span></strong> from energy conservation.</p></li>
+<li><p>At <span class="math notranslate nohighlight">\(x = 0\)</span>: all kinetic. At <span class="math notranslate nohighlight">\(x = \pm x_m\)</span>: all potential.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +746,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-energy-in-shm">Overview: Energy in SHM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-and-potential-energy">Kinetic and potential energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conservation-of-mechanical-energy">Conservation of mechanical energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-a-function-of-position-and-time">Energy as a function of position and time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

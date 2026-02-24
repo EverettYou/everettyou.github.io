@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch19_kinetic-theory/19-5-mean-free-path';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch19_kinetic-theory/19-5-mean-free-path.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-mean-free-path">Overview: Mean free path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-free-path-formula">The mean free path formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-on-density-and-pressure">Dependence on density and pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +570,96 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mean-free-path">
 <h1>19-5 Mean Free Path<a class="headerlink" href="#mean-free-path" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Define the mean free path <span class="math notranslate nohighlight">\(\lambda\)</span>. Why does it depend on the number density <span class="math notranslate nohighlight">\(N/V\)</span> and the molecular diameter <span class="math notranslate nohighlight">\(d\)</span>?</p></li>
+<li><p>Write the mean free path formula <span class="math notranslate nohighlight">\(\lambda = 1/(\sqrt{2}\,\pi d^2\,N/V)\)</span>. Why is there a factor <span class="math notranslate nohighlight">\(\sqrt{2}\)</span>? Why does <span class="math notranslate nohighlight">\(\lambda \propto 1/d^2\)</span>?</p></li>
+<li><p>Gas molecules move at hundreds of m/s. Why does perfume take seconds or minutes to diffuse across a room?</p></li>
+<li><p>For an ideal gas at pressure <span class="math notranslate nohighlight">\(p\)</span> and temperature <span class="math notranslate nohighlight">\(T\)</span>, express <span class="math notranslate nohighlight">\(N/V\)</span> in terms of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(T\)</span>. How does <span class="math notranslate nohighlight">\(\lambda\)</span> change if you double the pressure?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-mean-free-path">
+<h3>Overview: Mean free path<a class="headerlink" href="#overview-mean-free-path" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>mean free path</strong> <span class="math notranslate nohighlight">\(\lambda\)</span> is the average distance a molecule travels between collisions with other molecules.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\lambda \propto 1/(N/V)\)</span></strong>—higher number density → more collisions → shorter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\lambda \propto 1/d^2\)</span></strong>—larger molecules (larger collision cross section) → shorter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>Despite high molecular speeds (~500 m/s for air), <strong>diffusion</strong> is slow because collisions cause frequent direction changes.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-mean-free-path-formula">
+<h3>The mean free path formula<a class="headerlink" href="#the-mean-free-path-formula" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight" id="equation-eq-mean-free-path">
+<span class="eqno">(167)<a class="headerlink" href="#equation-eq-mean-free-path" title="Link to this equation">#</a></span>\[
+\lambda = \frac{1}{\sqrt{2}\,\pi d^2\,(N/V)}
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(d\)</span></strong>: molecular diameter (effective collision size).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(N/V\)</span></strong>: number of molecules per unit volume (number density).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\pi d^2\)</span></strong>: collision cross section—effective target area for a collision.</p></li>
+</ul>
+<p><strong>Physical picture:</strong> A molecule sweeps a cylinder of cross-sectional area <span class="math notranslate nohighlight">\(\pi d^2\)</span> as it moves. Collisions occur with molecules whose centers lie in that cylinder. The factor <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> arises because all molecules move—the relative speed is <span class="math notranslate nohighlight">\(\sqrt{2}\,v_{\text{avg}}\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="dependence-on-density-and-pressure">
+<h3>Dependence on density and pressure<a class="headerlink" href="#dependence-on-density-and-pressure" title="Link to this heading">#</a></h3>
+<p>For an ideal gas, <span class="math notranslate nohighlight">\(N/V = p/(kT)\)</span>. So</p>
+<div class="math notranslate nohighlight" id="equation-eq-lambda-pressure">
+<span class="eqno">(168)<a class="headerlink" href="#equation-eq-lambda-pressure" title="Link to this equation">#</a></span>\[
+\lambda \propto \frac{T}{p}
+\]</div>
+<ul class="simple">
+<li><p><strong>Higher pressure</strong> → more molecules per volume → shorter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p><strong>Higher temperature</strong> (at fixed <span class="math notranslate nohighlight">\(p\)</span>) → lower density → longer <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Condition</p></th>
+<th class="head"><p>Typical <span class="math notranslate nohighlight">\(\lambda\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Air at sea level (1 atm)</p></td>
+<td><p>~0.1 mm</p></td>
+</tr>
+<tr class="row-odd"><td><p>High altitude (~100 km)</p></td>
+<td><p>~16 cm</p></td>
+</tr>
+<tr class="row-even"><td><p>Very low density</p></td>
+<td><p>meters to km</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Why diffusion is slow</p>
+<p>Molecules move fast (~500 m/s), but they collide billions of times per second. Each collision changes direction, so the <strong>net displacement</strong> from the source (diffusion) is much slower than the molecular speed.</p>
+</div>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Mean free path</p>
+<p>You compress a gas to half its volume at constant temperature. The mean free path <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<ul class="simple">
+<li><p>(A) Doubles</p></li>
+<li><p>(B) Halves</p></li>
+<li><p>(C) Stays the same</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\lambda = 1/(\sqrt{2}\,\pi d^2\,N/V)\)</span></strong>—mean free path; average distance between collisions.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\lambda \propto 1/(N/V)\)</span></strong> and <strong><span class="math notranslate nohighlight">\(\lambda \propto 1/d^2\)</span></strong>.</p></li>
+<li><p>For ideal gas: <span class="math notranslate nohighlight">\(\lambda \propto T/p\)</span>; higher pressure → shorter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>Collisions cause frequent direction changes → diffusion is slow despite high molecular speeds.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +716,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-mean-free-path">Overview: Mean free path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-free-path-formula">The mean free path formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-on-density-and-pressure">Dependence on density and pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch15_oscillations/15-5-damped-simple-harmonic-motion';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch15_oscillations/15-5-damped-simple-harmonic-motion.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-damped-shm">Overview: Damped SHM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-damping-force">The damping force</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displacement-and-damped-frequency">Displacement and damped frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-decay">Energy decay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +571,122 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="damped-simple-harmonic-motion">
 <h1>15-5 Damped Simple Harmonic Motion<a class="headerlink" href="#damped-simple-harmonic-motion" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Why does a real oscillator (e.g., pendulum in air) eventually stop? Where does the energy go?</p></li>
+<li><p>What is the damping force <span class="math notranslate nohighlight">\(F_d = -bv\)</span>? Why does it oppose the velocity? What are typical units of <span class="math notranslate nohighlight">\(b\)</span>?</p></li>
+<li><p>For damped SHM, how does the amplitude change with time? Write <span class="math notranslate nohighlight">\(x(t)\)</span> and identify the decaying envelope.</p></li>
+<li><p>How does the damped angular frequency <span class="math notranslate nohighlight">\(\omega'\)</span> differ from the undamped <span class="math notranslate nohighlight">\(\omega\)</span>? When is <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>?</p></li>
+<li><p>The mechanical energy <span class="math notranslate nohighlight">\(E(t)\)</span> decays exponentially. If <span class="math notranslate nohighlight">\(E\)</span> drops to one-fourth of its initial value in time <span class="math notranslate nohighlight">\(t\)</span>, how is <span class="math notranslate nohighlight">\(t\)</span> related to <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span>?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-damped-shm">
+<h3>Overview: Damped SHM<a class="headerlink" href="#overview-damped-shm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Real oscillators</strong> lose energy to friction, air resistance, or other dissipative forces. The motion is <strong>damped</strong>—amplitude and energy decrease over time.</p></li>
+<li><p><strong>Damping force</strong> <span class="math notranslate nohighlight">\(F_d = -bv\)</span>: proportional to velocity, opposes motion. Energy is transferred to thermal energy.</p></li>
+<li><p><strong>Displacement</strong>: <span class="math notranslate nohighlight">\(x(t) = x_m e^{-bt/2m}\cos(\omega' t + \phi)\)</span>—a cosine with an <strong>exponentially decaying amplitude</strong>.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Undamped</p></th>
+<th class="head"><p>Damped</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Amplitude constant</p></td>
+<td><p>Amplitude <span class="math notranslate nohighlight">\(\propto e^{-bt/2m}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(E\)</span> constant</p></td>
+<td><p><span class="math notranslate nohighlight">\(E \propto e^{-bt/m}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\omega = \sqrt{k/m}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\omega' = \sqrt{k/m - b^2/(4m^2)}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="the-damping-force">
+<h3>The damping force<a class="headerlink" href="#the-damping-force" title="Link to this heading">#</a></h3>
+<p>A common model: the damping force is proportional to velocity and opposes it:</p>
+<div class="math notranslate nohighlight" id="equation-eq-damping-force">
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-damping-force" title="Link to this equation">#</a></span>\[
+F_d = -bv
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(b\)</span></strong> = damping constant (SI: kg/s). Depends on the vane, fluid, or friction mechanism.</p></li>
+<li><p>The minus sign ensures <span class="math notranslate nohighlight">\(F_d\)</span> opposes the direction of motion.</p></li>
+</ul>
+<p>Newton’s second law: <span class="math notranslate nohighlight">\(-bv - kx = ma\)</span>, giving</p>
+<div class="math notranslate nohighlight" id="equation-eq-damped-de">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-damped-de" title="Link to this equation">#</a></span>\[
+m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="displacement-and-damped-frequency">
+<h3>Displacement and damped frequency<a class="headerlink" href="#displacement-and-damped-frequency" title="Link to this heading">#</a></h3>
+<p>The solution (for <span class="math notranslate nohighlight">\(b &lt; 2\sqrt{km}\)</span>, underdamped case) is</p>
+<div class="math notranslate nohighlight" id="equation-eq-damped-x">
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-damped-x" title="Link to this equation">#</a></span>\[
+x(t) = x_m e^{-bt/2m} \cos(\omega' t + \phi)
+\]</div>
+<ul class="simple">
+<li><p><strong>Amplitude envelope</strong>: <span class="math notranslate nohighlight">\(x_m e^{-bt/2m}\)</span>—decays exponentially.</p></li>
+<li><p><strong>Damped angular frequency</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-omega-prime">
+<span class="eqno">(68)<a class="headerlink" href="#equation-eq-omega-prime" title="Link to this equation">#</a></span>\[
+\omega' = \sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}
+\]</div>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(b = 0\)</span>: <span class="math notranslate nohighlight">\(\omega' = \omega = \sqrt{k/m}\)</span> (undamped).</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(b \ll \sqrt{km}\)</span> (light damping): <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>—period nearly unchanged; only amplitude decays.</p></li>
+</ul>
+<div class="seealso admonition">
+<p class="admonition-title">Overdamping and critical damping</p>
+<p>If <span class="math notranslate nohighlight">\(b \geq 2\sqrt{km}\)</span>, the motion is <strong>overdamped</strong> (no oscillation) or <strong>critically damped</strong> (fastest return to equilibrium without overshoot). The cosine form <a class="reference internal" href="#equation-eq-damped-x">(67)</a> applies only when <span class="math notranslate nohighlight">\(b &lt; 2\sqrt{km}\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="energy-decay">
+<h3>Energy decay<a class="headerlink" href="#energy-decay" title="Link to this heading">#</a></h3>
+<p>Mechanical energy <span class="math notranslate nohighlight">\(E = K + U\)</span> is <strong>not</strong> conserved—it decreases as work is done against the damping force.</p>
+<p>For <strong>small damping</strong>, the amplitude is <span class="math notranslate nohighlight">\(x_m e^{-bt/2m}\)</span>, so (replacing the constant amplitude in <span class="math notranslate nohighlight">\(E = \frac{1}{2}kx_m^2\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-damped-energy">
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq-damped-energy" title="Link to this equation">#</a></span>\[
+E(t) \approx \frac{1}{2}kx_m^2\, e^{-bt/m}
+\]</div>
+<ul class="simple">
+<li><p><strong>Time constant</strong> for energy decay: <span class="math notranslate nohighlight">\(\tau = m/b\)</span>. After time <span class="math notranslate nohighlight">\(\tau\)</span>, <span class="math notranslate nohighlight">\(E\)</span> drops by factor <span class="math notranslate nohighlight">\(e^{-1} \approx 0.37\)</span>.</p></li>
+<li><p><strong>Time for <span class="math notranslate nohighlight">\(E\)</span> to drop to fraction <span class="math notranslate nohighlight">\(f\)</span></strong> of initial: <span class="math notranslate nohighlight">\(e^{-bt/m} = f\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(t = \frac{m}{b}\ln(1/f)\)</span>.</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Energy decay time</p>
+<p>Three damped oscillators differ in <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(m\)</span>. Which takes the <strong>longest</strong> time for mechanical energy to drop to one-fourth of its initial value?</p>
+<ul class="simple">
+<li><p>(A) <span class="math notranslate nohighlight">\(2k\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p>(B) <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(6b\)</span>, <span class="math notranslate nohighlight">\(4m\)</span></p></li>
+<li><p>(C) <span class="math notranslate nohighlight">\(3k\)</span>, <span class="math notranslate nohighlight">\(3b\)</span>, <span class="math notranslate nohighlight">\(m\)</span></p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Damping</strong>: <span class="math notranslate nohighlight">\(F_d = -bv\)</span>; energy lost to thermal.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(x(t) = x_m e^{-bt/2m}\cos(\omega' t + \phi)\)</span></strong>; amplitude decays exponentially.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\omega' = \sqrt{k/m - b^2/(4m^2)}\)</span></strong>; for small <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(E(t) \approx \frac{1}{2}kx_m^2\, e^{-bt/m}\)</span></strong>; time constant <span class="math notranslate nohighlight">\(\tau = m/b\)</span>.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +743,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-damped-shm">Overview: Damped SHM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-damping-force">The damping force</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displacement-and-damped-frequency">Displacement and damped frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-decay">Energy decay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

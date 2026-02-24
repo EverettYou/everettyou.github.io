@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch17_waves_ii/17-3-interference';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch17_waves_ii/17-3-interference.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-interference-of-sound-waves">Overview: Interference of sound waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-difference-from-path-length-difference">Phase difference from path length difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fully-constructive-and-fully-destructive-interference">Fully constructive and fully destructive interference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-phase-units">Converting phase units</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-two-in-phase-sources">Example: Two in-phase sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,45 +572,127 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="interference">
 <h1>17-3 Interference<a class="headerlink" href="#interference" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>17.14</strong> If two waves with the same wavelength begin in phase but reach a common point by traveling along different paths, calculate their phase difference f at that point by relating the path length difference � <em>L</em> to the wavelength l.</p></li>
-<li><p><strong>17.15</strong> Given the phase difference between two sound</p></li>
+<li><p>Two sound waves with the same wavelength are emitted in phase from two sources and meet at a point P. How do you find the phase difference <span class="math notranslate nohighlight">\(\phi\)</span> at P from the path length difference <span class="math notranslate nohighlight">\(\Delta L\)</span>?</p></li>
+<li><p>When is interference fully constructive? Fully destructive? Give both the phase condition (<span class="math notranslate nohighlight">\(\phi\)</span>) and the path-length condition (<span class="math notranslate nohighlight">\(\Delta L/\lambda\)</span>).</p></li>
+<li><p>Convert a phase difference of <span class="math notranslate nohighlight">\(\pi/2\)</span> rad to degrees and to number of wavelengths. What type of interference does it give?</p></li>
+<li><p>Two in-phase sources are separated by 1.5<span class="math notranslate nohighlight">\(\lambda\)</span>. On the perpendicular bisector, what is <span class="math notranslate nohighlight">\(\Delta L\)</span>? Along the line through the sources, what is <span class="math notranslate nohighlight">\(\Delta L\)</span>? Where do you get constructive vs destructive interference?</p></li>
 </ul>
-<p>waves with the same amplitude, wavelength, and travel direction, determine the type of interference between the waves (fully destructive interference, fully constructive interference, or indeterminate interference).</p>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-interference-of-sound-waves">
+<h3>Overview: Interference of sound waves<a class="headerlink" href="#overview-interference-of-sound-waves" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>17.16</strong> Convert a phase difference between radians, degrees, and number of wavelengths.</p></li>
+<li><p>When two sound waves with the <strong>same wavelength</strong> overlap at a point, the resultant displacement is the <strong>sum</strong> of the two (superposition, section 16-4).</p></li>
+<li><p>The type of interference—<strong>constructive</strong>, <strong>destructive</strong>, or <strong>intermediate</strong>—depends on the <strong>phase difference</strong> <span class="math notranslate nohighlight">\(\phi\)</span> at that point.</p></li>
+<li><p>If the waves are emitted <strong>in phase</strong> and travel in roughly the same direction, <span class="math notranslate nohighlight">\(\phi\)</span> is determined by the <strong>path length difference</strong> <span class="math notranslate nohighlight">\(\Delta L\)</span>: one wave travels farther than the other, so it is shifted in phase.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="phase-difference-from-path-length-difference">
+<h3>Phase difference from path length difference<a class="headerlink" href="#phase-difference-from-path-length-difference" title="Link to this heading">#</a></h3>
+<p>Two waves with wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> are emitted in phase from sources S<span class="math notranslate nohighlight">\(_1\)</span> and S<span class="math notranslate nohighlight">\(_2\)</span>. They reach a common point P after traveling distances <span class="math notranslate nohighlight">\(L_1\)</span> and <span class="math notranslate nohighlight">\(L_2\)</span>. The <strong>path length difference</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-path-diff">
+<span class="eqno">(112)<a class="headerlink" href="#equation-eq-path-diff" title="Link to this equation">#</a></span>\[
+\Delta L = |L_2 - L_1|
+\]</div>
+<p>The <strong>phase difference</strong> at P is</p>
+<div class="math notranslate nohighlight" id="equation-eq-phase-path">
+<span class="eqno">(113)<a class="headerlink" href="#equation-eq-phase-path" title="Link to this equation">#</a></span>\[
+\phi = \frac{\Delta L}{\lambda} \cdot 2\pi \quad \Leftrightarrow \quad \frac{\phi}{2\pi} = \frac{\Delta L}{\lambda}
+\]</div>
 <ul class="simple">
-<li><p>The interference of two sound waves with identical wave-</p></li>
-<li><p>lengths passing through a common point depends on their phase difference f there. If the sound waves were emitted in phase and are traveling in approximately the same direction, f is given by</p></li>
+<li><p>Each extra wavelength of path adds <span class="math notranslate nohighlight">\(2\pi\)</span> rad of phase.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta L/\lambda\)</span> = number of wavelengths by which one wave leads or lags the other.</p></li>
 </ul>
-<p>where � <em>L</em> is their path length difference.</p>
-<ul class="simple">
-<li><p>Fully constructive interference occurs when f is an integer</p></li>
-<li><p>multiple of 2p,</p></li>
-</ul>
+</section>
+<hr class="docutils" />
+<section id="fully-constructive-and-fully-destructive-interference">
+<h3>Fully constructive and fully destructive interference<a class="headerlink" href="#fully-constructive-and-fully-destructive-interference" title="Link to this heading">#</a></h3>
+<p>Same logic as transverse waves (section 16-5): two identical waves with phase difference <span class="math notranslate nohighlight">\(\phi\)</span> give resultant amplitude <span class="math notranslate nohighlight">\(s'_m = |2s_m \cos(\phi/2)|\)</span>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>f<br>�</p></th>
-<th class="head"><p><em>m</em>(2p),<br>for_m_<br>0, 1, 2, … ,<br>�</p></th>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Phase <span class="math notranslate nohighlight">\(\phi\)</span></p></th>
+<th class="head"><p>Path length <span class="math notranslate nohighlight">\(\Delta L/\lambda\)</span></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>and, equivalently, when�_L_is related to wavelengthlby<br>�0, 1, 2, … .<br>●Fully destructive interference occurs whenfis an odd multiple<br>ofp,<br>f�(2_m_�1)p,<br>for_m_�0, 1, 2, … ,<br>�_L_<br>l</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><strong>Fully constructive</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(m(2\pi)\)</span>, <span class="math notranslate nohighlight">\(m = 0, 1, 2, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0, 1, 2, \ldots\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>and</p></td>
-<td><p>�0.5, 1.5, 2.5, … .<br>�_L_<br>l</p></td>
+<tr class="row-odd"><td><p><strong>Fully destructive</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\((2m+1)\pi\)</span>, <span class="math notranslate nohighlight">\(m = 0, 1, 2, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.5, 1.5, 2.5, \ldots\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<ul class="simple">
+<li><p><strong>Constructive</strong>: waves arrive in phase; peaks align with peaks.</p></li>
+<li><p><strong>Destructive</strong>: waves arrive out of phase; peaks align with valleys.</p></li>
+<li><p><strong>Intermediate</strong>: e.g., <span class="math notranslate nohighlight">\(\Delta L/\lambda = 0.25\)</span> or <span class="math notranslate nohighlight">\(0.75\)</span> → neither maximum nor zero.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Phase in wavelengths</p>
+<p><span class="math notranslate nohighlight">\(\phi = 2\pi\)</span> ↔ 1<span class="math notranslate nohighlight">\(\lambda\)</span>. Use the <strong>fractional part</strong> of <span class="math notranslate nohighlight">\(\Delta L/\lambda\)</span>: 2.40<span class="math notranslate nohighlight">\(\lambda\)</span> and 0.40<span class="math notranslate nohighlight">\(\lambda\)</span> are equivalent. Quick checks: 0 → constructive; 0.50 → destructive.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="converting-phase-units">
+<h3>Converting phase units<a class="headerlink" href="#converting-phase-units" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Conversion</p></th>
+<th class="head"><p>Formula</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Radians ↔ wavelengths</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi/(2\pi) = \Delta L/\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Radians ↔ degrees</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_{\text{deg}} = \phi_{\text{rad}} \times (180°/\pi)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Degrees ↔ wavelengths</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_{\text{deg}}/360° = \Delta L/\lambda\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="example-two-in-phase-sources">
+<h3>Example: Two in-phase sources<a class="headerlink" href="#example-two-in-phase-sources" title="Link to this heading">#</a></h3>
+<p>Two point sources S<span class="math notranslate nohighlight">\(_1\)</span> and S<span class="math notranslate nohighlight">\(_2\)</span>, separated by <span class="math notranslate nohighlight">\(D = 1.5\lambda\)</span>, emit spherical sound waves in phase.</p>
+<ul class="simple">
+<li><p><strong>On the perpendicular bisector</strong>: <span class="math notranslate nohighlight">\(\Delta L = 0\)</span> → fully constructive.</p></li>
+<li><p><strong>Along the line through the sources</strong> (far side): <span class="math notranslate nohighlight">\(\Delta L = D = 1.5\lambda\)</span> → fully destructive.</p></li>
+<li><p><strong>Around a circle</strong> through both sources: <span class="math notranslate nohighlight">\(\Delta L\)</span> varies with angle; constructive and destructive points alternate.</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Path difference</p>
+<p>Two in-phase speakers are 2.0 m apart. You stand on the perpendicular bisector, 4.0 m from the midpoint. For sound with <span class="math notranslate nohighlight">\(\lambda = 0.50\)</span> m, what is <span class="math notranslate nohighlight">\(\Delta L\)</span> at your position? What type of interference do you hear?</p>
+<ul class="simple">
+<li><p>(A) <span class="math notranslate nohighlight">\(\Delta L = 0\)</span>, constructive</p></li>
+<li><p>(B) <span class="math notranslate nohighlight">\(\Delta L = 0.5\lambda\)</span>, destructive</p></li>
+<li><p>(C) <span class="math notranslate nohighlight">\(\Delta L = 2\lambda\)</span>, constructive</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\phi = (\Delta L/\lambda) \cdot 2\pi\)</span></strong>—path length difference sets phase difference for in-phase sources.</p></li>
+<li><p><strong>Constructive</strong>: <span class="math notranslate nohighlight">\(\Delta L/\lambda = 0, 1, 2, \ldots\)</span>. <strong>Destructive</strong>: <span class="math notranslate nohighlight">\(\Delta L/\lambda = 0.5, 1.5, 2.5, \ldots\)</span>.</p></li>
+<li><p>Use fractional part of <span class="math notranslate nohighlight">\(\Delta L/\lambda\)</span> to classify; convert between rad, deg, and wavelengths as needed.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -669,8 +760,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-interference-of-sound-waves">Overview: Interference of sound waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-difference-from-path-length-difference">Phase difference from path length difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fully-constructive-and-fully-destructive-interference">Fully constructive and fully destructive interference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-phase-units">Converting phase units</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-two-in-phase-sources">Example: Two in-phase sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

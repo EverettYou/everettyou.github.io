@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch17_waves_ii/17-4-intensity-and-sound-level';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch17_waves_ii/17-4-intensity-and-sound-level.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -548,8 +550,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-intensity-and-sound-level">Overview: Intensity and sound level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-definition-and-power">Intensity: definition and power</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-and-displacement-amplitude">Intensity and displacement amplitude</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotropic-point-source">Isotropic point source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sound-level-in-decibels">Sound level in decibels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-sound-levels">Typical sound levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-in-sound-level">Change in sound level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -563,29 +574,172 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="intensity-and-sound-level">
 <h1>17-4 Intensity and Sound Level<a class="headerlink" href="#intensity-and-sound-level" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>17.17</strong> Calculate the sound intensity <em>I</em> at a surface as the ratio of the power <em>P</em> to the surface area <em>A</em> .</p></li>
-<li><p><strong>17.18</strong> Apply the relationship between the sound intensity <em>I</em> and the displacement amplitude <em>sm</em> of the sound wave.</p></li>
-<li><p><strong>17.19</strong> Identify an isotropic point source of sound.</p></li>
-<li><p><strong>17.20</strong> For an isotropic point source, apply the relationship involving the emitting power <em>Ps</em> , the distance <em>r</em> to a detector, and the sound intensity <em>I</em> at the detector.</p></li>
-<li><p><strong>17.21</strong> Apply the relationship between the sound level b, the sound intensity <em>I</em> , and the standard reference intensity <em>I</em> 0.</p></li>
-<li><p><strong>17.22</strong> Evaluate a logarithm function (log) and an antilogarithm function (log[�][1] ).</p></li>
-<li><p><strong>17.23</strong> Relate the change in a sound level to the change in sound intensity.</p></li>
+<li><p>Define sound intensity <span class="math notranslate nohighlight">\(I\)</span>. What are its units? How does it relate to power <span class="math notranslate nohighlight">\(P\)</span> and area <span class="math notranslate nohighlight">\(A\)</span>?</p></li>
+<li><p>How does intensity <span class="math notranslate nohighlight">\(I\)</span> depend on the displacement amplitude <span class="math notranslate nohighlight">\(s_m\)</span>? Why does doubling <span class="math notranslate nohighlight">\(s_m\)</span> quadruple <span class="math notranslate nohighlight">\(I\)</span>?</p></li>
+<li><p>For an isotropic point source emitting power <span class="math notranslate nohighlight">\(P_s\)</span>, write the intensity at distance <span class="math notranslate nohighlight">\(r\)</span>. Why does <span class="math notranslate nohighlight">\(I \propto 1/r^2\)</span>?</p></li>
+<li><p>Define sound level <span class="math notranslate nohighlight">\(\beta\)</span> in decibels. What is <span class="math notranslate nohighlight">\(I_0\)</span>? If intensity doubles, by how many dB does <span class="math notranslate nohighlight">\(\beta\)</span> change?</p></li>
+<li><p>The sound level drops by 20 dB when you move away from a speaker. By what factor does the intensity change?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-intensity-and-sound-level">
+<h3>Overview: Intensity and sound level<a class="headerlink" href="#overview-intensity-and-sound-level" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Intensity</strong> <span class="math notranslate nohighlight">\(I\)</span> is the power per unit area carried by a sound wave—a physical measure of how much energy crosses a surface per second.</p></li>
+<li><p><strong>Sound level</strong> <span class="math notranslate nohighlight">\(\beta\)</span> (in decibels) is a logarithmic scale for intensity, matching the wide range of human hearing (from barely audible to painful).</p></li>
+<li><p>For a <strong>point source</strong> radiating equally in all directions, intensity falls off as <span class="math notranslate nohighlight">\(1/r^2\)</span>—energy spreads over an ever-larger spherical surface.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● The intensity <em>I</em> of a sound wave at a surface is the average rate per unit area at which energy is transferred by the wave through or onto the surface:</p>
-<p>where <em>P</em> is the time rate of energy transfer (power) of the sound wave and <em>A</em> is the area of the surface intercepting the sound. The intensity <em>I</em> is related to the displacement amplitude <em>sm</em> of the sound wave by</p>
-<p>● The intensity at a distance <em>r</em> from a point source that emits sound waves of power <em>Ps</em> equally in all directions (isotropically) is</p>
+<hr class="docutils" />
+<section id="intensity-definition-and-power">
+<h3>Intensity: definition and power<a class="headerlink" href="#intensity-definition-and-power" title="Link to this heading">#</a></h3>
+<p>The <strong>intensity</strong> of a sound wave at a surface is the average rate per unit area at which energy is transferred by the wave:</p>
+<div class="math notranslate nohighlight" id="equation-eq-intensity-power">
+<span class="eqno">(114)<a class="headerlink" href="#equation-eq-intensity-power" title="Link to this equation">#</a></span>\[
+I = \frac{P}{A}
+\]</div>
 <ul class="simple">
-<li><p>The sound level b in decibels (dB) is defined as</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(P\)</span></strong>: power (W)—time rate of energy transfer.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(A\)</span></strong>: area of the surface intercepting the sound (m²).</p></li>
+<li><p><strong>Units</strong>: W/m².</p></li>
 </ul>
-<p>where <em>I</em> 0 (� 10[�][12] W/m[2] ) is a reference intensity level to which all intensities are compared. For every factor-of-10 increase in intensity, 10 dB is added to the sound level.</p>
-<p><em>I</em> �[1] 2 ~~[�]~~ <em>[v]</em>[v][2] <em>[s] m</em>[2][.]</p>
+</section>
+<hr class="docutils" />
+<section id="intensity-and-displacement-amplitude">
+<h3>Intensity and displacement amplitude<a class="headerlink" href="#intensity-and-displacement-amplitude" title="Link to this heading">#</a></h3>
+<p>For a sinusoidal sound wave (section 17-2), intensity is related to the displacement amplitude <span class="math notranslate nohighlight">\(s_m\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-intensity-amplitude">
+<span class="eqno">(115)<a class="headerlink" href="#equation-eq-intensity-amplitude" title="Link to this equation">#</a></span>\[
+I = \frac{1}{2}\rho v \omega^2 s_m^2
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\rho\)</span></strong>: density of the medium; <strong><span class="math notranslate nohighlight">\(v\)</span></strong>: speed of sound; <strong><span class="math notranslate nohighlight">\(\omega\)</span></strong>: angular frequency.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(I \propto s_m^2\)</span></strong>: doubling the amplitude quadruples the intensity.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Why <span class="math notranslate nohighlight">\(I \propto s_m^2\)</span>?</p>
+<p>Energy in oscillatory motion scales as (amplitude)². The wave carries energy; the rate at which it delivers power per unit area is proportional to <span class="math notranslate nohighlight">\(s_m^2\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="isotropic-point-source">
+<h3>Isotropic point source<a class="headerlink" href="#isotropic-point-source" title="Link to this heading">#</a></h3>
+<p>An <strong>isotropic point source</strong> emits sound equally in all directions. The power <span class="math notranslate nohighlight">\(P_s\)</span> passes through every spherical surface centered on the source. At distance <span class="math notranslate nohighlight">\(r\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-intensity-spherical">
+<span class="eqno">(116)<a class="headerlink" href="#equation-eq-intensity-spherical" title="Link to this equation">#</a></span>\[
+I = \frac{P_s}{4\pi r^2}
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(I \propto 1/r^2\)</span></strong>: doubling the distance halves the intensity (or reduces it by a factor of 4).</p></li>
+<li><p>Same geometric idea as for light from a point source or Coulomb’s law for electric field.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sound-level-in-decibels">
+<h3>Sound level in decibels<a class="headerlink" href="#sound-level-in-decibels" title="Link to this heading">#</a></h3>
+<p>Human hearing spans roughly 12 orders of magnitude in intensity. The <strong>sound level</strong> <span class="math notranslate nohighlight">\(\beta\)</span> uses a logarithmic scale:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sound-level">
+<span class="eqno">(117)<a class="headerlink" href="#equation-eq-sound-level" title="Link to this equation">#</a></span>\[
+\beta = (10\;\text{dB})\,\log_{10}\left(\frac{I}{I_0}\right)
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(I_0 = 10^{-12}\)</span> W/m²</strong>: reference intensity (near the threshold of hearing).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(I = I_0\)</span></strong> → <span class="math notranslate nohighlight">\(\beta = 0\)</span> dB.</p></li>
+<li><p><strong>Factor of 10 in <span class="math notranslate nohighlight">\(I\)</span></strong> → add 10 dB: <span class="math notranslate nohighlight">\(\log(10) = 1\)</span> → <span class="math notranslate nohighlight">\(\Delta\beta = 10\)</span> dB.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change in intensity</p></th>
+<th class="head"><p>Change in <span class="math notranslate nohighlight">\(\beta\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(I \times 10\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+10\)</span> dB</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(I \times 100\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+20\)</span> dB</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(I \times 2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+3\)</span> dB (since <span class="math notranslate nohighlight">\(\log 2 \approx 0.30\)</span>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="typical-sound-levels">
+<h3>Typical sound levels<a class="headerlink" href="#typical-sound-levels" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment</p></th>
+<th class="head"><p>Sound level (dB)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Threshold of hearing</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rustle of leaves</p></td>
+<td><p>~10</p></td>
+</tr>
+<tr class="row-even"><td><p>Conversation</p></td>
+<td><p>~60</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rock concert</p></td>
+<td><p>~110</p></td>
+</tr>
+<tr class="row-even"><td><p>Pain threshold</p></td>
+<td><p>~120</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jet engine</p></td>
+<td><p>~130</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Intensity vs loudness</p>
+<p><strong>Intensity</strong> is a physical quantity (power per area). <strong>Loudness</strong> is subjective and depends on frequency—the ear is more sensitive to some frequencies than others.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="change-in-sound-level">
+<h3>Change in sound level<a class="headerlink" href="#change-in-sound-level" title="Link to this heading">#</a></h3>
+<p>When intensity changes from <span class="math notranslate nohighlight">\(I_i\)</span> to <span class="math notranslate nohighlight">\(I_f\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sound-level-change">
+<span class="eqno">(118)<a class="headerlink" href="#equation-eq-sound-level-change" title="Link to this equation">#</a></span>\[
+\beta_f - \beta_i = (10\;\text{dB})\,\log_{10}\left(\frac{I_f}{I_i}\right)
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta\beta = -20\)</span> dB</strong> → <span class="math notranslate nohighlight">\(I_f/I_i = 10^{-2} = 0.01\)</span> (intensity reduced by a factor of 100).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\Delta\beta = +3\)</span> dB</strong> → <span class="math notranslate nohighlight">\(I_f/I_i = 2\)</span> (intensity doubled).</p></li>
+</ul>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Moving away</p>
+<p>You stand 2 m from a speaker. You move to 6 m. By how many dB does the sound level change? (Assume <span class="math notranslate nohighlight">\(I \propto 1/r^2\)</span>.)</p>
+<ul class="simple">
+<li><p>(A) <span class="math notranslate nohighlight">\(-\)</span>3 dB</p></li>
+<li><p>(B) <span class="math notranslate nohighlight">\(-\)</span>9.5 dB</p></li>
+<li><p>(C) <span class="math notranslate nohighlight">\(-\)</span>20 dB</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(I = P/A\)</span></strong>—intensity is power per unit area (W/m²).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(I = \frac{1}{2}\rho v \omega^2 s_m^2\)</span></strong>—<span class="math notranslate nohighlight">\(I \propto s_m^2\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(I = P_s/(4\pi r^2)\)</span></strong>—for isotropic point source <span class="math notranslate nohighlight">\(I \propto 1/r^2\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\beta = (10\,\text{dB})\,\log(I/I_0)\)</span></strong> with <span class="math notranslate nohighlight">\(I_0 = 10^{-12}\)</span> W/m².</p></li>
+<li><p>Factor of 10 in <span class="math notranslate nohighlight">\(I\)</span> → add 10 dB; use <span class="math notranslate nohighlight">\(\Delta\beta\)</span> to relate changes in <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -653,8 +807,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-intensity-and-sound-level">Overview: Intensity and sound level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-definition-and-power">Intensity: definition and power</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-and-displacement-amplitude">Intensity and displacement amplitude</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotropic-point-source">Isotropic point source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sound-level-in-decibels">Sound level in decibels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-sound-levels">Typical sound levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-in-sound-level">Change in sound level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

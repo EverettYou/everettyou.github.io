@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7d8cb7a5" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -57,6 +57,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
 
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch17_waves_ii/17-8-supersonic-speeds-shock-waves';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch17_waves_ii/17-8-supersonic-speeds-shock-waves.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -525,7 +527,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -541,6 +545,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-supersonic-speeds-and-shock-waves">Overview: Supersonic speeds and shock waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-doppler-formula-breaks-down">Why the Doppler formula breaks down</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mach-cone">The Mach cone</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mach-number">Mach number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shock-wave-and-sonic-boom">Shock wave and sonic boom</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -552,6 +572,104 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="supersonic-speeds-shock-waves">
 <h1>17-8 Supersonic Speeds, Shock Waves<a class="headerlink" href="#supersonic-speeds-shock-waves" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>When a source moves at the speed of sound (<span class="math notranslate nohighlight">\(v_S = v\)</span>), what happens to the Doppler formula? Why does it break down?</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(v_S &gt; v\)</span>, sketch how spherical wavefronts bunch. What shape do they form in 2D? In 3D?</p></li>
+<li><p>Derive the Mach cone half-angle: <span class="math notranslate nohighlight">\(\sin\theta = v/v_S\)</span>. (Hint: consider a wavefront emitted at <span class="math notranslate nohighlight">\(t = 0\)</span> and the source position at time <span class="math notranslate nohighlight">\(t\)</span>.)</p></li>
+<li><p>What is the Mach number? An aircraft at Mach 2 travels how many times the speed of sound?</p></li>
+<li><p>What causes a sonic boom? Why does a bullwhip crack?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview-supersonic-speeds-and-shock-waves">
+<h3>Overview: Supersonic speeds and shock waves<a class="headerlink" href="#overview-supersonic-speeds-and-shock-waves" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When a source moves <strong>faster than sound</strong> (<span class="math notranslate nohighlight">\(v_S &gt; v\)</span>), the Doppler formulas (section 17-7) no longer apply—they predict infinite or undefined frequencies when <span class="math notranslate nohighlight">\(v_S \geq v\)</span>.</p></li>
+<li><p>Wavefronts <strong>bunch</strong> into a cone called the <strong>Mach cone</strong>. A <strong>shock wave</strong> travels along this surface—a sharp pressure change.</p></li>
+<li><p>The <strong>sonic boom</strong> is the audible burst when the shock wave passes an observer.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="why-the-doppler-formula-breaks-down">
+<h3>Why the Doppler formula breaks down<a class="headerlink" href="#why-the-doppler-formula-breaks-down" title="Link to this heading">#</a></h3>
+<p>For <span class="math notranslate nohighlight">\(v_S = v\)</span> (source at the speed of sound), the denominator <span class="math notranslate nohighlight">\(v - v_S\)</span> in the Doppler formula becomes zero → infinite detected frequency. The source keeps pace with its own wavefronts; they pile up at the source.</p>
+<p>For <span class="math notranslate nohighlight">\(v_S &gt; v\)</span>, the source <strong>outruns</strong> its wavefronts. Spherical wavefronts emitted at different times overlap and form an envelope—the <strong>Mach cone</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="the-mach-cone">
+<h3>The Mach cone<a class="headerlink" href="#the-mach-cone" title="Link to this heading">#</a></h3>
+<p>When <span class="math notranslate nohighlight">\(v_S &gt; v\)</span>, wavefronts emitted at successive positions bunch along a <strong>V-shaped envelope</strong> (2D) or <strong>cone</strong> (3D). The half-angle <span class="math notranslate nohighlight">\(\theta\)</span> of the Mach cone satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-mach-cone">
+<span class="eqno">(128)<a class="headerlink" href="#equation-eq-mach-cone" title="Link to this equation">#</a></span>\[
+\sin\theta = \frac{v}{v_S}
+\]</div>
+<p><strong>Derivation:</strong> In time <span class="math notranslate nohighlight">\(t\)</span>, a wavefront expands to radius <span class="math notranslate nohighlight">\(vt\)</span>; the source moves <span class="math notranslate nohighlight">\(v_S t\)</span>. The cone is tangent to the wavefront—the tangent makes angle <span class="math notranslate nohighlight">\(\theta\)</span> with the direction of motion, so <span class="math notranslate nohighlight">\(\sin\theta = (vt)/(v_S t) = v/v_S\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="mach-number">
+<h3>Mach number<a class="headerlink" href="#mach-number" title="Link to this heading">#</a></h3>
+<p>The <strong>Mach number</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-mach-number">
+<span class="eqno">(129)<a class="headerlink" href="#equation-eq-mach-number" title="Link to this equation">#</a></span>\[
+M = \frac{v_S}{v}
+\]</div>
+<ul class="simple">
+<li><p><strong>Mach 1</strong>: <span class="math notranslate nohighlight">\(v_S = v\)</span> (speed of sound).</p></li>
+<li><p><strong>Mach 2</strong>: <span class="math notranslate nohighlight">\(v_S = 2v\)</span> (twice the speed of sound).</p></li>
+<li><p>In terms of <span class="math notranslate nohighlight">\(M\)</span>: <span class="math notranslate nohighlight">\(\sin\theta = 1/M\)</span> → faster source → narrower cone.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="shock-wave-and-sonic-boom">
+<h3>Shock wave and sonic boom<a class="headerlink" href="#shock-wave-and-sonic-boom" title="Link to this heading">#</a></h3>
+<p>A <strong>shock wave</strong> exists along the surface of the Mach cone—air pressure rises sharply, then drops below normal, then returns. When this surface passes an observer, the result is a <strong>sonic boom</strong>: a loud burst of sound.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Supersonic jet</p></td>
+<td><p>Shock cone sweeps along the ground as the jet flies</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rifle bullet</p></td>
+<td><p>Tip can exceed speed of sound → small sonic boom</p></td>
+</tr>
+<tr class="row-even"><td><p>Bullwhip crack</p></td>
+<td><p>Tip accelerates past <span class="math notranslate nohighlight">\(v\)</span> → localized sonic boom</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Subsonic vs supersonic</p>
+<p><strong>Subsonic</strong> (<span class="math notranslate nohighlight">\(v_S &lt; v\)</span>): wavefronts spread ahead of the source; Doppler formula applies. <strong>Supersonic</strong> (<span class="math notranslate nohighlight">\(v_S &gt; v\)</span>): wavefronts bunch into a cone; shock wave forms.</p>
+</div>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Mach cone</p>
+<p>An aircraft flies at Mach 2. What is the half-angle <span class="math notranslate nohighlight">\(\theta\)</span> of its Mach cone? (<span class="math notranslate nohighlight">\(\sin 30° = 0.5\)</span>)</p>
+<ul class="simple">
+<li><p>(A) 30°</p></li>
+<li><p>(B) 45°</p></li>
+<li><p>(C) 60°</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(v_S \geq v\)</span></strong>: Doppler formula breaks down; wavefronts bunch into a cone.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\sin\theta = v/v_S = 1/M\)</span></strong>—Mach cone half-angle.</p></li>
+<li><p><strong>Mach number</strong> <span class="math notranslate nohighlight">\(M = v_S/v\)</span>.</p></li>
+<li><p><strong>Shock wave</strong> along the cone; <strong>sonic boom</strong> when it passes an observer.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +726,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-supersonic-speeds-and-shock-waves">Overview: Supersonic speeds and shock waves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-doppler-formula-breaks-down">Why the Doppler formula breaks down</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mach-cone">The Mach cone</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mach-number">Mach number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shock-wave-and-sonic-boom">Shock wave and sonic boom</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
