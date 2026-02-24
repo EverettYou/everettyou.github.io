@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch42_nuclear-physics/42-8-nuclear-models';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch42_nuclear-physics/42-8-nuclear-models.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-liquid-drop-model">The Liquid-Drop Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shell-model">The Shell Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liquid-drop-vs-shell-model">Liquid-Drop vs. Shell Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +572,97 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="nuclear-models">
 <h1>42-8 Nuclear Models<a class="headerlink" href="#nuclear-models" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>The <strong>liquid-drop model</strong> treats the nucleus as an incompressible fluid. What properties does this explain (e.g., constant density, fission)? What is the <strong>semi-empirical mass formula</strong> and what physical effects do its terms represent?</p></li>
+<li><p>The <strong>shell model</strong> treats nucleons as occupying orbitals, like electrons in an atom. What are the <strong>magic numbers</strong> (2, 8, 20, 28, 50, 82, 126)? Why do nuclei with magic <span class="math notranslate nohighlight">\(Z\)</span> or <span class="math notranslate nohighlight">\(N\)</span> tend to be especially stable?</p></li>
+<li><p>How do the liquid-drop and shell models <em>complement</em> each other? Which explains bulk binding and fission; which explains spin and magic-number stability?</p></li>
+<li><p><span class="math notranslate nohighlight">\(^{208}\text{Pb}\)</span> has <span class="math notranslate nohighlight">\(Z=82\)</span>, <span class="math notranslate nohighlight">\(N=126\)</span> — both magic. Why is it “doubly magic” and particularly stable?</p></li>
+<li><p>The liquid-drop model predicts that very heavy nuclei can lower their energy by splitting (fission). What role does the <strong>Coulomb repulsion</strong> play?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Two complementary models describe nuclear structure: the <strong>liquid-drop model</strong> (collective, bulk behavior) and the <strong>shell model</strong> (individual nucleon orbitals).</p></li>
+<li><p>The <strong>liquid-drop model</strong> treats the nucleus as an incompressible fluid droplet. It explains constant nuclear density, the <strong>semi-empirical mass formula</strong> for binding energy, and <strong>fission</strong> (splitting of heavy nuclei).</p></li>
+<li><p>The <strong>shell model</strong> treats nucleons as occupying quantized orbitals. It explains <strong>magic numbers</strong> (2, 8, 20, 28, 50, 82, 126), extra stability at closed shells, and nuclear spin.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-liquid-drop-model">
+<h3>The Liquid-Drop Model<a class="headerlink" href="#the-liquid-drop-model" title="Link to this heading">#</a></h3>
+<p>The nucleus is modeled as a <strong>liquid drop</strong>: incompressible, with short-range attractive forces between nucleons (analogous to molecules in a droplet). Key ideas:</p>
+<ul class="simple">
+<li><p><strong>Saturation:</strong> Nuclear force saturates — each nucleon attracts only nearby neighbors. Binding energy per nucleon is roughly constant (section 42-2).</p></li>
+<li><p><strong>Surface effect:</strong> Nucleons at the surface have fewer neighbors → less binding. A surface term <em>reduces</em> <span class="math notranslate nohighlight">\(E_b\)</span>.</p></li>
+<li><p><strong>Coulomb repulsion:</strong> Protons repel. A Coulomb term <em>reduces</em> <span class="math notranslate nohighlight">\(E_b\)</span> and grows with <span class="math notranslate nohighlight">\(Z^2/A^{1/3}\)</span>.</p></li>
+<li><p><strong>Asymmetry:</strong> For fixed <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(N \neq Z\)</span> costs energy (Pauli exclusion). Stable light nuclei prefer <span class="math notranslate nohighlight">\(N \approx Z\)</span>; heavy nuclei need more neutrons to dilute Coulomb repulsion.</p></li>
+</ul>
+<p>The <strong>semi-empirical mass formula</strong> (Bethe–Weizsäcker) combines these terms to fit <span class="math notranslate nohighlight">\(E_b(A,Z)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-semf">
+<span class="eqno">(448)<a class="headerlink" href="#equation-eq-semf" title="Link to this equation">#</a></span>\[
+E_b = a_V A - a_S A^{2/3} - a_C \frac{Z^2}{A^{1/3}} - a_A \frac{(N-Z)^2}{A} + \ldots
+\]</div>
+<p>with volume (<span class="math notranslate nohighlight">\(a_V\)</span>), surface (<span class="math notranslate nohighlight">\(a_S\)</span>), Coulomb (<span class="math notranslate nohighlight">\(a_C\)</span>), and asymmetry (<span class="math notranslate nohighlight">\(a_A\)</span>) coefficients. It successfully describes binding energies and predicts <strong>fission</strong>: for very heavy nuclei, the Coulomb term dominates and the nucleus can lower its energy by splitting.</p>
+</section>
+<hr class="docutils" />
+<section id="the-shell-model">
+<h3>The Shell Model<a class="headerlink" href="#the-shell-model" title="Link to this heading">#</a></h3>
+<p>The <strong>shell model</strong> treats nucleons as independent particles moving in an average potential (like electrons in an atom). Nucleons fill <strong>orbitals</strong> with discrete energies. When a shell is full, adding another nucleon costs a large energy jump → extra stability.</p>
+<p><strong>Magic numbers</strong> are the numbers of protons or neutrons that fill shells: <strong>2, 8, 20, 28, 50, 82, 126</strong>. Nuclei with magic <span class="math notranslate nohighlight">\(Z\)</span> or <span class="math notranslate nohighlight">\(N\)</span> (e.g., <span class="math notranslate nohighlight">\(^4\text{He}\)</span>, <span class="math notranslate nohighlight">\(^{16}\text{O}\)</span>, <span class="math notranslate nohighlight">\(^{40}\text{Ca}\)</span>, <span class="math notranslate nohighlight">\(^{208}\text{Pb}\)</span>) are unusually stable. <strong>Doubly magic</strong> nuclei (<span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(N\)</span> both magic), such as <span class="math notranslate nohighlight">\(^{208}\text{Pb}\)</span> (<span class="math notranslate nohighlight">\(Z=82\)</span>, <span class="math notranslate nohighlight">\(N=126\)</span>), are especially stable.</p>
+<p>The shell model explains:</p>
+<ul class="simple">
+<li><p><strong>Magic-number stability</strong> and anomalously high binding at closed shells</p></li>
+<li><p><strong>Nuclear spin</strong> (from unpaired nucleons in partially filled shells)</p></li>
+<li><p>Some decay patterns and isomerism</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Why different from atomic shells?</p>
+<p>The nuclear potential is not Coulombic; it is roughly a finite square well or harmonic oscillator, modified by spin–orbit coupling. The magic numbers emerge from this potential, not from <span class="math notranslate nohighlight">\(n^2\)</span> as in hydrogen.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="liquid-drop-vs-shell-model">
+<h3>Liquid-Drop vs. Shell Model<a class="headerlink" href="#liquid-drop-vs-shell-model" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Liquid-drop</p></th>
+<th class="head"><p>Shell model</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Picture</p></td>
+<td><p>Collective droplet</p></td>
+<td><p>Individual orbitals</p></td>
+</tr>
+<tr class="row-odd"><td><p>Explains</p></td>
+<td><p><span class="math notranslate nohighlight">\(E_b(A,Z)\)</span>, fission, density</p></td>
+<td><p>Magic numbers, spin, stability</p></td>
+</tr>
+<tr class="row-even"><td><p>Best for</p></td>
+<td><p>Bulk properties, heavy nuclei</p></td>
+<td><p>Structure, light/medium nuclei</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both are approximate. The liquid-drop captures bulk behavior; the shell model captures single-particle effects. Real nuclei show both — e.g., fission barriers depend on shell effects (fragment magic numbers).</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Liquid-drop:</strong> nucleus as incompressible fluid; semi-empirical mass formula (volume, surface, Coulomb, asymmetry); explains fission.</p></li>
+<li><p><strong>Shell model:</strong> nucleons in orbitals; magic numbers 2, 8, 20, 28, 50, 82, 126; explains stability and spin.</p></li>
+<li><p>Models complement each other: liquid-drop for bulk, shell for structure.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +719,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-liquid-drop-model">The Liquid-Drop Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shell-model">The Shell Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liquid-drop-vs-shell-model">Liquid-Drop vs. Shell Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

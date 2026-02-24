@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch34images/34-2-spherical-mirrors';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch34images/34-2-spherical-mirrors.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concave-vs-convex-mirrors">Concave vs convex mirrors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#focal-points">Focal points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images-from-concave-mirrors">Images from concave mirrors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images-from-convex-mirrors">Images from convex mirrors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mirror-equation-and-magnification">Mirror equation and magnification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ray-diagram-principal-rays">Ray diagram: principal rays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,38 +575,157 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="spherical-mirrors">
 <h1>34-2 Spherical Mirrors<a class="headerlink" href="#spherical-mirrors" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>34.06</strong> Distinguish a concave spherical mirror from a convex spherical mirror.</p></li>
-<li><p><strong>34.07</strong> For concave and convex mirrors, sketch a ray diagram for the reflection of light rays that are initially parallel to the central axis, indicating how they form the focal points, and identifying which is real and which is virtual.</p></li>
-<li><p><strong>34.08</strong> Distinguish a real focal point from a virtual focal point, identify which corresponds to which type of mirror, and identify the algebraic sign associated with each focal length.</p></li>
-<li><p><strong>34.09</strong> Relate a focal length of a spherical mirror to the radius.</p></li>
-<li><p><strong>34.10</strong> Identify the terms “inside the focal point” and “outside the focal point.”</p></li>
-<li><p><strong>34.11</strong> For an object (a) inside and (b) outside the focal point of a concave mirror, sketch the reflections of at least two rays to find the image and identify the type and orientation of the image.</p></li>
-<li><p><strong>34.12</strong> For a concave mirror, distinguish the locations and orientations of a real image and a virtual image.</p></li>
-<li><p><strong>34.13</strong> For an object in front of a convex mirror, sketch the reflections of at least two rays to find the image and identify the type and orientation of the image.</p></li>
-<li><p><strong>34.14</strong> Identify which type of mirror can produce both real and virtual images and which type can produce only virtual images.</p></li>
-<li><p><strong>34.15</strong> Identify the algebraic signs of the image distance <em>i</em> for real images and virtual images.</p></li>
-<li><p><strong>34.16</strong> For convex, concave, and plane mirrors, apply the relationship between the focal length <em>f</em> , object distance <em>p</em> , and image distance <em>i</em> .</p></li>
-<li><p><strong>34.17</strong> Apply the relationships between lateral magnification <em>m</em> , image height <em>h</em> �, object height <em>h</em> , image distance <em>i</em> , and object distance <em>p</em> .</p></li>
+<li><p>Distinguish <strong>concave</strong> and <strong>convex</strong> spherical mirrors. Where is the center of curvature? What are the signs of <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(f\)</span>?</p></li>
+<li><p>Sketch how <strong>parallel rays</strong> form the focal point for (a) concave and (b) convex mirrors. Which has a <strong>real</strong> focus and which a <strong>virtual</strong> focus?</p></li>
+<li><p>For a <strong>concave</strong> mirror: object <strong>inside</strong> vs <strong>outside</strong> the focal point—what type of image (real or virtual) and what orientation?</p></li>
+<li><p>For a <strong>convex</strong> mirror: what type of image can it form? Where is it located?</p></li>
+<li><p>State the <strong>mirror equation</strong> and the <strong>lateral magnification</strong> formula. What sign convention applies to <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(m\)</span>?</p></li>
+<li><p>Name two <strong>principal rays</strong> used to locate an image in a ray diagram for a spherical mirror.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Spherical mirrors</strong>: small section of a sphere—<strong>concave</strong> (caved in, <span class="math notranslate nohighlight">\(r &gt; 0\)</span>) or <strong>convex</strong> (flexed out, <span class="math notranslate nohighlight">\(r &lt; 0\)</span>).</p></li>
+<li><p><strong>Focal point</strong> <span class="math notranslate nohighlight">\(F\)</span>: parallel rays (near the central axis) reflect to a common point (concave: real) or appear to diverge from it (convex: virtual).</p></li>
+<li><p><strong>Focal length</strong> <span class="math notranslate nohighlight">\(f = r/2\)</span>; <span class="math notranslate nohighlight">\(f &gt; 0\)</span> for concave, <span class="math notranslate nohighlight">\(f &lt; 0\)</span> for convex.</p></li>
+<li><p><strong>Concave</strong>: real image if object outside <span class="math notranslate nohighlight">\(F\)</span>; virtual if inside <span class="math notranslate nohighlight">\(F\)</span>. <strong>Convex</strong>: always virtual image.</p></li>
+<li><p><strong>Mirror equation</strong> and <strong>magnification</strong> relate <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(f\)</span>, and image size.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="concave-vs-convex-mirrors">
+<h3>Concave vs convex mirrors<a class="headerlink" href="#concave-vs-convex-mirrors" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Shape</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(r\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(f\)</span></p></th>
+<th class="head"><p>Center of curvature <span class="math notranslate nohighlight">\(C\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Concave</strong></p></td>
+<td><p>Caved in</p></td>
+<td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p>In front of mirror</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Convex</strong></p></td>
+<td><p>Flexed out</p></td>
+<td><p><span class="math notranslate nohighlight">\(&lt; 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(&lt; 0\)</span></p></td>
+<td><p>Behind mirror</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Plane</strong></p></td>
+<td><p>Flat</p></td>
+<td><p><span class="math notranslate nohighlight">\(\to \infty\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\to \infty\)</span></p></td>
+<td><p>At infinity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Applications</strong>: Makeup/shaving mirrors are concave (magnified image). Store surveillance mirrors are convex (wider field of view).</p>
+</section>
+<hr class="docutils" />
+<section id="focal-points">
+<h3>Focal points<a class="headerlink" href="#focal-points" title="Link to this heading">#</a></h3>
+<p><strong>Concave mirror</strong>: Parallel rays (parallel to the central axis) reflect through a common point <span class="math notranslate nohighlight">\(F\)</span> in front of the mirror—a <strong>real focal point</strong>. An image can form on a card placed at <span class="math notranslate nohighlight">\(F\)</span>.</p>
+<p><strong>Convex mirror</strong>: Parallel rays diverge after reflection. Backward extensions of the reflected rays meet at a point <span class="math notranslate nohighlight">\(F\)</span> behind the mirror—a <strong>virtual focal point</strong>. No real image forms there.</p>
+<div class="math notranslate nohighlight" id="equation-eq-focal-length">
+<span class="eqno">(240)<a class="headerlink" href="#equation-eq-focal-length" title="Link to this equation">#</a></span>\[
+f = \frac{r}{2}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="images-from-concave-mirrors">
+<h3>Images from concave mirrors<a class="headerlink" href="#images-from-concave-mirrors" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Object location</p></th>
+<th class="head"><p>Image type</p></th>
+<th class="head"><p>Image location</p></th>
+<th class="head"><p>Orientation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Inside</strong> <span class="math notranslate nohighlight">\(F\)</span> (between mirror and <span class="math notranslate nohighlight">\(F\)</span>)</p></td>
+<td><p>Virtual</p></td>
+<td><p>Behind mirror</p></td>
+<td><p>Same as object</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>At</strong> <span class="math notranslate nohighlight">\(F\)</span></p></td>
+<td><p>—</p></td>
+<td><p>At infinity</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Outside</strong> <span class="math notranslate nohighlight">\(F\)</span></p></td>
+<td><p>Real</p></td>
+<td><p>In front of mirror</p></td>
+<td><p>Inverted</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Real images</strong> form on the same side of the mirror as the object; <strong>virtual images</strong> form on the opposite side.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="images-from-convex-mirrors">
+<h3>Images from convex mirrors<a class="headerlink" href="#images-from-convex-mirrors" title="Link to this heading">#</a></h3>
+<p>A convex mirror forms <strong>only virtual images</strong>—always behind the mirror, with the same orientation as the object, and smaller. Regardless of object position, <span class="math notranslate nohighlight">\(i &lt; 0\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="mirror-equation-and-magnification">
+<h3>Mirror equation and magnification<a class="headerlink" href="#mirror-equation-and-magnification" title="Link to this heading">#</a></h3>
+<p>For small angles with the central axis (paraxial rays):</p>
+<div class="math notranslate nohighlight" id="equation-eq-mirror">
+<span class="eqno">(241)<a class="headerlink" href="#equation-eq-mirror" title="Link to this equation">#</a></span>\[
+\frac{1}{p} + \frac{1}{i} = \frac{1}{f} = \frac{2}{r}
+\]</div>
+<p><strong>Sign convention</strong>: <span class="math notranslate nohighlight">\(p &gt; 0\)</span>; <span class="math notranslate nohighlight">\(f &gt; 0\)</span> (concave), <span class="math notranslate nohighlight">\(f &lt; 0\)</span> (convex); <span class="math notranslate nohighlight">\(i &gt; 0\)</span> (real image), <span class="math notranslate nohighlight">\(i &lt; 0\)</span> (virtual image).</p>
+<p><strong>Lateral magnification</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-magnification">
+<span class="eqno">(242)<a class="headerlink" href="#equation-eq-magnification" title="Link to this equation">#</a></span>\[
+m = -\frac{i}{p}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-mag-height">
+<span class="eqno">(243)<a class="headerlink" href="#equation-eq-mag-height" title="Link to this equation">#</a></span>\[
+|m| = \frac{h'}{h}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h\)</span> = object height, <span class="math notranslate nohighlight">\(h'\)</span> = image height. <span class="math notranslate nohighlight">\(m &gt; 0\)</span>: same orientation; <span class="math notranslate nohighlight">\(m &lt; 0\)</span>: inverted.</p>
+</section>
+<hr class="docutils" />
+<section id="ray-diagram-principal-rays">
+<h3>Ray diagram: principal rays<a class="headerlink" href="#ray-diagram-principal-rays" title="Link to this heading">#</a></h3>
+<p>To locate an image, draw any two of these rays from an off-axis point:</p>
+<ol class="arabic simple">
+<li><p><strong>Parallel to axis</strong> <span class="math notranslate nohighlight">\(\to\)</span> reflects through <span class="math notranslate nohighlight">\(F\)</span>.</p></li>
+<li><p><strong>Through <span class="math notranslate nohighlight">\(F\)</span></strong> <span class="math notranslate nohighlight">\(\to\)</span> reflects parallel to axis.</p></li>
+<li><p><strong>Through center of curvature <span class="math notranslate nohighlight">\(C\)</span></strong> <span class="math notranslate nohighlight">\(\to\)</span> reflects back along itself.</p></li>
+<li><p><strong>To center <span class="math notranslate nohighlight">\(c\)</span> of mirror</strong> <span class="math notranslate nohighlight">\(\to\)</span> reflects symmetrically about the axis.</p></li>
+</ol>
+<p>The image is at the intersection of the two rays (or their extensions). For convex mirrors, rays 2 and 3 use <em>extensions</em> toward <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(C\)</span> (both behind the mirror).</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A spherical mirror is in the shape of a small section of a</p></li>
-<li><p>spherical surface and can be concave (the radius of curvature <em>r</em> is a positive quantity), convex ( <em>r</em> is a negative quantity), or plane (flat, <em>r</em> is infinite).</p></li>
+<li><p><strong>Concave</strong>: <span class="math notranslate nohighlight">\(f &gt; 0\)</span>, real focus; object outside <span class="math notranslate nohighlight">\(F\)</span> <span class="math notranslate nohighlight">\(\to\)</span> real inverted image; object inside <span class="math notranslate nohighlight">\(F\)</span> <span class="math notranslate nohighlight">\(\to\)</span> virtual upright image.</p></li>
+<li><p><strong>Convex</strong>: <span class="math notranslate nohighlight">\(f &lt; 0\)</span>, virtual focus; always virtual, upright, smaller image.</p></li>
+<li><p><strong>Mirror equation</strong>: <span class="math notranslate nohighlight">\(1/p + 1/i = 1/f\)</span>; <strong>magnification</strong>: <span class="math notranslate nohighlight">\(m = -i/p\)</span>.</p></li>
+<li><p><strong>Ray diagram</strong>: Use two principal rays to locate the image.</p></li>
 </ul>
-<p>● If parallel rays are sent into a (spherical) concave mirror parallel to the central axis, the reflected rays pass through a common point (a real focus <em>F</em> ) at a distance <em>f</em> (a positive quantity) from the mirror. If they are sent toward a (spherical) convex mirror, backward extensions of the reflected rays pass through a common point (a virtual focus <em>F</em> ) at a distance <em>f</em> (a negative quantity) from the mirror.</p>
-<p>● A concave mirror can form a real image (if the object is outside the focal point) or a virtual image (if the object is inside the focal point).</p>
-<p>● A convex mirror can form only a virtual image.</p>
-<p>● The mirror equation relates an object distance <em>p</em> , the mirror’s focal length <em>f</em> and radius of curvature <em>r</em> , and the image distance <em>i</em> :</p>
-<p>● The magnitude of the lateral magnification <em>m</em> of an object is the ratio of the image height <em>h</em> � to object height <em>h</em> ,</p>
-<p>and is related to the object distance <em>p</em> and image distance <em>i</em> by</p>
-<p><em>m</em> � ~~�~~ <em>[i]</em></p>
-<p><em>p</em>[.]</p>
+</section>
 </section>
 </section>
 
@@ -663,8 +793,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concave-vs-convex-mirrors">Concave vs convex mirrors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#focal-points">Focal points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images-from-concave-mirrors">Images from concave mirrors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images-from-convex-mirrors">Images from convex mirrors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mirror-equation-and-magnification">Mirror equation and magnification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ray-diagram-principal-rays">Ray diagram: principal rays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

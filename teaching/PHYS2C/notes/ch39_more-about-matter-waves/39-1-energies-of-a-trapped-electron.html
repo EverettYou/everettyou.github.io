@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch39_more-about-matter-waves/39-1-energies-of-a-trapped-electron';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch39_more-about-matter-waves/39-1-energies-of-a-trapped-electron.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confinement-and-quantization">Confinement and quantization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infinite-potential-well">Infinite potential well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-level-diagram">Energy-level diagram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-jumps-and-photons">Quantum jumps and photons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-and-absorption-spectra">Emission and absorption spectra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +574,93 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="energies-of-a-trapped-electron">
 <h1>39-1 Energies of a Trapped Electron<a class="headerlink" href="#energies-of-a-trapped-electron" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>State the <strong>confinement principle</strong>: How does confining a wave (e.g., on a string or in a box) lead to <strong>quantization</strong> of wavelengths and energies?</p></li>
+<li><p>Sketch a <strong>one-dimensional infinite potential well</strong>. What is <span class="math notranslate nohighlight">\(U(x)\)</span> inside and outside? Why must the matter wave have <strong>nodes</strong> at the boundaries?</p></li>
+<li><p>For an electron in an infinite well of length <span class="math notranslate nohighlight">\(L\)</span>, the allowed energies are <span class="math notranslate nohighlight">\(E_n = h^2 n^2/(8mL^2)\)</span>. What is the <strong>ground-state</strong> energy? Why can’t the electron have <span class="math notranslate nohighlight">\(E = 0\)</span>?</p></li>
+<li><p>Define <strong>quantum jump</strong> and <span class="math notranslate nohighlight">\(\Delta E\)</span>. If an electron absorbs a photon to jump from <span class="math notranslate nohighlight">\(E_1\)</span> to <span class="math notranslate nohighlight">\(E_4\)</span>, what must be true about the photon’s energy? Write <span class="math notranslate nohighlight">\(hf\)</span> and <span class="math notranslate nohighlight">\(hc/\lambda\)</span> in terms of <span class="math notranslate nohighlight">\(\Delta E\)</span>.</p></li>
+<li><p>What are <strong>emission</strong> and <strong>absorption</strong> spectra? How do they arise from the discrete energy levels?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Confinement principle</strong>: Confining a wave to a finite region leads to <strong>quantization</strong>—only discrete wavelengths and energies are allowed. This applies to string waves, light in a cavity, and <strong>matter waves</strong>.</p></li>
+<li><p>An electron trapped in a <strong>one-dimensional infinite potential well</strong> of length <span class="math notranslate nohighlight">\(L\)</span> can have only the energies <span class="math notranslate nohighlight">\(E_n = h^2 n^2/(8mL^2)\)</span> for <span class="math notranslate nohighlight">\(n = 1, 2, 3, \ldots\)</span>.</p></li>
+<li><p>The <strong>ground state</strong> (<span class="math notranslate nohighlight">\(n=1\)</span>) has the lowest energy; the electron cannot have <span class="math notranslate nohighlight">\(E = 0\)</span>. <strong>Quantum jumps</strong> between levels require <span class="math notranslate nohighlight">\(\Delta E = E_{\text{high}} - E_{\text{low}}\)</span>.</p></li>
+<li><p><strong>Photon absorption</strong> (upward jump) and <strong>photon emission</strong> (downward jump) obey <span class="math notranslate nohighlight">\(hf = hc/\lambda = \Delta E\)</span>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="confinement-and-quantization">
+<h3>Confinement and quantization<a class="headerlink" href="#confinement-and-quantization" title="Link to this heading">#</a></h3>
+<p>A stretched string of <strong>infinite</strong> length can support traveling waves of any frequency. A string of <strong>finite</strong> length <span class="math notranslate nohighlight">\(L\)</span> with fixed ends supports only <strong>standing waves</strong>—and only those for which <span class="math notranslate nohighlight">\(L = n\lambda/2\)</span> (<span class="math notranslate nohighlight">\(n = 1, 2, 3, \ldots\)</span>). The ends are nodes; the wavelength is quantized.</p>
+<p>This idea applies to all waves, including <strong>matter waves</strong>. Confining an electron to a finite region forces its matter wave to fit that region—only certain wavelengths (and thus certain energies) are allowed.</p>
+<p><strong>Confinement principle:</strong> Confinement of a wave leads to quantization—discrete states with discrete energies. States with intermediate energies are not allowed.</p>
+</section>
+<hr class="docutils" />
+<section id="infinite-potential-well">
+<h3>Infinite potential well<a class="headerlink" href="#infinite-potential-well" title="Link to this heading">#</a></h3>
+<p>An idealized trap: an electron confined to <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span> with <span class="math notranslate nohighlight">\(U = 0\)</span> inside and <span class="math notranslate nohighlight">\(U \to \infty\)</span> outside. The walls are impenetrable—the electron cannot escape. This is a <strong>one-dimensional infinite potential well</strong>.</p>
+<p>The matter wave must have <strong>nodes</strong> at <span class="math notranslate nohighlight">\(x = 0\)</span> and <span class="math notranslate nohighlight">\(x = L\)</span> (the wave function must vanish where <span class="math notranslate nohighlight">\(U \to \infty\)</span>). So the well length must equal an integer number of half-wavelengths:</p>
+<div class="math notranslate nohighlight" id="equation-eq-l-lambda">
+<span class="eqno">(371)<a class="headerlink" href="#equation-eq-l-lambda" title="Link to this equation">#</a></span>\[
+L = n\,\frac{\lambda}{2}, \quad n = 1, 2, 3, \ldots
+\]</div>
+<p>The de Broglie wavelength is <span class="math notranslate nohighlight">\(\lambda = h/p = h/\sqrt{2mK}\)</span>. Inside the well, <span class="math notranslate nohighlight">\(U = 0\)</span>, so <span class="math notranslate nohighlight">\(E = K\)</span> (kinetic energy). Thus <span class="math notranslate nohighlight">\(\lambda = h/\sqrt{2mE}\)</span>. Substituting into <a class="reference internal" href="#equation-eq-l-lambda">(371)</a> and solving for <span class="math notranslate nohighlight">\(E\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-en">
+<span class="eqno">(372)<a class="headerlink" href="#equation-eq-en" title="Link to this equation">#</a></span>\[
+E_n = \frac{h^2}{8mL^2}\,n^2, \quad n = 1, 2, 3, \ldots
+\]</div>
+<p>The <strong>quantum number</strong> <span class="math notranslate nohighlight">\(n\)</span> labels the allowed states. The electron cannot have an energy between, say, <span class="math notranslate nohighlight">\(E_1\)</span> and <span class="math notranslate nohighlight">\(E_2\)</span>—only the discrete values <a class="reference internal" href="#equation-eq-en">(372)</a> are possible.</p>
+<div class="important admonition">
+<p class="admonition-title">Zero point energy</p>
+<p>The <strong>ground state</strong> (<span class="math notranslate nohighlight">\(n=1\)</span>) has energy <span class="math notranslate nohighlight">\(E_1 = h^2/(8mL^2) &gt; 0\)</span>. The electron cannot have <span class="math notranslate nohighlight">\(E = 0\)</span>—a confined matter wave cannot be at rest. This <strong>zero-point energy</strong> is a purely quantum effect.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="energy-level-diagram">
+<h3>Energy-level diagram<a class="headerlink" href="#energy-level-diagram" title="Link to this heading">#</a></h3>
+<p>We represent the allowed energies as <strong>energy levels</strong> on a vertical ladder. The lowest level is the <strong>ground state</strong> (<span class="math notranslate nohighlight">\(n=1\)</span>); higher levels are <strong>excited states</strong> (<span class="math notranslate nohighlight">\(n=2\)</span>: first excited, <span class="math notranslate nohighlight">\(n=3\)</span>: second excited, etc.).</p>
+<p>The electron tends to be in the ground state. It can occupy an excited state only if it receives the required energy from an external source.</p>
+</section>
+<hr class="docutils" />
+<section id="quantum-jumps-and-photons">
+<h3>Quantum jumps and photons<a class="headerlink" href="#quantum-jumps-and-photons" title="Link to this heading">#</a></h3>
+<p>A <strong>quantum jump</strong> (or transition) is a change from one allowed state to another. The energy change is</p>
+<div class="math notranslate nohighlight" id="equation-eq-deltae">
+<span class="eqno">(373)<a class="headerlink" href="#equation-eq-deltae" title="Link to this equation">#</a></span>\[
+\Delta E = E_{\text{high}} - E_{\text{low}}
+\]</div>
+<p><strong>Upward jump</strong> (electron gains energy): requires <strong>absorption</strong> of a photon (or other energy transfer). The photon energy must equal <span class="math notranslate nohighlight">\(\Delta E\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-photon">
+<span class="eqno">(374)<a class="headerlink" href="#equation-eq-photon" title="Link to this equation">#</a></span>\[
+hf = \frac{hc}{\lambda} = \Delta E
+\]</div>
+<p><strong>Downward jump</strong> (electron loses energy): the electron <strong>emits</strong> a photon with energy <span class="math notranslate nohighlight">\(\Delta E\)</span>.</p>
+<p>The electron cannot exist “between” levels—it jumps directly from one allowed state to another. It may skip intermediate levels (e.g., <span class="math notranslate nohighlight">\(n=1 \to n=4\)</span>).</p>
+</section>
+<hr class="docutils" />
+<section id="emission-and-absorption-spectra">
+<h3>Emission and absorption spectra<a class="headerlink" href="#emission-and-absorption-spectra" title="Link to this heading">#</a></h3>
+<p><strong>Absorption spectrum</strong>: Shine light on the trapped electron. Photons with energies matching <span class="math notranslate nohighlight">\(\Delta E\)</span> for some upward jump are absorbed; the rest pass through. The spectrum shows dark lines at the absorbed wavelengths.</p>
+<p><strong>Emission spectrum</strong>: An excited electron drops to a lower level and emits a photon. The emitted light has discrete wavelengths corresponding to the possible <span class="math notranslate nohighlight">\(\Delta E\)</span> values. The spectrum shows bright lines.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Confinement</strong> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> quantization of wavelength and energy.</p></li>
+<li><p><strong>Infinite well</strong>: <span class="math notranslate nohighlight">\(U=0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>; <span class="math notranslate nohighlight">\(U \to \infty\)</span> elsewhere; nodes at boundaries.</p></li>
+<li><p><strong>Allowed energies</strong> <span class="math notranslate nohighlight">\(E_n = h^2 n^2/(8mL^2)\)</span>; ground state <span class="math notranslate nohighlight">\(n=1\)</span> has <span class="math notranslate nohighlight">\(E_1 &gt; 0\)</span> (zero-point energy).</p></li>
+<li><p><strong>Quantum jump</strong> <span class="math notranslate nohighlight">\(\Delta E = E_{\text{high}} - E_{\text{low}}\)</span>; photon absorption (up) or emission (down) with <span class="math notranslate nohighlight">\(hf = hc/\lambda = \Delta E\)</span>.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +717,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confinement-and-quantization">Confinement and quantization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infinite-potential-well">Infinite potential well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-level-diagram">Energy-level diagram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-jumps-and-photons">Quantum jumps and photons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-and-absorption-spectra">Emission and absorption spectra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

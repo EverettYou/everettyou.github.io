@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch40_all-about-atoms/40-7-lasers';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch40_all-about-atoms/40-7-lasers.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,24 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laser-light-vs-ordinary-light">Laser Light vs. Ordinary Light</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-light-interacts-with-matter">Three Ways Light Interacts with Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-equilibrium-and-population-inversion">Thermal Equilibrium and Population Inversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metastable-states">Metastable States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-heliumneon-laser">The Helium–Neon Laser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#population-ratio-at-thermal-equilibrium">Population Ratio at Thermal Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +575,137 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lasers">
 <h1>40-7 Lasers<a class="headerlink" href="#lasers" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What does “laser” stand for? What is stimulated emission, and why is it the key to laser operation?</p></li>
+<li><p>Compare absorption, spontaneous emission, and stimulated emission. In stimulated emission, how does the emitted photon relate to the stimulating photon (phase, direction, energy)?</p></li>
+<li><p>At thermal equilibrium, what is the ratio <span class="math notranslate nohighlight">\(N_x/N_0\)</span> of atoms in excited vs. ground state? Why can’t thermal equilibrium produce a laser? What is population inversion?</p></li>
+<li><p>What is a metastable state? Why are metastable states important for building a laser?</p></li>
+<li><p>Describe how a helium–neon laser works: Which gas lases? Why is helium needed? How is population inversion achieved between the neon levels?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Laser</strong> = Light Amplification by Stimulated Emission of Radiation. Laser light is <strong>monochromatic</strong>, <strong>coherent</strong>, <strong>directional</strong>, and can be <strong>sharply focused</strong> — unlike the random emissions from a lightbulb.</p></li>
+<li><p>Three processes govern light–matter interaction: <strong>absorption</strong>, <strong>spontaneous emission</strong>, and <strong>stimulated emission</strong>. The last is the basis of lasing.</p></li>
+<li><p><strong>Stimulated emission</strong> occurs when a photon of energy <span class="math notranslate nohighlight">\(hf = E_{\text{high}} - E_{\text{low}}\)</span> induces an excited atom to emit an identical photon (same phase, direction, polarization).</p></li>
+<li><p><strong>Population inversion</strong> — more atoms in the upper level than the lower — is required for net amplification. It cannot arise from thermal equilibrium; it must be achieved by <strong>pumping</strong> (e.g., collisions, optical pumping).</p></li>
+<li><p><strong>Metastable states</strong> (long-lived excited states) enable population inversion; the <strong>helium–neon laser</strong> uses them to produce laser light at 632.8 nm.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="laser-light-vs-ordinary-light">
+<h3>Laser Light vs. Ordinary Light<a class="headerlink" href="#laser-light-vs-ordinary-light" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Laser</p></th>
+<th class="head"><p>Lightbulb</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Monochromaticity</p></td>
+<td><p>Very sharp (e.g., 1 part in <span class="math notranslate nohighlight">\(10^{15}\)</span>)</p></td>
+<td><p>Broad, continuous spectrum</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coherence</p></td>
+<td><p>Long wave trains (hundreds of km)</p></td>
+<td><p>Short (typically &lt; 1 m)</p></td>
+</tr>
+<tr class="row-even"><td><p>Directionality</p></td>
+<td><p>Very low divergence</p></td>
+<td><p>High divergence</p></td>
+</tr>
+<tr class="row-odd"><td><p>Focusability</p></td>
+<td><p>Can reach <span class="math notranslate nohighlight">\(\sim 10^{17}\)</span> W/cm²</p></td>
+<td><p>Much lower</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="three-ways-light-interacts-with-matter">
+<h3>Three Ways Light Interacts with Matter<a class="headerlink" href="#three-ways-light-interacts-with-matter" title="Link to this heading">#</a></h3>
+<p>Consider an atom with ground state <span class="math notranslate nohighlight">\(E_0\)</span> and excited state <span class="math notranslate nohighlight">\(E_x\)</span>.</p>
+<ol class="arabic simple">
+<li><p><strong>Absorption</strong>: Atom in <span class="math notranslate nohighlight">\(E_0\)</span> absorbs a photon of energy <span class="math notranslate nohighlight">\(hf = E_x - E_0\)</span> and jumps to <span class="math notranslate nohighlight">\(E_x\)</span>.</p></li>
+<li><p><strong>Spontaneous emission</strong>: Atom in <span class="math notranslate nohighlight">\(E_x\)</span> decays to <span class="math notranslate nohighlight">\(E_0\)</span> on its own, emitting a photon. The event is random in time and direction. Ordinary light sources (e.g., lightbulb) emit this way.</p></li>
+<li><p><strong>Stimulated emission</strong>: Atom in <span class="math notranslate nohighlight">\(E_x\)</span> is struck by a photon of energy <span class="math notranslate nohighlight">\(hf = E_x - E_0\)</span>. The atom is induced to emit a second photon <strong>identical</strong> to the first — same energy, phase, polarization, and direction. The light wave is <strong>amplified</strong>.</p></li>
+</ol>
+<div class="math notranslate nohighlight" id="equation-eq-photon-energy-lasers">
+<span class="eqno">(416)<a class="headerlink" href="#equation-eq-photon-energy-lasers" title="Link to this equation">#</a></span>\[
+hf = E_x - E_0
+\]</div>
+<div class="important admonition">
+<p class="admonition-title">Why stimulated emission matters</p>
+<p>In stimulated emission, the emitted photon is <strong>in phase</strong> with and <strong>travels in the same direction</strong> as the stimulating photon. This creates a coherent, directional beam — the essence of laser light.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="thermal-equilibrium-and-population-inversion">
+<h3>Thermal Equilibrium and Population Inversion<a class="headerlink" href="#thermal-equilibrium-and-population-inversion" title="Link to this heading">#</a></h3>
+<p>At thermal equilibrium at temperature <span class="math notranslate nohighlight">\(T\)</span>, the ratio of populations in two levels is given by the <strong>Boltzmann factor</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-boltzmann-lasers">
+<span class="eqno">(417)<a class="headerlink" href="#equation-eq-boltzmann-lasers" title="Link to this equation">#</a></span>\[
+\frac{N_x}{N_0} = e^{-(E_x - E_0)/kT}
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(E_x &gt; E_0\)</span>, we always have <span class="math notranslate nohighlight">\(N_x &lt; N_0\)</span> — fewer atoms in the excited state. Photons of energy <span class="math notranslate nohighlight">\(hf\)</span> are more likely to be <strong>absorbed</strong> than to cause stimulated emission.</p>
+<p>For a laser, we need <strong>more</strong> stimulated emission than absorption. That requires <span class="math notranslate nohighlight">\(N_x &gt; N_0\)</span> — a <strong>population inversion</strong>. This is <strong>not</strong> consistent with thermal equilibrium; we must use <strong>pumping</strong> to create and maintain it.</p>
+<div class="note admonition">
+<p class="admonition-title">Why thermal equilibrium fails</p>
+<p>For typical optical transitions (<span class="math notranslate nohighlight">\(E_x - E_0 \sim 2\)</span> eV) at room temperature (<span class="math notranslate nohighlight">\(kT \approx 0.02\)</span> eV), <span class="math notranslate nohighlight">\(N_x/N_0 \sim e^{-100}\)</span> is astronomically small. Achieving <span class="math notranslate nohighlight">\(N_x/N_0 = 1/2\)</span> would require <span class="math notranslate nohighlight">\(T \sim 38\,000\)</span> K — hotter than the Sun. Population inversion cannot be achieved by heating alone.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="metastable-states">
+<h3>Metastable States<a class="headerlink" href="#metastable-states" title="Link to this heading">#</a></h3>
+<p>Some excited states have <strong>much longer</strong> mean lifetimes (e.g., <span class="math notranslate nohighlight">\(10^5\)</span> times longer) than typical (<span class="math notranslate nohighlight">\(\sim 10^{-8}\)</span> s). These are <strong>metastable</strong> states. They are crucial for lasers because:</p>
+<ul class="simple">
+<li><p>Atoms can accumulate in a metastable state long enough.</p></li>
+<li><p>The lower level of the lasing transition can decay rapidly, so it stays relatively empty.</p></li>
+<li><p>Together, these conditions allow population inversion.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-heliumneon-laser">
+<h3>The Helium–Neon Laser<a class="headerlink" href="#the-heliumneon-laser" title="Link to this heading">#</a></h3>
+<p>A common design uses a discharge tube filled with a 20:80 mixture of <strong>helium</strong> and <strong>neon</strong>. <strong>Neon</strong> is the lasing medium; <strong>helium</strong> is the pump.</p>
+<p><strong>Mechanism:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Electrons</strong> in the discharge collide with helium atoms; helium is light enough to be excited efficiently. Helium is raised to a <strong>metastable</strong> state <span class="math notranslate nohighlight">\(E_3\)</span> (lifetime <span class="math notranslate nohighlight">\(\ge 1\)</span> ms).</p></li>
+<li><p><strong>Helium–neon collisions</strong>: Energy of helium <span class="math notranslate nohighlight">\(E_3\)</span> (20.61 eV) nearly matches neon <span class="math notranslate nohighlight">\(E_2\)</span> (20.66 eV). Collisions transfer energy from helium to neon, populating neon <span class="math notranslate nohighlight">\(E_2\)</span>.</p></li>
+<li><p><strong>Neon level E1</strong> decays rapidly (10 ns); <strong>E2</strong> has a longer lifetime (170 ns). So <span class="math notranslate nohighlight">\(N_{E2} &gt; N_{E1}\)</span> — population inversion.</p></li>
+<li><p>A spontaneously emitted photon triggers <strong>stimulated emission</strong>; other photons do the same. A coherent beam builds up.</p></li>
+<li><p><strong>Mirrors</strong> at the ends form a cavity; photons bounce back and forth, gaining more stimulated emission. One mirror is slightly <strong>leaky</strong> so part of the beam escapes as the laser output.</p></li>
+</ol>
+<p><strong>Output:</strong> 632.8 nm (red), continuous wave.</p>
+</section>
+<hr class="docutils" />
+<section id="population-ratio-at-thermal-equilibrium">
+<h3>Population Ratio at Thermal Equilibrium<a class="headerlink" href="#population-ratio-at-thermal-equilibrium" title="Link to this heading">#</a></h3>
+<p>For a laser that would emit at <span class="math notranslate nohighlight">\(\lambda = 550\)</span> nm (between ground and one excited state), the energy gap is <span class="math notranslate nohighlight">\(E_x - E_0 = hc/\lambda \approx 2.26\)</span> eV. At room temperature (<span class="math notranslate nohighlight">\(T = 300\)</span> K), <span class="math notranslate nohighlight">\(kT \approx 0.026\)</span> eV. Then</p>
+<div class="math notranslate nohighlight" id="equation-eq-ratio-example">
+<span class="eqno">(418)<a class="headerlink" href="#equation-eq-ratio-example" title="Link to this equation">#</a></span>\[
+\frac{N_x}{N_0} = e^{-(2.26)/(0.026)} \approx 10^{-38}
+\]</div>
+<p>— an extremely small ratio. To get <span class="math notranslate nohighlight">\(N_x/N_0 = 1/2\)</span> by thermal agitation alone would require <span class="math notranslate nohighlight">\(T \approx 38\,000\)</span> K. Population inversion thus demands a specific pumping mechanism, not simply heating.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Stimulated emission</strong> produces photons identical to the stimulating photon; it is the basis of laser operation.</p></li>
+<li><p><strong>Population inversion</strong> (<span class="math notranslate nohighlight">\(N_{upper} &gt; N_{lower}\)</span>) is required for net amplification; it cannot arise from thermal equilibrium.</p></li>
+<li><p><strong>Metastable states</strong> and pumping (e.g., He–Ne collisions) enable population inversion.</p></li>
+<li><p>The <strong>helium–neon laser</strong> uses helium to pump neon; neon lases between <span class="math notranslate nohighlight">\(E_2\)</span> and <span class="math notranslate nohighlight">\(E_1\)</span>; mirrors form a cavity.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +762,31 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laser-light-vs-ordinary-light">Laser Light vs. Ordinary Light</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-ways-light-interacts-with-matter">Three Ways Light Interacts with Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-equilibrium-and-population-inversion">Thermal Equilibrium and Population Inversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metastable-states">Metastable States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-heliumneon-laser">The Helium–Neon Laser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#population-ratio-at-thermal-equilibrium">Population Ratio at Thermal Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

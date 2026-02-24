@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch42_nuclear-physics/42-7-measuring-radiation-dosage';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch42_nuclear-physics/42-7-measuring-radiation-dosage.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absorbed-dose">Absorbed Dose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equivalent-dose-and-rbe">Equivalent Dose and RBE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-vs-dose">Activity vs. Dose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +572,102 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="measuring-radiation-dosage">
 <h1>42-7 Measuring Radiation Dosage<a class="headerlink" href="#measuring-radiation-dosage" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Define <strong>absorbed dose</strong>. What is the SI unit (gray)? Why is it energy per unit <em>mass</em>, not total energy?</p></li>
+<li><p>What is <strong>equivalent dose</strong> and how does it differ from absorbed dose? What role does <strong>RBE</strong> (relative biological effectiveness) play?</p></li>
+<li><p>Alpha particles cause more biological damage per unit absorbed energy than gamma rays. Why? How does RBE reflect this?</p></li>
+<li><p>A person receives 0.1 Gy from gamma rays and 0.01 Gy from alpha particles. Which exposure is more hazardous? Calculate the equivalent doses (use RBE ≈ 1 for gamma, ≈ 20 for alpha).</p></li>
+<li><p><strong>Activity</strong> (Bq) measures decays per second. How does activity relate to dose? Why can’t we infer dose from activity alone?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Absorbed dose</strong> measures the energy deposited by ionizing radiation per unit mass of tissue. The SI unit is the <strong>gray</strong> (Gy) = 1 J/kg.</p></li>
+<li><p><strong>Equivalent dose</strong> accounts for the fact that different types of radiation cause different biological damage for the same absorbed energy. It is absorbed dose × <strong>RBE</strong> (relative biological effectiveness), measured in <strong>sieverts</strong> (Sv).</p></li>
+<li><p><strong>Activity</strong> (section 42-3) measures the decay rate (Bq); it does not directly give dose — the dose depends on the type of radiation, distance, shielding, and exposure time.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="absorbed-dose">
+<h3>Absorbed Dose<a class="headerlink" href="#absorbed-dose" title="Link to this heading">#</a></h3>
+<p>The <strong>absorbed dose</strong> <span class="math notranslate nohighlight">\(D\)</span> is the energy deposited by ionizing radiation per unit mass of the absorbing material:</p>
+<div class="math notranslate nohighlight" id="equation-eq-absorbed-dose">
+<span class="eqno">(446)<a class="headerlink" href="#equation-eq-absorbed-dose" title="Link to this equation">#</a></span>\[
+D = \frac{E_{\text{dep}}}{m}
+\]</div>
+<p><strong>SI unit:</strong> the <strong>gray</strong> (Gy): <span class="math notranslate nohighlight">\(1\ \text{Gy} = 1\ \text{J/kg}\)</span>.</p>
+<p>The older unit, the <strong>rad</strong> (radiation absorbed dose), is <span class="math notranslate nohighlight">\(1\ \text{rad} = 0.01\ \text{Gy} = 10^{-2}\ \text{J/kg}\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Why per unit mass?</p>
+<p>Different tissues and organs have different masses. Dose per unit mass allows comparison across body parts and individuals. It also reflects the <em>local</em> energy density that drives ionization and damage.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="equivalent-dose-and-rbe">
+<h3>Equivalent Dose and RBE<a class="headerlink" href="#equivalent-dose-and-rbe" title="Link to this heading">#</a></h3>
+<p>The <strong>biological effect</strong> of radiation depends not only on how much energy is deposited but also on <em>how</em> it is deposited. Dense ionization (e.g., alpha particles) causes more damage per unit energy than sparse ionization (e.g., gamma rays).</p>
+<p>The <strong>relative biological effectiveness</strong> (RBE) is the ratio of doses needed to produce the same biological effect: if radiation type <span class="math notranslate nohighlight">\(X\)</span> requires dose <span class="math notranslate nohighlight">\(D_X\)</span> and a reference (e.g., gamma) requires <span class="math notranslate nohighlight">\(D_{\text{ref}}\)</span>, then <span class="math notranslate nohighlight">\(\text{RBE}_X = D_{\text{ref}}/D_X\)</span>. Higher RBE means <em>more</em> damage per unit absorbed dose.</p>
+<p>The <strong>equivalent dose</strong> <span class="math notranslate nohighlight">\(H\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-equivalent-dose">
+<span class="eqno">(447)<a class="headerlink" href="#equation-eq-equivalent-dose" title="Link to this equation">#</a></span>\[
+H = D \times \text{RBE}
+\]</div>
+<p><strong>SI unit:</strong> the <strong>sievert</strong> (Sv). For gamma rays and electrons, RBE ≈ 1, so <span class="math notranslate nohighlight">\(H \approx D\)</span> in Sv.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Radiation</p></th>
+<th class="head"><p>Typical RBE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gamma rays, X-rays, <span class="math notranslate nohighlight">\(\beta\)</span></p></td>
+<td><p>~1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Protons, fast neutrons</p></td>
+<td><p>~5–20</p></td>
+</tr>
+<tr class="row-even"><td><p>Alpha particles</p></td>
+<td><p>~20</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Why alpha is more damaging</p>
+<p>Alpha particles are heavy and charged; they ionize densely along a short track. Gamma rays spread energy over a larger volume. For the same absorbed dose (J/kg), alpha creates more clustered damage to DNA and cells.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="activity-vs-dose">
+<h3>Activity vs. Dose<a class="headerlink" href="#activity-vs-dose" title="Link to this heading">#</a></h3>
+<p><strong>Activity</strong> <span class="math notranslate nohighlight">\(R\)</span> (section 42-3) is the number of decays per second (Bq). It characterizes the <em>source</em>, not the effect on a person.</p>
+<p>Dose depends on:</p>
+<ul class="simple">
+<li><p><strong>Activity</strong> of the source</p></li>
+<li><p><strong>Type</strong> of radiation (alpha, beta, gamma)</p></li>
+<li><p><strong>Distance</strong> from the source (inverse-square for point sources)</p></li>
+<li><p><strong>Shielding</strong> (absorption in material)</p></li>
+<li><p><strong>Exposure time</strong></p></li>
+<li><p><strong>Geometry</strong> (internal vs. external, organ targeted)</p></li>
+</ul>
+<p>A high-activity gamma source far away may give a lower dose than a low-activity alpha source ingested (alpha is stopped by skin but damages internal tissue if inside the body).</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Absorbed dose: <span class="math notranslate nohighlight">\(D = E_{\text{dep}}/m\)</span>; unit gray (Gy) = 1 J/kg.</p></li>
+<li><p>Equivalent dose: <span class="math notranslate nohighlight">\(H = D \times \text{RBE}\)</span>; unit sievert (Sv); accounts for biological damage.</p></li>
+<li><p>RBE: alpha ~20, gamma/<span class="math notranslate nohighlight">\(\beta\)</span> ~1; denser ionization → higher RBE.</p></li>
+<li><p>Activity (Bq) measures source strength; dose depends on activity, radiation type, distance, shielding, and time.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +724,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absorbed-dose">Absorbed Dose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equivalent-dose-and-rbe">Equivalent Dose and RBE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-vs-dose">Activity vs. Dose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

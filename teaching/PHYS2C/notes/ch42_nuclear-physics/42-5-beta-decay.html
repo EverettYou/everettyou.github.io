@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch42_nuclear-physics/42-5-beta-decay';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch42_nuclear-physics/42-5-beta-decay.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-minus-decay-beta">Beta-Minus Decay (<span class="math notranslate nohighlight">\(\beta^-\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-plus-decay-beta">Beta-Plus Decay (<span class="math notranslate nohighlight">\(\beta^+\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electron-capture-ec">Electron Capture (EC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-neutrino">Why the Neutrino?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value-for-beta-decay">Q-Value for Beta Decay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +574,130 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="beta-decay">
 <h1>42-5 Beta Decay<a class="headerlink" href="#beta-decay" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Write the <strong>beta-minus</strong> decay reaction at the nucleon level. What changes in the nucleus (<span class="math notranslate nohighlight">\(Z\)</span>, <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(A\)</span>)? Why is an <strong>antineutrino</strong> required?</p></li>
+<li><p><strong>Beta-plus</strong> decay emits a positron. Write the reaction. How does it differ from beta-minus in terms of the nucleus and the neutrino?</p></li>
+<li><p>What is <strong>electron capture</strong>? When might it compete with or replace beta-plus decay?</p></li>
+<li><p>The beta particle (electron or positron) has a <em>continuous</em> energy spectrum, not a single value. Why? What would the spectrum look like without the neutrino?</p></li>
+<li><p>How do you calculate the <strong>Q-value</strong> for beta-minus decay from atomic masses? Why must the <em>daughter</em> be heavier than the parent for beta-plus?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Beta decay</strong> changes a neutron into a proton (or vice versa) within the nucleus, keeping <span class="math notranslate nohighlight">\(A\)</span> constant but changing <span class="math notranslate nohighlight">\(Z\)</span>. Three processes: <strong>beta-minus</strong> (<span class="math notranslate nohighlight">\(n \to p\)</span>), <strong>beta-plus</strong> (<span class="math notranslate nohighlight">\(p \to n\)</span>), and <strong>electron capture</strong> (<span class="math notranslate nohighlight">\(p + e^- \to n\)</span>).</p></li>
+<li><p>A <strong>neutrino</strong> or <strong>antineutrino</strong> is emitted in each process. It is required for <strong>energy</strong>, <strong>momentum</strong>, and <strong>lepton number</strong> conservation — and it explains the <em>continuous</em> energy spectrum of the beta particle.</p></li>
+<li><p>The <strong>Q-value</strong> determines whether a given beta decay is energetically allowed; mass tables (or atomic masses) are used to compute it.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="beta-minus-decay-beta">
+<h3>Beta-Minus Decay (<span class="math notranslate nohighlight">\(\beta^-\)</span>)<a class="headerlink" href="#beta-minus-decay-beta" title="Link to this heading">#</a></h3>
+<p>In <strong>beta-minus decay</strong>, a neutron inside the nucleus converts to a proton, emitting an electron and an antineutrino:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-minus">
+<span class="eqno">(438)<a class="headerlink" href="#equation-eq-beta-minus" title="Link to this equation">#</a></span>\[
+n \to p + e^- + \bar{\nu}_e
+\]</div>
+<p>At the nuclear level: <span class="math notranslate nohighlight">\(_Z^A\text{X} \to _{Z+1}^{A}\text{Y} + e^- + \bar{\nu}_e\)</span>. The mass number <span class="math notranslate nohighlight">\(A\)</span> is unchanged; the atomic number increases by 1. Example: <span class="math notranslate nohighlight">\(^{14}\text{C} \to ^{14}\text{N} + e^- + \bar{\nu}_e\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="beta-plus-decay-beta">
+<h3>Beta-Plus Decay (<span class="math notranslate nohighlight">\(\beta^+\)</span>)<a class="headerlink" href="#beta-plus-decay-beta" title="Link to this heading">#</a></h3>
+<p>In <strong>beta-plus decay</strong>, a proton converts to a neutron, emitting a <strong>positron</strong> (<span class="math notranslate nohighlight">\(e^+\)</span>) and a neutrino:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-plus">
+<span class="eqno">(439)<a class="headerlink" href="#equation-eq-beta-plus" title="Link to this equation">#</a></span>\[
+p \to n + e^+ + \nu_e
+\]</div>
+<p>At the nuclear level: <span class="math notranslate nohighlight">\(_Z^A\text{X} \to _{Z-1}^{A}\text{Y} + e^+ + \nu_e\)</span>. Example: <span class="math notranslate nohighlight">\(^{11}\text{C} \to ^{11}\text{B} + e^+ + \nu_e\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Energetic requirement</p>
+<p>Beta-plus requires the <em>parent</em> to be heavier than the <em>daughter</em> by at least <span class="math notranslate nohighlight">\(2m_e c^2\)</span> (the rest energy of the created positron–electron pair). If the mass difference is too small, beta-plus is forbidden but <strong>electron capture</strong> may still occur.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="electron-capture-ec">
+<h3>Electron Capture (EC)<a class="headerlink" href="#electron-capture-ec" title="Link to this heading">#</a></h3>
+<p>In <strong>electron capture</strong>, a proton captures an atomic electron and converts to a neutron, emitting a neutrino:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ec">
+<span class="eqno">(440)<a class="headerlink" href="#equation-eq-ec" title="Link to this equation">#</a></span>\[
+p + e^- \to n + \nu_e
+\]</div>
+<p>At the nuclear level: <span class="math notranslate nohighlight">\(_Z^A\text{X} + e^- \to _{Z-1}^{A}\text{Y} + \nu_e\)</span>. The captured electron usually comes from the innermost shell (K-shell); the process is sometimes written as K-capture.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Nucleon change</p></th>
+<th class="head"><p>Emitted</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(Z\)</span> change</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\beta^-\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n \to p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^-\)</span>, <span class="math notranslate nohighlight">\(\bar{\nu}_e\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\beta^+\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p \to n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^+\)</span>, <span class="math notranslate nohighlight">\(\nu_e\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>EC</p></td>
+<td><p><span class="math notranslate nohighlight">\(p + e^- \to n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\nu_e\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-1\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="why-the-neutrino">
+<h3>Why the Neutrino?<a class="headerlink" href="#why-the-neutrino" title="Link to this heading">#</a></h3>
+<p>The <strong>neutrino</strong> (<span class="math notranslate nohighlight">\(\nu_e\)</span>) and <strong>antineutrino</strong> (<span class="math notranslate nohighlight">\(\bar{\nu}_e\)</span>) are electrically neutral, nearly massless particles that carry energy, momentum, and <strong>lepton number</strong>.</p>
+<p><strong>Why they are required:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Energy spectrum:</strong> Without a third particle, the electron (or positron) would have a unique energy (two-body final state). Experimentally, the beta particle has a <em>continuous</em> spectrum from 0 up to a maximum <span class="math notranslate nohighlight">\(E_{\max} = Q\)</span>. The “missing” energy is carried by the neutrino.</p></li>
+<li><p><strong>Momentum:</strong> A two-body decay would fix the electron’s momentum. The three-body decay allows a range of momentum sharing.</p></li>
+<li><p><strong>Lepton number:</strong> The electron has lepton number <span class="math notranslate nohighlight">\(L = +1\)</span>; the antineutrino has <span class="math notranslate nohighlight">\(L = -1\)</span>. The decay <span class="math notranslate nohighlight">\(n \to p + e^-\)</span> would violate lepton number; adding <span class="math notranslate nohighlight">\(\bar{\nu}_e\)</span> conserves it.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="q-value-for-beta-decay">
+<h3>Q-Value for Beta Decay<a class="headerlink" href="#q-value-for-beta-decay" title="Link to this heading">#</a></h3>
+<p>The <strong>decay energy</strong> <span class="math notranslate nohighlight">\(Q\)</span> is the total kinetic energy shared by the products. For <strong>beta-minus</strong> (using atomic masses; the <span class="math notranslate nohighlight">\(Z\)</span> electrons cancel):</p>
+<div class="math notranslate nohighlight" id="equation-eq-q-beta-minus">
+<span class="eqno">(441)<a class="headerlink" href="#equation-eq-q-beta-minus" title="Link to this equation">#</a></span>\[
+Q_{\beta^-} = (M_{\text{parent}} - M_{\text{daughter}})c^2
+\]</div>
+<p>For <strong>beta-plus</strong>, the daughter has one fewer electron than the parent; creating the positron requires <span class="math notranslate nohighlight">\(2m_e c^2\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-q-beta-plus">
+<span class="eqno">(442)<a class="headerlink" href="#equation-eq-q-beta-plus" title="Link to this equation">#</a></span>\[
+Q_{\beta^+} = (M_{\text{parent}} - M_{\text{daughter}} - 2m_e)c^2
+\]</div>
+<p>For <strong>electron capture</strong>, the parent atom has one more electron than the daughter nucleus needs:</p>
+<div class="math notranslate nohighlight" id="equation-eq-q-ec">
+<span class="eqno">(443)<a class="headerlink" href="#equation-eq-q-ec" title="Link to this equation">#</a></span>\[
+Q_{\text{EC}} = (M_{\text{parent}} - M_{\text{daughter}})c^2 - E_B
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_B\)</span> is the binding energy of the captured electron (usually small compared to <span class="math notranslate nohighlight">\(Q\)</span>).</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\beta^-\)</span>:</strong> <span class="math notranslate nohighlight">\(n \to p + e^- + \bar{\nu}_e\)</span>; <span class="math notranslate nohighlight">\(Z \to Z+1\)</span>, <span class="math notranslate nohighlight">\(A\)</span> unchanged.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\beta^+\)</span>:</strong> <span class="math notranslate nohighlight">\(p \to n + e^+ + \nu_e\)</span>; <span class="math notranslate nohighlight">\(Z \to Z-1\)</span>.</p></li>
+<li><p><strong>EC:</strong> <span class="math notranslate nohighlight">\(p + e^- \to n + \nu_e\)</span>; <span class="math notranslate nohighlight">\(Z \to Z-1\)</span>; competes with <span class="math notranslate nohighlight">\(\beta^+\)</span> when <span class="math notranslate nohighlight">\(Q_{\beta^+}\)</span> is small.</p></li>
+<li><p>Neutrino/antineutrino: conserves energy, momentum, lepton number; explains continuous beta spectrum.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q &gt; 0\)</span> required for each process; use atomic masses with care for <span class="math notranslate nohighlight">\(\beta^+\)</span> and EC.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +754,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-minus-decay-beta">Beta-Minus Decay (<span class="math notranslate nohighlight">\(\beta^-\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-plus-decay-beta">Beta-Plus Decay (<span class="math notranslate nohighlight">\(\beta^+\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electron-capture-ec">Electron Capture (EC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-neutrino">Why the Neutrino?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value-for-beta-decay">Q-Value for Beta Decay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

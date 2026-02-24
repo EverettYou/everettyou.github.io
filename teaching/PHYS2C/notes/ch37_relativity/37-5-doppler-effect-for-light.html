@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch37_relativity/37-5-doppler-effect-for-light';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch37_relativity/37-5-doppler-effect-for-light.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longitudinal-doppler-effect">Longitudinal Doppler effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-speed-approximation">Low-speed approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transverse-doppler-effect">Transverse Doppler effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +573,84 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="doppler-effect-for-light">
 <h1>37-5 Doppler Effect for Light<a class="headerlink" href="#doppler-effect-for-light" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>How does the <strong>Doppler effect for light</strong> differ from that for sound? Why does it depend only on the <em>relative</em> velocity between source and detector?</p></li>
+<li><p>When the source–detector separation is <strong>increasing</strong> (receding), is the detected wavelength <strong>red-shifted</strong> or <strong>blue-shifted</strong>? Write the formula for <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span> in terms of <span class="math notranslate nohighlight">\(f_0\)</span>, <span class="math notranslate nohighlight">\(\lambda_0\)</span>, and <span class="math notranslate nohighlight">\(\beta = v/c\)</span>.</p></li>
+<li><p>For <strong>low speeds</strong> (<span class="math notranslate nohighlight">\(v \ll c\)</span>), show that <span class="math notranslate nohighlight">\(|\Delta\lambda|/\lambda_0 \approx v/c\)</span>. How is this used in astronomy to measure radial velocities?</p></li>
+<li><p>Explain the <strong>transverse Doppler effect</strong>: when the source moves <em>perpendicular</em> to the line of sight, why is there still a frequency shift? What is the formula? (Hint: time dilation.)</p></li>
+<li><p>A police radar uses a microwave beam. A car reflects it. Why does the radar unit detect a frequency <em>shifted up</em> when the car approaches? (Consider both the car as “detector” and as “re-emitter.”)</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>Doppler effect for light</strong> is a shift in detected frequency (or wavelength) when source and detector move relative to each other. Unlike sound, it depends only on the <em>relative</em> velocity—no medium is required.</p></li>
+<li><p><strong>Proper frequency</strong> <span class="math notranslate nohighlight">\(f_0\)</span> and <strong>proper wavelength</strong> <span class="math notranslate nohighlight">\(\lambda_0\)</span> are measured in the rest frame of the source.</p></li>
+<li><p><strong>Receding</strong> (separation increasing): <strong>red shift</strong>—<span class="math notranslate nohighlight">\(\lambda &gt; \lambda_0\)</span>, <span class="math notranslate nohighlight">\(f &lt; f_0\)</span>. <strong>Approaching</strong> (separation decreasing): <strong>blue shift</strong>—<span class="math notranslate nohighlight">\(\lambda &lt; \lambda_0\)</span>, <span class="math notranslate nohighlight">\(f &gt; f_0\)</span>.</p></li>
+<li><p><strong>Transverse Doppler effect</strong>: when the source moves perpendicular to the line of sight, there is still a shift (to lower frequency) due to <strong>time dilation</strong>—a purely relativistic effect with no classical analog.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="longitudinal-doppler-effect">
+<h3>Longitudinal Doppler effect<a class="headerlink" href="#longitudinal-doppler-effect" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(f_0\)</span> be the <strong>proper frequency</strong> (measured in the source’s rest frame) and <span class="math notranslate nohighlight">\(f\)</span> the frequency detected by an observer moving with speed <span class="math notranslate nohighlight">\(v\)</span> relative to the source. The <strong>radial speed</strong> <span class="math notranslate nohighlight">\(v\)</span> is the component of velocity along the line joining source and detector.</p>
+<p><strong>Source and detector receding</strong> (separation increasing):</p>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-receding">
+<span class="eqno">(321)<a class="headerlink" href="#equation-eq-doppler-receding" title="Link to this equation">#</a></span>\[
+f = f_0\sqrt{\frac{1 - \beta}{1 + \beta}}, \quad \lambda = \lambda_0\sqrt{\frac{1 + \beta}{1 - \beta}}
+\]</div>
+<p><strong>Source and detector approaching</strong> (separation decreasing): reverse the signs in front of <span class="math notranslate nohighlight">\(\beta\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-approaching">
+<span class="eqno">(322)<a class="headerlink" href="#equation-eq-doppler-approaching" title="Link to this equation">#</a></span>\[
+f = f_0\sqrt{\frac{1 + \beta}{1 - \beta}}, \quad \lambda = \lambda_0\sqrt{\frac{1 - \beta}{1 + \beta}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta = v/c\)</span>. <strong>Red shift</strong> = longer <span class="math notranslate nohighlight">\(\lambda\)</span>; <strong>blue shift</strong> = shorter <span class="math notranslate nohighlight">\(\lambda\)</span>. (The terms refer to the visible spectrum but apply to any wavelength.)</p>
+</section>
+<hr class="docutils" />
+<section id="low-speed-approximation">
+<h3>Low-speed approximation<a class="headerlink" href="#low-speed-approximation" title="Link to this heading">#</a></h3>
+<p>For <span class="math notranslate nohighlight">\(v \ll c\)</span> (<span class="math notranslate nohighlight">\(\beta \ll 1\)</span>), the wavelength shift magnitude is approximately</p>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-low">
+<span class="eqno">(323)<a class="headerlink" href="#equation-eq-doppler-low" title="Link to this equation">#</a></span>\[
+|\Delta\lambda| = |\lambda - \lambda_0| \approx \lambda_0\,\frac{v}{c}
+\]</div>
+<p>This is used in <strong>astronomy</strong> to measure the <strong>radial velocity</strong> of stars and galaxies: <span class="math notranslate nohighlight">\(v \approx c\,|\Delta\lambda|/\lambda_0\)</span>. Only the radial component of velocity produces a Doppler shift; transverse motion does not contribute to the longitudinal formula.</p>
+</section>
+<hr class="docutils" />
+<section id="transverse-doppler-effect">
+<h3>Transverse Doppler effect<a class="headerlink" href="#transverse-doppler-effect" title="Link to this heading">#</a></h3>
+<p>When the source’s velocity is <strong>perpendicular</strong> to the line joining source and detector (e.g., source passes the detector at closest approach), the classical Doppler effect would predict no shift. In relativity, there is still a shift because of <strong>time dilation</strong>: the source’s “clock” (its emission rate) runs slow as measured by the detector.</p>
+<div class="math notranslate nohighlight" id="equation-eq-doppler-transverse">
+<span class="eqno">(324)<a class="headerlink" href="#equation-eq-doppler-transverse" title="Link to this equation">#</a></span>\[
+f = \frac{f_0}{\gamma} = f_0\sqrt{1 - \beta^2}
+\]</div>
+<p>The detected frequency is <em>lower</em> than the proper frequency. This effect is purely relativistic; it does not exist for sound.</p>
+</section>
+<hr class="docutils" />
+<section id="applications">
+<h3>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h3>
+<p><strong>Police radar:</strong> A radar unit emits microwaves at frequency <span class="math notranslate nohighlight">\(f_0\)</span>. A car approaching reflects the beam. The car “sees” a blue-shifted frequency (approaching source); it re-emits that frequency. The radar unit receives a further blue-shifted signal (approaching detector). The unit compares the detected frequency with <span class="math notranslate nohighlight">\(f_0\)</span> to compute the car’s speed.</p>
+<p><strong>Astronomy:</strong> Spectral lines from stars and galaxies are shifted. Red shift indicates recession (e.g., expanding universe); blue shift indicates approach. The radial velocity is <span class="math notranslate nohighlight">\(v \approx c\,\Delta\lambda/\lambda_0\)</span> for <span class="math notranslate nohighlight">\(v \ll c\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example: galactic red shift</p>
+<p>A galaxy’s hydrogen line (rest wavelength <span class="math notranslate nohighlight">\(\lambda_0 = 656\)</span> nm) is observed at <span class="math notranslate nohighlight">\(\lambda = 662\)</span> nm. Red shift <span class="math notranslate nohighlight">\(\Delta\lambda = 6\)</span> nm. Radial recession speed: <span class="math notranslate nohighlight">\(v \approx c\,\Delta\lambda/\lambda_0 = 3\times 10^8 \times (6/656) \approx 2.7\times 10^6\)</span> m/s <span class="math notranslate nohighlight">\(\approx 0.009c\)</span>. (For larger <span class="math notranslate nohighlight">\(v\)</span>, use the exact relativistic formula.)</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Longitudinal Doppler</strong>: receding <span class="math notranslate nohighlight">\(f = f_0\sqrt{(1-\beta)/(1+\beta)}\)</span>; approaching—reverse <span class="math notranslate nohighlight">\(\beta\)</span> signs.</p></li>
+<li><p><strong>Red shift</strong> (longer <span class="math notranslate nohighlight">\(\lambda\)</span>): separation increasing. <strong>Blue shift</strong> (shorter <span class="math notranslate nohighlight">\(\lambda\)</span>): separation decreasing.</p></li>
+<li><p><strong>Low-speed</strong>: <span class="math notranslate nohighlight">\(|\Delta\lambda|/\lambda_0 \approx v/c\)</span>; used for radial velocities in astronomy.</p></li>
+<li><p><strong>Transverse Doppler</strong>: <span class="math notranslate nohighlight">\(f = f_0/\gamma\)</span>; due to time dilation; no classical analog.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +707,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longitudinal-doppler-effect">Longitudinal Doppler effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-speed-approximation">Low-speed approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transverse-doppler-effect">Transverse Doppler effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

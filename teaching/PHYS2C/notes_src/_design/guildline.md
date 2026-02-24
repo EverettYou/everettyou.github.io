@@ -61,7 +61,7 @@ Within Cell 2, use this hierarchy:
 ```
 ## Lecture Notes
 
-### Overview: [topic]
+### Overview
 - Brief bullet summary
 - Key comparison or contrast (if applicable)
 
@@ -96,7 +96,7 @@ Clarification or physical intuition.
 
 - Use `---` (horizontal rule) to separate major subsections.
 - Use `###` for subsection headings; keep them short and descriptive.
-- Start with an **Overview** subsection presenting a clear big picture of the topics.
+- Start with an **Overview** subsection presenting a clear big picture of the topics. Use only `### Overview` as the heading—do not append the section title (e.g., avoid `### Overview: Simple Harmonic Motion`), since that merely repeats the page title and adds no information.
 - End with a **Summary** subsection.
 - Use bullet lists; prefer `- **Term**: definition` for key concepts.
 - Use table to help summarize and compare.
@@ -229,7 +229,7 @@ In the AI era, **prompt engineering** is not merely a technique but a tool for l
 - [ ] Title cell: `# XX-Y [Topic]`
 - [ ] Prompts cell: 4–5 prompts, `:class: tip`
 - [ ] Lecture Notes: `## Lecture Notes`
-- [ ] Overview subsection (if applicable)
+- [ ] Overview subsection: use `### Overview` only (do not repeat section title)
 - [ ] Subsections separated by `---`
 - [ ] Key equations in display math
 - [ ] Tables for comparisons

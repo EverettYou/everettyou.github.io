@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch33_electromagnetic-waves/33-6-total-internal-reflection';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch33_electromagnetic-waves/33-6-total-internal-reflection.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-critical-angle">The critical angle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-glass-to-air">Example: glass to air</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optical-fibers">Optical fibers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +572,76 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="total-internal-reflection">
 <h1>33-6 Total Internal Reflection<a class="headerlink" href="#total-internal-reflection" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>When does <strong>total internal reflection</strong> occur? Which medium must have the higher index of refraction?</p></li>
+<li><p>Define the <strong>critical angle</strong> <span class="math notranslate nohighlight">\(\theta_c\)</span>. What is the angle of refraction when <span class="math notranslate nohighlight">\(\theta_1 = \theta_c\)</span>?</p></li>
+<li><p>Derive the formula <span class="math notranslate nohighlight">\(\theta_c = \sin^{-1}(n_2/n_1)\)</span>. Why must <span class="math notranslate nohighlight">\(n_2 &lt; n_1\)</span>?</p></li>
+<li><p>For light in glass (<span class="math notranslate nohighlight">\(n \approx 1.5\)</span>) incident on a glass–air interface, what is the critical angle?</p></li>
+<li><p>How do <strong>optical fibers</strong> use total internal reflection? Give an application.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Total internal reflection (TIR)</strong>: When light in a medium of <strong>higher</strong> index <span class="math notranslate nohighlight">\(n_1\)</span> strikes an interface with a medium of <strong>lower</strong> index <span class="math notranslate nohighlight">\(n_2\)</span>, and the angle of incidence exceeds a <strong>critical angle</strong> <span class="math notranslate nohighlight">\(\theta_c\)</span>, <strong>no</strong> refracted ray exists—all light is reflected.</p></li>
+<li><p>At <span class="math notranslate nohighlight">\(\theta_c\)</span>: the refracted ray would travel along the interface (<span class="math notranslate nohighlight">\(\theta_2 = 90°\)</span>).</p></li>
+<li><p>Applications: optical fibers, endoscopes, prisms in binoculars.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-critical-angle">
+<h3>The critical angle<a class="headerlink" href="#the-critical-angle" title="Link to this heading">#</a></h3>
+<p>Consider light in medium 1 (index <span class="math notranslate nohighlight">\(n_1\)</span>) incident on an interface with medium 2 (index <span class="math notranslate nohighlight">\(n_2\)</span>), where <strong><span class="math notranslate nohighlight">\(n_1 &gt; n_2\)</span></strong> (e.g., glass to air).</p>
+<p>As the angle of incidence <span class="math notranslate nohighlight">\(\theta_1\)</span> increases, the angle of refraction <span class="math notranslate nohighlight">\(\theta_2\)</span> (from Snell’s law <span class="math notranslate nohighlight">\(n_1\sin\theta_1 = n_2\sin\theta_2\)</span>) also increases. When <span class="math notranslate nohighlight">\(\theta_2\)</span> reaches 90°, the refracted ray lies along the interface. The corresponding angle of incidence is the <strong>critical angle</strong> <span class="math notranslate nohighlight">\(\theta_c\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+n_1 \sin\theta_c = n_2 \sin 90° = n_2
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-critical-angle">
+<span class="eqno">(232)<a class="headerlink" href="#equation-eq-critical-angle" title="Link to this equation">#</a></span>\[
+\theta_c = \sin^{-1}\left(\frac{n_2}{n_1}\right)
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\theta_1 &lt; \theta_c\)</span></strong>: both reflection and refraction; refracted ray enters medium 2.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\theta_1 = \theta_c\)</span></strong>: refracted ray at 90° (along interface).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\theta_1 &gt; \theta_c\)</span></strong>: <strong>total internal reflection</strong>—no refracted ray; all light stays in medium 1.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Total internal reflection occurs <strong>only</strong> when light is in the medium with the <strong>higher</strong> index (<span class="math notranslate nohighlight">\(n_1 &gt; n_2\)</span>). If the light is in the lower-index medium, Snell’s law always gives a real <span class="math notranslate nohighlight">\(\theta_2\)</span>; there is no critical angle and no TIR.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="example-glass-to-air">
+<h3>Example: glass to air<a class="headerlink" href="#example-glass-to-air" title="Link to this heading">#</a></h3>
+<p>For glass (<span class="math notranslate nohighlight">\(n_1 \approx 1.5\)</span>) to air (<span class="math notranslate nohighlight">\(n_2 \approx 1\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_c = \sin^{-1}\left(\frac{1}{1.5}\right) \approx 42°
+\]</div>
+<p>For water (<span class="math notranslate nohighlight">\(n \approx 1.33\)</span>) to air: <span class="math notranslate nohighlight">\(\theta_c \approx 49°\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="optical-fibers">
+<h3>Optical fibers<a class="headerlink" href="#optical-fibers" title="Link to this heading">#</a></h3>
+<p><strong>Optical fibers</strong> guide light by repeated total internal reflection. A core of higher-index glass is surrounded by a cladding of lower-index material. Light entering the core at angles that keep the incidence on the core–cladding interface above <span class="math notranslate nohighlight">\(\theta_c\)</span> is trapped and travels along the fiber.</p>
+<p><strong>Applications</strong>: telecommunications (fiber-optic cables), endoscopes (viewing inside the body), sensors.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Total internal reflection</strong>: <span class="math notranslate nohighlight">\(n_1 &gt; n_2\)</span>, <span class="math notranslate nohighlight">\(\theta_1 &gt; \theta_c\)</span> → no refraction, all light reflected.</p></li>
+<li><p><strong>Critical angle</strong>: <span class="math notranslate nohighlight">\(\theta_c = \sin^{-1}(n_2/n_1)\)</span>; at <span class="math notranslate nohighlight">\(\theta_c\)</span>, refracted ray at 90°.</p></li>
+<li><p><strong>Condition</strong>: light must be in the higher-index medium.</p></li>
+<li><p><strong>Applications</strong>: optical fibers, endoscopes, prisms.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +698,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-critical-angle">The critical angle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-glass-to-air">Example: glass to air</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optical-fibers">Optical fibers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch39_more-about-matter-waves/39-3-an-electron-in-a-finite-well';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch39_more-about-matter-waves/39-3-an-electron-in-a-finite-well.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-well-setup-and-wave-penetration">Finite well: setup and wave penetration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-vs-infinite-well">Finite vs infinite well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonquantized-region-and-escape">Nonquantized region and escape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +572,97 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="an-electron-in-a-finite-well">
 <h1>39-3 An Electron in a Finite Well<a class="headerlink" href="#an-electron-in-a-finite-well" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Sketch a <strong>finite potential well</strong>: <span class="math notranslate nohighlight">\(U = 0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>, <span class="math notranslate nohighlight">\(U = U_0 &gt; 0\)</span> outside. How does it differ from an <strong>infinite</strong> well? Why can’t we assume nodes at the walls?</p></li>
+<li><p>For a finite well, the wave function <strong>penetrates the walls</strong>. What happens to <span class="math notranslate nohighlight">\(|\psi|^2\)</span> inside the walls? How does the leakage depend on quantum number <span class="math notranslate nohighlight">\(n\)</span>?</p></li>
+<li><p>Compare a <strong>finite</strong> well and an <strong>infinite</strong> well of the same width <span class="math notranslate nohighlight">\(L\)</span>: which has (a) more bound states, (b) longer de Broglie wavelengths, (c) lower energies for a given <span class="math notranslate nohighlight">\(n\)</span>?</p></li>
+<li><p>What is the <strong>nonquantized region</strong>? When is an electron “free” rather than trapped? How much energy must a ground-state electron absorb to barely escape?</p></li>
+<li><p>A finite well has <span class="math notranslate nohighlight">\(U_0 = 450\)</span> eV and <span class="math notranslate nohighlight">\(L = 100\)</span> pm; <span class="math notranslate nohighlight">\(E_1 \approx 27\)</span> eV. What photon wavelength is needed to barely free the electron? If <span class="math notranslate nohighlight">\(\lambda = 2.00\)</span> nm, what happens?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>finite potential well</strong> has <span class="math notranslate nohighlight">\(U = 0\)</span> inside (<span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>) and <span class="math notranslate nohighlight">\(U = U_0 &gt; 0\)</span> outside—a more realistic model than the infinite well.</p></li>
+<li><p>The wave function <strong>penetrates the walls</strong>: <span class="math notranslate nohighlight">\(|\psi|^2\)</span> decays exponentially in the classically forbidden region. Leakage is greater for higher <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>Compared to an infinite well of the same width: finite well has <strong>fewer</strong> bound states, <strong>longer</strong> de Broglie wavelengths, and <strong>lower</strong> energies for each <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>Electrons with <span class="math notranslate nohighlight">\(E &gt; U_0\)</span> are <strong>not trapped</strong>—their energy is nonquantized. To escape, a trapped electron must absorb at least <span class="math notranslate nohighlight">\(U_0 - E_n\)</span>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="finite-well-setup-and-wave-penetration">
+<h3>Finite well: setup and wave penetration<a class="headerlink" href="#finite-well-setup-and-wave-penetration" title="Link to this heading">#</a></h3>
+<p>A <strong>finite potential well</strong> has depth <span class="math notranslate nohighlight">\(U_0\)</span> and width <span class="math notranslate nohighlight">\(L\)</span>: <span class="math notranslate nohighlight">\(U = 0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>, and <span class="math notranslate nohighlight">\(U = U_0\)</span> for <span class="math notranslate nohighlight">\(x &lt; 0\)</span> or <span class="math notranslate nohighlight">\(x &gt; L\)</span>. Unlike the infinite well, we cannot assume the wave function vanishes at the walls—there are no strict nodes at <span class="math notranslate nohighlight">\(x = 0\)</span> and <span class="math notranslate nohighlight">\(x = L\)</span>.</p>
+<p>Solving Schrödinger’s equation shows that the wave function <strong>extends into the walls</strong>, where it decays exponentially. This is analogous to tunneling (section 38-9): the matter wave “leaks” into the classically forbidden region (<span class="math notranslate nohighlight">\(E &lt; U_0\)</span>). The leakage is greater for higher quantum numbers <span class="math notranslate nohighlight">\(n\)</span>—higher <span class="math notranslate nohighlight">\(n\)</span> states have more energy and thus penetrate farther.</p>
+<div class="note admonition">
+<p class="admonition-title">Physical picture</p>
+<p>Inside the barrier, the wave function decays like <span class="math notranslate nohighlight">\(e^{-\kappa x}\)</span> where <span class="math notranslate nohighlight">\(\kappa\)</span> depends on <span class="math notranslate nohighlight">\(U_0 - E\)</span>. The wave is not exactly zero at the boundary—it smoothly extends into the wall and decays. The electron has a finite probability of being found in the “classically forbidden” region.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="finite-vs-infinite-well">
+<h3>Finite vs infinite well<a class="headerlink" href="#finite-vs-infinite-well" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Infinite well</p></th>
+<th class="head"><p>Finite well (same <span class="math notranslate nohighlight">\(L\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Bound states</strong></p></td>
+<td><p>Infinitely many</p></td>
+<td><p>Finite number (only those with <span class="math notranslate nohighlight">\(E &lt; U_0\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>de Broglie <span class="math notranslate nohighlight">\(\lambda\)</span></strong></p></td>
+<td><p>Shorter</p></td>
+<td><p>Longer (wave extends into walls)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Energy <span class="math notranslate nohighlight">\(E_n\)</span></strong></p></td>
+<td><p>Higher</p></td>
+<td><p>Lower (same <span class="math notranslate nohighlight">\(n\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Wave at walls</strong></p></td>
+<td><p>Nodes (<span class="math notranslate nohighlight">\(\psi = 0\)</span>)</p></td>
+<td><p>No nodes; penetrates</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Because the wave leaks into the walls, the effective wavelength inside the well is longer than in an infinite well of the same <span class="math notranslate nohighlight">\(L\)</span>. From <span class="math notranslate nohighlight">\(\lambda = h/\sqrt{2mE}\)</span>, a longer <span class="math notranslate nohighlight">\(\lambda\)</span> means lower <span class="math notranslate nohighlight">\(E\)</span>—so each <span class="math notranslate nohighlight">\(E_n\)</span> is lower in the finite well.</p>
+<p><strong>Energy-level diagram:</strong> Start with the infinite-well levels for the same <span class="math notranslate nohighlight">\(L\)</span>. Remove levels above <span class="math notranslate nohighlight">\(U_0\)</span>. Shift the remaining levels down, with the highest <span class="math notranslate nohighlight">\(n\)</span> shifted the most (greatest leakage).</p>
+</section>
+<hr class="docutils" />
+<section id="nonquantized-region-and-escape">
+<h3>Nonquantized region and escape<a class="headerlink" href="#nonquantized-region-and-escape" title="Link to this heading">#</a></h3>
+<p>An electron with <span class="math notranslate nohighlight">\(E &gt; U_0\)</span> has enough energy to be free—it is not confined. Its energy is <strong>nonquantized</strong> (any value <span class="math notranslate nohighlight">\(\geq U_0\)</span> is allowed).</p>
+<p><strong>Minimum energy to escape:</strong> For an electron in state <span class="math notranslate nohighlight">\(n\)</span> with energy <span class="math notranslate nohighlight">\(E_n\)</span>, the minimum energy it must absorb to become free is</p>
+<div class="math notranslate nohighlight" id="equation-eq-escape">
+<span class="eqno">(380)<a class="headerlink" href="#equation-eq-escape" title="Link to this equation">#</a></span>\[
+\Delta E_{\text{escape}} = U_0 - E_n
+\]</div>
+<p>If a photon provides exactly this energy, the electron barely escapes with zero kinetic energy. If the photon provides more (<span class="math notranslate nohighlight">\(hf &gt; U_0 - E_n\)</span>), the electron escapes with kinetic energy <span class="math notranslate nohighlight">\(K = hf - (U_0 - E_n)\)</span>.</p>
+<p>For photon absorption: <span class="math notranslate nohighlight">\(hf = hc/\lambda = \Delta E\)</span>. The threshold wavelength for escape from the ground state is <span class="math notranslate nohighlight">\(\lambda = hc/(U_0 - E_1)\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example</p>
+<p><strong>Finite well:</strong> <span class="math notranslate nohighlight">\(U_0 = 450\)</span> eV, <span class="math notranslate nohighlight">\(L = 100\)</span> pm, <span class="math notranslate nohighlight">\(E_1 \approx 27\)</span> eV. To barely escape: <span class="math notranslate nohighlight">\(\Delta E = 450 - 27 = 423\)</span> eV. Threshold wavelength <span class="math notranslate nohighlight">\(\lambda = hc/(423\,\text{eV}) \approx 2.94\)</span> nm. Light with <span class="math notranslate nohighlight">\(\lambda = 2.00\)</span> nm has photon energy <span class="math notranslate nohighlight">\(hf \approx 622\)</span> eV <span class="math notranslate nohighlight">\(&gt; 423\)</span> eV—the electron escapes with <span class="math notranslate nohighlight">\(K \approx 199\)</span> eV.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Finite well</strong>: <span class="math notranslate nohighlight">\(U = 0\)</span> inside, <span class="math notranslate nohighlight">\(U = U_0\)</span> outside; wave penetrates walls (exponential decay).</p></li>
+<li><p><strong>Comparison</strong>: Finite well has fewer bound states, longer <span class="math notranslate nohighlight">\(\lambda\)</span>, lower <span class="math notranslate nohighlight">\(E_n\)</span> than infinite well of same <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p><strong>Nonquantized</strong>: <span class="math notranslate nohighlight">\(E &gt; U_0\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> electron free; energy not quantized.</p></li>
+<li><p><strong>Escape</strong>: Minimum absorption <span class="math notranslate nohighlight">\(U_0 - E_n\)</span>; photon with <span class="math notranslate nohighlight">\(hf = hc/\lambda = \Delta E\)</span>.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +719,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-well-setup-and-wave-penetration">Finite well: setup and wave penetration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-vs-infinite-well">Finite vs infinite well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonquantized-region-and-escape">Nonquantized region and escape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

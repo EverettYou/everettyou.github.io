@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch33_electromagnetic-waves/33-2-energy-transport-and-the-poynting-vector';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch33_electromagnetic-waves/33-2-energy-transport-and-the-poynting-vector.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poynting-vector">The Poynting vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity">Intensity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotropic-point-source">Isotropic point source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,32 +572,103 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="energy-transport-and-the-poynting-vector">
 <h1>33-2 Energy Transport and the Poynting Vector<a class="headerlink" href="#energy-transport-and-the-poynting-vector" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>33.13</strong> Identify that an electromagnetic wave transports energy.</p></li>
-<li><p><strong>33.14</strong> transport per unit area is given by the Poynting vector , For a target, identify that an EM wave’s rate of energy: <em>S</em> which is related to the cross product of the electric field: : <em>E</em> and magnetic field . <em>B</em></p></li>
-<li><p><strong>33.15</strong> Determine the direction of travel (and thus energy transport) of an electromagnetic wave by applying the cross product for the corresponding Poynting vector.</p></li>
-<li><p><strong>33.16</strong> Calculate the instantaneous rate <em>S</em> of energy flow of an EM wave in terms of the instantaneous electric field magnitude <em>E</em> .</p></li>
-<li><p><strong>33.17</strong> For the electric field component of an electromagnetic wave, relate the rms value <em>E</em> rms to the amplitude <em>Em</em> .</p></li>
-<li><p><strong>33.18</strong> Identify an EM wave’s intensity <em>I</em> in terms of energy transport.</p></li>
-<li><p><strong>33.19</strong> Apply the relationships between an EM wave’s intensity <em>I</em> and the electric field’s rms value <em>E</em> rms and amplitude <em>Em</em> .</p></li>
-<li><p><strong>33.20</strong> Apply the relationship between average power <em>P</em> avg, energy transfer � <em>E</em> , and the time � <em>t</em> taken by that transfer, and apply the relationship between the instantaneous power <em>P</em> and the rate of energy transfer <em>dE/dt</em> .</p></li>
-<li><p><strong>33.21</strong> Identify an isotropic point source of light.</p></li>
-<li><p><strong>33.22</strong> For an isotropic point source of light, apply the relationship between the emission power <em>P</em> , the distance <em>r</em> to a point of measurement, and the intensity <em>I</em> at that point.</p></li>
-<li><p><strong>33.23</strong> In terms of energy conservation, explain why the intensity from an isotropic point source of light decreases as 1/ <em>r</em>[2] .</p></li>
+<li><p>What is the Poynting vector <span class="math notranslate nohighlight">\(\vec{S}\)</span>? How is it related to <span class="math notranslate nohighlight">\(\vec{E}\)</span> and <span class="math notranslate nohighlight">\(\vec{B}\)</span>? What does its direction tell you?</p></li>
+<li><p>For an EM wave, how do you calculate the instantaneous rate of energy flow per unit area? How does it relate to <span class="math notranslate nohighlight">\(E\)</span> alone?</p></li>
+<li><p>Define the <strong>intensity</strong> <span class="math notranslate nohighlight">\(I\)</span> of an EM wave. How is it related to <span class="math notranslate nohighlight">\(E_{\text{rms}}\)</span> and <span class="math notranslate nohighlight">\(E_m\)</span>?</p></li>
+<li><p>What is an <strong>isotropic point source</strong>? Why does intensity from such a source fall off as <span class="math notranslate nohighlight">\(1/r^2\)</span>? Use energy conservation.</p></li>
+<li><p>The electric and magnetic fields in an EM wave carry energy. Are the energy densities <span class="math notranslate nohighlight">\(u_E\)</span> and <span class="math notranslate nohighlight">\(u_B\)</span> equal or different? Why?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An EM wave <strong>transports energy</strong>; the rate per unit area is given by the <strong>Poynting vector</strong> <span class="math notranslate nohighlight">\(\vec{S}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{S} \propto \vec{E} \times \vec{B}\)</span> gives both direction (energy flow) and magnitude (power per area).</p></li>
+<li><p>The <strong>intensity</strong> <span class="math notranslate nohighlight">\(I\)</span> is the time-averaged power per unit area; <span class="math notranslate nohighlight">\(I \propto E_{\text{rms}}^2\)</span>.</p></li>
+<li><p>For an <strong>isotropic point source</strong>, <span class="math notranslate nohighlight">\(I = P_s/(4\pi r^2)\)</span>—intensity falls as <span class="math notranslate nohighlight">\(1/r^2\)</span> by energy conservation.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● The rate per unit area at which energy is transported via an electromagnetic wave is given by the Poynting: vector <em>S</em> :</p>
-<p>The direction of <em>S</em> : (and thus of the wave’s travel and the energy transport) is perpendicular to the directions of both: : <em>E</em> and <em>B</em> . ● The time-averaged rate per unit area at which energy is transported is <em>S</em> avg, which is called the intensity <em>I</em> of</p>
-<p>the wave:</p>
-<p>1 <em>I</em> � <em>E</em> 2rms, <em>c</em> m0</p>
-<p>in which <em>E</em> rms � <em>Em</em> / ~~1~~ 2.</p>
-<p>● A point source of electromagnetic waves emits the waves isotropically—that is, with equal intensity in all directions. The intensity of the waves at distance <em>r</em> from a point source of power <em>Ps</em> is</p>
-<p><em>I</em> � <em>Ps</em> 4p <em>r</em>[2][.]</p>
+<hr class="docutils" />
+<section id="the-poynting-vector">
+<h3>The Poynting vector<a class="headerlink" href="#the-poynting-vector" title="Link to this heading">#</a></h3>
+<p>The <strong>Poynting vector</strong> <span class="math notranslate nohighlight">\(\vec{S}\)</span> (after John Henry Poynting) describes the rate of energy transport per unit area in an EM wave:</p>
+<div class="math notranslate nohighlight" id="equation-eq-poynting">
+<span class="eqno">(218)<a class="headerlink" href="#equation-eq-poynting" title="Link to this equation">#</a></span>\[
+\vec{S} = \frac{1}{\mu_0} \vec{E} \times \vec{B}
+\]</div>
+<ul class="simple">
+<li><p><strong>Direction</strong>: <span class="math notranslate nohighlight">\(\vec{S}\)</span> points in the direction of wave travel and energy flow (perpendicular to both <span class="math notranslate nohighlight">\(\vec{E}\)</span> and <span class="math notranslate nohighlight">\(\vec{B}\)</span>).</p></li>
+<li><p><strong>Magnitude</strong>: <span class="math notranslate nohighlight">\(S = \frac{1}{\mu_0} EB\)</span> (since <span class="math notranslate nohighlight">\(\vec{E} \perp \vec{B}\)</span>).</p></li>
+<li><p><strong>SI unit</strong>: W/m² (power per area).</p></li>
+</ul>
+<p>Using <span class="math notranslate nohighlight">\(B = E/c\)</span> (from 33-1):</p>
+<div class="math notranslate nohighlight" id="equation-eq-poynting-e">
+<span class="eqno">(219)<a class="headerlink" href="#equation-eq-poynting-e" title="Link to this equation">#</a></span>\[
+S = \frac{1}{c\mu_0} E^2
+\]</div>
+<p>So the instantaneous energy flow rate depends only on <span class="math notranslate nohighlight">\(E\)</span> (and constants).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The electric and magnetic fields in an EM wave carry <strong>equal</strong> energy densities: <span class="math notranslate nohighlight">\(u_E = u_B\)</span>. Although <span class="math notranslate nohighlight">\(E = cB\)</span> and <span class="math notranslate nohighlight">\(c\)</span> is large, the energy density <span class="math notranslate nohighlight">\(u_B = B^2/(2\mu_0)\)</span> equals <span class="math notranslate nohighlight">\(u_E = \varepsilon_0 E^2/2\)</span> when <span class="math notranslate nohighlight">\(B = E/c\)</span> and <span class="math notranslate nohighlight">\(c = 1/\sqrt{\mu_0\varepsilon_0}\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="intensity">
+<h3>Intensity<a class="headerlink" href="#intensity" title="Link to this heading">#</a></h3>
+<p>The <strong>intensity</strong> <span class="math notranslate nohighlight">\(I\)</span> is the time-averaged power per unit area:</p>
+<div class="math notranslate nohighlight" id="equation-eq-intensity-def">
+<span class="eqno">(220)<a class="headerlink" href="#equation-eq-intensity-def" title="Link to this equation">#</a></span>\[
+I = S_{\text{avg}} = \left(\frac{\text{power}}{\text{area}}\right)_{\text{avg}}
+\]</div>
+<p>For a sinusoidal wave <span class="math notranslate nohighlight">\(E = E_m \sin(kx - \omega t)\)</span>, the average of <span class="math notranslate nohighlight">\(E^2\)</span> over a cycle gives <span class="math notranslate nohighlight">\(E_m^2/2\)</span>. Defining the <strong>root-mean-square</strong> electric field:</p>
+<div class="math notranslate nohighlight" id="equation-eq-erms">
+<span class="eqno">(221)<a class="headerlink" href="#equation-eq-erms" title="Link to this equation">#</a></span>\[
+E_{\text{rms}} = \frac{E_m}{\sqrt{2}}
+\]</div>
+<p>we obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-intensity">
+<span class="eqno">(222)<a class="headerlink" href="#equation-eq-intensity" title="Link to this equation">#</a></span>\[
+I = \frac{1}{c\mu_0} E_{\text{rms}}^2 = \frac{1}{2c\mu_0} E_m^2
+\]</div>
+<ul class="simple">
+<li><p><strong>Intensity</strong> <span class="math notranslate nohighlight">\(\propto\)</span> amplitude squared—typical for waves.</p></li>
+<li><p>Most detectors (e.g., eyes, solar cells) respond to the electric field; <span class="math notranslate nohighlight">\(E_{\text{rms}}\)</span> and <span class="math notranslate nohighlight">\(E_m\)</span> are the practical measures.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="isotropic-point-source">
+<h3>Isotropic point source<a class="headerlink" href="#isotropic-point-source" title="Link to this heading">#</a></h3>
+<p>An <strong>isotropic point source</strong> emits EM waves equally in all directions—spherical wavefronts.</p>
+<p><strong>Energy conservation</strong>: All power <span class="math notranslate nohighlight">\(P_s\)</span> emitted must pass through any sphere of radius <span class="math notranslate nohighlight">\(r\)</span> centered on the source. The sphere area is <span class="math notranslate nohighlight">\(4\pi r^2\)</span>, so</p>
+<div class="math notranslate nohighlight" id="equation-eq-point-source">
+<span class="eqno">(223)<a class="headerlink" href="#equation-eq-point-source" title="Link to this equation">#</a></span>\[
+I = \frac{P_s}{4\pi r^2}
+\]</div>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(1/r^2\)</span> falloff</strong>: Intensity decreases as the inverse square of distance—same power spread over a larger area.</p></li>
+<li><p>Applies to stars, small bulbs, and other sources that radiate roughly isotropically.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Beamed vs isotropic</p>
+<p>A searchlight or laser beam does <strong>not</strong> emit isotropically; intensity falls off differently (e.g., slowly within the beam). Eq. <a class="reference internal" href="#equation-eq-point-source">(223)</a> applies only when the source radiates equally in all directions.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Poynting vector</strong> <span class="math notranslate nohighlight">\(\vec{S} = (1/\mu_0)\vec{E} \times \vec{B}\)</span>: direction and rate of energy transport per unit area.</p></li>
+<li><p><strong>Instantaneous</strong>: <span class="math notranslate nohighlight">\(S = (1/(c\mu_0)) E^2\)</span>.</p></li>
+<li><p><strong>Intensity</strong> <span class="math notranslate nohighlight">\(I = S_{\text{avg}} = (1/(c\mu_0)) E_{\text{rms}}^2\)</span>; <span class="math notranslate nohighlight">\(E_{\text{rms}} = E_m/\sqrt{2}\)</span>.</p></li>
+<li><p><strong>Isotropic point source</strong>: <span class="math notranslate nohighlight">\(I = P_s/(4\pi r^2)\)</span>; <span class="math notranslate nohighlight">\(1/r^2\)</span> from energy conservation.</p></li>
+<li><p>Electric and magnetic energy densities in an EM wave are equal: <span class="math notranslate nohighlight">\(u_E = u_B\)</span>.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -657,8 +736,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poynting-vector">The Poynting vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity">Intensity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotropic-point-source">Isotropic point source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

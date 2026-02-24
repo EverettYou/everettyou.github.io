@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch35_interference/35-1-light-as-a-wave';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch35_interference/35-1-light-as-a-wave.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -549,8 +551,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#huygens-principle">Huygens’ principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refraction-and-index-of-refraction">Refraction and index of refraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavelength-in-a-medium">Wavelength in a medium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-difference-from-different-materials">Phase difference from different materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rainbows-and-optical-interference">Rainbows and optical interference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -564,35 +574,148 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="light-as-a-wave">
 <h1>35-1 Light as a Wave<a class="headerlink" href="#light-as-a-wave" title="Link to this heading">#</a></h1>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p><em>After reading this module, you should be able to …</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p><strong>35.01</strong> Using a sketch, explain Huygens’ principle.</p></li>
-<li><p><strong>35.02</strong> With a few simple sketches, explain refraction in terms of the gradual change in the speed of a wavefront as it passes through an interface at an angle to the normal.</p></li>
-<li><p><strong>35.03</strong> Apply the relationship between the speed of light in vacuum <em>c</em> , the speed of light in a material <em>v</em> , and the index of refraction of the material <em>n</em> .</p></li>
-<li><p><strong>35.04</strong> Apply the relationship between a distance <em>L</em> in a material, the speed of light in that material, and the time required for a pulse of the light to travel through <em>L</em> .</p></li>
-<li><p><strong>35.05</strong> Apply Snell’s law of refraction.</p></li>
-<li><p><strong>35.06</strong> When light refracts through an interface, identify that the frequency does not change but the wavelength and effective speed do.</p></li>
-<li><p><strong>35.07</strong> Apply the relationship between the wavelength in vacuum l, the wavelength l <em>n</em> in a material (the internal wavelength), and the index of refraction <em>n</em> of the material.</p></li>
-<li><p><strong>35.08</strong> For light in a certain length of a material, calculate the number of internal wavelengths that fit into the length.</p></li>
-<li><p><strong>35.09</strong> If two light waves travel through different materials with different indexes of refraction and then reach a common point, determine their phase difference and interpret the resulting interference in terms of maximum brightness, intermediate brightness, and darkness.</p></li>
-<li><p><strong>35.10</strong> Apply the learning objectives of Module 17-3 (sound waves there, light waves here) to find the phase difference and interference of two waves that reach a common point after traveling paths of different lengths.</p></li>
-<li><p><strong>35.11</strong> Given the initial phase difference between two waves with the same wavelength, determine their phase difference after they travel through different path lengths and through different indexes of refraction.</p></li>
-<li><p><strong>35.12</strong> Identify that rainbows are examples of optical interference.</p></li>
+<li><p>Using a sketch, explain <strong>Huygens’ principle</strong>. How does it predict where a wavefront will be at a future time?</p></li>
+<li><p>Explain refraction in terms of wavefronts: why does a wavefront bend when it crosses an interface at an angle? What happens to the wavelength and speed in each medium?</p></li>
+<li><p>Define the <strong>index of refraction</strong> <span class="math notranslate nohighlight">\(n\)</span>. When light refracts through an interface, does the <strong>frequency</strong> change? What about the wavelength and speed?</p></li>
+<li><p>Two light waves (same wavelength in vacuum) travel through different materials of length <span class="math notranslate nohighlight">\(L\)</span> with indices <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>, then meet. How do you find their <strong>phase difference</strong>? What is the “effective” phase difference, and why does only the fractional part matter for interference?</p></li>
+<li><p>How do rainbows and butterfly-wing colors relate to <strong>optical interference</strong>? What is the role of path differences within a raindrop?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Optical interference</strong>—the combining of light waves—requires treating light as a <strong>wave</strong>, not just rays (geometrical optics).</p></li>
+<li><p><strong>Huygens’ principle</strong> predicts wave propagation: each point on a wavefront acts as a source of spherical secondary wavelets; the new wavefront is tangent to them.</p></li>
+<li><p>Refraction follows from Huygens: wavefronts change speed at an interface, so wavelength and direction change; <strong>frequency stays constant</strong>.</p></li>
+<li><p>When two waves travel through different materials, their <strong>phase difference</strong> can change because wavelength depends on index of refraction—this drives interference patterns.</p></li>
 </ul>
 </section>
-<section id="key-ideas">
-<h2>Key Ideas<a class="headerlink" href="#key-ideas" title="Link to this heading">#</a></h2>
-<p>● The three-dimensional transmission of waves, including light, may often be predicted by Huygens’ principle, which states that all points on a wavefront serve as point sources of spherical secondary wavelets. After a time <em>t</em> , the new position of the wavefront will be that of a surface tangent to these secondary wavelets.</p>
+<hr class="docutils" />
+<section id="huygens-principle">
+<h3>Huygens’ principle<a class="headerlink" href="#huygens-principle" title="Link to this heading">#</a></h3>
+<p><strong>Huygens’ principle</strong> (1678, Christian Huygens): All points on a wavefront serve as point sources of spherical <strong>secondary wavelets</strong>. After a time <span class="math notranslate nohighlight">\(t\)</span>, the new position of the wavefront is the surface tangent to these wavelets.</p>
 <ul class="simple">
-<li><p>The law of refraction can be derived from Huygens’</p></li>
-<li><p>principle by assuming that the index of refraction of any medium is <em>n</em> � <em>c</em> / <em>v</em> , in which <em>v</em> is the speed of light in the medium and <em>c</em> is the speed of light in vacuum.</p></li>
-<li><p>The wavelength l <em>n</em> of light in a medium depends on the</p></li>
-<li><p>index of refraction <em>n</em> of the medium:</p></li>
+<li><p><strong>Plane wave in vacuum</strong>: A plane wavefront (e.g., plane <span class="math notranslate nohighlight">\(ab\)</span>) propagates by having points on it emit spherical wavelets. At time <span class="math notranslate nohighlight">\(\Delta t\)</span>, each wavelet has radius <span class="math notranslate nohighlight">\(c\,\Delta t\)</span>. The new wavefront is the plane tangent to them—parallel to the original, displaced by <span class="math notranslate nohighlight">\(c\,\Delta t\)</span>.</p></li>
+<li><p>This construction predicts reflection and refraction without Maxwell’s equations; it gives physical meaning to the index of refraction.</p></li>
 </ul>
-<p>in which l is the wavelength in vacuum.</p>
-<p>● Because of this dependency, the phase difference between two waves can change if they pass through different materials with different indexes of refraction.</p>
+<div class="note admonition">
+<p class="admonition-title">Wave vs. ray</p>
+<p>Geometrical optics (rays) is valid when features are much larger than the wavelength. Interference requires the wave picture—phase matters.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="refraction-and-index-of-refraction">
+<h3>Refraction and index of refraction<a class="headerlink" href="#refraction-and-index-of-refraction" title="Link to this heading">#</a></h3>
+<p>When a plane wave crosses an interface at an angle, the part of the wavefront that enters first slows down (or speeds up). The wavefront bends, changing the direction of propagation.</p>
+<p><strong>Index of refraction</strong> <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-n-def">
+<span class="eqno">(254)<a class="headerlink" href="#equation-eq-n-def" title="Link to this equation">#</a></span>\[
+n = \frac{c}{v}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light in vacuum and <span class="math notranslate nohighlight">\(v\)</span> is the speed in the medium. Vacuum: <span class="math notranslate nohighlight">\(n = 1\)</span>; air: <span class="math notranslate nohighlight">\(n \approx 1\)</span>; glass: <span class="math notranslate nohighlight">\(n \approx 1.5\)</span>.</p>
+<p><strong>Snell’s law</strong> (from Huygens geometry):</p>
+<div class="math notranslate nohighlight" id="equation-eq-snell-35">
+<span class="eqno">(255)<a class="headerlink" href="#equation-eq-snell-35" title="Link to this equation">#</a></span>\[
+n_1 \sin\theta_1 = n_2 \sin\theta_2
+\]</div>
+<ul class="simple">
+<li><p>Wavelengths in the two media satisfy <span class="math notranslate nohighlight">\(\lambda_1/v_1 = \lambda_2/v_2\)</span> (same time for one wavelength to cross).</p></li>
+<li><p>The refracted wavefront is tangent to Huygens wavelets in the second medium; the geometry yields Snell’s law.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="wavelength-in-a-medium">
+<h3>Wavelength in a medium<a class="headerlink" href="#wavelength-in-a-medium" title="Link to this heading">#</a></h3>
+<p>The wavelength in a medium depends on the index of refraction:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lambda-n">
+<span class="eqno">(256)<a class="headerlink" href="#equation-eq-lambda-n" title="Link to this equation">#</a></span>\[
+\lambda_n = \frac{\lambda}{n}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is the wavelength in vacuum. Since <span class="math notranslate nohighlight">\(v = \lambda f\)</span> and <span class="math notranslate nohighlight">\(f\)</span> is the same in vacuum and in the medium:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lambda-derivation">
+<span class="eqno">(257)<a class="headerlink" href="#equation-eq-lambda-derivation" title="Link to this equation">#</a></span>\[
+f = \frac{c}{\lambda} = \frac{v}{\lambda_n} \quad \Rightarrow \quad \lambda_n = \frac{v}{c}\lambda = \frac{\lambda}{n}
+\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <strong>frequency</strong> of light does <strong>not</strong> change when it enters a medium. Only the speed and wavelength change.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="phase-difference-from-different-materials">
+<h3>Phase difference from different materials<a class="headerlink" href="#phase-difference-from-different-materials" title="Link to this heading">#</a></h3>
+<p>When two waves (same wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> in vacuum) travel through different materials of length <span class="math notranslate nohighlight">\(L\)</span> with indices <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>, they accumulate different phase.</p>
+<p><strong>Number of wavelengths</strong> in length <span class="math notranslate nohighlight">\(L\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-n-wavelengths">
+<span class="eqno">(258)<a class="headerlink" href="#equation-eq-n-wavelengths" title="Link to this equation">#</a></span>\[
+N = \frac{L}{\lambda_n} = \frac{nL}{\lambda}
+\]</div>
+<p>For two materials of the same length <span class="math notranslate nohighlight">\(L\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-n1-n2">
+<span class="eqno">(259)<a class="headerlink" href="#equation-eq-n1-n2" title="Link to this equation">#</a></span>\[
+N_1 = \frac{n_1 L}{\lambda}, \qquad N_2 = \frac{n_2 L}{\lambda}
+\]</div>
+<p><strong>Phase difference</strong> (in wavelengths):</p>
+<div class="math notranslate nohighlight" id="equation-eq-phase-diff">
+<span class="eqno">(260)<a class="headerlink" href="#equation-eq-phase-diff" title="Link to this equation">#</a></span>\[
+|N_2 - N_1| = \frac{|n_2 - n_1| L}{\lambda}
+\]</div>
+<p><strong>Effective phase difference</strong>: Only the <strong>fractional part</strong> matters. A shift of <span class="math notranslate nohighlight">\(m\)</span> full wavelengths (<span class="math notranslate nohighlight">\(m\)</span> integer) leaves the waves in the same relative phase.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Effective phase difference</p></th>
+<th class="head"><p>Interference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 or 1 wavelength</p></td>
+<td><p>Fully constructive (brightness)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.5 wavelength</p></td>
+<td><p>Fully destructive (darkness)</p></td>
+</tr>
+<tr class="row-even"><td><p>Other</p></td>
+<td><p>Intermediate (dim)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Path length difference</p>
+<p>Same logic as section 17-3 (sound): if two waves travel through paths of different lengths <span class="math notranslate nohighlight">\(\Delta L\)</span>, the phase difference is <span class="math notranslate nohighlight">\(\Delta L/\lambda\)</span> (in wavelengths). For light, combine path length difference with phase from different materials.</p>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example: Phase difference from different materials</p>
+<p>Two light waves (wavelength 550.0 nm in vacuum) are in phase and have equal amplitudes. One travels through air (<span class="math notranslate nohighlight">\(n_1 = 1.000\)</span>); the other through a plastic layer of thickness <span class="math notranslate nohighlight">\(L = 2.600\)</span> mm and <span class="math notranslate nohighlight">\(n_2 = 1.600\)</span>. Find the phase difference in wavelengths and the effective phase difference. What type of interference occurs if they meet at a common point?</p>
+<p><strong>Solution:</strong> Use <a class="reference internal" href="#equation-eq-phase-diff">(260)</a>: <span class="math notranslate nohighlight">\(|N_2 - N_1| = (n_2 - n_1)L/\lambda = (1.600 - 1.000)(2.600\times10^{-3})/(550.0\times10^{-9}) \approx 2.84\)</span> wavelengths. Effective phase difference = fractional part = 0.84 wavelength. This is between 0.5 (destructive) and 1.0 (constructive), closer to 1.0 → <strong>intermediate brightness</strong>, closer to fully constructive.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="rainbows-and-optical-interference">
+<h3>Rainbows and optical interference<a class="headerlink" href="#rainbows-and-optical-interference" title="Link to this heading">#</a></h3>
+<p>Rainbows and <strong>supernumerary</strong> arcs (faint secondary arcs below the primary rainbow) are natural examples of <strong>optical interference</strong>.</p>
+<ul class="simple">
+<li><p>Light enters a raindrop along different paths; waves emerging at a given angle have traveled different distances inside the drop.</p></li>
+<li><p>At certain angles, waves emerge <strong>in phase</strong> → constructive interference → bright color.</p></li>
+<li><p>At other angles, waves have different phases → dim or washed out.</p></li>
+<li><p>Butterfly wings (e.g., <em>Morpho</em> blue) and anti-counterfeit inks use similar interference for color shifting with viewing angle.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Huygens’ principle</strong>: All points on a wavefront emit spherical secondary wavelets; new wavefront = surface tangent to them.</p></li>
+<li><p><strong>Refraction</strong>: <span class="math notranslate nohighlight">\(n = c/v\)</span>; Snell’s law <span class="math notranslate nohighlight">\(n_1\sin\theta_1 = n_2\sin\theta_2\)</span>; frequency unchanged, wavelength <span class="math notranslate nohighlight">\(\lambda_n = \lambda/n\)</span>.</p></li>
+<li><p><strong>Phase difference</strong>: Two waves through materials of length <span class="math notranslate nohighlight">\(L\)</span> with indices <span class="math notranslate nohighlight">\(n_1\)</span>, <span class="math notranslate nohighlight">\(n_2\)</span> differ by <span class="math notranslate nohighlight">\(|n_2 - n_1|L/\lambda\)</span> wavelengths; use fractional part for interference.</p></li>
+<li><p><strong>Rainbows and supernumeraries</strong>: Optical interference from path differences in raindrops.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -660,8 +783,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-ideas">Key Ideas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#huygens-principle">Huygens’ principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refraction-and-index-of-refraction">Refraction and index of refraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavelength-in-a-medium">Wavelength in a medium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-difference-from-different-materials">Phase difference from different materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rainbows-and-optical-interference">Rainbows and optical interference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

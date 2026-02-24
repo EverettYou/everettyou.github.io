@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch42_nuclear-physics/42-3-radioactive-decay';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch42_nuclear-physics/42-3-radioactive-decay.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-decay-law">The Decay Law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#half-life-and-mean-lifetime">Half-Life and Mean Lifetime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +572,114 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="radioactive-decay">
 <h1>42-3 Radioactive Decay<a class="headerlink" href="#radioactive-decay" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>Why does radioactive decay follow an <strong>exponential</strong> law? What does it mean that each nucleus has the same probability to decay per unit time?</p></li>
+<li><p>Derive the relation between <strong>decay constant</strong> <span class="math notranslate nohighlight">\(\lambda\)</span> and <strong>half-life</strong> <span class="math notranslate nohighlight">\(T_{1/2}\)</span>. If a sample has half-life 10 years, what fraction remains after 30 years?</p></li>
+<li><p>Define <strong>activity</strong> <span class="math notranslate nohighlight">\(R\)</span>. How does <span class="math notranslate nohighlight">\(R\)</span> change with time? Why is <span class="math notranslate nohighlight">\(R = \lambda N\)</span>?</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(N_0\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span>, how do you find the number of decays in a time interval? Can you work through an example?</p></li>
+<li><p>The becquerel (Bq) is 1 decay/s. A sample has activity 1000 Bq. What does that tell you about <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span>?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Radioactive decay</strong> is a <strong>random</strong> process: each unstable nucleus has the same probability per unit time to decay, independent of its age. This leads to <strong>exponential decay</strong> of the number of undecayed nuclei.</p></li>
+<li><p>The <strong>decay constant</strong> <span class="math notranslate nohighlight">\(\lambda\)</span> characterizes the decay rate; the <strong>half-life</strong> <span class="math notranslate nohighlight">\(T_{1/2} = (\ln 2)/\lambda\)</span> is the time for half the nuclei to decay.</p></li>
+<li><p><strong>Activity</strong> <span class="math notranslate nohighlight">\(R\)</span> is the decay rate (decays per second); <span class="math notranslate nohighlight">\(R = \lambda N\)</span> and <span class="math notranslate nohighlight">\(R\)</span> also decreases exponentially. The SI unit is the <strong>becquerel</strong> (Bq).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-decay-law">
+<h3>The Decay Law<a class="headerlink" href="#the-decay-law" title="Link to this heading">#</a></h3>
+<p>Radioactive decay is <strong>probabilistic</strong>: we cannot predict when a specific nucleus will decay, but each nucleus of a given nuclide has the same probability <span class="math notranslate nohighlight">\(\lambda\,dt\)</span> to decay in a short time <span class="math notranslate nohighlight">\(dt\)</span>. The constant <span class="math notranslate nohighlight">\(\lambda\)</span> is the <strong>decay constant</strong> (units: s<span class="math notranslate nohighlight">\(^{-1}\)</span>).</p>
+<p>The rate of change of the number <span class="math notranslate nohighlight">\(N\)</span> of undecayed nuclei is</p>
+<div class="math notranslate nohighlight" id="equation-eq-decay-law">
+<span class="eqno">(430)<a class="headerlink" href="#equation-eq-decay-law" title="Link to this equation">#</a></span>\[
+\frac{dN}{dt} = -\lambda N
+\]</div>
+<p>The minus sign indicates that <span class="math notranslate nohighlight">\(N\)</span> decreases. This differential equation has the solution</p>
+<div class="math notranslate nohighlight" id="equation-eq-n-decay">
+<span class="eqno">(431)<a class="headerlink" href="#equation-eq-n-decay" title="Link to this equation">#</a></span>\[
+N = N_0 e^{-\lambda t}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_0\)</span> is the number at <span class="math notranslate nohighlight">\(t = 0\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Why exponential?</p>
+<p>Because each nucleus decays independently with the same probability per unit time, the <em>fraction</em> that decays in <span class="math notranslate nohighlight">\(dt\)</span> is constant: <span class="math notranslate nohighlight">\(dN/N = -\lambda\,dt\)</span>. Integrating gives <span class="math notranslate nohighlight">\(N \propto e^{-\lambda t}\)</span>. No memory, no aging — a nucleus “born” 1 second ago has the same decay probability as one that has survived for years.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="half-life-and-mean-lifetime">
+<h3>Half-Life and Mean Lifetime<a class="headerlink" href="#half-life-and-mean-lifetime" title="Link to this heading">#</a></h3>
+<p>The <strong>half-life</strong> <span class="math notranslate nohighlight">\(T_{1/2}\)</span> is the time for half the nuclei to decay. Setting <span class="math notranslate nohighlight">\(N(T_{1/2}) = N_0/2\)</span> in <a class="reference internal" href="#equation-eq-n-decay">(431)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-half-life">
+<span class="eqno">(432)<a class="headerlink" href="#equation-eq-half-life" title="Link to this equation">#</a></span>\[
+T_{1/2} = \frac{\ln 2}{\lambda} = \frac{0.693}{\lambda}
+\]</div>
+<p>After <span class="math notranslate nohighlight">\(n\)</span> half-lives, the fraction remaining is <span class="math notranslate nohighlight">\((1/2)^n\)</span>.</p>
+<p>The <strong>mean lifetime</strong> (or mean life) is <span class="math notranslate nohighlight">\(\tau = 1/\lambda\)</span>. It is the average time a nucleus survives before decaying.</p>
+</section>
+<hr class="docutils" />
+<section id="activity">
+<h3>Activity<a class="headerlink" href="#activity" title="Link to this heading">#</a></h3>
+<p>The <strong>activity</strong> <span class="math notranslate nohighlight">\(R\)</span> is the number of decays per unit time:</p>
+<div class="math notranslate nohighlight" id="equation-eq-activity">
+<span class="eqno">(433)<a class="headerlink" href="#equation-eq-activity" title="Link to this equation">#</a></span>\[
+R = -\frac{dN}{dt} = \lambda N
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(N = N_0 e^{-\lambda t}\)</span>, the activity also decays exponentially:</p>
+<div class="math notranslate nohighlight" id="equation-eq-r-decay">
+<span class="eqno">(434)<a class="headerlink" href="#equation-eq-r-decay" title="Link to this equation">#</a></span>\[
+R = R_0 e^{-\lambda t},\quad R_0 = \lambda N_0
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quantity</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Relation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Decay constant</p></td>
+<td><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+<td><p>Probability per unit time</p></td>
+</tr>
+<tr class="row-odd"><td><p>Half-life</p></td>
+<td><p><span class="math notranslate nohighlight">\(T_{1/2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((\ln 2)/\lambda\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mean lifetime</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1/\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Activity</p></td>
+<td><p><span class="math notranslate nohighlight">\(R\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\lambda N\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Units:</strong> The SI unit of activity is the <strong>becquerel</strong> (Bq): <span class="math notranslate nohighlight">\(1\ \text{Bq} = 1\)</span> decay/s. The curie (Ci) is <span class="math notranslate nohighlight">\(3.7\times 10^{10}\)</span> Bq.</p>
+<div class="note admonition">
+<p class="admonition-title">Measuring activity</p>
+<p>We measure <span class="math notranslate nohighlight">\(R\)</span> (counts per second, corrected for detector efficiency), not <span class="math notranslate nohighlight">\(N\)</span> directly. From <span class="math notranslate nohighlight">\(R = \lambda N\)</span>, we can infer <span class="math notranslate nohighlight">\(N\)</span> if <span class="math notranslate nohighlight">\(\lambda\)</span> is known, or vice versa.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Decay law: <span class="math notranslate nohighlight">\(dN/dt = -\lambda N\)</span>; solution <span class="math notranslate nohighlight">\(N = N_0 e^{-\lambda t}\)</span>.</p></li>
+<li><p>Half-life: <span class="math notranslate nohighlight">\(T_{1/2} = (\ln 2)/\lambda\)</span>; mean lifetime <span class="math notranslate nohighlight">\(\tau = 1/\lambda\)</span>.</p></li>
+<li><p>Activity: <span class="math notranslate nohighlight">\(R = \lambda N = -\frac{dN}{dt}\)</span>; <span class="math notranslate nohighlight">\(R\)</span> decays exponentially.</p></li>
+<li><p>Unit: becquerel (Bq) = 1 decay/s.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +736,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-decay-law">The Decay Law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#half-life-and-mean-lifetime">Half-Life and Mean Lifetime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

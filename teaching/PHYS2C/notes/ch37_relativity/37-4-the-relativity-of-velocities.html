@@ -58,6 +58,8 @@
     <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch37_relativity/37-4-the-relativity-of-velocities';</script>
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS2C/notes/ch37_relativity/37-4-the-relativity-of-velocities.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -526,7 +528,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -542,6 +546,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relativistic-velocity-addition">Relativistic velocity addition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-properties">Key properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -553,6 +571,80 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-relativity-of-velocities">
 <h1>37-4 The Relativity of Velocities<a class="headerlink" href="#the-relativity-of-velocities" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>In <strong>Galilean</strong> relativity, if a particle has speed <span class="math notranslate nohighlight">\(u'\)</span> in frame <span class="math notranslate nohighlight">\(S'\)</span> and <span class="math notranslate nohighlight">\(S'\)</span> moves at <span class="math notranslate nohighlight">\(v\)</span> relative to <span class="math notranslate nohighlight">\(S\)</span>, the speed in <span class="math notranslate nohighlight">\(S\)</span> is <span class="math notranslate nohighlight">\(u = u' + v\)</span>. Why does this fail when <span class="math notranslate nohighlight">\(u'\)</span> or <span class="math notranslate nohighlight">\(v\)</span> is close to <span class="math notranslate nohighlight">\(c\)</span>?</p></li>
+<li><p>Derive the <strong>relativistic velocity addition</strong> formula <span class="math notranslate nohighlight">\(u = (u' + v)/(1 + u'v/c^2)\)</span> from the Lorentz transformation. (Hint: <span class="math notranslate nohighlight">\(u = \Delta x/\Delta t\)</span>, <span class="math notranslate nohighlight">\(u' = \Delta x'/\Delta t'\)</span>.)</p></li>
+<li><p>Show that if <span class="math notranslate nohighlight">\(u' = c\)</span> (e.g., a light beam in <span class="math notranslate nohighlight">\(S'\)</span>), then <span class="math notranslate nohighlight">\(u = c\)</span> in <span class="math notranslate nohighlight">\(S\)</span>—the speed of light is <strong>invariant</strong>.</p></li>
+<li><p>A spaceship moves at <span class="math notranslate nohighlight">\(0.9c\)</span> relative to Earth. It fires a probe at <span class="math notranslate nohighlight">\(0.9c\)</span> relative to the ship (in the same direction). What is the probe’s speed relative to Earth? Compare with the naive <span class="math notranslate nohighlight">\(1.8c\)</span>.</p></li>
+<li><p>When is the relativistic formula approximately equal to <span class="math notranslate nohighlight">\(u = u' + v\)</span>?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Velocities do <strong>not</strong> add simply in relativity. The Galilean rule <span class="math notranslate nohighlight">\(u = u' + v\)</span> fails when speeds approach <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+<li><p>The <strong>relativistic velocity transformation</strong> gives the correct relation between a particle’s velocity as measured in two inertial frames in relative motion.</p></li>
+<li><p>A key consequence: if a particle (or light) has speed <span class="math notranslate nohighlight">\(c\)</span> in one frame, it has speed <span class="math notranslate nohighlight">\(c\)</span> in <em>all</em> frames—the speed of light is <strong>invariant</strong>.</p></li>
+<li><p>The formula follows directly from the Lorentz transformation.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="relativistic-velocity-addition">
+<h3>Relativistic velocity addition<a class="headerlink" href="#relativistic-velocity-addition" title="Link to this heading">#</a></h3>
+<p>Consider frames <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(S'\)</span> with <span class="math notranslate nohighlight">\(S'\)</span> moving at speed <span class="math notranslate nohighlight">\(v\)</span> in the <span class="math notranslate nohighlight">\(+x\)</span> direction relative to <span class="math notranslate nohighlight">\(S\)</span>. A particle moves with constant velocity parallel to the <span class="math notranslate nohighlight">\(x\)</span>-axis. In <span class="math notranslate nohighlight">\(S'\)</span> its speed is <span class="math notranslate nohighlight">\(u' = \Delta x'/\Delta t'\)</span>; in <span class="math notranslate nohighlight">\(S\)</span> its speed is <span class="math notranslate nohighlight">\(u = \Delta x/\Delta t\)</span>.</p>
+<p>From the Lorentz transformation (difference form):</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta x = \gamma(\Delta x' + v\,\Delta t'), \quad \Delta t = \gamma\left(\Delta t' + \frac{v\,\Delta x'}{c^2}\right)
+\]</div>
+<p>Dividing <span class="math notranslate nohighlight">\(\Delta x\)</span> by <span class="math notranslate nohighlight">\(\Delta t\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-velocity-add">
+<span class="eqno">(318)<a class="headerlink" href="#equation-eq-velocity-add" title="Link to this equation">#</a></span>\[
+u = \frac{\Delta x}{\Delta t} = \frac{\Delta x' + v\,\Delta t'}{\Delta t' + v\,\Delta x'/c^2}
+= \frac{\Delta x'/\Delta t' + v}{1 + v(\Delta x'/\Delta t')/c^2}
+= \frac{u' + v}{1 + u'v/c^2}
+\]</div>
+<p><strong>Inverse</strong> (from <span class="math notranslate nohighlight">\(S\)</span> to <span class="math notranslate nohighlight">\(S'\)</span>): interchange <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(u'\)</span>, replace <span class="math notranslate nohighlight">\(v\)</span> by <span class="math notranslate nohighlight">\(-v\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-velocity-add-inv">
+<span class="eqno">(319)<a class="headerlink" href="#equation-eq-velocity-add-inv" title="Link to this equation">#</a></span>\[
+u' = \frac{u - v}{1 - uv/c^2}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="key-properties">
+<h3>Key properties<a class="headerlink" href="#key-properties" title="Link to this heading">#</a></h3>
+<p><strong>Invariance of <span class="math notranslate nohighlight">\(c\)</span>.</strong> If <span class="math notranslate nohighlight">\(u' = c\)</span> (e.g., a light signal in <span class="math notranslate nohighlight">\(S'\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-c-invariant">
+<span class="eqno">(320)<a class="headerlink" href="#equation-eq-c-invariant" title="Link to this equation">#</a></span>\[
+u = \frac{c + v}{1 + cv/c^2} = \frac{c + v}{1 + v/c} = \frac{c(c + v)}{c + v} = c
+\]</div>
+<p>The speed of light is the same in all inertial frames—consistent with the second postulate.</p>
+<p><strong>Galilean limit.</strong> For <span class="math notranslate nohighlight">\(u' \ll c\)</span> and <span class="math notranslate nohighlight">\(v \ll c\)</span>, the denominator <span class="math notranslate nohighlight">\(1 + u'v/c^2 \approx 1\)</span>, so <span class="math notranslate nohighlight">\(u \approx u' + v\)</span>. The relativistic formula reduces to the familiar Galilean addition.</p>
+<p><strong>No speed exceeds <span class="math notranslate nohighlight">\(c\)</span>.</strong> For any <span class="math notranslate nohighlight">\(u' &lt; c\)</span> and <span class="math notranslate nohighlight">\(v &lt; c\)</span>, one can show <span class="math notranslate nohighlight">\(u &lt; c\)</span>. Velocities “add” in such a way that <span class="math notranslate nohighlight">\(c\)</span> is never exceeded.</p>
+<div class="note admonition">
+<p class="admonition-title">Sign convention</p>
+<p><span class="math notranslate nohighlight">\(v\)</span> is the velocity of <span class="math notranslate nohighlight">\(S'\)</span> relative to <span class="math notranslate nohighlight">\(S\)</span> (positive when <span class="math notranslate nohighlight">\(S'\)</span> moves in <span class="math notranslate nohighlight">\(+x\)</span>). For motion in the negative <span class="math notranslate nohighlight">\(x\)</span> direction, use negative values of <span class="math notranslate nohighlight">\(u'\)</span>, <span class="math notranslate nohighlight">\(u\)</span>, or <span class="math notranslate nohighlight">\(v\)</span> as appropriate.</p>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example: ship and probe</p>
+<p>Ship moves at <span class="math notranslate nohighlight">\(v = 0.9c\)</span> relative to Earth. Probe fired at <span class="math notranslate nohighlight">\(u' = 0.9c\)</span> relative to ship (same direction). Speed relative to Earth: <span class="math notranslate nohighlight">\(u = (0.9c + 0.9c)/(1 + 0.81) = 1.8c/1.81 \approx 0.994c\)</span>. Galilean addition would give <span class="math notranslate nohighlight">\(1.8c\)</span> (impossible); relativity keeps <span class="math notranslate nohighlight">\(u &lt; c\)</span>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Velocity transformation</strong>: <span class="math notranslate nohighlight">\(u = (u' + v)/(1 + u'v/c^2)\)</span>; inverse <span class="math notranslate nohighlight">\(u' = (u - v)/(1 - uv/c^2)\)</span>.</p></li>
+<li><p><strong>Derived</strong> from the Lorentz transformation; valid for motion along the common <span class="math notranslate nohighlight">\(x\)</span>-axis.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(c\)</span> is invariant</strong>: if <span class="math notranslate nohighlight">\(u' = c\)</span> then <span class="math notranslate nohighlight">\(u = c\)</span>. No velocity exceeds <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+<li><p><strong>Galilean limit</strong>: <span class="math notranslate nohighlight">\(u \approx u' + v\)</span> when <span class="math notranslate nohighlight">\(u', v \ll c\)</span>.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +701,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relativistic-velocity-addition">Relativistic velocity addition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-properties">Key properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
