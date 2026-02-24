@@ -21,10 +21,10 @@ Jekyll::Hooks.register :site, :post_write do |site|
     FileUtils.cp_r(src, dest)
   end
 
-  # Rewrite HTML in notes so asset paths use deploy names (static, sources, ...)
+      # Rewrite HTML in notes so asset paths use deploy names (static, sources, ...)
   html_dir = notes_dest
   if File.directory?(html_dir)
-    Dir.glob(File.join(html_dir, "*.html")).each do |path|
+    Dir.glob(File.join(html_dir, "**", "*.html")).each do |path|
       content = File.read(path, :encoding => "utf-8")
       new_content = content
         .gsub(/_static\b/, "static")
