@@ -17,7 +17,7 @@ Welcome to the course notes for Fluids, Waves, Thermodynamics, and Optics.
 | 20 | [Entropy and the Second Law of Thermodynamics](ch20_entropy-second-law/index) |
 | 32 | [Maxwell's Equations; Magnetism of Matter](ch32_maxwells-equations/index) |
 | 33 | [Electromagnetic Waves](ch33_electromagnetic-waves/index) |
-| 34 | [Images](ch34_images/index) |
+| 34 | [Images](ch34_optics/index) |
 | 35 | [Interference](ch35_interference/index) |
 | 36 | [Diffraction](ch36_diffraction/index) |
 | 37 | [Relativity](ch37_relativity/index) |
