@@ -182,14 +182,15 @@ Use Markdown tables for comparisons:
 
 - **Display math**: `$$\Phi_B = \oint_S \vec{B} \cdot d\vec{A} = 0$$`
 - **Display math spacing**: `$$...$$` must have an **empty line before and after**; otherwise it will be interpreted as inline formula.
-- **Labeled equations**: Use `$$ ... $$ (label)` for display math you may want to cite. Cite with `[](#label)`.
+- **Labeled equations**: Use `$$ ... $$ (label)` for display math you may want to cite.
+- **Equation citations**: Always cite equations in the uniform format `Eq. [](#equation_label)` (e.g., `Eq. [](#eq-density)`). Do not use bare `[](#eq-xxx)` or other variants.
 
   ```markdown
   $$
   \rho = \frac{\Delta m}{\Delta V}
   $$ (eq-density)
 
-  We can write [](#eq-density) in simplified form when ...
+  We can write Eq. [](#eq-density) in simplified form when ...
   ```
 
   It is good practice to label every displayed equation (even if it is not referenced), so it can be cited later if needed.

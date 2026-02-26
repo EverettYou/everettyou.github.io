@@ -38,7 +38,7 @@ Sinusoidal Waves
   $$ (eq-16-speed)
 
 Equation of a Traveling Wave
-  Any function of the form $y(x,t) = h(kx \pm \omega t)$ can represent a **traveling wave** with wave speed given by [](#eq-16-speed). The plus sign denotes a wave traveling in the negative direction of the $x$ axis, and the minus sign a wave traveling in the positive direction.
+  Any function of the form $y(x,t) = h(kx \pm \omega t)$ can represent a **traveling wave** with wave speed given by Eq. [](#eq-16-speed). The plus sign denotes a wave traveling in the negative direction of the $x$ axis, and the minus sign a wave traveling in the positive direction.
 
 Wave Speed on Stretched String
   The speed of a wave on a stretched string is set by properties of the string. The speed on a string with tension $\tau$ and linear density $\mu$ (mass per unit length) is
