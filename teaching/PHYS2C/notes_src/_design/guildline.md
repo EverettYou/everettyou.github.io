@@ -161,6 +161,7 @@ When building interactive widgets (e.g., `ipywidgets` sliders) that display or u
 
 - **Labels**: Define with `(my-label)=` before a heading or `:name: my-label` on figures/equations.
 - **References**: Use `` {ref}`my-label` `` to link (e.g., "see `` {ref}`sec-gauss` `` for the definition").
+- **Figure citations**: Use `` {numref}`fig-label` `` (e.g., "see `` {numref}`fig-forced-oscillation` ``"). This produces "Fig. 17" (or the correct number) with a working link. Do **not** use `Fig. [](#fig-label)` with empty link text—Sphinx fills it with the full caption, and any LaTeX in the caption (e.g., `$x_m$`, `$\omega_d/\omega$`) is not rendered inside the link span and appears as raw text.
 - **Footnotes**: Use `[^1]` for inline definitions without interrupting the flow; define the note with `[^1]: Your footnote text.`
 
 ---
