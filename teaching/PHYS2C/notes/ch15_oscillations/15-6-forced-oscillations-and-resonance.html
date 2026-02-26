@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=48212000" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -605,7 +605,7 @@ document.write(`
 <td><p>Oscillates at <span class="math notranslate nohighlight">\(\omega_d\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>Amplitude set by initial conditions</p></td>
-<td><p>Amplitude depends on <span class="math notranslate nohighlight">\(\omega_d\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<td><p>Amplitude depends on <span class="math notranslate nohighlight">\(\omega_d\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -614,22 +614,34 @@ document.write(`
 <hr class="docutils" />
 <section id="forced-oscillations">
 <h3>Forced oscillations<a class="headerlink" href="#forced-oscillations" title="Link to this heading">#</a></h3>
+<p>Recall <span class="math notranslate nohighlight">\(\tau = m/b\)</span> (relaxation time from 15-5).</p>
 <p>A <strong>forced oscillator</strong> (e.g., a swing being pushed, a block–spring with a moving support) is driven by an external periodic force. Its displacement is</p>
 <div class="math notranslate nohighlight" id="equation-eq-forced-x">
-<span class="eqno">(70)<a class="headerlink" href="#equation-eq-forced-x" title="Link to this equation">#</a></span>\[
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-forced-x" title="Link to this equation">#</a></span>\[
 x(t) = x_m \cos(\omega_d t - \phi)
 \]</div>
 <ul class="simple">
 <li><p>The system oscillates at the <strong>driving frequency</strong> <span class="math notranslate nohighlight">\(\omega_d\)</span>, not the natural frequency <span class="math notranslate nohighlight">\(\omega\)</span>.</p></li>
-<li><p>The <strong>amplitude</strong> <span class="math notranslate nohighlight">\(x_m\)</span> depends on <span class="math notranslate nohighlight">\(\omega_d\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, and the damping constant <span class="math notranslate nohighlight">\(b\)</span>—it is a complicated function, but has a clear maximum when <span class="math notranslate nohighlight">\(\omega_d \approx \omega\)</span>.</p></li>
+<li><p><strong>Amplitude squared</strong> (Lorentzian-shaped):</p></li>
 </ul>
+<div class="math notranslate nohighlight" id="equation-eq-forced-amplitude">
+<span class="eqno">(82)<a class="headerlink" href="#equation-eq-forced-amplitude" title="Link to this equation">#</a></span>\[
+x_m^2 \propto \frac{1}{(\omega^2 - \omega_d^2)^2 + (\omega_d/\tau)^2}
+\]</div>
+<figure class="align-default" id="fig-forced-oscillation">
+<a class="reference internal image-reference" href="../images/15-6_forced_oscillation.png"><img alt="../images/15-6_forced_oscillation.png" src="../images/15-6_forced_oscillation.png" style="width: 66%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Amplitude <span class="math notranslate nohighlight">\(x_m\)</span> versus <span class="math notranslate nohighlight">\(\omega_d/\omega\)</span> for different damping levels. The peak is near <span class="math notranslate nohighlight">\(\omega_d \approx \omega\)</span>. Less damping → taller, narrower resonance peak.</span><a class="headerlink" href="#fig-forced-oscillation" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <hr class="docutils" />
 <section id="resonance">
 <h3>Resonance<a class="headerlink" href="#resonance" title="Link to this heading">#</a></h3>
 <p><strong>Resonance</strong> occurs when the driving frequency matches the natural frequency:</p>
 <div class="math notranslate nohighlight" id="equation-eq-resonance">
-<span class="eqno">(71)<a class="headerlink" href="#equation-eq-resonance" title="Link to this equation">#</a></span>\[
+<span class="eqno">(83)<a class="headerlink" href="#equation-eq-resonance" title="Link to this equation">#</a></span>\[
 \omega_d = \omega \quad \text{(resonance)}
 \]</div>
 <ul class="simple">
@@ -645,18 +657,21 @@ x(t) = x_m \cos(\omega_d t - \phi)
 <hr class="docutils" />
 <section id="resonance-curve-and-damping">
 <h3>Resonance curve and damping<a class="headerlink" href="#resonance-curve-and-damping" title="Link to this heading">#</a></h3>
-<p>A plot of amplitude <span class="math notranslate nohighlight">\(x_m\)</span> versus <span class="math notranslate nohighlight">\(\omega_d/\omega\)</span> shows a <strong>resonance peak</strong> near <span class="math notranslate nohighlight">\(\omega_d/\omega = 1\)</span>.</p>
+<p>A plot of amplitude <span class="math notranslate nohighlight">\(x_m\)</span> versus <span class="math notranslate nohighlight">\(\omega_d/\omega\)</span> shows a <strong>resonance peak</strong> near <span class="math notranslate nohighlight">\(\omega_d = \omega\)</span> (Fig. <a class="reference internal" href="#fig-forced-oscillation"><span class="std std-ref">Amplitude x_m versus \omega_d/\omega for different damping levels. The peak is near \omega_d \approx \omega. Less damping → taller, narrower resonance peak.</span></a>).</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Damping</p></th>
+<th class="head"><p>Relaxation time <span class="math notranslate nohighlight">\(\tau = m/b\)</span></p></th>
 <th class="head"><p>Resonance peak</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>Less</strong> <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<tr class="row-even"><td><p>Less <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<td><p>Longer <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
 <td><p>Taller, narrower peak</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>More</strong> <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<tr class="row-odd"><td><p>More <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<td><p>Shorter <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
 <td><p>Shorter, broader peak</p></td>
 </tr>
 </tbody>
@@ -666,23 +681,25 @@ x(t) = x_m \cos(\omega_d t - \phi)
 <li><p><strong>Light damping</strong>: sharp resonance; large amplitude at <span class="math notranslate nohighlight">\(\omega_d = \omega\)</span>, small elsewhere.</p></li>
 <li><p><strong>Heavy damping</strong>: broad peak; amplitude varies less with frequency.</p></li>
 </ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p><strong>Resonance can be dangerous.</strong> If a structure is driven at its natural frequency, oscillations can grow large enough to cause failure. Designers must avoid matching driving frequencies (engines, wind, earthquakes) to natural frequencies.</p>
-</div>
 </section>
 <hr class="docutils" />
 <section id="examples-resonance-in-the-real-world">
 <h3>Examples: resonance in the real world<a class="headerlink" href="#examples-resonance-in-the-real-world" title="Link to this heading">#</a></h3>
-<p><strong>Aircraft</strong>: Wings have natural frequencies. If the engine’s vibration frequency matches a wing mode, the wing can oscillate violently (flutter). Designers ensure these frequencies do not coincide.</p>
-<p><strong>Mexico City, 1985</strong>: An earthquake far from the city sent seismic waves at ~3 rad/s. Mexico City sits on soft lake-bed soil, which amplified the waves. Many intermediate-height buildings had natural frequencies near 3 rad/s and <strong>resonated</strong>—they collapsed. Shorter buildings (higher <span class="math notranslate nohighlight">\(\omega\)</span>) and taller buildings (lower <span class="math notranslate nohighlight">\(\omega\)</span>) did not resonate and survived.</p>
-<p><strong>Freeway collapse, 1989 SF earthquake</strong>: A section built on mudfill had a natural frequency that matched the seismic waves; resonance contributed to the collapse.</p>
+<div class="danger admonition">
+<p class="admonition-title">Resonance can be dangerous</p>
+<p>If a structure is driven at its natural frequency, oscillations can grow large enough to cause failure. Designers must avoid matching driving frequencies (engines, wind, earthquakes) to natural frequencies.</p>
+</div>
+<ul class="simple">
+<li><p><strong>Aircraft</strong>: Wings have natural frequencies. If the engine’s vibration frequency matches a wing mode, the wing can oscillate violently (flutter). Designers ensure these frequencies do not coincide.</p></li>
+<li><p><strong>Mexico City, 1985</strong>: An earthquake far from the city sent seismic waves at ~3 rad/s. Mexico City sits on soft lake-bed soil, which amplified the waves. Many intermediate-height buildings had natural frequencies near 3 rad/s and <strong>resonated</strong>—they collapsed. Shorter buildings (higher <span class="math notranslate nohighlight">\(\omega\)</span>) and taller buildings (lower <span class="math notranslate nohighlight">\(\omega\)</span>) did not resonate and survived.</p></li>
+<li><p><strong>Freeway collapse, 1989 SF earthquake</strong>: A section built on mudfill had a natural frequency that matched the seismic waves; resonance contributed to the collapse.</p></li>
+</ul>
 </section>
 <hr class="docutils" />
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Forced oscillator</strong>: driven at <span class="math notranslate nohighlight">\(\omega_d\)</span>; oscillates at <span class="math notranslate nohighlight">\(\omega_d\)</span>; amplitude <span class="math notranslate nohighlight">\(x_m\)</span> depends on <span class="math notranslate nohighlight">\(\omega_d\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
+<li><p><strong>Forced oscillator</strong>: driven at <span class="math notranslate nohighlight">\(\omega_d\)</span>; oscillates at <span class="math notranslate nohighlight">\(\omega_d\)</span>; amplitude <span class="math notranslate nohighlight">\(x_m\)</span> depends on <span class="math notranslate nohighlight">\(\omega_d\)</span>, <span class="math notranslate nohighlight">\(\omega\)</span>, <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
 <li><p><strong>Resonance</strong>: <span class="math notranslate nohighlight">\(\omega_d = \omega\)</span>; amplitude and velocity amplitude (approximately) maximum.</p></li>
 <li><p><strong>Resonance curve</strong>: peak near <span class="math notranslate nohighlight">\(\omega_d/\omega = 1\)</span>; less damping → taller, narrower peak.</p></li>
 <li><p><strong>Danger</strong>: driving at natural frequency can cause large, destructive oscillations.</p></li>

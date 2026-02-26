@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=48212000" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -555,7 +555,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simple-pendulum">The simple pendulum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-physical-pendulum">The physical pendulum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#center-of-oscillation">Center of oscillation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shm-and-uniform-circular-motion">SHM and uniform circular motion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -594,26 +593,36 @@ document.write(`
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
-<th class="head"><p>Restoring mechanism</p></th>
-<th class="head"><p>Period</p></th>
+<th class="head"><p>Inertia <span class="math notranslate nohighlight">\(\mu\)</span></p></th>
+<th class="head"><p>Stiffness <span class="math notranslate nohighlight">\(\kappa\)</span></p></th>
+<th class="head"><p>Equation of motion</p></th>
+<th class="head"><p>Period <span class="math notranslate nohighlight">\(T\)</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Spring–block</p></td>
-<td><p><span class="math notranslate nohighlight">\(F = -kx\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{m/k}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(m\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(k\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(m\frac{d^2x}{dt^2} = -kx\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi\sqrt{m/k}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Torsion</p></td>
-<td><p><span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(I\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\kappa\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(I\frac{d^2\theta}{dt^2} = -\kappa\theta\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi\sqrt{I/\kappa}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>Simple pendulum</p></td>
-<td><p>Gravity (<span class="math notranslate nohighlight">\(\tau \propto -\theta\)</span>)</p></td>
-<td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{L/g}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(mL^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(mgL\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(mL^2\frac{d^2\theta}{dt^2} = -mgL\theta\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi\sqrt{L/g}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Physical pendulum</p></td>
-<td><p>Gravity (<span class="math notranslate nohighlight">\(\tau \propto -\theta\)</span>)</p></td>
-<td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/(mgh)}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(I\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(mgh\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(I\frac{d^2\theta}{dt^2} = -mgh\theta\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi\sqrt{I/(mgh)}\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -627,14 +636,26 @@ document.write(`
 <li><p><strong>Restoring torque</strong>: The tangential component of gravity, <span class="math notranslate nohighlight">\(mg\sin\theta\)</span>, produces a torque about the pivot. For small <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(\sin\theta \approx \theta\)</span> (in radians):</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-simple-torque">
-<span class="eqno">(60)<a class="headerlink" href="#equation-eq-simple-torque" title="Link to this equation">#</a></span>\[
+<span class="eqno">(68)<a class="headerlink" href="#equation-eq-simple-torque" title="Link to this equation">#</a></span>\[
 \tau = -L(mg\sin\theta) \approx -mgL\theta
 \]</div>
 <ul class="simple">
-<li><p><strong>Angular equation</strong>: <span class="math notranslate nohighlight">\(\tau = I\alpha\)</span> with <span class="math notranslate nohighlight">\(I = mL^2\)</span> gives <span class="math notranslate nohighlight">\(\alpha = -(g/L)\theta\)</span>—the hallmark of SHM.</p></li>
+<li><p><strong>Energy</strong> (for small <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(1-\cos\theta \approx \theta^2/2\)</span>):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-simple-energy">
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq-simple-energy" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+E &amp;= \frac{1}{2}mL^2\left(\frac{d\theta}{dt}\right)^2 + mgL(1-\cos\theta) \\
+&amp;\approx \frac{1}{2}mL^2\left(\frac{d\theta}{dt}\right)^2 + \frac{1}{2}mgL\,\theta^2
+\end{split}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Inertia: <span class="math notranslate nohighlight">\(\mu = mL^2\)</span></p></li>
+<li><p>Stiffness: <span class="math notranslate nohighlight">\(\kappa = mgL\)</span></p></li>
+<li><p>By section 15-2, Eq. <a class="reference internal" href="15-2-energy-in-simple-harmonic-motion.html#equation-eq-omega-t-general">(59)</a>:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-simple-period">
-<span class="eqno">(61)<a class="headerlink" href="#equation-eq-simple-period" title="Link to this equation">#</a></span>\[
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq-simple-period" title="Link to this equation">#</a></span>\[
 \omega = \sqrt{\frac{g}{L}}, \qquad T = 2\pi\sqrt{\frac{L}{g}}
 \]</div>
 <ul class="simple">
@@ -643,6 +664,10 @@ document.write(`
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p><strong>Small-angle only.</strong> The approximation <span class="math notranslate nohighlight">\(\sin\theta \approx \theta\)</span> holds for <span class="math notranslate nohighlight">\(\theta \lesssim 10°\)</span>. For larger amplitudes, the motion is periodic but not sinusoidal; <span class="math notranslate nohighlight">\(T\)</span> increases slightly.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Why <span class="math notranslate nohighlight">\(g \approx \pi^2\)</span> numerically?</p>
+<p>The meter was originally proposed as the length of a <strong>seconds pendulum</strong> (half-period 1 s, so <span class="math notranslate nohighlight">\(T = 2\)</span> s). From <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{L/g}\)</span> with <span class="math notranslate nohighlight">\(L = 1\)</span> m and <span class="math notranslate nohighlight">\(T = 2\)</span> s: <span class="math notranslate nohighlight">\(g = \pi^2\,\text{m/s}^2\)</span>. That definition was later abandoned (gravity varies with location; the meter was instead based on Earth’s geometry), but the meter was sized similarly, so <span class="math notranslate nohighlight">\(g \approx 9.8\,\text{m/s}^2\)</span> and <span class="math notranslate nohighlight">\(\pi^2 \approx 9.87\)</span> remain close.</p>
 </div>
 </section>
 <hr class="docutils" />
@@ -653,23 +678,34 @@ document.write(`
 <li><p><strong>Restoring torque</strong>: Gravity acts at the center of mass, distance <span class="math notranslate nohighlight">\(h\)</span> from the pivot. The moment arm of <span class="math notranslate nohighlight">\(mg\sin\theta\)</span> is <span class="math notranslate nohighlight">\(h\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-physical-torque">
-<span class="eqno">(62)<a class="headerlink" href="#equation-eq-physical-torque" title="Link to this equation">#</a></span>\[
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq-physical-torque" title="Link to this equation">#</a></span>\[
 \tau = -h(mg\sin\theta) \approx -mgh\theta
 \]</div>
 <ul class="simple">
-<li><p><strong>Period</strong> (small angles):</p></li>
+<li><p><strong>Energy</strong> (for small <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(1-\cos\theta \approx \theta^2/2\)</span>):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-physical-energy">
+<span class="eqno">(72)<a class="headerlink" href="#equation-eq-physical-energy" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+E &amp;= \frac{1}{2}I\left(\frac{d\theta}{dt}\right)^2 + mgh(1-\cos\theta) \\
+&amp;\approx \frac{1}{2}I\left(\frac{d\theta}{dt}\right)^2 + \frac{1}{2}mgh\,\theta^2
+\end{split}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Inertia: <span class="math notranslate nohighlight">\(\mu = I\)</span> rotational inertia about the pivot</p></li>
+<li><p>Stiffness: <span class="math notranslate nohighlight">\(\kappa = mgh\)</span> (<span class="math notranslate nohighlight">\(h\)</span> = distance from pivot to center of mass)</p></li>
+<li><p>By section 15-2, Eq. <a class="reference internal" href="15-2-energy-in-simple-harmonic-motion.html#equation-eq-omega-t-general">(59)</a>:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-physical-period">
-<span class="eqno">(63)<a class="headerlink" href="#equation-eq-physical-period" title="Link to this equation">#</a></span>\[
-T = 2\pi\sqrt{\frac{I}{mgh}}
+<span class="eqno">(73)<a class="headerlink" href="#equation-eq-physical-period" title="Link to this equation">#</a></span>\[
+\omega = \sqrt{\frac{mgh}{I}}, \qquad T = 2\pi\sqrt{\frac{I}{mgh}}
 \]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(I\)</span> = rotational inertia about the pivot; <span class="math notranslate nohighlight">\(h\)</span> = distance from pivot to center of mass.</p></li>
 <li><p>If the pivot is at the center of mass, <span class="math notranslate nohighlight">\(h = 0\)</span> and <span class="math notranslate nohighlight">\(T \to \infty\)</span>—no oscillation.</p></li>
 </ul>
 <div class="note admonition">
 <p class="admonition-title">Simple vs physical</p>
-<p>A <strong>simple pendulum</strong> is a special case: all mass at distance <span class="math notranslate nohighlight">\(L\)</span>, so <span class="math notranslate nohighlight">\(I = mL^2\)</span> and <span class="math notranslate nohighlight">\(h = L\)</span>. Then <a class="reference internal" href="#equation-eq-physical-period">(63)</a> reduces to <a class="reference internal" href="#equation-eq-simple-period">(61)</a>.</p>
+<p>A <strong>simple pendulum</strong> is a special case: all mass at distance <span class="math notranslate nohighlight">\(L\)</span>, so <span class="math notranslate nohighlight">\(I = mL^2\)</span> and <span class="math notranslate nohighlight">\(h = L\)</span>. Then Eq. <a class="reference internal" href="#equation-eq-physical-period">(73)</a> reduces to Eq. <a class="reference internal" href="#equation-eq-simple-period">(70)</a>.</p>
 </div>
 </section>
 <hr class="docutils" />
@@ -677,25 +713,10 @@ T = 2\pi\sqrt{\frac{I}{mgh}}
 <h3>Center of oscillation<a class="headerlink" href="#center-of-oscillation" title="Link to this heading">#</a></h3>
 <p>For any physical pendulum with period <span class="math notranslate nohighlight">\(T\)</span>, there is an <strong>equivalent simple pendulum</strong> of length <span class="math notranslate nohighlight">\(L_0\)</span> with the same period:</p>
 <div class="math notranslate nohighlight" id="equation-eq-l0">
-<span class="eqno">(64)<a class="headerlink" href="#equation-eq-l0" title="Link to this equation">#</a></span>\[
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-l0" title="Link to this equation">#</a></span>\[
 T = 2\pi\sqrt{\frac{L_0}{g}} = 2\pi\sqrt{\frac{I}{mgh}} \quad \Rightarrow \quad L_0 = \frac{I}{mh}
 \]</div>
 <p>The point at distance <span class="math notranslate nohighlight">\(L_0\)</span> from the pivot is the <strong>center of oscillation</strong>. For a uniform rod pivoted at one end: <span class="math notranslate nohighlight">\(I = \frac{1}{3}mL^2\)</span>, <span class="math notranslate nohighlight">\(h = L/2\)</span>, so <span class="math notranslate nohighlight">\(L_0 = \frac{2}{3}L\)</span>.</p>
-</section>
-<hr class="docutils" />
-<section id="shm-and-uniform-circular-motion">
-<h3>SHM and uniform circular motion<a class="headerlink" href="#shm-and-uniform-circular-motion" title="Link to this heading">#</a></h3>
-<p><strong>Simple harmonic motion is the projection of uniform circular motion onto a diameter.</strong></p>
-<ul class="simple">
-<li><p>Imagine a particle <span class="math notranslate nohighlight">\(P'\)</span> moving in a circle of radius <span class="math notranslate nohighlight">\(x_m\)</span> at constant angular speed <span class="math notranslate nohighlight">\(\omega\)</span>.</p></li>
-<li><p>Its <strong>projection</strong> <span class="math notranslate nohighlight">\(P\)</span> onto the <span class="math notranslate nohighlight">\(x\)</span>-axis executes SHM.</p></li>
-<li><p>At time <span class="math notranslate nohighlight">\(t\)</span>, the angle is <span class="math notranslate nohighlight">\(\omega t + \phi\)</span>; the <span class="math notranslate nohighlight">\(x\)</span>-component of the position vector is <span class="math notranslate nohighlight">\(x_m\cos(\omega t + \phi)\)</span>—exactly <a class="reference internal" href="15-1-simple-harmonic-motion.html#equation-eq-shm-displacement">(43)</a> from section 15-1.</p></li>
-<li><p>Similarly, the projections of the velocity and (radial) acceleration vectors give <span class="math notranslate nohighlight">\(v(t)\)</span> and <span class="math notranslate nohighlight">\(a(t)\)</span> for SHM.</p></li>
-</ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>This explains why SHM is sinusoidal: it is “circular motion viewed edge-on.” The phase <span class="math notranslate nohighlight">\(\omega t + \phi\)</span> is the actual angle of the reference particle on the circle.</p>
-</div>
 </section>
 <hr class="docutils" />
 <section id="summary">
@@ -704,7 +725,6 @@ T = 2\pi\sqrt{\frac{L_0}{g}} = 2\pi\sqrt{\frac{I}{mgh}} \quad \Rightarrow \quad 
 <li><p><strong>Simple pendulum</strong>: <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{L/g}\)</span>; independent of mass; valid for small angles.</p></li>
 <li><p><strong>Physical pendulum</strong>: <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/(mgh)}\)</span>; <span class="math notranslate nohighlight">\(h\)</span> = pivot-to-CM distance.</p></li>
 <li><p><strong>Center of oscillation</strong>: <span class="math notranslate nohighlight">\(L_0 = I/(mh)\)</span>—equivalent simple-pendulum length.</p></li>
-<li><p><strong>SHM = projection of uniform circular motion</strong> onto a diameter; the phase is the angle on the reference circle.</p></li>
 </ul>
 </section>
 </section>
@@ -779,7 +799,6 @@ T = 2\pi\sqrt{\frac{L_0}{g}} = 2\pi\sqrt{\frac{I}{mgh}} \quad \Rightarrow \quad 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simple-pendulum">The simple pendulum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-physical-pendulum">The physical pendulum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#center-of-oscillation">Center of oscillation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shm-and-uniform-circular-motion">SHM and uniform circular motion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

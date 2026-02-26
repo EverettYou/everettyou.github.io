@@ -41,7 +41,7 @@ Simple Harmonic Motion
   \omega = \frac{2\pi}{T} = 2\pi f
   $$ (eq-15-omega)
 
-  Differentiating [](#eq-15-shm) with respect to time gives the velocity and acceleration:
+  Differentiating Eq. [](#eq-15-shm) with respect to time gives the velocity and acceleration:
 
   $$
   v(t) = -\omega x_m \sin(\omega t + \phi), \quad a(t) = -\omega^2 x_m \cos(\omega t + \phi)

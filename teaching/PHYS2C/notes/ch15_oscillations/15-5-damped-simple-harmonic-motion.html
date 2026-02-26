@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=48212000" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -577,8 +577,8 @@ document.write(`
 <li><p>Why does a real oscillator (e.g., pendulum in air) eventually stop? Where does the energy go?</p></li>
 <li><p>What is the damping force <span class="math notranslate nohighlight">\(F_d = -bv\)</span>? Why does it oppose the velocity? What are typical units of <span class="math notranslate nohighlight">\(b\)</span>?</p></li>
 <li><p>For damped SHM, how does the amplitude change with time? Write <span class="math notranslate nohighlight">\(x(t)\)</span> and identify the decaying envelope.</p></li>
-<li><p>How does the damped angular frequency <span class="math notranslate nohighlight">\(\omega'\)</span> differ from the undamped <span class="math notranslate nohighlight">\(\omega\)</span>? When is <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>?</p></li>
-<li><p>The mechanical energy <span class="math notranslate nohighlight">\(E(t)\)</span> decays exponentially. If <span class="math notranslate nohighlight">\(E\)</span> drops to one-fourth of its initial value in time <span class="math notranslate nohighlight">\(t\)</span>, how is <span class="math notranslate nohighlight">\(t\)</span> related to <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span>?</p></li>
+<li><p>Why does damping change the angular frequency? What is the physical intuition? How does the frequency evolve from undamped → underdamped → critical damping → overdamped?</p></li>
+<li><p>Why is energy damping twice as fast as amplitude damping? (Equivalently: why is the energy relaxation time half of the amplitude relaxation time?)</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -588,7 +588,8 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Real oscillators</strong> lose energy to friction, air resistance, or other dissipative forces. The motion is <strong>damped</strong>—amplitude and energy decrease over time.</p></li>
 <li><p><strong>Damping force</strong> <span class="math notranslate nohighlight">\(F_d = -bv\)</span>: proportional to velocity, opposes motion. Energy is transferred to thermal energy.</p></li>
-<li><p><strong>Displacement</strong>: <span class="math notranslate nohighlight">\(x(t) = x_m e^{-bt/2m}\cos(\omega' t + \phi)\)</span>—a cosine with an <strong>exponentially decaying amplitude</strong>.</p></li>
+<li><p><strong>Relaxation time</strong> <span class="math notranslate nohighlight">\(\tau = m/b\)</span>: time scale for energy decay; <span class="math notranslate nohighlight">\(1/\tau\)</span> sets the decay rate.</p></li>
+<li><p><strong>Displacement</strong>: <span class="math notranslate nohighlight">\(x(t) = x_m e^{-t/(2\tau)}\cos(\omega' t + \phi)\)</span>—a cosine with an <strong>exponentially decaying amplitude</strong>.</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -598,13 +599,13 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Amplitude constant</p></td>
-<td><p>Amplitude <span class="math notranslate nohighlight">\(\propto e^{-bt/2m}\)</span></p></td>
+<td><p>Amplitude <span class="math notranslate nohighlight">\(\propto e^{-t/(2\tau)}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(E\)</span> constant</p></td>
-<td><p><span class="math notranslate nohighlight">\(E \propto e^{-bt/m}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(E \propto e^{-t/\tau}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\omega = \sqrt{k/m}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\omega' = \sqrt{k/m - b^2/(4m^2)}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\omega' = \sqrt{\omega^2 - 1/(4\tau^2)}\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -615,64 +616,86 @@ document.write(`
 <h3>The damping force<a class="headerlink" href="#the-damping-force" title="Link to this heading">#</a></h3>
 <p>A common model: the damping force is proportional to velocity and opposes it:</p>
 <div class="math notranslate nohighlight" id="equation-eq-damping-force">
-<span class="eqno">(65)<a class="headerlink" href="#equation-eq-damping-force" title="Link to this equation">#</a></span>\[
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-damping-force" title="Link to this equation">#</a></span>\[
 F_d = -bv
 \]</div>
-<ul class="simple">
-<li><p><strong><span class="math notranslate nohighlight">\(b\)</span></strong> = damping constant (SI: kg/s). Depends on the vane, fluid, or friction mechanism.</p></li>
+<ul>
+<li><p><strong><span class="math notranslate nohighlight">\(b\)</span></strong> = damping constant (SI: kg/s). Depends on the vane, fluid, or friction mechanism.</p>
+<ul>
+<li><p><strong>Dimensional analysis</strong>: <span class="math notranslate nohighlight">\([b/m] = \text{(kg/s)}/\text{kg} = 1/\text{s}\)</span>—a time scale.</p></li>
+<li><p>Define the <strong>relaxation time</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-relaxation-time">
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-relaxation-time" title="Link to this equation">#</a></span>\[
+        \tau = \frac{m}{b}
+        \]</div>
+</li>
+</ul>
+</li>
 <li><p>The minus sign ensures <span class="math notranslate nohighlight">\(F_d\)</span> opposes the direction of motion.</p></li>
 </ul>
 <p>Newton’s second law: <span class="math notranslate nohighlight">\(-bv - kx = ma\)</span>, giving</p>
 <div class="math notranslate nohighlight" id="equation-eq-damped-de">
-<span class="eqno">(66)<a class="headerlink" href="#equation-eq-damped-de" title="Link to this equation">#</a></span>\[
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-damped-de" title="Link to this equation">#</a></span>\[
 m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0
 \]</div>
 </section>
 <hr class="docutils" />
 <section id="displacement-and-damped-frequency">
 <h3>Displacement and damped frequency<a class="headerlink" href="#displacement-and-damped-frequency" title="Link to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<figure class="align-default" id="fig-damping-regimes">
+<a class="reference internal image-reference" href="../images/15-5_damping.png"><img alt="../images/15-5_damping.png" src="../images/15-5_damping.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Displacement <span class="math notranslate nohighlight">\(x\)</span> versus time <span class="math notranslate nohighlight">\(t\)</span> for undamped, underdamped, critically damped, and overdamped oscillators.</span><a class="headerlink" href="#fig-damping-regimes" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</aside>
 <p>The solution (for <span class="math notranslate nohighlight">\(b &lt; 2\sqrt{km}\)</span>, underdamped case) is</p>
 <div class="math notranslate nohighlight" id="equation-eq-damped-x">
-<span class="eqno">(67)<a class="headerlink" href="#equation-eq-damped-x" title="Link to this equation">#</a></span>\[
-x(t) = x_m e^{-bt/2m} \cos(\omega' t + \phi)
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-damped-x" title="Link to this equation">#</a></span>\[
+x(t) = x_m e^{-t/(2\tau)} \cos(\omega' t + \phi)
 \]</div>
-<ul class="simple">
-<li><p><strong>Amplitude envelope</strong>: <span class="math notranslate nohighlight">\(x_m e^{-bt/2m}\)</span>—decays exponentially.</p></li>
-<li><p><strong>Damped angular frequency</strong>:</p></li>
-</ul>
+<ul>
+<li><p><strong>Amplitude envelope</strong>: <span class="math notranslate nohighlight">\(x_m e^{-t/(2\tau)}\)</span>—decays exponentially; <span class="math notranslate nohighlight">\(t/(2\tau)\)</span> is dimensionless.</p></li>
+<li><p><strong>Damped angular frequency</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-omega-prime">
-<span class="eqno">(68)<a class="headerlink" href="#equation-eq-omega-prime" title="Link to this equation">#</a></span>\[
-\omega' = \sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}
-\]</div>
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-omega-prime" title="Link to this equation">#</a></span>\[
+    \omega' = \sqrt{\omega^2 - \frac{1}{4\tau^2}}
+    \]</div>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(b = 0\)</span>: <span class="math notranslate nohighlight">\(\omega' = \omega = \sqrt{k/m}\)</span> (undamped).</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(b \ll \sqrt{km}\)</span> (light damping): <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>—period nearly unchanged; only amplitude decays.</p></li>
+<li><p><strong>Undamped</strong>: If <span class="math notranslate nohighlight">\(b = 0\)</span>: <span class="math notranslate nohighlight">\(\tau \to \infty\)</span>, <span class="math notranslate nohighlight">\(\omega' = \omega = \sqrt{k/m}\)</span>.</p></li>
+<li><p><strong>Lightly damped</strong>: <span class="math notranslate nohighlight">\(\tau\)</span> large <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(1/\tau \ll \omega\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>—period nearly unchanged; only amplitude decays.</p></li>
+</ul>
+</li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">Overdamping and critical damping</p>
-<p>If <span class="math notranslate nohighlight">\(b \geq 2\sqrt{km}\)</span>, the motion is <strong>overdamped</strong> (no oscillation) or <strong>critically damped</strong> (fastest return to equilibrium without overshoot). The cosine form <a class="reference internal" href="#equation-eq-damped-x">(67)</a> applies only when <span class="math notranslate nohighlight">\(b &lt; 2\sqrt{km}\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(b \geq 2\sqrt{km}\)</span> (equivalently <span class="math notranslate nohighlight">\(1/\tau \geq 2\omega\)</span>), the motion is <strong>overdamped</strong> (no oscillation) or <strong>critically damped</strong> (fastest return to equilibrium without overshoot). The cosine form Eq. <a class="reference internal" href="#equation-eq-damped-x">(78)</a> applies only when <span class="math notranslate nohighlight">\(b &lt; 2\sqrt{km}\)</span>.</p>
 </div>
 </section>
 <hr class="docutils" />
 <section id="energy-decay">
 <h3>Energy decay<a class="headerlink" href="#energy-decay" title="Link to this heading">#</a></h3>
 <p>Mechanical energy <span class="math notranslate nohighlight">\(E = K + U\)</span> is <strong>not</strong> conserved—it decreases as work is done against the damping force.</p>
-<p>For <strong>small damping</strong>, the amplitude is <span class="math notranslate nohighlight">\(x_m e^{-bt/2m}\)</span>, so (replacing the constant amplitude in <span class="math notranslate nohighlight">\(E = \frac{1}{2}kx_m^2\)</span>):</p>
+<p>For <strong>small damping</strong>, the amplitude is <span class="math notranslate nohighlight">\(x_m e^{-t/(2\tau)}\)</span>, so (replacing the constant amplitude in <span class="math notranslate nohighlight">\(E = \frac{1}{2}kx_m^2\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-damped-energy">
-<span class="eqno">(69)<a class="headerlink" href="#equation-eq-damped-energy" title="Link to this equation">#</a></span>\[
-E(t) \approx \frac{1}{2}kx_m^2\, e^{-bt/m}
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-damped-energy" title="Link to this equation">#</a></span>\[
+E(t) \approx \frac{1}{2}kx_m^2\, e^{-t/\tau}
 \]</div>
 <ul class="simple">
-<li><p><strong>Time constant</strong> for energy decay: <span class="math notranslate nohighlight">\(\tau = m/b\)</span>. After time <span class="math notranslate nohighlight">\(\tau\)</span>, <span class="math notranslate nohighlight">\(E\)</span> drops by factor <span class="math notranslate nohighlight">\(e^{-1} \approx 0.37\)</span>.</p></li>
-<li><p><strong>Time for <span class="math notranslate nohighlight">\(E\)</span> to drop to fraction <span class="math notranslate nohighlight">\(f\)</span></strong> of initial: <span class="math notranslate nohighlight">\(e^{-bt/m} = f\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(t = \frac{m}{b}\ln(1/f)\)</span>.</p></li>
+<li><p><strong>Time constant</strong> for energy decay: <span class="math notranslate nohighlight">\(\tau\)</span> (Eq. <a class="reference internal" href="#equation-eq-relaxation-time">(76)</a>). After time <span class="math notranslate nohighlight">\(\tau\)</span>, <span class="math notranslate nohighlight">\(E\)</span> drops by factor <span class="math notranslate nohighlight">\(e^{-1} \approx 0.37\)</span>.</p></li>
+<li><p><strong>Time for <span class="math notranslate nohighlight">\(E\)</span> to drop to fraction <span class="math notranslate nohighlight">\(f\)</span></strong> of initial: <span class="math notranslate nohighlight">\(e^{-t/\tau} = f\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(t = \tau\ln(1/f)\)</span>.</p></li>
 </ul>
 <div class="poll dropdown admonition">
-<p class="admonition-title">Poll: Energy decay time</p>
-<p>Three damped oscillators differ in <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(m\)</span>. Which takes the <strong>longest</strong> time for mechanical energy to drop to one-fourth of its initial value?</p>
+<p class="admonition-title">Poll: Amplitude vs energy decay</p>
+<p>A lightly damped oscillator’s amplitude decreases by 2% during each cycle. Approximately what fraction of its mechanical energy is lost per cycle?</p>
 <ul class="simple">
-<li><p>(A) <span class="math notranslate nohighlight">\(2k\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(m\)</span></p></li>
-<li><p>(B) <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(6b\)</span>, <span class="math notranslate nohighlight">\(4m\)</span></p></li>
-<li><p>(C) <span class="math notranslate nohighlight">\(3k\)</span>, <span class="math notranslate nohighlight">\(3b\)</span>, <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p>(A) 2%</p></li>
+<li><p>(B) 4%</p></li>
+<li><p>(C) 1%</p></li>
+<li><p>(D) Undetermined</p></li>
 </ul>
 </div>
 </section>
@@ -681,9 +704,10 @@ E(t) \approx \frac{1}{2}kx_m^2\, e^{-bt/m}
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Damping</strong>: <span class="math notranslate nohighlight">\(F_d = -bv\)</span>; energy lost to thermal.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(x(t) = x_m e^{-bt/2m}\cos(\omega' t + \phi)\)</span></strong>; amplitude decays exponentially.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(\omega' = \sqrt{k/m - b^2/(4m^2)}\)</span></strong>; for small <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(E(t) \approx \frac{1}{2}kx_m^2\, e^{-bt/m}\)</span></strong>; time constant <span class="math notranslate nohighlight">\(\tau = m/b\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\tau = m/b\)</span></strong> (relaxation time); <span class="math notranslate nohighlight">\(1/\tau\)</span> is the energy-decay rate.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(x(t) = x_m e^{-t/(2\tau)}\cos(\omega' t + \phi)\)</span></strong>; amplitude decays exponentially.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\omega' = \sqrt{\omega^2 - 1/(4\tau^2)}\)</span></strong>; for light damping (<span class="math notranslate nohighlight">\(1/\tau \ll \omega\)</span>), <span class="math notranslate nohighlight">\(\omega' \approx \omega\)</span>.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(E(t) \approx \frac{1}{2}kx_m^2\, e^{-t/\tau}\)</span></strong>; after time <span class="math notranslate nohighlight">\(\tau\)</span>, <span class="math notranslate nohighlight">\(E\)</span> drops by factor <span class="math notranslate nohighlight">\(e^{-1}\)</span>.</p></li>
 </ul>
 </section>
 </section>

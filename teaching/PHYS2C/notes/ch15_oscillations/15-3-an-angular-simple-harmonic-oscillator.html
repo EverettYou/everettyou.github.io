@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b4de26a8" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=48212000" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -553,9 +553,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-torsion-pendulum">The torsion pendulum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#period-and-angular-frequency">Period and angular frequency</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-torsion-pendulums">Comparing two torsion pendulums</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussions">Discussions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moment-of-inertia-definition-and-computation">Moment of inertia: definition and computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-table">Examples table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-examples">Worked examples</a></li>
 </ul>
 </li>
 </ul>
@@ -574,10 +579,10 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is a torsion pendulum? Where does the “springiness” come from, and what provides the inertia?</p></li>
+<li><p>What is a torsion pendulum? Where does the stiffness come from, and what provides the inertia?</p></li>
 <li><p>Write the angular analog of Hooke’s law. How does the restoring torque <span class="math notranslate nohighlight">\(\tau\)</span> depend on angular displacement <span class="math notranslate nohighlight">\(\theta\)</span>?</p></li>
 <li><p>For an angular SHM oscillator, how does the period <span class="math notranslate nohighlight">\(T\)</span> depend on rotational inertia <span class="math notranslate nohighlight">\(I\)</span> and torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span>? Compare with the linear spring–block case.</p></li>
-<li><p>Two objects hang from the same torsion wire. Object A has period 2.5 s; object B has period 4.8 s. Which has the larger rotational inertia? By what factor?</p></li>
+<li><p>A rod, a disk, and a ball (same mass, same size) are each hung from the same torsion wire, one at a time. Which has the longest period? Why?</p></li>
 <li><p>The angular acceleration <span class="math notranslate nohighlight">\(\alpha\)</span> in angular SHM satisfies <span class="math notranslate nohighlight">\(\alpha = -\omega^2 \theta\)</span>. How do you derive this from <span class="math notranslate nohighlight">\(\tau = I\alpha\)</span> and the restoring torque?</p></li>
 </ul>
 </div>
@@ -587,29 +592,47 @@ document.write(`
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A <strong>torsion pendulum</strong> is the angular analog of a spring–block oscillator: a disk or object suspended by a wire that twists.</p></li>
-<li><p><strong>Springiness</strong> comes from the wire’s resistance to twisting; <strong>inertia</strong> comes from the object’s rotational inertia <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+<li><p><strong>Stiffness</strong> comes from the wire’s resistance to twisting; <strong>inertia</strong> comes from the object’s rotational inertia <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
 <li><p>The same SHM structure applies: restoring torque <span class="math notranslate nohighlight">\(\tau \propto -\theta\)</span>, with period <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span>.</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Linear</p></th>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Linear</p></th>
 <th class="head"><p>Angular</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Displacement <span class="math notranslate nohighlight">\(x\)</span></p></td>
-<td><p>Angular displacement <span class="math notranslate nohighlight">\(\theta\)</span></p></td>
+<tr class="row-even"><td><p>Coordinate</p></td>
+<td><p><span class="math notranslate nohighlight">\(x\)</span> (position)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta\)</span> (angular displacement)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Force <span class="math notranslate nohighlight">\(F = -kx\)</span></p></td>
-<td><p>Torque <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span></p></td>
+<tr class="row-odd"><td><p>Acceleration</p></td>
+<td><p><span class="math notranslate nohighlight">\(a=d^2x/dt^2\)</span> (acceleration)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha = d^2\theta/dt^2\)</span> (angular acceleration)</p></td>
 </tr>
-<tr class="row-even"><td><p>Mass <span class="math notranslate nohighlight">\(m\)</span></p></td>
-<td><p>Rotational inertia <span class="math notranslate nohighlight">\(I\)</span></p></td>
+<tr class="row-even"><td><p>Inertia</p></td>
+<td><p><span class="math notranslate nohighlight">\(m\)</span> (mass)</p></td>
+<td><p><span class="math notranslate nohighlight">\(I\)</span> (moment of inertia)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Spring constant <span class="math notranslate nohighlight">\(k\)</span></p></td>
-<td><p>Torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span></p></td>
+<tr class="row-odd"><td><p>Stiffness</p></td>
+<td><p><span class="math notranslate nohighlight">\(k\)</span> (spring constant)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\kappa\)</span> (torsion constant)</p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{m/k}\)</span></p></td>
+<tr class="row-even"><td><p>KE</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}m(dx/dt)^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}I(d\theta/dt)^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>PE</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}kx^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}\kappa\theta^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Force / Torque</p></td>
+<td><p><span class="math notranslate nohighlight">\(F = m a = -kx\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau = I\alpha = -\kappa\theta\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Period</p></td>
+<td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{m/k}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span></p></td>
 </tr>
 </tbody>
@@ -619,77 +642,182 @@ document.write(`
 <hr class="docutils" />
 <section id="the-torsion-pendulum">
 <h3>The torsion pendulum<a class="headerlink" href="#the-torsion-pendulum" title="Link to this heading">#</a></h3>
-<p>A <strong>torsion pendulum</strong> consists of an object (e.g., a disk) suspended from a wire. When the wire is twisted and released, the object oscillates in angular simple harmonic motion.</p>
-<ul class="simple">
-<li><p><strong>Restoring torque</strong>: twisting the wire produces a torque that opposes the displacement:</p></li>
-</ul>
+<p>A <strong>torsion pendulum</strong> is an object (e.g., a disk) suspended from a wire. When the wire is twisted and released, the object oscillates in angular simple harmonic motion.</p>
+<p><strong>Restoring torque.</strong> Twisting the wire produces a torque that opposes displacement:</p>
 <div class="math notranslate nohighlight" id="equation-eq-torsion-torque">
-<span class="eqno">(55)<a class="headerlink" href="#equation-eq-torsion-torque" title="Link to this equation">#</a></span>\[
+<span class="eqno">(64)<a class="headerlink" href="#equation-eq-torsion-torque" title="Link to this equation">#</a></span>\[
 \tau = -\kappa\theta
 \]</div>
+<p><span class="math notranslate nohighlight">\(\kappa\)</span> (kappa) is the <strong>torsion constant</strong>—a property of the wire (length, diameter, material). It plays the role of spring constant <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p><strong>Energy</strong> (primary derivation):</p>
 <ul class="simple">
-<li><p><strong>κ (kappa)</strong> is the <strong>torsion constant</strong>—a property of the wire (length, diameter, material). It plays the analog of the spring constant <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Rotational kinetic energy: <span class="math notranslate nohighlight">\(K = \frac{1}{2}I(d\theta/dt)^2\)</span></p></li>
+<li><p>Potential energy in the twisted wire: <span class="math notranslate nohighlight">\(U = \frac{1}{2}\kappa\theta^2\)</span></p></li>
+<li><p>Total energy: <span class="math notranslate nohighlight">\(E = K + U\)</span> → inertia = <span class="math notranslate nohighlight">\(I\)</span>, stiffness = <span class="math notranslate nohighlight">\(\kappa\)</span></p></li>
 </ul>
-<div class="note admonition">
-<p class="admonition-title">Angular form of Hooke’s law</p>
-<p>Just as <span class="math notranslate nohighlight">\(F = -kx\)</span> gives restoring force proportional to displacement, <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span> gives restoring torque proportional to angular displacement. Both are linear (first power) restoring laws.</p>
-</div>
-</section>
-<hr class="docutils" />
-<section id="period-and-angular-frequency">
-<h3>Period and angular frequency<a class="headerlink" href="#period-and-angular-frequency" title="Link to this heading">#</a></h3>
-<p>From <span class="math notranslate nohighlight">\(\tau = I\alpha\)</span> (Newton’s second law for rotation) and <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-alpha-theta">
-<span class="eqno">(56)<a class="headerlink" href="#equation-eq-alpha-theta" title="Link to this equation">#</a></span>\[
-I\alpha = -\kappa\theta \quad \Rightarrow \quad \alpha = -\frac{\kappa}{I} \theta
-\]</div>
-<p>Comparing with the hallmark of SHM, <span class="math notranslate nohighlight">\(\alpha = -\omega^2\theta\)</span>, we identify:</p>
+<p>By section 15-2, Eq. <a class="reference internal" href="15-2-energy-in-simple-harmonic-motion.html#equation-eq-omega-t-general">(59)</a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-omega-torsion">
-<span class="eqno">(57)<a class="headerlink" href="#equation-eq-omega-torsion" title="Link to this equation">#</a></span>\[
-\omega = \sqrt{\frac{\kappa}{I}}
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-omega-torsion" title="Link to this equation">#</a></span>\[
+\omega = \sqrt{\frac{\kappa}{I}}, \qquad T = 2\pi\sqrt{\frac{I}{\kappa}}
 \]</div>
-<div class="math notranslate nohighlight" id="equation-eq-period-torsion">
-<span class="eqno">(58)<a class="headerlink" href="#equation-eq-period-torsion" title="Link to this equation">#</a></span>\[
-T = 2\pi\sqrt{\frac{I}{\kappa}}
+<div class="note admonition">
+<p class="admonition-title">Moment of inertia</p>
+<p>The <strong>moment of inertia</strong> <span class="math notranslate nohighlight">\(I\)</span> is <em>defined</em> as the coefficient of the <strong>rotational kinetic energy</strong>  <span class="math notranslate nohighlight">\(K = \frac{1}{2}I(d\theta/dt)^2\)</span> that makes it quadratic in <span class="math notranslate nohighlight">\(d\theta/dt\)</span>.</p>
+<ul class="simple">
+<li><p>For a rigid body, <span class="math notranslate nohighlight">\(I = \int\rho\,r^2\,dV\)</span> (or <span class="math notranslate nohighlight">\(\sum m_i r_i^2\)</span> for discrete masses)—each mass element contributes <span class="math notranslate nohighlight">\(m_i r_i^2\)</span> to the total.</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span> depends on how mass is distributed around the rotation axis: mass farther from the axis contributes more to <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+</ul>
+</div>
+<p><strong>Torque method</strong> (alternative):</p>
+<ul class="simple">
+<li><p>Newton’s second law for rotation: <span class="math notranslate nohighlight">\(\tau = I\alpha\)</span>, with <span class="math notranslate nohighlight">\(\alpha = d^2\theta/dt^2\)</span></p></li>
+<li><p>Restoring torque: <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span></p></li>
+<li><p>So <span class="math notranslate nohighlight">\(I\alpha = -\kappa\theta\)</span>, giving</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-alpha-torsion">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-alpha-torsion" title="Link to this equation">#</a></span>\[
+\alpha = -\frac{\kappa}{I}\,\theta
 \]</div>
 <ul class="simple">
-<li><p><strong>Larger inertia</strong> <span class="math notranslate nohighlight">\(I\)</span> → longer period (slower oscillations).</p></li>
-<li><p><strong>Stiffer wire</strong> (larger <span class="math notranslate nohighlight">\(\kappa\)</span>) → shorter period (faster oscillations).</p></li>
+<li><p>Comparing with the SHM hallmark <span class="math notranslate nohighlight">\(\alpha = -\omega^2\theta\)</span> yields the same <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
 </ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span> depends only on the wire. If two different objects hang from the <strong>same wire</strong>, <span class="math notranslate nohighlight">\(\kappa\)</span> is the same; only <span class="math notranslate nohighlight">\(I\)</span> differs. So <span class="math notranslate nohighlight">\(T \propto \sqrt{I}\)</span>—measuring periods lets you compare rotational inertias.</p>
-</div>
+<p><strong>Physical interpretation:</strong></p>
+<ul class="simple">
+<li><p>Larger <span class="math notranslate nohighlight">\(I\)</span> → longer period (slower oscillations)</p></li>
+<li><p>Stiffer wire (larger <span class="math notranslate nohighlight">\(\kappa\)</span>) → shorter period (faster oscillations)</p></li>
+</ul>
 </section>
 <hr class="docutils" />
 <section id="comparing-two-torsion-pendulums">
 <h3>Comparing two torsion pendulums<a class="headerlink" href="#comparing-two-torsion-pendulums" title="Link to this heading">#</a></h3>
+<p>The torsion constant <span class="math notranslate nohighlight">\(\kappa\)</span> depends only on the wire. If you <strong>hang different objects from the same wire, one at a time</strong>, <span class="math notranslate nohighlight">\(\kappa\)</span> stays the same; only <span class="math notranslate nohighlight">\(I\)</span> changes. So <span class="math notranslate nohighlight">\(T \propto \sqrt{I}\)</span>—measuring periods lets you compare rotational inertias.</p>
 <p>Same wire (same <span class="math notranslate nohighlight">\(\kappa\)</span>), different objects <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-compare-i">
-<span class="eqno">(59)<a class="headerlink" href="#equation-eq-compare-i" title="Link to this equation">#</a></span>\[
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-compare-i" title="Link to this equation">#</a></span>\[
 \frac{T_b}{T_a} = \sqrt{\frac{I_b}{I_a}} \quad \Rightarrow \quad I_b = I_a \left(\frac{T_b}{T_a}\right)^2
 \]</div>
 <p>If <span class="math notranslate nohighlight">\(T_b &gt; T_a\)</span>, then <span class="math notranslate nohighlight">\(I_b &gt; I_a\)</span>—the object with the longer period has the larger rotational inertia.</p>
 <div class="poll dropdown admonition">
 <p class="admonition-title">Poll: Period and inertia</p>
-<p>A thin rod and an irregular object hang from the same torsion wire. The rod has period 2.5 s; the object has period 4.8 s. The rotational inertia of the object is about how many times that of the rod?</p>
+<p>Three objects—a thin rod, a flat disk, and a ball—are each hung in turn from the same torsion wire (one at a time). All have the same mass and the same characteristic size (e.g., rod length = 2<span class="math notranslate nohighlight">\(R\)</span>, disk and ball radius = <span class="math notranslate nohighlight">\(R\)</span>). When oscillating, which has the longest period?</p>
 <ul class="simple">
-<li><p>(A) 1.9</p></li>
-<li><p>(B) 2.3</p></li>
-<li><p>(C) 3.7</p></li>
-<li><p>(D) 9.2</p></li>
+<li><p>(A) Rod</p></li>
+<li><p>(B) Disk</p></li>
+<li><p>(C) Ball</p></li>
+<li><p>(D) All the same</p></li>
 </ul>
+<figure class="align-default" id="fig-15-3-objects">
+<a class="reference internal image-reference" href="../images/15-3_objects.png"><img alt="../images/15-3_objects.png" src="../images/15-3_objects.png" style="width: 60%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">(A) Thin rod, (B) disk, (C) ball—each suspended from the center of a torsion wire.</span><a class="headerlink" href="#fig-15-3-objects" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </div>
 </section>
 <hr class="docutils" />
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Torsion pendulum</strong>: object on a twisted wire; restoring torque <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span> (angular Hooke’s law).</p></li>
-<li><p><strong>Torsion constant</strong> <span class="math notranslate nohighlight">\(\kappa\)</span>: property of the wire; plays the role of spring constant <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
-<li><p><strong>Period</strong> <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span>; <strong>angular frequency</strong> <span class="math notranslate nohighlight">\(\omega = \sqrt{\kappa/I}\)</span>.</p></li>
-<li><p><strong>Same wire, different objects</strong>: <span class="math notranslate nohighlight">\(I_b/I_a = (T_b/T_a)^2\)</span>—measure periods to compare rotational inertias.</p></li>
+<li><p><strong>Torsion pendulum</strong>: object on a twisted wire; restoring torque <span class="math notranslate nohighlight">\(\tau = -\kappa\theta\)</span>.</p></li>
+<li><p><strong>Energy method</strong> (section 15-2): <span class="math notranslate nohighlight">\(E = \frac{1}{2}I(d\theta/dt)^2 + \frac{1}{2}\kappa\theta^2\)</span> → inertia <span class="math notranslate nohighlight">\(I\)</span>, stiffness <span class="math notranslate nohighlight">\(\kappa\)</span> → <span class="math notranslate nohighlight">\(\omega = \sqrt{\kappa/I}\)</span>, <span class="math notranslate nohighlight">\(T = 2\pi\sqrt{I/\kappa}\)</span>. Torque method (<span class="math notranslate nohighlight">\(\tau = I\alpha\)</span>) gives the same result.</p></li>
+<li><p><strong>Moment of inertia</strong> <span class="math notranslate nohighlight">\(I\)</span>: defined from <span class="math notranslate nohighlight">\(K = \frac{1}{2}I(d\theta/dt)^2\)</span>; depends on mass distribution around the axis.</p></li>
+<li><p><strong>Same wire, different objects</strong>: <span class="math notranslate nohighlight">\(\kappa\)</span> unchanged; <span class="math notranslate nohighlight">\(I_b/I_a = (T_b/T_a)^2\)</span>—measure periods to compare rotational inertias.</p></li>
 </ul>
+</section>
+</section>
+<section id="discussions">
+<h2>Discussions<a class="headerlink" href="#discussions" title="Link to this heading">#</a></h2>
+<section id="moment-of-inertia-definition-and-computation">
+<h3>Moment of inertia: definition and computation<a class="headerlink" href="#moment-of-inertia-definition-and-computation" title="Link to this heading">#</a></h3>
+<p><strong>Definition from energy</strong>: The rotational kinetic energy <span class="math notranslate nohighlight">\(K = \frac{1}{2}I(d\theta/dt)^2\)</span> <em>defines</em> the moment of inertia <span class="math notranslate nohighlight">\(I\)</span>: it is the coefficient that makes <span class="math notranslate nohighlight">\(K\)</span> quadratic in angular speed. <span class="math notranslate nohighlight">\(I\)</span> measures resistance to angular acceleration; mass farther from the axis contributes more (the <span class="math notranslate nohighlight">\(r^2\)</span> factor).</p>
+<p><strong>Two forms</strong>:</p>
+<ul class="simple">
+<li><p><strong>Discrete</strong>: <span class="math notranslate nohighlight">\(I = \sum_i m_i r_i^2\)</span></p></li>
+<li><p><strong>Continuous</strong>: <span class="math notranslate nohighlight">\(I = \int \rho\,r^2\,dV\)</span></p></li>
+</ul>
+<p>Here <span class="math notranslate nohighlight">\(r\)</span> is the perpendicular distance from the mass element to the rotation axis.</p>
+<p><strong>How to compute</strong>:</p>
+<ol class="arabic simple">
+<li><p>Choose the rotation axis.</p></li>
+<li><p>For each mass element, find <span class="math notranslate nohighlight">\(r\)</span> (shortest distance to the axis).</p></li>
+<li><p>Sum <span class="math notranslate nohighlight">\(m_i r_i^2\)</span> (discrete) or integrate <span class="math notranslate nohighlight">\(\rho\,r^2\,dV\)</span> (continuous).</p></li>
+</ol>
+<p><strong>Parallel-axis theorem</strong>: If the axis is parallel to one through the center of mass, distance <span class="math notranslate nohighlight">\(d\)</span> apart, then <span class="math notranslate nohighlight">\(I = I_{\text{CM}} + Md^2\)</span>. Use this to find <span class="math notranslate nohighlight">\(I\)</span> about an end (e.g., rod about end) from <span class="math notranslate nohighlight">\(I\)</span> about the center.</p>
+</section>
+<hr class="docutils" />
+<section id="examples-table">
+<h3>Examples table<a class="headerlink" href="#examples-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Object</p></th>
+<th class="head"><p>Axis</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(I\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dumbbell (2 masses <span class="math notranslate nohighlight">\(m\)</span> at <span class="math notranslate nohighlight">\(\pm d/2\)</span>)</p></td>
+<td><p>Perpendicular, through center</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}md^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Thin rod (length <span class="math notranslate nohighlight">\(L\)</span>)</p></td>
+<td><p>Perpendicular, through center</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{12}mL^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Thin rod (length <span class="math notranslate nohighlight">\(L\)</span>)</p></td>
+<td><p>Perpendicular, through end</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{3}mL^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Disk (radius <span class="math notranslate nohighlight">\(R\)</span>)</p></td>
+<td><p>Perpendicular, through center</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}MR^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Thin spherical shell (radius <span class="math notranslate nohighlight">\(R\)</span>)</p></td>
+<td><p>Through center</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{2}{3}MR^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Solid ball (radius <span class="math notranslate nohighlight">\(R\)</span>)</p></td>
+<td><p>Through center</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{2}{5}MR^2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="worked-examples">
+<h3>Worked examples<a class="headerlink" href="#worked-examples" title="Link to this heading">#</a></h3>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example 1: Dumbbell</p>
+<p><strong>Setup</strong>: Two point masses <span class="math notranslate nohighlight">\(m\)</span> each at distance <span class="math notranslate nohighlight">\(d/2\)</span> on either side of the rotation axis (perpendicular to the line joining them).</p>
+<p><strong>Computation</strong>: <span class="math notranslate nohighlight">\(I = m(d/2)^2 + m(d/2)^2 = 2m(d/2)^2 = \frac{1}{2}md^2\)</span>.</p>
+<p>Each mass contributes <span class="math notranslate nohighlight">\(m_i r_i^2\)</span>; both have <span class="math notranslate nohighlight">\(r = d/2\)</span>.</p>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example 2: Thin rod about center</p>
+<p><strong>Setup</strong>: Thin rod of length <span class="math notranslate nohighlight">\(L\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span>; axis perpendicular to the rod, through its center.</p>
+<p><strong>Computation</strong>: Linear density <span class="math notranslate nohighlight">\(\lambda = m/L\)</span>. Place the rod along the <span class="math notranslate nohighlight">\(x\)</span>-axis with center at <span class="math notranslate nohighlight">\(x=0\)</span>. Each element <span class="math notranslate nohighlight">\(dm = \lambda\,dx\)</span> is at distance <span class="math notranslate nohighlight">\(r = |x|\)</span> from the axis:</p>
+<div class="math notranslate nohighlight">
+\[
+I = \int_{-L/2}^{L/2} \lambda\,x^2\,dx = \frac{\lambda}{3}\left[\left(\frac{L}{2}\right)^3 - \left(-\frac{L}{2}\right)^3\right] = \frac{\lambda L^3}{12} = \frac{1}{12}mL^2.
+\]</div>
+<p><strong>Rod about end</strong>: Use parallel-axis theorem with <span class="math notranslate nohighlight">\(d = L/2\)</span>: <span class="math notranslate nohighlight">\(I = \frac{1}{12}mL^2 + m(L/2)^2 = \frac{1}{3}mL^2\)</span>.</p>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Example 3: Solid ball</p>
+<p><strong>Result</strong>: <span class="math notranslate nohighlight">\(I = \frac{2}{5}MR^2\)</span> for a solid ball of mass <span class="math notranslate nohighlight">\(M\)</span> and radius <span class="math notranslate nohighlight">\(R\)</span>, rotating about an axis through its center.</p>
+<p><strong>Computation</strong>: <span class="math notranslate nohighlight">\(I = \int r_\perp^2\,dm\)</span>. Use spherical coordinates with the axis along <span class="math notranslate nohighlight">\(z\)</span>: <span class="math notranslate nohighlight">\(r_\perp = r\sin\theta\)</span>, <span class="math notranslate nohighlight">\(dV = r^2\sin\theta\,dr\,d\theta\,d\phi\)</span>, so <span class="math notranslate nohighlight">\(dm = \rho\,dV\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+I = \rho\int_0^R r^4\,dr \int_0^\pi \sin^3\theta\,d\theta \int_0^{2\pi} d\phi.
+\]</div>
+<p><span class="math notranslate nohighlight">\(\int_0^R r^4\,dr = R^5/5\)</span>. <span class="math notranslate nohighlight">\(\int_0^{2\pi} d\phi = 2\pi\)</span>. For <span class="math notranslate nohighlight">\(\int_0^\pi \sin^3\theta\,d\theta\)</span>, use <span class="math notranslate nohighlight">\(\sin^3\theta = \sin\theta(1-\cos^2\theta)\)</span> and <span class="math notranslate nohighlight">\(u = \cos\theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_0^\pi \sin^3\theta\,d\theta = \int_{-1}^{1}(1-u^2)\,du = \left[u - \frac{u^3}{3}\right]_{-1}^{1} = \frac{4}{3}.
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(I = \rho\cdot(R^5/5)\cdot(4/3)\cdot(2\pi) = (8\pi\rho/15)R^5\)</span>. With <span class="math notranslate nohighlight">\(\rho = M/(4\pi R^3/3) = 3M/(4\pi R^3)\)</span>: <span class="math notranslate nohighlight">\(I = \frac{2}{5}MR^2\)</span>.</p>
+</div>
 </section>
 </section>
 </section>
@@ -761,9 +889,14 @@ T = 2\pi\sqrt{\frac{I}{\kappa}}
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-torsion-pendulum">The torsion pendulum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#period-and-angular-frequency">Period and angular frequency</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-torsion-pendulums">Comparing two torsion pendulums</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussions">Discussions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moment-of-inertia-definition-and-computation">Moment of inertia: definition and computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-table">Examples table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-examples">Worked examples</a></li>
 </ul>
 </li>
 </ul>
