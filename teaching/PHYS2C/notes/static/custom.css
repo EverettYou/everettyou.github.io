@@ -39,6 +39,64 @@ html body .bd-sidebar-primary .sidebar-primary-item .navbar-brand.logo p.title.l
   font-weight: 800 !important;
 }
 
+/* Sidebar collapse: when checkbox checked, collapse to 0 width so content expands.
+   Also shrink margin figures (33%→26%) so right margin doesn't grow and cause overflow. */
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-sidebar-primary {
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  overflow: hidden;
+}
+/* Margin figures: keep same effective width when sidebar collapsed (26% ≈ 33% of 80%) */
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .cell.tag_margin,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .cell.tag_popout,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .margin.docutils.container,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main aside.margin,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.margin,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main figure.margin {
+  width: 26% !important;
+  margin: 0 -29% 0 0 !important;
+}
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.figure.margin-caption figcaption,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.figure.margin-caption p.caption,
+input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main figure.margin-caption figcaption {
+  width: 26% !important;
+  margin: 0 -29% 0 0 !important;
+}
+
+/* Fullscreen: restore tuned main-text vs margin ratio.
+   MAINTENANCE NOTE:
+   - This block is tightly coupled with:
+     (a) fullscreen .bd-article-container padding-right (14vw)
+     (b) fullscreen floating TOC width (29vw, fixed overlay)
+   - Change these as a set. Editing one value in isolation can shift the main/margin boundary
+     and quickly "break" the layout that was previously tuned by eye. */
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .cell.tag_margin,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .cell.tag_popout,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .margin.docutils.container,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main aside.margin,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.margin,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main figure.margin,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .cell.tag_margin,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .cell.tag_popout,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main .margin.docutils.container,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main aside.margin,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.margin,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main figure.margin {
+  width: 46% !important;
+  margin: 0 calc(-49% + clamp(0.75rem, 1vw, 1.5rem)) 0 0 !important;
+}
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.figure.margin-caption figcaption,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.figure.margin-caption p.caption,
+html:fullscreen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main figure.margin-caption figcaption,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.figure.margin-caption figcaption,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main div.figure.margin-caption p.caption,
+html:-webkit-full-screen input#pst-primary-sidebar-checkbox:checked ~ .bd-container .bd-main figure.margin-caption figcaption {
+  width: 46% !important;
+  margin: 0 calc(-49% + clamp(0.75rem, 1vw, 1.5rem)) 0 0 !important;
+}
+
 /* 3. Callout box: thicker left border (左侧竖线加粗), lighter title background */
 .admonition,
 div.admonition {
@@ -85,6 +143,42 @@ div.admonition.warning > .admonition-title {
 div.admonition.danger > .admonition-title,
 div.admonition.error > .admonition-title {
   background-color: color-mix(in srgb, var(--pst-color-danger-bg) 55%, white) !important;
+}
+
+/* Dark mode: deepen admonition title bars and improve title text contrast */
+html[data-theme=dark] .admonition > .admonition-title,
+html[data-theme=dark] div.admonition > .admonition-title {
+  color: #e2e8f0 !important;
+}
+html[data-theme=dark] .admonition.note > .admonition-title,
+html[data-theme=dark] .admonition.seealso > .admonition-title,
+html[data-theme=dark] .admonition.important > .admonition-title,
+html[data-theme=dark] div.admonition.note > .admonition-title,
+html[data-theme=dark] div.admonition.seealso > .admonition-title,
+html[data-theme=dark] div.admonition.important > .admonition-title {
+  background-color: color-mix(in srgb, var(--pst-color-info) 60%, #0b1118) !important;
+}
+html[data-theme=dark] .admonition.hint > .admonition-title,
+html[data-theme=dark] .admonition.poll > .admonition-title,
+html[data-theme=dark] .admonition.tip > .admonition-title,
+html[data-theme=dark] div.admonition.hint > .admonition-title,
+html[data-theme=dark] div.admonition.poll > .admonition-title,
+html[data-theme=dark] div.admonition.tip > .admonition-title {
+  background-color: color-mix(in srgb, var(--pst-color-success) 60%, #0b1118) !important;
+}
+html[data-theme=dark] .admonition.attention > .admonition-title,
+html[data-theme=dark] .admonition.caution > .admonition-title,
+html[data-theme=dark] .admonition.warning > .admonition-title,
+html[data-theme=dark] div.admonition.attention > .admonition-title,
+html[data-theme=dark] div.admonition.caution > .admonition-title,
+html[data-theme=dark] div.admonition.warning > .admonition-title {
+  background-color: color-mix(in srgb, var(--pst-color-warning) 60%, #0b1118) !important;
+}
+html[data-theme=dark] .admonition.danger > .admonition-title,
+html[data-theme=dark] .admonition.error > .admonition-title,
+html[data-theme=dark] div.admonition.danger > .admonition-title,
+html[data-theme=dark] div.admonition.error > .admonition-title {
+  background-color: color-mix(in srgb, var(--pst-color-danger) 60%, #0b1118) !important;
 }
 
 /* 1. important/seealso: use blue color same as note */
@@ -203,10 +297,36 @@ div.admonition.error .admonition-title:after {
   border: none !important;
 }
 
+/* Fullscreen-only title/icon geometry tuning.
+   Do NOT apply this to normal mode. */
+html:fullscreen .bd-content .admonition > .admonition-title,
+html:fullscreen .bd-content div.admonition > .admonition-title,
+html:-webkit-full-screen .bd-content .admonition > .admonition-title,
+html:-webkit-full-screen .bd-content div.admonition > .admonition-title {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0.62rem !important;
+  padding-bottom: 0.62rem !important;
+  padding-left: 3.15rem !important;
+}
+/* Move icon right together with title text, keeping a comfortable gap. */
+html:fullscreen .bd-content .admonition > .admonition-title::after,
+html:fullscreen .bd-content div.admonition > .admonition-title::after,
+html:-webkit-full-screen .bd-content .admonition > .admonition-title::after,
+html:-webkit-full-screen .bd-content div.admonition > .admonition-title::after {
+  left: 1.15rem !important;
+}
+
 /* Fix white edge below dropdown admonition title when figure (or other padded content) is inside */
 .admonition.toggle-hidden .admonition-title ~ * {
   padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
   overflow: hidden !important;
+}
+/* Fully collapse dropdown body in hidden state (prevents leftover narrow white strip). */
+.bd-content .admonition.dropdown.toggle-hidden > :not(.admonition-title) {
+  display: none !important;
 }
 
 /* 6. Table row hover: light blue (含蓄内敛, 简约大气) - override pydata theme's purple */
@@ -216,6 +336,17 @@ html:not([data-theme]) {
 }
 html[data-theme=dark] {
   --pst-color-table-row-hover-bg: #1e3a4d;
+}
+/* Enforce subtle blue table row hover (theme may bypass variable in some selectors) */
+html[data-theme=light] .bd-content table tr:hover > th,
+html[data-theme=light] .bd-content table tr:hover > td,
+html:not([data-theme]) .bd-content table tr:hover > th,
+html:not([data-theme]) .bd-content table tr:hover > td {
+  background-color: #e3f2fd !important;
+}
+html[data-theme=dark] .bd-content table tr:hover > th,
+html[data-theme=dark] .bd-content table tr:hover > td {
+  background-color: #1e3a4d !important;
 }
 
 /* 5. Footer: Line 1: logo + author + copyright; Line 2: Cursor AI (right of logo) */
@@ -269,5 +400,277 @@ figure.grid.gap-4 {
 }
 figure.grid.items-end {
   align-items: end;
+}
+
+/* Fullscreen mode: preserve normal-mode style, only enlarge article text. */
+html:fullscreen .bd-article-container .bd-article,
+html:-webkit-full-screen .bd-article-container .bd-article {
+  font-size: 150%;
+}
+/* CRITICAL MAINTENANCE NOTE (DO NOT TWEAK IN ISOLATION):
+   This fullscreen image block is coupled with:
+   1) figure/cell overflow visibility + bottom spacing below (prevents caption overlap)
+   2) main/margin geometry ratio block near top of file (46% / -49%)
+   3) container width constraints at bottom (100vw with inner safe padding)
+   Changing only one value here can reintroduce:
+   - "main image not zooming enough/too much"
+   - margin image overflow on large displays
+   - caption being covered by transformed images
+   If adjustments are needed, test these three linked areas as one set. */
+/* Restore fullscreen image scaling rules (removed by style-normalization pass). */
+html:fullscreen .bd-article-container img,
+html:fullscreen .bd-article-container video,
+html:-webkit-full-screen .bd-article-container img,
+html:-webkit-full-screen .bd-article-container video {
+  zoom: 1;
+}
+html:fullscreen .bd-article-container figure:not(.margin) img,
+html:-webkit-full-screen .bd-article-container figure:not(.margin) img {
+  transform: scale(1.23);
+  transform-origin: left top;
+  margin-bottom: 2em;
+}
+html:fullscreen aside.margin img,
+html:fullscreen aside.margin video,
+html:fullscreen div.margin img,
+html:fullscreen div.margin video,
+html:fullscreen figure.margin img,
+html:fullscreen figure.margin video,
+html:-webkit-full-screen aside.margin img,
+html:-webkit-full-screen aside.margin video,
+html:-webkit-full-screen div.margin img,
+html:-webkit-full-screen div.margin video,
+html:-webkit-full-screen figure.margin img,
+html:-webkit-full-screen figure.margin video {
+  zoom: 1.5;
+  max-width: 100% !important;
+  transform: none !important;
+}
+/* Fullscreen: keep margin media and caption on the same visual center line. */
+html:fullscreen aside.margin figure,
+html:fullscreen div.margin figure,
+html:fullscreen figure.margin,
+html:-webkit-full-screen aside.margin figure,
+html:-webkit-full-screen div.margin figure,
+html:-webkit-full-screen figure.margin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+html:fullscreen aside.margin figure figcaption,
+html:fullscreen div.margin figure figcaption,
+html:fullscreen figure.margin figcaption,
+html:-webkit-full-screen aside.margin figure figcaption,
+html:-webkit-full-screen div.margin figure figcaption,
+html:-webkit-full-screen figure.margin figcaption {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+html:fullscreen aside.margin figure figcaption > p,
+html:fullscreen div.margin figure figcaption > p,
+html:fullscreen figure.margin figcaption > p,
+html:-webkit-full-screen aside.margin figure figcaption > p,
+html:-webkit-full-screen div.margin figure figcaption > p,
+html:-webkit-full-screen figure.margin figcaption > p {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left !important;
+}
+html:fullscreen .bd-article-container figure,
+html:fullscreen .bd-article-container .cell_output,
+html:-webkit-full-screen .bd-article-container figure,
+html:-webkit-full-screen .bd-article-container .cell_output {
+  overflow: visible;
+}
+html:fullscreen .bd-article-container figure,
+html:-webkit-full-screen .bd-article-container figure {
+  margin-bottom: 2.5em;
+}
+/* MAINTENANCE NOTE:
+   Fullscreen typography goal is "normal-mode style + larger type".
+   Prefer adjusting spacing rhythm (line-height/margins) before touching geometry ratios above. */
+html:fullscreen .bd-article-container,
+html:-webkit-full-screen .bd-article-container {
+  padding-right: 14vw !important;
+}
+/* Fullscreen readability tuning: more vertical rhythm for lecture projection */
+html:fullscreen .bd-article-container .bd-article p,
+html:-webkit-full-screen .bd-article-container .bd-article p {
+  margin-top: 0.34em;
+  margin-bottom: 1.28em;
+  line-height: 1.56;
+}
+/* Fullscreen: add extra breathing room before the first paragraph blocks. */
+html:fullscreen .bd-article-container .bd-article > p:first-of-type,
+html:fullscreen .bd-article-container .bd-article section > p:first-of-type,
+html:-webkit-full-screen .bd-article-container .bd-article > p:first-of-type,
+html:-webkit-full-screen .bd-article-container .bd-article section > p:first-of-type {
+  margin-top: 0.85em;
+}
+html:fullscreen .bd-article-container .bd-article h1 + p,
+html:fullscreen .bd-article-container .bd-article h2 + p,
+html:fullscreen .bd-article-container .bd-article h3 + p,
+html:fullscreen .bd-article-container .bd-article h4 + p,
+html:fullscreen .bd-article-container .bd-article h5 + p,
+html:-webkit-full-screen .bd-article-container .bd-article h1 + p,
+html:-webkit-full-screen .bd-article-container .bd-article h2 + p,
+html:-webkit-full-screen .bd-article-container .bd-article h3 + p,
+html:-webkit-full-screen .bd-article-container .bd-article h4 + p,
+html:-webkit-full-screen .bd-article-container .bd-article h5 + p {
+  margin-top: 0.85em;
+}
+html:fullscreen .bd-article-container .bd-article p + ul,
+html:fullscreen .bd-article-container .bd-article p + ol,
+html:-webkit-full-screen .bd-article-container .bd-article p + ul,
+html:-webkit-full-screen .bd-article-container .bd-article p + ol {
+  margin-top: 1.05em;
+}
+html:fullscreen .bd-article-container .bd-article ul + p,
+html:fullscreen .bd-article-container .bd-article ol + p,
+html:-webkit-full-screen .bd-article-container .bd-article ul + p,
+html:-webkit-full-screen .bd-article-container .bd-article ol + p {
+  margin-top: 1.4em;
+}
+html:fullscreen .bd-article-container .bd-article ul,
+html:fullscreen .bd-article-container .bd-article ol,
+html:-webkit-full-screen .bd-article-container .bd-article ul,
+html:-webkit-full-screen .bd-article-container .bd-article ol {
+  margin-top: 1.02em;
+  margin-bottom: 1.32em;
+}
+html:fullscreen .bd-article-container .bd-article h2,
+html:fullscreen .bd-article-container .bd-article h3,
+html:-webkit-full-screen .bd-article-container .bd-article h2,
+html:-webkit-full-screen .bd-article-container .bd-article h3 {
+  margin-top: 1.55em;
+  margin-bottom: 0.7em;
+}
+html:fullscreen .bd-article-container .bd-article h1,
+html:fullscreen .bd-article-container .bd-article h4,
+html:fullscreen .bd-article-container .bd-article h5,
+html:-webkit-full-screen .bd-article-container .bd-article h1,
+html:-webkit-full-screen .bd-article-container .bd-article h4,
+html:-webkit-full-screen .bd-article-container .bd-article h5 {
+  margin-top: 1.45em;
+  margin-bottom: 0.65em;
+}
+html:fullscreen .bd-article-container .bd-article h1,
+html:fullscreen .bd-article-container .bd-article h2,
+html:fullscreen .bd-article-container .bd-article h3,
+html:fullscreen .bd-article-container .bd-article h4,
+html:fullscreen .bd-article-container .bd-article h5,
+html:-webkit-full-screen .bd-article-container .bd-article h1,
+html:-webkit-full-screen .bd-article-container .bd-article h2,
+html:-webkit-full-screen .bd-article-container .bd-article h3,
+html:-webkit-full-screen .bd-article-container .bd-article h4,
+html:-webkit-full-screen .bd-article-container .bd-article h5 {
+  line-height: 1.25;
+}
+/* Theme heading sizes are mostly rem-based; when body text scales up, headings look relatively smaller.
+   Raise heading sizes in fullscreen to preserve visual hierarchy. */
+html:fullscreen .bd-article-container .bd-article h1,
+html:-webkit-full-screen .bd-article-container .bd-article h1 { font-size: 2.7rem; }
+html:fullscreen .bd-article-container .bd-article h2,
+html:-webkit-full-screen .bd-article-container .bd-article h2 { font-size: 2.25rem; }
+html:fullscreen .bd-article-container .bd-article h3,
+html:-webkit-full-screen .bd-article-container .bd-article h3 { font-size: 1.9rem; }
+html:fullscreen .bd-article-container .bd-article h4,
+html:-webkit-full-screen .bd-article-container .bd-article h4 { font-size: 1.62rem; }
+html:fullscreen .bd-article-container .bd-article h5,
+html:-webkit-full-screen .bd-article-container .bd-article h5 { font-size: 1.42rem; }
+html:fullscreen .bd-article-container .bd-article table,
+html:fullscreen .bd-article-container .bd-article .table,
+html:-webkit-full-screen .bd-article-container .bd-article table,
+html:-webkit-full-screen .bd-article-container .bd-article .table {
+  margin-top: 0.9em;
+  margin-bottom: 1em;
+}
+html:fullscreen .bd-article-container .bd-article li,
+html:-webkit-full-screen .bd-article-container .bd-article li {
+  line-height: 1.62;
+  margin-bottom: 0.08em;
+}
+/* Keep list internals compact/consistent: same line-height as body text, no extra p margins inside items. */
+html:fullscreen .bd-article-container .bd-article li > p,
+html:-webkit-full-screen .bd-article-container .bd-article li > p {
+  line-height: 1.62;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* Fullscreen (conservative): slightly enlarge unordered-list bullet marker. */
+html:fullscreen .bd-article-container .bd-article ul > li::marker,
+html:-webkit-full-screen .bd-article-container .bd-article ul > li::marker {
+  font-size: 1.08em;
+}
+/* Fullscreen: increase top breathing room for first paragraph inside admonitions. */
+html:fullscreen .bd-article-container .bd-article .admonition > .admonition-title + p,
+html:fullscreen .bd-article-container .bd-article div.admonition > .admonition-title + p,
+html:-webkit-full-screen .bd-article-container .bd-article .admonition > .admonition-title + p,
+html:-webkit-full-screen .bd-article-container .bd-article div.admonition > .admonition-title + p {
+  margin-top: 0.75em !important;
+}
+html:fullscreen .bd-article-container .bd-article table th,
+html:fullscreen .bd-article-container .bd-article table td,
+html:-webkit-full-screen .bd-article-container .bd-article table th,
+html:-webkit-full-screen .bd-article-container .bd-article table td {
+  line-height: 1.3;
+  padding-top: 0.34em !important;
+  padding-bottom: 0.34em !important;
+}
+/* Fullscreen: prevent global paragraph spacing from inflating table rows. */
+html:fullscreen .bd-article-container .bd-article table th p,
+html:fullscreen .bd-article-container .bd-article table td p,
+html:-webkit-full-screen .bd-article-container .bd-article table th p,
+html:-webkit-full-screen .bd-article-container .bd-article table td p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.34 !important;
+}
+/* CRITICAL MAINTENANCE NOTE:
+   Fullscreen outer width and inner padding are safety rails for horizontal overflow.
+   Keep max-width and inner padding changes synchronized.
+   If only one is changed, 100vw + padding can overflow on some screens. */
+/* Fullscreen: use screen width instead of large outer page margins. */
+html:fullscreen .bd-container,
+html:fullscreen .bd-container__inner,
+html:fullscreen .bd-page-width,
+html:-webkit-full-screen .bd-container,
+html:-webkit-full-screen .bd-container__inner,
+html:-webkit-full-screen .bd-page-width {
+  max-width: 100vw !important;
+}
+html:fullscreen .bd-container__inner,
+html:-webkit-full-screen .bd-container__inner {
+  box-sizing: border-box !important;
+  max-width: calc(100vw - 1.5rem) !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+/* CRITICAL MAINTENANCE NOTE:
+   TOC must remain fixed overlay in fullscreen. If changed to sticky/static,
+   TOC width participates in layout and shifts the main/margin boundary.
+   Also keep this block aligned with fullscreen margin ratio + article padding-right.
+*/
+/* Keep floating contents menu from consuming layout width in fullscreen.
+   MAINTENANCE NOTE:
+   Must remain position: fixed; if reverted to sticky/static, menu width participates in layout
+   and pushes the main/margin boundary left. */
+html:fullscreen .bd-sidebar-secondary.bd-toc,
+html:-webkit-full-screen .bd-sidebar-secondary.bd-toc {
+  position: fixed !important;
+  top: 0 !important;
+  width: 29vw !important;
+  max-width: 29vw !important;
+  min-width: 16rem !important;
+  right: 0.5rem !important;
+  left: auto !important;
+  z-index: 30 !important;
+}
+html:fullscreen .bd-sidebar-secondary .sidebar-secondary__inner,
+html:-webkit-full-screen .bd-sidebar-secondary .sidebar-secondary__inner {
+  padding-left: 0 !important;
 }
 
