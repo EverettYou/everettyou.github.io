@@ -20,16 +20,16 @@ tags: [Course Syllabus]
 
   * *Office hours*: by schedule, Mayer 5202 or Zoom <https://ucsd.zoom.us/my/yzyou>
 
-* *Teaching Assistants*: Pathak Parashar.  *Email*: <psparash@ucsd.edu>
-* *Grader*: Shuhan Zhang. *Email*: <shz091@ucsd.edu>
+* *Teaching Assistants*: Shuhan Zhang. *Email*: <shz091@ucsd.edu>
 
 * **Course Grade Allocation**: 
-  - Homework: 70% 
-  - Mid-term Exam: 10%
-  - Final Exam: 20%
+  - Homework: 50% 
+  - Project: 20%
+  - Final Exam: 30%
 
 * **Assignment and Submission Platform**: 
-  - Homework and exams are online. They will all be assigned and submitted via the [UCSD Canvas](https://canvas.ucsd.edu/courses/65704){:target="_blank"} platform.
+  - Homework and Project are submitted via the [UCSD Canvas](https://canvas.ucsd.edu/courses/75310){:target="_blank"} platform.
+  - Final Exam will be in person.
 
 * **Homework Guidelines**:
 
