@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,15 +522,22 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charged-particle-hamiltonian-with-electromagnetic-coupling">Charged Particle Hamiltonian with Electromagnetic Coupling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-vs-kinetic-momentum">Canonical vs Kinetic Momentum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-covariance-of-the-hamiltonian">Gauge Covariance of the Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-lorentz-force">Quantum Lorentz Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-of-observables">Gauge Invariance of Observables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-dependent-phases-and-the-aharonov-bohm-effect">Path-Dependent Phases and the Aharonov-Bohm Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-coupling-prescription">Minimal Coupling Prescription</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-classical-to-quantum">From Classical to Quantum</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-the-hamiltonian">Expansion of the Hamiltonian</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-momentum-vs-kinetic-momentum">Canonical Momentum vs. Kinetic Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-force-from-quantum-mechanics">Lorentz Force from Quantum Mechanics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#heisenberg-equation-of-motion">Heisenberg Equation of Motion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-of-the-schrodinger-equation">Gauge Invariance of the Schrödinger Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-current-with-electromagnetic-field">Probability Current with Electromagnetic Field</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -548,7 +555,7 @@ document.write(`
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
 <li><p>How does the Hamiltonian change when we couple a charged particle to an electromagnetic field? Derive the minimal coupling prescription from first principles.</p></li>
-<li><p>What is the canonical momentum <span class="math notranslate nohighlight">\(\boldsymbol{p} = -i\hbar\nabla\)</span> versus kinetic momentum <span class="math notranslate nohighlight">\(\boldsymbol{\pi} = \boldsymbol{p} - q\boldsymbol{A}\)</span>? Why do they differ in a magnetic field?</p></li>
+<li><p>What is the canonical momentum <span class="math notranslate nohighlight">\(\boldsymbol{p} = -\mathrm{i}\hbar\nabla\)</span> versus kinetic momentum <span class="math notranslate nohighlight">\(\boldsymbol{\pi} = \boldsymbol{p} - q\boldsymbol{A}\)</span>? Why do they differ in a magnetic field?</p></li>
 <li><p>Derive the quantum Lorentz force from the Hamiltonian using the Heisenberg equation of motion. Does it match the classical formula?</p></li>
 <li><p>Prove that expectation values of physical observables are gauge-invariant. Why can different gauge choices give the same physics?</p></li>
 <li><p>What is the significance of the quantum kinetic momentum <span class="math notranslate nohighlight">\(\boldsymbol{\pi}\)</span>? How does it relate to particle velocity?</p></li>
@@ -556,155 +563,243 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Electromagnetism emerges naturally as the simplest possible gauge theory: a local <span class="math notranslate nohighlight">\(U(1)\)</span> symmetry that requires the existence of massless gauge bosons (photons) coupling to charged particles with universal strength. In this section, we uncover the minimal coupling prescription that encodes electromagnetic interactions in the quantum Hamiltonian, and show how the classical Maxwell equations emerge from demanding gauge covariance. This is the prototype for understanding all fundamental forces.</p>
-<section id="charged-particle-hamiltonian-with-electromagnetic-coupling">
-<h3>Charged Particle Hamiltonian with Electromagnetic Coupling<a class="headerlink" href="#charged-particle-hamiltonian-with-electromagnetic-coupling" title="Link to this heading">#</a></h3>
-<p>The Hamiltonian for a charged particle of charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> in electromagnetic fields is:</p>
+<p>Coupling a charged particle to an electromagnetic field is the next step in understanding gauge theory. We move from the abstract principle of gauge invariance to concrete physical consequences: how charges respond to fields, how energy and momentum are redefined, and how the kinetic momentum emerges as the physically relevant quantity.</p>
+<section id="minimal-coupling-prescription">
+<h3>Minimal Coupling Prescription<a class="headerlink" href="#minimal-coupling-prescription" title="Link to this heading">#</a></h3>
+<section id="from-classical-to-quantum">
+<h4>From Classical to Quantum<a class="headerlink" href="#from-classical-to-quantum" title="Link to this heading">#</a></h4>
+<p>In classical mechanics, a charged particle in an electromagnetic field obeys the Lorentz force:</p>
 <div class="math notranslate nohighlight">
-\[\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -i\hbar\nabla\)</span> is the canonical momentum operator, <span class="math notranslate nohighlight">\(\boldsymbol{A}(x, t)\)</span> is the vector potential (with magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>), and <span class="math notranslate nohighlight">\(\Phi(x, t)\)</span> is the scalar potential (with electric field <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span>). This is the <strong>minimal coupling</strong> form: we simply replace the canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> with the covariant momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> in the kinetic energy term. Expanding the kinetic energy carefully in the Coulomb gauge <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span> gives:</p>
+\[
+m\frac{\mathrm{d}^2\boldsymbol{r}}{\mathrm{d}t^2} = q(\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B})\]</div>
+<p>The Hamiltonian formulation expresses this through the canonical momentum:</p>
 <div class="math notranslate nohighlight">
-\[\hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} - \frac{q}{m}\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + \frac{q^2}{2m}\boldsymbol{A}^2 + q\Phi\]</div>
-<p>The three terms after <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}^2/(2m)\)</span> represent: the linear coupling to the vector potential (dominates for weak fields), the quadratic term (important for strong fields), and the scalar potential interaction respectively. Minimal coupling is the simplest way to introduce interactions with gauge fields—it ensures gauge invariance while introducing the minimum number of new terms.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Minimal Coupling and Operator Ordering</p>
-<p>The Hamiltonian for a charged particle of charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> in electromagnetic fields <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -i\hbar\nabla\)</span> is the canonical momentum operator</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{A}(x, t)\)</span> is the vector potential (magnetic field: <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Phi(x, t)\)</span> is the scalar potential (electric field: <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span>)</p></li>
-</ul>
-<p>This is the <strong>minimal coupling</strong> form, derived by the replacement <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> in the free-particle Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}_0 = \hat{\boldsymbol{p}}^2/(2m)\)</span>.</p>
-<p>Expanding the kinetic energy term:</p>
-<div class="math notranslate nohighlight">
-\[\frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 = \frac{1}{2m}[\hat{\boldsymbol{p}}^2 - q(\hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}}) + q^2\boldsymbol{A}^2]\]</div>
-<p>Since <span class="math notranslate nohighlight">\([\boldsymbol{A}, \boldsymbol{p}]\)</span> generally doesn’t vanish (because <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> varies in space), we need to be careful with the order of operators. The symmetric form is:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}} = 2\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + (\nabla \cdot \boldsymbol{A})\]</div>
-<p>In the <strong>Coulomb gauge</strong> where <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>, this simplifies to:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} - \frac{q}{m}\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + \frac{q^2}{2m}\boldsymbol{A}^2 + q\Phi\]</div>
-</div>
-</section>
-<section id="canonical-vs-kinetic-momentum">
-<h3>Canonical vs Kinetic Momentum<a class="headerlink" href="#canonical-vs-kinetic-momentum" title="Link to this heading">#</a></h3>
-<p>Two distinct momentum operators appear in the electromagnetic theory and play different roles:</p>
-<p><strong>Canonical momentum</strong>: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -i\hbar\nabla\)</span> is the generator of spatial translations and satisfies the fundamental commutation relation <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{x}_j] = -i\hbar\delta_{ij}\)</span>. It couples to forces and is related to the Noether current for translation symmetry.</p>
-<p><strong>Kinetic momentum</strong> (mechanical momentum): <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> appears in the kinetic energy term and determines the actual particle velocity: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}} = \hat{\boldsymbol{\pi}}/m\)</span>. This is the momentum that determines how fast the particle is actually moving.</p>
-<p><strong>Key difference</strong>: In a magnetic field, the canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> is generally <strong>not conserved</strong> because the electromagnetic force acts on the particle. However, kinetic momentum is also not separately conserved in a time-dependent field. The important distinction is that kinetic momentum directly measures the physical particle velocity, while canonical momentum is more abstract but has better symmetry properties.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Details: Canonical vs Kinetic Momentum</p>
-<p>Two important momentum operators appear in the theory:</p>
-<p><strong>Canonical momentum</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\boldsymbol{p}} = -i\hbar\nabla\]</div>
-<p>This is the generator of spatial translations and commutes with position: <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{x}_j] = -i\hbar\delta_{ij}\)</span>.</p>
-<p><strong>Kinetic momentum</strong> (or “mechanical momentum”):</p>
-<div class="math notranslate nohighlight">
-\[\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\]</div>
-<p>The kinetic momentum is the quantity that appears in the kinetic energy term and determines the actual particle velocity:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\boldsymbol{v}} = \frac{\hat{\boldsymbol{\pi}}}{m}\]</div>
-<p><strong>Key difference</strong>: In a magnetic field, the canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> is <strong>not conserved</strong> (there’s a force), but certain combinations like <span class="math notranslate nohighlight">\(\hat{p}_z\)</span> in a uniform field <strong>perpendicular</strong> to the <span class="math notranslate nohighlight">\(z\)</span>-direction may be conserved. The kinetic momentum is never separately conserved in a time-dependent field.</p>
-</div>
-</section>
-<section id="gauge-covariance-of-the-hamiltonian">
-<h3>Gauge Covariance of the Hamiltonian<a class="headerlink" href="#gauge-covariance-of-the-hamiltonian" title="Link to this heading">#</a></h3>
-<p>Under a gauge transformation where the wavefunction transforms as <span class="math notranslate nohighlight">\(\psi \to \psi' = e^{i\chi}\psi\)</span> and the potentials transform as <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A}' = \boldsymbol{A} - \frac{1}{q}\nabla\chi\)</span> and <span class="math notranslate nohighlight">\(\Phi \to \Phi' = \Phi + \frac{1}{q}\partial_t\chi\)</span>, the Hamiltonian transforms covariantly. That is, the transformed Hamiltonian applied to the transformed wavefunction gives the gauge-transformed result:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H}'\psi' = e^{i\chi}\hat{H}\psi\]</div>
-<p>This gauge covariance is <strong>crucial</strong>: it ensures that the eigenvalues (measurable energies) and eigenstates of the Hamiltonian are gauge-invariant. Physically, this means that no matter which gauge we choose to work in, the quantum dynamics and predictions are identical. This is a profound principle: the theory is independent of our choice of gauge.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Verification: Gauge Covariance Calculation</p>
-<p>Under a gauge transformation:</p>
-<div class="math notranslate nohighlight">
-\[\psi \to \psi' = e^{i\chi}\psi\]</div>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{A} \to \boldsymbol{A}' = \boldsymbol{A} - \frac{1}{q}\nabla\chi\]</div>
-<div class="math notranslate nohighlight">
-\[\Phi \to \Phi' = \Phi + \frac{1}{q}\partial_t\chi\]</div>
-<p>The Hamiltonian transforms as:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H}'\psi' = (\frac{1}{2m}[(\hat{\boldsymbol{p}} - q\boldsymbol{A}') + (q\Phi')]e^{i\chi}\psi\]</div>
-<p>Substituting the gauge transformation rules and using the chain rule carefully shows:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H}'\psi' = e^{i\chi}\hat{H}\psi\]</div>
-<p>The Hamiltonian is <strong>gauge covariant</strong>—the transformed Hamiltonian applied to the transformed wavefunction gives the gauge-transformed result of the original Hamiltonian. This ensures that observables (eigenvalues of operators) are gauge-invariant.</p>
-</div>
-</section>
-<section id="quantum-lorentz-force">
-<h3>Quantum Lorentz Force<a class="headerlink" href="#quantum-lorentz-force" title="Link to this heading">#</a></h3>
-<p>The equations of motion for expectation values in quantum mechanics follow from the Heisenberg equation. For the velocity, we compute:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\langle\boldsymbol{x}\rangle}{dt} = \langle\boldsymbol{v}\rangle = \frac{1}{m}\langle\boldsymbol{\pi}\rangle\]</div>
-<p>For the canonical momentum, the commutator with the Hamiltonian gives:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\langle\boldsymbol{p}\rangle}{dt} = q\langle\boldsymbol{E}\rangle + q\langle\boldsymbol{v} \times \boldsymbol{B}\rangle\]</div>
-<p>This is exactly the <strong>Lorentz force law</strong> in quantum form:</p>
-<div class="math notranslate nohighlight">
-\[m\frac{d\langle\boldsymbol{v}\rangle}{dt} = q(\langle\boldsymbol{E}\rangle + \langle\boldsymbol{v} \times \boldsymbol{B}\rangle)\]</div>
-<p><strong>Remarkable fact</strong>: The quantum equations of motion reduce to the classical Lorentz force law when we take expectation values! This is a manifestation of the <strong>correspondence principle</strong>, showing that quantum mechanics correctly reproduces classical mechanics in the appropriate limit. The covariant formulation of quantum mechanics guarantees this agreement at the level of expectation values.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Heisenberg Equations and Lorentz Force</p>
-<p>Using the Heisenberg equation of motion for the position operator:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\hat{\boldsymbol{x}}}{dt} = \frac{1}{i\hbar}[\hat{\boldsymbol{x}}, \hat{H}]\]</div>
-<p>The commutator yields:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\langle\boldsymbol{x}\rangle}{dt} = \langle\boldsymbol{v}\rangle = \frac{1}{m}\langle\boldsymbol{\pi}\rangle\]</div>
-<p>For the canonical momentum:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\hat{\boldsymbol{p}}}{dt} = \frac{1}{i\hbar}[\hat{\boldsymbol{p}}, \hat{H}]\]</div>
-<p>After careful computation:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\langle\boldsymbol{p}\rangle}{dt} = q\langle\boldsymbol{E}\rangle + q\langle\boldsymbol{v} \times \boldsymbol{B}\rangle\]</div>
-<p>This is exactly the <strong>Lorentz force law</strong> in quantum form:</p>
-<div class="math notranslate nohighlight">
-\[m\frac{d\langle\boldsymbol{v}\rangle}{dt} = q\langle\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B}\rangle\]</div>
-<p><strong>Remarkable fact</strong>: The quantum equations of motion reduce to the classical Lorentz force law when we take expectation values! This is a manifestation of the <strong>correspondence principle</strong>.</p>
-</div>
-</section>
-<section id="gauge-invariance-of-observables">
-<h3>Gauge Invariance of Observables<a class="headerlink" href="#gauge-invariance-of-observables" title="Link to this heading">#</a></h3>
-<p>A crucial principle of gauge theories: <strong>all physical observables are gauge-invariant.</strong> This statement summarizes why gauge freedom is merely redundancy, not ambiguity:</p>
-<p><strong>Position and momentum expectations</strong>: These are directly gauge-invariant—they’re defined in position space and don’t depend on the gauge choice:</p>
-<div class="math notranslate nohighlight">
-\[\langle\boldsymbol{x}\rangle' = \int (\psi')^*\boldsymbol{x}\psi'\, dx = \int(e^{-i\chi})\psi^*\boldsymbol{x}\psi(e^{i\chi})dx = \langle\boldsymbol{x}\rangle\]</div>
-<p><strong>Probability densities</strong>: Also manifestly gauge-invariant:</p>
-<div class="math notranslate nohighlight">
-\[P'(x) = |\psi'|^2 = |e^{i\chi}|^2|\psi|^2 = |\psi|^2 = P(x)\]</div>
-<p><strong>More subtle observables</strong> like angular momentum or current densities are also gauge-invariant if properly defined. The gauge potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> itself is <strong>not observable</strong> because different gauges give different values. Only the field strength <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> (and correspondingly <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span>) are observable.</p>
+\[
+H_{\text{cl}} = \frac{(\boldsymbol{p} - q\boldsymbol{A})^2}{2m} + q\Phi\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> is the canonical momentum (different from <span class="math notranslate nohighlight">\(m\boldsymbol{v}\)</span> when fields are present), and <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\Phi\)</span> are the vector and scalar potentials.</p>
+<p>To quantize a charged particle in an electromagnetic field, we use the <strong>minimal coupling prescription</strong>:</p>
 <div class="important admonition">
-<p class="admonition-title">Gauge Freedom as a Computational Tool</p>
-<p>The freedom to choose different gauges is not just a mathematical redundancy—it’s a practical advantage. In solving the Schrödinger equation, we can choose the gauge that makes the math simplest for a particular problem. The Coulomb gauge, the Lorenz gauge, and radiation gauge each have advantages in different contexts. Different gauges may be convenient for different purposes, but all lead to identical physical predictions.</p>
+<p class="admonition-title">Minimal Coupling Prescription</p>
+<p>Replace the canonical momentum operator with:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}(\hat{\boldsymbol{r}})\]</div>
+<p>The quantum Hamiltonian becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\]</div>
+<p>This is equivalent to the gauge-covariant Schrödinger equation where ordinary derivatives are replaced by covariant derivatives <span class="math notranslate nohighlight">\(D_i = \partial_i + \mathrm{i}qA_i\)</span>.</p>
+</div>
+<p>This prescription is not arbitrary—it is the unique choice that preserves gauge covariance of the Schrödinger equation.</p>
+</section>
+<section id="expansion-of-the-hamiltonian">
+<h4>Expansion of the Hamiltonian<a class="headerlink" href="#expansion-of-the-hamiltonian" title="Link to this heading">#</a></h4>
+<p>Expand the kinetic energy term:</p>
+<div class="math notranslate nohighlight">
+\[
+(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 = \hat{\boldsymbol{p}}^2 - q(\hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}}) + q^2\boldsymbol{A}^2\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}} = -\mathrm{i}\hbar(\nabla \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \nabla + \nabla \cdot \boldsymbol{A})\]</div>
+<p>In the <strong>Coulomb gauge</strong> where <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}} = -2\mathrm{i}\hbar\boldsymbol{A} \cdot \nabla = 2\hat{\boldsymbol{p}} \cdot \boldsymbol{A}\]</div>
+<div class="important admonition">
+<p class="admonition-title">Hamiltonian in Coulomb Gauge</p>
+<p>In the Coulomb gauge (<span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} - \frac{q}{m}\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + \frac{q^2}{2m}\boldsymbol{A}^2 + q\Phi\]</div>
+<ul class="simple">
+<li><p><strong>First term</strong>: kinetic energy (field-free)</p></li>
+<li><p><strong>Second term</strong>: linear coupling to magnetic field (diamagnetic coupling)</p></li>
+<li><p><strong>Third term</strong>: quadratic response to field (important only for strong fields)</p></li>
+<li><p><strong>Fourth term</strong>: Coulomb potential from scalar field</p></li>
+</ul>
 </div>
 </section>
-<section id="path-dependent-phases-and-the-aharonov-bohm-effect">
-<h3>Path-Dependent Phases and the Aharonov-Bohm Effect<a class="headerlink" href="#path-dependent-phases-and-the-aharonov-bohm-effect" title="Link to this heading">#</a></h3>
-<p>Although the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is not directly observable, <strong>line integrals</strong> of <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> are observable through quantum interference effects. A particle traveling from point <span class="math notranslate nohighlight">\(a\)</span> to point <span class="math notranslate nohighlight">\(b\)</span> along path <span class="math notranslate nohighlight">\(C\)</span> acquires a quantum phase:</p>
+</section>
+<section id="canonical-momentum-vs-kinetic-momentum">
+<h3>Canonical Momentum vs. Kinetic Momentum<a class="headerlink" href="#canonical-momentum-vs-kinetic-momentum" title="Link to this heading">#</a></h3>
+<p>A crucial distinction in quantum mechanics with electromagnetic fields is between two types of momentum:</p>
+<div class="important admonition">
+<p class="admonition-title">Canonical vs. Kinetic Momentum</p>
+<p>The <strong>canonical momentum</strong> is:</p>
 <div class="math notranslate nohighlight">
-\[\phi_C = \frac{q}{\hbar c}\int_C \boldsymbol{A} \cdot d\boldsymbol{l}\]</div>
-<p>Now consider two different paths <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> connecting the same two points. They enclose a region with magnetic flux <span class="math notranslate nohighlight">\(\Phi_B = \int_S (\nabla \times \boldsymbol{A}) \cdot d\boldsymbol{S}\)</span>. By Stokes’ theorem:</p>
+\[
+\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\]</div>
+<p>It satisfies the canonical commutation relation:</p>
 <div class="math notranslate nohighlight">
-\[\phi_{C_1} - \phi_{C_2} = \frac{q}{\hbar c}\oint\boldsymbol{A} \cdot d\boldsymbol{l} = \frac{q\Phi_B}{\hbar c}\]</div>
-<p><strong>The crucial point</strong>: The difference in phases between two paths is <strong>completely gauge-invariant</strong>—it depends only on the enclosed flux <span class="math notranslate nohighlight">\(\Phi_B\)</span>, not on the specific choice of vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> (which changes under gauge transformations). This is the origin of the Aharonov-Bohm effect: even in a region where <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> (say, inside a solenoid shielded from the outside), the vector potential is nonzero, and particles can acquire observable phase shifts from path-dependent integrals of <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>. This demonstrates that in quantum mechanics, the potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> are <strong>more fundamental</strong> than the fields <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>.</p>
+\[
+[\hat{p}_i, \hat{x}_j] = -\mathrm{i}\hbar\delta_{ij}\]</div>
+<p>The <strong>kinetic momentum</strong> (or physical momentum) is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\]</div>
+<p>It determines the particle’s actual velocity and obeys:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\pi}_i, \hat{x}_j] = -\mathrm{i}\hbar\delta_{ij} - q\partial_j A_i\]</div>
+<p>The correction term depends on how the magnetic field varies in space.</p>
+</div>
+<p>Why the distinction? The <strong>canonical momentum commutes with the Hamiltonian</strong> (in certain gauges), making it a useful quantum number. But the <strong>kinetic momentum</strong> represents the actual velocity and appears in physical observables like current and energy flux.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>In an experiment, can we directly measure the canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> of a particle in an electromagnetic field? Why or why not? How does the existence of multiple gauge choices (Coulomb, Lorenz, etc.) reflect this? Which momentum—canonical or kinetic—determines observable quantities like the velocity distribution in a momentum eigenstate?</p>
+</div>
+</section>
+<section id="lorentz-force-from-quantum-mechanics">
+<h3>Lorentz Force from Quantum Mechanics<a class="headerlink" href="#lorentz-force-from-quantum-mechanics" title="Link to this heading">#</a></h3>
+<section id="heisenberg-equation-of-motion">
+<h4>Heisenberg Equation of Motion<a class="headerlink" href="#heisenberg-equation-of-motion" title="Link to this heading">#</a></h4>
+<p>Use the Heisenberg equation to derive the force law from the Hamiltonian:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{\boldsymbol{p}}}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}[\hat{\boldsymbol{p}}, \hat{H}]\]</div>
+<p>In the Coulomb gauge with time-dependent fields, the calculation yields:</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{\mathrm{d}\langle\boldsymbol{v}\rangle}{\mathrm{d}t} = q\langle\boldsymbol{E}\rangle + q\langle\boldsymbol{v} \times \boldsymbol{B}\rangle\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Quantum Lorentz Force</p>
+<p>Start with:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{\boldsymbol{p}}}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}[\hat{\boldsymbol{p}}, \hat{H}] = \frac{1}{\mathrm{i}\hbar}[\hat{\boldsymbol{p}}, -\frac{q}{m}\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + q\Phi + \ldots]\]</div>
+<p>The commutator <span class="math notranslate nohighlight">\([\hat{p}_i, A_j\hat{p}_j]\)</span> requires the product rule:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{p}_i, A_j\hat{p}_j] = [\hat{p}_i, A_j]\hat{p}_j + A_j[\hat{p}_i, \hat{p}_j]\]</div>
+<p>Since <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{p}_j] = 0\)</span> and <span class="math notranslate nohighlight">\([\hat{p}_i, A_j] = -\mathrm{i}\hbar\partial_i A_j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{p}_i, A_j\hat{p}_j] = -\mathrm{i}\hbar(\partial_i A_j)\hat{p}_j\]</div>
+<p>Similarly, <span class="math notranslate nohighlight">\([\hat{p}_i, \Phi] = -\mathrm{i}\hbar\partial_i\Phi\)</span>.</p>
+<p>Collecting all terms:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\langle\hat{\boldsymbol{p}}\rangle}{\mathrm{d}t} = q\langle\nabla_{\boldsymbol{r}}\Phi\rangle - \frac{q}{m}\langle(\nabla_{\boldsymbol{r}} A_i)\hat{p}_i\rangle + q\frac{\partial\langle\boldsymbol{A}\rangle}{\partial t}\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> (which relates <span class="math notranslate nohighlight">\((\partial_i A_j - \partial_j A_i)\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{\mathrm{d}\langle\boldsymbol{v}\rangle}{\mathrm{d}t} = q\langle\boldsymbol{E}\rangle + q\langle\boldsymbol{v} \times \boldsymbol{B}\rangle\]</div>
+</div>
+<p>This is the <strong>correspondence principle in action</strong>: expectation values of quantum observables obey classical equations of motion.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The Coulomb gauge (<span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>) is convenient for atomic physics calculations. However, in a region where <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} \neq 0\)</span>, that gauge choice is not available. Does this mean different physical regimes require different gauges? Or should all physical predictions be independent of which gauge we choose?</p>
+</div>
+</section>
+</section>
+<section id="gauge-invariance-of-the-schrodinger-equation">
+<h3>Gauge Invariance of the Schrödinger Equation<a class="headerlink" href="#gauge-invariance-of-the-schrodinger-equation" title="Link to this heading">#</a></h3>
+<p>The Schrödinger equation with electromagnetic fields is manifestly gauge-covariant:</p>
+<div class="important admonition">
+<p class="admonition-title">Gauge Covariance of the Schrödinger Equation</p>
+<p>If <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}, t)\)</span> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\frac{\partial\psi}{\partial t} = \hat{H}[\boldsymbol{A}, \Phi]\psi\]</div>
+<p>then <span class="math notranslate nohighlight">\(\psi'(\boldsymbol{x}, t) = \mathrm{e}^{\mathrm{i}q\chi(\boldsymbol{x}, t)}\psi(\boldsymbol{x}, t)\)</span> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\frac{\partial\psi'}{\partial t} = \hat{H}[\boldsymbol{A}', \Phi']\psi'\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{A}' = \boldsymbol{A} - \nabla\chi\)</span> and <span class="math notranslate nohighlight">\(\Phi' = \Phi + \frac{1}{q}\partial_t\chi\)</span>.</p>
+<p>This means: <strong>different gauge choices yield wavefunctions that differ by a phase, but produce identical predictions for all physical observables</strong>.</p>
+</div>
+</section>
+<section id="probability-current-with-electromagnetic-field">
+<h3>Probability Current with Electromagnetic Field<a class="headerlink" href="#probability-current-with-electromagnetic-field" title="Link to this heading">#</a></h3>
+<p>A fundamental consequence of gauge invariance is how probability current transforms. The continuity equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\rho}{\partial t} + \nabla \cdot \boldsymbol{J} = 0\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho = |\psi|^2\)</span> is probability density. With an electromagnetic field, the probability current is:</p>
+<div class="important admonition">
+<p class="admonition-title">Probability Current in Electromagnetic Field</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{J} = \frac{1}{m}\text{Im}(\psi^*\hat{\boldsymbol{\pi}}\psi) = \frac{1}{m}\text{Im}(\psi^*[\hat{\boldsymbol{p}} - q\boldsymbol{A}]\psi)\]</div>
+<p>The <strong>kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> appears naturally in the current, not the canonical momentum. This makes physical sense: the current describes actual particle flow, which is determined by kinetic velocity <span class="math notranslate nohighlight">\(\boldsymbol{v} = \hat{\boldsymbol{\pi}}/m\)</span>, not canonical velocity.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Minimal coupling</strong>: Charged particles couple to EM fields through <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> in the Hamiltonian.</p></li>
-<li><p><strong>Hamiltonian form</strong>: <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span> is gauge covariant.</p></li>
-<li><p><strong>Canonical momentum</strong>: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -i\hbar\nabla\)</span> is the generator of translations; it’s frame-dependent.</p></li>
-<li><p><strong>Kinetic momentum</strong>: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> determines particle velocity; more physical but gauge-dependent.</p></li>
-<li><p><strong>Quantum Lorentz force</strong>: Heisenberg equations give <span class="math notranslate nohighlight">\(m d\langle\boldsymbol{v}\rangle/dt = q\langle\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B}\rangle\)</span>.</p></li>
-<li><p><strong>Observable gauge invariance</strong>: Physical quantities (probabilities, forces, energies) are independent of gauge choice.</p></li>
-<li><p><strong>Potentials are fundamental</strong>: In quantum mechanics, <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> directly affect wavefunction evolution; classical electromagnetism privileges fields <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>.</p></li>
-<li><p><strong>Path-dependent phases</strong>: Line integrals of <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> encode observable interference—the foundation of Aharonov-Bohm effect.</p></li>
+<li><p>The <strong>minimal coupling prescription</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> is the unique choice preserving gauge covariance.</p></li>
+<li><p>The <strong>kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> represents actual particle momentum; canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> is a mathematical tool.</p></li>
+<li><p>Expectation values obey the <strong>quantum Lorentz force</strong>, confirming the correspondence principle.</p></li>
+<li><p>The Schrödinger equation is <strong>gauge-covariant</strong>: different gauges give phase-related wavefunctions with identical physics.</p></li>
+<li><p><strong>Probability current</strong> naturally involves kinetic momentum, reflecting the physical meaning of particle flow in electromagnetic fields.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-1-1-gauge-transformations.html"><span class="std std-doc">4.1.1 Gauge Transformations</span></a></strong>: Gauge invariance as fundamental symmetry</p></li>
+<li><p><strong><a class="reference internal" href="4-2-1-aharonov-bohm-effect.html"><span class="std std-doc">4.2.1 Aharonov-Bohm Effect</span></a></strong>: Quantum interference in electromagnetic fields</p></li>
+<li><p><strong><a class="reference internal" href="4-3-1-cyclotron-motion.html"><span class="std std-doc">4.3.1 Cyclotron Motion</span></a></strong>: Classical charged particle dynamics in magnetic fields</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Minimal Coupling and the Hamiltonian</strong></p>
+<p>A charged particle of charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> moves in an electromagnetic field described by potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{x})\)</span> and <span class="math notranslate nohighlight">\(\Phi(\boldsymbol{x})\)</span>. Starting from the classical Hamiltonian <span class="math notranslate nohighlight">\(H = \frac{1}{2m}(\boldsymbol{p} - q\boldsymbol{A})^2 + q\Phi\)</span>, show that in the Coulomb gauge (<span class="math notranslate nohighlight">\(
+abla \cdot \boldsymbol{A} = 0\)</span>), the quantum Hamiltonian can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+   \hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} - \frac{q}{m}\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + \frac{q^2}{2m}\boldsymbol{A}^2 + q\Phi\]</div>
+<p>Explain the physical interpretation of each term after the kinetic energy. When is the quadratic term <span class="math notranslate nohighlight">\(\frac{q^2}{2m}\boldsymbol{A}^2\)</span> important versus negligible?</p>
+</li>
+<li><p><strong>Canonical Momentum Commutation Relations</strong></p>
+<p>The canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> satisfies <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{x}_j] = -\mathrm{i}\hbar\delta_{ij}\)</span>. Compute the commutators <span class="math notranslate nohighlight">\([\hat{\pi}_i, \hat{x}_j]\)</span> where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> is the kinetic momentum. How does the result depend on the vector potential? What does this tell you about the difference between canonical and kinetic momentum?</p>
+</li>
+<li><p><strong>Lorentz Force from the Hamiltonian</strong></p>
+<p>Use the Heisenberg equation of motion <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\boldsymbol{p}}}{dt} = \frac{1}{\mathrm{i}\hbar}[\hat{\boldsymbol{p}}, \hat{H}]\)</span> to derive the quantum Lorentz force law:</p>
+<div class="math notranslate nohighlight">
+\[
+   m\frac{\mathrm{d}\langle\boldsymbol{v}\rangle}{dt} = q(\langle\boldsymbol{E}\rangle + \langle\boldsymbol{v} \times \boldsymbol{B}\rangle)\]</div>
+<p>You will need: <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>. Show all steps and explain why expectation values obey the classical equation of motion (correspondence principle).</p>
+</li>
+<li><p><strong>Gauge Transformation and Wavefunction Phase</strong></p>
+<p>Under a gauge transformation, the wavefunction transforms as <span class="math notranslate nohighlight">\(\psi \to \psi' = \mathrm{e}^{\mathrm{i}\chi(\boldsymbol{x}, t)}\psi\)</span>, where <span class="math notranslate nohighlight">\(\chi(\boldsymbol{x}, t)\)</span> is an arbitrary scalar. The potentials transform as:</p>
+<div class="math notranslate nohighlight">
+\[
+   \boldsymbol{A} \to \boldsymbol{A}' = \boldsymbol{A} - \frac{1}{q}\nabla\chi\]</div>
+<p>Show that the kinetic energy term <span class="math notranslate nohighlight">\(\frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\psi'\)</span> equals <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\chi}\)</span> times the original kinetic energy acting on <span class="math notranslate nohighlight">\(\psi\)</span>. What does this calculation reveal about the covariance of the Hamiltonian?</p>
+</li>
+<li><p><strong>Probability Current with Electromagnetic Field</strong></p>
+<p>For a particle in an electromagnetic field, the probability current is modified compared to the field-free case. Starting from the Schrödinger equation with the electromagnetic Hamiltonian, derive the continuity equation:</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{\partial\rho}{\partial t} + \nabla \cdot \boldsymbol{J} = 0\]</div>
+<p>Show that the probability current is:</p>
+<div class="math notranslate nohighlight">
+\[
+   \boldsymbol{J} = \frac{1}{m}\text{Im}(\psi^*\hat{\boldsymbol{\pi}}\psi)\]</div>
+<p>Explain why the kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> (not the canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span>) appears in the current.</p>
+</li>
+<li><p><strong>Gauge Invariance of the Schrödinger Equation</strong></p>
+<p>Show that the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\frac{\partial\psi}{\partial t} = \hat{H}\psi\)</span> is invariant under gauge transformations in the following sense: if <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}, t)\)</span> satisfies the Schrödinger equation with potentials <span class="math notranslate nohighlight">\((\boldsymbol{A}, \Phi)\)</span>, then <span class="math notranslate nohighlight">\(\psi'(\boldsymbol{x}, t) = \mathrm{e}^{\mathrm{i}\chi(\boldsymbol{x}, t)}\psi(\boldsymbol{x}, t)\)</span> satisfies the Schrödinger equation with transformed potentials <span class="math notranslate nohighlight">\((\boldsymbol{A}', \Phi')\)</span>. \textit{Hint}: Use the chain rule when computing <span class="math notranslate nohighlight">\(\partial_t\psi'\)</span> and <span class="math notranslate nohighlight">\(\nabla\psi'\)</span>.</p>
+</li>
+<li><p><strong>Aharonov-Bohm Phase Shift</strong></p>
+<p>A charged particle with charge <span class="math notranslate nohighlight">\(q\)</span> travels from point <span class="math notranslate nohighlight">\(a\)</span> to point <span class="math notranslate nohighlight">\(b\)</span> along a closed path that encloses a region containing magnetic flux <span class="math notranslate nohighlight">\(\Phi_B\)</span>. Show that the phase difference acquired by the wavefunction as it travels around the two halves of the loop is:</p>
+<div class="math notranslate nohighlight">
+\[
+   \Delta\phi = \frac{q\Phi_B}{\hbar c}\]</div>
+<p>Explain why this phase is observable (it produces an interference pattern) even in a region where the magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> everywhere on the particle’s path. Why does this imply that the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is more fundamental in quantum mechanics than in classical mechanics?</p>
+</li>
+<li><p><strong>Gauge Freedom as Computational Advantage</strong></p>
+<p>Explain why the freedom to choose a gauge (Coulomb, Lorenz, radiation, etc.) is useful in practice. For a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{\boldsymbol{z}}\)</span>, compare the difficulty of solving the Schrödinger equation in two different gauges:</p>
+<p>(a) <strong>Symmetric gauge</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{1}{2}\boldsymbol{B} \times \boldsymbol{x} = \frac{B}{2}(-y, x, 0)\)</span></p>
+<p>(b) <strong>Landau gauge</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{A} = (0, Bx, 0)\)</span></p>
+<p>Write out the kinetic energy term in both gauges and discuss which is simpler for finding eigenstates. Explain why all gauge choices lead to identical physical predictions despite this computational difference.</p>
+</li>
+</ol>
 </section>
 </section>
 
@@ -773,15 +868,22 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charged-particle-hamiltonian-with-electromagnetic-coupling">Charged Particle Hamiltonian with Electromagnetic Coupling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-vs-kinetic-momentum">Canonical vs Kinetic Momentum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-covariance-of-the-hamiltonian">Gauge Covariance of the Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-lorentz-force">Quantum Lorentz Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-of-observables">Gauge Invariance of Observables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-dependent-phases-and-the-aharonov-bohm-effect">Path-Dependent Phases and the Aharonov-Bohm Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-coupling-prescription">Minimal Coupling Prescription</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-classical-to-quantum">From Classical to Quantum</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-the-hamiltonian">Expansion of the Hamiltonian</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-momentum-vs-kinetic-momentum">Canonical Momentum vs. Kinetic Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-force-from-quantum-mechanics">Lorentz Force from Quantum Mechanics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#heisenberg-equation-of-motion">Heisenberg Equation of Motion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-of-the-schrodinger-equation">Gauge Invariance of the Schrödinger Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-current-with-electromagnetic-field">Probability Current with Electromagnetic Field</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -819,7 +921,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

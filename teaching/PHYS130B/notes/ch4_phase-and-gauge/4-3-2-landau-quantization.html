@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,17 +522,22 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hamiltonian-in-symmetric-gauge">Quantum Hamiltonian in Symmetric Gauge</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonic-oscillator-ladder-operators">Harmonic Oscillator Ladder Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-level-hamiltonian">Landau Level Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-level-wavefunctions">Landau Level Wavefunctions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-landau-level-wavefunctions-n-0-1-2">Explicit Landau Level Wavefunctions: n=0,1,2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-coordinate-formalism">Complex Coordinate Formalism</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-length-the-fundamental-scale">Magnetic Length: The Fundamental Scale</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guiding-center-coordinates">Guiding Center Coordinates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hamiltonian-in-a-magnetic-field">Quantum Hamiltonian in a Magnetic Field</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-coupling-and-gauge-choice">Minimal Coupling and Gauge Choice</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-gauge-approach">Symmetric Gauge Approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operator-construction">Ladder Operator Construction</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-levels-and-energy-spectrum">Landau Levels and Energy Spectrum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-length-and-degeneracy">Magnetic Length and Degeneracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-consequences">Physical Consequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-vs-classical">Quantum vs Classical</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -558,185 +563,214 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>In quantum mechanics, a charged particle in a uniform magnetic field cannot have arbitrarily small or large energy—its kinetic energy is quantized into discrete Landau levels separated by ℏωc. This quantization is a purely quantum effect with no classical analog, yet it arises directly from solving the Schrödinger equation. Landau quantization is the gateway to understanding the quantum Hall effect, topological properties of energy bands, and how symmetry constrains the quantum mechanical spectrum.</p>
-<section id="quantum-hamiltonian-in-symmetric-gauge">
-<h3>Quantum Hamiltonian in Symmetric Gauge<a class="headerlink" href="#quantum-hamiltonian-in-symmetric-gauge" title="Link to this heading">#</a></h3>
-<p>When a quantum particle moves in a uniform magnetic field, the Hamiltonian with minimal coupling to the vector potential is:</p>
+<p>Landau quantization describes the energy spectrum of a charged particle in a uniform magnetic field quantum mechanically. This is a cornerstone result: it shows that the continuous kinetic energy of a free particle becomes quantized into discrete <em>Landau levels</em>, each with enormous degeneracy. This degeneracy is the key to understanding the quantum Hall effect.</p>
+<section id="quantum-hamiltonian-in-a-magnetic-field">
+<h3>Quantum Hamiltonian in a Magnetic Field<a class="headerlink" href="#quantum-hamiltonian-in-a-magnetic-field" title="Link to this heading">#</a></h3>
+<section id="minimal-coupling-and-gauge-choice">
+<h4>Minimal Coupling and Gauge Choice<a class="headerlink" href="#minimal-coupling-and-gauge-choice" title="Link to this heading">#</a></h4>
+<p>The quantum Hamiltonian for a charged particle in an electromagnetic field is:</p>
 <div class="math notranslate nohighlight">
-\[\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - e\boldsymbol{A})^2\]</div>
-<p>In the <strong>symmetric gauge</strong> (which preserves rotational symmetry), the vector potential is <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{1}{2}\boldsymbol{B} \times \boldsymbol{r}\)</span>. The kinetic momentum components don’t commute:</p>
-<div class="math notranslate nohighlight">
-\[[\pi_x, \pi_y] = -i\hbar\omega_c\]</div>
-<p>where <span class="math notranslate nohighlight">\(\omega_c = eB/m\)</span> is the cyclotron frequency. This non-commuting structure is the key to quantization—it signals that the system is fundamentally quantum and cannot be treated classically.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Kinetic Momentum and Commutation Relations</p>
-<p>For <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> and symmetric gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span>, the kinetic momentum is:</p>
-<div class="math notranslate nohighlight">
-\[\pi_x = p_x + \frac{eBy}{2}, \quad \pi_y = p_y - \frac{eBx}{2}\]</div>
-<p>Computing the commutator using <span class="math notranslate nohighlight">\([p_i, x_j] = -i\hbar\delta_{ij}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[[\pi_x, \pi_y] = [p_x, -\frac{eBx}{2}] + [\frac{eBy}{2}, p_y] = -i\hbar\omega_c\]</div>
-</div>
-</section>
-<section id="harmonic-oscillator-ladder-operators">
-<h3>Harmonic Oscillator Ladder Operators<a class="headerlink" href="#harmonic-oscillator-ladder-operators" title="Link to this heading">#</a></h3>
-<p>The non-commuting kinetic momentum components signal a <strong>harmonic oscillator structure</strong> underlying the problem. We can construct ladder operators analogous to the quantum harmonic oscillator.</p>
-<p>First, define the <strong>magnetic length</strong>—a fundamental length scale:</p>
-<div class="math notranslate nohighlight">
-\[\ell_B = \sqrt{\frac{\hbar}{eB}}\]</div>
-<p>Then define the <strong>ladder operators</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{a} = \frac{1}{\sqrt{2}\hbar\omega_c}(\pi_x + i\pi_y), \quad \hat{a}^\dagger = \frac{1}{\sqrt{2}\hbar\omega_c}(\pi_x - i\pi_y)\]</div>
-<p>These satisfy the <strong>canonical commutation relation</strong>:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{a}, \hat{a}^\dagger] = 1\]</div>
-<p>This is the hallmark of a harmonic oscillator. The ladder operators allow us to construct energy eigenstates by starting from the ground state and applying creation operators.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Proving the Canonical Commutation</p>
-<div class="math notranslate nohighlight">
-\[[\hat{a}, \hat{a}^\dagger] = \frac{1}{2\hbar\omega_c^2}[(\pi_x + i\pi_y), (\pi_x - i\pi_y)]\]</div>
-<div class="math notranslate nohighlight">
-\[= \frac{1}{2\hbar\omega_c^2}[-2i[\pi_x, \pi_y]] = \frac{1}{2\hbar\omega_c^2}[-2i(-i\hbar\omega_c)] = 1\]</div>
-</div>
-</section>
-<section id="landau-level-hamiltonian">
-<h3>Landau Level Hamiltonian<a class="headerlink" href="#landau-level-hamiltonian" title="Link to this heading">#</a></h3>
-<p>The kinetic energy can be rewritten in terms of the ladder operators:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H} = \hbar\omega_c\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right) = \hbar\omega_c\left(\hat{N} + \frac{1}{2}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{N} = \hat{a}^\dagger\hat{a}\)</span> is the occupation number operator. The energy eigenvalues are:</p>
-<div class="math notranslate nohighlight">
-\[E_n = \hbar\omega_c\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots\]</div>
-<p>These are the <strong>Landau level energies</strong>. Each level is labeled by <span class="math notranslate nohighlight">\(n\)</span> and has <strong>equal spacing</strong> <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>. Even the ground state (<span class="math notranslate nohighlight">\(n=0\)</span>) has finite zero-point energy <span class="math notranslate nohighlight">\(E_0 = \hbar\omega_c/2\)</span>—particles cannot be at rest in a magnetic field; they must undergo quantum zero-point cyclotron motion. This is radically different from classical mechanics.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Hamiltonian in Ladder Operator Form</p>
-<p>The kinetic energy <span class="math notranslate nohighlight">\(\frac{1}{2m}(\pi_x^2 + \pi_y^2)\)</span> can be expressed as:</p>
-<div class="math notranslate nohighlight">
-\[\frac{1}{2m}(\pi_x^2 + \pi_y^2) = \frac{\hbar\omega_c}{2}(\hat{a}^\dagger\hat{a} + \hat{a}\hat{a}^\dagger)\]</div>
-<p>Using <span class="math notranslate nohighlight">\(\hat{a}\hat{a}^\dagger = \hat{a}^\dagger\hat{a} + 1\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{1}{2m}(\pi_x^2 + \pi_y^2) = \hbar\omega_c\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)\]</div>
-<p>The total Hamiltonian follows directly.</p>
-</div>
-</section>
-<section id="landau-level-wavefunctions">
-<h3>Landau Level Wavefunctions<a class="headerlink" href="#landau-level-wavefunctions" title="Link to this heading">#</a></h3>
-<p>The quantum states are characterized by two quantum numbers: the <strong>Landau level index</strong> <span class="math notranslate nohighlight">\(n\)</span> and the <strong>guiding center position</strong> <span class="math notranslate nohighlight">\((X_c, Y_c)\)</span>—the center of the particle’s cyclotron orbit. For the lowest Landau level (<span class="math notranslate nohighlight">\(n=0\)</span>), the ground-state wavefunction in symmetric gauge is:</p>
-<div class="math notranslate nohighlight">
-\[\psi_0(x, y) = \frac{1}{(\pi\ell_B^2)^{1/4}}\exp\left(-\frac{x^2+y^2}{2\ell_B^2}\right)\]</div>
-<p>This is a <strong>Gaussian</strong> with width set by the magnetic length <span class="math notranslate nohighlight">\(\ell_B\)</span>. States with different guiding centers are translations of this wavefunction. Higher Landau levels (<span class="math notranslate nohighlight">\(n &gt; 0\)</span>) contain additional structure—the wavefunction oscillates within the Gaussian envelope via Hermite polynomials:</p>
-<div class="math notranslate nohighlight">
-\[\psi_n(x,y) \propto H_n\left(\frac{\sqrt{x^2+y^2}}{\ell_B}\right)\exp\left(-\frac{x^2+y^2}{2\ell_B^2}\right)\]</div>
-<p>The <strong>magnetic length</strong> <span class="math notranslate nohighlight">\(\ell_B\)</span> is the characteristic scale: wavefunctions are localized within a region of size <span class="math notranslate nohighlight">\(\ell_B\)</span>, independent of the particle’s energy. This is a purely quantum effect with no classical analog.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Wavefunction Structure and Hermite Polynomials</p>
-<p>The Landau level states can be labeled by <span class="math notranslate nohighlight">\(|n; X_c, Y_c\rangle\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the Landau level and <span class="math notranslate nohighlight">\((X_c, Y_c)\)</span> is the guiding center. In symmetric gauge, the ground state is the state annihilated by <span class="math notranslate nohighlight">\(\hat{a}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{a}|0; X_c, Y_c\rangle = 0\]</div>
-<p>Solving this equation in position space gives the Gaussian form. Excited Landau level states are obtained by applying the creation operator <span class="math notranslate nohighlight">\(\hat{a}^\dagger\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[|n; X_c, Y_c\rangle = \frac{(\hat{a}^\dagger)^n}{\sqrt{n!}}|0; X_c, Y_c\rangle\]</div>
-<p>The action of <span class="math notranslate nohighlight">\(\hat{a}^\dagger\)</span> introduces Hermite polynomials in the radial variable.</p>
-</div>
-</section>
-<section id="explicit-landau-level-wavefunctions-n-0-1-2">
-<h3>Explicit Landau Level Wavefunctions: n=0,1,2<a class="headerlink" href="#explicit-landau-level-wavefunctions-n-0-1-2" title="Link to this heading">#</a></h3>
-<p>While the general form uses Hermite polynomials, the first few Landau levels have particularly simple and instructive forms. Let’s write them out explicitly for the lowest three Landau levels.</p>
-<p><strong>Lowest Landau Level (<span class="math notranslate nohighlight">\(n=0\)</span>):</strong></p>
-<div class="math notranslate nohighlight">
-\[\psi_0(x, y) = \frac{1}{(\pi\ell_B^2)^{1/4}}\exp\left(-\frac{x^2+y^2}{2\ell_B^2}\right)\]</div>
-<p>This is a <strong>pure Gaussian</strong>—the simplest form. All states within the lowest Landau level are obtained by translating this wavefunction to different guiding center positions <span class="math notranslate nohighlight">\((X_c, Y_c)\)</span>.</p>
-<p><strong>First Excited Landau Level (<span class="math notranslate nohighlight">\(n=1\)</span>):</strong></p>
-<div class="math notranslate nohighlight">
-\[\psi_1(x, y) = \frac{1}{(\pi\ell_B^2)^{1/4}} \cdot \sqrt{2} \cdot \frac{\sqrt{x^2+y^2}}{\ell_B} \exp\left(-\frac{x^2+y^2}{2\ell_B^2}\right)\]</div>
-<p>This includes a factor of <span class="math notranslate nohighlight">\(\sqrt{x^2+y^2}\)</span> (the radial coordinate multiplied by the Hermite polynomial <span class="math notranslate nohighlight">\(H_1\)</span>), giving it a dipole-like shape. The wavefunction vanishes at the origin.</p>
-<p><strong>Second Excited Landau Level (<span class="math notranslate nohighlight">\(n=2\)</span>):</strong></p>
-<div class="math notranslate nohighlight">
-\[\psi_2(x, y) = \frac{1}{(\pi\ell_B^2)^{1/4}} \cdot \frac{1}{\sqrt{2}} \left[2\left(\frac{x^2+y^2}{\ell_B^2}\right) - 1\right] \exp\left(-\frac{x^2+y^2}{2\ell_B^2}\right)\]</div>
-<p>This includes a radial polynomial (related to <span class="math notranslate nohighlight">\(H_2\)</span>), creating a quadrupole-like structure with a radial node.</p>
-</section>
-<section id="complex-coordinate-formalism">
-<h3>Complex Coordinate Formalism<a class="headerlink" href="#complex-coordinate-formalism" title="Link to this heading">#</a></h3>
-<p>A powerful technique for analyzing Landau level wavefunctions uses <strong>complex coordinates</strong> on the plane. Define:</p>
-<div class="math notranslate nohighlight">
-\[z = x + iy, \quad \bar{z} = x - iy\]</div>
-<p>Then <span class="math notranslate nohighlight">\(x = (z + \bar{z})/2\)</span> and <span class="math notranslate nohighlight">\(y = (z - \bar{z})/(2i)\)</span>. In these complex variables, the <strong>lowering operator</strong> <span class="math notranslate nohighlight">\(\hat{a}\)</span> becomes:</p>
-<div class="math notranslate nohighlight">
-\[\hat{a} \propto \frac{\partial}{\partial \bar{z}} + \frac{z}{2\ell_B^2}\]</div>
-<p>This reveals a deep fact: in the symmetric gauge, the Landau level wavefunctions are <strong>holomorphic functions</strong> times a Gaussian. Specifically, the <span class="math notranslate nohighlight">\(n\)</span>-th Landau level wavefunction can be written as:</p>
-<div class="math notranslate nohighlight">
-\[\psi_n(z, \bar{z}) = P_n(z)\exp\left(-\frac{|z|^2}{2\ell_B^2}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(P_n(z)\)</span> is a <strong>holomorphic polynomial</strong> of degree <span class="math notranslate nohighlight">\(n\)</span>. For example:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n=0\)</span>: <span class="math notranslate nohighlight">\(P_0(z) = 1\)</span> (constant)</p></li>
-<li><p><span class="math notranslate nohighlight">\(n=1\)</span>: <span class="math notranslate nohighlight">\(P_1(z) = z\)</span> (linear)</p></li>
-<li><p><span class="math notranslate nohighlight">\(n=2\)</span>: <span class="math notranslate nohighlight">\(P_2(z) = z^2\)</span> (quadratic)</p></li>
-</ul>
-<p>This holomorphic structure is not accidental—it reflects the deep connection between Landau quantization and <strong>quantum Hall geometry</strong>. The fact that <span class="math notranslate nohighlight">\(n\)</span>-th Landau level states are spanned by degree-<span class="math notranslate nohighlight">\(n\)</span> polynomials, with one state per flux quantum, is the foundation of the modern geometric understanding of the quantum Hall effect.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Why Holomorphic? The Connection to Ladder Operators</p>
-<p>The lowering operator <span class="math notranslate nohighlight">\(\hat{a}\)</span> in the symmetric gauge can be written as:</p>
-<div class="math notranslate nohighlight">
-\[\hat{a} \propto \ell_B^{-1}\left(\frac{\partial}{\partial \bar{z}} + \frac{z}{2\ell_B^2}\right)\]</div>
-<p>The ground state satisfies <span class="math notranslate nohighlight">\(\hat{a}|0\rangle = 0\)</span>, which in position space is:</p>
-<div class="math notranslate nohighlight">
-\[\left(\frac{\partial}{\partial \bar{z}} + \frac{z}{2\ell_B^2}\right)\psi_0(z, \bar{z}) = 0\]</div>
-<p>The solution is a function with <strong>no <span class="math notranslate nohighlight">\(\bar{z}\)</span>-dependence</strong> (after accounting for the Gaussian), i.e., it depends only on <span class="math notranslate nohighlight">\(z\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\psi_0(z, \bar{z}) = \exp\left(-\frac{|z|^2}{2\ell_B^2}\right)\]</div>
-<p>Excited Landau levels are obtained by <span class="math notranslate nohighlight">\(\psi_n = (\hat{a}^\dagger)^n\psi_0\)</span>. Since <span class="math notranslate nohighlight">\(\hat{a}^\dagger \propto \partial/\partial z\)</span>, each application of the creation operator multiplies the wavefunction by <span class="math notranslate nohighlight">\(z\)</span>, giving:</p>
-<div class="math notranslate nohighlight">
-\[\psi_n(z, \bar{z}) \propto z^n \exp\left(-\frac{|z|^2}{2\ell_B^2}\right)\]</div>
-<p>This is why the <span class="math notranslate nohighlight">\(n\)</span>-th Landau level is spanned by <strong>holomorphic polynomials</strong> of degree <span class="math notranslate nohighlight">\(n\)</span> times the Gaussian.</p>
-</div>
-</section>
-<section id="magnetic-length-the-fundamental-scale">
-<h3>Magnetic Length: The Fundamental Scale<a class="headerlink" href="#magnetic-length-the-fundamental-scale" title="Link to this heading">#</a></h3>
-<p>The <strong>magnetic length</strong> <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(eB)}\)</span> sets the only length scale in the Landau problem. It characterizes:</p>
+\[
+\hat{H} = \frac{1}{2m}\left(\hat{\boldsymbol{p}} - \frac{q}{c}\boldsymbol{A}\right)^2 + q\Phi\]</div>
+<p>(In SI units, drop the <span class="math notranslate nohighlight">\(1/c\)</span> factor.) For a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> with no electric potential, <span class="math notranslate nohighlight">\(\Phi = 0\)</span>.</p>
+<p>The energy depends on the choice of gauge for <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>. Two convenient choices are:</p>
+<div class="note admonition">
+<p class="admonition-title">Gauge Choices</p>
 <ol class="arabic simple">
-<li><p><strong>Wavefunction size</strong>: All Landau level wavefunctions are localized within a region of linear size <span class="math notranslate nohighlight">\(\sim\ell_B\)</span>.</p></li>
-<li><p><strong>Guiding center spacing</strong>: States are spaced one guiding center per flux quantum, which occupies area <span class="math notranslate nohighlight">\(\sim 2\pi\ell_B^2\)</span>.</p></li>
-<li><p><strong>Kinetic energy scale</strong>: The spacing between Landau levels is <span class="math notranslate nohighlight">\(\hbar\omega_c = \hbar(eB/m) = (\hbar^2)/(m\ell_B^2)\)</span>.</p></li>
-<li><p><strong>Quantum geometry</strong>: The noncommuting guiding center coordinates <span class="math notranslate nohighlight">\([\hat{X}, \hat{Y}] = -i\ell_B^2\)</span> imply that guiding center space itself is <strong>quantized</strong>, with minimum area cell <span class="math notranslate nohighlight">\(\ell_B^2\)</span>.</p></li>
+<li><p><strong>Symmetric (Landau) gauge</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span>. This gauge respects rotational symmetry.</p></li>
+<li><p><strong>Landau gauge</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{A} = (0, Bx, 0)\)</span>. This breaks translational symmetry in <span class="math notranslate nohighlight">\(x\)</span> but simplifies algebra.</p></li>
 </ol>
-<p>Stronger magnetic fields make <span class="math notranslate nohighlight">\(\ell_B\)</span> smaller, confining particles to tighter orbits and pushing the Landau level energies higher. Weaker fields make <span class="math notranslate nohighlight">\(\ell_B\)</span> larger, allowing particles to spread out more. The magnetic length thus controls the transition between classical (large <span class="math notranslate nohighlight">\(\ell_B\)</span>) and quantum (small <span class="math notranslate nohighlight">\(\ell_B\)</span>) behavior.</p>
-</section>
-<section id="guiding-center-coordinates">
-<h3>Guiding Center Coordinates<a class="headerlink" href="#guiding-center-coordinates" title="Link to this heading">#</a></h3>
-<p>A remarkable feature emerges when we study the center of the cyclotron orbit. Define the <strong>guiding center coordinates</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{X} = \hat{x} + \frac{\hat{p}_y}{eB}, \quad \hat{Y} = \hat{y} - \frac{\hat{p}_x}{eB}\]</div>
-<p>These represent the actual center of the orbit. Unlike ordinary position coordinates, the guiding center coordinates have a <strong>non-zero commutator</strong>:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{X}, \hat{Y}] = -i\ell_B^2\]</div>
-<p>This non-commuting structure is a signature that guiding center coordinates live on a <strong>quantized phase space</strong> with minimum uncertainty <span class="math notranslate nohighlight">\(\ell_B\)</span>. The area of a unit cell in guiding center space is quantized: roughly one guiding center per magnetic flux quantum. This connects the Landau quantization problem to deep topological geometry (monopole phase space) and explains why the quantum Hall effect is a topological phenomenon.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Guiding Center Commutation and Magnetic Length</p>
-<p>In symmetric gauge, the kinetic momentum is:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\pi}_x = \hat{p}_x + \frac{eB}{2}\hat{y}, \quad \hat{\pi}_y = \hat{p}_y - \frac{eB}{2}\hat{x}\]</div>
-<p>The guiding center coordinates <span class="math notranslate nohighlight">\((\hat{X}, \hat{Y})\)</span> are defined such that they commute with all ladder operators and encode the orbital center. Their commutator is:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{X}, \hat{Y}] = [\hat{x}, \hat{y}] + \frac{1}{(eB)^2}[\hat{p}_y, \hat{p}_x] = 0 + \frac{i\hbar}{(eB)^2}\]</div>
-<div class="math notranslate nohighlight">
-\[= -i\frac{\hbar}{eB} = -i\ell_B^2\]</div>
-<p>where we used <span class="math notranslate nohighlight">\([\hat{p}_y, \hat{p}_x] = i\hbar\)</span>. This means each guiding center occupies a quantum area of order <span class="math notranslate nohighlight">\(\ell_B^2\)</span>.</p>
+<p>Both give the same physical spectrum; choice is a matter of convenience.</p>
 </div>
+</section>
+<section id="symmetric-gauge-approach">
+<h4>Symmetric Gauge Approach<a class="headerlink" href="#symmetric-gauge-approach" title="Link to this heading">#</a></h4>
+<p>In the symmetric gauge, the kinetic momentum components are:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\pi}_x = \hat{p}_x + \frac{qB}{2c}y, \quad \hat{\pi}_y = \hat{p}_y - \frac{qB}{2c}x\]</div>
+<p>The Hamiltonian becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H} = \frac{1}{2m}\left(\hat{\pi}_x^2 + \hat{\pi}_y^2\right) + \frac{\hat{p}_z^2}{2m}\]</div>
+<p>Motion along <span class="math notranslate nohighlight">\(z\)</span> is unaffected. For motion in the <span class="math notranslate nohighlight">\(xy\)</span>-plane, define the cyclotron frequency:</p>
+<div class="math notranslate nohighlight">
+\[
+\omega_c = \frac{qB}{mc}\]</div>
+<p>The kinetic momentum components satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\pi}_x, \hat{\pi}_y] = -\mathrm{i}\hbar\frac{qB}{c} = -\mathrm{i}\hbar m\omega_c\]</div>
+</section>
+<section id="ladder-operator-construction">
+<h4>Ladder Operator Construction<a class="headerlink" href="#ladder-operator-construction" title="Link to this heading">#</a></h4>
+<p>The perpendicular kinetic momentum components look like position and momentum in harmonic oscillator form. Define ladder operators:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{a} = \sqrt{\frac{m\omega_c}{2\hbar}}\hat{\pi}_x + \mathrm{i}\sqrt{\frac{1}{2\hbar m\omega_c}}\hat{\pi}_y\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{a}^\dagger = \sqrt{\frac{m\omega_c}{2\hbar}}\hat{\pi}_x - \mathrm{i}\sqrt{\frac{1}{2\hbar m\omega_c}}\hat{\pi}_y\]</div>
+<p>These satisfy the standard commutation relation:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{a}, \hat{a}^\dagger] = 1\]</div>
+<div class="important admonition">
+<p class="admonition-title">Hamiltonian in Ladder Operator Form</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}_{\text{2D}} = \hbar\omega_c\left(\hat{a}^\dagger\hat{a} + \tfrac{1}{2}\right)\]</div>
+<p>This is exactly the Hamiltonian of a 2D harmonic oscillator, with each Landau level separated by energy <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="landau-levels-and-energy-spectrum">
+<h3>Landau Levels and Energy Spectrum<a class="headerlink" href="#landau-levels-and-energy-spectrum" title="Link to this heading">#</a></h3>
+<p>The eigenvalue problem is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}|n\rangle = E_n|n\rangle\]</div>
+<p>with <span class="math notranslate nohighlight">\(\hat{a}^\dagger\hat{a}|n\rangle = n|n\rangle\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots\)</span></p>
+<div class="important admonition">
+<p class="admonition-title">Landau Level Energies</p>
+<div class="math notranslate nohighlight">
+\[
+E_n = \left(n + \tfrac{1}{2}\right)\hbar\omega_c\]</div>
+<p>All states with the same <span class="math notranslate nohighlight">\(n\)</span> belong to the <span class="math notranslate nohighlight">\(n\)</span>-th <em>Landau level</em> (LL). There is no energy separation between states with different guiding center positions—only the quantum number <span class="math notranslate nohighlight">\(n\)</span> matters.</p>
+</div>
+<p>The ground state <span class="math notranslate nohighlight">\(n = 0\)</span> has energy <span class="math notranslate nohighlight">\(E_0 = \frac{1}{2}\hbar\omega_c\)</span> (the zero-point energy). Higher Landau levels are spaced by <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> intervals.</p>
+</section>
+<section id="magnetic-length-and-degeneracy">
+<h3>Magnetic Length and Degeneracy<a class="headerlink" href="#magnetic-length-and-degeneracy" title="Link to this heading">#</a></h3>
+<p>The characteristic length scale in this problem is the <strong>magnetic length</strong>:</p>
+<div class="important admonition">
+<p class="admonition-title">Magnetic Length</p>
+<div class="math notranslate nohighlight">
+\[
+\ell_B = \sqrt{\frac{\hbar}{qB}} = \sqrt{\frac{\hbar c}{qBc}}\]</div>
+<p>(In Gaussian units: <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/eB}\)</span>.)</p>
+<p>The magnetic length sets the size of the quantum wavefunction in the lowest Landau level. Two distinct guiding center positions separated by <span class="math notranslate nohighlight">\(\gtrsim \ell_B\)</span> correspond to orthogonal wavefunctions.</p>
+</div>
+<p>For a sample of area <span class="math notranslate nohighlight">\(A\)</span>, the degeneracy of each Landau level is:</p>
+<div class="important admonition">
+<p class="admonition-title">Landau Level Degeneracy</p>
+<div class="math notranslate nohighlight">
+\[
+N_{\phi} = \frac{\Phi_{\text{total}}}{\Phi_0} = \frac{BA}{\Phi_0}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_0 = \frac{hc}{q} = \frac{h}\mathrm{e}\)</span> is the flux quantum (using <span class="math notranslate nohighlight">\(q = e\)</span> for electrons).</p>
+<p>Equivalently:</p>
+<div class="math notranslate nohighlight">
+\[
+N_{\phi} = \frac{A}{\pi \ell_B^2}\]</div>
+<p>Each Landau level can accommodate <span class="math notranslate nohighlight">\(N_{\phi}\)</span> quantum states—a macroscopic degeneracy.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Degeneracy from Uncertainty Principle</p>
+<p>In the lowest Landau level (<span class="math notranslate nohighlight">\(n = 0\)</span>), the guiding center position uncertainty is <span class="math notranslate nohighlight">\(\Delta X \sim \ell_B\)</span>. The number of distinct guiding center positions that fit in a region of area <span class="math notranslate nohighlight">\(A\)</span> is approximately <span class="math notranslate nohighlight">\(N \sim A/(\pi\ell_B^2)\)</span>.</p>
+<p>More rigorously, each state can be labeled by its guiding center position <span class="math notranslate nohighlight">\((X, Y)\)</span>, and the separation between orthogonal states is <span class="math notranslate nohighlight">\(\ell_B\)</span>. Thus the degeneracy is the number of lattice points in an <span class="math notranslate nohighlight">\(\ell_B\)</span>-spacing lattice covering area <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The degeneracy of each Landau level, <span class="math notranslate nohighlight">\(N_\phi = BA/\Phi_0\)</span>, grows linearly with the magnetic field strength <span class="math notranslate nohighlight">\(B\)</span>. This is counterintuitive: stronger fields should confine particles more tightly, not create more states. What is really happening?</p>
+<p>(a) The magnetic length <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(qB)}\)</span> <em>decreases</em> as <span class="math notranslate nohighlight">\(B\)</span> increases. How does the number of lattice sites (separated by <span class="math notranslate nohighlight">\(\ell_B\)</span>) that fit in a fixed area <span class="math notranslate nohighlight">\(A\)</span> scale with decreasing <span class="math notranslate nohighlight">\(\ell_B\)</span>?</p>
+<p>(b) A sample with area <span class="math notranslate nohighlight">\(A = 1 \text{ mm}^2 = 10^{-6} \text{ m}^2\)</span> at <span class="math notranslate nohighlight">\(B = 1 \text{ T}\)</span> has <span class="math notranslate nohighlight">\(N_\phi \approx 10^{10}\)</span> degenerate states in the lowest Landau level. If you increase <span class="math notranslate nohighlight">\(B\)</span> to <span class="math notranslate nohighlight">\(10 \text{ T}\)</span> while keeping the sample size fixed, what happens to <span class="math notranslate nohighlight">\(N_\phi\)</span>? Estimate the new value.</p>
+<p>(c) If all <span class="math notranslate nohighlight">\(N_\phi\)</span> states have the same energy (to leading order), what prevents the ground state energy from being completely determined by the number of particles <span class="math notranslate nohighlight">\(N_e\)</span>? Why is the filling factor <span class="math notranslate nohighlight">\(\nu = N_e/N_\phi\)</span> the crucial quantity?</p>
+</div>
+</section>
+<section id="physical-consequences">
+<h3>Physical Consequences<a class="headerlink" href="#physical-consequences" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Macroscopic Degeneracy and Its Significance</p>
+<ul class="simple">
+<li><p>The degeneracy <span class="math notranslate nohighlight">\(N_{\phi} \sim 10^{10}\)</span> for a typical Hall bar (area <span class="math notranslate nohighlight">\(\sim 1 \text{ mm}^2\)</span> in a <span class="math notranslate nohighlight">\(B \sim 1 \text{ T}\)</span> field).</p></li>
+<li><p>All <span class="math notranslate nohighlight">\(N_{\phi}\)</span> states in a Landau level have the <em>same energy</em> (to leading order).</p></li>
+<li><p>This massive degeneracy is broken by disorder, interactions, and finite size effects.</p></li>
+<li><p>The degeneracy is the origin of the integer quantum Hall effect: it allows distinct edge states to carry independent current.</p></li>
+</ul>
+</div>
+<section id="quantum-vs-classical">
+<h4>Quantum vs Classical<a class="headerlink" href="#quantum-vs-classical" title="Link to this heading">#</a></h4>
+<p>Landau quantization is fundamentally quantum:</p>
+<ul class="simple">
+<li><p>Classically, all energies up to the cyclotron energy are allowed.</p></li>
+<li><p>Quantum mechanically, only discrete Landau levels appear, spaced by <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>.</p></li>
+<li><p>The gap between Landau levels grows with <span class="math notranslate nohighlight">\(B\)</span>; at very strong fields, only the lowest level is populated.</p></li>
+</ul>
+</section>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Key Results: Landau Quantization</p>
 <ul class="simple">
-<li><p><strong>Symmetric gauge</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span> maintains rotational symmetry.</p></li>
-<li><p><strong>Kinetic momentum</strong>: Components <span class="math notranslate nohighlight">\(\pi_i = p_i + eA_i\)</span> commute via <span class="math notranslate nohighlight">\([\pi_x, \pi_y] = -i\hbar\omega_c\)</span>.</p></li>
-<li><p><strong>Ladder operators</strong>: <span class="math notranslate nohighlight">\(\hat{a} = (\pi_x + i\pi_y)/(\sqrt{2}\hbar\omega_c)\)</span> satisfy <span class="math notranslate nohighlight">\([\hat{a}, \hat{a}^\dagger] = 1\)</span>.</p></li>
-<li><p><strong>Harmonic oscillator structure</strong>: Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \hbar\omega_c(\hat{a}^\dagger\hat{a} + 1/2)\)</span> is an isotropic 2D oscillator.</p></li>
-<li><p><strong>Landau energies</strong>: <span class="math notranslate nohighlight">\(E_n = \hbar\omega_c(n + 1/2)\)</span>—equally spaced with gap <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>.</p></li>
-<li><p><strong>Magnetic length</strong>: <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(eB)}\)</span> is the quantum length scale; smaller in stronger fields.</p></li>
-<li><p><strong>Degeneracy</strong>: Each Landau level contains <span class="math notranslate nohighlight">\(N_\phi \approx A/(2\pi\ell_B^2)\)</span> states—enormous for macroscopic systems.</p></li>
-<li><p><strong>Localization</strong>: All wavefunctions in a given Landau level are localized on scales <span class="math notranslate nohighlight">\(\sim\ell_B\)</span>.</p></li>
-<li><p><strong>Guiding center</strong>: Position-dependent, reflecting the fact that different states within a Landau level differ only in guiding center location.</p></li>
+<li><p>Perpendicular motion in a magnetic field is equivalent to a 2D harmonic oscillator.</p></li>
+<li><p>Energy levels: <span class="math notranslate nohighlight">\(E_n = (n + \tfrac{1}{2})\hbar\omega_c\)</span> with <span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots\)</span></p></li>
+<li><p>Each level is macroscopically degenerate: <span class="math notranslate nohighlight">\(N_{\phi} = BA/\Phi_0\)</span> states per level.</p></li>
+<li><p>Magnetic length <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(qB)}\)</span> characterizes wavefunction size.</p></li>
+<li><p>Landau quantization is the basis for quantum Hall physics and topological quantum phenomena.</p></li>
 </ul>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-3-1-cyclotron-motion.html"><span class="std std-doc">4.3.1 Cyclotron Motion</span></a></strong>: Classical cyclotron frequency and circular orbits</p></li>
+<li><p><strong><a class="reference internal" href="4-3-3-quantum-hall-effect.html"><span class="std std-doc">4.3.3 Quantum Hall Effect</span></a></strong>: Integer and fractional quantum Hall states</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html"><span class="std std-doc">2.2.1 Angular Momentum Algebra</span></a></strong>: Canonical commutation relations and raising/lowering operators</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>Problem 1: Cyclotron Frequency and Magnetic Length</strong></p>
+<p>A charged particle in a magnetic field has cyclotron frequency <span class="math notranslate nohighlight">\(\omega_c = eB/m\)</span>. Show that the magnetic length <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(eB)}\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[\ell_B = \sqrt{\frac{\hbar}{m\omega_c}}\]</div>
+<p>Interpret this result physically: what does this tell you about the relationship between the magnetic length and the quantum zero-point motion at the cyclotron frequency?</p>
+<p><strong>Problem 2: Commutation Relations of Kinetic Momentum</strong></p>
+<p>In the symmetric gauge with <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span>, the kinetic momentum components are:</p>
+<div class="math notranslate nohighlight">
+\[\pi_x = p_x + \frac{eBy}{2}, \quad \pi_y = p_y - \frac{eBx}{2}\]</div>
+<p>(a) Verify that <span class="math notranslate nohighlight">\([\pi_x, \pi_y] = -\mathrm{i}\hbar\omega_c\)</span> using the canonical commutation relations <span class="math notranslate nohighlight">\([p_i, x_j] = -\mathrm{i}\hbar\delta_{ij}\)</span>.</p>
+<p>(b) Why does the non-commuting structure of kinetic momentum imply that the particle’s motion must have quantized energy levels?</p>
+<p><strong>Problem 3: Ladder Operators and Harmonic Oscillator Structure</strong></p>
+<p>Show that the ladder operators:</p>
+<div class="math notranslate nohighlight">
+\[\hat{a} = \frac{1}{\sqrt{2\hbar\omega_c}}(\pi_x + i\pi_y), \quad \hat{a}^\dagger = \frac{1}{\sqrt{2\hbar\omega_c}}(\pi_x - i\pi_y)\]</div>
+<p>satisfy the canonical commutation relation <span class="math notranslate nohighlight">\([\hat{a}, \hat{a}^\dagger] = 1\)</span>.</p>
+<p>Hint: Use the result <span class="math notranslate nohighlight">\([\pi_x, \pi_y] = -\mathrm{i}\hbar\omega_c\)</span> and recall that <span class="math notranslate nohighlight">\([\hat{a}, \hat{a}^\dagger] = \frac{1}{2\hbar\omega_c}[(\pi_x + i\pi_y), (\pi_x - i\pi_y)]\)</span>.</p>
+<p><strong>Problem 4: Energy Eigenvalues from Ladder Operators</strong></p>
+<p>The kinetic energy of the particle can be written as:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} = \hbar\omega_c\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)\]</div>
+<p>(a) Use the ladder operator algebra to find the energy eigenvalues <span class="math notranslate nohighlight">\(E_n\)</span> and show they are equally spaced with gap <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>.</p>
+<p>(b) What is the zero-point energy <span class="math notranslate nohighlight">\(E_0\)</span>? Explain why this non-zero value is purely quantum mechanical and has no classical analog.</p>
+<p>(c) If the magnetic field is doubled (<span class="math notranslate nohighlight">\(B \to 2B\)</span>), how do the Landau level spacings change?</p>
+<p><strong>Problem 5: Magnetic Length and Localization</strong></p>
+<p>The magnetic length <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(eB)}\)</span> is the characteristic size of all Landau level wavefunctions, independent of which Landau level <span class="math notranslate nohighlight">\(n\)</span> they belong to.</p>
+<p>(a) For an electron in a magnetic field <span class="math notranslate nohighlight">\(B = 1\)</span> Tesla, calculate <span class="math notranslate nohighlight">\(\ell_B\)</span> numerically (give result in nanometers).</p>
+<p>(b) Explain physically why the wavefunction size should depend on <span class="math notranslate nohighlight">\(B\)</span> but not on <span class="math notranslate nohighlight">\(n\)</span>. (Hint: Consider what happens when you increase <span class="math notranslate nohighlight">\(B\)</span>; how does the “confinement” of the particle change?)</p>
+<p>(c) In the quantum Hall regime, typical magnetic fields are <span class="math notranslate nohighlight">\(B \sim 10\)</span> Tesla. How much smaller is <span class="math notranslate nohighlight">\(\ell_B\)</span> in this case?</p>
+<p><strong>Problem 6: Guiding Center Non-Commutativity</strong></p>
+<p>The guiding center coordinates are:</p>
+<div class="math notranslate nohighlight">
+\[\hat{X} = \hat{x} + \frac{\hat{p}_y}{eB}, \quad \hat{Y} = \hat{y} - \frac{\hat{p}_x}{eB}\]</div>
+<p>Show that <span class="math notranslate nohighlight">\([\hat{X}, \hat{Y}] = -\mathrm{i}\ell_B^2\)</span>.</p>
+<p>Why is this non-zero commutator profound? What does it imply about the minimum area that a quantum state can occupy in guiding center space?</p>
+<p><strong>Problem 7: Wavefunction Structure in the Lowest Landau Level</strong></p>
+<p>The lowest Landau level wavefunction is:</p>
+<div class="math notranslate nohighlight">
+\[\psi_0(x, y) = \frac{1}{(\pi\ell_B^2)^{1/4}}\exp\left(-\frac{x^2+y^2}{2\ell_B^2}\right)\]</div>
+<p>(a) Verify that this wavefunction is normalized: <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}|\psi_0(x,y)|^2\,\mathrm{d}x\,\mathrm{d}y = 1\)</span>.</p>
+<p>(b) What is the probability of finding the particle at a distance greater than <span class="math notranslate nohighlight">\(2\ell_B\)</span> from the origin? (You may leave your answer in terms of the error function.)</p>
+<p>(c) All states within the lowest Landau level are translations of this Gaussian. What quantum number labels different states within the same Landau level?</p>
+<p><strong>Problem 8: Holomorphic Polynomial Structure</strong></p>
+<p>In complex coordinates <span class="math notranslate nohighlight">\(z = x + iy\)</span>, the <span class="math notranslate nohighlight">\(n\)</span>-th Landau level wavefunction has the form:</p>
+<div class="math notranslate nohighlight">
+\[\psi_n(z, \bar{z}) = P_n(z)\exp\left(-\frac{|z|^2}{2\ell_B^2}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_n(z)\)</span> is a holomorphic polynomial of degree <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>(a) Write down the explicit form of <span class="math notranslate nohighlight">\(P_n(z)\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, 2\)</span>.</p>
+<p>(b) Why must <span class="math notranslate nohighlight">\(P_n(z)\)</span> be holomorphic (depend only on <span class="math notranslate nohighlight">\(z\)</span>, not <span class="math notranslate nohighlight">\(\bar{z}\)</span>)? (Hint: Think about the ground state condition <span class="math notranslate nohighlight">\(\hat{a}|\psi_0\rangle = 0\)</span> and what it implies for <span class="math notranslate nohighlight">\(\bar{z}\)</span>-derivatives.)</p>
+<p>(c) How many independent states are there in the <span class="math notranslate nohighlight">\(n\)</span>-th Landau level for a system confined to a region of area <span class="math notranslate nohighlight">\(A\)</span>? Explain your reasoning.</p>
 </section>
 </section>
 
@@ -805,17 +839,22 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hamiltonian-in-symmetric-gauge">Quantum Hamiltonian in Symmetric Gauge</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonic-oscillator-ladder-operators">Harmonic Oscillator Ladder Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-level-hamiltonian">Landau Level Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-level-wavefunctions">Landau Level Wavefunctions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-landau-level-wavefunctions-n-0-1-2">Explicit Landau Level Wavefunctions: n=0,1,2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-coordinate-formalism">Complex Coordinate Formalism</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-length-the-fundamental-scale">Magnetic Length: The Fundamental Scale</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guiding-center-coordinates">Guiding Center Coordinates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hamiltonian-in-a-magnetic-field">Quantum Hamiltonian in a Magnetic Field</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-coupling-and-gauge-choice">Minimal Coupling and Gauge Choice</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-gauge-approach">Symmetric Gauge Approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operator-construction">Ladder Operator Construction</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-levels-and-energy-spectrum">Landau Levels and Energy Spectrum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-length-and-degeneracy">Magnetic Length and Degeneracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-consequences">Physical Consequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-vs-classical">Quantum vs Classical</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -853,7 +892,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

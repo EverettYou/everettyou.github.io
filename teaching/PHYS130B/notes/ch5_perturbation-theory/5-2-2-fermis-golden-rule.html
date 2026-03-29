@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -532,8 +532,7 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fermi’s Golden Rule</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-sinc-to-delta-function-long-time-limit">From Sinc to Delta Function: Long-Time Limit</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-and-statement">Derivation and Statement</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fermi-s-golden-rule-statement">Fermi’s Golden Rule Statement</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a><ul class="nav section-nav flex-column">
@@ -545,12 +544,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validity-conditions-and-assumptions">Validity Conditions and Assumptions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-rules-and-forbidden-transitions">Selection Rules and Forbidden Transitions</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-based-constraints">Symmetry-Based Constraints</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-transition-rates">Calculating Transition Rates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-forbidden-transitions">Interpreting Forbidden Transitions</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -567,12 +567,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How do we compute transition probabilities from the evolution operator?</p></li>
-<li><p>What is the sinc function behavior in the transition probability, and what does it tell us about resonance?</p></li>
-<li><p>Derive Fermi’s golden rule from first principles. Why does a delta function appear in the long-time limit?</p></li>
-<li><p>What is the density of states and how does it control the transition rate?</p></li>
-<li><p>Under what conditions is Fermi’s golden rule valid? What are the assumptions?</p></li>
-<li><p>How do selection rules emerge from perturbation theory? When is a transition forbidden?</p></li>
+<li><p>What does the sinc function tell us about transition probabilities when a perturbation first turns on?</p></li>
+<li><p>What happens in the long-time limit? Why does a transition rate (probability per unit time) emerge?</p></li>
+<li><p>What role does the density of states play in Fermi’s golden rule? Why must we count final states carefully?</p></li>
+<li><p>What assumptions must hold for Fermi’s golden rule to be valid? When does the approximation break down?</p></li>
+<li><p>How do selection rules emerge from the structure of the matrix elements? Can you explain why certain transitions are forbidden?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -584,16 +583,20 @@ document.write(`
 <h4>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h4>
 <p>Consider a system initially in state <span class="math notranslate nohighlight">\(|i\rangle\)</span> (eigenstate of <span class="math notranslate nohighlight">\(H_0\)</span> with energy <span class="math notranslate nohighlight">\(E_i^{(0)}\)</span>). The <strong>transition probability</strong> to reach state <span class="math notranslate nohighlight">\(|f\rangle\)</span> (energy <span class="math notranslate nohighlight">\(E_f^{(0)}\)</span>) at time <span class="math notranslate nohighlight">\(t\)</span> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-prob-def">
-<span class="eqno">(324)<a class="headerlink" href="#equation-eq-5b-prob-def" title="Link to this equation">#</a></span>\[P_{i\to f}(t) = |\langle f | U_S(t) | i \rangle|^2\]</div>
-<p>Using the factorization <span class="math notranslate nohighlight">\(U_S(t) = e^{-iH_0 t/\hbar} U_I(t)\)</span>, the overall phase cancels and we get:</p>
+<span class="eqno">(225)<a class="headerlink" href="#equation-eq-5b-prob-def" title="Link to this equation">#</a></span>\[
+P_{i\to f}(t) = |\langle f | U_S(t) | i \rangle|^2\]</div>
+<p>Using the factorization <span class="math notranslate nohighlight">\(U_S(t) = \mathrm{e}^{-\mathrm{i}H_0 t/\hbar} U_I(t)\)</span>, the overall phase cancels and we get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-prob-ip">
-<span class="eqno">(325)<a class="headerlink" href="#equation-eq-5b-prob-ip" title="Link to this equation">#</a></span>\[P_{i\to f}(t) = |\langle f | U_I(t) | i \rangle|^2\]</div>
+<span class="eqno">(226)<a class="headerlink" href="#equation-eq-5b-prob-ip" title="Link to this equation">#</a></span>\[
+P_{i\to f}(t) = |\langle f | U_I(t) | i \rangle|^2\]</div>
 <p>To <strong>first order</strong> in the coupling <span class="math notranslate nohighlight">\(\lambda\)</span> (valid for <span class="math notranslate nohighlight">\(|V| t / \hbar \ll 1\)</span>), using the first-order term of the Dyson series:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-p1st-general">
-<span class="eqno">(326)<a class="headerlink" href="#equation-eq-5b-p1st-general" title="Link to this equation">#</a></span>\[\boxed{P_{i\to f}^{(1)}(t) = \frac{1}{\hbar^2} \left| \int_0^t dt_1 e^{i\omega_{fi} t_1} V_{fi}(t_1) \right|^2}\]</div>
+<span class="eqno">(227)<a class="headerlink" href="#equation-eq-5b-p1st-general" title="Link to this equation">#</a></span>\[
+\boxed{P_{i\to f}^{(1)}(t) = \frac{1}{\hbar^2} \left| \int_0^t dt_1 \mathrm{e}^{\mathrm{i}\omega_{fi} t_1} V_{fi}(t_1) \right|^2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_{fi}(t) = \langle f | V(t) | i \rangle\)</span> is the matrix element, and:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-omega-fi">
-<span class="eqno">(327)<a class="headerlink" href="#equation-eq-5b-omega-fi" title="Link to this equation">#</a></span>\[\omega_{fi} = \frac{E_f^{(0)} - E_i^{(0)}}{\hbar}\]</div>
+<span class="eqno">(228)<a class="headerlink" href="#equation-eq-5b-omega-fi" title="Link to this equation">#</a></span>\[
+\omega_{fi} = \frac{E_f^{(0)} - E_i^{(0)}}{\hbar}\]</div>
 <p>is the <strong>transition frequency</strong> (resonance is at <span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span>, i.e., <span class="math notranslate nohighlight">\(E_f = E_i\)</span>).</p>
 </section>
 </section>
@@ -603,30 +606,34 @@ document.write(`
 <h4>Time-Independent Perturbation: Constant Coupling<a class="headerlink" href="#time-independent-perturbation-constant-coupling" title="Link to this heading">#</a></h4>
 <p>For a <strong>constant (time-independent) perturbation</strong> <span class="math notranslate nohighlight">\(V(t) = V_0\)</span> applied for a duration <span class="math notranslate nohighlight">\(t\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-p-sinc-formula">
-<span class="eqno">(328)<a class="headerlink" href="#equation-eq-5b-p-sinc-formula" title="Link to this equation">#</a></span>\[\boxed{P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi} t/2)}{\hbar^2 (\omega_{fi}/2)^2} = |V_{fi}|^2 t^2 \operatorname{sinc}^2\left(\frac{\omega_{fi} t}{2}\right)}\]</div>
+<span class="eqno">(229)<a class="headerlink" href="#equation-eq-5b-p-sinc-formula" title="Link to this equation">#</a></span>\[
+\boxed{P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi} t/2)}{\hbar^2 (\omega_{fi}/2)^2} = |V_{fi}|^2 t^2 \operatorname{sinc}^2\left(\frac{\omega_{fi} t}{2}\right)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\operatorname{sinc}(x) = \sin(x)/x\)</span> is the sinc function.</p>
-<p><strong>Physical interpretation</strong>:</p>
-<ul class="simple">
-<li><p><strong>On resonance</strong> (<span class="math notranslate nohighlight">\(\omega_{fi} \to 0\)</span>, i.e., <span class="math notranslate nohighlight">\(E_f \to E_i\)</span>): <span class="math notranslate nohighlight">\(P \approx |V_{fi}|^2 t^2/\hbar^2\)</span>, which grows <strong>quadratically in time</strong>. This implies a <strong>constant transition rate</strong> <span class="math notranslate nohighlight">\(\Gamma = dP/dt \approx 2|V_{fi}|^2 t/\hbar^2\)</span> (linear in <span class="math notranslate nohighlight">\(t\)</span>).</p></li>
-<li><p><strong>Off-resonance</strong> (<span class="math notranslate nohighlight">\(|\omega_{fi}| \gg 1/t\)</span>): The sinc function oscillates rapidly and averages to a small value <span class="math notranslate nohighlight">\(\propto 1/\omega_{fi}^2\)</span>, <strong>suppressing the transition</strong>.</p></li>
-</ul>
-<p>The sinc function has <strong>zero crossings</strong> at <span class="math notranslate nohighlight">\(\omega_{fi} = 2\pi n / t\)</span>, meaning that even off-resonant energies can give destructive interference. The <strong>width of the main lobe</strong> is <span class="math notranslate nohighlight">\(\Delta \omega \sim 2\pi / t\)</span> (resolution improves with longer observation time).</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
+<div class="note admonition">
+<p class="admonition-title">Resonance vs. Off-Resonance</p>
+<p><strong>On resonance</strong> (<span class="math notranslate nohighlight">\(\omega_{fi} \to 0\)</span>, i.e., <span class="math notranslate nohighlight">\(E_f \to E_i\)</span>): <span class="math notranslate nohighlight">\(P \approx |V_{fi}|^2 t^2/\hbar^2\)</span>, which grows <strong>quadratically in time</strong>. This implies a <strong>constant transition rate</strong> <span class="math notranslate nohighlight">\(\Gamma = dP/dt \approx 2|V_{fi}|^2 t/\hbar^2\)</span> (linear in <span class="math notranslate nohighlight">\(t\)</span>).</p>
+<p><strong>Off-resonance</strong> (<span class="math notranslate nohighlight">\(|\omega_{fi}| \gg 1/t\)</span>): The sinc function oscillates rapidly and averages to a small value <span class="math notranslate nohighlight">\(\propto 1/\omega_{fi}^2\)</span>, <strong>suppressing the transition</strong>. The <strong>width of the main lobe</strong> is <span class="math notranslate nohighlight">\(\Delta \omega \sim 2\pi / t\)</span> (resolution improves with longer observation time).</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: The Sinc Function</p>
 <p>For constant <span class="math notranslate nohighlight">\(V_0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to f}^{(1)}(t) = \frac{|V_{fi}|^2}{\hbar^2} \left| \int_0^t dt_1 e^{i\omega_{fi}t_1} \right|^2\]</div>
+\[
+P_{i\to f}^{(1)}(t) = \frac{|V_{fi}|^2}{\hbar^2} \left| \int_0^t dt_1 \mathrm{e}^{\mathrm{i}\omega_{fi}t_1} \right|^2\]</div>
 <p>Evaluate the integral:</p>
 <div class="math notranslate nohighlight">
-\[\int_0^t dt_1 e^{i\omega_{fi}t_1} = \frac{e^{i\omega_{fi}t} - 1}{i\omega_{fi}}\]</div>
+\[
+\int_0^t dt_1 \mathrm{e}^{\mathrm{i}\omega_{fi}t_1} = \frac{\mathrm{e}^{\mathrm{i}\omega_{fi}t} - 1}{\mathrm{i}\omega_{fi}}\]</div>
 <p>For <span class="math notranslate nohighlight">\(\omega_{fi} \neq 0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\left|\int_0^t dt_1 e^{i\omega_{fi}t_1}\right|^2 = \frac{(e^{i\omega_{fi}t} - 1)(e^{-i\omega_{fi}t} - 1)}{\omega_{fi}^2} = \frac{2 - 2\cos(\omega_{fi}t)}{\omega_{fi}^2} = \frac{4\sin^2(\omega_{fi}t/2)}{\omega_{fi}^2}\]</div>
+\[
+\left|\int_0^t dt_1 \mathrm{e}^{\mathrm{i}\omega_{fi}t_1}\right|^2 = \frac{(\mathrm{e}^{\mathrm{i}\omega_{fi}t} - 1)(\mathrm{e}^{-\mathrm{i}\omega_{fi}t} - 1)}{\omega_{fi}^2} = \frac{2 - 2\cos(\omega_{fi}t)}{\omega_{fi}^2} = \frac{4\sin^2(\omega_{fi}t/2)}{\omega_{fi}^2}\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi}t/2)}{\hbar^2(\omega_{fi}/2)^2}\]</div>
+\[
+P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi}t/2)}{\hbar^2(\omega_{fi}/2)^2}\]</div>
 </div>
-<p><strong>Physical picture</strong>: Imagine shining a laser at a specific frequency on an atom. If the laser frequency matches the atomic transition (<span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span>), absorption is strong and builds up over time. If the laser is detuned (off-resonance), the oscillating coupling causes the atom to absorb and re-emit, with the oscillations mostly canceling out. Only transitions within a bandwidth <span class="math notranslate nohighlight">\(\Delta\omega \sim 2\pi/T\)</span> (where <span class="math notranslate nohighlight">\(T\)</span> is the observation time) give net probability.</p>
+<p><strong>Physical picture</strong>: The sinc function encodes the interplay of <strong>coherence and interference</strong>. Imagine shining a laser at a specific frequency on an atom. If the laser frequency matches the atomic transition (<span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span>), absorption is strong and builds up. If the laser is detuned, the oscillating coupling causes the atom to absorb and re-emit, with the oscillations mostly canceling out. Only transitions within a bandwidth <span class="math notranslate nohighlight">\(\Delta\omega \sim 2\pi/T\)</span> (resolution-time product) give net probability.</p>
 </section>
 </section>
 <section id="id1">
@@ -636,75 +643,89 @@ document.write(`
 <p>In real systems, the final state is usually part of a <strong>continuum</strong> or <strong>dense spectrum</strong>: scattering into all possible momenta, decay into photons with all energies, absorption across a band of states. We do not ask “what is the probability to reach a specific state <span class="math notranslate nohighlight">\(|f\rangle\)</span>?” but rather “what is the total transition rate into any state near energy <span class="math notranslate nohighlight">\(E_i\)</span>?”</p>
 <p>The sinc function becomes increasingly sharply peaked at <span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span>. In the limit:</p>
 <div class="math notranslate nohighlight">
-\[\lim_{t \to \infty} \frac{t \sin^2(\omega_{fi} t/2)}{(\omega_{fi}/2)^2} = \pi t \delta(\omega_{fi})\]</div>
+\[
+\lim_{t \to \infty} \frac{t \sin^2(\omega_{fi} t/2)}{(\omega_{fi}/2)^2} = \pi t \delta(\omega_{fi})\]</div>
 <p>This delta function enforces <strong>energy conservation</strong>: only final states with <span class="math notranslate nohighlight">\(E_f = E_i\)</span> contribute.</p>
 </section>
-<section id="derivation-and-statement">
-<h4>Derivation and Statement<a class="headerlink" href="#derivation-and-statement" title="Link to this heading">#</a></h4>
+<section id="fermi-s-golden-rule-statement">
+<h4>Fermi’s Golden Rule Statement<a class="headerlink" href="#fermi-s-golden-rule-statement" title="Link to this heading">#</a></h4>
 <p>Consider the total transition probability into all final states within an energy interval:</p>
 <div class="math notranslate nohighlight">
-\[P_{i \to \text{continuum}}(t) = \sum_{f} P_{i\to f}(t) \approx \int dE_f \, \rho(E_f) P_{i\to f}^{(1)}(t)\]</div>
+\[
+P_{i \to \text{continuum}}(t) = \sum_{f} P_{i\to f}(t) \approx \int dE_f \, \rho(E_f) P_{i\to f}^{(1)}(t)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\rho(E_f)\)</span> is the <strong>density of states</strong> (number of states per unit energy).</p>
-<p>In the <strong>long-time limit</strong> <span class="math notranslate nohighlight">\(t \to \infty\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[P_{i\to\text{continuum}}(t) \approx |V_{fi}|^2 \rho(E_i) \frac{2\pi t}{\hbar}\]</div>
-<p>The transition <strong>rate</strong> (probability per unit time) is constant:</p>
+<div class="important admonition">
+<p class="admonition-title">Fermi’s Golden Rule</p>
+<p>In the <strong>long-time limit</strong> <span class="math notranslate nohighlight">\(t \to \infty\)</span>, the transition rate (probability per unit time) becomes constant:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-fgr-standard">
-<span class="eqno">(329)<a class="headerlink" href="#equation-eq-5b-fgr-standard" title="Link to this equation">#</a></span>\[\boxed{\Gamma = \frac{dP}{dt} = \frac{2\pi}{\hbar} |V_{fi}|^2 \rho(E_i)}\]</div>
-<p><strong>Fermi’s Golden Rule</strong> (the fundamental result):</p>
+<span class="eqno">(230)<a class="headerlink" href="#equation-eq-5b-fgr-standard" title="Link to this equation">#</a></span>\[
+\boxed{\Gamma_{i\to f} = \frac{2\pi}{\hbar} |\langle f | V | i \rangle|^2 \rho(E_i)}\]</div>
+<p>or equivalently:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-fgr-detailed">
-<span class="eqno">(330)<a class="headerlink" href="#equation-eq-5b-fgr-detailed" title="Link to this equation">#</a></span>\[\boxed{\Gamma_{i\to f} = \frac{2\pi}{\hbar} |\langle f | V | i \rangle|^2 \delta(E_f - E_i)}\]</div>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
+<span class="eqno">(231)<a class="headerlink" href="#equation-eq-5b-fgr-detailed" title="Link to this equation">#</a></span>\[
+\boxed{\Gamma_{i\to f} = \frac{2\pi}{\hbar} |\langle f | V | i \rangle|^2 \delta(E_f - E_i)}\]</div>
+<p><strong>Physical meaning</strong>: The transition rate is proportional to:</p>
+<ol class="arabic simple">
+<li><p>The square of the matrix element <span class="math notranslate nohighlight">\(|\langle f | V | i \rangle|^2\)</span> (coupling strength)</p></li>
+<li><p>The density of final states <span class="math notranslate nohighlight">\(\rho(E_i)\)</span> (available target states)</p></li>
+<li><p>Energy conservation via <span class="math notranslate nohighlight">\(\delta(E_f - E_i)\)</span> (only resonant states contribute)</p></li>
+</ol>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Golden Rule from the Delta Function Limit</p>
 <p>Start from the sinc-function formula:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi}t/2)}{\hbar^2(\omega_{fi}/2)^2}\]</div>
+\[
+P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi}t/2)}{\hbar^2(\omega_{fi}/2)^2}\]</div>
 <p><strong>Sum over final states</strong> in a continuum with density <span class="math notranslate nohighlight">\(\rho(E_f)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to\text{continuum}}(t) = \int dE_f \, \rho(E_f) |V_{fi}(E_f)|^2 \frac{\sin^2(\omega_{fi}t/2)}{\hbar^2(\omega_{fi}/2)^2}\]</div>
+\[
+P_{i\to\text{continuum}}(t) = \int dE_f \, \rho(E_f) |V_{fi}(E_f)|^2 \frac{\sin^2(\omega_{fi}t/2)}{\hbar^2(\omega_{fi}/2)^2}\]</div>
 <p>Change variables to <span class="math notranslate nohighlight">\(\omega_{fi} = (E_f - E_i)/\hbar\)</span>, so <span class="math notranslate nohighlight">\(dE_f = \hbar \, d\omega_{fi}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to\text{continuum}}(t) = \int d\omega_{fi} \, \rho(E_i + \hbar\omega_{fi}) |V_{fi}(\omega_{fi})|^2 \frac{t \sin^2(\omega_{fi}t/2)}{\hbar(\omega_{fi}/2)^2}\]</div>
-<p><strong>In the long-time limit</strong> <span class="math notranslate nohighlight">\(t \to \infty\)</span>, the product <span class="math notranslate nohighlight">\(t \sin^2(\omega_{fi}t/2) / (\omega_{fi}/2)^2\)</span> becomes sharply peaked around <span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span> with width <span class="math notranslate nohighlight">\(\sim 2\pi/t \to 0\)</span>. Using the delta-function identity:</p>
+\[
+P_{i\to\text{continuum}}(t) = \int d\omega_{fi} \, \rho(E_i + \hbar\omega_{fi}) |V_{fi}(\omega_{fi})|^2 \frac{t \sin^2(\omega_{fi}t/2)}{\hbar(\omega_{fi}/2)^2}\]</div>
+<p><strong>In the long-time limit</strong> <span class="math notranslate nohighlight">\(t \to \infty\)</span>, the function <span class="math notranslate nohighlight">\(t \sin^2(\omega_{fi}t/2) / (\omega_{fi}/2)^2\)</span> becomes sharply peaked around <span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span> with width <span class="math notranslate nohighlight">\(\sim 2\pi/t \to 0\)</span>. Over this narrow range, <span class="math notranslate nohighlight">\(\rho(E_f)\)</span> and <span class="math notranslate nohighlight">\(|V_{fi}|^2\)</span> are essentially constant, so we can approximate:</p>
 <div class="math notranslate nohighlight">
-\[\lim_{t\to\infty} \frac{t\sin^2(\omega_{fi}t/2)}{(\omega_{fi}/2)^2} = \pi t \delta(\omega_{fi})\]</div>
+\[
+\rho(E_i + \hbar\omega_{fi}) \approx \rho(E_i), \quad |V_{fi}(\omega_{fi})|^2 \approx |V_{fi}|^2\]</div>
+<p>Using the delta-function identity:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{t\to\infty} \frac{t\sin^2(\omega_{fi}t/2)}{(\omega_{fi}/2)^2} = \pi t \delta(\omega_{fi})\]</div>
 <p>we get:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to\text{continuum}}(t) = \int d\omega_{fi} \, \rho(E_i) |V_{fi}|^2 \frac{\pi t}{\hbar} \delta(\omega_{fi})\]</div>
-<p>The delta function forces <span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[P_{i\to\text{continuum}}(t) = \rho(E_i) |V_{fi}|^2 \frac{\pi t}{\hbar}\]</div>
+\[
+P_{i\to\text{continuum}}(t) = \rho(E_i) |V_{fi}|^2 \frac{\pi t}{\hbar}\]</div>
 <p><strong>Transition rate</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\Gamma = \frac{dP}{dt} = \rho(E_i) |V_{fi}|^2 \frac{\pi}{\hbar}\]</div>
-<p>(The factor differs slightly depending on normalization conventions; standard is <span class="math notranslate nohighlight">\(2\pi/\hbar\)</span>.)</p>
+\[
+\Gamma = \frac{\mathrm{d}P}{dt} = \rho(E_i) |V_{fi}|^2 \frac{\pi}{\hbar}\]</div>
+<p>(Standard conventions use <span class="math notranslate nohighlight">\(2\pi/\hbar\)</span>.)</p>
 </div>
-</section>
-<section id="physical-interpretation">
-<h4>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h4>
-<p><strong>Fermi’s Golden Rule states that the transition rate is proportional to:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>The square of the matrix element</strong> <span class="math notranslate nohighlight">\(|\langle f | V | i \rangle|^2\)</span>: Stronger coupling → faster transitions.</p></li>
-<li><p><strong>The density of final states</strong> <span class="math notranslate nohighlight">\(\rho(E_i)\)</span>: More available target states → more transition channels → faster overall decay or absorption.</p></li>
-<li><p><strong>Energy conservation</strong> <span class="math notranslate nohighlight">\(\delta(E_f - E_i)\)</span>: Only states with the same energy as the initial state contribute (elastic scattering or energy-conserving processes).</p></li>
-</ol>
-<p>In loose terms: <strong>Rate <span class="math notranslate nohighlight">\(\propto\)</span> (coupling strength)<span class="math notranslate nohighlight">\(^2\)</span> <span class="math notranslate nohighlight">\(\times\)</span> (number of available targets).</strong></p>
 </section>
 </section>
 <section id="applications">
 <h3>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h3>
 <section id="spontaneous-emission-radiative-decay">
 <h4>Spontaneous Emission (Radiative Decay)<a class="headerlink" href="#spontaneous-emission-radiative-decay" title="Link to this heading">#</a></h4>
-<p>An excited atomic state <span class="math notranslate nohighlight">\(|i\rangle\)</span> decays to lower states by emitting photons:</p>
+<p>An excited atomic state <span class="math notranslate nohighlight">\(|i\rangle\)</span> decays to lower states by emitting photons. The decay rate is:</p>
 <div class="math notranslate nohighlight">
-\[\Gamma_{\text{decay}} = \frac{2\pi}{\hbar} |\langle f | \boldsymbol{d} \cdot \boldsymbol{E} | i \rangle|^2 \rho_\gamma(E_f)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\rho_\gamma\)</span> is the <strong>photon density of states</strong> (number of radiation modes). The <strong>lifetime</strong> is <span class="math notranslate nohighlight">\(\tau = 1/\Gamma\)</span>.</p>
+\[
+\Gamma_{\text{decay}} = \frac{2\pi}{\hbar} |\langle f | \boldsymbol{d} \cdot \boldsymbol{E} | i \rangle|^2 \rho_\gamma(E_f)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_\gamma\)</span> is the <strong>photon density of states</strong> (number of electromagnetic radiation modes). The <strong>lifetime</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\tau = \frac{1}{\Gamma}\]</div>
+<p>Faster radiative decay occurs at higher frequencies (shorter wavelengths) because the photon density of states <span class="math notranslate nohighlight">\(\rho_\gamma(E) \propto E^2\)</span> increases with energy.</p>
 </section>
 <section id="scattering-cross-section">
 <h4>Scattering Cross Section<a class="headerlink" href="#scattering-cross-section" title="Link to this heading">#</a></h4>
-<p>In particle scattering, the final state is a plane wave (continuum of momenta). Fermi’s rule relates the <strong>scattering rate</strong> to the <strong>Born approximation</strong> (first-order scattering amplitude). The <strong>differential cross section</strong> is:</p>
+<p>In particle scattering (Born approximation), the final state is a plane wave with all possible momenta:</p>
 <div class="math notranslate nohighlight">
-\[\frac{d\sigma}{d\Omega} \propto |\langle\boldsymbol{k}_f | V | \boldsymbol{k}_i \rangle|^2\]</div>
+\[
+\frac{\mathrm{d}\sigma}{d\Omega} \propto |\langle\boldsymbol{k}_f | V | \boldsymbol{k}_i \rangle|^2\]</div>
+<p>The <strong>differential cross section</strong> quantifies the probability of scattering into a particular direction, weighted by the density of final plane-wave states.</p>
 </section>
 <section id="photoabsorption">
 <h4>Photoabsorption<a class="headerlink" href="#photoabsorption" title="Link to this heading">#</a></h4>
@@ -712,60 +733,142 @@ document.write(`
 <ul class="simple">
 <li><p>The density of initial states (valence band)</p></li>
 <li><p>The density of final states (conduction band)</p></li>
-<li><p>The photon energy (resonance if <span class="math notranslate nohighlight">\(\hbar\omega\)</span> matches the band gap)</p></li>
-<li><p>The dipole matrix element (how strongly light couples)</p></li>
+<li><p>Photon energy resonance (matches band gap)</p></li>
+<li><p>Dipole matrix element (coupling strength)</p></li>
 </ul>
-<p>Fermi’s rule quantifies all these factors.</p>
+<p>Fermi’s rule accounts for all these factors in one formula.</p>
 </section>
 </section>
 <section id="validity-conditions-and-assumptions">
 <h3>Validity Conditions and Assumptions<a class="headerlink" href="#validity-conditions-and-assumptions" title="Link to this heading">#</a></h3>
 <p>Fermi’s golden rule applies when:</p>
+<div class="caution admonition">
+<p class="admonition-title">Validity Conditions</p>
 <ol class="arabic simple">
-<li><p><strong>First-order approximation</strong>: <span class="math notranslate nohighlight">\(|V| t / \hbar \ll 1\)</span> (weak perturbation, short times) or <span class="math notranslate nohighlight">\(\rho |V|^2 \ll 1\)</span> (coupling much weaker than density-of-states scale).</p></li>
-<li><p><strong>Long-time limit</strong>: <span class="math notranslate nohighlight">\(t \gg 1/|\omega_{fi}|\)</span> (evolution time much longer than inverse transition frequency). This allows the sinc function to sharpen into a delta function.</p></li>
-<li><p><strong>Continuous or dense final-state spectrum</strong>: Final states must form a continuum or be densely packed. If final states are discrete and widely spaced, the delta function is not appropriate.</p></li>
-<li><p><strong>No initial-final overlap</strong>: <span class="math notranslate nohighlight">\(\langle i | f \rangle = 0\)</span> or negligible (initial and final states are orthogonal).</p></li>
+<li><p><strong>First-order approximation</strong>: <span class="math notranslate nohighlight">\(|V| t / \hbar \ll 1\)</span> or <span class="math notranslate nohighlight">\(\rho |V|^2 \ll 1\)</span> (coupling much weaker than density-of-states scale).</p></li>
+<li><p><strong>Long-time limit</strong>: <span class="math notranslate nohighlight">\(t \gg 1/|\omega_{fi}|\)</span> (evolution time much longer than inverse transition frequency).</p></li>
+<li><p><strong>Continuous or dense final-state spectrum</strong>: Final states must form a continuum or be closely spaced.</p></li>
+<li><p><strong>No initial-final overlap</strong>: <span class="math notranslate nohighlight">\(\langle i | f \rangle = 0\)</span> or negligible.</p></li>
+<li><p><strong>Energy conservation</strong>: Final states span a range that includes <span class="math notranslate nohighlight">\(E_i\)</span> (resonant states available).</p></li>
 </ol>
+<p>When any of these breaks down, more refined calculations are needed (second-order perturbation, beyond Born approximation, etc.).</p>
+</div>
 </section>
 <section id="selection-rules-and-forbidden-transitions">
 <h3>Selection Rules and Forbidden Transitions<a class="headerlink" href="#selection-rules-and-forbidden-transitions" title="Link to this heading">#</a></h3>
 <section id="symmetry-based-constraints">
 <h4>Symmetry-Based Constraints<a class="headerlink" href="#symmetry-based-constraints" title="Link to this heading">#</a></h4>
 <p>The matrix element <span class="math notranslate nohighlight">\(\langle f | V | i \rangle\)</span> <strong>vanishes identically</strong> if <span class="math notranslate nohighlight">\(V\)</span> and the basis states have incompatible symmetries. These are <strong>selection rules</strong>.</p>
-<p><strong>Example: Electric dipole radiation</strong> (<span class="math notranslate nohighlight">\(V = -\boldsymbol{d} \cdot \boldsymbol{E}\)</span>, dipole moment coupled to field)</p>
-<p>Selection rules:</p>
+<div class="example admonition">
+<p class="admonition-title">Example: Electric Dipole Selection Rules</p>
+<p>For electric dipole radiation (<span class="math notranslate nohighlight">\(V = -\boldsymbol{d} \cdot \boldsymbol{E}\)</span>, dipole moment coupled to field):</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\Delta \ell = \pm 1\)</span> (orbital angular momentum must change by 1)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Delta m_\ell = 0, \pm 1\)</span> (magnetic quantum number; depends on light polarization)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Delta S = 0\)</span> (spin is not affected in lowest order; spin-flip requires spin-orbit coupling)</p></li>
 </ul>
-<p>If a transition <strong>violates these rules</strong>, the dipole matrix element is zero, and the transition is <strong>forbidden to leading order</strong> (first-order dipole transitions). It may proceed at a much lower rate via higher-order processes (electric quadrupole, magnetic dipole, etc.).</p>
+<p><strong>Example transitions</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|2s\rangle \to |1s\rangle\)</span>: <strong>Forbidden</strong> (<span class="math notranslate nohighlight">\(\Delta\ell = 0\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(|2p\rangle \to |1s\rangle\)</span>: <strong>Allowed</strong> (<span class="math notranslate nohighlight">\(\Delta\ell = -1\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(|2p, m_\ell=1\rangle \to |1s, m_\ell=0\rangle\)</span> with linear-<span class="math notranslate nohighlight">\(z\)</span> polarized light: <strong>Allowed</strong> (<span class="math notranslate nohighlight">\(\Delta m_\ell = -1\)</span>)</p></li>
+</ul>
+</div>
 </section>
-<section id="calculating-transition-rates">
-<h4>Calculating Transition Rates<a class="headerlink" href="#calculating-transition-rates" title="Link to this heading">#</a></h4>
-<p>Practical steps:</p>
-<ol class="arabic simple">
-<li><p>Identify the perturbation <span class="math notranslate nohighlight">\(V\)</span> (e.g., <span class="math notranslate nohighlight">\(\boldsymbol{d} \cdot \boldsymbol{E}\)</span> for photon coupling).</p></li>
-<li><p>Write the initial <span class="math notranslate nohighlight">\(|i\rangle\)</span> and final <span class="math notranslate nohighlight">\(|f\rangle\)</span> states with all quantum numbers.</p></li>
-<li><p>Evaluate <span class="math notranslate nohighlight">\(\langle f | V | i \rangle\)</span>. Check selection rules.</p></li>
-<li><p>Determine <span class="math notranslate nohighlight">\(\rho(E_f)\)</span> at the relevant energy.</p></li>
-<li><p>Apply: <span class="math notranslate nohighlight">\(\Gamma = (2\pi/\hbar) |\langle f|V|i\rangle|^2 \rho(E_i)\)</span>.</p></li>
-</ol>
+<section id="interpreting-forbidden-transitions">
+<h4>Interpreting Forbidden Transitions<a class="headerlink" href="#interpreting-forbidden-transitions" title="Link to this heading">#</a></h4>
+<p>If a transition <strong>violates selection rules</strong>, the dipole matrix element is zero, and the transition is <strong>forbidden to leading order</strong> (first-order dipole transitions). It may proceed at a much lower rate via:</p>
+<ul class="simple">
+<li><p><strong>Electric quadrupole transitions</strong> (~10 slower)</p></li>
+<li><p><strong>Magnetic dipole transitions</strong> (~10 slower)</p></li>
+<li><p><strong>Higher-order processes</strong> (dramatically suppressed)</p></li>
+</ul>
+<p>This explains why some atomic transitions have extremely long lifetimes (metastable states).</p>
 </section>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Key Results</p>
 <ul class="simple">
 <li><p><strong>First-order transition probability</strong>: Oscillates as <span class="math notranslate nohighlight">\(\sin^2(\omega_{fi}t/2) / \omega_{fi}^2\)</span>. Enhanced on resonance (<span class="math notranslate nohighlight">\(\omega_{fi} \approx 0\)</span>), suppressed off-resonance.</p></li>
-<li><p><strong>Sinc function</strong>: Encodes destructive interference for off-resonant coupling. Main lobe width <span class="math notranslate nohighlight">\(\sim 2\pi/t\)</span>.</p></li>
-<li><p><strong>Fermi’s Golden Rule</strong>: <span class="math notranslate nohighlight">\(\Gamma = (2\pi/\hbar) |V_{fi}|^2 \rho(E_i) \delta(E_f - E_i)\)</span> (with proper energy normalization).</p></li>
-<li><p><strong>Key insight</strong>: Rate is constant in the long-time limit for a continuum spectrum; depends on coupling squared and density of states.</p></li>
-<li><p><strong>Validity</strong>: Weak perturbation, long time, continuous spectrum, first-order approximation valid.</p></li>
-<li><p><strong>Selection rules</strong>: Symmetry constraints determine which transitions are allowed. Violation = forbidden transition (suppressed rate).</p></li>
-<li><p><strong>Applications</strong>: Radiative decay (lifetime), scattering (cross section), absorption (transition rates in materials).</p></li>
+<li><p><strong>Sinc function</strong>: Encodes interference. Main lobe width <span class="math notranslate nohighlight">\(\sim 2\pi/t\)</span> sets the energy resolution.</p></li>
+<li><p><strong>Fermi’s Golden Rule</strong>: <span class="math notranslate nohighlight">\(\Gamma = (2\pi/\hbar) |V_{fi}|^2 \rho(E_i)\)</span> with energy conservation <span class="math notranslate nohighlight">\(\delta(E_f - E_i)\)</span>.</p></li>
+<li><p><strong>Rate independence</strong>: Once long-time limit is reached, transition rate is <strong>constant</strong> (no longer grows with time).</p></li>
+<li><p><strong>Coupling squared</strong>: Doubling the perturbation strength increases the rate 4-fold.</p></li>
+<li><p><strong>Density of states</strong>: More available final states → faster transitions.</p></li>
+<li><p><strong>Selection rules</strong>: Symmetries determine which transitions are allowed. Violations lead to suppressed (forbidden) transitions.</p></li>
+<li><p><strong>Applications</strong>: Radiative decay (lifetime), scattering (cross sections), absorption (materials).</p></li>
 </ul>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: From Exponential Decay to Quantum Zeno Effect</p>
+<p>Fermi’s golden rule predicts exponential decay: <span class="math notranslate nohighlight">\(P(t) = 1 - \Gamma t\)</span> (constant decay rate <span class="math notranslate nohighlight">\(\Gamma\)</span>). But quantum mechanics predicts <span class="math notranslate nohighlight">\(P(t) \approx 1 - (\Gamma t)^2\)</span> for very short times (quadratic regime), not linear.</p>
+<ul class="simple">
+<li><p>At what timescale <span class="math notranslate nohighlight">\(t^*\)</span> does the crossover from quadratic to linear decay occur? Use the golden rule rate <span class="math notranslate nohighlight">\(\Gamma\)</span> as the scale.</p></li>
+<li><p>How does this relate to the <strong>quantum Zeno effect</strong>, where frequent measurements suppress decay?</p></li>
+<li><p>Design an experiment to measure both regimes in, e.g., an excited atom decaying by spontaneous emission.</p></li>
+<li><p>Does the transition depend on the form of the spectral density, or is it universal?</p></li>
+</ul>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="5-2-1-interaction-picture.html"><span class="std std-doc">5.2.1 Interaction Picture</span></a></strong>: Time-dependent perturbation framework</p></li>
+<li><p><strong><a class="reference internal" href="5-2-3-applications.html"><span class="std std-doc">5.2.3 Applications</span></a></strong>: Experimental signatures and selection rules</p></li>
+<li><p><strong><a class="reference internal" href="../ch6_quantum-foundations/6-4-2-lindblad-master-equation.html"><span class="std std-doc">6.4.2 Lindblad Master Equation</span></a></strong>: Spontaneous emission and dissipative dynamics</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Transition Rate Formula from First-Order Probability</strong></p>
+<p>Starting from the first-order transition probability for constant perturbation,</p>
+<div class="math notranslate nohighlight">
+\[
+P_{i\to f}^{(1)}(t) = |V_{fi}|^2 \frac{\sin^2(\omega_{fi} t/2)}{\hbar^2 (\omega_{fi}/2)^2},\]</div>
+<p>show that for small times where <span class="math notranslate nohighlight">\(|\omega_{fi}| t \ll 1\)</span>, the transition probability grows quadratically in time. What is the instantaneous transition rate <span class="math notranslate nohighlight">\(\Gamma(t) = dP/dt\)</span> in this early-time limit? Why is this regime relevant for Fermi’s golden rule?</p>
+<p><strong>2. The Delta Function Limit</strong></p>
+<p>Verify that in the long-time limit <span class="math notranslate nohighlight">\(t \to \infty\)</span>, the identity</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{t\to\infty} \frac{t \sin^2(\omega_{fi} t/2)}{(\omega_{fi}/2)^2} = \pi t \delta(\omega_{fi})\]</div>
+<p>holds. (Hint: Show that the function is sharply peaked at <span class="math notranslate nohighlight">\(\omega_{fi} = 0\)</span> with width <span class="math notranslate nohighlight">\(\sim 2\pi/t\)</span> and height <span class="math notranslate nohighlight">\(\sim t\)</span>, and then use the definition of the delta function in an integral.) Why must we take the long-time limit for Fermi’s rule to apply?</p>
+<p><strong>3. Density of States and Available Channels</strong></p>
+<p>A particle is scattered from an initial plane-wave state <span class="math notranslate nohighlight">\(|\boldsymbol{k}_i \rangle\)</span> in 3D. The final state is another plane wave with wavenumber <span class="math notranslate nohighlight">\(|\boldsymbol{k}_f| = |\boldsymbol{k}_i|\)</span> (elastic scattering).</p>
+<p>(a) The density of final states in momentum space is <span class="math notranslate nohighlight">\(\rho(\boldsymbol{k}) = V/(2\pi)^3\)</span> (one state per <span class="math notranslate nohighlight">\((2\pi/L)^3\)</span> volume element). Explain what this means physically for a box of volume <span class="math notranslate nohighlight">\(V\)</span>.</p>
+<p>(b) Convert to energy density <span class="math notranslate nohighlight">\(\rho(E_f)\)</span> for non-relativistic scattering. Use <span class="math notranslate nohighlight">\(E = p^2/(2m)\)</span> and relate <span class="math notranslate nohighlight">\(\rho(E)\)</span> to <span class="math notranslate nohighlight">\(\rho(\boldsymbol{k})\)</span> via the Jacobian.</p>
+<p>(c) Fermi’s rule says the scattering rate is proportional to <span class="math notranslate nohighlight">\(\rho(E_i)\)</span>. Explain why the rate increases if the final-state density is higher.</p>
+<p><strong>4. Resonance, Detuning, and the Sinc Function</strong></p>
+<p>Consider light shining on an atom with transition frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>. The light has frequency <span class="math notranslate nohighlight">\(\omega_L\)</span>, and the detuning is <span class="math notranslate nohighlight">\(\Delta = \omega_L - \omega_0\)</span>.</p>
+<p>(a) Write the transition probability in terms of the sinc function and the detuning <span class="math notranslate nohighlight">\(\Delta\)</span>.</p>
+<p>(b) For a light pulse of duration <span class="math notranslate nohighlight">\(\tau\)</span>, explain why transitions are effectively suppressed if <span class="math notranslate nohighlight">\(|\Delta| \tau \gg 2\pi\)</span> (i.e., detuning is large compared to the inverse pulse duration).</p>
+<p>(c) Discuss the physical meaning: what is happening to the atom when the light is far detuned?</p>
+<p><strong>5. Selection Rules and Forbidden Transitions</strong></p>
+<p>Consider an electron in a hydrogen atom transitioning between states <span class="math notranslate nohighlight">\(|n_i, \ell_i, m_{\ell,i} \rangle\)</span> and <span class="math notranslate nohighlight">\(|n_f, \ell_f, m_{\ell,f} \rangle\)</span> by absorption of a linearly polarized photon. The perturbation is the electric dipole coupling <span class="math notranslate nohighlight">\(V = -\boldsymbol{d} \cdot \boldsymbol{E}\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{d} = -e\boldsymbol{r}\)</span> is the dipole operator.</p>
+<p>(a) State the selection rules for electric dipole radiation (allowed values of <span class="math notranslate nohighlight">\(\Delta \ell\)</span>, <span class="math notranslate nohighlight">\(\Delta m_\ell\)</span>, <span class="math notranslate nohighlight">\(\Delta S\)</span>).</p>
+<p>(b) Is the transition <span class="math notranslate nohighlight">\(|2s\rangle \to |1s\rangle\)</span> (both <span class="math notranslate nohighlight">\(\ell=0\)</span>) allowed? Explain why or why not by evaluating the selection rule.</p>
+<p>(c) Is the transition <span class="math notranslate nohighlight">\(|2p, m_\ell=1\rangle \to |1s, m_\ell=0\rangle\)</span> allowed? Check the selection rules for <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m_\ell\)</span> given that the photon is polarized linearly along <span class="math notranslate nohighlight">\(z\)</span> (so <span class="math notranslate nohighlight">\(\Delta m_\ell = 0\)</span>).</p>
+<p><strong>6. Lifetime and Spontaneous Emission Rate</strong></p>
+<p>An excited atomic state decays by spontaneous emission into a continuum of photon modes. The density of electromagnetic modes in the energy interval <span class="math notranslate nohighlight">\([E, E+dE]\)</span> is <span class="math notranslate nohighlight">\(\rho_\gamma(E) = \frac{V \omega^2}{\pi^2 c^3}\)</span> (given for your reference). The perturbation is <span class="math notranslate nohighlight">\(V = -\boldsymbol{d} \cdot \boldsymbol{E}\)</span>.</p>
+<p>(a) Use Fermi’s golden rule to write an expression for the decay rate <span class="math notranslate nohighlight">\(\Gamma = 2\pi/\hbar \, |\langle f|V|i \rangle|^2 \rho_\gamma(E_i)\)</span>.</p>
+<p>(b) For a dipole transition with dipole matrix element <span class="math notranslate nohighlight">\(|\langle f|\boldsymbol{d}|i \rangle| = d_0\)</span> (constant), determine how the decay rate scales with the transition frequency <span class="math notranslate nohighlight">\(\omega_0\)</span> and photon density.</p>
+<p>(c) Define the lifetime <span class="math notranslate nohighlight">\(\tau = 1/\Gamma\)</span> and explain why atoms in shorter-wavelength (higher-frequency) transitions decay faster.</p>
+<p><strong>7. Validity Conditions: When Does Fermi’s Rule Break Down?</strong></p>
+<p>Consider an excited state <span class="math notranslate nohighlight">\(|i \rangle\)</span> decaying into a discrete set of final states <span class="math notranslate nohighlight">\(\{|f_1\rangle, |f_2\rangle, \ldots\}\)</span> with energies <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> separated by spacing <span class="math notranslate nohighlight">\(\Delta E\)</span>.</p>
+<p>(a) For Fermi’s rule to apply, we require the time resolution <span class="math notranslate nohighlight">\(\Delta t \sim \hbar/\Delta E\)</span> to be much longer than the evolution time. Explain this condition physically.</p>
+<p>(b) If the evolution time is very short (<span class="math notranslate nohighlight">\(t \ll \hbar/\Delta E\)</span>), what form does the transition probability take, and why can we not use a delta function?</p>
+<p>(c) Suppose <span class="math notranslate nohighlight">\(\Delta E \sim 10^{-3}\)</span> eV (a typical atomic energy scale). Estimate the minimum observation time for Fermi’s rule to apply. Is this realistic for most laboratory measurements?</p>
+<p><strong>8. Matrix Element Dependence and Oscillator Strength</strong></p>
+<p>In photoabsorption, the transition rate is proportional to <span class="math notranslate nohighlight">\(|\langle f|V|i \rangle|^2\)</span>. For light absorption by an electron, <span class="math notranslate nohighlight">\(V = -\boldsymbol{d} \cdot \boldsymbol{E}\)</span> where <span class="math notranslate nohighlight">\(\boldsymbol{d} = -e \boldsymbol{r}\)</span>.</p>
+<p>(a) Write the matrix element as <span class="math notranslate nohighlight">\(\langle f|-e\boldsymbol{r}|i \rangle\)</span> for a transition from state <span class="math notranslate nohighlight">\(|i\rangle\)</span> to state <span class="math notranslate nohighlight">\(|f\rangle\)</span>.</p>
+<p>(b) The <strong>oscillator strength</strong> is defined as <span class="math notranslate nohighlight">\(f_{if} = \frac{2m\omega_{if}}{\hbar e^2} |\langle f|e\boldsymbol{r}|i \rangle|^2\)</span>. Show that the transition rate can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\Gamma \propto f_{if} \, \rho(E_i),\]</div>
+<p>and explain why oscillator strength is a dimensionless measure of the “strength” of a transition regardless of energy scale.</p>
+<p>(c) If the initial state has zero overlap with the final state coordinate operator, <span class="math notranslate nohighlight">\(\langle f|\boldsymbol{r}|i \rangle = 0\)</span>, what can you conclude about the transition rate and the corresponding matrix element?</p>
 </section>
 </section>
 
@@ -844,8 +947,7 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fermi’s Golden Rule</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-sinc-to-delta-function-long-time-limit">From Sinc to Delta Function: Long-Time Limit</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-and-statement">Derivation and Statement</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fermi-s-golden-rule-statement">Fermi’s Golden Rule Statement</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a><ul class="nav section-nav flex-column">
@@ -857,12 +959,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validity-conditions-and-assumptions">Validity Conditions and Assumptions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-rules-and-forbidden-transitions">Selection Rules and Forbidden Transitions</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-based-constraints">Symmetry-Based Constraints</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-transition-rates">Calculating Transition Rates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-forbidden-transitions">Interpreting Forbidden Transitions</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -900,7 +1003,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

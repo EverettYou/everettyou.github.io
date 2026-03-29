@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -524,7 +524,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-two-single-qubit-systems">Combining Two Single-Qubit Systems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-n-particles-with-d-states-each">General Case: <span class="math notranslate nohighlight">\(N\)</span> Particles with <span class="math notranslate nohighlight">\(d\)</span> States Each</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-states-and-entanglement">Product States and Entanglement</a><ul class="nav section-nav flex-column">
@@ -551,7 +550,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entanglement-as-a-computational-resource">Entanglement as a Computational Resource</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -568,68 +568,68 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the tensor product of two Hilbert spaces? How do basis states combine?</p></li>
-<li><p>How many basis states does a two-particle system have if each particle has <span class="math notranslate nohighlight">\(d\)</span> basis states?</p></li>
-<li><p>What is a product state? How is it different from an entangled state?</p></li>
-<li><p>How do operators on individual particles act on multi-particle states?</p></li>
-<li><p>Explain why the dimension of an <span class="math notranslate nohighlight">\(N\)</span>-particle Hilbert space grows exponentially with <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p>What is a tensor product of two Hilbert spaces, and how do basis states combine?</p></li>
+<li><p>For a two-particle system where each particle has <span class="math notranslate nohighlight">\(d\)</span> basis states, how many basis states does the combined system have, and why?</p></li>
+<li><p>What is a product state, and how does it differ from an entangled state?</p></li>
+<li><p>How do operators acting on individual particles act on multi-particle states?</p></li>
+<li><p>Explain why the dimension of an <span class="math notranslate nohighlight">\(N\)</span>-particle Hilbert space grows exponentially with <span class="math notranslate nohighlight">\(N\)</span>. Is there a fundamental limit?</p></li>
+<li><p>If you entangle two qubits in a Bell state, can you later separate them back into a product state? Why or why not?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>When quantum systems combine, their state space is not a simple union—it is a tensor product that encodes all possible correlations between subsystems. This section introduces the Hilbert space of composite quantum systems and reveals how entanglement arises as a fundamental feature of multi-qubit systems.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Concept: Tensor Product</p>
+<p>When quantum systems combine, their state space is not a simple union—it is a <strong>tensor product</strong> that encodes all possible correlations between subsystems. For subsystems A and B with Hilbert spaces <span class="math notranslate nohighlight">\(\mathcal{H}_A\)</span> and <span class="math notranslate nohighlight">\(\mathcal{H}_B\)</span>, the composite system lives in <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span>.</p>
+</div>
 <section id="combining-two-single-qubit-systems">
 <h3>Combining Two Single-Qubit Systems<a class="headerlink" href="#combining-two-single-qubit-systems" title="Link to this heading">#</a></h3>
 <p>Each qubit has a 2-dimensional Hilbert space with basis states <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>.</p>
 <p>The two-qubit Hilbert space has dimension <span class="math notranslate nohighlight">\(2 \times 2 = 4\)</span>. The basis states are formed by tensoring single-qubit states:</p>
 <div class="math notranslate nohighlight">
-\[|00\rangle = |0\rangle_A \otimes |0\rangle_B, \quad
+\[
+|00\rangle = |0\rangle_A \otimes |0\rangle_B, \quad
 |01\rangle = |0\rangle_A \otimes |1\rangle_B, \quad
 |10\rangle = |1\rangle_A \otimes |0\rangle_B, \quad
 |11\rangle = |1\rangle_A \otimes |1\rangle_B\]</div>
-<p>More compactly, we label two-qubit states as <span class="math notranslate nohighlight">\(|ij\rangle\)</span> where <span class="math notranslate nohighlight">\(i,j \in \{0,1\}\)</span>, or sometimes just write <span class="math notranslate nohighlight">\(|i\rangle \otimes |j\rangle\)</span> to emphasize the tensor product structure.</p>
-<p><strong>Orthonormality</strong>:</p>
+<p>More compactly, we label two-qubit states as <span class="math notranslate nohighlight">\(|ij\rangle\)</span> where <span class="math notranslate nohighlight">\(i,j \in \{0,1\}\)</span>, or sometimes write <span class="math notranslate nohighlight">\(|i\rangle \otimes |j\rangle\)</span> to emphasize the tensor product structure.</p>
+<p><strong>Orthonormality:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-two-qubit-orthonormal">
-<span class="eqno">(58)<a class="headerlink" href="#equation-eq-two-qubit-orthonormal" title="Link to this equation">#</a></span>\[\langle i_1 j_1 | i_2 j_2 \rangle = \langle i_1 | i_2 \rangle \langle j_1 | j_2 \rangle = \delta_{i_1 i_2} \delta_{j_1 j_2}\]</div>
+<span class="eqno">(58)<a class="headerlink" href="#equation-eq-two-qubit-orthonormal" title="Link to this equation">#</a></span>\[
+\langle i_1 j_1 | i_2 j_2 \rangle = \langle i_1 | i_2 \rangle \langle j_1 | j_2 \rangle = \delta_{i_1 i_2} \delta_{j_1 j_2}\]</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Schmidt Decomposition and Physical Factorization</p>
+<p>For any bipartite state <span class="math notranslate nohighlight">\(|\psi\rangle_{AB}\)</span>, the Schmidt decomposition writes it as <span class="math notranslate nohighlight">\(|\psi\rangle = \sum_k \sqrt{\lambda_k} |u_k\rangle_A |v_k\rangle_B\)</span>. Does separability depend on how we partition the system into subsystems A and B? A state might appear entangled under factorization <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span>, but separable under a different partition <span class="math notranslate nohighlight">\(\mathcal{H}_{A'} \otimes \mathcal{H}_{B'}\)</span>.</p>
+<p><strong>Key question</strong>: Is entanglement observer-dependent—a property of our choice of subsystem partition—or is there a physically preferred factorization based on dynamics or spatial separation?</p>
+</div>
 </section>
 <section id="general-case-n-particles-with-d-states-each">
 <h3>General Case: <span class="math notranslate nohighlight">\(N\)</span> Particles with <span class="math notranslate nohighlight">\(d\)</span> States Each<a class="headerlink" href="#general-case-n-particles-with-d-states-each" title="Link to this heading">#</a></h3>
 <p>For <span class="math notranslate nohighlight">\(N\)</span> quantum particles, each having access to <span class="math notranslate nohighlight">\(d\)</span> single-particle basis states <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> (where <span class="math notranslate nohighlight">\(\alpha = 1, 2, \ldots, d\)</span>), the combined Hilbert space is:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{H}_1 \otimes \mathcal{H}_2 \otimes \cdots \otimes \mathcal{H}_N\]</div>
-<p>This space has dimension:</p>
-<div class="math notranslate nohighlight" id="equation-eq-hilbert-dimension">
-<span class="eqno">(59)<a class="headerlink" href="#equation-eq-hilbert-dimension" title="Link to this equation">#</a></span>\[\dim(\mathcal{H}_{\text{total}}) = d^N\]</div>
+\[
+\mathcal{H}_1 \otimes \mathcal{H}_2 \otimes \cdots \otimes \mathcal{H}_N\]</div>
 <p>A complete orthonormal basis consists of all product states:</p>
 <div class="math notranslate nohighlight">
-\[|\alpha_1\rangle |\alpha_2\rangle \cdots |\alpha_N\rangle = |\alpha_1 \alpha_2 \ldots \alpha_N\rangle\]</div>
+\[
+|\alpha_1\rangle |\alpha_2\rangle \cdots |\alpha_N\rangle = |\alpha_1 \alpha_2 \ldots \alpha_N\rangle\]</div>
 <p>where each <span class="math notranslate nohighlight">\(\alpha_i \in \{1, 2, \ldots, d\}\)</span>.</p>
-<div class="note admonition">
-<p class="admonition-title">Exponential Growth and Classical Limits</p>
-<p>The dimension grows <strong>exponentially</strong> with <span class="math notranslate nohighlight">\(N\)</span>. For <span class="math notranslate nohighlight">\(N = 10\)</span> particles with <span class="math notranslate nohighlight">\(d = 2\)</span> (qubits), the total Hilbert space has <span class="math notranslate nohighlight">\(2^{10} = 1024\)</span> dimensions. For <span class="math notranslate nohighlight">\(N = 300\)</span> and <span class="math notranslate nohighlight">\(d = 2\)</span>, we get <span class="math notranslate nohighlight">\(2^{300} \approx 10^{90}\)</span> dimensions—larger than the number of atoms in the universe! This exponential growth is both a source of quantum computing’s power and a reason why classical simulation of quantum systems becomes intractable.</p>
-</div>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Key takeaway 1</p></li>
-<li><p>Key takeaway 2</p></li>
-<li><p>Key takeaway 3</p></li>
-</ul>
 <div class="important admonition">
-<p class="admonition-title">Important</p>
-<p>Exponential Hilbert Space Dimension</p>
-<p>The dimension of an N-particle system with d single-particle states is d^N. This exponential growth underlies both quantum computing’s power and the difficulty of classical simulation.</p>
+<p class="admonition-title">Hilbert Space Dimension</p>
+<p>The total Hilbert space dimension is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-hilbert-dimension">
+<span class="eqno">(59)<a class="headerlink" href="#equation-eq-hilbert-dimension" title="Link to this equation">#</a></span>\[
+\dim(\mathcal{H}_{\text{total}}) = d^N\]</div>
+<p>This dimension <strong>grows exponentially</strong> with the number of particles.</p>
+</div>
+<div class="example admonition">
+<p class="admonition-title">Example: Exponential Growth and Physical Limits</p>
+<p>For <span class="math notranslate nohighlight">\(N = 10\)</span> particles with <span class="math notranslate nohighlight">\(d = 2\)</span> (qubits), the Hilbert space has <span class="math notranslate nohighlight">\(2^{10} = 1024\)</span> dimensions. For <span class="math notranslate nohighlight">\(N = 300\)</span> and <span class="math notranslate nohighlight">\(d = 2\)</span>, we get <span class="math notranslate nohighlight">\(2^{300} \approx 10^{90}\)</span> dimensions—larger than the number of atoms in the observable universe!</p>
+<p>This exponential growth is both a source of quantum computing’s power and a reason why classical simulation of quantum systems becomes fundamentally intractable.</p>
 </div>
 <div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>Tensor Product Notation</p>
-<p>We use several equivalent notations: |α₁α₂…αₙ⟩, |α₁⟩|α₂⟩···|αₙ⟩, and |α₁⟩⊗|α₂⟩⊗···⊗|αₙ⟩. The abbreviated form is standard when indices don’t overlap.</p>
-</div>
-<div class="caution admonition">
-<p class="admonition-title">Caution</p>
-<p>Entanglement vs. Product States</p>
-<p>Not all states in ℋ₁⊗ℋ₂ are product states. Bell states like |Φ⁺⟩ = 1/√2(|00⟩+|11⟩) cannot be factored and exhibit maximal correlations upon measurement.</p>
+<p class="admonition-title">Note: Physical Interpretation</p>
+<p>The exponential dimension reflects a deep fact about quantum mechanics: specifying a general <span class="math notranslate nohighlight">\(N\)</span>-particle quantum state requires listing <span class="math notranslate nohighlight">\(d^N\)</span> complex amplitudes. No classical computer can store this for large <span class="math notranslate nohighlight">\(N\)</span> without enormous overhead. Quantum computers exploit this exponential space for computational advantage.</p>
 </div>
 </section>
 </section>
@@ -637,14 +637,26 @@ document.write(`
 <h2>Product States and Entanglement<a class="headerlink" href="#product-states-and-entanglement" title="Link to this heading">#</a></h2>
 <section id="product-states">
 <h3>Product States<a class="headerlink" href="#product-states" title="Link to this heading">#</a></h3>
-<p>A <strong>product state</strong> (or separable state) is a state that can be written as a tensor product of single-particle states:</p>
+<div class="important admonition">
+<p class="admonition-title">Product State (Separable State)</p>
+<p>A <strong>product state</strong> is a state that can be written as a tensor product of single-particle states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-product-state">
-<span class="eqno">(60)<a class="headerlink" href="#equation-eq-product-state" title="Link to this equation">#</a></span>\[|\psi\rangle = |\psi_1\rangle \otimes |\psi_2\rangle \otimes \cdots \otimes |\psi_N\rangle\]</div>
+<span class="eqno">(60)<a class="headerlink" href="#equation-eq-product-state" title="Link to this equation">#</a></span>\[
+|\psi
+angle = |\psi_1
+angle \otimes |\psi_2
+angle \otimes \cdots \otimes |\psi_N
+angle\]</div>
 <p>For a product state:</p>
 <ul class="simple">
-<li><p><strong>Particle independence</strong>: measurement on particle <span class="math notranslate nohighlight">\(i\)</span> does not affect the state of particle <span class="math notranslate nohighlight">\(j\)</span> (<span class="math notranslate nohighlight">\(j \neq i\)</span>).</p></li>
-<li><p><strong>Factorizable expectation values</strong>: <span class="math notranslate nohighlight">\(\langle A_1 \otimes B_2 \rangle = \langle A_1 \rangle \langle B_2 \rangle\)</span> where <span class="math notranslate nohighlight">\(A_1\)</span> acts on particle 1 and <span class="math notranslate nohighlight">\(B_2\)</span> acts on particle 2.</p></li>
+<li><p><strong>Particle independence</strong>: measurement on particle <span class="math notranslate nohighlight">\(i\)</span> does not affect the state of particle <span class="math notranslate nohighlight">\(j\)</span> (<span class="math notranslate nohighlight">\(j 
+eq i\)</span>).</p></li>
+<li><p><strong>Factorizable expectation values</strong>: <span class="math notranslate nohighlight">\(\langle A_1 \otimes B_2 
+angle = \langle A_1 
+angle \langle B_2 
+angle\)</span> where <span class="math notranslate nohighlight">\(A_1\)</span> acts on particle 1 and <span class="math notranslate nohighlight">\(B_2\)</span> acts on particle 2.</p></li>
 </ul>
+</div>
 </section>
 <section id="entangled-states">
 <h3>Entangled States<a class="headerlink" href="#entangled-states" title="Link to this heading">#</a></h3>
@@ -652,7 +664,8 @@ document.write(`
 <div class="example admonition">
 <p class="admonition-title">Example: The Bell State (Two Qubits)</p>
 <div class="math notranslate nohighlight">
-\[|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\]</div>
+\[
+|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\]</div>
 <p>This state <strong>cannot</strong> be written as <span class="math notranslate nohighlight">\(|\psi_A\rangle \otimes |\psi_B\rangle\)</span> for any <span class="math notranslate nohighlight">\(|\psi_A\rangle, |\psi_B\rangle\)</span>. If we measure qubit A and find it in state <span class="math notranslate nohighlight">\(|0\rangle\)</span>, then qubit B is <strong>definitely</strong> in state <span class="math notranslate nohighlight">\(|0\rangle\)</span> (not a superposition). The measurement on A instantaneously affects the state of B—perfect correlation.</p>
 </div>
 </section>
@@ -660,7 +673,8 @@ document.write(`
 <h3>General Multi-Particle State<a class="headerlink" href="#general-multi-particle-state" title="Link to this heading">#</a></h3>
 <p>Any state in the <span class="math notranslate nohighlight">\(N\)</span>-particle Hilbert space can be expanded as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-general-state-expansion">
-<span class="eqno">(61)<a class="headerlink" href="#equation-eq-general-state-expansion" title="Link to this equation">#</a></span>\[|\psi\rangle = \sum_{\alpha_1=1}^d \sum_{\alpha_2=1}^d \cdots \sum_{\alpha_N=1}^d c_{\alpha_1 \alpha_2 \ldots \alpha_N} |\alpha_1 \alpha_2 \ldots \alpha_N\rangle\]</div>
+<span class="eqno">(61)<a class="headerlink" href="#equation-eq-general-state-expansion" title="Link to this equation">#</a></span>\[
+|\psi\rangle = \sum_{\alpha_1=1}^d \sum_{\alpha_2=1}^d \cdots \sum_{\alpha_N=1}^d c_{\alpha_1 \alpha_2 \ldots \alpha_N} |\alpha_1 \alpha_2 \ldots \alpha_N\rangle\]</div>
 <p>The coefficients <span class="math notranslate nohighlight">\(c_{\alpha_1 \alpha_2 \ldots \alpha_N}\)</span> are complex amplitudes, with normalization <span class="math notranslate nohighlight">\(\sum_{\alpha_1, \ldots, \alpha_N} |c_{\alpha_1 \ldots \alpha_N}|^2 = 1\)</span>.</p>
 </section>
 </section>
@@ -671,13 +685,16 @@ document.write(`
 <p>An operator that acts on only one particle is extended to the full space by tensoring with identity on other particles.</p>
 <p>For particle <span class="math notranslate nohighlight">\(i\)</span> with operator <span class="math notranslate nohighlight">\(A_i\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-single-particle-op">
-<span class="eqno">(62)<a class="headerlink" href="#equation-eq-single-particle-op" title="Link to this equation">#</a></span>\[\hat{A}_i = \mathbb{I}_1 \otimes \cdots \otimes \mathbb{I}_{i-1} \otimes A_i \otimes \mathbb{I}_{i+1} \otimes \cdots \otimes \mathbb{I}_N\]</div>
+<span class="eqno">(62)<a class="headerlink" href="#equation-eq-single-particle-op" title="Link to this equation">#</a></span>\[
+\hat{A}_i = \mathbb{I}_1 \otimes \cdots \otimes \mathbb{I}_{i-1} \otimes A_i \otimes \mathbb{I}_{i+1} \otimes \cdots \otimes \mathbb{I}_N\]</div>
 <p><strong>Action on product states</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\hat{A}_i |\alpha_1 \alpha_2 \ldots \alpha_N\rangle = |\alpha_1 \ldots \alpha_{i-1}\rangle (A_i |\alpha_i\rangle) |\alpha_{i+1} \ldots \alpha_N\rangle\]</div>
+\[
+\hat{A}_i |\alpha_1 \alpha_2 \ldots \alpha_N\rangle = |\alpha_1 \ldots \alpha_{i-1}\rangle (A_i |\alpha_i\rangle) |\alpha_{i+1} \ldots \alpha_N\rangle\]</div>
 <p><strong>Example</strong>: For a two-qubit system, the Pauli <span class="math notranslate nohighlight">\(X\)</span> operator acting on qubit 2:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}X_2 = I \otimes X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \otimes I\end{split}\]</div>
+\[\begin{split}
+X_2 = I \otimes X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \otimes I\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[X_2 |01\rangle = |0\rangle \otimes (X|1\rangle) = |0\rangle \otimes |0\rangle = |00\rangle\]</div>
 </section>
@@ -685,12 +702,14 @@ document.write(`
 <h3>Two-Body Interactions<a class="headerlink" href="#two-body-interactions" title="Link to this heading">#</a></h3>
 <p>An operator acting on pairs of particles takes the form:</p>
 <div class="math notranslate nohighlight">
-\[V_{ij} = \mathbb{I}_1 \otimes \cdots \otimes V_{ij} \otimes \cdots \otimes \mathbb{I}_N\]</div>
+\[
+V_{ij} = \mathbb{I}_1 \otimes \cdots \otimes V_{ij} \otimes \cdots \otimes \mathbb{I}_N\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_{ij}\)</span> couples particles <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: Spin-spin coupling</p>
 <div class="math notranslate nohighlight">
-\[H_{int} = J \boldsymbol{S}_1 \cdot \boldsymbol{S}_2\]</div>
+\[
+H_{int} = J \boldsymbol{S}_1 \cdot \boldsymbol{S}_2\]</div>
 <p>This couples the spins of particles 1 and 2, energetically favoring or disfavoring alignment depending on the sign of <span class="math notranslate nohighlight">\(J\)</span>.</p>
 </div>
 </section>
@@ -698,7 +717,8 @@ document.write(`
 <h3>Commutation of Single-Particle Operators<a class="headerlink" href="#commutation-of-single-particle-operators" title="Link to this heading">#</a></h3>
 <p>Operators acting on different particles <strong>always commute</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-different-particle-commute">
-<span class="eqno">(63)<a class="headerlink" href="#equation-eq-different-particle-commute" title="Link to this equation">#</a></span>\[[A_i, B_j] = 0 \quad \text{for } i \neq j\]</div>
+<span class="eqno">(63)<a class="headerlink" href="#equation-eq-different-particle-commute" title="Link to this equation">#</a></span>\[
+[A_i, B_j] = 0 \quad \text{for } i \neq j\]</div>
 <p>This is because they act on orthogonal subspaces of the tensor product.</p>
 </section>
 </section>
@@ -708,40 +728,48 @@ document.write(`
 <h3>Standard Notation<a class="headerlink" href="#standard-notation" title="Link to this heading">#</a></h3>
 <p>For an <span class="math notranslate nohighlight">\(N\)</span>-particle system, we use several interchangeable notations:</p>
 <div class="math notranslate nohighlight">
-\[|\alpha_1 \alpha_2 \ldots \alpha_N\rangle = |\alpha_1\rangle |\alpha_2\rangle \cdots |\alpha_N\rangle = |\alpha_1\rangle \otimes |\alpha_2\rangle \otimes \cdots \otimes |\alpha_N\rangle\]</div>
+\[
+|\alpha_1 \alpha_2 \ldots \alpha_N\rangle = |\alpha_1\rangle |\alpha_2\rangle \cdots |\alpha_N\rangle = |\alpha_1\rangle \otimes |\alpha_2\rangle \otimes \cdots \otimes |\alpha_N\rangle\]</div>
 <p>The commas are often omitted for brevity when there is no ambiguity.</p>
 </section>
 <section id="position-and-momentum-basis">
 <h3>Position and Momentum Basis<a class="headerlink" href="#position-and-momentum-basis" title="Link to this heading">#</a></h3>
 <p>For continuous quantum systems (particles in space), basis states are labeled by position or momentum:</p>
 <div class="math notranslate nohighlight">
-\[|\boldsymbol{r}_1 \boldsymbol{r}_2 \ldots \boldsymbol{r}_N\rangle \quad \text{(position basis)}\]</div>
+\[
+|\boldsymbol{r}_1 \boldsymbol{r}_2 \ldots \boldsymbol{r}_N\rangle \quad \text{(position basis)}\]</div>
 <p>A many-body wavefunction is:</p>
 <div class="math notranslate nohighlight">
-\[\psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N) = \langle \boldsymbol{r}_1 \boldsymbol{r}_2 \ldots \boldsymbol{r}_N | \psi \rangle\]</div>
+\[
+\psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N) = \langle \boldsymbol{r}_1 \boldsymbol{r}_2 \ldots \boldsymbol{r}_N | \psi \rangle\]</div>
 </section>
 <section id="discrete-basis-modes">
 <h3>Discrete Basis (Modes)<a class="headerlink" href="#discrete-basis-modes" title="Link to this heading">#</a></h3>
 <p>For systems with discrete single-particle spectrum (e.g., trapped particles, cavity modes), label basis states by mode indices:</p>
 <div class="math notranslate nohighlight">
-\[|\phi_i\rangle \quad \text{for } i = 1, 2, 3, \ldots\]</div>
+\[
+|\phi_i\rangle \quad \text{for } i = 1, 2, 3, \ldots\]</div>
 <p>A two-particle state might be:</p>
 <div class="math notranslate nohighlight">
-\[|\phi_i \phi_j\rangle = |i, j\rangle\]</div>
+\[
+|\phi_i \phi_j\rangle = |i, j\rangle\]</div>
 <div class="example admonition">
 <p class="admonition-title">Example: Two-Particle Hilbert Space</p>
 <h3 class="rubric" id="two-distinguishable-qubits">Two Distinguishable Qubits</h3>
 <p>For two distinguishable particles (labeled A and B), each a qubit, the complete basis is:</p>
 <div class="math notranslate nohighlight">
-\[\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}\]</div>
+\[
+\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}\]</div>
 <p>Any two-qubit state:</p>
 <div class="math notranslate nohighlight">
-\[|\psi\rangle = c_{00} |00\rangle + c_{01} |01\rangle + c_{10} |10\rangle + c_{11} |11\rangle\]</div>
+\[
+|\psi\rangle = c_{00} |00\rangle + c_{01} |01\rangle + c_{10} |10\rangle + c_{11} |11\rangle\]</div>
 <p>with <span class="math notranslate nohighlight">\(|c_{00}|^2 + |c_{01}|^2 + |c_{10}|^2 + |c_{11}|^2 = 1\)</span>.</p>
 <h3 class="rubric" id="product-state-example">Product State Example</h3>
 <p>The state <span class="math notranslate nohighlight">\(|\psi_A\rangle \otimes |\psi_B\rangle = \left(\frac{|0\rangle + |1\rangle}{\sqrt{2}}\right)_A \otimes |0\rangle_B\)</span> expands as:</p>
 <div class="math notranslate nohighlight">
-\[|\psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\]</div>
+\[
+|\psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\]</div>
 <p>This factorizes: knowing particle A’s state constrains particle B to <span class="math notranslate nohighlight">\(|0\rangle\)</span> always.</p>
 <h3 class="rubric" id="entangled-state-example">Entangled State Example</h3>
 <p>The Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> has a beautiful property: measuring either qubit in the computational basis collapses both.</p>
@@ -778,8 +806,8 @@ document.write(`
 </ul>
 </section>
 </section>
-<section id="id1">
-<h2>Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Tensor product</strong> <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span> combines single-particle Hilbert spaces.</p></li>
 <li><p><strong>Dimension scaling</strong>: An <span class="math notranslate nohighlight">\(N\)</span>-particle system with <span class="math notranslate nohighlight">\(d\)</span> single-particle states has dimension <span class="math notranslate nohighlight">\(d^N\)</span>.</p></li>
@@ -788,6 +816,29 @@ document.write(`
 <li><p><strong>Single-particle operators</strong> act via identity on other particles; different-particle operators commute.</p></li>
 <li><p><strong>Exponential growth</strong> is foundational to quantum advantage and scaling challenges.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html"><span class="std std-doc">1 1 2 State And Representation</span></a></strong>: Single-qubit states form the building blocks for tensor product spaces</p></li>
+<li><p><strong><a class="reference internal" href="2-1-2-symmetrization.html"><span class="std std-doc">2 1 2 Symmetrization</span></a></strong>: Identical particles require symmetrizing tensor product states under exchange</p></li>
+<li><p><strong><a class="reference internal" href="../ch6_quantum-foundations/6-2-1-composite-systems.html"><span class="std std-doc">6 2 1 Composite Systems</span></a></strong>: Tensor product structure underlies entanglement and Schmidt decomposition</p></li>
+</ul>
+</div>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> The Hilbert space of system A has dimension <span class="math notranslate nohighlight">\(d_A = 3\)</span> (with basis <span class="math notranslate nohighlight">\(|1\rangle, |2\rangle, |3\rangle\)</span>) and system B has dimension <span class="math notranslate nohighlight">\(d_B = 4\)</span> (with basis <span class="math notranslate nohighlight">\(|1\rangle, |2\rangle, |3\rangle, |4\rangle\)</span>). Write down the dimension of <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span> and list all 12 basis states explicitly.</p>
+<p><strong>2.</strong> Determine whether the two-qubit state</p>
+<div class="math notranslate nohighlight">
+\[
+|\psi\rangle = \frac{1}{2}(|00\rangle + |01\rangle + |10\rangle + |11\rangle)\]</div>
+<p>is a product state. If it is, factor it as <span class="math notranslate nohighlight">\(|\psi_A\rangle \otimes |\psi_B\rangle\)</span>.</p>
+<p><strong>3.</strong> Show that the Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> cannot be written as a product state <span class="math notranslate nohighlight">\(|\psi_A\rangle \otimes |\psi_B\rangle\)</span> for any single-qubit states <span class="math notranslate nohighlight">\(|\psi_A\rangle\)</span> and <span class="math notranslate nohighlight">\(|\psi_B\rangle\)</span>.</p>
+<p><strong>4.</strong> The operator <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> acts on qubit A. Write the explicit <span class="math notranslate nohighlight">\(4 \times 4\)</span> matrix for <span class="math notranslate nohighlight">\(\hat{\sigma}^z \otimes \hat{\mathbb{I}}\)</span> in the ordered basis <span class="math notranslate nohighlight">\(\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}\)</span>.</p>
+<p><strong>5.</strong> Compute <span class="math notranslate nohighlight">\((\hat{\sigma}^x \otimes \hat{\sigma}^x)|\Phi^+\rangle\)</span> where <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span>. What is the result, and what does it tell you about this Bell state?</p>
+<p><strong>6.</strong> Using the tensor product inner product rule <span class="math notranslate nohighlight">\(\langle \alpha_1 \alpha_2 | \beta_1 \beta_2 \rangle = \langle \alpha_1 | \beta_1 \rangle \langle \alpha_2 | \beta_2 \rangle\)</span>, evaluate <span class="math notranslate nohighlight">\(\langle 00 | 11 \rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 01 | 01 \rangle\)</span>, and <span class="math notranslate nohighlight">\(\langle 10 | 01 \rangle\)</span>. Explain why the four states <span class="math notranslate nohighlight">\(\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}\)</span> form an orthonormal basis.</p>
+<p><strong>7.</strong> For a product state <span class="math notranslate nohighlight">\(|\psi\rangle = |\psi_A\rangle \otimes |\psi_B\rangle\)</span>, prove that the expectation value of a two-particle operator factorizes: <span class="math notranslate nohighlight">\(\langle \psi | \hat{A} \otimes \hat{B} | \psi \rangle = \langle \psi_A | \hat{A} | \psi_A \rangle \langle \psi_B | \hat{B} | \psi_B \rangle\)</span>.</p>
+<p><strong>8.</strong> For <span class="math notranslate nohighlight">\(N\)</span> qubits (<span class="math notranslate nohighlight">\(d = 2\)</span>), how many independent real parameters are needed to specify (a) a general normalized state in <span class="math notranslate nohighlight">\(\mathcal{H}^{\otimes N}\)</span>, and (b) a general normalized product state <span class="math notranslate nohighlight">\(|\psi_1\rangle \otimes \cdots \otimes |\psi_N\rangle\)</span>? What does the difference represent physically?</p>
 </section>
 </section>
 
@@ -858,7 +909,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-two-single-qubit-systems">Combining Two Single-Qubit Systems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-n-particles-with-d-states-each">General Case: <span class="math notranslate nohighlight">\(N\)</span> Particles with <span class="math notranslate nohighlight">\(d\)</span> States Each</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-states-and-entanglement">Product States and Entanglement</a><ul class="nav section-nav flex-column">
@@ -885,7 +935,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entanglement-as-a-computational-resource">Entanglement as a Computational Resource</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -923,7 +974,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

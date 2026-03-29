@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,16 +522,19 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariant-laplacian-on-a-monopole-sphere">Covariant Laplacian on a Monopole Sphere</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monopole-harmonics-explicit-form">Monopole Harmonics: Explicit Form</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-in-monopole-background">Angular Momentum in Monopole Background</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-angular-momentum-eigenvalues">Modified Angular Momentum Eigenvalues</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-2-as-a-monopole-excitation">Spin-1/2 as a Monopole Excitation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profound-implication">Profound Implication</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-numbers-and-energy-levels">Quantum Numbers and Energy Levels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavefunctions-in-a-monopole-background">Wavefunctions in a Monopole Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monopole-quantum-number">The Monopole Quantum Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-properties-of-monopole-harmonics">Definition and Properties of Monopole Harmonics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-ordinary-spherical-harmonics">Comparison with Ordinary Spherical Harmonics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-spin-1-2-from-monopole-harmonics">Special Case: Spin-1/2 from Monopole Harmonics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#periodicity-and-single-valuedness">Periodicity and Single-Valuedness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orthonormality-and-completeness">Orthonormality and Completeness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-topology-and-the-hopf-fibration">Connection to Topology and the Hopf Fibration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-and-physical-relevance">Applications and Physical Relevance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -548,145 +551,262 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Define monopole harmonics <span class="math notranslate nohighlight">\(Y_{l,m}^s(\theta, \phi)\)</span>. How do they differ from standard spherical harmonics?</p></li>
-<li><p>Derive the angular momentum operator commutators in a monopole background. How does the monopole quantum number <span class="math notranslate nohighlight">\(s\)</span> modify the standard relation?</p></li>
-<li><p>Show that <span class="math notranslate nohighlight">\(\hat{L}^2\)</span> eigenvalues become <span class="math notranslate nohighlight">\(\hbar^2 l(l + 1 - 2s)\)</span> instead of <span class="math notranslate nohighlight">\(\hbar^2 l(l+1)\)</span>. What does the <span class="math notranslate nohighlight">\(-2s\)</span> term signify?</p></li>
-<li><p>For spin-1/2 (<span class="math notranslate nohighlight">\(s=1/2\)</span>), what are the quantum numbers and energy levels?</p></li>
-<li><p>How does the monopole picture explain the origin of intrinsic angular momentum (spin)?</p></li>
+<li><p>What are monopole harmonics, and how do they generalize spherical harmonics? Why do we need them when studying particles in monopole fields?</p></li>
+<li><p>The monopole modifies angular momentum eigenvalues from <span class="math notranslate nohighlight">\(\hbar^2 l(l+1)\)</span> to <span class="math notranslate nohighlight">\(\hbar^2 l(l+1-2s)\)</span>. What does the <span class="math notranslate nohighlight">\(-2s\)</span> shift physically represent?</p></li>
+<li><p>For a particle with spin-1/2, the orbital angular momentum quantum numbers become half-integer (<span class="math notranslate nohighlight">\(l = 1/2, 3/2, \ldots\)</span>). What does this tell you about the relationship between spin and topology?</p></li>
+<li><p>Why do monopole harmonics have only <span class="math notranslate nohighlight">\(2l+1\)</span> states (like ordinary spherical harmonics) even though they depend on an additional quantum number <span class="math notranslate nohighlight">\(s\)</span>?</p></li>
+<li><p>If spin-1/2 can be understood as orbital motion in a monopole background, what does this suggest about the fundamental nature of intrinsic angular momentum?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Monopole harmonics are the eigenfunctions of angular momentum in the presence of a magnetic monopole—analogs of spherical harmonics, but defined on a space with topologically non-trivial gauge structure. These functions reveal how monopoles distort the quantum mechanical geometry: the usual rotational symmetry is broken by the monopole’s existence, creating a preferred axis. Monopole harmonics illustrate the profound interplay between topology, gauge symmetry, and quantum eigenstates.</p>
-<div class="attention admonition">
-<p class="admonition-title">Quantization Axis Dependence</p>
-<p>Monopole harmonics depend on the choice of quantization axis—just like ordinary spherical harmonics. Yet physical observables (energy levels, transition rates) are rotationally invariant regardless of this choice.</p>
-</div>
-<section id="covariant-laplacian-on-a-monopole-sphere">
-<h3>Covariant Laplacian on a Monopole Sphere<a class="headerlink" href="#covariant-laplacian-on-a-monopole-sphere" title="Link to this heading">#</a></h3>
-<p>In a monopole background, the quantum mechanical wavefunction on a sphere obeys the Schrödinger equation with a <strong>covariant Laplacian</strong> that includes the monopole connection:</p>
+<section id="wavefunctions-in-a-monopole-background">
+<h3>Wavefunctions in a Monopole Background<a class="headerlink" href="#wavefunctions-in-a-monopole-background" title="Link to this heading">#</a></h3>
+<p>When a charged particle moves in the field of a Dirac monopole, the electromagnetic vector potential enters the Schrödinger equation through the <strong>minimal coupling</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\hat{H} = -\frac{\hbar^2}{2I}\nabla_D^2\]</div>
-<p>where <span class="math notranslate nohighlight">\(\nabla_D^2\)</span> is the covariant Laplacian incorporating the monopole’s gauge field.</p>
-<p>The eigenvalue equation for free motion on the sphere is:</p>
-<div class="math notranslate nohighlight">
-\[\nabla_D^2 Y = -\lambda Y\]</div>
-<p>The eigenfunctions are <strong>monopole harmonics</strong> <span class="math notranslate nohighlight">\(Y_{l,m}^s(\theta, \phi)\)</span>, labeled by:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(l = |s|, |s|+1, |s|+2, \ldots\)</span> (orbital angular momentum quantum number)</p></li>
-<li><p><span class="math notranslate nohighlight">\(m = -l, -l+1, \ldots, l-1, l\)</span> (magnetic quantum number)</p></li>
-<li><p><span class="math notranslate nohighlight">\(s = qg/(2\hbar c)\)</span> (monopole quantum number, fractional in general)</p></li>
-</ul>
-<p>The quantum number <span class="math notranslate nohighlight">\(s\)</span> encodes how strongly the particle couples to the monopole.</p>
+\[ \hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - \frac{q}{c}\boldsymbol{A}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q\)</span> is the particle’s charge and <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is the monopole vector potential. For a particle confined to a sphere (or for the angular part of a scattering problem), we must solve the <strong>angular eigenvalue problem</strong> with this modified operator.</p>
+<p>The resulting eigenfunctions—<strong>monopole harmonics</strong> <span class="math notranslate nohighlight">\(Y_{l,m}^s(\theta,\phi)\)</span>—are the generalization of ordinary spherical harmonics to the monopole background.</p>
 </section>
-<section id="monopole-harmonics-explicit-form">
-<h3>Monopole Harmonics: Explicit Form<a class="headerlink" href="#monopole-harmonics-explicit-form" title="Link to this heading">#</a></h3>
-<p>Monopole harmonics can be written as:</p>
+<section id="the-monopole-quantum-number">
+<h3>The Monopole Quantum Number<a class="headerlink" href="#the-monopole-quantum-number" title="Link to this heading">#</a></h3>
+<p>The strength of the monopole coupling is characterized by the <strong>monopole quantum number</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}Y_{l,m}^s(\theta, \phi) = e^{im\phi}\\, P_{l,m}^s(\cos\theta)\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(P_{l,m}^s\)</span> are <strong>generalized Legendre polynomials</strong> that depend on the monopole number <span class="math notranslate nohighlight">\(s\)</span>.</p>
-<p><strong>For <span class="math notranslate nohighlight">\(s=0\)</span> (no monopole)</strong>, these reduce to standard spherical harmonics:</p>
-<div class="math notranslate nohighlight">
-\[Y_{l,m}^0(\theta, \phi) = Y_{l,m}(\theta, \phi)\]</div>
-<p><strong>For non-zero <span class="math notranslate nohighlight">\(s\)</span></strong>, the Legendre polynomials have modified structure reflecting the monopole coupling.</p>
-<p>Key properties:</p>
-<ul class="simple">
-<li><p><strong>Orthonormality</strong>: <span class="math notranslate nohighlight">\(\int d\Omega\\, (Y_{l,m}^s)^* Y_{l',m'}^s = \delta_{ll'}\delta_{mm'}\)</span></p></li>
-<li><p><strong>Completeness</strong>: They form a complete basis for functions on the sphere</p></li>
-<li><p><strong>Periodicity</strong>: <span class="math notranslate nohighlight">\(Y_{l,m}^s(\theta, \phi + 2\pi) = e^{2\pi i s}Y_{l,m}^s(\theta, \phi)\)</span> (only single-valued if <span class="math notranslate nohighlight">\(2s\)</span> is an integer)</p></li>
-</ul>
-</section>
-<section id="angular-momentum-in-monopole-background">
-<h3>Angular Momentum in Monopole Background<a class="headerlink" href="#angular-momentum-in-monopole-background" title="Link to this heading">#</a></h3>
-<p>In the presence of a monopole, the orbital angular momentum operators are modified. The standard commutation relations:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}\hat{L}_k\]</div>
-<p>become:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}(\hat{L}_k + s\hbar\delta_{k3})\]</div>
-<p>where <span class="math notranslate nohighlight">\(s = qg/(2\hbar c)\)</span> is the <strong>monopole quantum number</strong> encoding the particle’s coupling strength to the monopole field. This shows that the monopole introduces an additive modification to the fundamental angular momentum algebra.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
-<p>The orbital angular momentum operator on the sphere is defined as:</p>
-<div class="math notranslate nohighlight">
-\[\hat{L}_i = -i\hbar \epsilon_{ijk} n^j \frac{\partial}{\partial n^k}\]</div>
-<p>where <span class="math notranslate nohighlight">\(n^i\)</span> is the unit vector specifying position on the sphere.</p>
-<p><strong>Without monopole</strong>, these satisfy the standard commutation relations:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}\hat{L}_k\]</div>
-<p><strong>With monopole</strong>, the commutators are modified:</p>
-<div class="math notranslate nohighlight">
-\[[\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}(\hat{L}_k + s\hbar\delta_{k3})\]</div>
-<p>The monopole quantum number <span class="math notranslate nohighlight">\(s\)</span> appears additively in the commutation relation. This modified algebra is the <strong>non-abelian algebra of angular momentum modified by monopole coupling</strong>.</p>
+\[ s = \frac{qg}{2\hbar c}\]</div>
+<p>In Gaussian units, with <span class="math notranslate nohighlight">\(q = e\)</span> (electron charge) and <span class="math notranslate nohighlight">\(g\)</span> the monopole charge (in units where Dirac quantization gives <span class="math notranslate nohighlight">\(eg = n\hbar c/2\)</span>), we have <span class="math notranslate nohighlight">\(s = n/2\)</span> (which must be an integer or half-integer, depending on <span class="math notranslate nohighlight">\(n\)</span>).</p>
+<p>For a Dirac monopole (the minimal monopole consistent with one electron), <span class="math notranslate nohighlight">\(eg = \hbar c/2\)</span>, so <span class="math notranslate nohighlight">\(s = 1/2\)</span> for an electron.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Definition: Monopole Quantum Number</p>
+<p>The monopole quantum number <span class="math notranslate nohighlight">\(s = qg/(2\hbar c)\)</span> determines how strongly the charged particle couples to the monopole field. It modifies the allowed angular momentum quantum numbers: instead of <span class="math notranslate nohighlight">\(l = 0, 1, 2, \ldots\)</span>, we have <span class="math notranslate nohighlight">\(l = |s|, |s|+1, |s|+2, \ldots\)</span></p>
+<p>This shift in allowed <span class="math notranslate nohighlight">\(l\)</span> values is a topological effect of the monopole field.</p>
 </div>
 </section>
-<section id="modified-angular-momentum-eigenvalues">
-<h3>Modified Angular Momentum Eigenvalues<a class="headerlink" href="#modified-angular-momentum-eigenvalues" title="Link to this heading">#</a></h3>
-<p>The squared angular momentum operator acts on monopole harmonics as:</p>
+<section id="definition-and-properties-of-monopole-harmonics">
+<h3>Definition and Properties of Monopole Harmonics<a class="headerlink" href="#definition-and-properties-of-monopole-harmonics" title="Link to this heading">#</a></h3>
+<p><strong>Monopole harmonics</strong> <span class="math notranslate nohighlight">\(Y_{l,m}^s(\theta,\phi)\)</span> are defined as eigenfunctions of the <strong>modified orbital angular momentum operators</strong> in the monopole background.</p>
+<p>In the monopole background, the canonical angular momentum becomes:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\hat{L}^2 Y_{l,m}^s = \hbar^2 l(l + 1 - 2s)\\, Y_{l,m}^s\end{split}\]</div>
-<p>Compare to the standard result (without monopole, <span class="math notranslate nohighlight">\(s=0\)</span>):</p>
+\[ \hat{\boldsymbol{L}} = \boldsymbol{r} \times \left(\hat{\boldsymbol{p}} - \frac{q}{c}\boldsymbol{A}\right)\]</div>
+<p>On the sphere (where only angular dependence matters), this can be rewritten as:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\hat{L}^2 Y_{l,m} = \hbar^2 l(l + 1)\\, Y_{l,m}\end{split}\]</div>
-<p>The monopole shifts the eigenvalue by a term <span class="math notranslate nohighlight">\(-2s\hbar^2 l\)</span>. This <strong>monopole-induced shift</strong> is a pure topological effect.</p>
+\[ \hat{\boldsymbol{L}} = \hat{\boldsymbol{L}}_\text{orb} - s\hat{r}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}}_\text{orb}\)</span> is the ordinary orbital angular momentum and the <span class="math notranslate nohighlight">\(-s\hat{r}\)</span> term represents the <strong>self-angular momentum of the electromagnetic field</strong> (the spin angular momentum of the electromagnetic field configuration around the monopole).</p>
+<p>The monopole harmonics satisfy:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{L}^2 Y_{l,m}^s = \hbar^2 l(l + 1 - 2s) Y_{l,m}^s\]</div>
+<div class="math notranslate nohighlight">
+\[ \hat{L}_z Y_{l,m}^s = \hbar m Y_{l,m}^s\]</div>
+<p>with quantum numbers:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(l = |s|, |s|+1, |s|+2, \ldots\)</span> (orbital angular momentum quantum number, shifted!)</p></li>
+<li><p><span class="math notranslate nohighlight">\(m = -l, -l+1, \ldots, l\)</span> (magnetic quantum number, as usual)</p></li>
+<li><p><span class="math notranslate nohighlight">\(s\)</span> = monopole quantum number (fixed parameter of the problem)</p></li>
+</ul>
 </section>
-<section id="spin-1-2-as-a-monopole-excitation">
-<h3>Spin-1/2 as a Monopole Excitation<a class="headerlink" href="#spin-1-2-as-a-monopole-excitation" title="Link to this heading">#</a></h3>
-<p>For a <strong>spin-1/2 particle</strong>, set <span class="math notranslate nohighlight">\(s = 1/2\)</span>. The allowed orbital angular momentum quantum numbers are:</p>
-<div class="math notranslate nohighlight">
-\[l = \frac{1}{2}, \frac{3}{2}, \frac{5}{2}, \ldots\]</div>
-<p>(half-integer values starting from <span class="math notranslate nohighlight">\(|s|=1/2\)</span>), with magnetic quantum number <span class="math notranslate nohighlight">\(m = -l, -l+1, \ldots, l\)</span>.</p>
-<p>For the lowest value <span class="math notranslate nohighlight">\(l = 1/2\)</span>, we have exactly <span class="math notranslate nohighlight">\(m = \pm 1/2\)</span>—the two spin-1/2 states! This remarkable result shows that:</p>
-<p><strong>Spin-1/2 eigenstates emerge naturally from the topological structure of motion in a monopole background.</strong></p>
-<p>The <span class="math notranslate nohighlight">\(-2s\)</span> shift in the eigenvalues (<span class="math notranslate nohighlight">\(\hat{L}^2 = \hbar^2 l(l+1-2s)\)</span>) exactly cancels the usual orbital contribution, leaving only the spinor character.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Detailed Analysis</p>
-<p>For a <strong>spin-1/2 particle</strong>, the monopole quantum number is <span class="math notranslate nohighlight">\(s = 1/2\)</span>. The angular momentum eigenvalues become:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\hat{L}^2 Y_{l,m}^{1/2} = \hbar^2[l(l+1) - 2 \cdot \frac{1}{2} \cdot l]\\, Y_{l,m}^{1/2} = \hbar^2[l^2 + l - l]\\, Y_{l,m}^{1/2} = \hbar^2 l(l+1)\\, Y_{l,m}^{1/2}\end{split}\]</div>
-<p>Wait—the formula looks the same! But the quantum numbers differ: for spin-1/2, the minimum value of <span class="math notranslate nohighlight">\(l\)</span> is <span class="math notranslate nohighlight">\(|s| = 1/2\)</span>, not <span class="math notranslate nohighlight">\(0\)</span>.</p>
-<p>Allowed values:</p>
-<div class="math notranslate nohighlight">
-\[l = \frac{1}{2}, \frac{3}{2}, \frac{5}{2}, \ldots\]</div>
-<p>So we get half-integer orbital angular momentum quantum numbers! The magnetic quantum number is:</p>
-<div class="math notranslate nohighlight">
-\[m = -l, -l+1, \ldots, l-1, l\]</div>
-<p>giving <span class="math notranslate nohighlight">\(2l+1\)</span> states for each <span class="math notranslate nohighlight">\(l\)</span>. For <span class="math notranslate nohighlight">\(l=1/2\)</span>, we have <span class="math notranslate nohighlight">\(m = \pm 1/2\)</span>—exactly the two spin-1/2 states!</p>
+<section id="comparison-with-ordinary-spherical-harmonics">
+<h3>Comparison with Ordinary Spherical Harmonics<a class="headerlink" href="#comparison-with-ordinary-spherical-harmonics" title="Link to this heading">#</a></h3>
+<p><strong>For <span class="math notranslate nohighlight">\(s = 0\)</span> (no monopole)</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(l = 0, 1, 2, \ldots\)</span> (all non-negative integers)</p></li>
+<li><p>Eigenvalues: <span class="math notranslate nohighlight">\(\hat{L}^2 Y_l^m = \hbar^2 l(l+1) Y_l^m\)</span></p></li>
+<li><p>Familiar spherical harmonics</p></li>
+</ul>
+<p><strong>For <span class="math notranslate nohighlight">\(s \neq 0\)</span> (with monopole)</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(l = |s|, |s|+1, |s|+2, \ldots\)</span> (shifted!)</p></li>
+<li><p>Eigenvalues: <span class="math notranslate nohighlight">\(\hat{L}^2 Y_{l,m}^s = \hbar^2 l(l + 1 - 2s) Y_{l,m}^s\)</span> (modified!)</p></li>
+<li><p>Monopole harmonics</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Physical Interpretation: Angular Momentum Shift</p>
+<p>The shift from <span class="math notranslate nohighlight">\(l(l+1)\)</span> to <span class="math notranslate nohighlight">\(l(l+1-2s)\)</span> reflects that the monopole field carries angular momentum. A particle in this field must have its canonical angular momentum modified by the field’s angular momentum contribution.</p>
+<p>For <span class="math notranslate nohighlight">\(s = 1/2\)</span> (an electron in a Dirac monopole background), the minimum allowed orbital angular momentum is <span class="math notranslate nohighlight">\(l = 1/2\)</span>. This <strong>half-integer angular momentum</strong> arises from the topological properties of the monopole field, not from internal spin!</p>
 </div>
 </section>
-<section id="profound-implication">
-<h3>Profound Implication<a class="headerlink" href="#profound-implication" title="Link to this heading">#</a></h3>
-<p><strong>Spin can be understood as orbital angular momentum in a monopole background!</strong></p>
-<p>The fact that particles carry intrinsic angular momentum (spin) with half-integer quantum numbers may be a consequence of the topological structure of monopole interactions in the universe. Although we don’t observe free monopoles, their existence would explain why spin exists.</p>
-<p>This deep connection suggests:</p>
-<ul class="simple">
-<li><p>Spin is not “intrinsic” in a fundamental sense—it emerges from topology</p></li>
-<li><p>The quantum numbers of spin-1/2 are naturally explained</p></li>
-<li><p>The universe’s topological structure constrains the allowed particle types</p></li>
-</ul>
-</section>
-<section id="quantum-numbers-and-energy-levels">
-<h3>Quantum Numbers and Energy Levels<a class="headerlink" href="#quantum-numbers-and-energy-levels" title="Link to this heading">#</a></h3>
-<p>For a particle confined to a sphere in a monopole background:</p>
-<p><strong>Energy eigenvalues</strong>:</p>
+<section id="special-case-spin-1-2-from-monopole-harmonics">
+<h3>Special Case: Spin-1/2 from Monopole Harmonics<a class="headerlink" href="#special-case-spin-1-2-from-monopole-harmonics" title="Link to this heading">#</a></h3>
+<p>Consider an electron (<span class="math notranslate nohighlight">\(q = e\)</span>) in a Dirac monopole field with charge <span class="math notranslate nohighlight">\(g = \hbar c/(2e)\)</span>, giving:</p>
 <div class="math notranslate nohighlight">
-\[E_{l,m}^s = \frac{\hbar^2}{2I}l(l + 1 - 2s)\]</div>
-<p>where <span class="math notranslate nohighlight">\(I\)</span> is the moment of inertia (assuming a freely rotating particle).</p>
-<p><strong>Degeneracy</strong>: For each <span class="math notranslate nohighlight">\(l\)</span>, there are <span class="math notranslate nohighlight">\(2l+1\)</span> states (different values of <span class="math notranslate nohighlight">\(m = -l, \ldots, l\)</span>). If the particle has multiple monopole quantum numbers (like a superposition), the Hilbert space becomes richer.</p>
+\[ s = \frac{eg}{2\hbar c} = \frac{1}{2}\]</div>
+<p>The allowed angular momentum values are:</p>
+<div class="math notranslate nohighlight">
+\[ l = \frac{1}{2}, \frac{3}{2}, \frac{5}{2}, \ldots\]</div>
+<p>For the lowest value, <span class="math notranslate nohighlight">\(l = 1/2\)</span>, the magnetic quantum number ranges as:</p>
+<div class="math notranslate nohighlight">
+\[ m = -\frac{1}{2}, \frac{1}{2}\]</div>
+<p>giving <strong>two states</strong>. These two states form a <strong>doublet</strong>, exactly like spin-1/2.</p>
+<div class="example admonition">
+<p class="admonition-title">Deep Insight: Spin and Monopole Fields</p>
+<p>This result suggests a profound unification: <strong>intrinsic spin-1/2 can be understood as orbital angular momentum in the background of a magnetic charge configuration.</strong></p>
+<p>While the electron does not literally orbit a monopole, topologically the electron’s quantum numbers are equivalent to those of a spinor. This perspective hints that spin might arise from a more fundamental gauge theory with monopole-like objects.</p>
+</div>
 </section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<section id="periodicity-and-single-valuedness">
+<h3>Periodicity and Single-Valuedness<a class="headerlink" href="#periodicity-and-single-valuedness" title="Link to this heading">#</a></h3>
+<p>Monopole harmonics satisfy a <strong>non-trivial periodicity condition</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ Y_{l,m}^s(\theta, \phi + 2\pi) = \mathrm{e}^{2\pi \mathrm{i} s} Y_{l,m}^s(\theta, \phi)\]</div>
+<p>For the wavefunction to be single-valued on the full sphere (<span class="math notranslate nohighlight">\(\phi \in [0, 2\pi]\)</span>), we need:</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{e}^{2\pi \mathrm{i} s} = 1 \quad \text{or} \quad s \in \mathbb{Z}\]</div>
+<p>for integer <span class="math notranslate nohighlight">\(s\)</span>. However, if <span class="math notranslate nohighlight">\(s\)</span> is a <strong>half-integer</strong>, then <span class="math notranslate nohighlight">\(\mathrm{e}^{2\pi \mathrm{i} s} = -1\)</span>, and the wavefunction picks up a minus sign under <span class="math notranslate nohighlight">\(2\pi\)</span> rotation. This is acceptable in quantum mechanics—it corresponds to a <strong>projective representation</strong> of the rotation group <span class="math notranslate nohighlight">\(SO(3)\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Topological Classification: Integer vs. Half-Integer</p>
 <ul class="simple">
-<li><p><strong>Monopole harmonics</strong>: Generalized spherical harmonics <span class="math notranslate nohighlight">\(Y_{l,m}^s\)</span> for motion in monopole background.</p></li>
-<li><p><strong>Quantum number <span class="math notranslate nohighlight">\(s\)</span></strong>: Monopole charge quantum number; determines angular momentum coupling strength.</p></li>
-<li><p><strong>Modified commutators</strong>: <span class="math notranslate nohighlight">\([\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}(\hat{L}_k + s\hbar\delta_{k3})\)</span>.</p></li>
-<li><p><strong>Shifted eigenvalues</strong>: <span class="math notranslate nohighlight">\(\hat{L}^2\)</span> eigenvalues become <span class="math notranslate nohighlight">\(\hbar^2 l(l+1-2s)\)</span>, not the standard <span class="math notranslate nohighlight">\(\hbar^2 l(l+1)\)</span>.</p></li>
-<li><p><strong>Half-integer <span class="math notranslate nohighlight">\(l\)</span></strong>: For monopole background, <span class="math notranslate nohighlight">\(l = |s|, |s|+1, \ldots\)</span> can be non-integer.</p></li>
-<li><p><strong>Spin-1/2 connection</strong>: Spin-1/2 corresponds to <span class="math notranslate nohighlight">\(s=1/2\)</span>; half-integer <span class="math notranslate nohighlight">\(l\)</span> naturally emerge.</p></li>
-<li><p><strong>Topological origin of spin</strong>: Spin quantization explained by monopole topology.</p></li>
-<li><p><strong>Complete basis</strong>: Monopole harmonics form complete orthonormal basis on the sphere.</p></li>
+<li><p><strong>Integer <span class="math notranslate nohighlight">\(s\)</span></strong>: Ordinary functions on the sphere. Single-valued.</p></li>
+<li><p><strong>Half-integer <span class="math notranslate nohighlight">\(s\)</span></strong>: Spinor-like functions. Acquire a minus sign under <span class="math notranslate nohighlight">\(2\pi\)</span> rotation; single-valued only as sections of a spin bundle.</p></li>
 </ul>
+<p>This distinction explains why fermions (half-integer spin) and bosons (integer spin) have fundamentally different statistics.</p>
+</div>
 </section>
+<section id="orthonormality-and-completeness">
+<h3>Orthonormality and Completeness<a class="headerlink" href="#orthonormality-and-completeness" title="Link to this heading">#</a></h3>
+<p>Monopole harmonics form an <strong>orthonormal basis</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ \int \sin\theta \, \mathrm{d}\theta \, \mathrm{d}\phi \, (Y_{l,m}^s)^* Y_{l',m'}^s = \delta_{ll'}\delta_{mm'}\]</div>
+<p>and are <strong>complete</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{l=|s|}^\infty \sum_{m=-l}^l Y_{l,m}^s(\theta,\phi) Y_{l,m}^{s*}(\theta',\phi') = \delta(\cos\theta - \cos\theta')\delta(\phi - \phi')\]</div>
+<p>This allows any function on the sphere to be expanded as:</p>
+<div class="math notranslate nohighlight">
+\[ f(\theta,\phi) = \sum_{l=|s|}^\infty \sum_{m=-l}^l c_{l,m} Y_{l,m}^s(\theta,\phi)\]</div>
+</section>
+<section id="connection-to-topology-and-the-hopf-fibration">
+<h3>Connection to Topology and the Hopf Fibration<a class="headerlink" href="#connection-to-topology-and-the-hopf-fibration" title="Link to this heading">#</a></h3>
+<p>The monopole field creates a <strong>non-trivial fiber bundle</strong> over the 2-sphere <span class="math notranslate nohighlight">\(S^2\)</span>. The structure group is <span class="math notranslate nohighlight">\(U(1)\)</span> (the phase of the wavefunction), and the bundle is characterized by its <strong>first Chern number</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ c_1 = \frac{s}{\pi} = \frac{qg}{2\pi\hbar c}\]</div>
+<p>For a Dirac monopole with <span class="math notranslate nohighlight">\(qg = n\hbar c/2\)</span>, the Chern number is <span class="math notranslate nohighlight">\(c_1 = n/2\)</span>. The monopole harmonics are sections of this bundle.</p>
+<p>For <span class="math notranslate nohighlight">\(s = 1/2\)</span> (corresponding to <span class="math notranslate nohighlight">\(c_1 = 1/2\)</span>, or equivalently, to a bundle with winding number 1 when restricted to certain circles), the monopole harmonics encode the <strong>Hopf fibration</strong> geometry. This is why spin-1/2 particles have a two-fold rotation symmetry in their angular structure.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Angular Momentum Quantization with Monopoles</p>
+<p>Monopole harmonics Y^q_{lm} with monopole charge q must satisfy l ≥ |q|.</p>
+<p>For q=1/2 (Dirac monopole), <strong>calculate</strong> the minimum angular momentum eigenvalue.</p>
+<p>Compare to ordinary spherical harmonics and explain: why does the presence of a magnetic charge modify the allowed angular momentum values?</p>
+</div>
+</section>
+<section id="applications-and-physical-relevance">
+<h3>Applications and Physical Relevance<a class="headerlink" href="#applications-and-physical-relevance" title="Link to this heading">#</a></h3>
+<p><strong>Scattering theory</strong>: Monopole harmonics are essential for computing scattering amplitudes of electrons off monopoles, predicting observable angular distributions.</p>
+<p><strong>Topological Field Theory</strong>: In gauge theories on spaces with non-trivial bundles, monopole harmonics arise naturally.</p>
+<p><strong>Condensed Matter</strong>: In certain materials (spin ice, pyrochlore lattices), monopole-like excitations emerge as quasiparticles, and their coupling to charge carriers can be described using monopole harmonics.</p>
+<p><strong>Quantum Information</strong>: The spin-1/2 encoding in monopole harmonics has implications for quantum computing and the geometric phases of qubits.</p>
+</section>
+<section id="summary-table">
+<h3>Summary Table<a class="headerlink" href="#summary-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Spherical Harmonics (<span class="math notranslate nohighlight">\(s=0\)</span>)</p></th>
+<th class="head"><p>Monopole Harmonics (<span class="math notranslate nohighlight">\(s \neq 0\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Angular momentum range</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(l = 0, 1, 2, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(l = |s|, |s|+1, \ldots\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Eigenvalues of <span class="math notranslate nohighlight">\(\hat{L}^2\)</span></strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hbar^2 l(l+1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hbar^2 l(l+1-2s)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Magnetic quantum numbers</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(m = -l, \ldots, l\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(m = -l, \ldots, l\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Periodicity</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{e}^{0 \cdot 2\pi} = 1\)</span> (single-valued)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{e}^{2\pi \mathrm{i}s}\)</span> (may be <span class="math notranslate nohighlight">\(-1\)</span>)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Topological classification</strong></p></td>
+<td><p>Ordinary functions</p></td>
+<td><p>Sections of <span class="math notranslate nohighlight">\(U(1)\)</span> bundle</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Relevant for</strong></p></td>
+<td><p>Orbital angular momentum</p></td>
+<td><p>Spin, monopole interactions</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Minimum <span class="math notranslate nohighlight">\(l\)</span> for <span class="math notranslate nohighlight">\(s=1/2\)</span></strong></p></td>
+<td><p>N/A (<span class="math notranslate nohighlight">\(l\)</span> starts at 0)</p></td>
+<td><p><span class="math notranslate nohighlight">\(l_{\min} = 1/2\)</span> (two states)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-4-2-dirac-monopole.html"><span class="std std-doc">4.4.2 Dirac Monopole</span></a></strong>: Monopole singularities and string gauge freedom</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html"><span class="std std-doc">2.2.2 Spin Representations</span></a></strong>: Spin-<span class="math notranslate nohighlight">\(j\)</span> representations and tensor harmonics</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>Problem 1: Reducing to Spherical Harmonics</strong></p>
+<p>Show that monopole harmonics <span class="math notranslate nohighlight">\(Y_{l,m}^s(\theta, \phi)\)</span> reduce to ordinary spherical harmonics <span class="math notranslate nohighlight">\(Y_{l,m}(\theta, \phi)\)</span> when <span class="math notranslate nohighlight">\(s=0\)</span>. What does this tell you about the physical meaning of the monopole quantum number?</p>
+<hr class="docutils" />
+<p><strong>Problem 2: Orthonormality Check</strong></p>
+<p>Verify the orthonormality relation:</p>
+<div class="math notranslate nohighlight">
+\[
+\int \mathrm{d}\Omega\, (Y_{l,m}^s)^* Y_{l',m'}^s = \delta_{ll'}\delta_{mm'}\]</div>
+<p>Explain why this relation is essential for a consistent quantum mechanics on the monopole sphere.</p>
+<hr class="docutils" />
+<p><strong>Problem 3: Modified Commutation Relations</strong></p>
+<p>(a) Write out all three components of the modified angular momentum commutation relation with monopole:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{L}_i, \hat{L}_j] = \mathrm{i}\hbar\epsilon_{ijk}(\hat{L}_k + s\hbar\delta_{k3})\]</div>
+<p>(b) Show that for <span class="math notranslate nohighlight">\(s=0\)</span>, this reduces to the standard <span class="math notranslate nohighlight">\(su(2)\)</span> algebra.</p>
+<p>(c) Interpret physically: what does the <span class="math notranslate nohighlight">\(s\hbar\delta_{k3}\)</span> term represent?</p>
+<hr class="docutils" />
+<p><strong>Problem 4: Eigenvalue Shift from Monopole Coupling</strong></p>
+<p>The monopole modifies the angular momentum eigenvalues from <span class="math notranslate nohighlight">\(\hbar^2 l(l+1)\)</span> to <span class="math notranslate nohighlight">\(\hbar^2 l(l+1-2s)\)</span>.</p>
+<p>(a) Compute the energy shift <span class="math notranslate nohighlight">\(\Delta E = E_s - E_0\)</span> for a particle with monopole quantum number <span class="math notranslate nohighlight">\(s=1/3\)</span> and orbital angular momentum <span class="math notranslate nohighlight">\(l=2\)</span>.</p>
+<p>(b) Is this shift always negative? Explain the physical origin of the sign.</p>
+<p>(c) For which values of <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(l\)</span> does the monopole eigenvalue become zero?</p>
+<hr class="docutils" />
+<p><strong>Problem 5: Spin-1/2 from Monopole Harmonics</strong></p>
+<p>(a) For <span class="math notranslate nohighlight">\(s=1/2\)</span>, list the allowed values of the orbital angular momentum quantum number <span class="math notranslate nohighlight">\(l\)</span>. How many states exist for the lowest value of <span class="math notranslate nohighlight">\(l\)</span>?</p>
+<p>(b) Identify the magnetic quantum numbers <span class="math notranslate nohighlight">\(m\)</span> for <span class="math notranslate nohighlight">\(l=1/2\)</span>. How do these compare to the spin-1/2 values?</p>
+<p>(c) Explain why this result supports the claim that “spin can be understood as orbital angular momentum in a monopole background.”</p>
+<hr class="docutils" />
+<p><strong>Problem 6: Periodicity and Single-Valuedness</strong></p>
+<p>Monopole harmonics satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+Y_{l,m}^s(\theta, \phi + 2\pi) = \mathrm{e}^{2\pi i s}\, Y_{l,m}^s(\theta, \phi)\]</div>
+<p>(a) For a wavefunction to be single-valued on the sphere, what constraint must <span class="math notranslate nohighlight">\(s\)</span> satisfy?</p>
+<p>(b) If <span class="math notranslate nohighlight">\(s = 3/4\)</span>, is the wavefunction single-valued? What is the physical consequence?</p>
+<p>(c) Show that for integer monopole quantum numbers <span class="math notranslate nohighlight">\(s \in \mathbb{Z}\)</span>, the periodicity is always satisfied.</p>
+<hr class="docutils" />
+<p><strong>Problem 7: Angular Momentum Eigenvalues for Spin-3/2</strong></p>
+<p>Suppose a particle couples to a monopole with quantum number <span class="math notranslate nohighlight">\(s = 3/2\)</span>.</p>
+<p>(a) What are the allowed values of <span class="math notranslate nohighlight">\(l\)</span>?</p>
+<p>(b) For the lowest allowed <span class="math notranslate nohighlight">\(l\)</span>, compute <span class="math notranslate nohighlight">\(\hat{L}^2\)</span> eigenvalues using the formula <span class="math notranslate nohighlight">\(\hat{L}^2 Y_{l,m}^s = \hbar^2 l(l+1-2s)\, Y_{l,m}^s\)</span>.</p>
+<p>(c) How many distinct energy levels appear if the particle is confined to rotate freely on a sphere?</p>
+<hr class="docutils" />
+<p><strong>Problem 8: Gauge Transformation and Monopole Charge</strong></p>
+<p>The monopole quantum number is defined as <span class="math notranslate nohighlight">\(s = qg/(2\hbar c)\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the particle’s charge and <span class="math notranslate nohighlight">\(g\)</span> is the monopole strength.</p>
+<p>(a) Show that if you rescale the charge <span class="math notranslate nohighlight">\(q \to nq\)</span> (where <span class="math notranslate nohighlight">\(n\)</span> is an integer), the monopole quantum number changes as <span class="math notranslate nohighlight">\(s \to ns\)</span>.</p>
+<p>(b) How does this change affect the angular momentum eigenvalues? Would a doubly-charged particle see a monopole “twice as strongly”?</p>
+<p>(c) Interpret the result physically: does doubling the charge double the angular momentum shift?</p>
+<hr class="docutils" />
+<p><strong>Problem 9: Basis Completeness</strong></p>
+<p>The lecture states that monopole harmonics form a complete, orthonormal basis for functions on the sphere.</p>
+<p>(a) What is the dimension of the Hilbert space for a particle confined to a sphere with monopole quantum number <span class="math notranslate nohighlight">\(s=1/2\)</span>? (Consider all <span class="math notranslate nohighlight">\(l \geq 1/2\)</span> up to some maximum <span class="math notranslate nohighlight">\(l\)</span>.)</p>
+<p>(b) Compare to the dimension without a monopole (<span class="math notranslate nohighlight">\(s=0\)</span>). How does the monopole affect the Hilbert space structure?</p>
+<p>(c) Why is completeness important for describing time evolution and eigenstates?</p>
+<hr class="docutils" />
+<p><strong>Problem 10: Physical Realization</strong></p>
+<p>Although free monopoles have not been observed in nature, monopole-like excitations appear in certain condensed matter systems (e.g., magnetic monopoles in spin ice).</p>
+<p>Suppose you have a particle confined to the surface of a magnetic material with an effective monopole strength <span class="math notranslate nohighlight">\(g = 10\hbar c\)</span> and particle charge <span class="math notranslate nohighlight">\(q = e\)</span> (one electron charge).</p>
+<p>(a) Calculate the monopole quantum number <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p>(b) What are the first three allowed values of <span class="math notranslate nohighlight">\(l\)</span>?</p>
+<p>(c) For <span class="math notranslate nohighlight">\(l=|s|\)</span> (the lowest state), compute the angular momentum squared in units of <span class="math notranslate nohighlight">\(\hbar^2\)</span>.</p>
+<p>(d) Discuss: could you distinguish this system from ordinary spin in an experiment?</p>
 </section>
 </section>
 
@@ -755,16 +875,19 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariant-laplacian-on-a-monopole-sphere">Covariant Laplacian on a Monopole Sphere</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monopole-harmonics-explicit-form">Monopole Harmonics: Explicit Form</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-in-monopole-background">Angular Momentum in Monopole Background</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-angular-momentum-eigenvalues">Modified Angular Momentum Eigenvalues</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-2-as-a-monopole-excitation">Spin-1/2 as a Monopole Excitation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profound-implication">Profound Implication</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-numbers-and-energy-levels">Quantum Numbers and Energy Levels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavefunctions-in-a-monopole-background">Wavefunctions in a Monopole Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monopole-quantum-number">The Monopole Quantum Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-properties-of-monopole-harmonics">Definition and Properties of Monopole Harmonics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-ordinary-spherical-harmonics">Comparison with Ordinary Spherical Harmonics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-spin-1-2-from-monopole-harmonics">Special Case: Spin-1/2 from Monopole Harmonics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#periodicity-and-single-valuedness">Periodicity and Single-Valuedness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orthonormality-and-completeness">Orthonormality and Completeness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-topology-and-the-hopf-fibration">Connection to Topology and the Hopf Fibration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-and-physical-relevance">Applications and Physical Relevance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -802,7 +925,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

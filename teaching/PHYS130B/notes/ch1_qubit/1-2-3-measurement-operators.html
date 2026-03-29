@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -548,11 +548,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is a measurement operator (projector) <span class="math notranslate nohighlight">\(P_{O=m}\)</span> and how does it relate to the observable <span class="math notranslate nohighlight">\(O\)</span>?</p></li>
-<li><p>Write down the measurement operators for spin along each Pauli axis <span class="math notranslate nohighlight">\(X, Y, Z\)</span> with outcomes <span class="math notranslate nohighlight">\(m = \pm 1\)</span>.</p></li>
-<li><p>How is the measurement probability <span class="math notranslate nohighlight">\(p(m|O, \psi)\)</span> expressed as a conditional probability using projectors?</p></li>
-<li><p>Describe state collapse: what is the post-measurement state after outcome <span class="math notranslate nohighlight">\(m\)</span>?</p></li>
-<li><p>In what sense is state collapse analogous to Bayesian updating of a probability distribution?</p></li>
+<li><p>Define a measurement operator (projector) <span class="math notranslate nohighlight">\(P_{O=m}\)</span> for an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> with outcome <span class="math notranslate nohighlight">\(m\)</span>. What are the three key properties (Hermiticity, idempotence, completeness) and why does each matter?</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> with eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>, write down the two projectors <span class="math notranslate nohighlight">\(P_{+}\)</span> and <span class="math notranslate nohighlight">\(P_{-}\)</span> explicitly as matrices and verify that they satisfy completeness and idempotence.</p></li>
+<li><p>The measurement probability for outcome <span class="math notranslate nohighlight">\(m\)</span> is <span class="math notranslate nohighlight">\(p(m) = \langle \psi | P_{O=m} | \psi \rangle\)</span>. Prove that this always gives a number between 0 and 1, and that the probabilities sum to 1 across all outcomes.</p></li>
+<li><p>Derive the post-measurement state after outcome <span class="math notranslate nohighlight">\(m\)</span>: show that <span class="math notranslate nohighlight">\(|\psi'\rangle = \frac{P_{O=m}|\psi\rangle}{\sqrt{p(m)}}\)</span> is properly normalized and agrees with the measurement postulate.</p></li>
+<li><p>In Bayesian statistics, you update a probability distribution <span class="math notranslate nohighlight">\(p(x)\)</span> to <span class="math notranslate nohighlight">\(p(x|\text{data}) \propto p(\text{data}|x)p(x)\)</span> based on observations. Is the quantum measurement collapse <span class="math notranslate nohighlight">\(|\psi\rangle \to \frac{P|\psi\rangle}{\sqrt{\langle \psi|P|\psi \rangle}}\)</span> just a special case of Bayesian updating, or is something fundamentally different happening?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -562,47 +562,74 @@ document.write(`
 <h3>Measurement Operators as Projectors<a class="headerlink" href="#measurement-operators-as-projectors" title="Link to this heading">#</a></h3>
 <p>Given an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> with spectral decomposition</p>
 <div class="math notranslate nohighlight">
-\[\hat{O} = \sum_m m\, |O{=}m\rangle\langle O{=}m|\]</div>
+\[
+\hat{O} = \sum_m m\, |O{=}m\rangle\langle O{=}m|\]</div>
 <p>we define the <strong>measurement operator</strong> for outcome <span class="math notranslate nohighlight">\(m\)</span> as the projector onto the corresponding eigenspace:</p>
 <div class="math notranslate nohighlight" id="equation-eq-measurement-projector">
-<span class="eqno">(32)<a class="headerlink" href="#equation-eq-measurement-projector" title="Link to this equation">#</a></span>\[P_{O=m} = |O{=}m\rangle\langle O{=}m|\]</div>
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-measurement-projector" title="Link to this equation">#</a></span>\[
+P_{O=m} = |O{=}m\rangle\langle O{=}m|\]</div>
+<div class="important admonition">
+<p class="admonition-title">Projector Properties</p>
+<p>These projectors satisfy three fundamental properties:</p>
+<ul class="simple">
+<li><p><strong>Hermiticity</strong>: <span class="math notranslate nohighlight">\(P_{O=m}^\dagger = P_{O=m}\)</span> — projectors are observables with eigenvalues 0 or 1</p></li>
+<li><p><strong>Idempotence</strong>: <span class="math notranslate nohighlight">\(P_{O=m}^2 = P_{O=m}\)</span> — projecting twice is identical to projecting once</p></li>
+<li><p><strong>Completeness</strong>: <span class="math notranslate nohighlight">\(\sum_m P_{O=m} = I\)</span> — the projectors for all outcomes partition the Hilbert space</p></li>
+</ul>
+<p>These properties ensure that measurement outcomes are mutually exclusive and exhaustive, and that projectors can represent the measurement process as state collapse.</p>
+</div>
 <p>These projectors satisfy three key properties:</p>
 <ul class="simple">
 <li><p><strong>Hermiticity</strong>: <span class="math notranslate nohighlight">\(P_{O=m}^\dagger = P_{O=m}\)</span></p></li>
 <li><p><strong>Idempotence</strong>: <span class="math notranslate nohighlight">\(P_{O=m}^2 = P_{O=m}\)</span> (projecting twice is the same as projecting once)</p></li>
 <li><p><strong>Completeness</strong>: <span class="math notranslate nohighlight">\(\sum_m P_{O=m} = I\)</span> (the projectors for all outcomes sum to the identity)</p></li>
 </ul>
+<div class="important admonition">
+<p class="admonition-title">Spectral Decomposition</p>
 <p>The observable itself is reconstructed from its projectors via the <strong>spectral decomposition</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-spectral-decomposition">
-<span class="eqno">(33)<a class="headerlink" href="#equation-eq-spectral-decomposition" title="Link to this equation">#</a></span>\[\hat{O} = \sum_m m\, P_{O=m}\]</div>
+<span class="eqno">(33)<a class="headerlink" href="#equation-eq-spectral-decomposition" title="Link to this equation">#</a></span>\[
+\hat{O} = \sum_m m\, P_{O=m}\]</div>
+<p>This decomposition shows that every Hermitian operator can be expressed as a weighted sum of projectors. The eigenvalues are the weights, and the projectors are the “building blocks” of measurement.</p>
+</div>
 <p>This formula shows that an observable is completely characterized by its eigenvalues <span class="math notranslate nohighlight">\(m\)</span> and the corresponding projectors <span class="math notranslate nohighlight">\(P_{O=m}\)</span>.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p><strong>Can a measurement leave the state unchanged?</strong> Suppose we measure observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> on state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and happen to get outcome <span class="math notranslate nohighlight">\(m\)</span> such that <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is already an eigenstate of <span class="math notranslate nohighlight">\(\hat{O}\)</span>. The projector <span class="math notranslate nohighlight">\(P_{O=m}|\psi\rangle = |\psi\rangle\)</span>, so state collapse leaves it untouched. Does this mean the measurement caused no disturbance? What if we measure a <em>different</em> observable <span class="math notranslate nohighlight">\(\hat{O}'\)</span> on the same state and also get an eigenvalue—is measurement “non-disturbing” whenever we happen to measure an eigenbasis? Or is there still a hidden disturbance encoded in the collapse structure itself?</p>
+</div>
 </section>
 <section id="explicit-construction-p-o-m-frac-1-m-hat-o-2">
 <h3>Explicit Construction: <span class="math notranslate nohighlight">\(P_{O=m} = \frac{1 + m\hat{O}}{2}\)</span><a class="headerlink" href="#explicit-construction-p-o-m-frac-1-m-hat-o-2" title="Link to this heading">#</a></h3>
 <p>For a qubit observable with eigenvalues <span class="math notranslate nohighlight">\(m = \pm 1\)</span> (such as any Pauli operator), there is an elegant closed-form expression. Starting from the spectral decomposition <span class="math notranslate nohighlight">\(\hat{O} = (+1)|O{=}+\rangle\langle O{=}+| + (-1)|O{=}-\rangle\langle O{=}-|\)</span> and the completeness relation <span class="math notranslate nohighlight">\(|O{=}+\rangle\langle O{=}+| + |O{=}-\rangle\langle O{=}-| = I\)</span>, we can solve for each projector:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projector-formula">
-<span class="eqno">(34)<a class="headerlink" href="#equation-eq-projector-formula" title="Link to this equation">#</a></span>\[P_{O=m} = \frac{I + m\hat{O}}{2}\]</div>
+<span class="eqno">(34)<a class="headerlink" href="#equation-eq-projector-formula" title="Link to this equation">#</a></span>\[
+P_{O=m} = \frac{I + m\hat{O}}{2}\]</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation</p>
 <p>Adding the two equations:</p>
 <div class="math notranslate nohighlight">
-\[\hat{O} + I = 2|O{=}+\rangle\langle O{=}+| \implies P_{O=+} = \frac{I + \hat{O}}{2}\]</div>
+\[
+\hat{O} + I = 2|O{=}+\rangle\langle O{=}+| \implies P_{O=+} = \frac{I + \hat{O}}{2}\]</div>
 <p>Subtracting:</p>
 <div class="math notranslate nohighlight">
-\[I - \hat{O} = 2|O{=}-\rangle\langle O{=}-| \implies P_{O=-} = \frac{I - \hat{O}}{2}\]</div>
+\[
+I - \hat{O} = 2|O{=}-\rangle\langle O{=}-| \implies P_{O=-} = \frac{I - \hat{O}}{2}\]</div>
 <p>Both cases are unified by <span class="math notranslate nohighlight">\(P_{O=m} = (I + m\hat{O})/2\)</span>.</p>
 </div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Verification of Projector Properties</p>
+<p class="admonition-title">Verification of Projector</p>
 <p><strong>Idempotence</strong>: Using <span class="math notranslate nohighlight">\(\hat{O}^2 = I\)</span> (which holds for any operator with eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[P_{O=m}^2 = \frac{(I + m\hat{O})^2}{4} = \frac{I + 2m\hat{O} + m^2 \hat{O}^2}{4} = \frac{2I + 2m\hat{O}}{4} = P_{O=m} \quad\checkmark\]</div>
+\[
+P_{O=m}^2 = \frac{(I + m\hat{O})^2}{4} = \frac{I + 2m\hat{O} + m^2 \hat{O}^2}{4} = \frac{2I + 2m\hat{O}}{4} = P_{O=m} \quad\checkmark\]</div>
 <p><strong>Completeness</strong>:</p>
 <div class="math notranslate nohighlight">
-\[P_{O=+} + P_{O=-} = \frac{I + \hat{O}}{2} + \frac{I - \hat{O}}{2} = I \quad\checkmark\]</div>
+\[
+P_{O=+} + P_{O=-} = \frac{I + \hat{O}}{2} + \frac{I - \hat{O}}{2} = I \quad\checkmark\]</div>
 <p><strong>Orthogonality</strong>:</p>
 <div class="math notranslate nohighlight">
-\[P_{O=+}\, P_{O=-} = \frac{(I+\hat{O})(I-\hat{O})}{4} = \frac{I - \hat{O}^2}{4} = 0 \quad\checkmark\]</div>
+\[
+P_{O=+}\, P_{O=-} = \frac{(I+\hat{O})(I-\hat{O})}{4} = \frac{I - \hat{O}^2}{4} = 0 \quad\checkmark\]</div>
 </div>
 </section>
 <section id="measurement-operators-for-the-pauli-observables">
@@ -610,29 +637,39 @@ document.write(`
 <p>Applying <span class="math notranslate nohighlight">\(P_{O=m} = (I + m\hat{O})/2\)</span> to the three Pauli matrices:</p>
 <p><strong>Z-measurement</strong> (<span class="math notranslate nohighlight">\(\hat{O} = \hat{\sigma}^z\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}P_{Z=+1} = \frac{I + \hat{\sigma}^z}{2} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} = |0\rangle\langle 0|, \qquad P_{Z=-1} = \frac{I - \hat{\sigma}^z}{2} = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = |1\rangle\langle 1|\end{split}\]</div>
+\[\begin{split}
+P_{Z=+1} = \frac{I + \hat{\sigma}^z}{2} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} = |0\rangle\langle 0|, \qquad P_{Z=-1} = \frac{I - \hat{\sigma}^z}{2} = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = |1\rangle\langle 1|\end{split}\]</div>
 <p><strong>X-measurement</strong> (<span class="math notranslate nohighlight">\(\hat{O} = \hat{\sigma}^x\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}P_{X=+1} = \frac{I + \hat{\sigma}^x}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = |{+}\rangle\langle{+}|, \qquad P_{X=-1} = \frac{I - \hat{\sigma}^x}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} = |{-}\rangle\langle{-}|\end{split}\]</div>
+\[\begin{split}
+P_{X=+1} = \frac{I + \hat{\sigma}^x}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = |{+}\rangle\langle{+}|, \qquad P_{X=-1} = \frac{I - \hat{\sigma}^x}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} = |{-}\rangle\langle{-}|\end{split}\]</div>
 <p><strong>Y-measurement</strong> (<span class="math notranslate nohighlight">\(\hat{O} = \hat{\sigma}^y\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}P_{Y=+1} = \frac{I + \hat{\sigma}^y}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; -i \\ i &amp; 1 \end{pmatrix} = |{+}i\rangle\langle{+}i|, \qquad P_{Y=-1} = \frac{I - \hat{\sigma}^y}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; i \\ -i &amp; 1 \end{pmatrix} = |{-}i\rangle\langle{-}i|\end{split}\]</div>
+\[\begin{split}
+P_{Y=+1} = \frac{I + \hat{\sigma}^y}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; -\mathrm{i} \\ i &amp; 1 \end{pmatrix} = |{+}i\rangle\langle{+}i|, \qquad P_{Y=-1} = \frac{I - \hat{\sigma}^y}{2} = \frac{1}{2}\begin{pmatrix} 1 &amp; \mathrm{i} \\ -i &amp; 1 \end{pmatrix} = |{-}i\rangle\langle{-}i|\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|\pm i\rangle = \frac{1}{\sqrt{2}}(|0\rangle \pm i|1\rangle)\)</span> are the eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>.</p>
 </section>
 <section id="measurement-probability-as-conditional-probability">
 <h3>Measurement Probability as Conditional Probability<a class="headerlink" href="#measurement-probability-as-conditional-probability" title="Link to this heading">#</a></h3>
 <p>The Born rule can now be stated entirely in terms of projectors. The probability of obtaining outcome <span class="math notranslate nohighlight">\(m\)</span> when measuring observable <span class="math notranslate nohighlight">\(O\)</span> on state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-born-rule-projector">
-<span class="eqno">(35)<a class="headerlink" href="#equation-eq-born-rule-projector" title="Link to this equation">#</a></span>\[p(m \mid O, \psi) = \langle\psi| P_{O=m} |\psi\rangle = \|P_{O=m}|\psi\rangle\|^2\]</div>
+<span class="eqno">(35)<a class="headerlink" href="#equation-eq-born-rule-projector" title="Link to this equation">#</a></span>\[
+p(m \mid O, \psi) = \langle\psi| P_{O=m} |\psi\rangle = \|P_{O=m}|\psi\rangle\|^2\]</div>
 <p>The notation <span class="math notranslate nohighlight">\(p(m \mid O, \psi)\)</span> emphasizes that measurement probability is a <strong>conditional probability</strong>: it depends on both the choice of observable <span class="math notranslate nohighlight">\(O\)</span> and the state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>. Using the projector formula for qubits:</p>
 <div class="math notranslate nohighlight" id="equation-eq-born-rule-expectation">
-<span class="eqno">(36)<a class="headerlink" href="#equation-eq-born-rule-expectation" title="Link to this equation">#</a></span>\[p(m \mid O, \psi) = \left\langle\psi\left|\frac{I + m\hat{O}}{2}\right|\psi\right\rangle = \frac{1 + m\langle\hat{O}\rangle_\psi}{2}\]</div>
+<span class="eqno">(36)<a class="headerlink" href="#equation-eq-born-rule-expectation" title="Link to this equation">#</a></span>\[
+p(m \mid O, \psi) = \left\langle\psi\left|\frac{I + m\hat{O}}{2}\right|\psi\right\rangle = \frac{1 + m\langle\hat{O}\rangle_\psi}{2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle_\psi = \langle\psi|\hat{O}|\psi\rangle\)</span> is the expectation value. This gives a beautifully simple relationship: the measurement probability is determined entirely by the expectation value of the observable.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p><strong>Is the projector formalism the end of the story?</strong> We have defined measurement operators as projectors <span class="math notranslate nohighlight">\(P_{O=m}\)</span>. But is this the most general description of measurement? What if a physical measurement device cannot perfectly distinguish outcomes—say, it detects outcome <span class="math notranslate nohighlight">\(m\)</span> with efficiency less than 100%, or with some systematic leakage to other channels? In classical measurement, we would use likelihood functions. In quantum mechanics, this leads to <strong>positive operator-valued measures</strong> (POVMs), where the measurement operators need not be projectors, only positive operators that sum to <span class="math notranslate nohighlight">\(I\)</span>. Does this mean projectors are only an idealization, and real measurements require a richer framework?</p>
+</div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Example: Measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> on state <span class="math notranslate nohighlight">\(|0\rangle\)</span></p>
+<p class="admonition-title">Example: Measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></p>
 <p>The expectation value is <span class="math notranslate nohighlight">\(\langle 0|\hat{\sigma}^x|0\rangle = 0\)</span>, so:</p>
 <div class="math notranslate nohighlight">
-\[p(+1 \mid X, |0\rangle) = \frac{1 + 0}{2} = \frac{1}{2}, \qquad p(-1 \mid X, |0\rangle) = \frac{1 - 0}{2} = \frac{1}{2}\]</div>
+\[
+p(+1 \mid X, |0\rangle) = \frac{1 + 0}{2} = \frac{1}{2}, \qquad p(-1 \mid X, |0\rangle) = \frac{1 - 0}{2} = \frac{1}{2}\]</div>
 <p>As expected: a <span class="math notranslate nohighlight">\(z\)</span>-eigenstate is an equal superposition in the <span class="math notranslate nohighlight">\(x\)</span>-basis.</p>
 </div>
 </section>
@@ -640,11 +677,13 @@ document.write(`
 <h3>State Collapse as Bayesian Updating<a class="headerlink" href="#state-collapse-as-bayesian-updating" title="Link to this heading">#</a></h3>
 <p>After obtaining outcome <span class="math notranslate nohighlight">\(m\)</span>, the state collapses according to:</p>
 <div class="math notranslate nohighlight" id="equation-eq-state-collapse-projector">
-<span class="eqno">(37)<a class="headerlink" href="#equation-eq-state-collapse-projector" title="Link to this equation">#</a></span>\[|\psi\rangle \;\xrightarrow{\text{outcome } m}\; |\psi'\rangle = \frac{P_{O=m}|\psi\rangle}{\sqrt{p(m \mid O, \psi)}}\]</div>
+<span class="eqno">(37)<a class="headerlink" href="#equation-eq-state-collapse-projector" title="Link to this equation">#</a></span>\[
+|\psi\rangle \;\xrightarrow{\text{outcome } m}\; |\psi'\rangle = \frac{P_{O=m}|\psi\rangle}{\sqrt{p(m \mid O, \psi)}}\]</div>
 <p>The numerator <span class="math notranslate nohighlight">\(P_{O=m}|\psi\rangle\)</span> projects the state onto the eigenspace of outcome <span class="math notranslate nohighlight">\(m\)</span>, keeping only the component compatible with the observed result. The denominator <span class="math notranslate nohighlight">\(\sqrt{p(m|O,\psi)}\)</span> renormalizes the state. This is directly analogous to <strong>Bayes’ theorem</strong> in classical probability.</p>
 <p>In classical probability, Bayes’ theorem updates a prior distribution <span class="math notranslate nohighlight">\(p(x)\)</span> given observed data <span class="math notranslate nohighlight">\(d\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[p(x \mid d) = \frac{p(d \mid x)\, p(x)}{p(d)}\]</div>
+\[
+p(x \mid d) = \frac{p(d \mid x)\, p(x)}{p(d)}\]</div>
 <p>The quantum state collapse follows the same logical structure:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -669,11 +708,16 @@ document.write(`
 </table>
 </div>
 <p>In both cases, the update rule retains only the part of the prior that is <strong>compatible with the observation</strong>, then renormalizes. The key difference is that classical Bayesian updating changes a probability distribution (our knowledge), while quantum state collapse changes the state itself (the physical reality, not just our knowledge of it—at least in the standard interpretation).</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p><strong>Where is the quantum-classical boundary in the measurement chain?</strong> The state collapse formula <span class="math notranslate nohighlight">\(|\psi'\rangle = P_{O=m}|\psi\rangle / \sqrt{p(m|O,\psi)}\)</span> treats the measurement as an instantaneous, deterministic update. But in the lab, measuring a qubit means interacting it with a physical apparatus (photons, electron beams, etc.). That apparatus is itself quantum. At what point does a quantum interaction <em>become</em> a measurement that collapses the state? Is collapse a law of physics, or an emergent property that arises only when we trace out the apparatus degrees of freedom and compute reduced density matrices? Does the answer depend on whether the apparatus is “large enough” to decohere the outcomes?</p>
+</div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Bayesian Structure of Sequential Measurements</p>
+<p class="admonition-title">Bayesian Measurement Structure</p>
 <p>Consider two sequential measurements of observables <span class="math notranslate nohighlight">\(O_1\)</span> then <span class="math notranslate nohighlight">\(O_2\)</span>, obtaining outcomes <span class="math notranslate nohighlight">\(m_1\)</span> then <span class="math notranslate nohighlight">\(m_2\)</span>. The joint probability factorizes as:</p>
 <div class="math notranslate nohighlight">
-\[p(m_2, m_1 \mid O_2, O_1, \psi) = p(m_2 \mid O_2, \psi'_{m_1})\; p(m_1 \mid O_1, \psi)\]</div>
+\[
+p(m_2, m_1 \mid O_2, O_1, \psi) = p(m_2 \mid O_2, \psi'_{m_1})\; p(m_1 \mid O_1, \psi)\]</div>
 <p>where <span class="math notranslate nohighlight">\(|\psi'_{m_1}\rangle = P_{O_1=m_1}|\psi\rangle / \sqrt{p(m_1|O_1,\psi)}\)</span> is the post-first-measurement state. This is exactly the <strong>chain rule of conditional probability</strong>, reinforcing the Bayesian interpretation. Each measurement updates the state, and subsequent probabilities are computed from the updated state.</p>
 </div>
 </section>
@@ -681,19 +725,22 @@ document.write(`
 <h3>Degenerate Measurements<a class="headerlink" href="#degenerate-measurements" title="Link to this heading">#</a></h3>
 <p>When an eigenvalue <span class="math notranslate nohighlight">\(m\)</span> is <strong>degenerate</strong> (i.e., multiple linearly independent eigenstates share the same eigenvalue), the projector <span class="math notranslate nohighlight">\(P_{O=m}\)</span> projects onto the entire eigenspace, not just a single eigenstate. If the eigenspace for outcome <span class="math notranslate nohighlight">\(m\)</span> is spanned by <span class="math notranslate nohighlight">\(\{|m, \alpha\rangle\}_{\alpha=1}^{g_m}\)</span> where <span class="math notranslate nohighlight">\(g_m\)</span> is the degeneracy, then:</p>
 <div class="math notranslate nohighlight" id="equation-eq-degenerate-projector">
-<span class="eqno">(38)<a class="headerlink" href="#equation-eq-degenerate-projector" title="Link to this equation">#</a></span>\[P_{O=m} = \sum_{\alpha=1}^{g_m} |m, \alpha\rangle\langle m, \alpha|\]</div>
+<span class="eqno">(38)<a class="headerlink" href="#equation-eq-degenerate-projector" title="Link to this equation">#</a></span>\[
+P_{O=m} = \sum_{\alpha=1}^{g_m} |m, \alpha\rangle\langle m, \alpha|\]</div>
 <p>The measurement probability and state collapse formulas <a class="reference internal" href="#equation-eq-born-rule-projector">(35)</a> and <a class="reference internal" href="#equation-eq-state-collapse-projector">(37)</a> remain exactly the same—this is the power of the projector formalism. The only difference is that the post-measurement state now lies in a <strong>subspace</strong> rather than being a unique eigenstate:</p>
 <div class="math notranslate nohighlight">
-\[|\psi'\rangle = \frac{P_{O=m}|\psi\rangle}{\sqrt{p(m|O,\psi)}}\]</div>
+\[
+|\psi'\rangle = \frac{P_{O=m}|\psi\rangle}{\sqrt{p(m|O,\psi)}}\]</div>
 <div class="note admonition">
 <p class="admonition-title">Why Degeneracy Matters</p>
 <p>After a degenerate measurement, the state retains coherence <strong>within</strong> the eigenspace. Only the components <strong>outside</strong> the eigenspace are removed. This is sometimes called the <strong>Lüders rule</strong> (as opposed to the von Neumann rule, which would further collapse to a specific eigenstate within the degenerate subspace). The Lüders rule is the minimal disturbance consistent with the measurement outcome—it removes exactly the information gained and nothing more.</p>
 </div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Example: Measuring <span class="math notranslate nohighlight">\(L^2\)</span> vs. <span class="math notranslate nohighlight">\(L_z\)</span></p>
+<p class="admonition-title">Example: Measuring <span class="math notranslate nohighlight">\(L^2\)</span> vs.</p>
 <p>Consider the hydrogen atom with orbital angular momentum. Measuring <span class="math notranslate nohighlight">\(\hat{L}^2\)</span> with outcome <span class="math notranslate nohighlight">\(\ell(\ell+1)\hbar^2\)</span> projects onto the <span class="math notranslate nohighlight">\((2\ell+1)\)</span>-dimensional subspace spanned by <span class="math notranslate nohighlight">\(\{|l,m\rangle : m = -\ell, \ldots, +\ell\}\)</span>. The state after measurement is a superposition within this subspace:</p>
 <div class="math notranslate nohighlight">
-\[|\psi'\rangle = \frac{\sum_{m=-\ell}^{+\ell} |l,m\rangle\langle l,m|\psi\rangle}{\sqrt{\sum_{m=-\ell}^{+\ell} |\langle l,m|\psi\rangle|^2}}\]</div>
+\[
+|\psi'\rangle = \frac{\sum_{m=-\ell}^{+\ell} |l,m\rangle\langle l,m|\psi\rangle}{\sqrt{\sum_{m=-\ell}^{+\ell} |\langle l,m|\psi\rangle|^2}}\]</div>
 <p>A subsequent measurement of <span class="math notranslate nohighlight">\(\hat{L}_z\)</span> would further collapse this to a specific <span class="math notranslate nohighlight">\(|l,m\rangle\)</span>. The two measurements together—first <span class="math notranslate nohighlight">\(\hat{L}^2\)</span>, then <span class="math notranslate nohighlight">\(\hat{L}_z\)</span>—are compatible (since <span class="math notranslate nohighlight">\([\hat{L}^2, \hat{L}_z]=0\)</span>) and together specify the state within the angular momentum sector.</p>
 </div>
 </section>
@@ -706,6 +753,14 @@ document.write(`
 <li><p><strong>State collapse</strong> is projection followed by renormalization: <span class="math notranslate nohighlight">\(|\psi'\rangle = P_{O=m}|\psi\rangle / \sqrt{p}\)</span>, analogous to Bayesian updating.</p></li>
 <li><p>For <strong>degenerate</strong> eigenvalues, <span class="math notranslate nohighlight">\(P_{O=m}\)</span> projects onto the full eigenspace, and the post-measurement state retains coherence within that subspace (Lüders rule).</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="std std-doc">1.2.1 Measurement Postulate</span></a></strong>: The standard Born rule applies to Hermitian projectors; this section extends to non-projective measurements</p></li>
+<li><p><strong><a class="reference internal" href="1-2-2-uncertainty-and-incompatibility.html"><span class="std std-doc">1.2.2 Uncertainty and Incompatibility</span></a></strong>: Measurement operators give probabilities for outcomes; incompatibility constrains which observables can be measured jointly</p></li>
+<li><p><strong><a class="reference internal" href="#../ch6_quantum-foundations/6-3-2-povm-and-generalized-measurement.ipynb"><span class="xref myst">6.3.2 POVM and Generalized Measurement</span></a></strong>: Complete description of generalized quantum measurements in the open-system setting</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="homework">
@@ -848,7 +903,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

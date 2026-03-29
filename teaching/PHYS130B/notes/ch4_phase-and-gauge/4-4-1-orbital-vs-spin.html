@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,17 +522,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-decomposition">Angular Momentum Decomposition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-analogy-with-lorentz-force">Formal Analogy with Lorentz Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precession-as-geometrical-motion">Precession as Geometrical Motion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-spin-dynamics-in-a-magnetic-field">Classical Spin Dynamics in a Magnetic Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#larmor-precession">Larmor Precession</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-stability">Energy and Stability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-analog-of-quantum-spin">Classical Analog of Quantum Spin</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thomas-precession">Thomas Precession</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbital-angular-momentum">Orbital Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intrinsic-spin-angular-momentum">Intrinsic Spin Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-angular-momentum">Total Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-orbit-coupling">Spin-Orbit Coupling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-the-rotation-group">Representations of the Rotation Group</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -549,202 +547,253 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the angular momentum decomposition for a spinning object? Separate orbital and spin contributions.</p></li>
-<li><p>Derive the equation of motion for the spin axis <span class="math notranslate nohighlight">\(d\boldsymbol{n}/dt = \boldsymbol{n} \times \boldsymbol{\Omega}(\boldsymbol{n})\)</span>. What is <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}(\boldsymbol{n})\)</span>?</p></li>
-<li><p>Explain the analogy between spin dynamics and Lorentz force on a charged particle. How do torques map to magnetic fields?</p></li>
-<li><p>What is Thomas precession? How does the spin axis precess differently from the orbital angular momentum?</p></li>
-<li><p>Why is the spin motion formally equivalent to motion on the unit sphere?</p></li>
+<li><p>How is orbital angular momentum different from intrinsic spin? Can you describe both using the same quantum mechanical operators?</p></li>
+<li><p>A spin-1/2 particle precesses in a magnetic field. Why does it precess? Derive the equation of motion for the spin vector.</p></li>
+<li><p>What is Thomas precession, and when does it matter? How does the relativistic geometry change the expected precession rate?</p></li>
+<li><p>Explain the analogy between a spin in a magnetic field and a charged particle in an electromagnetic field. Where does this analogy break down?</p></li>
+<li><p>Why do we call spin “intrinsic” angular momentum when it can be described as orbital motion in an abstract space (monopole background)?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Spin is not a small sphere spinning, nor is it classical angular momentum—it is a purely quantum mechanical intrinsic angular momentum with no macroscopic counterpart. A spin-1/2 system has only two states, yet already exhibits quantum mysteries: superposition, non-commutativity of spin components, and intrinsic magnetic moments that are not generated by charge circulation. This section builds the foundation for understanding how spin couples to electromagnetic fields and defines the geometry of parameter space in gauge theory.</p>
-<div class="caution admonition">
-<p class="admonition-title">Angular Momentum is NOT Spin</p>
-<p>A spinning classical sphere acquires angular momentum. But quantum <strong>spin</strong> is intrinsic angular momentum with no classical analog—it has no “spinning” interpretation. The <span class="math notranslate nohighlight">\(S=1/2\)</span> eigenvalue shows spin is irreducibly quantum.</p>
-</div>
-<section id="angular-momentum-decomposition">
-<h3>Angular Momentum Decomposition<a class="headerlink" href="#angular-momentum-decomposition" title="Link to this heading">#</a></h3>
-<p>A macroscopic spinning object (like a spinning top or gyroscope) has total angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span>. We can decompose this into two parts by introducing the spin axis direction <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> (a unit vector):</p>
+<section id="orbital-angular-momentum">
+<h3>Orbital Angular Momentum<a class="headerlink" href="#orbital-angular-momentum" title="Link to this heading">#</a></h3>
+<p>The orbital angular momentum operator is defined as:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{L} = L_\parallel\boldsymbol{n} + \boldsymbol{L}_\perp\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(L_\parallel = \boldsymbol{L} \cdot \boldsymbol{n}\)</span> is the component of angular momentum <strong>along</strong> the spin axis</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{L}_\perp\)</span> is the perpendicular part, <strong>orthogonal</strong> to <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span></p></li>
-</ul>
-<p>The kinetic energy of a spinning rigid body is:</p>
+\[ \hat{\boldsymbol{L}} = \hat{\boldsymbol{r}} \times \hat{\boldsymbol{p}}\]</div>
+<p>In Cartesian components:</p>
 <div class="math notranslate nohighlight">
-\[T = \frac{L_\parallel^2}{2I_a} + \frac{L_\perp^2}{2I_t}\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(I_a\)</span> is the moment of inertia about the spin axis (axial, typically smaller)</p></li>
-<li><p><span class="math notranslate nohighlight">\(I_t\)</span> is the moment of inertia perpendicular to the spin axis (transverse, typically larger)</p></li>
-</ul>
-<p>For a symmetric top (like a spinning coin), <span class="math notranslate nohighlight">\(I_t\)</span> is the same for all directions perpendicular to the axis.</p>
-<p>When an external torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> acts on the spinning object, the total angular momentum evolves as:</p>
+\[ \hat{L}_i = \epsilon_{ijk}\hat{r}_j\hat{p}_k\]</div>
+<p>These operators satisfy the canonical <strong>angular momentum commutation relations</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{L}}{dt} = \boldsymbol{\tau}\]</div>
-<p>and the spin axis <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> follows the equation:</p>
+\[ [\hat{L}_i, \hat{L}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{L}_k\]</div>
+<p>In particular, <span class="math notranslate nohighlight">\([\hat{L}_x, \hat{L}_y] = \mathrm{i}\hbar\hat{L}_z\)</span> (and cyclic permutations). The magnitude squared commutes with all components:</p>
 <div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}(\boldsymbol{n})\]</div>
-<p>For a potential torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau} = -\nabla V(\boldsymbol{n})\)</span>, the effective angular velocity is:</p>
+\[ [\hat{L}^2, \hat{L}_i] = 0 \quad \text{for all } i\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{L}^2 = \hat{L}_x^2 + \hat{L}_y^2 + \hat{L}_z^2\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Property: Quantization of Orbital Angular Momentum</p>
+<p>Because orbital angular momentum arises from a spatial degree of freedom, its eigenvalues are <strong>integers only</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{\Omega}(\boldsymbol{n}) = \frac{1}{I_t}(\nabla V \times \boldsymbol{n})\]</div>
-<p>where the gradient is taken with respect to the direction on the unit sphere. This structure shows that spin dynamics is governed by an effective field that depends on both the potential energy landscape and the current spin direction.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
-<p>When an external torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> acts on the spinning object, the total angular momentum changes:</p>
+\[ \hat{L}^2 Y_l^m(\theta,\phi) = \hbar^2 l(l+1) Y_l^m(\theta,\phi), \quad l = 0, 1, 2, \ldots\]</div>
 <div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{L}}{dt} = \boldsymbol{\tau}\]</div>
-<p>The spin axis <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> evolves according to:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}(\boldsymbol{n})\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}(\boldsymbol{n})\)</span> is an effective angular velocity that depends on the spin configuration and applied torque.</p>
-<p>For a potential torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau} = -\nabla V(\boldsymbol{n})\)</span> (derivable from a potential energy function), the effective angular velocity is:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\Omega}(\boldsymbol{n}) = \frac{1}{I_t}(\nabla V \times \boldsymbol{n})\]</div>
-<p>where the gradient <span class="math notranslate nohighlight">\(\nabla V\)</span> is taken with respect to the direction <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> on the unit sphere.</p>
+\[ \hat{L}_z Y_l^m(\theta,\phi) = \hbar m Y_l^m(\theta,\phi), \quad m = -l, \ldots, l\]</div>
+<p>The eigenfunctions are the <strong>spherical harmonics</strong> <span class="math notranslate nohighlight">\(Y_l^m(\theta,\phi)\)</span>. The quantum numbers <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are always integers.</p>
 </div>
 </section>
-<section id="formal-analogy-with-lorentz-force">
-<h3>Formal Analogy with Lorentz Force<a class="headerlink" href="#formal-analogy-with-lorentz-force" title="Link to this heading">#</a></h3>
-<p>The equation <span class="math notranslate nohighlight">\(\frac{d\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}\)</span> is <strong>formally identical</strong> to the Lorentz force equation:</p>
+<section id="intrinsic-spin-angular-momentum">
+<h3>Intrinsic Spin Angular Momentum<a class="headerlink" href="#intrinsic-spin-angular-momentum" title="Link to this heading">#</a></h3>
+<p>Unlike orbital angular momentum, <strong>spin</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{S}}\)</span> is an intrinsic quantum property—it does not arise from spatial motion. It is an internal angular momentum that has no classical analogue.</p>
+<p>For a spin-1/2 particle (like an electron or proton):</p>
 <div class="math notranslate nohighlight">
-\[m\boldsymbol{a} = q(\boldsymbol{v} \times \boldsymbol{B})\]</div>
-<p>The correspondence is:</p>
+\[ \hat{\boldsymbol{S}} = \frac{\hbar}{2}\hat{\boldsymbol{\sigma}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)\)</span> are the <strong>Pauli matrices</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \quad \hat{\sigma}^y = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix}, \quad \hat{\sigma}^z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\end{split}\]</div>
+<p>The spin operators satisfy the same commutation relations as orbital angular momentum:</p>
+<div class="math notranslate nohighlight">
+\[ [\hat{S}_i, \hat{S}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{S}_k\]</div>
+<p>However, the <strong>eigenvalues</strong> differ. For spin-1/2:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{S}^2|\chi\rangle = \frac{3}{4}\hbar^2|\chi\rangle \quad \text{(for all states)}\]</div>
+<div class="math notranslate nohighlight">
+\[ \hat{S}_z|\uparrow\rangle = \frac{\hbar}{2}|\uparrow\rangle, \quad \hat{S}_z|\downarrow\rangle = -\frac{\hbar}{2}|\downarrow\rangle\]</div>
+<p>The <strong>spin quantum numbers are half-integer</strong>: <span class="math notranslate nohighlight">\(s = 1/2\)</span>, and <span class="math notranslate nohighlight">\(m_s = \pm 1/2\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Property: Half-Integer Spin Exists</p>
+<p>Unlike orbital angular momentum, spin can have <strong>half-integer quantum numbers</strong>. A spin-1/2 particle is described by a 2-dimensional Hilbert space (a spinor):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} |\chi\rangle = \begin{pmatrix} \chi_\uparrow \\ \chi_\downarrow \end{pmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\uparrow\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(|\downarrow\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>.</p>
+<p>This is fundamentally different from <span class="math notranslate nohighlight">\(L\)</span>, which always produces integers.</p>
+</div>
+</section>
+<section id="total-angular-momentum">
+<h3>Total Angular Momentum<a class="headerlink" href="#total-angular-momentum" title="Link to this heading">#</a></h3>
+<p>When both orbital and spin angular momentum are present, the <strong>total angular momentum</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\boldsymbol{J}} = \hat{\boldsymbol{L}} + \hat{\boldsymbol{S}}\]</div>
+<p>The total <span class="math notranslate nohighlight">\(J\)</span> operator satisfies the same commutation relations:</p>
+<div class="math notranslate nohighlight">
+\[ [\hat{J}_i, \hat{J}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{J}_k\]</div>
+<p>By the angular momentum addition rules, if a system has orbital quantum number <span class="math notranslate nohighlight">\(l\)</span> and spin quantum number <span class="math notranslate nohighlight">\(s\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[ j = |l - s|, |l - s| + 1, \ldots, l + s\]</div>
+<p>For example, an electron in a <span class="math notranslate nohighlight">\(p\)</span>-orbital (<span class="math notranslate nohighlight">\(l = 1\)</span>) with spin-1/2 (<span class="math notranslate nohighlight">\(s = 1/2\)</span>) can have <span class="math notranslate nohighlight">\(j = 1/2\)</span> or <span class="math notranslate nohighlight">\(j = 3/2\)</span>.</p>
+<p>The quantum numbers <span class="math notranslate nohighlight">\((l, s, j, m_j)\)</span> are useful when <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}}\)</span> coupling (spin-orbit coupling) is significant.</p>
+</section>
+<section id="spin-orbit-coupling">
+<h3>Spin-Orbit Coupling<a class="headerlink" href="#spin-orbit-coupling" title="Link to this heading">#</a></h3>
+<p>When a charged particle moves in a potential with a radial force (such as a nucleus), <strong>relativistic effects</strong> lead to a coupling between spin and orbital angular momentum.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Spin-Orbit Coupling Energy</p>
+<p>In the rest frame of the electron orbiting a nucleus with charge <span class="math notranslate nohighlight">\(Ze\)</span>, the nucleus appears to move, creating an effective magnetic field. This field couples to the electron’s magnetic moment:</p>
+<div class="math notranslate nohighlight">
+\[ \boldsymbol{B}_\text{eff} = -\frac{1}{c^2m}(\boldsymbol{E} \times \boldsymbol{v})\]</div>
+<p>For a central potential <span class="math notranslate nohighlight">\(V(r) = -\frac{Ze^2}{r}\)</span>, the electric field is <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla V\)</span>, so:</p>
+<div class="math notranslate nohighlight">
+\[ \boldsymbol{E} \times \boldsymbol{v} = -\frac{1}{r}\frac{\mathrm{d}V}{\mathrm{d}r}(\hat{r} \times \boldsymbol{v})\]</div>
+<p>The electron’s magnetic moment is <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = -\frac{g e}{2m c}\hat{\boldsymbol{S}}\)</span> (with <span class="math notranslate nohighlight">\(g \approx 2\)</span> for the electron), so the energy is:</p>
+<div class="math notranslate nohighlight">
+\[ H_{SO} = \boldsymbol{\mu} \cdot \boldsymbol{B}_\text{eff}\]</div>
+<p>After accounting for <strong>Thomas precession</strong> (a relativistic geometric effect that introduces a factor of 1/2), one obtains:</p>
+<div class="math notranslate nohighlight">
+\[ H_{SO} = \frac{1}{2m^2c^2r}\frac{\mathrm{d}V}{\mathrm{d}r}\hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}}\]</div>
+<p>For the Coulomb potential, <span class="math notranslate nohighlight">\(\frac{\mathrm{d}V}{\mathrm{d}r} = \frac{Ze^2}{r^2}\)</span>, giving:</p>
+<div class="math notranslate nohighlight">
+\[ H_{SO} = \frac{Ze^2}{2m^2c^2r^3}\hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}}\]</div>
+</div>
+<p>The strength of spin-orbit coupling is parametrized as:</p>
+<div class="math notranslate nohighlight">
+\[ H_{SO} = \xi(r)\hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi(r) = \frac{1}{2m^2c^2r}\frac{\mathrm{d}V}{\mathrm{d}r}\)</span> depends on the potential. For hydrogen-like atoms, <span class="math notranslate nohighlight">\(\xi(r) \propto 1/r^3\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Formula: Dot Product in Terms of Total Angular Momentum</p>
+<p>The dot product <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}}\)</span> can be written in terms of the total angular momentum:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}} = \frac{1}{2}(\hat{J}^2 - \hat{L}^2 - \hat{S}^2)\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{J}^2\)</span>, <span class="math notranslate nohighlight">\(\hat{L}^2\)</span>, and <span class="math notranslate nohighlight">\(\hat{S}^2\)</span> are diagonal in the <span class="math notranslate nohighlight">\(|l, s, j, m_j\rangle\)</span> basis, this formula greatly simplifies perturbation theory calculations.</p>
+<p>For a given <span class="math notranslate nohighlight">\(l\)</span>, <span class="math notranslate nohighlight">\(s\)</span>, and <span class="math notranslate nohighlight">\(j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \langle \hat{L} \cdot \hat{S} \rangle = \frac{\hbar^2}{2}[j(j+1) - l(l+1) - s(s+1)]\]</div>
+</div>
+<p><strong>Physical consequence</strong>: Spin-orbit coupling splits energy levels. For example, in hydrogen’s <span class="math notranslate nohighlight">\(2p\)</span> state:</p>
+<ul class="simple">
+<li><p>Without coupling: <span class="math notranslate nohighlight">\(2p\)</span> is 3-fold degenerate (three <span class="math notranslate nohighlight">\(m_l\)</span> values with any spin)</p></li>
+<li><p>With coupling: the state splits into <span class="math notranslate nohighlight">\(2p_{3/2}\)</span> (<span class="math notranslate nohighlight">\(j=3/2\)</span>, 4-fold degenerate) and <span class="math notranslate nohighlight">\(2p_{1/2}\)</span> (<span class="math notranslate nohighlight">\(j=1/2\)</span>, 2-fold degenerate)</p></li>
+</ul>
+<p>This <strong>fine structure splitting</strong> was a key piece of evidence that spin-orbit coupling is real.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Spin-Orbit Coupling and Energy Splitting</p>
+<p>Spin-orbit coupling ∝ L·S mixes eigenstates of L_z and S_z.</p>
+<p><strong>Compute</strong> the energy splitting between j=3/2 and j=1/2 states for hydrogen 2p states.</p>
+<p>How does this fine structure reveal that spin and orbital angular momentum are not independent degrees of freedom in the presence of a nucleus?</p>
+</div>
+</section>
+<section id="representations-of-the-rotation-group">
+<h3>Representations of the Rotation Group<a class="headerlink" href="#representations-of-the-rotation-group" title="Link to this heading">#</a></h3>
+<p>A fundamental distinction between orbital and spin angular momentum emerges from group theory:</p>
+<ul class="simple">
+<li><p><strong>Orbital angular momentum</strong> generates <strong>integer</strong> representations of <span class="math notranslate nohighlight">\(SO(3)\)</span> (the rotation group in 3D)</p></li>
+<li><p><strong>Spin</strong> generates both integer and <strong>half-integer</strong> representations of <span class="math notranslate nohighlight">\(SU(2)\)</span> (the double cover of <span class="math notranslate nohighlight">\(SO(3)\)</span>)</p></li>
+</ul>
+<p>This distinction is topological. Under a rotation by <span class="math notranslate nohighlight">\(2\pi\)</span> around any axis:</p>
+<ul class="simple">
+<li><p>A state with integer <span class="math notranslate nohighlight">\(l\)</span> returns to itself: <span class="math notranslate nohighlight">\(|\psi\rangle \to |\psi\rangle\)</span></p></li>
+<li><p>A state with half-integer <span class="math notranslate nohighlight">\(s\)</span> picks up a minus sign: <span class="math notranslate nohighlight">\(|\chi\rangle \to -|\chi\rangle\)</span></p></li>
+</ul>
+<p>This is observable only for half-integer spin; under <em>two</em> consecutive <span class="math notranslate nohighlight">\(2\pi\)</span> rotations, any state returns to itself. This is why interference experiments can distinguish half-integer from integer angular momentum.</p>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Spin dynamics</p></th>
-<th class="head"><p>Lorentz force</p></th>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Orbital <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}}\)</span></p></th>
+<th class="head"><p>Spin <span class="math notranslate nohighlight">\(\hat{\boldsymbol{S}}\)</span></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Spin axis <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span></p></td>
-<td><p>Velocity <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span></p></td>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Spatial motion</p></td>
+<td><p>Intrinsic to particle</p></td>
 </tr>
-<tr class="row-odd"><td><p>Effective field <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span></p></td>
-<td><p>Magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span></p></td>
+<tr class="row-odd"><td><p><strong>Quantum numbers</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(l = 0, 1, 2, \ldots\)</span> (integer only)</p></td>
+<td><p><span class="math notranslate nohighlight">\(s = 1/2, 1, 3/2, \ldots\)</span> (integer or half-integer)</p></td>
 </tr>
-<tr class="row-even"><td><p>Potential energy <span class="math notranslate nohighlight">\(V(\boldsymbol{n})\)</span></p></td>
-<td><p>Electric potential <span class="math notranslate nohighlight">\(\Phi\)</span></p></td>
+<tr class="row-even"><td><p><strong>For <span class="math notranslate nohighlight">\(s=1/2\)</span></strong></p></td>
+<td><p>N/A</p></td>
+<td><p><span class="math notranslate nohighlight">\(m_s = \pm 1/2\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>Unit sphere <span class="math notranslate nohighlight">\(|\boldsymbol{n}| = 1\)</span></p></td>
-<td><p>Velocity direction (magnitude)</p></td>
+<tr class="row-odd"><td><p><strong>Eigenvalues of <span class="math notranslate nohighlight">\(L^2\)</span></strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hbar^2 l(l+1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hbar^2 s(s+1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Representation of <span class="math notranslate nohighlight">\(SO(3)\)</span></strong></p></td>
+<td><p>Integer reps only</p></td>
+<td><p>Integer + half-integer reps</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Interaction with field</strong></p></td>
+<td><p>Couples to electric fields</p></td>
+<td><p>Couples to magnetic fields</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Commutation relations</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\([L_i, L_j] = \mathrm{i}\hbar\epsilon_{ijk}L_k\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\([S_i, S_j] = \mathrm{i}\hbar\epsilon_{ijk}S_k\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>This mapping means that <strong>spin dynamics on the unit sphere is equivalent to the motion of a charged particle in a magnetic field</strong>. This is not a coincidence—it reveals a deep geometric structure that will connect to monopoles.</p>
-</section>
-<section id="precession-as-geometrical-motion">
-<h3>Precession as Geometrical Motion<a class="headerlink" href="#precession-as-geometrical-motion" title="Link to this heading">#</a></h3>
-<p>In the absence of external torque (<span class="math notranslate nohighlight">\(V = 0\)</span>), the spin axis precesses with constant angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}_0\]</div>
-<p>This means the spin axis traces out a circle on the sphere (or cone in 3D space), always maintaining constant angle relative to the precession axis.</p>
-<p>For weak external potential <span class="math notranslate nohighlight">\(V(\boldsymbol{n})\)</span>, perturbation theory shows that the spin axis slowly precesses around the direction of <span class="math notranslate nohighlight">\(\nabla V\)</span> with frequency proportional to <span class="math notranslate nohighlight">\(|\nabla V|/I_t\)</span>.</p>
-</section>
-<section id="classical-spin-dynamics-in-a-magnetic-field">
-<h3>Classical Spin Dynamics in a Magnetic Field<a class="headerlink" href="#classical-spin-dynamics-in-a-magnetic-field" title="Link to this heading">#</a></h3>
-<p>When a <strong>magnetic dipole</strong> with moment <span class="math notranslate nohighlight">\(\boldsymbol{\mu}\)</span> is placed in an external magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, it experiences a <strong>torque</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\tau} = \boldsymbol{\mu} \times \boldsymbol{B}\]</div>
-<p>For a spinning object with spin angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>, the magnetic moment is proportional to the spin:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\mu} = -\frac{g}{2m}\boldsymbol{S}\]</div>
-<p>where <span class="math notranslate nohighlight">\(g\)</span> is the <strong>g-factor</strong> (unitless, typically <span class="math notranslate nohighlight">\(g \approx 2\)</span> for the electron) and <span class="math notranslate nohighlight">\(m\)</span> is the mass. The negative sign (by convention) indicates that the magnetic moment opposes the spin angular momentum for particles with negative charge.</p>
-<p>The equation of motion for the angular momentum is:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{S}}{dt} = \boldsymbol{\tau} = \boldsymbol{\mu} \times \boldsymbol{B} = -\frac{g}{2m}\boldsymbol{S} \times \boldsymbol{B}\]</div>
-<p>Rearranging with the <strong>gyromagnetic ratio</strong> <span class="math notranslate nohighlight">\(\gamma = g/(2m)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{S}}{dt} = -\gamma \boldsymbol{S} \times \boldsymbol{B}\]</div>
-<p>or equivalently, defining <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \gamma \boldsymbol{S}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{S}}{dt} = \gamma(\boldsymbol{B} \times \boldsymbol{S})\]</div>
-<p><strong>This is the Larmor precession equation!</strong> It shows that the spin angular momentum vector precesses around the magnetic field direction.</p>
-</section>
-<section id="larmor-precession">
-<h3>Larmor Precession<a class="headerlink" href="#larmor-precession" title="Link to this heading">#</a></h3>
-<p>For a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, the precession equation has an elegant geometric interpretation. The spin vector rotates around the <span class="math notranslate nohighlight">\(z\)</span>-axis with angular velocity:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\Omega}_L = -\gamma\boldsymbol{B} = -\gamma B\hat{z}\]</div>
-<p>The <strong>Larmor frequency</strong> (in SI units) is:</p>
-<div class="math notranslate nohighlight">
-\[\omega_L = \gamma B = \frac{gB}{2m}\]</div>
-<p>In Gaussian units (often used in quantum mechanics texts):</p>
-<div class="math notranslate nohighlight">
-\[\omega_L = \frac{gB}{2mc}\]</div>
-<p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light. For an electron (<span class="math notranslate nohighlight">\(g = 2\)</span>, <span class="math notranslate nohighlight">\(m = m_e\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[\omega_L = \frac{eB}{m_e c} \quad (\text{Gaussian units})\]</div>
-<p>The spin undergoes <strong>uniform precession</strong>: the magnitude <span class="math notranslate nohighlight">\(|\boldsymbol{S}|\)</span> remains constant, but the vector traces out a cone around the <span class="math notranslate nohighlight">\(z\)</span>-axis with the tip at a fixed polar angle. If the spin is initially aligned at angle <span class="math notranslate nohighlight">\(\theta\)</span> to the field, it maintains that angle while rotating around the field direction.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Larmor Precession from Torque Equation</p>
-<p>Starting from the torque equation:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{S}}{dt} = -\gamma \boldsymbol{S} \times \boldsymbol{B}\]</div>
-<p>with <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, write <span class="math notranslate nohighlight">\(\boldsymbol{S} = (S_x, S_y, S_z)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{dS_x}{dt} = -\gamma(S_y B) = -\gamma B S_y\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{dS_y}{dt} = -\gamma(-S_x B) = \gamma B S_x\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{dS_z}{dt} = 0\]</div>
-<p>The <span class="math notranslate nohighlight">\(z\)</span>-component is conserved. For the <span class="math notranslate nohighlight">\(x\)</span>-<span class="math notranslate nohighlight">\(y\)</span> components, define the complex variable <span class="math notranslate nohighlight">\(S_+ = S_x + iS_y\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{dS_+}{dt} = -i\gamma B S_+\]</div>
-<p>This has the solution:</p>
-<div class="math notranslate nohighlight">
-\[S_+(t) = S_+(0)e^{-i\gamma B t}\]</div>
-<p>In terms of amplitude and phase:</p>
-<div class="math notranslate nohighlight">
-\[S_x(t) = |S_\perp|\cos(\theta_0 - \gamma B t), \quad S_y(t) = |S_\perp|\sin(\theta_0 - \gamma B t)\]</div>
-<p>where <span class="math notranslate nohighlight">\(|S_\perp| = \sqrt{S_x^2 + S_y^2}\)</span> is the perpendicular component and <span class="math notranslate nohighlight">\(\theta_0\)</span> is the initial azimuthal angle. The spin precesses around the <span class="math notranslate nohighlight">\(z\)</span>-axis with angular velocity <span class="math notranslate nohighlight">\(\omega_L = \gamma B\)</span>.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html"><span class="std std-doc">2.2.2 Spin Representations</span></a></strong>: Spinor algebra and SU(2) representations</p></li>
+<li><p><strong><a class="reference internal" href="4-4-2-dirac-monopole.html"><span class="std std-doc">4.4.2 Dirac Monopole</span></a></strong>: Monopole harmonics and intrinsic angular momentum</p></li>
+</ul>
 </div>
 </section>
-<section id="energy-and-stability">
-<h3>Energy and Stability<a class="headerlink" href="#energy-and-stability" title="Link to this heading">#</a></h3>
-<p>The magnetic energy of a spin in a field is:</p>
-<div class="math notranslate nohighlight">
-\[U = -\boldsymbol{\mu} \cdot \boldsymbol{B} = \gamma\boldsymbol{S} \cdot \boldsymbol{B}\]</div>
-<p>For a spin aligned with the field (<span class="math notranslate nohighlight">\(\boldsymbol{S} \parallel \boldsymbol{B}\)</span>): <span class="math notranslate nohighlight">\(U = -\gamma SB\)</span> (minimum, stable).</p>
-<p>For a spin anti-aligned (<span class="math notranslate nohighlight">\(\boldsymbol{S} \antiparallel \boldsymbol{B}\)</span>): <span class="math notranslate nohighlight">\(U = +\gamma SB\)</span> (maximum, unstable).</p>
-<p>The <strong>energy splitting</strong> between these states is:</p>
-<div class="math notranslate nohighlight">
-\[\Delta E = 2\gamma SB = gB \cdot \frac{S}{m}\]</div>
-<p>In quantum mechanics, this energy difference becomes the transition frequency for spin flips, which is observable in <strong>electron spin resonance (ESR)</strong> and <strong>nuclear magnetic resonance (NMR)</strong> experiments.</p>
 </section>
-<section id="classical-analog-of-quantum-spin">
-<h3>Classical Analog of Quantum Spin<a class="headerlink" href="#classical-analog-of-quantum-spin" title="Link to this heading">#</a></h3>
-<p>This classical picture of spin dynamics provides intuition for quantum spin:</p>
-<ol class="arabic simple">
-<li><p><strong>Quantization</strong>: In quantum mechanics, the direction <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> becomes a quantum variable; only discrete orientations are allowed (spin quantization).</p></li>
-<li><p><strong>Precession</strong>: A spin in a magnetic field precesses at the Larmor frequency <span class="math notranslate nohighlight">\(\omega_L = gB/(2m_e c)\)</span> where <span class="math notranslate nohighlight">\(g\)</span> is the g-factor.</p></li>
-<li><p><strong>Two-level system</strong>: For spin-1/2, only two states (spin-up and spin-down) are possible, forming a qubit in quantum information.</p></li>
-<li><p><strong>Berry phase</strong>: The quantized spin undergoing adiabatic precession acquires a Berry phase—a topological phase that appears nowhere in the classical treatment.</p></li>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Angular momentum decomposition for a spinning coin</strong></p>
+<p>A spinning coin with moment of inertia <span class="math notranslate nohighlight">\(I_a\)</span> about its symmetry axis and <span class="math notranslate nohighlight">\(I_t\)</span> about any transverse axis has total angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span>.</p>
+<p>(a) Write the kinetic energy in terms of <span class="math notranslate nohighlight">\(L_\parallel = \boldsymbol{L} \cdot \hat{z}\)</span> and the perpendicular component, where <span class="math notranslate nohighlight">\(\hat{z}\)</span> is the spin axis direction.</p>
+<p>(b) For a coin with <span class="math notranslate nohighlight">\(I_a = 0.1 I_t\)</span>, describe qualitatively how the coin prefers to spin: is it more energetically favorable to spin about its symmetry axis or about an axis perpendicular to it?</p>
+</li>
+<li><p><strong>Equation of motion for spin axis on the sphere</strong></p>
+<p>The spin axis <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> evolves according to <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}(\boldsymbol{n})\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span> is an effective angular velocity.</p>
+<p>(a) Show that this equation preserves the constraint <span class="math notranslate nohighlight">\(|\boldsymbol{n}|^2 = 1\)</span> (i.e., motion stays on the unit sphere).</p>
+<p>(b) If <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span> is a constant vector, describe the geometry of trajectories: what shape does <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> trace out on the sphere?</p>
+</li>
+<li><p><strong>Lorentz force analogy in spin dynamics</strong></p>
+<p>A charged particle in a magnetic field obeys <span class="math notranslate nohighlight">\(m\boldsymbol{a} = q(\boldsymbol{v} \times \boldsymbol{B})\)</span>. The spin axis satisfies <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}\)</span>.</p>
+<p>(a) Identify the physical correspondence: what plays the role of charge, velocity, magnetic field?</p>
+<p>(b) A charged particle moving on a sphere (e.g., on Earth’s surface with constant angular velocity) traces a circle. By analogy, what does a spin axis do if <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span> is constant?</p>
+</li>
+<li><p><strong>Larmor precession from first principles</strong></p>
+<p>A magnetic dipole with moment <span class="math notranslate nohighlight">\(\boldsymbol{\mu}\)</span> in a field <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> experiences torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau} = \boldsymbol{\mu} \times \boldsymbol{B}\)</span>. For a spin, <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = -\gamma\boldsymbol{S}\)</span> with gyromagnetic ratio <span class="math notranslate nohighlight">\(\gamma = g/(2m)\)</span>.</p>
+<p>(a) Write the equation of motion for <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> and identify the Larmor frequency <span class="math notranslate nohighlight">\(\omega_L\)</span>.</p>
+<p>(b) For <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, show that <span class="math notranslate nohighlight">\(S_z\)</span> is conserved while <span class="math notranslate nohighlight">\(S_x\)</span> and <span class="math notranslate nohighlight">\(S_y\)</span> rotate with angular frequency <span class="math notranslate nohighlight">\(\omega_L\)</span>.</p>
+<p>(c) What is the Larmor frequency in rad/s for an electron in a magnetic field <span class="math notranslate nohighlight">\(B = 1\)</span> Tesla? (Use <span class="math notranslate nohighlight">\(g = 2\)</span>, <span class="math notranslate nohighlight">\(m_e = 9.109 \times 10^{-31}\)</span> kg, <span class="math notranslate nohighlight">\(e = 1.602 \times 10^{-19}\)</span> C, SI units.)</p>
+</li>
+<li><p><strong>Magnetic energy and spin orientation</strong></p>
+<p>The magnetic energy of a spin in a field is <span class="math notranslate nohighlight">\(U = -\boldsymbol{\mu} \cdot \boldsymbol{B} = \gamma\boldsymbol{S} \cdot \boldsymbol{B}\)</span>.</p>
+<p>(a) For a spin-1/2 particle with <span class="math notranslate nohighlight">\(|\boldsymbol{S}| = \hbar/2\)</span>, calculate the energy splitting between spin-up (aligned with <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>) and spin-down (anti-aligned).</p>
+<p>(b) A spin initially anti-aligned with the field is placed in the field. Describe qualitatively what happens: does the spin remain anti-aligned, or does it dynamically respond?</p>
+<p>(c) In ESR spectroscopy, radio-frequency radiation at frequency <span class="math notranslate nohighlight">\(\nu\)</span> causes spin flips. What is the relationship between <span class="math notranslate nohighlight">\(\nu\)</span> and the magnetic field <span class="math notranslate nohighlight">\(B\)</span>?</p>
+</li>
+<li><p><strong>Thomas precession and spin-orbit coupling</strong></p>
+<p>In the rest frame of a non-relativistic electron orbiting a nucleus, the nucleus appears to move, creating an effective magnetic field. This leads to <strong>Thomas precession</strong>—a modification of the naïve spin-orbit coupling by a factor of 1/2.</p>
+<p>(a) Explain qualitatively why a moving nucleus (in the electron’s rest frame) produces a magnetic field.</p>
+<p>(b) The naive spin-orbit coupling would give an energy <span class="math notranslate nohighlight">\(-\boldsymbol{\hat{\sigma}} \cdot \boldsymbol{B}_\text{eff}\)</span>. Why does the factor of 1/2 from Thomas precession matter for the fine structure of hydrogen?</p>
+</li>
+<li><p><strong>Potential energy and effective field geometry</strong></p>
+<p>Suppose the spin axis experiences a potential energy <span class="math notranslate nohighlight">\(V(\boldsymbol{n}) = -\alpha n_z\)</span>, where <span class="math notranslate nohighlight">\(n_z\)</span> is the <span class="math notranslate nohighlight">\(z\)</span>-component of the unit vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>.</p>
+<p>(a) Compute the effective angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}(\boldsymbol{n}) = \frac{1}{I_t}(\nabla V \times \boldsymbol{n})\)</span>.</p>
+<p>(b) Describe the equilibrium orientations: where does the spin axis settle if released from rest?</p>
+<p>(c) Is motion near the equilibrium stable or unstable? Explain.</p>
+</li>
+<li><p><strong>Precession cone geometry</strong></p>
+<p>A spin precesses around a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> at the Larmor frequency. Suppose the spin is initially at angle <span class="math notranslate nohighlight">\(\theta_0\)</span> from the <span class="math notranslate nohighlight">\(z\)</span>-axis.</p>
+<p>(a) As the spin precesses, does the angle <span class="math notranslate nohighlight">\(\theta\)</span> from the <span class="math notranslate nohighlight">\(z\)</span>-axis change?</p>
+<p>(b) Describe the 3D trajectory: what surface does the spin vector trace out?</p>
+<p>(c) If <span class="math notranslate nohighlight">\(\theta_0 = 0\)</span> (spin aligned with field), what is the trajectory?</p>
+</li>
+<li><p><strong>Quantization of precession</strong></p>
+<p>In classical mechanics, a spin precesses continuously at the Larmor frequency. In quantum mechanics, a spin-1/2 has only two states: spin-up <span class="math notranslate nohighlight">\(|\uparrow\rangle\)</span> and spin-down <span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span>, each with definite <span class="math notranslate nohighlight">\(S_z\)</span>.</p>
+<p>(a) In the quantum two-level system, what plays the role of the Larmor frequency?</p>
+<p>(b) If the spin starts in a superposition <span class="math notranslate nohighlight">\(|\Psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle)\)</span>, how does it evolve in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>?</p>
+<p>(c) What is the physical interpretation of Rabi oscillations in terms of this precession picture?</p>
+</li>
+<li><p><strong>Spin vs. orbital angular momentum in an atom</strong></p>
+<p>An electron in an atom can have orbital angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> (from its orbit) and spin angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> (intrinsic).</p>
+<p>(a) Why is the classical picture of spin (as a tiny sphere spinning) incompatible with the fact that a spin-1/2 electron has only two possible outcomes when measured along any axis?</p>
+<p>(b) In fine-structure splitting, the term <span class="math notranslate nohighlight">\((\boldsymbol{L} \cdot \boldsymbol{S})\)</span> couples orbital and spin angular momentum. Explain why this coupling should exist from a relativistic viewpoint (hint: Thomas precession).</p>
+<p>(c) For an electron in a <span class="math notranslate nohighlight">\(p\)</span>-orbital (<span class="math notranslate nohighlight">\(L = 1\)</span>) with spin-1/2, what are the possible values of total angular momentum <span class="math notranslate nohighlight">\(J = L + S\)</span>?</p>
+</li>
 </ol>
-</section>
-<section id="thomas-precession">
-<h3>Thomas Precession<a class="headerlink" href="#thomas-precession" title="Link to this heading">#</a></h3>
-<p>A subtle relativistic effect occurs when a spinning object undergoes acceleration: the spin axis precesses at a rate that differs from the orbital precession, even without an external magnetic field. This is <strong>Thomas precession</strong>.</p>
-<p>For a non-relativistic electron in an atom, Thomas precession accounts for the difference between the orbital and total angular momentum contributions, modifying the spin-orbit coupling strength by a factor of 1/2.</p>
-<p>In the rest frame of the electron, a moving nucleus creates an effective magnetic field (due to the relativistic transformation of electric field to magnetic field). The factor of 1/2 in the spin-orbit coupling <span class="math notranslate nohighlight">\(-\boldsymbol{\hat{\sigma}} \cdot \boldsymbol{B}_\text{eff}\)</span> is purely a Thomas precession effect.</p>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Decomposition</strong>: Angular momentum splits into axial component <span class="math notranslate nohighlight">\(L_\parallel\)</span> and perpendicular part <span class="math notranslate nohighlight">\(\boldsymbol{L}_\perp\)</span>.</p></li>
-<li><p><strong>Spin axis</strong>: Unit vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> specifies spin direction; evolves on the unit sphere.</p></li>
-<li><p><strong>Equation of motion</strong>: <span class="math notranslate nohighlight">\(\frac{d\boldsymbol{n}}{dt} = \boldsymbol{n} \times \boldsymbol{\Omega}(\boldsymbol{n})\)</span> resembles Lorentz force.</p></li>
-<li><p><strong>Precession</strong>: Spin axis circles around effective field direction at rate <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span>.</p></li>
-<li><p><strong>Lorentz analogy</strong>: Spin dynamics maps to charged particle in magnetic field via sphere geometry.</p></li>
-<li><p><strong>Potential energy</strong>: <span class="math notranslate nohighlight">\(V(\boldsymbol{n})\)</span> determines effective field: <span class="math notranslate nohighlight">\(\boldsymbol{\Omega} = (\nabla V \times \boldsymbol{n})/I_t\)</span>.</p></li>
-<li><p><strong>Thomas precession</strong>: Relativistic effect where spin axis precesses even without external field.</p></li>
-<li><p><strong>Quantum connection</strong>: Classical intuition guides understanding of quantum spin quantization and Berry phase.</p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -813,17 +862,15 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-decomposition">Angular Momentum Decomposition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-analogy-with-lorentz-force">Formal Analogy with Lorentz Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precession-as-geometrical-motion">Precession as Geometrical Motion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-spin-dynamics-in-a-magnetic-field">Classical Spin Dynamics in a Magnetic Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#larmor-precession">Larmor Precession</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-stability">Energy and Stability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-analog-of-quantum-spin">Classical Analog of Quantum Spin</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thomas-precession">Thomas Precession</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbital-angular-momentum">Orbital Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intrinsic-spin-angular-momentum">Intrinsic Spin Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-angular-momentum">Total Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-orbit-coupling">Spin-Orbit Coupling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-the-rotation-group">Representations of the Rotation Group</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -861,7 +908,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

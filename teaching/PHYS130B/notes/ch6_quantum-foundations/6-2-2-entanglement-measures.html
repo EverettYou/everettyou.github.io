@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -538,6 +538,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -554,13 +555,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is entanglement entropy, and how does it quantify entanglement in a bipartite system?</p></li>
-<li><p>For a pure state, why is entanglement entropy of subsystem A equal to von Neumann entropy of reduced density matrix <span class="math notranslate nohighlight">\(\rho_A\)</span>?</p></li>
-<li><p>How do you compute entanglement entropy for a Bell state? What is the maximum entanglement entropy for two qubits?</p></li>
-<li><p>What are Rényi entropies, and how do they relate to entanglement entropy?</p></li>
-<li><p>What is mutual information, and how does it differ from entanglement entropy?</p></li>
-<li><p>What does an entanglement witness measure? Can you construct one for a simple state?</p></li>
-<li><p>How are entanglement measures used to verify that a state is actually entangled?</p></li>
+<li><p>What is entanglement entropy? How do you compute it for a bipartite pure state from the reduced density matrix?</p></li>
+<li><p>For a Bell state (maximally entangled), what is the entanglement entropy? What does maximum entanglement look like?</p></li>
+<li><p>What are Rényi entropies, and why is Rényi-2 easier to measure experimentally than full von Neumann entropy?</p></li>
+<li><p>How does mutual information relate to entanglement entropy? Can two unentangled states have mutual information?</p></li>
+<li><p>What does an entanglement witness measure? How do you construct one, and what can you conclude from it?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -568,10 +567,18 @@ document.write(`
 <p>Entanglement is not merely a binary property (entangled or not)—it admits a rich quantitative structure. How entangled is a given state? Can we assign a number to it? The answers draw on information theory, geometry, and operator theory, and have deep implications for quantum computing, communication, and the structure of many-body physics.</p>
 <section id="entanglement-entropy">
 <h3>Entanglement Entropy<a class="headerlink" href="#entanglement-entropy" title="Link to this heading">#</a></h3>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>Entanglement entropy and entanglement of formation agree for pure states but not mixed states. Construct a 2-qubit mixed state where E_F ≠ S(ρ_A) and compute both.</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Definition: Entanglement Entropy</p>
 <p>For a bipartite pure state <span class="math notranslate nohighlight">\(|\Psi\rangle_{AB}\)</span> with Schmidt decomposition <span class="math notranslate nohighlight">\(|\Psi\rangle = \sum_k \lambda_k |u_k\rangle_A |v_k\rangle_B\)</span>, the <strong>entanglement entropy</strong> is defined as the von Neumann entropy of the reduced density matrix:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-entropy">
-<span class="eqno">(403)<a class="headerlink" href="#equation-eq-ent-measure-entropy" title="Link to this equation">#</a></span>\[E(\Psi) = S(\rho_A) = -\text{Tr}(\rho_A \ln \rho_A) = -\sum_k \lambda_k^2 \ln \lambda_k^2\]</div>
+<span class="eqno">(301)<a class="headerlink" href="#equation-eq-ent-measure-entropy" title="Link to this equation">#</a></span>\[
+E(\Psi) = S(\rho_A) = -\text{Tr}(\rho_A \ln \rho_A) = -\sum_k \lambda_k^2 \ln \lambda_k^2\]</div>
 <p>where <span class="math notranslate nohighlight">\(\rho_A = \text{Tr}_B(|\Psi\rangle\langle\Psi|)\)</span> has eigenvalues <span class="math notranslate nohighlight">\(\lambda_k^2\)</span> (the squared Schmidt coefficients from §6.2.1).</p>
+</div>
 <p>Key properties:</p>
 <ul class="simple">
 <li><p><strong>Vanishes for product states.</strong> If <span class="math notranslate nohighlight">\(|\Psi\rangle = |\psi\rangle_A \otimes |\phi\rangle_B\)</span>, then <span class="math notranslate nohighlight">\(\rho_A\)</span> is pure and <span class="math notranslate nohighlight">\(E = 0\)</span>.</p></li>
@@ -583,10 +590,12 @@ document.write(`
 <p class="admonition-title">Example: Bell State Entanglement Entropy</p>
 <p>For the Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span>, the reduced density matrix is:</p>
 <div class="math notranslate nohighlight">
-\[\rho_A = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1| = \frac{I}{2}\]</div>
+\[
+\rho_A = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1| = \frac{I}{2}\]</div>
 <p>Eigenvalues: <span class="math notranslate nohighlight">\(\lambda_1^2 = \lambda_2^2 = 1/2\)</span>. The entanglement entropy is:</p>
 <div class="math notranslate nohighlight">
-\[E = -\frac{1}{2}\ln\frac{1}{2} - \frac{1}{2}\ln\frac{1}{2} = \ln 2 \approx 0.693 \text{ nats}\]</div>
+\[
+E = -\frac{1}{2}\ln\frac{1}{2} - \frac{1}{2}\ln\frac{1}{2} = \ln 2 \approx 0.693 \text{ nats}\]</div>
 <p>This is <strong>maximal</strong> for two qubits: one ebit of entanglement.</p>
 </div>
 <div class="example admonition">
@@ -594,7 +603,8 @@ document.write(`
 <p>Consider <span class="math notranslate nohighlight">\(|\Psi\rangle = \cos\theta\, |00\rangle + \sin\theta\, |11\rangle\)</span> with <span class="math notranslate nohighlight">\(0 &lt; \theta &lt; \pi/4\)</span>.</p>
 <p>Schmidt coefficients: <span class="math notranslate nohighlight">\(\lambda_1 = \cos\theta\)</span>, <span class="math notranslate nohighlight">\(\lambda_2 = \sin\theta\)</span>. The entanglement entropy is:</p>
 <div class="math notranslate nohighlight">
-\[E(\theta) = -\cos^2\theta\, \ln(\cos^2\theta) - \sin^2\theta\, \ln(\sin^2\theta)\]</div>
+\[
+E(\theta) = -\cos^2\theta\, \ln(\cos^2\theta) - \sin^2\theta\, \ln(\sin^2\theta)\]</div>
 <ul class="simple">
 <li><p>At <span class="math notranslate nohighlight">\(\theta = 0\)</span>: product state, <span class="math notranslate nohighlight">\(E = 0\)</span>.</p></li>
 <li><p>At <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span>: Bell state, <span class="math notranslate nohighlight">\(E = \ln 2\)</span> (maximum).</p></li>
@@ -607,7 +617,8 @@ document.write(`
 <h3>Rényi Entanglement Entropies<a class="headerlink" href="#renyi-entanglement-entropies" title="Link to this heading">#</a></h3>
 <p>The Rényi-<span class="math notranslate nohighlight">\(\alpha\)</span> entanglement entropy generalizes entanglement entropy:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-renyi">
-<span class="eqno">(404)<a class="headerlink" href="#equation-eq-ent-measure-renyi" title="Link to this equation">#</a></span>\[E_\alpha(\Psi) = S_\alpha(\rho_A) = \frac{1}{1-\alpha} \ln \text{Tr}(\rho_A^\alpha) = \frac{1}{1-\alpha} \ln \sum_k \lambda_k^{2\alpha}\]</div>
+<span class="eqno">(302)<a class="headerlink" href="#equation-eq-ent-measure-renyi" title="Link to this equation">#</a></span>\[
+E_\alpha(\Psi) = S_\alpha(\rho_A) = \frac{1}{1-\alpha} \ln \text{Tr}(\rho_A^\alpha) = \frac{1}{1-\alpha} \ln \sum_k \lambda_k^{2\alpha}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\alpha \to 1\)</span>: recovers von Neumann entanglement entropy.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\alpha = 2\)</span>: Rényi-2 entropy <span class="math notranslate nohighlight">\(E_2 = -\ln \text{Tr}(\rho_A^2) = -\ln(\text{purity})\)</span>, experimentally accessible via randomized measurements without full tomography.</p></li>
@@ -623,19 +634,24 @@ document.write(`
 <p>For two-qubit systems, a computable entanglement measure is the <strong>concurrence</strong> <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.</p>
 <section id="pure-states">
 <h4>Pure States<a class="headerlink" href="#pure-states" title="Link to this heading">#</a></h4>
+<div class="important admonition">
+<p class="admonition-title">Definition: Concurrence (Pure Two-Qubit States)</p>
 <p>For a pure two-qubit state <span class="math notranslate nohighlight">\(|\Psi\rangle = \sum_{ij} c_{ij}|ij\rangle\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-concurrence-pure">
-<span class="eqno">(405)<a class="headerlink" href="#equation-eq-ent-measure-concurrence-pure" title="Link to this equation">#</a></span>\[\mathcal{C}(|\Psi\rangle) = 2|\det(C)| = 2|c_{00}c_{11} - c_{01}c_{10}|\]</div>
+<span class="eqno">(303)<a class="headerlink" href="#equation-eq-ent-measure-concurrence-pure" title="Link to this equation">#</a></span>\[
+\mathcal{C}(|\Psi\rangle) = 2|\det(C)| = 2|c_{00}c_{11} - c_{01}c_{10}|\]</div>
 <p>where <span class="math notranslate nohighlight">\(C = [c_{ij}]\)</span> is the <span class="math notranslate nohighlight">\(2\times 2\)</span> coefficient matrix.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{C} = 0\)</span>: separable (product state).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{C} = 1\)</span>: maximally entangled (Bell state).</p></li>
 </ul>
+</div>
 <div class="example admonition">
 <p class="admonition-title">Example: Concurrence of a General Two-Qubit State</p>
 <p>For <span class="math notranslate nohighlight">\(|\Psi\rangle = \alpha|00\rangle + \beta|11\rangle\)</span> (with <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}C = \begin{pmatrix} \alpha &amp; 0 \\ 0 &amp; \beta \end{pmatrix}, \quad \mathcal{C} = 2|\alpha\beta|\end{split}\]</div>
+\[\begin{split}
+C = \begin{pmatrix} \alpha &amp; 0 \\ 0 &amp; \beta \end{pmatrix}, \quad \mathcal{C} = 2|\alpha\beta|\end{split}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\alpha = 1, \beta = 0\)</span>: <span class="math notranslate nohighlight">\(\mathcal{C} = 0\)</span> (product state <span class="math notranslate nohighlight">\(|00\rangle\)</span>).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\alpha = \beta = 1/\sqrt{2}\)</span>: <span class="math notranslate nohighlight">\(\mathcal{C} = 1\)</span> (Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle\)</span>).</p></li>
@@ -647,25 +663,31 @@ document.write(`
 <h4>Mixed States (Wootters’ Formula)<a class="headerlink" href="#mixed-states-wootters-formula" title="Link to this heading">#</a></h4>
 <p>For mixed two-qubit states, <strong>Wootters’ concurrence</strong> is one of the few computable entanglement measures. It requires computing a “spin-flipped” version of the density matrix:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-spin-flip">
-<span class="eqno">(406)<a class="headerlink" href="#equation-eq-ent-measure-spin-flip" title="Link to this equation">#</a></span>\[\tilde{\rho} = (\hat{\sigma}_y \otimes \hat{\sigma}_y) \rho^* (\hat{\sigma}_y \otimes \hat{\sigma}_y)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\rho^*\)</span> is complex conjugation in the computational basis, and <span class="math notranslate nohighlight">\(\hat{\sigma}_y\)</span> are Pauli matrices.</p>
-<p>Then compute the eigenvalues <span class="math notranslate nohighlight">\(\mu_1 \geq \mu_2 \geq \mu_3 \geq \mu_4\)</span> of the matrix product <span class="math notranslate nohighlight">\(\sqrt{\sqrt{\rho} \tilde{\rho} \sqrt{\rho}}\)</span>, and evaluate:</p>
+<span class="eqno">(304)<a class="headerlink" href="#equation-eq-ent-measure-spin-flip" title="Link to this equation">#</a></span>\[
+\tilde{\rho} = (\hat{\sigma}^y \otimes \hat{\sigma}^y) \rho^* (\hat{\sigma}^y \otimes \hat{\sigma}^y)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho^*\)</span> is complex conjugation in the computational basis, and <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span> are Pauli matrices.</p>
+<div class="important admonition">
+<p class="admonition-title">Wootters’ Concurrence for Mixed States</p>
+<p>Compute the eigenvalues <span class="math notranslate nohighlight">\(\mu_1 \geq \mu_2 \geq \mu_3 \geq \mu_4\)</span> of the matrix product <span class="math notranslate nohighlight">\(\sqrt{\sqrt{\rho} \tilde{\rho} \sqrt{\rho}}\)</span>, and evaluate:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-concurrence-mixed">
-<span class="eqno">(407)<a class="headerlink" href="#equation-eq-ent-measure-concurrence-mixed" title="Link to this equation">#</a></span>\[\mathcal{C}(\rho) = \max(0, \mu_1 - \mu_2 - \mu_3 - \mu_4)\]</div>
+<span class="eqno">(305)<a class="headerlink" href="#equation-eq-ent-measure-concurrence-mixed" title="Link to this equation">#</a></span>\[
+\mathcal{C}(\rho) = \max(0, \mu_1 - \mu_2 - \mu_3 - \mu_4)\]</div>
 <p><strong>Properties</strong>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{C}(\rho) \in [0, 1]\)</span> for two-qubit systems</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{C} = 0\)</span> iff the state is separable</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{C} = 1\)</span> iff the state is maximally entangled (Bell state)</p></li>
-<li><p>This formula is one of the few <strong>computable</strong> entanglement measures for mixed states</p></li>
+<li><p>This formula is one of the few <strong>computable</strong> entanglement measures for mixed states.</p></li>
 </ul>
+</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation: Wootters’ Concurrence Formula</p>
 <p><strong>Construction of the formula:</strong></p>
 <p>The concurrence for a pure state was: <span class="math notranslate nohighlight">\(\mathcal{C}(|\Psi\rangle) = 2|c_1 c_2|\)</span> (product of Schmidt coefficients scaled).</p>
 <p>For mixed states, Wootters generalized this by introducing an auxiliary “spin-flipped” version:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{\rho} = (\hat{\sigma}_y \otimes \hat{\sigma}_y) \rho^* (\hat{\sigma}_y \otimes \hat{\sigma}_y)\]</div>
+\[
+\tilde{\rho} = (\hat{\sigma}^y \otimes \hat{\sigma}^y) \rho^* (\hat{\sigma}^y \otimes \hat{\sigma}^y)\]</div>
 <p>The idea: <span class="math notranslate nohighlight">\(\tilde{\rho}\)</span> transforms the state in a specific way related to its entanglement structure.</p>
 <p><strong>Key steps</strong>:</p>
 <ol class="arabic simple">
@@ -680,7 +702,8 @@ document.write(`
 <h4>Relation to Entanglement of Formation<a class="headerlink" href="#relation-to-entanglement-of-formation" title="Link to this heading">#</a></h4>
 <p>The <strong>entanglement of formation</strong> <span class="math notranslate nohighlight">\(E_f\)</span> (minimum average entanglement over all pure-state decompositions of <span class="math notranslate nohighlight">\(\rho\)</span>) is related to concurrence by:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-eof">
-<span class="eqno">(408)<a class="headerlink" href="#equation-eq-ent-measure-eof" title="Link to this equation">#</a></span>\[E_f(\rho) = h\!\left(\frac{1 + \sqrt{1 - \mathcal{C}^2}}{2}\right)\]</div>
+<span class="eqno">(306)<a class="headerlink" href="#equation-eq-ent-measure-eof" title="Link to this equation">#</a></span>\[
+E_f(\rho) = h\!\left(\frac{1 + \sqrt{1 - \mathcal{C}^2}}{2}\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(h(x) = -x\ln x - (1-x)\ln(1-x)\)</span> is the binary entropy function.</p>
 </section>
 </section>
@@ -689,18 +712,22 @@ document.write(`
 <p>An <strong>entanglement witness</strong> is a Hermitian operator <span class="math notranslate nohighlight">\(W\)</span> that detects entanglement without full state tomography.</p>
 <section id="definition">
 <h4>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h4>
+<div class="important admonition">
+<p class="admonition-title">Definition: Entanglement Witness</p>
 <p><span class="math notranslate nohighlight">\(W\)</span> is an entanglement witness if:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\text{Tr}(W \rho_{\text{sep}}) \geq 0\)</span> for all separable states <span class="math notranslate nohighlight">\(\rho_{\text{sep}}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\text{Tr}(W \rho_{\text{ent}}) &lt; 0\)</span> for at least one entangled state <span class="math notranslate nohighlight">\(\rho_{\text{ent}}\)</span>.</p></li>
 </ul>
 <p>A negative expectation value <span class="math notranslate nohighlight">\(\langle W \rangle &lt; 0\)</span> <strong>certifies</strong> that the state is entangled.</p>
+</div>
 <p>A systematic construction of entanglement witnesses:</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Construction: Entanglement Witnesses from Bell States</p>
 <p>For the Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle\)</span>, a witness is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-witness">
-<span class="eqno">(409)<a class="headerlink" href="#equation-eq-ent-measure-witness" title="Link to this equation">#</a></span>\[W = \frac{1}{2}I - |\Phi^+\rangle\langle\Phi^+|\]</div>
+<span class="eqno">(307)<a class="headerlink" href="#equation-eq-ent-measure-witness" title="Link to this equation">#</a></span>\[
+W = \frac{1}{2}I - |\Phi^+\rangle\langle\Phi^+|\]</div>
 <ul class="simple">
 <li><p>For any separable state: <span class="math notranslate nohighlight">\(\langle\Phi^+|\rho_{\text{sep}}|\Phi^+\rangle \leq 1/2\)</span>, so <span class="math notranslate nohighlight">\(\text{Tr}(W\rho_{\text{sep}}) \geq 0\)</span>.</p></li>
 <li><p>For <span class="math notranslate nohighlight">\(\rho = |\Phi^+\rangle\langle\Phi^+|\)</span>: <span class="math notranslate nohighlight">\(\text{Tr}(W\rho) = 1/2 - 1 = -1/2 &lt; 0\)</span>.</p></li>
@@ -710,7 +737,8 @@ document.write(`
 <p>Consider the noisy Bell state <span class="math notranslate nohighlight">\(\rho = p |\Phi^+\rangle\langle\Phi^+| + (1-p)\frac{I}{4}\)</span> (Werner state).</p>
 <p>Using the witness <span class="math notranslate nohighlight">\(W = \frac{1}{2}I - |\Phi^+\rangle\langle\Phi^+|\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\text{Tr}(W\rho) = \frac{1}{2} - p - (1-p)\frac{1}{4} = \frac{1}{2} - p - \frac{1}{4} + \frac{p}{4} = \frac{1}{4} - \frac{3p}{4}\]</div>
+\[
+\text{Tr}(W\rho) = \frac{1}{2} - p - (1-p)\frac{1}{4} = \frac{1}{2} - p - \frac{1}{4} + \frac{p}{4} = \frac{1}{4} - \frac{3p}{4}\]</div>
 <p>This is negative when <span class="math notranslate nohighlight">\(p &gt; 1/3\)</span>. So the witness detects entanglement for <span class="math notranslate nohighlight">\(p &gt; 1/3\)</span>, even though the state is mixed with significant noise.</p>
 </div>
 </div>
@@ -720,19 +748,23 @@ document.write(`
 </div>
 <div class="docutils">
 <h3 class="rubric" id="negativity">Negativity</h3>
+<div class="important admonition">
+<p class="admonition-title">Definition: Negativity</p>
 <p>The <strong>negativity</strong> exploits the <strong>partial transpose</strong> criterion (Peres–Horodecki):</p>
 <div class="math notranslate nohighlight" id="equation-eq-ent-measure-negativity">
-<span class="eqno">(410)<a class="headerlink" href="#equation-eq-ent-measure-negativity" title="Link to this equation">#</a></span>\[\mathcal{N}(\rho) = \frac{\|\rho^{T_B}\|_1 - 1}{2}\]</div>
+<span class="eqno">(308)<a class="headerlink" href="#equation-eq-ent-measure-negativity" title="Link to this equation">#</a></span>\[
+\mathcal{N}(\rho) = \frac{\|\rho^{T_B}\|_1 - 1}{2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\rho^{T_B}\)</span> is the partial transpose with respect to subsystem B, and <span class="math notranslate nohighlight">\(\|\cdot\|_1\)</span> is the trace norm (<span class="math notranslate nohighlight">\(\sum_i |\lambda_i|\)</span>).</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{N} = 0\)</span>: state has positive partial transpose (PPT); separable for <span class="math notranslate nohighlight">\(2 \times 2\)</span> and <span class="math notranslate nohighlight">\(2 \times 3\)</span> systems.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{N} &gt; 0\)</span>: state is entangled (negative eigenvalue under partial transpose).</p></li>
 <li><p><strong>Logarithmic negativity</strong> <span class="math notranslate nohighlight">\(E_N = \ln\|\rho^{T_B}\|_1\)</span> is also widely used.</p></li>
 </ul>
+</div>
+</div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>In dimensions <span class="math notranslate nohighlight">\(\geq 3 \times 3\)</span>, there exist entangled states with positive partial transpose (PPT entangled states, or “bound entangled” states). Negativity fails to detect these; additional criteria are needed.</p>
-</div>
 </div>
 </section>
 </section>
@@ -796,7 +828,84 @@ document.write(`
 <li><p><strong>Negativity</strong>: uses partial transpose; computable but misses bound entangled states in high dimensions.</p></li>
 <li><p><strong>No single measure suffices</strong>: different measures capture distinct operational aspects (distillation, formation, detection).</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="6-2-1-composite-systems.html"><span class="std std-doc">6.2.1 Composite Systems</span></a></strong>: Multi-partite quantum states</p></li>
+<li><p><strong><a class="reference internal" href="6-2-3-bell-inequality.html"><span class="std std-doc">6.2.3 Bell Inequality</span></a></strong>: Nonlocality and entanglement certification</p></li>
+<li><p><strong><a class="reference internal" href="6-1-3-entropy.html"><span class="std std-doc">6.1.3 Entropy</span></a></strong>: Entanglement entropy as Shannon entropy measure</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Schmidt Decomposition and Entanglement Rank.</strong>
+Any bipartite pure state can be written as <span class="math notranslate nohighlight">\(|\psi\rangle = \sum_i \sqrt{\lambda_i}\, |a_i\rangle|b_i\rangle\)</span> with orthonormal bases on each side. Find the Schmidt decomposition of:</p>
+<div class="math notranslate nohighlight">
+\[
+|\psi\rangle = \frac{1}{2}(|00\rangle + |01\rangle + |10\rangle - |11\rangle)\]</div>
+<p>What is the Schmidt rank? What does this tell you about how entangled the state is?</p>
+<p><strong>2. Product States Are Unentangled.</strong>
+Show that if <span class="math notranslate nohighlight">\(|\psi\rangle = |\phi\rangle_A \otimes |\phi\rangle_B\)</span> is a product state, then:
+(a) The reduced density matrix <span class="math notranslate nohighlight">\(\hat{\rho}_A = \mathrm{Tr}_B(|\psi\rangle\langle\psi|)\)</span> is pure.
+(b) The entanglement entropy is exactly zero: <span class="math notranslate nohighlight">\(E(\psi) = 0\)</span>.
+(c) The Schmidt rank is exactly 1.</p>
+<p>What does the Schmidt rank <span class="math notranslate nohighlight">\(\geq 2\)</span> imply about a state?</p>
+<p><strong>3. Bell States Are Maximally Entangled.</strong>
+For all four Bell states:</p>
+<div class="math notranslate nohighlight">
+\[
+|\Phi^\pm\rangle = \frac{|00\rangle \pm |11\rangle}{\sqrt{2}}, \quad |\Psi^\pm\rangle = \frac{|01\rangle \pm |10\rangle}{\sqrt{2}}\]</div>
+<p>(a) Compute the reduced density matrix <span class="math notranslate nohighlight">\(\hat{\rho}_A = \frac{I}{2}\)</span> for each.
+(b) Show the entanglement entropy is <span class="math notranslate nohighlight">\(E = \ln 2\)</span> for all four.
+(c) Verify this is the maximum possible for two qubits: <span class="math notranslate nohighlight">\(\max(E) = \ln d_A = \ln 2\)</span>.</p>
+<p><strong>4. Partial Entanglement Interpolates.</strong>
+Consider <span class="math notranslate nohighlight">\(|\psi(\theta)\rangle = \cos\theta\, |00\rangle + \sin\theta\, |11\rangle\)</span> for <span class="math notranslate nohighlight">\(\theta \in [0, \pi/2]\)</span>.</p>
+<p>(a) Find the Schmidt coefficients <span class="math notranslate nohighlight">\(\lambda_1(\theta)\)</span> and <span class="math notranslate nohighlight">\(\lambda_2(\theta)\)</span>.
+(b) Compute the entanglement entropy <span class="math notranslate nohighlight">\(E(\theta) = -\sum_i \lambda_i^2 \ln(\lambda_i^2)\)</span>.
+(c) Show that <span class="math notranslate nohighlight">\(E(0) = 0\)</span> (product state) and <span class="math notranslate nohighlight">\(E(\pi/4) = \ln 2\)</span> (Bell state).
+(d) Sketch <span class="math notranslate nohighlight">\(E(\theta)\)</span> and explain its physical meaning.</p>
+<p><strong>5. Rényi-2 Entropy and Purity.</strong>
+The Rényi-2 entanglement entropy is <span class="math notranslate nohighlight">\(E_2 = -\ln\mathrm{Tr}(\hat{\rho}_A^2)\)</span>.</p>
+<p>(a) For a pure subsystem, show that <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}_A^2) = 1\)</span> and thus <span class="math notranslate nohighlight">\(E_2 = 0\)</span>.
+(b) For the Bell state reduced density matrix <span class="math notranslate nohighlight">\(\hat{\rho}_A = \frac{I}{2}\)</span>, compute <span class="math notranslate nohighlight">\(E_2\)</span> and compare to the von Neumann entropy <span class="math notranslate nohighlight">\(E_1\)</span>.
+(c) Why is <span class="math notranslate nohighlight">\(E_2\)</span> experimentally useful? (Hint: think about the “swap trick”.)</p>
+<p><strong>6. Concurrence for Two-Qubit Pure States.</strong>
+For a pure two-qubit state <span class="math notranslate nohighlight">\(|\Psi\rangle = \alpha|00\rangle + \beta|01\rangle + \gamma|10\rangle + \delta|11\rangle\)</span>, the concurrence is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{C}(|\Psi\rangle) = 2|\alpha\delta - \beta\gamma|\]</div>
+<p>(a) Verify that <span class="math notranslate nohighlight">\(\mathcal{C} = 1\)</span> for the Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}\)</span>.
+(b) Verify that <span class="math notranslate nohighlight">\(\mathcal{C} = 0\)</span> for product state <span class="math notranslate nohighlight">\(|\psi\rangle = |0\rangle_A \otimes |+\rangle_B\)</span>.
+(c) For the partially entangled state <span class="math notranslate nohighlight">\(|\psi(\theta)\rangle = \cos\theta\, |00\rangle + \sin\theta\, |11\rangle\)</span>, show that <span class="math notranslate nohighlight">\(\mathcal{C}(\theta) = \sin(2\theta)\)</span>.</p>
+<p><strong>7. Entanglement of Formation vs. Concurrence.</strong>
+Wootters showed that for two qubits:</p>
+<div class="math notranslate nohighlight">
+\[
+E_f(\rho) = h\left(\frac{1 + \sqrt{1 - \mathcal{C}^2}}{2}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(h(x) = -x\ln x - (1-x)\ln(1-x)\)</span> is the binary entropy.</p>
+<p>(a) For the Bell state (<span class="math notranslate nohighlight">\(\mathcal{C} = 1\)</span>), compute <span class="math notranslate nohighlight">\(E_f\)</span> and verify it equals <span class="math notranslate nohighlight">\(\ln 2\)</span>.
+(b) For <span class="math notranslate nohighlight">\(\mathcal{C} = 1/2\)</span>, compute <span class="math notranslate nohighlight">\(E_f\)</span> numerically.
+(c) Explain why <span class="math notranslate nohighlight">\(E_f(\rho) \geq E_d(\rho)\)</span> (entanglement of formation is at least distillable entanglement).</p>
+<p><strong>8. Entanglement Witnesses Detect Entanglement.</strong>
+For the Bell state <span class="math notranslate nohighlight">\(|\Phi^+\rangle\)</span>, define the witness:</p>
+<div class="math notranslate nohighlight">
+\[
+W = \frac{I}{2} - |\Phi^+\rangle\langle\Phi^+|\]</div>
+<p>(a) Show that for any separable state <span class="math notranslate nohighlight">\(\rho_{\mathrm{sep}}\)</span>, we have <span class="math notranslate nohighlight">\(\mathrm{Tr}(W\rho_{\mathrm{sep}}) \geq 0\)</span>.
+(b) Compute <span class="math notranslate nohighlight">\(\mathrm{Tr}(W|\Phi^+\rangle\langle\Phi^+|)\)</span> and verify it is negative.
+(c) For the Werner state <span class="math notranslate nohighlight">\(\rho = p|\Phi^+\rangle\langle\Phi^+| + (1-p)\frac{I}{4}\)</span>, find the threshold <span class="math notranslate nohighlight">\(p_c\)</span> above which the witness detects entanglement.
+(d) Why is no single witness able to detect all entangled states?</p>
+<p><strong>9. Negativity as an Entanglement Measure.</strong>
+The partial transpose (with respect to subsystem B) of a <span class="math notranslate nohighlight">\(2 \times 2\)</span> state is <span class="math notranslate nohighlight">\(\rho^{T_B}\)</span>. The negativity is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{N}(\rho) = \frac{\|\rho^{T_B}\|_1 - 1}{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\|\cdot\|_1\)</span> is the trace norm (sum of absolute values of eigenvalues).</p>
+<p>(a) For the Bell state, compute <span class="math notranslate nohighlight">\(\rho^{T_B}\)</span> and show that <span class="math notranslate nohighlight">\(\mathcal{N} &gt; 0\)</span> (has negative eigenvalues).
+(b) For a product state <span class="math notranslate nohighlight">\(\rho = \rho_A \otimes \rho_B\)</span>, show that <span class="math notranslate nohighlight">\(\rho^{T_B}\)</span> is also separable, so <span class="math notranslate nohighlight">\(\mathcal{N} = 0\)</span>.
+(c) Why does the partial transpose criterion fail for bound entangled states in dimensions <span class="math notranslate nohighlight">\(\geq 3 \times 3\)</span>?</p>
 </section>
 </section>
 
@@ -881,6 +990,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -918,7 +1028,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

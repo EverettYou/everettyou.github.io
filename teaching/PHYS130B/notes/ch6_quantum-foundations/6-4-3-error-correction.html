@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -556,6 +556,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -586,25 +587,33 @@ document.write(`
 <p>Quantum information is fundamentally different from classical bits: you cannot copy an unknown quantum state, yet you can send an unknown state across the world using only entanglement and classical communication. These paradoxes dissolve when you recognize that quantum information is a resource all its own—one that enables feats impossible in any classical universe.</p>
 <section id="no-cloning-theorem">
 <h3>No-Cloning Theorem<a class="headerlink" href="#no-cloning-theorem" title="Link to this heading">#</a></h3>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The threshold theorem says fault-tolerant QC is possible if error rate p &lt; p_th. For the surface code, p_th ≈ 1%. How does the number of physical qubits per logical qubit scale with p/p_th?</p>
+</div>
 <p><strong>Theorem</strong>: There is no universal unitary operator that can copy an arbitrary quantum state:</p>
 <div class="math notranslate nohighlight">
-\[U(|\psi\rangle \otimes |0\rangle) = |\psi\rangle \otimes |\psi\rangle\]</div>
+\[
+U(|\psi\rangle \otimes |0\rangle) = |\psi\rangle \otimes |\psi\rangle\]</div>
 <p>for all <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> without prior knowledge of <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>.</p>
 <p>The proof is elegant:</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Proof: No-Cloning Theorem</p>
 <p>Suppose such a unitary <span class="math notranslate nohighlight">\(U\)</span> exists. Test on two orthogonal states <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[U(|0\rangle \otimes |0\rangle_\text{blank}) = |0\rangle \otimes |0\rangle \quad \text{(clone succeeded)}\]</div>
+\[
+U(|0\rangle \otimes |0\rangle_\text{blank}) = |0\rangle \otimes |0\rangle \quad \text{(clone succeeded)}\]</div>
 <div class="math notranslate nohighlight">
 \[U(|1\rangle \otimes |0\rangle_\text{blank}) = |1\rangle \otimes |1\rangle \quad \text{(clone succeeded)}\]</div>
 <p>Now test on superposition <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>:</p>
 <p>By linearity:</p>
 <div class="math notranslate nohighlight">
-\[U(|+\rangle \otimes |0\rangle) = \frac{1}{\sqrt{2}}(|0\rangle \otimes |0\rangle + |1\rangle \otimes |1\rangle)\]</div>
+\[
+U(|+\rangle \otimes |0\rangle) = \frac{1}{\sqrt{2}}(|0\rangle \otimes |0\rangle + |1\rangle \otimes |1\rangle)\]</div>
 <p>But for cloning to work on <span class="math notranslate nohighlight">\(|+\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[U(|+\rangle \otimes |0\rangle) \stackrel{?}{=} |+\rangle \otimes |+\rangle = \frac{1}{2}(|0\rangle \otimes |0\rangle + |0\rangle \otimes |1\rangle + |1\rangle \otimes |0\rangle + |1\rangle \otimes |1\rangle)\]</div>
+\[
+U(|+\rangle \otimes |0\rangle) \stackrel{?}{=} |+\rangle \otimes |+\rangle = \frac{1}{2}(|0\rangle \otimes |0\rangle + |0\rangle \otimes |1\rangle + |1\rangle \otimes |0\rangle + |1\rangle \otimes |1\rangle)\]</div>
 <p>These are <strong>not equal</strong> (different entanglement structure). <strong>Contradiction!</strong> Therefore, no such universal <span class="math notranslate nohighlight">\(U\)</span> exists.</p>
 </div>
 <section id="consequences">
@@ -629,18 +638,20 @@ document.write(`
 <h4>Protocol Steps<a class="headerlink" href="#protocol-steps" title="Link to this heading">#</a></h4>
 <p><strong>Initial state</strong>: Alice holds qubit <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha|{\uparrow}\rangle + \beta|{\downarrow}\rangle\)</span>; shared Bell pair between Alice (A) and Bob (B):</p>
 <div class="math notranslate nohighlight">
-\[|\Psi_\text{initial}\rangle = |\psi\rangle_A |\Phi^+\rangle_{AB}\]</div>
+\[
+|\Psi_\text{initial}\rangle = |\psi\rangle_A |\Phi^+\rangle_{AB}\]</div>
 <p><strong>Step 1</strong>: Alice performs <strong>Bell measurement</strong> (joint measurement of her qubit and her half of Bell pair) in the Bell basis, obtaining 2 classical bits <span class="math notranslate nohighlight">\((b_1, b_2)\)</span>.</p>
 <p><strong>Step 2</strong>: Alice sends 2 bits to Bob classically.</p>
-<p><strong>Step 3</strong>: Based on <span class="math notranslate nohighlight">\((b_1, b_2)\)</span>, Bob applies a <strong>Pauli correction</strong> (one of <span class="math notranslate nohighlight">\(I, \hat{\sigma}_x, \hat{\sigma}_y, \hat{\sigma}_z\)</span>) to his half:</p>
+<p><strong>Step 3</strong>: Based on <span class="math notranslate nohighlight">\((b_1, b_2)\)</span>, Bob applies a <strong>Pauli correction</strong> (one of <span class="math notranslate nohighlight">\(I, \hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span>) to his half:</p>
 <div class="math notranslate nohighlight">
-\[\text{If } (b_1, b_2) = (0,0) \Rightarrow \text{Apply } I\]</div>
+\[
+\text{If } (b_1, b_2) = (0,0) \Rightarrow \text{Apply } I\]</div>
 <div class="math notranslate nohighlight">
-\[\text{If } (b_1, b_2) = (0,1) \Rightarrow \text{Apply } \hat{\sigma}_z\]</div>
+\[\text{If } (b_1, b_2) = (0,1) \Rightarrow \text{Apply } \hat{\sigma}^z\]</div>
 <div class="math notranslate nohighlight">
-\[\text{If } (b_1, b_2) = (1,0) \Rightarrow \text{Apply } \hat{\sigma}_x\]</div>
+\[\text{If } (b_1, b_2) = (1,0) \Rightarrow \text{Apply } \hat{\sigma}^x\]</div>
 <div class="math notranslate nohighlight">
-\[\text{If } (b_1, b_2) = (1,1) \Rightarrow \text{Apply } \hat{\sigma}_x \hat{\sigma}_z\]</div>
+\[\text{If } (b_1, b_2) = (1,1) \Rightarrow \text{Apply } \hat{\sigma}^x \hat{\sigma}^z\]</div>
 <p><strong>Result</strong>: Bob’s qubit is now in state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>.</p>
 </section>
 <section id="key-features">
@@ -658,12 +669,15 @@ document.write(`
 <p><strong>Goal</strong>: Protect one logical qubit from single-qubit bit-flip errors using 3 physical qubits.</p>
 <p><strong>Encoding scheme</strong>: One logical qubit is encoded across three physical qubits by replicating the state:</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-3qubit-0">
-<span class="eqno">(470)<a class="headerlink" href="#equation-eq-qec-3qubit-0" title="Link to this equation">#</a></span>\[|0\rangle_L = |000\rangle \quad \text{(three identical qubits in $|0\rangle$)}\]</div>
+<span class="eqno">(368)<a class="headerlink" href="#equation-eq-qec-3qubit-0" title="Link to this equation">#</a></span>\[
+|0\rangle_L = |000\rangle \quad \text{(three identical qubits in $|0\rangle$)}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-qec-3qubit-1">
-<span class="eqno">(471)<a class="headerlink" href="#equation-eq-qec-3qubit-1" title="Link to this equation">#</a></span>\[|1\rangle_L = |111\rangle \quad \text{(three identical qubits in $|1\rangle$)}\]</div>
+<span class="eqno">(369)<a class="headerlink" href="#equation-eq-qec-3qubit-1" title="Link to this equation">#</a></span>\[
+|1\rangle_L = |111\rangle \quad \text{(three identical qubits in $|1\rangle$)}\]</div>
 <p>A general logical state is:</p>
 <div class="math notranslate nohighlight">
-\[|\psi\rangle_L = \alpha |000\rangle + \beta |111\rangle\]</div>
+\[
+|\psi\rangle_L = \alpha |000\rangle + \beta |111\rangle\]</div>
 <p><strong>How it works</strong>: If a single physical qubit flips, the resulting state (e.g., <span class="math notranslate nohighlight">\(|100\rangle\)</span> or <span class="math notranslate nohighlight">\(|110\rangle\)</span>) differs from both logical codewords in a detectable pattern. By measuring <strong>parity checks</strong> (non-destructive measurements that reveal which qubit flipped without revealing the logical data), we can identify and correct the error.</p>
 <p><strong>Key properties</strong>:</p>
 <ul class="simple">
@@ -677,16 +691,19 @@ document.write(`
 <p><strong>Detailed encoding:</strong></p>
 <p>Logical state <span class="math notranslate nohighlight">\(|\psi\rangle_L = \alpha |0\rangle_L + \beta |1\rangle_L\)</span> is encoded by mapping:</p>
 <div class="math notranslate nohighlight">
-\[|0\rangle_L = |000\rangle \quad \text{(three identical qubits in $|0\rangle$)}\]</div>
+\[
+|0\rangle_L = |000\rangle \quad \text{(three identical qubits in $|0\rangle$)}\]</div>
 <div class="math notranslate nohighlight">
 \[|1\rangle_L = |111\rangle \quad \text{(three identical qubits in $|1\rangle$)}\]</div>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle_L = \alpha |000\rangle + \beta |111\rangle\]</div>
 <p><strong>Syndrome measurement</strong> (parity checks):</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-parity-check-1">
-<span class="eqno">(473)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[P_1 = Z_1 Z_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
+<span class="eqno">(371)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[
+P_1 = Z_1 Z_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
 <div class="math notranslate nohighlight">
-\[P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
+\[
+P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
 <p>These measure <strong>which qubits have flipped</strong> without collapsing the logical state.</p>
 <p><strong>Syndrome table</strong>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -724,14 +741,14 @@ document.write(`
 <p><strong>Recovery step</strong>: Based on syndrome <span class="math notranslate nohighlight">\((s_1, s_2)\)</span>, apply correction:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((0,0)\)</span> → No error; apply <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((1,0)\)</span> → Error on qubit 1; apply <span class="math notranslate nohighlight">\(\hat{\sigma}_x^{(1)}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((1,1)\)</span> → Error on qubit 2; apply <span class="math notranslate nohighlight">\(\hat{\sigma}_x^{(2)}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((0,1)\)</span> → Error on qubit 3; apply <span class="math notranslate nohighlight">\(\hat{\sigma}_x^{(3)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((1,0)\)</span> → Error on qubit 1; apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(1)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((1,1)\)</span> → Error on qubit 2; apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(2)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((0,1)\)</span> → Error on qubit 3; apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(3)}\)</span>.</p></li>
 </ul>
 </div>
 <section id="error-scenarios">
 <h4>Error Scenarios<a class="headerlink" href="#error-scenarios" title="Link to this heading">#</a></h4>
-<p>If <strong>one qubit</strong> suffers a bit-flip error (e.g., <span class="math notranslate nohighlight">\(\hat{\sigma}_x\)</span> on qubit 1):</p>
+<p>If <strong>one qubit</strong> suffers a bit-flip error (e.g., <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> on qubit 1):</p>
 <ul class="simple">
 <li><p>Error on qubit 1: <span class="math notranslate nohighlight">\(|000\rangle \to |100\rangle\)</span>, <span class="math notranslate nohighlight">\(|111\rangle \to |011\rangle\)</span>.</p></li>
 <li><p>Error on qubit 2: <span class="math notranslate nohighlight">\(|000\rangle \to |010\rangle\)</span>, <span class="math notranslate nohighlight">\(|111\rangle \to |101\rangle\)</span>.</p></li>
@@ -742,9 +759,11 @@ document.write(`
 <h4>Syndrome Measurement<a class="headerlink" href="#syndrome-measurement" title="Link to this heading">#</a></h4>
 <p>Measure <strong>parity checks</strong> (without measuring logical data):</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-parity-check-1">
-<span class="eqno">(473)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[P_1 = Z_1 Z_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
+<span class="eqno">(371)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[
+P_1 = Z_1 Z_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
 <div class="math notranslate nohighlight">
-\[P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
+\[
+P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
 <p>These measure <strong>which qubits have flipped</strong> without collapsing the logical state:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -784,9 +803,9 @@ document.write(`
 <p>Based on syndrome <span class="math notranslate nohighlight">\((s_1, s_2)\)</span>, apply correction:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((0,0)\)</span> → No error; apply <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((1,0)\)</span> → Error on qubit 1; apply <span class="math notranslate nohighlight">\(\hat{\sigma}_x^{(1)}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((1,1)\)</span> → Error on qubit 2; apply <span class="math notranslate nohighlight">\(\hat{\sigma}_x^{(2)}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((0,1)\)</span> → Error on qubit 3; apply <span class="math notranslate nohighlight">\(\hat{\sigma}_x^{(3)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((1,0)\)</span> → Error on qubit 1; apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(1)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((1,1)\)</span> → Error on qubit 2; apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(2)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((0,1)\)</span> → Error on qubit 3; apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(3)}\)</span>.</p></li>
 </ul>
 <p><strong>Result</strong>: Original logical state <span class="math notranslate nohighlight">\(|\psi\rangle_L\)</span> is recovered.</p>
 </section>
@@ -801,6 +820,18 @@ document.write(`
 </section>
 <section id="general-quantum-error-correction">
 <h3>General Quantum Error Correction<a class="headerlink" href="#general-quantum-error-correction" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Knill-Laflamme Error Correction Conditions</p>
+<p>A quantum code with stabilizer generators <span class="math notranslate nohighlight">\(\{S_i\}\)</span> and Kraus error operators <span class="math notranslate nohighlight">\(\{E_a\}\)</span> can correct errors if and only if:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \psi | E_a^\dagger E_b | \psi \rangle = C_{ab} \langle \psi | \psi \rangle\]</div>
+<p>for all errors <span class="math notranslate nohighlight">\(E_a, E_b\)</span> in the error set, where <span class="math notranslate nohighlight">\(C_{ab}\)</span> is independent of the code state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>. Equivalently:</p>
+<div class="math notranslate nohighlight">
+\[
+E_a^\dagger E_b \in \text{span}(I, S_1, S_2, \ldots, S_k)\]</div>
+<p>This ensures that the error information is preserved in the stabilizers without disturbing the encoded logical state.</p>
+</div>
 <section id="requirements-for-a-code">
 <h4>Requirements for a Code<a class="headerlink" href="#requirements-for-a-code" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
@@ -823,6 +854,19 @@ document.write(`
 </ul>
 </li>
 </ol>
+<div class="important admonition">
+<p class="admonition-title">Stabilizer Code Properties</p>
+<p>A stabilizer code is defined by a set of commuting Hermitian stabilizer generators <span class="math notranslate nohighlight">\(\{S_1, S_2, \ldots, S_k\}\)</span> with eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>. The code space is the common eigenspace with eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S_i |\psi\rangle_L = |\psi\rangle_L \quad \forall i\]</div>
+<p><strong>Key properties:</strong></p>
+<ul class="simple">
+<li><p><strong>Syndrome measurement</strong>: Measuring stabilizer <span class="math notranslate nohighlight">\(S_i\)</span> yields eigenvalue <span class="math notranslate nohighlight">\(\pm 1\)</span> (syndrome bit), identifying error type without collapsing the logical state.</p></li>
+<li><p><strong>Distance</strong>: The code distance <span class="math notranslate nohighlight">\(d\)</span> is the minimum weight of a logical operator not in the stabilizer group.</p></li>
+<li><p><strong>Logical subspace</strong>: An <span class="math notranslate nohighlight">\([[n, k, d]]\)</span> code encodes <span class="math notranslate nohighlight">\(k\)</span> logical qubits in <span class="math notranslate nohighlight">\(n\)</span> physical qubits with distance <span class="math notranslate nohighlight">\(d\)</span>, correcting up to <span class="math notranslate nohighlight">\(\lfloor(d-1)/2\rfloor\)</span> errors.</p></li>
+</ul>
+</div>
 </section>
 <section id="surface-code-outlook">
 <h4>Surface Code (Outlook)<a class="headerlink" href="#surface-code-outlook" title="Link to this heading">#</a></h4>
@@ -900,7 +944,78 @@ document.write(`
 <li><p><strong>Quantum Darwinism</strong>: Environment proliferates information about system in multiple copies; enables multiple observers to independently determine system state; explains emergence of classicality via environmental selection (einselection).</p></li>
 <li><p><strong>No-communication</strong>: Despite quantum nonlocality, cannot transmit information faster than light; all practical protocols require classical channels.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="6-4-2-lindblad-master-equation.html"><span class="std std-doc">6.4.2 Lindblad Master Equation</span></a></strong>: Decoherence mechanisms in qubits</p></li>
+<li><p><strong><a class="reference internal" href="6-2-3-bell-inequality.html"><span class="std std-doc">6.2.3 Bell Inequality</span></a></strong>: Entanglement for quantum error correction</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html"><span class="std std-doc">2.3.3 Non-Abelian Anyons</span></a></strong>: Topological quantum error correction</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Three-Qubit Bit-Flip Code: Encoding and Basis</strong></p>
+<p>The 3-qubit bit-flip code encodes logical qubits as:</p>
+<div class="math notranslate nohighlight">
+\[
+|0\rangle_L = |000\rangle, \quad |1\rangle_L = |111\rangle\]</div>
+<p>(a) Write the general logical state <span class="math notranslate nohighlight">\(|\psi\rangle_L = \alpha|0\rangle_L + \beta|1\rangle_L\)</span> explicitly in terms of the physical qubits. Verify that this state lies in the 2-dimensional code subspace of <span class="math notranslate nohighlight">\(\mathbb{C}^8\)</span>.</p>
+<p>(b) Show that a single bit-flip error <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(j)}\)</span> on qubit <span class="math notranslate nohighlight">\(j\)</span> maps both <span class="math notranslate nohighlight">\(|0\rangle_L\)</span> and <span class="math notranslate nohighlight">\(|1\rangle_L\)</span> to orthogonal states outside the code subspace.</p>
+<p>(c) Explain why the syndrome measurement (parity checks <span class="math notranslate nohighlight">\(P_1 = Z_1 Z_2\)</span> and <span class="math notranslate nohighlight">\(P_2 = Z_2 Z_3\)</span>) does <em>not</em> collapse the logical state but <em>does</em> reveal which qubit flipped.</p>
+<hr class="docutils" />
+<p><strong>2. Syndrome Measurement and Error Diagnosis</strong></p>
+<p>Consider the 3-qubit bit-flip code. Suppose the error channel acts on qubit 2, applying <span class="math notranslate nohighlight">\(\hat{\sigma}^x^{(2)}\)</span> to the encoded state <span class="math notranslate nohighlight">\(|\psi\rangle_L = \alpha|000\rangle + \beta|111\rangle\)</span>.</p>
+<p>(a) Write the corrupted state after the error occurs.</p>
+<p>(b) Calculate the eigenvalues of the corrupted state under the two parity operators <span class="math notranslate nohighlight">\(P_1 = Z_1 Z_2\)</span> and <span class="math notranslate nohighlight">\(P_2 = Z_2 Z_3\)</span>. Verify that the syndrome is <span class="math notranslate nohighlight">\((s_1, s_2) = (1,1)\)</span>.</p>
+<p>(c) Based on the syndrome table in the lecture notes, which qubit should be corrected? Apply the correction and verify that the original logical state is recovered.</p>
+<hr class="docutils" />
+<p><strong>3. Three-Qubit Phase-Flip Code</strong></p>
+<p>Now consider protection against phase-flip errors. Define the 3-qubit phase-flip code as:</p>
+<div class="math notranslate nohighlight">
+\[
+|0\rangle_L = |+++\rangle = \frac{1}{2\sqrt{2}}(|000\rangle + |001\rangle + |010\rangle + |011\rangle + |100\rangle + |101\rangle + |110\rangle + |111\rangle)\]</div>
+<div class="math notranslate nohighlight">
+\[|1\rangle_L = |-  -  -\rangle = \frac{1}{2\sqrt{2}}(|000\rangle - |001\rangle - |010\rangle + |011\rangle - |100\rangle + |101\rangle + |110\rangle - |111\rangle)\]</div>
+<p>(a) Show that <span class="math notranslate nohighlight">\(|+\rangle_L\)</span> and <span class="math notranslate nohighlight">\(|-\rangle_L\)</span> are eigenstates of <span class="math notranslate nohighlight">\(Z_1 Z_2\)</span> and <span class="math notranslate nohighlight">\(Z_2 Z_3\)</span> with eigenvalue <span class="math notranslate nohighlight">\(+1\)</span> and <span class="math notranslate nohighlight">\(-1\)</span>, respectively.</p>
+<p>(b) Explain why a phase-flip error <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> on any single qubit can be detected via the same parity checks.</p>
+<p>(c) The phase-flip code can be understood as the bit-flip code applied in the Hadamard basis. How does the relationship <span class="math notranslate nohighlight">\(\hat{H} \hat{\sigma}^x \hat{H} = \hat{\sigma}^z\)</span> connect the two codes?</p>
+<hr class="docutils" />
+<p><strong>4. Shor Code: Combining Bit-Flip and Phase-Flip Protection</strong></p>
+<p>The 9-qubit Shor code encodes one logical qubit into 9 physical qubits, protecting against both bit-flip and phase-flip errors on any single qubit. The encoding is:</p>
+<div class="math notranslate nohighlight">
+\[
+|0\rangle_L = \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle) \otimes (|000\rangle + |111\rangle) \otimes (|000\rangle + |111\rangle)\]</div>
+<div class="math notranslate nohighlight">
+\[|1\rangle_L = \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle) \otimes (|000\rangle - |111\rangle) \otimes (|000\rangle - |111\rangle)\]</div>
+<p>Here each <span class="math notranslate nohighlight">\((|000\rangle + |111\rangle)\)</span> is a 3-qubit phase-flip protected block, and three such blocks protect against bit-flip errors.</p>
+<p>(a) How many independent stabilizer generators (parity checks) are required to uniquely identify errors for the Shor code? Explain your reasoning.</p>
+<p>(b) Write down <em>two</em> of the stabilizer generators explicitly, and explain what error type(s) each detects.</p>
+<p>(c) Explain briefly how the Shor code achieves protection against both bit-flip and phase-flip errors with only 9 qubits. Why is this better than naively using two separate 3-qubit codes (which would require 6 qubits)?</p>
+<hr class="docutils" />
+<p><strong>5. Knill-Laflamme Conditions and Code Characterization</strong></p>
+<p>The <strong>Knill-Laflamme conditions</strong> state that a quantum error correction code can correct errors in set <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> if and only if:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \psi | E_i^\dagger E_j | \phi \rangle = \delta_{ij} f(i,j)\]</div>
+<p>for all <span class="math notranslate nohighlight">\(|\psi\rangle, |\phi\rangle\)</span> in the code subspace and all error operators <span class="math notranslate nohighlight">\(E_i, E_j \in \mathcal{E}\)</span>, where <span class="math notranslate nohighlight">\(f(i,j)\)</span> is independent of <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(|\phi\rangle\)</span>.</p>
+<p>(a) For the 3-qubit bit-flip code, verify the Knill-Laflamme conditions for errors <span class="math notranslate nohighlight">\(E \in \{I, \hat{\sigma}^x^{(1)}, \hat{\sigma}^x^{(2)}, \hat{\sigma}^x^{(3)}\}\)</span>.</p>
+<p>(b) Explain in physical terms why <span class="math notranslate nohighlight">\(E_i^\dagger E_j\)</span> must satisfy this orthogonality structure for error correction to work.</p>
+<p>(c) Why do the Knill-Laflamme conditions <em>not</em> allow the 3-qubit bit-flip code to correct two or more simultaneous bit-flip errors?</p>
+<hr class="docutils" />
+<p><strong>6. No-Cloning and Why Quantum Error Correction Is Non-Trivial</strong></p>
+<p>The no-cloning theorem states that an unknown quantum state cannot be universally copied. This creates a fundamental tension with error correction: how can you protect quantum information if you cannot make backup copies?</p>
+<p>(a) Explain how the 3-qubit bit-flip code <em>avoids</em> cloning by distributing information across three physical qubits <em>without</em> copying the original state.</p>
+<p>(b) Suppose you attempted to store a backup copy of a logical qubit by trying to create a second independent copy of the entire encoded state. Show that this would violate the no-cloning theorem.</p>
+<p>(c) Quantum error correction requires measuring the error syndrome without measuring the logical data. Use the no-cloning theorem to argue why this is <em>necessary</em>: if you could measure logical data without destroying it, what would that imply about copying quantum states?</p>
+<hr class="docutils" />
+<p><strong>7. Threshold Theorem and Fault Tolerance (Conceptual)</strong></p>
+<p>The <strong>threshold theorem</strong> states: <em>If the physical error rate per qubit is below a critical threshold <span class="math notranslate nohighlight">\(p_{\text{th}}\)</span>, then quantum error correction codes can be concatenated recursively, with the logical error rate decreasing exponentially in the number of concatenation layers, enabling arbitrarily large quantum computations.</em></p>
+<p>(a) In simple terms, explain what “concatenation” of codes means and why it helps reduce errors.</p>
+<p>(b) Current superconducting qubits have single-qubit gate errors around <span class="math notranslate nohighlight">\(10^{-3}\)</span> to <span class="math notranslate nohighlight">\(10^{-4}\)</span>. Estimate what threshold <span class="math notranslate nohighlight">\(p_{\text{th}}\)</span> would need to be achieved for practical fault-tolerant quantum computers. (Current estimates are <span class="math notranslate nohighlight">\(p_{\text{th}} \sim 10^{-3}\)</span> to <span class="math notranslate nohighlight">\(10^{-4}\)</span>.)</p>
+<p>(c) The threshold theorem shows that quantum computing can be <strong>scalable in principle</strong>. What are the remaining practical challenges—beyond just meeting the threshold—that would still stand in the way of a useful large-scale quantum computer?</p>
+<p>(d) Surface codes are a leading candidate for fault-tolerant quantum computing. Without working through detailed calculations, explain why a 2D array of qubits (as in the surface code) might be more practical than fully connected qubits for building a large quantum computer, especially regarding error correction overhead.</p>
 </section>
 </section>
 
@@ -995,6 +1110,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -1032,7 +1148,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

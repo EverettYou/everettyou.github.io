@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -525,7 +525,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-states-via-density-matrix">Pure States via Density Matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-pure-state-density-matrices">Properties of Pure-State Density Matrices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-states-and-ensembles">Mixed States and Ensembles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-valid-density-matrices">Properties of Valid Density Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-valid-density-matrices">Properties of Valid Density Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purity-and-the-trace-of-the-square">Purity and the Trace of the Square</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-purity-as-reciprocal">Alternative: Purity as Reciprocal</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-ambiguity">Ensemble Ambiguity</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition">Spectral Decomposition</a></li>
 </ul>
 </li>
@@ -535,6 +540,7 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -551,13 +557,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the difference between a pure state and a mixed state? Why can’t a mixed state be represented by a single ket vector?</p></li>
-<li><p>For a pure state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>, construct the density matrix <span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span> for a qubit in superposition.</p></li>
-<li><p>How do you represent an ensemble (statistical mixture) of quantum states as a single density matrix?</p></li>
-<li><p>What are the key properties of a valid density matrix: Hermiticity, trace normalization, positive semidefiniteness?</p></li>
-<li><p>What does it mean if <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) &lt; 1\)</span>? How does this relate to purity and mixedness?</p></li>
-<li><p>What is the Bloch ball, and how does it visualize pure and mixed states for a qubit?</p></li>
-<li><p>Can two different ensembles represent the same density matrix? Give an example.</p></li>
+<li><p>What is the fundamental difference between a pure state and a mixed state? Why can’t you describe a mixed state by a single ket?</p></li>
+<li><p>For a qubit in an equal superposition, construct its density matrix. What would the density matrix look like for a statistical mixture (classical noise)?</p></li>
+<li><p>What mathematical properties must a density matrix satisfy? (Hermitian, trace, positive semidefinite)</p></li>
+<li><p>How does <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2)\)</span> measure purity? What does <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) &lt; 1\)</span> tell you about the mixedness of a state?</p></li>
+<li><p>Can two completely different ensembles give the same density matrix? What does this tell us about the information lost in going from state to density matrix?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -565,15 +569,33 @@ document.write(`
 <p>Not all quantum states are pure; sometimes we possess only incomplete information about a system, or it has interacted with an inaccessible environment. The density matrix elegantly captures this ignorance, unifying our description: whether we lack information by choice or by necessity, the formalism treats both identically. This single operator becomes the bridge between pure quantum coherence and classical uncertainty.</p>
 <section id="pure-states-via-density-matrix">
 <h3>Pure States via Density Matrix<a class="headerlink" href="#pure-states-via-density-matrix" title="Link to this heading">#</a></h3>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>A density matrix ρ = (1/2)I describes maximum ignorance. But two different ensembles {|+z⟩,|-z⟩} and {|+x⟩,|-x⟩} give the same ρ. Construct an experiment that distinguishes these two ensembles — is it possible?</p>
+</div>
+<p>:class: dropdown warning</p>
+<p>One of the deepest questions in quantum mechanics: does a mixed state <span class="math notranslate nohighlight">\(\rho\)</span> represent our <em>ignorance</em> about which pure state the system “truly” occupies, or is mixedness a <em>fundamental property</em> of the system itself?</p>
+<ul class="simple">
+<li><p>If I have a 50-50 mixture of spin-up and spin-down, is there a fact of the matter about which one it is, but I just don’t know? Or is the system genuinely neither one nor a superposition?</p></li>
+<li><p>Can a truly isolated quantum system, with no inaccessible environment, ever be in a genuinely mixed state? Or would isolation force it to be pure?</p></li>
+<li><p>If two different ensembles produce the same <span class="math notranslate nohighlight">\(\rho\)</span>, does that mean they are physically equivalent, or could measurements in the future distinguish them?</p></li>
+</ul>
+<div class="docutils">
+<div class="important admonition">
+<p class="admonition-title">Definition: Density Matrix for Pure States</p>
 <p>For a <strong>pure state</strong> <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>, the <strong>density operator</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-pure-density">
-<span class="eqno">(344)<a class="headerlink" href="#equation-eq-mixed-pure-density" title="Link to this equation">#</a></span>\[\rho = |\psi\rangle\langle\psi|\]</div>
+<span class="eqno">(242)<a class="headerlink" href="#equation-eq-mixed-pure-density" title="Link to this equation">#</a></span>\[
+\rho = |\psi\rangle\langle\psi|\]</div>
 <p>This is an <strong>outer product</strong> (rank-1 projection operator).</p>
+</div>
+</div>
 <div class="example admonition">
 <p class="admonition-title">Example: Qubit in Superposition</p>
 <p>Let <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha |{\uparrow}\rangle + \beta |{\downarrow}\rangle\)</span> with <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-qubit-density">
-<span class="eqno">(345)<a class="headerlink" href="#equation-eq-mixed-qubit-density" title="Link to this equation">#</a></span>\[\begin{split}|\psi\rangle\langle\psi| = \begin{pmatrix} \alpha \\ \beta \end{pmatrix} \begin{pmatrix} \alpha^* &amp; \beta^* \end{pmatrix} = \begin{pmatrix} |\alpha|^2 &amp; \alpha^*\beta \\ \beta^*\alpha &amp; |\beta|^2 \end{pmatrix}\end{split}\]</div>
+<span class="eqno">(243)<a class="headerlink" href="#equation-eq-mixed-qubit-density" title="Link to this equation">#</a></span>\[\begin{split}
+|\psi\rangle\langle\psi| = \begin{pmatrix} \alpha \\ \beta \end{pmatrix} \begin{pmatrix} \alpha^* &amp; \beta^* \end{pmatrix} = \begin{pmatrix} |\alpha|^2 &amp; \alpha^*\beta \\ \beta^*\alpha &amp; |\beta|^2 \end{pmatrix}\end{split}\]</div>
 <p><strong>Interpretation</strong>:</p>
 <ul class="simple">
 <li><p><strong>Diagonal elements</strong> (populations): <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> = probability of measuring <span class="math notranslate nohighlight">\(|{\uparrow}\rangle\)</span>; <span class="math notranslate nohighlight">\(|\beta|^2\)</span> = probability of measuring <span class="math notranslate nohighlight">\(|{\downarrow}\rangle\)</span>.</p></li>
@@ -581,7 +603,8 @@ document.write(`
 </ul>
 <p>If <span class="math notranslate nohighlight">\(\alpha = 1/\sqrt{2}, \beta = 1/\sqrt{2}\)</span> (superposition of <span class="math notranslate nohighlight">\(|{\uparrow}\rangle + |{\downarrow}\rangle\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-superposition-density">
-<span class="eqno">(346)<a class="headerlink" href="#equation-eq-mixed-superposition-density" title="Link to this equation">#</a></span>\[\begin{split}\rho = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\end{split}\]</div>
+<span class="eqno">(244)<a class="headerlink" href="#equation-eq-mixed-superposition-density" title="Link to this equation">#</a></span>\[\begin{split}
+\rho = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\end{split}\]</div>
 <p>Off-diagonal terms <span class="math notranslate nohighlight">\(\rho_{\uparrow\downarrow} = 1/2\)</span> indicate coherence between states.</p>
 </div>
 </section>
@@ -617,51 +640,73 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 <li><p>With probability <span class="math notranslate nohighlight">\(p_n\)</span>, system is in state <span class="math notranslate nohighlight">\(|\psi_n\rangle\)</span>.</p></li>
 </ul>
 <p>where <span class="math notranslate nohighlight">\(\sum_i p_i = 1\)</span> and <span class="math notranslate nohighlight">\(p_i \geq 0\)</span>. This is a <strong>statistical ensemble</strong>.</p>
+<div class="important admonition">
+<p class="admonition-title">Definition: Density Matrix for Ensembles</p>
 <p>The <strong>density matrix</strong> of the ensemble is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-ensemble-density">
-<span class="eqno">(347)<a class="headerlink" href="#equation-eq-mixed-ensemble-density" title="Link to this equation">#</a></span>\[\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|\]</div>
+<span class="eqno">(245)<a class="headerlink" href="#equation-eq-mixed-ensemble-density" title="Link to this equation">#</a></span>\[
+\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|\]</div>
 <p>If <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span> are <strong>orthonormal</strong>, this is the <strong>spectral decomposition</strong> of <span class="math notranslate nohighlight">\(\rho\)</span>. More generally, the <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span> need not be orthogonal (ensemble ambiguity, discussed below).</p>
+</div>
 <div class="example admonition">
 <p class="admonition-title">Example: Maximally Mixed Qubit</p>
 <p>Ensemble: 50% chance of <span class="math notranslate nohighlight">\(|{\uparrow}\rangle\)</span>, 50% chance of <span class="math notranslate nohighlight">\(|{\downarrow}\rangle\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-maxmix-qubit">
-<span class="eqno">(348)<a class="headerlink" href="#equation-eq-mixed-maxmix-qubit" title="Link to this equation">#</a></span>\[\begin{split}\rho = \frac{1}{2}|{\uparrow}\rangle\langle{\uparrow}| + \frac{1}{2}|{\downarrow}\rangle\langle{\downarrow}| = \frac{1}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}\end{split}\]</div>
+<span class="eqno">(246)<a class="headerlink" href="#equation-eq-mixed-maxmix-qubit" title="Link to this equation">#</a></span>\[\begin{split}
+\rho = \frac{1}{2}|{\uparrow}\rangle\langle{\uparrow}| + \frac{1}{2}|{\downarrow}\rangle\langle{\downarrow}| = \frac{1}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}\end{split}\]</div>
 <p><strong>No coherences</strong>: Off-diagonal elements are zero. The reduced density matrix is <strong>diagonal</strong> (classical-like).</p>
 </div>
 <div class="example admonition">
 <p class="admonition-title">Example: Thermal State</p>
 <p>System at temperature <span class="math notranslate nohighlight">\(T\)</span> in equilibrium with a heat bath. Probability of energy eigenstate <span class="math notranslate nohighlight">\(|n\rangle\)</span> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-thermal-prob">
-<span class="eqno">(349)<a class="headerlink" href="#equation-eq-mixed-thermal-prob" title="Link to this equation">#</a></span>\[p_n = \frac{e^{-E_n / k_B T}}{Z}, \quad Z = \sum_m e^{-E_m / k_B T} \quad \text{(partition function)}\]</div>
+<span class="eqno">(247)<a class="headerlink" href="#equation-eq-mixed-thermal-prob" title="Link to this equation">#</a></span>\[
+p_n = \frac{\mathrm{e}^{-E_n / k_B T}}{Z}, \quad Z = \sum_m \mathrm{e}^{-E_m / k_B T} \quad \text{(partition function)}\]</div>
 <p>Density matrix (in energy eigenbasis):</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-thermal-density">
-<span class="eqno">(350)<a class="headerlink" href="#equation-eq-mixed-thermal-density" title="Link to this equation">#</a></span>\[\rho_\text{thermal} = \sum_n \frac{e^{-E_n / k_B T}}{Z} |n\rangle\langle n| = \frac{e^{-H/k_B T}}{Z}\]</div>
+<span class="eqno">(248)<a class="headerlink" href="#equation-eq-mixed-thermal-density" title="Link to this equation">#</a></span>\[
+\rho_\text{thermal} = \sum_n \frac{\mathrm{e}^{-E_n / k_B T}}{Z} |n\rangle\langle n| = \frac{\mathrm{e}^{-H/k_B T}}{Z}\]</div>
 <p>This is <strong>diagonal in the energy basis</strong> (no coherence at thermal equilibrium). Diagonal elements decrease with energy.</p>
 </div>
 </section>
 <section id="properties-of-valid-density-matrices">
 <h3>Properties of Valid Density Matrices<a class="headerlink" href="#properties-of-valid-density-matrices" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Definition: Valid Density Matrix Conditions</p>
 <p>Any valid quantum state (pure or mixed) is represented by a density matrix <span class="math notranslate nohighlight">\(\rho\)</span> satisfying:</p>
 <p><strong>1. Hermiticity:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-hermitian">
-<span class="eqno">(351)<a class="headerlink" href="#equation-eq-mixed-hermitian" title="Link to this equation">#</a></span>\[\rho^\dagger = \rho \quad \Rightarrow \quad \text{eigenvalues} \in \mathbb{R}\]</div>
+<span class="eqno">(249)<a class="headerlink" href="#equation-eq-mixed-hermitian" title="Link to this equation">#</a></span>\[
+\rho^\dagger = \rho \quad \Rightarrow \quad \text{eigenvalues} \in \mathbb{R}\]</div>
 <p><strong>2. Trace normalization:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-trace-norm">
-<span class="eqno">(352)<a class="headerlink" href="#equation-eq-mixed-trace-norm" title="Link to this equation">#</a></span>\[\text{Tr}(\rho) = 1 \quad \Rightarrow \quad \sum_i \lambda_i = 1\]</div>
+<span class="eqno">(250)<a class="headerlink" href="#equation-eq-mixed-trace-norm" title="Link to this equation">#</a></span>\[
+\text{Tr}(\rho) = 1 \quad \Rightarrow \quad \sum_i \lambda_i = 1\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda_i\)</span> are eigenvalues. This ensures probability conservation.</p>
-<div class="docutils">
 <p><strong>3. Positive semidefiniteness:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-positive">
-<span class="eqno">(353)<a class="headerlink" href="#equation-eq-mixed-positive" title="Link to this equation">#</a></span>\[\rho \geq 0 \quad \Rightarrow \quad \lambda_i \geq 0 \text{ for all } i\]</div>
+<span class="eqno">(251)<a class="headerlink" href="#equation-eq-mixed-positive" title="Link to this equation">#</a></span>\[
+\rho \geq 0 \quad \Rightarrow \quad \lambda_i \geq 0 \text{ for all } i\]</div>
 <p>Equivalently: <span class="math notranslate nohighlight">\(\langle\phi|\rho|\phi\rangle \geq 0\)</span> for all <span class="math notranslate nohighlight">\(|\phi\rangle\)</span>. This ensures probabilities are non-negative.</p>
-<h3 class="rubric" id="purity-and-the-trace-of-the-square">Purity and the Trace of the Square</h3>
+</div>
+</section>
+<section id="purity-and-the-trace-of-the-square">
+<h3>Purity and the Trace of the Square<a class="headerlink" href="#purity-and-the-trace-of-the-square" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Definition: Purity</p>
 <p>The <strong>purity</strong> of a density matrix is defined as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-purity">
-<span class="eqno">(354)<a class="headerlink" href="#equation-eq-mixed-purity" title="Link to this equation">#</a></span>\[\mathcal{P} = \text{Tr}(\rho^2)\]</div>
-<p><strong>Physical interpretation</strong>: In the eigenbasis of <span class="math notranslate nohighlight">\(\rho\)</span> (with eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span>):</p>
+<span class="eqno">(252)<a class="headerlink" href="#equation-eq-mixed-purity" title="Link to this equation">#</a></span>\[
+\mathcal{P} = \text{Tr}(\rho^2)\]</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Physical Interpretation</p>
+<p>In the eigenbasis of <span class="math notranslate nohighlight">\(\rho\)</span> (with eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-purity-eigenbasis">
-<span class="eqno">(355)<a class="headerlink" href="#equation-eq-mixed-purity-eigenbasis" title="Link to this equation">#</a></span>\[\text{Tr}(\rho^2) = \sum_i \lambda_i^2\]</div>
-<h4 class="rubric" id="pure-vs-mixed">Pure vs. Mixed</h4>
+<span class="eqno">(253)<a class="headerlink" href="#equation-eq-mixed-purity-eigenbasis" title="Link to this equation">#</a></span>\[
+\text{Tr}(\rho^2) = \sum_i \lambda_i^2\]</div>
+</div>
+<p>####### Pure vs. Mixed</p>
 <ul class="simple">
 <li><p><strong>Pure state</strong> (<span class="math notranslate nohighlight">\(|\psi\rangle\langle\psi|\)</span>): One eigenvalue = 1, rest = 0. Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = 1\)</span>.</p></li>
 <li><p><strong>Maximally mixed</strong> (dimension <span class="math notranslate nohighlight">\(d\)</span>): All eigenvalues = <span class="math notranslate nohighlight">\(1/d\)</span>. Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = d \cdot (1/d)^2 = 1/d\)</span>.</p></li>
@@ -672,12 +717,17 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 <li><p><span class="math notranslate nohighlight">\(\text{Tr}(\rho^2)\)</span> close to 1: State is nearly pure; little uncertainty.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\text{Tr}(\rho^2)\)</span> close to <span class="math notranslate nohighlight">\(1/d\)</span>: State is nearly maximally mixed; maximum uncertainty.</p></li>
 </ul>
-<h4 class="rubric" id="alternative-purity-as-reciprocal">Alternative: Purity as Reciprocal</h4>
+<section id="alternative-purity-as-reciprocal">
+<h4>Alternative: Purity as Reciprocal<a class="headerlink" href="#alternative-purity-as-reciprocal" title="Link to this heading">#</a></h4>
 <p>Sometimes defined as:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \text{Tr}(\rho^2) \quad \text{or} \quad \text{Purity} = d \cdot \text{Tr}(\rho^2)\]</div>
+\[
+\gamma = \text{Tr}(\rho^2) \quad \text{or} \quad \text{Purity} = d \cdot \text{Tr}(\rho^2)\]</div>
 <p>to normalize to <span class="math notranslate nohighlight">\([0, 1]\)</span> or <span class="math notranslate nohighlight">\([1/d, 1]\)</span> depending on convention.</p>
-<h3 class="rubric" id="ensemble-ambiguity">Ensemble Ambiguity</h3>
+</section>
+</section>
+<section id="ensemble-ambiguity">
+<h3>Ensemble Ambiguity<a class="headerlink" href="#ensemble-ambiguity" title="Link to this heading">#</a></h3>
 <p><strong>Surprising fact</strong>: Different ensembles can produce the <strong>same</strong> density matrix.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: #### Example</p>
@@ -693,7 +743,8 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 </ul>
 <p>Compute <span class="math notranslate nohighlight">\(\rho_2\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\rho_2 = \frac{1}{2}|\rightarrow\rangle\langle\rightarrow| + \frac{1}{2}|\leftarrow\rangle\langle\leftarrow|\]</div>
+\[
+\rho_2 = \frac{1}{2}|\rightarrow\rangle\langle\rightarrow| + \frac{1}{2}|\leftarrow\rangle\langle\leftarrow|\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}= \frac{1}{2} \cdot \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} + \frac{1}{2} \cdot \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix}\end{split}\]</div>
 <div class="math notranslate nohighlight">
@@ -703,13 +754,14 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 <p>Instead, consider:</p>
 <p><strong>Ensemble A</strong>: 50% spin-up along <span class="math notranslate nohighlight">\(z\)</span>; 50% spin-down along <span class="math notranslate nohighlight">\(z\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\rho_A = \frac{1}{2}|{\uparrow}\rangle\langle{\uparrow}| + \frac{1}{2}|{\downarrow}\rangle\langle{\downarrow}| = \frac{I}{2}\]</div>
+\[
+\rho_A = \frac{1}{2}|{\uparrow}\rangle\langle{\uparrow}| + \frac{1}{2}|{\downarrow}\rangle\langle{\downarrow}| = \frac{I}{2}\]</div>
 <p><strong>Ensemble B</strong>: 50% spin-right along <span class="math notranslate nohighlight">\(x\)</span>; 50% spin-left along <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\rho_B = \frac{1}{2}|\rightarrow\rangle\langle\rightarrow| + \frac{1}{2}|\leftarrow\rangle\langle\leftarrow| = \frac{I}{2}\]</div>
+\[
+\rho_B = \frac{1}{2}|\rightarrow\rangle\langle\rightarrow| + \frac{1}{2}|\leftarrow\rangle\langle\leftarrow| = \frac{I}{2}\]</div>
 <p><strong>Both give <span class="math notranslate nohighlight">\(\rho = I/2\)</span></strong> (maximally mixed). But physical ensembles differ: in A, outcomes along <span class="math notranslate nohighlight">\(z\)</span> are 50/50 deterministic (given ensemble); in B, outcomes along <span class="math notranslate nohighlight">\(x\)</span> are 50/50.</p>
 <p><strong>Key insight</strong>: The density matrix alone <strong>cannot distinguish</strong> between these ensembles. Physical predictions (for observables in any basis) are identical; only preparation history differs.</p>
-</div>
 </div>
 <section id="spectral-decomposition">
 <h4>Spectral Decomposition<a class="headerlink" href="#spectral-decomposition" title="Link to this heading">#</a></h4>
@@ -718,23 +770,29 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 </section>
 <section id="the-bloch-ball-for-qubit-mixed-states">
 <h3>The Bloch Ball for Qubit Mixed States<a class="headerlink" href="#the-bloch-ball-for-qubit-mixed-states" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">The Bloch Ball Representation</p>
 <p>A qubit mixed state can be written:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-bloch-density">
-<span class="eqno">(356)<a class="headerlink" href="#equation-eq-mixed-bloch-density" title="Link to this equation">#</a></span>\[\rho = \frac{1}{2}(I + \boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{r} = (r_x, r_y, r_z)\)</span> is the <strong>Bloch vector</strong> and <span class="math notranslate nohighlight">\(\boldsymbol{\hat{\sigma}} = (\hat{\sigma}_x, \hat{\sigma}_y, \hat{\sigma}_z)\)</span> are Pauli matrices.</p>
-<p><strong>Bloch sphere constraints</strong>:</p>
+<span class="eqno">(254)<a class="headerlink" href="#equation-eq-mixed-bloch-density" title="Link to this equation">#</a></span>\[
+\rho = \frac{1}{2}(I + \boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{r} = (r_x, r_y, r_z)\)</span> is the <strong>Bloch vector</strong> and <span class="math notranslate nohighlight">\(\boldsymbol{\hat{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)\)</span> are Pauli matrices.</p>
+<p><strong>Bloch ball constraints</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-bloch-constraint">
-<span class="eqno">(357)<a class="headerlink" href="#equation-eq-mixed-bloch-constraint" title="Link to this equation">#</a></span>\[|\boldsymbol{r}| \leq 1\]</div>
+<span class="eqno">(255)<a class="headerlink" href="#equation-eq-mixed-bloch-constraint" title="Link to this equation">#</a></span>\[
+|\boldsymbol{r}| \leq 1\]</div>
 <ul class="simple">
 <li><p><strong>Pure states</strong>: <span class="math notranslate nohighlight">\(|\boldsymbol{r}| = 1\)</span> (surface of Bloch sphere).</p></li>
 <li><p><strong>Mixed states</strong>: <span class="math notranslate nohighlight">\(|\boldsymbol{r}| &lt; 1\)</span> (interior of Bloch ball).</p></li>
 <li><p><strong>Maximally mixed</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{r} = \boldsymbol{0}\)</span> (center of ball); <span class="math notranslate nohighlight">\(\rho = I/2\)</span>.</p></li>
 </ul>
+</div>
 <section id="purity-in-terms-of-bloch-vector">
 <h4>Purity in Terms of Bloch Vector<a class="headerlink" href="#purity-in-terms-of-bloch-vector" title="Link to this heading">#</a></h4>
 <p>The purity of a density matrix in terms of the Bloch vector is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mixed-purity-bloch">
-<span class="eqno">(358)<a class="headerlink" href="#equation-eq-mixed-purity-bloch" title="Link to this equation">#</a></span>\[\text{Tr}(\rho^2) = \frac{1}{2}(1 + |\boldsymbol{r}|^2)\]</div>
+<span class="eqno">(256)<a class="headerlink" href="#equation-eq-mixed-purity-bloch" title="Link to this equation">#</a></span>\[
+\text{Tr}(\rho^2) = \frac{1}{2}(1 + |\boldsymbol{r}|^2)\]</div>
 <p>This formula connects the purity to the magnitude of the Bloch vector:</p>
 <ul class="simple">
 <li><p><strong>Pure state</strong>: <span class="math notranslate nohighlight">\(|\boldsymbol{r}| = 1 \Rightarrow \text{Tr}(\rho^2) = 1\)</span></p></li>
@@ -746,20 +804,24 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 <p><strong>Detailed calculation:</strong></p>
 <p>Starting from <span class="math notranslate nohighlight">\(\rho = \frac{1}{2}(I + \boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\rho^2 = \frac{1}{4}(I + \boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})^2 = \frac{1}{4}(I + 2\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}} + (\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})^2)\]</div>
+\[
+\rho^2 = \frac{1}{4}(I + \boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})^2 = \frac{1}{4}(I + 2\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}} + (\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})^2)\]</div>
 <p>Using <span class="math notranslate nohighlight">\((\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})^2 = |\boldsymbol{r}|^2 I\)</span> (property of Pauli matrices):</p>
 <div class="math notranslate nohighlight">
-\[\rho^2 = \frac{1}{4}(I + 2\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}} + |\boldsymbol{r}|^2 I) = \frac{1}{4}((1 + |\boldsymbol{r}|^2) I + 2\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})\]</div>
+\[
+\rho^2 = \frac{1}{4}(I + 2\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}} + |\boldsymbol{r}|^2 I) = \frac{1}{4}((1 + |\boldsymbol{r}|^2) I + 2\boldsymbol{r} \cdot \boldsymbol{\hat{\sigma}})\]</div>
 <p>Taking the trace:</p>
 <div class="math notranslate nohighlight">
-\[\text{Tr}(\rho^2) = \frac{1}{4}(2(1 + |\boldsymbol{r}|^2)) = \frac{1}{2}(1 + |\boldsymbol{r}|^2)\]</div>
+\[
+\text{Tr}(\rho^2) = \frac{1}{4}(2(1 + |\boldsymbol{r}|^2)) = \frac{1}{2}(1 + |\boldsymbol{r}|^2)\]</div>
 <div class="example admonition">
 <p class="admonition-title">Example: Mixed Qubit State</p>
 <p>Consider <span class="math notranslate nohighlight">\(\rho = 0.8|{\uparrow}\rangle\langle{\uparrow}| + 0.2|{\downarrow}\rangle\langle{\downarrow}|\)</span> (mixture favoring spin-up).</p>
 <p>Eigenvalues: <span class="math notranslate nohighlight">\(\lambda_1 = 0.8, \lambda_2 = 0.2\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{r} = (0, 0, \lambda_1 - \lambda_2) = (0, 0, 0.6)\]</div>
-<p>Thus <span class="math notranslate nohighlight">\(\rho = \frac{1}{2}(I + 0.6 \hat{\sigma}_z) = \begin{pmatrix} 0.8 &amp; 0 \\ 0 &amp; 0.2 \end{pmatrix}\)</span>. ✓</p>
+\[
+\boldsymbol{r} = (0, 0, \lambda_1 - \lambda_2) = (0, 0, 0.6)\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\rho = \frac{1}{2}(I + 0.6 \hat{\sigma}^z) = \begin{pmatrix} 0.8 &amp; 0 \\ 0 &amp; 0.2 \end{pmatrix}\)</span>. ✓</p>
 <p>Bloch vector magnitude: <span class="math notranslate nohighlight">\(|\boldsymbol{r}| = 0.6 &lt; 1\)</span> (inside Bloch ball; mixed state). ✓</p>
 </div>
 </div>
@@ -782,9 +844,56 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 <li><p><strong>Purity</strong> <span class="math notranslate nohighlight">\(\mathcal{P} = \text{Tr}(\rho^2)\)</span>: Measures mixedness; <span class="math notranslate nohighlight">\(\in [1/d, 1]\)</span> (1 = pure, <span class="math notranslate nohighlight">\(1/d\)</span> = maximally mixed).</p></li>
 <li><p><strong>Ensemble ambiguity</strong>: Multiple ensembles yield same <span class="math notranslate nohighlight">\(\rho\)</span>; density matrix is all that matters for predictions.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html"><span class="std std-doc">1.1.2 State and Representation</span></a></strong>: Pure states and basis representation</p></li>
+<li><p><strong><a class="reference internal" href="6-1-2-partial-trace.html"><span class="std std-doc">6.1.2 Partial Trace</span></a></strong>: Constructing mixed states from entanglement</p></li>
+<li><p><strong><a class="reference internal" href="6-4-1-decoherence.html"><span class="std std-doc">6.4.1 Decoherence</span></a></strong>: Transition from pure to mixed states</p></li>
+</ul>
+</div>
 </div>
 </section>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Density Matrix Properties.</strong>
+Show that if <span class="math notranslate nohighlight">\(\hat{\rho} = \sum_i p_i |\psi_i\rangle\langle\psi_i|\)</span> with <span class="math notranslate nohighlight">\(p_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_i p_i = 1\)</span>, then:</p>
+<p>(a) <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is Hermitian: <span class="math notranslate nohighlight">\(\hat{\rho}^\dagger = \hat{\rho}\)</span>.</p>
+<p>(b) <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> has non-negative eigenvalues.</p>
+<p>(c) <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}) = 1\)</span>.</p>
+<p><strong>2. Pure vs. Mixed States.</strong>
+(a) Show that a pure state <span class="math notranslate nohighlight">\(\hat{\rho} = |\psi\rangle\langle\psi|\)</span> satisfies <span class="math notranslate nohighlight">\(\hat{\rho}^2 = \hat{\rho}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}^2) = 1\)</span>.</p>
+<p>(b) Show that for a mixed state, <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}^2) &lt; 1\)</span>. (Hint: write <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> in its eigenbasis and use the constraint <span class="math notranslate nohighlight">\(\sum p_i = 1\)</span> with at least two <span class="math notranslate nohighlight">\(p_i &gt; 0\)</span>.)</p>
+<p>(c) What is the minimum value of <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}^2)\)</span> for a <span class="math notranslate nohighlight">\(d\)</span>-dimensional system?</p>
+<p><strong>3. Expectation Values from Density Matrix.</strong>
+For an observable <span class="math notranslate nohighlight">\(\hat{A}\)</span>, show that <span class="math notranslate nohighlight">\(\langle\hat{A}\rangle = \mathrm{Tr}(\hat{\rho}\hat{A})\)</span> reproduces the quantum mechanical expectation value for a pure state <span class="math notranslate nohighlight">\(\hat{\rho} = |\psi\rangle\langle\psi|\)</span>.</p>
+<p><strong>4. Bloch Vector.</strong>
+A qubit density matrix can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho} = \frac{1}{2}(\hat{I} + \boldsymbol{r}\cdot\hat{\boldsymbol{\sigma}})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{r} = (r_x, r_y, r_z)\)</span> is the Bloch vector.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(r^i = \langle\hat{\sigma}^i\rangle = \mathrm{Tr}(\hat{\rho}\hat{\sigma}^i)\)</span>.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\(|\boldsymbol{r}| \leq 1\)</span> with equality iff the state is pure.</p>
+<p>(c) What Bloch vector corresponds to the maximally mixed state <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{I}/2\)</span>?</p>
+<p><strong>5. Von Neumann Equation.</strong>
+The time evolution of the density matrix is governed by</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = [\hat{H}, \hat{\rho}]\]</div>
+<p>(a) Derive this equation from <span class="math notranslate nohighlight">\(\hat{\rho}(t) = \hat{U}(t)\hat{\rho}(0)\hat{U}^\dagger(t)\)</span> by differentiating.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}^2)\)</span> is conserved under unitary evolution. What does this imply — can unitary evolution turn a pure state into a mixed state?</p>
+<p><strong>6. Coherences and Classical Mixing.</strong>
+Consider two states: (i) the superposition <span class="math notranslate nohighlight">\(|+\rangle = (|0\rangle + |1\rangle)/\sqrt{2}\)</span>, and (ii) the 50-50 mixture <span class="math notranslate nohighlight">\(\hat{\rho}_{\rm mix} = (|0\rangle\langle 0| + |1\rangle\langle 1|)/2\)</span>.</p>
+<p>(a) Write the density matrices for both.</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span> for both. Explain the physical difference.</p>
+<p>(c) Why can’t any sequence of local measurements on state (ii) distinguish it from “I prepared either <span class="math notranslate nohighlight">\(|0\rangle\)</span> or <span class="math notranslate nohighlight">\(|1\rangle\)</span> with equal probability but forgot which”?</p>
+<p><strong>7. Energy Basis Representation.</strong>
+In the energy eigenbasis <span class="math notranslate nohighlight">\(\{|n\rangle\}\)</span>, write out the matrix elements of <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span> under evolution with time-independent <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Show that the diagonal elements (populations) are time-independent, while the off-diagonal elements (coherences) oscillate at frequency <span class="math notranslate nohighlight">\((E_n - E_m)/\hbar\)</span>. What happens to coherences when averaged over a long time?</p>
+<p><strong>8. Preparation and Equivalence.</strong>
+Two experimenters prepare qubits differently: Alice prepares <span class="math notranslate nohighlight">\(|0\rangle\)</span> or <span class="math notranslate nohighlight">\(|1\rangle\)</span> with probability 1/2 each; Bob prepares <span class="math notranslate nohighlight">\(|+\rangle = (|0\rangle+|1\rangle)/\sqrt{2}\)</span> or <span class="math notranslate nohighlight">\(|-\rangle = (|0\rangle-|1\rangle)/\sqrt{2}\)</span> with probability 1/2 each. Show that both ensembles give the same density matrix <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{I}/2\)</span>, and therefore no experiment can distinguish the two preparation procedures.</p>
 </section>
 </section>
 
@@ -856,7 +965,12 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-states-via-density-matrix">Pure States via Density Matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-pure-state-density-matrices">Properties of Pure-State Density Matrices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-states-and-ensembles">Mixed States and Ensembles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-valid-density-matrices">Properties of Valid Density Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-valid-density-matrices">Properties of Valid Density Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purity-and-the-trace-of-the-square">Purity and the Trace of the Square</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-purity-as-reciprocal">Alternative: Purity as Reciprocal</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-ambiguity">Ensemble Ambiguity</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition">Spectral Decomposition</a></li>
 </ul>
 </li>
@@ -866,6 +980,7 @@ Thus <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \text{Tr}(
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -903,7 +1018,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   
