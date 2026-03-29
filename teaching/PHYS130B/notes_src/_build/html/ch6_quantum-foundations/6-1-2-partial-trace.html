@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,12 +521,19 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-trace-definition-and-computation">Partial Trace Definition and Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-trace-definition-and-computation">Partial Trace Definition and Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-partial-trace">Properties of Partial Trace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-vs-mixed-reduced-density-matrix">Pure vs. Mixed Reduced Density Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#answer-product-states">Answer: Product States</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#entangled-states-give-mixed-reductions">Entangled States Give Mixed Reductions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-schmidt-decomposition">Connection to Schmidt Decomposition</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purification">Purification</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#purification-ambiguity">Purification Ambiguity</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-mutual-information">Quantum Mutual Information</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-bipartite-states">Pure Bipartite States</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-bipartite-states">Mixed Bipartite States</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 </ul>
@@ -536,6 +543,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -552,13 +560,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the partial trace operation, and how does it extract the reduced density matrix of a subsystem?</p></li>
-<li><p>For a bipartite state <span class="math notranslate nohighlight">\(|\Psi\rangle_{AB}\)</span>, how do you compute <span class="math notranslate nohighlight">\(\rho_A = \text{Tr}_B(\rho_{AB})\)</span>?</p></li>
-<li><p>If the full state is pure (<span class="math notranslate nohighlight">\(\rho_{AB}\)</span> pure), is the reduced density matrix pure? When?</p></li>
-<li><p>What is purification? Can every mixed state be viewed as part of a pure state?</p></li>
-<li><p>How does quantum mutual information generalize classical mutual information to mixed states?</p></li>
-<li><p>What is the relationship between partial trace and entanglement? How do you detect entanglement from <span class="math notranslate nohighlight">\(\rho_A\)</span>?</p></li>
-<li><p>For an entangled bipartite state, how do the eigenvalues of <span class="math notranslate nohighlight">\(\rho_A\)</span> and <span class="math notranslate nohighlight">\(\rho_B\)</span> relate to Schmidt coefficients?</p></li>
+<li><p>What does the partial trace operation do? How do you extract the reduced density matrix of subsystem A from <span class="math notranslate nohighlight">\(\rho_{AB}\)</span>?</p></li>
+<li><p>If the combined system is in a pure state, when is the reduced density matrix also pure? What does this tell you about entanglement?</p></li>
+<li><p>What is purification? Can you always view a mixed state as part of a larger pure state?</p></li>
+<li><p>How does quantum mutual information measure correlations in a mixed state? What does it mean when mutual information is zero?</p></li>
+<li><p>Why do the eigenvalues of <span class="math notranslate nohighlight">\(\rho_A\)</span> and <span class="math notranslate nohighlight">\(\rho_B\)</span> relate to Schmidt coefficients? What does this connection tell you about the structure of entangled states?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -566,34 +572,47 @@ document.write(`
 <p>Imagine a quantum system composed of two entangled parts. If we care only about one part and wish to forget the other, we cannot simply ignore it—entanglement has woven their fates together. The partial trace is the mathematical knife that cuts away the other subsystem, leaving behind a reduced density matrix that faithfully captures all statistics measurable on the part we care about.</p>
 <section id="partial-trace-definition-and-computation">
 <h3>Partial Trace Definition and Computation<a class="headerlink" href="#partial-trace-definition-and-computation" title="Link to this heading">#</a></h3>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The partial trace “throws away” information about the environment. For a Bell state |Φ+⟩, compute ρ_A and ρ_B. Now consider a different purification of ρ_A = I/2 — does it give the same reduced state?</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Definition: Partial Trace</p>
 <p>Given a bipartite density matrix <span class="math notranslate nohighlight">\(\rho_{AB}\)</span> on <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span>, the <strong>partial trace over B</strong> removes the B subsystem while preserving all information accessible via measurements on A alone.</p>
 <p>The mathematical definition is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-definition">
-<span class="eqno">(359)<a class="headerlink" href="#equation-eq-parttrace-definition" title="Link to this equation">#</a></span>\[\text{Tr}_B(\rho_{AB}) = \sum_{j} (I_A \otimes \langle j|_B) \rho_{AB} (I_A \otimes |j\rangle_B)\]</div>
+<span class="eqno">(257)<a class="headerlink" href="#equation-eq-parttrace-definition" title="Link to this equation">#</a></span>\[
+\text{Tr}_B(\rho_{AB}) = \sum_{j} (I_A \otimes \langle j|_B) \rho_{AB} (I_A \otimes |j\rangle_B)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{|j\rangle_B\}\)</span> is an <strong>arbitrary orthonormal basis</strong> for <span class="math notranslate nohighlight">\(\mathcal{H}_B\)</span>. The result is <strong>independent of basis choice</strong> — this is a fundamental property of the partial trace.</p>
 <p>The result <span class="math notranslate nohighlight">\(\rho_A = \text{Tr}_B(\rho_{AB})\)</span> acts on <span class="math notranslate nohighlight">\(\mathcal{H}_A\)</span> alone with dimension <span class="math notranslate nohighlight">\(= \dim(\mathcal{H}_A)\)</span>.</p>
+</div>
 <p><strong>Matrix representation</strong>: In a product basis <span class="math notranslate nohighlight">\(\{|i\rangle_A |j\rangle_B\}\)</span>, the formula simplifies to summing over matching B indices:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-matrix-elements">
-<span class="eqno">(360)<a class="headerlink" href="#equation-eq-parttrace-matrix-elements" title="Link to this equation">#</a></span>\[(\rho_A)_{i,i'} = \text{Tr}_B(\rho_{AB})_{i,i'} = \sum_j \rho_{(i,j),(i',j)}\]</div>
+<span class="eqno">(258)<a class="headerlink" href="#equation-eq-parttrace-matrix-elements" title="Link to this equation">#</a></span>\[
+(\rho_A)_{i,i'} = \text{Tr}_B(\rho_{AB})_{i,i'} = \sum_j \rho_{(i,j),(i',j)}\]</div>
 <p>This extracts the “diagonal blocks” of the full density matrix.</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Calculation: Partial Trace Definition</p>
 <p><strong>Detailed computation:</strong></p>
 <p>Using matrix elements in a product basis <span class="math notranslate nohighlight">\(\{|i\rangle_A |j\rangle_B\}\)</span> of <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\rho_{AB} = \sum_{i,i',j,j'} \rho_{(i,j),(i',j')} |i\rangle\langle i'| \otimes |j\rangle\langle j'|\]</div>
+\[
+\rho_{AB} = \sum_{i,i',j,j'} \rho_{(i,j),(i',j')} |i\rangle\langle i'| \otimes |j\rangle\langle j'|\]</div>
 <p>Applying the partial trace formula:</p>
 <div class="math notranslate nohighlight">
-\[(\rho_A)_{i,i'} = \sum_j \rho_{(i,j),(i',j)}\]</div>
+\[
+(\rho_A)_{i,i'} = \sum_j \rho_{(i,j),(i',j)}\]</div>
 <p>The key insight: Trace operation over B means we set both B indices equal and sum them. This projects onto the block-diagonal structure in the product basis.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: Two-Qubit Product State</p>
 <p>Let <span class="math notranslate nohighlight">\(|\Psi\rangle_{AB} = |{\uparrow}\rangle_A \otimes |{\phi}\rangle_B\)</span> where <span class="math notranslate nohighlight">\(|{\phi}\rangle_B = c_0|{\uparrow}\rangle_B + c_1|{\downarrow}\rangle_B\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\rho_{AB} = |{\uparrow}\rangle\langle{\uparrow}|_A \otimes |{\phi}\rangle\langle{\phi}|_B = |{\uparrow}\rangle\langle{\uparrow}|_A \otimes \begin{pmatrix} |c_0|^2 &amp; c_0^*c_1 \\ c_1^*c_0 &amp; |c_1|^2 \end{pmatrix}_B\end{split}\]</div>
+\[\begin{split}
+\rho_{AB} = |{\uparrow}\rangle\langle{\uparrow}|_A \otimes |{\phi}\rangle\langle{\phi}|_B = |{\uparrow}\rangle\langle{\uparrow}|_A \otimes \begin{pmatrix} |c_0|^2 &amp; c_0^*c_1 \\ c_1^*c_0 &amp; |c_1|^2 \end{pmatrix}_B\end{split}\]</div>
 <p>Partial trace:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-product-example">
-<span class="eqno">(361)<a class="headerlink" href="#equation-eq-parttrace-product-example" title="Link to this equation">#</a></span>\[\rho_A = \text{Tr}_B(\rho_{AB}) = |{\uparrow}\rangle\langle{\uparrow}|_A \cdot \text{Tr}(|{\phi}\rangle\langle{\phi}|_B) = |{\uparrow}\rangle\langle{\uparrow}|_A\]</div>
+<span class="eqno">(259)<a class="headerlink" href="#equation-eq-parttrace-product-example" title="Link to this equation">#</a></span>\[
+\rho_A = \text{Tr}_B(\rho_{AB}) = |{\uparrow}\rangle\langle{\uparrow}|_A \cdot \text{Tr}(|{\phi}\rangle\langle{\phi}|_B) = |{\uparrow}\rangle\langle{\uparrow}|_A\]</div>
 <p>The reduced density matrix is <strong>pure</strong>: subsystem A is definite (spin-up).</p>
 </div>
 </div>
@@ -601,100 +620,139 @@ document.write(`
 <p class="admonition-title">Example: Two-Qubit Entangled State (Singlet)</p>
 <p>Let <span class="math notranslate nohighlight">\(|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|{\uparrow\downarrow}\rangle - |{\downarrow\uparrow}\rangle)\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\rho_{AB} = |\Psi^-\rangle\langle\Psi^-| = \frac{1}{2}\begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}\end{split}\]</div>
+\[\begin{split}
+\rho_{AB} = |\Psi^-\rangle\langle\Psi^-| = \frac{1}{2}\begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}\end{split}\]</div>
 <p>In block form (where rows/columns are ordered as <span class="math notranslate nohighlight">\(|{\uparrow\uparrow}\rangle, |{\uparrow\downarrow}\rangle, |{\downarrow\uparrow}\rangle, |{\downarrow\downarrow}\rangle\)</span>):</p>
 <p>Partial trace: Set <span class="math notranslate nohighlight">\(j = j'\)</span> and sum:</p>
 <div class="math notranslate nohighlight">
-\[(\rho_A)_{i,i'} = \sum_{j} (\rho_{AB})_{(i,j),(i',j)}\]</div>
+\[
+(\rho_A)_{i,i'} = \sum_{j} (\rho_{AB})_{(i,j),(i',j)}\]</div>
 <p>For <span class="math notranslate nohighlight">\(i=i'=0\)</span> (both up): <span class="math notranslate nohighlight">\(j \in \{0,1\}\)</span> (B can be up or down). <span class="math notranslate nohighlight">\((\rho_A)_{0,0} = (\rho_{AB})_{(0,0),(0,0)} + (\rho_{AB})_{(0,1),(0,1)} = 0 + 1/2 = 1/2\)</span>.</p>
 <p>For <span class="math notranslate nohighlight">\(i=i'=1\)</span> (both down): <span class="math notranslate nohighlight">\((\rho_A)_{1,1} = (\rho_{AB})_{(1,0),(1,0)} + (\rho_{AB})_{(1,1),(1,1)} = 1/2 + 0 = 1/2\)</span>.</p>
 <p>Off-diagonal: <span class="math notranslate nohighlight">\((\rho_A)_{0,1} = (\rho_{AB})_{(0,0),(1,0)} + (\rho_{AB})_{(0,1),(1,1)} = 0 + 0 = 0\)</span>.</p>
 <p>Result:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-singlet-result">
-<span class="eqno">(362)<a class="headerlink" href="#equation-eq-parttrace-singlet-result" title="Link to this equation">#</a></span>\[\begin{split}\rho_A = \frac{1}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}\end{split}\]</div>
+<span class="eqno">(260)<a class="headerlink" href="#equation-eq-parttrace-singlet-result" title="Link to this equation">#</a></span>\[\begin{split}
+\rho_A = \frac{1}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}\end{split}\]</div>
 <p>The reduced density matrix is <strong>maximally mixed</strong>, even though the full state is pure! Entanglement hides subsystem purity.</p>
 </div>
 <div class="docutils">
 <h3 class="rubric" id="physical-meaning-measurements-on-subsystem-a">Physical Meaning: Measurements on Subsystem A</h3>
+<div class="important admonition">
+<p class="admonition-title">Definition: Reduced Density Matrix</p>
 <p>For any observable <span class="math notranslate nohighlight">\(O_A\)</span> acting only on subsystem A, the expectation value is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-observable">
-<span class="eqno">(363)<a class="headerlink" href="#equation-eq-parttrace-observable" title="Link to this equation">#</a></span>\[\langle O_A \rangle = \text{Tr}(O_A \otimes I_B \cdot \rho_{AB}) = \text{Tr}(O_A \cdot \rho_A)\]</div>
-<p><strong>Consequence</strong>: The reduced density matrix <span class="math notranslate nohighlight">\(\rho_A\)</span> contains <strong>all information</strong> about subsystem A available from measurements on A alone. It is the <strong>complete description</strong> of A from an experimentalist’s perspective (without accessing B).</p>
-<h3 class="rubric" id="properties-of-partial-trace">Properties of Partial Trace</h3>
+<span class="eqno">(261)<a class="headerlink" href="#equation-eq-parttrace-observable" title="Link to this equation">#</a></span>\[
+\langle O_A \rangle = \text{Tr}(O_A \otimes I_B \cdot \rho_{AB}) = \text{Tr}(O_A \cdot \rho_A)\]</div>
+<p>The reduced density matrix <span class="math notranslate nohighlight">\(\rho_A\)</span> contains <strong>all information</strong> about subsystem A available from measurements on A alone. It is the <strong>complete description</strong> of A from an experimentalist’s perspective (without accessing B).</p>
+</div>
+</div>
+</section>
+<section id="properties-of-partial-trace">
+<h3>Properties of Partial Trace<a class="headerlink" href="#properties-of-partial-trace" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Linearity</strong>: <span class="math notranslate nohighlight">\(\text{Tr}_B(\alpha \rho + \beta \sigma) = \alpha \text{Tr}_B(\rho) + \beta \text{Tr}_B(\sigma)\)</span>.</p></li>
 <li><p><strong>Cyclic property</strong>: <span class="math notranslate nohighlight">\(\text{Tr}_B(\rho_{AB} \cdot (I_A \otimes O_B)) = \rho_A \cdot \text{Tr}(O_B)\)</span>. More generally: <span class="math notranslate nohighlight">\(\text{Tr}_B(O_A \otimes O_B \cdot \rho_{AB}) = O_A \text{Tr}_B(\rho_{AB} (I_A \otimes O_B^\dagger))\)</span>.</p></li>
 <li><p><strong>Trace preservation</strong>: <span class="math notranslate nohighlight">\(\text{Tr}(\rho_A) = \text{Tr}(\rho_{AB})\)</span>.</p></li>
 <li><p><strong>Positivity</strong>: If <span class="math notranslate nohighlight">\(\rho_{AB} \geq 0\)</span>, then <span class="math notranslate nohighlight">\(\rho_A = \text{Tr}_B(\rho_{AB}) \geq 0\)</span> (positive semidefinite).</p></li>
 </ol>
-<h3 class="rubric" id="pure-vs-mixed-reduced-density-matrix">Pure vs. Mixed Reduced Density Matrix</h3>
+</section>
+<section id="pure-vs-mixed-reduced-density-matrix">
+<h3>Pure vs. Mixed Reduced Density Matrix<a class="headerlink" href="#pure-vs-mixed-reduced-density-matrix" title="Link to this heading">#</a></h3>
 <p><strong>Key question</strong>: When is the reduced density matrix pure?</p>
-<h4 class="rubric" id="answer-product-states">Answer: Product States</h4>
+<section id="answer-product-states">
+<h4>Answer: Product States<a class="headerlink" href="#answer-product-states" title="Link to this heading">#</a></h4>
 <p>If <span class="math notranslate nohighlight">\(|\Psi\rangle_{AB} = |\psi\rangle_A \otimes |\phi\rangle_B\)</span> (product state), then:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-product-pure">
-<span class="eqno">(364)<a class="headerlink" href="#equation-eq-parttrace-product-pure" title="Link to this equation">#</a></span>\[\rho_A = \text{Tr}_B(|\psi\rangle\langle\psi| \otimes |\phi\rangle\langle\phi|) = |\psi\rangle\langle\psi|\]</div>
+<span class="eqno">(262)<a class="headerlink" href="#equation-eq-parttrace-product-pure" title="Link to this equation">#</a></span>\[
+\rho_A = \text{Tr}_B(|\psi\rangle\langle\psi| \otimes |\phi\rangle\langle\phi|) = |\psi\rangle\langle\psi|\]</div>
 <p>The reduced density matrix is <strong>pure</strong> (rank 1).</p>
-<h4 class="rubric" id="entangled-states-give-mixed-reductions">Entangled States Give Mixed Reductions</h4>
+</section>
+<section id="entangled-states-give-mixed-reductions">
+<h4>Entangled States Give Mixed Reductions<a class="headerlink" href="#entangled-states-give-mixed-reductions" title="Link to this heading">#</a></h4>
 <p>If <span class="math notranslate nohighlight">\(|\Psi\rangle_{AB}\)</span> is <strong>entangled</strong> (not a product), then <span class="math notranslate nohighlight">\(\rho_A\)</span> is <strong>mixed</strong> (rank <span class="math notranslate nohighlight">\(\geq 2\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-entangled-mixed">
-<span class="eqno">(365)<a class="headerlink" href="#equation-eq-parttrace-entangled-mixed" title="Link to this equation">#</a></span>\[\text{Tr}(\rho_A^2) &lt; 1 \quad \text{(unless special cases)}\]</div>
+<span class="eqno">(263)<a class="headerlink" href="#equation-eq-parttrace-entangled-mixed" title="Link to this equation">#</a></span>\[
+\text{Tr}(\rho_A^2) &lt; 1 \quad \text{(unless special cases)}\]</div>
 <p><strong>Intuition</strong>: Entanglement means subsystem A cannot be assigned a definite state independent of B. The reduced density matrix mixes over all possible states of A (conditioned on all possible states of B).</p>
-<h4 class="rubric" id="connection-to-schmidt-decomposition">Connection to Schmidt Decomposition</h4>
+</section>
+<section id="connection-to-schmidt-decomposition">
+<h4>Connection to Schmidt Decomposition<a class="headerlink" href="#connection-to-schmidt-decomposition" title="Link to this heading">#</a></h4>
+<div class="important admonition">
+<p class="admonition-title">Schmidt Decomposition and Reduced Density Matrix</p>
 <p>From Schmidt decomposition <span class="math notranslate nohighlight">\(|\Psi\rangle = \sum_k \lambda_k |u_k\rangle_A |v_k\rangle_B\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-schmidt-form">
-<span class="eqno">(366)<a class="headerlink" href="#equation-eq-parttrace-schmidt-form" title="Link to this equation">#</a></span>\[\rho_A = \text{Tr}_B(|\Psi\rangle\langle\Psi|) = \sum_k \lambda_k^2 |u_k\rangle_A \langle u_k|_A\]</div>
+<span class="eqno">(264)<a class="headerlink" href="#equation-eq-parttrace-schmidt-form" title="Link to this equation">#</a></span>\[
+\rho_A = \text{Tr}_B(|\Psi\rangle\langle\Psi|) = \sum_k \lambda_k^2 |u_k\rangle_A \langle u_k|_A\]</div>
 <p>The eigenvalues of <span class="math notranslate nohighlight">\(\rho_A\)</span> are the <strong>squared Schmidt coefficients</strong> <span class="math notranslate nohighlight">\(\lambda_k^2\)</span>.</p>
 <ul class="simple">
 <li><p>Schmidt rank = 1: Single nonzero eigenvalue (pure state); <span class="math notranslate nohighlight">\(\Psi\)</span> is product.</p></li>
 <li><p>Schmidt rank <span class="math notranslate nohighlight">\(\geq 2\)</span>: Multiple eigenvalues; <span class="math notranslate nohighlight">\(\rho_A\)</span> is mixed; <span class="math notranslate nohighlight">\(\Psi\)</span> is entangled.</p></li>
 </ul>
-<h3 class="rubric" id="purification">Purification</h3>
-<p><strong>Theorem</strong>: Every mixed state <span class="math notranslate nohighlight">\(\rho_A\)</span> acting on <span class="math notranslate nohighlight">\(\mathcal{H}_A\)</span> can be viewed as the reduced density matrix of a pure state:</p>
+</div>
+</section>
+</section>
+<section id="purification">
+<h3>Purification<a class="headerlink" href="#purification" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Purification Theorem</p>
+<p>Every mixed state <span class="math notranslate nohighlight">\(\rho_A\)</span> acting on <span class="math notranslate nohighlight">\(\mathcal{H}_A\)</span> can be viewed as the reduced density matrix of a pure state:</p>
 <div class="math notranslate nohighlight">
-\[|\Psi\rangle_{A\text{Ref}} \in \mathcal{H}_A \otimes \mathcal{H}_\text{Ref}\]</div>
+\[
+|\Psi\rangle_{A\text{Ref}} \in \mathcal{H}_A \otimes \mathcal{H}_\text{Ref}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\dim(\mathcal{H}_\text{Ref}) \geq \text{rank}(\rho_A)\)</span>. This is called a <strong>purification</strong> of <span class="math notranslate nohighlight">\(\rho_A\)</span>.</p>
+</div>
 <p>To construct a purification:</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation: Purification Construction</p>
 <p>Diagonalize <span class="math notranslate nohighlight">\(\rho_A = \sum_i \lambda_i |u_i\rangle\langle u_i|\)</span> (spectral decomposition). A purification is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-purification">
-<span class="eqno">(367)<a class="headerlink" href="#equation-eq-parttrace-purification" title="Link to this equation">#</a></span>\[|\Psi\rangle_{A\text{Ref}} = \sum_i \sqrt{\lambda_i} |u_i\rangle_A |i\rangle_\text{Ref}\]</div>
+<span class="eqno">(265)<a class="headerlink" href="#equation-eq-parttrace-purification" title="Link to this equation">#</a></span>\[
+|\Psi\rangle_{A\text{Ref}} = \sum_i \sqrt{\lambda_i} |u_i\rangle_A |i\rangle_\text{Ref}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{|i\rangle_\text{Ref}\}\)</span> is an orthonormal basis of reference (ancilla) space with dimension <span class="math notranslate nohighlight">\(\geq \text{rank}(\rho_A)\)</span>.</p>
 <p><strong>Check</strong>: <span class="math notranslate nohighlight">\(\rho_A = \text{Tr}_\text{Ref}(|\Psi\rangle\langle\Psi|) = \sum_i \lambda_i |u_i\rangle_A \langle u_i|_A\)</span>. ✓</p>
-</div>
 </div>
 <section id="purification-ambiguity">
 <h4>Purification Ambiguity<a class="headerlink" href="#purification-ambiguity" title="Link to this heading">#</a></h4>
 <p>A given mixed state has <strong>many</strong> purifications (not unique). Any two purifications <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> and <span class="math notranslate nohighlight">\(|\Psi'\rangle\)</span> differ by a unitary on the reference system.</p>
 <p><strong>Example</strong>: For maximally mixed qubit <span class="math notranslate nohighlight">\(\rho_A = I/2\)</span>, one purification is:</p>
 <div class="math notranslate nohighlight">
-\[|\Psi\rangle = \frac{1}{\sqrt{2}}(|{\uparrow}\rangle_A |0\rangle_\text{Ref} + |{\downarrow}\rangle_A |1\rangle_\text{Ref})\]</div>
+\[
+|\Psi\rangle = \frac{1}{\sqrt{2}}(|{\uparrow}\rangle_A |0\rangle_\text{Ref} + |{\downarrow}\rangle_A |1\rangle_\text{Ref})\]</div>
 <p>Another is:</p>
 <div class="math notranslate nohighlight">
-\[|\Psi'\rangle = \frac{1}{\sqrt{2}}(|\rightarrow\rangle_A |+\rangle_\text{Ref} + |\leftarrow\rangle_A |-\rangle_\text{Ref})\]</div>
+\[
+|\Psi'\rangle = \frac{1}{\sqrt{2}}(|\rightarrow\rangle_A |+\rangle_\text{Ref} + |\leftarrow\rangle_A |-\rangle_\text{Ref})\]</div>
 <p>Both reduce to <span class="math notranslate nohighlight">\(\rho_A = I/2\)</span>, but differ in entanglement structure with the reference.</p>
 </section>
 </section>
 <section id="quantum-mutual-information">
 <h3>Quantum Mutual Information<a class="headerlink" href="#quantum-mutual-information" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Definition: Quantum Mutual Information</p>
 <p>For a bipartite state <span class="math notranslate nohighlight">\(\rho_{AB}\)</span> (mixed or pure), the <strong>quantum mutual information</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-mutual-info-general">
-<span class="eqno">(368)<a class="headerlink" href="#equation-eq-parttrace-mutual-info-general" title="Link to this equation">#</a></span>\[I(A : B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})\]</div>
+<span class="eqno">(266)<a class="headerlink" href="#equation-eq-parttrace-mutual-info-general" title="Link to this equation">#</a></span>\[
+I(A : B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})\]</div>
 <p>where <span class="math notranslate nohighlight">\(S(\rho) = -\text{Tr}(\rho \ln \rho)\)</span> is von Neumann entropy.</p>
-<p><strong>Physical interpretation</strong>: Total correlations (classical + quantum) between A and B.</p>
-<section id="pure-bipartite-states">
-<h4>Pure Bipartite States<a class="headerlink" href="#pure-bipartite-states" title="Link to this heading">#</a></h4>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Physical Interpretation</p>
+<p>Total correlations (classical + quantum) between A and B.</p>
+</div>
+<p>####### Pure Bipartite States</p>
 <p>For a pure state <span class="math notranslate nohighlight">\(\rho_{AB} = |\Psi\rangle\langle\Psi|\)</span>, we have <span class="math notranslate nohighlight">\(S(\rho_{AB}) = 0\)</span>, so:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-mutual-pure">
-<span class="eqno">(369)<a class="headerlink" href="#equation-eq-parttrace-mutual-pure" title="Link to this equation">#</a></span>\[I(A : B) = S(\rho_A) + S(\rho_B) = 2 S(\rho_A)\]</div>
+<span class="eqno">(267)<a class="headerlink" href="#equation-eq-parttrace-mutual-pure" title="Link to this equation">#</a></span>\[
+I(A : B) = S(\rho_A) + S(\rho_B) = 2 S(\rho_A)\]</div>
 <p>by symmetry (<span class="math notranslate nohighlight">\(S(\rho_A) = S(\rho_B)\)</span> for pure bipartite states).</p>
 <p>For entangled states: <span class="math notranslate nohighlight">\(S(\rho_A) &gt; 0 \Rightarrow I(A:B) &gt; 0\)</span> (correlation).</p>
-</section>
 <section id="mixed-bipartite-states">
 <h4>Mixed Bipartite States<a class="headerlink" href="#mixed-bipartite-states" title="Link to this heading">#</a></h4>
 <p>Mutual information can be <strong>larger</strong> than for pure states if there are classical correlations:</p>
 <div class="math notranslate nohighlight">
-\[I(A : B) = E(\rho) + C(\rho)\]</div>
+\[
+I(A : B) = E(\rho) + C(\rho)\]</div>
 <p>where <span class="math notranslate nohighlight">\(E\)</span> (entanglement) and <span class="math notranslate nohighlight">\(C\)</span> (classical correlation) contributions add (though decomposition is not unique).</p>
 </section>
 <section id="properties">
@@ -711,11 +769,13 @@ document.write(`
 <h3>Conditional Density Matrix<a class="headerlink" href="#conditional-density-matrix" title="Link to this heading">#</a></h3>
 <p>Given a measurement outcome <span class="math notranslate nohighlight">\(j\)</span> on subsystem B, the <strong>conditional density matrix</strong> of A is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-conditional">
-<span class="eqno">(370)<a class="headerlink" href="#equation-eq-parttrace-conditional" title="Link to this equation">#</a></span>\[\rho_A^{|j} = \frac{(I_A \otimes |j\rangle\langle j|_B) \rho_{AB} (I_A \otimes |j\rangle\langle j|_B)}{p_j}\]</div>
+<span class="eqno">(268)<a class="headerlink" href="#equation-eq-parttrace-conditional" title="Link to this equation">#</a></span>\[
+\rho_A^{|j} = \frac{(I_A \otimes |j\rangle\langle j|_B) \rho_{AB} (I_A \otimes |j\rangle\langle j|_B)}{p_j}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p_j = \text{Tr}((I_A \otimes |j\rangle\langle j|_B) \rho_{AB})\)</span> is the probability of outcome <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <p>The unconditioned reduced state is the mixture:</p>
 <div class="math notranslate nohighlight" id="equation-eq-parttrace-mixture-conditional">
-<span class="eqno">(371)<a class="headerlink" href="#equation-eq-parttrace-mixture-conditional" title="Link to this equation">#</a></span>\[\rho_A = \sum_j p_j \rho_A^{|j}\]</div>
+<span class="eqno">(269)<a class="headerlink" href="#equation-eq-parttrace-mixture-conditional" title="Link to this equation">#</a></span>\[
+\rho_A = \sum_j p_j \rho_A^{|j}\]</div>
 <p><strong>Example</strong>: In the singlet state, if Bob measures spin-up on B, then Alice’s conditional state becomes <span class="math notranslate nohighlight">\(\rho_A^{|\uparrow\rangle} = |{\downarrow}\rangle\langle{\downarrow}|\)</span> (definite spin-down). But without knowing Bob’s result, Alice’s unconditioned state is <span class="math notranslate nohighlight">\(\rho_A = I/2\)</span> (maximally mixed).</p>
 </section>
 <section id="information-loss-and-reconstruction">
@@ -742,7 +802,26 @@ document.write(`
 <li><p><strong>Purification</strong>: Every mixed state <span class="math notranslate nohighlight">\(\rho_A\)</span> can be written as <span class="math notranslate nohighlight">\(\text{Tr}_\text{Ref}(|\Psi\rangle_{A\text{Ref}})\)</span> for some pure state (not unique).</p></li>
 <li><p><strong>Mutual information</strong> <span class="math notranslate nohighlight">\(I(A:B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})\)</span>: Total correlations; <span class="math notranslate nohighlight">\(2S(\rho_A)\)</span> for pure bipartite states.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="6-1-1-mixed-states.html"><span class="std std-doc">6.1.1 Mixed States</span></a></strong>: Density matrix description of quantum states</p></li>
+<li><p><strong><a class="reference internal" href="6-2-1-composite-systems.html"><span class="std std-doc">6.2.1 Composite Systems</span></a></strong>: Tensor product structure and reduced density matrices</p></li>
+<li><p><strong><a class="reference internal" href="6-1-3-entropy.html"><span class="std std-doc">6.1.3 Entropy</span></a></strong>: Information measures and purity</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> Let <span class="math notranslate nohighlight">\(\rho_{AB} = |\Psi\rangle\langle\Psi|\)</span> where <span class="math notranslate nohighlight">\(|\Psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> is the Bell state. Compute the reduced density matrix <span class="math notranslate nohighlight">\(\rho_A = \mathrm{Tr}_B[\rho_{AB}]\)</span> explicitly. What is the physical interpretation of the result?</p>
+<p><strong>2.</strong> Show that for a product state <span class="math notranslate nohighlight">\(\rho_{AB} = \rho_A \otimes \rho_B\)</span>, the partial trace satisfies <span class="math notranslate nohighlight">\(\mathrm{Tr}_B[\rho_A \otimes \rho_B] = \rho_A \, \mathrm{Tr}[\rho_B] = \rho_A\)</span>.</p>
+<p><strong>3.</strong> Prove that if <span class="math notranslate nohighlight">\(\rho_{AB}\)</span> is a valid density matrix (Hermitian, positive semidefinite, unit trace), then <span class="math notranslate nohighlight">\(\rho_A = \mathrm{Tr}_B[\rho_{AB}]\)</span> is also a valid density matrix.</p>
+<p><strong>4.</strong> Consider a two-qubit system in the state <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha|00\rangle + \beta|01\rangle + \gamma|10\rangle + \delta|11\rangle\)</span> with <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 + |\gamma|^2 + |\delta|^2 = 1\)</span>. Write the full density matrix <span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span> and compute the partial trace <span class="math notranslate nohighlight">\(\rho_A\)</span>. Under what conditions on <span class="math notranslate nohighlight">\(\alpha, \beta, \gamma, \delta\)</span> is <span class="math notranslate nohighlight">\(\rho_A\)</span> a pure state?</p>
+<p><strong>5.</strong> The partial trace can be written as <span class="math notranslate nohighlight">\(\rho_A = \sum_j (\mathbf{1}_A \otimes \langle j|_B) \rho_{AB} (\mathbf{1}_A \otimes |j\rangle_B)\)</span> where <span class="math notranslate nohighlight">\(\{|j\rangle_B\}\)</span> is any orthonormal basis of system <span class="math notranslate nohighlight">\(B\)</span>. Show that the result is independent of the choice of basis <span class="math notranslate nohighlight">\(\{|j\rangle_B\}\)</span>.</p>
+<p><strong>6.</strong> If a measurement on subsystem <span class="math notranslate nohighlight">\(B\)</span> in the basis <span class="math notranslate nohighlight">\(\{|j\rangle_B\}\)</span> gives outcome <span class="math notranslate nohighlight">\(j\)</span> with probability <span class="math notranslate nohighlight">\(p_j\)</span>, show that the post-measurement state of <span class="math notranslate nohighlight">\(A\)</span> averaged over outcomes (if the outcome is not recorded) equals <span class="math notranslate nohighlight">\(\rho_A = \mathrm{Tr}_B[\rho_{AB}]\)</span>. This shows that the partial trace describes <span class="math notranslate nohighlight">\(A\)</span>’s state when <span class="math notranslate nohighlight">\(B\)</span> is measured but the result is discarded.</p>
+<p><strong>7.</strong> For the Werner state <span class="math notranslate nohighlight">\(\rho_{AB} = p |\Phi^+\rangle\langle\Phi^+| + (1-p)\frac{\mathbf{1}}{4}\)</span> (a mixture of the Bell state and the maximally mixed state), compute <span class="math notranslate nohighlight">\(\rho_A\)</span>. Show that <span class="math notranslate nohighlight">\(\rho_A = \mathbf{1}/2\)</span> for all <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>.</p>
+<p><strong>8.</strong> Given a tripartite state <span class="math notranslate nohighlight">\(\rho_{ABC}\)</span>, show that <span class="math notranslate nohighlight">\(\mathrm{Tr}_C[\mathrm{Tr}_B[\rho_{ABC}]] = \mathrm{Tr}_{BC}[\rho_{ABC}]\)</span>. That is, tracing out subsystems sequentially is equivalent to tracing them out simultaneously.</p>
 </section>
 </section>
 
@@ -811,12 +890,19 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-trace-definition-and-computation">Partial Trace Definition and Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-trace-definition-and-computation">Partial Trace Definition and Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-partial-trace">Properties of Partial Trace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-vs-mixed-reduced-density-matrix">Pure vs. Mixed Reduced Density Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#answer-product-states">Answer: Product States</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#entangled-states-give-mixed-reductions">Entangled States Give Mixed Reductions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-schmidt-decomposition">Connection to Schmidt Decomposition</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purification">Purification</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#purification-ambiguity">Purification Ambiguity</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-mutual-information">Quantum Mutual Information</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-bipartite-states">Pure Bipartite States</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-bipartite-states">Mixed Bipartite States</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 </ul>
@@ -826,6 +912,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -863,7 +950,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

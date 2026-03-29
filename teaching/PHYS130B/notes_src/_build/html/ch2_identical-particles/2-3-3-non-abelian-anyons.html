@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,8 +522,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-them-non-abelian">What Makes Them Non-Abelian?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-non-abelian">Why “Non-Abelian”?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-braid-group-and-non-commutativity">The Braid Group and Non-Commutativity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-information-storage-and-computation">Quantum Information Storage and Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-non-abelian-anyons">Examples of Non-Abelian Anyons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-physical-implications">Summary and Physical Implications</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-rules">Fusion Rules</a><ul class="nav section-nav flex-column">
@@ -576,7 +578,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-discovery">Materials Discovery</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -593,12 +596,12 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What distinguishes non-abelian from abelian anyons?</p></li>
-<li><p>Explain fusion rules and their role in anyonic systems.</p></li>
-<li><p>What are braiding matrices? How do they encode non-abelian operations?</p></li>
-<li><p>Describe F-symbols (6j symbols) and their significance.</p></li>
-<li><p>How could non-abelian anyons be used for quantum computation? What is topological protection?</p></li>
-<li><p>What are Fibonacci anyons? Where might they be found physically?</p></li>
+<li><p>In 2D, particles are not restricted to being fermions or bosons—anyons can exist with fractional statistics. What changes about the physics compared to 3D?</p></li>
+<li><p>What distinguishes abelian from non-abelian anyons? How is this difference encoded in the braiding operations?</p></li>
+<li><p>Explain fusion rules for non-abelian anyons. What does it mean for two anyons to “fuse,” and why do the fusion outcomes matter?</p></li>
+<li><p>What are <span class="math notranslate nohighlight">\(F\)</span>-symbols (also called 6j symbols)? How do they relate different ways of associating three or more anyons?</p></li>
+<li><p>How could non-abelian anyons be harnessed for quantum computation? What makes topological protection superior to other error-correction schemes?</p></li>
+<li><p>Fibonacci anyons are conjectured to exist in certain fractional quantum Hall states, yet we have not definitively observed them. If they were proven not to exist, how would that change your assessment of topological quantum computing as a viable path forward?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -608,42 +611,99 @@ document.write(`
 <h3>What Makes Them Non-Abelian?<a class="headerlink" href="#what-makes-them-non-abelian" title="Link to this heading">#</a></h3>
 <p><strong>Non-abelian anyons</strong> are anyonic quasiparticles whose <strong>braiding operations</strong> don’t simply multiply the state by a phase factor. Instead, braiding can <strong>mix different quantum states</strong>.</p>
 <p>More precisely: when two non-abelian anyons exchange, the operation is represented by a <strong>unitary matrix</strong> acting on the Hilbert space of the system, not just a phase factor.</p>
-<div class="math notranslate nohighlight">
-\[\text{Abelian}: \quad R |\psi\rangle = e^{i\phi} |\psi\rangle\]</div>
-<div class="math notranslate nohighlight">
-\[\text{Non-abelian}: \quad R |\psi_1\rangle = U_{11} |\psi_1\rangle + U_{12} |\psi_2\rangle + \ldots\]</div>
-<p>where <span class="math notranslate nohighlight">\(U\)</span> is a unitary matrix with multiple non-zero entries.</p>
-</section>
-<section id="why-non-abelian">
-<h3>Why “Non-Abelian”?<a class="headerlink" href="#why-non-abelian" title="Link to this heading">#</a></h3>
-<p>The braiding operations form a <strong>representation of the braid group</strong> <span class="math notranslate nohighlight">\(B_N\)</span>. For abelian anyons, this representation is 1-dimensional (just phases). For non-abelian anyons, the representation is <strong>higher-dimensional</strong>.</p>
-<p>The composition of braiding operations doesn’t commute: <span class="math notranslate nohighlight">\(R_1 R_2 \neq R_2 R_1\)</span> in general. This non-commutativity is what makes the algebra “non-abelian.”</p>
-<div class="note admonition">
-<p class="admonition-title">Topological quantum computation</p>
-<p>Non-abelian anyons are the basis for topological quantum computation: quantum gates are implemented by braiding anyons, and the topological nature of braids makes the computation inherently fault-tolerant against local perturbations.</p>
-</div>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Key takeaway 1</p></li>
-<li><p>Key takeaway 2</p></li>
-<li><p>Key takeaway 3</p></li>
-</ul>
 <div class="important admonition">
-<p class="admonition-title">Important</p>
-<p>Non-Abelian Braid Group</p>
-<p>Non-abelian anyons obey non-abelian braid relations: BᵢBⱼ ≠ BⱼBᵢ in general. The braiding of multiple anyons can create unitary transformations in a protected subspace, enabling topological quantum computation.</p>
+<p class="admonition-title">Abelian vs Non-Abelian Exchange</p>
+<p><strong>Abelian anyons</strong> (phase anyons):</p>
+<div class="math notranslate nohighlight">
+\[
+R |\psi\rangle = \mathrm{e}^{\mathrm{i}\theta} |\psi\rangle\]</div>
+<p>Braiding produces only a global phase factor.</p>
+<p><strong>Non-abelian anyons</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+R |\psi_1\rangle = U_{11} |\psi_1\rangle + U_{12} |\psi_2\rangle + \ldots\]</div>
+<p>where <span class="math notranslate nohighlight">\(U\)</span> is a unitary matrix with multiple nonzero entries. Braiding mixes different quantum states.</p>
+</div>
+</section>
+<section id="the-braid-group-and-non-commutativity">
+<h3>The Braid Group and Non-Commutativity<a class="headerlink" href="#the-braid-group-and-non-commutativity" title="Link to this heading">#</a></h3>
+<p>The braiding operations form a <strong>representation of the braid group</strong> <span class="math notranslate nohighlight">\(B_N\)</span>. For <span class="math notranslate nohighlight">\(N\)</span> anyons, the braid group is generated by elementary transpositions <span class="math notranslate nohighlight">\(R_i\)</span> (exchange of anyons <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(i+1\)</span>).</p>
+<p>For <strong>abelian anyons</strong>, this representation is <strong>1-dimensional</strong>: each <span class="math notranslate nohighlight">\(R_i\)</span> acts as multiplication by a phase, and all <span class="math notranslate nohighlight">\(R_i\)</span> commute: <span class="math notranslate nohighlight">\([R_i, R_j] = 0\)</span>.</p>
+<p>For <strong>non-abelian anyons</strong>, the representation is <strong>higher-dimensional</strong>. The generators do NOT commute:</p>
+<div class="math notranslate nohighlight">
+\[
+R_i R_j \ne R_j R_i \quad (\text{for } |i-j|=1)\]</div>
+<div class="note admonition">
+<p class="admonition-title">Yang-Baxter Equation</p>
+<p>The consistency of sequential exchanges is governed by the <strong>Yang-Baxter equation</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{12} R_{13} R_{23} = R_{23} R_{13} R_{12}\]</div>
+<p>This ensures that different orderings of three-body exchanges give the same physical result (up to unitary equivalence). The Yang-Baxter equation is a fundamental consistency requirement for any anyon model.</p>
+</div>
+</section>
+<section id="quantum-information-storage-and-computation">
+<h3>Quantum Information Storage and Computation<a class="headerlink" href="#quantum-information-storage-and-computation" title="Link to this heading">#</a></h3>
+<div class="example admonition">
+<p class="admonition-title">Degenerate Ground State Subspace</p>
+<p>A pair of non-abelian anyons has a <strong>degenerate ground state</strong> subspace. For instance, two anyons of type <span class="math notranslate nohighlight">\(a\)</span> can fuse into different outcomes (fusion channels). The ground state manifold is spanned by these fusion possibilities.</p>
+<p>This degeneracy encodes quantum information: each pair of anyons can store approximately 1 qubit per fusion degree of freedom.</p>
+<p>Braiding operations act within this subspace, permuting the states without leaving the ground state manifold. Thus, braiding = quantum gate.</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Topological Quantum Computation</p>
+<p>Quantum gates are implemented by <strong>braiding non-abelian anyons</strong>. The topological nature of braids ensures that:</p>
+<ol class="arabic simple">
+<li><p>The quantum gates are <strong>protected</strong> against local perturbations (small deformations of braid paths don’t change the gate).</p></li>
+<li><p>Errors due to noise are exponentially suppressed in the separation between anyons.</p></li>
+<li><p>No active quantum error correction is needed; protection is intrinsic.</p></li>
+</ol>
+<p>This makes topological quantum computation inherently <strong>fault-tolerant</strong>.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Universal Quantum Computation</p>
+<p><strong>What is the minimum number of non-abelian anyons needed for universal quantum computation?</strong> A pair of non-abelian anyons can store 1 qubit of information in their degenerate ground-state subspace. Braiding operations rotate within this subspace but are constrained by the fusion rules.</p>
+<p>The Fibonacci anyon (which appears in some topological states of the fractional quantum Hall effect) has a 3-dimensional fusion space, permitting a rich set of braid operations. Is there a fundamental lower bound on the number of anyons needed to achieve a universal gate set? If so, what physical principle determines this bound, and does it depend on the specific anyon model?</p>
+</div>
+</section>
+<section id="examples-of-non-abelian-anyons">
+<h3>Examples of Non-Abelian Anyons<a class="headerlink" href="#examples-of-non-abelian-anyons" title="Link to this heading">#</a></h3>
+<div class="caution admonition">
+<p class="admonition-title">Majorana Fermions</p>
+<p>Proposals for creating non-abelian anyons include <strong>Majorana zero modes</strong> in topological superconductors and topological edge states.</p>
+<ul class="simple">
+<li><p>Majorana fermions are their own antiparticles (<span class="math notranslate nohighlight">\(\gamma^\dagger = \gamma\)</span>).</p></li>
+<li><p>Two Majorana zero modes can fuse into either vacuum or a regular fermion.</p></li>
+<li><p>Braiding Majorana anyons implements non-abelian gates.</p></li>
+</ul>
+<p>However, <strong>experimental confirmation of non-abelian braiding</strong> remains challenging. Definitive signatures require demonstrating that braiding phases are non-abelian, not just abelian.</p>
+</div>
+<div class="example admonition">
+<p class="admonition-title">Fibonacci Anyons</p>
+<p>In certain fractional quantum Hall states (filling factor <span class="math notranslate nohighlight">\(\nu = 12/5\)</span>), the relevant quasiparticles are <strong>Fibonacci anyons</strong>.</p>
+<ul class="simple">
+<li><p>Fusion rule: <span class="math notranslate nohighlight">\(a \times a = \mathbb{1} + a\)</span> (the identity plus another <span class="math notranslate nohighlight">\(a\)</span> anyon)</p></li>
+<li><p>This 3-dimensional fusion space permits a universal set of braiding gates.</p></li>
+<li><p>Fibonacci anyons are considered particularly promising for topological quantum computation.</p></li>
+</ul>
+</div>
+</section>
+<section id="summary-and-physical-implications">
+<h3>Summary and Physical Implications<a class="headerlink" href="#summary-and-physical-implications" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Non-Abelian Braiding</p>
+<ul class="simple">
+<li><p><strong>Non-abelian anyons</strong> do not commute under braiding: exchange operations act as unitary matrices on a degenerate subspace, not simple phase factors.</p></li>
+<li><p><strong>Braid group representation</strong>: <span class="math notranslate nohighlight">\(N\)</span> non-abelian anyons generate a <span class="math notranslate nohighlight">\((d_a)^{N-2}\)</span>-dimensional Hilbert space, where <span class="math notranslate nohighlight">\(d_a\)</span> is the quantum dimension. Braiding permutes basis states within this space.</p></li>
+<li><p><strong>Yang-Baxter consistency</strong>: Sequential exchanges must satisfy the Yang-Baxter equation: <span class="math notranslate nohighlight">\(R_{12} R_{13} R_{23} = R_{23} R_{13} R_{12}\)</span>.</p></li>
+<li><p><strong>Topological quantum computation</strong>: Gates are encoded as braid sequences. Topological protection makes gates robust against local perturbations.</p></li>
+<li><p><strong>Examples</strong>: Majorana fermions in topological superconductors, Fibonacci anyons in fractional quantum Hall states.</p></li>
+<li><p><strong>Experimental status</strong>: Direct observation of non-abelian braiding remains an open frontier.</p></li>
+</ul>
 </div>
 <div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>Topological Qubits</p>
-<p>Non-abelian anyons can encode quantum information in their collective braiding patterns. Crucially, this encoding is topological: small perturbations do not corrupt the information, offering built-in error protection.</p>
-</div>
-<div class="caution admonition">
-<p class="admonition-title">Caution</p>
-<p>Majorana Fermions</p>
-<p>Proposals for creating non-abelian anyons (e.g., Majorana zero modes in topological superconductors) remain experimentally challenging. Definitive signatures require demonstrating non-abelian braiding phases.</p>
+<p class="admonition-title">Topological Protection: Why It Works</p>
+<p>Braiding operations are defined by the <strong>topology</strong> of the particle worldlines, not the detailed geometry. Two braid sequences that differ only by a continuous deformation (without crossings) are topologically equivalent and give the same unitary transformation. This makes the quantum gates inherently stable: small perturbations in particle positions do not corrupt the gate unless they cross additional particle worldlines.</p>
 </div>
 </section>
 </section>
@@ -653,7 +713,8 @@ document.write(`
 <h3>Basic Concept<a class="headerlink" href="#basic-concept" title="Link to this heading">#</a></h3>
 <p>In a system with anyons, two anyons can <strong>fuse</strong> (come close together and combine) into a single anyon of a different type. The <strong>fusion rule</strong> specifies which fusion channels are allowed:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fusion-rule">
-<span class="eqno">(129)<a class="headerlink" href="#equation-eq-fusion-rule" title="Link to this equation">#</a></span>\[a \times b = \sum_c N_{ab}^c \, c\]</div>
+<span class="eqno">(124)<a class="headerlink" href="#equation-eq-fusion-rule" title="Link to this equation">#</a></span>\[
+a \times b = \sum_c N_{ab}^c \, c\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a, b\)</span> are anyon types (can be the same).</p></li>
@@ -665,11 +726,12 @@ document.write(`
 <p><strong>Fibonacci anyons</strong> are the simplest non-abelian anyons. There are two types: the <strong>identity</strong> <span class="math notranslate nohighlight">\(I\)</span> (vacuum) and the <strong>non-trivial</strong> anyon <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
 <p>Fusion rules:</p>
 <div class="math notranslate nohighlight">
-\[I \times I = I\]</div>
+\[
+I \times I = I\]</div>
 <div class="math notranslate nohighlight">
 \[I \times \tau = \tau\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-fibonacci-fusion">
-<span class="eqno">(130)<a class="headerlink" href="#equation-eq-fibonacci-fusion" title="Link to this equation">#</a></span>\[\tau \times \tau = I \oplus \tau\]</div>
+<span class="eqno">(125)<a class="headerlink" href="#equation-eq-fibonacci-fusion" title="Link to this equation">#</a></span>\[\tau \times \tau = I \oplus \tau\]</div>
 <p>The last rule is the key: two <span class="math notranslate nohighlight">\(\tau\)</span> anyons can fuse into either <span class="math notranslate nohighlight">\(I\)</span> (vacuum) or <span class="math notranslate nohighlight">\(\tau\)</span>. There are <strong>two channels</strong>.</p>
 </div>
 </section>
@@ -694,45 +756,54 @@ document.write(`
 <h3>The Key Data: F-Symbols<a class="headerlink" href="#the-key-data-f-symbols" title="Link to this heading">#</a></h3>
 <p>Beyond fusion rules, we need to specify <strong>how to rearrange fusion trees</strong>. This is encoded in the <strong>F-symbols</strong> (or <strong>6-j symbols</strong>):</p>
 <div class="math notranslate nohighlight">
-\[F^{d}_{abc}\]</div>
+\[
+F^{d}_{abc}\]</div>
 <p>These are unitary matrices that relate different ways of fusing three anyons <span class="math notranslate nohighlight">\(a, b, c\)</span> into <span class="math notranslate nohighlight">\(d\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\text{(fusion order 1:} (a \times b) \times c\text{)} \leftrightarrow \text{(fusion order 2:} a \times (b \times c)\text{)}\]</div>
+\[
+\text{(fusion order 1:} (a \times b) \times c\text{)} \leftrightarrow \text{(fusion order 2:} a \times (b \times c)\text{)}\]</div>
 </section>
 <section id="the-r-matrices-braiding">
 <h3>The R-Matrices: Braiding<a class="headerlink" href="#the-r-matrices-braiding" title="Link to this heading">#</a></h3>
 <p>The <strong>R-matrices</strong> (braiding matrices) specify how to exchange two anyons:</p>
 <div class="math notranslate nohighlight">
-\[R^c_{ab}\]</div>
+\[
+R^c_{ab}\]</div>
 <p>These are unitary matrices acting on fusion channels. When two anyons <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> exchange, the state in different fusion channels gets mixed by <span class="math notranslate nohighlight">\(R^c_{ab}\)</span>.</p>
 </section>
 <section id="consistency-yang-baxter-equation">
 <h3>Consistency: Yang-Baxter Equation<a class="headerlink" href="#consistency-yang-baxter-equation" title="Link to this heading">#</a></h3>
 <p>The F-symbols and R-matrices must satisfy consistency equations, most notably the <strong>Yang-Baxter equation</strong>:</p>
 <div class="math notranslate nohighlight">
-\[R_{12} R_{23} R_{12} = R_{23} R_{12} R_{23}\]</div>
+\[
+R_{12} R_{23} R_{12} = R_{23} R_{12} R_{23}\]</div>
 <p>This ensures that different ways of braiding multiple anyons give the same result.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: Fibonacci Anyons in Detail</p>
 <h3 class="rubric" id="fusion-rules-recap">Fusion Rules (Recap)</h3>
 <div class="math notranslate nohighlight">
-\[\tau \times \tau = I \oplus \tau\]</div>
+\[
+\tau \times \tau = I \oplus \tau\]</div>
 <p>Two <span class="math notranslate nohighlight">\(\tau\)</span> anyons can fuse to <span class="math notranslate nohighlight">\(I\)</span> or <span class="math notranslate nohighlight">\(\tau\)</span>—two orthogonal fusion channels.</p>
 <h3 class="rubric" id="quantum-dimension">Quantum Dimension</h3>
 <p>The <strong>quantum dimension</strong> of the <span class="math notranslate nohighlight">\(\tau\)</span> anyon is determined by:</p>
 <div class="math notranslate nohighlight">
-\[d_\tau^2 = \sum_c N_{\tau\tau}^c d_c^2\]</div>
+\[
+d_\tau^2 = \sum_c N_{\tau\tau}^c d_c^2\]</div>
 <p>With <span class="math notranslate nohighlight">\(N_{\tau\tau}^I = N_{\tau\tau}^\tau = 1\)</span> and <span class="math notranslate nohighlight">\(d_I = 1\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[d_\tau^2 = 1 + d_\tau^2\]</div>
+\[
+d_\tau^2 = 1 + d_\tau^2\]</div>
 <p>Wait—this is circular! The resolution: Fibonacci anyons satisfy</p>
 <div class="math notranslate nohighlight">
-\[d_\tau = \phi = \frac{1 + \sqrt{5}}{2} \approx 1.618 \quad \text{(golden ratio!)}\]</div>
+\[
+d_\tau = \phi = \frac{1 + \sqrt{5}}{2} \approx 1.618 \quad \text{(golden ratio!)}\]</div>
 <p>Indeed: <span class="math notranslate nohighlight">\(\phi^2 = \phi + 1\)</span>, so <span class="math notranslate nohighlight">\(\phi^2 = 1 + \phi^2\)</span> in the above (modulo subtlety with the <span class="math notranslate nohighlight">\(d_I\)</span> term).</p>
 <h3 class="rubric" id="r-matrix">R-Matrix</h3>
 <p>The braiding of two <span class="math notranslate nohighlight">\(\tau\)</span> anyons in their <span class="math notranslate nohighlight">\(\tau \times \tau \to \tau\)</span> channel gives phase:</p>
 <div class="math notranslate nohighlight">
-\[R^\tau_{\tau\tau} = e^{4\pi i/5}\]</div>
+\[
+R^\tau_{\tau\tau} = \mathrm{e}^{4\pi i/5}\]</div>
 <p>This is a rotation by <span class="math notranslate nohighlight">\(144°\)</span>.</p>
 <h3 class="rubric" id="why-fibonacci">Why Fibonacci?</h3>
 <p>The name “Fibonacci” comes from the fact that the quantum dimensions follow Fibonacci numbers in a generalized sense. The golden ratio naturally appears in their structure.</p>
@@ -745,7 +816,8 @@ document.write(`
 <h3>Qubits from Anyons<a class="headerlink" href="#qubits-from-anyons" title="Link to this heading">#</a></h3>
 <p>A <strong>topological qubit</strong> can be encoded in the fusion channel of two non-abelian anyons:</p>
 <div class="math notranslate nohighlight">
-\[|0\rangle_\text{topo} = |\text{anyon pair fuses to } I\rangle\]</div>
+\[
+|0\rangle_\text{topo} = |\text{anyon pair fuses to } I\rangle\]</div>
 <div class="math notranslate nohighlight">
 \[|1\rangle_\text{topo} = |\text{anyon pair fuses to } a \neq I\rangle\]</div>
 <p>The qubit is <strong>topological</strong>: encoded in a non-local property (fusion outcome) rather than a local quantum state.</p>
@@ -765,7 +837,7 @@ document.write(`
 <ul class="simple">
 <li><p>A qubit in the “fuses to <span class="math notranslate nohighlight">\(I\)</span>” state remains in that state as long as the two anyons are well-separated.</p></li>
 <li><p>To flip the qubit, an anyon would need to <strong>pass through infinity</strong> (a topologically nontrivial operation).</p></li>
-<li><p>Errors from local noise are exponentially suppressed (decay as <span class="math notranslate nohighlight">\(e^{-d/\xi}\)</span> where <span class="math notranslate nohighlight">\(d\)</span> is anyon separation and <span class="math notranslate nohighlight">\(\xi\)</span> is a correlation length).</p></li>
+<li><p>Errors from local noise are exponentially suppressed (decay as <span class="math notranslate nohighlight">\(\mathrm{e}^{-d/\xi}\)</span> where <span class="math notranslate nohighlight">\(d\)</span> is anyon separation and <span class="math notranslate nohighlight">\(\xi\)</span> is a correlation length).</p></li>
 </ul>
 <p><strong>Advantage</strong>: Quantum information is automatically protected without needing active error correction codes (though passive protection requires sufficient topological gap and separation).</p>
 </section>
@@ -949,8 +1021,8 @@ document.write(`
 <p>Search for natural or engineered materials with non-abelian anyonic excitations (topological superconductors, spin liquids, etc.).</p>
 </section>
 </section>
-<section id="id1">
-<h2>Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Non-abelian anyons</strong>: Braiding mixes different quantum states (R-matrices are non-diagonal).</p></li>
 <li><p><strong>Fusion rules</strong>: Specify allowed fusion outcomes and multiplicities; form algebraic structure.</p></li>
@@ -962,6 +1034,61 @@ document.write(`
 <li><p><strong>Challenge</strong>: Creating, isolating, and manipulating anyons experimentally remains open.</p></li>
 <li><p><strong>Promise</strong>: Fault-tolerant quantum computation without active error correction.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="2-3-2-abelian-anyons.html"><span class="std std-doc">2 3 2 Abelian Anyons</span></a></strong>: Abelian anyons and braiding in 2D</p></li>
+<li><p><strong><a class="reference internal" href="../ch4_phase-and-gauge/4-5-3-topology.html"><span class="std std-doc">4 5 3 Topology</span></a></strong>: Topological order and protected degeneracies</p></li>
+<li><p><strong><a class="reference internal" href="../ch6_quantum-foundations/6-4-3-error-correction.html"><span class="std std-doc">6 4 3 Error Correction</span></a></strong>: Topological quantum error correction</p></li>
+</ul>
+</div>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Non-abelian vs. Abelian Braiding (Conceptual)</strong></p>
+<p>Consider two anyons of type <span class="math notranslate nohighlight">\(a\)</span> that braid around each other. In an abelian system, the braiding operation is represented by multiplication by a phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\theta}\)</span>. For non-abelian anyons, the same operation is a unitary matrix <span class="math notranslate nohighlight">\(R^c_{aa}\)</span> in some multi-dimensional space.</p>
+<p>(a) What does the dimensionality of the R-matrix tell us about the system? Why can an abelian anyon’s braiding be represented by a single phase?</p>
+<p>(b) Suppose we have two non-abelian anyons with a 2D braiding space. Write down a general form for the R-matrix and explain what it means physically for the braiding operation to “mix” two quantum states.</p>
+<p>(c) Why is non-commutativity of braiding operations (<span class="math notranslate nohighlight">\(R_1 R_2 \neq R_2 R_1\)</span>) a necessary feature for topological quantum computation?</p>
+<p><strong>2. Fusion Channels and Quantum States (Conceptual)</strong></p>
+<p>Two Fibonacci <span class="math notranslate nohighlight">\(\tau\)</span> anyons can fuse according to the rule <span class="math notranslate nohighlight">\(\tau \times \tau = I \oplus \tau\)</span>.</p>
+<p>(a) Explain what the symbol <span class="math notranslate nohighlight">\(\oplus\)</span> means in this fusion rule. How many independent fusion outcomes are there, and what do they represent physically?</p>
+<p>(b) If we have three <span class="math notranslate nohighlight">\(\tau\)</span> anyons labeled 1, 2, and 3, can they all fuse into the vacuum state <span class="math notranslate nohighlight">\(I\)</span>? Justify your answer using the fusion rule.</p>
+<p>(c) In a topological qubit encoded in the fusion channel of two <span class="math notranslate nohighlight">\(\tau\)</span> anyons, why is the qubit information protected from local environmental noise?</p>
+<p><strong>3. Quantum Dimension and Fibonacci Numbers (Derivation)</strong></p>
+<p>The quantum dimension of a Fibonacci <span class="math notranslate nohighlight">\(\tau\)</span> anyon must satisfy:</p>
+<div class="math notranslate nohighlight">
+\[d_\tau^2 = d_I^2 + d_\tau^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_I = 1\)</span> is the quantum dimension of the identity.</p>
+<p>(a) This equation appears contradictory. Explain how the resolution involves recognizing that <span class="math notranslate nohighlight">\(\tau\)</span> can fuse to two different outcomes.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\(d_\tau = \phi = \frac{1+\sqrt{5}}{2}\)</span> (the golden ratio) solves the correct equation relating quantum dimensions and fusion multiplicities.</p>
+<p>(c) Verify that <span class="math notranslate nohighlight">\(\phi^2 = \phi + 1\)</span> and relate this property to why Fibonacci anyons are named after Fibonacci numbers.</p>
+<p><strong>4. Braiding as a Unitary Transformation (Short Derivation)</strong></p>
+<p>The R-matrix for Fibonacci <span class="math notranslate nohighlight">\(\tau\)</span> anyons in the <span class="math notranslate nohighlight">\(\tau \times \tau \to \tau\)</span> fusion channel is:</p>
+<div class="math notranslate nohighlight">
+\[R^\tau_{\tau\tau} = \mathrm{e}^{4\pi i/5}\]</div>
+<p>(a) What is the angle (in degrees) of this rotation? Express the result in the form <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\theta}\)</span>.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\((R^\tau_{\tau\tau})^5 = 1\)</span> (i.e., braiding the same pair 5 times returns to the identity). What is the physical interpretation?</p>
+<p>(c) How does this result relate to the universal quantum computation capabilities of Fibonacci anyons?</p>
+<p><strong>5. Fusion Trees and F-Symbols (Physical Reasoning)</strong></p>
+<p>Consider four Fibonacci <span class="math notranslate nohighlight">\(\tau\)</span> anyons. They can be fused in different orders:</p>
+<ul class="simple">
+<li><p>Order 1: <span class="math notranslate nohighlight">\((\tau_1 \times \tau_2) \times (\tau_3 \times \tau_4)\)</span></p></li>
+<li><p>Order 2: <span class="math notranslate nohighlight">\(((\tau_1 \times \tau_2) \times \tau_3) \times \tau_4\)</span></p></li>
+</ul>
+<p>(a) Draw the two different fusion trees (as binary trees) corresponding to these orders.</p>
+<p>(b) The F-symbols relate these different orderings. Why must the result of a fusion be <strong>independent</strong> of the order in which we combine anyons? (Hint: think about what it means physically for the system to be well-defined.)</p>
+<p>(c) The Yang-Baxter equation <span class="math notranslate nohighlight">\(R_{12}R_{23}R_{12} = R_{23}R_{12}R_{23}\)</span> is a consistency condition. In one sentence, explain why this equation must hold for any physically realizable system of non-abelian anyons.</p>
+<p><strong>6. Topological Qubits and Decoherence (Conceptual)</strong></p>
+<p>In conventional quantum computing, a qubit stored in a two-level atom decoheres over time due to environmental interactions. In topological quantum computing, qubits are encoded in the fusion outcome of two non-abelian anyons.</p>
+<p>(a) Why is a topological qubit more robust to decoherence than a qubit stored in a local degree of freedom?</p>
+<p>(b) Suppose two <span class="math notranslate nohighlight">\(\tau\)</span> anyons are separated by distance <span class="math notranslate nohighlight">\(d\)</span> and are in the fusion channel <span class="math notranslate nohighlight">\(|\tau \times \tau \to I\rangle\)</span>. What would need to happen for the qubit to flip to <span class="math notranslate nohighlight">\(|\tau \times \tau \to \tau\rangle\)</span>?</p>
+<p>(c) Explain briefly why the error rate for topological qubits is suppressed exponentially with the anyon separation, while conventional qubit error rates are roughly constant over time.</p>
+<p><strong>7. Physical Realization and Experimental Challenges (Research Investigation)</strong></p>
+<p>Non-abelian anyons could be realized in several platforms: fractional quantum Hall effect at <span class="math notranslate nohighlight">\(\nu = 5/2\)</span>, topological superconductors with Majorana fermions, or quantum spin liquids.</p>
+<p>(a) For each platform, briefly identify one key experimental challenge in creating and manipulating non-abelian anyons.</p>
+<p>(b) Why is <strong>measuring</strong> the result of topological quantum computation (i.e., extracting the final answer) more difficult than the computation itself?</p>
+<p>(c) Propose one alternative approach (besides direct real-world realization) for testing the properties and braiding rules of non-abelian anyons. What are its advantages and limitations compared to direct experiments?</p>
 </section>
 </section>
 
@@ -1031,8 +1158,10 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-them-non-abelian">What Makes Them Non-Abelian?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-non-abelian">Why “Non-Abelian”?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-braid-group-and-non-commutativity">The Braid Group and Non-Commutativity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-information-storage-and-computation">Quantum Information Storage and Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-non-abelian-anyons">Examples of Non-Abelian Anyons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-physical-implications">Summary and Physical Implications</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fusion-rules">Fusion Rules</a><ul class="nav section-nav flex-column">
@@ -1085,7 +1214,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-discovery">Materials Discovery</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -1123,7 +1253,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

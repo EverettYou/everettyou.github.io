@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -523,7 +523,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#huygens-principle-the-foundation-of-wave-optics">Huygens’ Principle: The Foundation of Wave Optics</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elementary-wavelet-and-phase">Elementary Wavelet and Phase</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#in-an-inhomogeneous-medium">In an Inhomogeneous Medium</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inhomogeneous-media-optical-path-length">Inhomogeneous Media: Optical Path Length</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-refraction-from-huygens-principle">Deriving Refraction from Huygens’ Principle</a></li>
@@ -534,10 +534,10 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-eikonal-equation-connecting-waves-to-rays">The Eikonal Equation: Connecting Waves to Rays</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-huygens-to-fermat-the-stationary-phase-connection">From Huygens to Fermat: The Stationary Phase Connection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitative-connection-huygens-integral">Quantitative Connection: Huygens Integral</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -563,12 +563,22 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Huygens’ principle reveals that light propagation is fundamentally about superposition of wavelets, each carrying a phase proportional to optical path length. In the high-frequency limit, constructive interference from paths of stationary optical path length produces Fermat’s principle—the geometric optics emerges from wave physics.</p>
+<p>Huygens’ principle reveals that light propagation is fundamentally about superposition of wavelets, each carrying a phase proportional to optical path length. In the high-frequency limit, constructive interference from paths of stationary optical path length produces Fermat’s principle—geometric optics emerges from wave physics.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Secondary Wavelets and Destructive Interference</p>
+<p>Huygens principle says each wavefront point radiates secondary spherical wavelets. The new wavefront emerges from their superposition. Yet a subtle question arises: do all paths from the aperture to the observation point contribute equally?</p>
+<ul class="simple">
+<li><p>If every aperture element contributes a secondary wavelet with equal <em>amplitude</em>, most contributions would interfere destructively. Yet diffraction patterns show sharp maxima, not averaging. How does interference select certain paths over others?</p></li>
+<li><p>In single-slit diffraction, does the edge of the aperture (abrupt boundary) create a discontinuity in secondary wavelets? Can Huygens principle handle sharp edges rigorously, or must we smooth them?</p></li>
+<li><p>The stationary phase approximation later in this chapter says only paths near the classical (stationary) path dominate. Is this the same selection mechanism as Huygens’ destructive interference, just viewed differently?</p></li>
+<li><p>For a small aperture (width comparable to wavelength), can you predict the diffraction pattern using only Huygens principle plus superposition? What happens if the aperture is much smaller than the wavelength?</p></li>
+</ul>
+</div>
 <section id="huygens-principle-the-foundation-of-wave-optics">
 <h3>Huygens’ Principle: The Foundation of Wave Optics<a class="headerlink" href="#huygens-principle-the-foundation-of-wave-optics" title="Link to this heading">#</a></h3>
-<p><strong>Christiaan Huygens</strong> (1690) introduced a constructive principle for understanding wave propagation:</p>
+<p><strong>Christiaan Huygens</strong> (1690) introduced a constructive principle for understanding wave propagation.</p>
 <div class="important admonition">
-<p class="admonition-title">Huygens’ Principle</p>
+<p class="admonition-title">Key Result: Huygens’ Principle</p>
 <p>Each point on a wavefront acts as a source of <strong>secondary wavelets</strong>. These wavelets are spherical waves emanating from that point. The wavefront at a later time is the <strong>envelope</strong> (coherent superposition) of all these secondary wavelets.</p>
 </div>
 <p>This principle is not derived from Maxwell’s equations (which didn’t exist in Huygens’ time) but rather a geometric statement about how waves evolve. Yet it captures the essence of wave behavior.</p>
@@ -576,21 +586,33 @@ document.write(`
 <h4>Elementary Wavelet and Phase<a class="headerlink" href="#elementary-wavelet-and-phase" title="Link to this heading">#</a></h4>
 <p>Consider a point source on the wavefront at position <span class="math notranslate nohighlight">\(\boldsymbol{r}_0\)</span> at time <span class="math notranslate nohighlight">\(t=0\)</span>. It emits a spherical wave that reaches position <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-spherical-wave">
-<span class="eqno">(137)<a class="headerlink" href="#equation-eq-spherical-wave" title="Link to this equation">#</a></span>\[\psi(\boldsymbol{r}, t) \propto \frac{e^{i(k|\boldsymbol{r}-\boldsymbol{r}_0| - \omega t)}}{|\boldsymbol{r}-\boldsymbol{r}_0|}\]</div>
+<span class="eqno">(132)<a class="headerlink" href="#equation-eq-spherical-wave" title="Link to this equation">#</a></span>\[
+\psi(\boldsymbol{r}, t) \propto \frac{\mathrm{e}^{\mathrm{i}(k|\boldsymbol{r}-\boldsymbol{r}_0| - \omega t)}}{|\boldsymbol{r}-\boldsymbol{r}_0|}\]</div>
 <p>The <strong>phase</strong> of this wavelet is</p>
 <div class="math notranslate nohighlight" id="equation-eq-wavelet-phase">
-<span class="eqno">(138)<a class="headerlink" href="#equation-eq-wavelet-phase" title="Link to this equation">#</a></span>\[\Phi(\boldsymbol{r}, t) = k|\boldsymbol{r}-\boldsymbol{r}_0| - \omega t = \frac{2\pi}{\lambda}|\boldsymbol{r}-\boldsymbol{r}_0| - 2\pi f t\]</div>
+<span class="eqno">(133)<a class="headerlink" href="#equation-eq-wavelet-phase" title="Link to this equation">#</a></span>\[
+\Phi(\boldsymbol{r}, t) = k|\boldsymbol{r}-\boldsymbol{r}_0| - \omega t = \frac{2\pi}{\lambda}|\boldsymbol{r}-\boldsymbol{r}_0| - 2\pi f t\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda = 2\pi/k\)</span> is the wavelength and <span class="math notranslate nohighlight">\(f = \omega/(2\pi)\)</span> is the frequency. The distance traveled is <span class="math notranslate nohighlight">\(|\boldsymbol{r}-\boldsymbol{r}_0|\)</span>, and the phase accumulated is proportional to this distance (in units of wavelength).</p>
 </section>
-<section id="in-an-inhomogeneous-medium">
-<h4>In an Inhomogeneous Medium<a class="headerlink" href="#in-an-inhomogeneous-medium" title="Link to this heading">#</a></h4>
+<section id="inhomogeneous-media-optical-path-length">
+<h4>Inhomogeneous Media: Optical Path Length<a class="headerlink" href="#inhomogeneous-media-optical-path-length" title="Link to this heading">#</a></h4>
 <p>When light propagates through a medium with varying refractive index <span class="math notranslate nohighlight">\(n(\boldsymbol{r})\)</span>, the <strong>optical path length</strong> from <span class="math notranslate nohighlight">\(\boldsymbol{r}_0\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-optical-path-length">
-<span class="eqno">(139)<a class="headerlink" href="#equation-eq-optical-path-length" title="Link to this equation">#</a></span>\[L(\boldsymbol{r}_0 \to \boldsymbol{r}) = \int_{\boldsymbol{r}_0}^{\boldsymbol{r}} n(\boldsymbol{r}') \, ds'\]</div>
+<span class="eqno">(134)<a class="headerlink" href="#equation-eq-optical-path-length" title="Link to this equation">#</a></span>\[
+L(\boldsymbol{r}_0 \to \boldsymbol{r}) = \int_{\boldsymbol{r}_0}^{\boldsymbol{r}} n(\boldsymbol{r}') \, \mathrm{d}s'\]</div>
 <p>where <span class="math notranslate nohighlight">\(ds'\)</span> is the arc length along the path. The phase accumulated is</p>
 <div class="math notranslate nohighlight" id="equation-eq-optical-path-phase">
-<span class="eqno">(140)<a class="headerlink" href="#equation-eq-optical-path-phase" title="Link to this equation">#</a></span>\[\Phi = k L(\boldsymbol{r}_0 \to \boldsymbol{r}) - \omega t = \frac{2\pi}{\lambda_0} L(\boldsymbol{r}_0 \to \boldsymbol{r}) - 2\pi f t\]</div>
-<p>where <span class="math notranslate nohighlight">\(\lambda_0\)</span> is the <strong>vacuum wavelength</strong>. This is crucial: <strong>Huygens’ principle weights each secondary wavelet by its phase, which depends on optical path length</strong>.</p>
+<span class="eqno">(135)<a class="headerlink" href="#equation-eq-optical-path-phase" title="Link to this equation">#</a></span>\[
+\Phi = k L(\boldsymbol{r}_0 \to \boldsymbol{r}) - \omega t = \frac{2\pi}{\lambda_0} L(\boldsymbol{r}_0 \to \boldsymbol{r}) - 2\pi f t\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_0\)</span> is the <strong>vacuum wavelength</strong>. <strong>Crucial observation</strong>: Huygens’ principle weights each secondary wavelet by its phase, which depends on optical path length.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Result: Huygens-Fresnel Integral</p>
+<p>The amplitude at an observation point <span class="math notranslate nohighlight">\(B\)</span> is the superposition over all points on an intermediate wavefront or aperture:</p>
+<div class="math notranslate nohighlight" id="equation-eq-huygens-fresnel">
+<span class="eqno">(136)<a class="headerlink" href="#equation-eq-huygens-fresnel" title="Link to this equation">#</a></span>\[
+\psi_B = \frac{1}{\mathrm{i}\lambda} \int_S K(\boldsymbol{r}) \, \mathrm{e}^{\mathrm{i}kL(A \to \boldsymbol{r} \to B)} \, \mathrm{d}S\]</div>
+<p>where <span class="math notranslate nohighlight">\(S\)</span> is the unobstructed aperture surface, <span class="math notranslate nohighlight">\(L\)</span> is optical path length, and <span class="math notranslate nohighlight">\(K(\boldsymbol{r})\)</span> is an obliquity factor. This is a <strong>sum over paths weighted by phase</strong> proportional to optical path—the precursor to Feynman’s path integral.</p>
+</div>
 </section>
 </section>
 <section id="deriving-refraction-from-huygens-principle">
@@ -606,10 +628,28 @@ document.write(`
 <li><p>At point <span class="math notranslate nohighlight">\(A\)</span>: wavelet propagates a distance <span class="math notranslate nohighlight">\(d_A\)</span> into medium 2 in time <span class="math notranslate nohighlight">\(t_B\)</span>, so <span class="math notranslate nohighlight">\(d_A = (c/n_2) t_B = \ell n_1/n_2\)</span>.</p></li>
 <li><p>At point <span class="math notranslate nohighlight">\(B\)</span>: wavelet has just started propagating, so <span class="math notranslate nohighlight">\(d_B = 0\)</span>.</p></li>
 </ul>
-<p><strong>New wavefront</strong>: The envelope of secondary wavelets is a plane at angle <span class="math notranslate nohighlight">\(\theta_2\)</span> to the normal, where</p>
+<p><strong>New wavefront envelope</strong>: The envelope of secondary wavelets is a plane at angle <span class="math notranslate nohighlight">\(\theta_2\)</span> to the normal, where</p>
 <div class="math notranslate nohighlight" id="equation-eq-snell-law">
-<span class="eqno">(141)<a class="headerlink" href="#equation-eq-snell-law" title="Link to this equation">#</a></span>\[\sin\theta_2 = \frac{d_A}{\ell} = \frac{n_1}{n_2} \sin\theta_1\]</div>
-<p>This is <strong>Snell’s law of refraction</strong>, derived purely from geometry and Huygens’ principle.</p>
+<span class="eqno">(137)<a class="headerlink" href="#equation-eq-snell-law" title="Link to this equation">#</a></span>\[
+\sin\theta_2 = \frac{\mathrm{d}_A}{\ell} = \frac{n_1}{n_2} \sin\theta_1\]</div>
+<p>This is <strong>Snell’s law of refraction</strong>, derived purely from geometry and Huygens’ principle without needing Maxwell’s equations.</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">Derivation: Snell’s Law from Fermat’s Principle</p>
+<p>Fermat’s principle states that light follows the path for which the optical path length is stationary (extremal). Given a path from point <span class="math notranslate nohighlight">\(A\)</span> in medium 1 (refractive index <span class="math notranslate nohighlight">\(n_1\)</span>) to point <span class="math notranslate nohighlight">\(B\)</span> in medium 2 (refractive index <span class="math notranslate nohighlight">\(n_2\)</span>), crossing the interface at position <span class="math notranslate nohighlight">\(x\)</span>, the optical path length is</p>
+<div class="math notranslate nohighlight">
+\[L(x) = n_1\sqrt{d_1^2 + x^2} + n_2\sqrt{d_2^2 + (w-x)^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_1\)</span>, <span class="math notranslate nohighlight">\(d_2\)</span> are the perpendicular distances from <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> to the interface, and <span class="math notranslate nohighlight">\(w\)</span> is the separation between the perpendiculars.</p>
+<p>By Fermat’s principle, at the extremum:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}L}{dx} = 0\]</div>
+<p>Computing the derivative:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}L}{dx} = n_1 \frac{x}{\sqrt{d_1^2 + x^2}} - n_2 \frac{w-x}{\sqrt{d_2^2 + (w-x)^2}}\]</div>
+<p>At the extremum, this vanishes. Note that <span class="math notranslate nohighlight">\(\sin\theta_1 = x/\sqrt{d_1^2 + x^2}\)</span> and <span class="math notranslate nohighlight">\(\sin\theta_2 = (w-x)/\sqrt{d_2^2 + (w-x)^2}\)</span> are the angles of incidence and refraction. Therefore:</p>
+<div class="math notranslate nohighlight">
+\[n_1 \sin\theta_1 = n_2 \sin\theta_2\]</div>
+<p>This is <strong>Snell’s law</strong>, derived directly from Fermat’s principle using calculus of variations.</p>
+</div>
 </section>
 <section id="interference-and-diffraction">
 <h3>Interference and Diffraction<a class="headerlink" href="#interference-and-diffraction" title="Link to this heading">#</a></h3>
@@ -631,11 +671,12 @@ document.write(`
 <ol class="arabic simple">
 <li><p>The intensity near the shadow boundary oscillates (Fresnel fringes).</p></li>
 <li><p>Inside the geometric shadow, there is non-zero intensity from contributions outside the shadow.</p></li>
-<li><p>This is purely a <strong>phase interference effect</strong>—the geometric optics picture (straight-line rays) breaks down.</p></li>
+<li><p>This is purely a <strong>phase interference effect</strong>—the geometric optics picture breaks down.</p></li>
 </ol>
 <div class="example admonition">
-<p class="admonition-title">Poisson Spot (1826)</p>
-<p>When Fresnel’s diffraction theory predicted that light would appear at the <strong>center of the shadow of a circular disk</strong>, it seemed absurd. The physicist Poisson used this as an argument against wave theory. But experimentalist François Arago verified the prediction: there is indeed a bright spot at the center of the disk’s shadow. This “Poisson spot” was crucial evidence for the wave nature of light and demonstrated the power of Huygens’ principle.</p>
+<p class="admonition-title">Example: Poisson Spot (1826)</p>
+<p>When Fresnel’s diffraction theory predicted that light would appear at the <strong>center of the shadow of a circular disk</strong>, it seemed absurd. The physicist Poisson used this as an argument <em>against</em> wave theory. But experimentalist François Arago verified the prediction: there is indeed a bright spot at the center of the disk’s shadow.</p>
+<p>This “Poisson spot” was crucial evidence for the wave nature of light and demonstrated the power of Huygens’ principle. What seemed like a paradox—light inside the geometric shadow—is actually constructive interference of wavelets from the edge of the obstacle.</p>
 </div>
 </section>
 </section>
@@ -644,35 +685,41 @@ document.write(`
 <p>Maxwell’s equations describe electromagnetic waves in a medium with varying refractive index <span class="math notranslate nohighlight">\(n(\boldsymbol{r})\)</span>. For high-frequency waves (short wavelength relative to variations in <span class="math notranslate nohighlight">\(n\)</span>), we can use the <strong>geometric optics approximation</strong>.</p>
 <p><strong>Wave equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-wave-equation">
-<span class="eqno">(142)<a class="headerlink" href="#equation-eq-wave-equation" title="Link to this equation">#</a></span>\[\nabla^2 \boldsymbol{E} = \frac{n^2}{c^2} \frac{\partial^2 \boldsymbol{E}}{\partial t^2}\]</div>
+<span class="eqno">(138)<a class="headerlink" href="#equation-eq-wave-equation" title="Link to this equation">#</a></span>\[
+\nabla^2 \boldsymbol{E} = \frac{n^2}{c^2} \frac{\partial^2 \boldsymbol{E}}{\partial t^2}\]</div>
 <p><strong>WKB ansatz</strong>: Write the field as</p>
 <div class="math notranslate nohighlight" id="equation-eq-eikonal-ansatz">
-<span class="eqno">(143)<a class="headerlink" href="#equation-eq-eikonal-ansatz" title="Link to this equation">#</a></span>\[\boldsymbol{E}(\boldsymbol{r}, t) = \boldsymbol{E}_0(\boldsymbol{r}) \, e^{i(\psi(\boldsymbol{r}) - \omega t)}\]</div>
+<span class="eqno">(139)<a class="headerlink" href="#equation-eq-eikonal-ansatz" title="Link to this equation">#</a></span>\[
+\boldsymbol{E}(\boldsymbol{r}, t) = \boldsymbol{E}_0(\boldsymbol{r}) \, \mathrm{e}^{\mathrm{i}(\psi(\boldsymbol{r}) - \omega t)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r})\)</span> is the <strong>eikonal function</strong> (related to optical path length) and <span class="math notranslate nohighlight">\(\boldsymbol{E}_0\)</span> is a slowly-varying envelope.</p>
 <p>Substituting into Maxwell’s equations and keeping only the leading-order (high-frequency) terms, we obtain the <strong>eikonal equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eikonal-equation">
-<span class="eqno">(144)<a class="headerlink" href="#equation-eq-eikonal-equation" title="Link to this equation">#</a></span>\[(\nabla\psi)^2 = n(\boldsymbol{r})^2\]</div>
-<p><strong>Light rays</strong> are the orthogonal trajectories to surfaces of constant eikonal, i.e., <span class="math notranslate nohighlight">\(\nabla \psi\)</span> points along the ray direction.</p>
+<span class="eqno">(140)<a class="headerlink" href="#equation-eq-eikonal-equation" title="Link to this equation">#</a></span>\[
+(\nabla\psi)^2 = n(\boldsymbol{r})^2\]</div>
+<p><strong>Light rays</strong> are the orthogonal trajectories to surfaces of constant eikonal, pointing in the direction of increasing eikonal.</p>
 <div class="note admonition">
-<p class="admonition-title">Ray trajectories from the eikonal</p>
+<p class="admonition-title">Physical Intuition: Ray Trajectories from the Eikonal</p>
 <p>A light ray follows the direction of increasing eikonal:</p>
 <div class="math notranslate nohighlight">
-\[\frac{d\boldsymbol{r}}{ds} = \frac{\nabla\psi}{|\nabla\psi|} = \frac{\nabla\psi}{n}\]</div>
+\[
+\frac{\mathrm{d}\boldsymbol{r}}{ds} = \frac{\nabla\psi}{|\nabla\psi|} = \frac{\nabla\psi}{n}\]</div>
 <p>where <span class="math notranslate nohighlight">\(s\)</span> is arc length along the ray. Differentiating the eikonal equation and using the above, we recover <strong>Newton’s law for light rays</strong> in an inhomogeneous medium:</p>
 <div class="math notranslate nohighlight" id="equation-eq-newtons-law-light">
-<span class="eqno">(145)<a class="headerlink" href="#equation-eq-newtons-law-light" title="Link to this equation">#</a></span>\[\frac{d}{ds}\left(n \frac{d\boldsymbol{r}}{ds}\right) = \nabla n\]</div>
+<span class="eqno">(141)<a class="headerlink" href="#equation-eq-newtons-law-light" title="Link to this equation">#</a></span>\[
+\frac{\mathrm{d}}{\mathrm{ds}}\left(n \frac{\mathrm{d}\boldsymbol{r}}{ds}\right) = \nabla n\]</div>
 <p>This shows that light is <strong>bent by the gradient of the refractive index</strong>, just as particles are bent by forces.</p>
 </div>
 </section>
 <section id="from-huygens-to-fermat-the-stationary-phase-connection">
 <h3>From Huygens to Fermat: The Stationary Phase Connection<a class="headerlink" href="#from-huygens-to-fermat-the-stationary-phase-connection" title="Link to this heading">#</a></h3>
 <p>Huygens’ principle appears to sum contributions from all possible paths (secondary wavelets from all points on the wavefront). Fermat’s principle selects only the extremal path. How are they related?</p>
-<p><strong>Huygens’ sum</strong>: Consider a wavefront propagating from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(B\)</span> through an inhomogeneous medium. Each point on an intermediate wavefront can be viewed as a secondary source. The amplitude at <span class="math notranslate nohighlight">\(B\)</span> is the superposition:</p>
+<p><strong>The limit connection</strong>: Consider wavefront propagation from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(B\)</span> through an inhomogeneous medium. Each point on an intermediate wavefront can be viewed as a secondary source. The amplitude at <span class="math notranslate nohighlight">\(B\)</span> is the superposition:</p>
 <div class="math notranslate nohighlight" id="equation-eq-huygens-sum">
-<span class="eqno">(146)<a class="headerlink" href="#equation-eq-huygens-sum" title="Link to this equation">#</a></span>\[\psi_B \propto \int \exp(i k L(A \to \text{intermediate point} \to B)) \, d(\text{intermediate point})\]</div>
-<p>where <span class="math notranslate nohighlight">\(L\)</span> is the optical path length. This is essentially an <strong>integral over all possible paths</strong>, weighted by phase <span class="math notranslate nohighlight">\(e^{iL}\)</span>.</p>
-<p><strong>Stationary phase argument</strong>: When the frequency is high (short wavelength, large <span class="math notranslate nohighlight">\(k\)</span>), the phase <span class="math notranslate nohighlight">\(kL\)</span> oscillates rapidly for paths far from an extremum. Only paths where <span class="math notranslate nohighlight">\(\delta L = 0\)</span> (Fermat’s principle) have slowly-varying phase and contribute constructively to the integral. All other paths cancel through destructive interference.</p>
-<p><strong>Therefore: Fermat’s principle emerges from Huygens’ principle in the high-frequency (short-wavelength) limit.</strong> Geometric optics is the <strong>classical limit of wave optics</strong>.</p>
+<span class="eqno">(142)<a class="headerlink" href="#equation-eq-huygens-sum" title="Link to this equation">#</a></span>\[
+\psi_B \propto \int \exp(\mathrm{i} k L(A \to \text{intermediate} \to B)) \, d(\text{intermediate})\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> is the optical path length. This is a sum over all possible paths, weighted by phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}kL}\)</span>.</p>
+<p><strong>Stationary phase argument</strong>: When the frequency is high (short wavelength, large <span class="math notranslate nohighlight">\(k\)</span>), the phase <span class="math notranslate nohighlight">\(kL\)</span> oscillates rapidly for paths far from an extremum. Only paths where <span class="math notranslate nohighlight">\(\delta L = 0\)</span> (Fermat’s principle) have slowly-varying phase and contribute constructively. All other paths cancel through destructive interference.</p>
+<p><strong>Result</strong>: Fermat’s principle emerges from Huygens’ principle in the high-frequency (short-wavelength) limit. <strong>Geometric optics is the classical limit of wave optics.</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Optics regime</p></th>
@@ -697,45 +744,57 @@ document.write(`
 </table>
 </div>
 </section>
-<section id="quantitative-connection-huygens-integral">
-<h3>Quantitative Connection: Huygens Integral<a class="headerlink" href="#quantitative-connection-huygens-integral" title="Link to this heading">#</a></h3>
-<p>The rigorous connection is the <strong>Huygens-Fresnel integral</strong>. For light propagating from a source at <span class="math notranslate nohighlight">\(A\)</span> to an observation point <span class="math notranslate nohighlight">\(B\)</span>, the amplitude is</p>
-<div class="math notranslate nohighlight" id="equation-eq-huygens-fresnel">
-<span class="eqno">(147)<a class="headerlink" href="#equation-eq-huygens-fresnel" title="Link to this equation">#</a></span>\[\psi_B = \frac{1}{i\lambda} \int_S K(\boldsymbol{r}) \, e^{ikL(A \to \boldsymbol{r} \to B)} \, dS\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p>The integral is over an aperture surface <span class="math notranslate nohighlight">\(S\)</span> (the unobstructed part of the intermediate wavefront).</p></li>
-<li><p><span class="math notranslate nohighlight">\(L\)</span> is the optical path length <span class="math notranslate nohighlight">\(L = \int n \, ds\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(K(\boldsymbol{r})\)</span> is an obliquity factor (slowly-varying).</p></li>
-</ul>
-<p><strong>Key observation</strong>: The phase is <span class="math notranslate nohighlight">\(e^{ikL} = e^{i L/\lambda_0}\)</span> where <span class="math notranslate nohighlight">\(\lambda_0 = 2\pi/k\)</span> is the wavelength. This is a <strong>sum over paths weighted by their phase</strong>—the precursor to Feynman’s path integral in quantum mechanics.</p>
-</section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Huygens’ principle</strong>: Secondary wavelets emanate from all points on a wavefront; their superposition gives the next wavefront.</p></li>
-<li><p><strong>Phase and optical path</strong>: Each wavelet carries phase proportional to optical path length <span class="math notranslate nohighlight">\(L = \int n \, ds\)</span>.</p></li>
-<li><p><strong>Interference and diffraction</strong>: Superposition of wavelets naturally produces interference fringes and diffraction patterns.</p></li>
-<li><p><strong>Eikonal equation</strong>: Governs ray trajectories; reduces to Newton’s law for light in non-uniform media.</p></li>
-<li><p><strong>Stationary phase limit</strong>: In the high-frequency limit, only paths with extremal optical path length survive—Fermat’s principle emerges from Huygens’ principle.</p></li>
-<li><p><strong>Path integral precursor</strong>: The Huygens-Fresnel integral is a sum over paths with phase weights—foundational to understanding Feynman’s path integral in quantum mechanics.</p></li>
+<li><p><strong>Phase and optical path</strong>: Each wavelet carries phase proportional to optical path length <span class="math notranslate nohighlight">\(L = \int n \, \mathrm{d}s\)</span>. Huygens-Fresnel integral is a sum over paths with phase weights.</p></li>
+<li><p><strong>Interference and diffraction</strong>: Superposition of wavelets naturally produces interference fringes and diffraction patterns, including the famous Poisson spot.</p></li>
+<li><p><strong>Eikonal equation</strong>: Governs ray trajectories in inhomogeneous media; reduces to Newton’s law for light rays.</p></li>
+<li><p><strong>Stationary phase limit</strong>: In the high-frequency limit, only paths with extremal optical path survive—Fermat’s principle emerges from Huygens’ principle through constructive/destructive interference.</p></li>
+<li><p><strong>Precursor to path integrals</strong>: The Huygens-Fresnel integral structure—a sum over paths with phase weights—is foundational to understanding Feynman’s path integral in quantum mechanics (§3.2).</p></li>
 </ul>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Snell’s Law from Fermat’s Principle via Calculus of Variations</p>
-<p>Fermat’s principle states that light follows the path for which the optical path length is stationary (extremal). Given a path from point <span class="math notranslate nohighlight">\(A\)</span> in medium 1 (refractive index <span class="math notranslate nohighlight">\(n_1\)</span>) to point <span class="math notranslate nohighlight">\(B\)</span> in medium 2 (refractive index <span class="math notranslate nohighlight">\(n_2\)</span>), crossing the interface at position <span class="math notranslate nohighlight">\(x\)</span>, the optical path length is</p>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}L(x) = n_1\sqrt{d_1^2 + x^2} + n_2\sqrt{d_2^2 + (w-x)^2}\\$$where $d_1$, $d_2$ are the perpendicular distances from $A$ and $B$ to the interface, and $w$ is the separation between the perpendiculars.\\By Fermat's principle, at the extremum:\end{aligned}\end{align} \]</div>
-<p>rac{dL}{dx} = 0</p>
-<div class="math notranslate nohighlight">
-\[Computing the derivative:\]</div>
-<p>rac{dL}{dx} = n_1
-rac{x}{\sqrt{d_1^2 + x^2}} - n_2
-rac{w-x}{\sqrt{d_2^2 + (w-x)^2}}</p>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}At the extremum, this vanishes. Note that $\sin	heta_1 = x/\sqrt{d_1^2 + x^2}$ and $\sin	heta_2 = (w-x)/\sqrt{d_2^2 + (w-x)^2}$ are the angles of incidence and refraction. Therefore:\\$$n_1 \sin	heta_1 = n_2 \sin	heta_2\end{aligned}\end{align} \]</div>
-<p>This is <strong>Snell’s law</strong>, derived directly from Fermat’s principle using calculus of variations. The statement <span class="math notranslate nohighlight">\(\delta L = 0\)</span> leads immediately to the law of refraction.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="3-1-1-classical-to-quantum.html"><span class="std std-doc">3 1 1 Classical To Quantum</span></a></strong>: Wave-particle duality and de Broglie relations</p></li>
+<li><p><strong><a class="reference internal" href="3-1-3-quantum-mechanics-as-optics.html"><span class="std std-doc">3 1 3 Quantum Mechanics As Optics</span></a></strong>: Quantum mechanics as a wave theory</p></li>
+<li><p><strong><a class="reference internal" href="3-2-1-path-integral-formulation.html"><span class="std std-doc">3 2 1 Path Integral Formulation</span></a></strong>: Path integral and Huygens principle</p></li>
+</ul>
 </div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> A plane wave with wavelength <span class="math notranslate nohighlight">\(\lambda\)</span> and refractive index <span class="math notranslate nohighlight">\(n_1\)</span> is incident on a boundary with a medium of refractive index <span class="math notranslate nohighlight">\(n_2\)</span>. Using Huygens’ principle, sketch the secondary wavelets originating from two adjacent points on the wavefront and show geometrically how the envelope of these wavelets yields the refracted wavefront. Derive Snell’s law <span class="math notranslate nohighlight">\(n_1 \sin\theta_1 = n_2 \sin\theta_2\)</span> from your construction.</p>
+<p><strong>2.</strong> A spherical wave emanates from a point source at <span class="math notranslate nohighlight">\(\boldsymbol{r}_0\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>, propagating through vacuum. Write the expression for the phase <span class="math notranslate nohighlight">\(\Phi(\boldsymbol{r}, t)\)</span> of the wavelet at position <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>. Now suppose the wave enters a slab of material with refractive index <span class="math notranslate nohighlight">\(n\)</span> (thickness <span class="math notranslate nohighlight">\(d\)</span>, boundaries perpendicular to the <span class="math notranslate nohighlight">\(z\)</span>-axis at <span class="math notranslate nohighlight">\(z=0\)</span> and <span class="math notranslate nohighlight">\(z=d\)</span>) embedded in vacuum. Sketch how the phase changes as the wave propagates through the slab and qualitatively describe the optical path length <span class="math notranslate nohighlight">\(L\)</span> vs. distance traveled <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p><strong>3.</strong> In Young’s double-slit experiment, two slits are separated by distance <span class="math notranslate nohighlight">\(a\)</span> and illuminated by plane waves of wavelength <span class="math notranslate nohighlight">\(\lambda\)</span>. At a point <span class="math notranslate nohighlight">\(P\)</span> on a screen distance <span class="math notranslate nohighlight">\(D\)</span> away (with <span class="math notranslate nohighlight">\(D \gg a\)</span>), the path difference from the two slits is <span class="math notranslate nohighlight">\(\Delta r \approx (a/D) y\)</span> where <span class="math notranslate nohighlight">\(y\)</span> is the vertical displacement of <span class="math notranslate nohighlight">\(P\)</span> from the center.</p>
+<ul class="simple">
+<li><p>(a) Find the condition for constructive interference at <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
+<li><p>(b) Find the condition for the first dark fringe.</p></li>
+<li><p>(c) If the wavelength were doubled, how would the fringe spacing change?</p></li>
+</ul>
+<p><strong>4.</strong> Optical path length in an inhomogeneous medium is defined as <span class="math notranslate nohighlight">\(L = \int n(\boldsymbol{r}') \, \mathrm{d}s'\)</span>. Consider a medium where <span class="math notranslate nohighlight">\(n(z) = 1 + \alpha z\)</span> for a small constant <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> and <span class="math notranslate nohighlight">\(0 &lt; z &lt; d\)</span>. A light ray starts at <span class="math notranslate nohighlight">\((x=0, z=0)\)</span> and ends at <span class="math notranslate nohighlight">\((x=d, z=d)\)</span>.</p>
+<ul class="simple">
+<li><p>(a) For a straight-line path <span class="math notranslate nohighlight">\(x = z\)</span>, compute the optical path length <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>(b) Explain qualitatively why light would bend away from the <span class="math notranslate nohighlight">\(x=z\)</span> line if it follows Fermat’s principle (extremal optical path).</p></li>
+</ul>
+<p><strong>5.</strong> The eikonal equation <span class="math notranslate nohighlight">\(|\nabla\psi|^2 = n(\boldsymbol{r})^2\)</span> governs the spatial phase profile of a high-frequency electromagnetic wave. In a uniform medium (<span class="math notranslate nohighlight">\(n=\)</span> constant), show that <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) = n \, \boldsymbol{k} \cdot \boldsymbol{r}\)</span> (where <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> is a constant wavevector) is a solution and interpret it physically.</p>
+<p><strong>6.</strong> Light rays are orthogonal to surfaces of constant eikonal. In a 2D medium where <span class="math notranslate nohighlight">\(n(x, y) = 1 + 0.1 \sin(2\pi x/L)\)</span> (slowly varying), sketch the expected shape of light rays emanating from a point source on the left, passing through the inhomogeneous region, and exiting on the right. Explain how the phase fronts (constant eikonal surfaces) relate to the ray directions.</p>
+<p><strong>7.</strong> Huygens’ principle summed over all paths with phase weights leads to the Huygens-Fresnel integral. Show that in the high-frequency limit (large <span class="math notranslate nohighlight">\(k = 2\pi/\lambda\)</span>), the integral is dominated by paths where the optical path length is stationary (i.e., satisfies Fermat’s principle). Why do paths far from the extremum contribute negligibly?</p>
+<p><strong>8.</strong> The Poisson spot (bright spot at the center of the shadow of a circular disk) is a prediction of diffraction theory. Using the concept of Fresnel zones:</p>
+<ul class="simple">
+<li><p>(a) Explain why the geometric optics prediction (no light in the shadow) is incorrect.</p></li>
+<li><p>(b) Sketch the first few Fresnel zones and explain when they constructively vs. destructively interfere at a point on the axis.</p></li>
+<li><p>(c) Qualitatively describe how the bright spot would change if the wavelength were decreased (shorter wavelength = smaller Fresnel zones).</p></li>
+</ul>
+<p><strong>9.</strong> Consider Snell’s law derived from Fermat’s principle (see the dropdown derivation in the lecture notes). Suppose a light ray must travel from point <span class="math notranslate nohighlight">\(A\)</span> in medium 1 (<span class="math notranslate nohighlight">\(n_1\)</span>) to point <span class="math notranslate nohighlight">\(B\)</span> in medium 2 (<span class="math notranslate nohighlight">\(n_2\)</span>), crossing the boundary at position <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<ul class="simple">
+<li><p>(a) Write the optical path length <span class="math notranslate nohighlight">\(L(x)\)</span> and its derivative <span class="math notranslate nohighlight">\(dL/dx\)</span>.</p></li>
+<li><p>(b) Show that setting <span class="math notranslate nohighlight">\(dL/dx = 0\)</span> yields Snell’s law.</p></li>
+<li><p>(c) Verify that the second derivative <span class="math notranslate nohighlight">\(d^2L/dx^2 &gt; 0\)</span>, confirming it is a minimum (not a maximum).</p></li>
+</ul>
+<p><strong>10.</strong> A plane wave with wavenumber <span class="math notranslate nohighlight">\(k\)</span> is incident on an abrupt boundary (refractive index step from <span class="math notranslate nohighlight">\(n_1\)</span> to <span class="math notranslate nohighlight">\(n_2\)</span>). Both Huygens’ principle and the eikonal equation predict refraction. Explain how each framework (wave vs. ray) captures the physics: Does Huygens’ principle involve rays or wave fronts? Does the eikonal equation describe rays or the phase profile? How do these two perspectives complement each other?</p>
 </section>
 </section>
 
@@ -806,7 +865,7 @@ rac{w-x}{\sqrt{d_2^2 + (w-x)^2}}</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#huygens-principle-the-foundation-of-wave-optics">Huygens’ Principle: The Foundation of Wave Optics</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elementary-wavelet-and-phase">Elementary Wavelet and Phase</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#in-an-inhomogeneous-medium">In an Inhomogeneous Medium</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inhomogeneous-media-optical-path-length">Inhomogeneous Media: Optical Path Length</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-refraction-from-huygens-principle">Deriving Refraction from Huygens’ Principle</a></li>
@@ -817,10 +876,10 @@ rac{w-x}{\sqrt{d_2^2 + (w-x)^2}}</p>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-eikonal-equation-connecting-waves-to-rays">The Eikonal Equation: Connecting Waves to Rays</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-huygens-to-fermat-the-stationary-phase-connection">From Huygens to Fermat: The Stationary Phase Connection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitative-connection-huygens-integral">Quantitative Connection: Huygens Integral</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -858,7 +917,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

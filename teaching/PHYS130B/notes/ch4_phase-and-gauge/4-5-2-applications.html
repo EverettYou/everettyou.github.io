@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,15 +522,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-for-spin-1-2-rotating-magnetic-field">Berry Phase for Spin-1/2 Rotating Magnetic Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-aharonov-bohm-effect-mead-longuet-higgins">Molecular Aharonov-Bohm Effect (Mead-Longuet-Higgins)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#born-oppenheimer-approximation-and-berry-phase-corrections">Born-Oppenheimer Approximation and Berry Phase Corrections</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-in-band-theory-and-topological-insulators">Berry Phase in Band Theory and Topological Insulators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chern-number-and-topological-classification">Chern Number and Topological Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observable-berry-phase-effects">Observable Berry Phase Effects</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#born-oppenheimer-approximation-and-conical-intersections">Born-Oppenheimer Approximation and Conical Intersections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aharonov-bohm-effect-as-berry-phase">The Aharonov-Bohm Effect as Berry Phase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hall-effect-and-chern-numbers">Quantum Hall Effect and Chern Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weak-localization-and-antilocalization">Weak Localization and Antilocalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-in-nmr-and-magnetic-resonance">Berry Phase in NMR and Magnetic Resonance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pancharatnam-phase-in-polarized-light">Pancharatnam Phase in Polarized Light</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -547,117 +547,251 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Compute Berry phase for spin-1/2 in a rotating magnetic field. Show that <span class="math notranslate nohighlight">\(\gamma = \pi(1 - \cos\theta)\)</span> for cone angle <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
-<li><p>What is the molecular (Mead-Longuet-Higgins) Aharonov-Bohm effect? How do nuclear dynamics induce Berry phase?</p></li>
-<li><p>Explain the Born-Oppenheimer approximation and how Berry phase corrections arise.</p></li>
-<li><p>How does Berry phase appear in band theory? What is the connection to orbital magnetization?</p></li>
-<li><p>Give examples where Berry phase is observable: neutron interference, photons, cold atoms.</p></li>
+<li><p>Compute the Berry phase for a spin-1/2 particle in a rotating magnetic field. Why is the result proportional to the solid angle enclosed by the path?</p></li>
+<li><p>What is the molecular Aharonov-Bohm effect, and why do conical intersections produce the most dramatic Berry phase signatures (like <span class="math notranslate nohighlight">\(\pm\pi\)</span> phase jumps)?</p></li>
+<li><p>Explain how the Born-Oppenheimer approximation usually decouples electronic and nuclear motion. When and why does Berry phase break this decoupling?</p></li>
+<li><p>Berry phase appears in band theory as a geometric property of occupied states. How does this connect to observable quantities like orbital magnetization and the anomalous Hall effect?</p></li>
+<li><p>Design an experiment to measure Berry phase using either neutrons, photons, or atoms. What challenges would you face in isolating the geometric phase from other effects?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>The Berry phase is not merely an academic curiosity—it manifests in spectacular ways: the rotation of polarized light in an optical fiber, the precession of a spin in a rotating magnetic field, and the fractional quantum Hall effect. This section explores diverse applications showing how geometric phases are ubiquitous and measurable. Each example reveals a principle: adiabatic evolution generates phase shifts determined by Hilbert space geometry, and these phases can be detected through quantum interference.</p>
-<div class="note admonition">
-<p class="admonition-title">Anholonomy: A Non-Integrable Effect</p>
-<p>When you move around a closed loop in parameter space, you cannot “undo” the geometric phase by reversing your path infinitesimally. This non-integrability is the hallmark of geometric effects.</p>
-</div>
-<section id="berry-phase-for-spin-1-2-rotating-magnetic-field">
-<h3>Berry Phase for Spin-1/2 Rotating Magnetic Field<a class="headerlink" href="#berry-phase-for-spin-1-2-rotating-magnetic-field" title="Link to this heading">#</a></h3>
-<p>The canonical example: a spin-1/2 particle in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t)\)</span> that rotates adiabatically around a fixed axis.</p>
-<p>For a field rotating around the <span class="math notranslate nohighlight">\(z\)</span>-axis with constant magnitude <span class="math notranslate nohighlight">\(B\)</span> and half-angle <span class="math notranslate nohighlight">\(\theta\)</span> relative to <span class="math notranslate nohighlight">\(z\)</span>:</p>
+<section id="born-oppenheimer-approximation-and-conical-intersections">
+<h3>Born-Oppenheimer Approximation and Conical Intersections<a class="headerlink" href="#born-oppenheimer-approximation-and-conical-intersections" title="Link to this heading">#</a></h3>
+<p>In molecules, the nuclear coordinates <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> change slowly compared to electronic time scales. The <strong>Born-Oppenheimer (BO) approximation</strong> treats electronic degrees of freedom as adiabatically following the nuclear motion.</p>
+<p>At each nuclear configuration <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>, the electrons occupy an instantaneous eigenstate <span class="math notranslate nohighlight">\(|n(\boldsymbol{R})\rangle\)</span> of the electronic Hamiltonian. As nuclei move, the electronic state acquires a Berry phase. This phase enters the nuclear equation of motion as a <strong>geometric vector potential</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{B}(t) = B(\sin\theta\cos(\Omega t), \sin\theta\sin(\Omega t), \cos\theta)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Omega \ll \omega_L = g B/(2m_e c)\)</span> is the adiabatic rotation frequency.</p>
-<p>The spin adiabatically tracks the instantaneous ground state, which points along <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>. As the field completes one rotation (<span class="math notranslate nohighlight">\(\Omega t = 0\)</span> to <span class="math notranslate nohighlight">\(2\pi\)</span>), the parameter space trace forms a closed loop.</p>
-<p>The Berry phase is:</p>
+\[\tilde{\mathcal{A}}_{nm}(\boldsymbol{R}) = \langle m(\boldsymbol{R})|\nabla_{\boldsymbol{R}}|n(\boldsymbol{R})\rangle\]</div>
+<p>The nuclear wavefunction on the <span class="math notranslate nohighlight">\(n\)</span>-th BO surface couples to the <span class="math notranslate nohighlight">\(m\)</span>-th surface through this off-diagonal coupling. When <span class="math notranslate nohighlight">\(E_n(\boldsymbol{R}) = E_m(\boldsymbol{R})\)</span> (a <strong>conical intersection</strong>), the BO approximation breaks down, and diabatic transitions become possible.</p>
+<div class="important admonition">
+<p class="admonition-title">Born-Oppenheimer Geometric Potential</p>
+<p>For a molecule undergoing adiabatic nuclear motion, the electronic Berry phase modifies the nuclear kinetic energy:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \frac{1}{2}\text{(solid angle enclosed)} = \frac{1}{2} \times 2\pi(1 - \cos\theta) = \pi(1 - \cos\theta)\]</div>
-<p><strong>Special cases</strong>:</p>
+\[\Delta V_{\text{geom}} = -\frac{\hbar^2}{2M}\left[(\nabla_{\boldsymbol{R}} \cdot \mathcal{A})^2 + 2\nabla_{\boldsymbol{R}} \cdot \mathcal{A}\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{A} = \mathrm{i}\langle n|\nabla_{\boldsymbol{R}}|n\rangle\)</span> is the diagonal Berry connection and <span class="math notranslate nohighlight">\(M\)</span> is the nuclear mass.</p>
+<p>Near <strong>conical intersections</strong> where two electronic surfaces cross (<span class="math notranslate nohighlight">\(E_n = E_m\)</span>), the off-diagonal Berry connection <span class="math notranslate nohighlight">\(\langle m|\nabla_{\boldsymbol{R}}|n\rangle\)</span> becomes singular, causing:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\theta = 0\)</span> (field rotates around itself): <span class="math notranslate nohighlight">\(\gamma = 0\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> (field precesses around equator): <span class="math notranslate nohighlight">\(\gamma = \pi\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\theta = \pi\)</span> (field precesses around pole): <span class="math notranslate nohighlight">\(\gamma = 2\pi\)</span> (which is equivalent to <span class="math notranslate nohighlight">\(\gamma = 0\)</span> modulo <span class="math notranslate nohighlight">\(2\pi\)</span>)</p></li>
+<li><p>Non-adiabatic transitions between electronic surfaces</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pm\pi\)</span> phase jumps in the electronic wavefunction</p></li>
+<li><p>Branching of reaction pathways in photochemistry</p></li>
 </ul>
-</section>
-<section id="molecular-aharonov-bohm-effect-mead-longuet-higgins">
-<h3>Molecular Aharonov-Bohm Effect (Mead-Longuet-Higgins)<a class="headerlink" href="#molecular-aharonov-bohm-effect-mead-longuet-higgins" title="Link to this heading">#</a></h3>
-<p>A remarkable application occurs in molecular physics when nuclei move adiabatically in a Born-Oppenheimer potential while electrons respond instantaneously.</p>
-<p><strong>Setup</strong>: A molecule with electronic Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}_e(\boldsymbol{R})\)</span> depending on nuclear positions <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>. As nuclei move slowly around a closed path <span class="math notranslate nohighlight">\(C\)</span> in configuration space:</p>
-<ol class="arabic simple">
-<li><p>Electrons remain in the instantaneous ground state <span class="math notranslate nohighlight">\(|\psi_0(\boldsymbol{R})\rangle\)</span></p></li>
-<li><p>The electronic wavefunction acquires a Berry phase: <span class="math notranslate nohighlight">\(\gamma = i\oint_C \langle\psi_0|\nabla_\boldsymbol{R}\psi_0\rangle \cdot d\boldsymbol{R}\)</span></p></li>
-<li><p>This phase is observable in molecular spectroscopy and scattering cross-sections</p></li>
-</ol>
-<p><strong>Famous example</strong>: Conical intersections in molecules (e.g., photochemical reactions). When two electronic energy surfaces cross, the Berry phase can be <span class="math notranslate nohighlight">\(\pm\pi\)</span> (a sign change!) depending on how the path encircles the intersection. This leads to observable effects in reaction dynamics.</p>
-</section>
-<section id="born-oppenheimer-approximation-and-berry-phase-corrections">
-<h3>Born-Oppenheimer Approximation and Berry Phase Corrections<a class="headerlink" href="#born-oppenheimer-approximation-and-berry-phase-corrections" title="Link to this heading">#</a></h3>
-<p>The <strong>Born-Oppenheimer (BO) approximation</strong> factorizes the total wavefunction as:</p>
-<div class="math notranslate nohighlight">
-\[\Psi(\boldsymbol{r}, \boldsymbol{R}) \approx \psi_e(\boldsymbol{r}; \boldsymbol{R})\, \phi_N(\boldsymbol{R})\]</div>
-<p>where electrons respond instantaneously to slowly-moving nuclei. When we account for the geometric phase acquired by electrons as nuclei move, the effective nuclear potential acquires a <strong>geometric correction</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\Delta V_{\text{Berry}} = -\frac{\hbar^2}{2M}[A^2 + 2\nabla \cdot \boldsymbol{A}]\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{A} = i\langle\psi_e|\nabla_\boldsymbol{R}\psi_e\rangle\)</span> is the Berry connection. This <strong>Berry curvature potential</strong> modifies the nuclear dynamics, especially near <strong>conical intersections</strong> where electronic states become degenerate. Near such intersections, the Berry phase can be <span class="math notranslate nohighlight">\(\pm\pi\)</span>, causing sign changes that fundamentally alter reaction pathways and observable molecular dynamics.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
-<p>The <strong>Born-Oppenheimer (BO) approximation</strong> assumes electrons respond instantaneously to nuclear motion:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\Psi(\boldsymbol{r}, \boldsymbol{R}) \approx \psi_e(\boldsymbol{r}; \boldsymbol{R})\\, \phi_N(\boldsymbol{R})\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\psi_e\)</span> is the electronic wavefunction and <span class="math notranslate nohighlight">\(\phi_N\)</span> is the nuclear wavefunction moving in the BO potential.</p>
-<p><strong>Quantum correction</strong>: The Schrödinger equation for nuclear motion becomes:</p>
-<div class="math notranslate nohighlight">
-\[\hat{T}_N\phi_N + [V_e(\boldsymbol{R}) + \Delta V_{\text{Berry}}(\boldsymbol{R})]\phi_N = E\phi_N\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Delta V_{\text{Berry}}\)</span> is a <strong>geometric potential</strong> arising from the Berry phase:</p>
-<div class="math notranslate nohighlight">
-\[\Delta V_{\text{Berry}} = -\frac{\hbar^2}{2M}[A^2 + 2\nabla \cdot \boldsymbol{A}]\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\boldsymbol{A} = i\langle\psi_e|\nabla_\boldsymbol{R}\psi_e\rangle\)</span> is the Berry connection.</p>
-<p>This <strong>Berry curvature potential</strong> can significantly affect nuclear dynamics near conical intersections.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Berry Phase in Molecular Spectroscopy</p>
+<p>The Born-Oppenheimer approximation for molecules introduces a Berry phase when nuclear coordinates trace a closed loop.</p>
+<p><strong>Determine</strong> for a diatomic molecule: when is this geometric phase observable in the ro-vibrational spectrum?</p>
+<p>What molecular symmetry operations would cause the adiabatic electronic state to acquire a non-trivial Berry phase?</p>
 </div>
 </section>
-<section id="berry-phase-in-band-theory-and-topological-insulators">
-<h3>Berry Phase in Band Theory and Topological Insulators<a class="headerlink" href="#berry-phase-in-band-theory-and-topological-insulators" title="Link to this heading">#</a></h3>
-<p>In condensed matter physics, electrons in a crystal form bands labeled by band index <span class="math notranslate nohighlight">\(n\)</span> and crystal momentum <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>. The eigenstate is <span class="math notranslate nohighlight">\(|n\boldsymbol{k}\rangle\)</span>.</p>
-<p>As <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> varies over the <strong>Brillouin zone</strong> (the fundamental domain of momentum space), the band eigenstates trace closed loops. The Berry phase acquired is:</p>
+<section id="the-aharonov-bohm-effect-as-berry-phase">
+<h3>The Aharonov-Bohm Effect as Berry Phase<a class="headerlink" href="#the-aharonov-bohm-effect-as-berry-phase" title="Link to this heading">#</a></h3>
+<p>In the original Aharonov-Bohm setup, an electron encircles a solenoid with magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span>. The electron’s wavefunction acquires phase:</p>
 <div class="math notranslate nohighlight">
-\[\gamma_n = i\oint_{\text{BZ}} \langle n\boldsymbol{k} | \nabla_\boldsymbol{k} n\boldsymbol{k} \rangle \cdot d\boldsymbol{k}\]</div>
-<p>The <strong>Berry curvature in momentum space</strong> is:</p>
+\[\Delta\phi = \frac{e\Phi}{\hbar c}\]</div>
+<p>This can be reinterpreted as a Berry phase in <em>position space</em>. The “parameter” is the electron’s position <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>, and the flux tube acts as a “background” that generates an effective Berry connection:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A}_{\text{eff}}(\boldsymbol{r}) = \frac\mathrm{e}{c\hbar}\boldsymbol{A}(\boldsymbol{r})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is the vector potential. The phase accumulated around a closed loop is:</p>
+<div class="math notranslate nohighlight">
+\[\oint \mathcal{A}_{\text{eff}} \cdot \mathrm{d}\boldsymbol{r} = \frac\mathrm{e}{\hbar c}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r} = \frac{e\Phi}{\hbar c}\]</div>
+<p>This unifies the quantum Hall effect, band geometry, and electromagnetic interactions under a single geometric framework.</p>
+<div class="important admonition">
+<p class="admonition-title">Aharonov-Bohm Phase as Geometric Effect</p>
+<p>The Aharonov-Bohm effect demonstrates that magnetic flux can produce a measurable phase shift even when the electron never enters the region of non-zero magnetic field.</p>
+<p><strong>Phase acquired by closed path around solenoid</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\phi_{\text{AB}} = \frac\mathrm{e}{c\hbar}\Phi_{\text{enclosed}} = \frac{e\Phi}{\hbar c}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the magnetic flux through the solenoid.</p>
+<p>This phase is:</p>
+<ul class="simple">
+<li><p><strong>Gauge-invariant</strong> for closed paths (absolute, not depending on choice of gauge)</p></li>
+<li><p><strong>Observable</strong> in double-slit interference: creates shift in fringe pattern</p></li>
+<li><p><strong>Purely quantum</strong>: no classical explanation (classical electron is unaffected by field it never enters)</p></li>
+<li><p><strong>Topological</strong>: depends only on total flux, not on field distribution</p></li>
+</ul>
+<p>The AB effect is a manifestation of Berry phase in position space, unifying electromagnetism with geometric quantum mechanics.</p>
+</div>
+</section>
+<section id="quantum-hall-effect-and-chern-numbers">
+<h3>Quantum Hall Effect and Chern Numbers<a class="headerlink" href="#quantum-hall-effect-and-chern-numbers" title="Link to this heading">#</a></h3>
+<p>When electrons move in a 2D crystal under a strong perpendicular magnetic field, they form <strong>Landau levels</strong>. In the absence of disorder, the Hall conductance is quantized:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{xy} = \frac{e^2}{h}\nu\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nu\)</span> is an integer (filling factor).</p>
+<p>In real crystalline systems without disorder, the conductance can be written as:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{xy} = \frac{e^2}{h}\sum_{\text{occupied bands}} C_n\]</div>
+<p>where <span class="math notranslate nohighlight">\(C_n\)</span> is the <strong>Chern number</strong> of band <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[C_n = \frac{1}{2\pi}\int_{\text{BZ}} \mathcal{F}_{xy}^{(n)}(\boldsymbol{k})\,\mathrm{d}^2k \in \mathbb{Z}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\mathcal{F}_{xy}^{(n)}\)</span> is the Berry curvature of band <span class="math notranslate nohighlight">\(n\)</span> in crystal momentum space <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>. The integer quantization is <strong>topological</strong> — it cannot change without closing the band gap.</p>
+<p>This is the <strong>TKNN formula</strong> (Thouless, Kohmoto, Nightingale, Nijs, 1982), linking Berry’s geometric phase to observable transport phenomena.</p>
+<div class="important admonition">
+<p class="admonition-title">TKNN Formula: Quantum Hall Conductance and Chern Numbers</p>
+<p>The integer quantum Hall effect is fundamentally a topological phenomenon. The quantized Hall conductivity is:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{xy} = \frac{e^2}{h} C_{\text{total}}\]</div>
+<p>where the <strong>Chern number</strong> of each occupied band is:</p>
+<div class="math notranslate nohighlight">
+\[C_n = \frac{1}{2\pi}\int_{\text{Brillouin Zone}} \mathrm{d}^2k \, \mathcal{F}_{n,xy}(\boldsymbol{k})\]</div>
+<p>with Berry curvature:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}_{n,xy}(\boldsymbol{k}) = -2\,\mathrm{Im}\sum_{m\neq n}\frac{\langle u_n|\partial_{k_x}\hat{H}|u_m\rangle\langle u_m|\partial_{k_y}\hat{H}|u_n\rangle}{(E_m - E_n)^2}\]</div>
+<p><strong>Key properties</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_n\)</span> is always an <strong>integer</strong> (topological invariant)</p></li>
+<li><p>Cannot change without closing the band gap</p></li>
+<li><p>Each filled Landau level contributes <span class="math notranslate nohighlight">\(C = 1\)</span></p></li>
+<li><p>Edge states = topologically protected conducting channels</p></li>
+</ul>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Berry Curvature in Momentum Space</p>
+<p>For a Bloch electron with band dispersion <span class="math notranslate nohighlight">\(E_n(\boldsymbol{k})\)</span> and Bloch states <span class="math notranslate nohighlight">\(|u_n(\boldsymbol{k})\rangle\)</span>, the Berry connection in <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>-space is:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A}_{n,\mu}(\boldsymbol{k}) = \mathrm{i}\langle u_n(\boldsymbol{k})|\partial_{k_\mu}u_n(\boldsymbol{k})\rangle\]</div>
+<p>The Berry curvature is:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}_{n,\mu\nu}(\boldsymbol{k}) = \partial_{k_\mu}\mathcal{A}_{n,\nu} - \partial_{k_\nu}\mathcal{A}_{n,\mu} - 2\,\mathrm{Im}\sum_{m\neq n}\frac{\langle u_n|\partial_{k_\mu}\hat{H}|u_m\rangle\langle u_m|\partial_{k_\nu}\hat{H}|u_n\rangle}{(E_m - E_n)^2}\]</div>
+<p>For a 2D system:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}_{n,xy}(\boldsymbol{k}) = -2\,\mathrm{Im}\sum_{m\neq n}\frac{\langle u_n|\partial_{k_x}\hat{H}|u_m\rangle\langle u_m|\partial_{k_y}\hat{H}|u_n\rangle}{(E_m - E_n)^2}\]</div>
+</div>
+</section>
+<section id="weak-localization-and-antilocalization">
+<h3>Weak Localization and Antilocalization<a class="headerlink" href="#weak-localization-and-antilocalization" title="Link to this heading">#</a></h3>
+<p>In mesoscopic systems (submicron conductors), quantum interference affects transport. Berry phase from spin-orbit coupling modifies these interference patterns:</p>
+<ul class="simple">
+<li><p><strong>Without spin-orbit</strong>: Constructive interference of time-reversed paths leads to <strong>weak localization</strong> (negative magnetoconductance).</p></li>
+<li><p><strong>With strong spin-orbit</strong>: Berry phase of <span class="math notranslate nohighlight">\(\pi\)</span> from a closed loop causes destructive interference, leading to <strong>antilocalization</strong> (positive magnetoconductance).</p></li>
+</ul>
+<p>The transition between these regimes is a direct probe of Berry phase effects in condensed matter.</p>
+</section>
+<section id="berry-phase-in-nmr-and-magnetic-resonance">
+<h3>Berry Phase in NMR and Magnetic Resonance<a class="headerlink" href="#berry-phase-in-nmr-and-magnetic-resonance" title="Link to this heading">#</a></h3>
+<p>In a rotating reference frame, nuclear spins experience an effective magnetic field. As the frame rotates, spins adiabatically follow the field direction. The Berry phase acquired modifies <strong>NMR line shifts</strong> and affects the observed spectrum.</p>
+<p>In particular, for coupled spins in a multidimensional NMR experiment, Berry phases from adiabatic pulses accumulate and can be detected as phase shifts in spectral peaks. This is used in sophisticated pulse sequences for structure determination.</p>
+<div class="example admonition">
+<p class="admonition-title">Example: Rotation of Spin-1/2</p>
+<p>A spin initially in state <span class="math notranslate nohighlight">\(|+z\rangle\)</span> experiences an RF field rotating in the <span class="math notranslate nohighlight">\(xy\)</span>-plane. The effective field precesses about the spin as the RF phase changes. If the RF amplitude is large (adiabatic), the spin stays aligned with the instantaneous effective field.</p>
+<p>After one complete RF phase cycle (the field returns to its original state), the spin acquires a Berry phase:</p>
+<div class="math notranslate nohighlight">
+\[\gamma = -\Omega/2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega\)</span> is the solid angle swept on the Bloch sphere. This shifts the NMR frequency by an amount proportional to the spin projection in the effective field direction.</p>
+</div>
+</section>
+<section id="pancharatnam-phase-in-polarized-light">
+<h3>Pancharatnam Phase in Polarized Light<a class="headerlink" href="#pancharatnam-phase-in-polarized-light" title="Link to this heading">#</a></h3>
+<p>Light polarization can be represented as a point on the <strong>Poincaré sphere</strong> (a 2-sphere where each point encodes the two components of the polarization state).</p>
+<p>When light passes through a sequence of polarization optics (retarders, rotators), its polarization state evolves around a path on the Poincaré sphere. At the end, if the state returns to its starting point (closed path), the light acquires a <strong>Pancharatnam phase</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\phi_P = \frac{\Omega}{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega\)</span> is the solid angle enclosed by the path.</p>
+<p>This is a manifestation of Berry phase for photons. It is observable as a measurable phase shift in interference experiments and is used in optical devices and quantum metrology.</p>
+<div class="important admonition">
+<p class="admonition-title">Geometric Phase in Different Physical Systems</p>
+<p>Berry phase (or geometric phase) appears universally across quantum systems, always related to the solid angle or curvature in an appropriate parameter space:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>System</p></th>
+<th class="head"><p>Parameter Space</p></th>
+<th class="head"><p>Phase</p></th>
+<th class="head"><p>Observable</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Spin-1/2 in rotating <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span></p></td>
+<td><p>Direction <span class="math notranslate nohighlight">\((\theta, \phi)\)</span> on unit sphere</p></td>
+<td><p><span class="math notranslate nohighlight">\(-\Omega/2\)</span></p></td>
+<td><p>Interference patterns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Molecules (BO approx)</p></td>
+<td><p>Nuclear coordinates <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\oint \mathcal{A} \cdot \mathrm{d}\boldsymbol{R}\)</span></p></td>
+<td><p>Reaction branching</p></td>
+</tr>
+<tr class="row-even"><td><p>Aharonov-Bohm effect</p></td>
+<td><p>Electron position around flux</p></td>
+<td><p><span class="math notranslate nohighlight">\(e\Phi/(\hbar c)\)</span></p></td>
+<td><p>Fringe shifts</p></td>
+</tr>
+<tr class="row-odd"><td><p>Photon polarization</p></td>
+<td><p>Poincaré sphere</p></td>
+<td><p><span class="math notranslate nohighlight">\(+\Omega/2\)</span></p></td>
+<td><p>Polarization rotation</p></td>
+</tr>
+<tr class="row-even"><td><p>Bloch electrons in crystals</p></td>
+<td><p>Crystal momentum <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span></p></td>
+<td><p>Chern number</p></td>
+<td><p>Hall conductance</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The universal feature: <strong>closed paths acquire gauge-invariant phases that depend only on geometry</strong>.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-5-1-berry-phase.html"><span class="std std-doc">4.5.1 Berry Phase</span></a></strong>: Geometric phase in cyclic evolution</p></li>
+<li><p><strong><a class="reference internal" href="4-5-3-topology.html"><span class="std std-doc">4.5.3 Topology</span></a></strong>: Topological invariants and robustness</p></li>
+<li><p><strong><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html"><span class="std std-doc">5.2.3 Applications</span></a></strong>: Adiabatic theorem and time-dependent perturbation theory</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Berry Phase for Different Cone Angles</strong></p>
+<p>A spin-1/2 particle is placed in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t)\)</span> that rotates adiabatically around the <span class="math notranslate nohighlight">\(z\)</span>-axis.</p>
+<p>(a) For a cone half-angle <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span>, calculate the Berry phase <span class="math notranslate nohighlight">\(\gamma\)</span> acquired after one complete rotation. Compare this to the case <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span>.</p>
+<p>(b) Explain physically why the Berry phase vanishes when <span class="math notranslate nohighlight">\(\theta = 0\)</span> but reaches a maximum as <span class="math notranslate nohighlight">\(\theta\)</span> increases toward <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>(c) Show that the Berry phase is periodic with period <span class="math notranslate nohighlight">\(2\pi\)</span> in the cone angle. What does this periodicity tell you about the geometric structure of the problem?</p>
+<hr class="docutils" />
+<p><strong>2. Geometric vs. Dynamical Phase</strong></p>
+<p>Consider a two-level system evolving adiabatically along a closed loop in parameter space.</p>
+<p>(a) Define the dynamical phase <span class="math notranslate nohighlight">\(\phi_d = -\frac{1}{\hbar}\int_0^T E_0(t)\mathrm{d}t\)</span> and the Berry phase <span class="math notranslate nohighlight">\(\gamma_B\)</span>. Why are these fundamentally different?</p>
+<p>(b) In the spin-1/2 rotating field example, if the rotation frequency is <span class="math notranslate nohighlight">\(\Omega\)</span> and the adiabatic condition requires <span class="math notranslate nohighlight">\(\Omega \ll \omega_L = gB/(2m_ec)\)</span>, estimate the ratio <span class="math notranslate nohighlight">\(\gamma_B/\phi_d\)</span> for a slow rotation (<span class="math notranslate nohighlight">\(\Omega/\omega_L = 0.01\)</span>). Comment on the observability of each phase.</p>
+<p>(c) Devise a thought experiment where you could measure both phases independently using quantum interference (e.g., via a Stern-Gerlach or Mach-Zehnder setup). What observable would distinguish them?</p>
+<hr class="docutils" />
+<p><strong>3. Conical Intersections and the Molecular Aharonov-Bohm Effect</strong></p>
+<p>In a molecule, two electronic energy surfaces <span class="math notranslate nohighlight">\(E_1(\boldsymbol{R})\)</span> and <span class="math notranslate nohighlight">\(E_2(\boldsymbol{R})\)</span> cross at a point <span class="math notranslate nohighlight">\(\boldsymbol{R}_0\)</span> (a conical intersection).</p>
+<p>(a) Near the crossing, the eigenstate of the lower surface acquires a Berry phase of <span class="math notranslate nohighlight">\(\pm\pi\)</span> depending on how the nuclear configuration path <span class="math notranslate nohighlight">\(C\)</span> encircles the intersection. Draw a diagram showing two paths with opposite winding numbers and label which acquires <span class="math notranslate nohighlight">\(+\pi\)</span> and which <span class="math notranslate nohighlight">\(-\pi\)</span>.</p>
+<p>(b) Explain why this <span class="math notranslate nohighlight">\(\pi\)</span> phase (sign change) is more dramatic than the Berry phase in the spin-1/2 case. How does it affect molecular reaction dynamics?</p>
+<p>(c) In photochemistry, when an excited electron decays back to the ground state near a conical intersection, the <span class="math notranslate nohighlight">\(\pm\pi\)</span> phase can cause branching into different reaction products. Sketch the amplitude for decay along two pathways and show how the phase shift changes their relative probability.</p>
+<hr class="docutils" />
+<p><strong>4. Born-Oppenheimer Corrections to Nuclear Motion</strong></p>
+<p>The nuclear wavefunction satisfies the Schrödinger equation with effective potential <span class="math notranslate nohighlight">\(V_e(\boldsymbol{R}) + \Delta V_{\text{Berry}}(\boldsymbol{R})\)</span>, where:</p>
+<div class="math notranslate nohighlight">
+\[\Delta V_{\text{Berry}} = -\frac{\hbar^2}{2M}[A^2 + 2\nabla \cdot \boldsymbol{A}]\]</div>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{A} = i\langle\psi_e|\nabla_\boldsymbol{R}\psi_e\rangle\)</span> the Berry connection.</p>
+<p>(a) If the Berry connection has magnitude <span class="math notranslate nohighlight">\(|A| \sim 1/\ell\)</span> where <span class="math notranslate nohighlight">\(\ell\)</span> is a molecular length scale (e.g., bond length), estimate the magnitude of the Berry potential in units of energy. For typical molecules (M ~ 10 u, <span class="math notranslate nohighlight">\(\ell \sim 1\)</span> Angstrom), is this correction large?</p>
+<p>(b) Near a conical intersection where the Berry curvature is large, argue that the correction term dominates and the nuclear motion is strongly affected. Why is this relevant for reaction rates?</p>
+<p>(c) The term <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A}\)</span> is non-zero near the conical intersection. Explain how this represents a “gauge potential” that modifies the kinetic energy of the nuclei, similar to how a vector potential modifies charged particle motion in a magnetic field.</p>
+<hr class="docutils" />
+<p><strong>5. Berry Curvature in the Brillouin Zone</strong></p>
+<p>In a crystalline solid, band eigenstates <span class="math notranslate nohighlight">\(|n\boldsymbol{k}\rangle\)</span> trace loops in the Brillouin zone. The Berry curvature is:</p>
 <div class="math notranslate nohighlight">
 \[\Omega_n(\boldsymbol{k}) = \nabla_\boldsymbol{k} \times \boldsymbol{A}_n(\boldsymbol{k})\]</div>
-<p>This curvature has profound consequences:</p>
-<ol class="arabic simple">
-<li><p><strong>Anomalous Hall effect</strong>: Electrons acquire velocity perpendicular to applied force due to Berry curvature</p></li>
-<li><p><strong>Orbital magnetization</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{m} \propto \int d\boldsymbol{k}\\, \Omega(\boldsymbol{k})\)</span></p></li>
-<li><p><strong>Topological protection</strong>: Non-trivial Berry curvature topology protects edge states in topological insulators</p></li>
-</ol>
-</section>
-<section id="chern-number-and-topological-classification">
-<h3>Chern Number and Topological Classification<a class="headerlink" href="#chern-number-and-topological-classification" title="Link to this heading">#</a></h3>
-<p>The <strong>Chern number</strong> quantifies the total “topological charge” of a band:</p>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{k}) = i\langle n\boldsymbol{k}|\nabla_\boldsymbol{k}n\boldsymbol{k}\rangle\)</span>.</p>
+<p>(a) For a 2D square lattice, the Berry curvature is non-zero in the interior of the Brillouin zone. Sketch the Brillouin zone and show where you expect the curvature to be largest (e.g., near band crossings, at high-symmetry points).</p>
+<p>(b) The Chern number <span class="math notranslate nohighlight">\(C = \frac{1}{2\pi}\int_{\text{BZ}}d^2k\,\Omega_n(\boldsymbol{k})\)</span> is always an integer. Explain why this is a topological invariant—that is, why it cannot change under small smooth deformations of the band structure.</p>
+<p>(c) For a system with Chern number <span class="math notranslate nohighlight">\(C = 1\)</span>, the anomalous Hall conductivity is <span class="math notranslate nohighlight">\(\sigma_H = Ce^2/h = e^2/h\)</span> (in units where <span class="math notranslate nohighlight">\(\hbar = 1\)</span>). Interpret this result: what does it mean that the Hall conductivity is quantized to <span class="math notranslate nohighlight">\(e^2/h\)</span> even without a magnetic field?</p>
+<hr class="docutils" />
+<p><strong>6. Integer Quantum Hall Effect from Berry Phase Perspective</strong></p>
+<p>In the quantum Hall regime, a 2D electron gas fills <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels completely (filling fraction <span class="math notranslate nohighlight">\(\nu = \)</span> integer).</p>
+<p>(a) Each filled Landau level contributes Chern number <span class="math notranslate nohighlight">\(C = 1\)</span>. Therefore, a state with <span class="math notranslate nohighlight">\(\nu\)</span> filled levels has total Chern number <span class="math notranslate nohighlight">\(C_{\text{total}} = \nu\)</span>. Show that the Hall conductivity is then:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}C_n = \frac{1}{2\pi}\int_{\text{BZ}}d^2k\\, \Omega_n(\boldsymbol{k})\end{split}\]</div>
-<p>For 2D systems, the Chern number is an integer, and it directly equals the number of protected edge states. This explains the <strong>integer quantum Hall effect</strong>: <span class="math notranslate nohighlight">\(\sigma_H = (C/e) \times e^2/h = C \times e^2/h\)</span>.</p>
-</section>
-<section id="observable-berry-phase-effects">
-<h3>Observable Berry Phase Effects<a class="headerlink" href="#observable-berry-phase-effects" title="Link to this heading">#</a></h3>
-<p><strong>1. Neutron interferometry</strong>: A spin-1/2 neutron passing through two paths in a rotating magnetic field setup experiences Berry phase. The phase shift creates detectable fringe displacement—<strong>direct measurement of geometric phase</strong>.</p>
-<p><strong>2. Photon polarization</strong>: A photon propagating through a twisted fiber undergoes Berry phase accumulation. The polarization state acquires topological phase independent of propagation details.</p>
-<p><strong>3. Cold atoms</strong>: Ultracold atoms in optical lattices can be engineered to have artificial gauge fields where Berry curvature can be directly measured from orbital angular momentum expectations.</p>
-<p><strong>4. Geometric phases in photochemistry</strong>: Molecular nonadiabatic dynamics near conical intersections show signatures of Berry phase—affecting reaction pathways and branching ratios.</p>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Spin rotating in field</strong>: Berry phase <span class="math notranslate nohighlight">\(\gamma = \pi(1 - \cos\theta)\)</span> for cone half-angle <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
-<li><p><strong>Molecular AB effect</strong>: Nuclear motion around conical intersections induces electronic Berry phase affecting reaction dynamics.</p></li>
-<li><p><strong>Born-Oppenheimer corrections</strong>: Geometric potential <span class="math notranslate nohighlight">\(\Delta V_{\text{Berry}}\)</span> modifies nuclear Schrödinger equation.</p></li>
-<li><p><strong>Band theory</strong>: Berry curvature in momentum space drives anomalous Hall effect and orbital magnetization.</p></li>
-<li><p><strong>Chern number</strong>: Topological invariant quantifying band curvature; equals number of edge states.</p></li>
-<li><p><strong>Quantum Hall connection</strong>: Integer QHE is quantized Hall conductance from Chern number = number of filled bands.</p></li>
-<li><p><strong>Observable effects</strong>: Neutron/photon interferometry, cold atoms, molecular spectroscopy all show Berry phase signatures.</p></li>
-<li><p><strong>Universality</strong>: Berry phase appears whenever systems adiabatically evolve through topologically interesting parameter spaces.</p></li>
-</ul>
-</section>
+\[\sigma_H = \nu \frac{e^2}{h}\]</div>
+<p>(b) Explain why the Chern number is a topological invariant that cannot be destroyed by weak disorder. Why does this explain the remarkable accuracy of the quantum Hall plateau?</p>
+<p>(c) In a sample with hard-wall boundaries, the number of edge states equals the Chern number. For <span class="math notranslate nohighlight">\(\nu = 2\)</span>, sketch the energy diagram showing two chiral edge channels and explain how they conduct current dissipation-free.</p>
+<hr class="docutils" />
+<p><strong>7. Experimental Signatures: Neutron Interferometry</strong></p>
+<p>A neutron with spin-1/2 travels through two arms of a perfect-crystal interferometer. In one arm, the neutron passes through a rotating magnetic field region (similar to the spin rotation example).</p>
+<p>(a) The rotating field has cone angle <span class="math notranslate nohighlight">\(\theta = \pi/3\)</span> and completes one rotation in the time it takes light to traverse the arm. Set up the phase difference <span class="math notranslate nohighlight">\(\Delta\phi = \phi_1 - \phi_2\)</span> between the two arms, where arm 1 experiences the rotating field and arm 2 does not.</p>
+<p>(b) The neutron interferes at the output. For a perfect interference contrast (no depolarization), the visibility is <span class="math notranslate nohighlight">\(V = |\cos(\Delta\phi)|\)</span>. For <span class="math notranslate nohighlight">\(\theta = \pi/3\)</span>, calculate the expected visibility and explain what the interference pattern would look like.</p>
+<p>(c) If instead of a rotating field, the two arms experience constant fields <span class="math notranslate nohighlight">\(\boldsymbol{B}_1\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}_2\)</span> differing only in direction (same magnitude), and the neutron adiabatically follows the field direction, what is the geometric phase difference? How would you design the setup to maximize sensitivity to small changes in field direction?</p>
+<hr class="docutils" />
 </section>
 </section>
 
@@ -726,15 +860,15 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-for-spin-1-2-rotating-magnetic-field">Berry Phase for Spin-1/2 Rotating Magnetic Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-aharonov-bohm-effect-mead-longuet-higgins">Molecular Aharonov-Bohm Effect (Mead-Longuet-Higgins)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#born-oppenheimer-approximation-and-berry-phase-corrections">Born-Oppenheimer Approximation and Berry Phase Corrections</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-in-band-theory-and-topological-insulators">Berry Phase in Band Theory and Topological Insulators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chern-number-and-topological-classification">Chern Number and Topological Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observable-berry-phase-effects">Observable Berry Phase Effects</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#born-oppenheimer-approximation-and-conical-intersections">Born-Oppenheimer Approximation and Conical Intersections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aharonov-bohm-effect-as-berry-phase">The Aharonov-Bohm Effect as Berry Phase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hall-effect-and-chern-numbers">Quantum Hall Effect and Chern Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weak-localization-and-antilocalization">Weak Localization and Antilocalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-in-nmr-and-magnetic-resonance">Berry Phase in NMR and Magnetic Resonance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pancharatnam-phase-in-polarized-light">Pancharatnam Phase in Polarized Light</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -772,7 +906,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

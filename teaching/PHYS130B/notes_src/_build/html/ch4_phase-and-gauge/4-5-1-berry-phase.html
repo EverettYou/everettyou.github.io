@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,16 +521,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem">The Adiabatic Theorem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamical-phase">Dynamical Phase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-the-geometric-contribution">Berry Phase: The Geometric Contribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-connection">Berry Connection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-curvature">Berry Curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-formula-for-curvature">Explicit Formula for Curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-geometric-vs-dynamical-phase">Comparison: Geometric vs Dynamical Phase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem-and-phase-evolution">The Adiabatic Theorem and Phase Evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-connection-and-berry-curvature">Berry Connection and Berry Curvature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-and-physical-observables">Gauge Invariance and Physical Observables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-2-in-a-rotating-magnetic-field">Spin-1/2 in a Rotating Magnetic Field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation-holonomy">Physical Interpretation: Holonomy</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -547,183 +545,196 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>State the adiabatic theorem. What is the difference between adiabatic and diabatic evolution?</p></li>
-<li><p>Derive the Berry phase formula <span class="math notranslate nohighlight">\(\gamma_n(C) = i\oint_C \langle n | \nabla_R n \rangle \cdot dR\)</span>. Why does it depend only on the path?</p></li>
-<li><p>Define Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(R)\)</span> and Berry curvature <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n(R)\)</span>. What do they measure physically?</p></li>
-<li><p>Explain the difference between geometric and dynamical phases. Can they interfere?</p></li>
-<li><p>Prove gauge-invariance of Berry curvature. Why is the curvature observable while the connection is not?</p></li>
+<li><p>What is the difference between adiabatic and diabatic evolution? How do we decide which regime applies?</p></li>
+<li><p>Define Berry phase geometrically. Why does it depend only on the shape of the path in parameter space, not the speed of traversal?</p></li>
+<li><p>What are Berry connection and Berry curvature, and how do they relate to familiar concepts like vector potential and magnetic field?</p></li>
+<li><p>Explain the difference between the geometric (Berry) phase and the familiar dynamical phase. Can these two phases interfere?</p></li>
+<li><p>Prove that Berry curvature is gauge-invariant. Why is this invariance crucial for physical observables?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>As a quantum system evolves adiabatically through parameter space along a closed path, it acquires not just the dynamical phase from energy, but an additional geometric phase—the Berry phase—that depends only on the path’s geometry, not on evolution speed. This phase arises from the curvature of the eigenstate space and reveals that quantum mechanics has a hidden geometric structure. Berry phase connects gauge theory, topology, and observable interference phenomena, and appears throughout quantum systems: atoms in slowly-rotating fields, electrons in slowly-varying potentials, and topological condensed matter.</p>
+<section id="the-adiabatic-theorem-and-phase-evolution">
+<h3>The Adiabatic Theorem and Phase Evolution<a class="headerlink" href="#the-adiabatic-theorem-and-phase-evolution" title="Link to this heading">#</a></h3>
+<p>When a quantum system’s Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R}(t))\)</span> changes slowly compared to the gap <span class="math notranslate nohighlight">\(\Delta E\)</span> between eigenlevels, the system remains in its instantaneous eigenstate:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H}(\boldsymbol{R})|n(\boldsymbol{R})\rangle = E_n(\boldsymbol{R})|n(\boldsymbol{R})\rangle\]</div>
+<p>This is the <strong>adiabatic theorem</strong>. If the system starts in eigenstate <span class="math notranslate nohighlight">\(|n(\boldsymbol{R}_0)\rangle\)</span>, it will stay in <span class="math notranslate nohighlight">\(|n(\boldsymbol{R}(t))\rangle\)</span> throughout evolution.</p>
+<p>However, the quantum state acquired during this process is not merely:</p>
+<div class="math notranslate nohighlight">
+\[|\psi(t)\rangle = \mathrm{e}^{-\mathrm{i}E_n(t)/\hbar} |n(\boldsymbol{R}(t))\rangle\]</div>
+<p>This expression misses a <strong>geometric phase</strong> — Berry’s phase — that depends on the path traced through parameter space, not just the initial and final states.</p>
 <div class="important admonition">
-<p class="admonition-title">Berry Phase Survives Adiabatic Approximation</p>
-<p>The adiabatic approximation ensures no transitions between states. Yet the Berry phase accumulates even when the system never leaves its instantaneous eigenstate. This is the magic of the geometric phase.</p>
-</div>
-<section id="the-adiabatic-theorem">
-<h3>The Adiabatic Theorem<a class="headerlink" href="#the-adiabatic-theorem" title="Link to this heading">#</a></h3>
-<p>The <strong>adiabatic theorem</strong> is a fundamental principle in quantum mechanics that applies when parameters in the Hamiltonian change slowly.</p>
-<p><strong>Statement</strong>: If a quantum system starts in an eigenstate of <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R}(0))\)</span> and the parameters <span class="math notranslate nohighlight">\(\boldsymbol{R}(t)\)</span> change slowly (adiabatically), then the system <strong>remains in the instantaneous eigenstate</strong> throughout the evolution:</p>
+<p class="admonition-title">The Phase Evolution</p>
+<p>The full adiabatic evolution of the <span class="math notranslate nohighlight">\(n\)</span>-th eigenstate is:</p>
 <div class="math notranslate nohighlight">
-\[|\psi(t)\rangle = e^{i\gamma_n(t)}e^{-i\phi_d(t)}|n(\boldsymbol{R}(t))\rangle\]</div>
-<p>The adiabatic condition requires:</p>
-<div class="math notranslate nohighlight">
-\[\left|\frac{d\boldsymbol{R}/dt}{E_{m} - E_n}\right| \ll 1 \quad (m \neq n)\]</div>
-<p>That is, parameters must change much more slowly than the intrinsic timescale set by energy level spacings.</p>
-<p><strong>Rigorous derivation</strong>: The adiabatic theorem can be derived rigorously from time-dependent perturbation theory. See <strong><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html"><span class="std std-doc">§5.2.3</span></a></strong> for the full derivation showing how adiabatic evolution naturally emerges when the perturbation timescale is much longer than energy gaps.</p>
-</section>
-<section id="dynamical-phase">
-<h3>Dynamical Phase<a class="headerlink" href="#dynamical-phase" title="Link to this heading">#</a></h3>
-<p>The <strong>dynamical phase</strong> is the phase accumulated from the time evolution of an energy eigenstate:</p>
-<div class="math notranslate nohighlight">
-\[\phi_d(t) = \frac{1}{\hbar}\int_0^t E_n(\boldsymbol{R}(t'))\, dt'\]</div>
-<p>This is exactly what we expect from the Schrödinger equation <span class="math notranslate nohighlight">\(i\hbar\partial_t|\psi\rangle = \hat{H}|\psi\rangle\)</span>. For a state with fixed energy <span class="math notranslate nohighlight">\(E_n\)</span>, the phase factor is simply <span class="math notranslate nohighlight">\(e^{-iE_n t/\hbar}\)</span>.</p>
-<p>The dynamical phase:</p>
+\[|\psi(t)\rangle = \mathrm{e}^{\mathrm{i}\gamma_n(t)} \mathrm{e}^{-\mathrm{i}\theta_n(t)} |n(\boldsymbol{R}(t))\rangle\]</div>
+<p>where:</p>
 <ul class="simple">
-<li><p>Depends on the evolution <strong>time</strong> (explicitly through the integral)</p></li>
-<li><p>Depends on the <strong>actual path</strong> taken through parameter space (via <span class="math notranslate nohighlight">\(E_n(\boldsymbol{R}(t))\)</span>)</p></li>
-<li><p>Is easily understood in terms of energy considerations</p></li>
-</ul>
-</section>
-<section id="berry-phase-the-geometric-contribution">
-<h3>Berry Phase: The Geometric Contribution<a class="headerlink" href="#berry-phase-the-geometric-contribution" title="Link to this heading">#</a></h3>
-<p>Beyond the dynamical phase, an adiabatically-evolving eigenstate acquires an additional <strong>geometric phase</strong>, discovered by Michael Berry in 1984:</p>
-<div class="math notranslate nohighlight">
-\[\gamma_n(C) = i\oint_C \langle n(\boldsymbol{R}) | \nabla_\boldsymbol{R} n(\boldsymbol{R}) \rangle \cdot d\boldsymbol{R}\]</div>
-<p>where the integral is over a closed loop <span class="math notranslate nohighlight">\(C\)</span> in parameter space.</p>
-<p><strong>Remarkable properties</strong>:</p>
-<ol class="arabic simple">
-<li><p><strong>Path-dependent, not time-dependent</strong>: The Berry phase depends only on the geometric shape of the path <span class="math notranslate nohighlight">\(C\)</span>, NOT on how long the evolution takes. Fast or slow adiabatic evolution gives the same Berry phase!</p></li>
-<li><p><strong>Geometric origin</strong>: It depends on the geometry of the eigenstate in Hilbert space as a function of parameters.</p></li>
-<li><p><strong>Closed paths only</strong>: For open paths, the phase can be gauged away by redefining the phase of the eigenstate. Only for closed loops is the phase well-defined and unambiguous.</p></li>
-<li><p><strong>Gauge ambiguity</strong>: The Berry phase depends on the phase convention chosen for <span class="math notranslate nohighlight">\(|n(\boldsymbol{R})\rangle\)</span>. Different phase choices shift the Berry phase by multiples of <span class="math notranslate nohighlight">\(2\pi\)</span>.</p></li>
-</ol>
-</section>
-<section id="berry-connection">
-<h3>Berry Connection<a class="headerlink" href="#berry-connection" title="Link to this heading">#</a></h3>
-<p>Define the <strong>Berry connection</strong> (a gauge field in parameter space):</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{A}_{n}(\boldsymbol{R}) = i\langle n(\boldsymbol{R}) | \nabla_\boldsymbol{R} n(\boldsymbol{R}) \rangle\]</div>
-<p>This is a vector field in parameter space with dimensions of inverse length. It encodes how the phase of the eigenstate changes as we move through parameter space.</p>
-<p>The Berry phase can then be written compactly as:</p>
-<div class="math notranslate nohighlight">
-\[\gamma_n(C) = \oint_C \boldsymbol{A}_{n}(\boldsymbol{R}) \cdot d\boldsymbol{R}\]</div>
-<p>This is the <strong>line integral of the Berry connection</strong>, analogous to the phase acquired by a charged particle traveling through an electromagnetic vector potential.</p>
-</section>
-<section id="berry-curvature">
-<h3>Berry Curvature<a class="headerlink" href="#berry-curvature" title="Link to this heading">#</a></h3>
-<p>Just as the electromagnetic field is the curl of the vector potential, we define the <strong>Berry curvature</strong> as a 2-form in parameter space:</p>
-<div class="math notranslate nohighlight">
-\[\Omega_{n,ij}(\boldsymbol{R}) = \partial_{R_i}A_{n,j} - \partial_{R_j}A_{n,i}\]</div>
-<p>By <strong>Stokes’ theorem</strong>, the Berry phase can be expressed as a surface integral of the curvature:</p>
-<div class="math notranslate nohighlight">
-\[\gamma_n(C) = \oint_C \boldsymbol{A}_n \cdot d\boldsymbol{R} = \int_S \boldsymbol{\Omega}_n(\boldsymbol{R}) \cdot d\boldsymbol{S}\]</div>
-<p><strong>Key property</strong>: Unlike the Berry connection (which is gauge-dependent), the <strong>Berry curvature is gauge-invariant</strong>. This makes the curvature a fundamental observable quantity that cannot be transformed away by phase redefinitions of the eigenstate.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
-<p>Just as the electromagnetic field is the curl of the vector potential, we define the <strong>Berry curvature</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\Omega_{n,ij}(\boldsymbol{R}) = \partial_{R_i}A_{n,j} - \partial_{R_j}A_{n,i}\]</div>
-<p>This is an antisymmetric tensor (2-form) in parameter space.</p>
-<p>By <strong>Stokes’ theorem</strong>, the line integral of the connection equals the surface integral of the curvature:</p>
-<div class="math notranslate nohighlight">
-\[\gamma_n(C) = \oint_C \boldsymbol{A}_n \cdot d\boldsymbol{R} = \int_S \boldsymbol{\Omega}_n(\boldsymbol{R}) \cdot d\boldsymbol{S}\]</div>
-<p>The Berry curvature:</p>
-<ul class="simple">
-<li><p>Is <strong>gauge-invariant</strong>: Unlike the connection, which changes under phase redefinition of <span class="math notranslate nohighlight">\(|n(\boldsymbol{R})\rangle\)</span>, the curvature is independent of gauge choice</p></li>
-<li><p>Measures the <strong>geometric twist</strong> in the eigenstate Hilbert space</p></li>
-<li><p>Encodes observable topological properties</p></li>
+<li><p><strong>Dynamical phase</strong>: <span class="math notranslate nohighlight">\(\theta_n(t) = \frac{1}{\hbar}\int_0^t E_n(\boldsymbol{R}(t'))\,\mathrm{d}t'\)</span></p></li>
+<li><p><strong>Geometric phase</strong> (Berry phase): <span class="math notranslate nohighlight">\(\gamma_n(t) = \mathrm{i}\int_0^t \langle n(\boldsymbol{R})|{\boldsymbol{\nabla}_{\boldsymbol{R}}|n(\boldsymbol{R})\rangle} \cdot \dot{\boldsymbol{R}}\,\mathrm{d}t'\)</span></p></li>
 </ul>
 </div>
 </section>
-<section id="explicit-formula-for-curvature">
-<h3>Explicit Formula for Curvature<a class="headerlink" href="#explicit-formula-for-curvature" title="Link to this heading">#</a></h3>
-<p>The Berry curvature can be expressed in terms of matrix elements of the Hamiltonian derivatives:</p>
+<section id="berry-connection-and-berry-curvature">
+<h3>Berry Connection and Berry Curvature<a class="headerlink" href="#berry-connection-and-berry-curvature" title="Link to this heading">#</a></h3>
+<p>Define the <strong>Berry connection</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\Omega_{n,ij} = -2\text{Im}\sum_{m \neq n}\frac{\langle n | \partial_i \hat{H} | m \rangle \langle m | \partial_j \hat{H} | n \rangle}{(E_n - E_m)^2}\]</div>
-<p>This formula reveals that:</p>
+\[\mathcal{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})|\nabla_{\boldsymbol{R}}|n(\boldsymbol{R})\rangle\]</div>
+<p>It is a vector field in parameter space. Then:</p>
+<div class="math notranslate nohighlight">
+\[\gamma_n(t) = \int_C \mathcal{A}_n(\boldsymbol{R}) \cdot \mathrm{d}\boldsymbol{R}\]</div>
+<p>where <span class="math notranslate nohighlight">\(C\)</span> is the path in parameter space from initial to final <span class="math notranslate nohighlight">\(\boldsymbol{R}(t)\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Berry Connection as Geometric Vector Potential</p>
+<p>The <strong>Berry connection</strong> <span class="math notranslate nohighlight">\(\mathcal{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})|\nabla_{\boldsymbol{R}}|n(\boldsymbol{R})\rangle\)</span> plays the role of a vector potential in parameter space, analogous to the electromagnetic vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r})\)</span>.</p>
+<p>Key properties:</p>
 <ul class="simple">
-<li><p>The curvature involves <strong>off-diagonal matrix elements</strong> of Hamiltonian derivatives</p></li>
-<li><p>States with large energy differences contribute weakly (denominator suppression)</p></li>
-<li><p>The sum is over all excited states <span class="math notranslate nohighlight">\(m 
-eq n\)</span></p></li>
-<li><p>The formula is intrinsically gauge-invariant (imaginary part of a fraction)</p></li>
+<li><p><strong>Gauge-dependent</strong>: Transforms as <span class="math notranslate nohighlight">\(\mathcal{A}_n \to \mathcal{A}_n + \nabla_{\boldsymbol{R}}\xi\)</span> under phase rotation <span class="math notranslate nohighlight">\(|n\rangle \to \mathrm{e}^{\mathrm{i}\xi}|n\rangle\)</span></p></li>
+<li><p><strong>Line integral gives Berry phase</strong>: <span class="math notranslate nohighlight">\(\gamma_n = \int_C \mathcal{A}_n \cdot \mathrm{d}\boldsymbol{R}\)</span> (for open paths, gauge-dependent)</p></li>
+<li><p><strong>Real-valued</strong>: <span class="math notranslate nohighlight">\(\mathcal{A}_n\)</span> is always real because <span class="math notranslate nohighlight">\(\langle n|n\rangle = 1 \Rightarrow \langle n|\nabla|n\rangle + \text{c.c.} = 0\)</span></p></li>
 </ul>
-<p>This provides a practical way to calculate Berry curvature from first principles given the Hamiltonian structure.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation and Example</p>
-<p>The Berry curvature can be expressed in terms of other eigenstates:</p>
-<div class="math notranslate nohighlight">
-\[\Omega_{n,ij} = -2\text{Im}\sum_{m \neq n}\frac{\langle n | \partial_i \hat{H} | m \rangle \langle m | \partial_j \hat{H} | n \rangle}{(E_n - E_m)^2}\]</div>
-<p>This formula shows that the curvature involves matrix elements of the Hamiltonian derivatives weighted by energy differences. States that are far in energy contribute weakly.</p>
 </div>
-<p>:class: example</p>
-<p>A paradigmatic example: a spin-1/2 particle in a slowly rotating magnetic field.</p>
-<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{B}(t)\)</span> rotate around the <span class="math notranslate nohighlight">\(z\)</span>-axis with angular velocity <span class="math notranslate nohighlight">\(\Omega \ll \omega_L\)</span> (much slower than Larmor frequency <span class="math notranslate nohighlight">\(\omega_L = g B/(2m_e c)\)</span>).</p>
-<p>The spin adiabatically follows the magnetic field direction (following the instantaneous eigenstate). As the field completes one full rotation around the <span class="math notranslate nohighlight">\(z\)</span>-axis, tracing a cone of half-angle <span class="math notranslate nohighlight">\(\theta\)</span>, the spin acquires Berry phase:</p>
+<p>The <strong>Berry curvature</strong> is:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \frac{1}{2}\Omega_\text{solid angle} = \frac{1}{2} \cdot 2\pi(1 - \cos\theta) = \pi(1 - \cos\theta)\]</div>
-<p>For a field rotating around the equator (<span class="math notranslate nohighlight">\(\theta = \pi/2\)</span>):</p>
+\[\mathcal{F}_n(\boldsymbol{R}) = \nabla_{\boldsymbol{R}} \times \mathcal{A}_n(\boldsymbol{R})\]</div>
+<p>By Stokes’ theorem, for a closed path enclosing a surface <span class="math notranslate nohighlight">\(S\)</span> in parameter space:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \pi\]</div>
-<p>This is the famous <strong>geometric phase of a spinning particle</strong>.</p>
-<div class="docutils">
+\[\gamma_n = \oint_C \mathcal{A}_n \cdot \mathrm{d}\boldsymbol{R} = \int_S \mathcal{F}_n \cdot \mathrm{d}\boldsymbol{S}\]</div>
+<div class="important admonition">
+<p class="admonition-title">Berry Curvature and Chern Number</p>
+<p>The <strong>Berry curvature</strong> <span class="math notranslate nohighlight">\(\mathcal{F}_{n,\mu\nu}(\boldsymbol{R}) = \partial_{R_\mu}\mathcal{A}_{n,\nu} - \partial_{R_\nu}\mathcal{A}_{n,\mu}\)</span> is a rank-2 tensor (the “field strength” of the Berry connection).</p>
+<p>Arises from off-diagonal couplings:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}_{n,\mu\nu} = -2\,\mathrm{Im}\sum_{m\neq n} \frac{\langle n|\partial_\mu \hat{H}|m\rangle\langle m|\partial_\nu \hat{H}|n\rangle}{(E_m - E_n)^2}\]</div>
+<p>For a 2D parameter space (e.g., crystal momentum <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>), the <strong>Chern number</strong> is the topological integral:</p>
+<div class="math notranslate nohighlight">
+\[C_n = \frac{1}{2\pi}\int \mathcal{F}_n \, \mathrm{d}A \in \mathbb{Z}\]</div>
+<p>This is always an integer—a topological invariant that cannot change without closing the band gap.</p>
 </div>
-</section>
-<section id="comparison-geometric-vs-dynamical-phase">
-<h3>Comparison: Geometric vs Dynamical Phase<a class="headerlink" href="#comparison-geometric-vs-dynamical-phase" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Aspect</p></th>
-<th class="head"><p>Dynamical Phase</p></th>
-<th class="head"><p>Geometric Phase</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Formula</p></td>
-<td><p><span class="math notranslate nohighlight">\(\phi_d = -\int E_n dt/\hbar\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\gamma = i\oint \langle n|\nabla n\rangle \cdot dR\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p>Dependence</p></td>
-<td><p>Explicit time integral</p></td>
-<td><p>Path shape only</p></td>
-</tr>
-<tr class="row-even"><td><p>Speed sensitivity</p></td>
-<td><p>YES—faster evolution gives smaller phase</p></td>
-<td><p>NO—independent of speed</p></td>
-</tr>
-<tr class="row-odd"><td><p>Closed loops needed</p></td>
-<td><p>NO—defined for any path</p></td>
-<td><p>YES—vanishes for open paths</p></td>
-</tr>
-<tr class="row-even"><td><p>Gauge-invariance</p></td>
-<td><p><span class="math notranslate nohighlight">\(2\pi\)</span> ambiguity</p></td>
-<td><p>Curvature is gauge-invariant</p></td>
-</tr>
-<tr class="row-odd"><td><p>Observable</p></td>
-<td><p>Direct energy measurement</p></td>
-<td><p>Requires interference</p></td>
-</tr>
-</tbody>
-</table>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Berry Curvature Formula</p>
+<p>The Berry curvature can be expressed in terms of the Hamiltonian. Acting on eigenstate <span class="math notranslate nohighlight">\(|n(\boldsymbol{R})\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\partial_\mu \mathcal{A}_{n,\nu} = \mathrm{i}\partial_\mu\langle n|\partial_\nu n\rangle = \mathrm{i}[\partial_\mu\langle n|]\partial_\nu|n\rangle + \mathrm{i}\langle n|\partial_{\mu}\partial_\nu|n\rangle\]</div>
+<p>The off-diagonal component comes from:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{i}\partial_\mu\langle n| = \mathrm{i}\sum_{m\neq n}\frac{\langle m|\partial_\mu\hat{H}|n\rangle}{(E_n - E_m)}\langle m|\]</div>
+<p>Combining and subtracting to form the curl gives the result above.</p>
 </div>
 </section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<section id="gauge-invariance-and-physical-observables">
+<h3>Gauge Invariance and Physical Observables<a class="headerlink" href="#gauge-invariance-and-physical-observables" title="Link to this heading">#</a></h3>
+<p>The geometric phase is <em>physically</em> well-defined only for closed paths. This is because we can perform a <strong>gauge transformation</strong>:</p>
+<div class="math notranslate nohighlight">
+\[|n(\boldsymbol{R})\rangle \to \mathrm{e}^{\mathrm{i}\phi(\boldsymbol{R})}|n(\boldsymbol{R})\rangle\]</div>
+<p>Under this redefinition, the Berry connection transforms as:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A}_n \to \mathcal{A}_n + \nabla_{\boldsymbol{R}}\phi\]</div>
+<p>For an open path, the Berry phase changes. But for a <strong>closed path</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\oint_C (\mathcal{A}_n + \nabla_{\boldsymbol{R}}\phi) \cdot \mathrm{d}\boldsymbol{R} = \oint_C \mathcal{A}_n \cdot \mathrm{d}\boldsymbol{R} + \oint_C \nabla\phi \cdot \mathrm{d}\boldsymbol{R} = \oint_C \mathcal{A}_n \cdot \mathrm{d}\boldsymbol{R}\]</div>
+<p>The gradient term vanishes around a closed loop, so <strong><span class="math notranslate nohighlight">\(\gamma_n\)</span> is gauge-invariant for closed paths</strong> (modulo <span class="math notranslate nohighlight">\(2\pi\)</span>).</p>
+<div class="important admonition">
+<p class="admonition-title">Gauge Invariance: Connection vs. Curvature</p>
 <ul class="simple">
-<li><p><strong>Adiabatic theorem</strong>: Slow parameter change preserves eigenstate (up to phases).</p></li>
-<li><p><strong>Dynamical phase</strong>: Standard energy-dependent phase <span class="math notranslate nohighlight">\(\phi_d = -\int E_n dt/\hbar\)</span>.</p></li>
-<li><p><strong>Berry phase</strong>: Additional geometric phase <span class="math notranslate nohighlight">\(\gamma = i\oint \langle n|\nabla_R n\rangle \cdot dR\)</span> from path geometry.</p></li>
-<li><p><strong>Path-dependent</strong>: Berry phase depends only on path shape, not evolution speed.</p></li>
-<li><p><strong>Berry connection</strong>: Gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}_n = i\langle n|\nabla_R n\rangle\)</span> in parameter space.</p></li>
-<li><p><strong>Berry curvature</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n = \nabla \times \boldsymbol{A}_n\)</span>—gauge-invariant field strength.</p></li>
-<li><p><strong>Stokes’ theorem</strong>: <span class="math notranslate nohighlight">\(\gamma = \oint \boldsymbol{A} \cdot dR = \int \boldsymbol{\Omega} \cdot dS\)</span> connects connection and curvature.</p></li>
-<li><p><strong>Geometric interpretation</strong>: Curvature measures geometric twist of eigenstate in Hilbert space.</p></li>
-<li><p><strong>Closed loops only</strong>: Non-zero Berry phase requires topologically non-trivial loops.</p></li>
-<li><p><strong>Rigorous foundation</strong>: The adiabatic theorem and Berry phase emerge naturally from time-dependent perturbation theory (see <strong><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html"><span class="std std-doc">§5.2.3</span></a></strong>).</p></li>
+<li><p><strong>Berry connection</strong> <span class="math notranslate nohighlight">\(\mathcal{A}_n(\boldsymbol{R})\)</span>: <strong>Gauge-dependent</strong> (transforms like vector potential)</p></li>
+<li><p><strong>Berry curvature</strong> <span class="math notranslate nohighlight">\(\mathcal{F}_n(\boldsymbol{R})\)</span>: <strong>Gauge-invariant</strong> (transforms like magnetic field)</p></li>
+<li><p><strong>Berry phase on closed loops</strong>: <strong>Gauge-invariant</strong> (depends only on geometry, not phase choice)</p></li>
+<li><p><strong>Berry phase on open paths</strong>: <strong>Gauge-dependent</strong> (depends on choice of phase convention)</p></li>
 </ul>
+<p>This mirrors electromagnetism: <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent, but <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{\ell}\)</span> around closed loops are gauge-invariant.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Gauge Invariance and Geometric Phase</p>
+<p>Berry phase is gauge-invariant but the Berry connection is not.</p>
+<p><strong>Explain</strong> this apparent contradiction. Then <strong>compute</strong> the Berry phase for a spin-1/2 in a magnetic field as its direction is adiabatically traced around a cone of half-angle θ.</p>
+<p>Why is the solid angle traced out the fundamental quantity that determines the geometric phase?</p>
+</div>
 </section>
+<section id="spin-1-2-in-a-rotating-magnetic-field">
+<h3>Spin-1/2 in a Rotating Magnetic Field<a class="headerlink" href="#spin-1-2-in-a-rotating-magnetic-field" title="Link to this heading">#</a></h3>
+<p><strong>Example</strong>: A spin-1/2 particle in a slowly rotating magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t)\)</span> with fixed magnitude <span class="math notranslate nohighlight">\(B_0\)</span> but rotating direction.</p>
+<p>For adiabatic evolution, the spin stays aligned with the instantaneous field. As <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> traces a closed path on the unit sphere, sweeping solid angle <span class="math notranslate nohighlight">\(\Omega\)</span>, the Berry phase is:</p>
+<div class="math notranslate nohighlight">
+\[\gamma = -\frac{\Omega}{2}\]</div>
+<p>The <strong>negative sign</strong> reflects the spinor’s intrinsic properties. For a path that encloses a full hemisphere (<span class="math notranslate nohighlight">\(\Omega = 2\pi\)</span>), <span class="math notranslate nohighlight">\(\gamma = -\pi\)</span>.</p>
+<p>This is intimately connected to the fact that a spin-1/2 wave function has <span class="math notranslate nohighlight">\(4\pi\)</span> periodicity (a <span class="math notranslate nohighlight">\(2\pi\)</span> rotation about any axis gives <span class="math notranslate nohighlight">\(-1\)</span>, not <span class="math notranslate nohighlight">\(+1\)</span>). The Berry phase partially compensates this geometric structure.</p>
+<div class="important admonition">
+<p class="admonition-title">Solid Angle Formula for Spin-1/2</p>
+<p>For a spin-1/2 in a rotating magnetic field, as the field direction traces a closed path enclosing solid angle <span class="math notranslate nohighlight">\(\Omega\)</span> on the unit sphere:</p>
+<div class="math notranslate nohighlight">
+\[\gamma_{\text{Berry}} = -\frac{\Omega}{2}\]</div>
+<p>This is called the <strong>Pancharatnam-Berry phase</strong> or <strong>geometric phase</strong>. The factor <span class="math notranslate nohighlight">\(-1/2\)</span> is characteristic of spin-1/2; higher spins have different coefficients.</p>
+<p>The solid angle <span class="math notranslate nohighlight">\(\Omega\)</span> can be computed from the path using spherical geometry. For a cone of half-angle <span class="math notranslate nohighlight">\(\theta_0\)</span> traversed once: <span class="math notranslate nohighlight">\(\Omega = 2\pi(1 - \cos\theta_0)\)</span>.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Solid Angle and Berry Phase</p>
+<p>For a spin-1/2 in field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t) = B_0(\sin\theta(t)\cos\phi(t), \sin\theta(t)\sin\phi(t), \cos\theta(t))\)</span>, the instantaneous ground state is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}|+(\theta,\phi)\rangle = \begin{pmatrix} \cos(\theta/2) \\ \sin(\theta/2)\mathrm{e}^{\mathrm{i}\phi} \end{pmatrix}\end{split}\]</div>
+<p>The Berry connection is:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A} = \mathrm{i}\langle +|\nabla|+\rangle\]</div>
+<p>Computing <span class="math notranslate nohighlight">\(\langle +|\partial_\theta |+\rangle\)</span> and <span class="math notranslate nohighlight">\(\langle +|\partial_\phi|+\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\langle +|\partial_\theta|+\rangle = 0, \quad \langle +|\partial_\phi|+\rangle = -\frac{1}{2}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\mathcal{A} = -\frac{1}{2}\mathrm{d}\phi\)</span>, and:</p>
+<div class="math notranslate nohighlight">
+\[\gamma = \oint \mathcal{A} \cdot \mathrm{d}\boldsymbol{R} = -\frac{1}{2}\oint \mathrm{d}\phi = -\frac{\Omega}{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega = \int \mathrm{d}\Omega\)</span> is the solid angle.</p>
+</div>
+</section>
+<section id="physical-interpretation-holonomy">
+<h3>Physical Interpretation: Holonomy<a class="headerlink" href="#physical-interpretation-holonomy" title="Link to this heading">#</a></h3>
+<p>Berry phase is a <strong>holonomy</strong> — a phase acquired by parallel transport of a quantum state around a closed path in an abstract geometric space (the space of Hamiltonian parameters).</p>
+<p>In general relativity, parallel transport around a closed loop in curved spacetime results in a rotation of the vector. Similarly, the quantum state’s phase is “rotated” by geometric curvature in the parameter space landscape.</p>
+<p>This perspective unifies many quantum phenomena:</p>
+<ul class="simple">
+<li><p>Molecular spectra (Berry phase in electronic coordinates)</p></li>
+<li><p>Transport in solids (Berry phase in crystal momentum space)</p></li>
+<li><p>Photon polarization (Berry phase in direction of propagation)</p></li>
+</ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-1-2-gauge-connection.html"><span class="std std-doc">4.1.2 Gauge Connection</span></a></strong>: Geometric connection and parallel transport</p></li>
+<li><p><strong><a class="reference internal" href="4-5-2-applications.html"><span class="std std-doc">4.5.2 Applications</span></a></strong>: Experimental and conceptual consequences of Berry phase</p></li>
+<li><p><strong><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html"><span class="std std-doc">3.3.3 Bohr-Sommerfeld Quantization</span></a></strong>: Quantization conditions and adiabatic invariants</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Adiabatic Condition.</strong>
+A quantum system has energy gap <span class="math notranslate nohighlight">\(\Delta E\)</span> between its ground and first excited state. The Hamiltonian varies at rate <span class="math notranslate nohighlight">\(\dot{H}\)</span>. State the adiabatic condition in terms of these quantities and explain physically why rapid changes cause non-adiabatic transitions.</p>
+<p><strong>2. Berry Phase as a Line Integral.</strong>
+The Berry phase is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma_n[C] = \oint_C \boldsymbol{\mathcal{A}}_n(\boldsymbol{R}) \cdot \mathrm{d}\boldsymbol{R}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\mathcal{A}}_n = \mathrm{i}\langle n(\boldsymbol{R})|\nabla_{\boldsymbol{R}}|n(\boldsymbol{R})\rangle\)</span> is the Berry connection. Show that <span class="math notranslate nohighlight">\(\boldsymbol{\mathcal{A}}_n\)</span> is real-valued by differentiating the normalization condition <span class="math notranslate nohighlight">\(\langle n|n\rangle = 1\)</span>.</p>
+<p><strong>3. Gauge Transformation.</strong>
+Under a local gauge transformation <span class="math notranslate nohighlight">\(|n(\boldsymbol{R})\rangle \to \mathrm{e}^{\mathrm{i}\xi(\boldsymbol{R})}|n(\boldsymbol{R})\rangle\)</span>, show that the Berry connection transforms as</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\mathcal{A}}_n \to \boldsymbol{\mathcal{A}}_n - \nabla_{\boldsymbol{R}}\xi(\boldsymbol{R})\]</div>
+<p>and explain why the Berry phase <span class="math notranslate nohighlight">\(\gamma_n[C]\)</span> around a closed loop <span class="math notranslate nohighlight">\(C\)</span> is gauge invariant.</p>
+<p><strong>4. Berry Curvature from Stokes’ Theorem.</strong>
+The Berry curvature is <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n = \nabla_{\boldsymbol{R}} \times \boldsymbol{\mathcal{A}}_n\)</span>. Using Stokes’ theorem, express the Berry phase as a surface integral of the Berry curvature over a surface <span class="math notranslate nohighlight">\(S\)</span> bounded by <span class="math notranslate nohighlight">\(C\)</span>. What is the electromagnetic analogy?</p>
+<p><strong>5. Spin-1/2 in a Magnetic Field: Solid Angle Formula.</strong>
+For a spin-1/2 particle in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B(\sin\theta\cos\phi,\, \sin\theta\sin\phi,\, \cos\theta)\)</span>, the ground state is the spin-up eigenstate along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{B}}\)</span>. When <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> traces a closed loop on a cone of half-angle <span class="math notranslate nohighlight">\(\theta_0\)</span> at fixed <span class="math notranslate nohighlight">\(|\boldsymbol{B}|\)</span>:</p>
+<p>(a) Show that the Berry phase equals <span class="math notranslate nohighlight">\(-\Omega/2\)</span> where <span class="math notranslate nohighlight">\(\Omega\)</span> is the solid angle enclosed by the loop on the unit sphere.</p>
+<p>(b) Calculate the Berry phase for a complete circle at fixed <span class="math notranslate nohighlight">\(\theta_0 = \pi/2\)</span>.</p>
+<p><strong>6. Degeneracy Points as Magnetic Monopoles.</strong>
+The Berry curvature <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n\)</span> is large near degeneracy points where <span class="math notranslate nohighlight">\(E_n = E_m\)</span>. For a two-level system with Hamiltonian <span class="math notranslate nohighlight">\(H = \boldsymbol{d}(\boldsymbol{R})\cdot\hat{\boldsymbol{\sigma}}\)</span>, the degeneracy occurs at <span class="math notranslate nohighlight">\(\boldsymbol{d} = 0\)</span>. Show that the Berry curvature acts like a magnetic monopole of charge <span class="math notranslate nohighlight">\(\pm 1/2\)</span> at this point in parameter space, and explain the physical significance.</p>
+<p><strong>7. Non-Abelian Berry Phase in Degenerate Subspace.</strong>
+When the instantaneous energy level <span class="math notranslate nohighlight">\(n\)</span> is degenerate (degeneracy <span class="math notranslate nohighlight">\(N &gt; 1\)</span>), the Berry “phase” becomes a unitary matrix <span class="math notranslate nohighlight">\(U \in U(N)\)</span> in the degenerate subspace, rather than a scalar. Explain qualitatively why path-ordering matters for the non-Abelian case (i.e., why <span class="math notranslate nohighlight">\(U[C_1 \to C_2] \neq U[C_2 \to C_1]\)</span>), and give one physical system where this arises.</p>
+<p><strong>8. Breakdown of Adiabatic Approximation.</strong>
+A two-level system has instantaneous eigenstates <span class="math notranslate nohighlight">\(|+\rangle\)</span> and <span class="math notranslate nohighlight">\(|-\rangle\)</span> with energy splitting <span class="math notranslate nohighlight">\(\Delta(t) = \Delta_0 + vt\)</span> (linearly increasing). The system starts in <span class="math notranslate nohighlight">\(|+\rangle\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
+<p>(a) At what time <span class="math notranslate nohighlight">\(t^*\)</span> does the gap become zero? Estimate the characteristic timescale for adiabatic-to-diabatic transition near this point using the Landau-Zener criterion.</p>
+<p>(b) For what range of velocities <span class="math notranslate nohighlight">\(v\)</span> is the adiabatic approximation valid throughout the evolution?</p>
 </section>
 </section>
 
@@ -792,16 +803,14 @@ eq n\)</span></p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem">The Adiabatic Theorem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamical-phase">Dynamical Phase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-the-geometric-contribution">Berry Phase: The Geometric Contribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-connection">Berry Connection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-curvature">Berry Curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-formula-for-curvature">Explicit Formula for Curvature</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-geometric-vs-dynamical-phase">Comparison: Geometric vs Dynamical Phase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem-and-phase-evolution">The Adiabatic Theorem and Phase Evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-connection-and-berry-curvature">Berry Connection and Berry Curvature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-and-physical-observables">Gauge Invariance and Physical Observables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-2-in-a-rotating-magnetic-field">Spin-1/2 in a Rotating Magnetic Field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation-holonomy">Physical Interpretation: Holonomy</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -839,7 +848,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

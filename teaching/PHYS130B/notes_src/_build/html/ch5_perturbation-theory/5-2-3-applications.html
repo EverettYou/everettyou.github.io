@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -525,11 +525,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-setup">Physical Setup</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-amplitude-and-resonance">Transition Amplitude and Resonance</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rabi-oscillations">Rabi Oscillations</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-2-the-adiabatic-theorem-and-berry-phase">Application 2: The Adiabatic Theorem and Berry Phase</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem-statement">The Adiabatic Theorem Statement</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-from-perturbation-theory">Derivation from Perturbation Theory</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-berry-phase-geometric-phase">The Berry Phase (Geometric Phase)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-in-rotating-magnetic-field">Example: Spin in Rotating Magnetic Field</a></li>
 </ul>
@@ -550,6 +546,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -566,13 +563,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How does a harmonically oscillating perturbation couple initial and final states? What are the selection rules?</p></li>
-<li><p>Derive the transition probability for harmonic driving. What is the role of the Rabi frequency?</p></li>
-<li><p>Explain stimulated emission and absorption in the language of perturbation theory. How does the perturbation distinguish them?</p></li>
-<li><p>What is the adiabatic theorem? Under what conditions does a system follow its instantaneous eigenstate?</p></li>
-<li><p>What is the Berry phase (geometric phase)? Why is it topological?</p></li>
-<li><p>What is a Green’s function in quantum mechanics? How are retarded and advanced Green’s functions used in scattering?</p></li>
-<li><p>How do Feynman diagrams represent perturbative processes?</p></li>
+<li><p>How does harmonic driving create resonance between states? What is the physical meaning of the Rabi frequency?</p></li>
+<li><p>Describe Rabi oscillations: what oscillates, and what determines the oscillation frequency?</p></li>
+<li><p>What is the adiabatic theorem? Under what conditions can a system follow its instantaneous eigenstate without exciting other levels?</p></li>
+<li><p>What is the Berry phase? Why is it geometric (independent of the path detail) rather than just accumulated energy?</p></li>
+<li><p>How do Green’s functions and Feynman diagrams provide tools for summing infinite perturbative series systematically?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -584,23 +579,26 @@ document.write(`
 <h4>Physical Setup<a class="headerlink" href="#physical-setup" title="Link to this heading">#</a></h4>
 <p>Many real perturbations are <strong>time-harmonic</strong> (oscillating), such as:</p>
 <ul class="simple">
-<li><p>Electromagnetic waves: <span class="math notranslate nohighlight">\(ec{E}(t) = ec{E}_0 \cos(\omega t + \phi)\)</span> (light, radio waves)</p></li>
+<li><p>Electromagnetic waves: <span class="math notranslate nohighlight">\(\boldsymbol{E}(t) = \boldsymbol{E}_0 \cos(\omega t + \phi)\)</span> (light, radio waves)</p></li>
 <li><p>Driving fields in quantum control: AC gate voltages on qubits</p></li>
 <li><p>Interaction with phonons or photons in condensed matter</p></li>
 </ul>
 <p>A harmonic perturbation can be written as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-harmonic-v">
-<span class="eqno">(331)<a class="headerlink" href="#equation-eq-5c-harmonic-v" title="Link to this equation">#</a></span>\[V(t) = V_0 \cos(\omega t) = \frac{V_0}{2} (e^{-i\omega t} + e^{i\omega t})\]</div>
+<span class="eqno">(232)<a class="headerlink" href="#equation-eq-5c-harmonic-v" title="Link to this equation">#</a></span>\[
+V(t) = V_0 \cos(\omega t) = \frac{V_0}{2} (\mathrm{e}^{-\mathrm{i}\omega t} + \mathrm{e}^{\mathrm{i}\omega t})\]</div>
 <p>or more generally, in the rotating-wave representation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-harmonic-v-gen">
-<span class="eqno">(332)<a class="headerlink" href="#equation-eq-5c-harmonic-v-gen" title="Link to this equation">#</a></span>\[V(t) = (V e^{-i\omega t} + V^\dagger e^{i\omega t})\]</div>
+<span class="eqno">(233)<a class="headerlink" href="#equation-eq-5c-harmonic-v-gen" title="Link to this equation">#</a></span>\[
+V(t) = (V \mathrm{e}^{-\mathrm{i}\omega t} + V^\dagger \mathrm{e}^{\mathrm{i}\omega t})\]</div>
 </section>
 <section id="transition-amplitude-and-resonance">
 <h4>Transition Amplitude and Resonance<a class="headerlink" href="#transition-amplitude-and-resonance" title="Link to this heading">#</a></h4>
 <p>Using first-order perturbation theory from the Dyson series:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{i}{\hbar} \int_0^t dt_1 e^{i\omega_{fi}t_1} \langle f | V(t_1) | i \rangle\]</div>
-<p>For harmonic <span class="math notranslate nohighlight">\(V(t) = \frac{V_0}{2}(e^{-i\omega t} + e^{i\omega t})\)</span>, this integral contains two terms with frequencies <span class="math notranslate nohighlight">\(\omega_{fi} \pm \omega\)</span>.</p>
+\[
+\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{\mathrm{i}}{\hbar} \int_0^t dt_1 \mathrm{e}^{\mathrm{i}\omega_{fi}t_1} \langle f | V(t_1) | i \rangle\]</div>
+<p>For harmonic <span class="math notranslate nohighlight">\(V(t) = \frac{V_0}{2}(\mathrm{e}^{-\mathrm{i}\omega t} + \mathrm{e}^{\mathrm{i}\omega t})\)</span>, this integral contains two terms with frequencies <span class="math notranslate nohighlight">\(\omega_{fi} \pm \omega\)</span>.</p>
 <p><strong>Resonance occurs at</strong>:</p>
 <ol class="arabic simple">
 <li><p><strong>Absorption</strong> (<span class="math notranslate nohighlight">\(E_f &gt; E_i\)</span>): <span class="math notranslate nohighlight">\(\omega = \omega_{fi} = (E_f - E_i)/\hbar\)</span> — the photon energy matches the energy gap; this term accumulates.</p></li>
@@ -612,11 +610,19 @@ document.write(`
 <h4>Rabi Oscillations<a class="headerlink" href="#rabi-oscillations" title="Link to this heading">#</a></h4>
 <p>In the <strong>rotating wave approximation</strong> (neglecting rapidly oscillating off-resonant terms) and on <strong>exact resonance</strong> (<span class="math notranslate nohighlight">\(\omega = \omega_{fi}\)</span>), the transition probability is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-p-rabi">
-<span class="eqno">(333)<a class="headerlink" href="#equation-eq-5c-p-rabi" title="Link to this equation">#</a></span>\[\boxed{P_{i\to f}(t) = \frac{|V_{fi}|^2}{\hbar^2} \sin^2\left(\frac{\Omega_R t}{2}\right)}\]</div>
-<p>where the <strong>Rabi frequency</strong> is:</p>
+<span class="eqno">(234)<a class="headerlink" href="#equation-eq-5c-p-rabi" title="Link to this equation">#</a></span>\[
+\boxed{P_{i\to f}(t) = \frac{|V_{fi}|^2}{\hbar^2} \sin^2\left(\frac{\Omega_R t}{2}\right)}\]</div>
+<div class="important admonition">
+<p class="admonition-title">Rabi Frequency</p>
+<p>The <strong>Rabi frequency</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-rabi-freq">
-<span class="eqno">(334)<a class="headerlink" href="#equation-eq-5c-rabi-freq" title="Link to this equation">#</a></span>\[\boxed{\Omega_R = \frac{|V_{fi}|}{\hbar}}\]</div>
-<p><strong>Physical interpretation</strong>: The probability <strong>oscillates sinusoidally</strong> between 0 and 1 as the system coherently exchanges energy with the driving field. This is <strong>Rabi oscillation</strong>. Starting in state <span class="math notranslate nohighlight">\(|i\rangle\)</span>, the system oscillates between <span class="math notranslate nohighlight">\(|i\rangle\)</span> and <span class="math notranslate nohighlight">\(|f\rangle\)</span>, reaching maximum probability (population inversion) at times <span class="math notranslate nohighlight">\(t = \pi/(2\Omega_R)\)</span>.</p>
+<span class="eqno">(235)<a class="headerlink" href="#equation-eq-5c-rabi-freq" title="Link to this equation">#</a></span>\[
+\boxed{\Omega_R = \frac{|V_{fi}|}{\hbar}}\]</div>
+<p>This represents the rate at which the system oscillates between the two states. Doubling the coupling strength (matrix element) doubles the Rabi frequency.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Physical Interpretation: Coherent Oscillations</p>
+<p>The probability <strong>oscillates sinusoidally</strong> between 0 and 1 as the system coherently exchanges energy with the driving field. This is <strong>Rabi oscillation</strong>. Starting in state <span class="math notranslate nohighlight">\(|i\rangle\)</span>, the system oscillates between <span class="math notranslate nohighlight">\(|i\rangle\)</span> and <span class="math notranslate nohighlight">\(|f\rangle\)</span>, reaching maximum probability (population inversion) at times <span class="math notranslate nohighlight">\(t = \pi/(2\Omega_R)\)</span>.</p>
 <p><strong>Applications</strong>:</p>
 <ul class="simple">
 <li><p><strong>NMR resonance</strong>: Radiofrequency (RF) pulses drive spin transitions; Rabi frequency determines pulse duration.</p></li>
@@ -628,36 +634,47 @@ document.write(`
 <p class="admonition-title">Derivation</p>
 <p>Start with:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{i}{\hbar} \int_0^t dt_1 e^{i\omega_{fi}t_1} \langle f | V(t_1) | i \rangle\]</div>
-<p>Insert <span class="math notranslate nohighlight">\(V(t) = \frac{V_0}{2}(e^{-i\omega t} + e^{i\omega t})\)</span> where <span class="math notranslate nohighlight">\(V_0 = V_{fi}\)</span> is the matrix element:</p>
+\[
+\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{\mathrm{i}}{\hbar} \int_0^t dt_1 \mathrm{e}^{\mathrm{i}\omega_{fi}t_1} \langle f | V(t_1) | i \rangle\]</div>
+<p>Insert <span class="math notranslate nohighlight">\(V(t) = \frac{V_0}{2}(\mathrm{e}^{-\mathrm{i}\omega t} + \mathrm{e}^{\mathrm{i}\omega t})\)</span> where <span class="math notranslate nohighlight">\(V_0 = V_{fi}\)</span> is the matrix element:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{i V_0}{2\hbar} \left[ \int_0^t dt_1 e^{i(\omega_{fi} - \omega)t_1} + \int_0^t dt_1 e^{i(\omega_{fi} + \omega)t_1} \right]\]</div>
+\[
+\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{\mathrm{i} V_0}{2\hbar} \left[ \int_0^t dt_1 \mathrm{e}^{\mathrm{i}(\omega_{fi} - \omega)t_1} + \int_0^t dt_1 \mathrm{e}^{\mathrm{i}(\omega_{fi} + \omega)t_1} \right]\]</div>
 <p>Evaluate the integrals:</p>
 <div class="math notranslate nohighlight">
-\[\int_0^t dt_1 e^{i\Delta\omega t_1} = \frac{e^{i\Delta\omega t} - 1}{i\Delta\omega}\]</div>
+\[
+\int_0^t dt_1 \mathrm{e}^{\mathrm{i}\Delta\omega t_1} = \frac{\mathrm{e}^{\mathrm{i}\Delta\omega t} - 1}{i\Delta\omega}\]</div>
 <p>giving:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{i V_0}{2\hbar} \left[ \frac{e^{i(\omega_{fi}-\omega)t} - 1}{i(\omega_{fi} - \omega)} + \frac{e^{i(\omega_{fi}+\omega)t} - 1}{i(\omega_{fi} + \omega)} \right]\]</div>
+\[
+\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{\mathrm{i} V_0}{2\hbar} \left[ \frac{\mathrm{e}^{\mathrm{i}(\omega_{fi}-\omega)t} - 1}{i(\omega_{fi} - \omega)} + \frac{\mathrm{e}^{\mathrm{i}(\omega_{fi}+\omega)t} - 1}{i(\omega_{fi} + \omega)} \right]\]</div>
 <p><strong>Rotating wave approximation</strong>: If <span class="math notranslate nohighlight">\(\omega \approx \omega_{fi}\)</span>, the first term is resonant (slow or zero oscillation), while the second term oscillates rapidly at <span class="math notranslate nohighlight">\(\approx 2\omega_{fi}\)</span>. Neglecting the rapid term:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}(t) \approx -\frac{i V_0}{2\hbar} \cdot \frac{e^{i(\omega_{fi}-\omega)t} - 1}{i(\omega_{fi} - \omega)} = \frac{V_0}{2\hbar} \cdot \frac{e^{i(\omega_{fi}-\omega)t} - 1}{\omega_{fi} - \omega}\]</div>
+\[
+\mathcal{A}_{i\to f}(t) \approx -\frac{\mathrm{i} V_0}{2\hbar} \cdot \frac{\mathrm{e}^{\mathrm{i}(\omega_{fi}-\omega)t} - 1}{i(\omega_{fi} - \omega)} = \frac{V_0}{2\hbar} \cdot \frac{\mathrm{e}^{\mathrm{i}(\omega_{fi}-\omega)t} - 1}{\omega_{fi} - \omega}\]</div>
 <p><strong>On exact resonance</strong> (<span class="math notranslate nohighlight">\(\omega = \omega_{fi}\)</span>), the numerator and denominator both vanish. Using L’Hôpital or direct substitution:</p>
 <div class="math notranslate nohighlight">
-\[\lim_{\omega \to \omega_{fi}} \frac{e^{i(\omega_{fi}-\omega)t} - 1}{\omega_{fi} - \omega} = \lim_{\delta \to 0} \frac{e^{-i\delta t} - 1}{-\delta} = it e^{-i\omega_{fi}t/2}\sin(\omega_{fi}t/2) / (\omega_{fi}t/2)\]</div>
+\[
+\lim_{\omega \to \omega_{fi}} \frac{\mathrm{e}^{\mathrm{i}(\omega_{fi}-\omega)t} - 1}{\omega_{fi} - \omega} = \lim_{\delta \to 0} \frac{\mathrm{e}^{-\mathrm{i}\delta t} - 1}{-\delta} = it \mathrm{e}^{-\mathrm{i}\omega_{fi}t/2}\sin(\omega_{fi}t/2) / (\omega_{fi}t/2)\]</div>
 <p>Actually, on exact resonance:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}(t) = -i\frac{V_0}{2\hbar} t + O((\omega - \omega_{fi})^2)\]</div>
+\[
+\mathcal{A}_{i\to f}(t) = -\mathrm{i}\frac{V_0}{2\hbar} t + O((\omega - \omega_{fi})^2)\]</div>
 <p>Wait, let me recalculate more carefully. On resonance:</p>
 <div class="math notranslate nohighlight">
-\[\int_0^t e^{i\Delta\omega t'} dt' \Big|_{\Delta\omega = 0} = t\]</div>
+\[
+\int_0^t \mathrm{e}^{\mathrm{i}\Delta\omega t'} dt' \Big|_{\Delta\omega = 0} = t\]</div>
 <p>So:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}(t) = -\frac{i V_0 t}{2\hbar}\]</div>
+\[
+\mathcal{A}_{i\to f}(t) = -\frac{\mathrm{i} V_0 t}{2\hbar}\]</div>
 <p>But this grows without bound, which is unphysical (violates probability conservation). The issue is that we must treat near-resonance more carefully using the Rabi frequency. The full solution (without the first-order approximation) gives sinusoidal oscillations.</p>
 <p><strong>Exact result from solving the two-level system directly</strong>: For a two-level atom in a resonant harmonic field, the population oscillates as:</p>
 <div class="math notranslate nohighlight">
-\[P_{i\to f}(t) = \sin^2\left(\frac{\Omega_R t}{2}\right)\]</div>
+\[
+P_{i\to f}(t) = \sin^2\left(\frac{\Omega_R t}{2}\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Omega_R = |V_{fi}|/\hbar\)</span> (the Rabi frequency).</p>
+</div>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Stimulated Emission vs. Absorption</p>
@@ -667,64 +684,106 @@ document.write(`
 <li><p><strong>Stimulated emission</strong> (<span class="math notranslate nohighlight">\(i \to f\)</span> with <span class="math notranslate nohighlight">\(E_f &lt; E_i\)</span>): The system emits a photon stimulated by the oscillating field and transitions downward. Resonance: <span class="math notranslate nohighlight">\(\hbar\omega = E_i - E_f\)</span>. This corresponds to the second term.</p></li>
 </ul>
 <p>Perturbation theory treats both transitions on equal footing—they arise as different contributions in the expansion. The distinction (absorption vs. emission) is determined by the resonance condition and the sign of the energy difference. Both are deterministic (unlike spontaneous emission, which occurs without external driving).</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Validity of the Rotating Wave Approximation</p>
+<p>The rotating wave approximation (RWA) drops the rapidly oscillating counter-rotating term (frequency <span class="math notranslate nohighlight">\(\sim 2\omega\)</span> from the second integral). This is justified when the Rabi frequency is much smaller than the driving frequency:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|V_{fi}|}{\hbar} \ll \omega_{fi}\]</div>
+<ul class="simple">
+<li><p><strong>What happens off-resonance?</strong> When <span class="math notranslate nohighlight">\(\omega \neq \omega_{fi}\)</span>, the resonant term is no longer truly resonant. How does detuning <span class="math notranslate nohighlight">\(\Delta = \omega - \omega_{fi}\)</span> affect RWA validity? Derive the condition on <span class="math notranslate nohighlight">\(\Delta\)</span> for the approximation to remain valid.</p></li>
+<li><p><strong>Quantifying RWA error:</strong> Estimate the transition amplitude from the discarded counter-rotating term when on resonance. How does the error scale with <span class="math notranslate nohighlight">\(\Omega_R / \omega\)</span>?</p></li>
+<li><p><strong>Strong driving regime:</strong> When the Rabi frequency becomes comparable to the driving frequency (<span class="math notranslate nohighlight">\(\Omega_R \sim \omega\)</span>), what effects from counter-rotating terms become observable?</p></li>
+</ul>
+</div>
+</div>
+<div class="docutils">
+<h3 class="rubric" id="application-2-the-adiabatic-theorem-and-berry-phase">Application 2: The Adiabatic Theorem and Berry Phase</h3>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Quantifying the Adiabatic Condition</p>
+<p>The adiabatic theorem states: if <span class="math notranslate nohighlight">\(H(t)\)</span> changes “slowly,” the system remains in an instantaneous eigenstate. But what does “slow” mean quantitatively?</p>
+<ul class="simple">
+<li><p>Express the adiabatic condition in terms of <span class="math notranslate nohighlight">\(\frac{\mathrm{d}H}{dt}\)</span>, matrix elements of the perturbation, and energy gaps.</p></li>
+<li><p>For a two-level system with <span class="math notranslate nohighlight">\(H(t) = \Omega(t) \hat{\sigma}^x + f(t) \hat{\sigma}^z\)</span>, when is <span class="math notranslate nohighlight">\(\Omega(t)\)</span> or <span class="math notranslate nohighlight">\(f(t)\)</span> changing “too fast”?</p></li>
+<li><p>Compute the adiabatic error (probability of transition to another eigenstate) as a function of the rate of change.</p></li>
+<li><p>In cavity QED, how fast can you sweep the detuning before violations of adiabaticity lead to transitions?</p></li>
+</ul>
+</div>
 </div>
 </section>
-</section>
-<section id="application-2-the-adiabatic-theorem-and-berry-phase">
-<h3>Application 2: The Adiabatic Theorem and Berry Phase<a class="headerlink" href="#application-2-the-adiabatic-theorem-and-berry-phase" title="Link to this heading">#</a></h3>
 <section id="the-adiabatic-theorem-statement">
 <h4>The Adiabatic Theorem Statement<a class="headerlink" href="#the-adiabatic-theorem-statement" title="Link to this heading">#</a></h4>
 <p>Consider a <strong>time-dependent Hamiltonian</strong> <span class="math notranslate nohighlight">\(H(t)\)</span> that depends on a parameter (or parameters) that evolve slowly. More precisely:</p>
 <div class="math notranslate nohighlight">
-\[H(t) = H_0(\lambda(t))\]</div>
+\[
+H(t) = H_0(\lambda(t))\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda(t)\)</span> changes on a <strong>time scale</strong> <span class="math notranslate nohighlight">\(T\)</span> that is much longer than <span class="math notranslate nohighlight">\(\hbar / (\Delta E)\)</span>, where <span class="math notranslate nohighlight">\(\Delta E\)</span> is the typical energy scale (gap between levels).</p>
-<p><strong>Adiabatic Theorem</strong>: If the system starts in an eigenstate <span class="math notranslate nohighlight">\(|n(0)\rangle\)</span> of <span class="math notranslate nohighlight">\(H(0)\)</span>, it will remain in the <strong>instantaneous eigenstate</strong> <span class="math notranslate nohighlight">\(|n(t)\rangle\)</span> of <span class="math notranslate nohighlight">\(H(t)\)</span> (up to phase factors) throughout the evolution, provided the adiabatic condition is satisfied.</p>
+<div class="important if the system starts in an eigenstate n-0-rangle of h-0 it will remain instantaneous n-t-rangle h-t up to phase factors throughout evolution provided adiabatic condition is satisfied admonition">
+<p class="admonition-title">Adiabatic Theorem</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-adiabatic-state">
-<span class="eqno">(335)<a class="headerlink" href="#equation-eq-5c-adiabatic-state" title="Link to this equation">#</a></span>\[|\psi(t)\rangle \approx e^{i\gamma_n(t)} e^{-i\phi_n(t)} |n(t)\rangle\]</div>
+<span class="eqno">(236)<a class="headerlink" href="#equation-eq-5c-adiabatic-state" title="Link to this equation">#</a></span>\[
+|\psi(t)\rangle \approx \mathrm{e}^{\mathrm{i}\gamma_n(t)} \mathrm{e}^{-\mathrm{i}\phi_n(t)} |n(t)\rangle\]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\phi_n(t) = \frac{1}{\hbar} \int_0^t E_n(t') dt'\)</span> is the <strong>dynamical phase</strong> (standard quantum phase acquired from time evolution).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi_n(t) = \frac{1}{\hbar} \int_0^t E_n(t') \mathrm{d}t\'\)</span> is the <strong>dynamical phase</strong> (standard quantum phase acquired from time evolution).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma_n(t)\)</span> is the <strong>Berry phase</strong> (geometric phase)—a topological quantity depending on the path in parameter space.</p></li>
 </ul>
-</section>
-<section id="derivation-from-perturbation-theory">
-<h4>Derivation from Perturbation Theory<a class="headerlink" href="#derivation-from-perturbation-theory" title="Link to this heading">#</a></h4>
+<h4 class="rubric" id="derivation-from-perturbation-theory">Derivation from Perturbation Theory</h4>
 <p>The adiabatic theorem can be derived rigorously from time-dependent perturbation theory. The key insight: slowly varying parameters suppress transitions to other levels.</p>
 <p>Consider the Hamiltonian in the <strong>adiabatic basis</strong> (the basis of instantaneous eigenstates <span class="math notranslate nohighlight">\(|n(t)\rangle\)</span>). The equation of motion in this basis contains <strong>transition matrix elements</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\langle m(t) | i\hbar \frac{d}{dt} | n(t) \rangle = (E_n - E_m) \delta_{mn} + i\hbar \langle m | \frac{\partial}{\partial t} | n \rangle\]</div>
+\[
+\langle m(t) | \mathrm{i}\hbar \frac{\mathrm{d}}{\mathrm{d}t} | n(t) \rangle = (E_n - E_m) \delta_{mn} + \mathrm{i}\hbar \langle m | \frac{\partial}{\partial t} | n \rangle\]</div>
 <p>The second term (the “non-adiabatic coupling”) is:</p>
 <div class="math notranslate nohighlight">
-\[\langle m | \frac{\partial}{\partial t} | n \rangle = \dot{\lambda}(t) \langle m | \frac{\partial}{\partial \lambda} | n \rangle\]</div>
+\[
+\langle m | \frac{\partial}{\partial t} | n \rangle = \dot{\lambda}(t) \langle m | \frac{\partial}{\partial \lambda} | n \rangle\]</div>
 <p><strong>For slow changes</strong> (<span class="math notranslate nohighlight">\(\dot{\lambda}\)</span> small), this coupling is small, and transitions to other levels are suppressed. The adiabatic condition is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-adiab-condition">
-<span class="eqno">(336)<a class="headerlink" href="#equation-eq-5c-adiab-condition" title="Link to this equation">#</a></span>\[\left| \dot{\lambda}(t) \langle m | \frac{\partial}{\partial\lambda} | n \rangle \right| \ll |E_m(t) - E_n(t)| / \hbar\]</div>
+<span class="eqno">(237)<a class="headerlink" href="#equation-eq-5c-adiab-condition" title="Link to this equation">#</a></span>\[
+\left| \dot{\lambda}(t) \langle m | \frac{\partial}{\partial\lambda} | n \rangle \right| \ll |E_m(t) - E_n(t)| / \hbar\]</div>
 <p>When this holds, transitions are negligible, and the system remains in state <span class="math notranslate nohighlight">\(|n(t)\rangle\)</span> (up to phases).</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation details</p>
 <p>Transform to the adiabatic basis by writing:</p>
 <div class="math notranslate nohighlight">
-\[|\psi(t)\rangle = \sum_n c_n(t) e^{i\gamma_n(t)} e^{-i\phi_n(t)} |n(t)\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\phi_n(t) = \int_0^t E_n(t') dt' / \hbar\)</span> and <span class="math notranslate nohighlight">\(\gamma_n(t) = i \int_0^t \langle n | \partial_t | n \rangle dt'\)</span>.</p>
-<p>Substitute into the Schrödinger equation <span class="math notranslate nohighlight">\(i\hbar \partial_t |\psi\rangle = H |\psi\rangle\)</span> and project onto <span class="math notranslate nohighlight">\(|m(t)\rangle\)</span>. The equation of motion for <span class="math notranslate nohighlight">\(c_m(t)\)</span> is:</p>
+\[
+|\psi(t)\rangle = \sum_n c_n(t) \mathrm{e}^{\mathrm{i}\gamma_n(t)} \mathrm{e}^{-\mathrm{i}\phi_n(t)} |n(t)\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_n(t) = \int_0^t E_n(t') \mathrm{d}t\' / \hbar\)</span> and <span class="math notranslate nohighlight">\(\gamma_n(t) = \mathrm{i} \int_0^t \langle n | \partial_t | n \rangle dt'\)</span>.</p>
+<p>Substitute into the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \partial_t |\psi\rangle = H |\psi\rangle\)</span> and project onto <span class="math notranslate nohighlight">\(|m(t)\rangle\)</span>. The equation of motion for <span class="math notranslate nohighlight">\(c_m(t)\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[\dot{c}_m(t) = -\dot{\lambda}(t) \sum_n c_n(t) \frac{\langle m | \partial_\lambda H | n \rangle}{E_n - E_m} e^{i(\gamma_m - \gamma_n)} e^{-i(\phi_m - \phi_n)}\]</div>
+\[
+\dot{c}_m(t) = -\dot{\lambda}(t) \sum_n c_n(t) \frac{\langle m | \partial_\lambda H | n \rangle}{E_n - E_m} \mathrm{e}^{\mathrm{i}(\gamma_m - \gamma_n)} \mathrm{e}^{-\mathrm{i}(\phi_m - \phi_n)}\]</div>
 <p><strong>Adiabatic approximation</strong>: If <span class="math notranslate nohighlight">\(|\dot{\lambda}| / (\Delta E / \hbar) \ll 1\)</span>, then the coupling terms are small, and <span class="math notranslate nohighlight">\(c_n(t) \approx \delta_{n, n_0}\)</span> (the coefficient remains constant for the initial state <span class="math notranslate nohighlight">\(n_0\)</span>). Thus the state remains <span class="math notranslate nohighlight">\(|n_0(t)\rangle\)</span> to leading order.</p>
+</div>
 </div>
 </section>
 <section id="the-berry-phase-geometric-phase">
 <h4>The Berry Phase (Geometric Phase)<a class="headerlink" href="#the-berry-phase-geometric-phase" title="Link to this heading">#</a></h4>
 <p>The <strong>Berry phase</strong> <span class="math notranslate nohighlight">\(\gamma_n(t)\)</span> arises from the <strong>geometry of the path</strong> traced in parameter space:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-berry-phase-integral">
-<span class="eqno">(337)<a class="headerlink" href="#equation-eq-5c-berry-phase-integral" title="Link to this equation">#</a></span>\[\gamma_n(t) = i \int_0^t \langle n(t') | \frac{d}{dt'} | n(t') \rangle dt'\]</div>
+<span class="eqno">(238)<a class="headerlink" href="#equation-eq-5c-berry-phase-integral" title="Link to this equation">#</a></span>\[
+\gamma_n(t) = \mathrm{i} \int_0^t \langle n(t') | \frac{\mathrm{d}}{\mathrm{d}t'} | n(t') \rangle dt'\]</div>
 <p><strong>Key properties</strong>:</p>
 <ol class="arabic simple">
 <li><p><strong>Geometric (not dynamical)</strong>: Depends only on the path <span class="math notranslate nohighlight">\(\lambda(t)\)</span> in parameter space, not on the speed of traversal or the time taken.</p></li>
-<li><p><strong>Gauge-dependent</strong>: The phase is gauge-dependent—it changes if we redefine <span class="math notranslate nohighlight">\(|n(t)\rangle \to e^{i\chi(t)} |n(t)\rangle\)</span>. However, for a <strong>closed loop</strong> (cyclic adiabatic evolution), the total Berry phase is <strong>gauge-invariant</strong>.</p></li>
+<li><p><strong>Gauge-dependent</strong>: The phase is gauge-dependent—it changes if we redefine <span class="math notranslate nohighlight">\(|n(t)\rangle \to \mathrm{e}^{\mathrm{i}\chi(t)} |n(t)\rangle\)</span>. However, for a <strong>closed loop</strong> (cyclic adiabatic evolution), the total Berry phase is <strong>gauge-invariant</strong>.</p></li>
+</ol>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Gauge Dependence vs. Physical Observability</p>
+<p>The Berry phase <span class="math notranslate nohighlight">\(\gamma_n(t) = \mathrm{i} \int_0^t \langle n | \partial_t n \rangle dt'\)</span> is explicitly gauge-dependent. Redefining <span class="math notranslate nohighlight">\(|n(t)\rangle \to \mathrm{e}^{\mathrm{i}\chi(t)} |n(t)\rangle\)</span> shifts the Berry phase by <span class="math notranslate nohighlight">\(\chi(T) - \chi(0)\)</span>. Yet physicists insist it is “physical” and observable.</p>
+<ul class="simple">
+<li><p><strong>Open vs. closed paths:</strong> Why is gauge freedom <em>not</em> a problem for measurements on open paths? What gauge-invariant quantity can you measure?</p></li>
+<li><p><strong>Cyclic evolution:</strong> Show that returning to the original parameter point yields a gauge-invariant phase shift <span class="math notranslate nohighlight">\(\gamma_n^{\text{cyclic}}\)</span>. Why does closure remove the gauge ambiguity?</p></li>
+<li><p><strong>Experimental observation:</strong> In the Aharonov-Bohm or spin Hall effect, how do interfering paths conspire to make the Berry phase observable despite individual gauge-dependent phases?</p></li>
+</ul>
+</div>
+<ol class="arabic simple" start="3">
 <li><p><strong>Topological (for closed loops)</strong>: For cyclic evolution <span class="math notranslate nohighlight">\(\lambda(T) = \lambda(0)\)</span>:</p></li>
 </ol>
 <div class="math notranslate nohighlight">
-\[\gamma_n^{\text{cyclic}} = i \oint \langle n(\boldsymbol{R}) | \nabla_\boldsymbol{R} n(\boldsymbol{R}) \rangle \cdot d\boldsymbol{R}\]</div>
+\[
+\gamma_n^{\text{cyclic}} = i \oint \langle n(\boldsymbol{R}) | \nabla_\boldsymbol{R} n(\boldsymbol{R}) \rangle \cdot d\boldsymbol{R}\]</div>
 <p>This is related to the <strong>Berry curvature</strong> and is a topological invariant (Chern number) depending only on the topology of the closed path, not its parametrization.</p>
 <ol class="arabic simple" start="4">
 <li><p><strong>Observable</strong>: The Berry phase manifests as a relative phase shift between regions of space and can be observed via interference experiments (e.g., Aharonov-Bohm effect for non-abelian gauge fields, spin Hall effect).</p></li>
@@ -733,9 +792,10 @@ document.write(`
 </section>
 <section id="example-spin-in-rotating-magnetic-field">
 <h4>Example: Spin in Rotating Magnetic Field<a class="headerlink" href="#example-spin-in-rotating-magnetic-field" title="Link to this heading">#</a></h4>
-<p>A spin-1/2 in a magnetic field <span class="math notranslate nohighlight">\(ec{B}(t) = B(\cos\omega t, \sin\omega t, 0)\)</span> (precessing in the <span class="math notranslate nohighlight">\(xy\)</span>-plane) follows the field adiabatically if the field rotates slowly. In the rotating frame (adiabatic limit), the spin precesses around the field direction. After a complete rotation, the spin acquires a Berry phase:</p>
+<p>A spin-1/2 in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t) = B(\cos\omega t, \sin\omega t, 0)\)</span> (precessing in the <span class="math notranslate nohighlight">\(xy\)</span>-plane) follows the field adiabatically if the field rotates slowly. In the rotating frame (adiabatic limit), the spin precesses around the field direction. After a complete rotation, the spin acquires a Berry phase:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \frac{\pi}{2} \Omega \quad (\text{for a } 2\pi \text{ rotation angle})\]</div>
+\[
+\gamma = \frac{\pi}{2} \Omega \quad (\text{for a } 2\pi \text{ rotation angle})\]</div>
 <p>This phase is observable and represents a purely geometric effect—it depends on the path traced, not the time taken.</p>
 </section>
 </section>
@@ -745,7 +805,8 @@ document.write(`
 <h4>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h4>
 <p>The <strong>Green’s function</strong> (propagator or resolvent) is a fundamental object encoding all spectral information:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-green-full">
-<span class="eqno">(338)<a class="headerlink" href="#equation-eq-5c-green-full" title="Link to this equation">#</a></span>\[\boxed{G^\pm(E) = \frac{1}{E - H \pm i\epsilon}}\]</div>
+<span class="eqno">(239)<a class="headerlink" href="#equation-eq-5c-green-full" title="Link to this equation">#</a></span>\[
+\boxed{G^\pm(E) = \frac{1}{E - H \pm \mathrm{i}\epsilon}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon \to 0^+\)</span> and:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(G^+\)</span> (retarded): Describes outgoing boundary conditions (effect follows cause).</p></li>
@@ -753,7 +814,8 @@ document.write(`
 </ul>
 <p>In time domain:</p>
 <div class="math notranslate nohighlight">
-\[G^+(\boldsymbol{r}, \boldsymbol{r}'; E) = -\frac{i}{\hbar} \int_0^\infty dt \, e^{iEt/\hbar} \langle \boldsymbol{r} | e^{-iHt/\hbar} | \boldsymbol{r}' \rangle\]</div>
+\[
+G^+(\boldsymbol{r}, \boldsymbol{r}'; E) = -\frac{\mathrm{i}}{\hbar} \int_0^\infty dt \, \mathrm{e}^{\mathrm{i}Et/\hbar} \langle \boldsymbol{r} | \mathrm{e}^{-\mathrm{i}Ht/\hbar} | \boldsymbol{r}' \rangle\]</div>
 </section>
 <section id="physical-interpretation">
 <h4>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h4>
@@ -768,39 +830,48 @@ document.write(`
 <h4>Lippmann-Schwinger Equation<a class="headerlink" href="#lippmann-schwinger-equation" title="Link to this heading">#</a></h4>
 <p>For a system with Hamiltonian <span class="math notranslate nohighlight">\(H = H_0 + V\)</span>, the full Green’s function satisfies a self-consistent equation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-lippmann-schwinger">
-<span class="eqno">(339)<a class="headerlink" href="#equation-eq-5c-lippmann-schwinger" title="Link to this equation">#</a></span>\[\boxed{G^\pm(E) = G_0^\pm(E) + G_0^\pm(E) V G^\pm(E)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(G_0^\pm(E) = 1/(E - H_0 \pm i\epsilon)\)</span> is the free (unperturbed) Green’s function.</p>
+<span class="eqno">(240)<a class="headerlink" href="#equation-eq-5c-lippmann-schwinger" title="Link to this equation">#</a></span>\[
+\boxed{G^\pm(E) = G_0^\pm(E) + G_0^\pm(E) V G^\pm(E)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G_0^\pm(E) = 1/(E - H_0 \pm \mathrm{i}\epsilon)\)</span> is the free (unperturbed) Green’s function.</p>
 <p><strong>Iterating this equation</strong> generates the <strong>Born series</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-born-series">
-<span class="eqno">(340)<a class="headerlink" href="#equation-eq-5c-born-series" title="Link to this equation">#</a></span>\[\boxed{G^\pm(E) = G_0^\pm + G_0^\pm V G_0^\pm + G_0^\pm V G_0^\pm V G_0^\pm + \ldots}\]</div>
+<span class="eqno">(241)<a class="headerlink" href="#equation-eq-5c-born-series" title="Link to this equation">#</a></span>\[
+\boxed{G^\pm(E) = G_0^\pm + G_0^\pm V G_0^\pm + G_0^\pm V G_0^\pm V G_0^\pm + \ldots}\]</div>
 <p>Each term represents an additional scattering event from <span class="math notranslate nohighlight">\(V\)</span>.</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation</p>
 <p>Start with:</p>
 <div class="math notranslate nohighlight">
-\[(E - H_0 - V) G^\pm(E) = 1\]</div>
+\[
+(E - H_0 - V) G^\pm(E) = 1\]</div>
 <p>Rewrite as:</p>
 <div class="math notranslate nohighlight">
-\[(E - H_0) G^\pm(E) = 1 + V G^\pm(E)\]</div>
-<p>Multiply both sides by <span class="math notranslate nohighlight">\(G_0^\pm(E) = 1/(E - H_0 \pm i\epsilon)\)</span>:</p>
+\[
+(E - H_0) G^\pm(E) = 1 + V G^\pm(E)\]</div>
+<p>Multiply both sides by <span class="math notranslate nohighlight">\(G_0^\pm(E) = 1/(E - H_0 \pm \mathrm{i}\epsilon)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[G^\pm(E) = G_0^\pm(E) + G_0^\pm(E) V G^\pm(E)\]</div>
+\[
+G^\pm(E) = G_0^\pm(E) + G_0^\pm(E) V G^\pm(E)\]</div>
 <p>This is the Lippmann-Schwinger equation. Iterate:</p>
 <div class="math notranslate nohighlight">
-\[G^\pm = G_0^\pm + G_0^\pm V G_0^\pm + G_0^\pm V G_0^\pm V G_0^\pm + \ldots\]</div>
+\[
+G^\pm = G_0^\pm + G_0^\pm V G_0^\pm + G_0^\pm V G_0^\pm V G_0^\pm + \ldots\]</div>
 </div>
 </section>
 <section id="scattering-t-matrix-and-born-approximation">
 <h4>Scattering T-Matrix and Born Approximation<a class="headerlink" href="#scattering-t-matrix-and-born-approximation" title="Link to this heading">#</a></h4>
 <p>The <strong>T-matrix</strong> (transition operator) is defined by:</p>
 <div class="math notranslate nohighlight">
-\[G^\pm(E) = G_0^\pm(E) + G_0^\pm(E) T^\pm(E) G_0^\pm(E)\]</div>
+\[
+G^\pm(E) = G_0^\pm(E) + G_0^\pm(E) T^\pm(E) G_0^\pm(E)\]</div>
 <p>The <strong>Born approximation</strong> (first-order scattering) truncates at:</p>
 <div class="math notranslate nohighlight">
-\[T^{(1)}(E) \approx V\]</div>
+\[
+T^{(1)}(E) \approx V\]</div>
 <p>The <strong>scattering amplitude</strong> is proportional to the T-matrix element:</p>
 <div class="math notranslate nohighlight">
-\[f(\theta) \propto \langle \boldsymbol{k}_f | T(E) | \boldsymbol{k}_i \rangle\]</div>
+\[
+f(\theta) \propto \langle \boldsymbol{k}_f | T(E) | \boldsymbol{k}_i \rangle\]</div>
 <p>where <span class="math notranslate nohighlight">\(|\boldsymbol{k}_i\rangle\)</span> and <span class="math notranslate nohighlight">\(|\boldsymbol{k}_f\rangle\)</span> are momentum eigenstates.</p>
 </section>
 </section>
@@ -832,11 +903,13 @@ document.write(`
 <h4>Example: Second-Order Diagram<a class="headerlink" href="#example-second-order-diagram" title="Link to this heading">#</a></h4>
 <p>For a transition <span class="math notranslate nohighlight">\(i \to n \to f\)</span> via an intermediate state, the diagram is:</p>
 <div class="math notranslate nohighlight">
-\[\text{Diagram:} \quad |i\rangle \to |n\rangle \to |f\rangle\]</div>
+\[
+\text{Diagram:} \quad |i\rangle \to |n\rangle \to |f\rangle\]</div>
 <p>This contributes:</p>
 <div class="math notranslate nohighlight">
-\[\text{Contribution} = \frac{\langle f|V|n\rangle \langle n|V|i\rangle}{E_i^{(0)} - E_n^{(0)} + i\epsilon}\]</div>
-<p>The denominator encodes the energy difference; the <span class="math notranslate nohighlight">\(i\epsilon\)</span> term ensures proper causality (the intermediate state is “virtual” and off-shell).</p>
+\[
+\text{Contribution} = \frac{\langle f|V|n\rangle \langle n|V|i\rangle}{E_i^{(0)} - E_n^{(0)} + \mathrm{i}\epsilon}\]</div>
+<p>The denominator encodes the energy difference; the <span class="math notranslate nohighlight">\(\mathrm{i}\epsilon\)</span> term ensures proper causality (the intermediate state is “virtual” and off-shell).</p>
 </section>
 <section id="advantages">
 <h4>Advantages<a class="headerlink" href="#advantages" title="Link to this heading">#</a></h4>
@@ -859,7 +932,90 @@ document.write(`
 <li><p><strong>Feynman diagrams</strong>: Visual representation of every term in the perturbative expansion. Vertices, propagators, and integration rules provide systematic calculational framework.</p></li>
 <li><p><strong>Common themes across applications</strong>: Time ordering, energy conservation, resonance conditions, systematic perturbative expansion, and quantum coherence.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="5-2-2-fermis-golden-rule.html"><span class="std std-doc">5.2.2 Fermi’s Golden Rule</span></a></strong>: Transition rates and resonance conditions</p></li>
+<li><p><strong><a class="reference internal" href="#4-5-1-berry-phase.ipynb"><span class="xref myst">4.5.1 Berry Phase</span></a></strong>: Adiabatic theorem and geometric phases</p></li>
+<li><p><strong><a class="reference internal" href="../ch6_quantum-foundations/6-4-1-decoherence.html"><span class="std std-doc">6.4.1 Decoherence</span></a></strong>: Environmental effects and open quantum systems</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Rabi frequency and pulse duration</strong></p>
+<p>A two-level atom is driven by resonant electromagnetic radiation with oscillating electric field <span class="math notranslate nohighlight">\(V(t) = V_0 \cos(\omega t)\)</span>, where <span class="math notranslate nohighlight">\(\omega = \omega_{fi}\)</span> (exact resonance). The matrix element is <span class="math notranslate nohighlight">\(V_{fi} = -\boldsymbol{d} \cdot \boldsymbol{E}_0\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{d}\)</span> is the dipole moment and <span class="math notranslate nohighlight">\(\boldsymbol{E}_0\)</span> is the field amplitude.</p>
+<p>(a) Starting from state <span class="math notranslate nohighlight">\(|i\rangle\)</span>, write the formula for transition probability <span class="math notranslate nohighlight">\(P_{i\to f}(t)\)</span> in the rotating wave approximation. What is the Rabi frequency <span class="math notranslate nohighlight">\(\Omega_R\)</span>?</p>
+<p>(b) A <strong>π-pulse</strong> is a driving pulse that swaps the populations of the two levels. Calculate the required time duration <span class="math notranslate nohighlight">\(t_\pi\)</span> of a π-pulse.</p>
+<p>(c) A <strong>Rabi flop</strong> is repeated oscillation of the transition probability. Sketch or describe the time evolution of <span class="math notranslate nohighlight">\(P_{i\to f}(t)\)</span> over several Rabi periods. At what times does the system achieve 50% excitation probability?</p>
+<p>(d) In NMR spectroscopy, a 90° RF pulse (π/2-pulse) is applied to spin-1/2 nuclei. What is its duration relative to a π-pulse?</p>
+<p><strong>2. Off-resonance driving</strong></p>
+<p>Now drive the two-level system at a frequency <span class="math notranslate nohighlight">\(\omega\)</span> close to but not exactly equal to the transition frequency <span class="math notranslate nohighlight">\(\omega_{fi}\)</span>. Define the detuning <span class="math notranslate nohighlight">\(\delta = \omega - \omega_{fi}\)</span>.</p>
+<p>(a) In the rotating wave approximation, show that when <span class="math notranslate nohighlight">\(\delta \neq 0\)</span>, the transition probability becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+P_{i\to f}(t) \sim \frac{\Omega_R^2}{\Omega_R^2 + \delta^2} \sin^2\left(\frac{\sqrt{\Omega_R^2 + \delta^2} \, t}{2}\right)\]</div>
+<p>(What is the physical role of the denominator?)</p>
+<p>(b) Show that on exact resonance (<span class="math notranslate nohighlight">\(\delta = 0\)</span>), this reduces to the formula from Problem 1.</p>
+<p>(c) What is the maximum transition probability when driving off-resonance? How does it depend on detuning?</p>
+<p>(d) Explain physically why large detuning suppresses transitions. What does this tell us about the rotating wave approximation?</p>
+<p><strong>3. Stimulated emission vs. absorption</strong></p>
+<p>An atom can transition from state <span class="math notranslate nohighlight">\(|i\rangle\)</span> to state <span class="math notranslate nohighlight">\(|f\rangle\)</span> by either absorbing or emitting a photon. Both processes couple to the same oscillating field <span class="math notranslate nohighlight">\(V(t) = V_0 \cos(\omega t)\)</span>.</p>
+<p>(a) For <strong>absorption</strong> (<span class="math notranslate nohighlight">\(E_f &gt; E_i\)</span>), at what frequency <span class="math notranslate nohighlight">\(\omega_{\text{abs}}\)</span> does resonance occur? For <strong>stimulated emission</strong> (<span class="math notranslate nohighlight">\(E_f &lt; E_i\)</span>), at what frequency <span class="math notranslate nohighlight">\(\omega_{\text{em}}\)</span> does resonance occur?</p>
+<p>(b) Show that in the rotating wave approximation, the <strong>same field</strong> at frequency <span class="math notranslate nohighlight">\(\omega\)</span> resonantly couples to either absorption or emission, depending on the initial state. Why is there no confusion?</p>
+<p>(c) In the presence of both a ground state <span class="math notranslate nohighlight">\(|g\rangle\)</span> and an excited state <span class="math notranslate nohighlight">\(|e\rangle\)</span> with <span class="math notranslate nohighlight">\(E_e &gt; E_g\)</span>, a single oscillating field at <span class="math notranslate nohighlight">\(\omega = (E_e - E_g)/\hbar\)</span> can cause transitions <span class="math notranslate nohighlight">\(|g\rangle \leftrightarrow |e\rangle\)</span> in both directions. Explain how the direction is determined by the initial population.</p>
+<p><strong>4. Adiabatic condition and dressed states</strong></p>
+<p>A two-level system is driven by a slowly varying harmonic field. The instantaneous Rabi frequency at time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\Omega_R(t)\)</span>, which changes on a timescale <span class="math notranslate nohighlight">\(\tau_{\text{scale}}\)</span>.</p>
+<p>(a) State the adiabatic condition relating <span class="math notranslate nohighlight">\(\Omega_R(t)\)</span>, its time derivative, and the energy gap.</p>
+<p>(b) For a field that grows from zero at <span class="math notranslate nohighlight">\(t=0\)</span> to its full value <span class="math notranslate nohighlight">\(\Omega_R^{\text{max}}\)</span> over a time <span class="math notranslate nohighlight">\(T_{\text{ramp}}\)</span>, estimate the timescale on which <span class="math notranslate nohighlight">\(\Omega_R(t)\)</span> changes. Is the adiabatic condition easier to satisfy for fast or slow ramps? Explain.</p>
+<p>(c) In the adiabatic limit, the system follows the <strong>instantaneous eigenstate</strong> of <span class="math notranslate nohighlight">\(H_{\text{inst}}(t) = H_0 + V(t)\)</span>. These are called <strong>dressed states</strong>. For a resonant harmonic drive, the dressed states are superpositions of the bare atomic states. If <span class="math notranslate nohighlight">\(|+\rangle_{\text{dressed}}\)</span> and <span class="math notranslate nohighlight">\(|-\rangle_{\text{dressed}}\)</span> are the dressed states, what is their physical interpretation?</p>
+<p>(d) Suppose the system starts in the ground state and the field is turned on adiabatically and then off. If the field was always resonant, in which dressed state does the system reside at the end? What is its energy relative to the ground state?</p>
+<p><strong>5. Berry phase for cyclic evolution</strong></p>
+<p>A spin-1/2 is placed in a slowly rotating magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t) = B(\cos(\Omega t), \sin(\Omega t), 0)\)</span> that rotates in the <span class="math notranslate nohighlight">\(xy\)</span>-plane with angular frequency <span class="math notranslate nohighlight">\(\Omega \ll \omega_L\)</span>, where <span class="math notranslate nohighlight">\(\omega_L = g\mu_B B/\hbar\)</span> is the Larmor frequency.</p>
+<p>(a) Write the Hamiltonian <span class="math notranslate nohighlight">\(H(t) = -\boldsymbol{\mu} \cdot \boldsymbol{B}(t)\)</span> for a magnetic moment <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \mu_B \boldsymbol{\sigma}\)</span>.</p>
+<p>(b) Assuming adiabatic evolution, the spin follows the field direction. After the field completes one full rotation (at time <span class="math notranslate nohighlight">\(T = 2\pi/\Omega\)</span>), the spin has returned to its original orientation in space. Show that the spin acquires a geometric (Berry) phase:</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma = -\frac{1}{2} \Omega T = -\pi\]</div>
+<p>(This factor of <span class="math notranslate nohighlight">\(-1/2\)</span> is the topological “half-angle” for spin-1/2.)</p>
+<p>(c) Explain why this phase is <strong>geometric</strong>: it depends on the solid angle subtended by the path traced by <span class="math notranslate nohighlight">\(\boldsymbol{B}(t)\)</span> in parameter space, not on the rotation rate <span class="math notranslate nohighlight">\(\Omega\)</span> or the time <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>(d) Is the Berry phase observable? How could you design an interference experiment to detect it?</p>
+<p><strong>6. Green’s function poles and spectrum</strong></p>
+<p>The retarded Green’s function for a quantum system is:</p>
+<div class="math notranslate nohighlight">
+\[
+G^+(E) = \frac{1}{E - H + \mathrm{i}\epsilon}\]</div>
+<p>The poles of <span class="math notranslate nohighlight">\(G^+(E)\)</span> reveal the quantum spectrum.</p>
+<p>(a) For a <strong>bound state</strong> with energy <span class="math notranslate nohighlight">\(E_n &lt; 0\)</span>, the Green’s function has a pole at <span class="math notranslate nohighlight">\(E = E_n\)</span> (on the real axis). Show that the residue at this pole is proportional to the projection onto the bound state: <span class="math notranslate nohighlight">\(|n\rangle\langle n|\)</span>.</p>
+<p>(b) A <strong>resonance</strong> corresponds to a state that decays. Its energy is complex: <span class="math notranslate nohighlight">\(E_R - i\Gamma/2\)</span>, where <span class="math notranslate nohighlight">\(\Gamma\)</span> is the decay rate (half-width). In the complex <span class="math notranslate nohighlight">\(E\)</span>-plane, is this pole in the upper or lower half-plane? Why does the small imaginary part describe exponential decay?</p>
+<p>(c) For a potential <span class="math notranslate nohighlight">\(V(\boldsymbol{r}) = -V_0 \mathrm{e}^{-r/a}\)</span> (exponential well), sketch the analytic structure of <span class="math notranslate nohighlight">\(G^+(E)\)</span> in the complex <span class="math notranslate nohighlight">\(E\)</span>-plane. Include: bound state poles, continuum branch cut, and an example resonance.</p>
+<p>(d) How would you extract the bound state energy and the scattering phase shifts from the Green’s function?</p>
+<p><strong>7. Born approximation and scattering length</strong></p>
+<p>Consider low-energy scattering of a particle from a short-range potential <span class="math notranslate nohighlight">\(V(\boldsymbol{r})\)</span> with range <span class="math notranslate nohighlight">\(a\)</span>. In the Born approximation, the scattering amplitude is:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\theta) \approx -\frac{m}{2\pi\hbar^2} \int d^3 r \, \mathrm{e}^{\mathrm{i}\boldsymbol{q}\cdot\boldsymbol{r}} V(\boldsymbol{r})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q} = \boldsymbol{k}_i - \boldsymbol{k}_f\)</span> is the momentum transfer.</p>
+<p>(a) For a <strong>spherically symmetric</strong> potential, the forward scattering amplitude (<span class="math notranslate nohighlight">\(\theta = 0\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{q} = 0\)</span>) is:</p>
+<div class="math notranslate nohighlight">
+\[
+f(0) = -\frac{m}{2\pi\hbar^2} \int d^3 r \, V(\boldsymbol{r}) = -\frac{m}{2\pi\hbar^2} \langle V \rangle\]</div>
+<p>The <strong>scattering length</strong> <span class="math notranslate nohighlight">\(a_s\)</span> is related to forward scattering by <span class="math notranslate nohighlight">\(f(0) = -a_s\)</span>. Show that <span class="math notranslate nohighlight">\(a_s = \frac{m}{2\pi\hbar^2} \int d^3 r \, V(\boldsymbol{r})\)</span>.</p>
+<p>(b) For a square-well potential <span class="math notranslate nohighlight">\(V(r) = -V_0\)</span> for <span class="math notranslate nohighlight">\(r &lt; a\)</span> and <span class="math notranslate nohighlight">\(V(r) = 0\)</span> for <span class="math notranslate nohighlight">\(r &gt; a\)</span>, calculate the scattering length in the Born approximation.</p>
+<p>(c) When is the Born approximation valid? State the condition in terms of <span class="math notranslate nohighlight">\(V_0\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, and the particle energy <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<p>(d) For attractive potentials (<span class="math notranslate nohighlight">\(V_0 &gt; 0\)</span>), the Born approximation gives <span class="math notranslate nohighlight">\(a_s &gt; 0\)</span>. Can the exact (non-perturbative) solution have <span class="math notranslate nohighlight">\(a_s &lt; 0\)</span>? What does this imply?</p>
+<p><strong>8. Feynman diagrams for fourth-order scattering</strong></p>
+<p>Consider a particle scattering off a potential <span class="math notranslate nohighlight">\(V\)</span>. The Born series gives the scattering amplitude as a sum over diagrams:</p>
+<ul class="simple">
+<li><p><strong>First order</strong> (Born approximation): One vertex, no intermediate propagators. Contributes <span class="math notranslate nohighlight">\(T^{(1)} \sim V\)</span>.</p></li>
+<li><p><strong>Second order</strong>: Two vertices, one intermediate propagator. Contributes <span class="math notranslate nohighlight">\(T^{(2)} \sim V G_0 V\)</span>.</p></li>
+<li><p><strong>Fourth order</strong>: Three vertices, two intermediate propagators. Contributes <span class="math notranslate nohighlight">\(T^{(4)} \sim V G_0 V G_0 V G_0 V\)</span> (schematically; multiple topologies exist).</p></li>
+</ul>
+<p>(a) For second-order scattering, draw a Feynman diagram showing: initial state <span class="math notranslate nohighlight">\(|\boldsymbol{k}_i\rangle\)</span>, final state <span class="math notranslate nohighlight">\(|\boldsymbol{k}_f\rangle\)</span>, two interaction vertices with the potential <span class="math notranslate nohighlight">\(V\)</span>, and one intermediate state <span class="math notranslate nohighlight">\(|\boldsymbol{k}_n\rangle\)</span>.</p>
+<p>(b) Write the analytic expression for the second-order T-matrix element <span class="math notranslate nohighlight">\(\langle \boldsymbol{k}_f | T^{(2)} | \boldsymbol{k}_i \rangle\)</span>. Include the sum over intermediate momenta and the intermediate propagator <span class="math notranslate nohighlight">\(G_0^+\)</span>.</p>
+<p>(c) In fourth order, how many distinct Feynman topologies (distinct orderings of vertices and propagators) contribute? Why is combinatorial care needed to avoid double-counting?</p>
+<p>(d) The Born series converges if the potential is weak. For what condition on <span class="math notranslate nohighlight">\(V\)</span> does the series converge? Is this a stronger or weaker requirement than the Born approximation validity condition from Problem 7(c)?</p>
 </section>
 </section>
 
@@ -932,11 +1088,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-setup">Physical Setup</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-amplitude-and-resonance">Transition Amplitude and Resonance</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rabi-oscillations">Rabi Oscillations</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-2-the-adiabatic-theorem-and-berry-phase">Application 2: The Adiabatic Theorem and Berry Phase</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem-statement">The Adiabatic Theorem Statement</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-from-perturbation-theory">Derivation from Perturbation Theory</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-berry-phase-geometric-phase">The Berry Phase (Geometric Phase)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-in-rotating-magnetic-field">Example: Spin in Rotating Magnetic Field</a></li>
 </ul>
@@ -957,6 +1109,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -994,7 +1147,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

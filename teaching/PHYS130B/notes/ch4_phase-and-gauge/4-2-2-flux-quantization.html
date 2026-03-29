@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,16 +522,29 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-valued-wavefunction-requirement">Single-Valued Wavefunction Requirement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-valuedness-and-phase-quantization">Single-Valuedness and Phase Quantization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-single-valuedness-requirement">The Single-Valuedness Requirement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-from-the-aharonov-bohm-connection">Phase from the Aharonov-Bohm Connection</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-quantization-condition">Flux Quantization Condition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-quantum-for-different-particles">Flux Quantum for Different Particles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persistent-currents-in-superconducting-rings">Persistent Currents in Superconducting Rings</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-persistent-current">Energy and Persistent Current</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squid-superconducting-quantum-interference-device">SQUID: Superconducting Quantum Interference Device</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-quantization">Topological Quantization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-cooper-pairs-the-factor-of-2">Why Cooper Pairs? The Factor of 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persistent-currents">Persistent Currents</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-meissner-effect">The Meissner Effect</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantized-persistent-current">Quantized Persistent Current</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squids-superconducting-quantum-interference-devices">SQUIDs: Superconducting Quantum Interference Devices</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-operation">Principle of Operation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-nature-of-flux-quantization">Topological Nature of Flux Quantization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -557,151 +570,194 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>In superconductors, quantum effects conspire to quantize magnetic flux in units of h/2e (not h/e), a spectacular phenomenon arising from Cooper pairs—composite bosons of two electrons. This reveals a principle deeper than ordinary gauge invariance: when multiple particles form a condensate, topological properties of the wavefunction become fixed, and only certain flux values are allowed. Flux quantization is a macroscopic quantum effect bridging gauge theory, topology, and superconductivity.</p>
-<div class="important admonition">
-<p class="admonition-title">Cooper Pairs and Half-Integer Flux Quantization</p>
-<p>Superconductors show flux quantization in half-integer units (<span class="math notranslate nohighlight">\(\Phi_0 = h/2e\)</span>) because Cooper pairs carry charge <span class="math notranslate nohighlight">\(2e\)</span>. This factor of 2 is a smoking-gun signature of pairing in superconductivity.</p>
-</div>
-<section id="single-valued-wavefunction-requirement">
-<h3>Single-Valued Wavefunction Requirement<a class="headerlink" href="#single-valued-wavefunction-requirement" title="Link to this heading">#</a></h3>
-<p>A fundamental quantum requirement is that the wavefunction must be <strong>single-valued</strong>: after traveling around any closed loop, the particle returns to the same quantum state. In a superconductor with magnetic flux threaded through a ring, this constraint couples directly to the electromagnetic field.</p>
-<p>As a particle (or Cooper pair) travels once around the loop, it accumulates phase from the vector potential:</p>
+<p>Flux quantization is a profound consequence of quantum mechanics applied to superconductors: the magnetic flux threading a superconducting loop is restricted to discrete values. This is not an approximate effect—it follows directly from the requirement that the macroscopic superconducting wavefunction be single-valued. Flux quantization underlies superconducting quantum devices like SQUIDs, which measure magnetic fields with extraordinary sensitivity, and connects to topological physics.</p>
+<section id="single-valuedness-and-phase-quantization">
+<h3>Single-Valuedness and Phase Quantization<a class="headerlink" href="#single-valuedness-and-phase-quantization" title="Link to this heading">#</a></h3>
+<section id="the-single-valuedness-requirement">
+<h4>The Single-Valuedness Requirement<a class="headerlink" href="#the-single-valuedness-requirement" title="Link to this heading">#</a></h4>
+<p>A quantum wavefunction must be single-valued: it must return to itself after any closed loop in space. If <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r})\)</span> travels around a closed contour <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> and returns to its starting point, we require:</p>
 <div class="math notranslate nohighlight">
-\[\Delta\phi = \frac{q}{\hbar c}\oint \boldsymbol{A} \cdot d\boldsymbol{l} = \frac{q\Phi}{\hbar c}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the total magnetic flux enclosed by the loop. For the wavefunction to be single-valued after one complete circuit, the phase must return to its original value (modulo <span class="math notranslate nohighlight">\(2\pi\)</span>).</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Single-Valued Condition</p>
-<p>If the wavefunction at angle <span class="math notranslate nohighlight">\(\theta = 0\)</span> is <span class="math notranslate nohighlight">\(\psi(0)\)</span>, then after traveling once around the loop to <span class="math notranslate nohighlight">\(\theta = 2\pi\)</span>, it becomes:</p>
+\[
+\psi(\boldsymbol{r})|_{\text{after loop}} = \psi(\boldsymbol{r})|_{\text{before loop}}\]</div>
+<p>More precisely, the phase accumulated around a closed loop must be a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\psi(2\pi) = e^{i\Delta\phi} \psi(0)\]</div>
-<p>For single-valuedness, we require:</p>
+\[
+\Delta\phi[\mathcal{C}] = 2\pi n \quad \text{for integer } n\]</div>
+</section>
+<section id="phase-from-the-aharonov-bohm-connection">
+<h4>Phase from the Aharonov-Bohm Connection<a class="headerlink" href="#phase-from-the-aharonov-bohm-connection" title="Link to this heading">#</a></h4>
+<p>From our discussion of the Aharonov-Bohm effect, the phase accumulated when traversing a closed loop in a region with vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[\psi(2\pi) = \psi(0)\]</div>
-<p>This means:</p>
-<div class="math notranslate nohighlight">
-\[e^{i\Delta\phi} = 1\]</div>
-<p>which requires <span class="math notranslate nohighlight">\(\Delta\phi = 2\pi n\)</span> for integer <span class="math notranslate nohighlight">\(n\)</span>.</p>
-</div>
+\[
+\Delta\phi = \frac{q}{\hbar c}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \frac{q\Phi_B}{\hbar c}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_B\)</span> is the magnetic flux enclosed by the loop.</p>
+</section>
 </section>
 <section id="flux-quantization-condition">
 <h3>Flux Quantization Condition<a class="headerlink" href="#flux-quantization-condition" title="Link to this heading">#</a></h3>
-<p>Combining the single-valuedness condition with the phase expression gives the <strong>flux quantization</strong> condition:</p>
+<p>For the wavefunction to be single-valued, we require:</p>
 <div class="math notranslate nohighlight">
-\[\frac{q\Phi}{\hbar c} = 2\pi n\]</div>
+\[
+\Delta\phi = \frac{q\Phi}{\hbar c} = 2\pi n\]</div>
 <p>Solving for the flux:</p>
 <div class="math notranslate nohighlight">
-\[\Phi = n\frac{2\pi\hbar c}{q}\]</div>
-<p><strong>Flux is quantized in discrete units.</strong> We define the <strong>flux quantum</strong> for a particle of charge <span class="math notranslate nohighlight">\(q\)</span>:</p>
+\[
+\Phi = \frac{2\pi n \hbar c}{q} = n \Phi_0\]</div>
+<p>where we define the <strong>flux quantum</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\Phi_0 = \frac{2\pi\hbar c}{q}\]</div>
-<p>Then the allowed fluxes are:</p>
+\[
+\Phi_0 = \frac{2\pi\hbar c}{q}\]</div>
+<div class="important admonition">
+<p class="admonition-title">Flux Quantization</p>
+<p>The magnetic flux through a superconducting loop is quantized:</p>
 <div class="math notranslate nohighlight">
-\[\Phi = n \Phi_0, \quad n = 0, \pm 1, \pm 2, \ldots\]</div>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Flux Quantum Definition</p>
-<p>The flux quantum is a fundamental constant with dimensions of magnetic flux. In SI units with <span class="math notranslate nohighlight">\(c\)</span> in m/s:</p>
+\[
+\Phi = n\Phi_0, \quad n = 0, \pm1, \pm2, \ldots\]</div>
+<p>where the flux quantum depends on the charge of the carriers. For a superconductor with Cooper pair condensate (charge <span class="math notranslate nohighlight">\(2e\)</span> per pair):</p>
 <div class="math notranslate nohighlight">
-\[\hbar = 1.055 \times 10^{-34}\text{ J}\cdot\text{s}, \quad c = 3 \times 10^8 \text{ m/s}\]</div>
-<p>For a charge <span class="math notranslate nohighlight">\(q\)</span>, the flux quantum becomes:</p>
+\[
+\Phi_{0,\text{Cooper}} = \frac{h}{2e} \approx 2.07 \times 10^{-15} \text{ Wb}\]</div>
+<p>For ordinary electrons (charge <span class="math notranslate nohighlight">\(e\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[\Phi_0 = \frac{2\pi\hbar c}{q}\]</div>
-<p>Alternatively, using the relation <span class="math notranslate nohighlight">\(2\pi\hbar c = hc\)</span> (since <span class="math notranslate nohighlight">\(h = 2\pi\hbar\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[\Phi_0 = \frac{hc}{q}\]</div>
+\[
+\Phi_{0,\text{electron}} = \frac{h}\mathrm{e} \approx 4.14 \times 10^{-15} \text{ Wb}\]</div>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>We derived that <span class="math notranslate nohighlight">\(\Delta\phi = 2\pi n\)</span> is required for single-valuedness. But what does “single-valued” really mean physically? The wavefunction <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r})\)</span> is already single-valued in the bulk superconductor. Why does the flux through a hole in the ring constrain the phase? What would happen physically if we tried to force <span class="math notranslate nohighlight">\(\Phi \neq n\Phi_0\)</span>?</p>
 </div>
 </section>
-<section id="flux-quantum-for-different-particles">
-<h3>Flux Quantum for Different Particles<a class="headerlink" href="#flux-quantum-for-different-particles" title="Link to this heading">#</a></h3>
-<p>The flux quantum has different values depending on the charge of the particle involved.</p>
-<p><strong>For electrons</strong> (<span class="math notranslate nohighlight">\(q = e\)</span>):</p>
+<section id="why-cooper-pairs-the-factor-of-2">
+<h3>Why Cooper Pairs? The Factor of 2<a class="headerlink" href="#why-cooper-pairs-the-factor-of-2" title="Link to this heading">#</a></h3>
+<p>In a normal metal, charge carriers are individual electrons. But in a superconductor below the critical temperature, electrons condense into <strong>Cooper pairs</strong>—two electrons bound together by the attractive electron-phonon interaction.</p>
+<p>Each Cooper pair carries charge <span class="math notranslate nohighlight">\(q = 2e\)</span> (two electrons). Therefore, when flux quantization applies to the macroscopic order parameter of the condensate, it is the Cooper pair charge that matters:</p>
 <div class="math notranslate nohighlight">
-\[\Phi_{0,e} = \frac{h}{e} \approx 4.14 \times 10^{-15}\text{ Wb}\]</div>
-<p><strong>For Cooper pairs</strong> in superconductors (<span class="math notranslate nohighlight">\(q = 2e\)</span>, since pairs carry twice the electron charge):</p>
-<div class="math notranslate nohighlight">
-\[\Phi_{0,\text{pair}} = \frac{h}{2e} = \frac{\Phi_{0,e}}{2} \approx 2.07 \times 10^{-15}\text{ Wb}\]</div>
-<p><strong>This is the key difference</strong>: Cooper pairs carry twice the electron charge, so their flux quantum is <strong>exactly half</strong> the single-electron flux quantum. This fundamental distinction explains why superconductors exhibit unique quantum phenomena unavailable to normal metals.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Why Cooper Pair Charge is 2e</p>
-<p>In a superconductor, electrons near the Fermi surface form <strong>Cooper pairs</strong>—composite bosons bound by the attractive electron-phonon interaction (BCS theory). A Cooper pair consists of two electrons:</p>
-<div class="math notranslate nohighlight">
-\[\text{Cooper pair} = \text{electron 1} + \text{electron 2}\]</div>
-<p>The total charge is therefore <span class="math notranslate nohighlight">\(q_{\text{pair}} = (-e) + (-e) = -2e\)</span>, or <span class="math notranslate nohighlight">\(|q_{\text{pair}}| = 2e\)</span>.</p>
-<p>This doubling of charge leads directly to halving of the flux quantum:</p>
-<div class="math notranslate nohighlight">
-\[\Phi_{0,\text{pair}} = \frac{h}{2e} = \frac{\Phi_{0,e}}{2}\]</div>
+\[
+\Phi_{0,\text{pairing}} = \frac{h}{2e}\]</div>
+<p>This is the flux quantum that appears in superconductors. The factor of 2 is a fingerprint of the pairing mechanism and is experimentally verifiable.</p>
+<div class="note admonition">
+<p class="admonition-title">Note: Experimental Verification</p>
+<p>The factor of 2 in superconducting flux quantization was confirmed in a famous 1961 experiment by Doll and Näbauer (and independently by Deaver and Fairbank), using superconducting tin cylinders. This experiment provided direct evidence for Cooper pairing and became a cornerstone of the BCS theory of superconductivity.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>In a normal metal (not superconductor), charge carriers are individual electrons, so the natural flux quantum would be <span class="math notranslate nohighlight">\(\Phi_0^{\text{electron}} = h/e\)</span>. But electrons don’t spontaneously pair in a normal metal—they only pair in a superconductor. How does the superconducting pairing mechanism “know” to produce the factor of 2? Is the flux quantum a consequence of pairing, or does it force pairing to occur?</p>
 </div>
 </section>
-<section id="persistent-currents-in-superconducting-rings">
-<h3>Persistent Currents in Superconducting Rings<a class="headerlink" href="#persistent-currents-in-superconducting-rings" title="Link to this heading">#</a></h3>
-<p>When magnetic flux threads a superconducting ring, a remarkable phenomenon emerges: <strong>persistent currents</strong> that flow indefinitely without dissipation. The superconductor cannot change the flux through the ring (due to flux quantization), so it responds by generating a current that maintains the current quantum state.</p>
-<p>When external magnetic field tries to change the flux, the superconductor generates a <strong>Meissner current</strong>:</p>
+<section id="persistent-currents">
+<h3>Persistent Currents<a class="headerlink" href="#persistent-currents" title="Link to this heading">#</a></h3>
+<section id="the-meissner-effect">
+<h4>The Meissner Effect<a class="headerlink" href="#the-meissner-effect" title="Link to this heading">#</a></h4>
+<p>When a superconductor is cooled below its critical temperature, it expels magnetic field from its interior (the Meissner effect). This means the magnetic field in the bulk is zero. But a flux can thread through a “hole” in the superconductor if the material forms a ring or has a hollow cavity.</p>
+</section>
+<section id="quantized-persistent-current">
+<h4>Quantized Persistent Current<a class="headerlink" href="#quantized-persistent-current" title="Link to this heading">#</a></h4>
+<p>If a superconducting ring encloses magnetic flux <span class="math notranslate nohighlight">\(\Phi = n\Phi_0\)</span>, the superconductor maintains a persistent current to ensure the total enclosed flux remains quantized.</p>
+<p>The persistent current is:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{B}_{\text{applied}} + \boldsymbol{B}_{\text{induced}} = 0 \quad (\text{Meissner effect})\]</div>
-<p>This current persists indefinitely—<strong>no dissipation, no decay</strong>—because any attempt to change the flux would violate flux quantization. The quantum state of the superconducting condensate (characterized by the phase of its macroscopic wavefunction) gets “locked” to the flux through the ring.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Phase Locking and Persistent Current</p>
-<p>The superconducting condensate has a macroscopic wavefunction:</p>
+\[
+I_{\text{persistent}} = \frac{2e}{\hbar}\frac{\mathrm{d}\chi}{\mathrm{d}t}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi\)</span> is the phase of the macroscopic superconducting order parameter. In equilibrium, <span class="math notranslate nohighlight">\(\chi\)</span> is constant (no time evolution), so:</p>
 <div class="math notranslate nohighlight">
-\[\psi_{\text{cond}}(\boldsymbol{r}) = |\psi_0(\boldsymbol{r})|e^{i\theta(\boldsymbol{r})}\]</div>
-<p>As we traverse the superconducting ring, the phase winds by exactly <span class="math notranslate nohighlight">\(2\pi\)</span> times the flux quantum number:</p>
-<div class="math notranslate nohighlight">
-\[\oint \nabla\theta \cdot d\boldsymbol{l} = 2\pi n\]</div>
-<p>The quantum state is “trapped” with fixed winding number <span class="math notranslate nohighlight">\(n\)</span>. If external flux tries to increase, the superconductor immediately generates a screening current to maintain constant <span class="math notranslate nohighlight">\(n\)</span>. This current produces the equal and opposite magnetic field (Meissner effect).</p>
-<p>Since the superconductor has zero electrical resistance, this current experiences no ohmic dissipation and persists indefinitely.</p>
+\[
+I_{\text{persistent}} = \frac{2e\Phi_{\text{enclosed}}}{\hbar c L}\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> is a self-inductance of the ring. The key point: <strong>this current persists indefinitely</strong> because a superconductor has exactly zero electrical resistance. No energy is dissipated.</p>
+<div class="important admonition">
+<p class="admonition-title">Persistent Currents and Flux Trapping</p>
+<p>When a superconductor is cooled in an external magnetic field below its critical temperature, the field configuration is “frozen” into the ring (flux trapping). If the field is then removed, the superconductor generates a persistent current that maintains the trapped flux at a quantized value <span class="math notranslate nohighlight">\(\Phi = n\Phi_0\)</span>.</p>
+<p>This trapped flux can be observed by measuring the superconductor’s magnetic moment; the flux persists for years with negligible decay.</p>
 </div>
 </section>
-<section id="energy-and-persistent-current">
-<h3>Energy and Persistent Current<a class="headerlink" href="#energy-and-persistent-current" title="Link to this heading">#</a></h3>
-<p>The energy cost of changing the flux through a superconducting loop is enormous because it requires creating quasiparticle excitations (breaking Cooper pairs). Below the superconducting gap, this cost is exponentially large, making flux change practically impossible. The persistent current can be thought of as the superconductor’s response to maintain constant flux despite external perturbations.</p>
 </section>
-<section id="squid-superconducting-quantum-interference-device">
-<h3>SQUID: Superconducting Quantum Interference Device<a class="headerlink" href="#squid-superconducting-quantum-interference-device" title="Link to this heading">#</a></h3>
-<p>The <strong>SQUID</strong> (Superconducting Quantum Interference Device) is one of the most sensitive magnetometers ever invented, exploiting Josephson junctions and flux quantization to measure magnetic fields. A SQUID consists of a superconducting loop interrupted by one or two <strong>Josephson junctions</strong>—thin insulating barriers through which Cooper pairs can tunnel.</p>
-<p><strong>Operating principle</strong>: The phase around the superconducting loop must satisfy flux quantization:</p>
+<section id="squids-superconducting-quantum-interference-devices">
+<h3>SQUIDs: Superconducting Quantum Interference Devices<a class="headerlink" href="#squids-superconducting-quantum-interference-devices" title="Link to this heading">#</a></h3>
+<section id="principle-of-operation">
+<h4>Principle of Operation<a class="headerlink" href="#principle-of-operation" title="Link to this heading">#</a></h4>
+<p>A SQUID is a superconducting loop with one or more <strong>Josephson junctions</strong> (thin insulating barriers that allow quantum tunneling of Cooper pairs). The critical current through the SQUID depends sensitively on the enclosed magnetic flux.</p>
+<div class="important admonition">
+<p class="admonition-title">SQUID Critical Current</p>
+<p>The critical current of a SQUID oscillates periodically with enclosed flux:</p>
 <div class="math notranslate nohighlight">
-\[\Delta\phi_{\text{loop}} = \frac{2e\Phi}{\hbar c} = 2\pi n + \delta\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the total enclosed flux and <span class="math notranslate nohighlight">\(\delta\)</span> is the phase slip at the junctions. The <strong>critical current</strong> <span class="math notranslate nohighlight">\(I_c\)</span> of the junction (maximum supercurrent before switching to resistive state) depends sensitively on <span class="math notranslate nohighlight">\(\delta\)</span>, and thus on the enclosed flux:</p>
-<div class="math notranslate nohighlight">
-\[I_c(\Phi) = I_{c0}\left|\cos\left(\frac{\pi\Phi}{\Phi_{0,\text{pair}}}\right)\right|\]</div>
-<p>This oscillation with period <span class="math notranslate nohighlight">\(\Phi_{0,\text{pair}} \approx 2 \times 10^{-15}\)</span> Wb makes SQUIDs extraordinarily sensitive—they can detect flux changes as small as a fraction of one flux quantum, equivalent to magnetic field variations of ~<span class="math notranslate nohighlight">\(10^{-18}\)</span> Tesla. This makes SQUIDs the most sensitive magnetometers known, used in medical imaging (magnetoencephalography) and fundamental physics experiments.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: SQUID Critical Current Oscillation</p>
-<p>A Josephson junction’s supercurrent depends on the phase difference across it:</p>
-<div class="math notranslate nohighlight">
-\[I = I_{c0} \sin(\phi_L - \phi_R)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\phi_L\)</span> and <span class="math notranslate nohighlight">\(\phi_R\)</span> are the phases on left and right sides.</p>
-<p>For a single-junction SQUID (or analyzing one path through two junctions), the phase difference depends on the flux:</p>
-<div class="math notranslate nohighlight">
-\[\phi_L - \phi_R = \frac{2e\Phi}{\hbar c} + \text{const}\]</div>
-<p>The maximum current (critical current) occurs when <span class="math notranslate nohighlight">\(\sin(\phi_L - \phi_R) = \pm 1\)</span>, giving:</p>
-<div class="math notranslate nohighlight">
-\[I_c(\Phi) \propto \left|\cos\left(\frac{\pi\Phi}{\Phi_{0,\text{pair}}}\right)\right|\]</div>
-<p>This oscillates with period equal to one flux quantum. Measuring <span class="math notranslate nohighlight">\(I_c\)</span> as a function of external magnetic field reveals the periodic modulation—a direct signature of flux quantization.</p>
+\[
+I_c(\Phi) = I_c^{\max}\left|\cos\left(\frac{\pi\Phi}{\Phi_0}\right)\right|\]</div>
+<p>The period is exactly one flux quantum <span class="math notranslate nohighlight">\(\Phi_0\)</span>. This creates an extremely sensitive magnetometer: small changes in flux produce large changes in critical current that are easily measured electronically.</p>
 </div>
 </section>
-<section id="topological-quantization">
-<h3>Topological Quantization<a class="headerlink" href="#topological-quantization" title="Link to this heading">#</a></h3>
-<p>Flux quantization is fundamentally <strong>topological</strong>—it depends only on the winding number of the phase around the loop, not on microscopic details:</p>
+<section id="sensitivity">
+<h4>Sensitivity<a class="headerlink" href="#sensitivity" title="Link to this heading">#</a></h4>
+<p>SQUIDs can detect magnetic flux changes of order:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta\Phi_{\min} \sim \frac{\Phi_0}{\sqrt{N}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is roughly the number of independent measurements. For a single SQUID, sensitivity approaches <span class="math notranslate nohighlight">\(\delta\Phi \sim 10^{-18}\)</span> Wb—orders of magnitude better than conventional magnetometers. This makes SQUIDs the most sensitive magnetic field detectors known.</p>
+</section>
+<section id="applications">
+<h4>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h4>
+<div class="example admonition">
+<p class="admonition-title">SQUID Applications</p>
+<p>SQUIDs are used in:</p>
 <ul class="simple">
-<li><p>Works for any superconductor (conventional, heavy-fermion, high-<span class="math notranslate nohighlight">\(T_c\)</span>)</p></li>
-<li><p>Insensitive to material properties, disorder, or defects</p></li>
-<li><p>Holds as long as the superconducting gap exists</p></li>
+<li><p><strong>Magnetoencephalography (MEG)</strong>: measuring brain magnetic fields (non-invasive neuroimaging)</p></li>
+<li><p><strong>Geomagnetic surveys</strong>: detecting mineral deposits and mapping underground structure</p></li>
+<li><p><strong>Fundamental physics</strong>: searching for magnetic monopoles and axion dark matter</p></li>
+<li><p><strong>Quantum information</strong>: reading out states of superconducting qubits</p></li>
 </ul>
-<p>This topological robustness is what makes SQUIDs so powerful—their operation doesn’t depend sensitively on microscopic parameters, making them extraordinarily reliable and precise.</p>
+</div>
+</section>
+</section>
+<section id="topological-nature-of-flux-quantization">
+<h3>Topological Nature of Flux Quantization<a class="headerlink" href="#topological-nature-of-flux-quantization" title="Link to this heading">#</a></h3>
+<p>Flux quantization is fundamentally topological—it depends only on the winding number of the phase around the loop, not on microscopic details.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Topology: Why Quantization is Robust</p>
+<p>Imagine deforming the superconducting ring continuously, or changing its material properties, or altering the electron density. The enclosed flux remains quantized at discrete multiples of <span class="math notranslate nohighlight">\(\Phi_0\)</span> <em>regardless</em> of these changes.</p>
+<p>This robustness arises because flux quantization is a <strong>topological</strong> constraint: it depends only on the topological property that the phase is single-valued, not on the detailed microscopic physics.</p>
+<p>This is why SQUIDs work reliably across many different superconducting materials and at different temperatures (as long as <span class="math notranslate nohighlight">\(T &lt; T_c\)</span>).</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Single-valuedness</strong>: Wavefunctions must return to themselves after encircling flux: <span class="math notranslate nohighlight">\(\psi(2\pi) = \psi(0)\)</span>.</p></li>
-<li><p><strong>Flux quantization</strong>: Enclosed flux must satisfy <span class="math notranslate nohighlight">\(\Phi = n\Phi_0\)</span> with integer <span class="math notranslate nohighlight">\(n\)</span>; a topological quantization condition.</p></li>
-<li><p><strong>Flux quantum</strong>: <span class="math notranslate nohighlight">\(\Phi_0 = h/q\)</span> for charge <span class="math notranslate nohighlight">\(q\)</span>; for Cooper pairs (<span class="math notranslate nohighlight">\(q=2e\)</span>): <span class="math notranslate nohighlight">\(\Phi_0 = h/2e \approx 2.07 \times 10^{-15}\)</span> Wb.</p></li>
-<li><p><strong>Persistent currents</strong>: Superconductors maintain dissipation-free currents that lock the phase to enclosed flux.</p></li>
-<li><p><strong>Meissner effect</strong>: Superconductors expel magnetic fields (except quantized flux units); zero field inside despite external fields.</p></li>
-<li><p><strong>SQUIDs</strong>: Josephson junction pairs create the world’s most sensitive magnetometers via interference modulation.</p></li>
-<li><p><strong>Topological origin</strong>: Flux quantization doesn’t depend on microscopic details—only on winding of quantum phase.</p></li>
-<li><p><strong>Fundamental verification</strong>: Superconducting experiments provide direct evidence for quantum mechanics at macroscopic scales.</p></li>
+<li><p><strong>Flux quantization</strong>: Magnetic flux through a superconducting loop must equal <span class="math notranslate nohighlight">\(n\Phi_0\)</span> for integer <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>Flux quantum for Cooper pairs</strong>: <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e) \approx 2.07 \times 10^{-15}\)</span> Wb (factor of 2 from pairing).</p></li>
+<li><p><strong>Single-valuedness</strong>: Flux quantization follows from requiring the macroscopic order parameter to be single-valued.</p></li>
+<li><p><strong>Persistent currents</strong>: Superconductors generate persistent currents to maintain quantized flux indefinitely.</p></li>
+<li><p><strong>SQUIDs</strong>: Josephson junction-based SQUIDs leverage flux quantization to create ultra-sensitive magnetometers.</p></li>
+<li><p><strong>Topological robustness</strong>: Flux quantization is independent of microscopic details, making it universal across superconductors.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-2-1-aharonov-bohm-effect.html"><span class="std std-doc">4.2.1 Aharonov-Bohm Effect</span></a></strong>: Discrete phase shifts from quantized flux</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html"><span class="std std-doc">2.3.2 Abelian Anyons</span></a></strong>: Anyons and flux quantization in 2D</p></li>
+<li><p><strong><a class="reference internal" href="4-3-3-quantum-hall-effect.html"><span class="std std-doc">4.3.3 Quantum Hall Effect</span></a></strong>: Topological protection and flux quantization in condensed matter</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>Problem 1: Single-Valuedness and Phase Accumulation</strong></p>
+<p>A particle of charge <span class="math notranslate nohighlight">\(q\)</span> travels once around a superconducting ring enclosing magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span>. Show that the phase accumulated is <span class="math notranslate nohighlight">\(\Delta\phi = q\Phi/(\hbar c)\)</span>. If the particle is an electron (<span class="math notranslate nohighlight">\(q = -e\)</span>) and the flux is <span class="math notranslate nohighlight">\(\Phi = h/(2e)\)</span> (one flux quantum for Cooper pairs), what is <span class="math notranslate nohighlight">\(\Delta\phi\)</span>? Explain why this value is problematic for single-valuedness.</p>
+<p><strong>Problem 2: Quantization Condition from Single-Valuedness</strong></p>
+<p>For the wavefunction to be single-valued after one complete circuit around a superconducting loop, the phase change must satisfy <span class="math notranslate nohighlight">\(\Delta\phi = 2\pi n\)</span> for integer <span class="math notranslate nohighlight">\(n\)</span>. Using the relation <span class="math notranslate nohighlight">\(\Delta\phi = q\Phi/(\hbar c)\)</span>, derive the flux quantization condition <span class="math notranslate nohighlight">\(\Phi = n\Phi_0\)</span> and express <span class="math notranslate nohighlight">\(\Phi_0\)</span> in terms of <span class="math notranslate nohighlight">\(q\)</span>, <span class="math notranslate nohighlight">\(\hbar\)</span>, and <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p><strong>Problem 3: Flux Quantum Values</strong></p>
+<p>A superconductor contains condensed Cooper pairs. Each pair carries total charge <span class="math notranslate nohighlight">\(2e\)</span> (two electrons).</p>
+<p>(a) Derive the flux quantum for Cooper pairs: <span class="math notranslate nohighlight">\(\Phi_{0,\text{pair}} = h/(2e)\)</span>.</p>
+<p>(b) Compare this to the flux quantum for a single electron. Why is the Cooper pair flux quantum exactly half the single-electron flux quantum?</p>
+<p>(c) Calculate the numerical value of <span class="math notranslate nohighlight">\(\Phi_{0,\text{pair}}\)</span> in Weber (Wb). Use <span class="math notranslate nohighlight">\(h = 6.626 \times 10^{-34}\)</span> J·s and <span class="math notranslate nohighlight">\(e = 1.602 \times 10^{-19}\)</span> C.</p>
+<p><strong>Problem 4: Flux Quantization in a Ring Geometry</strong></p>
+<p>A superconducting ring encloses a magnetic field region (from a solenoid threading through it). The superconductor itself has zero internal field (Meissner effect). Use the flux quantization condition to explain why the superconductor cannot simply allow the external flux to pass through — why must flux be restricted to discrete values?</p>
+<p><strong>Problem 5: Persistent Current Response</strong></p>
+<p>Consider a superconducting ring at temperature <span class="math notranslate nohighlight">\(T = 0\)</span> with <span class="math notranslate nohighlight">\(n = 1\)</span> flux quantum (<span class="math notranslate nohighlight">\(\Phi = \Phi_0\)</span>) threading through it. Suppose an external magnetic field is slowly applied, trying to increase the flux to <span class="math notranslate nohighlight">\(\Phi = 1.3\Phi_0\)</span>. The superconductor responds by generating a persistent current that maintains <span class="math notranslate nohighlight">\(\Phi = \Phi_0\)</span>. Explain: (a) why the superconductor can sustain this current indefinitely, and (b) what physical difference this makes compared to a normal metal.</p>
+<p><strong>Problem 6: SQUID Oscillations</strong></p>
+<p>A SQUID (Superconducting Quantum Interference Device) uses Josephson junctions to measure magnetic flux with extraordinary sensitivity. The critical current oscillates as <span class="math notranslate nohighlight">\(I_c(\Phi) \propto |\cos(\pi\Phi/\Phi_0)|\)</span>, where <span class="math notranslate nohighlight">\(\Phi\)</span> is the enclosed flux and <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e)\)</span> is the Cooper pair flux quantum.</p>
+<p>(a) What is the period of oscillation (in units of flux quantum)?</p>
+<p>(b) If a SQUID can measure current changes of order <span class="math notranslate nohighlight">\(\delta I_c \sim 10^{-9}\)</span> A, and <span class="math notranslate nohighlight">\(\Phi_0 \approx 2.07 \times 10^{-15}\)</span> Wb, estimate the smallest detectable flux change <span class="math notranslate nohighlight">\(\delta\Phi\)</span>. Convert this to an equivalent magnetic field sensitivity (in Tesla) for a loop area <span class="math notranslate nohighlight">\(A = 1\)</span> mm<span class="math notranslate nohighlight">\(^2\)</span>.</p>
+<p><strong>Problem 7: Topological vs. Microscopic</strong></p>
+<p>Flux quantization is described as a <strong>topological</strong> phenomenon. Explain what this means: why does flux quantization depend only on the winding number of the phase around the loop, not on microscopic details like the superconductor’s gap energy, electron density, or material composition? How does this topological robustness explain why SQUIDs work reliably in many different superconducting materials?</p>
+<p><strong>Problem 8: Connecting Microscopic and Macroscopic Quantum Mechanics</strong></p>
+<p>Flux quantization is a signature of macroscopic quantum mechanics — a bulk superconductor exhibits quantum effects at the centimeter scale. Explain how the requirement that a macroscopic wavefunction describing the condensate be single-valued — a microscopic quantum principle — leads to a constraint on the total enclosed flux that is observable at macroscopic scales. Why is this phenomenon rare in everyday life (unlike the quantum uncertainty principle, which doesn’t affect macroscopic objects)?</p>
 </section>
 </section>
 
@@ -770,16 +826,29 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-valued-wavefunction-requirement">Single-Valued Wavefunction Requirement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-valuedness-and-phase-quantization">Single-Valuedness and Phase Quantization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-single-valuedness-requirement">The Single-Valuedness Requirement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-from-the-aharonov-bohm-connection">Phase from the Aharonov-Bohm Connection</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-quantization-condition">Flux Quantization Condition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-quantum-for-different-particles">Flux Quantum for Different Particles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persistent-currents-in-superconducting-rings">Persistent Currents in Superconducting Rings</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-persistent-current">Energy and Persistent Current</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squid-superconducting-quantum-interference-device">SQUID: Superconducting Quantum Interference Device</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-quantization">Topological Quantization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-cooper-pairs-the-factor-of-2">Why Cooper Pairs? The Factor of 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persistent-currents">Persistent Currents</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-meissner-effect">The Meissner Effect</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantized-persistent-current">Quantized Persistent Current</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squids-superconducting-quantum-interference-devices">SQUIDs: Superconducting Quantum Interference Devices</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-operation">Principle of Operation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-nature-of-flux-quantization">Topological Nature of Flux Quantization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -817,7 +886,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

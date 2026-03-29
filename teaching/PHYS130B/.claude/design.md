@@ -38,11 +38,12 @@ Each x.y.z subsection notebook includes a `## Homework` section after `## Lectur
 Students bring AI to class. The lecture notes include **Discussion** admonition boxes with deliberately controversial or conceptually challenging problems — not problems to solve, but conceptual barriers that benefit from collective debate. Students share AI outputs, identify disagreements, research literature together, and reach consensus. The professor moderates rather than lectures.
 
 **Discussion problem design principles:**
-- Must be genuinely debatable — reasonable people (and AI) can disagree
-- Targets conceptual understanding, not computation
-- Often involves edge cases, paradoxes, or competing interpretations
-- Should provoke students to check primary sources and think critically about AI answers
-- Examples: measurement problem interpretations, whether a given approximation is justified, physical meaning of mathematical results
+- Must be **physics** questions with verifiable answers — NOT philosophical musings
+- Good: presenting a paradox, clarifying a subtle concept, resolving a common misunderstanding, debating whether an approximation is valid, interpreting a surprising physical result
+- Bad: "what does measurement really mean?", "is quantum mechanics complete?", vague interpretational questions with no concrete physical content
+- Open-ended is fine, but the question must be grounded in specific physics
+- Should provoke students to check AI answers against physical reasoning and primary sources
+- Use `:class: dropdown warning` so discussion boxes are collapsed by default (don't interrupt lecture flow)
 
 #### 4. Assessment
 
@@ -53,11 +54,12 @@ Two complementary approaches:
 **Research Projects:** Each student completes two research projects with AI assistance during the quarter. Each x.y section notebook includes a `## Projects` section with 2–3 project ideas. Projects may involve writing simulation code, conducting a comprehensive literature study, investigating an open-ended problem, or writing a research report. Graded (potentially by AI) on correctness, novelty, and presentation quality. Students present to the class if enrollment permits.
 
 **Project design principles:**
-- Must require genuine scientific thinking — framing a question, choosing a method, interpreting results
-- AI can help with implementation (code, writing, calculations) but the student must drive the inquiry
-- Categories: simulation, comprehensive study, research investigation
+- Must be at the FRONTIER of physics research — topics like classical shadow tomography, measurement-induced entanglement transitions, quantum Zeno effect, surface codes, topological order, etc.
+- NOT a big homework problem — a genuine research investigation requiring literature survey, computational exploration, and scientific writing
+- AI can help with implementation (code, writing, calculations) but the student must drive the scientific inquiry
+- Each section has exactly ONE project, designed to comprehensively cover the section's themes
 - Each project should be achievable in ~2 weeks with AI assistance
-- Output: written report (and oral presentation if class size allows)
+- Output: written research report (and oral presentation if class size allows)
 
 #### 5. Role of the Lecture Notes
 
@@ -139,14 +141,13 @@ Bullet list of 3–4 concrete skills students should gain.
 
 **Cell 2 (Projects):**
 ```
-## Projects
+## Project
 
-### Project 1: [Title]
-Description of a research project suitable for undergraduates with AI assistance.
-Specify: objective, suggested approach, expected deliverable.
-
-### Project 2: [Title]
-...
+### [Research-Level Title]
+A single, carefully designed research project at the frontier of physics.
+Should comprehensively cover the section's themes.
+Specify: objective, background, suggested approach, expected deliverable.
+Must require literature survey, computational exploration, and scientific writing.
 ```
 
 **Rules:**
@@ -154,8 +155,8 @@ Specify: objective, suggested approach, expected deliverable.
 - No "Brief Introduction" or "Structure of Chapter" headings
 - Topics table must link subsection filenames, not URLs
 - `## Overview` comes first, `## Projects` comes last
-- Each section should have 2–3 projects
-- Projects should require genuine scientific inquiry, not just calculation
+- Each section has exactly ONE research-level project (not 2-3)
+- Projects should require genuine scientific inquiry at the frontier, not just calculation
 
 ### Subsection Content Structure (x.y.z level)
 
@@ -234,8 +235,16 @@ Sections titled `### Application: ...` that contain detailed calculations demons
 
 - **Vectors**: use `\boldsymbol` (not `\vec`) for all vector quantities, e.g. `\boldsymbol{S}` for spin, `\boldsymbol{n}` for Bloch vector, `\boldsymbol{r}` for position, `\boldsymbol{p}` for momentum, `\boldsymbol{B}` for magnetic field.
 - **Operators**: use `\hat{...}` for all quantum operators, e.g. `\hat{H}` for Hamiltonian, `\hat{p}` for momentum operator, `\hat{O}` for a generic observable.
-- **Pauli operators**: Pauli matrices acting as operators use `\hat{\sigma}_x`, `\hat{\sigma}_y`, `\hat{\sigma}_z`. The vectorized Pauli operator is `\hat{\boldsymbol{\sigma}} = (\hat{\sigma}_x, \hat{\sigma}_y, \hat{\sigma}_z)`.
-- **Pauli matrices as matrices**: When referring to the explicit 2×2 matrices (not as operators), plain `\sigma_x`, `\sigma_y`, `\sigma_z` is acceptable.
+- **Pauli operators**: Pauli matrices acting as operators use SUPERSCRIPT indices: `\hat{\sigma}^x`, `\hat{\sigma}^y`, `\hat{\sigma}^z`. The vectorized Pauli operator is `\hat{\boldsymbol{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)`.
+- **Pauli matrices as matrices**: When referring to the explicit 2×2 matrices (not as operators), plain `\sigma^x`, `\sigma^y`, `\sigma^z` with superscript indices.
+
+### Upright Symbols for Special Constants and Operators
+
+- **Imaginary unit**: always `\mathrm{i}` (e.g., `\mathrm{e}^{\mathrm{i}\theta}`, not `e^{i\theta}`)
+- **Euler's number / exponential base**: always `\mathrm{e}` (e.g., `\mathrm{e}^{-\beta E}`, not `e^{-\beta E}`)
+- **Differential operator**: always `\mathrm{d}` (e.g., `\mathrm{d}x`, `\frac{\mathrm{d}}{\mathrm{d}t}`, not `dx` or `\frac{d}{dt}`)
+
+These follow the ISO 80000-2 convention: constants and operators that are not variables are set in upright (roman) type to distinguish them from italic variables.
 
 ## Eigenstate Notation
 

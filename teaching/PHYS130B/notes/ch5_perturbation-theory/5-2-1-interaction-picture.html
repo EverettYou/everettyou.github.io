@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -526,28 +526,27 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#three-pictures-of-quantum-mechanics">Three Pictures of Quantum Mechanics</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-transformations">Definition and Transformations</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#equation-of-motion-in-the-interaction-picture">Equation of Motion in the Interaction Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenbasis-expansion">Eigenbasis Expansion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenbasis-expansion-and-resonance">Eigenbasis Expansion and Resonance</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evolution-operator-and-dyson-series">The Evolution Operator and Dyson Series</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-solution">Formal Solution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning">Physical Meaning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-how-time-ordering-emerges">Derivation: How Time Ordering Emerges</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-ordering-and-causality">Time Ordering and Causality</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-schrodinger-picture-evolution">Full Schrödinger-Picture Evolution</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbative-expansion-and-transition-amplitudes">Perturbative Expansion and Transition Amplitudes</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#order-by-order-structure">Order-by-Order Structure</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-amplitudes">Transition Amplitudes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-amplitudes-and-resonance">Transition Amplitudes and Resonance</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resonance-and-detuning">Resonance and Detuning</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-processes">Virtual Processes</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-processes-and-higher-orders">Virtual Processes and Higher Orders</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -564,12 +563,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the interaction picture and why is it useful for time-dependent perturbations?</p></li>
-<li><p>How does the interaction picture factorize the time evolution into free propagation and interactions?</p></li>
-<li><p>Derive the equation of motion for the evolution operator in the interaction picture.</p></li>
-<li><p>What is the Dyson series? How does it encode time ordering and causality?</p></li>
-<li><p>Why is time ordering crucial? What goes wrong without it?</p></li>
-<li><p>How does the time-ordered exponential compactly represent the infinite perturbative series?</p></li>
+<li><p>What is the interaction picture and why is it useful for revealing the slow dynamics in time-dependent problems?</p></li>
+<li><p>How does choosing a rotating reference frame (interaction picture) eliminate rapid oscillations from the free Hamiltonian?</p></li>
+<li><p>In the interaction picture, the equation of motion becomes simpler — what role does the interaction-picture perturbation <span class="math notranslate nohighlight">\(V_I(t)\)</span> play?</p></li>
+<li><p>What is the Dyson series, and why is time ordering essential for computing the evolution operator?</p></li>
+<li><p>Can you give an example of how the time-ordered exponential <span class="math notranslate nohighlight">\(\text{T} \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}\int V_I(t')dt'}\)</span> encodes the physics of successive interactions?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -590,14 +588,14 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Schrödinger</strong></p></td>
-<td><p>$i\hbar d</p></td>
-<td><p>\psi_S\rangle/dt = H</p></td>
-<td><p>\psi_S\rangle$</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{i}\hbar d|\psi_S\rangle/dt = H|\psi_S\rangle\)</span></p></td>
+<td><p>Static: <span class="math notranslate nohighlight">\(O_S(t) = O(0)\)</span></p></td>
+<td><p>General; states change, operators fixed</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Heisenberg</strong></p></td>
-<td><p>Static: $</p></td>
-<td><p>\psi_H\rangle = 	ext{const}$</p></td>
+<td><p>Static: <span class="math notranslate nohighlight">\(|\psi_H\rangle = \text{const}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(O_H(t) = U^\dagger O_S U\)</span></p></td>
+<td><p>Classical-like; dynamics in observables</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Interaction</strong></p></td>
 <td><p>Driven by <span class="math notranslate nohighlight">\(V_I(t)\)</span></p></td>
@@ -615,54 +613,73 @@ document.write(`
 <li><p><strong>Free/unperturbed part</strong> <span class="math notranslate nohighlight">\(H_0\)</span>: evolution is rapid but exactly solvable (oscillates at natural frequencies <span class="math notranslate nohighlight">\(\omega_n = E_n^{(0)}/\hbar\)</span>)</p></li>
 <li><p><strong>Interaction part</strong> <span class="math notranslate nohighlight">\(V(t)\)</span>: slow compared to <span class="math notranslate nohighlight">\(H_0\)</span> (weak coupling regime)</p></li>
 </ul>
-<p>States and operators transform as:</p>
+<div class="important admonition">
+<p class="admonition-title">Key Transformations</p>
+<p>States transform as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-psi-ip">
-<span class="eqno">(311)<a class="headerlink" href="#equation-eq-5a-psi-ip" title="Link to this equation">#</a></span>\[|\psi_I(t)\rangle = e^{iH_0 t/\hbar} |\psi_S(t)\rangle\]</div>
+<span class="eqno">(212)<a class="headerlink" href="#equation-eq-5a-psi-ip" title="Link to this equation">#</a></span>\[
+|\psi_I(t)\rangle = \mathrm{e}^{\mathrm{i}H_0 t/\hbar} |\psi_S(t)\rangle\]</div>
+<p>Operators transform as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-o-ip">
-<span class="eqno">(312)<a class="headerlink" href="#equation-eq-5a-o-ip" title="Link to this equation">#</a></span>\[O_I(t) = e^{iH_0 t/\hbar} O_S e^{-iH_0 t/\hbar}\]</div>
-<p>The key insight: multiplying by <span class="math notranslate nohighlight">\(e^{iH_0 t/\hbar}\)</span> <strong>factors out the rapid oscillations</strong> from <span class="math notranslate nohighlight">\(H_0\)</span>, leaving only the slow dynamics driven by <span class="math notranslate nohighlight">\(V(t)\)</span>.</p>
+<span class="eqno">(213)<a class="headerlink" href="#equation-eq-5a-o-ip" title="Link to this equation">#</a></span>\[
+O_I(t) = \mathrm{e}^{\mathrm{i}H_0 t/\hbar} O_S \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}\]</div>
+<p><strong>Physical meaning</strong>: Multiplying by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}H_0 t/\hbar}\)</span> <strong>factors out the rapid oscillations</strong> from <span class="math notranslate nohighlight">\(H_0\)</span>, leaving only the slow dynamics driven by <span class="math notranslate nohighlight">\(V(t)\)</span>.</p>
+</div>
 </section>
 <section id="equation-of-motion-in-the-interaction-picture">
 <h4>Equation of Motion in the Interaction Picture<a class="headerlink" href="#equation-of-motion-in-the-interaction-picture" title="Link to this heading">#</a></h4>
 <p>The interaction-picture state obeys a much simpler equation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-schrod-ip">
-<span class="eqno">(313)<a class="headerlink" href="#equation-eq-5a-schrod-ip" title="Link to this equation">#</a></span>\[\boxed{i\hbar \frac{d|\psi_I\rangle}{dt} = \lambda V_I(t) |\psi_I\rangle}\]</div>
+<span class="eqno">(214)<a class="headerlink" href="#equation-eq-5a-schrod-ip" title="Link to this equation">#</a></span>\[
+\boxed{\mathrm{i}\hbar \frac{\mathrm{d}|\psi_I\rangle}{dt} = \lambda V_I(t) |\psi_I\rangle}\]</div>
 <p>where the <strong>interaction-picture perturbation</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-vi-def">
-<span class="eqno">(314)<a class="headerlink" href="#equation-eq-5a-vi-def" title="Link to this equation">#</a></span>\[\boxed{V_I(t) = e^{iH_0 t/\hbar} V(t) e^{-iH_0 t/\hbar}}\]</div>
-<p><strong>Physical content</strong>: <span class="math notranslate nohighlight">\(V_I(t)\)</span> is the perturbation as viewed from a frame rotating with the free evolution. Rapid oscillations (at natural frequencies <span class="math notranslate nohighlight">\(\sim E_n^{(0)}/\hbar\)</span>) are removed, revealing only the slow dynamics.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
+<span class="eqno">(215)<a class="headerlink" href="#equation-eq-5a-vi-def" title="Link to this equation">#</a></span>\[
+\boxed{V_I(t) = \mathrm{e}^{\mathrm{i}H_0 t/\hbar} V(t) \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}}\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Interaction Picture Equation</p>
 <p>Start with the Schrödinger equation:</p>
 <div class="math notranslate nohighlight">
-\[i\hbar \frac{d|\psi_S\rangle}{dt} = H(t)|\psi_S\rangle = [H_0 + \lambda V(t)]|\psi_S\rangle\]</div>
-<p>Transform to the interaction picture using <span class="math notranslate nohighlight">\(|\psi_S\rangle = e^{-iH_0 t/\hbar}|\psi_I\rangle\)</span>:</p>
+\[
+\mathrm{i}\hbar \frac{\mathrm{d}|\psi_S\rangle}{dt} = H(t)|\psi_S\rangle = [H_0 + \lambda V(t)]|\psi_S\rangle\]</div>
+<p>Transform to the interaction picture using <span class="math notranslate nohighlight">\(|\psi_S\rangle = \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[i\hbar \frac{d}{dt}\left(e^{-iH_0 t/\hbar}|\psi_I\rangle\right) = [H_0 + \lambda V(t)]e^{-iH_0 t/\hbar}|\psi_I\rangle\]</div>
+\[
+\mathrm{i}\hbar \frac{\mathrm{d}}{\mathrm{d}t}\left(\mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle\right) = [H_0 + \lambda V(t)]\mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle\]</div>
 <p>Expand the left side using the product rule:</p>
 <div class="math notranslate nohighlight">
-\[i\hbar e^{-iH_0 t/\hbar}\left(-\frac{i}{\hbar}H_0|\psi_I\rangle + \frac{d|\psi_I\rangle}{dt}\right) = [H_0 + \lambda V(t)]e^{-iH_0 t/\hbar}|\psi_I\rangle\]</div>
+\[
+\mathrm{i}\hbar \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}\left(-\frac{\mathrm{i}}{\hbar}H_0|\psi_I\rangle + \frac{\mathrm{d}|\psi_I\rangle}{dt}\right) = [H_0 + \lambda V(t)]\mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle\]</div>
 <p>Simplify:</p>
 <div class="math notranslate nohighlight">
-\[H_0 e^{-iH_0 t/\hbar}|\psi_I\rangle + i\hbar e^{-iH_0 t/\hbar}\frac{d|\psi_I\rangle}{dt} = H_0 e^{-iH_0 t/\hbar}|\psi_I\rangle + \lambda V(t)e^{-iH_0 t/\hbar}|\psi_I\rangle\]</div>
-<p>The <span class="math notranslate nohighlight">\(H_0\)</span> terms cancel:</p>
+\[
+H_0 \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle + \mathrm{i}\hbar \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}\frac{\mathrm{d}|\psi_I\rangle}{dt} = H_0 \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle + \lambda V(t)\mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle\]</div>
+<p>The <span class="math notranslate nohighlight">\(H_0\)</span> terms cancel, and multiply both sides by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}H_0 t/\hbar}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[i\hbar \frac{d|\psi_I\rangle}{dt} = \lambda e^{iH_0 t/\hbar} V(t) e^{-iH_0 t/\hbar}|\psi_I\rangle = \lambda V_I(t)|\psi_I\rangle\]</div>
+\[
+\mathrm{i}\hbar \frac{\mathrm{d}|\psi_I\rangle}{dt} = \lambda \mathrm{e}^{\mathrm{i}H_0 t/\hbar} V(t) \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}|\psi_I\rangle = \lambda V_I(t)|\psi_I\rangle\]</div>
 </div>
+<p><strong>Physical content</strong>: <span class="math notranslate nohighlight">\(V_I(t)\)</span> is the perturbation as viewed from a frame rotating with the free evolution. Rapid oscillations (at natural frequencies <span class="math notranslate nohighlight">\(\sim E_n^{(0)}/\hbar\)</span>) are removed, revealing only the slow dynamics.</p>
 </section>
-<section id="eigenbasis-expansion">
-<h4>Eigenbasis Expansion<a class="headerlink" href="#eigenbasis-expansion" title="Link to this heading">#</a></h4>
+<section id="eigenbasis-expansion-and-resonance">
+<h4>Eigenbasis Expansion and Resonance<a class="headerlink" href="#eigenbasis-expansion-and-resonance" title="Link to this heading">#</a></h4>
 <p>Expand <span class="math notranslate nohighlight">\(V_I(t)\)</span> in the eigenbasis of <span class="math notranslate nohighlight">\(H_0\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-vi-eigenbasis">
-<span class="eqno">(315)<a class="headerlink" href="#equation-eq-5a-vi-eigenbasis" title="Link to this equation">#</a></span>\[V_I(t) = \sum_{n,m} e^{i\omega_{nm}t} V_{nm}(t) |n\rangle\langle m|\]</div>
-<p>where:</p>
+<span class="eqno">(216)<a class="headerlink" href="#equation-eq-5a-vi-eigenbasis" title="Link to this equation">#</a></span>\[
+V_I(t) = \sum_{n,m} \mathrm{e}^{\mathrm{i}\omega_{nm}t} V_{nm}(t) |n\rangle\langle m|\]</div>
+<p>where the <strong>transition frequency</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-transition-freq">
-<span class="eqno">(316)<a class="headerlink" href="#equation-eq-5a-transition-freq" title="Link to this equation">#</a></span>\[\omega_{nm} = \frac{E_n^{(0)} - E_m^{(0)}}{\hbar}\]</div>
-<p>The oscillatory factor <span class="math notranslate nohighlight">\(e^{i\omega_{nm}t}\)</span> encodes <strong>resonance</strong>:</p>
+<span class="eqno">(217)<a class="headerlink" href="#equation-eq-5a-transition-freq" title="Link to this equation">#</a></span>\[
+\omega_{nm} = \frac{E_n^{(0)} - E_m^{(0)}}{\hbar}\]</div>
+<div class="note admonition">
+<p class="admonition-title">Resonance Interpretation</p>
+<p>The oscillatory factor <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\omega_{nm}t}\)</span> encodes <strong>resonance</strong>:</p>
 <ul class="simple">
-<li><p>When <span class="math notranslate nohighlight">\(\omega_{nm} \approx 0\)</span> (initial and final states have nearly equal energy): coupling is strong, transitions occur.</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(|\omega_{nm}|\)</span> is large (states far apart in energy): rapid oscillations suppress the coupling.</p></li>
+<li><p><strong>When <span class="math notranslate nohighlight">\(\omega_{nm} \approx 0\)</span></strong>: Initial and final states have nearly equal energy. Coupling is strong, and transitions occur efficiently.</p></li>
+<li><p><strong>When <span class="math notranslate nohighlight">\(|\omega_{nm}|\)</span> is large</strong>: States are far apart in energy. Rapid oscillations suppress the coupling (off-resonant).</p></li>
 </ul>
+<p>This insight motivates the <strong>rotating wave approximation</strong>: only near-resonant transitions (with <span class="math notranslate nohighlight">\(|\omega_{nm}| \lesssim 1/T\)</span>) contribute significantly to the dynamics over time <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
 </section>
 </section>
 <section id="the-evolution-operator-and-dyson-series">
@@ -671,68 +688,84 @@ document.write(`
 <h4>Formal Solution<a class="headerlink" href="#formal-solution" title="Link to this heading">#</a></h4>
 <p>Define the <strong>interaction-picture evolution operator</strong> <span class="math notranslate nohighlight">\(U_I(t)\)</span> such that:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-ui-def">
-<span class="eqno">(317)<a class="headerlink" href="#equation-eq-5a-ui-def" title="Link to this equation">#</a></span>\[|\psi_I(t)\rangle = U_I(t) |\psi_I(0)\rangle\]</div>
+<span class="eqno">(218)<a class="headerlink" href="#equation-eq-5a-ui-def" title="Link to this equation">#</a></span>\[
+|\psi_I(t)\rangle = U_I(t) |\psi_I(0)\rangle\]</div>
 <p>This operator has the formal solution:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-time-ord-exp">
-<span class="eqno">(318)<a class="headerlink" href="#equation-eq-5a-time-ord-exp" title="Link to this equation">#</a></span>\[\boxed{U_I(t) = T \exp\left(-\frac{i\lambda}{\hbar} \int_0^t dt' V_I(t')\right)}\]</div>
+<span class="eqno">(219)<a class="headerlink" href="#equation-eq-5a-time-ord-exp" title="Link to this equation">#</a></span>\[
+\boxed{U_I(t) = \mathcal{T} \exp\left(-\frac{\mathrm{i}\lambda}{\hbar} \int_0^t dt' V_I(t')\right)}\]</div>
 <p>This is the <strong>time-ordered exponential</strong>. Expanding it gives the <strong>Dyson series</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-dyson-expanded">
-<span class="eqno">(319)<a class="headerlink" href="#equation-eq-5a-dyson-expanded" title="Link to this equation">#</a></span>\[\boxed{U_I(t) = \mathbb{I} + \frac{\lambda}{i\hbar} \int_0^t dt_1 V_I(t_1) + \left(\frac{\lambda}{i\hbar}\right)^2 \int_0^t dt_1 \int_0^{t_1} dt_2 V_I(t_1) V_I(t_2) + \ldots}\]</div>
-<p><strong>Physical meaning</strong>:</p>
+<span class="eqno">(220)<a class="headerlink" href="#equation-eq-5a-dyson-expanded" title="Link to this equation">#</a></span>\[
+\boxed{U_I(t) = \mathbb{I} + \frac{\lambda}{\mathrm{i}\hbar} \int_0^t dt_1 V_I(t_1) + \left(\frac{\lambda}{\mathrm{i}\hbar}\right)^2 \int_0^t dt_1 \int_0^{t_1} dt_2 V_I(t_1) V_I(t_2) + \cdots}\]</div>
+</section>
+<section id="physical-meaning">
+<h4>Physical Meaning<a class="headerlink" href="#physical-meaning" title="Link to this heading">#</a></h4>
+<div class="note admonition">
+<p class="admonition-title">Interpreting the Dyson Series</p>
+<p>Each term in the expansion represents a different “scattering” process:</p>
 <ul class="simple">
-<li><p><strong>Zeroth order</strong> (<span class="math notranslate nohighlight">\(\lambda^0\)</span>): No interaction, system stays in its initial state.</p></li>
+<li><p><strong>Zeroth order</strong> (<span class="math notranslate nohighlight">\(\lambda^0\)</span>): No interaction; system stays in initial state.</p></li>
 <li><p><strong>First order</strong> (<span class="math notranslate nohighlight">\(\lambda^1\)</span>): One interaction event at time <span class="math notranslate nohighlight">\(t_1\)</span>.</p></li>
-<li><p><strong>Second order</strong> (<span class="math notranslate nohighlight">\(\lambda^2\)</span>): Two interaction events at times <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>, with <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span> (time-ordered).</p></li>
+<li><p><strong>Second order</strong> (<span class="math notranslate nohighlight">\(\lambda^2\)</span>): Two interaction events at times <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span> (time-ordered).</p></li>
 <li><p><strong>Higher orders</strong>: Multiple interaction events, always ordered in time (<span class="math notranslate nohighlight">\(t_1 &gt; t_2 &gt; t_3 &gt; \ldots\)</span>).</p></li>
 </ul>
-<p>Each term represents a different “scattering” process or number of intermediate transitions.</p>
-<div class="dropdown note admonition">
+<p>Each term can be visualized as Feynman diagrams in scattering theory.</p>
+</div>
+</section>
+<section id="derivation-how-time-ordering-emerges">
+<h4>Derivation: How Time Ordering Emerges<a class="headerlink" href="#derivation-how-time-ordering-emerges" title="Link to this heading">#</a></h4>
+<div class="dropdown admonition">
 <p class="admonition-title">Derivation</p>
 <p>From the equation of motion:</p>
 <div class="math notranslate nohighlight">
-\[i\hbar \frac{\partial U_I}{\partial t} = \lambda V_I(t) U_I(t), \quad U_I(0) = \mathbb{I}\]</div>
+\[
+\mathrm{i}\hbar \frac{\partial U_I}{\partial t} = \lambda V_I(t) U_I(t), \quad U_I(0) = \mathbb{I}\]</div>
 <p>Integrate formally:</p>
 <div class="math notranslate nohighlight">
-\[U_I(t) = \mathbb{I} + \frac{1}{i\hbar} \lambda \int_0^t dt_1 V_I(t_1) U_I(t_1)\]</div>
-<p>This is a <strong>Volterra integral equation</strong>. Solve by iterating: substitute the expression for <span class="math notranslate nohighlight">\(U_I\)</span> back into the integral to obtain higher orders:</p>
+\[
+U_I(t) = \mathbb{I} + \frac{1}{\mathrm{i}\hbar} \lambda \int_0^t dt_1 V_I(t_1) U_I(t_1)\]</div>
+<p>This is a <strong>Volterra integral equation</strong>. Solve iteratively by substituting the expression for <span class="math notranslate nohighlight">\(U_I\)</span> back into the integral:</p>
 <p><strong>First order</strong>:</p>
 <div class="math notranslate nohighlight">
-\[U_I^{(1)}(t) = \frac{\lambda}{i\hbar} \int_0^t dt_1 V_I(t_1)\]</div>
+\[
+U_I^{(1)}(t) = \frac{\lambda}{\mathrm{i}\hbar} \int_0^t dt_1 V_I(t_1)\]</div>
 <p><strong>Second order</strong>:</p>
 <div class="math notranslate nohighlight">
-\[U_I^{(2)}(t) = \left(\frac{\lambda}{i\hbar}\right)^2 \int_0^t dt_1 V_I(t_1) \int_0^{t_1} dt_2 V_I(t_2)\]</div>
-<p>The integral limits automatically enforce time ordering: when we substitute <span class="math notranslate nohighlight">\(U_I(t_1)\)</span> into the outer integral, the inner integration runs from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(t_1\)</span>, ensuring <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span>. This pattern continues for all higher orders.</p>
+\[
+U_I^{(2)}(t) = \left(\frac{\lambda}{\mathrm{i}\hbar}\right)^2 \int_0^t dt_1 V_I(t_1) \int_0^{t_1} dt_2 V_I(t_2)\]</div>
+<p>The integral limits automatically enforce time ordering: when substituting <span class="math notranslate nohighlight">\(U_I(t_1)\)</span> into the outer integral, the inner integration runs from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(t_1\)</span>, ensuring <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span>. This pattern continues for higher orders.</p>
 <p>Summing all orders:</p>
 <div class="math notranslate nohighlight">
-\[U_I(t) = \sum_{n=0}^\infty \left(\frac{\lambda}{i\hbar}\right)^n \int_0^t dt_1 \int_0^{t_1} dt_2 \cdots \int_0^{t_{n-1}} dt_n \, V_I(t_1) V_I(t_2) \cdots V_I(t_n)\]</div>
+\[
+U_I(t) = \sum_{n=0}^\infty \left(\frac{\lambda}{\mathrm{i}\hbar}\right)^n \int_0^t dt_1 \int_0^{t_1} dt_2 \cdots \int_0^{t_{n-1}} dt_n \, V_I(t_1) V_I(t_2) \cdots V_I(t_n)\]</div>
 <p>This is precisely the expansion of the time-ordered exponential.</p>
 </div>
 </section>
 <section id="time-ordering-and-causality">
 <h4>Time Ordering and Causality<a class="headerlink" href="#time-ordering-and-causality" title="Link to this heading">#</a></h4>
 <p>The integral limits <span class="math notranslate nohighlight">\(t &gt; t_1 &gt; t_2 &gt; \ldots\)</span> ensure <strong>causal time ordering</strong>: interactions are processed in sequence, with later times to the left.</p>
-<p><strong>Why this matters</strong>: In general, <span class="math notranslate nohighlight">\([V_I(t_1), V_I(t_2)] \neq 0\)</span> (operators do not commute). The order in which interactions occur is physical and affects the result. Time ordering enforces the natural causal sequence.</p>
-<div class="note admonition">
-<p class="admonition-title">Time-ordering operator definition</p>
-<p>For any two operators <span class="math notranslate nohighlight">\(A(t_1)\)</span> and <span class="math notranslate nohighlight">\(B(t_2)\)</span> with <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span>, the time-ordering operator <span class="math notranslate nohighlight">\(T\)</span> places later times to the left:</p>
+<div class="caution admonition">
+<p class="admonition-title">Why Time Ordering Matters</p>
+<p>In general, <span class="math notranslate nohighlight">\([V_I(t_1), V_I(t_2)] \neq 0\)</span> (operators do not commute). The order in which interactions occur is physical and affects the result. Time ordering enforces the natural causal sequence.</p>
+<p>For operators <span class="math notranslate nohighlight">\(A(t_1)\)</span> and <span class="math notranslate nohighlight">\(B(t_2)\)</span> with <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span>, the time-ordering operator <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
-\[T[A(t_1) B(t_2)] = A(t_1) B(t_2) \quad (t_1 &gt; t_2)\]</div>
-<div class="math notranslate nohighlight">
-\[T[B(t_2) A(t_1)] = A(t_1) B(t_2) \quad (t_1 &gt; t_2)\]</div>
-<p>The <strong>time-ordered exponential</strong> <span class="math notranslate nohighlight">\(T \exp(X)\)</span> automatically generates all orders of an expansion with time-ordered integration limits.</p>
+\[
+\mathcal{T}[A(t_1) B(t_2)] = A(t_1) B(t_2), \quad \mathcal{T}[B(t_2) A(t_1)] = A(t_1) B(t_2) \quad (t_1 &gt; t_2)\]</div>
 </div>
 </section>
 <section id="full-schrodinger-picture-evolution">
 <h4>Full Schrödinger-Picture Evolution<a class="headerlink" href="#full-schrodinger-picture-evolution" title="Link to this heading">#</a></h4>
-<p>The <strong>Schrödinger-picture evolution operator</strong> <span class="math notranslate nohighlight">\(U_S(t)\)</span> factorizes as:</p>
+<p>The <strong>Schrödinger-picture evolution operator</strong> <span class="math notranslate nohighlight">\(U_S(t)\)</span> factorizes beautifully:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-us-factored">
-<span class="eqno">(320)<a class="headerlink" href="#equation-eq-5a-us-factored" title="Link to this equation">#</a></span>\[\boxed{U_S(t) = e^{-iH_0 t/\hbar} U_I(t)}\]</div>
+<span class="eqno">(221)<a class="headerlink" href="#equation-eq-5a-us-factored" title="Link to this equation">#</a></span>\[
+\boxed{U_S(t) = \mathrm{e}^{-\mathrm{i}H_0 t/\hbar} U_I(t)}\]</div>
 <p>This decomposition is remarkably powerful:</p>
 <ul class="simple">
-<li><p>The first factor <span class="math notranslate nohighlight">\(e^{-iH_0 t/\hbar}\)</span> handles the fast, high-frequency <span class="math notranslate nohighlight">\(H_0\)</span> oscillations.</p></li>
+<li><p>The first factor <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}H_0 t/\hbar}\)</span> handles the fast, high-frequency <span class="math notranslate nohighlight">\(H_0\)</span> oscillations.</p></li>
 <li><p>The second factor <span class="math notranslate nohighlight">\(U_I(t)\)</span> (via the Dyson series) captures the slow interactions.</p></li>
 </ul>
-<p>Together, they build up the full interacting dynamics without having to solve the complete Hamiltonian.</p>
+<p>Together, they build up the full interacting dynamics without requiring direct solution of the complete Hamiltonian.</p>
 </section>
 </section>
 <section id="perturbative-expansion-and-transition-amplitudes">
@@ -741,64 +774,143 @@ document.write(`
 <h4>Order-by-Order Structure<a class="headerlink" href="#order-by-order-structure" title="Link to this heading">#</a></h4>
 <p>Expand the evolution operator in powers of <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-ui-series">
-<span class="eqno">(321)<a class="headerlink" href="#equation-eq-5a-ui-series" title="Link to this equation">#</a></span>\[U_I(t) = U_I^{(0)}(t) + \lambda U_I^{(1)}(t) + \lambda^2 U_I^{(2)}(t) + \ldots\]</div>
+<span class="eqno">(222)<a class="headerlink" href="#equation-eq-5a-ui-series" title="Link to this equation">#</a></span>\[
+U_I(t) = U_I^{(0)}(t) + \lambda U_I^{(1)}(t) + \lambda^2 U_I^{(2)}(t) + \ldots\]</div>
 <p><strong>Zeroth order</strong> (<span class="math notranslate nohighlight">\(\lambda = 0\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[U_I^{(0)}(t) = \mathbb{I} \quad \text{(no interaction)}\]</div>
+\[
+U_I^{(0)}(t) = \mathbb{I} \quad \text{(no interaction)}\]</div>
 <p><strong>First order</strong> (<span class="math notranslate nohighlight">\(\lambda^1\)</span>): One interaction at time <span class="math notranslate nohighlight">\(t_1\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[U_I^{(1)}(t) = -\frac{i}{\hbar} \int_0^t dt_1 V_I(t_1)\]</div>
+\[
+U_I^{(1)}(t) = -\frac{\mathrm{i}}{\hbar} \int_0^t dt_1 V_I(t_1)\]</div>
 <p><strong>Second order</strong> (<span class="math notranslate nohighlight">\(\lambda^2\)</span>): Two interactions at times <span class="math notranslate nohighlight">\(t_1, t_2\)</span> with <span class="math notranslate nohighlight">\(t_1 &gt; t_2\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[U_I^{(2)}(t) = -\frac{1}{\hbar^2} \int_0^t dt_1 \int_0^{t_1} dt_2 V_I(t_1) V_I(t_2)\]</div>
-<p>Higher orders follow the pattern: more interaction times, more nested integrals, time-ordered products.</p>
+\[
+U_I^{(2)}(t) = -\frac{1}{\hbar^2} \int_0^t dt_1 \int_0^{t_1} dt_2 V_I(t_1) V_I(t_2)\]</div>
+<p>Higher orders follow this pattern: more interaction times, more nested integrals, time-ordered products.</p>
 </section>
-<section id="transition-amplitudes">
-<h4>Transition Amplitudes<a class="headerlink" href="#transition-amplitudes" title="Link to this heading">#</a></h4>
+<section id="transition-amplitudes-and-resonance">
+<h4>Transition Amplitudes and Resonance<a class="headerlink" href="#transition-amplitudes-and-resonance" title="Link to this heading">#</a></h4>
 <p>The transition amplitude from state <span class="math notranslate nohighlight">\(|i\rangle\)</span> to <span class="math notranslate nohighlight">\(|f\rangle\)</span> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-amp-def">
-<span class="eqno">(322)<a class="headerlink" href="#equation-eq-5a-amp-def" title="Link to this equation">#</a></span>\[\mathcal{A}_{i\to f}(t) = \langle f | U_S(t) | i \rangle\]</div>
+<span class="eqno">(223)<a class="headerlink" href="#equation-eq-5a-amp-def" title="Link to this equation">#</a></span>\[
+\mathcal{A}_{i\to f}(t) = \langle f | U_S(t) | i \rangle\]</div>
 <p>To first order in <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A}_{i\to f}^{(0)}(t) = \delta_{fi} e^{-iE_f^{(0)} t/\hbar}\]</div>
+\[
+\mathcal{A}_{i\to f}^{(0)}(t) = \delta_{fi} \mathrm{e}^{-\mathrm{i}E_f^{(0)} t/\hbar}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-5a-amp-1st">
-<span class="eqno">(323)<a class="headerlink" href="#equation-eq-5a-amp-1st" title="Link to this equation">#</a></span>\[\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{i}{\hbar} e^{-iE_f^{(0)} t/\hbar} \int_0^t dt_1 e^{-i\omega_{fi}t_1} \langle f | V(t_1) | i \rangle\]</div>
+<span class="eqno">(224)<a class="headerlink" href="#equation-eq-5a-amp-1st" title="Link to this equation">#</a></span>\[\mathcal{A}_{i\to f}^{(1)}(t) = -\frac{\mathrm{i}}{\hbar} \mathrm{e}^{-\mathrm{i}E_f^{(0)} t/\hbar} \int_0^t dt_1 \mathrm{e}^{-\mathrm{i}\omega_{fi}t_1} \langle f | V(t_1) | i \rangle\]</div>
 <p>where <span class="math notranslate nohighlight">\(\omega_{fi} = (E_f^{(0)} - E_i^{(0)})/\hbar\)</span> is the transition frequency.</p>
 </section>
 </section>
-<section id="physical-interpretation">
-<h3>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h3>
-<section id="resonance-and-detuning">
-<h4>Resonance and Detuning<a class="headerlink" href="#resonance-and-detuning" title="Link to this heading">#</a></h4>
-<p>The oscillatory factor <span class="math notranslate nohighlight">\(e^{-i\omega_{fi}t_1}\)</span> in the transition amplitude has frequency <span class="math notranslate nohighlight">\(\omega_{fi}\)</span>, determined by the energy difference between initial and final states.</p>
-<p><strong>Resonant condition</strong> (<span class="math notranslate nohighlight">\(\omega_{fi} \approx 0\)</span>): The integrand oscillates slowly or not at all; the integral accumulates, giving a large (growing) amplitude. This is a strong resonant transition.</p>
-<p><strong>Off-resonant condition</strong> (<span class="math notranslate nohighlight">\(|\omega_{fi}| \gg 1/T\)</span> for evolution time <span class="math notranslate nohighlight">\(T\)</span>): Rapid oscillations cause cancellation; amplitude is suppressed. Weak off-resonant transitions.</p>
-<p>This is the origin of the <strong>rotating wave approximation</strong>: only near-resonant transitions (with <span class="math notranslate nohighlight">\(|\omega_{fi}| \lesssim 1/T\)</span>) contribute significantly.</p>
-</section>
-<section id="virtual-processes">
-<h4>Virtual Processes<a class="headerlink" href="#virtual-processes" title="Link to this heading">#</a></h4>
+<section id="virtual-processes-and-higher-orders">
+<h3>Virtual Processes and Higher Orders<a class="headerlink" href="#virtual-processes-and-higher-orders" title="Link to this heading">#</a></h3>
 <p>Higher-order terms in the Dyson series correspond to <strong>virtual intermediate states</strong>:</p>
 <ul class="simple">
 <li><p><strong>First order</strong>: Direct <span class="math notranslate nohighlight">\(i \to f\)</span> transition.</p></li>
 <li><p><strong>Second order</strong>: <span class="math notranslate nohighlight">\(i \to n \to f\)</span> (via intermediate state <span class="math notranslate nohighlight">\(n\)</span>), where state <span class="math notranslate nohighlight">\(n\)</span> is visited transiently.</p></li>
 <li><p><strong>Higher orders</strong>: Chains of intermediate transitions.</p></li>
 </ul>
-<p>The time integrals in the Dyson series encode <strong>energy conservation on average</strong>: the system is not required to have fixed energy during intermediate steps (virtual processes), but the overall energy is conserved when we integrate over all interaction times.</p>
-</section>
+<p>The time integrals in the Dyson series encode <strong>energy conservation on average</strong>: the system is not required to have fixed energy during intermediate steps (virtual processes), but the overall energy is conserved when integrated over all interaction times.</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Key Concepts</p>
 <ul class="simple">
-<li><p><strong>Interaction picture</strong>: Separates fast (solved by <span class="math notranslate nohighlight">\(e^{-iH_0 t/\hbar}\)</span>) and slow (perturbative <span class="math notranslate nohighlight">\(V_I(t)\)</span>) dynamics.</p></li>
-<li><p><strong>Interaction-picture perturbation</strong>: <span class="math notranslate nohighlight">\(V_I(t) = e^{iH_0 t/\hbar} V(t) e^{-iH_0 t/\hbar}\)</span>, with oscillatory terms <span class="math notranslate nohighlight">\(e^{i\omega_{nm}t}\)</span> encoding resonances.</p></li>
-<li><p><strong>Evolution operator</strong>: <span class="math notranslate nohighlight">\(U_I(t) = T \exp(-i \int V_I dt / \hbar)\)</span> (time-ordered exponential).</p></li>
+<li><p><strong>Interaction picture</strong>: Separates fast (solved by <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}H_0 t/\hbar}\)</span>) and slow (perturbative <span class="math notranslate nohighlight">\(V_I(t)\)</span>) dynamics.</p></li>
+<li><p><strong>Interaction-picture perturbation</strong>: <span class="math notranslate nohighlight">\(V_I(t) = \mathrm{e}^{\mathrm{i}H_0 t/\hbar} V(t) \mathrm{e}^{-\mathrm{i}H_0 t/\hbar}\)</span>, with oscillatory terms <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\omega_{nm}t}\)</span> encoding resonances.</p></li>
+<li><p><strong>Evolution operator</strong>: <span class="math notranslate nohighlight">\(U_I(t) = \mathcal{T} \exp(-\mathrm{i} \int V_I dt / \hbar)\)</span> (time-ordered exponential).</p></li>
 <li><p><strong>Dyson series</strong>: Systematic expansion showing interaction as sequence of events at ordered times.</p></li>
-<li><p><strong>Full evolution</strong>: <span class="math notranslate nohighlight">\(U_S(t) = e^{-iH_0 t/\hbar} U_I(t)\)</span> factorizes free propagation and interactions.</p></li>
-<li><p><strong>Transition amplitudes</strong>: Depend on oscillatory factors <span class="math notranslate nohighlight">\(e^{i\omega_{fi}t}\)</span>; resonance (<span class="math notranslate nohighlight">\(\omega_{fi} \approx 0\)</span>) enhances transitions.</p></li>
+<li><p><strong>Full evolution</strong>: <span class="math notranslate nohighlight">\(U_S(t) = \mathrm{e}^{-\mathrm{i}H_0 t/\hbar} U_I(t)\)</span> factorizes free propagation and interactions.</p></li>
+<li><p><strong>Transition amplitudes</strong>: Depend on oscillatory factors <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\omega_{fi}t}\)</span>; resonance (<span class="math notranslate nohighlight">\(\omega_{fi} \approx 0\)</span>) enhances transitions.</p></li>
 <li><p><strong>Causality</strong>: Time ordering ensures that interactions occur in the correct physical sequence.</p></li>
 <li><p><strong>Virtual processes</strong>: Higher-order terms represent intermediate state transitions with average energy conservation.</p></li>
 </ul>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Limits of the Rotating Wave Approximation</p>
+<p>The interaction picture separates <span class="math notranslate nohighlight">\(H = H_0 + V\)</span> and moves to a rotating frame where fast oscillations are removed. In the RWA, we keep only “resonant” terms.</p>
+<ul class="simple">
+<li><p>For a driven two-level atom (<span class="math notranslate nohighlight">\(\omega_0\)</span> = atomic transition, <span class="math notranslate nohighlight">\(\omega_L\)</span> = laser), what is the timescale on which non-resonant (“counter-rotating”) terms become important?</p></li>
+<li><p>If the detuning <span class="math notranslate nohighlight">\(\Delta = \omega_L - \omega_0\)</span> is very large, does the RWA break down? Explain physically.</p></li>
+<li><p>Propose a calculation to quantify when the RWA error exceeds 10%.</p></li>
+<li><p>Why does the rotating frame make the solution simpler—what physics does it obscure?</p></li>
+</ul>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html"><span class="std std-doc">1.3.3 Heisenberg Picture</span></a></strong>: Different pictures of quantum dynamics</p></li>
+<li><p><strong><a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="std std-doc">5.1.2 Non-Degenerate Perturbation Theory</span></a></strong>: Time-independent perturbation and adiabatic limits</p></li>
+<li><p><strong><a class="reference internal" href="5-2-2-fermis-golden-rule.html"><span class="std std-doc">5.2.2 Fermi’s Golden Rule</span></a></strong>: Transition rates from time-dependent perturbation theory</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Transformations between pictures</strong></p>
+<p>A state <span class="math notranslate nohighlight">\(|\psi_S(t)\rangle\)</span> evolves in the Schrödinger picture under Hamiltonian <span class="math notranslate nohighlight">\(H = H_0 + V(t)\)</span>.</p>
+<p>(a) Write the transformation relating <span class="math notranslate nohighlight">\(|\psi_I(t)\rangle\)</span> to <span class="math notranslate nohighlight">\(|\psi_S(t)\rangle\)</span>. Why does the interaction picture factor out the <span class="math notranslate nohighlight">\(H_0\)</span> evolution?</p>
+<p>(b) Similarly, relate an observable <span class="math notranslate nohighlight">\(O_I(t)\)</span> to <span class="math notranslate nohighlight">\(O_S\)</span>. What does this transformation physically represent?</p>
+<p>(c) Show that if <span class="math notranslate nohighlight">\(|\psi_I(t)\rangle\)</span> obeys <span class="math notranslate nohighlight">\(\mathrm{i}\hbar d|\psi_I\rangle/dt = \lambda V_I(t)|\psi_I\rangle\)</span>, then <span class="math notranslate nohighlight">\(|\psi_S(t)\rangle\)</span> obeys the full Schrödinger equation.</p>
+<hr class="docutils" />
+<p><strong>2. The interaction-picture perturbation</strong></p>
+<p>The unperturbed Hamiltonian <span class="math notranslate nohighlight">\(H_0\)</span> has eigenvalues <span class="math notranslate nohighlight">\(\{E_n^{(0)}\}\)</span> and eigenstates <span class="math notranslate nohighlight">\(\{|n\rangle\}\)</span>. A time-dependent perturbation <span class="math notranslate nohighlight">\(V(t)\)</span> is applied.</p>
+<p>(a) Write the Schrödinger-picture perturbation <span class="math notranslate nohighlight">\(V(t)\)</span> in the energy eigenbasis:</p>
+<div class="math notranslate nohighlight">
+\[V(t) = \sum_{m,n} V_{mn}(t) |m\rangle\langle n|\]</div>
+<p>(b) Transform to the interaction picture. Show that:</p>
+<div class="math notranslate nohighlight">
+\[V_I(t) = \sum_{m,n} V_{mn}(t) \mathrm{e}^{\mathrm{i}\omega_{mn}t} |m\rangle\langle n|\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_{mn} = (E_m^{(0)} - E_n^{(0)})/\hbar\)</span>.</p>
+<p>(c) Interpret this result: why do matrix elements acquire oscillatory phase factors at transition frequencies?</p>
+<hr class="docutils" />
+<p><strong>3. The time-evolution operator in the interaction picture</strong></p>
+<p>Define <span class="math notranslate nohighlight">\(U_I(t, t_0)\)</span> such that <span class="math notranslate nohighlight">\(|\psi_I(t)\rangle = U_I(t, t_0)|\psi_I(t_0)\rangle\)</span>.</p>
+<p>(a) Derive the equation of motion for <span class="math notranslate nohighlight">\(U_I(t, t_0)\)</span>.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\(U_I\)</span> satisfies the <strong>Dyson series</strong> (time-ordered exponential):</p>
+<div class="math notranslate nohighlight">
+\[U_I(t, t_0) = \mathcal{T} \exp\left(-\frac{\mathrm{i}}{\hbar}\int_{t_0}^{t} \lambda V_I(t') \mathrm{d}t'\right)\]</div>
+<p>(c) Expand the time-ordered exponential to second order in <span class="math notranslate nohighlight">\(\lambda\)</span> and verify that it correctly satisfies the differential equation.</p>
+<hr class="docutils" />
+<p><strong>4. Rabi oscillations in a two-level system</strong></p>
+<p>A two-level atom with ground state <span class="math notranslate nohighlight">\(|0\rangle\)</span> (energy <span class="math notranslate nohighlight">\(E_0 = 0\)</span>) and excited state <span class="math notranslate nohighlight">\(|1\rangle\)</span> (energy <span class="math notranslate nohighlight">\(E_1 = \hbar\omega_0\)</span>) is driven by a resonant field <span class="math notranslate nohighlight">\(V(t) = \hbar\Omega \sigma^x \cos(\omega_0 t)\)</span>, where <span class="math notranslate nohighlight">\(\sigma^x = |0\rangle\langle 1| + |1\rangle\langle 0|\)</span> and <span class="math notranslate nohighlight">\(\Omega\)</span> is the Rabi frequency.</p>
+<p>(a) Decompose <span class="math notranslate nohighlight">\(V(t)\)</span> into rotating and counter-rotating terms. Which term dominates near resonance?</p>
+<p>(b) In the interaction picture with <span class="math notranslate nohighlight">\(H_0 = \hbar\omega_0 |1\rangle\langle 1|\)</span>, show that <span class="math notranslate nohighlight">\(V_I(t) \approx \hbar\Omega \sigma^x\)</span> (rotating-wave approximation).</p>
+<p>(c) Write down the interaction-picture Schrödinger equation for the state <span class="math notranslate nohighlight">\(|\psi_I(t)\rangle = a_0(t)|0\rangle + a_1(t)|1\rangle\)</span>.</p>
+<p>(d) Solve to find the time evolution. Show that the population oscillates as:</p>
+<div class="math notranslate nohighlight">
+\[P_1(t) = \sin^2(\Omega t)\]</div>
+<hr class="docutils" />
+<p><strong>5. Relation between pictures: when to use each</strong></p>
+<p>Three quantum systems require calculations:</p>
+<p><strong>System A:</strong> A bound particle in a slowly-varying potential (e.g., gravity slowly turned on).</p>
+<p><strong>System B:</strong> An atom driven by a monochromatic laser at high intensity.</p>
+<p><strong>System C:</strong> A free particle subject to a brief, intense impulse (delta-function kick).</p>
+<p>For each system, discuss:</p>
+<ul class="simple">
+<li><p>Which picture(s) would be most natural for analysis?</p></li>
+<li><p>What is your reasoning (e.g., separation of timescales, nature of unperturbed dynamics)?</p></li>
+<li><p>What would be the main computational challenge in the less-suitable picture(s)?</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>6. Dyson series and time ordering</strong></p>
+<p>Consider a perturbation that acts in two distinct time intervals: <span class="math notranslate nohighlight">\(V(t) \neq 0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; t &lt; t_1\)</span> and <span class="math notranslate nohighlight">\(t_1 &lt; t &lt; 2t_1\)</span>, but <span class="math notranslate nohighlight">\(V(t) = 0\)</span> at <span class="math notranslate nohighlight">\(t = t_1\)</span> itself.</p>
+<p>(a) Compute the first-order perturbation correction to <span class="math notranslate nohighlight">\(U_I(2t_1, 0)\)</span> by hand (integral without time-ordering).</p>
+<p>(b) Compare with the time-ordered result from the Dyson series. Where does the difference appear, and why is time ordering essential for causality?</p>
+<p>(c) If the two intervals had <span class="math notranslate nohighlight">\(V(t)\)</span> with different operators <span class="math notranslate nohighlight">\(V_1(t)\)</span> and <span class="math notranslate nohighlight">\(V_2(t)\)</span>, would they commute? How does time-ordering handle the non-commutativity?</p>
+<hr class="docutils" />
+<p><strong>7. Eigenstate-perturbation correspondence</strong></p>
+<p>A system starts in an eigenstate of <span class="math notranslate nohighlight">\(H_0\)</span>, say <span class="math notranslate nohighlight">\(|\psi_I(0)\rangle = |n\rangle\)</span>. It evolves under a perturbation <span class="math notranslate nohighlight">\(V_I(t)\)</span> that couples <span class="math notranslate nohighlight">\(|n\rangle\)</span> to a nearby state <span class="math notranslate nohighlight">\(|m\rangle\)</span>.</p>
+<p>(a) Show that the interaction-picture amplitude for transition <span class="math notranslate nohighlight">\(n \to m\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[a_m(t) = -\frac{\mathrm{i}}{\hbar}\int_0^t \mathrm{e}^{\mathrm{i}\omega_{mn}t'} V_{mn}(t') a_n(t') \mathrm{d}t'\]</div>
+<p>(b) In the weak-coupling limit where <span class="math notranslate nohighlight">\(a_n(t) \approx 1\)</span> remains nearly constant, integrate to find the transition probability <span class="math notranslate nohighlight">\(P_{n \to m}(t) = |a_m(t)|^2\)</span> to first order in <span class="math notranslate nohighlight">\(V\)</span>.</p>
+<p>(c) For a constant coupling <span class="math notranslate nohighlight">\(V_{mn} = V_0\)</span>, compute <span class="math notranslate nohighlight">\(P_{n \to m}(t)\)</span>. Interpret the result in terms of resonance width and Fourier components of the coupling.</p>
 </section>
 </section>
 
@@ -871,28 +983,27 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#three-pictures-of-quantum-mechanics">Three Pictures of Quantum Mechanics</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-transformations">Definition and Transformations</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#equation-of-motion-in-the-interaction-picture">Equation of Motion in the Interaction Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenbasis-expansion">Eigenbasis Expansion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenbasis-expansion-and-resonance">Eigenbasis Expansion and Resonance</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evolution-operator-and-dyson-series">The Evolution Operator and Dyson Series</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-solution">Formal Solution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning">Physical Meaning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-how-time-ordering-emerges">Derivation: How Time Ordering Emerges</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-ordering-and-causality">Time Ordering and Causality</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-schrodinger-picture-evolution">Full Schrödinger-Picture Evolution</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbative-expansion-and-transition-amplitudes">Perturbative Expansion and Transition Amplitudes</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#order-by-order-structure">Order-by-Order Structure</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-amplitudes">Transition Amplitudes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-amplitudes-and-resonance">Transition Amplitudes and Resonance</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resonance-and-detuning">Resonance and Detuning</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-processes">Virtual Processes</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-processes-and-higher-orders">Virtual Processes and Higher Orders</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -930,7 +1041,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

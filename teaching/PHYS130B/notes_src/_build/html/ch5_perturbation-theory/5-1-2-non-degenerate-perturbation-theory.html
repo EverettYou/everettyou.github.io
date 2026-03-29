@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -533,6 +533,7 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -549,12 +550,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Why is the Hellmann-Feynman theorem a cornerstone of perturbation theory? How does it relate the energy derivative to expectation values?</p></li>
-<li><p>Derive the first-order energy correction <span class="math notranslate nohighlight">\(E_n^{(1)}\)</span> and interpret it physically.</p></li>
-<li><p>Derive the second-order energy correction <span class="math notranslate nohighlight">\(E_n^{(2)}\)</span>. Why does it always lower the ground state energy?</p></li>
-<li><p>What is state hybridization? How do energy gaps control the strength of mixing between levels?</p></li>
-<li><p>How does level repulsion emerge from the second-order correction? What does the sign tell us?</p></li>
-<li><p>When does non-degenerate perturbation theory break down? What happens if two levels become degenerate?</p></li>
+<li><p>What is the Hellmann-Feynman theorem, and why does it appear at the heart of perturbation theory? How does it relate energy changes to expectation values?</p></li>
+<li><p>Derive the first-order energy correction and explain what it physically represents. Why is it just the expectation value of the perturbation?</p></li>
+<li><p>In second order, why does the energy correction always lower the ground state energy? What does this tell you about the effect of perturbations?</p></li>
+<li><p>What is state hybridization, and how does the size of energy gaps control whether two states mix strongly or weakly?</p></li>
+<li><p>When does non-degenerate perturbation theory fail? What happens to the series when two levels approach degeneracy, and how should you handle this situation?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -564,7 +564,8 @@ document.write(`
 <h3>Problem Setup<a class="headerlink" href="#problem-setup" title="Link to this heading">#</a></h3>
 <p>We consider the Hamiltonian:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-ham-general">
-<span class="eqno">(288)<a class="headerlink" href="#equation-eq-5b-ham-general" title="Link to this equation">#</a></span>\[H(\lambda) = H_0 + \lambda V\]</div>
+<span class="eqno">(191)<a class="headerlink" href="#equation-eq-5b-ham-general" title="Link to this equation">#</a></span>\[
+H(\lambda) = H_0 + \lambda V\]</div>
 <p><strong>Assumptions</strong>:</p>
 <ol class="arabic simple">
 <li><p>The spectrum of <span class="math notranslate nohighlight">\(H_0\)</span> is <strong>discrete with no degeneracies</strong>: each eigenvalue appears exactly once.</p></li>
@@ -574,62 +575,97 @@ document.write(`
 </ol>
 <p><strong>Goal</strong>: Expand eigenvalues and eigenstates as power series:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-energy-series">
-<span class="eqno">(289)<a class="headerlink" href="#equation-eq-5b-energy-series" title="Link to this equation">#</a></span>\[E_n(\lambda) = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \ldots\]</div>
+<span class="eqno">(192)<a class="headerlink" href="#equation-eq-5b-energy-series" title="Link to this equation">#</a></span>\[
+E_n(\lambda) = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \ldots\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-5b-state-series">
-<span class="eqno">(290)<a class="headerlink" href="#equation-eq-5b-state-series" title="Link to this equation">#</a></span>\[|\psi_n(\lambda)\rangle = |\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + \lambda^2 |\psi_n^{(2)}\rangle + \ldots
-\]</div>
+<span class="eqno">(193)<a class="headerlink" href="#equation-eq-5b-state-series" title="Link to this equation">#</a></span>\[ |\psi_n(\lambda)\rangle = |\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + \lambda^2 |\psi_n^{(2)}\rangle + \ldots\]</div>
 </section>
 <section id="the-hellmann-feynman-theorem">
 <h3>The Hellmann-Feynman Theorem<a class="headerlink" href="#the-hellmann-feynman-theorem" title="Link to this heading">#</a></h3>
+<p>:: Discussion: Convergence of Rayleigh-Schrödinger Series
+:class: dropdown warning</p>
+<p>Rayleigh-Schrödinger perturbation theory gives</p>
+<div class="math notranslate nohighlight">
+\[ E_n^{(2)} = \sum_{m \neq n} \frac{|\langle m|V|n\rangle|^2}{E_n^{(0)} - E_m^{(0)}}\]</div>
+<p>For a harmonic oscillator with <span class="math notranslate nohighlight">\(V = \lambda x^4\)</span>, compute <span class="math notranslate nohighlight">\(E_0^{(2)}\)</span> (ground state energy correction).</p>
+<ul class="simple">
+<li><p>Does the series converge for all <span class="math notranslate nohighlight">\(\lambda\)</span>, or only for <span class="math notranslate nohighlight">\(\lambda\)</span> below some threshold?</p></li>
+<li><p>Compare the perturbative result to the exact ground state energy (available numerically). At what <span class="math notranslate nohighlight">\(\lambda\)</span> does the error exceed 5%?</p></li>
+<li><p>Physical interpretation: large <span class="math notranslate nohighlight">\(\lambda\)</span> means the potential becomes very steep. Why does perturbation theory fail?</p></li>
+</ul>
+<div class="docutils">
 <p>The <strong>Hellmann-Feynman theorem</strong> is a cornerstone of perturbation theory. It states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-hf-theorem">
-<span class="eqno">(291)<a class="headerlink" href="#equation-eq-5b-hf-theorem" title="Link to this equation">#</a></span>\[\boxed{\frac{dE_n}{d\lambda} = \langle \psi_n(\lambda) | \frac{\partial H}{\partial\lambda} | \psi_n(\lambda) \rangle}\]</div>
+<span class="eqno">(194)<a class="headerlink" href="#equation-eq-5b-hf-theorem" title="Link to this equation">#</a></span>\[
+\boxed{\frac{\mathrm{d}E_n}{d\lambda} = \langle \psi_n(\lambda) | \frac{\partial H}{\partial\lambda} | \psi_n(\lambda) \rangle}\]</div>
 <p><strong>Physical meaning</strong>: The energy shifts with the perturbation parameter proportionally to the expectation value of the perturbation operator. Evaluated at <span class="math notranslate nohighlight">\(\lambda = 0\)</span> with <span class="math notranslate nohighlight">\(\frac{\partial H}{\partial \lambda} = V\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-hf-first-order">
-<span class="eqno">(292)<a class="headerlink" href="#equation-eq-5b-hf-first-order" title="Link to this equation">#</a></span>\[\left.\frac{dE_n}{d\lambda}\right|_{\lambda=0} = \langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle\]</div>
+<span class="eqno">(195)<a class="headerlink" href="#equation-eq-5b-hf-first-order" title="Link to this equation">#</a></span>\[
+\left.\frac{\mathrm{d}E_n}{d\lambda}\right|_{\lambda=0} = \langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle\]</div>
 <p>This result shows that to first order, the energy shift is simply the expectation value of <span class="math notranslate nohighlight">\(V\)</span> in the unperturbed state—a direct consequence of the adiabatic continuity assumption.</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation</p>
 <p>Consider the eigenvalue equation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-eigenvalue-eq">
-<span class="eqno">(293)<a class="headerlink" href="#equation-eq-5b-eigenvalue-eq" title="Link to this equation">#</a></span>\[H(\lambda) |\psi_n(\lambda)\rangle = E_n(\lambda) |\psi_n(\lambda)\rangle\]</div>
+<span class="eqno">(196)<a class="headerlink" href="#equation-eq-5b-eigenvalue-eq" title="Link to this equation">#</a></span>\[
+H(\lambda) |\psi_n(\lambda)\rangle = E_n(\lambda) |\psi_n(\lambda)\rangle\]</div>
 <p>Differentiate both sides with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial H}{\partial \lambda}|\psi_n\rangle + H\frac{\partial |\psi_n\rangle}{\partial \lambda} = \frac{dE_n}{d\lambda} |\psi_n\rangle + E_n\frac{\partial |\psi_n\rangle}{\partial \lambda}\]</div>
+\[
+\frac{\partial H}{\partial \lambda}|\psi_n\rangle + H\frac{\partial |\psi_n\rangle}{\partial \lambda} = \frac{\mathrm{d}E_n}{d\lambda} |\psi_n\rangle + E_n\frac{\partial |\psi_n\rangle}{\partial \lambda}\]</div>
 <p>Take the inner product with <span class="math notranslate nohighlight">\(\langle \psi_n(\lambda)|\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle + \langle \psi_n|H\frac{\partial |\psi_n\rangle}{\partial \lambda} = \frac{dE_n}{d\lambda}\langle\psi_n|\psi_n\rangle + E_n\langle\psi_n|\frac{\partial |\psi_n\rangle}{\partial \lambda}\]</div>
+\[
+\langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle + \langle \psi_n|H\frac{\partial |\psi_n\rangle}{\partial \lambda} = \frac{\mathrm{d}E_n}{d\lambda}\langle\psi_n|\psi_n\rangle + E_n\langle\psi_n|\frac{\partial |\psi_n\rangle}{\partial \lambda}\]</div>
 <p>Use <span class="math notranslate nohighlight">\(H^\dagger = H\)</span> (Hermiticity) to rewrite <span class="math notranslate nohighlight">\(\langle \psi_n|H = E_n\langle\psi_n|\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle + E_n\langle\psi_n|\frac{\partial |\psi_n\rangle}{\partial \lambda} = \frac{dE_n}{d\lambda} + E_n\langle\psi_n|\frac{\partial |\psi_n\rangle}{\partial \lambda}\]</div>
+\[
+\langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle + E_n\langle\psi_n|\frac{\partial |\psi_n\rangle}{\partial \lambda} = \frac{\mathrm{d}E_n}{d\lambda} + E_n\langle\psi_n|\frac{\partial |\psi_n\rangle}{\partial \lambda}\]</div>
 <p>The <span class="math notranslate nohighlight">\(E_n\)</span> terms cancel:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-hf-main">
-<span class="eqno">(294)<a class="headerlink" href="#equation-eq-5b-hf-main" title="Link to this equation">#</a></span>\[\langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle = \frac{dE_n}{d\lambda}\]</div>
+<span class="eqno">(197)<a class="headerlink" href="#equation-eq-5b-hf-main" title="Link to this equation">#</a></span>\[
+\langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle = \frac{\mathrm{d}E_n}{d\lambda}\]</div>
+</div>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Hellmann-Feynman Theorem and State Corrections</p>
+<p>The Hellmann-Feynman theorem states <span class="math notranslate nohighlight">\(\frac{\mathrm{d}E_n}{\mathrm{d}\lambda} = \langle\psi_n(\lambda)|\frac{\partial H}{\partial\lambda}|\psi_n(\lambda)\rangle\)</span>, which appears to use only the expectation value in the perturbed state, not explicitly mentioning corrections to <span class="math notranslate nohighlight">\(|\psi_n\rangle\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Question 1</strong>: In the derivation, we took the inner product of the differentiated eigenvalue equation with <span class="math notranslate nohighlight">\(\langle\psi_n|\)</span>. Show that the cross term <span class="math notranslate nohighlight">\(\langle\psi_n|H\frac{\partial|\psi_n\rangle}{\partial\lambda}\)</span> vanishes exactly (using Hermiticity). Why does this cancellation make the theorem <strong>exact</strong> to all orders, despite the existence of state corrections?</p></li>
+<li><p><strong>Question 2</strong>: Suppose we naively used the first-order state <span class="math notranslate nohighlight">\(|\psi_n^{(1)}\rangle\)</span> to estimate <span class="math notranslate nohighlight">\(\frac{\mathrm{d}E_n}{\mathrm{d}\lambda}\)</span> as <span class="math notranslate nohighlight">\(\langle\psi_n^{(0)}|V|\psi_n^{(0)}\rangle + \lambda \text{(corrections)}\)</span>. Would this give the right answer? How do the neglected state corrections conspire to leave the energy derivative untouched?</p></li>
+<li><p><strong>Question 3</strong>: The adiabatic continuity assumption requires that we can label eigenstates continuously as <span class="math notranslate nohighlight">\(\lambda\)</span> varies. Explain why level crossings (where labeling becomes ambiguous) invalidate the theorem locally. Construct an example where <span class="math notranslate nohighlight">\(\frac{\mathrm{d}E_n}{\mathrm{d}\lambda}\)</span> jumps discontinuously.</p></li>
+</ul>
 </div>
 </section>
 <section id="first-order-energy-correction">
 <h3>First-Order Energy Correction<a class="headerlink" href="#first-order-energy-correction" title="Link to this heading">#</a></h3>
 <p>The first-order energy correction is obtained by expanding the eigenvalue equation to order <span class="math notranslate nohighlight">\(\lambda^1\)</span> and taking the inner product with the unperturbed state:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-e1-result">
-<span class="eqno">(295)<a class="headerlink" href="#equation-eq-5b-e1-result" title="Link to this equation">#</a></span>\[\boxed{E_n^{(1)} = \langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle}\]</div>
+<span class="eqno">(198)<a class="headerlink" href="#equation-eq-5b-e1-result" title="Link to this equation">#</a></span>\[
+\boxed{E_n^{(1)} = \langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle}\]</div>
 <p><strong>Physical interpretation</strong>: The first-order energy shift is simply the <strong>diagonal matrix element</strong> of the perturbation in the unperturbed basis. It is the expectation value of <span class="math notranslate nohighlight">\(V\)</span> in the unperturbed state. States with no diagonal matrix element (like <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> in the computational basis) experience zero first-order shift.</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation</p>
 <p>Expand <span class="math notranslate nohighlight">\(H|\psi_n\rangle = E_n|\psi_n\rangle\)</span> to first order in <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[(H_0 + \lambda V)(|\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + \ldots) = (E_n^{(0)} + \lambda E_n^{(1)} + \ldots)(|\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + \ldots)\]</div>
+\[
+(H_0 + \lambda V)(|\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + \ldots) = (E_n^{(0)} + \lambda E_n^{(1)} + \ldots)(|\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + \ldots)\]</div>
 <p><strong>Order <span class="math notranslate nohighlight">\(\lambda^0\)</span></strong>:</p>
 <div class="math notranslate nohighlight">
-\[H_0 |\psi_n^{(0)}\rangle = E_n^{(0)} |\psi_n^{(0)}\rangle \quad \text{(unperturbed eigenvalue eq.)}\]</div>
+\[
+H_0 |\psi_n^{(0)}\rangle = E_n^{(0)} |\psi_n^{(0)}\rangle \quad \text{(unperturbed eigenvalue eq.)}\]</div>
 <p><strong>Order <span class="math notranslate nohighlight">\(\lambda^1\)</span></strong>:</p>
 <div class="math notranslate nohighlight">
-\[V|\psi_n^{(0)}\rangle + H_0|\psi_n^{(1)}\rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
+\[
+V|\psi_n^{(0)}\rangle + H_0|\psi_n^{(1)}\rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
 <p>Take the inner product with <span class="math notranslate nohighlight">\(\langle \psi_n^{(0)}|\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle + \langle \psi_n^{(0)} | H_0 | \psi_n^{(1)} \rangle = E_n^{(0)} \langle \psi_n^{(0)} | \psi_n^{(1)} \rangle + E_n^{(1)}\]</div>
+\[
+\langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle + \langle \psi_n^{(0)} | H_0 | \psi_n^{(1)} \rangle = E_n^{(0)} \langle \psi_n^{(0)} | \psi_n^{(1)} \rangle + E_n^{(1)}\]</div>
 <p>Use <span class="math notranslate nohighlight">\(\langle \psi_n^{(0)} | H_0 = E_n^{(0)} \langle \psi_n^{(0)} |\)</span> and the orthogonality condition <span class="math notranslate nohighlight">\(\langle \psi_n^{(0)} | \psi_n^{(1)} \rangle = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle = E_n^{(1)}\]</div>
+\[
+\langle \psi_n^{(0)} | V | \psi_n^{(0)} \rangle = E_n^{(1)}\]</div>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Normalization choice</p>
@@ -640,7 +676,8 @@ document.write(`
 <h3>First-Order State Correction<a class="headerlink" href="#first-order-state-correction" title="Link to this heading">#</a></h3>
 <p>While the first-order energy is diagonal, the state mixes with other eigenstates. The first-order state correction is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-psi1-result">
-<span class="eqno">(296)<a class="headerlink" href="#equation-eq-5b-psi1-result" title="Link to this equation">#</a></span>\[|\psi_n^{(1)}\rangle = \sum_{m \neq n} \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}} |\psi_m^{(0)}\rangle\]</div>
+<span class="eqno">(199)<a class="headerlink" href="#equation-eq-5b-psi1-result" title="Link to this equation">#</a></span>\[
+|\psi_n^{(1)}\rangle = \sum_{m \neq n} \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}} |\psi_m^{(0)}\rangle\]</div>
 <p><strong>Physical interpretation</strong>: The perturbed state is a superposition of unperturbed states. The admixture of state <span class="math notranslate nohighlight">\(m\)</span> is:</p>
 <ul class="simple">
 <li><p><strong>Proportional to the coupling</strong>: <span class="math notranslate nohighlight">\(\langle m | V | n \rangle\)</span> (off-diagonal matrix element)</p></li>
@@ -652,30 +689,36 @@ document.write(`
 <p class="admonition-title">Derivation</p>
 <p>Expand <span class="math notranslate nohighlight">\(|\psi_n^{(1)}\rangle\)</span> in the eigenbasis of <span class="math notranslate nohighlight">\(H_0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[|\psi_n^{(1)}\rangle = \sum_{m \neq n} c_m^{(1)} |\psi_m^{(0)}\rangle\]</div>
+\[ |\psi_n^{(1)}\rangle = \sum_{m \neq n} c_m^{(1)} |\psi_m^{(0)}\rangle\]</div>
 <p>(We exclude <span class="math notranslate nohighlight">\(m=n\)</span> by the orthogonality condition <span class="math notranslate nohighlight">\(\langle \psi_n^{(0)} | \psi_n^{(1)} \rangle = 0\)</span>.)</p>
 <p>Insert into the order-<span class="math notranslate nohighlight">\(\lambda^1\)</span> equation:</p>
 <div class="math notranslate nohighlight">
-\[V|\psi_n^{(0)}\rangle + H_0 \sum_m c_m^{(1)} |\psi_m^{(0)}\rangle = E_n^{(0)} \sum_m c_m^{(1)} |\psi_m^{(0)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
+\[
+V|\psi_n^{(0)}\rangle + H_0 \sum_m c_m^{(1)} |\psi_m^{(0)}\rangle = E_n^{(0)} \sum_m c_m^{(1)} |\psi_m^{(0)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
 <p>Rearrange:</p>
 <div class="math notranslate nohighlight">
-\[V|\psi_n^{(0)}\rangle = \sum_m c_m^{(1)} (E_m^{(0)} - E_n^{(0)}) |\psi_m^{(0)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
+\[
+V|\psi_n^{(0)}\rangle = \sum_m c_m^{(1)} (E_m^{(0)} - E_n^{(0)}) |\psi_m^{(0)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
 <p>Project onto <span class="math notranslate nohighlight">\(\langle\psi_m^{(0)}|\)</span> for <span class="math notranslate nohighlight">\(m \neq n\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle = c_m^{(1)} (E_m^{(0)} - E_n^{(0)})\]</div>
+\[
+\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle = c_m^{(1)} (E_m^{(0)} - E_n^{(0)})\]</div>
 <p>Solving for <span class="math notranslate nohighlight">\(c_m^{(1)}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[c_m^{(1)} = \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_m^{(0)} - E_n^{(0)}} = \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{-(E_n^{(0)} - E_m^{(0)})}\]</div>
+\[
+c_m^{(1)} = \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_m^{(0)} - E_n^{(0)}} = \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{-(E_n^{(0)} - E_m^{(0)})}\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
-\[|\psi_n^{(1)}\rangle = \sum_{m \neq n} \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}} |\psi_m^{(0)}\rangle\]</div>
+\[
+|\psi_n^{(1)}\rangle = \sum_{m \neq n} \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}} |\psi_m^{(0)}\rangle\]</div>
 </div>
 </section>
 <section id="second-order-energy-correction">
 <h3>Second-Order Energy Correction<a class="headerlink" href="#second-order-energy-correction" title="Link to this heading">#</a></h3>
 <p>The second-order energy correction captures “virtual transitions”: the system temporarily borrows strength from (or lends to) intermediate states before returning. The result is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-e2-result">
-<span class="eqno">(297)<a class="headerlink" href="#equation-eq-5b-e2-result" title="Link to this equation">#</a></span>\[\boxed{E_n^{(2)} = \sum_{m \neq n} \frac{|\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle|^2}{E_n^{(0)} - E_m^{(0)}}}\]</div>
+<span class="eqno">(200)<a class="headerlink" href="#equation-eq-5b-e2-result" title="Link to this equation">#</a></span>\[
+\boxed{E_n^{(2)} = \sum_{m \neq n} \frac{|\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle|^2}{E_n^{(0)} - E_m^{(0)}}}\]</div>
 <p><strong>Key features</strong>:</p>
 <ol class="arabic simple">
 <li><p>The numerator is always <strong>non-negative</strong> (absolute value squared of coupling strength).</p></li>
@@ -689,16 +732,31 @@ document.write(`
 <p class="admonition-title">Derivation</p>
 <p>Derive from the order-<span class="math notranslate nohighlight">\(\lambda^2\)</span> eigenvalue equation. Project the order-<span class="math notranslate nohighlight">\(\lambda^1\)</span> equation:</p>
 <div class="math notranslate nohighlight">
-\[V|\psi_n^{(0)}\rangle + H_0|\psi_n^{(1)}\rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
+\[
+V|\psi_n^{(0)}\rangle + H_0|\psi_n^{(1)}\rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle\]</div>
 <p>onto <span class="math notranslate nohighlight">\(\langle\psi_n^{(0)}|\)</span> after applying <span class="math notranslate nohighlight">\((H_0 - E_n^{(0)})\)</span> to <span class="math notranslate nohighlight">\(|\psi_n^{(1)}\rangle\)</span> and using the orthogonality <span class="math notranslate nohighlight">\(\langle \psi_n^{(0)} | \psi_n^{(1)} \rangle = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle \psi_n^{(0)} | V | \psi_n^{(1)} \rangle = E_n^{(2)}\]</div>
+\[
+\langle \psi_n^{(0)} | V | \psi_n^{(1)} \rangle = E_n^{(2)}\]</div>
 <p>Substitute the first-order state correction:</p>
 <div class="math notranslate nohighlight">
-\[E_n^{(2)} = \langle \psi_n^{(0)} | V | \psi_n^{(1)} \rangle = \sum_{m \neq n} \frac{\langle \psi_n^{(0)} | V | \psi_m^{(0)} \rangle \langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}}\]</div>
+\[
+E_n^{(2)} = \langle \psi_n^{(0)} | V | \psi_n^{(1)} \rangle = \sum_{m \neq n} \frac{\langle \psi_n^{(0)} | V | \psi_m^{(0)} \rangle \langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}}\]</div>
 <p>Use the fact that <span class="math notranslate nohighlight">\(\langle \psi_n^{(0)} | V | \psi_m^{(0)} \rangle = \langle \psi_m^{(0)} | V^\dagger | \psi_n^{(0)} \rangle^* = \langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle^*\)</span> (by Hermiticity):</p>
 <div class="math notranslate nohighlight">
-\[E_n^{(2)} = \sum_{m \neq n} \frac{|\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle|^2}{E_n^{(0)} - E_m^{(0)}}\]</div>
+\[
+E_n^{(2)} = \sum_{m \neq n} \frac{|\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle|^2}{E_n^{(0)} - E_m^{(0)}}\]</div>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Perturbation Theory at Degeneracy</p>
+<p>Consider two unperturbed energy levels separated by a small gap <span class="math notranslate nohighlight">\(\Delta E = E_2^{(0)} - E_1^{(0)}\)</span>. If the perturbation has a significant matrix element <span class="math notranslate nohighlight">\(V_{12}\)</span> between these levels, the first-order state correction includes a term:</p>
+<div class="math notranslate nohighlight">
+\[ c_1^{(1)} \sim \frac{V_{12}}{\Delta E}\]</div>
+<ul class="simple">
+<li><p><strong>Question 1</strong>: For a given coupling <span class="math notranslate nohighlight">\(|V_{12}|\)</span>, at what value of <span class="math notranslate nohighlight">\(\Delta E\)</span> does this become larger than <span class="math notranslate nohighlight">\(c_1^{(0)} = 1\)</span>? What does this mean physically?</p></li>
+<li><p><strong>Question 2</strong>: When <span class="math notranslate nohighlight">\(\Delta E \to 0\)</span> (degeneracy), the formula <span class="math notranslate nohighlight">\(E_n^{(2)} = \sum_{m \neq n} \frac{|\langle m|V|n\rangle|^2}{E_n^{(0)} - E_m^{(0)}}\)</span> appears to diverge. Why is this not a failure of perturbation theory’s validity, but rather a signal that degenerate perturbation theory (or diagonalization of the full 2×2 block) is required?</p></li>
+<li><p><strong>Question 3</strong>: Show that for exactly degenerate levels (<span class="math notranslate nohighlight">\(\Delta E = 0\)</span> exactly), the correct first-order treatment is to diagonalize <span class="math notranslate nohighlight">\(V\)</span> in the degenerate subspace. Construct a physical argument: why must we do this differently than for non-degenerate pairs?</p></li>
+</ul>
 </div>
 <section id="level-repulsion">
 <h4>Level Repulsion<a class="headerlink" href="#level-repulsion" title="Link to this heading">#</a></h4>
@@ -709,7 +767,8 @@ document.write(`
 <li><p><strong>Net effect</strong>: The spacing between levels increases:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-5b-level-repulsion">
-<span class="eqno">(298)<a class="headerlink" href="#equation-eq-5b-level-repulsion" title="Link to this equation">#</a></span>\[\Delta E(\lambda) = [E_1(\lambda) - E_0(\lambda)] &gt; [E_1^{(0)} - E_0^{(0)}] = \Delta E(0)\]</div>
+<span class="eqno">(201)<a class="headerlink" href="#equation-eq-5b-level-repulsion" title="Link to this equation">#</a></span>\[
+\Delta E(\lambda) = [E_1(\lambda) - E_0(\lambda)] &gt; [E_1^{(0)} - E_0^{(0)}] = \Delta E(0)\]</div>
 <div class="note admonition">
 <p class="admonition-title">Level repulsion in words</p>
 <p><strong>Perturbation theory reveals that quantum levels repel each other.</strong> This is a fundamental consequence of the coupling structure <span class="math notranslate nohighlight">\(|\langle m|V|n\rangle|^2\)</span> (quadratic in coupling). The closer two levels are in energy, the stronger they couple, and the more they push apart. In non-degenerate systems, levels <strong>never cross</strong>—they execute an “avoided crossing.”</p>
@@ -719,8 +778,7 @@ document.write(`
 <h4>State Hybridization and Resonance<a class="headerlink" href="#state-hybridization-and-resonance" title="Link to this heading">#</a></h4>
 <p>The perturbed eigenstate is a <strong>hybrid</strong> of multiple unperturbed states:</p>
 <div class="math notranslate nohighlight">
-\[|\psi_n(\lambda)\rangle \approx |\psi_n^{(0)}\rangle + \sum_{m \neq n} \frac{\langle\psi_m^{(0)}|V|\psi_n^{(0)}\rangle}{E_n^{(0)} - E_m^{(0)}} |\psi_m^{(0)}\rangle + O(\lambda^2)
-\]</div>
+\[ |\psi_n(\lambda)\rangle \approx |\psi_n^{(0)}\rangle + \sum_{m \neq n} \frac{\langle\psi_m^{(0)}|V|\psi_n^{(0)}\rangle}{E_n^{(0)} - E_m^{(0)}} |\psi_m^{(0)}\rangle + O(\lambda^2)\]</div>
 <p><strong>Mixing strength</strong> depends on:</p>
 <ol class="arabic simple">
 <li><p><strong>Coupling matrix element</strong>: <span class="math notranslate nohighlight">\(|\langle m|V|n\rangle|\)</span> — larger coupling increases mixing.</p></li>
@@ -759,8 +817,43 @@ document.write(`
 </table>
 </div>
 <p><strong>Convergence criterion</strong>: Series converges when <span class="math notranslate nohighlight">\(\lambda \|V\| \ll \min_m(\|E_n^{(0)} - E_m^{(0)}\|)\)</span>, i.e., perturbation strength is much smaller than energy gaps.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="5-1-1-toy-model.html"><span class="std std-doc">5.1.1 Toy Model</span></a></strong>: Simple pedagogical example of perturbation expansion</p></li>
+<li><p><strong><a class="reference internal" href="5-1-3-degenerate-perturbation-theory.html"><span class="std std-doc">5.1.3 Degenerate Perturbation Theory</span></a></strong>: Handling multiple unperturbed states at same energy</p></li>
+<li><p><strong><a class="reference internal" href="5-2-1-interaction-picture.html"><span class="std std-doc">5.2.1 Interaction Picture</span></a></strong>: Time-dependent perturbation theory framework</p></li>
+</ul>
+</div>
 </section>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Normalization to First Order.</strong>
+Show that the first-order state correction <span class="math notranslate nohighlight">\(|n^{(1)}\rangle\)</span> satisfies <span class="math notranslate nohighlight">\(\langle n^{(0)}|n^{(1)}\rangle = 0\)</span>, i.e., it has no component along the unperturbed state. (Hint: project the first-order Schrödinger equation onto <span class="math notranslate nohighlight">\(\langle n^{(0)}|\)</span>.) Why does this choice simplify the perturbation expansion?</p>
+<p><strong>2. Stark Effect on Hydrogen Ground State.</strong>
+A hydrogen atom in a uniform electric field <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> along <span class="math notranslate nohighlight">\(z\)</span> has perturbation <span class="math notranslate nohighlight">\(\hat{V} = e\mathcal{E}\hat{z}\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(E_{1s}^{(1)} = 0\)</span> using the parity of the <span class="math notranslate nohighlight">\(1s\)</span> wavefunction.</p>
+<p>(b) The second-order shift is <span class="math notranslate nohighlight">\(E_{1s}^{(2)} = -\frac{9}{4}a_0^3 \epsilon_0 \mathcal{E}^2\)</span> (you may quote this result). Identify the polarizability <span class="math notranslate nohighlight">\(\alpha = -2E_{1s}^{(2)}/\mathcal{E}^2\)</span> and give its value in units of <span class="math notranslate nohighlight">\(a_0^3\)</span>.</p>
+<p><strong>3. Selection Rules from Parity.</strong>
+For a particle in a 1D symmetric potential <span class="math notranslate nohighlight">\(V_0(-x) = V_0(x)\)</span>, the eigenstates have definite parity. Show that if the perturbation <span class="math notranslate nohighlight">\(\hat{V} = \lambda \hat{x}\)</span> (odd parity), then <span class="math notranslate nohighlight">\(E_n^{(1)} = 0\)</span> for all <span class="math notranslate nohighlight">\(n\)</span>. What does this imply about the leading correction?</p>
+<p><strong>4. Anharmonic Oscillator.</strong>
+For the harmonic oscillator with <span class="math notranslate nohighlight">\(\hat{H}_0 = \frac{\hat{p}^2}{2m} + \frac{1}{2}m\omega^2\hat{x}^2\)</span> and perturbation <span class="math notranslate nohighlight">\(\hat{V} = \lambda \hat{x}^4\)</span>, compute the first-order energy correction <span class="math notranslate nohighlight">\(E_n^{(1)}\)</span> using <span class="math notranslate nohighlight">\(\hat{x} = \sqrt{\hbar/(2m\omega)}(\hat{a}+\hat{a}^\dagger)\)</span> and the matrix elements of <span class="math notranslate nohighlight">\(\hat{x}^4\)</span> in the number basis. (You may use <span class="math notranslate nohighlight">\(\hat{x}^4\)</span> in terms of <span class="math notranslate nohighlight">\(\hat{a}, \hat{a}^\dagger\)</span> and keep only diagonal terms.)</p>
+<p><strong>5. Zeeman Effect (Weak Field).</strong>
+In a weak magnetic field <span class="math notranslate nohighlight">\(B\)</span> along <span class="math notranslate nohighlight">\(z\)</span>, the perturbation to the hydrogen atom is <span class="math notranslate nohighlight">\(\hat{V} = -\boldsymbol{\mu}\cdot\boldsymbol{B}\)</span> where <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = -\frac{e}{2m_e}(\hat{L}_z + 2\hat{S}_z)\)</span> (ignoring diamagnetic term). For states with definite <span class="math notranslate nohighlight">\(j, m_j\)</span> (good quantum numbers including spin-orbit coupling), write the first-order energy shift and explain why these are the correct basis states.</p>
+<p><strong>6. Validity Breakdown.</strong>
+Consider a 3-level system with unperturbed energies <span class="math notranslate nohighlight">\(E_1 = 0\)</span>, <span class="math notranslate nohighlight">\(E_2 = \Delta\)</span>, <span class="math notranslate nohighlight">\(E_3 = 10\Delta\)</span>. The perturbation couples states 1 and 2 with matrix element <span class="math notranslate nohighlight">\(V_{12}\)</span>, and states 2 and 3 with <span class="math notranslate nohighlight">\(V_{23}\)</span>.</p>
+<p>(a) State the validity conditions for perturbation theory applied to state 1.</p>
+<p>(b) As <span class="math notranslate nohighlight">\(\Delta \to 0\)</span> with <span class="math notranslate nohighlight">\(V_{12}\)</span> fixed, which condition is violated? What is the appropriate fix?</p>
+<p><strong>7. Sum Rule.</strong>
+Show that the second-order ground-state energy shift satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+E_0^{(2)} = -\sum_{n \neq 0} \frac{|\langle n^{(0)}|\hat{V}|0^{(0)}\rangle|^2}{E_n^{(0)} - E_0^{(0)}} \leq 0\]</div>
+<p>This proves that perturbations always lower the ground state energy to second order. What physical principle (related to the variational theorem) explains this?</p>
+<p><strong>8. Off-Diagonal Perturbation.</strong>
+A particle has <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> with non-degenerate eigenvalues and a perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span> with <span class="math notranslate nohighlight">\(\hat{V}_{nn} = 0\)</span> for all <span class="math notranslate nohighlight">\(n\)</span> (no diagonal matrix elements). Show that the first-order energy correction vanishes for all states, and write the leading-order correction as a ratio that must be small for the expansion to be valid.</p>
 </section>
 </section>
 
@@ -841,6 +934,7 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -878,7 +972,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

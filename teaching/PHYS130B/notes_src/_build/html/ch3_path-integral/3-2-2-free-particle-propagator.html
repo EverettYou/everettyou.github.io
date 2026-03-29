@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,26 +521,32 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing-discretizing-the-path-integralthe-path-integral-is-a-functional-integralan-infinite-dimensional-sum-over-all-paths-boldsymbol-x-t-to-evaluate-it-we-discretize-by-dividing-time-into-small-intervals">Time-Slicing: Discretizing the Path IntegralThe path integral is a functional integral—an infinite-dimensional sum over all paths <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>. To evaluate it, we <strong>discretize</strong> by dividing time into small intervals.</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setupdivide-the-time-interval-t-i-t-f-into-n-equal-slices">SetupDivide the time interval <span class="math notranslate nohighlight">\([t_i, t_f]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equal slices:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#action-in-a-time-slicefor-a-path-segment-from-t-n-to-t-n-1-duration-varepsilon-approximate-the-action-as-if-the-particle-moves-at-constant-velocity">Action in a Time SliceFor a path segment from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> (duration <span class="math notranslate nohighlight">\(\varepsilon\)</span>), approximate the action as if the particle moves at constant velocity:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sliced-path-integralthe-propagator-becomes">Sliced Path IntegralThe propagator becomes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing-discretizing-the-path-integral">Time-Slicing: Discretizing the Path Integral</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#action-in-a-time-slice">Action in a Time Slice</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sliced-path-integral">Sliced Path Integral</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-integrals-the-key-computational-tool">Gaussian Integrals: The Key Computational Tool</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-gaussianthe-fundamental-gaussian-integral-is">One-Dimensional GaussianThe fundamental Gaussian integral is</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shifted-gaussianif-the-exponent-is-shifted">Shifted GaussianIf the exponent is shifted:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-dimensional-gaussianfor-a-vector-boldsymbol-x-in-mathbb-r-d-and-a-symmetric-matrix-a">Multi-Dimensional GaussianFor a vector <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{R}^d\)</span> and a symmetric matrix <span class="math notranslate nohighlight">\(A\)</span>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-integrals-the-key-computational-tool">Gaussian Integrals: The Key Computational Tool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-free-particle-propagator">Computing the Free-Particle Propagator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-slice-propagator">Single-Slice Propagator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-slice-propagator">Two-Slice Propagator</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-free-particle-propagatorwe-evaluate-the-sliced-path-integral-by-integrating-out-positions-one-by-one">Computing the Free-Particle PropagatorWe evaluate the sliced path integral by integrating out positions one by one.</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-slice-propagatorthe-propagator-from-t-n-to-t-n-1-is">Single-Slice PropagatorThe propagator from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> is</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-slice-propagatorintegrate-over-the-intermediate-position-boldsymbol-x-1">Two-Slice PropagatorIntegrate over the intermediate position <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exact-free-particle-propagator">The Exact Free-Particle Propagator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-the-schrodinger-equation">Relation to the Schrödinger Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavepacket-spreading">Wavepacket Spreading</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-gaussian-wavepacket">Initial Gaussian Wavepacket</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-evolved-wavepacket">Time-Evolved Wavepacket</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -557,128 +563,253 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How do we discretize the path integral into a product of ordinary integrals via time-slicing?</p></li>
-<li><p>What Gaussian integrals are needed to evaluate the free-particle propagator?</p></li>
-<li><p>What is the exact result for the free-particle propagator and how can we interpret it physically?</p></li>
-<li><p>Why does the free-particle propagator have that characteristic <span class="math notranslate nohighlight">\((T)^{-d/2}\)</span> spreading factor?</p></li>
-<li><p>How does the propagator relate to the Schrödinger equation and diffusion processes?</p></li>
+<li><p>How do we discretize the path integral via time-slicing and what Gaussian integrals appear?</p></li>
+<li><p>What is the exact free-particle propagator and what does its <span class="math notranslate nohighlight">\((T)^{-d/2}\)</span> factor tell you physically?</p></li>
+<li><p>Why does the propagator oscillate in phase while spreading in width—what quantum principle drives this?</p></li>
+<li><p>How does the path integral result for the propagator connect to the Schrödinger equation?</p></li>
+<li><p>Can you describe a physical process (diffraction pattern, wave packet evolution) where you’d actually measure this propagator?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>The propagator is the quantum amplitude for a particle to travel from one spacetime point to another. For a free particle, the path integral can be evaluated exactly by summing over all trajectories, producing a Gaussian result that contains the full quantum information: spreading, interference, and the de Broglie wavelength.</p>
-<section id="time-slicing-discretizing-the-path-integralthe-path-integral-is-a-functional-integralan-infinite-dimensional-sum-over-all-paths-boldsymbol-x-t-to-evaluate-it-we-discretize-by-dividing-time-into-small-intervals">
-<h3>Time-Slicing: Discretizing the Path IntegralThe path integral is a functional integral—an infinite-dimensional sum over all paths <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>. To evaluate it, we <strong>discretize</strong> by dividing time into small intervals.<a class="headerlink" href="#time-slicing-discretizing-the-path-integralthe-path-integral-is-a-functional-integralan-infinite-dimensional-sum-over-all-paths-boldsymbol-x-t-to-evaluate-it-we-discretize-by-dividing-time-into-small-intervals" title="Link to this heading">#</a></h3>
-<section id="setupdivide-the-time-interval-t-i-t-f-into-n-equal-slices">
-<h4>SetupDivide the time interval <span class="math notranslate nohighlight">\([t_i, t_f]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equal slices:<a class="headerlink" href="#setupdivide-the-time-interval-t-i-t-f-into-n-equal-slices" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-time-slicing">
-<span class="eqno">(179)<a class="headerlink" href="#equation-eq-time-slicing" title="Link to this equation">#</a></span>\[t_i = t_0 &lt; t_1 &lt; t_2 &lt; \cdots &lt; t_N = t_f, \quad \varepsilon = \ffrac{t_f - t_i}{N}\]</div>
+<div class="important admonition">
+<p class="admonition-title">Definition</p>
+<p>The <strong>propagator</strong> <span class="math notranslate nohighlight">\(K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i)\)</span> is the quantum amplitude for a particle to travel from position <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> at time <span class="math notranslate nohighlight">\(t_i\)</span> to position <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span> at time <span class="math notranslate nohighlight">\(t_f\)</span>. For a free particle, the path integral can be evaluated exactly by summing over all trajectories, producing a Gaussian result that contains the full quantum information: spreading, interference, and the de Broglie wavelength.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Wave Packet Spreading and Measurement Limits</p>
+<p>Free-particle propagator evolves an initial delta function <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}, 0) = \delta(\boldsymbol{x} - \boldsymbol{x}_i)\)</span> into a spreading Gaussian. The width grows as <span class="math notranslate nohighlight">\(\Delta x(t) \sim \sqrt{\hbar t / m}\)</span>. This spreading is fundamental:</p>
+<ul class="simple">
+<li><p>If you precisely localize a particle to within <span class="math notranslate nohighlight">\(\Delta x_0\)</span> using position measurement, its momentum uncertainty grows to <span class="math notranslate nohighlight">\(\Delta p \sim \hbar/\Delta x_0\)</span> (uncertainty principle). After time <span class="math notranslate nohighlight">\(t\)</span>, the wave packet width should be <span class="math notranslate nohighlight">\(\Delta x(t) \sim \sqrt{\Delta p^2 t^2 / m^2 + \Delta x_0^2}\)</span>. Can you reconcile this with the free-particle propagator formula?</p></li>
+<li><p>Quantum spreading (<span class="math notranslate nohighlight">\(\Delta x \propto \sqrt{t}\)</span>) is slower than classical diffusion (<span class="math notranslate nohighlight">\(\Delta x \propto \sqrt{t}\)</span>, same scaling!) yet faster than ballistic expansion. Why does the diffusion-like <span class="math notranslate nohighlight">\(\sqrt{t}\)</span> behavior emerge quantum mechanically without any dissipation?</p></li>
+<li><p>Consider a macroscopic baseball: <span class="math notranslate nohighlight">\(m = 0.1\)</span> kg, initially localized to <span class="math notranslate nohighlight">\(\Delta x_0 = 1\)</span> mm. How long does it take for quantum spreading to double the size? Does this explain why we don’t observe quantum superposition in macroscopic objects?</p></li>
+<li><p>If you measure the particle’s momentum after initial position measurement, you prepare a momentum eigenstate with sharp <span class="math notranslate nohighlight">\(p\)</span>. Its position uncertainty then grows as <span class="math notranslate nohighlight">\(\Delta x(t) = \Delta x_0 + p t / m\)</span> (no spreading factor!). Is this consistent with the propagator?</p></li>
+</ul>
+</div>
+<section id="time-slicing-discretizing-the-path-integral">
+<h3>Time-Slicing: Discretizing the Path Integral<a class="headerlink" href="#time-slicing-discretizing-the-path-integral" title="Link to this heading">#</a></h3>
+<p>The path integral is a functional integral—an infinite-dimensional sum over all paths <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>. To evaluate it, we <strong>discretize</strong> by dividing time into small intervals.</p>
+<section id="setup">
+<h4>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h4>
+<p>Divide the time interval <span class="math notranslate nohighlight">\([t_i, t_f]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equal slices:</p>
+<div class="math notranslate nohighlight">
+\[t_i = t_0 &lt; t_1 &lt; t_2 &lt; \cdots &lt; t_N = t_f, \quad \varepsilon = \frac{t_f - t_i}{N}\]</div>
 <p>The path <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span> is represented by positions <span class="math notranslate nohighlight">\(\boldsymbol{x}_n = \boldsymbol{x}(t_n)\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, \ldots, N\)</span>.</p>
 </section>
-<section id="action-in-a-time-slicefor-a-path-segment-from-t-n-to-t-n-1-duration-varepsilon-approximate-the-action-as-if-the-particle-moves-at-constant-velocity">
-<h4>Action in a Time SliceFor a path segment from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> (duration <span class="math notranslate nohighlight">\(\varepsilon\)</span>), approximate the action as if the particle moves at constant velocity:<a class="headerlink" href="#action-in-a-time-slicefor-a-path-segment-from-t-n-to-t-n-1-duration-varepsilon-approximate-the-action-as-if-the-particle-moves-at-constant-velocity" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-action-slice">
-<span class="eqno">(180)<a class="headerlink" href="#equation-eq-action-slice" title="Link to this equation">#</a></span>\[S_n = \int_{t_n}^{t_{n+1}} L(\boldsymbol{x}, \dot{\boldsymbol{x}}) \, dt \approx L\left(\boldsymbol{x}_n, \ffrac{\boldsymbol{x}_{n+1} - \boldsymbol{x}_n}{\varepsilon}\right) \varepsilon\]</div>
-<p>For a free particle with <span class="math notranslate nohighlight">\(L = \ffrac{m}{2}\dot{\boldsymbol{x}}^2\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-free-action-slice">
-<span class="eqno">(181)<a class="headerlink" href="#equation-eq-free-action-slice" title="Link to this equation">#</a></span>\[S_n = \ffrac{m}{2} \ffrac{(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2}{\varepsilon}\]</div>
+<section id="action-in-a-time-slice">
+<h4>Action in a Time Slice<a class="headerlink" href="#action-in-a-time-slice" title="Link to this heading">#</a></h4>
+<p>For a path segment from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> (duration <span class="math notranslate nohighlight">\(\varepsilon\)</span>), approximate the action as if the particle moves at constant velocity:</p>
+<div class="math notranslate nohighlight">
+\[S_n = \int_{t_n}^{t_{n+1}} L(\boldsymbol{x}, \dot{\boldsymbol{x}}) \, \mathrm{d}t \approx L\left(\boldsymbol{x}_n, \frac{\boldsymbol{x}_{n+1} - \boldsymbol{x}_n}{\varepsilon}\right) \varepsilon\]</div>
+<p>For a free particle with <span class="math notranslate nohighlight">\(L = \frac{m}{2}\dot{\boldsymbol{x}}^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[S_n = \frac{m}{2} \frac{(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2}{\varepsilon}\]</div>
 <p>The total action is</p>
-<div class="math notranslate nohighlight" id="equation-eq-total-action-sliced">
-<span class="eqno">(182)<a class="headerlink" href="#equation-eq-total-action-sliced" title="Link to this equation">#</a></span>\[S = \sum_{n=0}^{N-1} S_n = \sum_{n=0}^{N-1} \ffrac{m}{2\varepsilon}(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2\]</div>
+<div class="math notranslate nohighlight">
+\[S = \sum_{n=0}^{N-1} S_n = \sum_{n=0}^{N-1} \frac{m}{2\varepsilon}(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2\]</div>
 </section>
-<section id="sliced-path-integralthe-propagator-becomes">
-<h4>Sliced Path IntegralThe propagator becomes<a class="headerlink" href="#sliced-path-integralthe-propagator-becomes" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-propagator-sliced">
-<span class="eqno">(183)<a class="headerlink" href="#equation-eq-propagator-sliced" title="Link to this equation">#</a></span>\[K(\boldsymbol{x}_N, t_f; \boldsymbol{x}_0, t_i) = \int d^3\boldsymbol{x}_1 \int d^3\boldsymbol{x}_2 \cdots \int d^3\boldsymbol{x}_{N-1} \prod_{n=0}^{N-1} \exp\left(\ffrac{im}{2\hbar\varepsilon}(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2\right)\]</div>
+<section id="sliced-path-integral">
+<h4>Sliced Path Integral<a class="headerlink" href="#sliced-path-integral" title="Link to this heading">#</a></h4>
+<p>The propagator becomes</p>
+<div class="math notranslate nohighlight">
+\[K(\boldsymbol{x}_N, t_f; \boldsymbol{x}_0, t_i) = \int d^3\boldsymbol{x}_1 \int d^3\boldsymbol{x}_2 \cdots \int d^3\boldsymbol{x}_{N-1} \prod_{n=0}^{N-1} \exp\left(\frac{\mathrm{i}m}{2\hbar\varepsilon}(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2\right)\]</div>
 <p>This is a product of exponentials of quadratic forms in the positions—perfect for <strong>Gaussian integrals</strong>.</p>
 </section>
 </section>
 <section id="gaussian-integrals-the-key-computational-tool">
 <h3>Gaussian Integrals: The Key Computational Tool<a class="headerlink" href="#gaussian-integrals-the-key-computational-tool" title="Link to this heading">#</a></h3>
-<section id="one-dimensional-gaussianthe-fundamental-gaussian-integral-is">
-<h4>One-Dimensional GaussianThe fundamental Gaussian integral is<a class="headerlink" href="#one-dimensional-gaussianthe-fundamental-gaussian-integral-is" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-gaussian-real">
-<span class="eqno">(184)<a class="headerlink" href="#equation-eq-gaussian-real" title="Link to this equation">#</a></span>\[\int_{-\infty}^{\infty} e^{-ax^2} dx = \sqrt{\ffrac{\pi}{a}}, \quad \text{Re}(a) &gt; 0\]</div>
-<p>For a <strong>complex</strong> exponent (relevant in quantum mechanics):</p>
-<div class="math notranslate nohighlight" id="equation-eq-gaussian-complex">
-<span class="eqno">(185)<a class="headerlink" href="#equation-eq-gaussian-complex" title="Link to this equation">#</a></span>\[\int_{-\infty}^{\infty} e^{iax^2} dx = \sqrt{\ffrac{\pi}{ia}} = e^{i\pi/4}\sqrt{\ffrac{\pi}{|a|}}\]</div>
-<p>where we use the convention that <span class="math notranslate nohighlight">\(\sqrt{i} = e^{i\pi/4} = (1+i)/\sqrt{2}\)</span>.</p>
-</section>
-<section id="shifted-gaussianif-the-exponent-is-shifted">
-<h4>Shifted GaussianIf the exponent is shifted:<a class="headerlink" href="#shifted-gaussianif-the-exponent-is-shifted" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-gaussian-shifted">
-<span class="eqno">(186)<a class="headerlink" href="#equation-eq-gaussian-shifted" title="Link to this equation">#</a></span>\[\int_{-\infty}^{\infty} e^{ia(x - x_0)^2} dx = \sqrt{\ffrac{\pi}{ia}}\]</div>
+<div class="important admonition">
+<p class="admonition-title">Important Result</p>
+<p>The fundamental Gaussian integral is</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} \mathrm{e}^{-ax^2} dx = \sqrt{\frac{\pi}{a}}, \quad \text{Re}(a) &gt; 0\]</div>
+<p>For <strong>complex</strong> exponents (relevant in quantum mechanics):</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}ax^2} dx = \sqrt{\frac{\pi}{ia}} = \mathrm{e}^{\mathrm{i}\pi/4}\sqrt{\frac{\pi}{|a|}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sqrt{i} = \mathrm{e}^{\mathrm{i}\pi/4} = (1+i)/\sqrt{2}\)</span>.</p>
+</div>
+<p><strong>Shifted Gaussian</strong>: If the exponent is shifted:</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}a(x - x_0)^2} dx = \sqrt{\frac{\pi}{ia}}\]</div>
 <p>The shift doesn’t change the result—a key property that makes the calculation work.</p>
-</section>
-<section id="multi-dimensional-gaussianfor-a-vector-boldsymbol-x-in-mathbb-r-d-and-a-symmetric-matrix-a">
-<h4>Multi-Dimensional GaussianFor a vector <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{R}^d\)</span> and a symmetric matrix <span class="math notranslate nohighlight">\(A\)</span>:<a class="headerlink" href="#multi-dimensional-gaussianfor-a-vector-boldsymbol-x-in-mathbb-r-d-and-a-symmetric-matrix-a" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-gaussian-multidim">
-<span class="eqno">(187)<a class="headerlink" href="#equation-eq-gaussian-multidim" title="Link to this equation">#</a></span>\[\int d^d\boldsymbol{x} \, e^{i\boldsymbol{x}^T A \boldsymbol{x}} = \ffrac{(\pi i)^{d/2}}{\sqrt{\det A}}\]</div>
-<p>Or more carefully:</p>
-<div class="math notranslate nohighlight" id="equation-eq-gaussian-multidim-careful">
-<span class="eqno">(188)<a class="headerlink" href="#equation-eq-gaussian-multidim-careful" title="Link to this equation">#</a></span>\[\int d^d\boldsymbol{x} \, e^{i\boldsymbol{x}^T A \boldsymbol{x}} = \sqrt{\ffrac{\pi^d i^d}{\det A}} = \left(\ffrac{\pi}{i}\right)^{d/2} \ffrac{1}{\sqrt{\det A}}\]</div>
-</section>
-</section>
-<section id="computing-the-free-particle-propagatorwe-evaluate-the-sliced-path-integral-by-integrating-out-positions-one-by-one">
-<h3>Computing the Free-Particle PropagatorWe evaluate the sliced path integral by integrating out positions one by one.<a class="headerlink" href="#computing-the-free-particle-propagatorwe-evaluate-the-sliced-path-integral-by-integrating-out-positions-one-by-one" title="Link to this heading">#</a></h3>
-<section id="single-slice-propagatorthe-propagator-from-t-n-to-t-n-1-is">
-<h4>Single-Slice PropagatorThe propagator from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> is<a class="headerlink" href="#single-slice-propagatorthe-propagator-from-t-n-to-t-n-1-is" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight" id="equation-eq-single-slice-prop">
-<span class="eqno">(189)<a class="headerlink" href="#equation-eq-single-slice-prop" title="Link to this equation">#</a></span>\[K_\varepsilon(\boldsymbol{x}', \boldsymbol{x}; \varepsilon) = \int e^{\ffrac{im}{2\hbar\varepsilon}(\boldsymbol{x}' - \boldsymbol{x})^2} = \left(\ffrac{m}{2\pi i\hbar\varepsilon}\right)^{d/2} e^{\ffrac{im}{2\hbar\varepsilon}(\boldsymbol{x}' - \boldsymbol{x})^2}\]</div>
-<p>The normalization factor <span class="math notranslate nohighlight">\((m/2\pi i\hbar\varepsilon)^{d/2}\)</span> comes from the Gaussian integral formula.</p>
-</section>
-<section id="two-slice-propagatorintegrate-over-the-intermediate-position-boldsymbol-x-1">
-<h4>Two-Slice PropagatorIntegrate over the intermediate position <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span>:<a class="headerlink" href="#two-slice-propagatorintegrate-over-the-intermediate-position-boldsymbol-x-1" title="Link to this heading">#</a></h4>
+<p><strong>Multi-Dimensional Gaussian</strong>: For a vector <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{R}^d\)</span> and a symmetric matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}K_{2\varepsilon} = \int d^d\boldsymbol{x}_1 \, K_\varepsilon(\boldsymbol{x}_2, \boldsymbol{x}_1; \varepsilon) K_\varepsilon(\boldsymbol{x}_1, \boldsymbol{x}_0; \varepsilon)\\$$$$= \int d^d\boldsymbol{x}_1 \left(\ffrac{m}{2\pi i\hbar\varepsilon}\right)^d \exp\left(\ffrac{im}{2\hbar\varepsilon}[(\boldsymbol{x}_2 - \boldsymbol{x}_1)^2 + (\boldsymbol{x}_1 - \boldsymbol{x}_0)^2]\right)\\$$:::{admonition} Derivation: Two-Slice Gaussian Integration
-:class: dropdown note\\Expand the exponent:\\$$(\boldsymbol{x}_2 - \boldsymbol{x}_1)^2 + (\boldsymbol{x}_1 - \boldsymbol{x}_0)^2 = 2\boldsymbol{x}_1^2 - 2(\boldsymbol{x}_2 + \boldsymbol{x}_0)\boldsymbol{x}_1 + (\boldsymbol{x}_2^2 + \boldsymbol{x}_0^2)\end{aligned}\end{align} \]</div>
-<p>Completing the square:</p>
+\[\int d^d\boldsymbol{x} \, \mathrm{e}^{\mathrm{i}\boldsymbol{x}^T A \boldsymbol{x}} = \sqrt{\frac{\pi^d i^d}{\det A}} = \left(\frac{\pi}{\mathrm{i}}\right)^{d/2} \frac{1}{\sqrt{\det A}}\]</div>
+</section>
+<section id="computing-the-free-particle-propagator">
+<h3>Computing the Free-Particle Propagator<a class="headerlink" href="#computing-the-free-particle-propagator" title="Link to this heading">#</a></h3>
+<p>We evaluate the sliced path integral by integrating out positions one by one.</p>
+<section id="single-slice-propagator">
+<h4>Single-Slice Propagator<a class="headerlink" href="#single-slice-propagator" title="Link to this heading">#</a></h4>
+<p>The propagator from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[= 2\left(\boldsymbol{x}_1 - frac{\boldsymbol{x}_2 + \boldsymbol{x}_0}{2}
-ight)^2 + (\boldsymbol{x}_2^2 + \boldsymbol{x}_0^2) - frac{(\boldsymbol{x}_2 + \boldsymbol{x}_0)^2}{2}\]</div>
+\[K_\varepsilon(\boldsymbol{x}', \boldsymbol{x}; \varepsilon) = \int \mathrm{e}^{\frac{\mathrm{i}m}{2\hbar\varepsilon}(\boldsymbol{x}' - \boldsymbol{x})^2} = \left(\frac{m}{2\pi \mathrm{i}\hbar\varepsilon}\right)^{d/2} \mathrm{e}^{\frac{\mathrm{i}m}{2\hbar\varepsilon}(\boldsymbol{x}' - \boldsymbol{x})^2}\]</div>
+<p>The normalization factor <span class="math notranslate nohighlight">\((m/2\pi \mathrm{i}\hbar\varepsilon)^{d/2}\)</span> comes from the Gaussian integral formula.</p>
+</section>
+<section id="two-slice-propagator">
+<h4>Two-Slice Propagator<a class="headerlink" href="#two-slice-propagator" title="Link to this heading">#</a></h4>
+<p>Integrate over the intermediate position <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[= 2\left(\boldsymbol{x}_1 - frac{\boldsymbol{x}_2 + \boldsymbol{x}_0}{2}
-ight)^2 + frac{(\boldsymbol{x}_2 - \boldsymbol{x}_0)^2}{2}\]</div>
-<div class="docutils">
+\[K_{2\varepsilon} = \int d^d\boldsymbol{x}_1 \, K_\varepsilon(\boldsymbol{x}_2, \boldsymbol{x}_1; \varepsilon) K_\varepsilon(\boldsymbol{x}_1, \boldsymbol{x}_0; \varepsilon)\]</div>
+<div class="math notranslate nohighlight">
+\[= \int d^d\boldsymbol{x}_1 \left(\frac{m}{2\pi \mathrm{i}\hbar\varepsilon}\right)^d \exp\left(\frac{\mathrm{i}m}{2\hbar\varepsilon}[(\boldsymbol{x}_2 - \boldsymbol{x}_1)^2 + (\boldsymbol{x}_1 - \boldsymbol{x}_0)^2]\right)\]</div>
+<div class="dropdown note admonition">
+<p class="admonition-title">Derivation: Two-Slice Gaussian Integration</p>
+<p>Expand the exponent:</p>
+<div class="math notranslate nohighlight">
+\[( \boldsymbol{x}_2 - \boldsymbol{x}_1)^2 + (\boldsymbol{x}_1 - \boldsymbol{x}_0)^2 = 2\boldsymbol{x}_1^2 - 2(\boldsymbol{x}_2 + \boldsymbol{x}_0) \cdot \boldsymbol{x}_1 + (\boldsymbol{x}_2^2 + \boldsymbol{x}_0^2)\]</div>
+<p>Complete the square:</p>
+<div class="math notranslate nohighlight">
+\[= 2\left(\boldsymbol{x}_1 - \frac{\boldsymbol{x}_2 + \boldsymbol{x}_0}{2}\right)^2 + (\boldsymbol{x}_2^2 + \boldsymbol{x}_0^2) - \frac{(\boldsymbol{x}_2 + \boldsymbol{x}_0)^2}{2}\]</div>
+<div class="math notranslate nohighlight">
+\[= 2\left(\boldsymbol{x}_1 - \frac{\boldsymbol{x}_2 + \boldsymbol{x}_0}{2}\right)^2 + \frac{(\boldsymbol{x}_2 - \boldsymbol{x}_0)^2}{2}\]</div>
 <p>The integral over <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span> (a shifted Gaussian) gives:</p>
-<div class="math notranslate nohighlight" id="equation-eq-free-propagator-exact">
-<span class="eqno">(190)<a class="headerlink" href="#equation-eq-free-propagator-exact" title="Link to this equation">#</a></span>\[ \begin{align}\begin{aligned}\int d^d\boldsymbol{x}_1 \exp\left(\ffrac{im}{\hbar\varepsilon}\left(\boldsymbol{x}_1 - \ffrac{\boldsymbol{x}_2 + \boldsymbol{x}_0}{2}\right)^2\right) = \left(\ffrac{\pi\hbar\varepsilon}{im}\right)^{d/2}\\$$Combining with the remaining exponent and normalizations:\\$$K_{2\varepsilon}(\boldsymbol{x}_2, \boldsymbol{x}_0; 2\varepsilon) = \left(\ffrac{m}{2\pi i\hbar(2\varepsilon)}\right)^{d/2} \exp\left(\ffrac{im}{2\hbar(2\varepsilon)}(\boldsymbol{x}_2 - \boldsymbol{x}_0)^2\right)\\$$**Pattern**: The time increases additively ($\varepsilon + \varepsilon = 2\varepsilon$), and the distance appears in the exponent with the total time.\\### The Exact Free-Particle PropagatorBy induction (or by taking the continuum limit $N \to \infty$), the exact propagator for a free particle is:\\$$K_\text{free}(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \left(\ffrac{m}{2\pi i\hbar T}\right)^{d/2} \exp\left(\ffrac{im}{2\hbar T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\right)\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[\int d^d\boldsymbol{x}_1 \exp\left(\frac{\mathrm{i}m}{\hbar\varepsilon}\left(\boldsymbol{x}_1 - \frac{\boldsymbol{x}_2 + \boldsymbol{x}_0}{2}\right)^2\right) = \left(\frac{\pi\hbar\varepsilon}{im}\right)^{d/2}\]</div>
+<p>Combining with the remaining exponent and normalizations:</p>
+<div class="math notranslate nohighlight">
+\[K_{2\varepsilon}(\boldsymbol{x}_2, \boldsymbol{x}_0; 2\varepsilon) = \left(\frac{m}{2\pi \mathrm{i}\hbar(2\varepsilon)}\right)^{d/2} \exp\left(\frac{\mathrm{i}m}{2\hbar(2\varepsilon)}(\boldsymbol{x}_2 - \boldsymbol{x}_0)^2\right)\]</div>
+<p><strong>Key observation</strong>: The time increases additively (<span class="math notranslate nohighlight">\(\varepsilon + \varepsilon = 2\varepsilon\)</span>), and the distance appears in the exponent with the total time. This pattern generalizes to <span class="math notranslate nohighlight">\(N\)</span> slices.</p>
+</div>
+</section>
+</section>
+<section id="the-exact-free-particle-propagator">
+<h3>The Exact Free-Particle Propagator<a class="headerlink" href="#the-exact-free-particle-propagator" title="Link to this heading">#</a></h3>
+<p>By induction (or by taking the continuum limit <span class="math notranslate nohighlight">\(N \to \infty\)</span>), the exact propagator for a free particle is:</p>
+<div class="important admonition">
+<p class="admonition-title">The Free-Particle Propagator</p>
+<div class="math notranslate nohighlight">
+\[K_\text{free}(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \left(\frac{m}{2\pi \mathrm{i}\hbar T}\right)^{d/2} \exp\left(\frac{\mathrm{i}m}{2\hbar T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(T = t_f - t_i\)</span> is the total time interval and <span class="math notranslate nohighlight">\(d\)</span> is the spatial dimension.</p>
-<h4 class="rubric" id="physical-interpretationprefactor-m-2-pi-i-hbar-t-d-2-scales-as-t-d-2-as-time-increases-for-d-1-k-propto-1-sqrt-t-wavepacket-spreads-as-sqrt-t-for-d-3-k-propto-1-t-3-2-faster-spreading-in-higher-dimensions-exponent-ffrac-im-2-hbar-t-boldsymbol-x-f-boldsymbol-x-i-2-equals-the-classical-action-for-a-particle-traveling-at-constant-velocity-from-boldsymbol-x-i-to-boldsymbol-x-f">Physical Interpretation<strong>Prefactor</strong> <span class="math notranslate nohighlight">\((m/2\pi i\hbar T)^{d/2}\)</span>:- Scales as <span class="math notranslate nohighlight">\(T^{-d/2}\)</span> as time increases.- For <span class="math notranslate nohighlight">\(d=1\)</span>: <span class="math notranslate nohighlight">\(K \propto 1/\sqrt{T}\)</span> (wavepacket spreads as <span class="math notranslate nohighlight">\(\sqrt{T}\)</span>).- For <span class="math notranslate nohighlight">\(d=3\)</span>: <span class="math notranslate nohighlight">\(K \propto 1/T^{3/2}\)</span> (faster spreading in higher dimensions).<strong>Exponent</strong> <span class="math notranslate nohighlight">\(\ffrac{im}{2\hbar T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\)</span>:- Equals the <strong>classical action</strong> for a particle traveling at constant velocity from <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span>:</h4>
-<div class="math notranslate nohighlight" id="equation-eq-schrodinger-propagator">
-<span class="eqno">(191)<a class="headerlink" href="#equation-eq-schrodinger-propagator" title="Link to this equation">#</a></span>\[ \begin{align}\begin{aligned}S_\text{cl} = \ffrac{m v^2}{2} T = \ffrac{m}{2T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\\$$- Contains the phase that oscillates according to the classical action.**Probability density** $|K|^2$:\\$$|K|^2 = \ffrac{m^d}{(2\pi\hbar T)^d} \propto T^{-d}\\$$- For $d=1$: $|K|^2 \propto 1/T$ (spreading like diffusion).- For $d=3$: $|K|^2 \propto 1/T^3$ (very rapid dilution).\\### Relation to the Schrödinger EquationThe free-particle propagator satisfies the **Schrödinger equation**:\\$$i\hbar \ffrac{\partial K}{\partial t_f} = -\ffrac{\hbar^2}{2m} \nabla_{\boldsymbol{x}_f}^2 K\end{aligned}\end{align} \]</div>
+</div>
+<section id="physical-interpretation">
+<h4>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h4>
+<p><strong>Prefactor</strong> <span class="math notranslate nohighlight">\((m/2\pi \mathrm{i}\hbar T)^{d/2}\)</span>:</p>
+<ul class="simple">
+<li><p>Scales as <span class="math notranslate nohighlight">\(T^{-d/2}\)</span> as time increases</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(d=1\)</span>: <span class="math notranslate nohighlight">\(K \propto 1/\sqrt{T}\)</span> (wavepacket spreads as <span class="math notranslate nohighlight">\(\sqrt{T}\)</span>)</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(d=3\)</span>: <span class="math notranslate nohighlight">\(K \propto 1/T^{3/2}\)</span> (faster spreading in higher dimensions)</p></li>
+</ul>
+<p><strong>Exponent</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{i}m}{2\hbar T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\)</span>:</p>
+<ul class="simple">
+<li><p>Equals the <strong>classical action</strong> for a particle traveling at constant velocity from <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_\text{cl} = \frac{m v^2}{2} T = \frac{m}{2T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\]</div>
+<ul class="simple">
+<li><p>Contains the phase that oscillates according to the classical action</p></li>
+</ul>
+<p><strong>Probability density</strong> <span class="math notranslate nohighlight">\(|K|^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[|K|^2 = \frac{m^d}{(2\pi\hbar T)^d} \propto T^{-d}\]</div>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(d=1\)</span>: <span class="math notranslate nohighlight">\(|K|^2 \propto 1/T\)</span> (spreading like diffusion)</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(d=3\)</span>: <span class="math notranslate nohighlight">\(|K|^2 \propto 1/T^3\)</span> (very rapid dilution)</p></li>
+</ul>
+</section>
+</section>
+<section id="relation-to-the-schrodinger-equation">
+<h3>Relation to the Schrödinger Equation<a class="headerlink" href="#relation-to-the-schrodinger-equation" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">The Propagator Satisfies the Schrödinger Equation</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{i}\hbar \frac{\partial K}{\partial t_f} = -\frac{\hbar^2}{2m} \nabla_{\boldsymbol{x}_f}^2 K\]</div>
 <p>with <strong>initial condition</strong></p>
-<div class="math notranslate nohighlight" id="equation-eq-initial-condition">
-<span class="eqno">(192)<a class="headerlink" href="#equation-eq-initial-condition" title="Link to this equation">#</a></span>\[K(\boldsymbol{x}_f, t_i; \boldsymbol{x}_i, t_i) = \delta^{(d)}(\boldsymbol{x}_f - \boldsymbol{x}_i)\]</div>
-<p><strong>Verification</strong>: Taking derivatives of <span class="math notranslate nohighlight">\(K_\text{free}\)</span> directly confirms these properties. This connection shows that the path integral is equivalent to solving the Schrödinger equation.</p>
-<h3 class="rubric" id="wavepacket-spreading">Wavepacket Spreading</h3>
-<h4 class="rubric" id="initial-gaussian-wavepacketconsider-an-initial-wavefunction-that-is-a-gaussian-wavepacket-minimum-uncertainty-state">Initial Gaussian WavepacketConsider an initial wavefunction that is a <strong>Gaussian wavepacket</strong> (minimum uncertainty state):</h4>
-<div class="math notranslate nohighlight" id="equation-eq-initial-gaussian">
-<span class="eqno">(193)<a class="headerlink" href="#equation-eq-initial-gaussian" title="Link to this equation">#</a></span>\[\psi_0(\boldsymbol{x}) = \left(\ffrac{1}{\pi \hat{\sigma}_0^2}\right)^{d/4} \exp\left(-\ffrac{\boldsymbol{x}^2}{2\hat{\sigma}_0^2} + i\boldsymbol{k}_0 \cdot \boldsymbol{x}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}_0\)</span> is the initial width and <span class="math notranslate nohighlight">\(\boldsymbol{k}_0 = \boldsymbol{p}_0/\hbar\)</span> is the initial momentum.</p>
-<h4 class="rubric" id="time-evolved-wavepacketusing-the-free-particle-propagator">Time-Evolved WavepacketUsing the free-particle propagator:</h4>
-<div class="math notranslate nohighlight" id="equation-eq-evolved-gaussian">
-<span class="eqno">(194)<a class="headerlink" href="#equation-eq-evolved-gaussian" title="Link to this equation">#</a></span>\[ \begin{align}\begin{aligned}\psi(\boldsymbol{x}, t) = \int K_\text{free}(\boldsymbol{x}, t; \boldsymbol{x}_0, 0) \, \psi_0(\boldsymbol{x}_0) \, d^d\boldsymbol{x}_0\\$$The integral of two Gaussians yields another Gaussian (up to a phase). The result is:\\$$\psi(\boldsymbol{x}, t) = \text{normalization} \times \exp\left(-\ffrac{(\boldsymbol{x} - \boldsymbol{x}_\text{cm}(t))^2}{2\sigma(t)^2} + i\Phi(\boldsymbol{x}, t)\right)\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[K(\boldsymbol{x}_f, t_i; \boldsymbol{x}_i, t_i) = \delta^{(d)}(\boldsymbol{x}_f - \boldsymbol{x}_i)\]</div>
+<p>This connection shows that the path integral is equivalent to solving the Schrödinger equation. Verification by direct differentiation of <span class="math notranslate nohighlight">\(K_\text{free}\)</span> is straightforward but algebraically involved.</p>
+</div>
+</section>
+<section id="wavepacket-spreading">
+<h3>Wavepacket Spreading<a class="headerlink" href="#wavepacket-spreading" title="Link to this heading">#</a></h3>
+<section id="initial-gaussian-wavepacket">
+<h4>Initial Gaussian Wavepacket<a class="headerlink" href="#initial-gaussian-wavepacket" title="Link to this heading">#</a></h4>
+<p>Consider an initial wavefunction that is a <strong>Gaussian wavepacket</strong> (minimum uncertainty state):</p>
+<div class="math notranslate nohighlight">
+\[\psi_0(\boldsymbol{x}) = \left(\frac{1}{\pi \sigma_0^2}\right)^{d/4} \exp\left(-\frac{\boldsymbol{x}^2}{2\sigma_0^2} + \mathrm{i}\boldsymbol{k}_0 \cdot \boldsymbol{x}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_0\)</span> is the initial width and <span class="math notranslate nohighlight">\(\boldsymbol{k}_0 = \boldsymbol{p}_0/\hbar\)</span> is the initial momentum.</p>
+</section>
+<section id="time-evolved-wavepacket">
+<h4>Time-Evolved Wavepacket<a class="headerlink" href="#time-evolved-wavepacket" title="Link to this heading">#</a></h4>
+<p>Using the free-particle propagator:</p>
+<div class="math notranslate nohighlight">
+\[\psi(\boldsymbol{x}, t) = \int K_\text{free}(\boldsymbol{x}, t; \boldsymbol{x}_0, 0) \, \psi_0(\boldsymbol{x}_0) \, d^d\boldsymbol{x}_0\]</div>
+<p>The integral of two Gaussians yields another Gaussian (up to a phase). The result is:</p>
+<div class="important admonition">
+<p class="admonition-title">Time Evolution of a Gaussian Wavepacket</p>
+<div class="math notranslate nohighlight">
+\[\psi(\boldsymbol{x}, t) = \text{normalization} \times \exp\left(-\frac{(\boldsymbol{x} - \boldsymbol{x}_\text{cm}(t))^2}{2\sigma(t)^2} + i\Phi(\boldsymbol{x}, t)\right)\]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><strong>Center of mass</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{cm}(t) = \boldsymbol{x}_0 + (\boldsymbol{p}_0/m)t\)</span> (classical trajectory).</p></li>
-<li><p><strong>Width</strong>: <span class="math notranslate nohighlight">\(\sigma(t) = \hat{\sigma}_0\sqrt{1 + (\hbar t/(2m\hat{\sigma}_0^2))^2}\)</span> (spreading).</p></li>
-<li><p><strong>Diffusion time scale</strong>: <span class="math notranslate nohighlight">\(\tau = 2m\hat{\sigma}_0^2/\hbar\)</span> (time for width to double).</p></li>
+<li><p><strong>Center of mass</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{cm}(t) = \boldsymbol{x}_0 + (\boldsymbol{p}_0/m)t\)</span> (classical trajectory)</p></li>
+<li><p><strong>Width</strong>: <span class="math notranslate nohighlight">\(\sigma(t) = \sigma_0\sqrt{1 + (\hbar t/(2m\sigma_0^2))^2}\)</span> (spreading)</p></li>
+<li><p><strong>Spreading time scale</strong>: <span class="math notranslate nohighlight">\(\tau = 2m\sigma_0^2/\hbar\)</span> (time for width to double)</p></li>
 </ul>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note: Quantum Spreading vs. Classical</p>
+<p>A <strong>classical</strong> wavepacket has fixed width—the center moves but the shape doesn’t change. A <strong>quantum</strong> wavepacket spreads because different momentum components travel at different velocities.</p>
+<p>For a macroscopic object (<span class="math notranslate nohighlight">\(m \sim 1\)</span> kg, <span class="math notranslate nohighlight">\(\sigma_0 \sim 1\)</span> mm), the spreading time is <span class="math notranslate nohighlight">\(\tau \sim 10^{40}\)</span> seconds—unobservable. For an electron (<span class="math notranslate nohighlight">\(m \sim 10^{-30}\)</span> kg, <span class="math notranslate nohighlight">\(\sigma_0 \sim 10^{-10}\)</span> m), <span class="math notranslate nohighlight">\(\tau \sim 10^{-16}\)</span> s—very observable. This is why microscopic systems show quantum behavior.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note: Classical-Quantum Correspondence</p>
+<p>The transition from quantum to classical mechanics is smooth. When the action <span class="math notranslate nohighlight">\(S\)</span> is much larger than <span class="math notranslate nohighlight">\(\hbar\)</span>, the phase varies rapidly and only the stationary-action path survives quantum interference. This is the essence of the <strong>correspondence principle</strong>.</p>
+<p>In quantum mechanics, the action <span class="math notranslate nohighlight">\(S\)</span> plays the role that phase <span class="math notranslate nohighlight">\(\phi = S/\hbar\)</span> plays in waves. The Planck constant <span class="math notranslate nohighlight">\(\hbar\)</span> sets the scale: when <span class="math notranslate nohighlight">\(S \sim \hbar\)</span>, quantum effects are significant; when <span class="math notranslate nohighlight">\(S \gg \hbar\)</span>, classical behavior dominates.</p>
 </div>
 </section>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Time-slicing</strong>: Discretize time into intervals; paths are represented by positions at each slice.</p></li>
-<li><p><strong>Gaussian integrals</strong>: Evaluate the quadratic exponents using standard formulas; this is the computational workhorse.</p></li>
-<li><p><strong>Free-particle propagator</strong>: Exact result is <span class="math notranslate nohighlight">\((m/2\pi i\hbar T)^{d/2} \exp(im(\boldsymbol{x}_f - \boldsymbol{x}_i)^2/2\hbar T)\)</span>.</p></li>
-<li><p><strong>Wavepacket spreading</strong>: The amplitude decays as <span class="math notranslate nohighlight">\(T^{-d/2}\)</span>; the width grows as <span class="math notranslate nohighlight">\(\sqrt{1 + (\hbar t/2m\hat{\sigma}_0^2)^2}\)</span>.</p></li>
-<li><p><strong>Schrödinger equivalence</strong>: The propagator satisfies the Schrödinger equation with a delta-function initial condition.</p></li>
-<li><p><strong>Physical picture</strong>: Quantum mechanics governs the evolution of probability amplitudes; classical action determines the phase.</p></li>
+<li><p><strong>Time-slicing</strong>: Discretize time into intervals; paths are represented by positions at each slice</p></li>
+<li><p><strong>Gaussian integrals</strong>: Evaluate the quadratic exponents using standard formulas; this is the computational workhorse</p></li>
+<li><p><strong>Free-particle propagator</strong>: Exact result is <span class="math notranslate nohighlight">\((m/2\pi \mathrm{i}\hbar T)^{d/2} \exp(\mathrm{i}m(\boldsymbol{x}_f - \boldsymbol{x}_i)^2/2\hbar T)\)</span></p></li>
+<li><p><strong>Wavepacket spreading</strong>: The amplitude decays as <span class="math notranslate nohighlight">\(T^{-d/2}\)</span>; the width grows as <span class="math notranslate nohighlight">\(\sqrt{1 + (\hbar t/2m\sigma_0^2)^2}\)</span></p></li>
+<li><p><strong>Schrödinger equivalence</strong>: The propagator satisfies the Schrödinger equation with a delta-function initial condition</p></li>
+<li><p><strong>Physical picture</strong>: Quantum mechanics governs the evolution of probability amplitudes; classical action determines the phase</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="3-2-1-path-integral-formulation.html"><span class="std std-doc">3 2 1 Path Integral Formulation</span></a></strong>: Path integral quantization</p></li>
+<li><p><strong><a class="reference internal" href="3-2-3-schrodinger-equation.html"><span class="std std-doc">3 2 3 Schrodinger Equation</span></a></strong>: Schrödinger equation from path integrals</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Time-Slicing Discretization</strong></p>
+<p>Consider dividing the time interval <span class="math notranslate nohighlight">\([0, T]\)</span> into <span class="math notranslate nohighlight">\(N = 100\)</span> equal slices. What is the time step <span class="math notranslate nohighlight">\(\varepsilon\)</span> if <span class="math notranslate nohighlight">\(T = 1\)</span> second? In the limit <span class="math notranslate nohighlight">\(N \to \infty\)</span>, how does the discretized action <span class="math notranslate nohighlight">\(S = \sum_{n=0}^{N-1} \frac{m}{2\varepsilon}(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2\)</span> approximate the continuous action <span class="math notranslate nohighlight">\(S = \int_0^T \frac{m}{2}\dot{\boldsymbol{x}}^2 dt\)</span>?</p>
+<p><strong>2. Gaussian Integral with Shifted Argument</strong></p>
+<p>Evaluate the integral:</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i} a (x - x_0)^2} dx\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> is a real positive constant. Show that the result does not depend on <span class="math notranslate nohighlight">\(x_0\)</span>. Why is this property crucial for evaluating the propagator?</p>
+<p><strong>3. Single-Slice Propagator in 1D</strong></p>
+<p>Using the formula <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i} a x^2} dx = \sqrt{\frac{\pi}{ia}}\)</span>, derive the single-slice propagator in one dimension:</p>
+<div class="math notranslate nohighlight">
+\[K_\varepsilon(x', x; \varepsilon) = \int \mathrm{e}^{\frac{\mathrm{i}m}{2\hbar\varepsilon}(x' - x)^2} dx = \left(\frac{m}{2\pi \mathrm{i}\hbar\varepsilon}\right)^{1/2} \mathrm{e}^{\frac{\mathrm{i}m}{2\hbar\varepsilon}(x' - x)^2}\]</div>
+<p><strong>4. Dimensional Analysis of the Prefactor</strong></p>
+<p>The free-particle propagator in <span class="math notranslate nohighlight">\(d\)</span> dimensions has prefactor <span class="math notranslate nohighlight">\((m/2\pi \mathrm{i}\hbar T)^{d/2}\)</span>. Show using dimensional analysis that this factor must scale as <span class="math notranslate nohighlight">\(T^{-d/2}\)</span>. What does this scaling tell you about how the wavepacket amplitude spreads in space?</p>
+<p><strong>5. Relation to Schrödinger Equation</strong></p>
+<p>The free-particle propagator satisfies the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \frac{\partial K}{\partial t_f} = -\frac{\hbar^2}{2m} \nabla_{\boldsymbol{x}_f}^2 K\)</span>. Take the time derivative of the exact result:</p>
+<div class="math notranslate nohighlight">
+\[K_\text{free}(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, 0) = \left(\frac{m}{2\pi \mathrm{i}\hbar t_f}\right)^{d/2} \exp\left(\frac{\mathrm{i}m}{2\hbar t_f}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\right)\]</div>
+<p>and verify that it satisfies the Schrödinger equation (in the 1D case).</p>
+<p><strong>6. Probability Density and Spreading</strong></p>
+<p>For a free particle in one dimension, the probability density is <span class="math notranslate nohighlight">\(|K|^2 \propto t^{-1}\)</span>. Use this to explain why a quantum wavepacket spreads faster than the amplitude decays. Compare to the case <span class="math notranslate nohighlight">\(d=3\)</span> where <span class="math notranslate nohighlight">\(|K|^2 \propto t^{-3}\)</span>.</p>
+<p><strong>7. Initial Condition (Delta Function)</strong></p>
+<p>Show that the free-particle propagator approaches a delta function as <span class="math notranslate nohighlight">\(t_f \to 0^+\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t \to 0^+} K_\text{free}(\boldsymbol{x}, t; \boldsymbol{x}_0, 0) = \delta^{(d)}(\boldsymbol{x} - \boldsymbol{x}_0)\]</div>
+<p>Hint: Use the fact that <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\boldsymbol{k} \cdot \boldsymbol{r}}\)</span> integrates to a delta function.</p>
+<p><strong>8. Wavepacket Spreading Time</strong></p>
+<p>A Gaussian wavepacket has initial width <span class="math notranslate nohighlight">\(\sigma_0 = 1\)</span> nanometer. For an electron (<span class="math notranslate nohighlight">\(m = 9.1 \times 10^{-31}\)</span> kg), what is the spreading time <span class="math notranslate nohighlight">\(\tau = 2m\sigma_0^2/\hbar\)</span> in seconds? Compare to the same quantity for a grain of dust with mass <span class="math notranslate nohighlight">\(m = 10^{-12}\)</span> kg and <span class="math notranslate nohighlight">\(\sigma_0 = 1\)</span> micrometer. What does this tell you about observing quantum spreading in macroscopic systems?</p>
+<p><strong>9. Classical Action and Phase</strong></p>
+<p>For a particle traveling from <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span> in time <span class="math notranslate nohighlight">\(T\)</span>, the classical action is <span class="math notranslate nohighlight">\(S_\text{cl} = \frac{m}{2T}(\boldsymbol{x}_f - \boldsymbol{x}_i)^2\)</span> (constant-velocity motion). Show that the exponent in the free-particle propagator can be written as <span class="math notranslate nohighlight">\(i S_\text{cl}/\hbar\)</span>. Why is the factor <span class="math notranslate nohighlight">\(i\)</span> (rather than <span class="math notranslate nohighlight">\(-i\)</span>) important for the physics?</p>
+<p><strong>10. Two-Particle Interference</strong></p>
+<p>The propagator to position <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span> includes contributions from all paths through intermediate position <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span>. Show that integrating over <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span> using two applications of the single-slice propagator yields the correct two-step result. Explain in physical terms why different intermediate positions lead to quantum interference.</p>
 </section>
 </section>
 
@@ -747,26 +878,32 @@ ight)^2 + frac{(\boldsymbol{x}_2 - \boldsymbol{x}_0)^2}{2}\]</div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing-discretizing-the-path-integralthe-path-integral-is-a-functional-integralan-infinite-dimensional-sum-over-all-paths-boldsymbol-x-t-to-evaluate-it-we-discretize-by-dividing-time-into-small-intervals">Time-Slicing: Discretizing the Path IntegralThe path integral is a functional integral—an infinite-dimensional sum over all paths <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>. To evaluate it, we <strong>discretize</strong> by dividing time into small intervals.</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setupdivide-the-time-interval-t-i-t-f-into-n-equal-slices">SetupDivide the time interval <span class="math notranslate nohighlight">\([t_i, t_f]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equal slices:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#action-in-a-time-slicefor-a-path-segment-from-t-n-to-t-n-1-duration-varepsilon-approximate-the-action-as-if-the-particle-moves-at-constant-velocity">Action in a Time SliceFor a path segment from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> (duration <span class="math notranslate nohighlight">\(\varepsilon\)</span>), approximate the action as if the particle moves at constant velocity:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sliced-path-integralthe-propagator-becomes">Sliced Path IntegralThe propagator becomes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing-discretizing-the-path-integral">Time-Slicing: Discretizing the Path Integral</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#action-in-a-time-slice">Action in a Time Slice</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sliced-path-integral">Sliced Path Integral</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-integrals-the-key-computational-tool">Gaussian Integrals: The Key Computational Tool</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-gaussianthe-fundamental-gaussian-integral-is">One-Dimensional GaussianThe fundamental Gaussian integral is</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shifted-gaussianif-the-exponent-is-shifted">Shifted GaussianIf the exponent is shifted:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-dimensional-gaussianfor-a-vector-boldsymbol-x-in-mathbb-r-d-and-a-symmetric-matrix-a">Multi-Dimensional GaussianFor a vector <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{R}^d\)</span> and a symmetric matrix <span class="math notranslate nohighlight">\(A\)</span>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-integrals-the-key-computational-tool">Gaussian Integrals: The Key Computational Tool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-free-particle-propagator">Computing the Free-Particle Propagator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-slice-propagator">Single-Slice Propagator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-slice-propagator">Two-Slice Propagator</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-free-particle-propagatorwe-evaluate-the-sliced-path-integral-by-integrating-out-positions-one-by-one">Computing the Free-Particle PropagatorWe evaluate the sliced path integral by integrating out positions one by one.</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-slice-propagatorthe-propagator-from-t-n-to-t-n-1-is">Single-Slice PropagatorThe propagator from <span class="math notranslate nohighlight">\(t_n\)</span> to <span class="math notranslate nohighlight">\(t_{n+1}\)</span> is</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-slice-propagatorintegrate-over-the-intermediate-position-boldsymbol-x-1">Two-Slice PropagatorIntegrate over the intermediate position <span class="math notranslate nohighlight">\(\boldsymbol{x}_1\)</span>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exact-free-particle-propagator">The Exact Free-Particle Propagator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-the-schrodinger-equation">Relation to the Schrödinger Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavepacket-spreading">Wavepacket Spreading</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-gaussian-wavepacket">Initial Gaussian Wavepacket</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-evolved-wavepacket">Time-Evolved Wavepacket</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -804,7 +941,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

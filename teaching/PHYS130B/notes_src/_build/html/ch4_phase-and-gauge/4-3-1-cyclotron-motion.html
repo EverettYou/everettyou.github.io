@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,15 +521,17 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-force-and-equations-of-motion">Lorentz Force and Equations of Motion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cyclotron-frequency">Cyclotron Frequency</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#circular-orbits">Circular Orbits</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-and-orbital-period">Kinetic Energy and Orbital Period</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hall-effect-classical-derivation">Hall Effect: Classical Derivation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hall-angle">Classical Hall Angle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-cyclotron-motion">Classical Cyclotron Motion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-of-motion">Equations of Motion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#circular-orbits-and-guiding-center-motion">Circular Orbits and Guiding Center Motion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#motion-in-crossed-boldsymbol-e-and-boldsymbol-b-fields">Motion in Crossed <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> Fields</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semiclassical-quantization-and-landau-levels">Semiclassical Quantization and Landau Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-physical-insights">Key Physical Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -555,117 +557,210 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>A charged particle in a magnetic field orbits in a circle at the cyclotron frequency—a phenomenon that seems classically mundane but is profoundly quantum. The cyclotron frequency ωc = eB/m is universal: it depends only on the physical field, not on gauge choice, and is independent of the particle’s energy. This classical foundation sets the stage for understanding Landau quantization, the quantum Hall effect, and the intimate connection between geometry (curvature of orbits) and quantum mechanics (quantization of energy levels).</p>
+<p>The motion of a charged particle in a uniform magnetic field is one of the most fundamental problems in electromagnetism and quantum mechanics. It serves as the foundation for understanding the quantum Hall effect, shows how Landau quantization arises, and reveals deep connections between classical and quantum physics.</p>
+<section id="classical-cyclotron-motion">
+<h3>Classical Cyclotron Motion<a class="headerlink" href="#classical-cyclotron-motion" title="Link to this heading">#</a></h3>
+<section id="equations-of-motion">
+<h4>Equations of Motion<a class="headerlink" href="#equations-of-motion" title="Link to this heading">#</a></h4>
+<p>A charged particle with charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> in a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> experiences the Lorentz force:</p>
+<div class="math notranslate nohighlight">
+\[m\boldsymbol{a} = q\boldsymbol{v} \times \boldsymbol{B}\]</div>
+<p>Writing <span class="math notranslate nohighlight">\(\boldsymbol{v} = v_x\hat{x} + v_y\hat{y} + v_z\hat{z}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{a} = \dot{v}_x\hat{x} + \dot{v}_y\hat{y} + \dot{v}_z\hat{z}\)</span>, the cross product gives:</p>
+<div class="math notranslate nohighlight">
+\[m\dot{v}_x = qv_yB, \quad m\dot{v}_y = -qv_xB, \quad m\dot{v}_z = 0\]</div>
 <div class="important admonition">
-<p class="admonition-title">Why Cyclotron Frequency is Gauge-Independent</p>
-<p>The cyclotron frequency <span class="math notranslate nohighlight">\(\omega_c = eB/m\)</span> depends only on the physical magnetic field <strong>B</strong>, not on the gauge choice for the vector potential. This is your first clue that observables are gauge-invariant.</p>
-</div>
-<section id="lorentz-force-and-equations-of-motion">
-<h3>Lorentz Force and Equations of Motion<a class="headerlink" href="#lorentz-force-and-equations-of-motion" title="Link to this heading">#</a></h3>
-<p>A charged particle of charge <span class="math notranslate nohighlight">\(q = -e\)</span> (electron) and mass <span class="math notranslate nohighlight">\(m\)</span> moving in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> experiences the <strong>Lorentz force</strong>:</p>
+<p class="admonition-title">Cyclotron Frequency</p>
+<p>The characteristic timescale of motion perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> is set by the <strong>cyclotron frequency</strong> (or <strong>Larmor frequency</strong>):</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{F} = q(\boldsymbol{v} \times \boldsymbol{B})\]</div>
-<p>This leads to Newton’s second law:</p>
-<div class="math notranslate nohighlight">
-\[m\frac{d\boldsymbol{v}}{dt} = q(\boldsymbol{v} \times \boldsymbol{B})\]</div>
-<p>For a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, the motion parallel to the field is unaffected, while the perpendicular components couple to the field and cause the particle to orbit.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Component Equations</p>
-<p>Writing out components for <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[m\frac{dv_x}{dt} = qv_y B, \quad m\frac{dv_y}{dt} = -qv_x B, \quad m\frac{dv_z}{dt} = 0\]</div>
-<p>Motion in the <span class="math notranslate nohighlight">\(z\)</span>-direction is free motion: <span class="math notranslate nohighlight">\(v_z = \text{const}\)</span>. The <span class="math notranslate nohighlight">\(x\)</span>-<span class="math notranslate nohighlight">\(y\)</span> components are coupled and oscillate.</p>
-</div>
-</section>
-<section id="cyclotron-frequency">
-<h3>Cyclotron Frequency<a class="headerlink" href="#cyclotron-frequency" title="Link to this heading">#</a></h3>
-<p>The perpendicular motion is characterized by a universal frequency—the <strong>cyclotron frequency</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\omega_c = \frac{|q|B}{m} = \frac{eB}{m}\]</div>
-<p>This is a fundamental frequency: it depends only on the field strength <span class="math notranslate nohighlight">\(B\)</span> and the particle’s charge-to-mass ratio, <strong>not on the particle’s energy or speed</strong>. All particles with the same charge-to-mass ratio orbit at the same frequency, regardless of how fast they move.</p>
-<p>The perpendicular equations of motion become:</p>
-<div class="math notranslate nohighlight">
-\[\frac{dv_x}{dt} = \omega_c v_y, \quad \frac{dv_y}{dt} = -\omega_c v_x\]</div>
-<p>These are <strong>harmonic oscillator equations</strong>: the velocity rotates in the perpendicular plane with angular frequency <span class="math notranslate nohighlight">\(\omega_c\)</span>.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Solving the Harmonic Equations</p>
-<p>Taking the time derivative of the first equation and substituting the second:</p>
-<div class="math notranslate nohighlight">
-\[\frac{d^2v_x}{dt^2} = \omega_c\frac{dv_y}{dt} = -\omega_c^2 v_x\]</div>
-<p>This is simple harmonic motion. The general solution is:</p>
-<div class="math notranslate nohighlight">
-\[v_x(t) = v_\perp\cos(\omega_c t + \phi), \quad v_y(t) = v_\perp\sin(\omega_c t + \phi)\]</div>
-<p>where <span class="math notranslate nohighlight">\(v_\perp = \sqrt{v_x^2 + v_y^2}\)</span> is the perpendicular speed and <span class="math notranslate nohighlight">\(\phi\)</span> is a phase determined by initial conditions.</p>
-</div>
-</section>
-<section id="circular-orbits">
-<h3>Circular Orbits<a class="headerlink" href="#circular-orbits" title="Link to this heading">#</a></h3>
-<p>Integrating the velocity gives the trajectory: the particle traces a <strong>perfect circle</strong> in the plane perpendicular to the magnetic field. The orbit has radius:</p>
-<div class="math notranslate nohighlight">
-\[r_c = \frac{v_\perp}{\omega_c} = \frac{mv_\perp}{eB}\]</div>
-<p>This is the <strong>cyclotron radius</strong> (also called <strong>Larmor radius</strong>)—it depends on the particle’s perpendicular speed. Faster particles orbit in larger circles. Meanwhile, the particle drifts freely along the field direction:</p>
-<div class="math notranslate nohighlight">
-\[z(t) = z_0 + v_z t\]</div>
-<p>In classical mechanics, any perpendicular kinetic energy is allowed, so the cyclotron radius can be made arbitrarily large or small. <strong>This is fundamentally different from quantum mechanics</strong>, where energy is quantized into discrete Landau levels and the radius becomes a quantum property.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Trajectory Integration</p>
-<p>Starting from the velocity solution with <span class="math notranslate nohighlight">\(\phi = 0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[x(t) = x_c + r_c\sin(\omega_c t), \quad y(t) = y_c + r_c\cos(\omega_c t)\]</div>
-<p>where <span class="math notranslate nohighlight">\((x_c, y_c)\)</span> is the <strong>guiding center</strong> (center of the orbit). The particle traces a circle of radius <span class="math notranslate nohighlight">\(r_c\)</span> in the <span class="math notranslate nohighlight">\(x\)</span>-<span class="math notranslate nohighlight">\(y\)</span> plane while moving freely in the <span class="math notranslate nohighlight">\(z\)</span>-direction.</p>
-<p>The centripetal acceleration <span class="math notranslate nohighlight">\(a = v_\perp\omega_c\)</span> is provided by the Lorentz force <span class="math notranslate nohighlight">\(F = ev_\perp B\)</span>, consistent with <span class="math notranslate nohighlight">\(F = ma\)</span>.</p>
-</div>
-</section>
-<section id="kinetic-energy-and-orbital-period">
-<h3>Kinetic Energy and Orbital Period<a class="headerlink" href="#kinetic-energy-and-orbital-period" title="Link to this heading">#</a></h3>
-<p>The perpendicular kinetic energy is <span class="math notranslate nohighlight">\(E_\perp = \frac{1}{2}mv_\perp^2\)</span>, which determines the cyclotron radius.</p>
-<p>The orbital period is:</p>
-<div class="math notranslate nohighlight">
-\[T_c = \frac{2\pi}{\omega_c} = \frac{2\pi m}{eB}\]</div>
-<p><strong>Remarkably, the period is independent of energy</strong>: slow and fast particles orbit at the same frequency. This is a special feature of the cyclotron motion and underlies the cyclotron resonance used to accelerate particles in cyclotrons.</p>
-</section>
-<section id="hall-effect-classical-derivation">
-<h3>Hall Effect: Classical Derivation<a class="headerlink" href="#hall-effect-classical-derivation" title="Link to this heading">#</a></h3>
-<p>Consider electrons drifting through a conductor in a current, subject to a perpendicular magnetic field. The Lorentz force deflects electrons to one side of the conductor, creating a <strong>Hall electric field</strong> that opposes further deflection. At equilibrium:</p>
-<div class="math notranslate nohighlight">
-\[E_H = v_d B\]</div>
-<p>where <span class="math notranslate nohighlight">\(v_d\)</span> is the drift velocity. This Hall field is <strong>transverse to the current</strong>—perpendicular to both the current direction and the magnetic field. This is the <strong>Hall effect</strong>: a voltage develops perpendicular to both current and field, revealing information about the charge carriers.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Hall Voltage and Conductance</p>
-<p>For a rectangular conductor with current <span class="math notranslate nohighlight">\(I\)</span> in the <span class="math notranslate nohighlight">\(x\)</span>-direction and field <span class="math notranslate nohighlight">\(B\)</span> in the <span class="math notranslate nohighlight">\(-z\)</span> direction, electrons (charge <span class="math notranslate nohighlight">\(-e\)</span>) drift with velocity <span class="math notranslate nohighlight">\(\boldsymbol{v} = v_d\hat{x}\)</span>.</p>
-<p>The Lorentz force is:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{F} = -e(\boldsymbol{v} \times \boldsymbol{B}) = -ev_d B\hat{y}\]</div>
-<p>Electrons accumulate on one side, creating a Hall electric field <span class="math notranslate nohighlight">\(E_y\)</span> in the <span class="math notranslate nohighlight">\(y\)</span>-direction. At equilibrium:</p>
-<div class="math notranslate nohighlight">
-\[eE_y = ev_d B \quad \Rightarrow \quad E_y = v_d B\]</div>
-<p>The Hall voltage across width <span class="math notranslate nohighlight">\(w\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[V_H = E_y \cdot w = v_d B w\]</div>
-<p>The Hall conductance (or Hall resistance) depends on the charge carrier density, revealing whether carriers are electrons, holes, or something else.</p>
-</div>
-</section>
-<section id="classical-hall-angle">
-<h3>Classical Hall Angle<a class="headerlink" href="#classical-hall-angle" title="Link to this heading">#</a></h3>
-<p>In the presence of both magnetic and electric fields with collisions, the drift velocity is determined by the <strong>Hall angle</strong> <span class="math notranslate nohighlight">\(\theta_H\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\tan\theta_H = \frac{\omega_c\tau}{1}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the collision time. For weak fields (<span class="math notranslate nohighlight">\(\omega_c\tau \ll 1\)</span>), the Hall effect is linear in <span class="math notranslate nohighlight">\(B\)</span>. For strong fields (<span class="math notranslate nohighlight">\(\omega_c\tau \gg 1\)</span>), particles complete many orbits between collisions, and quantum effects dominate—the <strong>quantum Hall regime</strong>.</p>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+\[\omega_c = \frac{qB}{m}\]</div>
+<p>(In Gaussian units: <span class="math notranslate nohighlight">\(\omega_c = eB/mc\)</span>.)</p>
+<p><strong>Key properties</strong>:</p>
 <ul class="simple">
-<li><p><strong>Lorentz force</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{F} = q(\boldsymbol{v} \times \boldsymbol{B})\)</span> causes perpendicular deflection.</p></li>
-<li><p><strong>Cyclotron frequency</strong>: <span class="math notranslate nohighlight">\(\omega_c = eB/m\)</span> is the orbital frequency, independent of particle energy.</p></li>
-<li><p><strong>Cyclotron radius</strong>: <span class="math notranslate nohighlight">\(r_c = mv_\perp/(eB)\)</span> increases with perpendicular velocity.</p></li>
-<li><p><strong>Orbital period</strong>: <span class="math notranslate nohighlight">\(T = 2\pi m/(eB)\)</span> is independent of velocity—universal for a given <span class="math notranslate nohighlight">\(B\)</span> and particle type.</p></li>
-<li><p><strong>Drift motion</strong>: Parallel motion is unaffected; particles drift freely along field lines.</p></li>
-<li><p><strong>Guiding center</strong>: The center of the circular orbit slowly drifts, decoupling fast (cyclotron) from slow (drift) motion.</p></li>
-<li><p><strong>Hall effect</strong>: Transverse electric field develops from Lorentz force on current-carrying charges.</p></li>
-<li><p><strong>Hall coefficient</strong>: <span class="math notranslate nohighlight">\(R_H = 1/(ne)\)</span> provides direct measurement of charge carrier density.</p></li>
-<li><p><strong>Classical limitation</strong>: Any energy is allowed; quantization appears only in quantum mechanics.</p></li>
+<li><p>Independent of particle kinetic energy</p></li>
+<li><p>Depends only on charge-to-mass ratio and field strength</p></li>
+<li><p>Determines the period of one orbit: <span class="math notranslate nohighlight">\(T_c = 2\pi/\omega_c\)</span></p></li>
+<li><p>For electrons: <span class="math notranslate nohighlight">\(\omega_c = eB/m_e\)</span> (negative because <span class="math notranslate nohighlight">\(e &lt; 0\)</span>)</p></li>
 </ul>
+</div>
+<p>The equations become:</p>
+<div class="math notranslate nohighlight">
+\[\ddot{v}_x + \omega_c^2 v_x = 0, \quad \ddot{v}_y + \omega_c^2 v_y = 0\]</div>
+<p>These are simple harmonic oscillators. The general solution is:</p>
+<div class="math notranslate nohighlight">
+\[v_x(t) = v_\perp \cos(\omega_c t + \phi_0), \quad v_y(t) = v_\perp \sin(\omega_c t + \phi_0)\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_\perp = \sqrt{v_x^2 + v_y^2}\)</span> is the speed perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> and <span class="math notranslate nohighlight">\(\phi_0\)</span> is an arbitrary phase.</p>
 </section>
+<section id="circular-orbits-and-guiding-center-motion">
+<h4>Circular Orbits and Guiding Center Motion<a class="headerlink" href="#circular-orbits-and-guiding-center-motion" title="Link to this heading">#</a></h4>
+<p>Integrating the velocity components gives the orbit in the <span class="math notranslate nohighlight">\(xy\)</span>-plane:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = x_0 + \frac{v_\perp}{\omega_c}\sin(\omega_c t + \phi_0), \quad y(t) = y_0 - \frac{v_\perp}{\omega_c}\cos(\omega_c t + \phi_0)\]</div>
+<p>This describes a circular orbit with:</p>
+<div class="important admonition">
+<p class="admonition-title">Cyclotron Radius (Larmor Radius)</p>
+<div class="math notranslate nohighlight">
+\[r_c = \frac{v_\perp}{\omega_c} = \frac{mv_\perp}{qB}\]</div>
+<p><strong>Physical meaning</strong>:</p>
+<ul class="simple">
+<li><p>The particle spirals around the <strong>guiding center</strong> position <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> at frequency <span class="math notranslate nohighlight">\(\omega_c\)</span></p></li>
+<li><p>Motion parallel to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> (the <span class="math notranslate nohighlight">\(z\)</span>-direction) is unaffected</p></li>
+<li><p>Radius scales with: momentum (<span class="math notranslate nohighlight">\(\propto v_\perp\)</span>), inversely with field (<span class="math notranslate nohighlight">\(\propto 1/B\)</span>)</p></li>
+<li><p>Different particles with same kinetic energy orbit with different radii if they have different <span class="math notranslate nohighlight">\(m/q\)</span> ratios</p></li>
+</ul>
+<p><strong>Relation to energy</strong>: Using <span class="math notranslate nohighlight">\(E_\perp = \frac{1}{2}mv_\perp^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[r_c = \frac{\sqrt{2mE_\perp}}{qB}\]</div>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Orbital Period: Energy-Independent</p>
+<p>The period of one complete orbit is:</p>
+<div class="math notranslate nohighlight">
+\[T_c = \frac{2\pi}{\omega_c} = \frac{2\pi m}{qB}\]</div>
+<p><strong>Remarkable fact</strong>: <span class="math notranslate nohighlight">\(T_c\)</span> is <strong>completely independent of the particle’s kinetic energy</strong> or velocity!</p>
+<p>This is why cyclotron accelerators work: particles always take the same time to complete a semicircle, allowing constant-frequency RF acceleration to keep all particles synchronized regardless of their energy.</p>
+</div>
+</section>
+<section id="motion-in-crossed-boldsymbol-e-and-boldsymbol-b-fields">
+<h4>Motion in Crossed <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> Fields<a class="headerlink" href="#motion-in-crossed-boldsymbol-e-and-boldsymbol-b-fields" title="Link to this heading">#</a></h4>
+<p>When both electric and magnetic fields are present, the behavior is richer. If <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> is perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, the guiding center drifts with velocity:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{v}_{\text{drift}} = \frac{\boldsymbol{E} \times \boldsymbol{B}}{B^2}\]</div>
+<div class="important admonition">
+<p class="admonition-title">E×B Drift Velocity</p>
+<p>In crossed fields <span class="math notranslate nohighlight">\(\boldsymbol{E} \perp \boldsymbol{B}\)</span>, the guiding center drifts with velocity:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{v}_E = \frac{\boldsymbol{E} \times \boldsymbol{B}}{B^2}\]</div>
+<p><strong>Remarkable properties</strong>:</p>
+<ul class="simple">
+<li><p><strong>Independent of charge</strong> <span class="math notranslate nohighlight">\(q\)</span> and <strong>mass</strong> <span class="math notranslate nohighlight">\(m\)</span> — all particles drift together</p></li>
+<li><p><strong>Direction</strong>: perpendicular to both <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span></p></li>
+<li><p><strong>Magnitude</strong>: <span class="math notranslate nohighlight">\(v_E = E/B\)</span> (for perpendicular fields)</p></li>
+<li><p>Acts as an <strong>E-cross-B drift</strong> that is fundamental in plasma physics</p></li>
+</ul>
+<p>This universal drift is crucial for plasma confinement and appears throughout geophysics (ionosphere, magnetosphere) and astrophysics (accretion disks, solar flares).</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note: Physical Intuition for Drift</p>
+<p>The electric field accelerates the particle in one direction, increasing the cyclotron radius on one side of the orbit. This asymmetry causes the guiding center to drift perpendicular to both <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>. The drift speed adjusts so the net force on the guiding center is zero in the drift direction.</p>
+</div>
+</section>
+</section>
+<section id="semiclassical-quantization-and-landau-levels">
+<h3>Semiclassical Quantization and Landau Levels<a class="headerlink" href="#semiclassical-quantization-and-landau-levels" title="Link to this heading">#</a></h3>
+<p>The classical cyclotron motion suggests a natural quantization condition. The action integral for one complete orbit is:</p>
+<div class="math notranslate nohighlight">
+\[S = \oint p \, \mathrm{d}q = m v_\perp (2\pi r_c) = \frac{2\pi m v_\perp^2}{\omega_c} = \frac{2\pi E_\perp}{\omega_c}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_\perp = \frac{1}{2}m v_\perp^2\)</span> is the kinetic energy perpendicular to the field.</p>
+<p>By the Bohr-Sommerfeld quantization rule, <span class="math notranslate nohighlight">\(S = 2\pi n \hbar\)</span> for integer <span class="math notranslate nohighlight">\(n\)</span>, we get:</p>
+<div class="important admonition">
+<p class="admonition-title">Landau Levels (Semiclassical Derivation)</p>
+<p>Using the Bohr-Sommerfeld quantization condition <span class="math notranslate nohighlight">\(\oint p \, \mathrm{d}q = 2\pi\hbar(n + \tfrac{1}{2})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[E_n = \hbar\omega_c\left(n + \tfrac{1}{2}\right)\]</div>
+<p>for <span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots\)</span></p>
+<p>These are the <strong>Landau levels</strong>, equally spaced in energy with gap <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>.</p>
+<p><strong>Key features</strong>:</p>
+<ul class="simple">
+<li><p>Spacing <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> is independent of magnetic field strength (but <span class="math notranslate nohighlight">\(\omega_c \propto B\)</span>, so levels get closer in real energy units as <span class="math notranslate nohighlight">\(B \to 0\)</span>)</p></li>
+<li><p>Each level is highly degenerate (degeneracy <span class="math notranslate nohighlight">\(\sim eB\hbar/(\pi c)\)</span> for large systems)</p></li>
+<li><p>Semiclassical result is <strong>exact</strong> for the harmonic oscillator problem, explaining why Bohr-Sommerfeld works perfectly here</p></li>
+<li><p>Landau quantization is the foundation for the integer and fractional quantum Hall effects</p></li>
+</ul>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Bohr-Sommerfeld Result</p>
+<p>The phase space action for circular motion at fixed energy is:</p>
+<div class="math notranslate nohighlight">
+\[\oint p_\phi \, \mathrm{d}\phi = p_\phi \cdot 2\pi = m r_c v_\perp \cdot 2\pi = 2\pi m \frac{E_\perp}{\omega_c}\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(\oint p \, \mathrm{d}q = 2\pi\hbar(n + \tfrac{1}{2})\)</span> (with the zero-point correction <span class="math notranslate nohighlight">\(+\tfrac{1}{2}\)</span> characteristic of harmonic oscillators), we obtain:</p>
+<div class="math notranslate nohighlight">
+\[2\pi m \frac{E_\perp}{\omega_c} = 2\pi\hbar\left(n + \tfrac{1}{2}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[E_\perp = \hbar\omega_c\left(n + \tfrac{1}{2}\right)\]</div>
+<p>The <span class="math notranslate nohighlight">\(+\tfrac{1}{2}\)</span> zero-point energy is unavoidable from the uncertainty principle: we cannot have both <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(x\)</span> exactly zero for a confined particle.</p>
+</div>
+</section>
+<section id="key-physical-insights">
+<h3>Key Physical Insights<a class="headerlink" href="#key-physical-insights" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Summary: Cyclotron Motion</p>
+<p><strong>Cyclotron frequency</strong> (energy-independent):</p>
+<div class="math notranslate nohighlight">
+\[\omega_c = \frac{qB}{m}\]</div>
+<p><strong>Cyclotron radius</strong> (momentum-dependent):</p>
+<div class="math notranslate nohighlight">
+\[r_c = \frac{mv_\perp}{qB}\]</div>
+<p><strong>Orbital period</strong> (energy-independent):</p>
+<div class="math notranslate nohighlight">
+\[T_c = \frac{2\pi m}{qB}\]</div>
+<p><strong>E×B drift</strong> (independent of <span class="math notranslate nohighlight">\(q\)</span>, <span class="math notranslate nohighlight">\(m\)</span>, energy):</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{v}_E = \frac{\boldsymbol{E} \times \boldsymbol{B}}{B^2}\]</div>
+<p><strong>Landau levels</strong> (from Bohr-Sommerfeld):</p>
+<div class="math notranslate nohighlight">
+\[E_n = \hbar\omega_c\left(n + \tfrac{1}{2}\right)\]</div>
+<p>These are the fundamental building blocks for understanding:</p>
+<ul class="simple">
+<li><p>Plasma confinement and dynamics</p></li>
+<li><p>Quantum Hall effects</p></li>
+<li><p>Cyclotron resonance spectroscopy</p></li>
+<li><p>Motion in the Earth’s magnetosphere</p></li>
+</ul>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The Bohr-Sommerfeld quantization rule predicts energy levels <span class="math notranslate nohighlight">\(E_n = (n + \tfrac{1}{2})\hbar\omega_c\)</span>, exactly matching the quantum mechanical result from Landau quantization. But is this agreement a coincidence, or is there a deeper reason?</p>
+<p>(a) In general, Bohr-Sommerfeld is an approximation valid only for large <span class="math notranslate nohighlight">\(n\)</span>. Yet for cyclotron motion, it gives the <em>exact</em> result even for <span class="math notranslate nohighlight">\(n=0\)</span>. Why is cyclotron motion special?</p>
+<p>(b) The <span class="math notranslate nohighlight">\(+\tfrac{1}{2}\)</span> zero-point energy comes from the uncertainty principle: you cannot have both <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> simultaneously zero. Can you show that the zero-point energy <span class="math notranslate nohighlight">\(\tfrac{1}{2}\hbar\omega_c\)</span> is unavoidable quantum mechanically, using only <span class="math notranslate nohighlight">\(\Delta x \Delta p \gtrsim \hbar\)</span> and the circular orbit geometry?</p>
+<p>(c) In the classical limit (<span class="math notranslate nohighlight">\(\hbar \to 0\)</span> or large <span class="math notranslate nohighlight">\(B\)</span>), do the Landau levels remain equally spaced? What happens to the energy gaps between levels?</p>
+</div>
+<p>The classical cyclotron problem is the springboard to understanding quantum many-body physics in strong magnetic fields, where the Landau level degeneracy and topological properties dominate the physics.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-1-3-electromagnetic-coupling.html"><span class="std std-doc">4.1.3 Electromagnetic Coupling</span></a></strong>: Coupling electrons to external magnetic fields</p></li>
+<li><p><strong><a class="reference internal" href="4-3-2-landau-quantization.html"><span class="std std-doc">4.3.2 Landau Quantization</span></a></strong>: Quantum treatment of cyclotron orbits</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>Problem 1: Derive the Cyclotron Frequency</strong></p>
+<p>Starting from Newton’s second law for a charged particle in a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, derive the cyclotron frequency <span class="math notranslate nohighlight">\(\omega_c = eB/m\)</span>. Show that the perpendicular velocity components satisfy the coupled differential equations:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}v_x}{dt} = \omega_c v_y, \quad \frac{\mathrm{d}v_y}{dt} = -\omega_c v_x\]</div>
+<p>Then verify that the solution <span class="math notranslate nohighlight">\(v_x(t) = v_\perp\cos(\omega_c t)\)</span>, <span class="math notranslate nohighlight">\(v_y(t) = v_\perp\sin(\omega_c t)\)</span> satisfies these equations.</p>
+<p><strong>Problem 2: Cyclotron Radius and Kinetic Energy</strong></p>
+<p>An electron in a magnetic field <span class="math notranslate nohighlight">\(B = 0.5\)</span> T orbits with cyclotron radius <span class="math notranslate nohighlight">\(r_c = 1\)</span> mm.</p>
+<p>(a) Calculate the perpendicular velocity <span class="math notranslate nohighlight">\(v_\perp\)</span>.</p>
+<p>(b) Find the perpendicular kinetic energy <span class="math notranslate nohighlight">\(E_\perp = \frac{1}{2}mv_\perp^2\)</span> in eV.</p>
+<p>(c) Show that <span class="math notranslate nohighlight">\(r_c = \sqrt{2mE_\perp}/(eB)\)</span>.</p>
+<p><strong>Problem 3: Orbital Period is Energy-Independent</strong></p>
+<p>Prove that the cyclotron orbital period <span class="math notranslate nohighlight">\(T_c = 2\pi m/(eB)\)</span> is independent of the particle’s perpendicular velocity and kinetic energy. Why is this property crucial for the operation of a classical cyclotron accelerator?</p>
+<p><strong>Problem 4: Hall Voltage in a Current-Carrying Wire</strong></p>
+<p>A copper wire carries a current <span class="math notranslate nohighlight">\(I = 10\)</span> A in the <span class="math notranslate nohighlight">\(x\)</span>-direction. A perpendicular magnetic field <span class="math notranslate nohighlight">\(B = 1\)</span> T is applied in the <span class="math notranslate nohighlight">\(-z\)</span> direction. The wire has cross-sectional width <span class="math notranslate nohighlight">\(w = 2\)</span> cm in the <span class="math notranslate nohighlight">\(y\)</span>-direction.</p>
+<p>(a) Derive the Hall electric field <span class="math notranslate nohighlight">\(E_H\)</span> in terms of the electron drift velocity <span class="math notranslate nohighlight">\(v_d\)</span>, using force balance.</p>
+<p>(b) If the electron density in copper is <span class="math notranslate nohighlight">\(n = 8.5 \times 10^{28}\)</span> m<span class="math notranslate nohighlight">\(^{-3}\)</span>, calculate the drift velocity <span class="math notranslate nohighlight">\(v_d = I/(neA)\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is the cross-sectional area.</p>
+<p>(c) Calculate the Hall voltage <span class="math notranslate nohighlight">\(V_H = E_H \cdot w\)</span>.</p>
+<p><strong>Problem 5: Lorentz Force Provides Centripetal Acceleration</strong></p>
+<p>Show that the Lorentz force on a particle orbiting at the cyclotron frequency equals the required centripetal force <span class="math notranslate nohighlight">\(F_c = mv_\perp^2/r_c\)</span>. Verify dimensional consistency and explain why this equality confirms circular motion.</p>
+<p><strong>Problem 6: Drift Motion vs Cyclotron Orbits</strong></p>
+<p>In the presence of a perpendicular electric field <span class="math notranslate nohighlight">\(\boldsymbol{E} = E\hat{x}\)</span> and magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, a charged particle undergoes a <strong>drift velocity</strong> <span class="math notranslate nohighlight">\(\boldsymbol{v}_d = (\boldsymbol{E} \times \boldsymbol{B})/B^2\)</span>.</p>
+<p>(a) Calculate the drift velocity for <span class="math notranslate nohighlight">\(E = 1000\)</span> V/m and <span class="math notranslate nohighlight">\(B = 1\)</span> T.</p>
+<p>(b) Compare the timescale of drift motion to the cyclotron period <span class="math notranslate nohighlight">\(T_c\)</span> for an electron in this field.</p>
+<p>(c) Explain physically why the drift is independent of the particle’s charge and mass (a surprising result).</p>
+<p><strong>Problem 7: Cyclotron Radius Scales with Momentum</strong></p>
+<p>An electron and a proton enter the same uniform magnetic field <span class="math notranslate nohighlight">\(B = 2\)</span> T with the same kinetic energy <span class="math notranslate nohighlight">\(K = 1\)</span> keV.</p>
+<p>(a) Calculate the perpendicular velocity for each particle.</p>
+<p>(b) Calculate the cyclotron radius <span class="math notranslate nohighlight">\(r_c = mv_\perp/(eB)\)</span> for each.</p>
+<p>(c) Compare the radii: what is the ratio <span class="math notranslate nohighlight">\(r_{\text{proton}}/r_{\text{electron}}\)</span>? Explain why heavier particles orbit in larger circles at the same kinetic energy.</p>
+<p><strong>Problem 8: Hall Coefficient and Charge Carrier Type</strong></p>
+<p>The Hall coefficient is <span class="math notranslate nohighlight">\(R_H = E_H/(j_x B) = 1/(ne)\)</span> for electrons, where <span class="math notranslate nohighlight">\(j_x\)</span> is the current density and <span class="math notranslate nohighlight">\(n\)</span> is the electron density.</p>
+<p>(a) For a material with <span class="math notranslate nohighlight">\(n = 10^{23}\)</span> m<span class="math notranslate nohighlight">\(^{-3}\)</span>, calculate <span class="math notranslate nohighlight">\(R_H\)</span> in SI units.</p>
+<p>(b) If a measurement gives <span class="math notranslate nohighlight">\(R_H = -8.5 \times 10^{-11}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/C, is the dominant charge carrier an electron or a hole? Explain.</p>
+<p>(c) Could a material with mixed carrier types (electrons and holes) have <span class="math notranslate nohighlight">\(R_H = 0\)</span>? What would this imply about the densities and mobilities?</p>
 </section>
 </section>
 
@@ -734,15 +829,17 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-force-and-equations-of-motion">Lorentz Force and Equations of Motion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cyclotron-frequency">Cyclotron Frequency</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#circular-orbits">Circular Orbits</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-and-orbital-period">Kinetic Energy and Orbital Period</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hall-effect-classical-derivation">Hall Effect: Classical Derivation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hall-angle">Classical Hall Angle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-cyclotron-motion">Classical Cyclotron Motion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-of-motion">Equations of Motion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#circular-orbits-and-guiding-center-motion">Circular Orbits and Guiding Center Motion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#motion-in-crossed-boldsymbol-e-and-boldsymbol-b-fields">Motion in Crossed <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> Fields</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semiclassical-quantization-and-landau-levels">Semiclassical Quantization and Landau Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-physical-insights">Key Physical Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -780,7 +877,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

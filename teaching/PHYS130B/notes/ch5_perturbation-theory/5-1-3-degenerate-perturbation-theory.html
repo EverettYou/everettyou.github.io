@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -524,11 +524,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-degenerate-pt-is-necessary">Why Degenerate PT is Necessary</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The Problem</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-degenerate-states">Labeling Degenerate States</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-operator">Projection Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-degenerate-states-and-projection-operators">Labeling Degenerate States and Projection Operators</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effective-hamiltonian">The Effective Hamiltonian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effective-hamiltonian">The Effective Hamiltonian</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-representation">Matrix Representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-corrections">Higher-Order Corrections</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-computing-effective-hamiltonians">Examples: Computing Effective Hamiltonians</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-system">Spin-1 System</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stark-effect-in-hydrogen-n-2-level">Stark Effect in Hydrogen (<span class="math notranslate nohighlight">\(n=2\)</span> Level)</a></li>
@@ -539,6 +542,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights">Key Insights</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -555,12 +559,12 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Why does non-degenerate perturbation theory fail when the unperturbed spectrum has degeneracies?</p></li>
-<li><p>What is the effective Hamiltonian? How do we project the perturbation onto a degenerate subspace?</p></li>
-<li><p>How does diagonalizing the effective Hamiltonian lift (split) a degenerate level?</p></li>
-<li><p>Apply degenerate PT to a spin-1 system: identify the degenerate subspaces and compute the effective Hamiltonian.</p></li>
-<li><p>How does the Stark effect in hydrogen split the degenerate <span class="math notranslate nohighlight">\(n=2\)</span> level? What is the physical origin of the splitting?</p></li>
-<li><p>What is the difference between a fully lifted degeneracy and a partially lifted degeneracy?</p></li>
+<li><p>Why does non-degenerate perturbation theory fail when the unperturbed spectrum has degeneracies? What breaks down in the derivation?</p></li>
+<li><p>What is an effective Hamiltonian, and how do you construct it by projecting a perturbation onto a degenerate subspace?</p></li>
+<li><p>When you diagonalize the effective Hamiltonian, what happens to the degenerate level? How does the perturbation split it?</p></li>
+<li><p>Apply degenerate perturbation theory to a concrete example (like spin-1 or the Stark effect in hydrogen). What is the origin of the level splitting you find?</p></li>
+<li><p>When does the perturbation split a degenerate level completely versus partially? What do the remaining degeneracies tell you about hidden symmetries?</p></li>
+<li><p>For a system with multiple degeneracies at different energy scales, how would you extend the perturbative approach to handle nested degeneracies?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -572,160 +576,187 @@ document.write(`
 <h4>The Problem<a class="headerlink" href="#the-problem" title="Link to this heading">#</a></h4>
 <p>Suppose the unperturbed Hamiltonian <span class="math notranslate nohighlight">\(H_0\)</span> has a <strong>degenerate level</strong> with energy <span class="math notranslate nohighlight">\(E_n^{(0)}\)</span> and <span class="math notranslate nohighlight">\(d &gt; 1\)</span> linearly independent eigenstates:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-degenerate-basis">
-<span class="eqno">(299)<a class="headerlink" href="#equation-eq-5c-degenerate-basis" title="Link to this equation">#</a></span>\[H_0 |n, \alpha\rangle = E_n^{(0)} |n, \alpha\rangle, \quad \alpha = 1, 2, \ldots, d\]</div>
+<span class="eqno">(202)<a class="headerlink" href="#equation-eq-5c-degenerate-basis" title="Link to this equation">#</a></span>\[
+H_0 |n, \alpha\rangle = E_n^{(0)} |n, \alpha\rangle, \quad \alpha = 1, 2, \ldots, d\]</div>
 <p>Applying the standard (non-degenerate) first-order formula from Section 5.1.2:</p>
 <div class="math notranslate nohighlight">
-\[|\psi_n^{(1)}\rangle = \sum_{m \neq n} \frac{\langle m^{(0)} | V | n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}} |m^{(0)}\rangle\]</div>
+\[
+|\psi_n^{(1)}\rangle = \sum_{m \neq n} \frac{\langle m^{(0)} | V | n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}} |m^{(0)}\rangle\]</div>
 <p>would face a <strong>divergence</strong>: For intermediate states within the degenerate subspace, <span class="math notranslate nohighlight">\(E_n^{(0)} - E_m^{(0)} = 0\)</span> (both have the same energy), making the denominator zero. The state correction diverges—<strong>the formula breaks down</strong>.</p>
-<p><strong>Root Cause</strong>: The non-degenerate formula assumes <strong>adiabatic continuity</strong>—that a given label <span class="math notranslate nohighlight">\(n\)</span> uniquely tracks a particular eigenstate from <span class="math notranslate nohighlight">\(\lambda = 0\)</span> onwards. But when <span class="math notranslate nohighlight">\(H_0\)</span> has degeneracies, the perturbation can <strong>mix degenerate states</strong>, and there is no unique way to identify which perturbed state comes from which unperturbed state. The label becomes ambiguous.</p>
+<div class="caution admonition">
+<p class="admonition-title">Root Cause: Adiabatic Continuity Fails</p>
+<p>The non-degenerate formula assumes <strong>adiabatic continuity</strong>—that a given label <span class="math notranslate nohighlight">\(n\)</span> uniquely tracks a particular eigenstate from <span class="math notranslate nohighlight">\(\lambda = 0\)</span> onwards. But when <span class="math notranslate nohighlight">\(H_0\)</span> has degeneracies, the perturbation can <strong>mix degenerate states</strong>, and there is no unique way to identify which perturbed state comes from which unperturbed state. The label becomes ambiguous.</p>
 <p><strong>Solution</strong>: Diagonalize <span class="math notranslate nohighlight">\(V\)</span> <strong>within the degenerate subspace</strong> to identify the <strong>correct zeroth-order basis</strong> that will not mix to first order. This becomes the natural basis for the perturbative expansion.</p>
+</div>
 </section>
-<section id="labeling-degenerate-states">
-<h4>Labeling Degenerate States<a class="headerlink" href="#labeling-degenerate-states" title="Link to this heading">#</a></h4>
-<p>For a degenerate level <span class="math notranslate nohighlight">\(n\)</span> with multiplicity <span class="math notranslate nohighlight">\(d\)</span>, we use two indices:</p>
+<section id="labeling-degenerate-states-and-projection-operators">
+<h4>Labeling Degenerate States and Projection Operators<a class="headerlink" href="#labeling-degenerate-states-and-projection-operators" title="Link to this heading">#</a></h4>
+<p>For a degenerate level <span class="math notranslate nohighlight">\(n\)</span> with multiplicity <span class="math notranslate nohighlight">\(d\)</span>, we use a two-index labeling:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-double-index">
-<span class="eqno">(300)<a class="headerlink" href="#equation-eq-5c-double-index" title="Link to this equation">#</a></span>\[|n, \alpha\rangle, \quad \alpha = 1, 2, \ldots, d\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n\)</span>: labels the <strong>degenerate subspace</strong> (principal quantum number or level index)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: labels <strong>orthogonal states within that subspace</strong> (secondary index)</p></li>
-</ul>
-<p>The states satisfy:</p>
+<span class="eqno">(203)<a class="headerlink" href="#equation-eq-5c-double-index" title="Link to this equation">#</a></span>\[
+|n, \alpha\rangle, \quad \alpha = 1, 2, \ldots, d\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> labels the <strong>degenerate subspace</strong> and <span class="math notranslate nohighlight">\(\alpha\)</span> labels <strong>orthogonal states within that subspace</strong>. The states satisfy:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-orthonormality">
-<span class="eqno">(301)<a class="headerlink" href="#equation-eq-5c-orthonormality" title="Link to this equation">#</a></span>\[\langle n, \alpha | n, \beta \rangle = \delta_{\alpha\beta}, \quad \langle n, \alpha | m, \gamma \rangle = 0 \text{ for } n \neq m\]</div>
-</section>
-<section id="projection-operator">
-<h4>Projection Operator<a class="headerlink" href="#projection-operator" title="Link to this heading">#</a></h4>
+<span class="eqno">(204)<a class="headerlink" href="#equation-eq-5c-orthonormality" title="Link to this equation">#</a></span>\[
+\langle n, \alpha | n, \beta \rangle = \delta_{\alpha\beta}, \quad \langle n, \alpha | m, \gamma \rangle = 0 \text{ for } n \neq m\]</div>
+<div class="important admonition">
+<p class="admonition-title">Projection Operators</p>
 <p>Define the <strong>projection operator</strong> onto the <span class="math notranslate nohighlight">\(n\)</span>-th degenerate subspace:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-projector">
-<span class="eqno">(302)<a class="headerlink" href="#equation-eq-5c-projector" title="Link to this equation">#</a></span>\[\boxed{P_n = \sum_{\alpha=1}^d |n, \alpha\rangle \langle n, \alpha |}\]</div>
+<span class="eqno">(205)<a class="headerlink" href="#equation-eq-5c-projector" title="Link to this equation">#</a></span>\[
+\boxed{P_n = \sum_{\alpha=1}^d |n, \alpha\rangle \langle n, \alpha |}\]</div>
 <p>and its complement (projection onto all other subspaces):</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-complement">
-<span class="eqno">(303)<a class="headerlink" href="#equation-eq-5c-complement" title="Link to this equation">#</a></span>\[\boxed{Q_n = \mathbb{I} - P_n = \sum_{m \neq n} \sum_{\beta=1}^{d_m} |m, \beta\rangle \langle m, \beta |}\]</div>
-<p>These projectors are orthogonal and complete:  <span class="math notranslate nohighlight">\(P_n + Q_n = \mathbb{I}\)</span>, <span class="math notranslate nohighlight">\(P_n Q_n = 0\)</span>, <span class="math notranslate nohighlight">\(P_n^2 = P_n\)</span>.</p>
-<div class="note admonition">
-<p class="admonition-title">Key insight: Projection</p>
-<p>The projection operators split the Hilbert space into two regions:</p>
-<ul class="simple">
-<li><p><strong>Inside the subspace</strong> (<span class="math notranslate nohighlight">\(P_n\)</span>): All degenerate partners at energy <span class="math notranslate nohighlight">\(E_n^{(0)}\)</span>.</p></li>
-<li><p><strong>Outside</strong> (<span class="math notranslate nohighlight">\(Q_n\)</span>): All states outside this subspace (at different unperturbed energies).</p></li>
-</ul>
-<p>This separation allows us to treat within-subspace mixing (the source of level splitting) separately from virtual transitions to other levels.</p>
+<span class="eqno">(206)<a class="headerlink" href="#equation-eq-5c-complement" title="Link to this equation">#</a></span>\[
+\boxed{Q_n = \mathbb{I} - P_n = \sum_{m \neq n} \sum_{\beta=1}^{d_m} |m, \beta\rangle \langle m, \beta |}\]</div>
+<p>These projectors satisfy the algebra: <span class="math notranslate nohighlight">\(P_n + Q_n = \mathbb{I}\)</span>, <span class="math notranslate nohighlight">\(P_n Q_n = 0\)</span>, and <span class="math notranslate nohighlight">\(P_n^2 = P_n\)</span>.</p>
+<p><strong>Physical meaning</strong>: <span class="math notranslate nohighlight">\(P_n\)</span> separates the Hilbert space into the degenerate subspace (inside) and all other states (outside). This separation allows treating within-subspace mixing separately from virtual transitions to other levels.</p>
 </div>
 </section>
 </section>
 <section id="the-effective-hamiltonian">
 <h3>The Effective Hamiltonian<a class="headerlink" href="#the-effective-hamiltonian" title="Link to this heading">#</a></h3>
-<p>The <strong>effective Hamiltonian</strong> is a <span class="math notranslate nohighlight">\(d \times d\)</span> matrix that acts only within the degenerate subspace. It is defined by:</p>
-<div class="math notranslate nohighlight" id="equation-eq-5c-heff-zeroth">
-<span class="eqno">(304)<a class="headerlink" href="#equation-eq-5c-heff-zeroth" title="Link to this equation">#</a></span>\[\boxed{H^{\text{eff}}_n = P_n(H_0 + \lambda V) P_n}\]</div>
-<p><strong>To first order in <span class="math notranslate nohighlight">\(\lambda\)</span></strong>, this is simply:</p>
+<div class="important admonition">
+<p class="admonition-title">Definition: Effective Hamiltonian</p>
+<p>The <strong>effective Hamiltonian</strong> acting within the degenerate subspace is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{H^{\text{eff}}_n = P_n(H_0 + \lambda V) P_n}\]</div>
+<p>To first order in <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-heff-1st">
-<span class="eqno">(305)<a class="headerlink" href="#equation-eq-5c-heff-1st" title="Link to this equation">#</a></span>\[\boxed{H^{\text{eff}}_n(\lambda) = E_n^{(0)} \mathbb{I}_d + \lambda P_n V P_n + O(\lambda^2)}\]</div>
-<p>In matrix form, using basis <span class="math notranslate nohighlight">\(\{|n, 1\rangle, |n, 2\rangle, \ldots, |n, d\rangle\}\)</span>, the matrix elements are:</p>
-<div class="math notranslate nohighlight">
-\[V_{\alpha\beta} = \langle n, \alpha | V | n, \beta \rangle\]</div>
-<p>and the effective Hamiltonian matrix is:</p>
-<div class="math notranslate nohighlight" id="equation-eq-5c-heff-matrix">
-<span class="eqno">(306)<a class="headerlink" href="#equation-eq-5c-heff-matrix" title="Link to this equation">#</a></span>\[\begin{split}\boxed{H^{\text{eff}}_n = E_n^{(0)} \mathbb{I}_d + \lambda \begin{pmatrix} V_{11} &amp; V_{12} &amp; \cdots &amp; V_{1d} \\ V_{21} &amp; V_{22} &amp; \cdots &amp; V_{2d} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ V_{d1} &amp; V_{d2} &amp; \cdots &amp; V_{dd} \end{pmatrix} + O(\lambda^2)}\end{split}\]</div>
-<p><strong>Diagonalize</strong> this matrix to obtain eigenvalues and eigenvectors:</p>
-<div class="math notranslate nohighlight">
-\[H^{\text{eff}}_n |n, \alpha'\rangle = E_{n,\alpha'}(\lambda) |n, \alpha'\rangle\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight" id="equation-eq-5c-perturbed-energies">
-<span class="eqno">(307)<a class="headerlink" href="#equation-eq-5c-perturbed-energies" title="Link to this equation">#</a></span>\[\boxed{E_{n,\alpha}(\lambda) = E_n^{(0)} + \lambda \Delta E_{n,\alpha}^{(1)} + O(\lambda^2)}\]</div>
-<p>and <span class="math notranslate nohighlight">\(|n, \alpha'\rangle\)</span> are the eigenstates (the “corrected basis”).</p>
-<p><strong>Key result</strong>: The diagonalization of <span class="math notranslate nohighlight">\(P_n V P_n\)</span> reveals which combinations of degenerate states remain eigenstates of <span class="math notranslate nohighlight">\(H(\lambda)\)</span> to first order. These are the “natural” states to use for the perturbative expansion.</p>
-<div class="note admonition">
-<p class="admonition-title">Higher-order corrections</p>
-<p>Including second-order and higher corrections, the effective Hamiltonian becomes:</p>
-<div class="math notranslate nohighlight">
-\[H^{\text{eff}}_n(\lambda) = P_n V P_n + P_n V Q_n \frac{1}{E_n^{(0)} - Q_n H_0 Q_n} Q_n V P_n + O(\lambda^2)\]</div>
-<p>The second term accounts for <strong>virtual transitions</strong> to states outside the subspace and back. It is analogous to the second-order energy correction in non-degenerate PT.</p>
+<span class="eqno">(207)<a class="headerlink" href="#equation-eq-5c-heff-1st" title="Link to this equation">#</a></span>\[
+\boxed{H^{\text{eff}}_n(\lambda) = E_n^{(0)} \mathbb{I}_d + \lambda P_n V P_n + O(\lambda^2)}\]</div>
 </div>
+<section id="matrix-representation">
+<h4>Matrix Representation<a class="headerlink" href="#matrix-representation" title="Link to this heading">#</a></h4>
+<p>In the basis <span class="math notranslate nohighlight">\(\{|n, 1\rangle, |n, 2\rangle, \ldots, |n, d\rangle\}\)</span>, the effective Hamiltonian is a <span class="math notranslate nohighlight">\(d \times d\)</span> matrix with elements:</p>
+<div class="math notranslate nohighlight">
+\[
+V_{\alpha\beta} = \langle n, \alpha | V | n, \beta \rangle\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-5c-heff-matrix">
+<span class="eqno">(208)<a class="headerlink" href="#equation-eq-5c-heff-matrix" title="Link to this equation">#</a></span>\[\begin{split}\boxed{H^{\text{eff}}_n = E_n^{(0)} \mathbb{I}_d + \lambda \begin{pmatrix} V_{11} &amp; V_{12} &amp; \cdots &amp; V_{1d} \\ V_{21} &amp; V_{22} &amp; \cdots &amp; V_{2d} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ V_{d1} &amp; V_{d2} &amp; \cdots &amp; V_{dd} \end{pmatrix} + O(\lambda^2)}\end{split}\]</div>
+<p><strong>Procedure</strong>: Diagonalize this matrix to obtain eigenvalues and eigenvectors:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{\text{eff}}_n |n, \alpha'\rangle = E_{n,\alpha'}(\lambda) |n, \alpha'\rangle\]</div>
+<p>The perturbed energies are:</p>
+<div class="math notranslate nohighlight" id="equation-eq-5c-perturbed-energies">
+<span class="eqno">(209)<a class="headerlink" href="#equation-eq-5c-perturbed-energies" title="Link to this equation">#</a></span>\[
+\boxed{E_{n,\alpha}(\lambda) = E_n^{(0)} + \lambda \Delta E_{n,\alpha}^{(1)} + O(\lambda^2)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta E_{n,\alpha}^{(1)}\)</span> are the eigenvalues of <span class="math notranslate nohighlight">\(P_n V P_n\)</span>, and <span class="math notranslate nohighlight">\(|n, \alpha'\rangle\)</span> are the corresponding eigenvectors (the corrected basis).</p>
+<div class="note admonition">
+<p class="admonition-title">Key Insight: What Diagonalization Reveals</p>
+<p>The diagonalization of <span class="math notranslate nohighlight">\(P_n V P_n\)</span> identifies which combinations of degenerate states remain eigenstates of <span class="math notranslate nohighlight">\(H(\lambda)\)</span> to first order. These are the <strong>natural states</strong> to use for the perturbative expansion — they do not mix with each other at first order, only with states outside the subspace.</p>
+</div>
+</section>
+<section id="higher-order-corrections">
+<h4>Higher-Order Corrections<a class="headerlink" href="#higher-order-corrections" title="Link to this heading">#</a></h4>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Including Virtual Transitions</p>
+<p>When second-order and higher corrections are included, the effective Hamiltonian becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{\text{eff}}_n(\lambda) = P_n V P_n + P_n V Q_n \frac{1}{E_n^{(0)} - Q_n H_0 Q_n} Q_n V P_n + O(\lambda^2)\]</div>
+<p>The second term accounts for <strong>virtual transitions</strong> to states outside the subspace and back. Here, the resolvent operator <span class="math notranslate nohighlight">\(\frac{1}{E_n^{(0)} - Q_n H_0 Q_n}\)</span> projects onto the orthogonal complement and inverts the energy difference.</p>
+<p><strong>Analogy</strong>: This is the same mechanism as second-order energy corrections in non-degenerate perturbation theory, but now restricted to the subspace dynamics.</p>
+</div>
+</section>
 </section>
 <section id="examples-computing-effective-hamiltonians">
 <h3>Examples: Computing Effective Hamiltonians<a class="headerlink" href="#examples-computing-effective-hamiltonians" title="Link to this heading">#</a></h3>
 <section id="spin-1-system">
 <h4>Spin-1 System<a class="headerlink" href="#spin-1-system" title="Link to this heading">#</a></h4>
-<p><strong>Setup</strong>: A spin-1 particle in a magnetic field plus additional perturbation.</p>
-<div class="math notranslate nohighlight" id="equation-eq-5c-spin1-ham">
-<span class="eqno">(308)<a class="headerlink" href="#equation-eq-5c-spin1-ham" title="Link to this equation">#</a></span>\[H(\lambda) = (S^z)^2 + \lambda(S^x + S^z)\]</div>
+<div class="example admonition">
+<p class="admonition-title">Example: Degenerate PT for a Spin-1 Particle</p>
+<p><strong>Setup</strong>: A spin-1 particle with unperturbed Hamiltonian <span class="math notranslate nohighlight">\(H_0 = (S^z)^2\)</span> and perturbation <span class="math notranslate nohighlight">\(V = \lambda(S^x + S^z)\)</span>.</p>
 <p>Basis states: <span class="math notranslate nohighlight">\(|+1\rangle, |0\rangle, |-1\rangle\)</span> (eigenstates of <span class="math notranslate nohighlight">\(S^z\)</span> with eigenvalues <span class="math notranslate nohighlight">\(+1, 0, -1\)</span>).</p>
-<p><strong>Unperturbed Hamiltonian</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}H_0 = (S^z)^2 = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}\end{split}\]</div>
+\[\begin{split}
+H_0 = (S^z)^2 = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}\end{split}\]</div>
 <p><strong>Degenerate subspaces</strong>:</p>
 <ul class="simple">
 <li><p><strong><span class="math notranslate nohighlight">\(E_1^{(0)} = 1\)</span></strong> (doubly degenerate): states <span class="math notranslate nohighlight">\(|+1\rangle\)</span> and <span class="math notranslate nohighlight">\(|-1\rangle\)</span></p></li>
 <li><p><strong><span class="math notranslate nohighlight">\(E_0^{(0)} = 0\)</span></strong> (non-degenerate): state <span class="math notranslate nohighlight">\(|0\rangle\)</span></p></li>
 </ul>
-<p>For the degenerate subspace with <span class="math notranslate nohighlight">\(n=1\)</span>, the effective Hamiltonian is a <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix:</p>
+<p>For the degenerate subspace <span class="math notranslate nohighlight">\(n=1\)</span>, construct the effective Hamiltonian as a <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}H^{\text{eff}}_1 = \begin{pmatrix}
+\[\begin{split}
+H^{\text{eff}}_1 = \begin{pmatrix}
 \langle +1 | V | +1 \rangle &amp; \langle +1 | V | -1 \rangle \\
 \langle -1 | V | +1 \rangle &amp; \langle -1 | V | -1 \rangle
 \end{pmatrix}\end{split}\]</div>
-<p><strong>Computing matrix elements</strong> using spin-1 matrices:</p>
+<p><strong>Computing matrix elements</strong> using <span class="math notranslate nohighlight">\(S^x\)</span> and <span class="math notranslate nohighlight">\(S^z\)</span> matrices for spin-1:</p>
 <div class="math notranslate nohighlight">
-\[\langle +1 | S^x | +1 \rangle = 0, \quad \langle +1 | S^z | +1 \rangle = 1 \quad \Rightarrow \quad \langle +1 | V | +1 \rangle = 1\]</div>
+\[
+\langle +1 | S^x | +1 \rangle = 0, \quad \langle +1 | S^z | +1 \rangle = 1 \quad \Rightarrow \quad \langle +1 | V | +1 \rangle = 1\]</div>
 <div class="math notranslate nohighlight">
 \[\langle -1 | S^x | -1 \rangle = 0, \quad \langle -1 | S^z | -1 \rangle = -1 \quad \Rightarrow \quad \langle -1 | V | -1 \rangle = -1\]</div>
 <div class="math notranslate nohighlight">
 \[\langle +1 | S^x | -1 \rangle = \frac{1}{\sqrt{2}}, \quad \langle +1 | S^z | -1 \rangle = 0 \quad \Rightarrow \quad \langle +1 | V | -1 \rangle = \frac{1}{\sqrt{2}}\]</div>
 <p><strong>Effective Hamiltonian matrix</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-heff1-spin1">
-<span class="eqno">(309)<a class="headerlink" href="#equation-eq-5c-heff1-spin1" title="Link to this equation">#</a></span>\[\begin{split}H^{\text{eff}}_1 = \begin{pmatrix} 1 &amp; 1/\sqrt{2} \\ 1/\sqrt{2} &amp; -1 \end{pmatrix}\end{split}\]</div>
+<span class="eqno">(210)<a class="headerlink" href="#equation-eq-5c-heff1-spin1" title="Link to this equation">#</a></span>\[\begin{split}
+H^{\text{eff}}_1 = \begin{pmatrix} 1 &amp; 1/\sqrt{2} \\ 1/\sqrt{2} &amp; -1 \end{pmatrix}\end{split}\]</div>
 <p><strong>Diagonalization</strong>: Solve <span class="math notranslate nohighlight">\(\det(H^{\text{eff}}_1 - \delta E \mathbb{I}) = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[(1 - \delta E)(-1 - \delta E) - \frac{1}{2} = 0 \quad \Rightarrow \quad (\delta E)^2 = \frac{3}{2}\]</div>
+\[
+(1 - \delta E)(-1 - \delta E) - \frac{1}{2} = 0 \quad \Rightarrow \quad (\delta E)^2 = \frac{3}{2}\]</div>
 <p><strong>First-order energy shifts</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-splits-spin1">
-<span class="eqno">(310)<a class="headerlink" href="#equation-eq-5c-splits-spin1" title="Link to this equation">#</a></span>\[\boxed{\Delta E_{1,+}^{(1)} = +\sqrt{3/2}, \quad \Delta E_{1,-}^{(1)} = -\sqrt{3/2}}\]</div>
+<span class="eqno">(211)<a class="headerlink" href="#equation-eq-5c-splits-spin1" title="Link to this equation">#</a></span>\[
+\boxed{\Delta E_{1,+}^{(1)} = +\sqrt{3/2}, \quad \Delta E_{1,-}^{(1)} = -\sqrt{3/2}}\]</div>
 <p><strong>Perturbed energies</strong>:</p>
 <div class="math notranslate nohighlight">
-\[E_{1,+}(\lambda) = 1 + \lambda\sqrt{3/2} + O(\lambda^2)\]</div>
+\[
+E_{1,+}(\lambda) = 1 + \lambda\sqrt{3/2} + O(\lambda^2)\]</div>
 <div class="math notranslate nohighlight">
 \[E_{1,-}(\lambda) = 1 - \lambda\sqrt{3/2} + O(\lambda^2)\]</div>
-<p>The <strong>degeneracy is completely lifted</strong>: the single level <span class="math notranslate nohighlight">\(E_1^{(0)} = 1\)</span> splits into two distinct levels separated by <span class="math notranslate nohighlight">\(\Delta E = 2\lambda\sqrt{3/2}\)</span>.</p>
-<p><strong>Physical picture</strong>: The perturbation <span class="math notranslate nohighlight">\(V = S^x + S^z\)</span> couples the spin-up (<span class="math notranslate nohighlight">\(|+1\rangle\)</span>) and spin-down (<span class="math notranslate nohighlight">\(|-1\rangle\)</span>) states. The diagonal elements tell us: <span class="math notranslate nohighlight">\(|+1\rangle\)</span> is boosted in energy by <span class="math notranslate nohighlight">\(1\)</span> (from <span class="math notranslate nohighlight">\(S^z\)</span> term), while <span class="math notranslate nohighlight">\(|-1\rangle\)</span> is pulled down by <span class="math notranslate nohighlight">\(1\)</span>. The off-diagonal coupling <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span> (from <span class="math notranslate nohighlight">\(S^x\)</span>) mixes them. Together, these produce a level splitting.</p>
+<p>The <strong>doubly degenerate level is completely lifted</strong> into two distinct levels separated by <span class="math notranslate nohighlight">\(\Delta E = 2\lambda\sqrt{3/2}\)</span>.</p>
+<p><strong>Physical picture</strong>: The perturbation <span class="math notranslate nohighlight">\(V = S^x + S^z\)</span> couples the spin-up (<span class="math notranslate nohighlight">\(|+1\rangle\)</span>) and spin-down (<span class="math notranslate nohighlight">\(|-1\rangle\)</span>) states. The diagonal elements reflect the energy shifts from the <span class="math notranslate nohighlight">\(S^z\)</span> term (boosting <span class="math notranslate nohighlight">\(|+1\rangle\)</span> and pulling down <span class="math notranslate nohighlight">\(|-1\rangle\)</span>), while the off-diagonal coupling <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span> from <span class="math notranslate nohighlight">\(S^x\)</span> mixes them. Together, these produce the observed level splitting.</p>
+</div>
 </section>
 <section id="stark-effect-in-hydrogen-n-2-level">
 <h4>Stark Effect in Hydrogen (<span class="math notranslate nohighlight">\(n=2\)</span> Level)<a class="headerlink" href="#stark-effect-in-hydrogen-n-2-level" title="Link to this heading">#</a></h4>
-<p><strong>Setup</strong>: Apply a uniform electric field (perturbation) to a hydrogen atom and examine the degenerate <span class="math notranslate nohighlight">\(n=2\)</span> level.</p>
-<p><strong>Unperturbed energy</strong>: <span class="math notranslate nohighlight">\(E_2^{(0)} = -\frac{13.6 \text{ eV}}{4} = -3.4 \text{ eV}\)</span></p>
-<p><strong>Degenerate states</strong> (ignoring fine structure): The <span class="math notranslate nohighlight">\(n=2\)</span> level has four states with the same unperturbed energy:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(|2, 0, 0, \uparrow\rangle\)</span> (1s-like, spin up)</p></li>
-<li><p><span class="math notranslate nohighlight">\(|2, 0, 0, \downarrow\rangle\)</span> (1s-like, spin down)</p></li>
-<li><p><span class="math notranslate nohighlight">\(|2, 1, m_\ell, \uparrow\rangle\)</span> (2p-like, spin up, <span class="math notranslate nohighlight">\(m_\ell = \pm 1, 0\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(|2, 1, m_\ell, \downarrow\rangle\)</span> (2p-like, spin down, <span class="math notranslate nohighlight">\(m_\ell = \pm 1, 0\)</span>)</p></li>
-</ul>
-<p>(Total: 4 states)</p>
-<p><strong>Perturbation</strong>: Electric field <span class="math notranslate nohighlight">\(\mathcal{E}_0\)</span> along <span class="math notranslate nohighlight">\(z\)</span> gives:</p>
+<div class="example admonition">
+<p class="admonition-title">Example: Linear Stark Effect</p>
+<p><strong>Setup</strong>: Apply a uniform electric field <span class="math notranslate nohighlight">\(\boldsymbol{E} = E \hat{z}\)</span> to the hydrogen atom <span class="math notranslate nohighlight">\(n = 2\)</span> level, which is fourfold degenerate (ignoring fine structure):</p>
 <div class="math notranslate nohighlight">
-\[V = e \mathcal{E}_0 z = e \mathcal{E}_0 r \cos\theta\]</div>
-<p><strong>Selection rules</strong>: The matrix element <span class="math notranslate nohighlight">\(\langle n', \ell', m'_\ell | z | n, \ell, m_\ell \rangle\)</span> is nonzero only if:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\Delta \ell = \pm 1\)</span> (parity must flip)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta m_\ell = 0\)</span> (azimuthal quantum number unchanged)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta n\)</span> unrestricted (any <span class="math notranslate nohighlight">\(n\)</span> difference allowed)</p></li>
-</ul>
-<p><strong>Key couplings within <span class="math notranslate nohighlight">\(n=2\)</span></strong>: The <span class="math notranslate nohighlight">\(z\)</span> operator couples:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(|2, 0, 0\rangle \leftrightarrow |2, 1, 0\rangle\)</span> (s ↔ p with <span class="math notranslate nohighlight">\(m_\ell = 0\)</span>)</p></li>
-<li><p>No couplings within <span class="math notranslate nohighlight">\(|2, 1, m_\ell = \pm 1\rangle\)</span> (different parity classes)</p></li>
-</ul>
-<p><strong>Result</strong>: The effective Hamiltonian (ignoring spin for simplicity, focusing on spatial states) is approximately <span class="math notranslate nohighlight">\(4 \times 4\)</span>, but with block structure:</p>
+\[ |2, 0, 0, \uparrow\rangle, \quad |2, 0, 0, \downarrow\rangle, \quad |2, 1, m_\ell, \uparrow\rangle, \quad |2, 1, m_\ell, \downarrow\rangle\]</div>
+<p>(4 states total)</p>
+<p><strong>Perturbation</strong>: The electric field induces:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}H^{\text{eff}}_2 \sim \begin{pmatrix}
+\[
+V = e \mathcal{E}_0 z = e \mathcal{E}_0 r \cos\theta\]</div>
+<p><strong>Selection rules</strong> for the <span class="math notranslate nohighlight">\(z\)</span> operator:</p>
+<ul class="simple">
+<li><p>Parity must flip: <span class="math notranslate nohighlight">\(\Delta \ell = \pm 1\)</span></p></li>
+<li><p>Azimuthal quantum number unchanged: <span class="math notranslate nohighlight">\(\Delta m_\ell = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> unrestricted</p></li>
+</ul>
+<p><strong>Key couplings within <span class="math notranslate nohighlight">\(n=2\)</span></strong>: Only <span class="math notranslate nohighlight">\(|2, 0, 0\rangle \leftrightarrow |2, 1, 0\rangle\)</span> couple (s ↔ p with <span class="math notranslate nohighlight">\(m_\ell = 0\)</span>). States with <span class="math notranslate nohighlight">\(|2, 1, m_\ell = \pm 1\rangle\)</span> do not couple to anything within the <span class="math notranslate nohighlight">\(n=2\)</span> manifold.</p>
+<p><strong>Effective Hamiltonian structure</strong> (ignoring spin, focusing on spatial states):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H^{\text{eff}}_2 \sim \begin{pmatrix}
 0 &amp; V_{01} &amp; 0 &amp; 0 \\
 V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 0
 \end{pmatrix}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_{01} = e \mathcal{E}_0 \langle 2,1,0 | z | 2,0,0 \rangle \neq 0\)</span>.</p>
-<p><strong>Diagonalization</strong> lifts the degeneracy and produces <strong>three distinct first-order energy levels</strong> (from the <span class="math notranslate nohighlight">\(2 \times 2\)</span> block and two degenerate singletons). The eigenstates are <strong>hybridized combinations</strong> of <span class="math notranslate nohighlight">\(|2,0,0\rangle\)</span> and <span class="math notranslate nohighlight">\(|2,1,0\rangle\)</span> (parity mixing).</p>
-<p><strong>Physical significance</strong>: This is the <strong>linear Stark effect</strong> (first-order energy shift proportional to <span class="math notranslate nohighlight">\(\mathcal{E}_0\)</span>) in hydrogen. It occurs because the perturbation has <strong>off-diagonal matrix elements</strong> within the degenerate <span class="math notranslate nohighlight">\(n=2\)</span> subspace. If the degenerate level had definite parity (all states same parity), there would be no off-diagonal elements, and the energy shift would be <strong>quadratic</strong> (second-order): <span class="math notranslate nohighlight">\(\Delta E \propto \mathcal{E}_0^2\)</span> (quadratic Stark effect).</p>
+<p><strong>Diagonalization</strong> produces <strong>three distinct first-order energy levels</strong>: the <span class="math notranslate nohighlight">\(2 \times 2\)</span> block gives a shifted pair, while two states remain fixed (the <span class="math notranslate nohighlight">\(m_\ell = \pm 1\)</span> states).</p>
+<p><strong>Physical significance</strong>: This is the <strong>linear Stark effect</strong> — first-order energy shifts proportional to <span class="math notranslate nohighlight">\(E\)</span>. It occurs because off-diagonal matrix elements exist within the <span class="math notranslate nohighlight">\(n=2\)</span> subspace (parity mixing). If all degenerate states had definite parity, there would be no off-diagonal elements, and shifts would be quadratic: <span class="math notranslate nohighlight">\(\Delta E \propto E^2\)</span> (quadratic Stark effect).</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Degenerate Subspace Degeneracy</p>
+<p>In degenerate perturbation theory, you diagonalize <span class="math notranslate nohighlight">\(H'\)</span> within the degenerate subspace to find the “good basis.” But suppose <span class="math notranslate nohighlight">\(H'\)</span> itself has degenerate eigenvalues within that subspace.</p>
+<ul class="simple">
+<li><p>Give a concrete example: a three-fold degenerate level where the perturbation has a two-fold degeneracy in the subspace.</p></li>
+<li><p>Can you determine the lifted energy levels uniquely from first-order perturbation theory alone, or must you go to higher order?</p></li>
+<li><p>What role does the second-order correction play in resolving residual degeneracies?</p></li>
+<li><p>Physical example: fine structure of hydrogen due to spin-orbit coupling. Why does solving the <span class="math notranslate nohighlight">\(2 \times 2\)</span> coupled system sometimes require considering mixed states?</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="summary-degenerate-pt-procedure">
@@ -737,8 +768,8 @@ V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 <li><p><strong>Diagonalize</strong>: Find eigenvalues <span class="math notranslate nohighlight">\(\Delta E_{n,\alpha}^{(1)}\)</span> and eigenvectors <span class="math notranslate nohighlight">\(|n,\alpha'\rangle\)</span> of the effective matrix.</p></li>
 <li><p><strong>Read off results</strong>:</p>
 <ul class="simple">
-<li><p>Eigenvalues → first-order energy shifts (degeneracy is lifted or partially lifted)</p></li>
-<li><p>Eigenvectors → corrected basis (the “natural” states for the perturbative expansion)</p></li>
+<li><p>Eigenvalues → first-order energy shifts (degeneracy lifted or partially lifted)</p></li>
+<li><p>Eigenvectors → corrected basis (the natural states for perturbative expansion)</p></li>
 </ul>
 </li>
 <li><p><strong>Higher orders</strong>: Include virtual transitions via resolvent: <span class="math notranslate nohighlight">\(P_n V Q_n \frac{1}{E_n^{(0)} - H_0|_{Q_n}} Q_n V P_n\)</span></p></li>
@@ -755,7 +786,7 @@ V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Unperturbed spectrum</strong></p></td>
-<td><p>All levels are distinct</p></td>
+<td><p>All levels distinct</p></td>
 <td><p>Contains degenerate subspaces</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>First-order energy</strong></p></td>
@@ -767,20 +798,20 @@ V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 <td><p><span class="math notranslate nohighlight">\(d\)</span> corrected states (for multiplicity <span class="math notranslate nohighlight">\(d\)</span>)</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Divergence issue</strong></p></td>
-<td><p>Denominator <span class="math notranslate nohighlight">\((E_n^{(0)} - E_m^{(0)})\)</span> is finite</p></td>
-<td><p>Would be zero for degenerate <span class="math notranslate nohighlight">\(m\)</span>; prevented by diagonalizing</p></td>
+<td><p>Denominator <span class="math notranslate nohighlight">\((E_n^{(0)} - E_m^{(0)})\)</span> finite</p></td>
+<td><p>Would be zero; prevented by diagonalizing</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Correct zeroth-order basis</strong></p></td>
-<td><p>Given (states are non-mixing)</p></td>
+<td><p>Given (non-mixing)</p></td>
 <td><p>Must choose basis diagonalizing perturbation</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Lifting degeneracy</strong></p></td>
-<td><p>Perturbation couples to states outside the level</p></td>
-<td><p>Perturbation mixes degenerate partners</p></td>
+<td><p>Couples to states outside level</p></td>
+<td><p>Mixes degenerate partners</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Selection rules</strong></p></td>
 <td><p>Off-diagonal elements <span class="math notranslate nohighlight">\(\langle m | V | n \rangle\)</span> for <span class="math notranslate nohighlight">\(m \neq n\)</span> matter</p></td>
-<td><p>Only diagonal-block elements matter to first order</p></td>
+<td><p>Diagonal-block elements matter to first order</p></td>
 </tr>
 </tbody>
 </table>
@@ -788,20 +819,84 @@ V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 </section>
 <section id="key-insights">
 <h3>Key Insights<a class="headerlink" href="#key-insights" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Main Takeaways</p>
 <ul class="simple">
 <li><p><strong>Degeneracy as opportunity</strong>: Rather than a computational pitfall, degeneracy becomes a feature. The perturbation reveals the “true” eigenbasis by showing which combinations of degenerate states are stable.</p></li>
-<li><p><strong>Lifting vs. partial lifting</strong>: A degenerate level can be completely lifted (all eigenvalues of <span class="math notranslate nohighlight">\(H^{\text{eff}}_n\)</span> are distinct) or partially lifted (some remain degenerate).</p></li>
+<li><p><strong>Lifting vs. partial lifting</strong>: A degenerate level can be completely lifted (all eigenvalues of <span class="math notranslate nohighlight">\(H^{\text{eff}}_n\)</span> distinct) or partially lifted (some remain degenerate).</p></li>
 <li><p><strong>Linear vs. quadratic Stark effect</strong>: Whether the Stark effect is linear or quadratic depends on the parity of the states in the degenerate subspace.</p></li>
-<li><p><strong>Virtual transitions</strong>: Higher-order corrections account for the system momentarily “visiting” states outside the subspace before returning, analogous to non-degenerate PT.</p></li>
+<li><p><strong>Virtual transitions</strong>: Higher-order corrections account for the system momentarily “visiting” states outside the subspace before returning.</p></li>
+<li><p><strong>Applications</strong>: Spin-orbit coupling, Stark effect, fine structure in hydrogen, crystal field splitting.</p></li>
 </ul>
-<p><strong>Applications</strong>:</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><strong>Spin-orbit coupling</strong>: Splits degenerate <span class="math notranslate nohighlight">\(\ell\)</span> levels (spin couples to orbital angular momentum)</p></li>
-<li><p><strong>Stark effect</strong>: Electric field splits degenerate atomic levels (parity mixing)</p></li>
-<li><p><strong>Fine structure in hydrogen</strong>: Relativistic corrections and spin-orbit effects</p></li>
-<li><p><strong>Crystal fields</strong>: Splits degenerate d-shell levels in transition metals</p></li>
+<li><p><strong><a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="std std-doc">5.1.2 Non-Degenerate Perturbation Theory</span></a></strong>: Perturbation expansion for simple eigenvalues</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html"><span class="std std-doc">2.2.3 Addition of Angular Momenta</span></a></strong>: Degeneracy structure and basis selection</p></li>
 </ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Projection onto a Degenerate Subspace</strong></p>
+<p>Consider a two-level degenerate subspace spanned by orthonormal states <span class="math notranslate nohighlight">\(|1\rangle\)</span> and <span class="math notranslate nohighlight">\(|2\rangle\)</span>. The projection operator onto this subspace is <span class="math notranslate nohighlight">\(P = |1\rangle\langle 1| + |2\rangle\langle 2|\)</span>, and the complement is <span class="math notranslate nohighlight">\(Q = \mathbb{I} - P\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(P^2 = P\)</span> and <span class="math notranslate nohighlight">\(Q^2 = Q\)</span> (idempotency).</p>
+<p>(b) Prove that <span class="math notranslate nohighlight">\(PQ = QP = 0\)</span> (orthogonality).</p>
+<p>(c) If <span class="math notranslate nohighlight">\(V\)</span> is a general operator, show that <span class="math notranslate nohighlight">\(PVP\)</span> has vanishing matrix elements outside the degenerate subspace (i.e., all off-diagonal blocks vanish when expressed in the product basis <span class="math notranslate nohighlight">\(\{|1\rangle, |2\rangle, \{\text{other states}\}\}\)</span>).</p>
+<hr class="docutils" />
+<p><strong>2. Secular Equation for a Spin-1 Perturbation</strong></p>
+<p>A spin-1 system has unperturbed Hamiltonian <span class="math notranslate nohighlight">\(H_0 = \hbar\omega S_z\)</span>, where <span class="math notranslate nohighlight">\(S_z\)</span> has eigenstates <span class="math notranslate nohighlight">\(|+1\rangle\)</span>, <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|-1\rangle\)</span> with eigenvalues <span class="math notranslate nohighlight">\(\hbar\omega\)</span>, <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(-\hbar\omega\)</span> respectively. A perturbation <span class="math notranslate nohighlight">\(V = \lambda S_x\)</span> is applied.</p>
+<p>(a) Identify the degenerate subspace of <span class="math notranslate nohighlight">\(H_0\)</span> (if any). Is there a degeneracy?</p>
+<p>(b) Now consider instead <span class="math notranslate nohighlight">\(H_0 = \hbar\omega (S_z + \epsilon S_z^2)\)</span> with small <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>. Show that the three levels are now split (no degeneracy to first order in <span class="math notranslate nohighlight">\(\epsilon\)</span>), and find their approximate energies.</p>
+<p>(c) Suppose <span class="math notranslate nohighlight">\(H_0 = \hbar\omega S_z\)</span> as in part (a), and we apply <span class="math notranslate nohighlight">\(V = \lambda(S_+ + S_-)\)</span> where <span class="math notranslate nohighlight">\(S_{\pm} = S_x \pm \mathrm{i} S_y\)</span>. Find the <span class="math notranslate nohighlight">\(3 \times 3\)</span> matrix representation of <span class="math notranslate nohighlight">\(H_0 + \lambda V\)</span> in the basis <span class="math notranslate nohighlight">\(\{|+1\rangle, |0\rangle, |-1\rangle\}\)</span> and identify which eigenstates mix at first order.</p>
+<hr class="docutils" />
+<p><strong>3. Lifting a Doubly Degenerate Level</strong></p>
+<p>Consider a particle in a one-dimensional harmonic oscillator with an unperturbed Hamiltonian <span class="math notranslate nohighlight">\(H_0 = \hbar\omega(a^\dagger a + 1/2)\)</span>. The perturbation is <span class="math notranslate nohighlight">\(V = \lambda(a + a^\dagger)^2\)</span>.</p>
+<p>(a) Show that the first two excited states <span class="math notranslate nohighlight">\(|1\rangle\)</span> and <span class="math notranslate nohighlight">\(|2\rangle\)</span> are nearly degenerate in energy (explain why the label “nearly” is appropriate for a harmonic oscillator).</p>
+<p>(b) Construct the effective Hamiltonian <span class="math notranslate nohighlight">\(H^{\text{eff}}_2 = P_2 V P_2\)</span> acting on the subspace spanned by <span class="math notranslate nohighlight">\(|1\rangle\)</span> and <span class="math notranslate nohighlight">\(|2\rangle\)</span>, where <span class="math notranslate nohighlight">\(P_2 = |1\rangle\langle 1| + |2\rangle\langle 2|\)</span>. Compute its matrix elements.</p>
+<p>(c) Diagonalize <span class="math notranslate nohighlight">\(H^{\text{eff}}_2\)</span> to find the corrected eigenvalues (splitting of the degenerate level).</p>
+<p>(d) Find the new eigenstates to zeroth order.</p>
+<hr class="docutils" />
+<p><strong>4. Good Quantum Numbers and Symmetry</strong></p>
+<p>An atom has total angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{J} = \boldsymbol{L} + \boldsymbol{S}\)</span> (spin-orbit coupling). Before the coupling is turned on, the unperturbed Hamiltonian <span class="math notranslate nohighlight">\(H_0\)</span> commutes with <span class="math notranslate nohighlight">\(L_z\)</span> and <span class="math notranslate nohighlight">\(S_z\)</span> separately, so the good quantum numbers are <span class="math notranslate nohighlight">\(m_\ell\)</span> and <span class="math notranslate nohighlight">\(m_s\)</span>.</p>
+<p>(a) When spin-orbit coupling <span class="math notranslate nohighlight">\(V \sim \lambda \boldsymbol{L} \cdot \boldsymbol{S}\)</span> is included, show that <span class="math notranslate nohighlight">\([V, L_z] \neq 0\)</span> and <span class="math notranslate nohighlight">\([V, S_z] \neq 0\)</span>, meaning <span class="math notranslate nohighlight">\(m_\ell\)</span> and <span class="math notranslate nohighlight">\(m_s\)</span> are no longer conserved.</p>
+<p>(b) However, <span class="math notranslate nohighlight">\([V, J_z] = 0\)</span> and <span class="math notranslate nohighlight">\([V, \boldsymbol{J}^2] = 0\)</span>. Why does this imply that the correct zeroth-order basis for degenerate perturbation theory should use quantum numbers <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(m_j\)</span> instead?</p>
+<p>(c) In the spirit of degenerate PT: the perturbation naturally mixes <span class="math notranslate nohighlight">\(|\ell, m_\ell, m_s\rangle\)</span> states, but the eigenstates of <span class="math notranslate nohighlight">\(V\)</span> within a fixed <span class="math notranslate nohighlight">\(j\)</span> manifold are <span class="math notranslate nohighlight">\(|\ell, j, m_j\rangle\)</span> states. Explain why diagonalizing <span class="math notranslate nohighlight">\(V\)</span> within the correct degenerate subspace recovers the right eigenstates.</p>
+<hr class="docutils" />
+<p><strong>5. Hydrogen Atom Stark Effect (Linear Response)</strong></p>
+<p>The hydrogen atom <span class="math notranslate nohighlight">\(n = 2\)</span> level has four degenerate states (ignoring spin): <span class="math notranslate nohighlight">\(|2, 0, 0\rangle\)</span>, <span class="math notranslate nohighlight">\(|2, 1, -1\rangle\)</span>, <span class="math notranslate nohighlight">\(|2, 1, 0\rangle\)</span>, <span class="math notranslate nohighlight">\(|2, 1, +1\rangle\)</span>.</p>
+<p>An external electric field <span class="math notranslate nohighlight">\(\boldsymbol{E} = E \hat{z}\)</span> induces a perturbation <span class="math notranslate nohighlight">\(V = e E z\)</span>, where <span class="math notranslate nohighlight">\(z = r\cos\theta\)</span>.</p>
+<p>(a) Construct the <span class="math notranslate nohighlight">\(4 \times 4\)</span> matrix <span class="math notranslate nohighlight">\(V_{\alpha\beta} = \langle 2, \ell_\alpha, m_\alpha | V | 2, \ell_\beta, m_\beta \rangle\)</span>. (Hint: <span class="math notranslate nohighlight">\(\langle 2, 0, 0 | z | 2, 1, 0 \rangle = 3a_0\)</span> and off-diagonal elements between different <span class="math notranslate nohighlight">\(m\)</span> values vanish by rotational symmetry.)</p>
+<p>(b) Diagonalize this matrix to find the four corrected energies to first order in <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<p>(c) Compare your result to the known exact solution for the Stark effect in the <span class="math notranslate nohighlight">\(n = 2\)</span> manifold (the splitting should show linear dependence on <span class="math notranslate nohighlight">\(E\)</span>; some states remain degenerate).</p>
+<hr class="docutils" />
+<p><strong>6. Partial vs. Complete Degeneracy Lifting</strong></p>
+<p>(a) Define the difference between <strong>fully lifted degeneracy</strong> (all degenerate states split into distinct energies at first order) and <strong>partially lifted degeneracy</strong> (some corrected energies remain equal despite the perturbation).</p>
+<p>(b) Under what conditions can a perturbation fail to completely lift a degeneracy? (Hint: Consider symmetries of <span class="math notranslate nohighlight">\(V\)</span> and selection rules.)</p>
+<p>(c) In the Stark effect problem (Problem 5), which states remain accidentally degenerate? What symmetry or selection rule prevents the perturbation from splitting them?</p>
+<hr class="docutils" />
+<p><strong>7. First-Order Corrections to Degenerate States</strong></p>
+<p>For a degenerate eigenstate <span class="math notranslate nohighlight">\(|n, \alpha^*\rangle\)</span> that emerges as a solution to the secular equation:</p>
+<div class="math notranslate nohighlight">
+\[H^{\text{eff}}_n |n, \alpha^*\rangle = E_n^{(1)} |n, \alpha^*\rangle\]</div>
+<p>the first-order perturbed state is:</p>
+<div class="math notranslate nohighlight">
+\[|\psi_n^{(1)}\rangle = |n, \alpha^*\rangle + \sum_{m \neq n} \sum_\gamma \frac{\langle m, \gamma | V | n, \alpha^*\rangle}{E_n^{(0)} - E_m^{(0)}} |m, \gamma\rangle + \text{const correction in subspace}\]</div>
+<p>(a) Why does the formula avoid the divergence that plagued non-degenerate PT? (What role does the secular equation play?)</p>
+<p>(b) Using the spin-1 example from Problem 2(c), compute the first-order correction <span class="math notranslate nohighlight">\(|\psi_+^{(1)}\rangle\)</span> to the state with the largest energy shift (arising from the secular equation).</p>
+<hr class="docutils" />
+<p><strong>8. Effective Hamiltonian in a Qubit (Two-Level System)</strong></p>
+<p>A qubit is formed by two nearly degenerate energy levels <span class="math notranslate nohighlight">\(E_1^{(0)}\)</span> and <span class="math notranslate nohighlight">\(E_2^{(0)}\)</span> separated by a small gap <span class="math notranslate nohighlight">\(\Delta E = E_2^{(0)} - E_1^{(0)}\)</span> (in the lab frame). A rapid time-dependent field couples them: <span class="math notranslate nohighlight">\(V(t) = \lambda(t) \sigma^x\)</span>.</p>
+<p>(a) Construct the effective Hamiltonian <span class="math notranslate nohighlight">\(H^{\text{eff}} = P (H_0 + V) P\)</span> using the projection <span class="math notranslate nohighlight">\(P = |1\rangle\langle 1| + |2\rangle\langle 2|\)</span> (the two-level subspace).</p>
+<p>(b) For static <span class="math notranslate nohighlight">\(\lambda\)</span>, what are the eigenenergies and eigenstates of <span class="math notranslate nohighlight">\(H^{\text{eff}}\)</span>? (This is the Rabi problem.)</p>
+<p>(c) Why is the two-level approximation valid when <span class="math notranslate nohighlight">\(\Delta E \gg \lambda\)</span>? (Relate this to the assumption of degenerate perturbation theory.)</p>
+<p>(d) How does the effective Hamiltonian change if the external field is far detuned (<span class="math notranslate nohighlight">\(\Delta E \gg \lambda\)</span>)? Compute the second-order correction to the effective Hamiltonian using the formula:</p>
+<div class="math notranslate nohighlight">
+\[H^{\text{eff}} = P_1 H_0 P_1 + \lambda P_1 V P_1 + \lambda^2 P_1 V Q \frac{1}{E_1^{(0)} - H_0|_Q} Q V P_1 + \cdots\]</div>
+<p>Interpret the physical meaning of this correction.</p>
+<hr class="docutils" />
 </section>
 </section>
 
@@ -872,11 +967,14 @@ V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-degenerate-pt-is-necessary">Why Degenerate PT is Necessary</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The Problem</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-degenerate-states">Labeling Degenerate States</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-operator">Projection Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-degenerate-states-and-projection-operators">Labeling Degenerate States and Projection Operators</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effective-hamiltonian">The Effective Hamiltonian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effective-hamiltonian">The Effective Hamiltonian</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-representation">Matrix Representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-corrections">Higher-Order Corrections</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-computing-effective-hamiltonians">Examples: Computing Effective Hamiltonians</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-system">Spin-1 System</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stark-effect-in-hydrogen-n-2-level">Stark Effect in Hydrogen (<span class="math notranslate nohighlight">\(n=2\)</span> Level)</a></li>
@@ -887,6 +985,7 @@ V_{10} &amp; 0 &amp; 0 &amp; 0 \\
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights">Key Insights</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -924,7 +1023,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

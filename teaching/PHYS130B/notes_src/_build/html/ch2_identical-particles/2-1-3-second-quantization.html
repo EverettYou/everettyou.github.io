@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -564,6 +564,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -580,38 +581,48 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the difference between first-quantized and second-quantized descriptions of a many-body system?</p></li>
-<li><p>Explain Fock space. What are occupation numbers and why are they more natural for identical particles?</p></li>
-<li><p>Define creation and annihilation operators. How do they act on Fock states?</p></li>
-<li><p>Distinguish between boson and fermion algebra. Why do commutators and anticommutators appear?</p></li>
-<li><p>How do commutation relations encode the statistics of particles?</p></li>
-<li><p>What is the number operator? How does it relate to occupation numbers?</p></li>
+<li><p>What is the key difference between first-quantized and second-quantized descriptions of a many-body system?</p></li>
+<li><p>Explain Fock space and occupation numbers. Why is this representation more natural for identical particles than first quantization?</p></li>
+<li><p>Define the creation operator <span class="math notranslate nohighlight">\(\hat{a}^\dagger\)</span> and annihilation operator <span class="math notranslate nohighlight">\(\hat{a}\)</span>. How do they act on Fock states?</p></li>
+<li><p>Why do boson and fermion operators satisfy different algebra: commutators versus anticommutators?</p></li>
+<li><p>How do the commutation/anticommutation relations of <span class="math notranslate nohighlight">\(\hat{a}\)</span> and <span class="math notranslate nohighlight">\(\hat{a}^\dagger\)</span> automatically enforce quantum statistics?</p></li>
+<li><p>Does second quantization describe a physical process where particles are “created” and “destroyed,” or is it just a mathematical convenience? How would you explain this to someone who has never studied field theory?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Creation and annihilation operators provide a powerful reformulation of quantum mechanics that naturally handles systems with variable particle number and automatically enforces quantum statistics. This section introduces the operator formalism that dominates modern quantum field theory and many-body physics.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Concept: Second Quantization</p>
+<p>Creation and annihilation operators provide a powerful reformulation of quantum mechanics that naturally handles systems with variable particle number and automatically enforces quantum statistics. Instead of asking “which particle is in which state?”, we ask “how many particles occupy each state?”</p>
+</div>
 <section id="first-quantized-picture-which-particle-in-which-state">
 <h3>First-Quantized Picture: “Which Particle in Which State?”<a class="headerlink" href="#first-quantized-picture-which-particle-in-which-state" title="Link to this heading">#</a></h3>
 <p>In the <strong>first-quantized</strong> approach, we specify the state of each particle individually:</p>
 <div class="math notranslate nohighlight">
-\[\text{Particle 1 in state } |\phi_1\rangle, \quad \text{Particle 2 in state } |\phi_2\rangle, \quad \ldots\]</div>
+\[
+\text{Particle 1 in state } |\phi_1\rangle, \quad \text{Particle 2 in state } |\phi_2\rangle, \quad \ldots\]</div>
 <p>For a system of <span class="math notranslate nohighlight">\(N\)</span> distinguishable particles, the many-body state lives in a tensor product space:</p>
 <div class="math notranslate nohighlight">
-\[|\psi\rangle = |\phi_1\rangle \otimes |\phi_2\rangle \otimes \cdots \otimes |\phi_N\rangle\]</div>
-<p>For <strong>identical</strong> particles, we must symmetrize or antisymmetrize, making the first-quantized picture awkward.</p>
+\[
+|\psi\rangle = |\phi_1\rangle \otimes |\phi_2\rangle \otimes \cdots \otimes |\phi_N\rangle\]</div>
+<p>For <strong>identical</strong> particles, we must symmetrize or antisymmetrize, making the first-quantized picture awkward and unwieldy.</p>
 </section>
 <section id="second-quantized-picture-how-many-particles-in-each-state">
 <h3>Second-Quantized Picture: “How Many Particles in Each State?”<a class="headerlink" href="#second-quantized-picture-how-many-particles-in-each-state" title="Link to this heading">#</a></h3>
-<p>The <strong>second-quantized</strong> approach asks a different question:</p>
+<p>The <strong>second-quantized</strong> approach asks a fundamentally different question:</p>
 <div class="math notranslate nohighlight">
-\[n_1 \text{ particles in state } 1, \quad n_2 \text{ particles in state } 2, \quad \ldots\]</div>
-<p>A state is specified entirely by <strong>occupation numbers</strong> <span class="math notranslate nohighlight">\(\{n_\alpha\}\)</span>. This is much more natural for identical particles since:</p>
+\[
+n_1 \text{ particles in state } 1, \quad n_2 \text{ particles in state } 2, \quad \ldots\]</div>
+<p>A state is specified entirely by <strong>occupation numbers</strong> <span class="math notranslate nohighlight">\(\{n_\alpha\}\)</span>. This is much more natural for identical particles:</p>
 <ul class="simple">
 <li><p>We never ask “which particle is where?”</p></li>
-<li><p>Symmetry/antisymmetry is built in from the start.</p></li>
-<li><p>Variable particle number is handled elegantly (via the vacuum state).</p></li>
+<li><p>Symmetry/antisymmetry is built in from the start</p></li>
+<li><p>Variable particle number is handled elegantly (via the vacuum state)</p></li>
 </ul>
+<div class="note admonition">
+<p class="admonition-title">Note: Why “Second” Quantization?</p>
+<p>Despite the name, there is only <strong>one</strong> level of quantization in second quantization. The terminology is historical. What changed is not the quantization level, but the choice of variables: from particle positions to occupation numbers. This reformulation makes particle-number changes natural and encoded in the operator algebra itself.</p>
+</div>
 </section>
 <section id="relation-to-quantum-field-theory">
 <h3>Relation to Quantum Field Theory<a class="headerlink" href="#relation-to-quantum-field-theory" title="Link to this heading">#</a></h3>
@@ -620,34 +631,22 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\hat{\psi}^\dagger(\boldsymbol{r})\)</span>: <strong>field creation operator</strong> (creates a particle at position <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\hat{\psi}(\boldsymbol{r})\)</span>: <strong>field annihilation operator</strong> (annihilates a particle at position <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>)</p></li>
 </ul>
-<p>Despite the name “second quantization,” there is only one level of quantization; the terminology is historical.</p>
-<div class="note admonition">
-<p class="admonition-title">Why second quantization?</p>
-<p>Second quantization is not a deeper level of quantization—it is a reformulation that makes particle-number changes natural. Creation and annihilation operators automatically enforce the correct symmetry (bosonic or fermionic) without explicit symmetrization.</p>
+<p>These field operators automatically enforce the correct commutation or anticommutation relations, ensuring the proper statistics (bosonic or fermionic) without explicit symmetrization.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Can We Distinguish Bosonic and Fermionic Vacua?</p>
+<p>The bosonic vacuum <span class="math notranslate nohighlight">\(|0\rangle_B\)</span> and fermionic vacuum <span class="math notranslate nohighlight">\(|0\rangle_F\)</span> both have zero particles. But they support different excitation spectra: bosons permit arbitrary occupation <span class="math notranslate nohighlight">\(n_\alpha = 0, 1, 2, \ldots\)</span>, while fermions restrict to <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>.</p>
+<p><strong>Question</strong>: Is the vacuum state genuinely different, or is the difference purely a feature of the operator algebra? Could we tell the two vacua apart by a measurement that <em>does not involve</em> creating particles?</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Key takeaway 1</p></li>
-<li><p>Key takeaway 2</p></li>
-<li><p>Key takeaway 3</p></li>
+<li><p><strong>Occupation numbers</strong> <span class="math notranslate nohighlight">\(\{n_\alpha\}\)</span> replace particle labels; state <span class="math notranslate nohighlight">\(|n_1, n_2, \ldots\rangle\)</span> specifies how many particles occupy each single-particle mode</p></li>
+<li><p><strong>Fock space</strong> <span class="math notranslate nohighlight">\(\mathcal{F} = \bigoplus_{N=0}^\infty \mathcal{H}_N\)</span> includes sectors of all particle numbers; vacuum <span class="math notranslate nohighlight">\(|0\rangle\)</span> has no particles</p></li>
+<li><p><strong>Creation operator</strong> <span class="math notranslate nohighlight">\(\hat{a}_\alpha^\dagger\)</span> adds a particle to mode <span class="math notranslate nohighlight">\(\alpha\)</span>; <strong>annihilation operator</strong> <span class="math notranslate nohighlight">\(\hat{a}_\alpha\)</span> removes one</p></li>
+<li><p><strong>Number operator</strong> <span class="math notranslate nohighlight">\(\hat{n}_\alpha = \hat{a}_\alpha^\dagger \hat{a}_\alpha\)</span> counts particles in mode <span class="math notranslate nohighlight">\(\alpha\)</span></p></li>
+<li><p>Second quantization automatically enforces Pauli exclusion for fermions and boson statistics; simplifies identical-particle calculations dramatically</p></li>
 </ul>
-<div class="important admonition">
-<p class="admonition-title">Important</p>
-<p>Fock Space and Occupation Numbers</p>
-<p>Instead of labeling particles, second quantization works with occupation numbers {nₖ}—how many particles occupy each single-particle state k. This naturally encodes particle identity and statistics.</p>
-</div>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>Creation and Annihilation Operators</p>
-<p>â†ₖ creates a particle in state k; âₖ destroys one. For fermions, these satisfy anticommutation relations {âᵢ, â†ⱼ} = δᵢⱼ. For bosons, they obey commutation relations [âᵢ, â†ⱼ] = δᵢⱼ.</p>
-</div>
-<div class="caution admonition">
-<p class="admonition-title">Caution</p>
-<p>Commutation vs. Anticommutation</p>
-<p>The algebra (commutation vs. anticommutation) directly encodes exchange statistics. Bosons commute because wavefunction symmetry; fermions anticommute because wavefunction antisymmetry. These are not independent choices.</p>
-</div>
 </section>
 </section>
 <section id="fock-space-and-occupation-number-representation">
@@ -656,7 +655,8 @@ document.write(`
 <h3>Definition of a Fock State<a class="headerlink" href="#definition-of-a-fock-state" title="Link to this heading">#</a></h3>
 <p>A <strong>Fock state</strong> (also called a <strong>number state</strong> or <strong>occupation number state</strong>) is labeled by the occupation numbers of all single-particle states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fock-state-label">
-<span class="eqno">(78)<a class="headerlink" href="#equation-eq-fock-state-label" title="Link to this equation">#</a></span>\[|n_1, n_2, \ldots, n_D\rangle \quad \text{or} \quad |\{n_\alpha\}\rangle\]</div>
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-fock-state-label" title="Link to this equation">#</a></span>\[
+|n_1, n_2, \ldots, n_D\rangle \quad \text{or} \quad |\{n_\alpha\}\rangle\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(n_\alpha\)</span> = number of particles in single-particle state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span></p></li>
@@ -668,27 +668,31 @@ document.write(`
 <h3>The Vacuum State<a class="headerlink" href="#the-vacuum-state" title="Link to this heading">#</a></h3>
 <p>The <strong>vacuum state</strong> <span class="math notranslate nohighlight">\(|0\rangle\)</span> or <span class="math notranslate nohighlight">\(|\text{vac}\rangle\)</span> has no particles:</p>
 <div class="math notranslate nohighlight" id="equation-eq-vacuum-state">
-<span class="eqno">(79)<a class="headerlink" href="#equation-eq-vacuum-state" title="Link to this equation">#</a></span>\[|0\rangle = |0, 0, \ldots, 0\rangle \quad (n_\alpha = 0 \text{ for all } \alpha)\]</div>
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-vacuum-state" title="Link to this equation">#</a></span>\[
+|0\rangle = |0, 0, \ldots, 0\rangle \quad (n_\alpha = 0 \text{ for all } \alpha)\]</div>
 <p>It is the <strong>ground state</strong> of the Fock space and serves as the reference for building all other states.</p>
 </section>
 <section id="single-particle-excitations">
 <h3>Single-Particle Excitations<a class="headerlink" href="#single-particle-excitations" title="Link to this heading">#</a></h3>
 <p>States with one particle in state <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[|n_\alpha = 1\rangle = |0, 0, \ldots, 0, \underbrace{1}_{\alpha}, 0, \ldots, 0\rangle\]</div>
+\[
+|n_\alpha = 1\rangle = |0, 0, \ldots, 0, \underbrace{1}_{\alpha}, 0, \ldots, 0\rangle\]</div>
 <p>These are the <strong>single-particle basis states</strong> expressed in the Fock representation.</p>
 </section>
 <section id="multi-particle-states">
 <h3>Multi-Particle States<a class="headerlink" href="#multi-particle-states" title="Link to this heading">#</a></h3>
 <p>States with multiple particles:</p>
 <div class="math notranslate nohighlight">
-\[|1, 2, 0, 3, \ldots\rangle \quad \text{means } 1 \text{ particle in state } 1, \, 2 \text{ in state } 2, \, 3 \text{ in state } 4, \, \ldots\]</div>
+\[
+|1, 2, 0, 3, \ldots\rangle \quad \text{means } 1 \text{ particle in state } 1, \, 2 \text{ in state } 2, \, 3 \text{ in state } 4, \, \ldots\]</div>
 </section>
 <section id="fock-space-completeness">
 <h3>Fock Space Completeness<a class="headerlink" href="#fock-space-completeness" title="Link to this heading">#</a></h3>
 <p>All Fock states form an <strong>orthonormal basis</strong> for Fock space:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fock-orthonormality">
-<span class="eqno">(80)<a class="headerlink" href="#equation-eq-fock-orthonormality" title="Link to this equation">#</a></span>\[\langle n_1', n_2', \ldots | n_1, n_2, \ldots \rangle = \prod_\alpha \delta_{n_\alpha' n_\alpha}\]</div>
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-fock-orthonormality" title="Link to this equation">#</a></span>\[
+\langle n_1', n_2', \ldots | n_1, n_2, \ldots \rangle = \prod_\alpha \delta_{n_\alpha' n_\alpha}\]</div>
 <p>This basis is complete for quantum states involving any number of particles.</p>
 </section>
 </section>
@@ -705,22 +709,26 @@ document.write(`
 <h3>Action on Fock States: Bosons<a class="headerlink" href="#action-on-fock-states-bosons" title="Link to this heading">#</a></h3>
 <p>For bosons, with no restriction on occupation numbers:</p>
 <div class="math notranslate nohighlight" id="equation-eq-boson-creation">
-<span class="eqno">(81)<a class="headerlink" href="#equation-eq-boson-creation" title="Link to this equation">#</a></span>\[b^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha + 1, \ldots\rangle\]</div>
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-boson-creation" title="Link to this equation">#</a></span>\[
+b^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha + 1, \ldots\rangle\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-boson-annihilation">
-<span class="eqno">(82)<a class="headerlink" href="#equation-eq-boson-annihilation" title="Link to this equation">#</a></span>\[b_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha} |n_1, \ldots, n_\alpha - 1, \ldots\rangle\]</div>
+<span class="eqno">(82)<a class="headerlink" href="#equation-eq-boson-annihilation" title="Link to this equation">#</a></span>\[
+b_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha} |n_1, \ldots, n_\alpha - 1, \ldots\rangle\]</div>
 <p><strong>Key feature</strong>: The <span class="math notranslate nohighlight">\(\sqrt{n_\alpha + 1}\)</span> and <span class="math notranslate nohighlight">\(\sqrt{n_\alpha}\)</span> factors are <strong>combinatorial weights</strong> arising from the symmetry of bosonic states. They ensure proper normalization.</p>
 </section>
 <section id="action-on-fock-states-fermions">
 <h3>Action on Fock States: Fermions<a class="headerlink" href="#action-on-fock-states-fermions" title="Link to this heading">#</a></h3>
 <p>For fermions, occupation is restricted to 0 or 1. Creation has an important modification:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fermion-creation">
-<span class="eqno">(83)<a class="headerlink" href="#equation-eq-fermion-creation" title="Link to this equation">#</a></span>\[c^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \begin{cases}
+<span class="eqno">(83)<a class="headerlink" href="#equation-eq-fermion-creation" title="Link to this equation">#</a></span>\[
+c^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \begin{cases}
 (-1)^{P_\alpha} |n_1, \ldots, n_\alpha + 1, \ldots\rangle &amp; \text{if } n_\alpha = 0 \
 0 &amp; \text{if } n_\alpha = 1
 \end{cases}\]</div>
 <p>where <span class="math notranslate nohighlight">\(P_\alpha = \sum_{i &lt; \alpha} n_i\)</span> is the <strong>parity</strong> (number of fermions in states before <span class="math notranslate nohighlight">\(\alpha\)</span>).</p>
 <div class="math notranslate nohighlight" id="equation-eq-fermion-annihilation">
-<span class="eqno">(84)<a class="headerlink" href="#equation-eq-fermion-annihilation" title="Link to this equation">#</a></span>\[c_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \begin{cases}
+<span class="eqno">(84)<a class="headerlink" href="#equation-eq-fermion-annihilation" title="Link to this equation">#</a></span>\[
+c_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \begin{cases}
 (-1)^{P_\alpha} |n_1, \ldots, n_\alpha - 1, \ldots\rangle &amp; \text{if } n_\alpha = 1 \
 0 &amp; \text{if } n_\alpha = 0
 \end{cases}\]</div>
@@ -729,10 +737,12 @@ document.write(`
 <p class="admonition-title">Example: Boson and Fermion Examples</p>
 <p><strong>Boson example</strong>:</p>
 <div class="math notranslate nohighlight">
-\[b^\dagger_1 |0, 3, 0, \ldots\rangle = \sqrt{0 + 1} |1, 3, 0, \ldots\rangle = |1, 3, 0, \ldots\rangle\]</div>
+\[
+b^\dagger_1 |0, 3, 0, \ldots\rangle = \sqrt{0 + 1} |1, 3, 0, \ldots\rangle = |1, 3, 0, \ldots\rangle\]</div>
 <p><strong>Fermion example</strong>:</p>
 <div class="math notranslate nohighlight">
-\[c^\dagger_1 |0, 1, 1, \ldots\rangle = |1, 1, 1, \ldots\rangle \quad (P_1 = 0 \text{ since state 1 is empty})\]</div>
+\[
+c^\dagger_1 |0, 1, 1, \ldots\rangle = |1, 1, 1, \ldots\rangle \quad (P_1 = 0 \text{ since state 1 is empty})\]</div>
 <div class="math notranslate nohighlight">
 \[c^\dagger_3 |1, 1, 0, \ldots\rangle = (-1)^{1+1} |1, 1, 1, \ldots\rangle = |1, 1, 1, \ldots\rangle \quad (P_3 = 2)\]</div>
 </div>
@@ -744,51 +754,74 @@ document.write(`
 <h3>Bosonic Relations: Commutators<a class="headerlink" href="#bosonic-relations-commutators" title="Link to this heading">#</a></h3>
 <p>Creation and annihilation operators for bosons satisfy the <strong>canonical commutation relations</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-boson-commutation">
-<span class="eqno">(85)<a class="headerlink" href="#equation-eq-boson-commutation" title="Link to this equation">#</a></span>\[[b_\alpha, b^\dagger_\beta] = \delta_{\alpha\beta}, \quad [b_\alpha, b_\beta] = 0, \quad [b^\dagger_\alpha, b^\dagger_\beta] = 0\]</div>
+<span class="eqno">(85)<a class="headerlink" href="#equation-eq-boson-commutation" title="Link to this equation">#</a></span>\[
+[b_\alpha, b^\dagger_\beta] = \delta_{\alpha\beta}, \quad [b_\alpha, b_\beta] = 0, \quad [b^\dagger_\alpha, b^\dagger_\beta] = 0\]</div>
+<div class="important admonition">
+<p class="admonition-title">Canonical Commutation Relations (Bosons)</p>
+<p>Creation and annihilation operators for bosons satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+[b_\alpha, b^\dagger_\beta] = \delta_{\alpha\beta}, \quad [b_\alpha, b_\beta] = 0, \quad [b^\dagger_\alpha, b^\dagger_\beta] = 0\]</div>
 <p>where the commutator is <span class="math notranslate nohighlight">\([A, B] = AB - BA\)</span>.</p>
 <p><strong>Equivalently</strong>:</p>
 <ul class="simple">
 <li><p>Operators on <strong>different states</strong> commute: <span class="math notranslate nohighlight">\([b_\alpha, b_\beta] = 0\)</span> for <span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span>.</p></li>
 <li><p>The fundamental relation: <span class="math notranslate nohighlight">\([b_\alpha, b^\dagger_\alpha] = 1\)</span> (for the same state).</p></li>
 </ul>
+</div>
 </section>
 <section id="fermionic-relations-anticommutators">
 <h3>Fermionic Relations: Anticommutators<a class="headerlink" href="#fermionic-relations-anticommutators" title="Link to this heading">#</a></h3>
 <p>Creation and annihilation operators for fermions satisfy <strong>canonical anticommutation relations</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-fermion-anticommutation">
-<span class="eqno">(86)<a class="headerlink" href="#equation-eq-fermion-anticommutation" title="Link to this equation">#</a></span>\[\{c_\alpha, c^\dagger_\beta\} = \delta_{\alpha\beta}, \quad \{c_\alpha, c_\beta\} = 0, \quad \{c^\dagger_\alpha, c^\dagger_\beta\} = 0\]</div>
+<span class="eqno">(86)<a class="headerlink" href="#equation-eq-fermion-anticommutation" title="Link to this equation">#</a></span>\[
+\{c_\alpha, c^\dagger_\beta\} = \delta_{\alpha\beta}, \quad \{c_\alpha, c_\beta\} = 0, \quad \{c^\dagger_\alpha, c^\dagger_\beta\} = 0\]</div>
+<div class="important admonition">
+<p class="admonition-title">Canonical Anticommutation Relations (Fermions)</p>
+<p>Creation and annihilation operators for fermions satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+\{c_\alpha, c^\dagger_\beta\} = \delta_{\alpha\beta}, \quad \{c_\alpha, c_\beta\} = 0, \quad \{c^\dagger_\alpha, c^\dagger_\beta\} = 0\]</div>
 <p>where the anticommutator is <span class="math notranslate nohighlight">\(\{A, B\} = AB + BA\)</span>.</p>
+</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation: Boson Commutation Relations from Definitions</p>
 <p>We prove <span class="math notranslate nohighlight">\([b_\alpha, b^\dagger_\beta] = \delta_{\alpha\beta}\)</span> using the action on Fock states.</p>
 <p><strong>Case 1: <span class="math notranslate nohighlight">\(\alpha = \beta\)</span></strong></p>
 <div class="math notranslate nohighlight">
-\[[b_\alpha, b^\dagger_\alpha] |n_1, \ldots, n_\alpha, \ldots\rangle = b_\alpha b^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle - b^\dagger_\alpha b_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
+\[
+[b_\alpha, b^\dagger_\alpha] |n_1, \ldots, n_\alpha, \ldots\rangle = b_\alpha b^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle - b^\dagger_\alpha b_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
 <p>Apply <span class="math notranslate nohighlight">\(b^\dagger_\alpha\)</span> first:</p>
 <div class="math notranslate nohighlight">
-\[b^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha + 1, \ldots\rangle\]</div>
+\[
+b^\dagger_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha + 1, \ldots\rangle\]</div>
 <p>Then <span class="math notranslate nohighlight">\(b_\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[b_\alpha \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha + 1, \ldots\rangle = \sqrt{n_\alpha + 1} \cdot \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha, \ldots\rangle = (n_\alpha + 1) |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
+\[
+b_\alpha \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha + 1, \ldots\rangle = \sqrt{n_\alpha + 1} \cdot \sqrt{n_\alpha + 1} |n_1, \ldots, n_\alpha, \ldots\rangle = (n_\alpha + 1) |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
 <p>Now apply <span class="math notranslate nohighlight">\(b_\alpha\)</span> first, then <span class="math notranslate nohighlight">\(b^\dagger_\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[b_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha} |n_1, \ldots, n_\alpha - 1, \ldots\rangle\]</div>
+\[
+b_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha} |n_1, \ldots, n_\alpha - 1, \ldots\rangle\]</div>
 <div class="math notranslate nohighlight">
 \[b^\dagger_\alpha \sqrt{n_\alpha} |n_1, \ldots, n_\alpha - 1, \ldots\rangle = \sqrt{n_\alpha} \cdot \sqrt{n_\alpha} |n_1, \ldots, n_\alpha, \ldots\rangle = n_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
 <p>The commutator:</p>
 <div class="math notranslate nohighlight">
-\[[b_\alpha, b^\dagger_\alpha] = (n_\alpha + 1) - n_\alpha = 1 \quad ✓\]</div>
+\[
+[b_\alpha, b^\dagger_\alpha] = (n_\alpha + 1) - n_\alpha = 1 \quad ✓\]</div>
 <p><strong>Case 2: <span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span></strong></p>
 <p>Since <span class="math notranslate nohighlight">\(b_\alpha\)</span> and <span class="math notranslate nohighlight">\(b^\dagger_\beta\)</span> act on different states, they commute:</p>
 <div class="math notranslate nohighlight">
-\[[b_\alpha, b^\dagger_\beta] = 0 \quad ✓\]</div>
+\[
+[b_\alpha, b^\dagger_\beta] = 0 \quad ✓\]</div>
 <p>Similarly, <span class="math notranslate nohighlight">\([b_\alpha, b_\beta] = 0\)</span> and <span class="math notranslate nohighlight">\([b^\dagger_\alpha, b^\dagger_\beta] = 0\)</span> follow from the fact that creation and annihilation operators on <strong>different states</strong> do not interfere.</p>
 </div>
 <p>::{admonition} Derivation: Pauli Exclusion from Anticommutation Algebra
 :class: dropdown note</p>
 <p>From <span class="math notranslate nohighlight">\(\{c^\dagger_\alpha, c^\dagger_\alpha\} = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[c^\dagger_\alpha c^\dagger_\alpha + c^\dagger_\alpha c^\dagger_\alpha = 0 \quad \Rightarrow \quad c^\dagger_\alpha c^\dagger_\alpha = 0\]</div>
+\[
+c^\dagger_\alpha c^\dagger_\alpha + c^\dagger_\alpha c^\dagger_\alpha = 0 \quad \Rightarrow \quad c^\dagger_\alpha c^\dagger_\alpha = 0\]</div>
 <p>This means applying <span class="math notranslate nohighlight">\(c^\dagger_\alpha\)</span> twice to any state gives <strong>zero</strong>—impossible to put two fermions in the same state! This is the Pauli exclusion principle encoded in the algebra.</p>
 <div class="docutils">
 <h3 class="rubric" id="physical-meaning">Physical Meaning</h3>
@@ -797,37 +830,42 @@ document.write(`
 <li><p><strong>Commuting operators</strong>: particle exchange does not change order → symmetric (bosonic) states.</p></li>
 <li><p><strong>Anticommuting operators</strong>: particle exchange picks up a minus sign → antisymmetric (fermionic) states.</p></li>
 </ul>
-</div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Fermion Anticommutation Relations from Definitions</p>
+<p class="admonition-title">Derivation: Fermion Anticommutation Relations</p>
 <p>We prove <span class="math notranslate nohighlight">\(\{c_\alpha, c^\dagger_\beta\} = \delta_{\alpha\beta}\)</span> using the action on Fock states (with <span class="math notranslate nohighlight">\(n_i \in \{0, 1\}\)</span>).</p>
 <p><strong>Case 1: <span class="math notranslate nohighlight">\(\alpha = \beta\)</span></strong></p>
 <p>Consider a state <span class="math notranslate nohighlight">\(|n_1, \ldots, n_\alpha, \ldots\rangle\)</span> where <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>.</p>
 <p><strong>Subcase 1a: <span class="math notranslate nohighlight">\(n_\alpha = 0\)</span></strong> (state is empty)</p>
 <div class="math notranslate nohighlight">
-\[c^\dagger_\alpha |\ldots, 0, \ldots\rangle = |\ldots, 1, \ldots\rangle\]</div>
+\[
+c^\dagger_\alpha |\ldots, 0, \ldots\rangle = |\ldots, 1, \ldots\rangle\]</div>
 <div class="math notranslate nohighlight">
 \[c_\alpha |\ldots, 1, \ldots\rangle = |\ldots, 0, \ldots\rangle\]</div>
 <p>So: <span class="math notranslate nohighlight">\(c_\alpha c^\dagger_\alpha |\ldots, 0, \ldots\rangle = |\ldots, 0, \ldots\rangle\)</span></p>
 <p>And: <span class="math notranslate nohighlight">\(c^\dagger_\alpha c_\alpha |\ldots, 0, \ldots\rangle = 0\)</span> (cannot annihilate from empty state)</p>
 <p>The anticommutator:</p>
 <div class="math notranslate nohighlight">
-\[\{c_\alpha, c^\dagger_\alpha\} |\ldots, 0, \ldots\rangle = (1 + 0) |\ldots, 0, \ldots\rangle = |\ldots, 0, \ldots\rangle \quad ✓\]</div>
+\[
+\{c_\alpha, c^\dagger_\alpha\} |\ldots, 0, \ldots\rangle = (1 + 0) |\ldots, 0, \ldots\rangle = |\ldots, 0, \ldots\rangle \quad ✓\]</div>
 <p><strong>Subcase 1b: <span class="math notranslate nohighlight">\(n_\alpha = 1\)</span></strong> (state is occupied)</p>
 <div class="math notranslate nohighlight">
-\[c^\dagger_\alpha |\ldots, 1, \ldots\rangle = 0\]</div>
+\[
+c^\dagger_\alpha |\ldots, 1, \ldots\rangle = 0\]</div>
 <div class="math notranslate nohighlight">
 \[c_\alpha |\ldots, 1, \ldots\rangle = |\ldots, 0, \ldots\rangle\]</div>
 <p>So: <span class="math notranslate nohighlight">\(c_\alpha c^\dagger_\alpha |\ldots, 1, \ldots\rangle = 0\)</span></p>
 <p>And: <span class="math notranslate nohighlight">\(c^\dagger_\alpha c_\alpha |\ldots, 1, \ldots\rangle = c^\dagger_\alpha |\ldots, 0, \ldots\rangle = |\ldots, 1, \ldots\rangle\)</span></p>
 <p>The anticommutator:</p>
 <div class="math notranslate nohighlight">
-\[\{c_\alpha, c^\dagger_\alpha\} |\ldots, 1, \ldots\rangle = (0 + 1) |\ldots, 1, \ldots\rangle = |\ldots, 1, \ldots\rangle \quad ✓\]</div>
+\[
+\{c_\alpha, c^\dagger_\alpha\} |\ldots, 1, \ldots\rangle = (0 + 1) |\ldots, 1, \ldots\rangle = |\ldots, 1, \ldots\rangle \quad ✓\]</div>
 <p><strong>Case 2: <span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span></strong></p>
 <p>Since <span class="math notranslate nohighlight">\(c_\alpha\)</span> and <span class="math notranslate nohighlight">\(c^\dagger_\beta\)</span> act on different states:</p>
 <div class="math notranslate nohighlight">
-\[\{c_\alpha, c^\dagger_\beta\} = 0 \quad ✓\]</div>
+\[
+\{c_\alpha, c^\dagger_\beta\} = 0 \quad ✓\]</div>
 <p>The phases (<span class="math notranslate nohighlight">\((-1)^P\)</span>) on different states are independent and cancel in the anticommutation relation.</p>
+</div>
 </div>
 </section>
 </section>
@@ -837,7 +875,8 @@ document.write(`
 <h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
 <p>The <strong>number operator</strong> (or <strong>occupation number operator</strong>) for state <span class="math notranslate nohighlight">\(\alpha\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[\hat{n}_\alpha = b^\dagger_\alpha b_\alpha \quad \text{(bosons)}\]</div>
+\[
+\hat{n}_\alpha = b^\dagger_\alpha b_\alpha \quad \text{(bosons)}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-number-operator">
 <span class="eqno">(87)<a class="headerlink" href="#equation-eq-number-operator" title="Link to this equation">#</a></span>\[\hat{n}_\alpha = c^\dagger_\alpha c_\alpha \quad \text{(fermions)}\]</div>
 <p>The same form applies to both! The difference lies in the algebra of the operators.</p>
@@ -846,17 +885,20 @@ document.write(`
 <h3>Eigenvalues and Eigenstates<a class="headerlink" href="#eigenvalues-and-eigenstates" title="Link to this heading">#</a></h3>
 <p>The action on Fock states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-number-eigenvalue">
-<span class="eqno">(88)<a class="headerlink" href="#equation-eq-number-eigenvalue" title="Link to this equation">#</a></span>\[\hat{n}_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = n_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
+<span class="eqno">(88)<a class="headerlink" href="#equation-eq-number-eigenvalue" title="Link to this equation">#</a></span>\[
+\hat{n}_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle = n_\alpha |n_1, \ldots, n_\alpha, \ldots\rangle\]</div>
 <p>Fock states are <strong>eigenstates</strong> of number operators, with eigenvalues equal to the occupation numbers.</p>
 </section>
 <section id="total-particle-number">
 <h3>Total Particle Number<a class="headerlink" href="#total-particle-number" title="Link to this heading">#</a></h3>
 <p>The <strong>total particle number operator</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-total-number">
-<span class="eqno">(89)<a class="headerlink" href="#equation-eq-total-number" title="Link to this equation">#</a></span>\[\hat{N} = \sum_\alpha \hat{n}_\alpha = \sum_\alpha b^\dagger_\alpha b_\alpha\]</div>
+<span class="eqno">(89)<a class="headerlink" href="#equation-eq-total-number" title="Link to this equation">#</a></span>\[
+\hat{N} = \sum_\alpha \hat{n}_\alpha = \sum_\alpha b^\dagger_\alpha b_\alpha\]</div>
 <p>Eigenvalue on state <span class="math notranslate nohighlight">\(|n_1, n_2, \ldots\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\hat{N} |n_1, n_2, \ldots\rangle = \left(\sum_\alpha n_\alpha\right) |n_1, n_2, \ldots\rangle\]</div>
+\[
+\hat{N} |n_1, n_2, \ldots\rangle = \left(\sum_\alpha n_\alpha\right) |n_1, n_2, \ldots\rangle\]</div>
 <p>This allows systems with a fixed particle number or (in the full Fock space) variable particle number.</p>
 </section>
 </section>
@@ -866,19 +908,23 @@ document.write(`
 <h3>Building from the Vacuum<a class="headerlink" href="#building-from-the-vacuum" title="Link to this heading">#</a></h3>
 <p>Any Fock state can be built by repeatedly applying creation operators to the vacuum:</p>
 <div class="math notranslate nohighlight" id="equation-eq-boson-state-construction">
-<span class="eqno">(90)<a class="headerlink" href="#equation-eq-boson-state-construction" title="Link to this equation">#</a></span>\[|n_1, n_2, \ldots, n_D\rangle = \frac{(b^\dagger_1)^{n_1} (b^\dagger_2)^{n_2} \cdots (b^\dagger_D)^{n_D}}{\sqrt{n_1! n_2! \cdots n_D!}} |0\rangle \quad \text{(bosons)}\]</div>
+<span class="eqno">(90)<a class="headerlink" href="#equation-eq-boson-state-construction" title="Link to this equation">#</a></span>\[
+|n_1, n_2, \ldots, n_D\rangle = \frac{(b^\dagger_1)^{n_1} (b^\dagger_2)^{n_2} \cdots (b^\dagger_D)^{n_D}}{\sqrt{n_1! n_2! \cdots n_D!}} |0\rangle \quad \text{(bosons)}\]</div>
 <p>For fermions (where <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-fermion-state-construction">
-<span class="eqno">(91)<a class="headerlink" href="#equation-eq-fermion-state-construction" title="Link to this equation">#</a></span>\[|n_1, n_2, \ldots, n_D\rangle = (c^\dagger_1)^{n_1} (c^\dagger_2)^{n_2} \cdots (c^\dagger_D)^{n_D} |0\rangle \quad \text{(fermions)}\]</div>
+<span class="eqno">(91)<a class="headerlink" href="#equation-eq-fermion-state-construction" title="Link to this equation">#</a></span>\[
+|n_1, n_2, \ldots, n_D\rangle = (c^\dagger_1)^{n_1} (c^\dagger_2)^{n_2} \cdots (c^\dagger_D)^{n_D} |0\rangle \quad \text{(fermions)}\]</div>
 <p>where the exponents are either 0 or 1.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: Two Bosons</p>
 <div class="math notranslate nohighlight">
-\[|2, 0, 0, \ldots\rangle = \frac{(b^\dagger_1)^2}{\sqrt{2}} |0\rangle\]</div>
+\[
+|2, 0, 0, \ldots\rangle = \frac{(b^\dagger_1)^2}{\sqrt{2}} |0\rangle\]</div>
 <p>Check: <span class="math notranslate nohighlight">\(b_1 |2, 0, \ldots\rangle = \sqrt{2} |1, 0, \ldots\rangle\)</span>.</p>
 <h3 class="rubric" id="example-two-fermions-in-different-states">Example: Two Fermions in Different States</h3>
 <div class="math notranslate nohighlight">
-\[|1, 1, 0, \ldots\rangle = c^\dagger_1 c^\dagger_2 |0\rangle\]</div>
+\[
+|1, 1, 0, \ldots\rangle = c^\dagger_1 c^\dagger_2 |0\rangle\]</div>
 <p>If we try <span class="math notranslate nohighlight">\(|1, 1, 0, \ldots\rangle = c^\dagger_1 c^\dagger_1 |0\rangle\)</span>, anticommutation gives <span class="math notranslate nohighlight">\((c^\dagger_1)^2 = 0\)</span>, so the state is <strong>zero</strong>—impossible to put two fermions in state 1.</p>
 </div>
 </section>
@@ -887,7 +933,8 @@ document.write(`
 <h2>Field Operators (Optional: Introduction)<a class="headerlink" href="#field-operators-optional-introduction" title="Link to this heading">#</a></h2>
 <p>In many-body physics and quantum field theory, <strong>field operators</strong> generalize creation/annihilation operators to continuous space:</p>
 <div class="math notranslate nohighlight">
-\[\hat{\psi}(\boldsymbol{r}) = \sum_\alpha \phi_\alpha(\boldsymbol{r}) b_\alpha \quad \text{(bosons)}\]</div>
+\[
+\hat{\psi}(\boldsymbol{r}) = \sum_\alpha \phi_\alpha(\boldsymbol{r}) b_\alpha \quad \text{(bosons)}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-field-operator">
 <span class="eqno">(92)<a class="headerlink" href="#equation-eq-field-operator" title="Link to this equation">#</a></span>\[\hat{\psi}^\dagger(\boldsymbol{r}) = \sum_\alpha \phi^*_\alpha(\boldsymbol{r}) b^\dagger_\alpha \quad \text{(bosons)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_\alpha(\boldsymbol{r})\)</span> are single-particle wavefunction basis functions.</p>
@@ -904,20 +951,24 @@ document.write(`
 <h3>Single-Particle Hamiltonian<a class="headerlink" href="#single-particle-hamiltonian" title="Link to this heading">#</a></h3>
 <p>A first-quantized Hamiltonian for non-interacting particles:</p>
 <div class="math notranslate nohighlight">
-\[H_0^{(1)} = \sum_{i=1}^N h(\boldsymbol{r}_i)\]</div>
+\[
+H_0^{(1)} = \sum_{i=1}^N h(\boldsymbol{r}_i)\]</div>
 <p>becomes, in second quantization:</p>
 <div class="math notranslate nohighlight" id="equation-eq-secondq-single-particle">
-<span class="eqno">(93)<a class="headerlink" href="#equation-eq-secondq-single-particle" title="Link to this equation">#</a></span>\[\hat{H}_0 = \sum_\alpha \epsilon_\alpha b^\dagger_\alpha b_\alpha\]</div>
+<span class="eqno">(93)<a class="headerlink" href="#equation-eq-secondq-single-particle" title="Link to this equation">#</a></span>\[
+\hat{H}_0 = \sum_\alpha \epsilon_\alpha b^\dagger_\alpha b_\alpha\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon_\alpha\)</span> are single-particle energies (eigenvalues of <span class="math notranslate nohighlight">\(h\)</span>).</p>
 </section>
 <section id="two-body-interaction">
 <h3>Two-Body Interaction<a class="headerlink" href="#two-body-interaction" title="Link to this heading">#</a></h3>
 <p>An interaction between pairs of particles:</p>
 <div class="math notranslate nohighlight">
-\[H_{int}^{(1)} = \frac{1}{2} \sum_{i \neq j} V(\boldsymbol{r}_i - \boldsymbol{r}_j)\]</div>
+\[
+H_{int}^{(1)} = \frac{1}{2} \sum_{i \neq j} V(\boldsymbol{r}_i - \boldsymbol{r}_j)\]</div>
 <p>becomes:</p>
 <div class="math notranslate nohighlight" id="equation-eq-secondq-interaction">
-<span class="eqno">(94)<a class="headerlink" href="#equation-eq-secondq-interaction" title="Link to this equation">#</a></span>\[\hat{H}_{int} = \frac{1}{2} \sum_{\alpha,\beta,\gamma,\delta} V_{\alpha\beta\gamma\delta} b^\dagger_\alpha b^\dagger_\beta b_\gamma b_\delta\]</div>
+<span class="eqno">(94)<a class="headerlink" href="#equation-eq-secondq-interaction" title="Link to this equation">#</a></span>\[
+\hat{H}_{int} = \frac{1}{2} \sum_{\alpha,\beta,\gamma,\delta} V_{\alpha\beta\gamma\delta} b^\dagger_\alpha b^\dagger_\beta b_\gamma b_\delta\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_{\alpha\beta\gamma\delta} = \langle \alpha\beta | V | \gamma\delta \rangle\)</span> are matrix elements.</p>
 </section>
 <section id="advantages-of-second-quantization">
@@ -942,6 +993,25 @@ document.write(`
 <li><p><strong>Anticommutation encodes Pauli exclusion</strong>: <span class="math notranslate nohighlight">\(\{c^\dagger_\alpha, c^\dagger_\alpha\} = 0\)</span> forbids double occupation.</p></li>
 <li><p><strong>Number operator</strong> <span class="math notranslate nohighlight">\(\hat{n}_\alpha = b^\dagger_\alpha b_\alpha\)</span> counts particles in state <span class="math notranslate nohighlight">\(\alpha\)</span>.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="2-1-2-symmetrization.html"><span class="std std-doc">2 1 2 Symmetrization</span></a></strong>: Symmetric and antisymmetric states in multi-particle Hilbert spaces</p></li>
+<li><p><strong><a class="reference internal" href="2-2-3-addition-of-angular-momenta.html"><span class="std std-doc">2 2 3 Addition Of Angular Momenta</span></a></strong>: Coupling angular momenta of creation and annihilation operators</p></li>
+<li><p><strong><a class="reference internal" href="../ch3_path-integral/3-4-2-statistical-mechanics.html"><span class="std std-doc">3 4 2 Statistical Mechanics</span></a></strong>: Second quantization in thermal and Matsubara formalism</p></li>
+</ul>
+</div>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> Show that the number operator <span class="math notranslate nohighlight">\(\hat{n}_\alpha = b^\dagger_\alpha b_\alpha\)</span> (bosons) has eigenvalues <span class="math notranslate nohighlight">\(0, 1, 2, \ldots\)</span> by verifying that <span class="math notranslate nohighlight">\(b^\dagger_\alpha b_\alpha |n_\alpha\rangle = n_\alpha |n_\alpha\rangle\)</span> for <span class="math notranslate nohighlight">\(n_\alpha = 0\)</span> and <span class="math notranslate nohighlight">\(n_\alpha = 1\)</span> using the bosonic commutation relation <span class="math notranslate nohighlight">\([b_\alpha, b^\dagger_\alpha] = 1\)</span>.</p>
+<p><strong>2.</strong> Using the bosonic commutation relation <span class="math notranslate nohighlight">\([b_\alpha, b^\dagger_\beta] = \delta_{\alpha\beta}\)</span>, compute the commutators <span class="math notranslate nohighlight">\([\hat{n}_\alpha, b^\dagger_\beta]\)</span> and <span class="math notranslate nohighlight">\([\hat{n}_\alpha, b_\beta]\)</span>. Interpret the results in terms of particle creation and annihilation.</p>
+<p><strong>3.</strong> For fermions, the anticommutation relation <span class="math notranslate nohighlight">\(\{c^\dagger_\alpha, c^\dagger_\alpha\} = 0\)</span> implies <span class="math notranslate nohighlight">\((c^\dagger_\alpha)^2 = 0\)</span>. Show this directly, and explain why it enforces the Pauli exclusion principle in second quantization.</p>
+<p><strong>4.</strong> Compute the vacuum expectation values <span class="math notranslate nohighlight">\(\langle 0 | b_\alpha b^\dagger_\alpha | 0 \rangle\)</span> and <span class="math notranslate nohighlight">\(\langle 0 | b^\dagger_\alpha b_\alpha | 0 \rangle\)</span>. What is the physical interpretation of the difference?</p>
+<p><strong>5.</strong> Consider a two-mode bosonic system with creation operators <span class="math notranslate nohighlight">\(b^\dagger_1\)</span> and <span class="math notranslate nohighlight">\(b^\dagger_2\)</span>. List all Fock states with total particle number <span class="math notranslate nohighlight">\(N = 2\)</span>. Do the same for a two-mode fermionic system. How many states are there in each case?</p>
+<p><strong>6.</strong> For non-interacting particles with single-particle energies <span class="math notranslate nohighlight">\(\epsilon_\alpha\)</span>, the Hamiltonian is <span class="math notranslate nohighlight">\(\hat{H} = \sum_\alpha \epsilon_\alpha \hat{n}_\alpha\)</span>. Compute the expectation value <span class="math notranslate nohighlight">\(\langle n_1, n_2, \ldots, n_D | \hat{H} | n_1, n_2, \ldots, n_D \rangle\)</span> in terms of the occupation numbers <span class="math notranslate nohighlight">\(\{n_\alpha\}\)</span>.</p>
+<p><strong>7.</strong> Show that <span class="math notranslate nohighlight">\([\hat{H}, \hat{N}] = 0\)</span> for the non-interacting Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \sum_\alpha \epsilon_\alpha \hat{n}_\alpha\)</span>, where <span class="math notranslate nohighlight">\(\hat{N} = \sum_\alpha \hat{n}_\alpha\)</span> is the total number operator. What does this conservation law mean physically?</p>
+<p><strong>8.</strong> A single-particle Hamiltonian in position space is <span class="math notranslate nohighlight">\(h = -\frac{\hbar^2}{2m}\nabla^2\)</span>. In momentum space with plane-wave basis <span class="math notranslate nohighlight">\(|\boldsymbol{k}\rangle\)</span>, the single-particle energy eigenvalue is <span class="math notranslate nohighlight">\(\epsilon_{\boldsymbol{k}} = \frac{\hbar^2 k^2}{2m}\)</span>. Write the second-quantized kinetic energy operator for bosons. How does it simplify compared to the first-quantized form <span class="math notranslate nohighlight">\(\sum_{i=1}^N \frac{\hat{\boldsymbol{p}}_i^2}{2m}\)</span>?</p>
 </section>
 </section>
 
@@ -1053,6 +1123,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -1090,7 +1161,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

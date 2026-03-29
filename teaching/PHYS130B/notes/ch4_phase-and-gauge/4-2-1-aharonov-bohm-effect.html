@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,12 +522,27 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-experimental-setup">The Experimental Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-potential-of-the-solenoid">Vector Potential of the Solenoid</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#circulation-of-vector-potential">Circulation of Vector Potential</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-accumulation-along-closed-path">Phase Accumulation Along Closed Path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aharonov-bohm-experimental-setup">The Aharonov-Bohm Experimental Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-configuration">Physical Configuration</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-potential-in-a-solenoid">Vector Potential in a Solenoid</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#outside-the-solenoid">Outside the Solenoid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#circulation-integral">Circulation Integral</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-accumulation-along-a-path">Phase Accumulation Along a Path</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-phase-integral">The Phase Integral</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-path-interference">Two-Path Interference</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-of-the-aharonov-bohm-effect">Gauge Invariance of the Aharonov-Bohm Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters-the-non-classical-nature-of-the-vector-potential">Why This Matters: The Non-Classical Nature of the Vector Potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-nature-and-flux-quantization">Topological Nature and Flux Quantization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -553,123 +568,205 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>The Aharonov-Bohm effect shatters the classical intuition that electromagnetic effects require local presence of fields. A quantum particle can acquire observable phase shifts from vector potentials in regions where the magnetic field vanishes entirely, revealing that quantum mechanics couples to potentials, not fields. This demonstrates a fundamental non-locality: the quantum world is sensitive to long-range, gauge-dependent objects, and only gauge-invariant combinations (like loop integrals of the potential) have physical meaning.</p>
-<section id="the-experimental-setup">
-<h3>The Experimental Setup<a class="headerlink" href="#the-experimental-setup" title="Link to this heading">#</a></h3>
-<p>Consider a very long solenoid of radius <span class="math notranslate nohighlight">\(R\)</span> carrying a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> entirely contained within. The solenoid is so thin that its length is much greater than its radius. <strong>Outside the solenoid</strong>, the magnetic field vanishes: <span class="math notranslate nohighlight">\(\boldsymbol{B}(r &gt; R) = 0\)</span>.</p>
-<p>In classical electromagnetism, particles traveling in the field-free region experience no Lorentz force and move in straight lines. The magnetic field is “hidden” inside the solenoid and has no influence outside.</p>
-<p>In quantum mechanics, the situation is dramatically different. Although <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> outside, the <strong>vector potential</strong> <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is non-zero. This creates observable quantum interference effects—the <strong>Aharonov-Bohm (AB) effect</strong>.</p>
+<p>The Aharonov-Bohm (AB) effect is one of the most celebrated phenomena in quantum mechanics. It demonstrates that the quantum phase of a particle can be affected by a vector potential even in regions where the electromagnetic field (the field strength tensor) vanishes completely. This effect reveals the fundamental importance of gauge fields in quantum mechanics and hints at deep geometric structure underlying quantum theory.</p>
+<section id="the-aharonov-bohm-experimental-setup">
+<h3>The Aharonov-Bohm Experimental Setup<a class="headerlink" href="#the-aharonov-bohm-experimental-setup" title="Link to this heading">#</a></h3>
+<section id="physical-configuration">
+<h4>Physical Configuration<a class="headerlink" href="#physical-configuration" title="Link to this heading">#</a></h4>
+<p>Imagine a solenoid (a coil wound tightly on a cylinder) producing a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> inside the solenoid but approximately zero outside. An electron beam is split into two paths that encircle the solenoid—one path passing above it and one passing below. The two beams then recombine at a distant observation screen.</p>
+<p>In classical mechanics, since the electron experiences no Lorentz force (<span class="math notranslate nohighlight">\(\boldsymbol{F} = q\boldsymbol{v} \times \boldsymbol{B}\)</span>) in the field-free region outside the solenoid, both paths would follow identical trajectories. The interference pattern at the screen should show no dependence on the solenoid’s magnetic field.</p>
+<p>In quantum mechanics, something startling happens:</p>
 <div class="important admonition">
-<p class="admonition-title">The Key Insight</p>
-<p>The Aharonov-Bohm effect demonstrates that the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is <strong>physically fundamental</strong>, not just a mathematical auxiliary field. In quantum mechanics, charged particles couple directly to the potentials, not just to the fields.</p>
+<p class="admonition-title">Aharonov-Bohm Phase Shift</p>
+<p>Even though the magnetic field is zero along the electron’s path, the quantum phase of the electron wavefunction <em>changes</em> depending on the solenoid’s flux. This phase shift shifts the interference pattern—a purely quantum effect with no classical analog.</p>
+<p>The phase difference between the upper and lower paths is:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta\phi = \frac{q\Phi_B}{\hbar c}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_B = \int \boldsymbol{B} \cdot \mathrm{d}\boldsymbol{S}\)</span> is the total magnetic flux <em>through</em> the solenoid (not experienced by the particle!).</p>
 </div>
 </section>
-<section id="vector-potential-of-the-solenoid">
-<h3>Vector Potential of the Solenoid<a class="headerlink" href="#vector-potential-of-the-solenoid" title="Link to this heading">#</a></h3>
-<p>For a solenoid along the <span class="math notranslate nohighlight">\(z\)</span>-axis with internal field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> and radius <span class="math notranslate nohighlight">\(R\)</span>:</p>
-<p><strong>Inside</strong> (<span class="math notranslate nohighlight">\(r &lt; R\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{A}_\text{in} = \frac{B}{2}\boldsymbol{\hat{z}} \times \boldsymbol{r} = \frac{Br}{2}\hat{\theta}\]</div>
-<p>where <span class="math notranslate nohighlight">\((r, \theta, z)\)</span> are cylindrical coordinates.</p>
-<p><strong>Outside</strong> (<span class="math notranslate nohighlight">\(r &gt; R\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{A}_\text{out} = \frac{BR^2}{2r}\hat{\theta}\]</div>
-<p>The key feature: the vector potential has an <strong>azimuthal component</strong> that doesn’t vanish outside. At <span class="math notranslate nohighlight">\(r = R\)</span> (the solenoid boundary), both expressions agree: <span class="math notranslate nohighlight">\(A_\theta = BR/2\)</span>, ensuring continuity.</p>
-<p>The magnitude of the potential falls as <span class="math notranslate nohighlight">\(1/r\)</span> for large <span class="math notranslate nohighlight">\(r\)</span>, much slower than the field (which falls exponentially from the boundary).</p>
 </section>
-<section id="circulation-of-vector-potential">
-<h3>Circulation of Vector Potential<a class="headerlink" href="#circulation-of-vector-potential" title="Link to this heading">#</a></h3>
-<p>The total magnetic flux through the solenoid is:</p>
+<section id="vector-potential-in-a-solenoid">
+<h3>Vector Potential in a Solenoid<a class="headerlink" href="#vector-potential-in-a-solenoid" title="Link to this heading">#</a></h3>
+<p>To understand the AB effect, we must think in terms of the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, not the field strength <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>.</p>
+<section id="outside-the-solenoid">
+<h4>Outside the Solenoid<a class="headerlink" href="#outside-the-solenoid" title="Link to this heading">#</a></h4>
+<p>For a solenoid of radius <span class="math notranslate nohighlight">\(R\)</span> with uniform internal field <span class="math notranslate nohighlight">\(B\)</span> along the <span class="math notranslate nohighlight">\(z\)</span>-axis, the vector potential outside (in cylindrical coordinates) is:</p>
 <div class="math notranslate nohighlight">
-\[\Phi_B = \int_{\text{inside}} \boldsymbol{B} \cdot d\boldsymbol{S} = B \cdot \pi R^2\]</div>
-<p>A crucial result follows from <strong>Stokes’ theorem</strong>. When we integrate the vector potential around any closed path that encircles the solenoid:</p>
+\[
+\boldsymbol{A}(r &gt; R) = \frac{\Phi_B}{2\pi r}\hat{\boldsymbol{\theta}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_B = \pi R^2 B\)</span> is the total flux. Note:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is <em>nonzero</em> outside the solenoid</p></li>
+<li><p>The magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A} = 0\)</span> outside (the curl of <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> vanishes)</p></li>
+</ul>
+</section>
+<section id="circulation-integral">
+<h4>Circulation Integral<a class="headerlink" href="#circulation-integral" title="Link to this heading">#</a></h4>
+<p>The key property is that the vector potential’s circulation around any closed loop encircling the solenoid equals the enclosed flux:</p>
 <div class="math notranslate nohighlight">
-\[\oint \boldsymbol{A} \cdot d\boldsymbol{l} = \int (\nabla \times \boldsymbol{A}) \cdot d\boldsymbol{S} = \int \boldsymbol{B} \cdot d\boldsymbol{S} = \Phi_B\]</div>
-<p>This is a <strong>remarkable result</strong>: the line integral of the vector potential around the solenoid equals the total enclosed magnetic flux. This means that although the field vanishes outside, the circulation of the potential encodes the complete flux information.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Circulation from Azimuthal Symmetry</p>
-<p>For a circular path of radius <span class="math notranslate nohighlight">\(r &gt; R\)</span> (outside the solenoid) in the azimuthal direction:</p>
+\[
+\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \Phi_B\]</div>
+<p>This result holds for <em>any</em> closed path enclosing the solenoid, regardless of its shape. It is a topological fact—a consequence of Stokes’ theorem:</p>
 <div class="math notranslate nohighlight">
-\[\oint \boldsymbol{A} \cdot d\boldsymbol{l} = \int_0^{2\pi} A_\theta(r) \, r \, d\theta\]</div>
-<p>Outside the solenoid, <span class="math notranslate nohighlight">\(A_\theta = \frac{BR^2}{2r}\)</span>, so:</p>
-<div class="math notranslate nohighlight">
-\[\oint \boldsymbol{A} \cdot d\boldsymbol{l} = \int_0^{2\pi} \frac{BR^2}{2r} \, r \, d\theta = \int_0^{2\pi} \frac{BR^2}{2} d\theta = \frac{BR^2}{2} \cdot 2\pi = \pi B R^2 = \Phi_B\]</div>
-<p>The result is independent of the integration path’s radius and shape—it depends only on whether the path encloses the flux.</p>
+\[
+\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \int_{\text{surface}} (\nabla \times \boldsymbol{A}) \cdot \mathrm{d}\boldsymbol{S} = \int_{\text{surface}} \boldsymbol{B} \cdot \mathrm{d}\boldsymbol{S} = \Phi_B\]</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is nonzero outside the solenoid, but the magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A} = 0\)</span>. In classical mechanics, only <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> couples to a moving charge. How can the nonzero <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> produce a physical effect (phase shift) if no classical force acts? Does this mean quantum mechanics sees something in the vector potential that classical mechanics misses?</p>
 </div>
 </section>
-<section id="phase-accumulation-along-closed-path">
-<h3>Phase Accumulation Along Closed Path<a class="headerlink" href="#phase-accumulation-along-closed-path" title="Link to this heading">#</a></h3>
-<p>In quantum mechanics, when a charged particle travels along a path <span class="math notranslate nohighlight">\(C\)</span> in the presence of a vector potential, it acquires a <strong>phase factor</strong>. For a closed path encircling the solenoid, the observable phase shift is:</p>
+</section>
+<section id="phase-accumulation-along-a-path">
+<h3>Phase Accumulation Along a Path<a class="headerlink" href="#phase-accumulation-along-a-path" title="Link to this heading">#</a></h3>
+<section id="the-phase-integral">
+<h4>The Phase Integral<a class="headerlink" href="#the-phase-integral" title="Link to this heading">#</a></h4>
+<p>When a charged particle travels along a path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> through a region with vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, the quantum phase acquired is:</p>
 <div class="math notranslate nohighlight">
-\[\phi_{\text{AB}} = \frac{e\Phi_B}{\hbar c}\]</div>
-<p>This is the <strong>Aharonov-Bohm phase</strong>. Remarkably, it depends <strong>only on the enclosed flux</strong>, not on the detailed field distribution or the path’s shape. For typical experimental values (magnetic flux <span class="math notranslate nohighlight">\(\Phi_B \sim 10^{-15}\)</span> Wb, de Broglie wavelength <span class="math notranslate nohighlight">\(\lambda \sim 0.1\)</span> nm), this phase is typically several radians—easily measurable through interference.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Phase from Path Integral</p>
-<p>When a charged particle travels along path <span class="math notranslate nohighlight">\(C\)</span>, the wavefunction acquires phase:</p>
+\[
+\phi[\mathcal{C}] = \frac{q}{\hbar c}\int_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\]</div>
+<p>This arises from the covariant derivative in the Schrödinger equation: as the wavefunction propagates, the local vector potential “rotates” its phase continuously.</p>
+</section>
+<section id="two-path-interference">
+<h4>Two-Path Interference<a class="headerlink" href="#two-path-interference" title="Link to this heading">#</a></h4>
+<p>Consider two paths: the upper path (encircling the solenoid from above) and the lower path (from below). Both start and end at the same points, but their relative phase depends on the solenoid’s flux.</p>
+<p>The phase difference is:</p>
 <div class="math notranslate nohighlight">
-\[\psi(\text{end}) = e^{i\phi_C} \psi(\text{start})\]</div>
-<p>where the phase is:</p>
+\[
+\Delta\phi = \frac{q}{\hbar c}\left(\int_{\text{upper}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} - \int_{\text{lower}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\right) = \frac{q}{\hbar c}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \frac{q\Phi_B}{\hbar c}\]</div>
+<p>The two wave packets acquire a relative phase that manifests as a shift in the interference pattern.</p>
+</section>
+</section>
+<section id="gauge-invariance-of-the-aharonov-bohm-effect">
+<h3>Gauge Invariance of the Aharonov-Bohm Effect<a class="headerlink" href="#gauge-invariance-of-the-aharonov-bohm-effect" title="Link to this heading">#</a></h3>
+<p>A crucial check: is the AB effect gauge-invariant?</p>
+<div class="important admonition">
+<p class="admonition-title">Gauge Invariance of AB Phase</p>
+<p>Under a gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A}' = \boldsymbol{A} - \nabla\chi\)</span> and <span class="math notranslate nohighlight">\(\psi \to \psi' = \mathrm{e}^{\mathrm{i}q\chi}\psi\)</span>:</p>
+<p>The accumulated phase changes as:</p>
 <div class="math notranslate nohighlight">
-\[\phi_C = \frac{q}{\hbar c}\int_C \boldsymbol{A} \cdot d\boldsymbol{l}\]</div>
-<p>For a closed path encircling the solenoid, this becomes:</p>
+\[
+\phi'[\mathcal{C}] = \frac{q}{\hbar c}\int_{\mathcal{C}} (\boldsymbol{A} - \nabla\chi) \cdot \mathrm{d}\boldsymbol{l} = \phi[\mathcal{C}] - \frac{q}{\hbar c}[\chi(\text{end}) - \chi(\text{start})]\]</div>
+<p>But the wavefunction also acquires an overall phase factor <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}q(\chi_{\text{end}} - \chi_{\text{start}})}\)</span>. These <em>precisely cancel</em> when we compare <em>relative phases</em> of two paths with the same endpoints:</p>
 <div class="math notranslate nohighlight">
-\[\phi_{\text{AB}} = \frac{q\Phi_B}{\hbar c}\]</div>
-<p>Using <span class="math notranslate nohighlight">\(q = e\)</span> for an electron:</p>
-<div class="math notranslate nohighlight">
-\[\phi_{\text{AB}} = \frac{e\Phi_B}{\hbar c}\]</div>
+\[
+\Delta\phi' = \phi'_1 - \phi'_2 = (\phi_1 - \Delta\chi_1) - (\phi_2 - \Delta\chi_2) = \phi_1 - \phi_2 = \Delta\phi\]</div>
+<p>The <strong>relative phase difference between two interfering beams is gauge-invariant</strong>.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>We showed that the relative phase difference <span class="math notranslate nohighlight">\(\Delta\phi' = \Delta\phi\)</span> is gauge-invariant. But the individual phases <span class="math notranslate nohighlight">\(\phi_1'\)</span> and <span class="math notranslate nohighlight">\(\phi_2'\)</span> on each path <em>do</em> change under a gauge transformation. How can we experimentally measure the relative phase in a way that reveals the gauge-invariant quantity, not the gauge-dependent individual phases?</p>
+</div>
+</section>
+<section id="why-this-matters-the-non-classical-nature-of-the-vector-potential">
+<h3>Why This Matters: The Non-Classical Nature of the Vector Potential<a class="headerlink" href="#why-this-matters-the-non-classical-nature-of-the-vector-potential" title="Link to this heading">#</a></h3>
+<p>The Aharonov-Bohm effect reveals something profound:</p>
 <div class="note admonition">
-<p class="admonition-title">Units and Conventions</p>
-<p>In SI units, <span class="math notranslate nohighlight">\(\phi = \frac{e}{\hbar c}\int \boldsymbol{A} \cdot d\boldsymbol{l}\)</span>. In Gaussian units (often used in older texts), <span class="math notranslate nohighlight">\(\phi = \frac{2e}{hc}\int \boldsymbol{A} \cdot d\boldsymbol{l}\)</span>. The factors differ between conventions; check your reference carefully.</p>
+<p class="admonition-title">The Vector Potential is Physical in Quantum Mechanics</p>
+<p>In classical electromagnetism, the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is regarded as a mathematical convenience—only the field strengths <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> have direct physical meaning.</p>
+<p>In quantum mechanics, <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> appears <em>explicitly</em> in the Schrödinger equation via the covariant derivative. The AB effect demonstrates that <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> produces observable consequences even when <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> everywhere on the particle’s path.</p>
+<p>This is not a contradiction: <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent (unobservable in isolation), but the <em>circulation</em> <span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span> is gauge-invariant (observable). Only gauge-invariant combinations appear in interference patterns.</p>
 </div>
+</section>
+<section id="topological-nature-and-flux-quantization">
+<h3>Topological Nature and Flux Quantization<a class="headerlink" href="#topological-nature-and-flux-quantization" title="Link to this heading">#</a></h3>
+<p>The AB effect has a topological character: it depends only on the total flux enclosed, not on the detailed field configuration.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Topology: Shape-Independence</p>
+<p>Imagine deforming the two paths continuously without breaking them. As long as they remain separated and encircle the solenoid, the phase difference <span class="math notranslate nohighlight">\(\Delta\phi = q\Phi_B/(\hbar c)\)</span> remains unchanged. This is a topological property: it is invariant under continuous deformation.</p>
+<p>Only discontinuous changes (like one path “jumping over” the solenoid) would change the phase.</p>
 </div>
-<div class="docutils">
-<h3 class="rubric" id="double-slit-interference-pattern-shift">Double-Slit Interference Pattern Shift</h3>
-<p>Consider electrons passing through two slits, with a solenoid positioned so that one slit is above it and one below. Electrons can take two paths:</p>
-<p><strong>Path 1</strong> (above the solenoid): Encircles the solenoid, accumulating phase <span class="math notranslate nohighlight">\(\phi_1 = \phi_0 + \phi_{\text{AB}}/2\)</span> (half the total flux on one side)</p>
-<p><strong>Path 2</strong> (below the solenoid): Also encircles, but in opposite sense: <span class="math notranslate nohighlight">\(\phi_2 = \phi_0 - \phi_{\text{AB}}/2\)</span></p>
-<p>The <strong>phase difference</strong> between the two paths is:</p>
+<p>This topological structure connects to <strong>flux quantization</strong> in superconductivity: when a superconductor forms a ring, quantum interference enforces that the flux through the ring is quantized in units of the flux quantum:</p>
 <div class="math notranslate nohighlight">
-\[\Delta\phi = \phi_1 - \phi_2 = \frac{e\Phi_B}{\hbar c}\]</div>
-<p>In the interference region, the intensity is:</p>
-<div class="math notranslate nohighlight">
-\[I(x) = |\psi_1 + \psi_2|^2 = |\psi_1|^2 + |\psi_2|^2 + 2|\psi_1||\psi_2|\cos(\Delta\phi)\]</div>
-<p>The interference pattern (bright and dark fringes) <strong>shifts</strong> by an amount proportional to the change in <span class="math notranslate nohighlight">\(\Delta\phi\)</span>. Varying the solenoid current (and thus <span class="math notranslate nohighlight">\(\Phi_B\)</span>) causes the entire pattern to shift while the electron paths remain unchanged (since <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> outside).</p>
-<p><strong>This pattern shift is the observable signature of the AB effect.</strong> Remarkably, it depends only on <span class="math notranslate nohighlight">\(\Phi_B\)</span>, not on the detailed field distribution inside the solenoid or its size.</p>
-<h3 class="rubric" id="non-locality-and-path-independence">Non-Locality and Path Independence</h3>
-<p>A crucial aspect of the AB effect is its <strong>non-local</strong> character:</p>
-<ol class="arabic simple">
-<li><p><strong>The particle never enters the region of strong field</strong> (where <span class="math notranslate nohighlight">\(\boldsymbol{B} \neq 0\)</span>), yet it experiences an effect.</p></li>
-<li><p><strong>The phase depends only on the global flux</strong>, not on the local field strength at the particle’s location.</p></li>
-<li><p><strong>The effect persists even if the solenoid is infinitesimally thin</strong> but carries arbitrarily large flux (the thin solenoid limit).</p></li>
-</ol>
-<p>This demonstrates a fundamental principle: <strong>in quantum mechanics, particles couple to potentials, which are intrinsically non-local objects</strong>. The wavefunction “feels” the long-range vector potential, accumulating phase far from the source of the field.</p>
-<h3 class="rubric" id="experimental-observation">Experimental Observation</h3>
-<p>The Aharonov-Bohm effect was experimentally verified by <strong>Tonomura et al. (1986)</strong> using electron holograms. They used:</p>
+\[
+\Phi_q = \frac{\pi \hbar c}{e} \approx 4.1 \times 10^{-15} \text{ Wb}\]</div>
+<p>When the enclosed flux is exactly <span class="math notranslate nohighlight">\(\Phi_q\)</span>, the phase shift is <span class="math notranslate nohighlight">\(2\pi\)</span>, returning the electron wavefunction to itself with a complete cycle.</p>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A thin, insulated toroidal magnet to create controlled magnetic flux</p></li>
-<li><p>Electron beam splitters and recombination optics</p></li>
-<li><p>Electron holography to measure the phase shift with nanometer-scale spatial resolution</p></li>
+<li><p>The <strong>Aharonov-Bohm effect</strong> demonstrates that quantum phases depend on the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, even in regions where the field strength (magnetic field) is zero.</p></li>
+<li><p>The <strong>phase shift</strong> around a closed path equals <span class="math notranslate nohighlight">\(q\Phi_B/(\hbar c)\)</span>, where <span class="math notranslate nohighlight">\(\Phi_B\)</span> is the enclosed flux.</p></li>
+<li><p>The effect is <strong>gauge-invariant</strong>: relative phases between interfering beams are independent of gauge choice.</p></li>
+<li><p>The AB effect reveals that the vector potential has genuine physical significance in quantum mechanics, not merely mathematical convenience as in classical theory.</p></li>
+<li><p>The topological nature of the AB effect connects to <strong>flux quantization</strong> and appears in superconductivity, quantum Hall effect, and modern topological materials.</p></li>
 </ul>
-<p>The experiment directly mapped the phase shift as a function of position, definitively proving:</p>
-<ol class="arabic simple">
-<li><p>The vector potential has physical significance in quantum mechanics</p></li>
-<li><p>The phase shift depends only on the enclosed flux</p></li>
-<li><p>The effect is gauge-invariant (independent of gauge choice for <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>)</p></li>
-</ol>
-<h3 class="rubric" id="relation-to-berry-phase">Relation to Berry Phase</h3>
-<p>The Aharonov-Bohm phase can be understood as a <strong>Berry phase</strong> acquired as the particle’s momentum adiabatically cycles through parameter space. The Berry connection in parameter space encodes the vector potential in real space, showing a deep connection between geometric phases and gauge fields.</p>
-<h3 class="rubric" id="summary">Summary</h3>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><strong>AB effect</strong>: Charged particles acquire phase <span class="math notranslate nohighlight">\(\phi = \frac{q\Phi_B}{\hbar c}\)</span> when traveling around enclosed magnetic flux, even in field-free regions.</p></li>
-<li><p><strong>Non-locality</strong>: The effect demonstrates that quantum mechanics is fundamentally non-local—particles couple to long-range potentials, not just local fields.</p></li>
-<li><p><strong>Potentials fundamental</strong>: Vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> directly affects wavefunction evolution; it’s not just an auxiliary field.</p></li>
-<li><p><strong>Gauge potentials observable</strong>: Although <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent, <strong>line integrals</strong> <span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot d\boldsymbol{l}\)</span> are observable through interference.</p></li>
-<li><p><strong>Pattern shift</strong>: Interference fringes shift by amount proportional to <span class="math notranslate nohighlight">\(\Phi_B\)</span>; shift depends only on total flux, not field details.</p></li>
-<li><p><strong>Experimental confirmation</strong>: Tonomura’s electron holography definitively verified the effect (1986).</p></li>
-<li><p><strong>Topological origin</strong>: The AB phase is topological—depends only on the winding number of the flux, insensitive to deformations of the path.</p></li>
+<li><p><strong><a class="reference internal" href="4-1-1-gauge-transformations.html"><span class="std std-doc">4.1.1 Gauge Transformations</span></a></strong>: Gauge freedom and observable gauge-invariant phase</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html"><span class="std std-doc">2.3.2 Abelian Anyons</span></a></strong>: Flux attachment and statistical transmutation in 2D systems</p></li>
+<li><p><strong><a class="reference internal" href="4-2-2-flux-quantization.html"><span class="std std-doc">4.2.2 Flux Quantization</span></a></strong>: Quantization of flux through topological constraints</p></li>
 </ul>
 </div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>Problem 1: Vector Potential Circulation</strong></p>
+<p>A solenoid of radius <span class="math notranslate nohighlight">\(R = 1\)</span> cm carries a uniform internal magnetic field <span class="math notranslate nohighlight">\(B = 0.1\)</span> T along the <span class="math notranslate nohighlight">\(z\)</span>-axis. Outside the solenoid, <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span>.</p>
+<p>(a) Compute the total magnetic flux <span class="math notranslate nohighlight">\(\Phi_B\)</span> through the solenoid.</p>
+<p>(b) Using the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}_{\text{out}} = \frac{BR^2}{2r}\hat{\theta}\)</span>, verify by direct integration that <span class="math notranslate nohighlight">\(\oint_C \boldsymbol{A} \cdot d\boldsymbol{l} = \Phi_B\)</span> for a circular path <span class="math notranslate nohighlight">\(C\)</span> of radius <span class="math notranslate nohighlight">\(r = 2R\)</span> encircling the solenoid.</p>
+<p>(c) Show that this result holds for <em>any</em> closed path encircling the solenoid, not just circles. (Hint: Use Stokes’ theorem.)</p>
+<hr class="docutils" />
+<p><strong>Problem 2: Gauge Freedom and Circulation</strong></p>
+<p>The vector potential is not unique; adding <span class="math notranslate nohighlight">\(\boldsymbol{A}' = \boldsymbol{A} + \nabla\chi\)</span> for any scalar function <span class="math notranslate nohighlight">\(\chi\)</span> gives the same magnetic field.</p>
+<p>(a) Show that a different gauge choice <span class="math notranslate nohighlight">\(\boldsymbol{A}'\)</span> gives <span class="math notranslate nohighlight">\(\oint_C \boldsymbol{A}' \cdot d\boldsymbol{l} = \oint_C \boldsymbol{A} \cdot d\boldsymbol{l}\)</span> for any closed path.</p>
+<p>(b) Explain why this is consistent with the fact that the Aharonov-Bohm phase shift is physical (gauge-invariant) even though individual vector potentials are gauge-dependent.</p>
+<hr class="docutils" />
+<p><strong>Problem 3: Aharonov-Bohm Phase (Quantitative)</strong></p>
+<p>An electron (charge <span class="math notranslate nohighlight">\(-e\)</span>, mass <span class="math notranslate nohighlight">\(m\)</span>) travels around a solenoid of flux <span class="math notranslate nohighlight">\(\Phi_B = 10^{-15}\)</span> Wb.</p>
+<p>(a) Compute the Aharonov-Bohm phase shift <span class="math notranslate nohighlight">\(\phi_{\text{AB}} = \frac{e\Phi_B}{\hbar c}\)</span> (use SI units).</p>
+<p>(b) If the electron de Broglie wavelength is <span class="math notranslate nohighlight">\(\lambda = 0.1\)</span> nm, what is the phase shift in terms of wavelengths crossed? (Relate phase to path length divided by wavelength.)</p>
+<p>(c) Would this phase shift be observable (i.e., shift an interference pattern by a detectable amount)? Justify your answer.</p>
+<hr class="docutils" />
+<p><strong>Problem 4: Double-Slit Interference Pattern Shift</strong></p>
+<p>Two electrons pass through two slits positioned symmetrically above and below an infinitesimally thin solenoid carrying flux <span class="math notranslate nohighlight">\(\Phi_B\)</span>. They recombine at a distant screen.</p>
+<p>(a) Explain why the upper path acquires phase <span class="math notranslate nohighlight">\(+\phi_{\text{AB}}/2\)</span> and the lower path acquires phase <span class="math notranslate nohighlight">\(-\phi_{\text{AB}}/2\)</span> relative to a reference (not including geometric phase from propagation distance).</p>
+<p>(b) Write the two-slit intensity formula <span class="math notranslate nohighlight">\(I(x) = |\psi_1(x) + \psi_2(x)|^2\)</span> and show that the phase difference between the two amplitudes is <span class="math notranslate nohighlight">\(\Delta\phi = e\Phi_B/(\hbar c)\)</span>.</p>
+<p>(c) By how many fringe spacings does the interference pattern shift if the solenoid current (and thus <span class="math notranslate nohighlight">\(\Phi_B\)</span>) is increased by <span class="math notranslate nohighlight">\(\Delta\Phi_B = 2\pi\hbar c/e\)</span>? (This quantum is called the <strong>flux quantum</strong> in superconductivity.)</p>
+<hr class="docutils" />
+<p><strong>Problem 5: Path Independence of Aharonov-Bohm Phase</strong></p>
+<p>Consider three different closed paths around a solenoid, all enclosing the same flux <span class="math notranslate nohighlight">\(\Phi_B\)</span>:</p>
+<ul class="simple">
+<li><p>Path A: A perfect circle</p></li>
+<li><p>Path B: A square</p></li>
+<li><p>Path C: A highly irregular, loopy curve</p></li>
+</ul>
+<p>(a) If a charged particle travels along each path, what are the respective phase shifts?</p>
+<p>(b) Why does the phase shift depend only on the enclosed flux and not on the detailed shape of the path? (Hint: Use Stokes’ theorem and think about what property of the paths is actually relevant.)</p>
+<p>(c) How would the result change if the solenoid were replaced by a solenoid with a non-uniform internal field? Would the phase shift still depend only on total flux, or on the detailed distribution?</p>
+<hr class="docutils" />
+<p><strong>Problem 6: Thin Solenoid Limit</strong></p>
+<p>Consider a solenoid of radius <span class="math notranslate nohighlight">\(R\)</span> carrying flux <span class="math notranslate nohighlight">\(\Phi_B\)</span>. Now imagine shrinking the radius to <span class="math notranslate nohighlight">\(R \to 0\)</span> while keeping <span class="math notranslate nohighlight">\(\Phi_B\)</span> fixed (this requires the internal field <span class="math notranslate nohighlight">\(B \to \infty\)</span>).</p>
+<p>(a) In the limit <span class="math notranslate nohighlight">\(R \to 0\)</span>, what happens to the vector potential outside: <span class="math notranslate nohighlight">\(\boldsymbol{A}_{\text{out}} = \frac{BR^2}{2r}\hat{\theta}\)</span>? Does it vanish?</p>
+<p>(b) Sketch the vector potential field (magnitude vs. <span class="math notranslate nohighlight">\(r\)</span>) for three cases: finite <span class="math notranslate nohighlight">\(R\)</span>, smaller <span class="math notranslate nohighlight">\(R\)</span>, and infinitesimal <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<p>(c) Even though the solenoid becomes infinitely thin and carries infinite field, explain why the Aharonov-Bohm phase remains finite and measurable.</p>
+<p>(d) How would you physically realize such a thin solenoid in an experiment?</p>
+<hr class="docutils" />
+<p><strong>Problem 7: Non-Locality Argument</strong></p>
+<p>The Aharonov-Bohm effect is often cited as a demonstration of “non-locality” in quantum mechanics.</p>
+<p>(a) Define precisely what is meant by non-locality in this context. Does it mean that an influence travels faster than light?</p>
+<p>(b) A classical charged particle passing by the solenoid in a field-free region experiences no Lorentz force and is unaffected by the hidden internal field. Why is a quantum particle different?</p>
+<p>(c) Is the non-locality of the AB effect related to entanglement, or is it a separate feature of quantum mechanics? Explain.</p>
+<hr class="docutils" />
+<p><strong>Problem 8: Experimental Measurement via Electron Holography</strong></p>
+<p>Electron holography (as used by Tonomura et al.) measures the phase shift of electron waves by creating an interference pattern between an electron beam that passes near the solenoid and a reference beam far away.</p>
+<p>(a) Explain conceptually how measuring a shift in interference fringes can reveal the phase accumulated by the solenoid-scattering electrons.</p>
+<p>(b) If two measurement points differ in their distance from the solenoid, how would their measured phase difference vary? Would it depend on the solenoid current or only on position?</p>
+<p>(c) A solenoid with variable current is placed inside the electron microscope. Sketch (qualitatively) how the electron hologram interference pattern would change as the solenoid current is increased from zero.</p>
+<hr class="docutils" />
+<p><strong>Problem 9: Quantum vs. Classical Intuition</strong></p>
+<p>(a) In classical mechanics, can a charged particle acquire a velocity-independent deflection from a force it never experiences? Explain why or why not.</p>
+<p>(b) In quantum mechanics, the Aharonov-Bohm effect shows that a particle’s phase (and hence its wavefunction) <em>can</em> be altered without experiencing a local force. What is the conceptual difference between a classical trajectory and a quantum wavefunction that makes this possible?</p>
+<p>(c) The vector potential appears explicitly in the Schrödinger equation via the kinetic energy term <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A}/c)^2/2m\)</span>. Why does <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> appear in the quantum equation but not in the classical equation of motion <span class="math notranslate nohighlight">\(m\ddot{\boldsymbol{r}} = q(\boldsymbol{E} + \dot{\boldsymbol{r}} \times \boldsymbol{B})\)</span>?</p>
+<hr class="docutils" />
+<p><strong>Problem 10: Relation to Berry Phase</strong></p>
+<p>The Aharonov-Bohm phase can be understood as a special case of the <strong>Berry phase</strong>: when a quantum system evolves adiabatically around a closed loop in parameter space, it acquires a geometric phase.</p>
+<p>(a) Identify the relevant “parameter space” for the Aharonov-Bohm effect. What are the parameters that cycle?</p>
+<p>(b) In the Berry phase picture, the phase arises from the non-trivial geometry of the state’s evolution, not from the Hamiltonian eigenvalues directly. How does this conceptual framework illuminate the Aharonov-Bohm result?</p>
+<p>(c) Berry phases appear in many modern physics applications (e.g., topological insulators, quantum anomalous Hall effect). Name one other physical phenomenon where a Berry-like phase leads to observable effects.</p>
 </section>
 </section>
 
@@ -738,12 +835,27 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-experimental-setup">The Experimental Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-potential-of-the-solenoid">Vector Potential of the Solenoid</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#circulation-of-vector-potential">Circulation of Vector Potential</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-accumulation-along-closed-path">Phase Accumulation Along Closed Path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aharonov-bohm-experimental-setup">The Aharonov-Bohm Experimental Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-configuration">Physical Configuration</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-potential-in-a-solenoid">Vector Potential in a Solenoid</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#outside-the-solenoid">Outside the Solenoid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#circulation-integral">Circulation Integral</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-accumulation-along-a-path">Phase Accumulation Along a Path</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-phase-integral">The Phase Integral</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-path-interference">Two-Path Interference</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-of-the-aharonov-bohm-effect">Gauge Invariance of the Aharonov-Bohm Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters-the-non-classical-nature-of-the-vector-potential">Why This Matters: The Non-Classical Nature of the Vector Potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-nature-and-flux-quantization">Topological Nature and Flux Quantization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -781,7 +893,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

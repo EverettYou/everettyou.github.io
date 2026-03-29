@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -541,6 +541,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -557,16 +558,25 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is Feynman’s path integral and what does it mean to “sum over all paths”?</p></li>
-<li><p>How is the action functional <span class="math notranslate nohighlight">\(S[\boldsymbol{x}]\)</span> defined and what role does it play in the path integral?</p></li>
-<li><p>Why does each path contribute equally in magnitude but with phase <span class="math notranslate nohighlight">\(e^{iS/\hbar}\)</span>?</p></li>
-<li><p>What is the transition amplitude and how does it relate to the wavefunction and probability?</p></li>
-<li><p>How does the path integral naturally incorporate both classical and quantum mechanics?</p></li>
+<li><p>What does it mean to “sum over all paths”? Is Feynman’s path integral a rigorous mathematical sum or a heuristic principle?</p></li>
+<li><p>Define the action functional <span class="math notranslate nohighlight">\(S[\boldsymbol{x}]\)</span>. Why does each path contribute a phase factor <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> and not just a weight factor?</p></li>
+<li><p>How does the stationary phase approximation emerge from the path integral? Why do classical paths dominate in the <span class="math notranslate nohighlight">\(\hbar \to 0\)</span> limit?</p></li>
+<li><p>Explain the connection between path integral and partition function in statistical mechanics (Wick rotation). Why is imaginary time natural in thermal systems?</p></li>
+<li><p>Compare the path integral and operator formalisms: each seems to encode quantum mechanics completely, but which insights does each approach offer that the other obscures?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <p>Feynman’s path integral reveals that a quantum particle does not follow a single trajectory—it explores every possible path simultaneously, with each path contributing a phase proportional to its classical action. This radical idea unifies quantum mechanics, statistical mechanics, and quantum field theory into a single mathematical framework.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Path Integral Equivalence and Convergence</p>
+<p>The path integral formulation must yield identical results to the Schrödinger equation (since both describe the same physics), yet they look completely different: one is a sum over infinite paths, the other is a differential equation.</p>
+<ul class="simple">
+<li><p>How can a path integral (which naively seems to diverge, since there are uncountably many paths) be properly regularized and made mathematically rigorous?</p></li>
+<li><p>The path integral approach seems to treat the classical path and quantum paths equally (all have weight <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>). Yet in the classical limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, the classical path dominates due to stationary phase. Is this emergence of classicality from the quantum formalism something profound, or just a mathematical consequence of the exponential phase?</p></li>
+<li><p>Why must the path integral be taken in Euclidean (imaginary) time rather than real time for thermal/statistical mechanics applications? Does this reveal something about the deep connection between quantum mechanics and statistical mechanics?</p></li>
+</ul>
+</div>
 <section id="feynman-s-path-integral-principle">
 <h3>Feynman’s Path Integral Principle<a class="headerlink" href="#feynman-s-path-integral-principle" title="Link to this heading">#</a></h3>
 <p>In 1948, <strong>Richard Feynman</strong> proposed a radically different formulation of quantum mechanics based on a deceptively simple idea:</p>
@@ -574,12 +584,13 @@ document.write(`
 <p class="admonition-title">Path Integral Principle</p>
 <p>The quantum amplitude for a particle to evolve from an initial state at <span class="math notranslate nohighlight">\((\boldsymbol{x}_i, t_i)\)</span> to a final state at <span class="math notranslate nohighlight">\((\boldsymbol{x}_f, t_f)\)</span> is the <strong>sum over all possible paths</strong> <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span> connecting these points:</p>
 <div class="math notranslate nohighlight" id="equation-eq-feynman-path-integral">
-<span class="eqno">(167)<a class="headerlink" href="#equation-eq-feynman-path-integral" title="Link to this equation">#</a></span>\[\psi(\boldsymbol{x}_f, t_f) = \int_{\boldsymbol{x}(t_i)=\boldsymbol{x}_i}^{\boldsymbol{x}(t_f)=\boldsymbol{x}_f} e^{iS[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}] \, \psi(\boldsymbol{x}_i, t_i)\]</div>
+<span class="eqno">(162)<a class="headerlink" href="#equation-eq-feynman-path-integral" title="Link to this equation">#</a></span>\[
+\psi(\boldsymbol{x}_f, t_f) = \int_{\boldsymbol{x}(t_i)=\boldsymbol{x}_i}^{\boldsymbol{x}(t_f)=\boldsymbol{x}_f} \mathrm{e}^{\mathrm{i}S[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}] \, \psi(\boldsymbol{x}_i, t_i)\]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(S[\boldsymbol{x}] = \int_{t_i}^{t_f} L(\boldsymbol{x}, \dot{\boldsymbol{x}}, t) \, dt\)</span> is the <strong>action functional</strong> along path <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(S[\boldsymbol{x}] = \int_{t_i}^{t_f} L(\boldsymbol{x}, \dot{\boldsymbol{x}}, t) \, \mathrm{d}t\)</span> is the <strong>action functional</strong> along path <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{D}[\boldsymbol{x}]\)</span> denotes a <strong>functional integral</strong> (sum) over all paths.</p></li>
-<li><p>Each path contributes with <strong>magnitude</strong> 1 (unit weight) and <strong>phase</strong> <span class="math notranslate nohighlight">\(e^{iS/\hbar}\)</span>.</p></li>
+<li><p>Each path contributes with <strong>magnitude</strong> 1 (unit weight) and <strong>phase</strong> <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>.</p></li>
 </ul>
 </div>
 <p>This is a profound reformulation. Rather than solving a differential equation (Schrödinger equation), we sum over all possibilities. The quantum evolution is a <strong>sum of probability amplitudes</strong>, not a unique deterministic trajectory.</p>
@@ -588,27 +599,33 @@ document.write(`
 <h3>The Propagator: Transition Amplitude<a class="headerlink" href="#the-propagator-transition-amplitude" title="Link to this heading">#</a></h3>
 <p>The <strong>propagator</strong> (also called <strong>Green’s function</strong> or <strong>transition amplitude</strong>) is</p>
 <div class="math notranslate nohighlight" id="equation-eq-propagator-definition">
-<span class="eqno">(168)<a class="headerlink" href="#equation-eq-propagator-definition" title="Link to this equation">#</a></span>\[K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int_{\boldsymbol{x}(t_i)=\boldsymbol{x}_i}^{\boldsymbol{x}(t_f)=\boldsymbol{x}_f} e^{iS[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}]\]</div>
+<span class="eqno">(163)<a class="headerlink" href="#equation-eq-propagator-definition" title="Link to this equation">#</a></span>\[
+K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int_{\boldsymbol{x}(t_i)=\boldsymbol{x}_i}^{\boldsymbol{x}(t_f)=\boldsymbol{x}_f} \mathrm{e}^{\mathrm{i}S[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}]\]</div>
 <p>It represents the amplitude for a particle at <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> at time <span class="math notranslate nohighlight">\(t_i\)</span> to arrive at <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span> at time <span class="math notranslate nohighlight">\(t_f\)</span>.</p>
 <p><strong>Wavefunction evolution</strong>: Given an initial wavefunction <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}_i, t_i)\)</span>, the wavefunction at a later time is</p>
 <div class="math notranslate nohighlight" id="equation-eq-wavefunction-evolution">
-<span class="eqno">(169)<a class="headerlink" href="#equation-eq-wavefunction-evolution" title="Link to this equation">#</a></span>\[\psi(\boldsymbol{x}_f, t_f) = \int K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) \, \psi(\boldsymbol{x}_i, t_i) \, d^3\boldsymbol{x}_i\]</div>
+<span class="eqno">(164)<a class="headerlink" href="#equation-eq-wavefunction-evolution" title="Link to this equation">#</a></span>\[
+\psi(\boldsymbol{x}_f, t_f) = \int K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) \, \psi(\boldsymbol{x}_i, t_i) \, d^3\boldsymbol{x}_i\]</div>
 <p>The propagator is the <strong>kernel</strong> for time evolution.</p>
 <section id="composition-property-chain-rule-for-propagators">
 <h4>Composition Property (Chain Rule for Propagators)<a class="headerlink" href="#composition-property-chain-rule-for-propagators" title="Link to this heading">#</a></h4>
 <p>Suppose we want to go from time <span class="math notranslate nohighlight">\(t_i\)</span> to time <span class="math notranslate nohighlight">\(t_f\)</span>, but we know the state at an intermediate time <span class="math notranslate nohighlight">\(t_m\)</span> (with <span class="math notranslate nohighlight">\(t_i &lt; t_m &lt; t_f\)</span>). Then</p>
 <div class="math notranslate nohighlight" id="equation-eq-propagator-composition">
-<span class="eqno">(170)<a class="headerlink" href="#equation-eq-propagator-composition" title="Link to this equation">#</a></span>\[K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_m, t_m) K(\boldsymbol{x}_m, t_m; \boldsymbol{x}_i, t_i) \, d^3\boldsymbol{x}_m\]</div>
+<span class="eqno">(165)<a class="headerlink" href="#equation-eq-propagator-composition" title="Link to this equation">#</a></span>\[
+K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_m, t_m) K(\boldsymbol{x}_m, t_m; \boldsymbol{x}_i, t_i) \, d^3\boldsymbol{x}_m\]</div>
 <p><strong>Physical interpretation</strong>: A path from <span class="math notranslate nohighlight">\(t_i\)</span> to <span class="math notranslate nohighlight">\(t_f\)</span> can be decomposed into a path from <span class="math notranslate nohighlight">\(t_i\)</span> to <span class="math notranslate nohighlight">\(t_m\)</span> and then from <span class="math notranslate nohighlight">\(t_m\)</span> to <span class="math notranslate nohighlight">\(t_f\)</span>. Integrating over all possible intermediate positions at <span class="math notranslate nohighlight">\(t_m\)</span> gives the full propagator.</p>
 <p><strong>Proof</strong>: Consider the path integral from <span class="math notranslate nohighlight">\(t_i\)</span> to <span class="math notranslate nohighlight">\(t_f\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int_{\boldsymbol{x}(t_i)=\boldsymbol{x}_i}^{\boldsymbol{x}(t_f)=\boldsymbol{x}_f} e^{iS[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}]\]</div>
+\[
+K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int_{\boldsymbol{x}(t_i)=\boldsymbol{x}_i}^{\boldsymbol{x}(t_f)=\boldsymbol{x}_f} \mathrm{e}^{\mathrm{i}S[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}]\]</div>
 <p>Any path from <span class="math notranslate nohighlight">\(t_i\)</span> to <span class="math notranslate nohighlight">\(t_f\)</span> passes through some point <span class="math notranslate nohighlight">\(\boldsymbol{x}_m\)</span> at time <span class="math notranslate nohighlight">\(t_m\)</span>. Grouping paths by their value at <span class="math notranslate nohighlight">\(t_m\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[K = \int d^3\boldsymbol{x}_m \left( \int_{t_i \to t_m} e^{iS[t_i \to t_m]/\hbar} \, \mathcal{D}[\text{paths } t_i \to t_m] \right) \left( \int_{t_m \to t_f} e^{iS[t_m \to t_f]/\hbar} \, \mathcal{D}[\text{paths } t_m \to t_f] \right)\]</div>
+\[
+K = \int d^3\boldsymbol{x}_m \left( \int_{t_i \to t_m} \mathrm{e}^{\mathrm{i}S[t_i \to t_m]/\hbar} \, \mathcal{D}[\text{paths } t_i \to t_m] \right) \left( \int_{t_m \to t_f} \mathrm{e}^{\mathrm{i}S[t_m \to t_f]/\hbar} \, \mathcal{D}[\text{paths } t_m \to t_f] \right)\]</div>
 <p>Since the action is additive, <span class="math notranslate nohighlight">\(S[t_i \to t_f] = S[t_i \to t_m] + S[t_m \to t_f]\)</span>, the exponentials factor:</p>
 <div class="math notranslate nohighlight">
-\[e^{iS[t_i \to t_f]/\hbar} = e^{iS[t_i \to t_m]/\hbar} \cdot e^{iS[t_m \to t_f]/\hbar}\]</div>
+\[
+\mathrm{e}^{\mathrm{i}S[t_i \to t_f]/\hbar} = \mathrm{e}^{\mathrm{i}S[t_i \to t_m]/\hbar} \cdot \mathrm{e}^{\mathrm{i}S[t_m \to t_f]/\hbar}\]</div>
 <p>This gives the composition formula.</p>
 </section>
 </section>
@@ -616,19 +633,23 @@ document.write(`
 <h3>The Action: Lagrangian Path Integral<a class="headerlink" href="#the-action-lagrangian-path-integral" title="Link to this heading">#</a></h3>
 <p>The <strong>action</strong> along a path <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span> is defined as</p>
 <div class="math notranslate nohighlight" id="equation-eq-action-definition">
-<span class="eqno">(171)<a class="headerlink" href="#equation-eq-action-definition" title="Link to this equation">#</a></span>\[S[\boldsymbol{x}] = \int_{t_i}^{t_f} L(\boldsymbol{x}(t), \dot{\boldsymbol{x}}(t), t) \, dt\]</div>
+<span class="eqno">(166)<a class="headerlink" href="#equation-eq-action-definition" title="Link to this equation">#</a></span>\[
+S[\boldsymbol{x}] = \int_{t_i}^{t_f} L(\boldsymbol{x}(t), \dot{\boldsymbol{x}}(t), t) \, \mathrm{d}t\]</div>
 <p>where <span class="math notranslate nohighlight">\(L\)</span> is the <strong>Lagrangian</strong>. For a non-relativistic particle of mass <span class="math notranslate nohighlight">\(m\)</span> in a potential <span class="math notranslate nohighlight">\(V\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lagrangian-standard">
-<span class="eqno">(172)<a class="headerlink" href="#equation-eq-lagrangian-standard" title="Link to this equation">#</a></span>\[L = \frac{m}{2}\dot{\boldsymbol{x}}^2 - V(\boldsymbol{x}, t)\]</div>
+<span class="eqno">(167)<a class="headerlink" href="#equation-eq-lagrangian-standard" title="Link to this equation">#</a></span>\[
+L = \frac{m}{2}\dot{\boldsymbol{x}}^2 - V(\boldsymbol{x}, t)\]</div>
 <p>The action has dimensions of [energy] <span class="math notranslate nohighlight">\(\times\)</span> [time] = [angular momentum], as does <span class="math notranslate nohighlight">\(\hbar\)</span>.</p>
 <section id="why-the-lagrangian">
 <h4>Why the Lagrangian?<a class="headerlink" href="#why-the-lagrangian" title="Link to this heading">#</a></h4>
 <p>The Lagrangian is fundamental in classical mechanics because the <strong>principle of stationary action</strong> states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-stationary-action-principle">
-<span class="eqno">(173)<a class="headerlink" href="#equation-eq-stationary-action-principle" title="Link to this equation">#</a></span>\[\delta S = 0 \quad \Rightarrow \quad \text{Equations of motion}\]</div>
+<span class="eqno">(168)<a class="headerlink" href="#equation-eq-stationary-action-principle" title="Link to this equation">#</a></span>\[
+\delta S = 0 \quad \Rightarrow \quad \text{Equations of motion}\]</div>
 <p>The path followed by a classical particle is the one for which <span class="math notranslate nohighlight">\(S\)</span> is stationary (extremized). Varying <span class="math notranslate nohighlight">\(S\)</span> with respect to the path gives the Euler-Lagrange equations:</p>
 <div class="math notranslate nohighlight" id="equation-eq-euler-lagrange">
-<span class="eqno">(174)<a class="headerlink" href="#equation-eq-euler-lagrange" title="Link to this equation">#</a></span>\[\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}^i}\right) - \frac{\partial L}{\partial x^i} = 0\]</div>
+<span class="eqno">(169)<a class="headerlink" href="#equation-eq-euler-lagrange" title="Link to this equation">#</a></span>\[
+\frac{\mathrm{d}}{\mathrm{dt}}\left(\frac{\partial L}{\partial \dot{x}^i}\right) - \frac{\partial L}{\partial x^i} = 0\]</div>
 <p>In quantum mechanics, the path integral <strong>retains all paths</strong>, but each is weighted by the classical action. This is a beautiful synthesis: quantum mechanics respects the classical action, but explores all possibilities.</p>
 </section>
 </section>
@@ -636,13 +657,14 @@ document.write(`
 <h3>Physical Interpretation: Amplitude and Interference<a class="headerlink" href="#physical-interpretation-amplitude-and-interference" title="Link to this heading">#</a></h3>
 <section id="equal-magnitude-contribution">
 <h4>Equal Magnitude Contribution<a class="headerlink" href="#equal-magnitude-contribution" title="Link to this heading">#</a></h4>
-<p>Each path contributes with <strong>unit amplitude</strong> (magnitude 1): <span class="math notranslate nohighlight">\(|e^{iS/\hbar}| = 1\)</span>. This may seem counterintuitive—shouldn’t “unlikely” paths contribute less? In the path integral framework, all paths contribute equally in amplitude; what matters is their <strong>relative phase</strong>.</p>
+<p>Each path contributes with <strong>unit amplitude</strong> (magnitude 1): <span class="math notranslate nohighlight">\(|\mathrm{e}^{\mathrm{i}S/\hbar}| = 1\)</span>. This may seem counterintuitive—shouldn’t “unlikely” paths contribute less? In the path integral framework, all paths contribute equally in amplitude; what matters is their <strong>relative phase</strong>.</p>
 </section>
 <section id="phase-weighting-interference">
 <h4>Phase Weighting: Interference<a class="headerlink" href="#phase-weighting-interference" title="Link to this heading">#</a></h4>
 <p>Two paths <span class="math notranslate nohighlight">\(\boldsymbol{x}_1(t)\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{x}_2(t)\)</span> have phases <span class="math notranslate nohighlight">\(\Phi_1 = S_1/\hbar\)</span> and <span class="math notranslate nohighlight">\(\Phi_2 = S_2/\hbar\)</span>. Their <strong>phase difference</strong> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-phase-difference">
-<span class="eqno">(175)<a class="headerlink" href="#equation-eq-phase-difference" title="Link to this equation">#</a></span>\[\Delta\Phi = \frac{S_1 - S_2}{\hbar}\]</div>
+<span class="eqno">(170)<a class="headerlink" href="#equation-eq-phase-difference" title="Link to this equation">#</a></span>\[
+\Delta\Phi = \frac{S_1 - S_2}{\hbar}\]</div>
 <p><strong>Constructive interference</strong>: When <span class="math notranslate nohighlight">\(\Delta\Phi = 2\pi n\)</span> (phase difference is a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>), the two paths interfere constructively—their amplitudes add.</p>
 <p><strong>Destructive interference</strong>: When <span class="math notranslate nohighlight">\(\Delta\Phi = \pi(2n+1)\)</span> (phase difference is an odd multiple of <span class="math notranslate nohighlight">\(\pi\)</span>), the paths interfere destructively—their amplitudes partially cancel.</p>
 <p><strong>Stationary action paths</strong>: If two paths have nearly the same action (differ by <span class="math notranslate nohighlight">\(\lesssim \hbar\)</span>), their phases are nearly equal, and they interfere constructively. Paths clustered around a stationary point of <span class="math notranslate nohighlight">\(S\)</span> all have similar phases and add coherently.</p>
@@ -651,7 +673,8 @@ document.write(`
 <h4>Classical Path Dominance<a class="headerlink" href="#classical-path-dominance" title="Link to this heading">#</a></h4>
 <p>The <strong>classical path</strong> is defined by <span class="math notranslate nohighlight">\(\delta S = 0\)</span>. Near the classical path:</p>
 <div class="math notranslate nohighlight">
-\[S[\boldsymbol{x}_\text{cl} + \delta\boldsymbol{x}] \approx S[\boldsymbol{x}_\text{cl}] + \frac{1}{2}(\delta\boldsymbol{x})^T M (\delta\boldsymbol{x}) + \cdots\]</div>
+\[
+S[\boldsymbol{x}_\text{cl} + \delta\boldsymbol{x}] \approx S[\boldsymbol{x}_\text{cl}] + \frac{1}{2}(\delta\boldsymbol{x})^T M (\delta\boldsymbol{x}) + \cdots\]</div>
 <p>where <span class="math notranslate nohighlight">\(M\)</span> is the second variation (Hessian). For a small deviation <span class="math notranslate nohighlight">\(\delta\boldsymbol{x} \sim \sqrt{\hbar}\)</span>, the action difference is <span class="math notranslate nohighlight">\(\Delta S \sim \hbar\)</span>, giving a phase difference <span class="math notranslate nohighlight">\(\sim 1\)</span> radian.</p>
 <p><strong>In the classical limit (<span class="math notranslate nohighlight">\(\hbar \to 0\)</span>)</strong>:</p>
 <ul class="simple">
@@ -659,7 +682,7 @@ document.write(`
 <li><p>Only paths with <span class="math notranslate nohighlight">\(|S - S_\text{cl}| \lesssim \hbar\)</span> (a neighborhood of the classical path) <strong>interfere constructively</strong>.</p></li>
 <li><p>As <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, the constructive region shrinks to zero, and only the classical path survives.</p></li>
 </ul>
-<div class="note admonition">
+<div class="important admonition">
 <p class="admonition-title">Quantum-to-classical correspondence</p>
 <p>The path integral naturally explains the correspondence principle:</p>
 <ul class="simple">
@@ -714,22 +737,25 @@ document.write(`
 <h3>Free Particle as Motivation<a class="headerlink" href="#free-particle-as-motivation" title="Link to this heading">#</a></h3>
 <p>For a <strong>free particle</strong> (no potential, <span class="math notranslate nohighlight">\(V = 0\)</span>), the Lagrangian is <span class="math notranslate nohighlight">\(L = \frac{m}{2}\dot{\boldsymbol{x}}^2\)</span>. The action is</p>
 <div class="math notranslate nohighlight" id="equation-eq-free-action">
-<span class="eqno">(176)<a class="headerlink" href="#equation-eq-free-action" title="Link to this equation">#</a></span>\[S[\boldsymbol{x}] = \int_{t_i}^{t_f} \frac{m}{2}\dot{\boldsymbol{x}}^2 \, dt\]</div>
+<span class="eqno">(171)<a class="headerlink" href="#equation-eq-free-action" title="Link to this equation">#</a></span>\[
+S[\boldsymbol{x}] = \int_{t_i}^{t_f} \frac{m}{2}\dot{\boldsymbol{x}}^2 \, \mathrm{d}t\]</div>
 <p>Classically, the extremum is a <strong>straight line</strong> (constant velocity):</p>
 <div class="math notranslate nohighlight" id="equation-eq-classical-trajectory">
-<span class="eqno">(177)<a class="headerlink" href="#equation-eq-classical-trajectory" title="Link to this equation">#</a></span>\[\boldsymbol{x}_\text{cl}(t) = \boldsymbol{x}_i + \frac{\boldsymbol{x}_f - \boldsymbol{x}_i}{t_f - t_i}(t - t_i)\]</div>
+<span class="eqno">(172)<a class="headerlink" href="#equation-eq-classical-trajectory" title="Link to this equation">#</a></span>\[
+\boldsymbol{x}_\text{cl}(t) = \boldsymbol{x}_i + \frac{\boldsymbol{x}_f - \boldsymbol{x}_i}{t_f - t_i}(t - t_i)\]</div>
 <p>with action</p>
 <div class="math notranslate nohighlight" id="equation-eq-free-action-classical">
-<span class="eqno">(178)<a class="headerlink" href="#equation-eq-free-action-classical" title="Link to this equation">#</a></span>\[S_\text{cl} = \frac{m}{2}\left(\frac{\boldsymbol{x}_f - \boldsymbol{x}_i}{t_f - t_i}\right)^2 (t_f - t_i) = \frac{m(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2(t_f - t_i)}\]</div>
+<span class="eqno">(173)<a class="headerlink" href="#equation-eq-free-action-classical" title="Link to this equation">#</a></span>\[
+S_\text{cl} = \frac{m}{2}\left(\frac{\boldsymbol{x}_f - \boldsymbol{x}_i}{t_f - t_i}\right)^2 (t_f - t_i) = \frac{m(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2(t_f - t_i)}\]</div>
 <p>For a free particle, the path integral can be <strong>evaluated exactly</strong> (Section 3.2.2), giving a Gaussian result.</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Path integral</strong>: Quantum amplitude is a sum over all paths, each weighted by <span class="math notranslate nohighlight">\(e^{iS/\hbar}\)</span>.</p></li>
+<li><p><strong>Path integral</strong>: Quantum amplitude is a sum over all paths, each weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>.</p></li>
 <li><p><strong>Propagator</strong>: Transition amplitude between two spacetime points; solves the Schrödinger equation.</p></li>
 <li><p><strong>Composition property</strong>: Propagators multiply for sequential time intervals.</p></li>
-<li><p><strong>Action functional</strong>: <span class="math notranslate nohighlight">\(S[\boldsymbol{x}] = \int L \, dt\)</span> is the classical action. Stationary points give classical equations of motion.</p></li>
+<li><p><strong>Action functional</strong>: <span class="math notranslate nohighlight">\(S[\boldsymbol{x}] = \int L \, \mathrm{d}t\)</span> is the classical action. Stationary points give classical equations of motion.</p></li>
 <li><p><strong>Interference</strong>: Paths with nearly equal action interfere constructively; paths with differing action cancel.</p></li>
 <li><p><strong>Classical limit</strong>: <span class="math notranslate nohighlight">\(\hbar \to 0\)</span> suppresses paths away from stationary action; classical mechanics emerges.</p></li>
 <li><p><strong>Equivalence</strong>: Path integral and Schrödinger equation are equivalent formulations of quantum mechanics.</p></li>
@@ -738,11 +764,11 @@ document.write(`
 <p class="admonition-title">Derivation: Gaussian Path Integral for a Single Time Slice</p>
 <p>For a free particle propagating over a time interval <span class="math notranslate nohighlight">\(\varepsilon\)</span>, the action is</p>
 <div class="math notranslate nohighlight">
-\[S[\boldsymbol{x}] = \int_0^\varepsilon \frac{m}{2}\dot{\boldsymbol{x}}^2 \, dt\]</div>
+\[S[\boldsymbol{x}] = \int_0^\varepsilon \frac{m}{2}\dot{\boldsymbol{x}}^2 \, \mathrm{d}t\]</div>
 <p>For a path from <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span> in time <span class="math notranslate nohighlight">\(\varepsilon\)</span>, we parameterize the path and evaluate the path integral.</p>
 <p>In the <strong>time-sliced formulation</strong>, the path integral becomes</p>
 <div class="math notranslate nohighlight">
-\[K(\boldsymbol{x}_f, \boldsymbol{x}_i; \varepsilon) = \int \mathcal{D}[\boldsymbol{x}] \, e^{iS[\boldsymbol{x}]/\hbar}\]</div>
+\[K(\boldsymbol{x}_f, \boldsymbol{x}_i; \varepsilon) = \int \mathcal{D}[\boldsymbol{x}] \, \mathrm{e}^{\mathrm{i}S[\boldsymbol{x}]/\hbar}\]</div>
 <p>For small <span class="math notranslate nohighlight">\(\varepsilon\)</span>, the path is approximately a straight line, and we can write</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{x}(t) = \boldsymbol{x}_i + \frac{(\boldsymbol{x}_f - \boldsymbol{x}_i)\varepsilon}{\varepsilon} t = \boldsymbol{x}_i + (\boldsymbol{x}_f - \boldsymbol{x}_i)\frac{t}{\varepsilon}\]</div>
@@ -751,32 +777,54 @@ document.write(`
 \[S = \frac{m}{2} \left(\frac{\boldsymbol{x}_f - \boldsymbol{x}_i}{\varepsilon}\right)^2 \varepsilon = \frac{m(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2\varepsilon}\]</div>
 <p>The path integral is a <strong>Gaussian integral</strong>:</p>
 <div class="math notranslate nohighlight">
-\[K = \int \mathcal{D}[\boldsymbol{x}] \, \exp\left(\frac{im(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2\hbar\varepsilon}\right)\]</div>
-<p>Using the Gaussian integral formula <span class="math notranslate nohighlight">\(\int e^{-\alpha x^2} dx = \sqrt{\pi/\alpha}\)</span> (with <span class="math notranslate nohighlight">\(\alpha \to -i\alpha\)</span>):</p>
+\[K = \int \mathcal{D}[\boldsymbol{x}] \, \exp\left(\frac{\mathrm{i}m(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2\hbar\varepsilon}\right)\]</div>
+<p>Using the Gaussian integral formula <span class="math notranslate nohighlight">\(\int \mathrm{e}^{-\alpha x^2} dx = \sqrt{\pi/\alpha}\)</span> (with <span class="math notranslate nohighlight">\(\alpha \to -\mathrm{i}\alpha\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[K(\boldsymbol{x}_f, \boldsymbol{x}_i; \varepsilon) = \left(\frac{m}{2\pi i\hbar\varepsilon}\right)^{d/2} \exp\left(\frac{im(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2\hbar\varepsilon}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(d\)</span> is the spatial dimension. The prefactor <span class="math notranslate nohighlight">\((m/2\pi i\hbar\varepsilon)^{d/2}\)</span> is the <strong>normalization factor</strong> for a single time slice.</p>
+\[K(\boldsymbol{x}_f, \boldsymbol{x}_i; \varepsilon) = \left(\frac{m}{2\pi \mathrm{i}\hbar\varepsilon}\right)^{d/2} \exp\left(\frac{\mathrm{i}m(\boldsymbol{x}_f - \boldsymbol{x}_i)^2}{2\hbar\varepsilon}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(d\)</span> is the spatial dimension. The prefactor <span class="math notranslate nohighlight">\((m/2\pi \mathrm{i}\hbar\varepsilon)^{d/2}\)</span> is the <strong>normalization factor</strong> for a single time slice.</p>
 </div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Normalization Factor for the Path Integral Measure</p>
+<p class="admonition-title">Derivation: Path Integral Normalization</p>
 <p>The path integral measure <span class="math notranslate nohighlight">\(\mathcal{D}[\boldsymbol{x}]\)</span> for <span class="math notranslate nohighlight">\(N\)</span> discrete time slices is defined as</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{D}[\boldsymbol{x}] = \prod_{n=1}^{N-1} d^d\boldsymbol{x}_n \cdot \lambda_N^{-N/2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda_N\)</span> is a <strong>normalization constant</strong> (dimension [length]<span class="math notranslate nohighlight">\(^d\)</span>) that ensures proper dimensions and convergence.</p>
 <p>For a free particle, each time slice contributes a factor</p>
 <div class="math notranslate nohighlight">
-\[\lambda_\varepsilon = \left(\frac{2\pi i\hbar\varepsilon}{m}\right)\]</div>
+\[\lambda_\varepsilon = \left(\frac{2\pi \mathrm{i}\hbar\varepsilon}{m}\right)\]</div>
 <p>For <span class="math notranslate nohighlight">\(N\)</span> slices spanning total time <span class="math notranslate nohighlight">\(T = N\varepsilon\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\lambda_N = \lambda_\varepsilon = \frac{2\pi i\hbar\varepsilon}{m}\]</div>
+\[\lambda_N = \lambda_\varepsilon = \frac{2\pi \mathrm{i}\hbar\varepsilon}{m}\]</div>
 <p>The full propagator over <span class="math notranslate nohighlight">\(N\)</span> slices is</p>
 <div class="math notranslate nohighlight">
-\[K_N = \prod_{n=0}^{N-1} \left(\frac{m}{2\pi i\hbar\varepsilon}\right)^{d/2} \exp\left(\frac{im(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2}{2\hbar\varepsilon}\right)\]</div>
+\[K_N = \prod_{n=0}^{N-1} \left(\frac{m}{2\pi \mathrm{i}\hbar\varepsilon}\right)^{d/2} \exp\left(\frac{\mathrm{i}m(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2}{2\hbar\varepsilon}\right)\]</div>
 <div class="math notranslate nohighlight">
-\[= \left(\frac{m}{2\pi i\hbar\varepsilon}\right)^{Nd/2} \int \prod_{n=1}^{N-1} d^d\boldsymbol{x}_n \, \exp\left(\frac{i}{\hbar} \sum_n \frac{m}{2}\frac{(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2}{\varepsilon}\right)\]</div>
-<p>The prefactor <span class="math notranslate nohighlight">\(\left(m/2\pi i\hbar\varepsilon\right)^{Nd/2}\)</span> is the product of normalization factors for each time slice, ensuring that probability is conserved: <span class="math notranslate nohighlight">\(\int K_N(\boldsymbol{x}_f, \boldsymbol{x}_i) \, d^d\boldsymbol{x}_i = 1\)</span> for fixed <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span>.</p>
+\[= \left(\frac{m}{2\pi \mathrm{i}\hbar\varepsilon}\right)^{Nd/2} \int \prod_{n=1}^{N-1} d^d\boldsymbol{x}_n \, \exp\left(\frac{\mathrm{i}}{\hbar} \sum_n \frac{m}{2}\frac{(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2}{\varepsilon}\right)\]</div>
+<p>The prefactor <span class="math notranslate nohighlight">\(\left(m/2\pi \mathrm{i}\hbar\varepsilon\right)^{Nd/2}\)</span> is the product of normalization factors for each time slice, ensuring that probability is conserved: <span class="math notranslate nohighlight">\(\int K_N(\boldsymbol{x}_f, \boldsymbol{x}_i) \, d^d\boldsymbol{x}_i = 1\)</span> for fixed <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span>.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="3-1-3-quantum-mechanics-as-optics.html"><span class="std std-doc">3 1 3 Quantum Mechanics As Optics</span></a></strong>: Path integral as optical analogy</p></li>
+<li><p><strong><a class="reference internal" href="3-2-2-free-particle-propagator.html"><span class="std std-doc">3 2 2 Free Particle Propagator</span></a></strong>: Computing path integrals for free particles</p></li>
+<li><p><strong><a class="reference internal" href="3-4-1-wick-rotation.html"><span class="std std-doc">3 4 1 Wick Rotation</span></a></strong>: Euclidean path integrals and thermal field theory</p></li>
+</ul>
 </div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> Define the path integral amplitude and explain what it means to “sum over all paths.” In particular, address: (a) What is the physical interpretation of a path <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>? (b) Why does each path contribute with equal magnitude but different phase? (c) How is this fundamentally different from classical mechanics?</p>
+<p><strong>2.</strong> The action functional for a free particle is <span class="math notranslate nohighlight">\(S[\boldsymbol{x}] = \int_{t_i}^{t_f} \frac{m}{2}\dot{\boldsymbol{x}}^2 \, \mathrm{d}t\)</span>. (a) Show that the classical path (extremum of <span class="math notranslate nohighlight">\(S\)</span>) is a straight line: <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{cl}(t) = \boldsymbol{x}_i + \frac{\boldsymbol{x}_f - \boldsymbol{x}_i}{t_f - t_i}(t - t_i)\)</span>. (b) Compute the action <span class="math notranslate nohighlight">\(S_\text{cl}\)</span> along this classical path in terms of <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span>, and <span class="math notranslate nohighlight">\(\Delta t = t_f - t_i\)</span>.</p>
+<p><strong>3.</strong> For a particle in a potential <span class="math notranslate nohighlight">\(V(\boldsymbol{x}, t)\)</span>, the Lagrangian is <span class="math notranslate nohighlight">\(L = \frac{m}{2}\dot{\boldsymbol{x}}^2 - V(\boldsymbol{x}, t)\)</span>. Apply the stationary action principle <span class="math notranslate nohighlight">\(\delta S = 0\)</span> to derive the Euler-Lagrange equation. Show that this yields Newton’s second law for the particle.</p>
+<p><strong>4.</strong> Consider two nearby paths, <span class="math notranslate nohighlight">\(\boldsymbol{x}_1(t)\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{x}_2(t)\)</span>, connecting the same initial and final points. Each carries a phase <span class="math notranslate nohighlight">\(\Phi_1 = S_1/\hbar\)</span> and <span class="math notranslate nohighlight">\(\Phi_2 = S_2/\hbar\)</span>. (a) Under what condition on <span class="math notranslate nohighlight">\(|S_1 - S_2|\)</span> do these paths interfere constructively? (b) Under what condition do they interfere destructively? (c) Why are paths far from the classical path typically suppressed?</p>
+<p><strong>5.</strong> Explain the propagator composition property: <span class="math notranslate nohighlight">\(K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_m, t_m) K(\boldsymbol{x}_m, t_m; \boldsymbol{x}_i, t_i) \, d^3\boldsymbol{x}_m\)</span> for <span class="math notranslate nohighlight">\(t_i &lt; t_m &lt; t_f\)</span>. Describe the physical meaning: how do propagators “chain” over time? Why is this property mathematically consistent with the path integral definition?</p>
+<p><strong>6.</strong> In the classical limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, discuss how the path integral reproduces classical mechanics. Specifically: (a) Which path(s) dominate the sum? (b) What happens to paths with <span class="math notranslate nohighlight">\(|S - S_\text{cl}| \gg \hbar\)</span>? (c) Why does this explain the correspondence principle?</p>
+<p><strong>7.</strong> For a free particle confined to one dimension, the propagator over infinitesimal time <span class="math notranslate nohighlight">\(\varepsilon\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[K(x_f, x_i; \varepsilon) = \left(\frac{m}{2\pi i \hbar \varepsilon}\right)^{1/2} \exp\left(\frac{\mathrm{i}m(x_f - x_i)^2}{2\hbar\varepsilon}\right).\]</div>
+<p>Verify that this satisfies the time-dependent Schrödinger equation for a free particle: <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \psi}{\partial x^2}\)</span> in the infinitesimal time limit.</p>
+<p><strong>8.</strong> The wavefunction evolves via the propagator: <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}_f, t_f) = \int K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) \psi(\boldsymbol{x}_i, t_i) \, d^3\boldsymbol{x}_i\)</span>. Show that if <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}_i, t_i)\)</span> obeys the Schrödinger equation with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span>, and <span class="math notranslate nohighlight">\(K\)</span> is the correct propagator for that Hamiltonian, then <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}_f, t_f)\)</span> also obeys the Schrödinger equation. (Hint: Write the time derivative of the wavefunction evolution and use the composition property.)</p>
 </section>
 </section>
 
@@ -865,6 +913,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -902,7 +951,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

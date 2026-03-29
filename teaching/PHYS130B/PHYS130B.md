@@ -10,9 +10,9 @@ tags: [Course Syllabus]
 
 ### Schedule of Classes
 
-* *Lecture*: Mon, Wed, Fri. 3:00 PM - 3:50 PM, RWAC 0115
+* *Lecture*: Mon, Wed, Fri. 3:00 PM - 3:50 PM, MOS 0204
 
-* *Discussion session*: Thu. 7:00 PM - 7:50 PM, YORK 4080A
+* *Discussion session*: Thu. 6:30 PM - 7:20 PM, WLH 2204
 
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
@@ -65,7 +65,7 @@ Some other books for reference:
 
 <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1.5em; margin: 1em 0; background: #f8f9fa;">
   <a href="/teaching/PHYS130B/notes/" target="_blank" style="font-size: 1.1em;">/teaching/PHYS130B/notes/</a><br>
-  <span style="color: #666; font-size: 0.9em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Cursor AI; all material has been reviewed by the instructor.</span>
+  <span style="color: #666; font-size: 0.9em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Claude Code and Cursor AI; all material has been reviewed by the instructor.</span>
 </div>
 
 **Chap 1. Qubit** (Tong §4)
@@ -77,7 +77,7 @@ Some other books for reference:
 **Chap 2. Identical Particles** (Tong §8)
 
 - 2.1 Bosons and Fermions
-- 2.2 Spin
+- 2.2 Angular Momentum
 - 2.3 Anyons
 
 **Chap 3. Path Integral** (Tong §15)
@@ -102,18 +102,8 @@ Some other books for reference:
 
 **Chap 6. Quantum Foundations** (Tong §16)
 
-- 6.1 Entanglement
-- 6.2 Density Matrix
+- 6.1 Density Matrix
+- 6.2 Entanglement
 - 6.3 Generalized Measurement
 - 6.4 Open Quantum Systems
 
-#### Previous Lecture Notes (Mathematica)
-
-As a UCSD student, you have free access to *Mathematica* ([see how](/teaching/Mathematica_UCSD)).
-
-- Path Integral Quantization ([Mathematica](/teaching/PHYS130B/notebooks/PathIntegral.nb))
-- Perturbation Theory ([Mathematica](/teaching/PHYS130B/notebooks/PerturbationTheory.nb))
-- Phase and Gauge ([Mathematica](/teaching/PHYS130B/notebooks/PhaseAndGauge.nb))
-- Qubits and Entanglement ([Mathematica](/teaching/PHYS130B/notebooks/QubitsAndEntanglement.nb))
-- Quantum Statistics ([Mathematica](/teaching/PHYS130B/notebooks/QuantumStatistics.nb))
-- Algebraic Methods ([Mathematica](/teaching/PHYS130B/notebooks/AlgebraicMethods.nb))

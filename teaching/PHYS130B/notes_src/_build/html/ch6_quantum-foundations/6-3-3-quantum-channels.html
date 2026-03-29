@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,7 +521,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-quantum-channel">Definition: Quantum Channel</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cptp-properties">CPTP Properties</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-motivation-for-complete-positivity">Physical Motivation for Complete Positivity</a></li>
 </ul>
@@ -548,6 +547,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#channel-composition">Channel Composition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#channel-capacity-outlook">Channel Capacity (Outlook)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-kraus-completeness-relation">Problem 1: Kraus Completeness Relation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-depolarizing-channel-on-bloch-sphere">Problem 2: Depolarizing Channel on Bloch Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-amplitude-damping-and-spontaneous-emission">Problem 3: Amplitude Damping and Spontaneous Emission</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-completely-positive-trace-preserving-cptp-maps">Problem 4: Completely Positive Trace-Preserving (CPTP) Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-choi-matrix-and-channel-state-duality">Problem 5: Choi Matrix and Channel-State Duality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-composing-channels">Problem 6: Composing Channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-7-distinguishing-quantum-noise-channels">Problem 7: Distinguishing Quantum Noise Channels</a></li>
 </ul>
 </li>
 </ul>
@@ -578,30 +587,40 @@ document.write(`
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <p>A quantum channel is a map that transforms one density matrix into another while respecting the rules of quantum mechanics: probabilities must be conserved, and all quantum properties preserved even for subsystems. These linear maps are the quantum generalization of classical communication channels, encoding everything from the evolution of open systems to the effects of quantum noise.</p>
-<section id="definition-quantum-channel">
-<h3>Definition: Quantum Channel<a class="headerlink" href="#definition-quantum-channel" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Definition</p>
+<p>Quantum Channel</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The completely positive condition requires the channel to remain positive on extensions. Construct a map that is positive but not completely positive (e.g., the transpose map T: ρ → ρ^T) and show why it’s unphysical.</p>
+</div>
+</div>
 <p>A <strong>quantum channel</strong> (or <strong>quantum operation</strong>) is a linear map:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{E}: \text{Density matrices on } \mathcal{H}_\text{in} \to \text{Density matrices on } \mathcal{H}_\text{out}\]</div>
+\[
+\mathcal{E}: \text{Density matrices on } \mathcal{H}_\text{in} \to \text{Density matrices on } \mathcal{H}_\text{out}\]</div>
 <p>Representing any physical process: unitary evolution, measurement, dissipation, entanglement with environment, etc.</p>
-</section>
 <section id="cptp-properties">
 <h3>CPTP Properties<a class="headerlink" href="#cptp-properties" title="Link to this heading">#</a></h3>
 <p>A valid quantum channel must satisfy:</p>
 <p><strong>1. Linearity</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-linearity">
-<span class="eqno">(434)<a class="headerlink" href="#equation-eq-channel-linearity" title="Link to this equation">#</a></span>\[\mathcal{E}(p\rho_1 + q\rho_2) = p\mathcal{E}(\rho_1) + q\mathcal{E}(\rho_2)\]</div>
+<span class="eqno">(332)<a class="headerlink" href="#equation-eq-channel-linearity" title="Link to this equation">#</a></span>\[
+\mathcal{E}(p\rho_1 + q\rho_2) = p\mathcal{E}(\rho_1) + q\mathcal{E}(\rho_2)\]</div>
 <p><strong>2. Trace preservation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-trace-preserving">
-<span class="eqno">(435)<a class="headerlink" href="#equation-eq-channel-trace-preserving" title="Link to this equation">#</a></span>\[\text{Tr}(\mathcal{E}(\rho)) = \text{Tr}(\rho) = 1\]</div>
+<span class="eqno">(333)<a class="headerlink" href="#equation-eq-channel-trace-preserving" title="Link to this equation">#</a></span>\[
+\text{Tr}(\mathcal{E}(\rho)) = \text{Tr}(\rho) = 1\]</div>
 <p>Probabilities are conserved; output is a valid density matrix.</p>
 <p><strong>3. Positivity</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-positivity">
-<span class="eqno">(436)<a class="headerlink" href="#equation-eq-channel-positivity" title="Link to this equation">#</a></span>\[\rho \geq 0 \quad \Rightarrow \quad \mathcal{E}(\rho) \geq 0\]</div>
+<span class="eqno">(334)<a class="headerlink" href="#equation-eq-channel-positivity" title="Link to this equation">#</a></span>\[
+\rho \geq 0 \quad \Rightarrow \quad \mathcal{E}(\rho) \geq 0\]</div>
 <p>Positive semidefinite inputs map to positive semidefinite outputs.</p>
 <p><strong>4. Complete positivity</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-completely-positive">
-<span class="eqno">(437)<a class="headerlink" href="#equation-eq-channel-completely-positive" title="Link to this equation">#</a></span>\[\mathcal{E} \otimes \mathcal{I}_n \text{ is positive for all } n\]</div>
+<span class="eqno">(335)<a class="headerlink" href="#equation-eq-channel-completely-positive" title="Link to this equation">#</a></span>\[
+\mathcal{E} \otimes \mathcal{I}_n \text{ is positive for all } n\]</div>
 <p>Even when the system is entangled with auxiliary systems (e.g., reference qubits), the map preserves positivity.</p>
 <section id="physical-motivation-for-complete-positivity">
 <h4>Physical Motivation for Complete Positivity<a class="headerlink" href="#physical-motivation-for-complete-positivity" title="Link to this heading">#</a></h4>
@@ -613,10 +632,12 @@ document.write(`
 <h3>Kraus Representation Theorem<a class="headerlink" href="#kraus-representation-theorem" title="Link to this heading">#</a></h3>
 <p><strong>Theorem</strong>: A linear map <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> on density matrices is CPTP if and only if it can be written in <strong>Kraus form</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-kraus">
-<span class="eqno">(438)<a class="headerlink" href="#equation-eq-channel-kraus" title="Link to this equation">#</a></span>\[\mathcal{E}(\rho) = \sum_{k=1}^r K_k \rho K_k^\dagger\]</div>
+<span class="eqno">(336)<a class="headerlink" href="#equation-eq-channel-kraus" title="Link to this equation">#</a></span>\[
+\mathcal{E}(\rho) = \sum_{k=1}^r K_k \rho K_k^\dagger\]</div>
 <p>where the <strong>Kraus operators</strong> <span class="math notranslate nohighlight">\(\{K_k\}\)</span> satisfy:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-kraus-constraint">
-<span class="eqno">(439)<a class="headerlink" href="#equation-eq-channel-kraus-constraint" title="Link to this equation">#</a></span>\[\sum_k K_k^\dagger K_k = I\]</div>
+<span class="eqno">(337)<a class="headerlink" href="#equation-eq-channel-kraus-constraint" title="Link to this equation">#</a></span>\[
+\sum_k K_k^\dagger K_k = I\]</div>
 <p>(sum of products of Kraus operators equals identity).</p>
 <p>The Kraus representation ensures complete positivity:</p>
 <div class="dropdown note admonition">
@@ -631,7 +652,8 @@ document.write(`
 <h4>Non-Uniqueness of Kraus Operators<a class="headerlink" href="#non-uniqueness-of-kraus-operators" title="Link to this heading">#</a></h4>
 <p>Given one set <span class="math notranslate nohighlight">\(\{K_k\}\)</span>, other valid sets exist related by unitary rotation:</p>
 <div class="math notranslate nohighlight">
-\[K_k' = \sum_j U_{kj} K_j\]</div>
+\[
+K_k' = \sum_j U_{kj} K_j\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{U_{kj}\}\)</span> is a unitary matrix. Different representations yield the same channel map.</p>
 </section>
 <section id="minimal-kraus-representation">
@@ -641,16 +663,22 @@ document.write(`
 </section>
 <section id="choi-jamiolkowski-isomorphism">
 <h3>Choi-Jamiołkowski Isomorphism<a class="headerlink" href="#choi-jamiolkowski-isomorphism" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Choi-Jamiołkowski Isomorphism</p>
 <p>The <strong>Choi matrix</strong> (or <strong>Choi state</strong>) is a bipartite state that uniquely encodes a channel:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-choi">
-<span class="eqno">(440)<a class="headerlink" href="#equation-eq-channel-choi" title="Link to this equation">#</a></span>\[J_\mathcal{E} = (\mathcal{E} \otimes \mathcal{I})(|\Phi^+\rangle\langle\Phi^+|)\]</div>
+<span class="eqno">(338)<a class="headerlink" href="#equation-eq-channel-choi" title="Link to this equation">#</a></span>\[
+J_\mathcal{E} = (\mathcal{E} \otimes \mathcal{I})(|\Phi^+\rangle\langle\Phi^+|)\]</div>
 <p>where <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1}|ii\rangle\)</span> is the <strong>maximally entangled state</strong> (with <span class="math notranslate nohighlight">\(d = \dim(\mathcal{H}_\text{in})\)</span>).</p>
+<p>A channel <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> is CPTP if and only if its Choi matrix is positive semidefinite. This establishes a one-to-one correspondence between CPTP channels and positive semidefinite bipartite states.</p>
+</div>
 <p><strong>Interpretation</strong>: The identity channel applied to one half of a maximally entangled pair; the other half undergoes channel <span class="math notranslate nohighlight">\(\mathcal{E}\)</span>. The resulting state encodes the full information about <span class="math notranslate nohighlight">\(\mathcal{E}\)</span>.</p>
 <section id="reconstruction">
 <h4>Reconstruction<a class="headerlink" href="#reconstruction" title="Link to this heading">#</a></h4>
 <p>From the Choi matrix, reconstruct the channel via:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-choi-recovery">
-<span class="eqno">(441)<a class="headerlink" href="#equation-eq-channel-choi-recovery" title="Link to this equation">#</a></span>\[\mathcal{E}(\rho) = \text{Tr}_1((I \otimes \rho^T) J_\mathcal{E})\]</div>
+<span class="eqno">(339)<a class="headerlink" href="#equation-eq-channel-choi-recovery" title="Link to this equation">#</a></span>\[
+\mathcal{E}(\rho) = \text{Tr}_1((I \otimes \rho^T) J_\mathcal{E})\]</div>
 <p>where the partial transpose <span class="math notranslate nohighlight">\(\rho^T\)</span> is applied to the input system, and we trace over the reference system.</p>
 <p>Complete positivity can be checked via the Choi matrix:</p>
 <div class="dropdown note admonition">
@@ -665,7 +693,8 @@ document.write(`
 <section id="unitary-channel">
 <h4>1. Unitary Channel<a class="headerlink" href="#unitary-channel" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight" id="equation-eq-channel-unitary">
-<span class="eqno">(442)<a class="headerlink" href="#equation-eq-channel-unitary" title="Link to this equation">#</a></span>\[\mathcal{E}_U(\rho) = U \rho U^\dagger\]</div>
+<span class="eqno">(340)<a class="headerlink" href="#equation-eq-channel-unitary" title="Link to this equation">#</a></span>\[
+\mathcal{E}_U(\rho) = U \rho U^\dagger\]</div>
 <p><strong>Kraus form</strong>: Single operator <span class="math notranslate nohighlight">\(K = U\)</span> (with <span class="math notranslate nohighlight">\(U^\dagger U = I\)</span>).</p>
 <p><strong>Properties</strong>:</p>
 <ul class="simple">
@@ -678,43 +707,51 @@ document.write(`
 <h4>2. Depolarizing Channel<a class="headerlink" href="#depolarizing-channel" title="Link to this heading">#</a></h4>
 <p>With probability <span class="math notranslate nohighlight">\(p\)</span>, the state becomes completely random; with probability <span class="math notranslate nohighlight">\(1-p\)</span>, it’s unchanged:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-depolarizing">
-<span class="eqno">(443)<a class="headerlink" href="#equation-eq-channel-depolarizing" title="Link to this equation">#</a></span>\[\mathcal{E}_\text{depol}(\rho) = (1-p)\rho + p\frac{I}{d}\]</div>
+<span class="eqno">(341)<a class="headerlink" href="#equation-eq-channel-depolarizing" title="Link to this equation">#</a></span>\[
+\mathcal{E}_\text{depol}(\rho) = (1-p)\rho + p\frac{I}{d}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d = \dim(\mathcal{H})\)</span>.</p>
 <p><strong>Kraus operators</strong> (for qubit, <span class="math notranslate nohighlight">\(d=2\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-depol-kraus">
-<span class="eqno">(444)<a class="headerlink" href="#equation-eq-channel-depol-kraus" title="Link to this equation">#</a></span>\[K_0 = \sqrt{1-p}\, I, \quad K_1 = \sqrt{p/3}\, \hat{\sigma}_x, \quad K_2 = \sqrt{p/3}\, \hat{\sigma}_y, \quad K_3 = \sqrt{p/3}\, \hat{\sigma}_z\]</div>
+<span class="eqno">(342)<a class="headerlink" href="#equation-eq-channel-depol-kraus" title="Link to this equation">#</a></span>\[
+K_0 = \sqrt{1-p}\, I, \quad K_1 = \sqrt{p/3}\, \hat{\sigma}^x, \quad K_2 = \sqrt{p/3}\, \hat{\sigma}^y, \quad K_3 = \sqrt{p/3}\, \hat{\sigma}^z\]</div>
 <p><strong>Physical interpretation</strong>: Errors on all three Pauli axes with equal probability; models generic noise.</p>
 </section>
 <section id="amplitude-damping-t-1-process">
 <h4>3. Amplitude Damping (<span class="math notranslate nohighlight">\(T_1\)</span> Process)<a class="headerlink" href="#amplitude-damping-t-1-process" title="Link to this heading">#</a></h4>
 <p>Excited state decays to ground state at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-amplitude-damping">
-<span class="eqno">(445)<a class="headerlink" href="#equation-eq-channel-amplitude-damping" title="Link to this equation">#</a></span>\[\mathcal{E}_\text{amp}(\rho) = K_0 \rho K_0^\dagger + K_1 \rho K_1^\dagger\]</div>
+<span class="eqno">(343)<a class="headerlink" href="#equation-eq-channel-amplitude-damping" title="Link to this equation">#</a></span>\[
+\mathcal{E}_\text{amp}(\rho) = K_0 \rho K_0^\dagger + K_1 \rho K_1^\dagger\]</div>
 <p>with:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-amp-kraus">
-<span class="eqno">(446)<a class="headerlink" href="#equation-eq-channel-amp-kraus" title="Link to this equation">#</a></span>\[\begin{split}K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad K_1 = \begin{pmatrix} 0 &amp; \sqrt{\gamma} \\ 0 &amp; 0 \end{pmatrix}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\gamma = 1 - e^{-t/T_1}\)</span> is the decay probability.</p>
+<span class="eqno">(344)<a class="headerlink" href="#equation-eq-channel-amp-kraus" title="Link to this equation">#</a></span>\[\begin{split}
+K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad K_1 = \begin{pmatrix} 0 &amp; \sqrt{\gamma} \\ 0 &amp; 0 \end{pmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma = 1 - \mathrm{e}^{-t/T_1}\)</span> is the decay probability.</p>
 <p><strong>Physical interpretation</strong>: Energy dissipation; ground state is absorbing (fixed point).</p>
 </section>
 <section id="phase-damping-t-2-process-dephasing">
 <h4>4. Phase Damping (<span class="math notranslate nohighlight">\(T_2\)</span> Process, Dephasing)<a class="headerlink" href="#phase-damping-t-2-process-dephasing" title="Link to this heading">#</a></h4>
 <p>Coherences decay without energy loss at rate <span class="math notranslate nohighlight">\(\Gamma_\phi = 1/T_2\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-phase-damping">
-<span class="eqno">(447)<a class="headerlink" href="#equation-eq-channel-phase-damping" title="Link to this equation">#</a></span>\[\mathcal{E}_\text{phase}(\rho) = K_0 \rho K_0^\dagger + K_1 \rho K_1^\dagger\]</div>
+<span class="eqno">(345)<a class="headerlink" href="#equation-eq-channel-phase-damping" title="Link to this equation">#</a></span>\[
+\mathcal{E}_\text{phase}(\rho) = K_0 \rho K_0^\dagger + K_1 \rho K_1^\dagger\]</div>
 <p>with:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-phase-kraus">
-<span class="eqno">(448)<a class="headerlink" href="#equation-eq-channel-phase-kraus" title="Link to this equation">#</a></span>\[\begin{split}K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad K_1 = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; \sqrt{\gamma} \end{pmatrix}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\gamma = 1 - e^{-t/T_2}\)</span>.</p>
+<span class="eqno">(346)<a class="headerlink" href="#equation-eq-channel-phase-kraus" title="Link to this equation">#</a></span>\[\begin{split}
+K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad K_1 = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; \sqrt{\gamma} \end{pmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma = 1 - \mathrm{e}^{-t/T_2}\)</span>.</p>
 <p><strong>Physical interpretation</strong>: Random phase fluctuations; diagonal density matrix (classical-like).</p>
 </section>
 <section id="erasure-channel">
 <h4>5. Erasure Channel<a class="headerlink" href="#erasure-channel" title="Link to this heading">#</a></h4>
 <p>With probability <span class="math notranslate nohighlight">\(p\)</span>, the system is lost (replaced by flag state <span class="math notranslate nohighlight">\(|e\rangle\)</span>); with probability <span class="math notranslate nohighlight">\(1-p\)</span>, passed unchanged:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-erasure">
-<span class="eqno">(449)<a class="headerlink" href="#equation-eq-channel-erasure" title="Link to this equation">#</a></span>\[\mathcal{E}_\text{erase}(\rho) = (1-p)\rho \oplus p|e\rangle\langle e|\]</div>
+<span class="eqno">(347)<a class="headerlink" href="#equation-eq-channel-erasure" title="Link to this equation">#</a></span>\[
+\mathcal{E}_\text{erase}(\rho) = (1-p)\rho \oplus p|e\rangle\langle e|\]</div>
 <p><strong>Kraus operators</strong>:</p>
 <div class="math notranslate nohighlight">
-\[K_0 = \sqrt{1-p}\, I, \quad K_1 = \sqrt{p}\, |e\rangle\langle 0| + \ldots\]</div>
+\[
+K_0 = \sqrt{1-p}\, I, \quad K_1 = \sqrt{p}\, |e\rangle\langle 0| + \ldots\]</div>
 <p><strong>Physical interpretation</strong>: Photon loss, quantum memory readout failure; allows identifying lost systems.</p>
 </section>
 </section>
@@ -739,29 +776,34 @@ document.write(`
 <h3>Partial Transpose and Physical Channels<a class="headerlink" href="#partial-transpose-and-physical-channels" title="Link to this heading">#</a></h3>
 <p>The <strong>partial transpose</strong> of a bipartite state <span class="math notranslate nohighlight">\(\rho_{AB}\)</span> (w.r.t. system B) is:</p>
 <div class="math notranslate nohighlight">
-\[\rho_{AB}^{T_B} = (I_A \otimes T_B)(\rho_{AB})\]</div>
+\[
+\rho_{AB}^{T_B} = (I_A \otimes T_B)(\rho_{AB})\]</div>
 <p>where <span class="math notranslate nohighlight">\(T_B\)</span> is the transpose operation on subsystem B: <span class="math notranslate nohighlight">\((|i\rangle\langle j|)^T = |j\rangle\langle i|\)</span>.</p>
 <p><strong>Criterion for CPTP channels</strong> (via Choi matrix):</p>
 <p>The channel <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> is CPTP if and only if the partial transpose of its Choi matrix is positive semidefinite:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-partial-transpose-criterion">
-<span class="eqno">(450)<a class="headerlink" href="#equation-eq-channel-partial-transpose-criterion" title="Link to this equation">#</a></span>\[J_\mathcal{E}^{T_2} \geq 0\]</div>
+<span class="eqno">(348)<a class="headerlink" href="#equation-eq-channel-partial-transpose-criterion" title="Link to this equation">#</a></span>\[
+J_\mathcal{E}^{T_2} \geq 0\]</div>
 <p><strong>Physical interpretation</strong>: The partial transpose detects whether a state is separable (no entanglement); similarly, it detects whether a channel is physical.</p>
 </section>
 <section id="channel-composition">
 <h3>Channel Composition<a class="headerlink" href="#channel-composition" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(\mathcal{E}_1\)</span> and <span class="math notranslate nohighlight">\(\mathcal{E}_2\)</span> are channels, their <strong>composition</strong> (apply <span class="math notranslate nohighlight">\(\mathcal{E}_1\)</span> first, then <span class="math notranslate nohighlight">\(\mathcal{E}_2\)</span>) is also a channel:</p>
 <div class="math notranslate nohighlight" id="equation-eq-channel-composition">
-<span class="eqno">(451)<a class="headerlink" href="#equation-eq-channel-composition" title="Link to this equation">#</a></span>\[(\mathcal{E}_2 \circ \mathcal{E}_1)(\rho) = \mathcal{E}_2(\mathcal{E}_1(\rho))\]</div>
+<span class="eqno">(349)<a class="headerlink" href="#equation-eq-channel-composition" title="Link to this equation">#</a></span>\[
+(\mathcal{E}_2 \circ \mathcal{E}_1)(\rho) = \mathcal{E}_2(\mathcal{E}_1(\rho))\]</div>
 <p><strong>Kraus operators</strong>: If <span class="math notranslate nohighlight">\(\mathcal{E}_1(\rho) = \sum_k K_k \rho K_k^\dagger\)</span> and <span class="math notranslate nohighlight">\(\mathcal{E}_2(\rho) = \sum_j L_j \rho L_j^\dagger\)</span>, then:</p>
 <div class="math notranslate nohighlight">
-\[(\mathcal{E}_2 \circ \mathcal{E}_1)(\rho) = \sum_{j,k} (L_j K_k) \rho (L_j K_k)^\dagger\]</div>
+\[
+(\mathcal{E}_2 \circ \mathcal{E}_1)(\rho) = \sum_{j,k} (L_j K_k) \rho (L_j K_k)^\dagger\]</div>
 <p>Kraus operators of the composition are products <span class="math notranslate nohighlight">\(L_j K_k\)</span>.</p>
 </section>
 <section id="channel-capacity-outlook">
 <h3>Channel Capacity (Outlook)<a class="headerlink" href="#channel-capacity-outlook" title="Link to this heading">#</a></h3>
 <p>The <strong>classical capacity</strong> of a quantum channel is the maximum rate of classical information that can be reliably transmitted:</p>
 <div class="math notranslate nohighlight">
-\[C(\mathcal{E}) = \max_{\{p_i, \rho_i\}} I(X : Y)\]</div>
+\[
+C(\mathcal{E}) = \max_{\{p_i, \rho_i\}} I(X : Y)\]</div>
 <p>where the max is over all input ensembles <span class="math notranslate nohighlight">\(\{p_i, \rho_i\}\)</span>, and <span class="math notranslate nohighlight">\(I(X:Y)\)</span> is mutual information.</p>
 <p><strong>Computing capacity</strong> is generally hard; known for specific channels (depolarizing, erasure, amplitude damping).</p>
 <div class="important admonition">
@@ -781,6 +823,97 @@ document.write(`
 <li><p><strong>Partial transpose criterion</strong>: Channel CPTP ⟺ <span class="math notranslate nohighlight">\(J_\mathcal{E}^{T_2} \geq 0\)</span> (partial transpose of Choi state positive).</p></li>
 <li><p><strong>Channel composition</strong>: Sequential channels are channels; Kraus operators compose as products.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="6-3-2-povm.html"><span class="std std-doc">6.3.2 POVM</span></a></strong>: Measurement-induced quantum channels</p></li>
+<li><p><strong><a class="reference internal" href="6-4-2-lindblad-master-equation.html"><span class="std std-doc">6.4.2 Lindblad Master Equation</span></a></strong>: Master equations as channel generators</p></li>
+<li><p><strong><a class="reference internal" href="6-1-1-mixed-states.html"><span class="std std-doc">6.1.1 Mixed States</span></a></strong>: Density matrix evolution</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<section id="problem-1-kraus-completeness-relation">
+<h3>Problem 1: Kraus Completeness Relation<a class="headerlink" href="#problem-1-kraus-completeness-relation" title="Link to this heading">#</a></h3>
+<p>Consider a quantum channel with Kraus operators <span class="math notranslate nohighlight">\(\{K_1, K_2, K_3\}\)</span>. Show that the completeness relation <span class="math notranslate nohighlight">\(\sum_k K_k^\dagger K_k = I\)</span> is <strong>necessary and sufficient</strong> for the channel to be trace-preserving.</p>
+<p><strong>Hint</strong>: Start with the trace of the output <span class="math notranslate nohighlight">\(\text{Tr}(\mathcal{E}(\rho)) = \sum_k \text{Tr}(K_k \rho K_k^\dagger)\)</span> and use the cyclic property of trace.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-2-depolarizing-channel-on-bloch-sphere">
+<h3>Problem 2: Depolarizing Channel on Bloch Sphere<a class="headerlink" href="#problem-2-depolarizing-channel-on-bloch-sphere" title="Link to this heading">#</a></h3>
+<p>A qubit depolarizing channel with parameter <span class="math notranslate nohighlight">\(p\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{E}_\text{depol}(\rho) = (1-p)\rho + \frac{p}{2}I\]</div>
+<p>Express this in Kraus form using Pauli operators <span class="math notranslate nohighlight">\(\{I, \hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\}\)</span>.</p>
+<p>(a) Write down all four Kraus operators explicitly.</p>
+<p>(b) Verify the completeness relation <span class="math notranslate nohighlight">\(\sum_k K_k^\dagger K_k = I\)</span>.</p>
+<p>(c) Interpret the action of the depolarizing channel on the <strong>Bloch vector</strong>: if <span class="math notranslate nohighlight">\(\rho = \frac{1}{2}(I + \boldsymbol{r} \cdot \hat{\boldsymbol{\sigma}})\)</span> with Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>, show that the output has Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{r}' = (1-p)\boldsymbol{r}\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-3-amplitude-damping-and-spontaneous-emission">
+<h3>Problem 3: Amplitude Damping and Spontaneous Emission<a class="headerlink" href="#problem-3-amplitude-damping-and-spontaneous-emission" title="Link to this heading">#</a></h3>
+<p>A two-level atom decays from excited state <span class="math notranslate nohighlight">\(|1\rangle\)</span> to ground state <span class="math notranslate nohighlight">\(|0\rangle\)</span> with lifetime <span class="math notranslate nohighlight">\(T_1\)</span>. After time <span class="math notranslate nohighlight">\(t\)</span>, the amplitude damping channel is given by Kraus operators:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad K_1 = \begin{pmatrix} 0 &amp; \sqrt{\gamma} \\ 0 &amp; 0 \end{pmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma = 1 - \mathrm{e}^{-t/T_1}\)</span>.</p>
+<p>(a) Verify the completeness relation <span class="math notranslate nohighlight">\(K_0^\dagger K_0 + K_1^\dagger K_1 = I\)</span>.</p>
+<p>(b) Apply the channel to a pure state <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\)</span>. Write the output density matrix <span class="math notranslate nohighlight">\(\mathcal{E}_\text{amp}(|\psi\rangle\langle\psi|)\)</span> and interpret physically.</p>
+<p>(c) Show that the ground state <span class="math notranslate nohighlight">\(|0\rangle\)</span> is a <strong>fixed point</strong> of the channel: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{amp}(|0\rangle\langle 0|) = |0\rangle\langle 0|\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-4-completely-positive-trace-preserving-cptp-maps">
+<h3>Problem 4: Completely Positive Trace-Preserving (CPTP) Maps<a class="headerlink" href="#problem-4-completely-positive-trace-preserving-cptp-maps" title="Link to this heading">#</a></h3>
+<p>Consider the map <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{E}(\rho) = \frac{1}{2}\rho + \frac{1}{2}\sigma^z \rho \sigma^z\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma^z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>.</p>
+<p>(a) Show that this map is <strong>linear</strong> and <strong>trace-preserving</strong>.</p>
+<p>(b) Express this map in Kraus form with operators <span class="math notranslate nohighlight">\(K_0\)</span> and <span class="math notranslate nohighlight">\(K_1\)</span>.</p>
+<p>(c) Verify complete positivity by checking that the map remains positive when tensored with identity: test on the maximally entangled state <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> and confirm <span class="math notranslate nohighlight">\(J_\mathcal{E} \geq 0\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-5-choi-matrix-and-channel-state-duality">
+<h3>Problem 5: Choi Matrix and Channel-State Duality<a class="headerlink" href="#problem-5-choi-matrix-and-channel-state-duality" title="Link to this heading">#</a></h3>
+<p>For the amplitude damping channel (Problem 3), compute the <strong>Choi matrix</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+J_\mathcal{E} = (\mathcal{E} \otimes \mathcal{I})(|\Phi^+\rangle\langle\Phi^+|)\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> and <span class="math notranslate nohighlight">\(\gamma = 0.5\)</span> for concreteness.</p>
+<p>(a) Apply the amplitude damping channel to the <strong>first qubit</strong> of <span class="math notranslate nohighlight">\(|\Phi^+\rangle\langle\Phi^+|\)</span> and compute the resulting <span class="math notranslate nohighlight">\(4 \times 4\)</span> Choi matrix.</p>
+<p>(b) Verify that <span class="math notranslate nohighlight">\(J_\mathcal{E}\)</span> is positive semidefinite (i.e., all eigenvalues <span class="math notranslate nohighlight">\(\geq 0\)</span>).</p>
+<p>(c) The Kraus rank of the channel equals the rank of the Choi matrix. Show that this channel has Kraus rank 2 by confirming the rank of <span class="math notranslate nohighlight">\(J_\mathcal{E}\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-6-composing-channels">
+<h3>Problem 6: Composing Channels<a class="headerlink" href="#problem-6-composing-channels" title="Link to this heading">#</a></h3>
+<p>Consider two channels:</p>
+<ul class="simple">
+<li><p><strong>Phase flip</strong> (bit-flip on <span class="math notranslate nohighlight">\(\sigma^z\)</span>): <span class="math notranslate nohighlight">\(\mathcal{E}_\text{phase}(\rho) = (1-q)\rho + q\sigma^z\rho\sigma^z\)</span></p></li>
+<li><p><strong>Amplitude damping</strong>: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{amp}\)</span> from Problem 3 with <span class="math notranslate nohighlight">\(\gamma = 0.1\)</span></p></li>
+</ul>
+<p>(a) Express the phase-flip channel in Kraus form.</p>
+<p>(b) The composition <span class="math notranslate nohighlight">\(\mathcal{E}_\text{comp} = \mathcal{E}_\text{amp} \circ \mathcal{E}_\text{phase}\)</span> applies phase flip first, then amplitude damping. Write the Kraus operators of the composed channel.</p>
+<p>(c) Show that the composed channel is still CPTP. Is the composition <strong>commutative</strong>? Does <span class="math notranslate nohighlight">\(\mathcal{E}_\text{amp} \circ \mathcal{E}_\text{phase} = \mathcal{E}_\text{phase} \circ \mathcal{E}_\text{amp}\)</span>? Explain physically.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-7-distinguishing-quantum-noise-channels">
+<h3>Problem 7: Distinguishing Quantum Noise Channels<a class="headerlink" href="#problem-7-distinguishing-quantum-noise-channels" title="Link to this heading">#</a></h3>
+<p>Three noise channels (all with parameter <span class="math notranslate nohighlight">\(p = 0.5\)</span>) act on a qubit:</p>
+<ul class="simple">
+<li><p><strong>Bit-flip</strong> (X noise): <span class="math notranslate nohighlight">\(\mathcal{E}_X(\rho) = (1-p)\rho + p\sigma^x\rho\sigma^x\)</span></p></li>
+<li><p><strong>Phase-flip</strong> (Z noise): <span class="math notranslate nohighlight">\(\mathcal{E}_Z(\rho) = (1-p)\rho + p\sigma^z\rho\sigma^z\)</span></p></li>
+<li><p><strong>Depolarizing</strong>: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{depol}(\rho) = (1-p)\rho + \frac{p}{2}I\)</span> (random Pauli, normalized)</p></li>
+</ul>
+<p>(a) Compute the <strong>Choi matrix</strong> for each channel and verify all are positive semidefinite.</p>
+<p>(b) Compute the <strong>purity</strong> <span class="math notranslate nohighlight">\(\text{Tr}(J_\mathcal{E}^2)\)</span> of each Choi matrix. Which channel is most/least noisy?</p>
+<p>(c) Apply each channel to the input state <span class="math notranslate nohighlight">\(\rho_\text{in} = \frac{1}{2}(I + \hat{\sigma}^x)\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\sigma^x\)</span>). Compare the outputs: which channel preserves the most information about the input?</p>
+<p>(d) <strong>Conceptual</strong>: The depolarizing channel is called “universal noise” because it cannot distinguish the computational basis. Explain why bit-flip and phase-flip channels <strong>can</strong> be distinguished by an appropriate measurement on the output, but depolarizing cannot.</p>
+<hr class="docutils" />
 </section>
 </section>
 </section>
@@ -850,7 +983,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-quantum-channel">Definition: Quantum Channel</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cptp-properties">CPTP Properties</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-motivation-for-complete-positivity">Physical Motivation for Complete Positivity</a></li>
 </ul>
@@ -877,6 +1009,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#channel-composition">Channel Composition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#channel-capacity-outlook">Channel Capacity (Outlook)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-kraus-completeness-relation">Problem 1: Kraus Completeness Relation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-depolarizing-channel-on-bloch-sphere">Problem 2: Depolarizing Channel on Bloch Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-amplitude-damping-and-spontaneous-emission">Problem 3: Amplitude Damping and Spontaneous Emission</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-completely-positive-trace-preserving-cptp-maps">Problem 4: Completely Positive Trace-Preserving (CPTP) Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-choi-matrix-and-channel-state-duality">Problem 5: Choi Matrix and Channel-State Duality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-composing-channels">Problem 6: Composing Channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-7-distinguishing-quantum-noise-channels">Problem 7: Distinguishing Quantum Noise Channels</a></li>
 </ul>
 </li>
 </ul>
@@ -916,7 +1058,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

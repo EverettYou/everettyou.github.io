@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,17 +521,23 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-factor-and-quantum-hall-plateaus">Filling Factor and Quantum Hall Plateaus</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-quantum-hall-conductance">Integer Quantum Hall Conductance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#origin-of-quantization-edge-states">Origin of Quantization: Edge States</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charge-pumping">Charge Pumping</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-theory">Linear Response Theory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-nature-chern-number">Topological Nature: Chern Number</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-to-disorder">Robustness to Disorder</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fractional-quantum-hall-effect">Fractional Quantum Hall Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-quantum-hall-effect-iqhe">Integer Quantum Hall Effect (IQHE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-setup-and-observation">Experimental Setup and Observation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-factor-and-magnetic-length">Filling Factor and Magnetic Length</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hall-conductance-derivation">Hall Conductance Derivation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-and-topological-origin">Robustness and Topological Origin</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-disorder-doesn-t-destroy-quantization">Why Disorder Doesn’t Destroy Quantization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-states">Edge States</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laughlin-s-wavefunction-and-fractionality">Laughlin’s Wavefunction and Fractionality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-significance-and-modern-applications">Experimental Significance and Modern Applications</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -557,145 +563,212 @@ document.write(`
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>The quantum Hall effect reveals that the Hall conductance is quantized in integer multiples of e²/h, independent of microscopic details or disorder—a universal transport coefficient set by fundamental constants alone. This topological quantization arises because the filled Landau level supports only a fixed number of current-carrying states, regardless of sample impurity or geometry. The integer quantum Hall effect is a triumph of topological thinking in condensed matter physics, and a window into how topology shapes quantum phenomena.</p>
+<p>The quantum Hall effect (QHE) is one of the most celebrated discoveries in condensed matter physics. It demonstrates that in a strong perpendicular magnetic field, the Hall conductance becomes <em>quantized</em> in units of <span class="math notranslate nohighlight">\(e^2/h\)</span>, achieving values independent of microscopic details like sample purity and geometry. This unexpected robustness points to deep topological structure underlying the effect.</p>
+<section id="integer-quantum-hall-effect-iqhe">
+<h3>Integer Quantum Hall Effect (IQHE)<a class="headerlink" href="#integer-quantum-hall-effect-iqhe" title="Link to this heading">#</a></h3>
+<section id="experimental-setup-and-observation">
+<h4>Experimental Setup and Observation<a class="headerlink" href="#experimental-setup-and-observation" title="Link to this heading">#</a></h4>
+<p>A 2D electron gas (a thin layer of free electrons confined to move in a plane) is placed in a perpendicular magnetic field <span class="math notranslate nohighlight">\(B\)</span>. Current <span class="math notranslate nohighlight">\(I\)</span> flows in one direction (the <span class="math notranslate nohighlight">\(x\)</span>-direction), and the transverse voltage <span class="math notranslate nohighlight">\(V_y\)</span> (perpendicular to current) is measured.</p>
+<p>In a classical conductor, Ohm’s law gives <span class="math notranslate nohighlight">\(V_y = R_H I\)</span> where <span class="math notranslate nohighlight">\(R_H\)</span> is the Hall resistance. The classical Hall coefficient is:</p>
+<div class="math notranslate nohighlight">
+\[
+R_H^{\text{cl}} = \frac{B}{ne}\]</div>
+<p>Crucially, <span class="math notranslate nohighlight">\(R_H^{\text{cl}}\)</span> is continuous in <span class="math notranslate nohighlight">\(B\)</span> and depends on the carrier density <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p><strong>The quantum surprise</strong>: In a strong magnetic field at low temperature, <span class="math notranslate nohighlight">\(R_H\)</span> jumps to quantized values:</p>
 <div class="important admonition">
-<p class="admonition-title">Integer Quantum Hall Effect is Topological</p>
-<p>The quantized Hall resistance <span class="math notranslate nohighlight">\(\rho_{xy} = h/(ne^2)\)</span> (where <span class="math notranslate nohighlight">\(n\)</span> is an integer) is exact and independent of sample geometry, purity, or material details. This topological protection is why IQHE is so robust.</p>
-</div>
-<section id="filling-factor-and-quantum-hall-plateaus">
-<h3>Filling Factor and Quantum Hall Plateaus<a class="headerlink" href="#filling-factor-and-quantum-hall-plateaus" title="Link to this heading">#</a></h3>
-<p>In a 2D electron gas in a strong perpendicular magnetic field, the key parameter is the <strong>filling factor</strong>:</p>
+<p class="admonition-title">Integer Quantum Hall Conductance</p>
 <div class="math notranslate nohighlight">
-\[\nu = \frac{N_e}{N_\phi}\]</div>
-<p>where <span class="math notranslate nohighlight">\(N_e\)</span> is the number of electrons and <span class="math notranslate nohighlight">\(N_\phi = \Phi/\Phi_0\)</span> is the number of flux quanta through the system.</p>
-<p>The filling factor tells us how many Landau levels are occupied. For <span class="math notranslate nohighlight">\(\nu = 1\)</span>, the lowest Landau level is completely filled. For <span class="math notranslate nohighlight">\(\nu = 2\)</span>, both the lowest and first excited Landau levels are filled, etc.</p>
-<p>As we vary the magnetic field (keeping electron number fixed), the filling factor changes. When <span class="math notranslate nohighlight">\(\nu\)</span> is an integer, the Hall conductance exhibits remarkable behavior.</p>
-</section>
-<section id="integer-quantum-hall-conductance">
-<h3>Integer Quantum Hall Conductance<a class="headerlink" href="#integer-quantum-hall-conductance" title="Link to this heading">#</a></h3>
-<p>The <strong>quantum Hall effect</strong> occurs when a 2D electron gas in a perpendicular magnetic field is subject to an applied electric field. An electric field in the <span class="math notranslate nohighlight">\(x\)</span>-direction drives a perpendicular (Hall) current in the <span class="math notranslate nohighlight">\(y\)</span>-direction. The Hall conductance is:</p>
-<div class="math notranslate nohighlight">
-\[\sigma_H = \frac{I_y}{E_x}\]</div>
-<p><strong>Von Klitzing’s experimental discovery (1980)</strong>: When an integer number <span class="math notranslate nohighlight">\(\nu\)</span> of Landau levels are completely filled, the Hall conductance is <strong>exactly quantized</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\sigma_H = \nu\frac{e^2}{h}\]</div>
-<p>This quantization is:</p>
-<ul class="simple">
-<li><p><strong>Exact</strong>: Measured to parts per billion precision</p></li>
-<li><p><strong>Universal</strong>: Independent of material properties, sample shape, even disorder strength</p></li>
-<li><p><strong>Fundamental</strong>: Determined by only two fundamental constants—<span class="math notranslate nohighlight">\(e\)</span> and <span class="math notranslate nohighlight">\(h\)</span>—with no dependence on sample parameters</p></li>
-</ul>
-<p>For a single filled Landau level (<span class="math notranslate nohighlight">\(\nu = 1\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[\sigma_H = \frac{e^2}{h} \approx 77.5\, \mu S\]</div>
-<p>This quantity <span class="math notranslate nohighlight">\(e^2/h\)</span> is so fundamental it’s called the <strong>conductance quantum</strong>. The integer quantum Hall effect is one of the most precisely measured phenomena in physics, rivaling even atomic spectroscopy in accuracy.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Transport Quantization from Edge States</p>
-<p>In a magnetic field <span class="math notranslate nohighlight">\(B\)</span> applied perpendicular to a 2D electron system, Landau levels form at energies <span class="math notranslate nohighlight">\(E_n = \hbar\omega_c(n + 1/2)\)</span> with degeneracy <span class="math notranslate nohighlight">\(N_\phi = \Phi_{\text{total}}/\Phi_0\)</span> per level, where <span class="math notranslate nohighlight">\(\Phi_0 = h/e\)</span> is the flux quantum.</p>
-<p>When <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are completely filled, there are <span class="math notranslate nohighlight">\(N_e = \nu N_\phi\)</span> electrons.</p>
-<p>The key insight: In the bulk, Landau level states are localized by disorder. At the sample <strong>boundary</strong>, the confining potential breaks the degeneracy and creates <strong>extended edge states</strong> that propagate freely along the boundary. When <span class="math notranslate nohighlight">\(\nu\)</span> levels are filled, exactly <span class="math notranslate nohighlight">\(\nu\)</span> edge state branches carry current, each with conductance <span class="math notranslate nohighlight">\(e^2/h\)</span>.</p>
-<p>The total Hall conductance is the sum:</p>
-<div class="math notranslate nohighlight">
-\[\sigma_H = \nu \times \frac{e^2}{h}\]</div>
-<p>This transport is <strong>topologically protected</strong>: the edge states must exist as long as the energy gap separating filled from empty Landau levels persists, regardless of edge details or disorder. This protection is the reason for the remarkable precision.</p>
+\[
+\sigma_{xy} = \nu \frac{e^2}{h}, \quad R_H = \frac{h}{\nu e^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nu = 1, 2, 3, \ldots\)</span> is the <strong>filling factor</strong>, an integer.</p>
+<p>The conductance is <em>exactly</em> quantized—independent of disorder, sample geometry, and other microscopic details.</p>
 </div>
 </section>
-<section id="origin-of-quantization-edge-states">
-<h3>Origin of Quantization: Edge States<a class="headerlink" href="#origin-of-quantization-edge-states" title="Link to this heading">#</a></h3>
-<p>The key to understanding quantum Hall quantization is the role of <strong>edge states</strong>.</p>
-<p><strong>Bulk states</strong>: In the interior of the sample, Landau level states are highly degenerate. Disorder (impurities, defects) localizes these states into immobile clusters. Bulk electrons cannot contribute to transport—they are trapped in localized orbitals.</p>
-<p><strong>Edge states</strong>: At the physical boundary of the sample, the confining potential bends the Landau level structure. States that would be localized in the bulk become <strong>extended along the edge</strong>—they propagate freely along the boundary like a 1D wire.</p>
-<p>When <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are filled:</p>
+<section id="filling-factor-and-magnetic-length">
+<h4>Filling Factor and Magnetic Length<a class="headerlink" href="#filling-factor-and-magnetic-length" title="Link to this heading">#</a></h4>
+<p>The filling factor is the ratio of electrons to flux quanta:</p>
+<div class="important admonition">
+<p class="admonition-title">Filling Factor</p>
+<div class="math notranslate nohighlight">
+\[
+\nu = \frac{N_e}{N_\phi}\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_e\)</span> is the number of electrons and <span class="math notranslate nohighlight">\(N_\phi = BA/\Phi_0 = BA\cdot e/h\)</span> is the number of flux quanta piercing the sample.</p>
+<p>For integer <span class="math notranslate nohighlight">\(\nu\)</span>, exactly <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are filled.</p>
+</div>
+<p>When <span class="math notranslate nohighlight">\(\nu\)</span> is an integer, the Fermi level lies in a gap between filled and empty Landau levels. This gap (the <strong>cyclotron gap</strong>) has size <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> and is crucial for the robustness of the effect.</p>
+</section>
+<section id="hall-conductance-derivation">
+<h4>Hall Conductance Derivation<a class="headerlink" href="#hall-conductance-derivation" title="Link to this heading">#</a></h4>
+<p>Consider a filled Landau level with <span class="math notranslate nohighlight">\(N_{\phi}\)</span> electrons. Each electron carries charge <span class="math notranslate nohighlight">\(-e\)</span>. A current <span class="math notranslate nohighlight">\(I\)</span> flowing through the sample means charges move with drift velocity. The Hall field arises from the Lorentz force:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{F} = -e\boldsymbol{v} \times \boldsymbol{B}\]</div>
+<p>At steady state, the electric field <span class="math notranslate nohighlight">\(E_y\)</span> balances this force to prevent further acceleration. The relation between Hall field and current gives:</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Hall Conductance</p>
+<p>For a filled Landau level in a Hall bar of width <span class="math notranslate nohighlight">\(W\)</span> and length <span class="math notranslate nohighlight">\(L\)</span>:</p>
 <ul class="simple">
-<li><p>The <span class="math notranslate nohighlight">\(\nu\)</span> lowest edge state branches each propagate along the boundary</p></li>
-<li><p>Each branch carries conductance <span class="math notranslate nohighlight">\(e^2/h\)</span> independently</p></li>
-<li><p>The total conductance is the sum: <span class="math notranslate nohighlight">\(\sigma_H = \nu e^2/h\)</span></p></li>
+<li><p>Current <span class="math notranslate nohighlight">\(I\)</span> means <span class="math notranslate nohighlight">\(I/e\)</span> electrons per unit time cross a transverse section.</p></li>
+<li><p>These electrons are deflected by <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, creating a charge accumulation on one edge.</p></li>
+<li><p>The resulting electric field <span class="math notranslate nohighlight">\(E_y\)</span> creates a force that exactly cancels the Lorentz force for the drifting electrons.</p></li>
 </ul>
-<p>This edge transport is <strong>topologically protected</strong>: the states must exist as long as the Landau level gap is maintained, regardless of edge geometry or disorder. This is why the quantum Hall effect is robust—disorder that localizes bulk states cannot destroy the edge transport.</p>
-</section>
-<section id="charge-pumping">
-<h3>Charge Pumping<a class="headerlink" href="#charge-pumping" title="Link to this heading">#</a></h3>
-<p>As the magnetic field increases adiabatically, the Landau level structure evolves. Charges are “pumped” from the bulk to the edge—a quantum transfer of charge across an insulating bulk. This reveals the topological nature: the quantum Hall state transports charge via winding numbers and topological defects, not via conventional current paths.</p>
-</section>
-<section id="linear-response-theory">
-<h3>Linear Response Theory<a class="headerlink" href="#linear-response-theory" title="Link to this heading">#</a></h3>
-<p>In linear response to a weak applied electric field, the current-field relation is governed by the <strong>conductivity tensor</strong>:</p>
+<p>The Hall voltage is <span class="math notranslate nohighlight">\(V_y = E_y \cdot W\)</span>. From the balance of forces and the number of filled levels:</p>
 <div class="math notranslate nohighlight">
-\[J_i = \hat{\sigma}_{ij}E_j\]</div>
-<p>In a magnetic field perpendicular to a 2D system, the conductivity tensor has the form:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\sigma}_{ij} = \hat{\sigma}_{xx}\delta_{ij} + \hat{\sigma}_{xy}\epsilon_{ij}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}_{xx}\)</span> is the longitudinal (dissipative) conductivity and <span class="math notranslate nohighlight">\(\hat{\sigma}_{xy} = \sigma_H\)</span> is the Hall conductivity.</p>
-<p><strong>In the quantum Hall regime</strong>, when a Landau level is completely filled, something remarkable happens:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\sigma}_{xx} \approx 0 \quad (\text{perfect insulator})\]</div>
-<div class="math notranslate nohighlight">
-\[\hat{\sigma}_{xy} = \nu\frac{e^2}{h} \quad (\text{perfectly quantized})\]</div>
-<p>The system acts as a perfect insulator in the direction of the applied field but shows <strong>perfect quantized conductance</strong> perpendicular to both field and current. This is impossible in classical physics—it arises purely from the topological structure of Landau levels and the existence of extended edge states.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Conductivity Tensor and Transport Coefficients</p>
-<p>In the quantum Hall regime, the bulk is insulating (localized states), and all transport flows along the <span class="math notranslate nohighlight">\(\nu\)</span> edge branches. Each edge branch behaves like a 1D quantum wire with quantized conductance <span class="math notranslate nohighlight">\(e^2/h\)</span>.</p>
-<p>A particle with charge <span class="math notranslate nohighlight">\(e\)</span> traveling along an edge picks up an energy <span class="math notranslate nohighlight">\(eE\)</span> from the applied field. In steady state, the current carried by one edge branch is:</p>
-<div class="math notranslate nohighlight">
-\[I_{\text{edge}} = \frac{e^2 E}{h}\]</div>
-<p>so <span class="math notranslate nohighlight">\(\sigma_{\text{edge}} = e^2/h\)</span>.</p>
-<p>With <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels, there are <span class="math notranslate nohighlight">\(\nu\)</span> independent edge branches, so:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\sigma}_{xy} = \nu \times \frac{e^2}{h}\]</div>
-<p>The longitudinal conductivity is suppressed because the bulk is insulating and disorder cannot create midgap states that would short across the sample.</p>
+\[
+\sigma_{xy} = \frac{I}{V_y/L} = \frac{e^2 h}{h} \cdot \nu = \nu \frac{e^2}{h}\]</div>
+<p>The result depends only on <span class="math notranslate nohighlight">\(\nu\)</span> (the number of filled Landau levels) and fundamental constants—not on <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(n\)</span>, or sample properties.</p>
 </div>
 </section>
-<section id="topological-nature-chern-number">
-<h3>Topological Nature: Chern Number<a class="headerlink" href="#topological-nature-chern-number" title="Link to this heading">#</a></h3>
-<p>The quantization of Hall conductance is fundamentally <strong>topological</strong>—it reflects a topological invariant called the <strong>Chern number</strong> of the electron band.</p>
-<p>The Chern number is defined in momentum space as:</p>
+</section>
+<section id="robustness-and-topological-origin">
+<h3>Robustness and Topological Origin<a class="headerlink" href="#robustness-and-topological-origin" title="Link to this heading">#</a></h3>
+<section id="why-disorder-doesn-t-destroy-quantization">
+<h4>Why Disorder Doesn’t Destroy Quantization<a class="headerlink" href="#why-disorder-doesn-t-destroy-quantization" title="Link to this heading">#</a></h4>
+<p>Intuitively, disorder should spoil any delicate quantum effect. Yet the QHE conductance is observed to be quantized to parts per billion precision, even in very dirty samples.</p>
+<p>The key is the <strong>Landau level gap</strong>: Disorder cannot mix states within a single Landau level if the energy cost is <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>. Electrons in a filled level cannot scatter into empty states above the gap. Thus:</p>
+<div class="important admonition">
+<p class="admonition-title">Disorder Robustness</p>
+<ul class="simple">
+<li><p>The quantized Hall conductance is <strong>topologically protected</strong>: it depends only on the topology of the filled band structure, not microscopic details.</p></li>
+<li><p>Disorder can localize states deep in the Landau level bulk, but <strong>edge states</strong> remain delocalized.</p></li>
+<li><p>Edge states carry the current; their number is fixed by the topology, independent of disorder.</p></li>
+</ul>
+</div>
+</section>
+<section id="edge-states">
+<h4>Edge States<a class="headerlink" href="#edge-states" title="Link to this heading">#</a></h4>
+<p>A real sample has boundaries. Near the boundary, the potential energy is not uniform—it rises toward the edge (to confine electrons). This confining potential shifts Landau level energies, causing them to fan upward toward the boundary. The result: some states near the edge have energy within the bulk gap.</p>
+<p>These <strong>edge states</strong> are topological: they are guaranteed to exist at the boundary of a filled Landau level, and they remain intact even with disorder.</p>
+<div class="note admonition">
+<p class="admonition-title">Edge State Properties</p>
+<ul class="simple">
+<li><p>Edge states are chiral: they propagate in one direction only (set by <span class="math notranslate nohighlight">\(\boldsymbol{E} \times \boldsymbol{B}\)</span> drift).</p></li>
+<li><p>Each edge state carries exactly one quantum <span class="math notranslate nohighlight">\(e^2/h\)</span> of conductance.</p></li>
+<li><p>The total Hall conductance equals the number of chiral edge states times <span class="math notranslate nohighlight">\(e^2/h\)</span>.</p></li>
+<li><p>Disorder cannot backscatter an electron along the edge without energy cost <span class="math notranslate nohighlight">\(\sim \hbar\omega_c\)</span>.</p></li>
+</ul>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>The statement “disorder cannot mix states within a single Landau level if the energy cost is <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>” is powerful, but requires careful thinking. Consider an electron in a filled Landau level (all states occupied) with a small random potential <span class="math notranslate nohighlight">\(V(\boldsymbol{r})\)</span> due to impurities.</p>
+<p>(a) If the electron scatters off an impurity, can it scatter into an empty state above the current Landau level (i.e., into the next Landau level)? What is the minimum energy it must gain to do so?</p>
+<p>(b) Within the current filled Landau level, are there empty states available into which the electron could scatter? If all states are filled, what does the Pauli exclusion principle forbid?</p>
+<p>(c) Explain carefully why “the quantized Hall conductance is topologically protected”: How does the absence of scattering channels (due to the Landau level gap and Pauli blocking) guarantee that edge states remain delocalized even with strong disorder?</p>
+<p>(d) What happens if the disorder potential has regions where <span class="math notranslate nohighlight">\(V(\boldsymbol{r}) &gt; \hbar\omega_c\)</span>? Can such strong disorder create a scattering channel into the next Landau level?</p>
+</div>
+</section>
+</section>
+<section id="laughlin-s-wavefunction-and-fractionality">
+<h3>Laughlin’s Wavefunction and Fractionality<a class="headerlink" href="#laughlin-s-wavefunction-and-fractionality" title="Link to this heading">#</a></h3>
+<p>For the integer case (<span class="math notranslate nohighlight">\(\nu\)</span> integer), all electrons fit neatly into <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels. But what happens at fractional fillings, like <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>?</p>
+<p>At fractional fillings, electron-electron interactions become essential. The ground state is a highly entangled many-body state with <strong>long-range order</strong>. Laughlin proposed an elegant wavefunction for <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> (where <span class="math notranslate nohighlight">\(m\)</span> is odd):</p>
 <div class="math notranslate nohighlight">
-\[C = \frac{1}{2\pi}\int_{\text{BZ}}d^2k\, \Omega(\boldsymbol{k})\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Omega(\boldsymbol{k})\)</span> is the Berry curvature in momentum space and the integral is over the Brillouin zone.</p>
-<p>For Landau levels:</p>
+\[
+\Psi_{\text{Laughlin}} = \prod_{i&lt;j} (z_i - z_j)^m \exp\left(-\frac{1}{4\ell_B^2}\sum_i |z_i|^2\right)\]</div>
+<p>This wavefunction describes electrons with filling <span class="math notranslate nohighlight">\(\nu = 1/m\)</span>. Its key features are:</p>
+<div class="note admonition">
+<p class="admonition-title">Laughlin Wavefunction Insights</p>
 <ul class="simple">
-<li><p>The Chern number of the <span class="math notranslate nohighlight">\(n\)</span>-th Landau level is <span class="math notranslate nohighlight">\(C_n = 1\)</span> (or <span class="math notranslate nohighlight">\(-1\)</span> depending on gauge convention)</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are filled, the total Chern number is <span class="math notranslate nohighlight">\(C_{\text{tot}} = \nu\)</span></p></li>
-<li><p>The Hall conductance is directly related: <span class="math notranslate nohighlight">\(\sigma_H = C_{\text{tot}} \cdot e^2/h\)</span></p></li>
+<li><p>The factor <span class="math notranslate nohighlight">\((z_i - z_j)^m\)</span> enforces that electrons repel: the closer two electrons, the more suppressed the wavefunction.</p></li>
+<li><p>The state is a <strong>quantum fluid</strong>—incompressible, with a gap to excitations.</p></li>
+<li><p>Excitations are <strong>fractional quasiparticles</strong> carrying charge <span class="math notranslate nohighlight">\(e/m\)</span> (and fractional statistics).</p></li>
+<li><p>Laughlin’s picture extends to the fractional quantum Hall effect (FQHE), where <span class="math notranslate nohighlight">\(\nu\)</span> is a rational fraction.</p></li>
 </ul>
-<p>The Chern number is a <strong>topological invariant</strong>—it cannot change under continuous deformations of the band structure that don’t close the gap. This explains why quantization is so robust.</p>
+</div>
 </section>
-<section id="robustness-to-disorder">
-<h3>Robustness to Disorder<a class="headerlink" href="#robustness-to-disorder" title="Link to this heading">#</a></h3>
-<p>A remarkable feature of the quantum Hall effect is its insensitivity to disorder.</p>
-<p><strong>Why disorder doesn’t matter</strong>:</p>
-<ol class="arabic simple">
-<li><p>Bulk Landau level states are already localized by the magnetic field itself (cyclotron radius ≲ magnetic length)</p></li>
-<li><p>Weak disorder cannot delocalize already-localized bulk states</p></li>
-<li><p>Edge states remain extended and protected by the topology of the bulk</p></li>
-<li><p>The topological protection persists as long as the bulk gap (Landau level spacing) is maintained</p></li>
-</ol>
-<p>This is why the IQHE was so surprising and important—it established that macroscopic quantum effects can be completely universal, independent of material quality. This principle underlies modern quantum metrology and topological quantum computation.</p>
-</section>
-<section id="fractional-quantum-hall-effect">
-<h3>Fractional Quantum Hall Effect<a class="headerlink" href="#fractional-quantum-hall-effect" title="Link to this heading">#</a></h3>
-<p>At fractional filling factors like <span class="math notranslate nohighlight">\(\nu = 1/3, 2/5, 3/7, \ldots\)</span>, additional quantized Hall plateaus appear! These are due to many-body effects (electron-electron interactions):</p>
+<section id="experimental-significance-and-modern-applications">
+<h3>Experimental Significance and Modern Applications<a class="headerlink" href="#experimental-significance-and-modern-applications" title="Link to this heading">#</a></h3>
+<p>The quantum Hall effect had enormous impact:</p>
+<div class="important admonition">
+<p class="admonition-title">Historical and Practical Importance</p>
 <ul class="simple">
-<li><p>Electrons within a partially filled Landau level interact via Coulomb repulsion</p></li>
-<li><p>Correlations can create new incompressible quantum states</p></li>
-<li><p>Each fractional state has its own topological quantum number</p></li>
+<li><p><strong>Discovery (1980)</strong>: Von Klitzing discovered the IQHE and won the Nobel Prize in 1985.</p></li>
+<li><p><strong>Precision metrology</strong>: QHE provides a standard for electrical resistance, independent of microscopic details. It defines the ohm in the SI system.</p></li>
+<li><p><strong>Topological quantum matter</strong>: QHE is the prototypical topological phase—a state of matter with no classical analog, protected by global constraints rather than symmetry.</p></li>
+<li><p><strong>Modern research</strong>: QHE connections to topological insulators, topological superconductors, and anyons continue to drive fundamental physics and quantum information science.</p></li>
 </ul>
-<p>The fractional quantum Hall effect is beyond the single-particle Landau level picture but follows the same topological principles.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Key Results: Quantum Hall Effect</p>
 <ul class="simple">
-<li><p><strong>Filling factor</strong>: <span class="math notranslate nohighlight">\(\nu = N_e/N_\phi\)</span> counts electrons per flux quantum; integer <span class="math notranslate nohighlight">\(\nu\)</span> labels integer QHE plateaus.</p></li>
-<li><p><strong>Hall conductance</strong>: <span class="math notranslate nohighlight">\(\sigma_H = \nu e^2/h\)</span> is exactly quantized when <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are filled.</p></li>
-<li><p><strong>Universal and exact</strong>: Quantization depends only on fundamental constants, not material properties.</p></li>
-<li><p><strong>Edge states</strong>: Carry all current; protected by topology; bulk states are localized and inactive.</p></li>
-<li><p><strong>Topological protection</strong>: Robust against disorder, temperature, geometry—as long as Landau level gap persists.</p></li>
-<li><p><strong>Charge pumping</strong>: Increasing flux by <span class="math notranslate nohighlight">\(\Phi_0\)</span> pumps exactly <span class="math notranslate nohighlight">\(\nu e\)</span> out of the system.</p></li>
-<li><p><strong>Chern number</strong>: Topological invariant that directly equals <span class="math notranslate nohighlight">\(\nu\)</span> for integer quantum Hall states.</p></li>
-<li><p><strong>Landau level spacing</strong>: <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> must be large compared to temperature and disorder strength.</p></li>
-<li><p><strong>Experimental precision</strong>: IQHE measured to better than 1 part in <span class="math notranslate nohighlight">\(10^9\)</span>; used to define resistance standard.</p></li>
+<li><p><strong>Integer QHE</strong>: Hall conductance <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span> is exactly quantized at integer filling <span class="math notranslate nohighlight">\(\nu\)</span>.</p></li>
+<li><p><strong>Filling factor</strong>: <span class="math notranslate nohighlight">\(\nu = N_e/N_\phi\)</span>; integer <span class="math notranslate nohighlight">\(\nu\)</span> means <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are completely filled.</p></li>
+<li><p><strong>Robustness</strong>: Quantization is independent of disorder, sample geometry, and microscopic details.</p></li>
+<li><p><strong>Origin</strong>: Landau level gap and topological edge states ensure current is carried by delocalized chiral edge modes.</p></li>
+<li><p><strong>Fractional QHE</strong>: At fractional fillings, interactions create incompressible quantum fluids with fractional charge excitations.</p></li>
+<li><p><strong>Significance</strong>: Canonical example of topological phases; defines the ohm in SI metrology.</p></li>
 </ul>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-3-2-landau-quantization.html"><span class="std std-doc">4.3.2 Landau Quantization</span></a></strong>: Landau levels and degeneracy in strong magnetic fields</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html"><span class="std std-doc">2.3.2 Abelian Anyons</span></a></strong>: Fractional statistics and edge states</p></li>
+<li><p><strong><a class="reference internal" href="4-5-3-topology.html"><span class="std std-doc">4.5.3 Topology</span></a></strong>: Topological protection and Chern numbers</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>Problem 1: Filling Factor and Flux Quanta</strong></p>
+<p>A 2D electron gas contains <span class="math notranslate nohighlight">\(N_e = 2.4 \times 10^{11}\)</span> electrons. The sample is square with side <span class="math notranslate nohighlight">\(L = 1\,\text{mm}\)</span>. A perpendicular magnetic field <span class="math notranslate nohighlight">\(B = 5\,\text{T}\)</span> is applied.</p>
+<p>(a) Calculate the number of flux quanta <span class="math notranslate nohighlight">\(N_\phi = \Phi_{\text{total}}/\Phi_0\)</span> through the sample, where <span class="math notranslate nohighlight">\(\Phi_0 = h/e\)</span> is the flux quantum.</p>
+<p>(b) Find the filling factor <span class="math notranslate nohighlight">\(\nu = N_e/N_\phi\)</span>.</p>
+<p>(c) How many Landau levels are completely filled? Is the system in an integer quantum Hall regime?</p>
+<hr class="docutils" />
+<p><strong>Problem 2: Hall Conductance and Conductance Quantum</strong></p>
+<p>At filling factor <span class="math notranslate nohighlight">\(\nu = 3\)</span> (three completely filled Landau levels), the sample exhibits the quantum Hall effect.</p>
+<p>(a) Calculate the Hall conductance <span class="math notranslate nohighlight">\(\sigma_H\)</span> in SI units (S = siemens). Use <span class="math notranslate nohighlight">\(e = 1.602 \times 10^{-19}\,\text{C}\)</span> and <span class="math notranslate nohighlight">\(h = 6.626 \times 10^{-34}\,\text{J·s}\)</span>.</p>
+<p>(b) Express your answer as a multiple of the conductance quantum <span class="math notranslate nohighlight">\(e^2/h \approx 77.5\,\mu\text{S}\)</span>.</p>
+<p>(c) What is the Hall resistance <span class="math notranslate nohighlight">\(\rho_H = 1/\sigma_H\)</span>? (This is often called the von Klitzing resistance for <span class="math notranslate nohighlight">\(\nu = 1\)</span>.)</p>
+<hr class="docutils" />
+<p><strong>Problem 3: Topological Protection and Disorder</strong></p>
+<p>Consider two quantum Hall samples at <span class="math notranslate nohighlight">\(\nu = 1\)</span>: one ultra-pure (mean free path <span class="math notranslate nohighlight">\(\ell \gg \ell_B\)</span>, where <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(eB)}\)</span> is the magnetic length) and one with strong disorder (mean free path <span class="math notranslate nohighlight">\(\ell \sim \ell_B\)</span>).</p>
+<p>(a) Explain qualitatively why both samples exhibit the same quantized Hall conductance <span class="math notranslate nohighlight">\(\sigma_H = e^2/h\)</span>, despite vastly different disorder levels.</p>
+<p>(b) In the pure sample, do bulk electrons contribute to Hall transport? Why or why not?</p>
+<p>(c) In the disordered sample, are bulk Landau level states extended or localized? Explain how this is consistent with the edge state picture.</p>
+<hr class="docutils" />
+<p><strong>Problem 4: Edge States and Conductance</strong></p>
+<p>When <span class="math notranslate nohighlight">\(\nu = 2\)</span> Landau levels are completely filled, the sample has two edge state branches propagating along its boundary.</p>
+<p>(a) Each edge branch acts like a 1D quantum wire carrying current. What is the conductance of a <em>single</em> edge branch in units of <span class="math notranslate nohighlight">\(e^2/h\)</span>?</p>
+<p>(b) If there are two independent edge branches, what is the total Hall conductance? Write it in the form <span class="math notranslate nohighlight">\(\sigma_H = \nu \times (e^2/h)\)</span>.</p>
+<p>(c) Explain why disorder along the edge does not destroy the edge state conductance (even if edge roughness or impurities are present).</p>
+<hr class="docutils" />
+<p><strong>Problem 5: Chern Number and Topological Invariant</strong></p>
+<p>The Hall conductance is related to a topological property of the electron band: the <strong>Chern number</strong></p>
+<div class="math notranslate nohighlight">
+\[
+C = \frac{1}{2\pi}\int_{\text{BZ}}\mathrm{d}^2k\, \Omega(\boldsymbol{k}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega(\boldsymbol{k})\)</span> is the Berry curvature. The relation is <span class="math notranslate nohighlight">\(\sigma_H = C \times (e^2/h)\)</span>.</p>
+<p>(a) For a filled Landau level, the Chern number is <span class="math notranslate nohighlight">\(C = \pm 1\)</span>. What is the Chern number for <span class="math notranslate nohighlight">\(\nu = 5\)</span> (five filled Landau levels)? Assume each Landau level contributes equally.</p>
+<p>(b) Why is the Chern number called a “topological” invariant? (Hint: Can it change if you continuously deform the band structure without closing the gap?)</p>
+<p>(c) A Chern number of <span class="math notranslate nohighlight">\(C = 5\)</span> means there must be exactly 5 <strong>chiral edge modes</strong>—edge states that propagate in only one direction around the sample boundary. Use this to re-derive the Hall conductance formula <span class="math notranslate nohighlight">\(\sigma_H = \nu e^2/h\)</span> in terms of edge modes.</p>
+<hr class="docutils" />
+<p><strong>Problem 6: Charge Pumping</strong></p>
+<p>The quantum Hall effect can be understood as a <strong>charge pumping</strong> effect. As the magnetic field increases by <span class="math notranslate nohighlight">\(\Delta\Phi = \Phi_0\)</span> (one flux quantum), exactly <span class="math notranslate nohighlight">\(\nu\)</span> electrons are “pumped” from the bulk to the edge (or equivalently, exit the sample).</p>
+<p>(a) If the sample has area <span class="math notranslate nohighlight">\(A\)</span> and the magnetic field increases from <span class="math notranslate nohighlight">\(B\)</span> to <span class="math notranslate nohighlight">\(B + \Delta B\)</span>, the flux through the sample changes by <span class="math notranslate nohighlight">\(\Delta\Phi = A \cdot \Delta B\)</span>. How many flux quanta correspond to this change?</p>
+<p>(b) At <span class="math notranslate nohighlight">\(\nu = 1\)</span>, how many electrons are pumped out when <span class="math notranslate nohighlight">\(\Delta\Phi = \Phi_0\)</span>?</p>
+<p>(c) This pumping process is <strong>adiabatic</strong>—the system evolves slowly enough that the Landau level gap is always maintained. Why is the Landau level gap important for ensuring quantized pumping?</p>
+<hr class="docutils" />
+<p><strong>Problem 7: Longitudinal vs. Hall Conductivity</strong></p>
+<p>In the quantum Hall regime, the conductivity tensor takes the form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\sigma} = \begin{pmatrix} \sigma_{xx} &amp; \sigma_{xy} \\ -\sigma_{xy} &amp; \sigma_{yy} \end{pmatrix},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_{xx} = \sigma_{yy}\)</span> (longitudinal) and <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> (Hall).</p>
+<p>(a) In the quantum Hall regime at <span class="math notranslate nohighlight">\(\nu = 1\)</span>, which component (<span class="math notranslate nohighlight">\(\sigma_{xx}\)</span> or <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span>) is quantized? Which is approximately zero?</p>
+<p>(b) A classical conductor in a magnetic field should have <span class="math notranslate nohighlight">\(\sigma_{xx} &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\sigma_{xy} \neq 0\)</span>. Explain physically why the quantum Hall system behaves so differently (perfect insulator in the <span class="math notranslate nohighlight">\(x\)</span>-direction, but perfect quantized conductance in the <span class="math notranslate nohighlight">\(y\)</span>-direction).</p>
+<p>(c) An applied electric field <span class="math notranslate nohighlight">\(E_x\)</span> drives a current. Sketch the current direction (<span class="math notranslate nohighlight">\(J_x\)</span> and <span class="math notranslate nohighlight">\(J_y\)</span>) and explain what is carrying it.</p>
+<hr class="docutils" />
+<p><strong>Problem 8: Robustness and Universal Measurement</strong></p>
+<p>The integer quantum Hall effect is measured to a precision of better than 1 part in <span class="math notranslate nohighlight">\(10^9\)</span>. This precision is not limited by material quality, impurities, or sample geometry—only by fundamental physics. This universality is why the IQHE is used to define the standard of electrical resistance.</p>
+<p>(a) Identify the three key properties of the quantum Hall state that make it so robust to perturbations: (i) one about disorder, (ii) one about the bulk vs. edge distinction, and (iii) one about topological protection.</p>
+<p>(b) Suppose the Landau level spacing <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> is very small (weak magnetic field). Can we still observe a clean integer quantum Hall plateau at <span class="math notranslate nohighlight">\(\nu = 1\)</span>? Why or why not?</p>
+<p>(c) Why must the sample be genuinely 2D (not 3D) for the quantum Hall effect to occur? (Hint: How does the number of extended edge states change if disorder or finite thickness allows 3D localization?)</p>
 </section>
 </section>
 
@@ -764,17 +837,23 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-factor-and-quantum-hall-plateaus">Filling Factor and Quantum Hall Plateaus</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-quantum-hall-conductance">Integer Quantum Hall Conductance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#origin-of-quantization-edge-states">Origin of Quantization: Edge States</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charge-pumping">Charge Pumping</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-theory">Linear Response Theory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-nature-chern-number">Topological Nature: Chern Number</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-to-disorder">Robustness to Disorder</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fractional-quantum-hall-effect">Fractional Quantum Hall Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-quantum-hall-effect-iqhe">Integer Quantum Hall Effect (IQHE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-setup-and-observation">Experimental Setup and Observation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-factor-and-magnetic-length">Filling Factor and Magnetic Length</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hall-conductance-derivation">Hall Conductance Derivation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-and-topological-origin">Robustness and Topological Origin</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-disorder-doesn-t-destroy-quantization">Why Disorder Doesn’t Destroy Quantization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-states">Edge States</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laughlin-s-wavefunction-and-fractionality">Laughlin’s Wavefunction and Fractionality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-significance-and-modern-applications">Experimental Significance and Modern Applications</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -812,7 +891,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

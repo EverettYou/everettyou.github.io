@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -522,17 +522,17 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chern-number-as-topological-invariant">Chern Number as Topological Invariant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-integer-quantization">Proof of Integer Quantization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#winding-number-and-berry-phase">Winding Number and Berry Phase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fiber-bundle-picture">Fiber Bundle Picture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-insulators-and-bulk-boundary-correspondence">Topological Insulators and Bulk-Boundary Correspondence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulk-boundary-correspondence-theorem">Bulk-Boundary Correspondence Theorem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-quantum-hall-effect-from-topology">Integer Quantum Hall Effect from Topology</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-phase-transitions">Topological Phase Transitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chern-number-and-topological-invariants">The Chern Number and Topological Invariants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-picture-berry-flux-and-winding">Physical Picture: Berry Flux and Winding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tknn-formula-and-integer-quantum-hall-effect">The TKNN Formula and Integer Quantum Hall Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-vs-geometric-invariants">Topological vs. Geometric Invariants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulk-boundary-correspondence-index-theorem">Bulk-Boundary Correspondence (Index Theorem)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-reversal-symmetry-and-topological-insulators">Time-Reversal Symmetry and Topological Insulators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#winding-numbers-in-1d-chains">Winding Numbers in 1D Chains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-physical-consequences-of-topological-structure">Key Physical Consequences of Topological Structure</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -549,150 +549,224 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Define Chern number as a topological invariant. Show that it’s independent of smooth deformations.</p></li>
-<li><p>How does Berry curvature integrate to give quantized Chern numbers? What is winding number?</p></li>
-<li><p>Explain the fiber bundle picture of quantum mechanics. How does Berry phase emerge from connection on fiber bundles?</p></li>
-<li><p>Connect topological quantization to observable Hall conductance. Why is quantization exact?</p></li>
-<li><p>What is a topological insulator? How does bulk-boundary correspondence work?</p></li>
+<li><p>Why is a topological invariant like the Chern number robust against perturbations? What does it count, and why can’t it change by a small amount?</p></li>
+<li><p>Integrate Berry curvature over the Brillouin zone to obtain a Chern number. Why must this integral always yield an integer?</p></li>
+<li><p>Describe the fiber bundle picture of quantum mechanics. How does Berry phase emerge naturally from connections on fiber bundles?</p></li>
+<li><p>Connect the Chern number to experimentally observable Hall conductance in the quantum Hall regime. Why is quantization exact despite disorder?</p></li>
+<li><p>What is a topological insulator, and how does the bulk-boundary correspondence guarantee the existence of protected edge states?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>The Berry curvature—the gauge field in parameter space—is a topological object: it can be integrated over closed surfaces to yield an integer, the Chern number, that cannot change without a phase transition. This topological invariant classifies quantum states according to their geometric structure and has profound consequences: the integer quantum Hall effect, topological insulators, and the stability of protected boundary states. Topology is not just mathematical elegance; it is a fundamental principle that determines what quantum states can exist.</p>
+<section id="the-chern-number-and-topological-invariants">
+<h3>The Chern Number and Topological Invariants<a class="headerlink" href="#the-chern-number-and-topological-invariants" title="Link to this heading">#</a></h3>
+<p>The <strong>Chern number</strong> is an integer topological invariant that classifies quantum states and energy bands. For a 2D band structure, it is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+C_n = \frac{1}{2\pi}\int_{\text{BZ}} \mathcal{F}_{xy}^{(n)}(\boldsymbol{k})\,\mathrm{d}^2k \in \mathbb{Z}\]</div>
+<p>where the integral is over the Brillouin zone and <span class="math notranslate nohighlight">\(\mathcal{F}_{xy}^{(n)}\)</span> is the Berry curvature of band <span class="math notranslate nohighlight">\(n\)</span> in momentum space.</p>
+<p>The Chern number is called a <strong>topological invariant</strong> because:</p>
+<ol class="arabic simple">
+<li><p>It is always an integer</p></li>
+<li><p>It cannot change under smooth deformations of the Hamiltonian (unless the band gap closes)</p></li>
+<li><p>It is independent of the choice of gauge (the choice of phase for the Bloch states)</p></li>
+</ol>
+<p>These properties make <span class="math notranslate nohighlight">\(C_n\)</span> robust to disorder and perturbations — it characterizes a fundamentally different phase of matter.</p>
 <div class="important admonition">
-<p class="admonition-title">Chern Number Classifies Geometry</p>
-<p>The Chern number is a topological integer that counts how many times the Berry curvature “winds” around parameter space. It is a topological invariant—unchanged by smooth deformations of the parameter space.</p>
-</div>
-<section id="chern-number-as-topological-invariant">
-<h3>Chern Number as Topological Invariant<a class="headerlink" href="#chern-number-as-topological-invariant" title="Link to this heading">#</a></h3>
-<p>The <strong>Chern number</strong> is defined for a band in a 2D crystal as:</p>
+<p class="admonition-title">Chern Number Definition</p>
+<p>The <strong>Chern number</strong> <span class="math notranslate nohighlight">\(C_n \in \mathbb{Z}\)</span> of a 2D Bloch band <span class="math notranslate nohighlight">\(n\)</span> is a topological invariant:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}C_n = \frac{1}{2\pi}\int_{\text{BZ}}d^2k\\, \Omega_n(\boldsymbol{k})\end{split}\]</div>
-<p>where the integral is over the entire Brillouin zone (BZ), which is a 2D torus topologically.</p>
+\[
+C_n = \frac{1}{2\pi}\int_{\text{BZ}} \mathcal{F}_{xy}^{(n)}(\boldsymbol{k})\,\mathrm{d}^2k \in \mathbb{Z}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{F}_{xy}^{(n)}(\boldsymbol{k}) = \partial_{k_x} \mathcal{A}_y^{(n)} - \partial_{k_y} \mathcal{A}_x^{(n)}\)</span> is the <strong>Berry curvature</strong> and <span class="math notranslate nohighlight">\(\mathcal{A}^{(n)} = i\langle n(\boldsymbol{k})|\nabla_{\boldsymbol{k}}n(\boldsymbol{k})\rangle\)</span> is the Berry connection.</p>
 <p><strong>Key properties</strong>:</p>
-<ol class="arabic simple">
-<li><p><strong>Integer-valued</strong>: By topological arguments, <span class="math notranslate nohighlight">\(C_n\)</span> is always an integer: <span class="math notranslate nohighlight">\(C_n \in \mathbb{Z}\)</span></p></li>
-<li><p><strong>Topology-dependent</strong>: The Chern number cannot change unless the band gap closes (system passes through a phase transition)</p></li>
-<li><p><strong>Robust</strong>: Small deformations of the band structure preserve <span class="math notranslate nohighlight">\(C_n\)</span>; disorder doesn’t change it</p></li>
-<li><p><strong>Gauge-invariant</strong>: Although the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> is gauge-dependent, the curvature <span class="math notranslate nohighlight">\(\Omega_n\)</span> and hence <span class="math notranslate nohighlight">\(C_n\)</span> are gauge-invariant</p></li>
-</ol>
-</section>
-<section id="proof-of-integer-quantization">
-<h3>Proof of Integer Quantization<a class="headerlink" href="#proof-of-integer-quantization" title="Link to this heading">#</a></h3>
-<p>By applying Stokes’ theorem and exploiting periodic boundary conditions on the torus-shaped Brillouin zone, the total Berry curvature integrated over the BZ must be a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\int_{\text{BZ}}\Omega = 2\pi n\]</div>
-<p>where <span class="math notranslate nohighlight">\(n\)</span> is an integer. Therefore, the Chern number must be integer-valued:</p>
-<div class="math notranslate nohighlight">
-\[C_n = \frac{1}{2\pi}\int_{\text{BZ}}\Omega \in \mathbb{Z}\]</div>
-<p>This integrality is a topological consequence of the periodic boundary conditions (the BZ is a torus), not a coincidence. The Chern number cannot change continuously—it can only jump discontinuously when the band gap closes.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation</p>
-<p>To understand why <span class="math notranslate nohighlight">\(C_n\)</span> must be an integer, apply Stokes’ theorem to a small region of the BZ:</p>
-<div class="math notranslate nohighlight">
-\[\int_S \Omega \cdot d\boldsymbol{A} = \oint_C \boldsymbol{A} \cdot d\boldsymbol{k}\]</div>
-<p>When integrating over the entire closed BZ (which is topologically a torus), we can decompose it into small surface patches. The line integrals on shared boundaries cancel, leaving:</p>
-<div class="math notranslate nohighlight">
-\[\int_{\text{BZ}}\Omega = \text{sum of boundary line integrals}\]</div>
-<p>Due to periodic boundary conditions on the torus, the wavefunction phase must return to itself after traversing the BZ. This quantizes the total flux:</p>
-<div class="math notranslate nohighlight">
-\[\int_{\text{BZ}}\Omega = 2\pi n\]</div>
-<p>with integer <span class="math notranslate nohighlight">\(n\)</span>. Thus:</p>
-<div class="math notranslate nohighlight">
-\[C_n = \frac{1}{2\pi}\int_{\text{BZ}}\Omega = n \in \mathbb{Z}\]</div>
+<ul class="simple">
+<li><p>Always an integer (topological quantization)</p></li>
+<li><p>Cannot change under smooth deformations without closing the band gap</p></li>
+<li><p>Gauge-invariant: independent of the choice of phase for Bloch states</p></li>
+<li><p>Characterizes the winding of the electronic state’s phase as momentum traverses the Brillouin zone</p></li>
+</ul>
 </div>
 </section>
-<section id="winding-number-and-berry-phase">
-<h3>Winding Number and Berry Phase<a class="headerlink" href="#winding-number-and-berry-phase" title="Link to this heading">#</a></h3>
-<p>For a 1D system, the <strong>winding number</strong> plays the role of the Chern number. As momentum <span class="math notranslate nohighlight">\(k\)</span> goes from 0 to <span class="math notranslate nohighlight">\(2\pi\)</span> (around the 1D Brillouin zone), the phase of the wavefunction winds around the complex plane some integer number of times.</p>
-<p>The <strong>Berry phase for a closed 1D path</strong> is:</p>
+<section id="physical-picture-berry-flux-and-winding">
+<h3>Physical Picture: Berry Flux and Winding<a class="headerlink" href="#physical-picture-berry-flux-and-winding" title="Link to this heading">#</a></h3>
+<p>Imagine smoothly deforming a band by continuously changing Hamiltonian parameters. The Berry curvature <span class="math notranslate nohighlight">\(\mathcal{F}_{xy}^{(n)}(\boldsymbol{k})\)</span> encodes the “twist” or “winding” of the electron’s internal quantum state as we move through momentum space.</p>
+<p>Integrating this curvature over the entire Brillouin zone gives the total “magnetic flux” of Berry curvature:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = i\oint_0^{2\pi}\langle\psi(k)|\frac{d}{dk}\psi(k)\rangle dk\]</div>
-<p>This can be written as:</p>
+\[
+\Phi_{\text{Berry}} = \int_{\text{BZ}} \mathcal{F}_{xy}^{(n)}\,\mathrm{d}^2k = 2\pi C_n\]</div>
+<p>The quantization condition forces <span class="math notranslate nohighlight">\(C_n\)</span> to be an integer. You cannot continuously deform the band to reduce this flux by less than one “flux quantum” (<span class="math notranslate nohighlight">\(2\pi\)</span>) without closing the gap or changing topological structure.</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Chern Number and Topological Protection</p>
+<p>The Chern number C = (1/2π)∫_BZ F dk² is always an integer.</p>
+<p><strong>Show</strong> that a band with C=1 cannot be smoothly deformed to a flat band (trivial insulator) without closing a gap.</p>
+<p>Why is the integer nature of the Chern number a topological obstruction? How does this protect edge states in topological insulators?</p>
+</div>
+</section>
+<section id="the-tknn-formula-and-integer-quantum-hall-effect">
+<h3>The TKNN Formula and Integer Quantum Hall Effect<a class="headerlink" href="#the-tknn-formula-and-integer-quantum-hall-effect" title="Link to this heading">#</a></h3>
+<p><strong>Theorem</strong> (TKNN, 1982): The quantized Hall conductance of a 2D electron system with filled energy bands is:</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \arg[\langle\psi(2\pi)|\psi(0)\rangle] = 2\pi w\]</div>
-<p>where <span class="math notranslate nohighlight">\(w\)</span> is the <strong>winding number</strong>—an integer counting how many times the phase wraps around.</p>
-</section>
-<section id="fiber-bundle-picture">
-<h3>Fiber Bundle Picture<a class="headerlink" href="#fiber-bundle-picture" title="Link to this heading">#</a></h3>
-<p>To understand Berry phase’s geometric meaning, we use the language of <strong>fiber bundles</strong> from differential geometry:</p>
-<p><strong>Base space</strong>: The parameter space (configuration space, momentum space, or nuclear coordinates). Example: the 2D Brillouin zone for band theory.</p>
-<p><strong>Fiber</strong>: At each point in parameter space, we have a Hilbert space (or subspace for a single band). The fiber is the space of quantum states.</p>
-<p><strong>Section</strong>: A choice of eigenstate <span class="math notranslate nohighlight">\(|n(\boldsymbol{R})\rangle\)</span> as a function of parameters—a “section” of the bundle.</p>
-<p><strong>Connection</strong>: The Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n = i\langle n|\nabla n\rangle\)</span> is the <strong>connection 1-form</strong> that specifies how to parallel-transport quantum states through parameter space.</p>
-<p><strong>Curvature</strong>: The Berry curvature <span class="math notranslate nohighlight">\(\Omega = d\boldsymbol{A} + \boldsymbol{A} \wedge \boldsymbol{A}\)</span> (for non-abelian bundles) characterizes the intrinsic curvature of the bundle.</p>
-<p>This geometric language reveals that Berry phase is fundamentally a <strong>connection on a fiber bundle</strong>—the same mathematical structure that underlies gauge theories and gravitation.</p>
-</section>
-<section id="topological-insulators-and-bulk-boundary-correspondence">
-<h3>Topological Insulators and Bulk-Boundary Correspondence<a class="headerlink" href="#topological-insulators-and-bulk-boundary-correspondence" title="Link to this heading">#</a></h3>
-<p>A <strong>topological insulator</strong> is a material that is insulating in the bulk but has conducting (or perfectly transmitted) edge states. The protection mechanism involves Berry curvature and Chern numbers.</p>
-<p><strong>2D Topological Insulator</strong>: (Also called a <strong>Chern insulator</strong>)</p>
+\[
+\sigma_{xy} = \frac{e^2}{h}\sum_{n=1}^{N_{\text{filled}}} C_n\]</div>
+<p>where the sum runs over all occupied bands and <span class="math notranslate nohighlight">\(C_n\)</span> is the Chern number of band <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">TKNN Formula: Quantized Hall Conductance</p>
+<p><strong>Thouless, Kohmoto, Nightingale, and Newnham (1982)</strong>: The quantized Hall conductance of a 2D electron system with filled energy bands is:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy} = \frac{e^2}{h} \sum_{n=1}^{N_{\text{filled}}} C_n\]</div>
+<p>where the sum runs over all occupied bands and <span class="math notranslate nohighlight">\(C_n\)</span> is the Chern number of band <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p><strong>Physical significance</strong>:</p>
 <ul class="simple">
-<li><p>The occupied bands have non-zero total Chern number: <span class="math notranslate nohighlight">\(C = \sum_n C_n \neq 0\)</span></p></li>
-<li><p>The bulk is gapped (insulating): energy gap between occupied and unoccupied bands</p></li>
-<li><p><strong>Protected edge states</strong>: The boundary has exactly <span class="math notranslate nohighlight">\(|C|\)</span> chiral edge states that cross the band gap</p></li>
-<li><p>These edge states conduct current even if the bulk is a perfect insulator</p></li>
+<li><p>Relates a macroscopic transport coefficient (Hall conductance) to a microscopic topological invariant (Chern number)</p></li>
+<li><p>Hall conductance is quantized in units of <span class="math notranslate nohighlight">\(e^2/h\)</span> (no device-dependent factors)</p></li>
+<li><p>Quantization is <strong>exact and robust</strong> against disorder, impurities, and perturbations (as long as the band gap remains open)</p></li>
+<li><p>This explains the universal plateaus observed in the integer quantum Hall effect</p></li>
 </ul>
-<p><strong>3D Topological Insulator</strong>: (Z_2 topological insulator)</p>
+</div>
+<p>This remarkable formula connects:</p>
 <ul class="simple">
-<li><p>More subtle: cannot be characterized by a single Chern number</p></li>
-<li><p>Involves a <span class="math notranslate nohighlight">\(\mathbb{Z}_2\)</span> topological invariant (integers modulo 2)</p></li>
-<li><p>Protected surface states exist on the 2D boundary</p></li>
-<li><p>Examples: Bi₂Se₃, Bi₂Te₃</p></li>
+<li><p>A macroscopic observable (Hall conductance, measured in volts and currents)</p></li>
+<li><p>A microscopic quantum topological invariant (Chern number, counting how many times Berry curvature “winds” around momentum space)</p></li>
 </ul>
+<p>The result is that the Hall conductance is quantized in units of <span class="math notranslate nohighlight">\(e^2/h\)</span> and immune to disorder (up to localization effects).</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation Sketch: Why Hall Conductance is Topological</p>
+<p>When a magnetic field is applied perpendicular to a 2D electron system, the kinetic energy operator becomes noncommuting in different directions. Electrons cannot move freely in the field direction (they form Landau levels), but within each band, Berry curvature encodes an effective “anomalous velocity” perpendicular to the applied electric field.</p>
+<p>The transverse conductance arises entirely from this Berry-curvature-induced anomalous velocity. Integrating over all occupied states in all occupied bands, the current is proportional to the total Chern number.</p>
+</div>
 </section>
-<section id="bulk-boundary-correspondence-theorem">
-<h3>Bulk-Boundary Correspondence Theorem<a class="headerlink" href="#bulk-boundary-correspondence-theorem" title="Link to this heading">#</a></h3>
-<p>A deep topological principle: <strong>the number of edge states equals the Chern number of bulk bands</strong>.</p>
-<p><strong>Why?</strong> When we cut the infinite 2D system to create a boundary:</p>
+<section id="topological-vs-geometric-invariants">
+<h3>Topological vs. Geometric Invariants<a class="headerlink" href="#topological-vs-geometric-invariants" title="Link to this heading">#</a></h3>
+<p>It is crucial to distinguish:</p>
+<p><strong>Geometric (Berry) phases:</strong></p>
+<ul class="simple">
+<li><p>Path-dependent</p></li>
+<li><p>Change when the path changes</p></li>
+<li><p>Observable in open-path interferometry</p></li>
+<li><p>Example: <span class="math notranslate nohighlight">\(\gamma_n = \oint_C \mathcal{A}_n \cdot \mathrm{d}\boldsymbol{R}\)</span> depends on the specific path <span class="math notranslate nohighlight">\(C\)</span></p></li>
+</ul>
+<p><strong>Topological invariants (Chern numbers):</strong></p>
+<ul class="simple">
+<li><p>Path-independent (for closed loops)</p></li>
+<li><p>Invariant under smooth deformations of the system</p></li>
+<li><p>Characterize global structure of the Hilbert space bundle</p></li>
+<li><p>Example: <span class="math notranslate nohighlight">\(C_n = \frac{1}{2\pi}\int_{\text{BZ}} \mathcal{F}_{xy}^{(n)}\,\mathrm{d}^2k\)</span> depends only on the band structure, not on how we parametrize it</p></li>
+</ul>
+<p>A Chern number is an <em>integrated</em> geometric property — it sums up the Berry curvature to yield an integer that encodes global topology.</p>
+</section>
+<section id="bulk-boundary-correspondence-index-theorem">
+<h3>Bulk-Boundary Correspondence (Index Theorem)<a class="headerlink" href="#bulk-boundary-correspondence-index-theorem" title="Link to this heading">#</a></h3>
+<p>One of the most profound results in topological band theory:</p>
+<p><strong>Index Theorem</strong>: If a 2D system with bulk Chern number <span class="math notranslate nohighlight">\(C_n \neq 0\)</span> is terminated at a boundary, there must exist <strong>chiral edge states</strong> at that boundary.</p>
+<p>The number of gapless one-way propagating edge modes equals <span class="math notranslate nohighlight">\(|C_n|\)</span>:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(C = +1\)</span>: one chiral edge state propagating clockwise</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(C = -1\)</span>: one chiral edge state propagating counterclockwise</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(C = 0\)</span>: no necessary edge states (generic case)</p></li>
+</ul>
+<p>These edge states are <strong>topologically protected</strong> — they cannot be removed by disorder or perturbations without closing the bulk band gap.</p>
+<div class="note admonition">
+<p class="admonition-title">Physical Explanation</p>
+<p>Imagine “cutting” the 2D system along a line. The Berry curvature in the bulk represents a kind of “circulation” of electron momentum. At the boundary, this circulation must be interrupted. The result is a current that flows along the edge, carried by states that live at the boundary.</p>
+<p>These edge currents are one-directional and robust because reversing them would require changing the global Chern number — an energetically expensive process involving gap closure.</p>
+</div>
+</section>
+<section id="time-reversal-symmetry-and-topological-insulators">
+<h3>Time-Reversal Symmetry and Topological Insulators<a class="headerlink" href="#time-reversal-symmetry-and-topological-insulators" title="Link to this heading">#</a></h3>
+<p>If a system has <strong>time-reversal symmetry</strong> (T-symmetry), then:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{T}\hat{H}\hat{T}^{-1} = \hat{H}\]</div>
+<p>For fermionic systems, T-symmetry requires that bands come in pairs with opposite Chern numbers:</p>
+<div class="math notranslate nohighlight">
+\[
+C_n(\boldsymbol{k}) = -C_n(-\boldsymbol{k})\]</div>
+<p>Therefore, the total Chern number for all occupied bands is forced to be <strong>zero</strong>, and <span class="math notranslate nohighlight">\(C = 0\)</span> does not predict edge states.</p>
+<p>However, TR-symmetric systems can be <strong>topologically nontrivial</strong> via a different integer invariant: the <strong><span class="math notranslate nohighlight">\(\mathbb{Z}_2\)</span> topological invariant</strong>. This predicts an even number of protected edge modes that are resilient to backscattering but not one-directional.</p>
+<p>Such systems are called <strong>topological insulators</strong>.</p>
+</section>
+<section id="winding-numbers-in-1d-chains">
+<h3>Winding Numbers in 1D Chains<a class="headerlink" href="#winding-numbers-in-1d-chains" title="Link to this heading">#</a></h3>
+<p>In one-dimensional systems (e.g., the <strong>SSH model</strong> — Su-Schrieffer-Heeger model of polyacetylene), the analog of the Chern number is the <strong>winding number</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+w = \frac{1}{2\pi}\oint_0^{2\pi} \arg(\det[\hat{H}(\boldsymbol{k})])\,\mathrm{d}k \in \mathbb{Z}\]</div>
+<p>This integer also cannot change without closing the band gap. A non-zero winding number predicts <strong>zero-energy edge states</strong> (bound states at the ends of the chain).</p>
+<p>For the SSH model:</p>
+<ul class="simple">
+<li><p>Two sublattices (A and B) in a 1D chain</p></li>
+<li><p>Alternating hopping amplitudes <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span></p></li>
+<li><p>Winding number <span class="math notranslate nohighlight">\(w = \mathrm{sign}(t_2 - t_1)\)</span> predicts which sublattice hosts the edge state</p></li>
+</ul>
+<p>This is the 1D version of bulk-boundary correspondence.</p>
+</section>
+<section id="key-physical-consequences-of-topological-structure">
+<h3>Key Physical Consequences of Topological Structure<a class="headerlink" href="#key-physical-consequences-of-topological-structure" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Bulk eigenstates remain (with gaps between occupied and unoccupied bands)</p></li>
-<li><p>New states appear at the edge with energies in the bulk gap</p></li>
-<li><p>These edge states must connect occupied and unoccupied bands as we traverse the boundary</p></li>
-<li><p>Topological argument: the number of such edge states is pinned to equal the bulk Chern number</p></li>
+<li><p><strong>Quantized Responses</strong>: Hall conductance, thermal Hall effect, etc., are quantized integers determined by Chern numbers.</p></li>
+<li><p><strong>Robust Edge States</strong>: Gapless boundary modes exist and are protected against disorder, defects, and weak perturbations.</p></li>
+<li><p><strong>Immune to Disorder</strong>: As long as the band gap remains open, disorder cannot change the Chern number or destroy the topological protection.</p></li>
+<li><p><strong>Observable Signatures</strong>:</p>
+<ul class="simple">
+<li><p>Quantized transverse conductance</p></li>
+<li><p>Chiral edge currents</p></li>
+<li><p>Anomalous transport (anomalous Hall effect)</p></li>
+<li><p>Edge magnetization and thermal transport</p></li>
+</ul>
+</li>
+<li><p><strong>Applications</strong>: Topological insulators and materials promise fault-tolerant electronics, quantum computing platforms, and robust quantum devices.</p></li>
 </ol>
-<p>This is <strong>topological protection</strong>—the edge states cannot be eliminated by perturbations without closing the gap. Disorder, impurities, or deformations at the edge don’t destroy the edge current because the edge states form a complete 1D band that must be filled.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-5-1-berry-phase.html"><span class="std std-doc">4.5.1 Berry Phase</span></a></strong>: Geometric phase and topological invariants</p></li>
+<li><p><strong><a class="reference internal" href="4-3-3-quantum-hall-effect.html"><span class="std std-doc">4.3.3 Quantum Hall Effect</span></a></strong>: Topological order and edge states</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html"><span class="std std-doc">2.3.3 Non-Abelian Anyons</span></a></strong>: Topological quantum computation and non-abelian statistics</p></li>
+</ul>
+</div>
 </section>
-<section id="integer-quantum-hall-effect-from-topology">
-<h3>Integer Quantum Hall Effect from Topology<a class="headerlink" href="#integer-quantum-hall-effect-from-topology" title="Link to this heading">#</a></h3>
-<p>The integer quantum Hall effect is understood completely through Chern number topology:</p>
-<ol class="arabic simple">
-<li><p>When <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are filled, the occupied bands have total Chern number <span class="math notranslate nohighlight">\(C = \nu\)</span></p></li>
-<li><p>By bulk-boundary correspondence, there are <span class="math notranslate nohighlight">\(\nu\)</span> chiral edge states</p></li>
-<li><p>Each edge state carries conductance <span class="math notranslate nohighlight">\(e^2/h\)</span>, giving total Hall conductance:</p></li>
-</ol>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Integer Quantization of the Chern Number</strong></p>
+<p>Consider a 2D electron band with Berry curvature <span class="math notranslate nohighlight">\(\Omega(\boldsymbol{k})\)</span>. Use Stokes’ theorem to show that the Chern number <span class="math notranslate nohighlight">\(C = \frac{1}{2\pi}\int_{\text{BZ}} \Omega(\boldsymbol{k}) \, \mathrm{d}^2k\)</span> must be an integer. Explain why periodic boundary conditions on the torus-shaped Brillouin zone are crucial for this quantization. Would the Chern number be quantized if the BZ had a different topology (e.g., an open plane)?</p>
+<p><strong>2. Berry Phase for a One-Dimensional Circle</strong></p>
+<p>A 1D system has a closed Brillouin zone of circumference <span class="math notranslate nohighlight">\(2\pi\)</span>. The Berry connection is <span class="math notranslate nohighlight">\(A(k) = i\langle\psi(k)|\partial_k\psi(k)\rangle\)</span>. Show that the Berry phase is:</p>
 <div class="math notranslate nohighlight">
-\[\sigma_H = \nu \times \frac{e^2}{h}\]</div>
-<ol class="arabic simple" start="4">
-<li><p>The quantization is <strong>exact and universal</strong> because it’s a topological property—independent of disorder, material details, or microscopic parameters</p></li>
-</ol>
-</section>
-<section id="topological-phase-transitions">
-<h3>Topological Phase Transitions<a class="headerlink" href="#topological-phase-transitions" title="Link to this heading">#</a></h3>
-<p>When a system undergoes a topological phase transition, the Chern number changes. This can only happen when <strong>the band gap closes</strong>—states from occupied and unoccupied bands become degenerate.</p>
-<p>At a critical parameter value:</p>
-<ul class="simple">
-<li><p>The band gap vanishes</p></li>
-<li><p>States from different Chern number sectors “mix”</p></li>
-<li><p>Beyond the transition, the new topological order emerges</p></li>
-</ul>
-<p>This is profoundly different from conventional phase transitions (like ferromagnet to paramagnet), which are characterized by symmetry breaking. Topological transitions involve no symmetry change—only a change in global topology.</p>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Chern number</strong>: Integer topological invariant <span class="math notranslate nohighlight">\(C = \frac{1}{2\pi}\int\Omega d^2k\)</span> insensitive to smooth deformations.</p></li>
-<li><p><strong>Quantization</strong>: Periodic boundary conditions on torus (BZ) force <span class="math notranslate nohighlight">\(C \in \mathbb{Z}\)</span>.</p></li>
-<li><p><strong>Winding number</strong>: 1D analog; counts phase windings as momentum traverses Brillouin zone.</p></li>
-<li><p><strong>Fiber bundle geometry</strong>: Berry phase is connection on bundle of quantum states over parameter space.</p></li>
-<li><p><strong>Bulk-boundary correspondence</strong>: Number of edge states = Chern number of bulk bands.</p></li>
-<li><p><strong>Topological insulator</strong>: Bulk gap + non-zero Chern number → protected conducting edge states.</p></li>
-<li><p><strong>IQHE from topology</strong>: <span class="math notranslate nohighlight">\(\sigma_H = \nu e^2/h\)</span> follows from bulk Chern number <span class="math notranslate nohighlight">\(\nu\)</span>.</p></li>
-<li><p><strong>Robustness</strong>: Topological properties protected against disorder and impurities (as long as gap survives).</p></li>
-<li><p><strong>Topological phase transition</strong>: Band gap closure allows Chern number to change.</p></li>
-<li><p><strong>Deep principle</strong>: Quantum geometry (Berry phase, curvature) directly determines observable transport properties.</p></li>
-</ul>
-</section>
+\[
+\gamma = \oint_0^{2\pi} A(k) \, \mathrm{d}k = 2\pi w\]</div>
+<p>where <span class="math notranslate nohighlight">\(w\)</span> is an integer winding number. Relate the winding number to the argument of <span class="math notranslate nohighlight">\(\langle\psi(2\pi)|\psi(0)\rangle\)</span>. Why does the winding number equal the number of times the electronic phase winds around the complex plane as <span class="math notranslate nohighlight">\(k\)</span> traverses the Brillouin zone?</p>
+<p><strong>3. Gauge Invariance of the Chern Number</strong></p>
+<p>The Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{k}) = i\langle n(\boldsymbol{k})|\nabla_{\boldsymbol{k}}n(\boldsymbol{k})\rangle\)</span> is not gauge-invariant: under a local U(1) phase rotation <span class="math notranslate nohighlight">\(|n(\boldsymbol{k})\rangle \to \mathrm{e}^{\mathrm{i}\lambda(\boldsymbol{k})}|n(\boldsymbol{k})\rangle\)</span>, the connection transforms as <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\lambda\)</span>. Show that the Berry curvature <span class="math notranslate nohighlight">\(\Omega = \nabla \times \boldsymbol{A}\)</span> is gauge-invariant, and therefore the Chern number is well-defined despite the choice of phase for the eigenstates.</p>
+<p><strong>4. Chern Number for a Simple 2D Model</strong></p>
+<p>Consider a toy 2D tight-binding Hamiltonian:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}(\boldsymbol{k}) = 2t[\cos(k_x) + \cos(k_y)]\sigma^x + m\sigma^z\]</div>
+<p>where <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, <span class="math notranslate nohighlight">\(m &gt; 0\)</span> are parameters, and <span class="math notranslate nohighlight">\(\sigma^{x,z}\)</span> are Pauli matrices.</p>
+<p>(a) Find the eigenvalues <span class="math notranslate nohighlight">\(E_{\pm}(\boldsymbol{k})\)</span> and eigenstates <span class="math notranslate nohighlight">\(|n_+(\boldsymbol{k})\rangle\)</span>, <span class="math notranslate nohighlight">\(|n_-(\boldsymbol{k})\rangle\)</span> in terms of <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>.</p>
+<p>(b) Compute the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_+(\boldsymbol{k}) = i\langle n_+|\nabla_{\boldsymbol{k}}n_+\rangle\)</span> for the upper band.</p>
+<p>(c) Compute the Berry curvature <span class="math notranslate nohighlight">\(\Omega_+(\boldsymbol{k}) = \partial_{k_x} A_{+,y} - \partial_{k_y} A_{+,x}\)</span>.</p>
+<p>(d) Integrate to find the Chern number <span class="math notranslate nohighlight">\(C_+ = \frac{1}{2\pi}\int_{\text{BZ}} \Omega_+ \, \mathrm{d}^2k\)</span>. [<em>Hint</em>: Use symmetry; the integral should be straightforward.]</p>
+<p><strong>5. Bulk-Boundary Correspondence: Edge States</strong></p>
+<p>A topological insulator with bulk Chern number <span class="math notranslate nohighlight">\(C = 1\)</span> is cut to create a boundary. According to the bulk-boundary correspondence theorem, exactly one chiral edge state should cross the band gap.</p>
+<p>(a) Explain physically why edge states must exist at the boundary between a Chern insulator and vacuum.</p>
+<p>(b) Why must this edge state be chiral (traveling only in one direction)?</p>
+<p>(c) If we add a non-magnetic impurity at the edge, why is the edge state robust to this perturbation? (Hint: Consider how backscattering would require a transition to other edge states.)</p>
+<p><strong>6. Quantized Hall Conductance</strong></p>
+<p>The integer quantum Hall effect shows <span class="math notranslate nohighlight">\(\sigma_H = \nu \frac{e^2}{h}\)</span> where <span class="math notranslate nohighlight">\(\nu\)</span> is the number of filled Landau levels. Explain why this quantization is exact using topological arguments:</p>
+<p>(a) Show that when <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are filled, the occupied band manifold has total Chern number <span class="math notranslate nohighlight">\(C = \nu\)</span>.</p>
+<p>(b) Use bulk-boundary correspondence to argue that there are <span class="math notranslate nohighlight">\(\nu\)</span> chiral edge states.</p>
+<p>(c) Each edge state is a 1D band carrying current. Why does each edge state contribute exactly <span class="math notranslate nohighlight">\(\frac{e^2}{h}\)</span> to the conductance?</p>
+<p>(d) Why is this quantization robust against disorder and microscopic details?</p>
+<p><strong>7. Topological Phase Transition</strong></p>
+<p>Consider a family of Hamiltonians <span class="math notranslate nohighlight">\(\hat{H}(m)\)</span> parameterized by a mass term <span class="math notranslate nohighlight">\(m\)</span>. Suppose that for <span class="math notranslate nohighlight">\(m &lt; 0\)</span> the system has Chern number <span class="math notranslate nohighlight">\(C = 0\)</span>, and for <span class="math notranslate nohighlight">\(m &gt; 0\)</span> it has Chern number <span class="math notranslate nohighlight">\(C = 1\)</span>.</p>
+<p>(a) What must happen to the band gap at <span class="math notranslate nohighlight">\(m = 0\)</span>?</p>
+<p>(b) Sketch the band structure near the critical point and explain how states from occupied and unoccupied bands “mix” during the transition.</p>
+<p>(c) Explain why a topological phase transition is fundamentally different from a conventional symmetry-breaking phase transition (like ferromagnetism).</p>
+<p>(d) If the system is small and <span class="math notranslate nohighlight">\(m\)</span> is changed slowly across <span class="math notranslate nohighlight">\(m = 0\)</span>, can the occupied band adiabatically evolve from <span class="math notranslate nohighlight">\(C = 0\)</span> to <span class="math notranslate nohighlight">\(C = 1\)</span> without crossing <span class="math notranslate nohighlight">\(m = 0\)</span>? Why or why not?</p>
 </section>
 </section>
 
@@ -761,17 +835,17 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chern-number-as-topological-invariant">Chern Number as Topological Invariant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-integer-quantization">Proof of Integer Quantization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#winding-number-and-berry-phase">Winding Number and Berry Phase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fiber-bundle-picture">Fiber Bundle Picture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-insulators-and-bulk-boundary-correspondence">Topological Insulators and Bulk-Boundary Correspondence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulk-boundary-correspondence-theorem">Bulk-Boundary Correspondence Theorem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-quantum-hall-effect-from-topology">Integer Quantum Hall Effect from Topology</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-phase-transitions">Topological Phase Transitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chern-number-and-topological-invariants">The Chern Number and Topological Invariants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-picture-berry-flux-and-winding">Physical Picture: Berry Flux and Winding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tknn-formula-and-integer-quantum-hall-effect">The TKNN Formula and Integer Quantum Hall Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-vs-geometric-invariants">Topological vs. Geometric Invariants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulk-boundary-correspondence-index-theorem">Bulk-Boundary Correspondence (Index Theorem)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-reversal-symmetry-and-topological-insulators">Time-Reversal Symmetry and Topological Insulators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#winding-numbers-in-1d-chains">Winding Numbers in 1D Chains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-physical-consequences-of-topological-structure">Key Physical Consequences of Topological Structure</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -809,7 +883,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

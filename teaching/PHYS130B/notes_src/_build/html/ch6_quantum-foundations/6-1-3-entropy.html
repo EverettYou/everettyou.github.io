@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -521,16 +521,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-entropy-definition">Von Neumann Entropy: Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-vs-quantum-entropy">Classical vs. Quantum Entropy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-examples">Fundamental Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-state">Pure State</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximally-mixed-state-d-dimensional">Maximally Mixed State (d-dimensional)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-qubit-example">Mixed Qubit (Example)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-von-neumann-entropy">Properties of Von Neumann Entropy</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boundedness">1. Boundedness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-entropy-definition">Von Neumann Entropy: Definition</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#concavity">2. Concavity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#additivity-for-independent-systems">3. Additivity (For Independent Systems)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#subadditivity-arakilieb-inequality">4. Subadditivity (Araki–Lieb Inequality)</a></li>
@@ -554,6 +545,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -570,13 +562,11 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How do you compute von Neumann entropy <span class="math notranslate nohighlight">\(S(\rho) = -\text{Tr}(\rho \ln \rho)\)</span> from eigenvalues?</p></li>
-<li><p>What is the physical meaning of von Neumann entropy? How does it relate to classical information entropy?</p></li>
-<li><p>What are the properties of entropy: boundedness, concavity, subadditivity, additivity?</p></li>
-<li><p>What is the maximum entropy principle, and how does it relate to thermal equilibrium?</p></li>
-<li><p>What are Rényi entropies, and why is Rényi-2 relevant for experiments?</p></li>
-<li><p>How do entanglement entropy and mutual information connect entropy to quantum correlations?</p></li>
-<li><p>What is the relationship between von Neumann entropy and thermodynamic entropy?</p></li>
+<li><p>What is von Neumann entropy? How do you compute it from eigenvalues of <span class="math notranslate nohighlight">\(\rho\)</span>?</p></li>
+<li><p>What is the physical meaning of von Neumann entropy? How does it relate to classical Shannon entropy and to uncertainty in quantum states?</p></li>
+<li><p>What are the key properties of entropy: bounds, concavity, subadditivity? Why are these properties physically important?</p></li>
+<li><p>What is the maximum entropy principle? Under what conditions does a system tend toward maximum entropy?</p></li>
+<li><p>For a bipartite pure state, why is entanglement entropy of subsystem A equal to von Neumann entropy of the reduced density matrix <span class="math notranslate nohighlight">\(\rho_A\)</span>?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -584,14 +574,24 @@ document.write(`
 <p>Classical information theory measures uncertainty through Shannon entropy; quantum mechanics demands its own generalization. Von Neumann entropy quantifies the mixedness of a quantum state, ranging from zero for perfect knowledge to a maximum for complete ignorance. This single number encodes how much pure quantum coherence remains, serving as the quantum analog of ‘how much information we have lost.’</p>
 <section id="von-neumann-entropy-definition">
 <h3>Von Neumann Entropy: Definition<a class="headerlink" href="#von-neumann-entropy-definition" title="Link to this heading">#</a></h3>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion</p>
+<p>For a pure state, S(ρ) = 0. For the Bell state |Φ+⟩, compute the entanglement entropy of each subsystem. Why is S(ρ_AB) &lt; S(ρ_A) + S(ρ_B)?</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Definition: Von Neumann Entropy</p>
 <p>For a density matrix <span class="math notranslate nohighlight">\(\rho\)</span>, the <strong>von Neumann entropy</strong> quantifies the quantum information (or uncertainty) in the state:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-vn-def">
-<span class="eqno">(372)<a class="headerlink" href="#equation-eq-entropy-vn-def" title="Link to this equation">#</a></span>\[S(\rho) = -\text{Tr}(\rho \ln \rho)\]</div>
+<span class="eqno">(270)<a class="headerlink" href="#equation-eq-entropy-vn-def" title="Link to this equation">#</a></span>\[
+S(\rho) = -\text{Tr}(\rho \ln \rho)\]</div>
 <p>In the eigenbasis of <span class="math notranslate nohighlight">\(\rho\)</span> with eigenvalues <span class="math notranslate nohighlight">\(\{\lambda_i\}\)</span>, this simplifies to:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-vn-eigenbasis">
-<span class="eqno">(373)<a class="headerlink" href="#equation-eq-entropy-vn-eigenbasis" title="Link to this equation">#</a></span>\[S(\rho) = -\sum_i \lambda_i \ln \lambda_i\]</div>
+<span class="eqno">(271)<a class="headerlink" href="#equation-eq-entropy-vn-eigenbasis" title="Link to this equation">#</a></span>\[
+S(\rho) = -\sum_i \lambda_i \ln \lambda_i\]</div>
 <p>where we use the convention <span class="math notranslate nohighlight">\(0 \ln 0 = 0\)</span> (taking the limit as <span class="math notranslate nohighlight">\(x \to 0^+\)</span>: <span class="math notranslate nohighlight">\(x \ln x \to 0\)</span>).</p>
-<p><strong>Physical interpretation</strong>:</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Physical Interpretation</p>
 <ul class="simple">
 <li><p><strong>Pure state</strong> (<span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span>): <span class="math notranslate nohighlight">\(S(\rho) = 0\)</span> (complete certainty, no entropy)</p></li>
 <li><p><strong>Maximally mixed</strong> (<span class="math notranslate nohighlight">\(\rho = I/d\)</span>): <span class="math notranslate nohighlight">\(S(\rho) = \ln d\)</span> (maximum entropy for dimension <span class="math notranslate nohighlight">\(d\)</span>)</p></li>
@@ -603,74 +603,77 @@ document.write(`
 <p><strong>Construction of the formula:</strong></p>
 <p>Start with the von Neumann operator:</p>
 <div class="math notranslate nohighlight">
-\[S(\rho) = -\text{Tr}(\rho \ln \rho)\]</div>
+\[
+S(\rho) = -\text{Tr}(\rho \ln \rho)\]</div>
 <p>To evaluate this, work in the eigenbasis where <span class="math notranslate nohighlight">\(\rho = \sum_i \lambda_i |u_i\rangle\langle u_i|\)</span>.</p>
 <p>Then <span class="math notranslate nohighlight">\(\ln \rho = \sum_i (\ln \lambda_i) |u_i\rangle\langle u_i|\)</span>, so:</p>
 <div class="math notranslate nohighlight">
-\[\rho \ln \rho = \sum_i \lambda_i (\ln \lambda_i) |u_i\rangle\langle u_i|\]</div>
+\[
+\rho \ln \rho = \sum_i \lambda_i (\ln \lambda_i) |u_i\rangle\langle u_i|\]</div>
 <p>Taking the trace:</p>
 <div class="math notranslate nohighlight">
-\[\text{Tr}(\rho \ln \rho) = \sum_i \lambda_i \ln \lambda_i\]</div>
+\[
+\text{Tr}(\rho \ln \rho) = \sum_i \lambda_i \ln \lambda_i\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
-\[S(\rho) = -\sum_i \lambda_i \ln \lambda_i\]</div>
+\[
+S(\rho) = -\sum_i \lambda_i \ln \lambda_i\]</div>
 <p>This is the <strong>spectral formula</strong> and is independent of basis choice (eigenvalues are invariant).</p>
 <p><strong>Limit convention</strong>: For eigenvalues <span class="math notranslate nohighlight">\(\lambda_i = 0\)</span>, the term <span class="math notranslate nohighlight">\(\lambda_i \ln \lambda_i\)</span> is defined to vanish:</p>
 <div class="math notranslate nohighlight">
-\[\lim_{x \to 0^+} x \ln x = 0\]</div>
+\[
+\lim_{x \to 0^+} x \ln x = 0\]</div>
 <p>This makes physical sense: a zero eigenvalue contributes no entropy (it’s not in the support of the state).</p>
 </div>
-</section>
-<section id="classical-vs-quantum-entropy">
-<h3>Classical vs. Quantum Entropy<a class="headerlink" href="#classical-vs-quantum-entropy" title="Link to this heading">#</a></h3>
+</div>
+<div class="docutils">
+<h6 class="rubric" id="classical-vs-quantum-entropy">Classical vs. Quantum Entropy</h6>
 <p><strong>Classical Shannon entropy</strong> for a probability distribution <span class="math notranslate nohighlight">\(\{p_i\}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[H(p) = -\sum_i p_i \ln p_i\]</div>
+\[
+H(p) = -\sum_i p_i \ln p_i\]</div>
 <p><strong>Quantum von Neumann entropy</strong> generalizes this: the eigenvalues of <span class="math notranslate nohighlight">\(\rho\)</span> play the role of probabilities, but <span class="math notranslate nohighlight">\(\rho\)</span> encodes more than classical probabilities (coherences, entanglement).</p>
 <p><strong>Key difference</strong>: Quantum entropy can increase or decrease under local operations (unlike classical entropy, which cannot decrease under any operation).</p>
-</section>
-<section id="fundamental-examples">
-<h3>Fundamental Examples<a class="headerlink" href="#fundamental-examples" title="Link to this heading">#</a></h3>
-<section id="pure-state">
-<h4>Pure State<a class="headerlink" href="#pure-state" title="Link to this heading">#</a></h4>
+<h3 class="rubric" id="fundamental-examples">Fundamental Examples</h3>
+<h4 class="rubric" id="pure-state">Pure State</h4>
 <p>For <span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span> (eigenvalues: 1 and 0’s):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-pure">
-<span class="eqno">(374)<a class="headerlink" href="#equation-eq-entropy-pure" title="Link to this equation">#</a></span>\[S(\rho) = -1 \cdot \ln 1 - 0 \cdot \ln 0 = 0\]</div>
+<span class="eqno">(272)<a class="headerlink" href="#equation-eq-entropy-pure" title="Link to this equation">#</a></span>\[
+S(\rho) = -1 \cdot \ln 1 - 0 \cdot \ln 0 = 0\]</div>
 <p><strong>No uncertainty</strong> about the state; entropy is zero.</p>
-</section>
-<section id="maximally-mixed-state-d-dimensional">
-<h4>Maximally Mixed State (d-dimensional)<a class="headerlink" href="#maximally-mixed-state-d-dimensional" title="Link to this heading">#</a></h4>
+<h4 class="rubric" id="maximally-mixed-state-d-dimensional">Maximally Mixed State (d-dimensional)</h4>
 <p>For <span class="math notranslate nohighlight">\(\rho = I/d\)</span> (eigenvalues: all <span class="math notranslate nohighlight">\(1/d\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-maxmix">
-<span class="eqno">(375)<a class="headerlink" href="#equation-eq-entropy-maxmix" title="Link to this equation">#</a></span>\[S(\rho) = -d \cdot \frac{1}{d} \ln\frac{1}{d} = \ln d\]</div>
+<span class="eqno">(273)<a class="headerlink" href="#equation-eq-entropy-maxmix" title="Link to this equation">#</a></span>\[
+S(\rho) = -d \cdot \frac{1}{d} \ln\frac{1}{d} = \ln d\]</div>
 <p>For a qubit (<span class="math notranslate nohighlight">\(d=2\)</span>): <span class="math notranslate nohighlight">\(S(I/2) = \ln 2 \approx 0.693\)</span> bits.</p>
 <p><strong>Maximum uncertainty</strong> for a <span class="math notranslate nohighlight">\(d\)</span>-dimensional system.</p>
-</section>
-<section id="mixed-qubit-example">
-<h4>Mixed Qubit (Example)<a class="headerlink" href="#mixed-qubit-example" title="Link to this heading">#</a></h4>
+<h4 class="rubric" id="mixed-qubit-example">Mixed Qubit (Example)</h4>
 <p>Eigenvalues <span class="math notranslate nohighlight">\(\lambda_1 = 0.7, \lambda_2 = 0.3\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-mixed-example">
-<span class="eqno">(376)<a class="headerlink" href="#equation-eq-entropy-mixed-example" title="Link to this equation">#</a></span>\[S(\rho) = -0.7 \ln(0.7) - 0.3 \ln(0.3) \approx 0.610 + 1.204 \approx 1.204\text{ nats} \approx 0.610\text{ bits}\]</div>
+<span class="eqno">(274)<a class="headerlink" href="#equation-eq-entropy-mixed-example" title="Link to this equation">#</a></span>\[
+S(\rho) = -0.7 \ln(0.7) - 0.3 \ln(0.3) \approx 0.610 + 1.204 \approx 1.204\text{ nats} \approx 0.610\text{ bits}\]</div>
 <p>Intermediate between pure (0) and maximally mixed (<span class="math notranslate nohighlight">\(\ln 2 \approx 0.693\)</span> bits).</p>
-</section>
-</section>
-<section id="properties-of-von-neumann-entropy">
-<h3>Properties of Von Neumann Entropy<a class="headerlink" href="#properties-of-von-neumann-entropy" title="Link to this heading">#</a></h3>
-<section id="boundedness">
-<h4>1. Boundedness<a class="headerlink" href="#boundedness" title="Link to this heading">#</a></h4>
+<h3 class="rubric" id="properties-of-von-neumann-entropy">Properties of Von Neumann Entropy</h3>
+<h4 class="rubric" id="boundedness">1. Boundedness</h4>
+<div class="important admonition">
+<p class="admonition-title">Entropy Bounds</p>
 <p>For a density matrix on <span class="math notranslate nohighlight">\(d\)</span>-dimensional Hilbert space:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-bound">
-<span class="eqno">(377)<a class="headerlink" href="#equation-eq-entropy-bound" title="Link to this equation">#</a></span>\[0 \leq S(\rho) \leq \ln d\]</div>
+<span class="eqno">(275)<a class="headerlink" href="#equation-eq-entropy-bound" title="Link to this equation">#</a></span>\[
+0 \leq S(\rho) \leq \ln d\]</div>
 <ul class="simple">
 <li><p>Lower bound: <span class="math notranslate nohighlight">\(S(\rho) = 0\)</span> ⟺ <span class="math notranslate nohighlight">\(\rho\)</span> is pure (rank 1).</p></li>
 <li><p>Upper bound: <span class="math notranslate nohighlight">\(S(\rho) = \ln d\)</span> ⟺ <span class="math notranslate nohighlight">\(\rho = I/d\)</span> (maximally mixed, full rank).</p></li>
 </ul>
-</section>
+</div>
+</div>
 <section id="concavity">
 <h4>2. Concavity<a class="headerlink" href="#concavity" title="Link to this heading">#</a></h4>
 <p>For any <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span> and density matrices <span class="math notranslate nohighlight">\(\rho_1, \rho_2\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-concave">
-<span class="eqno">(378)<a class="headerlink" href="#equation-eq-entropy-concave" title="Link to this equation">#</a></span>\[S(p\rho_1 + (1-p)\rho_2) \geq p S(\rho_1) + (1-p)S(\rho_2)\]</div>
+<span class="eqno">(276)<a class="headerlink" href="#equation-eq-entropy-concave" title="Link to this equation">#</a></span>\[
+S(p\rho_1 + (1-p)\rho_2) \geq p S(\rho_1) + (1-p)S(\rho_2)\]</div>
 <p><strong>Interpretation</strong>: Entropy of a mixture is <strong>at least</strong> the average entropy of the components. Mixing increases entropy (or keeps it same).</p>
 <p><strong>Consequence</strong>: If you don’t know which state you have (ensemble), entropy is higher than if you knew which one it was.</p>
 </section>
@@ -678,23 +681,29 @@ document.write(`
 <h4>3. Additivity (For Independent Systems)<a class="headerlink" href="#additivity-for-independent-systems" title="Link to this heading">#</a></h4>
 <p>If <span class="math notranslate nohighlight">\(\rho_{AB} = \rho_A \otimes \rho_B\)</span> (product state, no entanglement):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-additive">
-<span class="eqno">(379)<a class="headerlink" href="#equation-eq-entropy-additive" title="Link to this equation">#</a></span>\[S(\rho_A \otimes \rho_B) = S(\rho_A) + S(\rho_B)\]</div>
+<span class="eqno">(277)<a class="headerlink" href="#equation-eq-entropy-additive" title="Link to this equation">#</a></span>\[
+S(\rho_A \otimes \rho_B) = S(\rho_A) + S(\rho_B)\]</div>
 <p>Entropies add when systems are uncorrelated.</p>
 </section>
 <section id="subadditivity-arakilieb-inequality">
 <h4>4. Subadditivity (Araki–Lieb Inequality)<a class="headerlink" href="#subadditivity-arakilieb-inequality" title="Link to this heading">#</a></h4>
+<div class="important admonition">
+<p class="admonition-title">Subadditivity of Entropy</p>
 <p>For any bipartite state <span class="math notranslate nohighlight">\(\rho_{AB}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-subadditive">
-<span class="eqno">(380)<a class="headerlink" href="#equation-eq-entropy-subadditive" title="Link to this equation">#</a></span>\[S(\rho_{AB}) \leq S(\rho_A) + S(\rho_B)\]</div>
+<span class="eqno">(278)<a class="headerlink" href="#equation-eq-entropy-subadditive" title="Link to this equation">#</a></span>\[
+S(\rho_{AB}) \leq S(\rho_A) + S(\rho_B)\]</div>
 <p><strong>Interpretation</strong>: Joint entropy is <strong>at most</strong> the sum of marginal entropies. Entanglement reduces the total entropy.</p>
 <p><strong>Equality</strong> ⟺ no entanglement: <span class="math notranslate nohighlight">\(\rho_{AB} = \rho_A \otimes \rho_B\)</span>.</p>
 <p><strong>For pure states</strong>: <span class="math notranslate nohighlight">\(S(\rho_{AB}) = 0\)</span>, so <span class="math notranslate nohighlight">\(S(\rho_A) + S(\rho_B) \geq 0\)</span> (always true, but becomes <span class="math notranslate nohighlight">\(S(\rho_A) = S(\rho_B) = E_{\text{ent}} &gt; 0\)</span> if entangled).</p>
+</div>
 </section>
 <section id="strong-subadditivity">
 <h4>5. Strong Subadditivity<a class="headerlink" href="#strong-subadditivity" title="Link to this heading">#</a></h4>
 <p>For a tripartite system <span class="math notranslate nohighlight">\(ABC\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-strong-subadditive">
-<span class="eqno">(381)<a class="headerlink" href="#equation-eq-entropy-strong-subadditive" title="Link to this equation">#</a></span>\[S(\rho_{AB}) + S(\rho_{BC}) \geq S(\rho_B) + S(\rho_{ABC})\]</div>
+<span class="eqno">(279)<a class="headerlink" href="#equation-eq-entropy-strong-subadditive" title="Link to this equation">#</a></span>\[
+S(\rho_{AB}) + S(\rho_{BC}) \geq S(\rho_B) + S(\rho_{ABC})\]</div>
 <p>This is the cornerstone of the <strong>second law of thermodynamics</strong> in quantum information.</p>
 </section>
 </section>
@@ -704,11 +713,15 @@ document.write(`
 <section id="thermal-state-example">
 <h4>Thermal State (Example)<a class="headerlink" href="#thermal-state-example" title="Link to this heading">#</a></h4>
 <p>At thermal equilibrium, a system reaches the state that maximizes entropy subject to fixed average energy <span class="math notranslate nohighlight">\(\langle H \rangle = E\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Thermal State and Maximum Entropy</p>
 <p>Using <strong>Lagrange multipliers</strong> (with energy constraint and normalization):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-thermal-state">
-<span class="eqno">(382)<a class="headerlink" href="#equation-eq-entropy-thermal-state" title="Link to this equation">#</a></span>\[\rho_\text{thermal} = \frac{e^{-\beta H}}{\text{Tr}(e^{-\beta H})} = \frac{e^{-\beta H}}{Z}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span> (inverse temperature) and <span class="math notranslate nohighlight">\(Z = \text{Tr}(e^{-\beta H})\)</span> (partition function).</p>
+<span class="eqno">(280)<a class="headerlink" href="#equation-eq-entropy-thermal-state" title="Link to this equation">#</a></span>\[
+\rho_\text{thermal} = \frac{\mathrm{e}^{-\beta H}}{\text{Tr}(\mathrm{e}^{-\beta H})} = \frac{\mathrm{e}^{-\beta H}}{Z}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span> (inverse temperature) and <span class="math notranslate nohighlight">\(Z = \text{Tr}(\mathrm{e}^{-\beta H})\)</span> (partition function).</p>
 <p>This maximizes von Neumann entropy for fixed average energy: <span class="math notranslate nohighlight">\(S(\rho_\text{thermal})\)</span> is maximum among all <span class="math notranslate nohighlight">\(\rho\)</span> with <span class="math notranslate nohighlight">\(\langle H \rangle = E\)</span>.</p>
+</div>
 </section>
 <section id="maximally-mixed-state">
 <h4>Maximally Mixed State<a class="headerlink" href="#maximally-mixed-state" title="Link to this heading">#</a></h4>
@@ -719,7 +732,8 @@ document.write(`
 <h3>Von Neumann Entropy and Thermodynamic Entropy<a class="headerlink" href="#von-neumann-entropy-and-thermodynamic-entropy" title="Link to this heading">#</a></h3>
 <p><strong>Boltzmann–Gibbs relation</strong> (fundamental in statistical mechanics):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-thermodynamic-connection">
-<span class="eqno">(383)<a class="headerlink" href="#equation-eq-entropy-thermodynamic-connection" title="Link to this equation">#</a></span>\[S_\text{thermo} = k_B \cdot S_\text{von Neumann}(\rho)\]</div>
+<span class="eqno">(281)<a class="headerlink" href="#equation-eq-entropy-thermodynamic-connection" title="Link to this equation">#</a></span>\[
+S_\text{thermo} = k_B \cdot S_\text{von Neumann}(\rho)\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(S_\text{thermo}\)</span> = thermodynamic entropy (extensive, increases with system size).</p></li>
@@ -730,26 +744,34 @@ document.write(`
 </section>
 <section id="renyi-entropy">
 <h3>Rényi Entropy<a class="headerlink" href="#renyi-entropy" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Definition: Rényi Entropy Family</p>
 <p>A family of entropies parameterized by <span class="math notranslate nohighlight">\(\alpha \in (0, \infty) \setminus \{1\}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-renyi">
-<span class="eqno">(384)<a class="headerlink" href="#equation-eq-entropy-renyi" title="Link to this equation">#</a></span>\[S_\alpha(\rho) = \frac{1}{1-\alpha} \ln \text{Tr}(\rho^\alpha)\]</div>
+<span class="eqno">(282)<a class="headerlink" href="#equation-eq-entropy-renyi" title="Link to this equation">#</a></span>\[
+S_\alpha(\rho) = \frac{1}{1-\alpha} \ln \text{Tr}(\rho^\alpha)\]</div>
 <p><strong>Limit</strong>: <span class="math notranslate nohighlight">\(\lim_{\alpha \to 1} S_\alpha(\rho) = S(\rho)\)</span> (von Neumann entropy).</p>
+</div>
 <section id="common-cases">
 <h4>Common Cases<a class="headerlink" href="#common-cases" title="Link to this heading">#</a></h4>
 <p><strong><span class="math notranslate nohighlight">\(\alpha = 0\)</span> (Hartley entropy)</strong>:</p>
 <div class="math notranslate nohighlight">
-\[S_0(\rho) = \ln(\text{rank}(\rho))\]</div>
+\[
+S_0(\rho) = \ln(\text{rank}(\rho))\]</div>
 <p>Counts number of nonzero eigenvalues.</p>
 <p><strong><span class="math notranslate nohighlight">\(\alpha = 1/2\)</span> (Collision entropy variant)</strong>:</p>
 <div class="math notranslate nohighlight">
-\[S_{1/2}(\rho) = -2\ln \text{Tr}(\rho^{1/2})\]</div>
+\[
+S_{1/2}(\rho) = -2\ln \text{Tr}(\rho^{1/2})\]</div>
 <p><strong><span class="math notranslate nohighlight">\(\alpha = 2\)</span> (Rényi-2, collision entropy)</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-renyi-2">
-<span class="eqno">(385)<a class="headerlink" href="#equation-eq-entropy-renyi-2" title="Link to this equation">#</a></span>\[S_2(\rho) = -\ln \text{Tr}(\rho^2) = -\ln(\text{Purity})\]</div>
-<p>Related to purity: <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = e^{-S_2(\rho)}\)</span>.</p>
+<span class="eqno">(283)<a class="headerlink" href="#equation-eq-entropy-renyi-2" title="Link to this equation">#</a></span>\[
+S_2(\rho) = -\ln \text{Tr}(\rho^2) = -\ln(\text{Purity})\]</div>
+<p>Related to purity: <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = \mathrm{e}^{-S_2(\rho)}\)</span>.</p>
 <p><strong><span class="math notranslate nohighlight">\(\alpha \to \infty\)</span> (Min-entropy)</strong>:</p>
 <div class="math notranslate nohighlight">
-\[S_\infty(\rho) = -\ln(\lambda_\text{max})\]</div>
+\[
+S_\infty(\rho) = -\ln(\lambda_\text{max})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda_\text{max}\)</span> is the largest eigenvalue.</p>
 </section>
 <section id="properties">
@@ -771,7 +793,8 @@ document.write(`
 <h4>Rényi-2 Experimental Accessibility<a class="headerlink" href="#renyi-2-experimental-accessibility" title="Link to this heading">#</a></h4>
 <p>For identical independent measurements, the probability of getting the same outcome twice is:</p>
 <div class="math notranslate nohighlight">
-\[P(\text{same}) = \text{Tr}(\rho^2)\]</div>
+\[
+P(\text{same}) = \text{Tr}(\rho^2)\]</div>
 <p>Thus <span class="math notranslate nohighlight">\(S_2(\rho) = -\ln P(\text{same})\)</span> is <strong>directly measurable</strong> without reconstructing full <span class="math notranslate nohighlight">\(\rho\)</span> (no need for full state tomography).</p>
 </section>
 </section>
@@ -779,7 +802,8 @@ document.write(`
 <h3>Conditional Entropy<a class="headerlink" href="#conditional-entropy" title="Link to this heading">#</a></h3>
 <p>For a bipartite state <span class="math notranslate nohighlight">\(\rho_{AB}\)</span>, the <strong>conditional entropy</strong> of A given B is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-conditional">
-<span class="eqno">(386)<a class="headerlink" href="#equation-eq-entropy-conditional" title="Link to this equation">#</a></span>\[S(A|B) = S(\rho_{AB}) - S(\rho_B)\]</div>
+<span class="eqno">(284)<a class="headerlink" href="#equation-eq-entropy-conditional" title="Link to this equation">#</a></span>\[
+S(A|B) = S(\rho_{AB}) - S(\rho_B)\]</div>
 <p><strong>Interpretation</strong>: Average entropy of A after measuring B and learning the outcome (on average).</p>
 <p><strong>Properties</strong>:</p>
 <ul class="simple">
@@ -792,10 +816,12 @@ document.write(`
 <h3>Mutual Information and Entanglement Entropy<a class="headerlink" href="#mutual-information-and-entanglement-entropy" title="Link to this heading">#</a></h3>
 <p><strong>Mutual information</strong> (total correlations):</p>
 <div class="math notranslate nohighlight">
-\[I(A : B) = S(A) + S(B) - S(AB)\]</div>
+\[
+I(A : B) = S(A) + S(B) - S(AB)\]</div>
 <p>For a <strong>pure bipartite state</strong> where <span class="math notranslate nohighlight">\(S(AB) = 0\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-mutual-ent">
-<span class="eqno">(387)<a class="headerlink" href="#equation-eq-entropy-mutual-ent" title="Link to this equation">#</a></span>\[I(A : B) = S(A) + S(B) = 2 S(A) = 2 E_{\text{ent}}\]</div>
+<span class="eqno">(285)<a class="headerlink" href="#equation-eq-entropy-mutual-ent" title="Link to this equation">#</a></span>\[
+I(A : B) = S(A) + S(B) = 2 S(A) = 2 E_{\text{ent}}\]</div>
 <p>Thus <strong>entanglement entropy</strong> is half the mutual information for pure bipartite states.</p>
 <div class="attention admonition">
 <p class="admonition-title">Entropy of subsystem can exceed total</p>
@@ -810,13 +836,78 @@ document.write(`
 <li><p><strong>Concavity</strong>: Averaging increases entropy (or keeps same).</p></li>
 <li><p><strong>Additivity</strong>: For independent systems, <span class="math notranslate nohighlight">\(S(\rho_A \otimes \rho_B) = S(\rho_A) + S(\rho_B)\)</span>.</p></li>
 <li><p><strong>Subadditivity</strong>: <span class="math notranslate nohighlight">\(S(\rho_{AB}) \leq S(\rho_A) + S(\rho_B)\)</span>; entanglement reduces total entropy.</p></li>
-<li><p><strong>Maximum entropy principle</strong>: Thermal state <span class="math notranslate nohighlight">\(\rho = e^{-\beta H}/Z\)</span> maximizes entropy at fixed average energy.</p></li>
+<li><p><strong>Maximum entropy principle</strong>: Thermal state <span class="math notranslate nohighlight">\(\rho = \mathrm{e}^{-\beta H}/Z\)</span> maximizes entropy at fixed average energy.</p></li>
 <li><p><strong>Thermodynamic entropy</strong>: <span class="math notranslate nohighlight">\(S_\text{thermo} = k_B S_\text{von Neumann}\)</span>; quantum uncertainty is origin of irreversibility.</p></li>
 <li><p><strong>Rényi entropy</strong> <span class="math notranslate nohighlight">\(S_\alpha(\rho) = \frac{1}{1-\alpha}\ln\text{Tr}(\rho^\alpha)\)</span>: Family generalizing von Neumann; <span class="math notranslate nohighlight">\(S_2\)</span> experimentally accessible.</p></li>
 <li><p><strong>Conditional entropy</strong>: <span class="math notranslate nohighlight">\(S(A|B) = S(AB) - S(B)\)</span>; measures A’s entropy after learning B.</p></li>
 <li><p><strong>Mutual information</strong>: <span class="math notranslate nohighlight">\(I(A:B) = S(A) + S(B) - S(AB)\)</span>; for pure bipartite, <span class="math notranslate nohighlight">\(= 2E_{\text{ent}}\)</span>.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="6-1-2-partial-trace.html"><span class="std std-doc">6.1.2 Partial Trace</span></a></strong>: Information contained in reduced density matrices</p></li>
+<li><p><strong><a class="reference internal" href="6-2-2-entanglement-measures.html"><span class="std std-doc">6.2.2 Entanglement Measures</span></a></strong>: Quantifying quantum correlations</p></li>
+<li><p><strong><a class="reference internal" href="6-4-1-decoherence.html"><span class="std std-doc">6.4.1 Decoherence</span></a></strong>: Entropy growth in open systems</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Von Neumann Entropy from Eigenvalues</strong></p>
+<p>A qubit has density matrix with eigenvalues <span class="math notranslate nohighlight">\(\lambda_1 = 0.6\)</span> and <span class="math notranslate nohighlight">\(\lambda_2 = 0.4\)</span>.
+Compute the von Neumann entropy <span class="math notranslate nohighlight">\(S(\rho) = -\sum_i \lambda_i \ln \lambda_i\)</span> in nats.
+Express your answer to 3 decimal places. What physical interpretation does this value have compared to a pure state (<span class="math notranslate nohighlight">\(S=0\)</span>) and maximally mixed state (<span class="math notranslate nohighlight">\(S = \ln 2\)</span>)?</p>
+<p><strong>2. Entropy of Product States</strong></p>
+<p>Consider a bipartite system <span class="math notranslate nohighlight">\(AB\)</span> where:</p>
+<ul class="simple">
+<li><p>Subsystem A is in pure state <span class="math notranslate nohighlight">\(\rho_A = |\psi\rangle\langle\psi|\)</span></p></li>
+<li><p>Subsystem B is maximally mixed: <span class="math notranslate nohighlight">\(\rho_B = I_2/2\)</span> (qubit)</p></li>
+<li><p>The composite state is a product: <span class="math notranslate nohighlight">\(\rho_{AB} = \rho_A \otimes \rho_B\)</span></p></li>
+</ul>
+<p>Compute:
+(a) <span class="math notranslate nohighlight">\(S(\rho_A)\)</span>
+(b) <span class="math notranslate nohighlight">\(S(\rho_B)\)</span>
+(c) <span class="math notranslate nohighlight">\(S(\rho_{AB})\)</span></p>
+<p>Verify that additivity holds: <span class="math notranslate nohighlight">\(S(\rho_{AB}) = S(\rho_A) + S(\rho_B)\)</span>.</p>
+<p><strong>3. Maximally Mixed State Entropy</strong></p>
+<p>A <span class="math notranslate nohighlight">\(d\)</span>-dimensional system is in the maximally mixed state <span class="math notranslate nohighlight">\(\rho = I_d/d\)</span>.</p>
+<p>(a) Show that all eigenvalues equal <span class="math notranslate nohighlight">\(1/d\)</span>.</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(S(\rho)\)</span> in terms of <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p>(c) For <span class="math notranslate nohighlight">\(d = 2\)</span> (qubit), <span class="math notranslate nohighlight">\(d = 3\)</span> (qutrit), and <span class="math notranslate nohighlight">\(d = 4\)</span>, calculate the entropy in <strong>nats</strong> and <strong>bits</strong> (use <span class="math notranslate nohighlight">\(1 \text{ nat} = 1/\ln 2 \text{ bits}\)</span>).</p>
+<p>(d) Which dimension has entropy = 1 nat?</p>
+<p><strong>4. Subadditivity: Entangled Bell State</strong></p>
+<p>Consider the Bell state <span class="math notranslate nohighlight">\(|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> on a two-qubit system.</p>
+<p>(a) Write the density matrix <span class="math notranslate nohighlight">\(\rho_{AB} = |\Psi^+\rangle\langle\Psi^+|\)</span>.</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(S(\rho_{AB})\)</span> (the composite system is pure).</p>
+<p>(c) Compute the reduced density matrices:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho_A = \text{Tr}_B(\rho_{AB})\)</span> and its eigenvalues</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho_B = \text{Tr}_A(\rho_{AB})\)</span> and its eigenvalues</p></li>
+</ul>
+<p>(d) Compute <span class="math notranslate nohighlight">\(S(\rho_A)\)</span> and <span class="math notranslate nohighlight">\(S(\rho_B)\)</span>.</p>
+<p>(e) Verify subadditivity: <span class="math notranslate nohighlight">\(S(\rho_{AB}) \leq S(\rho_A) + S(\rho_B)\)</span>. Is equality violated? Explain physically.</p>
+<p><strong>5. Strong Subadditivity (Conceptual)</strong></p>
+<p>Strong subadditivity states: <span class="math notranslate nohighlight">\(S(\rho_{AB}) + S(\rho_{BC}) \geq S(\rho_B) + S(\rho_{ABC})\)</span> for any tripartite state.</p>
+<p>(a) Rearrange this inequality to show: <span class="math notranslate nohighlight">\(S(\rho_{AB}) - S(\rho_B) \geq S(\rho_{ABC}) - S(\rho_{BC})\)</span>.</p>
+<p>(b) The left side is the conditional entropy <span class="math notranslate nohighlight">\(S(A|B) = S(\rho_{AB}) - S(\rho_B)\)</span>.
+Interpret the inequality: What does it say about how learning information about subsystem C affects the conditional entropy of A given B?</p>
+<p>(c) Why is this property fundamental to the <strong>second law of thermodynamics</strong> in quantum information? (Hint: Think about entropy evolution under local operations.)</p>
+<p><strong>6. Entanglement Entropy and Mutual Information</strong></p>
+<p>A pure bipartite state has subsystem entropies <span class="math notranslate nohighlight">\(S(\rho_A) = 0.5\)</span> nats and <span class="math notranslate nohighlight">\(S(\rho_B) = 0.5\)</span> nats.</p>
+<p>(a) What is <span class="math notranslate nohighlight">\(S(\rho_{AB})\)</span>? (Recall: for pure bipartite states, <span class="math notranslate nohighlight">\(S(\rho_{AB}) = 0\)</span>.)</p>
+<p>(b) Compute the mutual information: <span class="math notranslate nohighlight">\(I(A:B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})\)</span>.</p>
+<p>(c) Show that <span class="math notranslate nohighlight">\(I(A:B) = 2E_{\text{ent}}\)</span> where <span class="math notranslate nohighlight">\(E_{\text{ent}}\)</span> is the entanglement entropy.</p>
+<p>(d) If the state were instead a product (no entanglement), what would <span class="math notranslate nohighlight">\(S(\rho_A)\)</span> and <span class="math notranslate nohighlight">\(S(\rho_B)\)</span> be? Compute the mutual information in that case.</p>
+<p><strong>7. Classical Limit: Shannon Entropy Connection</strong></p>
+<p>A quantum system’s density matrix in the computational basis is diagonal:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho = \begin{pmatrix} 0.5 &amp; 0 \\ 0 &amp; 0.5 \end{pmatrix}\end{split}\]</div>
+<p>(a) Is this a pure state or mixed state? What is the physical interpretation?</p>
+<p>(b) Compute the von Neumann entropy <span class="math notranslate nohighlight">\(S(\rho)\)</span>.</p>
+<p>(c) The eigenvalues <span class="math notranslate nohighlight">\(\{0.5, 0.5\}\)</span> can be viewed as a classical probability distribution. Compute the <strong>Shannon entropy</strong> <span class="math notranslate nohighlight">\(H(p) = -\sum_i p_i \ln p_i\)</span> for <span class="math notranslate nohighlight">\(p_1 = 0.5, p_2 = 0.5\)</span>.</p>
+<p>(d) Show that <span class="math notranslate nohighlight">\(S(\rho) = H(p)\)</span> in this case. Why does this connection hold for diagonal density matrices?</p>
+<p>(e) For a general diagonal <span class="math notranslate nohighlight">\(\rho\)</span> with eigenvalues <span class="math notranslate nohighlight">\(\{\lambda_i\}\)</span>, argue that von Neumann entropy reduces to classical Shannon entropy. Why is the quantum entropy <em>defined</em> using the spectral decomposition?</p>
 </section>
 </section>
 
@@ -885,16 +976,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-entropy-definition">Von Neumann Entropy: Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-vs-quantum-entropy">Classical vs. Quantum Entropy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-examples">Fundamental Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-state">Pure State</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximally-mixed-state-d-dimensional">Maximally Mixed State (d-dimensional)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-qubit-example">Mixed Qubit (Example)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-von-neumann-entropy">Properties of Von Neumann Entropy</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boundedness">1. Boundedness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-entropy-definition">Von Neumann Entropy: Definition</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#concavity">2. Concavity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#additivity-for-independent-systems">3. Additivity (For Independent Systems)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#subadditivity-arakilieb-inequality">4. Subadditivity (Araki–Lieb Inequality)</a></li>
@@ -918,6 +1000,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -955,7 +1038,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

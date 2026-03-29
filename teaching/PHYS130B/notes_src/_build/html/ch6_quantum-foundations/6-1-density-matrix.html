@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -520,10 +520,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topics">Topics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topics">Topics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projects">Projects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-shadow-tomography-efficient-quantum-state-estimation">Classical Shadow Tomography: Efficient Quantum State Estimation</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -540,33 +546,9 @@ document.write(`
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Until now, we have described quantum states as <strong>vectors</strong> <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> in Hilbert space. This works perfectly for <strong>pure states</strong>—states with complete, maximal information.</p>
-<p>However, quantum mechanics also deals with <strong>mixed states</strong>:</p>
-<ul class="simple">
-<li><p>States arising from <strong>incomplete knowledge</strong> (we don’t know exactly what state the system is in).</p></li>
-<li><p>States arising from <strong>entanglement</strong> with an inaccessible environment (the system is part of a larger system, but we only observe a subsystem).</p></li>
-<li><p>States resulting from <strong>decoherence</strong> due to uncontrolled interactions with the environment.</p></li>
-</ul>
-<p>For these cases, a single state vector is insufficient. We introduce the <strong>density matrix</strong> (or <strong>density operator</strong>).</p>
-<p>The <strong>density matrix</strong> is a Hermitian operator <span class="math notranslate nohighlight">\(\rho\)</span> satisfying:</p>
-<ol class="arabic simple">
-<li><p><strong>Hermiticity</strong>: <span class="math notranslate nohighlight">\(\rho^\dagger = \rho\)</span></p></li>
-<li><p><strong>Positivity</strong>: All eigenvalues are non-negative (<span class="math notranslate nohighlight">\(\rho \geq 0\)</span>)</p></li>
-<li><p><strong>Trace normalization</strong>: <span class="math notranslate nohighlight">\(\text{Tr}(\rho) = 1\)</span></p></li>
-</ol>
-<p>For a <strong>pure state</strong> <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-6-1-pure-density">
-<span class="eqno">(341)<a class="headerlink" href="#equation-eq-6-1-pure-density" title="Link to this equation">#</a></span>\[\rho = |\psi\rangle\langle\psi|\]</div>
-<p>For a <strong>mixed state</strong> (probabilistic ensemble), if the system is in state <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span> with probability <span class="math notranslate nohighlight">\(p_i\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-6-1-mixed-density">
-<span class="eqno">(342)<a class="headerlink" href="#equation-eq-6-1-mixed-density" title="Link to this equation">#</a></span>\[\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|\]</div>
-<p>The <strong>purity</strong> <span class="math notranslate nohighlight">\(\mathcal{P} = \text{Tr}(\rho^2)\)</span> distinguishes pure (<span class="math notranslate nohighlight">\(\mathcal{P}=1\)</span>) from mixed (<span class="math notranslate nohighlight">\(\mathcal{P}&lt;1\)</span>) states.</p>
-<p>For an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the expectation value in state <span class="math notranslate nohighlight">\(\rho\)</span> is:</p>
-<div class="math notranslate nohighlight" id="equation-eq-6-1-expectation">
-<span class="eqno">(343)<a class="headerlink" href="#equation-eq-6-1-expectation" title="Link to this equation">#</a></span>\[\langle \hat{O} \rangle = \text{Tr}(\rho \hat{O})\]</div>
-<p>This formula unifies pure and mixed states: for <span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span>, it reduces to <span class="math notranslate nohighlight">\(\langle\psi|\hat{O}|\psi\rangle\)</span>.</p>
-</section>
+<p>However, quantum mechanics also deals with <strong>mixed states</strong>: states arising from incomplete knowledge, entanglement with an inaccessible environment, or decoherence. For these cases, a single state vector is insufficient. The <strong>density matrix</strong> formalism provides the general framework to describe all quantum states, pure and mixed alike.</p>
 <section id="topics">
-<h2>Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h2>
+<h3>Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
 <col style="width: 8.0%" />
@@ -597,7 +579,7 @@ document.write(`
 </div>
 </section>
 <section id="key-concepts">
-<h2>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h2>
+<h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Density matrix</strong>: The most general description of a quantum state, <span class="math notranslate nohighlight">\(\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|\)</span>, satisfying <span class="math notranslate nohighlight">\(\rho^\dagger = \rho\)</span>, <span class="math notranslate nohighlight">\(\rho \geq 0\)</span>, and <span class="math notranslate nohighlight">\(\text{Tr}(\rho) = 1\)</span>.</p></li>
 <li><p><strong>Pure vs. mixed states</strong>: A state is pure if <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) = 1\)</span> (equivalently, <span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span> for some <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>), and mixed if <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2) &lt; 1\)</span>. Mixed states cannot be represented by a single state vector.</p></li>
@@ -607,13 +589,49 @@ document.write(`
 </ul>
 </section>
 <section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Construct the density matrix representation for both pure and mixed quantum states and verify properties of Hermiticity, positivity, and trace normalization.</p></li>
 <li><p>Compute the purity <span class="math notranslate nohighlight">\(\text{Tr}(\rho^2)\)</span> and distinguish between pure and mixed states using spectral decomposition.</p></li>
 <li><p>Apply the partial trace operation to extract the reduced density matrix of a subsystem and explain how entanglement produces mixed reduced states.</p></li>
 <li><p>Calculate the von Neumann entropy and use it to quantify information content and entanglement in quantum systems.</p></li>
 </ul>
+</section>
+</section>
+<section id="projects">
+<h2>Projects<a class="headerlink" href="#projects" title="Link to this heading">#</a></h2>
+<section id="classical-shadow-tomography-efficient-quantum-state-estimation">
+<h3>Classical Shadow Tomography: Efficient Quantum State Estimation<a class="headerlink" href="#classical-shadow-tomography-efficient-quantum-state-estimation" title="Link to this heading">#</a></h3>
+<p><strong>Objective:</strong> Study the classical shadow protocol (Huang et al., 2020) for estimating exponentially many properties of a quantum state using only O(log M) random measurements. Implement the protocol for a few-qubit system and compare its efficiency to full state tomography.</p>
+<p><strong>Background:</strong> Full quantum state tomography requires exponentially many measurements in the number of qubits. The classical shadow protocol revolutionizes this by using random Clifford unitaries and classical post-processing to efficiently estimate expectation values. This is one of the major breakthroughs in quantum information science in the past decade.</p>
+<p><strong>Suggested Approach:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Literature Survey:</strong> Read Huang et al. (arXiv:2011.02993) and understand: (a) random Clifford sampling, (b) classical snapshot construction, (c) median-of-means post-processing for robust estimation.</p></li>
+<li><p><strong>Implementation:</strong> Write Python code to:</p>
+<ul class="simple">
+<li><p>Generate random Clifford circuits for 2-3 qubits</p></li>
+<li><p>Simulate measurement outcomes</p></li>
+<li><p>Reconstruct classical shadow estimates</p></li>
+<li><p>Compute expectation values of observables</p></li>
+</ul>
+</li>
+<li><p><strong>Comparison:</strong> For a known 2-3 qubit state:</p>
+<ul class="simple">
+<li><p>Estimate observables using classical shadows</p></li>
+<li><p>Compare to full state tomography</p></li>
+<li><p>Measure sample complexity and computational cost as a function of system size</p></li>
+</ul>
+</li>
+<li><p><strong>Extension:</strong> Explore robustness to noise and realistic measurement errors.</p></li>
+</ol>
+<p><strong>Expected Deliverable:</strong></p>
+<ul class="simple">
+<li><p>Code implementing classical shadow protocol</p></li>
+<li><p>Numerical comparison: shadows vs. tomography (accuracy vs. sample count)</p></li>
+<li><p>Brief scientific summary (1-2 pages) explaining why classical shadows are more efficient than tomography and when they should be preferred in practice.</p></li>
+</ul>
+<p><strong>Frontier Aspect:</strong> This is an active research frontier. Understanding shadows opens doors to applications in quantum error correction, entanglement detection, and quantum machine learning.</p>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -683,10 +701,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topics">Topics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topics">Topics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projects">Projects</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-shadow-tomography-efficient-quantum-state-estimation">Classical Shadow Tomography: Efficient Quantum State Estimation</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -724,7 +748,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

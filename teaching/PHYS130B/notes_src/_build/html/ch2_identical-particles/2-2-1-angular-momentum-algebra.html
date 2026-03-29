@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -523,14 +523,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-operators">Angular Momentum Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-canonical-commutation-relations">The Canonical Commutation Relations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-component-relations">Explicit Component Relations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-these-relations">Why These Relations?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-casimir-operator">The Casimir Operator</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commutation-with-all-components">Commutation with All Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why This Matters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simultaneous-eigenstates">Simultaneous Eigenstates</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operators-raising-and-lowering">Ladder Operators (Raising and Lowering)</a><ul class="nav section-nav flex-column">
@@ -558,9 +557,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-relations-and-identities">Useful Relations and Identities</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-commutators">Useful Commutators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-products">Useful Products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#completeness-of-ladder-operators">Completeness of Ladder Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values">Expectation Values</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -577,94 +579,83 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What are the fundamental commutation relations for angular momentum? Why must they hold?</p></li>
-<li><p>Define the ladder operators <span class="math notranslate nohighlight">\(J_+\)</span> and <span class="math notranslate nohighlight">\(J_-\)</span>. How do they act on angular momentum eigenstates?</p></li>
-<li><p>Explain the Casimir operator <span class="math notranslate nohighlight">\(J^2\)</span>. Why does it commute with all components?</p></li>
-<li><p>What are the allowed eigenvalues of <span class="math notranslate nohighlight">\(J^2\)</span> and <span class="math notranslate nohighlight">\(J_z\)</span>? How does angular momentum quantization arise from the algebra?</p></li>
-<li><p>How are orbital and spin angular momentum related? Why do they satisfy the same commutation relations?</p></li>
+<li><p>What are the fundamental commutation relations for angular momentum components, and why must they hold for any form of angular momentum?</p></li>
+<li><p>Define the ladder operators <span class="math notranslate nohighlight">\(J_+\)</span> and <span class="math notranslate nohighlight">\(J_-\)</span>. How do they connect eigenstates with different magnetic quantum numbers?</p></li>
+<li><p>What is the Casimir operator <span class="math notranslate nohighlight">\(J^2\)</span>, and why does it commute with all three components of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>?</p></li>
+<li><p>What are the allowed eigenvalues of <span class="math notranslate nohighlight">\(J^2\)</span> and <span class="math notranslate nohighlight">\(J_z\)</span>? How does quantization arise purely from the algebra, without solving a differential equation?</p></li>
+<li><p>Orbital angular momentum comes from <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span>, while spin has no classical meaning. How can they obey the same commutation relations?</p></li>
+<li><p>If angular momentum quantization follows purely from commutation algebra, could there be other observables with similar algebra? What would they represent physically?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Angular momentum is far more than a rotational property—it is a fundamental quantum number that governs the internal structure of atoms and the symmetry of space itself. Understanding its algebra reveals why particle spin and orbital motion are inextricably linked in the quantum world.</p>
+<div class="important admonition">
+<p class="admonition-title">Key Concept: Angular Momentum Algebra</p>
+<p>Angular momentum is far more than a rotational property—it is a fundamental quantum number that governs atomic structure and the symmetry of space itself. All forms of angular momentum (orbital, spin, total) satisfy the <strong>same commutation relations</strong>, revealing a deep unity in quantum mechanics.</p>
+</div>
 <section id="angular-momentum-operators">
 <h3>Angular Momentum Operators<a class="headerlink" href="#angular-momentum-operators" title="Link to this heading">#</a></h3>
 <p><strong>Orbital angular momentum</strong> is defined as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-orbital-angmom-def">
-<span class="eqno">(95)<a class="headerlink" href="#equation-eq-orbital-angmom-def" title="Link to this equation">#</a></span>\[\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\]</div>
+<span class="eqno">(95)<a class="headerlink" href="#equation-eq-orbital-angmom-def" title="Link to this equation">#</a></span>\[
+\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\]</div>
 <p><strong>Spin angular momentum</strong> <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> is an intrinsic angular momentum with no classical analog.</p>
 <p><strong>Total angular momentum</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{J} = \boldsymbol{L} + \boldsymbol{S} \quad \text{(or more generally, any angular momentum)}\]</div>
-<p>Despite their different origins, all forms of angular momentum satisfy the <strong>same fundamental commutation relations</strong>.</p>
+\[
+\boldsymbol{J} = \boldsymbol{L} + \boldsymbol{S} \quad \text{(or more generally, any angular momentum)}\]</div>
+<p>Despite their different origins, all forms satisfy the same fundamental commutation relations.</p>
 </section>
 <section id="the-canonical-commutation-relations">
 <h3>The Canonical Commutation Relations<a class="headerlink" href="#the-canonical-commutation-relations" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Commutation Relations for Angular Momentum</p>
 <p>The three components of any angular momentum operator satisfy:</p>
 <div class="math notranslate nohighlight" id="equation-eq-angular-momentum-commutation">
-<span class="eqno">(96)<a class="headerlink" href="#equation-eq-angular-momentum-commutation" title="Link to this equation">#</a></span>\[[J_i, J_j] = i\hbar \epsilon_{ijk} J_k\]</div>
+<span class="eqno">(96)<a class="headerlink" href="#equation-eq-angular-momentum-commutation" title="Link to this equation">#</a></span>\[
+[J_i, J_j] = \mathrm{i}\hbar \epsilon_{ijk} J_k\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon_{ijk}\)</span> is the <strong>Levi-Civita symbol</strong> (completely antisymmetric):</p>
 <div class="math notranslate nohighlight">
-\[\epsilon_{123} = \epsilon_{231} = \epsilon_{312} = +1, \quad \epsilon_{321} = \epsilon_{213} = \epsilon_{132} = -1, \quad \text{else} = 0\]</div>
-</section>
-<section id="explicit-component-relations">
-<h3>Explicit Component Relations<a class="headerlink" href="#explicit-component-relations" title="Link to this heading">#</a></h3>
-<p>The commutation relations break down to:</p>
+\[
+\epsilon_{123} = \epsilon_{231} = \epsilon_{312} = +1, \quad \epsilon_{321} = \epsilon_{213} = \epsilon_{132} = -1, \quad \text{else} = 0\]</div>
+<p><strong>Explicit component relations:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-explicit-commutators">
-<span class="eqno">(97)<a class="headerlink" href="#equation-eq-explicit-commutators" title="Link to this equation">#</a></span>\[[J_x, J_y] = i\hbar J_z, \quad [J_y, J_z] = i\hbar J_x, \quad [J_z, J_x] = i\hbar J_y\]</div>
+<span class="eqno">(97)<a class="headerlink" href="#equation-eq-explicit-commutators" title="Link to this equation">#</a></span>\[
+[J_x, J_y] = \mathrm{i}\hbar J_z, \quad [J_y, J_z] = \mathrm{i}\hbar J_x, \quad [J_z, J_x] = \mathrm{i}\hbar J_y\]</div>
 <p>These are <strong>cyclic</strong> in <span class="math notranslate nohighlight">\((x, y, z)\)</span>.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Angular Momentum Commutation Relation [J_i, J_j] = iℏε_ijk J_k</p>
-<p><strong>From orbital angular momentum definition:</strong></p>
-<p>Let <span class="math notranslate nohighlight">\(J_i = L_i = \epsilon_{ijk} r_j p_k\)</span> (summation over repeated indices).</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Angular Momentum Commutation Relations</p>
+<p>For orbital angular momentum <span class="math notranslate nohighlight">\(L_i = \epsilon_{ijk} r_j p_k\)</span> (summation over repeated indices):</p>
 <div class="math notranslate nohighlight">
-\[[L_i, L_j] = [\epsilon_{imn} r_m p_n, \epsilon_{jpq} r_p p_q]\]</div>
-<p>Expanding the commutator:</p>
+\[
+[L_i, L_j] = [\epsilon_{imn} r_m p_n, \epsilon_{jpq} r_p p_q]\]</div>
+<p>Using <span class="math notranslate nohighlight">\([r_m, r_p] = 0\)</span>, <span class="math notranslate nohighlight">\([p_n, p_q] = 0\)</span>, and the canonical relation <span class="math notranslate nohighlight">\([r_m, p_q] = \mathrm{i}\hbar \delta_{mq}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[[L_i, L_j] = \epsilon_{imn} \epsilon_{jpq} [r_m p_n, r_p p_q]\]</div>
-<p>Using <span class="math notranslate nohighlight">\([r_m, r_p] = 0\)</span>, <span class="math notranslate nohighlight">\([p_n, p_q] = 0\)</span>, and <span class="math notranslate nohighlight">\([r_m, p_q] = i\hbar \delta_{mq}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[[r_m p_n, r_p p_q] = r_m [p_n, r_p] p_q + [r_m, r_p] p_n p_q + r_m r_p [p_n, p_q] + [r_m, p_q] p_n r_p\]</div>
-<div class="math notranslate nohighlight">
-\[= r_m (-i\hbar \delta_{np}) p_q + 0 + 0 + i\hbar \delta_{mq} p_n r_p = i\hbar (\delta_{mq} p_n r_p - \delta_{np} r_m p_q)\]</div>
+\[
+[r_m p_n, r_p p_q] = \mathrm{i}\hbar (\delta_{mq} p_n r_p - \delta_{np} r_m p_q)\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
-\[[L_i, L_j] = i\hbar \epsilon_{imn} \epsilon_{jpq} (\delta_{mq} p_n r_p - \delta_{np} r_m p_q)\]</div>
-<p>Using the identity <span class="math notranslate nohighlight">\(\epsilon_{imn}\epsilon_{jpq}\delta_{mq} = \epsilon_{inn}\epsilon_{jpn}\)</span> and simplifying with <span class="math notranslate nohighlight">\(\epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}\)</span>:</p>
+\[
+[L_i, L_j] = \mathrm{i}\hbar \epsilon_{imn} \epsilon_{jpq} (\delta_{mq} p_n r_p - \delta_{np} r_m p_q)\]</div>
+<p>Using the identity <span class="math notranslate nohighlight">\(\epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}\)</span> to simplify:</p>
 <div class="math notranslate nohighlight">
-\[[L_i, L_j] = i\hbar \epsilon_{ijk} L_k\]</div>
-<p><strong>For spin:</strong> The commutation relation is <strong>postulated</strong> based on rotational invariance, and all angular momenta are required to satisfy the same algebra.</p>
+\[
+[L_i, L_j] = \mathrm{i}\hbar \epsilon_{ijk} L_k\]</div>
+<p><strong>For spin</strong>: The commutation relation is <strong>postulated</strong> based on rotational invariance, and all angular momenta are required to satisfy this same algebra.</p>
+</div>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Are Orbital and Spin Angular Momentum the Same?</p>
+<p>Orbital <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> arises from position and momentum (classical limit possible). Spin <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> is intrinsic with no classical analog. Yet both satisfy <span class="math notranslate nohighlight">\([J_i, J_j] = \mathrm{i}\hbar \epsilon_{ijk} J_k\)</span>.</p>
+<p><strong>Are they fundamentally the same kind of angular momentum, or do we just use the same word for two things?</strong> If a physicist measures total angular momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{J}} = \hat{\boldsymbol{L}} + \hat{\boldsymbol{S}}\)</span> and finds <span class="math notranslate nohighlight">\(j = 1\)</span>, can they determine the contribution from orbital versus spin without additional measurements?</p>
 </div>
 </section>
 <section id="why-these-relations">
 <h3>Why These Relations?<a class="headerlink" href="#why-these-relations" title="Link to this heading">#</a></h3>
-<p>For orbital angular momentum, these relations follow from the canonical position-momentum commutation relation <span class="math notranslate nohighlight">\([x_i, p_j] = i\hbar \delta_{ij}\)</span>. For spin, they are postulated based on the requirement of <strong>rotational invariance</strong>. The commutation relations encode the fundamental structure of rotations in quantum mechanics.</p>
+<p>For orbital angular momentum, these relations follow rigorously from the canonical position-momentum commutation relation <span class="math notranslate nohighlight">\([x_i, p_j] = \mathrm{i}\hbar \delta_{ij}\)</span>. For spin, they are postulated based on <strong>rotational invariance</strong>. The commutation relations encode the fundamental structure of rotations in quantum mechanics.</p>
 <div class="note admonition">
-<p class="admonition-title">Physical meaning of commutation relations</p>
-<p>The commutation relations <span class="math notranslate nohighlight">\([J_i, J_j] = i\hbar \epsilon_{ijk} J_k\)</span> encode the geometry of rotations: the order of rotations matters. This is the quantum manifestation of the non-commutativity of 3D rotations.</p>
-</div>
-</section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Key takeaway 1</p></li>
-<li><p>Key takeaway 2</p></li>
-<li><p>Key takeaway 3</p></li>
-</ul>
-<div class="important admonition">
-<p class="admonition-title">Important</p>
-<p>Angular Momentum Commutation Relations</p>
-<p>[Ĵᵢ, Ĵⱼ] = iℏεᵢⱼₖĴₖ. These commutation relations define angular momentum algebra and are the same for orbital L, spin S, and total J.</p>
-</div>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>Simultaneous Eigenstates</p>
-<p>Because [Ĵ², Ĵz] = 0, we can find simultaneous eigenstates |j,m⟩. Here j labels the total angular momentum magnitude and m is the z-component quantum number.</p>
-</div>
-<div class="caution admonition">
-<p class="admonition-title">Caution</p>
-<p>Quantum Numbers j and m</p>
-<p>For a given j, m ranges from -j to +j in integer steps. For orbital angular momentum L, j = 0, 1, 2, … For spin-1/2, j = 1/2 only. The spacing between m levels is always ℏ.</p>
+<p class="admonition-title">Physical Meaning: The Geometry of Rotations</p>
+<p>The commutation relations <span class="math notranslate nohighlight">\([J_i, J_j] = \mathrm{i}\hbar \epsilon_{ijk} J_k\)</span> encode the geometry of rotations: the order of rotations matters. This is the quantum manifestation of the non-commutativity of 3D rotations.</p>
 </div>
 </section>
 </section>
@@ -672,34 +663,47 @@ document.write(`
 <h2>The Casimir Operator<a class="headerlink" href="#the-casimir-operator" title="Link to this heading">#</a></h2>
 <section id="definition">
 <h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Casimir Operator</p>
 <p>The <strong>Casimir operator</strong> (or <strong>total angular momentum squared</strong>) is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-casimir-operator">
-<span class="eqno">(98)<a class="headerlink" href="#equation-eq-casimir-operator" title="Link to this equation">#</a></span>\[J^2 = J_x^2 + J_y^2 + J_z^2\]</div>
-</section>
-<section id="commutation-with-all-components">
-<h3>Commutation with All Components<a class="headerlink" href="#commutation-with-all-components" title="Link to this heading">#</a></h3>
+<span class="eqno">(98)<a class="headerlink" href="#equation-eq-casimir-operator" title="Link to this equation">#</a></span>\[
+J^2 = J_x^2 + J_y^2 + J_z^2\]</div>
 <p>A remarkable property is that <span class="math notranslate nohighlight">\(J^2\)</span> commutes with all components of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-casimir-commutation">
-<span class="eqno">(99)<a class="headerlink" href="#equation-eq-casimir-commutation" title="Link to this equation">#</a></span>\[[J^2, J_x] = 0, \quad [J^2, J_y] = 0, \quad [J^2, J_z] = 0\]</div>
-<p>::{admonition} Derivation: Commutation of Casimir with J_z
-:class: dropdown note</p>
+<span class="eqno">(99)<a class="headerlink" href="#equation-eq-casimir-commutation" title="Link to this equation">#</a></span>\[
+[J^2, J_x] = 0, \quad [J^2, J_y] = 0, \quad [J^2, J_z] = 0\]</div>
+</div>
+</section>
+<section id="why-this-matters">
+<h3>Why This Matters<a class="headerlink" href="#why-this-matters" title="Link to this heading">#</a></h3>
+<p>Because <span class="math notranslate nohighlight">\([J^2, J_z] = 0\)</span>, we can find <strong>simultaneous eigenstates</strong> of both <span class="math notranslate nohighlight">\(J^2\)</span> and <span class="math notranslate nohighlight">\(J_z\)</span>, labeled as <span class="math notranslate nohighlight">\(|j, m\rangle\)</span>. This allows a clean labeling of quantum states by two quantum numbers.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Commutation of Casimir with <span class="math notranslate nohighlight">\(J_z\)</span></p>
 <p><strong>Proof</strong> (for <span class="math notranslate nohighlight">\([J^2, J_z]\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[[J^2, J_z] = [J_x^2, J_z] + [J_y^2, J_z] + [J_z^2, J_z]\]</div>
+\[
+[J^2, J_z] = [J_x^2, J_z] + [J_y^2, J_z] + [J_z^2, J_z]\]</div>
 <p>The last term is zero. For the first:</p>
 <div class="math notranslate nohighlight">
-\[[J_x^2, J_z] = J_x[J_x, J_z] + [J_x, J_z]J_x = J_x(-i\hbar J_y) + (-i\hbar J_y)J_x = -i\hbar(J_x J_y + J_y J_x)\]</div>
+\[
+[J_x^2, J_z] = J_x[J_x, J_z] + [J_x, J_z]J_x = J_x(-\mathrm{i}\hbar J_y) + (-\mathrm{i}\hbar J_y)J_x = -\mathrm{i}\hbar(J_x J_y + J_y J_x)\]</div>
 <div class="math notranslate nohighlight">
-\[[J_y^2, J_z] = J_y[J_y, J_z] + [J_y, J_z]J_y = J_y(i\hbar J_x) + (i\hbar J_x)J_y = i\hbar(J_y J_x + J_x J_y)\]</div>
+\[[J_y^2, J_z] = J_y[J_y, J_z] + [J_y, J_z]J_y = J_y(\mathrm{i}\hbar J_x) + (\mathrm{i}\hbar J_x)J_y = \mathrm{i}\hbar(J_y J_x + J_x J_y)\]</div>
 <p>These cancel: <span class="math notranslate nohighlight">\([J^2, J_z] = 0\)</span>. ✓</p>
-<div class="docutils">
-<h3 class="rubric" id="simultaneous-eigenstates">Simultaneous Eigenstates</h3>
-<p>Because <span class="math notranslate nohighlight">\([J^2, J_z] = 0\)</span>, we can find simultaneous eigenstates of both <span class="math notranslate nohighlight">\(J^2\)</span> and <span class="math notranslate nohighlight">\(J_z\)</span>. We label them as:</p>
+</div>
+</section>
+<section id="simultaneous-eigenstates">
+<h3>Simultaneous Eigenstates<a class="headerlink" href="#simultaneous-eigenstates" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
-\[|j, m\rangle\]</div>
+\[
+|j, m\rangle\]</div>
 <p>with eigenvalues:</p>
+<div class="important admonition">
+<p class="admonition-title">Eigenvalues of Angular Momentum</p>
 <div class="math notranslate nohighlight">
-\[J^2 |j, m\rangle = \hbar^2 j(j+1) |j, m\rangle\]</div>
+\[
+J^2 |j, m\rangle = \hbar^2 j(j+1) |j, m\rangle\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-angular-momentum-eigenstates">
 <span class="eqno">(100)<a class="headerlink" href="#equation-eq-angular-momentum-eigenstates" title="Link to this equation">#</a></span>\[J_z |j, m\rangle = \hbar m |j, m\rangle\]</div>
 <p>where <span class="math notranslate nohighlight">\(j\)</span> is the <strong>angular momentum quantum number</strong> and <span class="math notranslate nohighlight">\(m\)</span> is the <strong>magnetic quantum number</strong> (projection along <span class="math notranslate nohighlight">\(z\)</span>).</p>
@@ -710,37 +714,49 @@ document.write(`
 <h2>Ladder Operators (Raising and Lowering)<a class="headerlink" href="#ladder-operators-raising-and-lowering" title="Link to this heading">#</a></h2>
 <section id="id1">
 <h3>Definition<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Ladder Operators</p>
 <p>The <strong>raising operator</strong> <span class="math notranslate nohighlight">\(J_+\)</span> and <strong>lowering operator</strong> <span class="math notranslate nohighlight">\(J_-\)</span> are defined as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-ladder-operators-def">
-<span class="eqno">(101)<a class="headerlink" href="#equation-eq-ladder-operators-def" title="Link to this equation">#</a></span>\[J_+ = J_x + i J_y, \quad J_- = J_x - i J_y\]</div>
+<span class="eqno">(101)<a class="headerlink" href="#equation-eq-ladder-operators-def" title="Link to this equation">#</a></span>\[
+J_+ = J_x + \mathrm{i} J_y, \quad J_- = J_x - \mathrm{i} J_y\]</div>
 <p><strong>Inverse relations</strong>:</p>
 <div class="math notranslate nohighlight">
-\[J_x = \frac{1}{2}(J_+ + J_-), \quad J_y = \frac{1}{2i}(J_+ - J_-)\]</div>
+\[
+J_x = \frac{1}{2}(J_+ + J_-), \quad J_y = \frac{1}{2\mathrm{i}}(J_+ - J_-)\]</div>
+</div>
 </section>
 <section id="commutation-relations-for-ladder-operators">
 <h3>Commutation Relations for Ladder Operators<a class="headerlink" href="#commutation-relations-for-ladder-operators" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight" id="equation-eq-ladder-commutation-z">
-<span class="eqno">(102)<a class="headerlink" href="#equation-eq-ladder-commutation-z" title="Link to this equation">#</a></span>\[[J_z, J_+] = \hbar J_+, \quad [J_z, J_-] = -\hbar J_-\]</div>
+<span class="eqno">(102)<a class="headerlink" href="#equation-eq-ladder-commutation-z" title="Link to this equation">#</a></span>\[
+[J_z, J_+] = \hbar J_+, \quad [J_z, J_-] = -\hbar J_-\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-ladder-commutation-pm">
-<span class="eqno">(103)<a class="headerlink" href="#equation-eq-ladder-commutation-pm" title="Link to this equation">#</a></span>\[[J_+, J_-] = 2\hbar J_z\]</div>
+<span class="eqno">(103)<a class="headerlink" href="#equation-eq-ladder-commutation-pm" title="Link to this equation">#</a></span>\[
+[J_+, J_-] = 2\hbar J_z\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-casimir-ladder">
-<span class="eqno">(104)<a class="headerlink" href="#equation-eq-casimir-ladder" title="Link to this equation">#</a></span>\[[J^2, J_\pm] = 0\]</div>
+<span class="eqno">(104)<a class="headerlink" href="#equation-eq-casimir-ladder" title="Link to this equation">#</a></span>\[
+[J^2, J_\pm] = 0\]</div>
 </section>
 <section id="action-on-eigenstates">
 <h3>Action on Eigenstates<a class="headerlink" href="#action-on-eigenstates" title="Link to this heading">#</a></h3>
-<p>The ladder operators act on <span class="math notranslate nohighlight">\(|j, m\rangle\)</span> as:</p>
+<div class="important admonition">
+<p class="admonition-title">Action of Ladder Operators on Eigenstates</p>
 <div class="math notranslate nohighlight" id="equation-eq-raising-action">
-<span class="eqno">(105)<a class="headerlink" href="#equation-eq-raising-action" title="Link to this equation">#</a></span>\[J_+ |j, m\rangle = \hbar\sqrt{j(j+1) - m(m+1)} |j, m+1\rangle\]</div>
+<span class="eqno">(105)<a class="headerlink" href="#equation-eq-raising-action" title="Link to this equation">#</a></span>\[
+J_+ |j, m\rangle = \hbar\sqrt{j(j+1) - m(m+1)} |j, m+1\rangle\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-lowering-action">
-<span class="eqno">(106)<a class="headerlink" href="#equation-eq-lowering-action" title="Link to this equation">#</a></span>\[J_- |j, m\rangle = \hbar\sqrt{j(j+1) - m(m-1)} |j, m-1\rangle\]</div>
+<span class="eqno">(106)<a class="headerlink" href="#equation-eq-lowering-action" title="Link to this equation">#</a></span>\[
+J_- |j, m\rangle = \hbar\sqrt{j(j+1) - m(m-1)} |j, m-1\rangle\]</div>
 <p><strong>Physical interpretation</strong>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(J_+\)</span> <strong>raises</strong> the <span class="math notranslate nohighlight">\(z\)</span>-projection of angular momentum: <span class="math notranslate nohighlight">\(m \to m+1\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(J_-\)</span> <strong>lowers</strong> the <span class="math notranslate nohighlight">\(z\)</span>-projection: <span class="math notranslate nohighlight">\(m \to m-1\)</span>.</p></li>
 <li><p>The coefficient <span class="math notranslate nohighlight">\(\sqrt{\cdots}\)</span> is a <strong>normalization factor</strong> ensuring that <span class="math notranslate nohighlight">\(|j, m+1\rangle\)</span> is normalized if <span class="math notranslate nohighlight">\(|j, m\rangle\)</span> is.</p></li>
 </ul>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Action of Raising Operator J_+ on Eigenstates</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Action of Raising Operator <span class="math notranslate nohighlight">\(J_+\)</span> on Eigenstates</p>
 <p>We prove: <span class="math notranslate nohighlight">\(J_+ |j, m\rangle = \hbar\sqrt{j(j+1) - m(m+1)} |j, m+1\rangle\)</span></p>
 <p><strong>Key relations:</strong></p>
 <ul class="simple">
@@ -752,25 +768,30 @@ document.write(`
 <p><strong>Argument:</strong> Let <span class="math notranslate nohighlight">\(|\psi\rangle = J_+ |j, m\rangle\)</span>. We determine what state it is.</p>
 <p>Apply <span class="math notranslate nohighlight">\(J_z\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[J_z |\psi\rangle = J_z J_+ |j, m\rangle = (J_+ J_z + [J_z, J_+]) |j, m\rangle = J_+ J_z |j, m\rangle + \hbar J_+ |j, m\rangle\]</div>
+\[
+J_z |\psi\rangle = J_z J_+ |j, m\rangle = (J_+ J_z + [J_z, J_+]) |j, m\rangle = J_+ J_z |j, m\rangle + \hbar J_+ |j, m\rangle\]</div>
 <div class="math notranslate nohighlight">
 \[= J_+ (\hbar m) |j, m\rangle + \hbar J_+ |j, m\rangle = \hbar(m+1) J_+ |j, m\rangle = \hbar(m+1) |\psi\rangle\]</div>
 <p>So <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(J_z\)</span> with eigenvalue <span class="math notranslate nohighlight">\(\hbar(m+1)\)</span>, meaning it is proportional to <span class="math notranslate nohighlight">\(|j, m+1\rangle\)</span>.</p>
 <p>Apply <span class="math notranslate nohighlight">\(J^2\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[J^2 |\psi\rangle = J^2 J_+ |j, m\rangle = J_+ J^2 |j, m\rangle = J_+ (\hbar^2 j(j+1)) |j, m\rangle = \hbar^2 j(j+1) J_+ |j, m\rangle = \hbar^2 j(j+1) |\psi\rangle\]</div>
+\[
+J^2 |\psi\rangle = J^2 J_+ |j, m\rangle = J_+ J^2 |j, m\rangle = J_+ (\hbar^2 j(j+1)) |j, m\rangle = \hbar^2 j(j+1) J_+ |j, m\rangle = \hbar^2 j(j+1) |\psi\rangle\]</div>
 <p>So <span class="math notranslate nohighlight">\(|\psi\rangle = |j, m+1\rangle\)</span> (up to normalization).</p>
 <p><strong>Normalization:</strong> To find the coefficient, use the norm:</p>
 <div class="math notranslate nohighlight">
-\[\langle j, m | J_-^\dagger J_- |j, m\rangle = \langle j, m | J_+ J_- |j, m\rangle\]</div>
+\[
+\langle j, m | J_-^\dagger J_- |j, m\rangle = \langle j, m | J_+ J_- |j, m\rangle\]</div>
 <p>Using <span class="math notranslate nohighlight">\(J_+ J_- = J^2 - J_z^2 + \hbar J_z\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle j, m | (J^2 - J_z^2 + \hbar J_z) |j, m\rangle = \hbar^2 j(j+1) - \hbar^2 m^2 + \hbar^2 m = \hbar^2(j(j+1) - m^2 + m)\]</div>
+\[
+\langle j, m | (J^2 - J_z^2 + \hbar J_z) |j, m\rangle = \hbar^2 j(j+1) - \hbar^2 m^2 + \hbar^2 m = \hbar^2(j(j+1) - m^2 + m)\]</div>
 <div class="math notranslate nohighlight">
 \[= \hbar^2(j(j+1) - m(m-1)) = \hbar^2((j-m)(j+m+1))\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
-\[J_+ |j, m\rangle = \hbar\sqrt{(j-m)(j+m+1)} |j, m+1\rangle \quad ✓\]</div>
+\[
+J_+ |j, m\rangle = \hbar\sqrt{(j-m)(j+m+1)} |j, m+1\rangle \quad ✓\]</div>
 <p>which can also be written as <span class="math notranslate nohighlight">\(\hbar\sqrt{j(j+1) - m(m+1)}\)</span>.</p>
 </div>
 </section>
@@ -778,10 +799,12 @@ document.write(`
 <h3>Normalization Coefficients<a class="headerlink" href="#normalization-coefficients" title="Link to this heading">#</a></h3>
 <p>The square root coefficients can be rewritten using <span class="math notranslate nohighlight">\(j(j+1) - m(m+1) = (j-m)(j+m+1)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[J_+ |j, m\rangle = \hbar\sqrt{(j-m)(j+m+1)} |j, m+1\rangle\]</div>
+\[
+J_+ |j, m\rangle = \hbar\sqrt{(j-m)(j+m+1)} |j, m+1\rangle\]</div>
 <p>Similarly, <span class="math notranslate nohighlight">\(j(j+1) - m(m-1) = (j+m)(j-m+1)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[J_- |j, m\rangle = \hbar\sqrt{(j+m)(j-m+1)} |j, m-1\rangle\]</div>
+\[
+J_- |j, m\rangle = \hbar\sqrt{(j+m)(j-m+1)} |j, m-1\rangle\]</div>
 </section>
 </section>
 <section id="angular-momentum-quantization">
@@ -791,11 +814,13 @@ document.write(`
 <p>The allowed values of angular momentum quantum numbers arise purely from the <strong>algebra of commutation relations</strong>, without solving any differential equations!</p>
 <p><strong>Key observation</strong>: For a state with angular momentum quantum number <span class="math notranslate nohighlight">\(j\)</span>, the eigenvalue equation <span class="math notranslate nohighlight">\(J_z |j, m\rangle = \hbar m |j, m\rangle\)</span> requires that:</p>
 <div class="math notranslate nohighlight">
-\[m \in \{-j, -j+1, \ldots, j-1, j\}\]</div>
+\[
+m \in \{-j, -j+1, \ldots, j-1, j\}\]</div>
 <p>That is, <span class="math notranslate nohighlight">\(m\)</span> ranges from <span class="math notranslate nohighlight">\(-j\)</span> to <span class="math notranslate nohighlight">\(+j\)</span> in integer steps. This has <span class="math notranslate nohighlight">\(2j+1\)</span> possible values.</p>
 <p><strong>For physical systems</strong>, the requirement of <strong>single-valuedness</strong> (the wavefunction must return to itself after a <span class="math notranslate nohighlight">\(2\pi\)</span> rotation) forces:</p>
 <div class="math notranslate nohighlight">
-\[j \in \{0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots\}\]</div>
+\[
+j \in \{0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots\}\]</div>
 <p>Both <strong>integer</strong> and <strong>half-integer</strong> values are allowed in quantum mechanics (unlike classical mechanics, where angular momentum is always an integer multiple of <span class="math notranslate nohighlight">\(\hbar\)</span>).</p>
 </section>
 <section id="integer-vs-half-integer">
@@ -812,17 +837,21 @@ document.write(`
 <section id="spin-1-2-two-dimensional-representation">
 <h3>Spin-1/2 (Two-Dimensional Representation)<a class="headerlink" href="#spin-1-2-two-dimensional-representation" title="Link to this heading">#</a></h3>
 <p>For <span class="math notranslate nohighlight">\(j = 1/2\)</span>, there are <span class="math notranslate nohighlight">\(2j + 1 = 2\)</span> basis states: <span class="math notranslate nohighlight">\(|1/2, +1/2\rangle\)</span> and <span class="math notranslate nohighlight">\(|1/2, -1/2\rangle\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Pauli Matrix Representations</p>
 <p>The angular momentum operators are represented as:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}J_z = \frac{\hbar}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = \frac{\hbar}{2} \hat{\sigma}_z\end{split}\]</div>
+\[\begin{split}
+J_z = \frac{\hbar}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = \frac{\hbar}{2} \hat{\sigma}^z\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}J_+ = \hbar \begin{pmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}J_- = \hbar \begin{pmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{pmatrix}\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}J_x = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \frac{\hbar}{2} \hat{\sigma}_x, \quad
-J_y = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} = \frac{\hbar}{2} \hat{\sigma}_y\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}_i\)</span> are the <strong>Pauli matrices</strong>.</p>
+\[\begin{split}J_x = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \frac{\hbar}{2} \hat{\sigma}^x, \quad
+J_y = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix} = \frac{\hbar}{2} \hat{\sigma}^y\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}^i\)</span> are the <strong>Pauli matrices</strong>.</p>
+</div>
 </section>
 <section id="general-pattern">
 <h3>General Pattern<a class="headerlink" href="#general-pattern" title="Link to this heading">#</a></h3>
@@ -836,20 +865,26 @@ J_y = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} = \f
 <h3>In Quantum Mechanics<a class="headerlink" href="#in-quantum-mechanics" title="Link to this heading">#</a></h3>
 <p>Orbital angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span> with components:</p>
 <div class="math notranslate nohighlight" id="equation-eq-orbital-components">
-<span class="eqno">(107)<a class="headerlink" href="#equation-eq-orbital-components" title="Link to this equation">#</a></span>\[L_x = y p_z - z p_y, \quad L_y = z p_x - x p_z, \quad L_z = x p_y - y p_x\]</div>
+<span class="eqno">(107)<a class="headerlink" href="#equation-eq-orbital-components" title="Link to this equation">#</a></span>\[
+L_x = y p_z - z p_y, \quad L_y = z p_x - x p_z, \quad L_z = x p_y - y p_x\]</div>
 <p>In the position representation:</p>
 <div class="math notranslate nohighlight">
-\[L_z = -i\hbar \frac{\partial}{\partial \phi} \quad \text{(in spherical coordinates)}\]</div>
+\[
+L_z = -\mathrm{i}\hbar \frac{\partial}{\partial \phi} \quad \text{(in spherical coordinates)}\]</div>
 </section>
 <section id="spherical-harmonics-as-eigenfunctions">
 <h3>Spherical Harmonics as Eigenfunctions<a class="headerlink" href="#spherical-harmonics-as-eigenfunctions" title="Link to this heading">#</a></h3>
 <p>The eigenfunctions of <span class="math notranslate nohighlight">\(L^2\)</span> and <span class="math notranslate nohighlight">\(L_z\)</span> are the <strong>spherical harmonics</strong> <span class="math notranslate nohighlight">\(Y_\ell^m(\theta, \phi)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[L^2 Y_\ell^m = \hbar^2 \ell(\ell+1) Y_\ell^m\]</div>
+\[
+L^2 Y_\ell^m = \hbar^2 \ell(\ell+1) Y_\ell^m\]</div>
 <div class="math notranslate nohighlight">
 \[L_z Y_\ell^m = \hbar m Y_\ell^m\]</div>
 <p>where <span class="math notranslate nohighlight">\(\ell \in \{0, 1, 2, \ldots\}\)</span> (always <strong>integer</strong>) and <span class="math notranslate nohighlight">\(m \in \{-\ell, \ldots, \ell\}\)</span>.</p>
-<p><strong>Note</strong>: Orbital angular momentum can only have integer quantum numbers. Half-integer is forbidden for <span class="math notranslate nohighlight">\(L\)</span> (a consequence of requiring single-valuedness for the spatial wavefunction on a sphere).</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Orbital angular momentum can only have integer quantum numbers. Half-integer is forbidden for <span class="math notranslate nohighlight">\(L\)</span> (a consequence of requiring single-valuedness for the spatial wavefunction on a sphere).</p>
+</div>
 </section>
 </section>
 <section id="useful-relations-and-identities">
@@ -857,59 +892,88 @@ J_y = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} = \f
 <section id="useful-commutators">
 <h3>Useful Commutators<a class="headerlink" href="#useful-commutators" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
-\[[J_x, J_x] = 0 \quad \text{(self-commutation always zero)}\]</div>
+\[
+[J_x, J_x] = 0 \quad \text{(self-commutation always zero)}\]</div>
 <p>For different components:</p>
 <div class="math notranslate nohighlight">
-\[[J_i, J_j] = i\hbar \epsilon_{ijk} J_k\]</div>
+\[
+[J_i, J_j] = \mathrm{i}\hbar \epsilon_{ijk} J_k\]</div>
 </section>
 <section id="useful-products">
 <h3>Useful Products<a class="headerlink" href="#useful-products" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
-\[J_+ J_- = J^2 - J_z^2 + \hbar J_z\]</div>
+\[
+J_+ J_- = J^2 - J_z^2 + \hbar J_z\]</div>
 <div class="math notranslate nohighlight">
 \[J_- J_+ = J^2 - J_z^2 - \hbar J_z\]</div>
-<p>::{admonition} Derivation: Verification of Ladder Product Relations
-:class: dropdown note</p>
-<p>These can be verified by expanding <span class="math notranslate nohighlight">\(J_\pm = J_x \pm i J_y\)</span> and using <span class="math notranslate nohighlight">\([J_x, J_y] = i\hbar J_z\)</span>.</p>
-<p>Starting from <span class="math notranslate nohighlight">\(J_\pm = J_x \pm i J_y\)</span>:</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Derivation: Verification of Ladder Product Relations</p>
+<p>These can be verified by expanding <span class="math notranslate nohighlight">\(J_\pm = J_x \pm \mathrm{i} J_y\)</span> and using <span class="math notranslate nohighlight">\([J_x, J_y] = \mathrm{i}\hbar J_z\)</span>.</p>
+<p>Starting from <span class="math notranslate nohighlight">\(J_\pm = J_x \pm \mathrm{i} J_y\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[J_+ J_- = (J_x + i J_y)(J_x - i J_y) = J_x^2 - i J_x J_y + i J_y J_x + J_y^2\]</div>
+\[
+J_+ J_- = (J_x + \mathrm{i} J_y)(J_x - \mathrm{i} J_y) = J_x^2 - \mathrm{i} J_x J_y + \mathrm{i} J_y J_x + J_y^2\]</div>
 <div class="math notranslate nohighlight">
 \[= J_x^2 + J_y^2 + i(J_y J_x - J_x J_y) = J_x^2 + J_y^2 - i[J_x, J_y]\]</div>
 <div class="math notranslate nohighlight">
-\[= J_x^2 + J_y^2 - i \cdot i\hbar J_z = J_x^2 + J_y^2 + \hbar J_z\]</div>
+\[= J_x^2 + J_y^2 - i \cdot \mathrm{i}\hbar J_z = J_x^2 + J_y^2 + \hbar J_z\]</div>
 <p>Since <span class="math notranslate nohighlight">\(J^2 = J_x^2 + J_y^2 + J_z^2\)</span>, we have <span class="math notranslate nohighlight">\(J_x^2 + J_y^2 = J^2 - J_z^2\)</span>, giving:</p>
 <div class="math notranslate nohighlight">
-\[J_+ J_- = J^2 - J_z^2 + \hbar J_z\]</div>
+\[
+J_+ J_- = J^2 - J_z^2 + \hbar J_z\]</div>
 <p>The second relation follows similarly.</p>
-<div class="docutils">
-<h3 class="rubric" id="completeness-of-ladder-operators">Completeness of Ladder Operators</h3>
+</div>
+</section>
+<section id="completeness-of-ladder-operators">
+<h3>Completeness of Ladder Operators<a class="headerlink" href="#completeness-of-ladder-operators" title="Link to this heading">#</a></h3>
 <p>Every state <span class="math notranslate nohighlight">\(|j, m\rangle\)</span> can be reached from <span class="math notranslate nohighlight">\(|j, j\rangle\)</span> (the state with maximum <span class="math notranslate nohighlight">\(m\)</span>) by repeatedly applying <span class="math notranslate nohighlight">\(J_-\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[|j, m\rangle \propto (J_-)^{j-m} |j, j\rangle\]</div>
+\[
+|j, m\rangle \propto (J_-)^{j-m} |j, j\rangle\]</div>
 <p>Similarly, every state can be reached from <span class="math notranslate nohighlight">\(|j, -j\rangle\)</span> by applying <span class="math notranslate nohighlight">\(J_+\)</span> repeatedly.</p>
-<h3 class="rubric" id="expectation-values">Expectation Values</h3>
+</section>
+<section id="expectation-values">
+<h3>Expectation Values<a class="headerlink" href="#expectation-values" title="Link to this heading">#</a></h3>
 <p>For a state <span class="math notranslate nohighlight">\(|j, m\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle J_x \rangle = \langle J_y \rangle = 0 \quad \text{(no preferred $x$ or $y$ direction)}\]</div>
+\[
+\langle J_x \rangle = \langle J_y \rangle = 0 \quad \text{(no preferred $x$ or $y$ direction)}\]</div>
 <div class="math notranslate nohighlight">
 \[\langle J_z \rangle = \hbar m\]</div>
 <div class="math notranslate nohighlight">
 \[\langle J^2 \rangle = \hbar^2 j(j+1)\]</div>
-</div>
 </section>
 </section>
-<section id="id2">
-<h2>Summary<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Angular momentum algebra</strong>: All angular momenta satisfy <span class="math notranslate nohighlight">\([J_i, J_j] = i\hbar \epsilon_{ijk} J_k\)</span>.</p></li>
+<li><p><strong>Angular momentum algebra</strong>: All angular momenta satisfy <span class="math notranslate nohighlight">\([J_i, J_j] = \mathrm{i}\hbar \epsilon_{ijk} J_k\)</span>.</p></li>
 <li><p><strong>Casimir operator</strong> <span class="math notranslate nohighlight">\(J^2 = J_x^2 + J_y^2 + J_z^2\)</span> commutes with all components; simultaneous eigenstates exist: <span class="math notranslate nohighlight">\(|j, m\rangle\)</span>.</p></li>
 <li><p><strong>Eigenvalues</strong>: <span class="math notranslate nohighlight">\(J^2 |j, m\rangle = \hbar^2 j(j+1) |j, m\rangle\)</span> and <span class="math notranslate nohighlight">\(J_z |j, m\rangle = \hbar m |j, m\rangle\)</span>.</p></li>
 <li><p><strong>Quantization</strong>: <span class="math notranslate nohighlight">\(j \in \{0, 1/2, 1, 3/2, \ldots\}\)</span> and <span class="math notranslate nohighlight">\(m \in \{-j, -j+1, \ldots, j-1, j\}\)</span> (integer steps).</p></li>
-<li><p><strong>Ladder operators</strong> <span class="math notranslate nohighlight">\(J_\pm = J_x \pm i J_y\)</span> shift <span class="math notranslate nohighlight">\(m\)</span> by one unit: <span class="math notranslate nohighlight">\(J_\pm |j, m\rangle = \hbar\sqrt{(j\mp m)(j\pm m+1)} |j, m\pm 1\rangle\)</span>.</p></li>
+<li><p><strong>Ladder operators</strong> <span class="math notranslate nohighlight">\(J_\pm = J_x \pm \mathrm{i} J_y\)</span> shift <span class="math notranslate nohighlight">\(m\)</span> by one unit: <span class="math notranslate nohighlight">\(J_\pm |j, m\rangle = \hbar\sqrt{(j\mp m)(j\pm m+1)} |j, m\pm 1\rangle\)</span>.</p></li>
 <li><p><strong>Orbital angular momentum</strong> always has integer <span class="math notranslate nohighlight">\(\ell\)</span>; <strong>spin</strong> can be half-integer.</p></li>
 <li><p><strong>Representation matrices</strong>: For spin-1/2, use Pauli matrices; general <span class="math notranslate nohighlight">\(j\)</span> requires <span class="math notranslate nohighlight">\((2j+1) \times (2j+1)\)</span> matrices.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html"><span class="std std-doc">1 1 3 Hermitian Operators</span></a></strong>: Eigenvalues and eigenvectors of observables</p></li>
+<li><p><strong><a class="reference internal" href="2-2-2-spin-representations.html"><span class="std std-doc">2 2 2 Spin Representations</span></a></strong>: Explicit matrix representations of angular momentum operators</p></li>
+<li><p><strong><a class="reference internal" href="2-2-3-addition-of-angular-momenta.html"><span class="std std-doc">2 2 3 Addition Of Angular Momenta</span></a></strong>: Combining angular momenta of two systems</p></li>
+</ul>
+</div>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1. Verify commutation relations.</strong> Show that the commutation relations <span class="math notranslate nohighlight">\([J_x, J_y] = \mathrm{i}\hbar J_z\)</span>, <span class="math notranslate nohighlight">\([J_y, J_z] = \mathrm{i}\hbar J_x\)</span>, and <span class="math notranslate nohighlight">\([J_z, J_x] = \mathrm{i}\hbar J_y\)</span> are cyclic. What does this symmetry tell you about rotations in three dimensions?</p>
+<p><strong>2. Casimir operator commutation.</strong> Verify that <span class="math notranslate nohighlight">\([J^2, J_z] = 0\)</span> by expanding <span class="math notranslate nohighlight">\(J^2 = J_x^2 + J_y^2 + J_z^2\)</span> and using the fundamental commutation relation <span class="math notranslate nohighlight">\([J_i, J_j] = \mathrm{i}\hbar \epsilon_{ijk} J_k\)</span>. Why is this result important for finding simultaneous eigenstates?</p>
+<p><strong>3. Ladder operator algebra.</strong> Using the definitions <span class="math notranslate nohighlight">\(J_+ = J_x + \mathrm{i} J_y\)</span> and <span class="math notranslate nohighlight">\(J_- = J_x - \mathrm{i} J_y\)</span>, derive the relation <span class="math notranslate nohighlight">\([J_+, J_-] = 2\hbar J_z\)</span>. (Hint: expand the commutator and use <span class="math notranslate nohighlight">\([J_x, J_y] = \mathrm{i}\hbar J_z\)</span>.)</p>
+<p><strong>4. Action of raising operator.</strong> Consider the state <span class="math notranslate nohighlight">\(|1, 1\rangle\)</span> (spin-1). Use the formula <span class="math notranslate nohighlight">\(J_+ |j, m\rangle = \hbar\sqrt{(j-m)(j+m+1)} |j, m+1\rangle\)</span> to explain why <span class="math notranslate nohighlight">\(J_+ |1, 1\rangle = 0\)</span>. What is the physical meaning of this result?</p>
+<p><strong>5. Spin-1/2 matrix representations.</strong> For a spin-1/2 system, verify that the Pauli matrices satisfy the angular momentum commutation relations. Specifically, show that <span class="math notranslate nohighlight">\([\sigma^x, \sigma^y] = 2\mathrm{i}\sigma^z\)</span> and interpret this result.</p>
+<p><strong>6. Normalization of ladder operator states.</strong> Given <span class="math notranslate nohighlight">\(J_- |j, m\rangle = \hbar\sqrt{(j+m)(j-m+1)} |j, m-1\rangle\)</span>, find the coefficient when <span class="math notranslate nohighlight">\(J_-\)</span> acts on <span class="math notranslate nohighlight">\(|1/2, 1/2\rangle\)</span> (the spin-up state for spin-1/2). Verify your result using the explicit matrix representation from the lecture.</p>
+<p><strong>7. Expectation values in angular momentum eigenstates.</strong> In a state <span class="math notranslate nohighlight">\(|j, m\rangle\)</span>, compute <span class="math notranslate nohighlight">\(\langle J_x \rangle\)</span> and <span class="math notranslate nohighlight">\(\langle J_y \rangle\)</span> using the ladder operators. Explain why these expectation values are zero despite <span class="math notranslate nohighlight">\(J_x\)</span> and <span class="math notranslate nohighlight">\(J_y\)</span> being non-zero operators. (Hint: <span class="math notranslate nohighlight">\(J_x = \frac{1}{2}(J_+ + J_-)\)</span> and use <span class="math notranslate nohighlight">\(\langle j, m | J_+ | j, m \rangle\)</span>.)</p>
+<p><strong>8. Integer vs. half-integer angular momentum.</strong> Explain why orbital angular momentum <span class="math notranslate nohighlight">\(L\)</span> (which arises from <span class="math notranslate nohighlight">\(L_z = -\mathrm{i}\hbar \partial_\phi\)</span>) can only have integer quantum numbers <span class="math notranslate nohighlight">\(\ell = 0, 1, 2, \ldots\)</span>, while spin <span class="math notranslate nohighlight">\(S\)</span> can be half-integer. What is the role of single-valuedness of the wavefunction in restricting <span class="math notranslate nohighlight">\(\ell\)</span>? How does this connect to the spin-statistics theorem mentioned in the lecture?</p>
 </section>
 </section>
 
@@ -980,14 +1044,13 @@ J_y = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} = \f
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-operators">Angular Momentum Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-canonical-commutation-relations">The Canonical Commutation Relations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-component-relations">Explicit Component Relations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-these-relations">Why These Relations?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-casimir-operator">The Casimir Operator</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commutation-with-all-components">Commutation with All Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why This Matters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simultaneous-eigenstates">Simultaneous Eigenstates</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operators-raising-and-lowering">Ladder Operators (Raising and Lowering)</a><ul class="nav section-nav flex-column">
@@ -1015,9 +1078,12 @@ J_y = \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} = \f
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-relations-and-identities">Useful Relations and Identities</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-commutators">Useful Commutators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-products">Useful Products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#completeness-of-ladder-operators">Completeness of Ladder Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values">Expectation Values</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -1055,7 +1121,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

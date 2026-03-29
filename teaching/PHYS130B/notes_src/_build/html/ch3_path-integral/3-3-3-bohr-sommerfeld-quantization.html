@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=db3dade7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -541,6 +541,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -557,75 +558,85 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the Bohr-Sommerfeld quantization rule and how does it emerge from single-valuedness of the wavefunction?</p></li>
-<li><p>How does the WKB approximation naturally lead to quantization without assuming discrete energy levels?</p></li>
-<li><p>Why does the Bohr-Sommerfeld rule give exact results for the harmonic oscillator and why does it fail for other potentials?</p></li>
-<li><p>What is the EBK (Einstein-Brillouin-Keller) quantization and how does it generalize Bohr-Sommerfeld?</p></li>
-<li><p>How accurate is Bohr-Sommerfeld for realistic potentials like hydrogen and anharmonic oscillators?</p></li>
+<li><p>How does the Bohr-Sommerfeld quantization rule emerge from requiring single-valuedness of the wavefunction?</p></li>
+<li><p>Why does WKB naturally produce quantization without ever assuming discrete energy levels?</p></li>
+<li><p>For what potentials is Bohr-Sommerfeld exact, and what do these potentials have in common?</p></li>
+<li><p>How does the EBK (Einstein-Brillouin-Keller) rule generalize Bohr-Sommerfeld to multidimensional and non-integrable systems?</p></li>
+<li><p>If Bohr-Sommerfeld gives exact results for harmonic oscillators, does that mean it captures all quantum effects for that potential?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Bohr-Sommerfeld quantization reveals that discrete energy levels arise from a simple geometric condition: the phase accumulated around a closed classical orbit must equal an integer multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>. This bridges classical mechanics and quantum mechanics, explaining quantization without solving the Schrödinger equation exactly.</p>
+<div class="important admonition">
+<p class="admonition-title">Definition</p>
+<p><strong>Bohr-Sommerfeld quantization</strong> reveals that discrete energy levels arise from a simple geometric condition: the phase accumulated around a closed classical orbit must equal an integer multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>. This bridges classical mechanics and quantum mechanics, explaining quantization without solving the Schrödinger equation exactly.</p>
+</div>
 <section id="quantization-from-single-valuedness">
 <h3>Quantization from Single-Valuedness<a class="headerlink" href="#quantization-from-single-valuedness" title="Link to this heading">#</a></h3>
 <p>In quantum mechanics, the wavefunction must be <strong>single-valued</strong> in configuration space. For a bound state (particle oscillating in a potential well), the wavefunction returns to itself after a complete cycle. This imposes a <strong>quantization condition</strong> on the allowed energies.</p>
 <section id="the-closed-orbit-condition">
 <h4>The Closed Orbit Condition<a class="headerlink" href="#the-closed-orbit-condition" title="Link to this heading">#</a></h4>
-<p>For a <strong>bound state</strong> in a 1D potential, the particle oscillates between classical turning points <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span> (where <span class="math notranslate nohighlight">\(E = V(x)\)</span>). Classically, the particle goes back and forth: <span class="math notranslate nohighlight">\(x_a \to x_b \to x_a \to \cdots\)</span>.</p>
-<p>In the WKB approximation, the phase accumulated on the left side of the barrier (from <span class="math notranslate nohighlight">\(x_a\)</span> to <span class="math notranslate nohighlight">\(x_b\)</span>) is</p>
+<p>For a <strong>bound state</strong> in a 1D potential, the particle oscillates between classical turning points <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span> (where <span class="math notranslate nohighlight">\(E = V(x)\)</span>). The phase accumulated on the left side of the barrier (from <span class="math notranslate nohighlight">\(x_a\)</span> to <span class="math notranslate nohighlight">\(x_b\)</span>) is</p>
 <div class="math notranslate nohighlight">
 \[\Phi_R = \frac{1}{\hbar}\int_{x_a}^{x_b} p(x) dx\]</div>
 <p>By symmetry, the phase on the return (from <span class="math notranslate nohighlight">\(x_b\)</span> to <span class="math notranslate nohighlight">\(x_a\)</span>) is the same. The <strong>total phase</strong> for a complete cycle is</p>
 <div class="math notranslate nohighlight">
-\[\Phi_\text{total} = 2\Phi_R + \text{(phase shifts at turning points)}\]</div>
-<p>At a <strong>simple turning point</strong>, the WKB connection formula introduces a phase shift of <span class="math notranslate nohighlight">\(\pi/4\)</span> (or <span class="math notranslate nohighlight">\(\pi/2\)</span> total, counting both turning points). Thus:</p>
-<div class="math notranslate nohighlight" id="equation-eq-phase-cycle">
-<span class="eqno">(235)<a class="headerlink" href="#equation-eq-phase-cycle" title="Link to this equation">#</a></span>\[\Phi_\text{total} = \frac{2}{\hbar}\int_{x_a}^{x_b} p(x) dx + \frac{\pi}{2}\]</div>
+\[\Phi_\text{total} = \frac{2}{\hbar}\int_{x_a}^{x_b} p(x) dx + \frac{\pi}{2}\]</div>
+<p>At a <strong>simple turning point</strong>, the WKB connection formula introduces a phase shift of <span class="math notranslate nohighlight">\(\pi/4\)</span> (or <span class="math notranslate nohighlight">\(\pi/2\)</span> total, counting both turning points).</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Semi-Classical Quantization</p>
+<p>Bohr-Sommerfeld quantization condition <span class="math notranslate nohighlight">\(\oint p \, \mathrm{d}x = 2\pi\hbar(n + 1/2)\)</span> emerges from WKB by requiring single-valued wavefunction around a closed orbit. Yet it looks almost <em>classical</em> (an integral around a closed path). This raises foundational questions:</p>
+<ul class="simple">
+<li><p>Bohr-Sommerfeld correctly predicts energy levels for hydrogen (like the quantum result for <span class="math notranslate nohighlight">\(n\)</span> levels). For more complex atoms, it fails. Why does it work for hydrogen but not for helium?</p></li>
+<li><p>The factor <span class="math notranslate nohighlight">\(1/2\)</span> (zero-point energy) comes from phase shifts at turning points. Is this factor purely quantum, or does it have a semi-classical interpretation?</p></li>
+<li><p>For a chaotic (non-integrable) system, the Bohr-Sommerfeld condition doesn’t apply (no longer valid action variables). Yet quantum mechanics still works. How does quantum mechanics handle chaos when semi-classical intuition fails?</p></li>
+<li><p>Can you design a potential where Bohr-Sommerfeld gives an <em>exact</em> result (matching the full quantum spectrum exactly)? What special property must the potential have?</p></li>
+</ul>
+</div>
 </section>
 <section id="single-valuedness-requirement">
 <h4>Single-Valuedness Requirement<a class="headerlink" href="#single-valuedness-requirement" title="Link to this heading">#</a></h4>
 <p>For the wavefunction to be single-valued after a complete oscillation, the total phase must be a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-single-valued">
-<span class="eqno">(236)<a class="headerlink" href="#equation-eq-single-valued" title="Link to this equation">#</a></span>\[\Phi_\text{total} = 2\pi n, \quad n = 0, 1, 2, \ldots\]</div>
+<div class="math notranslate nohighlight">
+\[\Phi_\text{total} = 2\pi n, \quad n = 0, 1, 2, \ldots\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
 \[\frac{2}{\hbar}\int_{x_a}^{x_b} p(x) dx + \frac{\pi}{2} = 2\pi n\]</div>
-<p>Simplifying (using a different convention for the quantum number):</p>
-<div class="math notranslate nohighlight" id="equation-eq-bohr-sommerfeld">
-<span class="eqno">(237)<a class="headerlink" href="#equation-eq-bohr-sommerfeld" title="Link to this equation">#</a></span>\[\frac{1}{\hbar}\oint p(x) dx = 2\pi\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots\]</div>
-<p>This is the <strong>Bohr-Sommerfeld quantization rule</strong>. The contour integral <span class="math notranslate nohighlight">\(\oint\)</span> is around the closed orbit in phase space.</p>
+<p>Simplifying:</p>
+<div class="math notranslate nohighlight">
+\[\oint p(x) dx = 2\pi\hbar\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots\]</div>
 <div class="important admonition">
-<p class="admonition-title">Bohr-Sommerfeld Rule</p>
+<p class="admonition-title">The Bohr-Sommerfeld Rule</p>
 <p>For a 1D bound state, the allowed energies <span class="math notranslate nohighlight">\(E_n\)</span> satisfy</p>
-<div class="math notranslate nohighlight" id="equation-eq-bs-rule">
-<span class="eqno">(238)<a class="headerlink" href="#equation-eq-bs-rule" title="Link to this equation">#</a></span>\[\oint p(x) dx = 2\pi\hbar\left(n + \frac{1}{2}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\oint p(x) dx = 2\pi\hbar\left(n + \frac{1}{2}\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - V(x))}\)</span> and the integral is around the complete classical orbit. The factor of <span class="math notranslate nohighlight">\(1/2\)</span> is the <strong>zero-point energy correction</strong>—even the ground state (<span class="math notranslate nohighlight">\(n=0\)</span>) has non-zero energy.</p>
 </div>
 <div class="example admonition">
 <p class="admonition-title">Example: Harmonic Oscillator</p>
 <p>For the harmonic oscillator <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2\)</span>:</p>
-<p><strong>Turning points</strong>: At <span class="math notranslate nohighlight">\(E = V(x)\)</span>, we have <span class="math notranslate nohighlight">\(\frac{1}{2}m\omega^2 x^2 = E\)</span>, so <span class="math notranslate nohighlight">\(x = \pm\sqrt{2E/(m\omega^2)}\)</span>. Let <span class="math notranslate nohighlight">\(a = \sqrt{2E/(m\omega^2)}\)</span>.</p>
-<p><strong>Momentum</strong>: <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - \frac{1}{2}m\omega^2 x^2)} = m\omega\sqrt{a^2 - x^2}\)</span>.</p>
+<p><strong>Turning points</strong>: At <span class="math notranslate nohighlight">\(E = V(x)\)</span>, we have <span class="math notranslate nohighlight">\(x = \pm a\)</span> where <span class="math notranslate nohighlight">\(a = \sqrt{2E/(m\omega^2)}\)</span>.</p>
+<p><strong>Momentum</strong>: <span class="math notranslate nohighlight">\(p(x) = m\omega\sqrt{a^2 - x^2}\)</span>.</p>
 <p><strong>Integral</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\oint p dx = 2\int_{-a}^{a} m\omega\sqrt{a^2 - x^2} dx = 2m\omega \cdot \frac{\pi a^2}{2} = \pi m\omega a^2 = \pi m\omega \cdot \frac{2E}{m\omega^2} = \frac{2\pi E}{\omega}\]</div>
+\[\oint p dx = 2\int_{-a}^{a} m\omega\sqrt{a^2 - x^2} dx = \pi m\omega a^2 = \frac{2\pi E}{\omega}\]</div>
 <p><strong>Quantization condition</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\frac{2\pi E_n}{\omega} = 2\pi\hbar\left(n + \frac{1}{2}\right)\]</div>
-<div class="math notranslate nohighlight" id="equation-eq-ho-energy-bs">
-<span class="eqno">(239)<a class="headerlink" href="#equation-eq-ho-energy-bs" title="Link to this equation">#</a></span>\[E_n = \hbar\omega\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots\]</div>
+<div class="math notranslate nohighlight">
+\[E_n = \hbar\omega\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots\]</div>
 <p>This is <strong>exactly the quantum mechanical result</strong>! For the harmonic oscillator, Bohr-Sommerfeld is exact.</p>
-<p><strong>admonition</strong></p>
-<p>The harmonic oscillator is special because its potential is quadratic. In the WKB approximation, the momentum <span class="math notranslate nohighlight">\(p(x) \propto \sqrt{E - V}\)</span> is piecewise linear in the integral bounds, making the integral calculable exactly. Moreover, the WKB phase shifts are exact for quadratic potentials. For higher-order potentials, WKB is an approximation.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note: Why is the Harmonic Oscillator Special?</p>
+<p>The harmonic oscillator is special because its potential is quadratic. In the WKB approximation, the momentum <span class="math notranslate nohighlight">\(p(x) \propto \sqrt{E - V}\)</span> leads to an integral that is tractable exactly. Moreover, the WKB phase shifts are exact for quadratic potentials. For higher-order potentials, WKB and Bohr-Sommerfeld are excellent approximations but not exact.</p>
 </div>
 <div class="example admonition">
-<p class="admonition-title">Example: Hydrogen Atom (Bohr Model Revisited)</p>
-<p>For the Coulomb potential <span class="math notranslate nohighlight">\(V(r) = -e^2/(4\pi\epsilon_0 r) = -k/r\)</span> (in Gaussian units, <span class="math notranslate nohighlight">\(V = -k/r\)</span>), the circular orbit has quantized angular momentum <span class="math notranslate nohighlight">\(L = mv_\text{cl}r = n_\phi\hbar\)</span>.</p>
-<p>For a <strong>circular orbit</strong>, the WKB quantization in the radial direction gives an additional condition. The result, incorporating both the azimuthal and radial quantization, is</p>
-<div class="math notranslate nohighlight" id="equation-eq-hydrogen-bs">
-<span class="eqno">(240)<a class="headerlink" href="#equation-eq-hydrogen-bs" title="Link to this equation">#</a></span>\[E_n = -\frac{13.6 \text{ eV}}{n^2}, \quad n = 1, 2, 3, \ldots\]</div>
-<p>This agrees with the quantum mechanical result! However, Bohr-Sommerfeld requires careful treatment of the radial turning point and angular momentum quantization separately.</p>
+<p class="admonition-title">Example: Hydrogen Atom (Bohr Model)</p>
+<p>For the Coulomb potential <span class="math notranslate nohighlight">\(V(r) = -k/r\)</span> with circular orbits, angular momentum quantization <span class="math notranslate nohighlight">\(L = n_\phi\hbar\)</span> combined with radial quantization yields</p>
+<div class="math notranslate nohighlight">
+\[E_n = -\frac{13.6 \text{ eV}}{n^2}, \quad n = 1, 2, 3, \ldots\]</div>
+<p>This agrees with the quantum mechanical result! However, Bohr-Sommerfeld requires careful treatment of the radial turning point and angular momentum quantization separately. The result shows that Bohr-Sommerfeld works even for non-separable or complicated potentials when applied systematically.</p>
 </div>
 </section>
 </section>
@@ -635,21 +646,15 @@ document.write(`
 <section id="multiple-degrees-of-freedom">
 <h4>Multiple Degrees of Freedom<a class="headerlink" href="#multiple-degrees-of-freedom" title="Link to this heading">#</a></h4>
 <p>For a system with <span class="math notranslate nohighlight">\(N\)</span> degrees of freedom and <span class="math notranslate nohighlight">\(N\)</span> action variables <span class="math notranslate nohighlight">\(J_i\)</span>, the quantization condition is</p>
-<div class="math notranslate nohighlight" id="equation-eq-ebk-quantization">
-<span class="eqno">(241)<a class="headerlink" href="#equation-eq-ebk-quantization" title="Link to this equation">#</a></span>\[J_i = \oint p_i dq_i = 2\pi\hbar(n_i + \alpha_i), \quad n_i = 0, 1, 2, \ldots\]</div>
+<div class="math notranslate nohighlight">
+\[J_i = \oint p_i dq_i = 2\pi\hbar(n_i + \alpha_i), \quad n_i = 0, 1, 2, \ldots\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_i\)</span> is the <strong>Maslov index</strong> (phase correction), typically <span class="math notranslate nohighlight">\(1/2\)</span> for each degree of freedom with turning points.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: 2D Isotropic Oscillator</p>
-<p>For the 2D harmonic oscillator <span class="math notranslate nohighlight">\(V(x, y) = \frac{1}{2}m\omega^2(x^2 + y^2)\)</span>, the energy in terms of action variables is</p>
+<p>For the 2D harmonic oscillator <span class="math notranslate nohighlight">\(V(x, y) = \frac{1}{2}m\omega^2(x^2 + y^2)\)</span>, with action variables <span class="math notranslate nohighlight">\(J_x = \oint p_x dx\)</span> and <span class="math notranslate nohighlight">\(J_y = \oint p_y dy\)</span> and using EBK quantization <span class="math notranslate nohighlight">\(J_i = 2\pi\hbar(n_i + 1/2)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[E = \frac{1}{2m}(p_x^2 + p_y^2) + \frac{1}{2}m\omega^2(x^2 + y^2)\]</div>
-<p>Introducing action variables <span class="math notranslate nohighlight">\(J_x = \oint p_x dx\)</span> and <span class="math notranslate nohighlight">\(J_y = \oint p_y dy\)</span>, and using them to eliminate the momenta:</p>
-<div class="math notranslate nohighlight">
-\[E = \omega(J_x + J_y)/(2\pi)\]</div>
-<p>With the EBK quantization <span class="math notranslate nohighlight">\(J_i = 2\pi\hbar(n_i + 1/2)\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-2d-ho-ebk">
-<span class="eqno">(242)<a class="headerlink" href="#equation-eq-2d-ho-ebk" title="Link to this equation">#</a></span>\[E_{n_x, n_y} = \hbar\omega(n_x + n_y + 1), \quad n_x, n_y = 0, 1, 2, \ldots\]</div>
-<p>Again, exact agreement with quantum mechanics.</p>
+\[E_{n_x, n_y} = \hbar\omega(n_x + n_y + 1), \quad n_x, n_y = 0, 1, 2, \ldots\]</div>
+<p>Again, exact agreement with quantum mechanics. EBK correctly captures the degeneracies and energy level structure.</p>
 </div>
 </section>
 </section>
@@ -658,24 +663,24 @@ document.write(`
 <section id="when-bohr-sommerfeld-works-well">
 <h4>When Bohr-Sommerfeld Works Well<a class="headerlink" href="#when-bohr-sommerfeld-works-well" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><strong>Quadratic or near-quadratic potentials</strong>: Harmonic oscillators and slowly-varying deformations.</p></li>
-<li><p><strong>Deep potential wells</strong>: Large quantum numbers <span class="math notranslate nohighlight">\(n \gg 1\)</span> (large <span class="math notranslate nohighlight">\(S/\hbar\)</span>).</p></li>
-<li><p><strong>Separable systems</strong>: Multiple uncoupled degrees of freedom (use EBK).</p></li>
-<li><p><strong>WKB-valid potentials</strong>: Smooth, slowly-varying (potential derivatives small on wavelength scale).</p></li>
+<li><p><strong>Quadratic or near-quadratic potentials</strong>: Harmonic oscillators and slowly-varying deformations</p></li>
+<li><p><strong>Deep potential wells</strong>: Large quantum numbers <span class="math notranslate nohighlight">\(n \gg 1\)</span> (large <span class="math notranslate nohighlight">\(S/\hbar\)</span>)</p></li>
+<li><p><strong>Separable systems</strong>: Multiple uncoupled degrees of freedom (use EBK)</p></li>
+<li><p><strong>WKB-valid potentials</strong>: Smooth, slowly-varying (potential derivatives small on wavelength scale)</p></li>
 </ol>
 </section>
 <section id="when-bohr-sommerfeld-fails">
 <h4>When Bohr-Sommerfeld Fails<a class="headerlink" href="#when-bohr-sommerfeld-fails" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><strong>Steep or discontinuous potentials</strong>: Violates WKB assumptions.</p></li>
-<li><p><strong>Degeneracies</strong>: Degenerate states require careful treatment.</p></li>
-<li><p><strong>Resonances</strong>: Coupled oscillators with irrational frequency ratios.</p></li>
-<li><p><strong>Chaotic systems</strong>: Non-integrable dynamics; no action variables.</p></li>
+<li><p><strong>Steep or discontinuous potentials</strong>: Violates WKB assumptions</p></li>
+<li><p><strong>Degeneracies</strong>: Degenerate states require careful treatment</p></li>
+<li><p><strong>Resonances</strong>: Coupled oscillators with irrational frequency ratios</p></li>
+<li><p><strong>Chaotic systems</strong>: Non-integrable dynamics; no action variables</p></li>
 </ol>
 </section>
 <section id="accuracy-for-hydrogen">
 <h4>Accuracy for Hydrogen<a class="headerlink" href="#accuracy-for-hydrogen" title="Link to this heading">#</a></h4>
-<p>For hydrogen, Bohr-Sommerfeld gives exact energy levels but incorrect radial wave functions. The reason is subtle: the exact cancellation of errors in the action integral, combined with the spherical symmetry. For slightly different potentials (e.g., helium atom), Bohr-Sommerfeld accuracy drops to <span class="math notranslate nohighlight">\(\sim 5-10\%\)</span>.</p>
+<p>For hydrogen, Bohr-Sommerfeld gives exact energy levels but incorrect radial wave functions. The reason is subtle: exact cancellation of errors in the action integral, combined with spherical symmetry. For slightly different potentials (e.g., helium atom), Bohr-Sommerfeld accuracy drops to <span class="math notranslate nohighlight">\(\sim 5\text{-}10\%\)</span>.</p>
 </section>
 <section id="improving-bohr-sommerfeld-higher-order-corrections">
 <h4>Improving Bohr-Sommerfeld: Higher-Order Corrections<a class="headerlink" href="#improving-bohr-sommerfeld-higher-order-corrections" title="Link to this heading">#</a></h4>
@@ -688,20 +693,100 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\text{Bohr-Sommerfeld} = \text{Stationary phase applied to periodic orbits}\]</div>
 <p>This is why the path integral naturally bridges classical mechanics (action, orbits) and quantum mechanics (phase, quantization).</p>
+<div class="note admonition">
+<p class="admonition-title">Note: Classical Limit and Correspondence Principle</p>
+<p>In the classical limit (<span class="math notranslate nohighlight">\(n \gg 1\)</span>), the energy spacing <span class="math notranslate nohighlight">\(\Delta E = E_{n+1} - E_n = \hbar\omega\)</span> should match the classical frequency via the correspondence principle. For the harmonic oscillator, this is exact. For general potentials with Bohr-Sommerfeld, the energy level spacing approaches the classical oscillation frequency, confirming the smooth transition to classical mechanics.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Single-valuedness requirement</strong>: Wavefunction must return to itself after a complete orbit, quantizing the phase.</p></li>
-<li><p><strong>Bohr-Sommerfeld rule</strong>: <span class="math notranslate nohighlight">\(\oint p dx = 2\pi\hbar(n + 1/2)\)</span> determines allowed energies without solving the Schrödinger equation.</p></li>
-<li><p><strong>Zero-point energy</strong>: The <span class="math notranslate nohighlight">\(1/2\)</span> factor ensures non-zero ground-state energy, a quintessentially quantum effect.</p></li>
-<li><p><strong>Harmonic oscillator</strong>: Bohr-Sommerfeld is exact, giving <span class="math notranslate nohighlight">\(E_n = \hbar\omega(n + 1/2)\)</span>.</p></li>
-<li><p><strong>Hydrogen atom</strong>: Bohr-Sommerfeld gives correct energy levels when applied carefully (azimuthal + radial quantization).</p></li>
-<li><p><strong>EBK quantization</strong>: Generalizes to integrable systems with multiple degrees of freedom.</p></li>
-<li><p><strong>Validity and accuracy</strong>: Excellent for high-<span class="math notranslate nohighlight">\(n\)</span> states and smooth potentials; fails for chaos and discontinuities.</p></li>
-<li><p><strong>Path integral origin</strong>: Bohr-Sommerfeld is the stationary-phase result for periodic orbits in the path integral.</p></li>
+<li><p><strong>Single-valuedness requirement</strong>: Wavefunction must return to itself after a complete orbit, quantizing the phase</p></li>
+<li><p><strong>Bohr-Sommerfeld rule</strong>: <span class="math notranslate nohighlight">\(\oint p dx = 2\pi\hbar(n + 1/2)\)</span> determines allowed energies without solving the Schrödinger equation</p></li>
+<li><p><strong>Zero-point energy</strong>: The <span class="math notranslate nohighlight">\(1/2\)</span> factor ensures non-zero ground-state energy, a quintessentially quantum effect</p></li>
+<li><p><strong>Harmonic oscillator</strong>: Bohr-Sommerfeld is exact, giving <span class="math notranslate nohighlight">\(E_n = \hbar\omega(n + 1/2)\)</span></p></li>
+<li><p><strong>Hydrogen atom</strong>: Bohr-Sommerfeld gives correct energy levels when applied carefully (azimuthal + radial quantization)</p></li>
+<li><p><strong>EBK quantization</strong>: Generalizes to integrable systems with multiple degrees of freedom</p></li>
+<li><p><strong>Validity and accuracy</strong>: Excellent for high-<span class="math notranslate nohighlight">\(n\)</span> states and smooth potentials; fails for chaos and discontinuities</p></li>
+<li><p><strong>Path integral origin</strong>: Bohr-Sommerfeld is the stationary-phase result for periodic orbits in the path integral</p></li>
+<li><p><strong>Classical correspondence</strong>: Energy level spacing matches classical frequency, confirming the semiclassical limit</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="3-3-2-wkb-approximation.html"><span class="std std-doc">3 3 2 Wkb Approximation</span></a></strong>: WKB approximation and quantization</p></li>
+<li><p><strong><a class="reference internal" href="../ch4_phase-and-gauge/4-5-1-berry-phase.html"><span class="std std-doc">4 5 1 Berry Phase</span></a></strong>: Geometric phase in adiabatic evolution</p></li>
+</ul>
+</div>
 </section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> (Bohr-Sommerfeld for Particle in a Box)
+A particle of mass <span class="math notranslate nohighlight">\(m\)</span> is confined in a 1D box of width <span class="math notranslate nohighlight">\(a\)</span> with infinite potential walls at <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=a\)</span>.</p>
+<p>(a) Inside the box, the potential is <span class="math notranslate nohighlight">\(V(x) = 0\)</span> and <span class="math notranslate nohighlight">\(p(x) = \sqrt{2mE}\)</span>. Show that the Bohr-Sommerfeld quantization condition</p>
+<div class="math notranslate nohighlight">
+\[\oint p(x) dx = 2\pi\hbar\left(n + \frac{1}{2}\right)\]</div>
+<p>gives <span class="math notranslate nohighlight">\(E_n = \frac{\pi^2\hbar^2 n^2}{2ma^2}\)</span> (note the factor of <span class="math notranslate nohighlight">\(n\)</span>, not <span class="math notranslate nohighlight">\(n+1/2\)</span>). Why does this differ from the exact quantum result by a factor in <span class="math notranslate nohighlight">\(n\)</span>?</p>
+<p>(b) Explain why the WKB phase shifts at the hard walls are different from those at soft turning points. What is the correct Maslov index for this system?</p>
+<hr class="docutils" />
+<p><strong>2.</strong> (Linear Potential)
+Consider a particle in a linear potential <span class="math notranslate nohighlight">\(V(x) = F x\)</span> for <span class="math notranslate nohighlight">\(x \geq 0\)</span> and <span class="math notranslate nohighlight">\(V(x) = \infty\)</span> for <span class="math notranslate nohighlight">\(x &lt; 0\)</span> (Airy potential).</p>
+<p>(a) At energy <span class="math notranslate nohighlight">\(E\)</span>, the turning point is at <span class="math notranslate nohighlight">\(x_a = E/F\)</span>. Show that</p>
+<div class="math notranslate nohighlight">
+\[\int_0^{x_a} p(x) dx = \int_0^{E/F} \sqrt{2m(E - Fx)} dx = \frac{2}{3F}(2mE)^{3/2}\]</div>
+<p>(b) Apply the Bohr-Sommerfeld rule to find the energy levels <span class="math notranslate nohighlight">\(E_n\)</span>. How do the spacings <span class="math notranslate nohighlight">\(\Delta E_n = E_{n+1} - E_n\)</span> scale with <span class="math notranslate nohighlight">\(n\)</span>?</p>
+<p>(c) Sketch the potential and the first two energy levels. Is the ground state energy zero or non-zero? Discuss.</p>
+<hr class="docutils" />
+<p><strong>3.</strong> (Beyond Bohr-Sommerfeld — WKB Corrections)
+The next-order correction to Bohr-Sommerfeld arises from higher-order WKB terms. For a potential with two turning points <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span>, the leading correction is approximately</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\hbar}\int_{x_a}^{x_b} p(x) dx \approx \pi\left(n + \frac{1}{2}\right) + \frac{1}{24}\left(\frac{1}{p(x_a)} \frac{\mathrm{d}V}{dx}\bigg|_{x_a} - \frac{1}{p(x_b)} \frac{\mathrm{d}V}{dx}\bigg|_{x_b}\right)\]</div>
+<p>For the harmonic oscillator <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2\)</span>:</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\frac{\mathrm{d}V}{dx}\)</span> at the turning points <span class="math notranslate nohighlight">\(x = \pm a = \pm\sqrt{2E/(m\omega^2)}\)</span> and <span class="math notranslate nohighlight">\(p(\pm a) = 0\)</span>. What goes wrong with the correction formula at the turning points?</p>
+<p>(b) Explain why Bohr-Sommerfeld is <em>exact</em> for the harmonic oscillator and doesn’t require WKB corrections. (Hint: think about which WKB orders contribute.)</p>
+<hr class="docutils" />
+<p><strong>4.</strong> (Anharmonic Oscillator — Qualitative Analysis)
+Consider a potential <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2 + \lambda x^4\)</span> with <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> (quartic anharmonicity).</p>
+<p>(a) For small <span class="math notranslate nohighlight">\(\lambda\)</span>, the turning points are approximately at <span class="math notranslate nohighlight">\(x_{\pm} \approx \pm\sqrt{2E/(m\omega^2)}\)</span> (same as harmonic oscillator). Explain why the Bohr-Sommerfeld integral will differ from the harmonic result.</p>
+<p>(b) Will the energy levels of the anharmonic oscillator be more or less spaced than the harmonic oscillator? Use a physical argument (does the fourth-order term make the well steeper or shallower?).</p>
+<p>(c) For which energy range (low <span class="math notranslate nohighlight">\(n\)</span>, high <span class="math notranslate nohighlight">\(n\)</span>, or both) will Bohr-Sommerfeld for the anharmonic oscillator be less accurate than for the harmonic oscillator? Why?</p>
+<hr class="docutils" />
+<p><strong>5.</strong> (EBK Quantization — 2D Anisotropic Oscillator)
+A particle moves in a 2D anisotropic harmonic potential</p>
+<div class="math notranslate nohighlight">
+\[V(x, y) = \frac{1}{2}m\omega_x^2 x^2 + \frac{1}{2}m\omega_y^2 y^2\]</div>
+<p>with <span class="math notranslate nohighlight">\(\omega_x \neq \omega_y\)</span>. The system is integrable with action variables <span class="math notranslate nohighlight">\(J_x\)</span> and <span class="math notranslate nohighlight">\(J_y\)</span>.</p>
+<p>(a) For the <span class="math notranslate nohighlight">\(x\)</span>-direction alone, <span class="math notranslate nohighlight">\(\oint p_x dx = 2\pi\hbar(n_x + 1/2)\)</span>. Similarly for <span class="math notranslate nohighlight">\(y\)</span>. Find the total energy <span class="math notranslate nohighlight">\(E_{n_x, n_y}\)</span> in terms of quantum numbers <span class="math notranslate nohighlight">\(n_x, n_y\)</span> and the frequencies.</p>
+<p>(b) Suppose <span class="math notranslate nohighlight">\(\omega_x = 2\omega_y = 2\omega\)</span>. Find the first five energy levels (in units of <span class="math notranslate nohighlight">\(\hbar\omega\)</span>) and identify any degeneracies.</p>
+<p>(c) Now suppose <span class="math notranslate nohighlight">\(\omega_x/\omega_y = \sqrt{2}\)</span> (irrational). Explain why EBK quantization can still be applied but the system may exhibit complicated dynamics if perturbed. Does irrationality of frequency ratio imply chaos?</p>
+<hr class="docutils" />
+<p><strong>6.</strong> (Maslov Index and Hard Boundaries)
+The Maslov index <span class="math notranslate nohighlight">\(\mu\)</span> corrects the phase shift at turning points. For a soft turning point (where <span class="math notranslate nohighlight">\(V(x) = E\)</span>), <span class="math notranslate nohighlight">\(\mu = 1/2\)</span>. For a hard wall (infinite potential), <span class="math notranslate nohighlight">\(\mu = 1\)</span>.</p>
+<p>Consider a particle in potential <span class="math notranslate nohighlight">\(V(x) = V_0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; a\)</span> and <span class="math notranslate nohighlight">\(V(x) = \infty\)</span> elsewhere, with total energy <span class="math notranslate nohighlight">\(E &gt; V_0\)</span>.</p>
+<p>(a) Inside the potential well, <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - V_0)}\)</span>. Write down the Bohr-Sommerfeld condition with correct Maslov indices for both hard walls.</p>
+<p>(b) Show that the quantization condition simplifies to</p>
+<div class="math notranslate nohighlight">
+\[k a = n\pi, \quad k = \sqrt{2m(E - V_0)}/\hbar\]</div>
+<p>and thus <span class="math notranslate nohighlight">\(E_n = V_0 + \frac{n^2\pi^2\hbar^2}{2ma^2}\)</span>. Compare to Problem 1.</p>
+<p>(c) How would the quantization condition change if one boundary were soft (e.g., exponential wall decay) and one hard?</p>
+<hr class="docutils" />
+<p><strong>7.</strong> (Hydrogen via Bohr-Sommerfeld (Circular Orbits))
+In the Bohr model, a circular orbit with radius <span class="math notranslate nohighlight">\(r\)</span> and angular momentum <span class="math notranslate nohighlight">\(L = m v r = n_\phi\hbar\)</span> is stable. For the Coulomb potential <span class="math notranslate nohighlight">\(V(r) = -e^2/(4\pi\epsilon_0 r)\)</span>, the centripetal force condition is</p>
+<div class="math notranslate nohighlight">
+\[\frac{m v^2}{r} = \frac{e^2}{4\pi\epsilon_0 r^2}\]</div>
+<p>(a) Show that the circular orbit energy is <span class="math notranslate nohighlight">\(E = -\frac{e^2}{8\pi\epsilon_0 r}\)</span> (half the potential energy, by the virial theorem).</p>
+<p>(b) For an azimuthal quantization with <span class="math notranslate nohighlight">\(n_\phi\hbar\)</span>, use the centripetal condition to eliminate <span class="math notranslate nohighlight">\(v\)</span> and show that</p>
+<div class="math notranslate nohighlight">
+\[r_{n_\phi} = \frac{4\pi\epsilon_0 n_\phi^2 \hbar^2}{m e^2} = n_\phi^2 a_0\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_0\)</span> is the Bohr radius.</p>
+<p>(c) Find the energy <span class="math notranslate nohighlight">\(E_{n_\phi}\)</span> for each azimuthal quantum number. Why is the hydrogen atom result often written as <span class="math notranslate nohighlight">\(E_n = -13.6 \text{ eV}/n^2\)</span> with a <em>principal</em> quantum number <span class="math notranslate nohighlight">\(n\)</span> that sums all degrees of freedom?</p>
+<hr class="docutils" />
+<p><strong>8.</strong> (Classical Limit and Correspondence Principle)
+In the classical limit (<span class="math notranslate nohighlight">\(n \gg 1\)</span>), the energy spacing <span class="math notranslate nohighlight">\(\Delta E = E_{n+1} - E_n\)</span> should match the classical frequency <span class="math notranslate nohighlight">\(\omega_\text{cl}\)</span> via <span class="math notranslate nohighlight">\(\Delta E = \hbar\omega_\text{cl}\)</span> (Bohr correspondence).</p>
+<p>(a) For the harmonic oscillator, <span class="math notranslate nohighlight">\(E_n = \hbar\omega(n + 1/2)\)</span>, so <span class="math notranslate nohighlight">\(\Delta E = \hbar\omega\)</span>. Show that this agrees with <span class="math notranslate nohighlight">\(\hbar\omega_\text{cl}\)</span> where <span class="math notranslate nohighlight">\(\omega_\text{cl}\)</span> is the classical frequency of oscillation.</p>
+<p>(b) For a power-law potential <span class="math notranslate nohighlight">\(V(x) = C|x|^\alpha\)</span> (e.g., <span class="math notranslate nohighlight">\(\alpha = 2\)</span> for harmonic, <span class="math notranslate nohighlight">\(\alpha = 4\)</span> for quartic), the Bohr-Sommerfeld result is <span class="math notranslate nohighlight">\(E_n \propto n^{2\alpha/(\alpha+2)}\)</span>. Show that <span class="math notranslate nohighlight">\(\Delta E / E_n \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>, implying the energy levels become quasi-continuous—the classical limit.</p>
+<p>(c) Estimate the quantum number <span class="math notranslate nohighlight">\(n^*\)</span> above which Bohr-Sommerfeld should be accurate (say, within <span class="math notranslate nohighlight">\(10\%\)</span>) for a typical atomic potential. Use the condition <span class="math notranslate nohighlight">\(\hbar\omega / E \lesssim 0.1\)</span> where <span class="math notranslate nohighlight">\(\omega\)</span> is a characteristic frequency scale.</p>
 </section>
 </section>
 
@@ -790,6 +875,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
@@ -827,7 +913,7 @@ By Yi-Zhuang You
   
   <div class="footer-item">
     <div class="extra_footer">
-  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
 </div>
   </div>
   

@@ -31,10 +31,11 @@ The notes live in `notes_src/` as `.ipynb` notebooks compiled to a static HTML s
 
 ## Before You Start
 
-Read these companion docs in this directory:
-- **`design.md`** — Teaching philosophy, notebook conventions, cell structure, MyST markdown rules, admonition classes, eigenstate notation
-- **`experience.md`** — Critical lessons about ipynb file format, corruption patterns, and safe editing practices
-- **`progress.md`** — Current improvement progress tracker (read before starting, update after finishing)
+Read these companion docs:
+- **`.claude/design.md`** — Teaching philosophy, notebook conventions, cell structure, MyST markdown rules, admonition classes, eigenstate notation
+- **`.claude/experience.md`** — Critical lessons about ipynb file format, corruption patterns, and safe editing practices
+- **`progress.md`** (in project root, NOT in .claude/) — Current improvement progress tracker (read before starting, update after finishing)
+- **`feedback.md`** (in project root, NOT in .claude/) — Professor feedback for agents to act on
 
 **IMPORTANT**: The teaching philosophy in `design.md` §"Teaching Philosophy: Physics Education in the AI Era" is the guiding vision for all work on these notes. Read it carefully before making any content decisions.
 
