@@ -1,14 +1,14 @@
-# Chap 2: Identical Particles
+# Chapter 2: Identical Particles
 
-## Sections
+## Units
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 2.1
   - [Bosons and Fermions](2-1-bosons-and-fermions)

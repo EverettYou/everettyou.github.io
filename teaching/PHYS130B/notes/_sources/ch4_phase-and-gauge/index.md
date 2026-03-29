@@ -1,14 +1,14 @@
-# Chap 4: Phase and Gauge
+# Chapter 4: Phase and Gauge
 
-## Sections
+## Units
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 4.1
   - [Gauge Field](4-1-gauge-field)

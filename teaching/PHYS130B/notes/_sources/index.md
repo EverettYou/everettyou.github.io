@@ -4,17 +4,19 @@ Welcome to the course notes for Quantum Mechanics.
 
 **Textbook**: David Tong, *Quantum Mechanics* (Lectures on Theoretical Physics Volume 3), Cambridge University Press.
 
+**Course structure:** Material is grouped into **chapters** (themes), **units** (*x.y*), and **lessons** (*x.y.z*). Each chapter index lists its units; each unit page lists its lessons. The Jupyter Book sidebar follows the same nesting (Jupyter Book’s config still uses the YAML key `sections` for both levels).
+
 ## Table of Contents
 
-**Chap 1. [Qubit](ch1_qubit/index)**
+**Chapter 1. [Qubit](ch1_qubit/index)**
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 1.1
   - [States and Observables](ch1_qubit/1-1-states-and-observables)
@@ -27,15 +29,15 @@ Welcome to the course notes for Quantum Mechanics.
   - §4.3
 ```
 
-**Chap 2. [Identical Particles](ch2_identical-particles/index)**
+**Chapter 2. [Identical Particles](ch2_identical-particles/index)**
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 2.1
   - [Bosons and Fermions](ch2_identical-particles/2-1-bosons-and-fermions)
@@ -48,15 +50,15 @@ Welcome to the course notes for Quantum Mechanics.
   - §8.3
 ```
 
-**Chap 3. [Path Integral](ch3_path-integral/index)**
+**Chapter 3. [Path Integral](ch3_path-integral/index)**
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 3.1
   - [Quantization](ch3_path-integral/3-1-quantization)
@@ -72,15 +74,15 @@ Welcome to the course notes for Quantum Mechanics.
   - §15.3
 ```
 
-**Chap 4. [Phase and Gauge](ch4_phase-and-gauge/index)**
+**Chapter 4. [Phase and Gauge](ch4_phase-and-gauge/index)**
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 4.1
   - [Gauge Field](ch4_phase-and-gauge/4-1-gauge-field)
@@ -99,15 +101,15 @@ Welcome to the course notes for Quantum Mechanics.
   - §11.1
 ```
 
-**Chap 5. [Perturbation Theory](ch5_perturbation-theory/index)**
+**Chapter 5. [Perturbation Theory](ch5_perturbation-theory/index)**
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 5.1
   - [Time-Independent Perturbation](ch5_perturbation-theory/5-1-time-independent-perturbation-theory)
@@ -117,15 +119,15 @@ Welcome to the course notes for Quantum Mechanics.
   - §11.3
 ```
 
-**Chap 6. [Quantum Foundations](ch6_quantum-foundations/index)**
+**Chapter 6. [Quantum Foundations](ch6_quantum-foundations/index)**
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 6.1
   - [Density Matrix](ch6_quantum-foundations/6-1-density-matrix)

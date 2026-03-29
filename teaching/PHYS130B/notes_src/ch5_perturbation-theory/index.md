@@ -1,14 +1,14 @@
-# Chap 5: Perturbation Theory
+# Chapter 5: Perturbation Theory
 
-## Sections
+## Units
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 5.1
   - [Time-Independent Perturbation](5-1-time-independent-perturbation-theory)

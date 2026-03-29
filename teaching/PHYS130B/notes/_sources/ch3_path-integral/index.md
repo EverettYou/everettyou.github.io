@@ -1,14 +1,14 @@
-# Chap 3: Path Integral
+# Chapter 3: Path Integral
 
-## Sections
+## Units
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 3.1
   - [Quantization](3-1-quantization)

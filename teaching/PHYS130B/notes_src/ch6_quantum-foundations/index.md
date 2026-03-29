@@ -1,14 +1,14 @@
-# Chap 6: Quantum Foundations
+# Chapter 6: Quantum Foundations
 
-## Sections
+## Units
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 6.1
   - [Density Matrix](6-1-density-matrix)

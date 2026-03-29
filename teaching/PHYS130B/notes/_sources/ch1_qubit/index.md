@@ -1,14 +1,14 @@
-# Chap 1: Qubit
+# Chapter 1: Qubit
 
-## Sections
+## Units
 
 ```{list-table}
 :class: toc-table
 :header-rows: 1
 :widths: 5 60 15
 
-* - Sec
-  - Topic
+* - Unit
+  - Title
   - Textbook
 * - 1.1
   - [States and Observables](1-1-states-and-observables)

@@ -26,22 +26,22 @@ tags: [Course Syllabus]
 
 #### 1. AI-Assisted Preview Reports
 
-Before each lecture, students use AI to preview the upcoming material. Each subsection of the lecture notes contains a **Prompts** box with guiding questions designed to help students engage AI productively. Students submit a preview report — their chat history with AI about the lecture — before class starts.
+Before each **unit** (§x.y), students use AI to preview the upcoming material. Each lesson page contains a **Prompts** box with guiding questions designed to help students engage AI productively. Students submit a preview report — their chat history with AI about the unit — before class starts.
 
 - **Grading:** Completion-based (graded on submission, not content).
 - **Purpose:** Arrive at class already familiar with the landscape, with questions that AI couldn't fully resolve.
 
 #### 2. Homework
 
-Each of the 63 subsections (§x.y.z) includes a Homework section with 5–10 problems. Choose **5** problems  You are welcome to use AI assistance.
+Each of the 63 **lessons** (§x.y.z) includes a Homework block with 5–10 problems. Choose **5** problems per **unit** (§x.y) to finish. You are welcome to use AI assistance.
 
 - **Grading:** Graded on timely submission, not correctness — since AI assistance makes correctness grading meaningless. Late submissions receive decaying credit.
-- **Numbering:** Problems are numbered 1, 2, 3, … within each subsection. Cross-references use format HW x.y.z.k (e.g., HW 1.1.1.3 = problem 3 of §1.1.1).
+- **Numbering:** Problems are numbered 1, 2, 3, … within each lesson. Cross-references use format HW x.y.z.k (e.g., HW 1.1.1.3 = problem 3 of lesson §1.1.1).
 - **Connection to final exam:** The same problems will appear on the in-person final exam with possible slight variations, so students who genuinely engage with the homework — rather than passively copying AI output — will be well prepared.
 
 #### 4. Research Projects
 
-Each student completes **two research projects** during the quarter, with AI assistance. Each of the 21 sections (§x.y) in the lecture notes includes a research project at the frontier of physics research. Projects require genuine scientific inquiry — literature survey, computational exploration, and scientific writing — not just extended calculation.
+Each student completes **two research projects** during the quarter, with AI assistance. Each of the 21 **units** (§x.y) in the lecture notes includes a research project at the frontier of physics research. Choose **2** projects to finish and submit project reports. Projects require genuine scientific inquiry — literature survey, computational exploration, and scientific writing — not just extended calculation.
 
 - **Scope:** Each project is designed to be achievable in approximately 2 weeks with AI assistance.
 - **Deliverable:** A written research report. Oral presentations to the class if enrollment permits.
@@ -58,12 +58,12 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 
 #### Grading Breakdown
 
-| Component | Weight | Grading Basis |
-|-----------|--------|---------------|
-| Preview Reports | 10% | Completion |
-| Homework | 40% | Timely submission |
-| Research Projects (×2) | 20% | Correctness, novelty, presentation |
-| Final Exam | 30% | Accuracy and understanding |
+| Component | Weight | Workload | Grading Basis |
+|-----------|--------|----------|---------------|
+| Preview Reports | 10% | 1 report × 21 units | Completion |
+| Homework | 40% | 5 problems × 21 units | Timely submission |
+| Research Projects (x2) | 20% | 2 reports | Correctness, novelty, presentation |
+| Final Exam | 30% | 10 problems | Accuracy and understanding |
 
 #### AI Policy
 
@@ -91,44 +91,44 @@ Some other books for reference:
   <span style="color: #666; font-size: 0.9em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Claude Code and Cursor AI; all material has been reviewed by the instructor.</span>
 </div>
 
-The course covers 6 chapters, 21 sections, and 63 subsections. Each subsection corresponds roughly to one lecture. Two project periods (~2 weeks each) are distributed across the quarter for students to work on their chosen research projects.
+The course covers **6 chapters**, **21 units** (§x.y), and **63 lessons** (§x.y.z). Each lesson corresponds roughly to one lecture’s worth of material. Two project periods (~2 weeks each) are distributed across the quarter for students to work on their chosen research projects.
 
-**Chap 1. Qubit** (Tong §4)
+**Chapter 1 — Qubit** (Tong §4)
 
-- 1.1 States and Observables
-- 1.2 Measurement
-- 1.3 Time Evolution
+- **Unit 1.1** — States and Observables
+- **Unit 1.2** — Measurement
+- **Unit 1.3** — Time Evolution
 
-**Chap 2. Identical Particles** (Tong §8)
+**Chapter 2 — Identical Particles** (Tong §8)
 
-- 2.1 Bosons and Fermions
-- 2.2 Angular Momentum
-- 2.3 Anyons
+- **Unit 2.1** — Bosons and Fermions
+- **Unit 2.2** — Angular Momentum
+- **Unit 2.3** — Anyons
 
-**Chap 3. Path Integral** (Tong §15)
+**Chapter 3 — Path Integral** (Tong §15)
 
-- 3.1 Quantization
-- 3.2 Propagator
-- 3.3 Stationary Phase
-- 3.4 Imaginary Time
+- **Unit 3.1** — Quantization
+- **Unit 3.2** — Propagator
+- **Unit 3.3** — Stationary Phase
+- **Unit 3.4** — Imaginary Time
 
-**Chap 4. Phase and Gauge** (Tong §9, §11)
+**Chapter 4 — Phase and Gauge** (Tong §9, §11)
 
-- 4.1 Gauge Field
-- 4.2 Flux Ring
-- 4.3 Landau Level
-- 4.4 Spin and Monopole
-- 4.5 Berry Phase
+- **Unit 4.1** — Gauge Field
+- **Unit 4.2** — Flux Ring
+- **Unit 4.3** — Landau Level
+- **Unit 4.4** — Spin and Monopole
+- **Unit 4.5** — Berry Phase
 
-**Chap 5. Perturbation Theory** (Tong §10, §11)
+**Chapter 5 — Perturbation Theory** (Tong §10, §11)
 
-- 5.1 Time-Independent Perturbation
-- 5.2 Time-Dependent Perturbation
+- **Unit 5.1** — Time-Independent Perturbation
+- **Unit 5.2** — Time-Dependent Perturbation
 
-**Chap 6. Quantum Foundations** (Tong §16)
+**Chapter 6 — Quantum Foundations** (Tong §16)
 
-- 6.1 Density Matrix
-- 6.2 Entanglement
-- 6.3 Generalized Measurement
-- 6.4 Open Quantum Systems
+- **Unit 6.1** — Density Matrix
+- **Unit 6.2** — Entanglement
+- **Unit 6.3** — Generalized Measurement
+- **Unit 6.4** — Open Quantum Systems
 
