@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.3.1 Unitary Evolution &#8212; Quantum Mechanics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7276957b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/boldsymbol"]}, "tex": {"packages": {"[+]": ["boldsymbol"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch1_qubit/1-3-1-unitary-evolution';</script>
+    <script src="../_static/fullscreen-sidebar.js?v=438d21d6"></script>
+    <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/ch1_qubit/1-3-1-unitary-evolution.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.3.2 Spin Dynamics" href="1-3-2-spin-dynamics.html" />
+    <link rel="prev" title="1.3 Time Evolution" href="1-3-time-evolution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quantum Mechanics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PHYS 130B Lecture Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chap 1: Qubit</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="1-1-states-and-observables.html">1.1 States and Observables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-1-1-spins-and-qubits.html">1.1.1 Spins and Qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="1-2-measurement.html">1.2 Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-2-1-measurement-postulate.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-2-2-uncertainty-and-incompatibility.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-2-3-measurement-operators.html">1.2.3 Measurement Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2_identical-particles/index.html">Chap 2: Identical Particles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-1-bosons-and-fermions.html">2.1 Bosons and Fermions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-2-symmetrization.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-3-second-quantization.html">2.1.3 Second Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-2-angular-momentum.html">2.2 Angular Momentum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html">2.2.3 Addition of Angular Momenta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch3_path-integral/index.html">Chap 3: Path Integral</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-classical-to-quantum.html">3.1.1 Classical to Quantum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-quantum-mechanics-as-optics.html">3.1.3 Quantum Mechanics as Optics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-1-path-integral-formulation.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-2-free-particle-propagator.html">3.2.2 Free Particle Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-3-schrodinger-equation.html">3.2.3 Schrödinger Equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-3-stationary-phase.html">3.3 Stationary Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-1-stationary-phase-approximation.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-2-wkb-approximation.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-3-instantons.html">3.4.3 Instantons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/index.html">Chap 4: Phase and Gauge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-gauge-field.html">4.1 Gauge Field</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-1-gauge-transformations.html">4.1.1 Gauge Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-gauge-connection.html">4.1.2 Gauge Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-3-electromagnetic-coupling.html">4.1.3 Electromagnetic Coupling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-flux-ring.html">4.2 Flux Ring</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-aharonov-bohm-effect.html">4.2.1 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-2-flux-quantization.html">4.2.2 Flux Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-gauge-invariance.html">4.2.3 Gauge Invariance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-landau-level.html">4.3 Landau Level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-1-cyclotron-motion.html">4.3.1 Cyclotron Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-2-landau-quantization.html">4.3.2 Landau Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html">4.3.3 Quantum Hall Effect</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-spin-and-monopole.html">4.4 Spin and Monopole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-1-orbital-vs-spin.html">4.4.1 Orbital vs Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-2-dirac-monopole.html">4.4.2 Dirac Monopole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-3-monopole-harmonics.html">4.4.3 Monopole Harmonics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-berry-phase.html">4.5 Berry Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-1-berry-phase.html">4.5.1 Berry Phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-2-applications.html">4.5.2 Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-3-topology.html">4.5.3 Topology</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch5_perturbation-theory/index.html">Chap 5: Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html">5.1 Time-Independent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory.html">5.1.2 Non-Degenerate Perturbation Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-3-degenerate-perturbation-theory.html">5.1.3 Degenerate Perturbation Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch6_quantum-foundations/index.html">Chap 6: Quantum Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-1-density-matrix.html">6.1 Density Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-1-mixed-states.html">6.1.1 Mixed States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-2-partial-trace.html">6.1.2 Partial Trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-3-entropy.html">6.1.3 Entropy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-2-entanglement.html">6.2 Entanglement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-1-composite-systems.html">6.2.1 Composite Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-2-entanglement-measures.html">6.2.2 Entanglement Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-3-bell-inequality.html">6.2.3 Bell Inequality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-3-generalized-measurement.html">6.3 Generalized Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-1-projective-measurement.html">6.3.1 Projective Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-2-povm.html">6.3.2 POVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-3-quantum-channels.html">6.3.3 Quantum Channels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-4-open-quantum-systems.html">6.4 Open Quantum Systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-1-decoherence.html">6.4.1 Decoherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-2-lindblad-master-equation.html">6.4.2 Lindblad Master Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-3-error-correction.html">6.4.3 Error Correction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/EverettYou/everettyou.github.io/master?urlpath=tree/teaching/PHYS130B/notes_src/ch1_qubit/1-3-1-unitary-evolution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/EverettYou/everettyou.github.io/blob/master/teaching/PHYS130B/notes_src/ch1_qubit/1-3-1-unitary-evolution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ch1_qubit/1-3-1-unitary-evolution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.3.1 Unitary Evolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-operators">Unitary Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-properties">Definition and Properties</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-generators-and-unitary-operators">Hermitian Generators and Unitary Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-of-an-operator">The Exponential of an Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-from-hermitian-generator">Unitary from Hermitian Generator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-dependent-schrodinger-equation">The Time-Dependent Schrödinger Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statement">Statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hamiltonian">The Hamiltonian</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-independent-vs-time-dependent">Time-Independent vs. Time-Dependent</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-the-time-evolution-operator">Solution: The Time-Evolution Operator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-solution">Formal Solution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verification">Verification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-time-evolution-operator">Properties of the Time-Evolution Operator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-time-evolution-operator-for-22-systems">Computing the Time-Evolution Operator for 2×2 Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition-method">Spectral Decomposition Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-hat-u-t-for-hat-h-omega-hat-sigma-z">Computing <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}_z\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-transformations-and-unitary-changes-of-basis">Basis Transformations and Unitary Changes of Basis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#change-of-basis">Change of Basis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="unitary-evolution">
+<h1>1.3.1 Unitary Evolution<a class="headerlink" href="#unitary-evolution" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is a unitary operator? Why is unitarity essential for quantum evolution?</p></li>
+<li><p>What does it mean to say that quantum evolution “preserves normalization”? Show why unitary operators ensure this.</p></li>
+<li><p>State the time-dependent Schrödinger equation. How does it differ from the time-independent version?</p></li>
+<li><p>What is the Hamiltonian? How does it relate to energy and symmetries?</p></li>
+<li><p>Write down the solution to the Schrödinger equation in terms of the time-evolution operator <span class="math notranslate nohighlight">\(U(t) = e^{-i\hat{H}t/\hbar}\)</span>.</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<p>Quantum systems do not stand still. They evolve in time according to the Schrödinger equation, a fundamental postulate of quantum mechanics. This evolution is governed by the Hamiltonian operator, which encodes the energy and symmetries of the system. A remarkable feature of quantum evolution is that it must be <strong>unitary</strong>: it preserves the normalization of quantum states and the probabilities of all outcomes. This section develops the theory of unitary operators, derives the time-dependent Schrödinger equation, and solves it to obtain the time-evolution operator.</p>
+<section id="unitary-operators">
+<h3>Unitary Operators<a class="headerlink" href="#unitary-operators" title="Link to this heading">#</a></h3>
+<p>In quantum mechanics, time evolution must satisfy a stringent requirement: it must preserve the normalization of states. If <span class="math notranslate nohighlight">\(|\psi(0)\rangle\)</span> is normalized, then <span class="math notranslate nohighlight">\(|\psi(t)\rangle\)</span> must remain normalized for all times <span class="math notranslate nohighlight">\(t\)</span>. This is achieved by <strong>unitary operators</strong>.</p>
+<section id="definition-and-properties">
+<h4>Definition and Properties<a class="headerlink" href="#definition-and-properties" title="Link to this heading">#</a></h4>
+<p>A linear operator <span class="math notranslate nohighlight">\(\hat{U}\)</span> is <strong>unitary</strong> if</p>
+<div class="math notranslate nohighlight" id="equation-eq-unitarity">
+<span class="eqno">(39)<a class="headerlink" href="#equation-eq-unitarity" title="Link to this equation">#</a></span>\[\hat{U}^\dagger \hat{U} = \hat{U}\hat{U}^\dagger = I\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{U}^\dagger\)</span> is the <strong>adjoint</strong> (conjugate transpose) and <span class="math notranslate nohighlight">\(I\)</span> is the identity.</p>
+<p><strong>Key properties of unitary operators:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Inverse</strong>: <span class="math notranslate nohighlight">\(\hat{U}^{-1} = \hat{U}^\dagger\)</span>. Unitary operators are always invertible.</p></li>
+<li><p><strong>Preserve inner products</strong>: If <span class="math notranslate nohighlight">\(\hat{U}\)</span> is unitary, then</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\langle \psi | \hat{U}^\dagger \hat{U} | \phi \rangle = \langle \psi | \phi \rangle\]</div>
+<p>This means <span class="math notranslate nohighlight">\(\hat{U}\)</span> preserves the overlap between any two states.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Preserve normalization</strong>: For a normalized state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> with <span class="math notranslate nohighlight">\(\langle \psi | \psi \rangle = 1\)</span>,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\langle \psi | \hat{U}^\dagger \hat{U} | \psi \rangle = \langle \psi | \psi \rangle = 1\]</div>
+<p>So <span class="math notranslate nohighlight">\(|\psi'\rangle = \hat{U}|\psi\rangle\)</span> is also normalized.</p>
+<ol class="arabic simple" start="4">
+<li><p><strong>Preserve probabilities</strong>: Measurement probabilities are unchanged. If <span class="math notranslate nohighlight">\(\hat{O}\)</span> is an observable with eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> and eigenvectors <span class="math notranslate nohighlight">\(|\phi_i\rangle\)</span>, then measuring <span class="math notranslate nohighlight">\(\hat{O}\)</span> on the evolved state <span class="math notranslate nohighlight">\(\hat{U}|\psi\rangle\)</span> gives the same probability distribution as measuring <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{O} \hat{U}\)</span> on the original state.</p></li>
+</ol>
+<div class="dropdown note admonition">
+<p class="admonition-title">Why Unitary Evolution Preserves Probabilities</p>
+<p>Consider the probability of outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span> when measuring <span class="math notranslate nohighlight">\(\hat{O}\)</span> on state <span class="math notranslate nohighlight">\(\hat{U}|\psi\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P_i(t) = |\langle \phi_i | \hat{U} | \psi \rangle|^2 = \langle \psi | \hat{U}^\dagger | \phi_i \rangle \langle \phi_i | \hat{U} | \psi \rangle\]</div>
+<p>By linearity and unitarity (<span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{U} = I\)</span>), this equals</p>
+<div class="math notranslate nohighlight">
+\[\langle \psi | \hat{U}^\dagger \hat{O}_i \hat{U} | \psi \rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{O}_i = |\phi_i\rangle\langle \phi_i|\)</span> is the projector onto the <span class="math notranslate nohighlight">\(i\)</span>-th eigenstate. The probability distribution depends only on the evolved state through the evolved observable <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{O} \hat{U}\)</span>, preserving all measurement statistics.</p>
+</div>
+</section>
+</section>
+<section id="hermitian-generators-and-unitary-operators">
+<h3>Hermitian Generators and Unitary Operators<a class="headerlink" href="#hermitian-generators-and-unitary-operators" title="Link to this heading">#</a></h3>
+<p>A profound connection exists between <strong>Hermitian operators</strong> and <strong>unitary operators</strong>. Any unitary operator can be written as the exponential of a Hermitian operator multiplied by an imaginary constant.</p>
+<section id="the-exponential-of-an-operator">
+<h4>The Exponential of an Operator<a class="headerlink" href="#the-exponential-of-an-operator" title="Link to this heading">#</a></h4>
+<p>For a square matrix <span class="math notranslate nohighlight">\(\hat{A}\)</span>, the exponential <span class="math notranslate nohighlight">\(e^{\hat{A}}\)</span> is defined via the Taylor series:</p>
+<div class="math notranslate nohighlight" id="equation-eq-operator-exponential">
+<span class="eqno">(40)<a class="headerlink" href="#equation-eq-operator-exponential" title="Link to this equation">#</a></span>\[e^{\hat{A}} = I + \hat{A} + \frac{\hat{A}^2}{2!} + \frac{\hat{A}^3}{3!} + \cdots = \sum_{n=0}^\infty \frac{\hat{A}^n}{n!}\]</div>
+</section>
+<section id="unitary-from-hermitian-generator">
+<h4>Unitary from Hermitian Generator<a class="headerlink" href="#unitary-from-hermitian-generator" title="Link to this heading">#</a></h4>
+<p>If <span class="math notranslate nohighlight">\(\hat{G}\)</span> is Hermitian (<span class="math notranslate nohighlight">\(\hat{G}^\dagger = \hat{G}\)</span>) and <span class="math notranslate nohighlight">\(\theta\)</span> is a real number, then</p>
+<div class="math notranslate nohighlight" id="equation-eq-unitary-from-hermitian">
+<span class="eqno">(41)<a class="headerlink" href="#equation-eq-unitary-from-hermitian" title="Link to this equation">#</a></span>\[\hat{U}(\theta) = e^{i\hat{G}\theta}\]</div>
+<p>is unitary. To verify:</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}^\dagger \hat{U} = e^{-i\hat{G}\theta} e^{i\hat{G}\theta} = e^0 = I\]</div>
+<p>The factor <span class="math notranslate nohighlight">\(i\)</span> in the exponent ensures unitarity: the exponent <span class="math notranslate nohighlight">\(i\hat{G}\theta\)</span> is <strong>anti-Hermitian</strong> (its adjoint is the negative of itself), and exponentiating an anti-Hermitian operator yields a unitary matrix.</p>
+<div class="example admonition">
+<p class="admonition-title">Example: Rotation via Pauli Matrices</p>
+<p>The Pauli operator <span class="math notranslate nohighlight">\(\hat{\sigma}_z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> is Hermitian. The unitary operator</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}(\theta) = e^{-i\hat{\sigma}_z \theta / 2}\]</div>
+<p>represents a rotation about the z-axis by angle <span class="math notranslate nohighlight">\(\theta\)</span> in the Bloch sphere. Expanding via the exponential:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}e^{-i\hat{\sigma}_z \theta / 2} = \cos(\theta/2) I - i\sin(\theta/2) \hat{\sigma}_z = \begin{pmatrix} e^{-i\theta/2} &amp; 0 \\ 0 &amp; e^{i\theta/2} \end{pmatrix}\end{split}\]</div>
+<p>This is unitary and applies a phase rotation to the <span class="math notranslate nohighlight">\(|0\rangle\)</span> state and an opposite phase to <span class="math notranslate nohighlight">\(|1\rangle\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="the-time-dependent-schrodinger-equation">
+<h3>The Time-Dependent Schrödinger Equation<a class="headerlink" href="#the-time-dependent-schrodinger-equation" title="Link to this heading">#</a></h3>
+<p>Quantum evolution is governed by a fundamental postulate: the <strong>time-dependent Schrödinger equation</strong>.</p>
+<section id="statement">
+<h4>Statement<a class="headerlink" href="#statement" title="Link to this heading">#</a></h4>
+<p>For a quantum system with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> (the <strong>energy operator</strong>), the state <span class="math notranslate nohighlight">\(|\psi(t)\rangle\)</span> evolves according to</p>
+<div class="math notranslate nohighlight" id="equation-eq-tdse">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eq-tdse" title="Link to this equation">#</a></span>\[i\hbar \frac{\partial}{\partial t} |\psi(t)\rangle = \hat{H} |\psi(t)\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hbar = h/(2\pi)\)</span> is the reduced Planck constant and <span class="math notranslate nohighlight">\(i\)</span> is the imaginary unit.</p>
+</section>
+<section id="the-hamiltonian">
+<h4>The Hamiltonian<a class="headerlink" href="#the-hamiltonian" title="Link to this heading">#</a></h4>
+<p>The <strong>Hamiltonian</strong> <span class="math notranslate nohighlight">\(\hat{H}\)</span> is the operator representing the <strong>total energy</strong> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} = \hat{T} + \hat{V}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{T}\)</span> is kinetic energy and <span class="math notranslate nohighlight">\(\hat{V}\)</span> is potential energy. For a single particle in 3D,</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} + V(\hat{\boldsymbol{r}})\]</div>
+<p>The Hamiltonian is <strong>always Hermitian</strong> (<span class="math notranslate nohighlight">\(\hat{H}^\dagger = \hat{H}\)</span>) because energy is a real, observable quantity. The eigenvalues of <span class="math notranslate nohighlight">\(\hat{H}\)</span> are the allowed <strong>energy levels</strong> of the system.</p>
+</section>
+<section id="time-independent-vs-time-dependent">
+<h4>Time-Independent vs. Time-Dependent<a class="headerlink" href="#time-independent-vs-time-dependent" title="Link to this heading">#</a></h4>
+<p>The <strong>time-independent Schrödinger equation</strong> (TISE) applies when <span class="math notranslate nohighlight">\(\hat{H}\)</span> does not depend on time:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} |\psi\rangle = E |\psi\rangle\]</div>
+<p>This is an eigenvalue equation for the energy eigenstates and eigenvalues. Any solution to the TISE evolves in time with a simple phase factor:</p>
+<div class="math notranslate nohighlight">
+\[|\psi(t)\rangle = e^{-iEt/\hbar} |\psi\rangle\]</div>
+<p>The <strong>time-dependent Schrödinger equation</strong> (TDSE), equation <a class="reference internal" href="#equation-eq-tdse">(42)</a>, is the general postulate. When <span class="math notranslate nohighlight">\(\hat{H}\)</span> is time-independent, we can solve it and recover the TISE.</p>
+</section>
+</section>
+<section id="solution-the-time-evolution-operator">
+<h3>Solution: The Time-Evolution Operator<a class="headerlink" href="#solution-the-time-evolution-operator" title="Link to this heading">#</a></h3>
+<p>For a <strong>time-independent Hamiltonian</strong>, the general solution to the TDSE can be written using the <strong>time-evolution operator</strong>.</p>
+<section id="formal-solution">
+<h4>Formal Solution<a class="headerlink" href="#formal-solution" title="Link to this heading">#</a></h4>
+<p>The state at time <span class="math notranslate nohighlight">\(t\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-time-evolution-formula">
+<span class="eqno">(43)<a class="headerlink" href="#equation-eq-time-evolution-formula" title="Link to this equation">#</a></span>\[|\psi(t)\rangle = \hat{U}(t) |\psi(0)\rangle\]</div>
+<p>where the <strong>time-evolution operator</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-time-evolution-operator">
+<span class="eqno">(44)<a class="headerlink" href="#equation-eq-time-evolution-operator" title="Link to this equation">#</a></span>\[\hat{U}(t) = e^{-i\hat{H}t/\hbar}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{H}\)</span> is Hermitian, <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> is unitary (with the Hermitian generator being <span class="math notranslate nohighlight">\(\hat{H}/\hbar\)</span> and the parameter being <span class="math notranslate nohighlight">\(-t\)</span>).</p>
+</section>
+<section id="verification">
+<h4>Verification<a class="headerlink" href="#verification" title="Link to this heading">#</a></h4>
+<p>Substituting <span class="math notranslate nohighlight">\(|\psi(t)\rangle = \hat{U}(t)|\psi(0)\rangle\)</span> into the TDSE:</p>
+<div class="math notranslate nohighlight">
+\[i\hbar \frac{\partial}{\partial t} \hat{U}(t) |\psi(0)\rangle = \hat{H} \hat{U}(t) |\psi(0)\rangle\]</div>
+<p>Taking the time derivative of <span class="math notranslate nohighlight">\(\hat{U}(t) = e^{-i\hat{H}t/\hbar}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \hat{U}}{\partial t} = -\frac{i}{\hbar} \hat{H} e^{-i\hat{H}t/\hbar} = -\frac{i}{\hbar} \hat{H} \hat{U}(t)\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight">
+\[i\hbar \frac{\partial \hat{U}}{\partial t} = \hat{H} \hat{U}(t) \quad \checkmark\]</div>
+</section>
+<section id="properties-of-the-time-evolution-operator">
+<h4>Properties of the Time-Evolution Operator<a class="headerlink" href="#properties-of-the-time-evolution-operator" title="Link to this heading">#</a></h4>
+<p>The time-evolution operator satisfies several important properties:</p>
+<ol class="arabic simple">
+<li><p><strong>Composition law</strong>: Evolution for time <span class="math notranslate nohighlight">\(t_1\)</span> followed by evolution for time <span class="math notranslate nohighlight">\(t_2\)</span> equals evolution for time <span class="math notranslate nohighlight">\(t_1 + t_2\)</span>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\hat{U}(t_1 + t_2) = \hat{U}(t_1) \hat{U}(t_2)\]</div>
+<p>This follows from <span class="math notranslate nohighlight">\(e^{\hat{A}(t_1+t_2)} = e^{\hat{A}t_1} e^{\hat{A}t_2}\)</span> for any operator <span class="math notranslate nohighlight">\(\hat{A}\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Initial condition</strong>: <span class="math notranslate nohighlight">\(\hat{U}(0) = e^0 = I\)</span> (identity).</p></li>
+<li><p><strong>Inverse and adjoint</strong>: <span class="math notranslate nohighlight">\(\hat{U}^\dagger(t) = e^{i\hat{H}t/\hbar} = \hat{U}(-t)\)</span>. Evolution backward in time is the adjoint of forward evolution.</p></li>
+<li><p><strong>Unitarity</strong>: <span class="math notranslate nohighlight">\(\hat{U}^\dagger(t) \hat{U}(t) = I\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ol>
+</section>
+</section>
+<section id="computing-the-time-evolution-operator-for-22-systems">
+<h3>Computing the Time-Evolution Operator for 2×2 Systems<a class="headerlink" href="#computing-the-time-evolution-operator-for-22-systems" title="Link to this heading">#</a></h3>
+<p>For a qubit or spin-1/2 system, the Hamiltonian is a 2×2 matrix. The time-evolution operator can be computed explicitly using the spectral decomposition or by exploiting the structure of 2×2 matrices.</p>
+<section id="spectral-decomposition-method">
+<h4>Spectral Decomposition Method<a class="headerlink" href="#spectral-decomposition-method" title="Link to this heading">#</a></h4>
+<p>If <span class="math notranslate nohighlight">\(\hat{H}\)</span> has eigenvalues <span class="math notranslate nohighlight">\(E_1, E_2\)</span> and orthonormal eigenstates <span class="math notranslate nohighlight">\(|E_1\rangle, |E_2\rangle\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} = E_1 |E_1\rangle\langle E_1| + E_2 |E_2\rangle\langle E_2|\]</div>
+<p>It follows that</p>
+<div class="math notranslate nohighlight" id="equation-eq-evolution-spectral">
+<span class="eqno">(45)<a class="headerlink" href="#equation-eq-evolution-spectral" title="Link to this equation">#</a></span>\[\hat{U}(t) = e^{-i\hat{H}t/\hbar} = e^{-iE_1 t/\hbar} |E_1\rangle\langle E_1| + e^{-iE_2 t/\hbar} |E_2\rangle\langle E_2|\]</div>
+<p>The eigenstates do not evolve in direction—they only accumulate phases proportional to their energies.</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">Derivation: Spectral Decomposition of the Exponential</p>
+<p>For any operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> with spectral decomposition <span class="math notranslate nohighlight">\(\hat{A} = \sum_i \lambda_i |a_i\rangle\langle a_i|\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[e^{\hat{A}} = \sum_i e^{\lambda_i} |a_i\rangle\langle a_i|\]</div>
+<p>This is because powers of <span class="math notranslate nohighlight">\(\hat{A}\)</span> in the exponential series respect the projection structure. Applying this to <span class="math notranslate nohighlight">\(\hat{H}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[e^{-i\hat{H}t/\hbar} = \sum_i e^{-iE_i t/\hbar} |E_i\rangle\langle E_i|\]</div>
+</div>
+</section>
+<section id="computing-hat-u-t-for-hat-h-omega-hat-sigma-z">
+<h4>Computing <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}_z\)</span><a class="headerlink" href="#computing-hat-u-t-for-hat-h-omega-hat-sigma-z" title="Link to this heading">#</a></h4>
+<p>A common case is a spin in a magnetic field along the z-direction: <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}_z = \omega \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>, where <span class="math notranslate nohighlight">\(\omega\)</span> is a frequency.</p>
+<p>The eigenvalues are <span class="math notranslate nohighlight">\(E_\pm = \pm \omega\)</span> with eigenstates <span class="math notranslate nohighlight">\(|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(|1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{U}(t) = e^{-i\omega t} |0\rangle\langle 0| + e^{i\omega t} |1\rangle\langle 1| = \begin{pmatrix} e^{-i\omega t} &amp; 0 \\ 0 &amp; e^{i\omega t} \end{pmatrix}\end{split}\]</div>
+<p>A general state <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha |0\rangle + \beta |1\rangle\)</span> evolves to</p>
+<div class="math notranslate nohighlight">
+\[|\psi(t)\rangle = \alpha e^{-i\omega t} |0\rangle + \beta e^{i\omega t} |1\rangle\]</div>
+<p>Each energy eigenstate accumulates its own phase factor; the relative phase between the two evolves with the energy difference <span class="math notranslate nohighlight">\(2\omega\)</span>.</p>
+</section>
+</section>
+<section id="basis-transformations-and-unitary-changes-of-basis">
+<h3>Basis Transformations and Unitary Changes of Basis<a class="headerlink" href="#basis-transformations-and-unitary-changes-of-basis" title="Link to this heading">#</a></h3>
+<p>In quantum mechanics, we often switch between different bases (e.g., from the computational basis <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span> to the eigenbasis of <span class="math notranslate nohighlight">\(\hat{\sigma}_x\)</span>). These basis changes are performed by unitary transformations.</p>
+<section id="change-of-basis">
+<h4>Change of Basis<a class="headerlink" href="#change-of-basis" title="Link to this heading">#</a></h4>
+<p>Suppose we have an orthonormal basis <span class="math notranslate nohighlight">\(\{|e_i\rangle\}\)</span> and another basis <span class="math notranslate nohighlight">\(\{|f_j\rangle\}\)</span>. The <strong>change-of-basis operator</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-change-of-basis">
+<span class="eqno">(46)<a class="headerlink" href="#equation-eq-change-of-basis" title="Link to this equation">#</a></span>\[\hat{U} = \sum_i |f_i\rangle\langle e_i|\]</div>
+<p>This unitary operator maps the first basis to the second: <span class="math notranslate nohighlight">\(\hat{U} |e_i\rangle = |f_i\rangle\)</span>. It is unitary because</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}^\dagger \hat{U} = \sum_i |e_i\rangle\langle f_i| \sum_j |f_j\rangle\langle e_j| = \sum_i |e_i\rangle\langle e_i| = I\]</div>
+<p>A state vector transforms as <span class="math notranslate nohighlight">\(|\psi'\rangle = \hat{U} |\psi\rangle\)</span>, and its components in the new basis are related to the old by unitary transformations of the coefficient vectors.</p>
+</section>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Unitary operators</strong> preserve inner products, normalization, and measurement probabilities. They form the foundation of reversible quantum evolution.</p></li>
+<li><p><strong>Hermitian operators</strong> generate unitary transformations: <span class="math notranslate nohighlight">\(\hat{U} = e^{i\hat{G}\theta}\)</span> where <span class="math notranslate nohighlight">\(\hat{G}^\dagger = \hat{G}\)</span>.</p></li>
+<li><p>The <strong>time-dependent Schrödinger equation</strong>, <span class="math notranslate nohighlight">\(i\hbar \partial_t|\psi\rangle = \hat{H}|\psi\rangle\)</span>, is the fundamental postulate governing quantum evolution. The Hamiltonian is the energy operator.</p></li>
+<li><p>The <strong>time-evolution operator</strong> <span class="math notranslate nohighlight">\(\hat{U}(t) = e^{-i\hat{H}t/\hbar}\)</span> solves the Schrödinger equation. It is unitary and satisfies the composition law.</p></li>
+<li><p>For <strong>time-independent Hamiltonians</strong>, eigenstates evolve with phase factors <span class="math notranslate nohighlight">\(e^{-iE_n t/\hbar}\)</span> determined by their energies. This is the basis of energy-level diagrams and selection rules.</p></li>
+<li><p><strong>Basis transformations</strong> are unitary: any two orthonormal bases are related by a unitary operator.</p></li>
+<li><p>Energy eigenstates do not change in time—they only accumulate phases. Superpositions evolve, with relative phases oscillating at frequencies determined by energy differences.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch1_qubit"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-3-time-evolution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.3 Time Evolution</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-3-2-spin-dynamics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1.3.2 Spin Dynamics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-operators">Unitary Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-properties">Definition and Properties</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-generators-and-unitary-operators">Hermitian Generators and Unitary Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-of-an-operator">The Exponential of an Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-from-hermitian-generator">Unitary from Hermitian Generator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-dependent-schrodinger-equation">The Time-Dependent Schrödinger Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statement">Statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hamiltonian">The Hamiltonian</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-independent-vs-time-dependent">Time-Independent vs. Time-Dependent</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-the-time-evolution-operator">Solution: The Time-Evolution Operator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-solution">Formal Solution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verification">Verification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-time-evolution-operator">Properties of the Time-Evolution Operator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-time-evolution-operator-for-22-systems">Computing the Time-Evolution Operator for 2×2 Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition-method">Spectral Decomposition Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-hat-u-t-for-hat-h-omega-hat-sigma-z">Computing <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}_z\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-transformations-and-unitary-changes-of-basis">Basis Transformations and Unitary Changes of Basis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#change-of-basis">Change of Basis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yi-Zhuang You
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    <div class="extra_footer">
+  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,902 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.4.2 Lindblad Master Equation &#8212; Quantum Mechanics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../static/doctools.js?v=9a2dae69"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../static/copybutton.js?v=f281be69"></script>
+    <script src="../static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/boldsymbol"]}, "tex": {"packages": {"[+]": ["boldsymbol"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch6_quantum-foundations/6-4-2-lindblad-master-equation';</script>
+    <script src="../static/fullscreen-sidebar.js?v=438d21d6"></script>
+    <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/ch6_quantum-foundations/6-4-2-lindblad-master-equation.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.4.3 Error Correction" href="6-4-3-error-correction.html" />
+    <link rel="prev" title="6.4.1 Decoherence" href="6-4-1-decoherence.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quantum Mechanics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PHYS 130B Lecture Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch1_qubit/index.html">Chap 1: Qubit</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-1-states-and-observables.html">1.1 States and Observables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-1-spins-and-qubits.html">1.1.1 Spins and Qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-2-measurement.html">1.2 Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-1-measurement-postulate.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-2-uncertainty-and-incompatibility.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-3-measurement-operators.html">1.2.3 Measurement Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2_identical-particles/index.html">Chap 2: Identical Particles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-1-bosons-and-fermions.html">2.1 Bosons and Fermions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-2-symmetrization.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-3-second-quantization.html">2.1.3 Second Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-2-angular-momentum.html">2.2 Angular Momentum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html">2.2.3 Addition of Angular Momenta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch3_path-integral/index.html">Chap 3: Path Integral</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-classical-to-quantum.html">3.1.1 Classical to Quantum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-quantum-mechanics-as-optics.html">3.1.3 Quantum Mechanics as Optics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-1-path-integral-formulation.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-2-free-particle-propagator.html">3.2.2 Free Particle Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-3-schrodinger-equation.html">3.2.3 Schrödinger Equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-3-stationary-phase.html">3.3 Stationary Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-1-stationary-phase-approximation.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-2-wkb-approximation.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-3-instantons.html">3.4.3 Instantons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/index.html">Chap 4: Phase and Gauge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-gauge-field.html">4.1 Gauge Field</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-1-gauge-transformations.html">4.1.1 Gauge Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-gauge-connection.html">4.1.2 Gauge Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-3-electromagnetic-coupling.html">4.1.3 Electromagnetic Coupling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-flux-ring.html">4.2 Flux Ring</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-aharonov-bohm-effect.html">4.2.1 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-2-flux-quantization.html">4.2.2 Flux Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-gauge-invariance.html">4.2.3 Gauge Invariance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-landau-level.html">4.3 Landau Level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-1-cyclotron-motion.html">4.3.1 Cyclotron Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-2-landau-quantization.html">4.3.2 Landau Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html">4.3.3 Quantum Hall Effect</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-spin-and-monopole.html">4.4 Spin and Monopole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-1-orbital-vs-spin.html">4.4.1 Orbital vs Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-2-dirac-monopole.html">4.4.2 Dirac Monopole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-3-monopole-harmonics.html">4.4.3 Monopole Harmonics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-berry-phase.html">4.5 Berry Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-1-berry-phase.html">4.5.1 Berry Phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-2-applications.html">4.5.2 Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-3-topology.html">4.5.3 Topology</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch5_perturbation-theory/index.html">Chap 5: Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html">5.1 Time-Independent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory.html">5.1.2 Non-Degenerate Perturbation Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-3-degenerate-perturbation-theory.html">5.1.3 Degenerate Perturbation Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chap 6: Quantum Foundations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="6-1-density-matrix.html">6.1 Density Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="6-1-1-mixed-states.html">6.1.1 Mixed States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-1-2-partial-trace.html">6.1.2 Partial Trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-1-3-entropy.html">6.1.3 Entropy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="6-2-entanglement.html">6.2 Entanglement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="6-2-1-composite-systems.html">6.2.1 Composite Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-2-2-entanglement-measures.html">6.2.2 Entanglement Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-2-3-bell-inequality.html">6.2.3 Bell Inequality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="6-3-generalized-measurement.html">6.3 Generalized Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="6-3-1-projective-measurement.html">6.3.1 Projective Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-3-2-povm.html">6.3.2 POVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-3-3-quantum-channels.html">6.3.3 Quantum Channels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="6-4-open-quantum-systems.html">6.4 Open Quantum Systems</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="6-4-1-decoherence.html">6.4.1 Decoherence</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">6.4.2 Lindblad Master Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-4-3-error-correction.html">6.4.3 Error Correction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/EverettYou/everettyou.github.io/master?urlpath=tree/teaching/PHYS130B/notes_src/ch6_quantum-foundations/6-4-2-lindblad-master-equation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/EverettYou/everettyou.github.io/blob/master/teaching/PHYS130B/notes_src/ch6_quantum-foundations/6-4-2-lindblad-master-equation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../sources/ch6_quantum-foundations/6-4-2-lindblad-master-equation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6.4.2 Lindblad Master Equation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-equation-general-form">Master Equation: General Form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lindblad-master-equation-gksl-form">The Lindblad Master Equation (GKSL Form)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning-of-terms">Physical Meaning of Terms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-evolution">Unitary Evolution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-term">Gain Term</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-term">Loss Term</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-lindblad-equation">Properties of the Lindblad Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{\downarrow}\rangle\langle{\uparrow}|\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z">2. Phase Damping (Dephasing): <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\phi} \hat{\sigma}_z\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z">3. Depolarizing: <span class="math notranslate nohighlight">\(L_x = \sqrt{\Gamma_d/3} \hat{\sigma}_x\)</span>, <span class="math notranslate nohighlight">\(L_y = \sqrt{\Gamma_d/3} \hat{\sigma}_y\)</span>, <span class="math notranslate nohighlight">\(L_z = \sqrt{\Gamma_d/3} \hat{\sigma}_z\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-states">Steady States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-jump-picture-stochastic-interpretation">Quantum Jump Picture (Stochastic Interpretation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-lindblad-equation">Solving the Lindblad Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lindblad-master-equation">
+<h1>6.4.2 Lindblad Master Equation<a class="headerlink" href="#lindblad-master-equation" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is a master equation, and how does it describe the dynamics of an open quantum system?</p></li>
+<li><p>What is the Lindblad (GKSL) equation, and why is it the most general Markovian master equation?</p></li>
+<li><p>What are Lindblad operators (jump operators), and what physical process does each represent?</p></li>
+<li><p>How do you construct a Lindblad equation from first principles for a specific physical system?</p></li>
+<li><p>What is the quantum jump picture, and how does it relate to the Lindblad master equation?</p></li>
+<li><p>What are common Lindblad operators: <span class="math notranslate nohighlight">\(\hat{\sigma}_-\)</span> (decay), <span class="math notranslate nohighlight">\(\hat{\sigma}_z\)</span> (dephasing), <span class="math notranslate nohighlight">\(\hat{\sigma}_x/y/z\)</span> (depolarizing)?</p></li>
+<li><p>What is a steady state of the master equation, and how do you find it?</p></li>
+<li><p>What is the quantum regression theorem, and what does it predict about correlations?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<p>For an isolated system, the Schrödinger equation perfectly captures quantum evolution. But real systems interact with their surroundings—heat baths, photon fields, uncontrolled degrees of freedom. The Lindblad master equation describes how open systems evolve, accounting for both unitary dynamics and the irreversible effects of environmental coupling. It is the most general form of Markovian (memoryless) evolution compatible with quantum mechanics.</p>
+<section id="master-equation-general-form">
+<h3>Master Equation: General Form<a class="headerlink" href="#master-equation-general-form" title="Link to this heading">#</a></h3>
+<p>For an open system coupled to environment (bath/reservoir), the <strong>master equation</strong> describes the reduced density matrix <span class="math notranslate nohighlight">\(\rho_S\)</span> (system only):</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-master-general">
+<span class="eqno">(461)<a class="headerlink" href="#equation-eq-lindblad-master-general" title="Link to this equation">#</a></span>\[\frac{d\rho_S}{dt} = \mathcal{L}(\rho_S)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is the <strong>Liouvillian superoperator</strong> (linear map on density matrices).</p>
+<p>We derive the Lindblad equation from first principles:</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">Derivation: Lindblad Master Equation from System-Environment</p>
+<p>Start with total Hamiltonian:</p>
+<div class="math notranslate nohighlight">
+\[H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
+<p>The full system+environment evolves unitarily. Tracing out the environment (and assuming <strong>Markovian approximation</strong>: short environment memory):</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-master-decomposed">
+<span class="eqno">(462)<a class="headerlink" href="#equation-eq-lindblad-master-decomposed" title="Link to this equation">#</a></span>\[\frac{d\rho_S}{dt} = -\frac{i}{\hbar}[H_S, \rho_S] + \mathcal{D}(\rho_S)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>First term: unitary evolution under system Hamiltonian.</p></li>
+<li><p>Second term: <strong>dissipation superoperator</strong> describing decoherence.</p></li>
+</ul>
+</div>
+</section>
+<section id="the-lindblad-master-equation-gksl-form">
+<h3>The Lindblad Master Equation (GKSL Form)<a class="headerlink" href="#the-lindblad-master-equation-gksl-form" title="Link to this heading">#</a></h3>
+<p>The most general form preserving trace and positivity is the <strong>Lindblad equation</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-equation">
+<span class="eqno">(463)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[\frac{d\rho}{dt} = -\frac{i}{\hbar}[H, \rho] + \sum_k \gamma_k \left( L_k \rho L_k^\dagger - \frac{1}{2}\{L_k^\dagger L_k, \rho\} \right)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H\)</span> = system Hamiltonian (Hermitian).</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_k\)</span> = <strong>Lindblad operators</strong> (or <strong>jump operators</strong>); arbitrary operators (generally non-Hermitian).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma_k \geq 0\)</span> = <strong>decay rates</strong> (non-negative).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{A, B\} = AB + BA\)</span> = anticommutator.</p></li>
+</ul>
+<p><strong>Named</strong>: Lindblad (1976), Kossakowski, Sudarshan (GKSL form).</p>
+</section>
+<section id="physical-meaning-of-terms">
+<h3>Physical Meaning of Terms<a class="headerlink" href="#physical-meaning-of-terms" title="Link to this heading">#</a></h3>
+<section id="unitary-evolution">
+<h4>Unitary Evolution<a class="headerlink" href="#unitary-evolution" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[-\frac{i}{\hbar}[H, \rho]\]</div>
+<p>Standard Schrödinger evolution of the isolated system.</p>
+</section>
+<section id="gain-term">
+<h4>Gain Term<a class="headerlink" href="#gain-term" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\gamma_k L_k \rho L_k^\dagger\]</div>
+<p><strong>Gain</strong> of population by jumping via <span class="math notranslate nohighlight">\(L_k\)</span>. Represents an <strong>inflow</strong> of probability as system undergoes transition <span class="math notranslate nohighlight">\(L_k\)</span>.</p>
+</section>
+<section id="loss-term">
+<h4>Loss Term<a class="headerlink" href="#loss-term" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[-\frac{1}{2}\gamma_k \{L_k^\dagger L_k, \rho\}\]</div>
+<p><strong>Loss</strong> of population by jumping out of the current state via <span class="math notranslate nohighlight">\(L_k\)</span>. Ensures trace is conserved:</p>
+<div class="math notranslate nohighlight">
+\[\text{Tr}\left(-\frac{1}{2}\{L_k^\dagger L_k, \rho\}\right) = -\text{Tr}(L_k^\dagger L_k \rho) = -\text{Tr}(L_k \rho L_k^\dagger)\]</div>
+<p>Gain and loss balance to preserve <span class="math notranslate nohighlight">\(\text{Tr}(\rho) = 1\)</span>.</p>
+</section>
+</section>
+<section id="properties-of-the-lindblad-equation">
+<h3>Properties of the Lindblad Equation<a class="headerlink" href="#properties-of-the-lindblad-equation" title="Link to this heading">#</a></h3>
+<p><strong>1. Trace Preservation:</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-trace-preserving">
+<span class="eqno">(464)<a class="headerlink" href="#equation-eq-lindblad-trace-preserving" title="Link to this equation">#</a></span>\[\frac{d}{dt}\text{Tr}(\rho) = 0 \Rightarrow \text{Tr}(\rho(t)) = 1\]</div>
+<p><strong>2. Hermiticity Preservation:</strong>
+If <span class="math notranslate nohighlight">\(\rho(0)\)</span> is Hermitian, then <span class="math notranslate nohighlight">\(\rho(t)\)</span> remains Hermitian.</p>
+<p><strong>3. Positive Semidefiniteness (Positivity-Preserving):</strong>
+If <span class="math notranslate nohighlight">\(\rho(0) \geq 0\)</span>, then <span class="math notranslate nohighlight">\(\rho(t) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span> (valid quantum state).</p>
+<p><strong>4. CPTP (Completely Positive Trace-Preserving):</strong>
+The time evolution generates a CPTP map (quantum channel); formally equivalent to Kraus representation.</p>
+</section>
+<section id="common-lindblad-operators">
+<h3>Common Lindblad Operators<a class="headerlink" href="#common-lindblad-operators" title="Link to this heading">#</a></h3>
+<section id="amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow">
+<h4>1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{\downarrow}\rangle\langle{\uparrow}|\)</span><a class="headerlink" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow" title="Link to this heading">#</a></h4>
+<p><strong>Physical</strong>: Excited state decays to ground state; energy dissipation at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>.</p>
+<p><strong>Master equation</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-amp-damping">
+<span class="eqno">(465)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[\frac{d\rho}{dt} = \Gamma_1 \left( \hat{\sigma}_- \rho \hat{\sigma}_+ - \frac{1}{2}\{\hat{\sigma}_+ \hat{\sigma}_-, \rho\} \right)\]</div>
+<p><strong>Effect on populations</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\rho_{\uparrow\uparrow}}{dt} = -\Gamma_1 \rho_{\uparrow\uparrow}, \quad \frac{d\rho_{\downarrow\downarrow}}{dt} = +\Gamma_1 \rho_{\uparrow\uparrow}\]</div>
+<p>Population decays from excited (<span class="math notranslate nohighlight">\(|{\uparrow}\rangle\)</span>) to ground (<span class="math notranslate nohighlight">\(|{\downarrow}\rangle\)</span>) at rate <span class="math notranslate nohighlight">\(\Gamma_1\)</span>.</p>
+<p><strong>Effect on coherence</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\rho_{\uparrow\downarrow}}{dt} = -\frac{\Gamma_1}{2} \rho_{\uparrow\downarrow}\]</div>
+<p>Coherences decay at half the rate (because excited state population decreases).</p>
+</section>
+<section id="phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z">
+<h4>2. Phase Damping (Dephasing): <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\phi} \hat{\sigma}_z\)</span><a class="headerlink" href="#phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z" title="Link to this heading">#</a></h4>
+<p><strong>Physical</strong>: Random phase fluctuations; coherences decay without energy loss at rate <span class="math notranslate nohighlight">\(\Gamma_\phi = 1/T_2\)</span> (where <span class="math notranslate nohighlight">\(T_2 &gt; T_1/2\)</span>).</p>
+<p><strong>Master equation</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-phase-damping">
+<span class="eqno">(466)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[\frac{d\rho}{dt} = \Gamma_\phi (\hat{\sigma}_z \rho \hat{\sigma}_z - \rho)\]</div>
+<p><strong>Effect</strong>: Only off-diagonal (coherence) terms decay:</p>
+<div class="math notranslate nohighlight">
+\[\rho_{\uparrow\downarrow}(t) = e^{-\Gamma_\phi t} \rho_{\uparrow\downarrow}(0)\]</div>
+<p>Diagonal (population) terms unchanged. Dephasing creates classical mixtures.</p>
+</section>
+<section id="depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z">
+<h4>3. Depolarizing: <span class="math notranslate nohighlight">\(L_x = \sqrt{\Gamma_d/3} \hat{\sigma}_x\)</span>, <span class="math notranslate nohighlight">\(L_y = \sqrt{\Gamma_d/3} \hat{\sigma}_y\)</span>, <span class="math notranslate nohighlight">\(L_z = \sqrt{\Gamma_d/3} \hat{\sigma}_z\)</span><a class="headerlink" href="#depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z" title="Link to this heading">#</a></h4>
+<p><strong>Physical</strong>: Errors on all three Pauli axes with equal probability; generic noise at rate <span class="math notranslate nohighlight">\(\Gamma_d\)</span>.</p>
+<p><strong>Master equation</strong>: Drives state toward maximally mixed <span class="math notranslate nohighlight">\(I/2\)</span> (after time <span class="math notranslate nohighlight">\(\sim 1/\Gamma_d\)</span>).</p>
+</section>
+</section>
+<section id="steady-states">
+<h3>Steady States<a class="headerlink" href="#steady-states" title="Link to this heading">#</a></h3>
+<p>A <strong>steady state</strong> <span class="math notranslate nohighlight">\(\rho_\infty\)</span> satisfies:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-steady-state">
+<span class="eqno">(467)<a class="headerlink" href="#equation-eq-lindblad-steady-state" title="Link to this equation">#</a></span>\[\mathcal{L}(\rho_\infty) = 0\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(\frac{d\rho_\infty}{dt} = 0\)</span>; the state does not evolve.</p>
+<div class="example admonition">
+<p class="admonition-title">Example: Amplitude Damping</p>
+<p>From <span class="math notranslate nohighlight">\(\frac{d\rho_{\uparrow\uparrow}}{dt} = -\Gamma_1 \rho_{\uparrow\uparrow}\)</span>, steady state has <span class="math notranslate nohighlight">\(\rho_{\uparrow\uparrow}^\infty = 0\)</span>.</p>
+<p>Thus: <span class="math notranslate nohighlight">\(\rho_\infty = |{\downarrow}\rangle\langle{\downarrow}|\)</span> (ground state; all population decayed).</p>
+</div>
+<div class="example admonition">
+<p class="admonition-title">Example: Amplitude Damping + Pumping</p>
+<p>If system is pumped into excited state at rate <span class="math notranslate nohighlight">\(\Gamma_2\)</span> (with operator <span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma_2} \hat{\sigma}_+\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\rho_{\uparrow\uparrow}}{dt} = -\Gamma_1 \rho_{\uparrow\uparrow} + \Gamma_2 \rho_{\downarrow\downarrow}\]</div>
+<p>Steady state: balance between decay and pumping.</p>
+<div class="math notranslate nohighlight">
+\[\rho_{\uparrow\uparrow}^\infty = \frac{\Gamma_2}{\Gamma_1 + \Gamma_2}, \quad \rho_{\downarrow\downarrow}^\infty = \frac{\Gamma_1}{\Gamma_1 + \Gamma_2}\]</div>
+</div>
+</section>
+<section id="quantum-jump-picture-stochastic-interpretation">
+<h3>Quantum Jump Picture (Stochastic Interpretation)<a class="headerlink" href="#quantum-jump-picture-stochastic-interpretation" title="Link to this heading">#</a></h3>
+<p><strong>Alternative viewpoint</strong>: Lindblad equation is the <strong>average</strong> over many quantum trajectories.</p>
+<p><strong>Trajectory picture</strong>:</p>
+<ol class="arabic">
+<li><p>System evolves under modified Hamiltonian:
+$$</p>
+<p>H_\text{eff} = H - \frac{i\hbar}{2} \sum_k \gamma_k L_k^\dagger L_k</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}   (non-Hermitian: evolution is non-unitary).\\2. At random times (Poisson process), a &quot;**jump**&quot; occurs: $\rho \to L_k \rho L_k^\dagger / p_k$ with probability $p_k \propto \gamma_k$.\\3. Averaging over all trajectories (all possible jump sequences) reproduces the Lindblad master equation.\\**Insight**: Decoherence and dissipation arise from random quantum jumps induced by the environment; averaging erases the randomness, revealing the ensemble behavior.\\### Quantum Regression Theorem\\For a system governed by Lindblad equation with steady state $\rho_\infty$, the **two-time correlation** is:\end{aligned}\end{align} \]</div>
+</li>
+</ol>
+<p>\langle A(t) B(0) \rangle = \text{Tr}(A \mathcal{E}^{(t)}(B \rho_\infty))</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-regression">
+<span class="eqno">(468)<a class="headerlink" href="#equation-eq-lindblad-regression" title="Link to this equation">#</a></span>\[\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{E}^{(t)}\)</span> is the time-evolved Liouvillian (solution of master equation).</p>
+<p><strong>Interpretation</strong>: Correlations at different times obey the same master equation as populations. One can predict oscillations and decay of correlations from the same Lindblad equation.</p>
+</section>
+<section id="solving-the-lindblad-equation">
+<h3>Solving the Lindblad Equation<a class="headerlink" href="#solving-the-lindblad-equation" title="Link to this heading">#</a></h3>
+<p><strong>General case</strong>: Lindblad equation is a system of coupled ODEs for matrix elements of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p><strong>Methods</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Analytical</strong>: For simple systems (single qubit, 2-level system); exact solutions exist.</p></li>
+<li><p><strong>Numerical integration</strong>: RK4, implicit methods; QuTiP library (Python) widely used.</p></li>
+<li><p><strong>Eigenbasis decomposition</strong>: Diagonalize Liouvillian matrix; solutions are exponentials <span class="math notranslate nohighlight">\(e^{\lambda_i t}\)</span>.</p></li>
+</ol>
+<div class="example admonition">
+<p class="admonition-title">Example: Decay from Excited State</p>
+<p>Initial condition: <span class="math notranslate nohighlight">\(\rho(0) = |{\uparrow}\rangle\langle{\uparrow}|\)</span>. Under amplitude damping:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho(t) = \begin{pmatrix} (1-e^{-\Gamma_1 t}) &amp; 0 \\ 0 &amp; e^{-\Gamma_1 t} \end{pmatrix}\end{split}\]</div>
+<p>Wait: Let me recalculate. <span class="math notranslate nohighlight">\(\rho_{\uparrow\uparrow}(t) = e^{-\Gamma_1 t}\)</span>, so:</p>
+<div class="math notranslate nohighlight" id="equation-eq-lindblad-decay-solution">
+<span class="eqno">(469)<a class="headerlink" href="#equation-eq-lindblad-decay-solution" title="Link to this equation">#</a></span>\[\begin{split}\rho(t) = \begin{pmatrix} e^{-\Gamma_1 t} &amp; 0 \\ 0 &amp; 1 - e^{-\Gamma_1 t} \end{pmatrix}\end{split}\]</div>
+<p>Excited state population decays exponentially; ground state population grows. As <span class="math notranslate nohighlight">\(t \to \infty\)</span>: <span class="math notranslate nohighlight">\(\rho(\infty) = |{\downarrow}\rangle\langle{\downarrow}|\)</span> (ground state).</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Lindblad is Markovian</p>
+<p>The Lindblad master equation assumes Markovian (memoryless) dynamics: the environment correlation time is much shorter than the system timescale. For structured environments or strong coupling, non-Markovian generalizations are needed.</p>
+</div>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Master equation</strong>: Differential equation for reduced density matrix of open system; describes irreversible evolution.</p></li>
+<li><p><strong>Lindblad form</strong> <span class="math notranslate nohighlight">\(\frac{d\rho}{dt} = -\frac{i}{\hbar}[H,\rho] + \sum_k \gamma_k(L_k\rho L_k^\dagger - \frac{1}{2}\{L_k^\dagger L_k, \rho\})\)</span>: Most general Markovian master equation.</p></li>
+<li><p><strong>Lindblad operators</strong> <span class="math notranslate nohighlight">\(L_k\)</span>: Represent quantum jumps/transitions; rates <span class="math notranslate nohighlight">\(\gamma_k \geq 0\)</span>.</p></li>
+<li><p><strong>CPTP</strong>: Lindblad evolution is completely positive, trace-preserving; valid quantum dynamics.</p></li>
+<li><p><strong>Common operators</strong>: Amplitude damping (<span class="math notranslate nohighlight">\(\hat{\sigma}_-\)</span>), phase damping (<span class="math notranslate nohighlight">\(\hat{\sigma}_z\)</span>), depolarizing (<span class="math notranslate nohighlight">\(\hat{\sigma}_x, \hat{\sigma}_y, \hat{\sigma}_z\)</span>).</p></li>
+<li><p><strong>Steady states</strong>: Fixed points <span class="math notranslate nohighlight">\(\mathcal{L}(\rho_\infty) = 0\)</span>; often thermal equilibrium or ground states.</p></li>
+<li><p><strong>Quantum jump picture</strong>: Lindblad equation averages over random quantum trajectories; jumps occur at Poisson-distributed times.</p></li>
+<li><p><strong>Quantum regression theorem</strong>: Two-time correlations follow same master equation as populations.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch6_quantum-foundations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="6-4-1-decoherence.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">6.4.1 Decoherence</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="6-4-3-error-correction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6.4.3 Error Correction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-equation-general-form">Master Equation: General Form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lindblad-master-equation-gksl-form">The Lindblad Master Equation (GKSL Form)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning-of-terms">Physical Meaning of Terms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-evolution">Unitary Evolution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-term">Gain Term</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-term">Loss Term</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-lindblad-equation">Properties of the Lindblad Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{\downarrow}\rangle\langle{\uparrow}|\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z">2. Phase Damping (Dephasing): <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\phi} \hat{\sigma}_z\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z">3. Depolarizing: <span class="math notranslate nohighlight">\(L_x = \sqrt{\Gamma_d/3} \hat{\sigma}_x\)</span>, <span class="math notranslate nohighlight">\(L_y = \sqrt{\Gamma_d/3} \hat{\sigma}_y\)</span>, <span class="math notranslate nohighlight">\(L_z = \sqrt{\Gamma_d/3} \hat{\sigma}_z\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-states">Steady States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-jump-picture-stochastic-interpretation">Quantum Jump Picture (Stochastic Interpretation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-lindblad-equation">Solving the Lindblad Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yi-Zhuang You
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    <div class="extra_footer">
+  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.1.1 Spins and Qubits &#8212; Quantum Mechanics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../static/doctools.js?v=9a2dae69"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../static/copybutton.js?v=f281be69"></script>
+    <script src="../static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/boldsymbol"]}, "tex": {"packages": {"[+]": ["boldsymbol"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch1_qubit/1-1-1-spins-and-qubits';</script>
+    <script src="../static/fullscreen-sidebar.js?v=438d21d6"></script>
+    <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/ch1_qubit/1-1-1-spins-and-qubits.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.1.2 State and Representation" href="1-1-2-state-and-representation.html" />
+    <link rel="prev" title="1.1 States and Observables" href="1-1-states-and-observables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quantum Mechanics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PHYS 130B Lecture Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chap 1: Qubit</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="1-1-states-and-observables.html">1.1 States and Observables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">1.1.1 Spins and Qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="1-2-measurement.html">1.2 Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-2-1-measurement-postulate.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-2-2-uncertainty-and-incompatibility.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-2-3-measurement-operators.html">1.2.3 Measurement Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2_identical-particles/index.html">Chap 2: Identical Particles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-1-bosons-and-fermions.html">2.1 Bosons and Fermions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-2-symmetrization.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-3-second-quantization.html">2.1.3 Second Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-2-angular-momentum.html">2.2 Angular Momentum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html">2.2.3 Addition of Angular Momenta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch3_path-integral/index.html">Chap 3: Path Integral</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-classical-to-quantum.html">3.1.1 Classical to Quantum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-quantum-mechanics-as-optics.html">3.1.3 Quantum Mechanics as Optics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-1-path-integral-formulation.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-2-free-particle-propagator.html">3.2.2 Free Particle Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-3-schrodinger-equation.html">3.2.3 Schrödinger Equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-3-stationary-phase.html">3.3 Stationary Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-1-stationary-phase-approximation.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-2-wkb-approximation.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-3-instantons.html">3.4.3 Instantons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/index.html">Chap 4: Phase and Gauge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-gauge-field.html">4.1 Gauge Field</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-1-gauge-transformations.html">4.1.1 Gauge Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-gauge-connection.html">4.1.2 Gauge Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-3-electromagnetic-coupling.html">4.1.3 Electromagnetic Coupling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-flux-ring.html">4.2 Flux Ring</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-aharonov-bohm-effect.html">4.2.1 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-2-flux-quantization.html">4.2.2 Flux Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-gauge-invariance.html">4.2.3 Gauge Invariance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-landau-level.html">4.3 Landau Level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-1-cyclotron-motion.html">4.3.1 Cyclotron Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-2-landau-quantization.html">4.3.2 Landau Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html">4.3.3 Quantum Hall Effect</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-spin-and-monopole.html">4.4 Spin and Monopole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-1-orbital-vs-spin.html">4.4.1 Orbital vs Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-2-dirac-monopole.html">4.4.2 Dirac Monopole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-3-monopole-harmonics.html">4.4.3 Monopole Harmonics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-berry-phase.html">4.5 Berry Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-1-berry-phase.html">4.5.1 Berry Phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-2-applications.html">4.5.2 Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-3-topology.html">4.5.3 Topology</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch5_perturbation-theory/index.html">Chap 5: Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html">5.1 Time-Independent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory.html">5.1.2 Non-Degenerate Perturbation Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-3-degenerate-perturbation-theory.html">5.1.3 Degenerate Perturbation Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch6_quantum-foundations/index.html">Chap 6: Quantum Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-1-density-matrix.html">6.1 Density Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-1-mixed-states.html">6.1.1 Mixed States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-2-partial-trace.html">6.1.2 Partial Trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-3-entropy.html">6.1.3 Entropy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-2-entanglement.html">6.2 Entanglement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-1-composite-systems.html">6.2.1 Composite Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-2-entanglement-measures.html">6.2.2 Entanglement Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-3-bell-inequality.html">6.2.3 Bell Inequality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-3-generalized-measurement.html">6.3 Generalized Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-1-projective-measurement.html">6.3.1 Projective Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-2-povm.html">6.3.2 POVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-3-quantum-channels.html">6.3.3 Quantum Channels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-4-open-quantum-systems.html">6.4 Open Quantum Systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-1-decoherence.html">6.4.1 Decoherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-2-lindblad-master-equation.html">6.4.2 Lindblad Master Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-3-error-correction.html">6.4.3 Error Correction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/EverettYou/everettyou.github.io/master?urlpath=tree/teaching/PHYS130B/notes_src/ch1_qubit/1-1-1-spins-and-qubits.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/EverettYou/everettyou.github.io/blob/master/teaching/PHYS130B/notes_src/ch1_qubit/1-1-1-spins-and-qubits.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../sources/ch1_qubit/1-1-1-spins-and-qubits.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.1.1 Spins and Qubits</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spin">What is Spin?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-vs-quantum-angular-momentum">Classical vs. Quantum Angular Momentum</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-2-particles">Spin-1/2 Particles</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stern-gerlach-experiment">The Stern-Gerlach Experiment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-outcomes">Setup and Outcomes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-stern-gerlach-experiments">Sequential Stern-Gerlach Experiments</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-spin-to-qubits">From Spin to Qubits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-a-qubit">Definition of a Qubit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-bit-vs-quantum-qubit">Classical Bit vs. Quantum Qubit</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qubit-as-an-abstract-system">The Qubit as an Abstract System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-it-from-qubit-perspective">The “It from Qubit” Perspective</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="spins-and-qubits">
+<h1>1.1.1 Spins and Qubits<a class="headerlink" href="#spins-and-qubits" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is spin, and why is it fundamentally different from classical rotation? Why can’t we picture it simply as a little spinning arrow?</p></li>
+<li><p>What is a qubit, and how does it generalize the notion of spin? Why is a two-state system the simplest quantum system?</p></li>
+<li><p>How do the classical bit and quantum qubit differ in their information content and measurement properties?</p></li>
+<li><p>Design a Stern-Gerlach-style thought experiment to probe the non-classical nature of spin.</p></li>
+<li><p>Why are qubits considered the “building blocks” of quantum information and potentially all quantum systems?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<p>At the heart of quantum mechanics lies a startling discovery: the most fundamental properties of matter cannot be visualized or understood through classical intuition. Spin—an intrinsic angular momentum carried by every elementary particle—is where this quantum strangeness becomes undeniable. It is an angular momentum without anything rotating, a magnetic property without a classical analog, and yet it determines the structure of atoms, the stability of matter, and the nature of force itself. Understanding spin is the gateway to understanding why quantum mechanics is necessary.</p>
+<section id="what-is-spin">
+<h3>What is Spin?<a class="headerlink" href="#what-is-spin" title="Link to this heading">#</a></h3>
+<p><strong>Spin</strong> is an intrinsic form of angular momentum carried by elementary particles such as electrons, protons, and photons. Unlike orbital angular momentum (which arises from a particle’s motion through space), spin is a purely quantum property—it has no classical analog, and we cannot interpret it as physical rotation of a charge or mass distribution.</p>
+<section id="classical-vs-quantum-angular-momentum">
+<h4>Classical vs. Quantum Angular Momentum<a class="headerlink" href="#classical-vs-quantum-angular-momentum" title="Link to this heading">#</a></h4>
+<p>In classical mechanics, angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span> describes a rotating object. We can visualize it: a spinning top has angular momentum pointing along its spin axis, and the magnitude is <span class="math notranslate nohighlight">\(L = m\omega r^2\)</span> for a point mass.</p>
+<p><strong>Spin is not this.</strong> When we say an electron “has spin,” we mean it carries an intrinsic angular momentum that cannot be understood as orbital motion. There is no classical picture that correctly captures spin. Instead, spin is a fundamental quantum property built into the fabric of particle physics.</p>
+</section>
+<section id="spin-1-2-particles">
+<h4>Spin-1/2 Particles<a class="headerlink" href="#spin-1-2-particles" title="Link to this heading">#</a></h4>
+<p>For spin-1/2 particles (electrons, protons, neutrons, and many other fermions):</p>
+<ul class="simple">
+<li><p>The <strong>magnitude</strong> of the spin angular momentum is fixed: <span class="math notranslate nohighlight">\(|\boldsymbol{S}| = \sqrt{s(s+1)}\hbar = \sqrt{3/4}\,\hbar\)</span> for <span class="math notranslate nohighlight">\(s = 1/2\)</span>.</p></li>
+<li><p>The <strong>component</strong> along any chosen axis (say, the z-axis) can only take two values: <span class="math notranslate nohighlight">\(S_z = \pm\frac{\hbar}{2}\)</span>.</p></li>
+<li><p>These correspond to <strong>spin-up</strong> (<span class="math notranslate nohighlight">\(|\uparrow\rangle\)</span>, eigenvalue <span class="math notranslate nohighlight">\(+\hbar/2\)</span>) and <strong>spin-down</strong> (<span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span>, eigenvalue <span class="math notranslate nohighlight">\(-\hbar/2\)</span>).</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title">Key Insight: Discrete Spin Values</p>
+<p>Unlike classical angular momentum (which can have any orientation), a spin-1/2 particle measured along any axis gives <strong>binary outcomes</strong>: either “spin-up” or “spin-down.” There are no intermediate values. This discreteness is fundamentally quantum.</p>
+</div>
+</section>
+</section>
+<section id="the-stern-gerlach-experiment">
+<h3>The Stern-Gerlach Experiment<a class="headerlink" href="#the-stern-gerlach-experiment" title="Link to this heading">#</a></h3>
+<p>The <strong>Stern-Gerlach apparatus</strong> is a thought experiment (and a real experimental device) that reveals the quantum nature of spin.</p>
+<section id="setup-and-outcomes">
+<h4>Setup and Outcomes<a class="headerlink" href="#setup-and-outcomes" title="Link to this heading">#</a></h4>
+<p>Imagine an inhomogeneous (non-uniform) magnetic field oriented along the z-axis. A beam of atoms (e.g., silver atoms with one unpaired electron) passes through this field:</p>
+<ol class="arabic simple">
+<li><p><strong>Atoms in the “spin-up” state</strong> (<span class="math notranslate nohighlight">\(|\uparrow\rangle\)</span> along z) experience a force in one direction (say, upward) and are deflected upward.</p></li>
+<li><p><strong>Atoms in the “spin-down” state</strong> (<span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span> along z) experience a force in the opposite direction and are deflected downward.</p></li>
+<li><p>The beam <strong>splits into two discrete bands</strong>—there is no continuous smearing.</p></li>
+</ol>
+<p>The splitting is determined by the <strong>inhomogeneous force</strong> <span class="math notranslate nohighlight">\(F \propto \nabla B \cdot S_z\)</span>, which couples the spin to the field gradient.</p>
+</section>
+<section id="sequential-stern-gerlach-experiments">
+<h4>Sequential Stern-Gerlach Experiments<a class="headerlink" href="#sequential-stern-gerlach-experiments" title="Link to this heading">#</a></h4>
+<p>Now consider a sequence of three Stern-Gerlach apparatuses. These sequential experiments reveal profound facts about the nature of quantum measurement.</p>
+<div class="example admonition">
+<p class="admonition-title">Experiment A: Z–Z–Z (repeated measurement along the same axis)</p>
+<p>Start with 1000 atoms. The first SG apparatus (z-axis) splits the beam; we <strong>block the spin-down beam</strong> and keep only the 1000 atoms in state <span class="math notranslate nohighlight">\(|\uparrow\rangle_z\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>Apparatus</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1st</p></td>
+<td><p>SG-Z</p></td>
+<td><p>1000 atoms exit as $</p></td>
+</tr>
+<tr class="row-odd"><td><p>2nd</p></td>
+<td><p>SG-Z</p></td>
+<td><p>1000 atoms exit as $</p></td>
+</tr>
+<tr class="row-even"><td><p>3rd</p></td>
+<td><p>SG-Z</p></td>
+<td><p>1000 atoms exit as $</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Every atom that was measured spin-up along z <strong>remains</strong> spin-up along z in all subsequent z-measurements. The result is perfectly reproducible.</p>
+</div>
+<p><strong>What we learn from Experiment A:</strong></p>
+<ul class="simple">
+<li><p><strong>Reproducibility confirms physical reality.</strong> Repeating the same measurement yields the same outcome with certainty. This means the first measurement did not produce a random fluke—it revealed (or created) a definite property of the system. After passing through the first SG-Z apparatus, the atom genuinely <em>is</em> in the state <span class="math notranslate nohighlight">\(|\uparrow\rangle_z\)</span>.</p></li>
+<li><p><strong>Measurement as state preparation.</strong> By selecting the spin-up beam, we have <em>prepared</em> a well-defined quantum state. The second and third apparatuses merely confirm what the first one established.</p></li>
+</ul>
+<div class="example admonition">
+<p class="admonition-title">Experiment B: Z–X–Z (intermediate measurement along a different axis)</p>
+<p>Start again with 1000 atoms prepared in <span class="math notranslate nohighlight">\(|\uparrow\rangle_z\)</span> by the first apparatus.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>Apparatus</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1st</p></td>
+<td><p>SG-Z</p></td>
+<td><p>1000 atoms exit as $</p></td>
+</tr>
+<tr class="row-odd"><td><p>2nd</p></td>
+<td><p>SG-X</p></td>
+<td><p>500 atoms exit as $</p></td>
+</tr>
+<tr class="row-even"><td><p>3rd</p></td>
+<td><p>SG-Z</p></td>
+<td><p>250 atoms as $</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>After the x-measurement, the atoms have <strong>forgotten</strong> their original z-spin. Measuring along x has completely randomized the z-outcome.</p>
+</div>
+<p><strong>What we learn from Experiment B:</strong></p>
+<ul class="simple">
+<li><p><strong>Measurement actively changes the quantum state.</strong> The x-measurement does not merely reveal a pre-existing x-spin value while leaving the z-spin intact. It <em>transforms</em> the state: what was a definite <span class="math notranslate nohighlight">\(|\uparrow\rangle_z\)</span> becomes an equal superposition of <span class="math notranslate nohighlight">\(|\uparrow\rangle_z\)</span> and <span class="math notranslate nohighlight">\(|\downarrow\rangle_z\)</span>. The original z-information is irreversibly erased.</p></li>
+<li><p><strong>Incompatible observables cannot be known simultaneously.</strong> The z-component and x-component of spin are <em>complementary</em>: gaining information about one necessarily destroys information about the other. This is the operational meaning of non-commutativity <span class="math notranslate nohighlight">\([S_z, S_x] \neq 0\)</span>.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Bayesian Interpretation of Measurement</p>
+<p>There is a useful Bayesian analogy for understanding state collapse. Think of the quantum state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> as encoding our <strong>knowledge</strong> about the system—analogous to a prior probability distribution in Bayesian statistics.</p>
+<p>When we perform a measurement and obtain outcome <span class="math notranslate nohighlight">\(m\)</span>, we <strong>update</strong> our description:</p>
+<div class="math notranslate nohighlight">
+\[|\psi\rangle \;\xrightarrow{\text{observe } m}\; |m\rangle\]</div>
+<p>just as a Bayesian agent updates a prior to a posterior upon receiving new data. In this view, “collapse” is not a violent physical event but an <strong>update of our information</strong> about the system.</p>
+<p>This perspective—central to <strong>QBism</strong> (Quantum Bayesianism)—does not claim that nothing physical happens during measurement. Rather, it shifts the emphasis: the state vector is a tool for making predictions, and measurement refines that tool. The deep question of <em>why</em> quantum updates follow the Born rule (rather than classical Bayes’ rule) remains one of the foundational puzzles of quantum mechanics.</p>
+<p><strong>seealso</strong>
+The measurement formalism is developed rigorously in §1.2, where we introduce measurement operators <span class="math notranslate nohighlight">\(P_{O=m}\)</span> and the conditional probability <span class="math notranslate nohighlight">\(p(m|O,\psi)\)</span>. The Bayesian interpretation is revisited in §1.2.3.</p>
+</div>
+</section>
+</section>
+<section id="from-spin-to-qubits">
+<h3>From Spin to Qubits<a class="headerlink" href="#from-spin-to-qubits" title="Link to this heading">#</a></h3>
+<p>The physical realization of spin-1/2 systems (electrons, photons, atoms, etc.) is rich and complex. However, quantum mechanics teaches us that we can <strong>abstract away the physical details</strong> and focus on the essential mathematical structure.</p>
+<section id="definition-of-a-qubit">
+<h4>Definition of a Qubit<a class="headerlink" href="#definition-of-a-qubit" title="Link to this heading">#</a></h4>
+<p>A <strong>qubit</strong> (or <strong>quantum bit</strong>) is a <strong>two-state quantum system</strong>—the simplest possible quantum system.</p>
+<ul class="simple">
+<li><p>It has a <strong>two-dimensional Hilbert space</strong> over the complex numbers.</p></li>
+<li><p>Any pure state can be written as a <strong>superposition</strong> of two orthogonal basis states, often denoted <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> (or <span class="math notranslate nohighlight">\(|\uparrow\rangle\)</span> and <span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span>).</p></li>
+<li><p>A qubit is <strong>universal</strong>: it exhibits all the essential properties of quantum mechanics in its simplest form.</p></li>
+</ul>
+<p><strong>Why qubits are central:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Simplicity with completeness</strong>: A qubit is the smallest quantum system, yet it perfectly demonstrates superposition, entanglement, measurement, and unitary evolution.</p></li>
+<li><p><strong>Building block of quantum information</strong>: Just as classical bits are the fundamental unit of classical information, qubits are the fundamental unit of quantum information.</p></li>
+<li><p><strong>Universality</strong>: Any quantum computation can (in principle) be expressed using qubits and quantum gates acting on them.</p></li>
+<li><p><strong>Physical realizations are abundant</strong>: Spin-1/2 systems, two-level atoms, photon polarization, superconducting circuit states, trapped ions, and more can all serve as qubits.</p></li>
+</ol>
+</section>
+<section id="classical-bit-vs-quantum-qubit">
+<h4>Classical Bit vs. Quantum Qubit<a class="headerlink" href="#classical-bit-vs-quantum-qubit" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Classical Bit</p></th>
+<th class="head"><p>Quantum Qubit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Values</strong></p></td>
+<td><p>0 or 1 (definite)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha|0\rangle + \beta|1\rangle\)</span> (superposition)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Information</strong></p></td>
+<td><p>Deterministic; value exists before measurement</p></td>
+<td><p>Probabilistic; only revealed by measurement</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Measurement</strong></p></td>
+<td><p>Non-destructive; can be read many times</p></td>
+<td><p>Destructive/Irreversible; collapses to <span class="math notranslate nohighlight">\(|0\rangle\)</span> or <span class="math notranslate nohighlight">\(|1\rangle\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>States</strong></p></td>
+<td><p>2 possible values</p></td>
+<td><p>Infinitely many (continuum on Bloch sphere)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Copying</strong></p></td>
+<td><p>Trivial</p></td>
+<td><p>Impossible (no-cloning theorem)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Information capacity</strong></p></td>
+<td><p>1 bit</p></td>
+<td><p>2 classical bits (in Hilbert space dimension)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Degree of freedom</strong></p></td>
+<td><p>1 integer</p></td>
+<td><p>2 real parameters (angles on sphere)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="the-qubit-as-an-abstract-system">
+<h3>The Qubit as an Abstract System<a class="headerlink" href="#the-qubit-as-an-abstract-system" title="Link to this heading">#</a></h3>
+<p>Once we identify the <strong>essential structure</strong> of a two-level quantum system, we can define a qubit independently of its physical implementation:</p>
+<p><strong>Qubit state</strong>: A normalized vector in <span class="math notranslate nohighlight">\(\mathbb{C}^2\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-qubit-abstract">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-qubit-abstract" title="Link to this equation">#</a></span>\[\begin{split}|\psi\rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}, \quad |\alpha|^2 + |\beta|^2 = 1\end{split}\]</div>
+<p><strong>Observables</strong>: Hermitian <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices (discussed in detail in section 1.1.3).</p>
+<p><strong>Measurement</strong>: Projective measurement onto eigenstates (discussed in section 1.2.1).</p>
+<p><strong>Time evolution</strong>: Unitary transformations (discussed in section 1.3.1).</p>
+<p>This abstraction is powerful because it allows us to study quantum mechanics without worrying about whether we are dealing with electrons, photons, or artificial systems like superconducting qubits.</p>
+</section>
+<section id="the-it-from-qubit-perspective">
+<h3>The “It from Qubit” Perspective<a class="headerlink" href="#the-it-from-qubit-perspective" title="Link to this heading">#</a></h3>
+<p>Contemporary quantum physics research includes the vision that qubits, and quantum information more generally, may be the <strong>fundamental building blocks of reality</strong>.</p>
+<p><strong>“It from Qubit”</strong> is a research initiative supported by the Simons Foundation that proposes:</p>
+<ul class="simple">
+<li><p>Physical objects and phenomena can be understood as arising from quantum information.</p></li>
+<li><p>Spacetime, matter, and gravity might all emerge from entanglement and quantum correlations among qubits.</p></li>
+<li><p>This is a radical reinterpretation of quantum mechanics from an information-theoretic perspective.</p></li>
+</ul>
+<p>While speculative, this vision has motivated rigorous mathematical and conceptual advances in quantum gravity, holography, and the foundations of quantum mechanics.</p>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Spin</strong> is an intrinsic quantum angular momentum with no classical analog; for spin-1/2, measurements along any axis yield binary outcomes.</p></li>
+<li><p>The <strong>Stern-Gerlach experiment</strong> reveals the non-classical nature of spin: different measurements are incompatible; measuring one observable destroys information about another.</p></li>
+<li><p>A <strong>qubit</strong> is the abstract mathematical model of a two-state quantum system, capturing the essential structure of any physical spin-1/2 system.</p></li>
+<li><p>Qubits are the fundamental unit of quantum information and exhibit all core quantum phenomena in their simplest form.</p></li>
+<li><p>The universality and simplicity of qubits make them central to quantum computing, quantum information, and potentially to understanding the foundations of physics itself.</p></li>
+</ul>
+</section>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> In the Stern-Gerlach experiment, a beam of spin-1/2 atoms passes through an inhomogeneous magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B_0(z/d)\,\hat{z}\)</span>, where <span class="math notranslate nohighlight">\(d\)</span> is a length scale characterizing the field gradient. The force on a magnetic moment <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \gamma \boldsymbol{S}\)</span> is <span class="math notranslate nohighlight">\(F_z = \mu_z (\partial B_z / \partial z)\)</span>. For an electron with <span class="math notranslate nohighlight">\(\gamma = -e/m_e\)</span> and <span class="math notranslate nohighlight">\(S_z = \pm \hbar/2\)</span>, show that the two deflected beams separate by an amount proportional to <span class="math notranslate nohighlight">\(\hbar\)</span>. What does this tell you about why the splitting is evidence for quantized angular momentum?</p>
+<p><strong>2.</strong> Consider the sequential Stern-Gerlach setup: first measure <span class="math notranslate nohighlight">\(S_z\)</span> (keep spin-up), then measure <span class="math notranslate nohighlight">\(S_x\)</span> (keep <span class="math notranslate nohighlight">\(|+\rangle_x\)</span>), then measure <span class="math notranslate nohighlight">\(S_z\)</span> again. Starting with <span class="math notranslate nohighlight">\(N\)</span> atoms, how many emerge from each output of the third apparatus? Explain physically why the intermediate <span class="math notranslate nohighlight">\(S_x\)</span> measurement “erases” the <span class="math notranslate nohighlight">\(S_z\)</span> information.</p>
+<p><strong>3.</strong> Suppose you have three Stern-Gerlach apparatuses oriented along the <span class="math notranslate nohighlight">\(z\)</span>, <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> directions. But now, instead of blocking one beam after the <span class="math notranslate nohighlight">\(S_x\)</span> measurement, you recombine both beams coherently before the final <span class="math notranslate nohighlight">\(S_z\)</span> measurement. What fraction of the original spin-up atoms emerge as spin-up from the third apparatus? Compare with the result of Problem 2 and explain the difference.</p>
+<p><strong>4.</strong> A classical bit stores one of two values: 0 or 1. A qubit state <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\)</span> is specified by two continuous real parameters (after normalization and global phase removal). Does this mean a qubit stores more information than a classical bit? Argue carefully why or why not, considering what happens when you measure the qubit.</p>
+<p><strong>5.</strong> The spin quantum number for a spin-<span class="math notranslate nohighlight">\(s\)</span> particle allows <span class="math notranslate nohighlight">\(2s+1\)</span> values of <span class="math notranslate nohighlight">\(S_z\)</span>: <span class="math notranslate nohighlight">\(m = -s, -s+1, \ldots, s\)</span>. For spin-1/2, <span class="math notranslate nohighlight">\(|\boldsymbol{S}|^2 = s(s+1)\hbar^2 = \tfrac{3}{4}\hbar^2\)</span>, while the maximum <span class="math notranslate nohighlight">\(S_z = \tfrac{1}{2}\hbar\)</span>. Show that <span class="math notranslate nohighlight">\(S_z^{\max} &lt; |\boldsymbol{S}|\)</span> and explain the physical significance: why can the spin vector never be fully aligned along any single axis?</p>
+<p><strong>6.</strong> In Experiment B of the sequential Stern-Gerlach discussion, we found that measuring <span class="math notranslate nohighlight">\(S_x\)</span> on a state prepared as <span class="math notranslate nohighlight">\(|\uparrow\rangle_z\)</span> yields outcomes <span class="math notranslate nohighlight">\(\pm\hbar/2\)</span> with equal probability. Without detailed calculation, use a symmetry argument to explain why the probabilities must be equal (hint: consider what the <span class="math notranslate nohighlight">\(z\)</span>-axis “knows” about the <span class="math notranslate nohighlight">\(x\)</span>-axis).</p>
+<p><strong>7.</strong> List three distinct physical systems that can serve as qubits and, for each, identify what plays the role of <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>. For one of your examples, briefly describe how a superposition state <span class="math notranslate nohighlight">\(\alpha|0\rangle + \beta|1\rangle\)</span> is prepared in practice.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch1_qubit"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-1-states-and-observables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.1 States and Observables</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-1-2-state-and-representation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1.1.2 State and Representation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spin">What is Spin?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-vs-quantum-angular-momentum">Classical vs. Quantum Angular Momentum</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-1-2-particles">Spin-1/2 Particles</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stern-gerlach-experiment">The Stern-Gerlach Experiment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-outcomes">Setup and Outcomes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-stern-gerlach-experiments">Sequential Stern-Gerlach Experiments</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-spin-to-qubits">From Spin to Qubits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-a-qubit">Definition of a Qubit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-bit-vs-quantum-qubit">Classical Bit vs. Quantum Qubit</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qubit-as-an-abstract-system">The Qubit as an Abstract System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-it-from-qubit-perspective">The “It from Qubit” Perspective</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yi-Zhuang You
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    <div class="extra_footer">
+  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

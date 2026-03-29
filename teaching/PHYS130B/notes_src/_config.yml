@@ -1,0 +1,49 @@
+# Jupyter Book configuration for PHYS130B notes
+title: "Quantum Mechanics"
+author: "Yi-Zhuang You"
+copyright: "2027"
+
+# Base URL when book is served from a subpath (fixes assets and launch button when deployed).
+# Sidebar: show course title only (no logo). Favicon injected by build.sh from site avatar.
+html:
+  baseurl: "https://everettyou.github.io/teaching/PHYS130B/notes/"
+  analytics:
+    google_analytics_id: ""  # Optional: set to your GA4 ID (e.g. G-XXXXXXXX) to track page views
+
+# Execute notebooks at build time so the published site shows rendered outputs.
+# Use "auto" when building locally (or run: jupyter-book build . --execute). "off" skips execution.
+execute:
+  execute_notebooks: "off"
+
+# Launch buttons: rocket icon for Binder and Colab (requires repository below).
+repository:
+  url: "https://github.com/EverettYou/everettyou.github.io"
+  path_to_book: "teaching/PHYS130B/notes_src"
+  branch: "master"
+
+launch_buttons:
+  binderhub_url: "https://mybinder.org"
+  colab_url: "https://colab.research.google.com"
+  notebook_interface: "classic"
+
+# Exclude _design/ and _references/ from build (design/reference docs, not course content)
+sphinx:
+  extra_extensions:
+    - sphinx_subfigure
+    - sphinxcontrib.video
+  config:
+    html_js_files: ["fullscreen-sidebar.js"]
+    exclude_patterns: ["_design/*", "_references/*"]
+    templates_path: ["_templates"]
+    # Disable transition before footnotes to avoid docutils AssertionError when
+    # transition ends up in invalid context (parent not document/section).
+    myst_footnote_transition: false
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    mathjax3_config:
+      loader:
+        load: ['[tex]/boldsymbol']
+      tex:
+        packages:
+          '[+]': ['boldsymbol']
+        macros:
+          bm: ["\\boldsymbol{#1}", 1]

@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.3.2 POVM &#8212; Quantum Mechanics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=7276957b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../static/doctools.js?v=9a2dae69"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../static/copybutton.js?v=f281be69"></script>
+    <script src="../static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/boldsymbol"]}, "tex": {"packages": {"[+]": ["boldsymbol"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch6_quantum-foundations/6-3-2-povm';</script>
+    <script src="../static/fullscreen-sidebar.js?v=438d21d6"></script>
+    <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/ch6_quantum-foundations/6-3-2-povm.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.3.3 Quantum Channels" href="6-3-3-quantum-channels.html" />
+    <link rel="prev" title="6.3.1 Projective Measurement" href="6-3-1-projective-measurement.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quantum Mechanics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PHYS 130B Lecture Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch1_qubit/index.html">Chap 1: Qubit</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-1-states-and-observables.html">1.1 States and Observables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-1-spins-and-qubits.html">1.1.1 Spins and Qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-2-measurement.html">1.2 Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-1-measurement-postulate.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-2-uncertainty-and-incompatibility.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-3-measurement-operators.html">1.2.3 Measurement Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2_identical-particles/index.html">Chap 2: Identical Particles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-1-bosons-and-fermions.html">2.1 Bosons and Fermions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-2-symmetrization.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-3-second-quantization.html">2.1.3 Second Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-2-angular-momentum.html">2.2 Angular Momentum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html">2.2.3 Addition of Angular Momenta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch3_path-integral/index.html">Chap 3: Path Integral</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-classical-to-quantum.html">3.1.1 Classical to Quantum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-quantum-mechanics-as-optics.html">3.1.3 Quantum Mechanics as Optics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-1-path-integral-formulation.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-2-free-particle-propagator.html">3.2.2 Free Particle Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-3-schrodinger-equation.html">3.2.3 Schrödinger Equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-3-stationary-phase.html">3.3 Stationary Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-1-stationary-phase-approximation.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-2-wkb-approximation.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-3-instantons.html">3.4.3 Instantons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/index.html">Chap 4: Phase and Gauge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-gauge-field.html">4.1 Gauge Field</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-1-gauge-transformations.html">4.1.1 Gauge Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-gauge-connection.html">4.1.2 Gauge Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-3-electromagnetic-coupling.html">4.1.3 Electromagnetic Coupling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-flux-ring.html">4.2 Flux Ring</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-aharonov-bohm-effect.html">4.2.1 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-2-flux-quantization.html">4.2.2 Flux Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-gauge-invariance.html">4.2.3 Gauge Invariance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-landau-level.html">4.3 Landau Level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-1-cyclotron-motion.html">4.3.1 Cyclotron Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-2-landau-quantization.html">4.3.2 Landau Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html">4.3.3 Quantum Hall Effect</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-spin-and-monopole.html">4.4 Spin and Monopole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-1-orbital-vs-spin.html">4.4.1 Orbital vs Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-2-dirac-monopole.html">4.4.2 Dirac Monopole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-3-monopole-harmonics.html">4.4.3 Monopole Harmonics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-berry-phase.html">4.5 Berry Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-1-berry-phase.html">4.5.1 Berry Phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-2-applications.html">4.5.2 Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-5-3-topology.html">4.5.3 Topology</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch5_perturbation-theory/index.html">Chap 5: Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html">5.1 Time-Independent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory.html">5.1.2 Non-Degenerate Perturbation Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-3-degenerate-perturbation-theory.html">5.1.3 Degenerate Perturbation Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chap 6: Quantum Foundations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="6-1-density-matrix.html">6.1 Density Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="6-1-1-mixed-states.html">6.1.1 Mixed States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-1-2-partial-trace.html">6.1.2 Partial Trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-1-3-entropy.html">6.1.3 Entropy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="6-2-entanglement.html">6.2 Entanglement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="6-2-1-composite-systems.html">6.2.1 Composite Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-2-2-entanglement-measures.html">6.2.2 Entanglement Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-2-3-bell-inequality.html">6.2.3 Bell Inequality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="6-3-generalized-measurement.html">6.3 Generalized Measurement</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="6-3-1-projective-measurement.html">6.3.1 Projective Measurement</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">6.3.2 POVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-3-3-quantum-channels.html">6.3.3 Quantum Channels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="6-4-open-quantum-systems.html">6.4 Open Quantum Systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="6-4-1-decoherence.html">6.4.1 Decoherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-4-2-lindblad-master-equation.html">6.4.2 Lindblad Master Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-4-3-error-correction.html">6.4.3 Error Correction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/EverettYou/everettyou.github.io/master?urlpath=tree/teaching/PHYS130B/notes_src/ch6_quantum-foundations/6-3-2-povm.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/EverettYou/everettyou.github.io/blob/master/teaching/PHYS130B/notes_src/ch6_quantum-foundations/6-3-2-povm.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../sources/ch6_quantum-foundations/6-3-2-povm.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6.3.2 POVM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-povm">Definition of POVM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurement-process-with-povm">Measurement Process with POVM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#povm-vs-projective-measurement">POVM vs. Projective Measurement</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off">Trade-off</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unambiguous-state-discrimination">Unambiguous State Discrimination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neumark-s-theorem">Neumark’s Theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="povm">
+<h1>6.3.2 POVM<a class="headerlink" href="#povm" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Prompts</p>
+<ul class="simple">
+<li><p>What is a POVM (positive operator-valued measure), and how does it generalize projective measurement?</p></li>
+<li><p>Why don’t POVM elements need to be orthogonal? What advantage does this provide?</p></li>
+<li><p>How do you construct POVM elements from a given measurement problem?</p></li>
+<li><p>What is Neumark’s theorem, and what does it say about extending POVMs?</p></li>
+<li><p>What is unambiguous state discrimination, and how does POVM achieve it?</p></li>
+<li><p>Can you give an example of a POVM that is not a projective measurement?</p></li>
+<li><p>How are POVM elements related to Kraus operators for quantum channels?</p></li>
+</ul>
+</div>
+<section id="lecture-notes">
+<h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<p>Projective measurements are elegant but restrictive: outcomes must be orthogonal, and we learn something definite about the system. Yet in many practical scenarios, we wish to perform softer measurements that leave less disturbance, or distinguish between non-orthogonal states. Positive operator-valued measures generalize the measurement postulate, enabling a vast new toolkit for quantum information processing and state discrimination.</p>
+<section id="definition-of-povm">
+<h3>Definition of POVM<a class="headerlink" href="#definition-of-povm" title="Link to this heading">#</a></h3>
+<p>A <strong>positive operator-valued measure</strong> (POVM) is a set of operators <span class="math notranslate nohighlight">\(\{M_1, M_2, \ldots, M_n\}\)</span> on Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> satisfying:</p>
+<p><strong>1. Positive semidefiniteness</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-povm-positive">
+<span class="eqno">(429)<a class="headerlink" href="#equation-eq-povm-positive" title="Link to this equation">#</a></span>\[M_i \geq 0 \quad \text{for all } i \quad (\text{eigenvalues} \geq 0)\]</div>
+<p><strong>2. Completeness</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-povm-complete">
+<span class="eqno">(430)<a class="headerlink" href="#equation-eq-povm-complete" title="Link to this equation">#</a></span>\[\sum_i M_i = I\]</div>
+</section>
+<section id="measurement-process-with-povm">
+<h3>Measurement Process with POVM<a class="headerlink" href="#measurement-process-with-povm" title="Link to this heading">#</a></h3>
+<p>If a system in state <span class="math notranslate nohighlight">\(\rho\)</span> is measured with POVM <span class="math notranslate nohighlight">\(\{M_i\}\)</span>:</p>
+<p><strong>Outcome</strong>: Measurement yields result <span class="math notranslate nohighlight">\(i\)</span> with <strong>probability</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-povm-probability">
+<span class="eqno">(431)<a class="headerlink" href="#equation-eq-povm-probability" title="Link to this equation">#</a></span>\[p_i = \text{Tr}(M_i \rho)\]</div>
+<p><strong>Post-measurement state</strong> (state after measurement):</p>
+<div class="math notranslate nohighlight" id="equation-eq-povm-collapse">
+<span class="eqno">(432)<a class="headerlink" href="#equation-eq-povm-collapse" title="Link to this equation">#</a></span>\[\rho' = \frac{\sqrt{M_i} \rho \sqrt{M_i}}{\text{Tr}(M_i \rho)}\]</div>
+<p>The post-measurement state involves <span class="math notranslate nohighlight">\(\sqrt{M_i}\)</span> (square root of <span class="math notranslate nohighlight">\(M_i\)</span>), not the projector itself.</p>
+<section id="normalization">
+<h4>Normalization<a class="headerlink" href="#normalization" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\sum_i p_i = \sum_i \text{Tr}(M_i \rho) = \text{Tr}\left(\sum_i M_i \rho\right) = \text{Tr}(I \rho) = 1 \quad ✓\]</div>
+</section>
+</section>
+<section id="povm-vs-projective-measurement">
+<h3>POVM vs. Projective Measurement<a class="headerlink" href="#povm-vs-projective-measurement" title="Link to this heading">#</a></h3>
+<p><strong>Projective measurement</strong> (special case of POVM):</p>
+<ul class="simple">
+<li><p>POVM elements are <strong>orthogonal projectors</strong>: <span class="math notranslate nohighlight">\(M_i = P_i\)</span>, with <span class="math notranslate nohighlight">\(P_i P_j = \delta_{ij} P_i\)</span>.</p></li>
+<li><p>Post-measurement state: <span class="math notranslate nohighlight">\(\rho' = P_i \rho P_i / p_i\)</span> (same as before, since <span class="math notranslate nohighlight">\(P_i^2 = P_i\)</span>).</p></li>
+<li><p>Outcomes correspond to eigenvalues of Hermitian operator.</p></li>
+</ul>
+<p><strong>General POVM</strong>:</p>
+<ul class="simple">
+<li><p>Elements <strong>need not be orthogonal</strong>: <span class="math notranslate nohighlight">\(M_i M_j \neq 0\)</span> in general.</p></li>
+<li><p>More outcomes possible than dimensions: <span class="math notranslate nohighlight">\(n &gt; \dim(\mathcal{H})\)</span> allowed (overcomplete basis).</p></li>
+<li><p>Can extract more information than orthogonal projections.</p></li>
+</ul>
+<section id="trade-off">
+<h4>Trade-off<a class="headerlink" href="#trade-off" title="Link to this heading">#</a></h4>
+<p>Projective measurement:</p>
+<ul class="simple">
+<li><p><strong>Pro</strong>: Outcomes are eigenvalues (physical meaning); state collapse onto eigenstates.</p></li>
+<li><p><strong>Con</strong>: Limited to <span class="math notranslate nohighlight">\(d\)</span> outcomes for <span class="math notranslate nohighlight">\(d\)</span>-dimensional space; cannot measure non-orthogonal states unambiguously.</p></li>
+</ul>
+<p>POVM:</p>
+<ul class="simple">
+<li><p><strong>Pro</strong>: <span class="math notranslate nohighlight">\(n &gt; d\)</span> outcomes possible; unambiguous state discrimination; more information.</p></li>
+<li><p><strong>Con</strong>: Outcomes are indices, not eigenvalues; post-measurement states more complex.</p></li>
+</ul>
+</section>
+</section>
+<section id="unambiguous-state-discrimination">
+<h3>Unambiguous State Discrimination<a class="headerlink" href="#unambiguous-state-discrimination" title="Link to this heading">#</a></h3>
+<p><strong>Problem</strong>: Given a qubit in one of two non-orthogonal states <span class="math notranslate nohighlight">\(|\psi_1\rangle\)</span> or <span class="math notranslate nohighlight">\(|\psi_2\rangle\)</span>, can you determine which with certainty?</p>
+<p><strong>Projective measurement</strong>: No. Non-orthogonal states cannot be perfectly distinguished by projective measurement (overlapping eigenspaces).</p>
+<p><strong>POVM solution</strong>: Yes, with a trade-off. Use a <strong>three-outcome POVM</strong>:</p>
+<ul class="simple">
+<li><p>Outcome 1: Definitely state <span class="math notranslate nohighlight">\(|\psi_1\rangle\)</span>.</p></li>
+<li><p>Outcome 2: Definitely state <span class="math notranslate nohighlight">\(|\psi_2\rangle\)</span>.</p></li>
+<li><p>Outcome 3: Inconclusive (cannot decide).</p></li>
+</ul>
+<p>For two non-orthogonal states:</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">Construction: Unambiguous State Discrimination POVM</p>
+<p>For states <span class="math notranslate nohighlight">\(|\psi_1\rangle, |\psi_2\rangle\)</span> with overlap <span class="math notranslate nohighlight">\(\langle\psi_1|\psi_2\rangle = c\)</span> (with <span class="math notranslate nohighlight">\(0 &lt; |c| &lt; 1\)</span>):</p>
+<p>Define POVM elements:</p>
+<div class="math notranslate nohighlight">
+\[M_1 = \frac{1}{1+|c|^2}(I - |\psi_2\rangle\langle\psi_2|) = \frac{1}{1+|c|^2}|\psi_1^\perp\rangle\langle\psi_1^\perp|\]</div>
+<div class="math notranslate nohighlight">
+\[M_2 = \frac{1}{1+|c|^2}(I - |\psi_1\rangle\langle\psi_1|) = \frac{1}{1+|c|^2}|\psi_2^\perp\rangle\langle\psi_2^\perp|\]</div>
+<div class="math notranslate nohighlight">
+\[M_3 = I - M_1 - M_2\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\psi_1^\perp\rangle, |\psi_2^\perp\rangle\)</span> are orthogonal complements.</p>
+<p><strong>Properties</strong>:</p>
+<ul class="simple">
+<li><p>If state is <span class="math notranslate nohighlight">\(|\psi_1\rangle\)</span>: Outcome 1 with probability <span class="math notranslate nohighlight">\(1-|c|^2\)</span>; outcome 3 with probability <span class="math notranslate nohighlight">\(|c|^2\)</span> (never outcome 2).</p></li>
+<li><p>If state is <span class="math notranslate nohighlight">\(|\psi_2\rangle\)</span>: Outcome 2 with probability <span class="math notranslate nohighlight">\(1-|c|^2\)</span>; outcome 3 with probability <span class="math notranslate nohighlight">\(|c|^2\)</span> (never outcome 1).</p></li>
+<li><p><strong>Unambiguous</strong>: Outcomes 1 and 2 identify state with certainty; outcome 3 means try again.</p></li>
+</ul>
+</div>
+</section>
+<section id="neumark-s-theorem">
+<h3>Neumark’s Theorem<a class="headerlink" href="#neumark-s-theorem" title="Link to this heading">#</a></h3>
+<p><strong>Theorem (Neumark)</strong>: Every POVM on Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> can be realized as a <strong>projective measurement</strong> on an <strong>extended space</strong> <span class="math notranslate nohighlight">\(\mathcal{H} \otimes \mathcal{H}_\text{aux}\)</span> (original plus auxiliary system), followed by tracing out the auxiliary system.</p>
+<p><strong>Mathematical statement</strong>: For POVM <span class="math notranslate nohighlight">\(\{M_i\}\)</span> on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, there exist:</p>
+<ul class="simple">
+<li><p>Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_\text{aux}\)</span> (auxiliary/ancilla system).</p></li>
+<li><p>Orthogonal projectors <span class="math notranslate nohighlight">\(\{P_i\}\)</span> on <span class="math notranslate nohighlight">\(\mathcal{H} \otimes \mathcal{H}_\text{aux}\)</span>.</p></li>
+</ul>
+<p>such that:</p>
+<div class="math notranslate nohighlight" id="equation-eq-povm-neumark">
+<span class="eqno">(433)<a class="headerlink" href="#equation-eq-povm-neumark" title="Link to this equation">#</a></span>\[M_i = \text{Tr}_\text{aux}(P_i (\rho \otimes |0\rangle\langle 0|_\text{aux}))\]</div>
+<p><strong>Physical interpretation</strong>: POVM is equivalent to entangling with an ancilla, performing a projective measurement on the combined system, and discarding the ancilla outcome.</p>
+<p>Neumark’s theorem provides a minimal realization:</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">Proof: Neumark’s Theorem - Minimal Realization</p>
+<p>The minimal auxiliary space dimension is <span class="math notranslate nohighlight">\(\dim(\mathcal{H}_\text{aux}) = n\)</span> (number of POVM outcomes). For <span class="math notranslate nohighlight">\(d\)</span>-dimensional original space and <span class="math notranslate nohighlight">\(n\)</span> outcomes: auxiliary needs dimension <span class="math notranslate nohighlight">\(\approx n - d\)</span>.</p>
+</div>
+<div class="example admonition">
+<p class="admonition-title">Example: #### Example 1: Six-State POVM (Symmetric Informationally Complete POVM)</p>
+<p>For a qubit (<span class="math notranslate nohighlight">\(d=2\)</span>), define 6 POVM elements:</p>
+<div class="math notranslate nohighlight">
+\[M_k = \frac{1}{3}|\psi_k\rangle\langle\psi_k| \quad (k=1,\ldots,6)\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\psi_k\rangle\)</span> are 6 equally-spaced directions on the Bloch sphere (vertices of icosahedron).</p>
+<p><strong>Properties</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sum_k M_k = I\)</span> (completeness verified by symmetry).</p></li>
+<li><p><strong>Informationally complete</strong>: Can reconstruct any qubit state from probabilities <span class="math notranslate nohighlight">\(\{p_k\}\)</span>.</p></li>
+<li><p>More outcomes (<span class="math notranslate nohighlight">\(n=6\)</span>) than dimensions (<span class="math notranslate nohighlight">\(d=2\)</span>); overcomplete.</p></li>
+</ul>
+</div>
+<div class="example admonition">
+<p class="admonition-title">Example: #### Example 2: Heterodyne Detection (Phase Space POVM)</p>
+<p>In quantum optics, measuring quadrature amplitudes: POVM elements are <strong>Gaussian</strong> states (coherent states), indexed by phase space points.</p>
+<div class="math notranslate nohighlight">
+\[M(\alpha) = \frac{1}{\pi}|\alpha\rangle\langle\alpha| \quad (\alpha \in \mathbb{C})\]</div>
+<p><strong>Properties</strong>:</p>
+<ul class="simple">
+<li><p>Continuous outcome space (not discrete).</p></li>
+<li><p>Each outcome has overlap with many states (not orthogonal).</p></li>
+<li><p>Allows full quantum tomography of optical fields.</p></li>
+</ul>
+</div>
+<div class="docutils">
+<h3 class="rubric" id="square-roots-of-povm-elements">Square Roots of POVM Elements</h3>
+<p>The post-measurement state involves <span class="math notranslate nohighlight">\(\sqrt{M_i}\)</span> (square root operator). Since <span class="math notranslate nohighlight">\(M_i \geq 0\)</span> (positive semidefinite), the square root is well-defined via spectral decomposition:</p>
+<div class="math notranslate nohighlight">
+\[M_i = \sum_j \lambda_{i,j} |v_{i,j}\rangle\langle v_{i,j}| \quad \Rightarrow \quad \sqrt{M_i} = \sum_j \sqrt{\lambda_{i,j}} |v_{i,j}\rangle\langle v_{i,j}|\]</div>
+<p><strong>Physical interpretation</strong>: <span class="math notranslate nohighlight">\(\sqrt{M_i}\)</span> represents the “measurement operator” (Kraus operator) associated with outcome <span class="math notranslate nohighlight">\(i\)</span>; <span class="math notranslate nohighlight">\(M_i = \sqrt{M_i}^\dagger \sqrt{M_i}\)</span> is the “effect operator”.</p>
+<h3 class="rubric" id="weak-measurement">Weak Measurement</h3>
+<p>A <strong>weak measurement</strong> is a limiting case where the measurement extracts partial information, minimizing state disturbance. It can be realized via:</p>
+<ul class="simple">
+<li><p>Weak coupling to an ancilla.</p></li>
+<li><p>POVM with “soft” (gradual) state collapse.</p></li>
+<li><p>Post-selection on weak measurement outcome.</p></li>
+</ul>
+<p><strong>Allows</strong>: Feedback control, sequential measurements, detecting small effects without strong collapse.</p>
+<h3 class="rubric" id="informationally-complete-povms-ic-povm">Informationally Complete POVMs (IC-POVM)</h3>
+<p>A POVM is <strong>informationally complete</strong> if the probabilities <span class="math notranslate nohighlight">\(\{p_i = \text{Tr}(M_i \rho)\}\)</span> uniquely determine the state <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p><strong>Minimum size</strong>: At least <span class="math notranslate nohighlight">\(d^2\)</span> outcomes needed for a <span class="math notranslate nohighlight">\(d\)</span>-dimensional system (to uniquely specify <span class="math notranslate nohighlight">\(d^2\)</span> real parameters of <span class="math notranslate nohighlight">\(\rho\)</span>).</p>
+<p><strong>Symmetric IC-POVM (SIC-POVM)</strong>: Special case with maximal symmetry and minimal overlap. For qubits, 4 outcomes suffice (tetrahedron vertices on Bloch ball).</p>
+<p><strong>Application</strong>: Full quantum state tomography with minimal measurements; important for quantum certification and characterization.</p>
+<h3 class="rubric" id="connection-to-quantum-channels">Connection to Quantum Channels</h3>
+<p>A POVM outcome describes a <strong>quantum channel</strong> in the sense of Kraus operators:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{E}(\rho) = \sum_i \sqrt{M_i} \rho \sqrt{M_i}\]</div>
+<p>where the sum is over all outcomes (unconditional), averaging the post-measurement states.</p>
+<p>The Kraus operators are <span class="math notranslate nohighlight">\(K_i = \sqrt{M_i}\)</span>, and they satisfy:</p>
+<div class="math notranslate nohighlight">
+\[\sum_i K_i^\dagger K_i = \sum_i M_i = I\]</div>
+<p>(trace-preserving condition for a channel).</p>
+<div class="important admonition">
+<p class="admonition-title">POVM vs projective</p>
+<p>A POVM <span class="math notranslate nohighlight">\(\{M_i\}\)</span> with <span class="math notranslate nohighlight">\(\sum_i M_i = I\)</span> and <span class="math notranslate nohighlight">\(M_i \geq 0\)</span> generalizes projective measurement: the elements need not be orthogonal or rank-1. POVMs can have more outcomes than the Hilbert space dimension, enabling tasks impossible with projective measurements (e.g., unambiguous state discrimination).</p>
+</div>
+</div>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>POVM</strong>: Set of positive operators <span class="math notranslate nohighlight">\(\{M_i\}\)</span> with <span class="math notranslate nohighlight">\(M_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_i M_i = I\)</span>; generalizes orthogonal projectors.</p></li>
+<li><p><strong>Measurement</strong>: Outcome <span class="math notranslate nohighlight">\(i\)</span> with probability <span class="math notranslate nohighlight">\(p_i = \text{Tr}(M_i \rho)\)</span>; post-measurement state <span class="math notranslate nohighlight">\(\rho' = \sqrt{M_i}\rho\sqrt{M_i}/p_i\)</span>.</p></li>
+<li><p><strong>Advantages</strong>: Non-orthogonal elements; more outcomes than dimensions; unambiguous state discrimination.</p></li>
+<li><p><strong>Unambiguous discrimination</strong>: Three-outcome POVM can distinguish non-orthogonal states with inconclusive outcome (trade-off).</p></li>
+<li><p><strong>Neumark’s theorem</strong>: POVM on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> equals projective measurement on <span class="math notranslate nohighlight">\(\mathcal{H} \otimes \mathcal{H}_\text{aux}\)</span> (extended space with auxiliary system).</p></li>
+<li><p><strong>Examples</strong>: 6-state POVM (qubits), heterodyne detection (optics), SIC-POVM (tomography).</p></li>
+<li><p><strong>IC-POVM</strong>: Informationally complete POVM uniquely determines state from probabilities; needs <span class="math notranslate nohighlight">\(\geq d^2\)</span> outcomes.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch6_quantum-foundations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="6-3-1-projective-measurement.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">6.3.1 Projective Measurement</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="6-3-3-quantum-channels.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6.3.3 Quantum Channels</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-povm">Definition of POVM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurement-process-with-povm">Measurement Process with POVM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#povm-vs-projective-measurement">POVM vs. Projective Measurement</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off">Trade-off</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unambiguous-state-discrimination">Unambiguous State Discrimination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neumark-s-theorem">Neumark’s Theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yi-Zhuang You
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    <div class="extra_footer">
+  <p class="text-muted">Lecture notes prepared with <a href="https://cursor.com/home?from=agents" target="_blank" rel="noopener">Cursor AI</a>.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
