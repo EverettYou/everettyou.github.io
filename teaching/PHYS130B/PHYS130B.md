@@ -22,30 +22,53 @@ tags: [Course Syllabus]
 
 * *Teaching Assistants*: Shuhan Zhang. *Email*: <shz091@ucsd.edu>
 
-* **Course Grade Allocation**: 
-  - Homework: 50% 
-  - Project: 20%
-  - Final Exam: 30%
+### Assessment Components
 
-* **Assignment and Submission Platform**: 
-  - Homework and Project are submitted via the [UCSD Canvas](https://canvas.ucsd.edu/courses/75310){:target="_blank"} platform.
-  - Final Exam will be in person.
+#### 1. AI-Assisted Preview Reports
 
-* **Homework Guidelines**:
+Before each lecture, students use AI to preview the upcoming material. Each subsection of the lecture notes contains a **Prompts** box with guiding questions designed to help students engage AI productively. Students submit a preview report — their chat history with AI about the lecture — before class starts.
 
-  - Assignments will occur irregularly, depending on when the homework problem is encountered in the lecture.
-  
-  - A recommended deadline will be provided for each assignment. However, there are no penalties for late submissions (meaning that submissions are accepted until the end of the quarter). But please kindly manage your submissions to alleviate the TA's workload.
-  
-  - For homework, discussion among students and consulting with the TA are allowed. You may utilize all educational resources (including AI language models). Nevertheless, you are required to complete your assignments by yourself to maintain academic integrity. You are encouraged to acknowledge in your homework the resources that are helpful to you.
+- **Grading:** Completion-based (graded on submission, not content).
+- **Purpose:** Arrive at class already familiar with the landscape, with questions that AI couldn't fully resolve.
 
-* **Examination Policies**:
+#### 2. Homework
 
-  - The scheduling for the mid-term and final exams has yet to be determined. Your input regarding preferred time slots is welcome.
-  
-  - Exams will be announced online, and you will typically be given a two-day window for completion. Extensions may be granted under exceptional circumstances.
-  
-  - All exams are take-home and open-book in nature. You are permitted to consult textbooks and lecture notes, employ computational tools, browse online resources, and interact with AI language models. However, discussing the exam content with other humans is not allowed.
+Each of the 63 subsections (§x.y.z) includes a Homework section with 5–10 problems. Choose **5** problems  You are welcome to use AI assistance.
+
+- **Grading:** Graded on timely submission, not correctness — since AI assistance makes correctness grading meaningless. Late submissions receive decaying credit.
+- **Numbering:** Problems are numbered 1, 2, 3, … within each subsection. Cross-references use format HW x.y.z.k (e.g., HW 1.1.1.3 = problem 3 of §1.1.1).
+- **Connection to final exam:** The same problems will appear on the in-person final exam with possible slight variations, so students who genuinely engage with the homework — rather than passively copying AI output — will be well prepared.
+
+#### 4. Research Projects
+
+Each student completes **two research projects** during the quarter, with AI assistance. Each of the 21 sections (§x.y) in the lecture notes includes a research project at the frontier of physics research. Projects require genuine scientific inquiry — literature survey, computational exploration, and scientific writing — not just extended calculation.
+
+- **Scope:** Each project is designed to be achievable in approximately 2 weeks with AI assistance.
+- **Deliverable:** A written research report. Oral presentations to the class if enrollment permits.
+- **Grading:** Evaluated on correctness, novelty, and presentation quality (potentially with AI-assisted grading).
+- **AI policy:** AI can help with implementation (code, writing, calculations), but the student must drive the scientific inquiry and demonstrate understanding.
+
+#### 5. Final Exam (In-Person, No AI)
+
+The final exam is held in person with no AI access. Problems are drawn directly from the homework assignments, with possible slight variations. This is the primary test of whether students have internalized the physical worldview and problem-solving skills — not merely copied AI-generated solutions.
+
+- **Format:** In-person, closed-book, closed-AI. **10** problems.
+- **Content:** Problems selected from the homework sets across all six chapters.
+- **Philosophy:** Students who genuinely learned from working with AI throughout the quarter — who built intuition, checked AI answers against physical reasoning, and developed their own understanding — will succeed.
+
+#### Grading Breakdown
+
+| Component | Weight | Grading Basis |
+|-----------|--------|---------------|
+| Preview Reports | 10% | Completion |
+| Homework | 40% | Timely submission |
+| Research Projects (×2) | 20% | Correctness, novelty, presentation |
+| Final Exam | 30% | Accuracy and understanding |
+
+#### AI Policy
+
+Students are **encouraged** to use AI (ChatGPT, Claude, etc.) for all coursework except the final exam. This is not a concession — it is a core part of the pedagogical design. The course teaches students how to use AI effectively: how to ask good questions, how to evaluate AI-generated answers against physical reasoning, and how to spot hallucinations. The final exam, taken without AI, ensures that genuine understanding has been internalized.
+
 
 ### Textbooks
 
@@ -67,6 +90,8 @@ Some other books for reference:
   <a href="/teaching/PHYS130B/notes/" target="_blank" style="font-size: 1.1em;">/teaching/PHYS130B/notes/</a><br>
   <span style="color: #666; font-size: 0.9em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Claude Code and Cursor AI; all material has been reviewed by the instructor.</span>
 </div>
+
+The course covers 6 chapters, 21 sections, and 63 subsections. Each subsection corresponds roughly to one lecture. Two project periods (~2 weeks each) are distributed across the quarter for students to work on their chosen research projects.
 
 **Chap 1. Qubit** (Tong §4)
 

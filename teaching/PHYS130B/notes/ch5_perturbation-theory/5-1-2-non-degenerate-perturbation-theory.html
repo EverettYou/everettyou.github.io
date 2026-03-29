@@ -558,6 +558,35 @@ document.write(`
 <li><p>When does non-degenerate perturbation theory fail? What happens to the series when two levels approach degeneracy, and how should you handle this situation?</p></li>
 </ul>
 </div>
+<div class="important admonition">
+<p class="admonition-title">First-Order Energy Correction</p>
+<p>The energy shift to <strong>first order in <span class="math notranslate nohighlight">\(\lambda\)</span></strong> is simply the expectation value of the perturbation in the unperturbed state:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{{E_n^{{(1)}} = \langle \psi_n^{{(0)}} | V | \psi_n^{{(0)}} \rangle}}\]</div>
+<p><strong>Physical interpretation</strong>:</p>
+<ul class="simple">
+<li><p>The first-order correction is the <strong>diagonal matrix element</strong> of <span class="math notranslate nohighlight">\(V\)</span> in the unperturbed eigenbasis</p></li>
+<li><p>It measures the <strong>average energy shift</strong> due to the perturbation</p></li>
+<li><p>States with no diagonal coupling (e.g., odd-parity <span class="math notranslate nohighlight">\(V\)</span> acting on an even-parity state) experience <strong>zero first-order shift</strong> and must be treated to second order</p></li>
+<li><p>From the Hellmann-Feynman theorem: <span class="math notranslate nohighlight">\(\frac{{\mathrm{{d}}E_n}}{{\mathrm{{d}}\lambda}}\big|_{{\lambda=0}} = E_n^{{(1)}}\)</span></p></li>
+</ul>
+<p><strong>Example</strong>: For a qubit perturbed by <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> (which has zero diagonal elements in the computational basis), the first-order energy is exactly zero.</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Hellmann-Feynman Theorem</p>
+<p>A cornerstone result connecting energy derivatives to expectation values:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{{\frac{{\mathrm{{d}}E_n(\lambda)}}{{\mathrm{{d}}\lambda}} = \langle \psi_n(\lambda) | \frac{{\partial H}}{{\partial \lambda}} | \psi_n(\lambda) \rangle}}\]</div>
+<p><strong>Physical meaning</strong>: The rate at which the eigenvalue changes with a parameter is exactly the expectation value of the parameter’s derivative in the eigenstate.</p>
+<p><strong>At <span class="math notranslate nohighlight">\(\lambda = 0\)</span></strong> with <span class="math notranslate nohighlight">\(\frac{{\partial H}}{{\partial \lambda}} = V\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{{\mathrm{{d}}E_n}}{{\mathrm{{d}}\lambda}}\bigg|_{{\lambda=0}} = \langle \psi_n^{{(0)}} | V | \psi_n^{{(0)}} \rangle = E_n^{{(1)}}\]</div>
+<p><strong>Consequence</strong>: The first-order perturbation theory result follows directly from this theorem without expanding eigenstates explicitly.</p>
+<p><strong>Requires</strong>: The <strong>adiabatic continuity</strong> assumption — that eigenstates can be labeled continuously as <span class="math notranslate nohighlight">\(\lambda\)</span> varies (no level crossings in the parameter range of interest).</p>
+</div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <p>The central strategy of non-degenerate perturbation theory is to surgically separate a quantum system’s evolution into two parts: the rapid, familiar oscillations of a solved Hamiltonian <span class="math notranslate nohighlight">\(H_0\)</span>, and the slow, subtle rearrangement caused by a perturbation <span class="math notranslate nohighlight">\(V\)</span>. This separation exposes a fundamental principle: energy gaps act as barriers to state mixing, with strong hybridization happening near resonance and exponential suppression far from it. The result is a systematic, order-by-order algorithm for computing energy shifts and state distortions without solving the full problem.</p>
@@ -583,8 +612,8 @@ E_n(\lambda) = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \ldots\]</d
 </section>
 <section id="the-hellmann-feynman-theorem">
 <h3>The Hellmann-Feynman Theorem<a class="headerlink" href="#the-hellmann-feynman-theorem" title="Link to this heading">#</a></h3>
-<p>:: Discussion: Convergence of Rayleigh-Schrödinger Series
-:class: dropdown warning</p>
+<div class="dropdown warning admonition">
+<p class="admonition-title">Discussion: Convergence of Rayleigh-Schrödinger Series</p>
 <p>Rayleigh-Schrödinger perturbation theory gives</p>
 <div class="math notranslate nohighlight">
 \[ E_n^{(2)} = \sum_{m \neq n} \frac{|\langle m|V|n\rangle|^2}{E_n^{(0)} - E_m^{(0)}}\]</div>
@@ -594,7 +623,7 @@ E_n(\lambda) = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \ldots\]</d
 <li><p>Compare the perturbative result to the exact ground state energy (available numerically). At what <span class="math notranslate nohighlight">\(\lambda\)</span> does the error exceed 5%?</p></li>
 <li><p>Physical interpretation: large <span class="math notranslate nohighlight">\(\lambda\)</span> means the potential becomes very steep. Why does perturbation theory fail?</p></li>
 </ul>
-<div class="docutils">
+</div>
 <p>The <strong>Hellmann-Feynman theorem</strong> is a cornerstone of perturbation theory. It states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5b-hf-theorem">
 <span class="eqno">(194)<a class="headerlink" href="#equation-eq-5b-hf-theorem" title="Link to this equation">#</a></span>\[
@@ -626,7 +655,6 @@ H(\lambda) |\psi_n(\lambda)\rangle = E_n(\lambda) |\psi_n(\lambda)\rangle\]</div
 <div class="math notranslate nohighlight" id="equation-eq-5b-hf-main">
 <span class="eqno">(197)<a class="headerlink" href="#equation-eq-5b-hf-main" title="Link to this equation">#</a></span>\[
 \langle \psi_n|\frac{\partial H}{\partial\lambda}|\psi_n\rangle = \frac{\mathrm{d}E_n}{d\lambda}\]</div>
-</div>
 </div>
 <div class="dropdown warning admonition">
 <p class="admonition-title">Discussion: Hellmann-Feynman Theorem and State Corrections</p>
@@ -729,6 +757,21 @@ c_m^{(1)} = \frac{\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rangle}{E_m^{(0)} - E
 <li><p><strong>Convergence</strong>: Series converges when <span class="math notranslate nohighlight">\(\lambda |\langle m | V | n \rangle| \ll \min_m |E_n^{(0)} - E_m^{(0)}|\)</span>, i.e., perturbation is small compared to energy gaps.</p></li>
 </ol>
 <p>This order contributes to <strong>level repulsion</strong>: nearby levels push each other apart. The ground state borrows energy from excited states (lowering itself), which raises the excited state energies.</p>
+<div class="important admonition">
+<p class="admonition-title">Second-Order Energy Correction</p>
+<p>The energy shift to <strong>second order in <span class="math notranslate nohighlight">\(\lambda\)</span></strong> accounts for “virtual transitions” to intermediate states:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{{E_n^{{(2)}} = \sum_{{m \neq n}} \frac{{|\langle \psi_m^{{(0)}} | V | \psi_n^{{(0)}} \rangle|^2}}{{E_n^{{(0)}} - E_m^{{(0)}}}}}}\]</div>
+<p><strong>Key features</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Always negative for ground state</strong>: All denominators are negative (all intermediate states lie above), so <span class="math notranslate nohighlight">\(E_0^{{(2)}} &lt; 0\)</span>. <strong>Perturbations always lower the ground state energy</strong>.</p></li>
+<li><p><strong>Level repulsion</strong>: Nearby levels are pushed apart by the perturbation (spacing increases).</p></li>
+<li><p><strong>Resonance effect</strong>: Mixing is strongest when <span class="math notranslate nohighlight">\(E_n^{{(0)}} \approx E_m^{{(0)}}\)</span> (small denominator); exponentially suppressed for distant levels.</p></li>
+<li><p><strong>Convergence criterion</strong>: Series converges when <span class="math notranslate nohighlight">\(\lambda |V| \ll \min_m |E_n^{{(0)}} - E_m^{{(0)}}|\)</span>, i.e., perturbation strength is much smaller than energy gaps.</p></li>
+</ol>
+<p><strong>Virtual transitions picture</strong>: The system temporarily “borrows” strength from excited states (raising their energy) to lower the ground state energy, then returns to the original state.</p>
+</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Derivation</p>
 <p>Derive from the order-<span class="math notranslate nohighlight">\(\lambda^2\)</span> eigenvalue equation. Project the order-<span class="math notranslate nohighlight">\(\lambda^1\)</span> equation:</p>
@@ -818,6 +861,35 @@ E_n^{(2)} = \sum_{m \neq n} \frac{|\langle \psi_m^{(0)} | V | \psi_n^{(0)} \rang
 </table>
 </div>
 <p><strong>Convergence criterion</strong>: Series converges when <span class="math notranslate nohighlight">\(\lambda \|V\| \ll \min_m(\|E_n^{(0)} - E_m^{(0)}\|)\)</span>, i.e., perturbation strength is much smaller than energy gaps.</p>
+<div class="example admonition">
+<p class="admonition-title">Example: The Qubit Revisited</p>
+<p>For the qubit model <span class="math notranslate nohighlight">\(H(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x\)</span>:</p>
+<p><strong>Unperturbed basis</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad E_+^{(0)} = 1, \quad E_-^{(0)} = -1\end{split}\]</div>
+<p><strong>Perturbation matrix elements</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+V = \hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \Rightarrow\langle 0|\hat{\sigma}^x|0\rangle = 0, \quad \langle 1|\hat{\sigma}^x|1\rangle = 0, \quad \langle 0|\hat{\sigma}^x|1\rangle = 1\end{split}\]</div>
+<p><strong>Energy of state <span class="math notranslate nohighlight">\(|0\rangle\)</span> (labeled as <span class="math notranslate nohighlight">\(+\)</span> index)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+E_+^{(1)} = \langle 0|\hat{\sigma}^x|0\rangle = 0\]</div>
+<div class="math notranslate nohighlight">
+\[E_+^{(2)} = \frac{|\langle 1|\hat{\sigma}^x|0\rangle|^2}{E_+^{(0)} - E_-^{(0)}} = \frac{|1|^2}{1 - (-1)} = \frac{1}{2}\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[
+E_+(\lambda) = 1 + 0 \cdot \lambda + \frac{1}{2}\lambda^2 + O(\lambda^3)\]</div>
+<p>Compare with exact: <span class="math notranslate nohighlight">\(E_+ = \sqrt{1+\lambda^2} = 1 + \frac{1}{2}\lambda^2 - \frac{1}{8}\lambda^4 + \ldots\)</span> ✓ Matches through <span class="math notranslate nohighlight">\(O(\lambda^2)\)</span>!</p>
+<p><strong>State of <span class="math notranslate nohighlight">\(|0\rangle\)</span></strong>:</p>
+<div class="math notranslate nohighlight">
+\[ |\psi_+^{(1)}\rangle = \frac{\langle 1|\hat{\sigma}^x|0\rangle}{E_+^{(0)} - E_-^{(0)}} |1\rangle = \frac{1}{2}|1\rangle\]</div>
+<p>So:</p>
+<div class="math notranslate nohighlight">
+\[ |\psi_+(\lambda)\rangle = |0\rangle + \frac{\lambda}{2}|1\rangle + O(\lambda^2)\]</div>
+<p>Again, matches the exact expansion from Section 5.1.1! ✓</p>
+</div>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
