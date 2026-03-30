@@ -1,10 +1,26 @@
 /**
- * Fullscreen mode: collapse primary sidebar on entry, restore state on exit.
- * Uses the theme's checkbox so the toggle button remains functional in fullscreen.
+ * Fullscreen mode: collapse primary (left) sidebar when entering fullscreen,
+ * restore the user's prior sidebar state on exit.
+ *
+ * - Hides the sidebar immediately on fullscreen-button click (before the async
+ *   Fullscreen API completes) so there is no visible flash.
+ * - Uses the theme checkbox + change events so PyData / Book theme stay in sync.
  */
 (function () {
-  var sidebarWasOpen = false;
+  /** true = sidebar was open (visible) before we auto-collapsed for fullscreen */
+  var savedSidebarOpen = null;
+
   var fullscreenTriggerState = null;
+
+  function getFullscreenElement() {
+    return (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement ||
+      null
+    );
+  }
 
   function rememberFullscreenTriggerState() {
     var scroller = document.scrollingElement || document.documentElement;
@@ -54,28 +70,75 @@
     })();
   }
 
+  function notifySidebarCheckbox(checkbox) {
+    if (!checkbox) return;
+    try {
+      checkbox.dispatchEvent(new Event("input", { bubbles: true }));
+      checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+    } catch (e) {
+      /* IE / very old engines */
+      var ev;
+      if (document.createEvent) {
+        ev = document.createEvent("HTMLEvents");
+        ev.initEvent("change", true, false);
+        checkbox.dispatchEvent(ev);
+      }
+    }
+  }
+
+  function collapsePrimarySidebarForFullscreen(checkbox) {
+    if (!checkbox) return;
+    /* Theme custom.css: checked => primary sidebar collapsed */
+    checkbox.checked = true;
+    notifySidebarCheckbox(checkbox);
+  }
+
   function handleFullscreenChange() {
     var checkbox = document.getElementById("pst-primary-sidebar-checkbox");
     if (!checkbox) return;
 
-    var inFullscreen =
-      document.fullscreenElement || document.webkitFullscreenElement;
+    var inFullscreen = !!getFullscreenElement();
 
     if (inFullscreen) {
-      /* Theme: checked = sidebar hidden, unchecked = visible. Store visibility to restore on exit. */
-      sidebarWasOpen = !checkbox.checked;
-      checkbox.checked = true;
+      if (savedSidebarOpen === null) {
+        /* Entered fullscreen without our button capture (rare) */
+        savedSidebarOpen = !checkbox.checked;
+      }
+      collapsePrimarySidebarForFullscreen(checkbox);
       restoreScrollToTrigger();
     } else {
-      checkbox.checked = !sidebarWasOpen;
+      if (savedSidebarOpen !== null) {
+        /* Restore: checked => hidden; was open => unchecked */
+        checkbox.checked = !savedSidebarOpen;
+        savedSidebarOpen = null;
+        notifySidebarCheckbox(checkbox);
+      }
       restoreScrollToTrigger();
     }
   }
 
   document.addEventListener("fullscreenchange", handleFullscreenChange);
   document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
-  document.addEventListener("click", function (event) {
-    var trigger = event.target && event.target.closest ? event.target.closest(".btn-fullscreen-button") : null;
-    if (trigger) rememberFullscreenTriggerState();
-  }, true);
+  document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+  document.addEventListener("MSFullscreenChange", handleFullscreenChange);
+
+  document.addEventListener(
+    "click",
+    function (event) {
+      var trigger = event.target && event.target.closest ? event.target.closest(".btn-fullscreen-button") : null;
+      if (!trigger) return;
+
+      rememberFullscreenTriggerState();
+
+      var checkbox = document.getElementById("pst-primary-sidebar-checkbox");
+      if (!checkbox) return;
+
+      /* If not currently in fullscreen, the theme button will enter fullscreen */
+      if (!getFullscreenElement()) {
+        savedSidebarOpen = !checkbox.checked;
+        collapsePrimarySidebarForFullscreen(checkbox);
+      }
+    },
+    true
+  );
 })();
