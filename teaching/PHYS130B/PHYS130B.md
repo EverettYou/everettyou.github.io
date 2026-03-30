@@ -24,7 +24,7 @@ tags: [Course Syllabus]
 
 ### Assessment Components
 
-#### 1. AI-Assisted Preview Reports
+#### 1. Preview Reports
 
 Before each **unit** (§x.y), students use AI to preview the upcoming material. Each lesson page contains a **Prompts** box with guiding questions designed to help students engage AI productively. Students submit a preview report — their chat history with AI about the unit — before class starts.
 
@@ -65,6 +65,11 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 | Research Projects (x2) | 20% | 2 reports | Correctness, novelty, presentation |
 | Final Exam | 30% | 10 problems | Accuracy and understanding |
 
+#### Submission
+
+- **Preview reports**, **homework**, and **research projects** are submitted online on **Canvas**: [https://canvas.ucsd.edu/courses/75310](https://canvas.ucsd.edu/courses/75310){:target="_blank"}.
+- **Final exam:** in person during **finals week**.
+
 #### AI Policy
 
 Students are **encouraged** to use AI (ChatGPT, Claude, etc.) for all coursework except the final exam. This is not a concession — it is a core part of the pedagogical design. The course teaches students how to use AI effectively: how to ask good questions, how to evaluate AI-generated answers against physical reasoning, and how to spot hallucinations. The final exam, taken without AI, ensures that genuine understanding has been internalized.
@@ -72,9 +77,9 @@ Students are **encouraged** to use AI (ChatGPT, Claude, etc.) for all coursework
 
 ### Textbooks
 
-The lecture will follow this book:
-
-[1] David Tong, *Quantum Mechanics* (Lectures on Theoretical Physics Volume 3). Cambridge University Press. DOI:[10.1017/9781009594806](https://doi.org/10.1017/9781009594806){:target="_blank"}
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 1.5em; margin: 1em 0; ">
+  <span style="font-size: 1em; "><strong>[1]</strong> David Tong, <i>Quantum Mechanics</i> (Lectures on Theoretical Physics Volume 3). Cambridge University Press. DOI: <a href="https://doi.org/10.1017/9781009594806" target="_blank" rel="noopener">10.1017/9781009594806</a></span>
+</div>
 
 Some other books for reference:
 
@@ -86,9 +91,9 @@ Some other books for reference:
 
 ### Lecture Notes
 
-<div style="border: 1px solid #ddd; border-radius: 8px; padding: 1.5em; margin: 1em 0; background: #f8f9fa;">
-  <a href="/teaching/PHYS130B/notes/" target="_blank" style="font-size: 1.1em;">/teaching/PHYS130B/notes/</a><br>
-  <span style="color: #666; font-size: 0.9em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Claude Code and Cursor AI; all material has been reviewed by the instructor.</span>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 1.5em; margin: 1em 0; ">
+  <a href="/teaching/PHYS130B/notes/" target="_blank" style="font-size: 1.2em;">/teaching/PHYS130B/notes/</a><br>
+  <span style="font-size: 0.8em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Claude Code and Cursor AI; all material has been reviewed by the instructor.</span>
 </div>
 
 The course covers **6 chapters**, **21 units** (§x.y), and **63 lessons** (§x.y.z). Each lesson corresponds roughly to one lecture’s worth of material. Two project periods (~2 weeks each) are distributed across the quarter for students to work on their chosen research projects.

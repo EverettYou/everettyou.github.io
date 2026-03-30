@@ -216,8 +216,8 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html">2.3.2 Fractional Quantum Hall Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html">2.3.3 Toric Code</a></li>
 </ul>
 </details></li>
 </ul>
@@ -525,10 +525,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition-and-hermitian-operators">Spectral Decomposition and Hermitian Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-measurement-postulate">The Measurement Postulate</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization-check">Normalization Check</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-value">Expectation Value</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-state-measurement">Pure State Measurement</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeated-measurements">Repeated Measurements</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quantum-zeno-effect">The Quantum Zeno Effect</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degenerate-eigenvalues">Degenerate Eigenvalues</a></li>
@@ -575,7 +573,7 @@ document.write(`
 <p class="admonition-title">Definition: Spectral Decomposition</p>
 <p>For a Hermitian operator <span class="math notranslate nohighlight">\(A\)</span> (observable), the <strong>spectral theorem</strong> states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-spectral">
-<span class="eqno">(321)<a class="headerlink" href="#equation-eq-projmeas-spectral" title="Link to this equation">#</a></span>\[
+<span class="eqno">(313)<a class="headerlink" href="#equation-eq-projmeas-spectral" title="Link to this equation">#</a></span>\[
 A = \sum_i a_i P_i\]</div>
 <p>where:</p>
 <ul class="simple">
@@ -592,12 +590,12 @@ A = \sum_i a_i P_i\]</div>
 <p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> (Pauli-z operator):</p>
 <ul class="simple">
 <li><p>Eigenvalues: <span class="math notranslate nohighlight">\(\lambda_1 = +1, \lambda_2 = -1\)</span>.</p></li>
-<li><p>Eigenvectors: <span class="math notranslate nohighlight">\(|\uparrow\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, |\downarrow\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>.</p></li>
+<li><p>Eigenvectors: <span class="math notranslate nohighlight">\(|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>.</p></li>
 <li><p>Projectors:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-P_+ = |\uparrow\rangle\langle\uparrow| = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \quad P_- = |\downarrow\rangle\langle\downarrow| = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\end{split}\]</div>
+P_+ = |0\rangle\langle 0| = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \quad P_- = |1\rangle\langle 1| = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\end{split}\]</div>
 <ul class="simple">
 <li><p>Verification: <span class="math notranslate nohighlight">\(P_+ + P_- = I\)</span> ✓, <span class="math notranslate nohighlight">\(P_+^2 = P_+\)</span> ✓, <span class="math notranslate nohighlight">\(P_+ P_- = 0\)</span> ✓.</p></li>
 <li><p>Spectral form: <span class="math notranslate nohighlight">\(\hat{\sigma}^z = (+1) P_+ + (-1) P_-\)</span>.</p></li>
@@ -612,11 +610,11 @@ P_+ = |\uparrow\rangle\langle\uparrow| = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 
 <p class="admonition-title">Measurement Postulate: Probability and Collapse</p>
 <p><strong>Outcome</strong>: Measurement yields eigenvalue <span class="math notranslate nohighlight">\(a_i\)</span> with <strong>probability</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-probability">
-<span class="eqno">(322)<a class="headerlink" href="#equation-eq-projmeas-probability" title="Link to this equation">#</a></span>\[
+<span class="eqno">(314)<a class="headerlink" href="#equation-eq-projmeas-probability" title="Link to this equation">#</a></span>\[
 p_i = \text{Tr}(P_i \rho)\]</div>
 <p><strong>Post-measurement state</strong> (state collapse):</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-collapse">
-<span class="eqno">(323)<a class="headerlink" href="#equation-eq-projmeas-collapse" title="Link to this equation">#</a></span>\[
+<span class="eqno">(315)<a class="headerlink" href="#equation-eq-projmeas-collapse" title="Link to this equation">#</a></span>\[
 \rho' = \frac{P_i \rho P_i}{\text{Tr}(P_i \rho)} = \frac{P_i \rho P_i}{p_i}\]</div>
 <p>The state is <strong>projected</strong> onto the eigenspace corresponding to the measured eigenvalue.</p>
 </div>
@@ -626,27 +624,20 @@ p_i = \text{Tr}(P_i \rho)\]</div>
 \[
 \text{Tr}(\rho') = \frac{\text{Tr}(P_i \rho P_i)}{p_i} = \frac{p_i}{p_i} = 1 \quad ✓\]</div>
 <p>since <span class="math notranslate nohighlight">\(P_i^2 = P_i\)</span> and <span class="math notranslate nohighlight">\(P_i\)</span> is Hermitian.</p>
-</section>
-<section id="expectation-value">
-<h4>Expectation Value<a class="headerlink" href="#expectation-value" title="Link to this heading">#</a></h4>
-<div class="important admonition">
-<p class="admonition-title">Born Rule: Expectation Value</p>
+<p>#:::{admonition} Born Rule: Expectation Value
+:class: important</p>
 <p>The average outcome of repeated measurements is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-expectation">
-<span class="eqno">(324)<a class="headerlink" href="#equation-eq-projmeas-expectation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(316)<a class="headerlink" href="#equation-eq-projmeas-expectation" title="Link to this equation">#</a></span>\[
 \langle A \rangle = \sum_i a_i p_i = \sum_i a_i \text{Tr}(P_i \rho) = \text{Tr}(A \rho)\]</div>
 <p>This is the <strong>Born rule</strong> in density matrix form.</p>
-</div>
-</section>
-</section>
-<section id="pure-state-measurement">
-<h3>Pure State Measurement<a class="headerlink" href="#pure-state-measurement" title="Link to this heading">#</a></h3>
+<div class="docutils">
 <div class="important admonition">
 <p class="admonition-title">Measurement of Pure States</p>
 <p>For a <strong>pure state</strong> <span class="math notranslate nohighlight">\(\rho = |\psi\rangle\langle\psi|\)</span>:</p>
 <p><strong>Probability</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-pure-prob">
-<span class="eqno">(325)<a class="headerlink" href="#equation-eq-projmeas-pure-prob" title="Link to this equation">#</a></span>\[
+<span class="eqno">(317)<a class="headerlink" href="#equation-eq-projmeas-pure-prob" title="Link to this equation">#</a></span>\[
 p_i = \text{Tr}(P_i |\psi\rangle\langle\psi|) = \langle\psi| P_i |\psi\rangle\]</div>
 <p>If <span class="math notranslate nohighlight">\(|\psi\rangle = \sum_j c_j |u_j^{(i)}\rangle\)</span> where <span class="math notranslate nohighlight">\(|u_j^{(i)}\rangle\)</span> are eigenstates of eigenvalue <span class="math notranslate nohighlight">\(a_i\)</span> (with multiplicity <span class="math notranslate nohighlight">\(d_i\)</span>):</p>
 <div class="math notranslate nohighlight">
@@ -654,30 +645,32 @@ p_i = \text{Tr}(P_i |\psi\rangle\langle\psi|) = \langle\psi| P_i |\psi\rangle\]<
 p_i = \sum_j |c_j|^2\]</div>
 <p><strong>Post-measurement state</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-pure-collapse">
-<span class="eqno">(326)<a class="headerlink" href="#equation-eq-projmeas-pure-collapse" title="Link to this equation">#</a></span>\[
+<span class="eqno">(318)<a class="headerlink" href="#equation-eq-projmeas-pure-collapse" title="Link to this equation">#</a></span>\[
 |\psi'\rangle = \frac{P_i |\psi\rangle}{\sqrt{p_i}}\]</div>
 <p>The state is <strong>normalized projection</strong> onto eigenspace <span class="math notranslate nohighlight">\(i\)</span>.</p>
 </div>
+</div>
 <div class="example admonition">
-<p class="admonition-title">Example: Measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> on Superposition</p>
-<p>Initial state: <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle)\)</span> (superposition).</p>
+<p class="admonition-title">Example: Measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p>
+<p>Initial state: <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> (superposition).</p>
 <p>Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>:</p>
 <ul class="simple">
-<li><p><strong>Outcome</strong> <span class="math notranslate nohighlight">\(+1\)</span> (spin-up):</p>
+<li><p><strong>Outcome</strong> <span class="math notranslate nohighlight">\(+1\)</span> (<span class="math notranslate nohighlight">\(|0\rangle\)</span>):</p>
 <ul>
 <li><p>Probability: <span class="math notranslate nohighlight">\(p_+ = |\frac{1}{\sqrt{2}}|^2 = 1/2\)</span>.</p></li>
-<li><p>Post-measurement: <span class="math notranslate nohighlight">\(|\psi'\rangle = |\uparrow\rangle\)</span> (definite spin-up).</p></li>
+<li><p>Post-measurement: <span class="math notranslate nohighlight">\(|\psi'\rangle = |0\rangle\)</span> (definite <span class="math notranslate nohighlight">\(|0\rangle\)</span>).</p></li>
 </ul>
 </li>
-<li><p><strong>Outcome</strong> <span class="math notranslate nohighlight">\(-1\)</span> (spin-down):</p>
+<li><p><strong>Outcome</strong> <span class="math notranslate nohighlight">\(-1\)</span> (<span class="math notranslate nohighlight">\(|1\rangle\)</span>):</p>
 <ul>
 <li><p>Probability: <span class="math notranslate nohighlight">\(p_- = |\frac{1}{\sqrt{2}}|^2 = 1/2\)</span>.</p></li>
-<li><p>Post-measurement: <span class="math notranslate nohighlight">\(|\psi'\rangle = |\downarrow\rangle\)</span> (definite spin-down).</p></li>
+<li><p>Post-measurement: <span class="math notranslate nohighlight">\(|\psi'\rangle = |1\rangle\)</span> (definite <span class="math notranslate nohighlight">\(|1\rangle\)</span>).</p></li>
 </ul>
 </li>
 </ul>
 <p>After measurement, the superposition is <strong>destroyed</strong>; the state is definite.</p>
 </div>
+</section>
 </section>
 <section id="repeated-measurements">
 <h3>Repeated Measurements<a class="headerlink" href="#repeated-measurements" title="Link to this heading">#</a></h3>
@@ -720,7 +713,7 @@ P_i = \sum_{j=1}^{d_i} |u_j^{(i)}\rangle\langle u_j^{(i)}|\]</div>
 \rho' = \frac{P_i \rho P_i}{p_i}\]</div>
 <p>is supported on the entire eigenspace (possibly mixed, if initial state was a superposition of degenerate eigenstates).</p>
 <div class="example admonition">
-<p class="admonition-title">Example: Measuring Spin-Up/Down vs. Angular Momentum Squared</p>
+<p class="admonition-title">Example: Spin vs. Angular Momentum</p>
 <ul class="simple">
 <li><p><strong><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> measurement</strong>: Non-degenerate eigenvalues (+1, -1); outcome fully specifies the state.</p></li>
 <li><p><strong><span class="math notranslate nohighlight">\(L^2\)</span> measurement</strong> (orbital angular momentum squared): Degenerate eigenvalues (<span class="math notranslate nohighlight">\(l(l+1)\hbar^2\)</span> with degeneracy <span class="math notranslate nohighlight">\(2l+1\)</span>); outcome specifies angular momentum but not magnetic quantum number.</p></li>
@@ -849,10 +842,8 @@ P_i = \sum_{j=1}^{d_i} |u_j^{(i)}\rangle\langle u_j^{(i)}|\]</div>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition-and-hermitian-operators">Spectral Decomposition and Hermitian Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-measurement-postulate">The Measurement Postulate</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization-check">Normalization Check</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-value">Expectation Value</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-state-measurement">Pure State Measurement</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeated-measurements">Repeated Measurements</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quantum-zeno-effect">The Quantum Zeno Effect</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degenerate-eigenvalues">Degenerate Eigenvalues</a></li>

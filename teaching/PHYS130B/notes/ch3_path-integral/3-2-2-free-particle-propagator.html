@@ -216,8 +216,8 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html">2.3.2 Fractional Quantum Hall Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html">2.3.3 Toric Code</a></li>
 </ul>
 </details></li>
 </ul>
@@ -528,7 +528,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sliced-path-integral">Sliced Path Integral</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-integrals-the-key-computational-tool">Gaussian Integrals: The Key Computational Tool</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-free-particle-propagator">Computing the Free-Particle Propagator</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-slice-propagator">Single-Slice Propagator</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-slice-propagator">Two-Slice Propagator</a></li>
@@ -538,7 +537,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-the-schrodinger-equation">Relation to the Schrödinger Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavepacket-spreading">Wavepacket Spreading</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-gaussian-wavepacket">Initial Gaussian Wavepacket</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-evolved-wavepacket">Time-Evolved Wavepacket</a></li>
@@ -578,7 +576,7 @@ document.write(`
 <p>The <strong>propagator</strong> <span class="math notranslate nohighlight">\(K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i)\)</span> is the quantum amplitude for a particle to travel from position <span class="math notranslate nohighlight">\(\boldsymbol{x}_i\)</span> at time <span class="math notranslate nohighlight">\(t_i\)</span> to position <span class="math notranslate nohighlight">\(\boldsymbol{x}_f\)</span> at time <span class="math notranslate nohighlight">\(t_f\)</span>. For a free particle, the path integral can be evaluated exactly by summing over all trajectories, producing a Gaussian result that contains the full quantum information: spreading, interference, and the de Broglie wavelength.</p>
 </div>
 <div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: Wave Packet Spreading and Measurement Limits</p>
+<p class="admonition-title">Discussion: Wave Packet Spreading</p>
 <p>Free-particle propagator evolves an initial delta function <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}, 0) = \delta(\boldsymbol{x} - \boldsymbol{x}_i)\)</span> into a spreading Gaussian. The width grows as <span class="math notranslate nohighlight">\(\Delta x(t) \sim \sqrt{\hbar t / m}\)</span>. This spreading is fundamental:</p>
 <ul class="simple">
 <li><p>If you precisely localize a particle to within <span class="math notranslate nohighlight">\(\Delta x_0\)</span> using position measurement, its momentum uncertainty grows to <span class="math notranslate nohighlight">\(\Delta p \sim \hbar/\Delta x_0\)</span> (uncertainty principle). After time <span class="math notranslate nohighlight">\(t\)</span>, the wave packet width should be <span class="math notranslate nohighlight">\(\Delta x(t) \sim \sqrt{\Delta p^2 t^2 / m^2 + \Delta x_0^2}\)</span>. Can you reconcile this with the free-particle propagator formula?</p></li>
@@ -615,10 +613,6 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[K(\boldsymbol{x}_N, t_f; \boldsymbol{x}_0, t_i) = \int d^3\boldsymbol{x}_1 \int d^3\boldsymbol{x}_2 \cdots \int d^3\boldsymbol{x}_{N-1} \prod_{n=0}^{N-1} \exp\left(\frac{\mathrm{i}m}{2\hbar\varepsilon}(\boldsymbol{x}_{n+1} - \boldsymbol{x}_n)^2\right)\]</div>
 <p>This is a product of exponentials of quadratic forms in the positions—perfect for <strong>Gaussian integrals</strong>.</p>
-</section>
-</section>
-<section id="gaussian-integrals-the-key-computational-tool">
-<h3>Gaussian Integrals: The Key Computational Tool<a class="headerlink" href="#gaussian-integrals-the-key-computational-tool" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">Important Result</p>
 <p>The fundamental Gaussian integral is</p>
@@ -636,6 +630,7 @@ document.write(`
 <p><strong>Multi-Dimensional Gaussian</strong>: For a vector <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{R}^d\)</span> and a symmetric matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\int d^d\boldsymbol{x} \, \mathrm{e}^{\mathrm{i}\boldsymbol{x}^T A \boldsymbol{x}} = \sqrt{\frac{\pi^d i^d}{\det A}} = \left(\frac{\pi}{\mathrm{i}}\right)^{d/2} \frac{1}{\sqrt{\det A}}\]</div>
+</section>
 </section>
 <section id="computing-the-free-particle-propagator">
 <h3>Computing the Free-Particle Propagator<a class="headerlink" href="#computing-the-free-particle-propagator" title="Link to this heading">#</a></h3>
@@ -707,10 +702,6 @@ document.write(`
 <li><p>For <span class="math notranslate nohighlight">\(d=1\)</span>: <span class="math notranslate nohighlight">\(|K|^2 \propto 1/T\)</span> (spreading like diffusion)</p></li>
 <li><p>For <span class="math notranslate nohighlight">\(d=3\)</span>: <span class="math notranslate nohighlight">\(|K|^2 \propto 1/T^3\)</span> (very rapid dilution)</p></li>
 </ul>
-</section>
-</section>
-<section id="relation-to-the-schrodinger-equation">
-<h3>Relation to the Schrödinger Equation<a class="headerlink" href="#relation-to-the-schrodinger-equation" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">The Propagator Satisfies the Schrödinger Equation</p>
 <div class="math notranslate nohighlight">
@@ -720,6 +711,7 @@ document.write(`
 \[K(\boldsymbol{x}_f, t_i; \boldsymbol{x}_i, t_i) = \delta^{(d)}(\boldsymbol{x}_f - \boldsymbol{x}_i)\]</div>
 <p>This connection shows that the path integral is equivalent to solving the Schrödinger equation. Verification by direct differentiation of <span class="math notranslate nohighlight">\(K_\text{free}\)</span> is straightforward but algebraically involved.</p>
 </div>
+</section>
 </section>
 <section id="wavepacket-spreading">
 <h3>Wavepacket Spreading<a class="headerlink" href="#wavepacket-spreading" title="Link to this heading">#</a></h3>
@@ -885,7 +877,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sliced-path-integral">Sliced Path Integral</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-integrals-the-key-computational-tool">Gaussian Integrals: The Key Computational Tool</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-free-particle-propagator">Computing the Free-Particle Propagator</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-slice-propagator">Single-Slice Propagator</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-slice-propagator">Two-Slice Propagator</a></li>
@@ -895,7 +886,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-the-schrodinger-equation">Relation to the Schrödinger Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wavepacket-spreading">Wavepacket Spreading</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-gaussian-wavepacket">Initial Gaussian Wavepacket</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-evolved-wavepacket">Time-Evolved Wavepacket</a></li>
