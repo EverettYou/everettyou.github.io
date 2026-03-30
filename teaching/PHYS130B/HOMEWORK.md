@@ -135,7 +135,7 @@ Equivalently: $|+\rangle_x = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ and $|-\
 
 **6.** A qubit state $|\psi\rangle$ has Bloch vector $\boldsymbol{n} = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)$. Show that measuring in the computational basis gives $P(0) = \frac{1 + n_z}{2}$ and $P(1) = \frac{1 - n_z}{2}$, where $n_z = \cos\theta$. Interpret this geometrically: how does the measurement probability relate to the "height" of the Bloch vector?
 
-**7.** Consider the Y-basis states $|\mathrm{i}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle)$ and $|\bar{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - \mathrm{i}|1\rangle)$. Express $|0\rangle$ and $|1\rangle$ in terms of $|\mathrm{i}\rangle$ and $|\bar{\mathrm{i}}\rangle$. Then express the state $|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ in the Y-basis.
+**7.** Using the inverse Y-basis relations in the notes (equation labeled `eq-z-in-y-basis`), express $|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ as a linear combination of $|\mathrm{i}\rangle$ and $|\bar{\mathrm{i}}\rangle$. Verify normalization and $\langle + | + \rangle = 1$ using your Y-basis coefficients.
 
 **8.** How many real parameters are needed to specify a general $n$-level quantum state (a "qudit")? Start with the naive count of $2n$ real numbers (from $n$ complex amplitudes), then subtract constraints from normalization and global phase. Verify your formula gives 2 for $n = 2$ (the qubit).
 
@@ -249,19 +249,13 @@ $$P(1) = |\langle 1|\psi\rangle|^2 = \sin^2(\theta/2) = \frac{1-\cos\theta}{2} =
 
 ---
 
-**Solution 7.** Y-basis: $|\mathrm{i}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle)$, $|\bar{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - \mathrm{i}|1\rangle)$
+**Solution 7.** Use the inverse Y-basis relations from the notes,
+$$|0\rangle = \frac{1}{\sqrt{2}}(|\mathrm{i}\rangle + |\bar{\mathrm{i}}\rangle), \qquad |1\rangle = \frac{\mathrm{i}}{\sqrt{2}}(|\bar{\mathrm{i}}\rangle - |\mathrm{i}\rangle).$$
 
-**Invert to express Z-basis in terms of Y-basis:**
+Then
+$$|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) = \frac{1}{2}(|\mathrm{i}\rangle + |\bar{\mathrm{i}}\rangle) + \frac{\mathrm{i}}{2}(|\bar{\mathrm{i}}\rangle - |\mathrm{i}\rangle) = \frac{1}{2}\left[(1-\mathrm{i})|\mathrm{i}\rangle + (1+\mathrm{i})|\bar{\mathrm{i}}\rangle\right].$$
 
-From $|\mathrm{i}\rangle + |\bar{\mathrm{i}}\rangle = \sqrt{2}|0\rangle$:
-$$|0\rangle = \frac{1}{\sqrt{2}}(|\mathrm{i}\rangle + |\bar{\mathrm{i}}\rangle)$$
-
-From $|\mathrm{i}\rangle - |\bar{\mathrm{i}}\rangle = \mathrm{i}\sqrt{2}|1\rangle$:
-$$|1\rangle = \frac{1}{\mathrm{i}\sqrt{2}}(|\mathrm{i}\rangle - |\bar{\mathrm{i}}\rangle) = -\mathrm{i}\frac{1}{\sqrt{2}}(|\mathrm{i}\rangle - |\bar{\mathrm{i}}\rangle)$$
-
-**Express $|+\rangle$ in Y-basis:**
-$$|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) = \frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2}}(|\mathrm{i}\rangle + |\bar{\mathrm{i}}\rangle) - \mathrm{i}\frac{1}{\sqrt{2}}(|\mathrm{i}\rangle - |\bar{\mathrm{i}}\rangle)\right]$$
-$$= \frac{1}{2}\left[(1-\mathrm{i})|\mathrm{i}\rangle + (1+\mathrm{i})|\bar{\mathrm{i}}\rangle\right]$$
+**Normalization:** with $\alpha = (1-\mathrm{i})/2$ and $\beta = (1+\mathrm{i})/2$, $|\alpha|^2 + |\beta|^2 = \frac{1}{4}(2) + \frac{1}{4}(2) = 1$. So $\langle + | + \rangle = |\alpha|^2 + |\beta|^2 = 1$ in the Y-basis ✓
 
 ---
 
