@@ -1,0 +1,5239 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    188915,       5231]
+NotebookOptionsPosition[    120786,       3937]
+NotebookOutlinePosition[    169327,       4970]
+CellTagsIndexPosition[    168931,       4958]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Quantum Mechanics", "Title",ExpressionUUID->"3c8ad64d-0f54-48ae-a066-84e52e5fe67e"],
+
+Cell["Second Quantization", "Subtitle",ExpressionUUID->"996386ca-696e-493b-9c19-ede6ca0b43a8"],
+
+Cell[CellGroupData[{
+
+Cell["Second Quantization", "Section",ExpressionUUID->"00b0d44c-c2fa-40c0-b2f5-2d75103497b0"],
+
+Cell[CellGroupData[{
+
+Cell["Quantum Many-Body States", "Subsection",ExpressionUUID->"ca6949d5-0745-4146-94cb-faa22e6fe6c9"],
+
+Cell[TextData[{
+ StyleBox["Quantum many-body states",
+  FontWeight->"Bold"],
+ " describe the quantum system of many entities (particles). Depending on \
+whether the particles are ",
+ StyleBox["distinct",
+  FontSlant->"Italic"],
+ " or ",
+ StyleBox["identical",
+  FontSlant->"Italic"],
+ ", quantum many-body systems can be divided into two classes:"
+}], "TextIndent",ExpressionUUID->"45943c57-2932-42dc-92be-022c59740588"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["distinct",
+  FontWeight->"Bold"],
+ " particles: spins, qubits ..."
+}], "Item",ExpressionUUID->"d4bb5926-3d54-4f55-88d2-a3c23fce0775"],
+
+Cell[TextData[{
+ StyleBox["identical",
+  FontWeight->"Bold"],
+ " particles: bosons, fermions ..."
+}], "Item",ExpressionUUID->"630e8335-0ad5-49ac-8a2f-993f50e64fca"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Distinct Particles", "Subsubsection",ExpressionUUID->"685c49c7-9133-4e67-91fd-71572de3d42a"],
+
+Cell[TextData[{
+ StyleBox["Distinct particles",
+  FontWeight->"Bold"],
+ " can be ",
+ StyleBox["labeled",
+  FontSlant->"Italic"],
+ ", such that we can specify the state of each particle, e.g. \
+\[OpenCurlyDoubleQuote]the ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]],ExpressionUUID->
+  "d900121c-9cd5-45e5-b6e9-c4444640ece0"],
+ "th particle is in ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Alpha]", "i"], TraditionalForm]],ExpressionUUID->
+  "d5820337-1452-417a-a886-509f8c92a3fc"],
+ " state\[CloseCurlyDoubleQuote]."
+}], "TextIndent",ExpressionUUID->"4205c9fa-d3d8-40f6-91bd-1571825556eb"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Suppose the ",
+ StyleBox["single-particle Hilbert space",
+  FontWeight->"Bold"],
+ " is ",
+ Cell[BoxData[
+  FormBox["D", TraditionalForm]],ExpressionUUID->
+  "16e58d4c-5a4e-499a-90b1-5c9b553f9049"],
+ " dimensional, spanned by a set of orthonormal ",
+ StyleBox["single-particle basis states",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"0af2557c-f97c-4f62-8488-12d72400d3f7"],
+ " (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Alpha]", "=", "1"}], ",", "2", ",", "\[Ellipsis]", ",", "D"}], 
+   TraditionalForm]],ExpressionUUID->"f50412d1-d504-4949-a163-f11d760fb90f"],
+ ")."
+}], "Item",ExpressionUUID->"ad7f2b77-6eca-4e7a-9d53-2bdd2ab9e639"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["many-body Hilbert space",
+  FontWeight->"Bold"],
+ " of ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "8fe14456-1ff1-4412-8d99-c284dd182882"],
+ " ",
+ StyleBox["distinct",
+  FontSlant->"Italic"],
+ " particles will be ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["D", "N"], TraditionalForm]],ExpressionUUID->
+  "ff162c48-e25a-48e1-b250-13638157d254"],
+ " dimensional, spanned by the ",
+ StyleBox["many-body basis states",
+  FontWeight->"Bold"]
+}], "Item",ExpressionUUID->"8d175e13-3878-4550-86b6-fe93677f42f1"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    TemplateBox[{
+      RowBox[{"[", "\[Alpha]", "]"}]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    "\[Congruent]", 
+    RowBox[{
+     TemplateBox[{
+       SubscriptBox["\[Alpha]", "1"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", 
+     TemplateBox[{
+       SubscriptBox["\[Alpha]", "2"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", "\[Ellipsis]", "\[CircleTimes]", 
+     TemplateBox[{
+       SubscriptBox["\[Alpha]", "N"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"26d6e09e-\
+083b-4b04-a84a-a27ffede0411"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[Alpha]", "i"], "=", "1"}], ",", "2", ",", "\[Ellipsis]", 
+    ",", "D"}], TraditionalForm]],ExpressionUUID->
+  "c4e4d2b8-0d44-4028-a6d5-2e902880dc36"],
+ " labels the state of the ",
+ Cell[BoxData[
+  FormBox["i", TraditionalForm]],ExpressionUUID->
+  "cc4ea585-e152-4474-a244-07e5a68d1351"],
+ "th particle."
+}], "ItemParagraph",ExpressionUUID->"a679b5ca-8af9-4932-8007-92447376dfd0"],
+
+Cell[TextData[{
+ "A generic ",
+ StyleBox["many-body state",
+  FontWeight->"Bold"],
+ " is a linear superposition of these basis states"
+}], "Item",ExpressionUUID->"7ab6ee1f-6ce7-4120-a812-de7800ad7f3f"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    TemplateBox[{"\[CapitalPsi]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+    RowBox[{
+     UnderscriptBox["\[Sum]", 
+      RowBox[{"[", "\[Alpha]", "]"}]], 
+     RowBox[{
+      RowBox[{"\[CapitalPsi]", "[", "\[Alpha]", "]"}], 
+      TemplateBox[{
+        RowBox[{"[", "\[Alpha]", "]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}]}],
+    ","}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 2678166479532444448",ExpressionUUID->"045cdefb-470c-4578-9d4c-\
+0a84de65eb7a"],
+
+Cell[TextData[{
+ "where the coefficient ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[CapitalPsi]", "[", "\[Alpha]", "]"}], "\[Element]", 
+    "\[DoubleStruckCapitalC]"}], TraditionalForm]],ExpressionUUID->
+  "4560f275-d646-49b5-bd64-46f0bd59798e"],
+ " is also called the ",
+ StyleBox["many-body wave function",
+  FontWeight->"Bold"],
+ "."
+}], "ItemParagraph",ExpressionUUID->"deca14ce-e7df-4f7e-8023-7aac5e3b8691"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["probability",
+  FontWeight->"Bold"],
+ " to find the many-body system in a specific state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{
+     RowBox[{"[", "\[Alpha]", "]"}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"8d7012c6-adaa-4281-a77d-d2aa0d38798b"],
+ " is given by the absolute ",
+ StyleBox["square",
+  FontSlant->"Italic"],
+ " of the ",
+ StyleBox["many-body wave function",
+  FontSlant->"Italic"],
+ ","
+}], "Item",ExpressionUUID->"de9e89d8-707f-4a33-92aa-a1730611bdf7"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["p", "\[CapitalPsi]"], "[", "\[Alpha]", "]"}], "=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"\[LeftBracketingBar]", 
+      TemplateBox[{
+        RowBox[{"[", "\[Alpha]", "]"}], "\[CapitalPsi]"},
+       "BraKet",
+       DisplayFunction->(
+        RowBox[{"\[LeftAngleBracket]", #, "\[VerticalSeparator]", #2, 
+          "\[RightAngleBracket]"}]& )], "\[RightBracketingBar]"}], "2"], "=", 
+    
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"\[LeftBracketingBar]", 
+       RowBox[{"\[CapitalPsi]", "[", "\[Alpha]", "]"}], 
+       "\[RightBracketingBar]"}], "2"], "."}]}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",
+ CellTags->
+  "eq: 1107742002833268259",ExpressionUUID->"e8ec30cf-cc4e-4d89-9fcf-\
+a09dc382b76a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Identical Particles", "Subsubsection",ExpressionUUID->"c1f67965-31a9-421f-9323-c1da769aa606"],
+
+Cell[TextData[{
+ StyleBox["Identical particles",
+  FontWeight->"Bold"],
+ " does not admit a labeling. Suppose we have a system of two particles, the \
+following states are distinguishable only if we can label which particle is \
+the 1st one and which is the 2nd one."
+}], "TextIndent",ExpressionUUID->"0308a728-22ce-4edd-b0dd-0b1d55d0a1ac"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Style", "[", 
+  RowBox[{
+   RowBox[{"Grid", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\\!\\(\[LeftBracketingBar]\[Alpha]\\_1\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Alpha]\\_2\[RightAngleBracket]\\)\>\"", 
+         ",", "\"\<\>\"", ",", 
+         "\"\<\\!\\(\[LeftBracketingBar]\[Alpha]\\_2\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Alpha]\\_1\[RightAngleBracket]\\)\>\""}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<the 1st particle on \\!\\(\[LeftBracketingBar]\[Alpha]\\_1\
+\[RightAngleBracket]\\)\\nthe 2nd particle in \\!\\(\[LeftBracketingBar]\
+\[Alpha]\\_2\[RightAngleBracket]\\)\>\"", ",", "\"\< \>\"", ",", 
+         "\"\<the 1st particle on \\!\\(\[LeftBracketingBar]\[Alpha]\\_2\
+\[RightAngleBracket]\\)\\nthe 2nd particle in \\!\\(\[LeftBracketingBar]\
+\[Alpha]\\_1\[RightAngleBracket]\\)\>\""}], "}"}]}], "}"}], ",", 
+     RowBox[{"Frame", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "1"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "3"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"4", ",", "1"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"4", ",", "2"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"4", ",", "3"}], "}"}], "\[Rule]", "True"}]}], "}"}]}], 
+       "}"}]}], ",", 
+     RowBox[{"Alignment", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Center", ",", "Center"}], "}"}]}]}], "]"}], ",", "14", ",", 
+   RowBox[{"LineSpacing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "14"}], "}"}]}], ",", 
+   RowBox[{"FontFamily", "\[Rule]", "\"\<CMU\>\""}]}], "]"}]], "Input",
+ CellLabel->
+  "In[147]:=",ExpressionUUID->"68630331-3d0d-461f-bd7f-8f37f1df2c1c"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[GridBox[{
+     {"\<\"\\!\\(\[LeftBracketingBar]\[Alpha]\\_1\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Alpha]\\_2\[RightAngleBracket]\\)\"\>", "\
+\<\"\"\>", "\<\"\\!\\(\[LeftBracketingBar]\[Alpha]\\_2\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Alpha]\\_1\[RightAngleBracket]\\)\"\>"},
+     {"\<\"the 1st particle on \\!\\(\[LeftBracketingBar]\[Alpha]\\_1\
+\[RightAngleBracket]\\)\\nthe 2nd particle in \\!\\(\[LeftBracketingBar]\
+\[Alpha]\\_2\[RightAngleBracket]\\)\"\>", "\<\" \"\>", "\<\"the 1st particle \
+on \\!\\(\[LeftBracketingBar]\[Alpha]\\_2\[RightAngleBracket]\\)\\nthe 2nd \
+particle in \\!\\(\[LeftBracketingBar]\[Alpha]\\_1\[RightAngleBracket]\\)\"\>"}
+    },
+    AutoDelete->False,
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Center}}},
+    GridBoxFrame->{
+     "Columns" -> None, "Rows" -> None, 
+      "ItemsIndexed" -> {{2, 1} -> True, {2, 3} -> True, {4, 1} -> 
+        True, {4, 2} -> True, {4, 3} -> True}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Grid"],
+  StripOnInput->False,
+  LineSpacing->{0, 14},
+  FontFamily->"CMU",
+  FontSize->14]], "Output",
+ CellLabel->
+  "Out[147]=",ExpressionUUID->"cceaadef-4e91-4f57-a4e1-857c21674ab3"]
+}, {2}]],
+
+Cell[TextData[{
+ "For identical particles, the above two scenarios are indistinguishable, \
+meaning that it will be equally likely to observe the system in ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{
+     RowBox[{
+       SubscriptBox["\[Alpha]", "1"], 
+       SubscriptBox["\[Alpha]", "2"]}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"c25351c8-6dca-40ce-9c91-b15c08f839dd"],
+ " state as in ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{
+     RowBox[{
+       SubscriptBox["\[Alpha]", "2"], 
+       SubscriptBox["\[Alpha]", "1"]}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"fd4ed10a-c327-4302-ba18-c4e86ff49ce5"],
+ " state."
+}], "TextNoIndent",ExpressionUUID->"d3c4eca8-9557-4429-8c97-0b1efb2e793a"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["p", "\[CapitalPsi]"], "(", 
+    RowBox[{
+     SubscriptBox["\[Alpha]", "1"], ",", 
+     SubscriptBox["\[Alpha]", "2"]}], ")"}], "=", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["p", "\[CapitalPsi]"], "(", 
+     RowBox[{
+      SubscriptBox["\[Alpha]", "2"], ",", 
+      SubscriptBox["\[Alpha]", "1"]}], ")"}], "."}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"387ab404-c873-\
+4e20-b53c-df07b6505c29"],
+
+Cell[TextData[{
+ "Generalize to ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "a4e94524-cd6d-4e67-bc61-3c5ad2f080f2"],
+ " particles, we introduce the ",
+ StyleBox["permutation operator",
+  FontSlant->"Italic"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Pi]", "\[Element]", 
+    SubscriptBox["S", "N"]}], TraditionalForm]],ExpressionUUID->
+  "2006ec02-2467-4626-b967-405bc62ff8a4"],
+ ", and denote the permuted state as"
+}], "TextIndent",ExpressionUUID->"e0bac744-18c9-4e61-a9cf-061779b0de5a"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   TemplateBox[{
+     RowBox[{"[", 
+       SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+   RowBox[{
+    TemplateBox[{
+      SubscriptBox["\[Alpha]", 
+       RowBox[{"\[Pi]", "(", "1", ")"}]]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    "\[CircleTimes]", 
+    TemplateBox[{
+      SubscriptBox["\[Alpha]", 
+       RowBox[{"\[Pi]", "(", "2", ")"}]]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    "\[CircleTimes]", "\[Ellipsis]", "\[CircleTimes]", 
+    RowBox[{
+     TemplateBox[{
+       SubscriptBox["\[Alpha]", 
+        RowBox[{"\[Pi]", "(", "N", ")"}]]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "."}]}]}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->\
+"117e6815-ac8b-40db-90a4-f667d202f052"],
+
+Cell[TextData[{
+ "The requirement of identical particles imposes a ",
+ StyleBox["permutation symmetry",
+  FontSlant->"Italic"],
+ " to the ",
+ StyleBox["probability",
+  FontSlant->"Italic"]
+}], "TextNoIndent",ExpressionUUID->"e6683d93-dec2-4c60-a779-11a951480fe8"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[ForAll]", 
+     RowBox[{"\[Pi]", "\[Element]", 
+      RowBox[{
+       SubscriptBox["S", "N"], ":", 
+       RowBox[{
+        SubscriptBox["p", "\[CapitalPsi]"], "[", "\[Alpha]", "]"}]}]}]}], "=", 
+    RowBox[{
+     SubscriptBox["p", "\[CapitalPsi]"], "[", 
+     SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]}], ","}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"1dc16260-f257-\
+4149-921f-72c07a7305e6"],
+
+Cell[TextData[{
+ "which, according to Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 1107742002833268259"],
+ "), is also a ",
+ StyleBox["permutation symmetry",
+  FontSlant->"Italic"],
+ " of the ",
+ StyleBox["many-body wave function",
+  FontSlant->"Italic"],
+ ","
+}], "TextNoIndent",ExpressionUUID->"621fe1ae-4568-457e-81f8-a2c27e6c2bb0"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"\[ForAll]", 
+    RowBox[{"\[Pi]", "\[Element]", 
+     RowBox[{
+      SubscriptBox["S", "N"], ":", 
+      SuperscriptBox[
+       RowBox[{"\[LeftBracketingBar]", 
+        RowBox[{"\[CapitalPsi]", "[", "\[Alpha]", "]"}], 
+        "\[RightBracketingBar]"}], "2"]}]}]}], "=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"\[LeftBracketingBar]", 
+      RowBox[{"\[CapitalPsi]", "[", 
+       SubscriptBox["\[Alpha]", "\[Pi]"], "]"}], "\[RightBracketingBar]"}], 
+     "2"], "."}]}], TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID\
+->"fc18f855-67da-4803-b038-5bd486bce0f1"],
+
+Cell[TextData[{
+ "The wave function can only change up to an ",
+ StyleBox["overall phase factor",
+  FontSlant->"Italic"],
+ "."
+}], "TextNoIndent",ExpressionUUID->"2620d77e-f976-4dd5-b436-86f6de9bc18c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[CapitalPsi]", "[", "\[Alpha]", "]"}], "=", 
+    RowBox[{
+     SuperscriptBox["e", 
+      RowBox[{"\[ImaginaryI]", " ", "\[CurlyPhi]"}]], 
+     RowBox[{"\[CapitalPsi]", "[", 
+      SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]}]}], ","}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"3bdd8784-1cce-\
+482b-9b05-48f572abaee3"],
+
+Cell[TextData[{
+ "It forms a ",
+ StyleBox["one-dimensional representation",
+  FontWeight->"Bold"],
+ " of the ",
+ StyleBox["permutation group",
+  FontWeight->"Bold"],
+ ". ",
+ StyleBox["Mathematical fact", "TextConcreteNoIndent"],
+ ": there are only ",
+ StyleBox["two",
+  FontSlant->"Italic"],
+ " 1-dim representations of any permutation group,"
+}], "TextNoIndent",ExpressionUUID->"bc620517-38b1-4710-b5fd-378acbeb647f"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["symmetric",
+  FontWeight->"Bold"],
+ " (trivial) representation \[Implies] ",
+ StyleBox["bosons",
+  FontWeight->"Bold"]
+}], "Item",ExpressionUUID->"b5f1cfe0-4ee9-4218-8846-fa13fdbb3216"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", "B"], "[", "\[Alpha]", "]"}], "=", 
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", "B"], "[", 
+     SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]}], ","}], 
+  TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"210e7d4a-8346-\
+4c80-b950-1f644226687c"],
+
+Cell[TextData[{
+ StyleBox["antisymmetric",
+  FontWeight->"Bold"],
+ " (sign) representation \[Implies] ",
+ StyleBox["fermions",
+  FontWeight->"Bold"]
+}], "Item",ExpressionUUID->"7f2b5218-25d9-4b3e-af3e-4963c406f426"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", "F"], "[", "\[Alpha]", "]"}], "=", 
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"(", "-", ")"}], "\[Pi]"], 
+     RowBox[{
+      SubscriptBox["\[CapitalPsi]", "F"], "[", 
+      SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]}]}], ","}], 
+  TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"b3c210f9-3eec-\
+44e5-b538-cdc491e52889"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", "-", ")"}], "\[Pi]"], TraditionalForm]],ExpressionUUID->
+  "2f7b05ee-804e-4c20-bf6e-8b2fff4335a5"],
+ " denotes the ",
+ StyleBox["permutation sign",
+  FontWeight->"Bold"],
+ " of ",
+ Cell[BoxData[
+  FormBox["\[Pi]", TraditionalForm]],ExpressionUUID->
+  "a7f23bdc-2300-471e-bdbd-4049748a7565"]
+}], "ItemParagraph",ExpressionUUID->"d0ad7d82-dc34-491c-a147-96b46a2579cd"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SuperscriptBox[
+    RowBox[{"(", "-", ")"}], "\[Pi]"], "=", 
+   TagBox[GridBox[{
+      {"\[Piecewise]", GridBox[{
+         {
+          RowBox[{"+", "1"}], 
+          RowBox[{
+           RowBox[{
+           "if", " ", "\[Pi]", " ", "contains", " ", "even", " ", "number", 
+            " ", "of", " ", "exchanges"}], ","}]},
+         {
+          RowBox[{"-", "1"}], 
+          RowBox[{
+          "if", " ", "\[Pi]", " ", "contains", " ", "odd", " ", "number", " ",
+            "of", " ", 
+           RowBox[{"exchanges", "."}]}]}
+        },
+        AllowedDimensions->{2, Automatic},
+        Editable->True,
+        GridBoxAlignment->{
+         "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}},
+           "RowsIndexed" -> {}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.84]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}},
+        Selectable->True]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.35]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    "Piecewise",
+    DeleteWithContents->True,
+    Editable->False,
+    SelectWithContents->True,
+    Selectable->False]}], TraditionalForm]], "DisplayFormulaNumbered",Expressi\
+onUUID->"8c34de42-e5bc-45d8-a985-8c1f44c4e08a"],
+
+Cell[TextData[{
+ StyleBox["Note", "TextConcreteNoIndent"],
+ ": An exchange is a pair ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"x", ",", "y"}], ")"}], TraditionalForm]],ExpressionUUID->
+  "93b45e6a-c01b-496d-87f4-d8d557f7c1fe"],
+ " such that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "<", "y"}], TraditionalForm]],ExpressionUUID->
+  "50f8d1b7-86f6-4bfc-bbc1-edde1d2f28cb"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Pi]", "(", "x", ")"}], ">", 
+    RowBox[{"\[Pi]", "(", "y", ")"}]}], TraditionalForm]],ExpressionUUID->
+  "3a3b0b0a-62ac-4936-b92f-72c40dc2a373"],
+ ". Take the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["S", "3"], TraditionalForm]],ExpressionUUID->
+  "05c6731e-39f8-4a64-aed3-b50516471da6"],
+ " group for example:"
+}], "SubitemParagraph",ExpressionUUID->"2c8d162c-c82a-419d-9fff-b74ff91eb15a"],
+
+Cell[BoxData[
+ FormBox[GridBox[{
+    {"123", 
+     OverscriptBox["\[RightArrow]", "\[Pi]"], "123", "231", "312", "321", 
+     "213", "132"},
+    {
+     SuperscriptBox[
+      RowBox[{"(", "-", ")"}], "\[Pi]"], "=", 
+     RowBox[{"+", "1"}], 
+     RowBox[{"+", "1"}], 
+     RowBox[{"+", "1"}], 
+     RowBox[{"-", "1"}], 
+     RowBox[{"-", "1"}], 
+     RowBox[{"-", "1"}]}
+   }], TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"e184fc63-\
+6f8c-4155-9a3b-2406a0e3a4a2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Side Remark: Identical Particle as a Symmetry", "Subsubsubsection",ExpressionUUID->"b3a04f84-32a1-440d-98ce-2209d2bc75bc"],
+
+Cell[TextData[{
+ StyleBox["A philosophical question", "TextConcreteIndent"],
+ ": how do we know if two particles are identical or not?"
+}], "TextIndent",ExpressionUUID->"5a1cbecb-4b23-4f87-bfa6-9aab171ffe9f"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Whether two particles are identical or not is ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " a property associated to the particles themselves, by a property of the ",
+ StyleBox["quantum dynamics",
+  FontSlant->"Italic"],
+ " of the particles."
+}], "Item",ExpressionUUID->"58dfae9c-7297-44b6-b903-268f241c777a"],
+
+Cell[TextData[{
+ StyleBox["Rule", "TextConcreteNoIndent"],
+ ": if two particles ",
+ StyleBox["can",
+  FontWeight->"Bold"],
+ " (",
+ StyleBox["can not",
+  FontWeight->"Bold"],
+ ") transform to each other in the quantum dynamics, they should be \
+considered as ",
+ StyleBox["identical",
+  FontWeight->"Bold"],
+ " (",
+ StyleBox["distinct",
+  FontWeight->"Bold"],
+ ")."
+}], "Item",ExpressionUUID->"736e4f88-dd89-4d73-9bb6-e5f27016cc18"],
+
+Cell["\<\
+So the distinguishability of particles depends on the conservation of the \
+identity of the particle, which is a symmetry of the quantum dynamics.\
+\>", "Item",ExpressionUUID->"a764c8aa-cd4e-4266-aae7-8a0460f63068"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Bosonic and Fermionic States", "Subsubsection",ExpressionUUID->"542ae8db-0bd5-4be7-8e3a-46809e0e3648"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["bosonic",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["fermionic",
+  FontSlant->"Italic"],
+ " many-body states only span a ",
+ StyleBox["subspace",
+  FontSlant->"Italic"],
+ " of the many-body Hilbert space (of distinct particles). Starting from a \
+generic basis state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{
+     RowBox[{"[", "\[Alpha]", "]"}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"0a6a3bed-35a6-4586-9663-e6035c180bc1"],
+ ", we can pick out (or construct) the ",
+ StyleBox["basis states",
+  FontWeight->"Bold"],
+ " for the ",
+ StyleBox["bosonic",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["fermionic",
+  FontSlant->"Italic"],
+ " subspaces:"
+}], "TextIndent",ExpressionUUID->"af2e5715-c0b5-4525-8c4c-c438f1cf2211"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "construct ",
+ StyleBox["bosonic",
+  FontWeight->"Bold"],
+ " states by ",
+ StyleBox["symmetrization",
+  FontWeight->"Bold"]
+}], "Item",ExpressionUUID->"1859a7e2-ac6d-41d6-8465-b30389f376e0"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[ScriptCapitalS]", 
+      TemplateBox[{
+        RowBox[{"[", "\[Alpha]", "]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     "\[Congruent]", 
+     RowBox[{
+      UnderscriptBox["\[Sum]", 
+       RowBox[{"\[Pi]", "\[Element]", 
+        SubscriptBox["S", "N"]}]], 
+      TemplateBox[{
+        RowBox[{"[", 
+          SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+    "=", 
+    RowBox[{
+     UnderscriptBox["\[Sum]", 
+      RowBox[{"\[Pi]", "\[Element]", 
+       SubscriptBox["S", "N"]}]], 
+     RowBox[{
+      TemplateBox[{
+        SubscriptBox["\[Alpha]", 
+         RowBox[{"\[Pi]", "(", "1", ")"}]]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{
+        SubscriptBox["\[Alpha]", 
+         RowBox[{"\[Pi]", "(", "2", ")"}]]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", "\[Ellipsis]", "\[CircleTimes]", 
+      TemplateBox[{
+        SubscriptBox["\[Alpha]", 
+         RowBox[{"\[Pi]", "(", "N", ")"}]]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}]}],
+    ","}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 3845993496320827985",ExpressionUUID->"0f911d14-5523-4568-ac65-\
+0c9612456d91"],
+
+Cell[TextData[{
+ "construct ",
+ StyleBox["fermionic",
+  FontWeight->"Bold"],
+ " states by ",
+ StyleBox["antisymmetrization",
+  FontWeight->"Bold"]
+}], "Item",ExpressionUUID->"0ae1b510-2911-4e82-b4ed-21973a627a20"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[ScriptCapitalA]", 
+     TemplateBox[{
+       RowBox[{"[", "\[Alpha]", "]"}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+    "\[Congruent]", 
+    RowBox[{
+     UnderscriptBox["\[Sum]", 
+      RowBox[{"\[Pi]", "\[Element]", 
+       SubscriptBox["S", "N"]}]], 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", "-", ")"}], "\[Pi]"], 
+      TemplateBox[{
+        RowBox[{"[", 
+          SubscriptBox["\[Alpha]", "\[Pi]"], "]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}]}],
+    "=", 
+   RowBox[{
+    UnderscriptBox["\[Sum]", 
+     RowBox[{"\[Pi]", "\[Element]", 
+      SubscriptBox["S", "N"]}]], 
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"(", "-", ")"}], "\[Pi]"], 
+     RowBox[{
+      TemplateBox[{
+        SubscriptBox["\[Alpha]", 
+         RowBox[{"\[Pi]", "(", "1", ")"}]]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{
+        SubscriptBox["\[Alpha]", 
+         RowBox[{"\[Pi]", "(", "2", ")"}]]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", "\[Ellipsis]", "\[CircleTimes]", 
+      RowBox[{
+       TemplateBox[{
+         SubscriptBox["\[Alpha]", 
+          RowBox[{"\[Pi]", "(", "N", ")"}]]},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+       "."}]}]}]}]}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 2650570974792524985",ExpressionUUID->"9a2d7a7f-33db-437d-ab02-\
+b88d60fb0b97"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Examples", "TextConcreteIndent"],
+ ": consider a two-particle system."
+}], "TextIndent",ExpressionUUID->"2484e088-e55b-4b53-87fa-b297cdfaaf72"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["Bosonic",
+  FontWeight->"Bold"],
+ " states (unnormalized):"
+}], "Item",ExpressionUUID->"250472f0-627c-4cd2-8e7c-de352a184fae"],
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[ScriptCapitalS]", 
+     RowBox[{
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+    "=", 
+    RowBox[{
+     RowBox[{
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     "+", 
+     RowBox[{
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}]}],
+    ",", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"assuming", " ", "\[Alpha]"}], "\[NotEqual]", "\[Beta]"}], 
+    ")"}]}], TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{"\[ScriptCapitalS]", 
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   "=", 
+   RowBox[{
+    TemplateBox[{"\[Alpha]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    "\[CircleTimes]", 
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "."}]}]}], TraditionalForm]}], "DisplayFormulaNumbered",ExpressionUUID->\
+"9ef48873-2717-4c40-b566-6746be670eea"],
+
+Cell[TextData[{
+ StyleBox["Fermionic",
+  FontWeight->"Bold"],
+ " states (unnormalized):"
+}], "Item",ExpressionUUID->"5c4f0f62-d6f9-4767-a47c-ab19c7f021af"],
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[ScriptCapitalA]", 
+     RowBox[{
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+    "=", 
+    RowBox[{
+     RowBox[{
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     "-", 
+     RowBox[{
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}]}],
+    ",", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"assuming", " ", "\[Alpha]"}], "\[NotEqual]", "\[Beta]"}], 
+    ")"}]}], TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{"\[ScriptCapitalA]", 
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   "=", 
+   RowBox[{"0", " ", "\[Implies]", " ", 
+    RowBox[{"no", " ", "such", " ", "fermionic", " ", 
+     RowBox[{"state", "."}]}]}]}], 
+  TraditionalForm]}], "DisplayFormulaNumbered",ExpressionUUID->"b645708d-1042-\
+4758-909d-f1ae607c036d"],
+
+Cell[TextData[{
+ StyleBox["Pauli exclusion principle",
+  FontWeight->"Bold"],
+ ": two (or more) identical fermions can not occupy the same state \
+simultaneously. "
+}], "ItemParagraph",ExpressionUUID->"fc4d141a-6057-4434-a856-c208d46ce4b4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "For ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "1eba0f80-76c9-46b2-ae38-2650978859fe"],
+ " particles, the Hilbert space dimension of"
+}], "TextIndent",ExpressionUUID->"2b3dbb21-29ce-4561-8692-b5e08217d341"],
+
+Cell[CellGroupData[{
+
+Cell["the full space (of distinct particles):", "Item",ExpressionUUID->"c6efba9b-5813-4382-b4a9-4e57aa7941c1"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"\[ScriptCapitalD]", "=", 
+    SuperscriptBox["D", "N"]}], ","}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"95b95928-fe04-\
+41fb-ab2c-f5adf9a99b0a"],
+
+Cell[TextData[{
+ "the ",
+ StyleBox["bosonic",
+  FontWeight->"Bold"],
+ " subspace:"
+}], "Item",ExpressionUUID->"8dcf59fc-5951-48b5-90a0-97450d59df92"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[ScriptCapitalD]", "B"], "=", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"N", "+", "D", "-", "1"}], ")"}], "!"}], 
+     RowBox[{
+      RowBox[{"N", "!"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"D", "-", "1"}], ")"}], "!"}]}]]}], ","}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"fed5ed46-18a6-\
+4fc6-a8c3-2685f1b13f14"],
+
+Cell[TextData[{
+ "the ",
+ StyleBox["fermionic",
+  FontWeight->"Bold"],
+ " subspace:"
+}], "Item",ExpressionUUID->"dfe5a2b0-361e-4d82-bf88-4a91ee6949fa"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox["\[ScriptCapitalD]", "F"], "=", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"D", "!"}], 
+     RowBox[{
+      RowBox[{"N", "!"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"D", "-", "N"}], ")"}], "!"}]}]], "."}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"945a2b8e-9c17-\
+4b16-9540-fab16553328c"]
+}, Open  ]],
+
+Cell[TextData[{
+ "It turns out that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[ScriptCapitalD]", "B"], "+", 
+     SubscriptBox["\[ScriptCapitalD]", "F"]}], "\[LessEqual]", 
+    "\[ScriptCapitalD]"}], TraditionalForm]],ExpressionUUID->
+  "84fa6805-dc49-4fc8-82f3-efaa99dd1c5a"],
+ " as long as ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"N", ">", "1"}], TraditionalForm]],ExpressionUUID->
+  "20beaee5-d91a-477b-b2e2-01a25171e611"],
+ " \[Implies] the remaining basis states in the many-body Hilbert space are \
+",
+ StyleBox["unphysical",
+  FontSlant->"Italic"],
+ " (for identical particles). Is there a better way to organize the many-body \
+Hilbert space, such that all states in the space are physical?"
+}], "TextNoIndent",ExpressionUUID->"cf0cd537-35db-4d99-816a-4604ac9d7ba2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fock States and Fock Space", "Subsubsection",ExpressionUUID->"d0f6a3fc-f808-4eeb-a460-19532e3bf6c5"],
+
+Cell[TextData[{
+ "Sometimes, ",
+ StyleBox["conceptual problems",
+  FontSlant->"Italic"],
+ " in physics arise from the ",
+ StyleBox["inappropriate language",
+  FontSlant->"Italic"],
+ " we used. There are two different ways to describe many-body states:"
+}], "TextIndent",ExpressionUUID->"a032455d-d7eb-47c3-a828-835fce583138"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "In first-quantization, we ask: ",
+ StyleBox["Which particle is in which state",
+  FontSlant->"Italic"],
+ "?"
+}], "Item",ExpressionUUID->"7aa97ce8-2c98-4b9f-bf36-cbdf548a5044"],
+
+Cell[TextData[{
+ "In second-quantization, we ask: ",
+ StyleBox["How many particles are there in every state",
+  FontSlant->"Italic"],
+ "?"
+}], "Item",ExpressionUUID->"16fea75c-b91b-4d19-acef-39c7ea88cf8f"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The first question is inappropriate for ",
+ StyleBox["identical",
+  FontSlant->"Italic"],
+ " particles: it is impossible to tell which particle is which in the first \
+place. We need a new language:"
+}], "TextNoIndent",ExpressionUUID->"aaf232c0-107f-48cc-96f0-69126ad19e78"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Style", "[", 
+  RowBox[{
+   RowBox[{"Grid", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\\!\\(\[LeftBracketingBar]\[Alpha]\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\\)\>\"", ",", 
+         "\"\<\>\"", ",", 
+         "\"\<\\!\\(\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Alpha]\[RightAngleBracket]\\)\>\""}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<the 1st particle on \\!\\(\[LeftBracketingBar]\[Alpha]\
+\[RightAngleBracket]\\)\\nthe 2nd particle in \\!\\(\[LeftBracketingBar]\
+\[Beta]\[RightAngleBracket]\\)\>\"", ",", "\"\< \>\"", ",", 
+         "\"\<the 1st particle on \\!\\(\[LeftBracketingBar]\[Beta]\
+\[RightAngleBracket]\\)\\nthe 2nd particle in \\!\\(\[LeftBracketingBar]\
+\[Alpha]\[RightAngleBracket]\\)\>\""}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\[LowerRightArrow]\>\"", ",", "\"\< \>\"", ",", 
+         "\"\<\[LowerLeftArrow]\>\""}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<there is one particle in \\!\\(\[LeftBracketingBar]\[Alpha]\
+\[RightAngleBracket]\\), another particle in \
+\\!\\(\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\\)\>\"", ",", 
+         "SpanFromLeft", ",", "SpanFromLeft"}], "}"}]}], "}"}], ",", 
+     RowBox[{"Frame", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "1"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "3"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"4", ",", "1"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"4", ",", "2"}], "}"}], "\[Rule]", "True"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"4", ",", "3"}], "}"}], "\[Rule]", "True"}]}], "}"}]}], 
+       "}"}]}], ",", 
+     RowBox[{"Alignment", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Center", ",", "Center"}], "}"}]}]}], "]"}], ",", "14", ",", 
+   RowBox[{"LineSpacing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "14"}], "}"}]}], ",", 
+   RowBox[{"FontFamily", "\[Rule]", "\"\<CMU\>\""}]}], "]"}]], "Input",Express\
+ionUUID->"6c0d69ff-ff01-4681-a4a5-94b74116c0ce"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[GridBox[{
+     {"\<\"\\!\\(\[LeftBracketingBar]\[Alpha]\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\\)\"\>", \
+"\<\"\"\>", "\<\"\\!\\(\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\
+\[CircleTimes]\[LeftBracketingBar]\[Alpha]\[RightAngleBracket]\\)\"\>"},
+     {"\<\"the 1st particle on \\!\\(\[LeftBracketingBar]\[Alpha]\
+\[RightAngleBracket]\\)\\nthe 2nd particle in \\!\\(\[LeftBracketingBar]\
+\[Beta]\[RightAngleBracket]\\)\"\>", "\<\" \"\>", "\<\"the 1st particle on \
+\\!\\(\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\\)\\nthe 2nd particle \
+in \\!\\(\[LeftBracketingBar]\[Alpha]\[RightAngleBracket]\\)\"\>"},
+     {"\<\"\[LowerRightArrow]\"\>", "\<\" \"\>", \
+"\<\"\[LowerLeftArrow]\"\>"},
+     {"\<\"there is one particle in \\!\\(\[LeftBracketingBar]\[Alpha]\
+\[RightAngleBracket]\\), another particle in \
+\\!\\(\[LeftBracketingBar]\[Beta]\[RightAngleBracket]\\)\"\>", 
+      "\[SpanFromLeft]", "\[SpanFromLeft]"}
+    },
+    AutoDelete->False,
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Center}}},
+    GridBoxFrame->{
+     "Columns" -> None, "Rows" -> None, 
+      "ItemsIndexed" -> {{2, 1} -> True, {2, 3} -> True, {4, 1} -> 
+        True, {4, 2} -> True, {4, 3} -> True}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Grid"],
+  StripOnInput->False,
+  LineSpacing->{0, 14},
+  FontFamily->"CMU",
+  FontSize->14]], "Output",ExpressionUUID->"be140bab-4ea9-4bda-b8d5-\
+192943333f49"]
+}, {2}]],
+
+Cell["\<\
+The new description does not require the labeling of particles \[Implies] no \
+redundancy of the basis state \[Implies] hence a both concise and precise \
+description.\
+\>", "TextNoIndent",ExpressionUUID->"323b708f-49c5-4e35-86a1-c644a10977fb"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Each ",
+ StyleBox["basis state",
+  FontWeight->"Bold"],
+ " in the many-body Hilbert space is labeled by a set of ",
+ StyleBox["occupation numbers",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "d0631922-a875-435e-8fc9-45de7c1f2cfc"],
+ " (for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Alpha]", "=", "1"}], ",", "2", ",", "\[Ellipsis]", ",", "D"}], 
+   TraditionalForm]],ExpressionUUID->"2f2f7f10-178c-4f5d-8052-00a449d3aac3"],
+ ")"
+}], "Item",ExpressionUUID->"f416bd20-e5d5-46e5-90e2-3ae3865d6e0e"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    TemplateBox[{
+      RowBox[{"[", "n", "]"}]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    "\[Congruent]", 
+    TemplateBox[{
+      RowBox[{
+        SubscriptBox["n", "1"], ",", 
+        SubscriptBox["n", "2"], ",", "\[Ellipsis]", ",", 
+        SubscriptBox["n", "\[Alpha]"], ",", "\[Ellipsis]", ",", 
+        SubscriptBox["n", "D"]}]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"3023dce3-\
+55ae-409b-b279-3554d9a83b3c"],
+
+Cell[TextData[{
+ "meaning that there are ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "7d40b802-7933-42f9-a15c-346538d9dc47"],
+ " particles in the state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"26f5a20b-a229-47bd-bfa3-ebbcf448a69a"],
+ "."
+}], "ItemParagraph",ExpressionUUID->"abf6bf51-c182-45db-b586-7a20d2d95ce1"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox["n", "\[Alpha]"], "=", 
+   TagBox[GridBox[{
+      {"\[Piecewise]", GridBox[{
+         {
+          RowBox[{"0", ",", "1", ",", "2", ",", "3", ",", "\[Ellipsis]"}], 
+          RowBox[{"bosons", ","}]},
+         {
+          RowBox[{"0", ",", "1"}], 
+          RowBox[{"fermions", "."}]}
+        },
+        AllowedDimensions->{2, Automatic},
+        Editable->True,
+        GridBoxAlignment->{
+         "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}},
+           "RowsIndexed" -> {}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.84]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}},
+        Selectable->True]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.35]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    "Piecewise",
+    DeleteWithContents->True,
+    Editable->False,
+    SelectWithContents->True,
+    Selectable->False]}], TraditionalForm]], "DisplayFormulaNumbered",Expressi\
+onUUID->"b1d074fb-a442-454c-b7ea-dd0eb002b1fc"],
+
+Cell[TextData[{
+ "For ",
+ StyleBox["bosons",
+  FontWeight->"Bold"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "57b3a627-ad95-4eed-b8fc-a6f4c067b7e9"],
+ " can be any non-negative integer."
+}], "Subitem",ExpressionUUID->"fff51027-70d3-47a1-94ea-c4395e1de8b8"],
+
+Cell[TextData[{
+ "For ",
+ StyleBox["fermions",
+  FontWeight->"Bold"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "b26f0c8c-2a2b-4549-b173-1372d597be2b"],
+ " can only take ",
+ Cell[BoxData[
+  FormBox["0", TraditionalForm]],ExpressionUUID->
+  "a1d8c82e-5a47-492e-a16d-c35f4177c18c"],
+ " or ",
+ Cell[BoxData[
+  FormBox["1", TraditionalForm]],ExpressionUUID->
+  "6b6638e8-5914-4164-b47f-51068d99d7a1"],
+ ", due to the ",
+ StyleBox["Pauli exclusion principle",
+  FontSlant->"Italic"],
+ "."
+}], "Subitem",ExpressionUUID->"224d82c2-d25f-47fc-9a4a-2a4b5c9fe4a6"],
+
+Cell[TextData[{
+ "The occupation numbers ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "804b145f-cd32-424f-b345-768cf752b2c6"],
+ " sum up to the total number of particles, i.e. ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[Sum]", "\[Alpha]"], 
+     SubscriptBox["n", "\[Alpha]"]}], "=", "N"}], TraditionalForm]],
+  ExpressionUUID->"8399a3b1-47c8-472e-a3d1-c1550fc15262"],
+ "."
+}], "Subitem",ExpressionUUID->"bbb1a16c-db58-44b3-997a-82557657f122"],
+
+Cell[TextData[{
+ "The states ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{
+     RowBox[{"[", "n", "]"}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"e37355a2-2069-4229-b038-bd46d7642555"],
+ " are also known as ",
+ StyleBox["Fock states",
+  FontWeight->"Bold"],
+ "."
+}], "Item",ExpressionUUID->"e29d1a13-9103-41b3-8bca-27b1f434bf0a"],
+
+Cell[TextData[{
+ "All Fock states form a complete set of basis for the many-body Hilbert \
+space, or the ",
+ StyleBox["Fock space",
+  FontWeight->"Bold"],
+ "."
+}], "Item",ExpressionUUID->"26c08ff8-1d5c-4e81-82ae-16fce38591cc"],
+
+Cell[TextData[{
+ "Any generic ",
+ StyleBox["second-quantized",
+  FontWeight->"Bold"],
+ " many-body state is a linear combination of ",
+ StyleBox["Fock states",
+  FontSlant->"Italic"],
+ ","
+}], "Item",ExpressionUUID->"f992aebe-dca3-470d-9113-b5d223cadc30"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   TemplateBox[{"\[CapitalPsi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+   RowBox[{
+    UnderscriptBox["\[Sum]", 
+     RowBox[{"[", "n", "]"}]], 
+    RowBox[{
+     RowBox[{"\[CapitalPsi]", "[", "n", "]"}], 
+     RowBox[{
+      TemplateBox[{
+        RowBox[{"[", "n", "]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "."}]}]}]}], TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->\
+"b6093f69-e377-4f92-8e38-4df92646d56e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Representation of Fock States", "Subsubsection",ExpressionUUID->"d60a1d20-a634-47ff-9dbd-f468a36eb864"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["first",
+  FontWeight->"Bold"],
+ "- and the ",
+ StyleBox["second",
+  FontWeight->"Bold"],
+ "-",
+ StyleBox["quantization",
+  FontWeight->"Bold"],
+ " formalisms can both provide ",
+ StyleBox["legitimate",
+  FontSlant->"Italic"],
+ " description of identical particles. (The first-quantization is just \
+awkward to use, but it is still valid.)"
+}], "TextIndent",ExpressionUUID->"858e7e94-31a9-49ca-bf46-1d85d954bd3d"],
+
+Cell[TextData[{
+ "Every ",
+ StyleBox["Fock state",
+  FontSlant->"Italic"],
+ " has a ",
+ StyleBox["first-quantized representation",
+  FontWeight->"Bold"],
+ "."
+}], "TextIndent",ExpressionUUID->"f932c6bf-d85e-41a2-9f66-4564f191f423"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "The Fock state with all occupation numbers to be zero is called the ",
+ StyleBox["vacuum state",
+  FontWeight->"Bold"],
+ ", denoted as"
+}], "Item",ExpressionUUID->"c9d5a44f-1923-4d9a-9478-5b6890eba530"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   TemplateBox[{"0"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   "\[Congruent]", 
+   TemplateBox[{
+     RowBox[{"\[Ellipsis]", ",", "0", ",", "\[Ellipsis]"}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"bdc50bf9-66c3-\
+437c-8cf0-3732f379adc8"],
+
+Cell[TextData[{
+ "It corresponds to the ",
+ StyleBox["tensor product unit",
+  FontSlant->"Italic"],
+ " in the first-quantization, which can be written as"
+}], "ItemParagraph",ExpressionUUID->"292be0d7-e48a-46c9-ba1e-e557d6d3f622"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox[
+    TemplateBox[{"0"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+   "=", 
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{"0"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "F"], 
+    "=", 
+    RowBox[{"\[ScriptOne]", "."}]}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"a6488ce0-bfb7-\
+47d6-93d1-27b7886be6bd"],
+
+Cell[TextData[{
+ "We use a subscript ",
+ Cell[BoxData[
+  FormBox["B", TraditionalForm]],ExpressionUUID->
+  "e278eba1-019e-4b0a-aa05-12d618b6337c"],
+ "/",
+ Cell[BoxData[
+  FormBox["F", TraditionalForm]],ExpressionUUID->
+  "c55ef290-35ca-437c-9850-9f354eb1d80d"],
+ " to indicate whether the Fock state is ",
+ StyleBox["bosonic",
+  FontWeight->"Bold"],
+ " (",
+ Cell[BoxData[
+  FormBox["B", TraditionalForm]],ExpressionUUID->
+  "b0251beb-4e87-4030-8183-2d2923a92591"],
+ ") or ",
+ StyleBox["fermionic",
+  FontWeight->"Bold"],
+ " (",
+ Cell[BoxData[
+  FormBox["F", TraditionalForm]],ExpressionUUID->
+  "f0adaf47-8a51-4854-ba5b-eb715ce32001"],
+ "). For vacuum state, there is no difference between them."
+}], "ItemParagraph",ExpressionUUID->"0ac4516a-e49d-4635-93cf-32dc6cd04d0c"],
+
+Cell[TextData[{
+ "The Fock state with only one ",
+ StyleBox["non-zero",
+  FontSlant->"Italic"],
+ " occupation number is a ",
+ StyleBox["single-mode Fock state",
+  FontWeight->"Bold"],
+ ", denoted as"
+}], "Item",ExpressionUUID->"9d151264-5882-47f7-840b-c6e1fea234e0"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   TemplateBox[{
+     SubscriptBox["n", "\[Alpha]"]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+   TemplateBox[{
+     RowBox[{"\[Ellipsis]", ",", "0", ",", 
+       SubscriptBox["n", "\[Alpha]"], ",", "0", ",", "\[Ellipsis]"}]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"5aaf4cf7-5e0f-\
+40bc-bb16-d65e40370e4e"],
+
+Cell["In terms of the first-quantized states", "ItemParagraph",ExpressionUUID->"5a9a2372-16d9-4cb4-9711-7c44d5fcaf4f"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       SubscriptBox["1", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+    "=", 
+    RowBox[{
+     SubscriptBox[
+      TemplateBox[{
+        SubscriptBox["1", "\[Alpha]"]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "F"],
+      "=", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       SubscriptBox["2", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+    "=", 
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       SubscriptBox["3", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+    "=", 
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+    "=", 
+    RowBox[{
+     UnderscriptBox[
+      UnderscriptBox[
+       RowBox[{
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", "\[Ellipsis]", "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       "\[UnderBrace]"], 
+      RowBox[{
+       SubscriptBox["n", "\[Alpha]"], " ", "factors"}]], "\[Congruent]", 
+     RowBox[{
+      SuperscriptBox[
+       TemplateBox[{"\[Alpha]"},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+       RowBox[{"\[CircleTimes]", 
+        SubscriptBox["n", "\[Alpha]"]}]], "."}]}]}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"1a176226-54e2-\
+4ca7-99d3-ec4b2a1fd7ab"],
+
+Cell[TextData[{
+ "For ",
+ StyleBox["multi-mode Fock states",
+  FontWeight->"Bold"],
+ " (meaning more than one single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"54d77d8b-eb43-4bf0-98cd-b1dfce437066"],
+ " is involved), the first-quantized state will involve appropriate \
+symmetrization depending on the particle statistics. For example,"
+}], "Item",ExpressionUUID->"0770b162-eda6-4a66-962a-66fecade446c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["1", "\[Alpha]"], ",", 
+         SubscriptBox["1", "\[Beta]"]}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+    "=", 
+    RowBox[{
+     FractionBox["1", 
+      SqrtBox["2"]], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Beta]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       "+", 
+       RowBox[{
+        TemplateBox[{"\[Beta]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}],
+       ")"}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["1", "\[Alpha]"], ",", 
+         SubscriptBox["1", "\[Beta]"]}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "F"], 
+    "=", 
+    RowBox[{
+     FractionBox["1", 
+      SqrtBox["2"]], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "-", 
+        RowBox[{
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, 
+             "\[RightAngleBracket]"}]& )]}]}], ")"}], "."}]}]}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"622d16c8-6393-\
+41ab-9053-36fec60ee66a"],
+
+Cell["\<\
+Note the difference between bosonic and fermionic Fock states (even if their \
+occupation numbers are the same). Here are more examples\
+\>", "ItemParagraph",ExpressionUUID->"fa7db996-59af-4dd7-a694-c467ba4e097e"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["2", "\[Alpha]"], ",", 
+         SubscriptBox["1", "\[Beta]"]}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+    "=", 
+    RowBox[{
+     FractionBox["1", 
+      SqrtBox["3"]], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Beta]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       "+", 
+       RowBox[{
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Beta]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       "+", 
+       RowBox[{
+        TemplateBox[{"\[Beta]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        "\[CircleTimes]", 
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}],
+       ")"}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    SubscriptBox[
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["1", "\[Alpha]"], ",", 
+         SubscriptBox["1", "\[Beta]"], ",", 
+         SubscriptBox["1", "\[Gamma]"]}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "F"], 
+    "=", 
+    RowBox[{
+     FractionBox["1", 
+      SqrtBox["6"]], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Gamma]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "+", 
+        RowBox[{
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Gamma]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "+", 
+        RowBox[{
+         TemplateBox[{"\[Gamma]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "-", 
+        RowBox[{
+         TemplateBox[{"\[Gamma]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "-", 
+        RowBox[{
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Gamma]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "-", 
+        RowBox[{
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Gamma]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Beta]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, 
+             "\[RightAngleBracket]"}]& )]}]}], ")"}], "."}]}]}]}], 
+  TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->"02585f01-cea9-\
+4524-b2bd-ce5634898144"]
+}, Open  ]],
+
+Cell["\<\
+Ok, you get the idea. In general, the Fock state can be represented as\
+\>", "TextNoIndent",ExpressionUUID->"01de0aca-0666-48d8-8b68-ae8d0c2d5ed0"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "for ",
+ StyleBox["bosons",
+  FontWeight->"Bold"],
+ ","
+}], "Item",ExpressionUUID->"a3c1ec4f-46cf-4d8f-a207-6d0fd9f9adcf"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox[
+    TemplateBox[{
+      RowBox[{"[", "n", "]"}]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "B"], 
+   "=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      FractionBox[
+       RowBox[{
+        UnderscriptBox["\[Product]", "\[Alpha]"], 
+        RowBox[{
+         SubscriptBox["n", "\[Alpha]"], "!"}]}], 
+       RowBox[{"N", "!"}]], ")"}], 
+     RowBox[{"1", "/", "2"}]], 
+    RowBox[{"\[ScriptCapitalS]", " ", 
+     UnderscriptBox["\[CircleTimes]", "\[Alpha]"], 
+     RowBox[{
+      SuperscriptBox[
+       TemplateBox[{"\[Alpha]"},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+       RowBox[{"\[CircleTimes]", 
+        SubscriptBox["n", "\[Alpha]"]}]], "."}]}]}]}], 
+  TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"088d350f-e2dc-\
+4a72-9031-a713e19a609f"],
+
+Cell[TextData[{
+ "for ",
+ StyleBox["fermions",
+  FontWeight->"Bold"],
+ ","
+}], "Item",ExpressionUUID->"6fef56fd-8e68-448a-b397-c3470449f847"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox[
+    TemplateBox[{
+      RowBox[{"[", "n", "]"}]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "F"], 
+   "=", 
+   RowBox[{
+    FractionBox["1", 
+     SqrtBox[
+      RowBox[{"N", "!"}]]], 
+    RowBox[{"\[ScriptCapitalA]", " ", 
+     UnderscriptBox["\[CircleTimes]", "\[Alpha]"], 
+     RowBox[{
+      SuperscriptBox[
+       TemplateBox[{"\[Alpha]"},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+       RowBox[{"\[CircleTimes]", 
+        SubscriptBox["n", "\[Alpha]"]}]], "."}]}]}]}], 
+  TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"80cdc10a-e100-\
+4e5b-897d-148f3e4967c9"]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalS]", TraditionalForm]],ExpressionUUID->
+  "4314074a-70d5-4619-a842-da0f08ba26d7"],
+ " and ",
+ Cell[BoxData[
+  FormBox["\[ScriptCapitalA]", TraditionalForm]],ExpressionUUID->
+  "806a57fe-5196-45d5-a873-35d74c90c69d"],
+ " are symmetrization and antisymmetrization operators defined in Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 3845993496320827985"],
+ ") and Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 2650570974792524985"],
+ ")."
+}], "TextNoIndent",ExpressionUUID->"6a8b89f2-ccd4-49f2-be0a-905e063793e9"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Creation and Annihilation Operators", "Subsection",ExpressionUUID->"dcd8cace-708e-4a34-8886-a1a9f3ae07a6"],
+
+Cell[CellGroupData[{
+
+Cell["State Insertion and Deletion", "Subsubsection",ExpressionUUID->"37fc0e3a-a99e-41fa-a340-99916549487e"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["creation",
+  FontWeight->"Bold"],
+ " and ",
+ StyleBox["annihilation operators",
+  FontWeight->"Bold"],
+ " are introduced to ",
+ StyleBox["create",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["annihilate",
+  FontSlant->"Italic"],
+ " particles in the quantum many-body system, as indicated by their names. \
+The first step towards defining them is to understand how to ",
+ StyleBox["insert",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["delete",
+  FontSlant->"Italic"],
+ " a single-particle state from the first-quantized state in a ",
+ StyleBox["symmetric",
+  FontSlant->"Italic"],
+ " (or ",
+ StyleBox["antisymmetric",
+  FontSlant->"Italic"],
+ ") manner."
+}], "TextIndent",ExpressionUUID->"8e321999-d4cd-4297-9e5c-497f722206bf"],
+
+Cell["Let us first declare some notations:", "TextIndent",ExpressionUUID->"7adefa4d-f7af-446a-bed0-016f07d0a32a"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"28f44ac2-8f8b-4ccf-8399-bbafad38b7a8"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Beta]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"692497e5-dc15-4575-9158-3344d54188a6"],
+ " be single-particle states."
+}], "Item",ExpressionUUID->"6a86d662-5787-4a03-8e8e-108fcbcdb9e3"],
+
+Cell[TextData[{
+ "Let \[ScriptOne] be the ",
+ StyleBox["tensor identity",
+  FontSlant->"Italic"],
+ " (meaning that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "\[CircleTimes]", "\[ScriptOne]"}], "=", 
+    RowBox[{
+     RowBox[{"\[ScriptOne]", "\[CircleTimes]", 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     "=", 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   TraditionalForm]],ExpressionUUID->"bf78c6ef-5243-492e-9794-c30f81592d0f"],
+ ")."
+}], "Item",ExpressionUUID->"3b6e58bb-27bf-4afd-8050-3981f7d72165"],
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[CapitalPsi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"74a30662-ce02-4656-8cda-d497794da7ee"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[CapitalPhi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"27ef7bca-8948-43f1-81be-c8a56d010f27"],
+ " be generic ",
+ StyleBox["first-quantized states",
+  FontSlant->"Italic"],
+ " as in Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 2678166479532444448"],
+ "). "
+}], "Item",ExpressionUUID->"10883ebe-efae-429d-8af2-034372339f08"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Now we define the ",
+ StyleBox["insertion operator",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], TraditionalForm]],
+  ExpressionUUID->"2bafdf34-08c7-4f64-bf39-2ce8f3778a0d"],
+ " and ",
+ StyleBox["deletion operator",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], TraditionalForm]],
+  ExpressionUUID->"68faf94b-71f7-4972-9205-6f2f9b077248"],
+ " by the following rules:"
+}], "TextNoIndent",ExpressionUUID->"a248b32b-b2ec-4bbc-bd3e-59a0d513174e"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Linearity (for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", ",", 
+    RowBox[{"b", "\[Element]", "\[DoubleStruckCapitalC]"}]}], 
+   TraditionalForm]],ExpressionUUID->"ff33c951-3d8c-4941-bbc8-5601aa255287"],
+ ")"
+}], "Item",ExpressionUUID->"a42663d2-f258-44d1-9ff8-5d1c16183571"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", 
+        TemplateBox[{"\[CapitalPsi]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       "+", 
+       RowBox[{"b", 
+        TemplateBox[{"\[CapitalPhi]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}],
+       ")"}]}], "=", 
+    RowBox[{
+     RowBox[{"a", 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], 
+     RowBox[{
+      TemplateBox[{"\[CapitalPsi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "+", 
+      
+      RowBox[{"b", 
+       TemplateBox[{"\[Alpha]"},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+     
+     SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], 
+     TemplateBox[{"\[CapitalPhi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", 
+        TemplateBox[{"\[CapitalPsi]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       "+", 
+       RowBox[{"b", 
+        TemplateBox[{"\[CapitalPhi]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}],
+       ")"}]}], "=", 
+    RowBox[{
+     RowBox[{"a", 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], 
+     RowBox[{
+      TemplateBox[{"\[CapitalPsi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "+", 
+      
+      RowBox[{"b", 
+       TemplateBox[{"\[Alpha]"},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+     
+     SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], 
+     RowBox[{
+      TemplateBox[{"\[CapitalPhi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "."}]}]}]}], TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->\
+"a5e76b14-c100-40d4-a9dc-1f0e91a361ec"],
+
+Cell["Vacuum action", "Item",ExpressionUUID->"487d6a7a-f910-4789-a279-3ecbab6b5e9f"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], "\[ScriptOne]"}], "=", 
+    
+    TemplateBox[{"\[Alpha]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], "\[ScriptOne]"}], "=", 
+    "0."}]}], TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->\
+"3fbcbb50-0801-41fc-be9b-b0c0907fb81c"],
+
+Cell["Recursive relation", "Item",ExpressionUUID->"b4d05b2d-198f-4aec-adc5-59e67f4604b5"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], 
+     RowBox[{
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[CapitalPsi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+    "=", 
+    RowBox[{
+     RowBox[{
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[CapitalPsi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     "\[PlusMinus]", 
+     RowBox[{
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      RowBox[{"(", 
+       RowBox[{
+        TemplateBox[{"\[Alpha]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+        SubscriptBox["\[RightTriangle]", "\[PlusMinus]"], 
+        TemplateBox[{"\[CapitalPsi]"},
+         "Ket",
+         DisplayFunction->(
+          RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+       ")"}]}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], 
+     RowBox[{
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      TemplateBox[{"\[CapitalPsi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+    "=", 
+    RowBox[{
+     RowBox[{
+      TemplateBox[{"\[Alpha]", "\[Beta]"},
+       "BraKet",
+       DisplayFunction->(
+        RowBox[{"\[LeftAngleBracket]", #, "\[VerticalSeparator]", #2, 
+          "\[RightAngleBracket]"}]& )], 
+      TemplateBox[{"\[CapitalPsi]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     "\[PlusMinus]", 
+     RowBox[{
+      TemplateBox[{"\[Beta]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "\[CircleTimes]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         SubscriptBox["\[LeftTriangle]", "\[PlusMinus]"], 
+         TemplateBox[{"\[CapitalPsi]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        ")"}], "."}]}]}]}]}], TraditionalForm]], "DisplayFormulaNumbered",Expr\
+essionUUID->"5ba51bd6-94b1-4528-84a1-18d5500a41bd"]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[{"\[Alpha]", "\[Beta]"},
+     "BraKet",
+     DisplayFunction->(
+      RowBox[{"\[LeftAngleBracket]", #, "\[VerticalSeparator]", #2, 
+        "\[RightAngleBracket]"}]& )], "=", 
+    SubscriptBox["\[Delta]", 
+     RowBox[{"\[Alpha]", "\[VeryThinSpace]", "\[Beta]"}]]}], 
+   TraditionalForm]],ExpressionUUID->"cd57725c-3305-4c34-aff3-90721418fe19"],
+ " if ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"d09b59d8-fb15-4d07-a10a-b930d454de70"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Beta]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"a4f7ece6-9d97-419e-884f-14a2941b23b4"],
+ " are orthonormal basis states. The subscript ",
+ Cell[BoxData[
+  FormBox["\[PlusMinus]", TraditionalForm]],ExpressionUUID->
+  "b05d85c5-bb63-4552-bea9-a69d4679bc1b"],
+ " of the insertion or deletion operators indicates whether symmetrization \
+(",
+ Cell[BoxData[
+  FormBox["+", TraditionalForm]],ExpressionUUID->
+  "8702a509-b35d-48d5-90ca-da1c2a48d5e0"],
+ ") or antisymmetrization (",
+ Cell[BoxData[
+  FormBox["-", TraditionalForm]],ExpressionUUID->
+  "d71d5640-1dca-430d-bc9a-e66b3e4cfe8d"],
+ ") is implemented."
+}], "TextNoIndent",ExpressionUUID->"b44a87c7-d191-47a6-a19c-dc22e1e15337"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Boson Creation and Annihilation", "Subsubsection",ExpressionUUID->"3fe0722d-dfe6-49a9-9664-d5647c6cf9b7"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "The ",
+ StyleBox["boson creation operator",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], TraditionalForm]],
+  ExpressionUUID->"78c6bccf-9753-4800-9b47-e4cef604cab7"],
+ " ",
+ StyleBox["adds",
+  FontSlant->"Italic"],
+ " a boson to the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"4135ba5f-552f-4205-a1de-fcbef13ec834"],
+ ", ",
+ StyleBox["increasing",
+  FontSlant->"Italic"],
+ " the occupation number by one ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], "\[RightArrow]", 
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], "+", "1"}]}], TraditionalForm]],
+  ExpressionUUID->"e054a3ae-84c7-498d-bd84-287fa109cab5"],
+ ". It acts on a ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "2f3c2808-a40e-4280-b3b7-bc1be8b0c9ea"],
+ "-particle first-quantized state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[CapitalPsi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"69b10b60-f749-43d7-b06d-762bb3d7b9f5"],
+ " as"
+}], "Item",ExpressionUUID->"322a9943-497b-4f58-b2f8-e0fde8cd2ed9"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       SqrtBox[
+        RowBox[{"N", "+", "1"}]]], 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[RightTriangle]", "+"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"fd7a4fe2-\
+7e4b-497e-bff1-b5b4588ad3dc"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[{"\[Alpha]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    SubscriptBox["\[RightTriangle]", "+"]}], TraditionalForm]],ExpressionUUID->
+  "d818aaf9-ac56-4a93-8fcd-7736aa672ddd"],
+ " ",
+ StyleBox["inserts",
+  FontSlant->"Italic"],
+ " the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"55c2916d-44ab-497e-a8f4-cb7493a010b9"],
+ " to ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"N", "+", "1"}], TraditionalForm]],ExpressionUUID->
+  "a124fcb3-8f8c-4d94-ad7c-7dc824ca4789"],
+ " possible insertion positions ",
+ StyleBox["symmetrically",
+  FontSlant->"Italic"],
+ "."
+}], "ItemParagraph",ExpressionUUID->"e4066e31-dfa7-4228-b15c-eff122fe7bfb"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["boson annihilation operator",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["b", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "f464a86c-0323-493b-b3c8-03203c09e1f7"],
+ " ",
+ StyleBox["removes",
+  FontSlant->"Italic"],
+ " a boson from the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"1f7086c5-1b1d-4fac-8047-b0bc24f14515"],
+ ", ",
+ StyleBox["reducing",
+  FontSlant->"Italic"],
+ " the occupation number by one ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], "\[Rule]", 
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], "-", "1"}]}], TraditionalForm]],
+  ExpressionUUID->"7e1cb090-829a-4b0d-8335-0f187f346553"],
+ " (while ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], ">", "0"}], TraditionalForm]],
+  ExpressionUUID->"810ce253-d852-4017-bd1f-82d13abc0ca9"],
+ "). It acts on a ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "6503daf0-7fbf-4b67-b3c2-f9012a23c891"],
+ "-particle first-quantized state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[CapitalPsi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"987e35cd-3718-4f48-95f9-1632c582aa42"],
+ " as"
+}], "Item",ExpressionUUID->"04f6d724-5008-4237-96d2-539002f8123a"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["b", "\[Alpha]"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       SqrtBox["N"]], 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[LeftTriangle]", "+"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"5d53c8ac-\
+bcf2-4e80-bf87-50d8e3ba5519"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[{"\[Alpha]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    SubscriptBox["\[LeftTriangle]", "+"]}], TraditionalForm]],ExpressionUUID->
+  "4c33facb-7ab2-4708-9e20-37931accf714"],
+ " ",
+ StyleBox["removes",
+  FontSlant->"Italic"],
+ " the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"6ac36245-c63f-42a0-b829-3f06bf5ae0d7"],
+ " from ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "e5be919e-9df6-4c8f-9797-787ca82066ec"],
+ " possible deletion positions ",
+ StyleBox["symmetrically",
+  FontSlant->"Italic"],
+ "."
+}], "ItemParagraph",ExpressionUUID->"21da1653-8fc9-4418-a69e-c198af1d91af"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Single-Mode Fock States", "Subsubsubsection",ExpressionUUID->"ad486398-7b7e-4d0b-8864-ec37f62bec10"],
+
+Cell["\<\
+Based on these definitions, we can show that the creation and annihilation \
+operators acting on single-mode Fock states as\
+\>", "TextIndent",ExpressionUUID->"39c8991d-da12-4134-81ec-cfb976b30cbd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+    TemplateBox[{
+      SubscriptBox["n", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+   
+   RowBox[{
+    RowBox[{
+     FractionBox["1", 
+      SqrtBox[
+       RowBox[{
+        SubscriptBox["n", "\[Alpha]"], "+", "1"}]]], 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+    SubscriptBox["\[RightTriangle]", "+"], 
+    SuperscriptBox[
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     RowBox[{"\[CircleTimes]", 
+      SubscriptBox["n", "\[Alpha]"]}]]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      SubscriptBox["n", "\[Alpha]"], "+", "1"}], 
+     SqrtBox[
+      RowBox[{
+       SubscriptBox["n", "\[Alpha]"], "+", "1"}]]], 
+    SuperscriptBox[
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     RowBox[{"\[CircleTimes]", 
+      RowBox[{"(", 
+       RowBox[{
+        SubscriptBox["n", "\[Alpha]"], "+", "1"}], ")"}]}]]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    SqrtBox[
+     RowBox[{
+      SubscriptBox["n", "\[Alpha]"], "+", "1"}]], 
+    RowBox[{
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["n", "\[Alpha]"], "+", "1"}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "."}]}]}], TraditionalForm]}], "DisplayFormulaNumbered",ExpressionUUID->\
+"f6d545b5-7156-4a54-8684-65a33492d129"],
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["b", "\[Alpha]"], 
+    TemplateBox[{
+      SubscriptBox["n", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+   
+   RowBox[{
+    RowBox[{
+     FractionBox["1", 
+      SqrtBox[
+       SubscriptBox["n", "\[Alpha]"]]], 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+    SubscriptBox["\[LeftTriangle]", "+"], 
+    SuperscriptBox[
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     RowBox[{"\[CircleTimes]", 
+      SubscriptBox["n", "\[Alpha]"]}]]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    FractionBox[
+     SubscriptBox["n", "\[Alpha]"], 
+     SqrtBox[
+      SubscriptBox["n", "\[Alpha]"]]], 
+    SuperscriptBox[
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     RowBox[{"\[CircleTimes]", 
+      RowBox[{"(", 
+       RowBox[{
+        SubscriptBox["n", "\[Alpha]"], "-", "1"}], ")"}]}]]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    SqrtBox[
+     SubscriptBox["n", "\[Alpha]"]], 
+    RowBox[{
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["n", "\[Alpha]"], "-", "1"}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "."}]}]}], TraditionalForm]}], "DisplayFormulaNumbered",ExpressionUUID->\
+"78481b7d-7fe0-46e5-a921-5e9e5aed51fd"]
+}, Open  ]],
+
+Cell["Thus we conclude", "TextNoIndent",ExpressionUUID->"c05ed860-4650-4b2f-bc5e-3d1b9a68407d"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     SqrtBox[
+      RowBox[{
+       SubscriptBox["n", "\[Alpha]"], "+", "1"}]], 
+     TemplateBox[{
+       RowBox[{
+         SubscriptBox["n", "\[Alpha]"], "+", "1"}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["b", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     SqrtBox[
+      SubscriptBox["n", "\[Alpha]"]], 
+     RowBox[{
+      TemplateBox[{
+        RowBox[{
+          SubscriptBox["n", "\[Alpha]"], "-", "1"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "."}]}]}]}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 2048359422744236814",ExpressionUUID->"53ec45b3-a9d9-4687-a8c0-\
+0291b6420d01"],
+
+Cell[CellGroupData[{
+
+Cell["Especially, when acting on the vacuum state", "Item",ExpressionUUID->"d6b62b65-db9c-41d6-a8db-4287999bdca1"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+     TemplateBox[{
+       SubscriptBox["0", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    TemplateBox[{
+      SubscriptBox["1", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["b", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["0", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=",
+     "0."}]}], TraditionalForm]], "DisplayFormulaNumbered",ExpressionUUID->\
+"3c69d381-4c3d-4c59-9dd6-08b85f806eb3"],
+
+Cell[TextData[{
+ "Using Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 2048359422744236814"],
+ "), we can show that"
+}], "Item",ExpressionUUID->"652567a2-6303-4786-a1d6-b997244b4b9c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+     SubscriptBox["b", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"f7f3fb88-\
+4b17-40b8-b4b8-e4d7980fb25f"],
+
+Cell[TextData[{
+ "meaning that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+    SubscriptBox["b", "\[Alpha]"]}], TraditionalForm]],ExpressionUUID->
+  "c6d57ab6-4f1e-4f23-8b55-c59a0326adc0"],
+ " is the ",
+ StyleBox["boson number operator",
+  FontWeight->"Bold"],
+ " of the ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"ca025930-38e0-43dc-bd9a-11462264ad10"],
+ " state."
+}], "ItemParagraph",ExpressionUUID->"57d1841c-e3b5-4573-b03d-36d738e8b30c"]
+}, Open  ]],
+
+Cell["\<\
+All the single-mode Fock state can be constructed by the boson creation \
+operator from the vacuum state\
+\>", "TextNoIndent",ExpressionUUID->"52735e17-e694-45b8-afc8-06a32ead7c59"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   TemplateBox[{
+     SubscriptBox["n", "\[Alpha]"]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+   RowBox[{
+    FractionBox["1", 
+     SqrtBox[
+      RowBox[{
+       SubscriptBox["n", "\[Alpha]"], "!"}]]], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], ")"}], 
+     SubscriptBox["n", "\[Alpha]"]], 
+    RowBox[{
+     TemplateBox[{
+       SubscriptBox["0", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "."}]}]}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->\
+"4cda94c6-690f-4d0f-bf28-b38cf0609a9b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Generic Fock States", "Subsubsubsection",ExpressionUUID->"b3f381f8-8e32-4edd-934b-0fefa65d9b9b"],
+
+Cell["\<\
+The above result can be generalized to any Fock state of bosons\
+\>", "TextIndent",ExpressionUUID->"c27d010a-0829-487d-942d-51796cfb195b"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], 
+     SubscriptBox[
+      TemplateBox[{
+        RowBox[{"\[Ellipsis]", ",", 
+          SubscriptBox["n", "\[Beta]"], ",", 
+          SubscriptBox["n", "\[Alpha]"], ",", 
+          SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "B"]}], "=", 
+    RowBox[{
+     SqrtBox[
+      RowBox[{
+       SubscriptBox["n", "\[Alpha]"], "+", "1"}]], 
+     SubscriptBox[
+      TemplateBox[{
+        RowBox[{"\[Ellipsis]", ",", 
+          SubscriptBox["n", "\[Beta]"], ",", 
+          RowBox[{
+            SubscriptBox["n", "\[Alpha]"], "+", "1"}], ",", 
+          SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "B"]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["b", "\[Alpha]"], 
+     SubscriptBox[
+      TemplateBox[{
+        RowBox[{"\[Ellipsis]", ",", 
+          SubscriptBox["n", "\[Beta]"], ",", 
+          SubscriptBox["n", "\[Alpha]"], ",", 
+          SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "B"]}], "=", 
+    RowBox[{
+     SqrtBox[
+      SubscriptBox["n", "\[Alpha]"]], 
+     RowBox[{
+      SubscriptBox[
+       TemplateBox[{
+         RowBox[{"\[Ellipsis]", ",", 
+           SubscriptBox["n", "\[Beta]"], ",", 
+           RowBox[{
+             SubscriptBox["n", "\[Alpha]"], "-", "1"}], ",", 
+           SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+       "B"], "."}]}]}]}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 5515499843479260558",ExpressionUUID->"c3f9ed37-3ba5-4059-9702-\
+6e2dc69dce83"],
+
+Cell[TextData[{
+ "These two equations can be considered as the ",
+ StyleBox["defining properties",
+  FontWeight->"Bold"],
+ " of boson creation and annihilation operators. "
+}], "TextNoIndent",ExpressionUUID->"3c59922b-979b-4b18-b4a2-35a19d235558"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Operator Identities", "Subsubsubsection",ExpressionUUID->"62fb69b8-3100-48eb-bfcc-9074c36e6ef6"],
+
+Cell[TextData[{
+ "Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 5515499843479260558"],
+ ") implies the following operator identities"
+}], "TextIndent",ExpressionUUID->"f545ccc6-4460-4152-8067-0e479739d67a"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"[", 
+     RowBox[{
+      SubsuperscriptBox["b", "\[Alpha]", "\[Dagger]"], ",", 
+      SubsuperscriptBox["b", "\[Beta]", "\[Dagger]"]}], "]"}], "=", 
+    RowBox[{
+     RowBox[{"[", 
+      RowBox[{
+       SubscriptBox["b", "\[Alpha]"], ",", 
+       SubscriptBox["b", "\[Beta]"]}], "]"}], "=", "0"}]}], ",", " ", 
+   RowBox[{
+    RowBox[{"[", 
+     RowBox[{
+      SubscriptBox["b", "\[Alpha]"], ",", 
+      SubsuperscriptBox["b", "\[Beta]", "\[Dagger]"]}], "]"}], "=", 
+    RowBox[{
+     SubscriptBox["\[Delta]", 
+      RowBox[{"\[Alpha]", "\[VeryThinSpace]", "\[Beta]"}]], "."}]}]}], 
+  TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"716d532a-4a26-\
+4771-9a6b-e639a1bca260"],
+
+Cell[TextData[{
+ "These relations can be considered as the ",
+ StyleBox["algebraic definition",
+  FontWeight->"Bold"],
+ " of boson creation and annihilation operators."
+}], "TextNoIndent",ExpressionUUID->"4f034f24-41ef-4d1c-bd60-b38260e5d44e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fermion Creation and Annihilation", "Subsubsection",ExpressionUUID->"60d8e72c-4ed1-4e65-8056-ddccd035a840"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "The ",
+ StyleBox["fermion creation operator",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], TraditionalForm]],
+  ExpressionUUID->"642ab619-06b9-49aa-97fa-d2b8e110ff2c"],
+ " ",
+ StyleBox["adds",
+  FontSlant->"Italic"],
+ " a fermion to the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"24281f96-507c-44ae-b2c9-a87dc161575b"],
+ ", ",
+ StyleBox["increasing",
+  FontSlant->"Italic"],
+ " the occupation number by one ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], "\[RightArrow]", 
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], "+", "1"}]}], TraditionalForm]],
+  ExpressionUUID->"7d853919-3151-45db-a4ad-6d4a4883fd7f"],
+ " (while ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], "=", "0"}], TraditionalForm]],
+  ExpressionUUID->"f85ae484-0e82-4932-9953-e60a6ec8763e"],
+ "). It acts on a ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "f3ae4aeb-e4c3-4924-90c1-1e8d0a5e5358"],
+ "-particle first-quantized state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[CapitalPsi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"ecdcfd94-7e94-4e85-ac1e-f2873d9526c6"],
+ " as"
+}], "Item",ExpressionUUID->"03f15506-3c5d-4dde-92a1-10f6045c8c56"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       SqrtBox[
+        RowBox[{"N", "+", "1"}]]], 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[RightTriangle]", "-"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"2bccb0d0-\
+f00e-4fc8-b33f-5153c3cceb5d"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[{"\[Alpha]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    SubscriptBox["\[RightTriangle]", "-"]}], TraditionalForm]],ExpressionUUID->
+  "f4f41caa-15bd-4102-a1e8-c145cc15fe39"],
+ " ",
+ StyleBox["inserts",
+  FontSlant->"Italic"],
+ " the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"e089a9fd-3a2f-4e58-9c16-3029689ca0e4"],
+ " to ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"N", "+", "1"}], TraditionalForm]],ExpressionUUID->
+  "ce6969a8-13c8-4d73-a667-0bdc740d358c"],
+ " possible insertion positions ",
+ StyleBox["anti-symmetrically",
+  FontSlant->"Italic"],
+ "."
+}], "ItemParagraph",ExpressionUUID->"a2b53d5e-c4f5-49e4-95d8-8c44aee53de9"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["fermion annihilation operator",
+  FontWeight->"Bold"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["c", "\[Alpha]"], TraditionalForm]],ExpressionUUID->
+  "ab99f420-251f-4689-9cda-578866f6adbe"],
+ " ",
+ StyleBox["removes",
+  FontSlant->"Italic"],
+ " a fermion from the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"b0ba9fb4-19f1-400b-ab8e-3358ef9de86a"],
+ ", ",
+ StyleBox["reducing",
+  FontSlant->"Italic"],
+ " the occupation number by one ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], "\[Rule]", 
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], "-", "1"}]}], TraditionalForm]],
+  ExpressionUUID->"83301b1d-0c2b-43a7-aef5-b6351ed1531d"],
+ " (while ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["n", "\[Alpha]"], "=", "1"}], TraditionalForm]],
+  ExpressionUUID->"9d33669b-627b-4d48-84b3-de8737becd72"],
+ "). It acts on a ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "93d05c52-4cb3-4ddf-9a5a-a0c397050271"],
+ "-particle first-quantized state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[CapitalPsi]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"a89b9235-8b62-42c4-9f6b-b378bbc54d63"],
+ " as"
+}], "Item",ExpressionUUID->"68783975-3577-450f-a93b-07d6966dd0d8"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["c", "\[Alpha]"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       SqrtBox["N"]], 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[LeftTriangle]", "-"], 
+     TemplateBox[{"\[CapitalPsi]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"c6db2d51-\
+cc0f-4d70-9026-effb992da53b"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[{"\[Alpha]"},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+    SubscriptBox["\[LeftTriangle]", "-"]}], TraditionalForm]],ExpressionUUID->
+  "e7e47aab-02cd-421a-8b76-126925855b5c"],
+ " ",
+ StyleBox["removes",
+  FontSlant->"Italic"],
+ " the single-particle state ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"ae434e39-599d-4316-8263-ef621e032757"],
+ " from ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]],ExpressionUUID->
+  "5098cc5c-b4c8-4e99-b19e-c2cf1c6460a6"],
+ " possible deletion positions ",
+ StyleBox["anti-symmetrically",
+  FontSlant->"Italic"],
+ "."
+}], "ItemParagraph",ExpressionUUID->"81710fdf-180a-4daf-a2c3-58f7ddb64cd8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Single-Mode Fock States", "Subsubsubsection",ExpressionUUID->"6ae7191a-740c-4d0d-8d81-743bbf0e8cf4"],
+
+Cell["\<\
+Based on these definitions, we can show that the creation and annihilation \
+operators acting on single-mode Fock states as\
+\>", "TextIndent",ExpressionUUID->"ad310716-436a-4085-98cc-e4c5a1300f99"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+    TemplateBox[{
+      SubscriptBox["0", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+   
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[RightTriangle]", "-"], "\[ScriptOne]"}], "=", 
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+     TemplateBox[{
+       SubscriptBox["1", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+    TemplateBox[{
+      SubscriptBox["1", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       SqrtBox["2"]], 
+      TemplateBox[{"\[Alpha]"},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+     SubscriptBox["\[RightTriangle]", "-"], 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", 
+       SqrtBox["2"]], 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], 
+        "-", 
+        RowBox[{
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+         "\[CircleTimes]", 
+         TemplateBox[{"\[Alpha]"},
+          "Ket",
+          
+          DisplayFunction->(
+           RowBox[{"\[LeftBracketingBar]", #, 
+             "\[RightAngleBracket]"}]& )]}]}], ")"}]}], "=", "0"}]}]}], 
+  TraditionalForm]}], "DisplayFormulaNumbered",ExpressionUUID->"1e75a53b-d027-\
+4da2-a5ea-8c621295b82a"],
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["c", "\[Alpha]"], 
+    TemplateBox[{
+      SubscriptBox["0", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+   "0"}], TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["c", "\[Alpha]"], 
+    TemplateBox[{
+      SubscriptBox["1", "\[Alpha]"]},
+     "Ket",
+     DisplayFunction->(
+      RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+   
+   RowBox[{
+    RowBox[{
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     SubscriptBox["\[LeftTriangle]", "-"], 
+     TemplateBox[{"\[Alpha]"},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{"\[ScriptOne]", "=", 
+     RowBox[{
+      TemplateBox[{
+        SubscriptBox["0", "\[Alpha]"]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "."}]}]}]}], TraditionalForm]}], "DisplayFormulaNumbered",ExpressionUUID\
+->"069ddab3-64fc-499e-8e97-f382ed959f3f"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Thus we conclude (note that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], "=", "0"}], ",", "1"}], TraditionalForm]],
+  ExpressionUUID->"c9585274-e33a-4e0a-b673-82d5bfddb942"],
+ " only take two values)"
+}], "TextNoIndent",ExpressionUUID->"e7ef3b7b-9586-4264-bf35-a62a225c7441"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     SqrtBox[
+      RowBox[{"1", "-", 
+       SubscriptBox["n", "\[Alpha]"]}]], 
+     TemplateBox[{
+       RowBox[{"1", "-", 
+         SubscriptBox["n", "\[Alpha]"]}]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["c", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     SqrtBox[
+      SubscriptBox["n", "\[Alpha]"]], 
+     RowBox[{
+      TemplateBox[{
+        RowBox[{"1", "-", 
+          SubscriptBox["n", "\[Alpha]"]}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "."}]}]}]}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 2576531109702945186",ExpressionUUID->"0b44d810-c367-4a0f-9097-\
+2d2a4076d8f4"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Using Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 2576531109702945186"],
+ "), we can show that"
+}], "Item",ExpressionUUID->"ed101cc0-5cd2-4367-959c-a5c764bb4853"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+     SubscriptBox["c", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}], "=", 
+    RowBox[{
+     SubscriptBox["n", "\[Alpha]"], 
+     TemplateBox[{
+       SubscriptBox["n", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )]}]}], 
+   ","}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"8558190e-\
+1bd5-402e-a820-0582c137eed6"],
+
+Cell[TextData[{
+ "meaning that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+    SubscriptBox["c", "\[Alpha]"]}], TraditionalForm]],ExpressionUUID->
+  "6e0a841f-bc4e-4b6a-8494-72339c0a09a5"],
+ " is the ",
+ StyleBox["fermion number operator",
+  FontWeight->"Bold"],
+ " of the ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[{"\[Alpha]"},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+   TraditionalForm]],ExpressionUUID->"70ef5af4-046a-4c26-b861-c06f75a6e399"],
+ " state."
+}], "ItemParagraph",ExpressionUUID->"bd2f4691-23be-4eb8-83dc-a70835426471"]
+}, Open  ]],
+
+Cell["\<\
+All the single-mode Fock state can be constructed by the fermion creation \
+operator from the vacuum state\
+\>", "TextNoIndent",ExpressionUUID->"6be5686b-64a7-4e63-a454-cf9f06ebaf00"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   TemplateBox[{
+     SubscriptBox["n", "\[Alpha]"]},
+    "Ket",
+    DisplayFunction->(
+     RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], "=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], ")"}], 
+     SubscriptBox["n", "\[Alpha]"]], 
+    RowBox[{
+     TemplateBox[{
+       SubscriptBox["0", "\[Alpha]"]},
+      "Ket",
+      DisplayFunction->(
+       RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+     "."}]}]}], TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->\
+"5aeca242-40c7-48ec-8aef-e6d60d2d218a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Generic Fock States", "Subsubsubsection",ExpressionUUID->"283b4e9e-5b71-4a1d-b180-680197e20537"],
+
+Cell["\<\
+The above result can be generalized to any Fock state of bosons\
+\>", "TextIndent",ExpressionUUID->"84e99004-8aa4-43f4-bac9-67cc929e3972"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], 
+     SubscriptBox[
+      TemplateBox[{
+        RowBox[{"\[Ellipsis]", ",", 
+          SubscriptBox["n", "\[Beta]"], ",", 
+          SubscriptBox["n", "\[Alpha]"], ",", 
+          SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "F"]}], "=", 
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"(", "-", ")"}], 
+      RowBox[{
+       SubscriptBox["\[Sum]", 
+        RowBox[{"\[Beta]", "<", "\[Alpha]"}]], 
+       SubscriptBox["n", "\[Beta]"]}]], 
+     SqrtBox[
+      RowBox[{"1", "-", 
+       SubscriptBox["n", "\[Alpha]"]}]], 
+     SubscriptBox[
+      TemplateBox[{
+        RowBox[{"\[Ellipsis]", ",", 
+          SubscriptBox["n", "\[Beta]"], ",", 
+          RowBox[{"1", "-", 
+            SubscriptBox["n", "\[Alpha]"]}], ",", 
+          SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "F"]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["c", "\[Alpha]"], 
+     SubscriptBox[
+      TemplateBox[{
+        RowBox[{"\[Ellipsis]", ",", 
+          SubscriptBox["n", "\[Beta]"], ",", 
+          SubscriptBox["n", "\[Alpha]"], ",", 
+          SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+       "Ket",
+       DisplayFunction->(
+        RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+      "F"]}], "=", 
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"(", "-", ")"}], 
+      RowBox[{
+       SubscriptBox["\[Sum]", 
+        RowBox[{"\[Beta]", "<", "\[Alpha]"}]], 
+       SubscriptBox["n", "\[Beta]"]}]], 
+     SqrtBox[
+      SubscriptBox["n", "\[Alpha]"]], 
+     RowBox[{
+      SubscriptBox[
+       TemplateBox[{
+         RowBox[{"\[Ellipsis]", ",", 
+           SubscriptBox["n", "\[Beta]"], ",", 
+           RowBox[{"1", "-", 
+             SubscriptBox["n", "\[Alpha]"]}], ",", 
+           SubscriptBox["n", "\[Gamma]"], ",", "\[Ellipsis]"}]},
+        "Ket",
+        DisplayFunction->(
+         RowBox[{"\[LeftBracketingBar]", #, "\[RightAngleBracket]"}]& )], 
+       "F"], "."}]}]}]}], TraditionalForm]], "DisplayFormulaFramed",
+ CellTags->
+  "eq: 2438092776105532924",ExpressionUUID->"12ee1ee8-ab33-456d-9856-\
+31391d01723d"],
+
+Cell[TextData[{
+ "These two equations can be considered as the ",
+ StyleBox["defining properties",
+  FontWeight->"Bold"],
+ " of fermion creation and annihilation operators. "
+}], "TextNoIndent",ExpressionUUID->"fe3f1a58-5ce7-4d87-9941-c11b19005398"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Operator Identities", "Subsubsubsection",ExpressionUUID->"3d248c98-fdbb-4597-8704-eb011816e7c3"],
+
+Cell[TextData[{
+ "Eq. (",
+ 
+ CounterBox["DisplayFormulaNumbered", "eq: 2438092776105532924"],
+ ") implies the following operator identities"
+}], "TextIndent",ExpressionUUID->"f29eb48f-d792-4b4e-acb9-7bbeebeec868"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      SubsuperscriptBox["c", "\[Alpha]", "\[Dagger]"], ",", 
+      SubsuperscriptBox["c", "\[Beta]", "\[Dagger]"]}], "}"}], "=", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["c", "\[Alpha]"], ",", 
+       SubscriptBox["c", "\[Beta]"]}], "}"}], "=", "0"}]}], ",", " ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["c", "\[Alpha]"], ",", 
+      SubsuperscriptBox["c", "\[Beta]", "\[Dagger]"]}], "}"}], "=", 
+    RowBox[{
+     SubscriptBox["\[Delta]", 
+      RowBox[{"\[Alpha]", "\[VeryThinSpace]", "\[Beta]"}]], "."}]}]}], 
+  TraditionalForm]], "DisplayFormulaFramed",ExpressionUUID->"5d619523-07e3-\
+47cc-8447-881cd5d5c857"],
+
+Cell[TextData[{
+ "These relations can be considered as the ",
+ StyleBox["algebraic definition",
+  FontWeight->"Bold"],
+ " of fermion creation and annihilation operators."
+}], "TextNoIndent",ExpressionUUID->"1fb9553e-b11d-4516-891b-6f28fb92a36d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{660, 629},
+WindowMargins->{{Automatic, 8}, {Automatic, 25}},
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Core.nb"]], 
+   Cell[
+    CellGroupData[{
+      Cell["Style Environment Names", "Section"], 
+      Cell[
+       StyleData[All, "Working"], ShowCellLabel -> True], 
+      Cell[
+       StyleData[All, "Presentation"], ScreenStyleEnvironment -> 
+       "Presentation", Magnification -> 2.], 
+      Cell[
+       StyleData[All, "Printout"], PageWidth :> PaperWidth, ShowCellBracket -> 
+       False, CellLabelAutoDelete -> True]}, Open]], 
+   Cell[
+    CellGroupData[{
+      Cell["Notebook Options Settings", "Section"], 
+      Cell[
+      "The options defined for the style below will be used at the Notebook \
+level.", "Text"], 
+      Cell[
+       StyleData["Notebook"], WindowToolbars -> {"EditBar"}, 
+       WindowSize -> {240, 400}, DockedCells -> Dynamic[
+         If[CurrentValue[ScreenStyleEnvironment] === "Working", 
+          Cell[
+           BoxData[
+            TemplateBox[{"\[VerticalSeparator]", "\"\[VerticalSeparator]\"", 
+              ButtonBox[
+               StyleBox["\"DiagramEditor\"", "CT", StripOnInput -> False], 
+               ButtonFunction :> DiagramEditor`DiagramEditor[], Appearance -> 
+               "Frameless", Evaluator -> Automatic, Method -> "Preemptive"], 
+              
+              DynamicModuleBox[{$CellContext`nb$$ = 
+                NotebookObject[], $CellContext`cells$$ = {}, \
+$CellContext`NameCellTag$$, $CellContext`SetCellTag$$, \
+$CellContext`CellRef$$, $CellContext`TargetRef$$ = 
+                "", $CellContext`TaggedCells$$}, 
+               DynamicBox[
+                ToBoxes[$CellContext`nb$$ = EvaluationNotebook[]; Row[{
+                    EventHandler[
+                    Dynamic[
+                    ActionMenu[
+                    Style["Xref", "CT"], 
+                    Apply[Style[
+                    StringReplace[#2, {StringExpression["eq: ", 
+                    BlankSequence[]] :> "Eq. (" <> ToString[
+                    
+                    CurrentValue[#, {
+                    "CounterValue", "DisplayFormulaNumbered"}]] <> ")", 
+                    StringExpression["ref: ", 
+                    BlankSequence[]] :> "Ref. [" <> ToString[
+                    CurrentValue[#, {"CounterValue", "Reference"}]] <> "]", 
+                    StringExpression["hw: ", 
+                    BlankSequence[]] :> "(HW " <> ToString[
+                    CurrentValue[#, {"CounterValue", "Homework"}]] <> ")"}], 
+                    "RM"] :> SelectionMove[#, All, 
+                    Cell]& , $CellContext`cells$$, {1}], Appearance -> None], 
+                    TrackedSymbols :> {$CellContext`cells$$}], 
+                    "MouseEntered" :> ($CellContext`cells$$ = \
+$CellContext`TaggedCells$$[])], " ", 
+                    DynamicModule[{$CellContext`col = Black}, 
+                    EventHandler[
+                    Button[
+                    Style[
+                    "Target", "BT", FontColor -> Dynamic[$CellContext`col]], 
+                    SelectionMove[$CellContext`nb$$, All, Cell]; 
+                    Module[{$CellContext`cell$ = 
+                    NotebookRead[$CellContext`nb$$], $CellContext`tag$}, \
+$CellContext`tag$ = OptionValue[Cell, 
+                    Options[$CellContext`cell$], CellTags]; If[
+                    Not[
+                    
+                    StringQ[$CellContext`tag$]], $CellContext`tag$ = \
+$CellContext`NameCellTag$$[$CellContext`cell$]]; \
+$CellContext`SetCellTag$$[$CellContext`tag$]; $CellContext`TargetRef$$ = \
+$CellContext`CellRef$$[$CellContext`cell$, $CellContext`tag$]], Appearance -> 
+                    "Frameless"], {
+                    "MouseEntered" :> ($CellContext`col = Gray), 
+                    "MouseExited" :> ($CellContext`col = Black)}]], " ", 
+                    DynamicModule[{$CellContext`col = Black}, 
+                    EventHandler[
+                    Button[
+                    Style[
+                    "Insert", "BT", FontColor -> Dynamic[$CellContext`col]], 
+                    NotebookWrite[$CellContext`nb$$, 
+                    TextData[$CellContext`TargetRef$$]], Appearance -> 
+                    "Frameless"], {
+                    "MouseEntered" :> ($CellContext`col = Gray), 
+                    "MouseExited" :> ($CellContext`col = Black)}]], " ", 
+                    DynamicModule[{$CellContext`col = Black}, 
+                    EventHandler[
+                    Button[
+                    Style[
+                    "Clear", "BT", FontColor -> Dynamic[$CellContext`col]], 
+                    SelectionMove[$CellContext`nb$$, All, 
+                    Cell]; $CellContext`SetCellTag$$[{}], Appearance -> 
+                    "Frameless"], {
+                    "MouseEntered" :> ($CellContext`col = Gray), 
+                    "MouseExited" :> ($CellContext`col = Black)}]]}], 
+                 StandardForm], ImageSizeCache -> {142., {5., 13.}}], 
+               DynamicModuleValues :> {{
+                 DownValues[$CellContext`NameCellTag$$] = {HoldPattern[
+                    $CellContext`NameCellTag$$[
+                    Pattern[$CellContext`cell, 
+                    Blank[Cell]]]] :> With[{$CellContext`index = ToString[
+                    Hash[
+                    First[$CellContext`cell]]]}, 
+                    Switch[
+                    Part[$CellContext`cell, 2], 
+                    Alternatives[
+                    "DisplayFormulaNumbered", "DisplayFormulaFramed"], 
+                    "eq: " <> $CellContext`index, "Reference", 
+                    "ref: " <> $CellContext`index, "Homework", 
+                    "hw: " <> $CellContext`index, 
+                    Blank[], $CellContext`index]]}}, {
+                 DownValues[$CellContext`SetCellTag$$] = {HoldPattern[
+                    $CellContext`SetCellTag$$[
+                    Pattern[$CellContext`tag$, 
+                    Blank[]]]] :> SetOptions[
+                    NotebookSelection[$CellContext`nb$$], 
+                    CellTags -> $CellContext`tag$]}}, {
+                 DownValues[$CellContext`CellRef$$] = {HoldPattern[
+                    $CellContext`CellRef$$[
+                    Pattern[$CellContext`cell, 
+                    Blank[Cell]], 
+                    Pattern[$CellContext`tag, 
+                    Blank[]]]] :> Switch[
+                    Part[$CellContext`cell, 2], 
+                    Alternatives[
+                    "DisplayFormulaNumbered", "DisplayFormulaFramed"], {
+                    "Eq. (", 
+                    CounterBox["DisplayFormulaNumbered", $CellContext`tag], 
+                    ")"}, "Reference", {"[", 
+                    CounterBox["Reference", $CellContext`tag], "]"}, 
+                    "Homework", {"(HW ", 
+                    CounterBox["Homework", $CellContext`tag], ")"}, 
+                    Blank[], {}]}}, {
+                 DownValues[$CellContext`TaggedCells$$] = {HoldPattern[
+                    $CellContext`TaggedCells$$[]] :> Sort[
+                    Cases[
+                    Map[{#, 
+                    CurrentValue[#, CellTags]}& , 
+                    Cells[$CellContext`nb$$]], {
+                    Blank[], 
+                    Except[{}]}]]}}}]}, "RowWithSeparators"]], 
+           "Toolbar"], {}]], PageHeaders -> {{
+          Cell[
+           TextData[{
+             CounterBox["Page"]}], "PageNumber"], None, 
+          Cell[
+           TextData[{
+             ValueBox["FileName"]}], "Header"]}, {
+          Cell[
+           TextData[{
+             ValueBox["FileName"]}], "Header"], None, 
+          Cell[
+           TextData[{
+             CounterBox["Page"]}], "PageNumber"]}}, 
+       PrintingOptions -> {
+        "EmbedExternalFonts" -> False, "EmbedStandardPostScriptFonts" -> 
+         False, "FacingPages" -> False, "FirstPageFace" -> Right, 
+         "FirstPageFooter" -> True, "FirstPageHeader" -> True, 
+         "GraphicsPrintingFormat" -> "Automatic", 
+         "IncludePostScriptResourceDirectives" -> True, "IncludeSpecialFonts" -> 
+         True, "InnerOuterMargins" -> {Automatic, Automatic}, "Magnification" -> 
+         1., "OpacityRenderingMethod" -> Automatic, 
+         "PageFooterMargins" -> {Automatic, Automatic}, 
+         "PageHeaderMargins" -> {Automatic, Automatic}, 
+         "PageSize" -> {Automatic, Automatic}, "PaperOrientation" -> 
+         "Portrait", "PaperSize" -> {Automatic, Automatic}, 
+         "PostScriptOutputFile" -> Automatic, "PrintCellBrackets" -> False, 
+         "PrintMultipleHorizontalPages" -> False, "PrintRegistrationMarks" -> 
+         False, "PrintSelectionHighlighting" -> False, 
+         "PrintingMargins" -> {{50, 50}, {70, 70}}, "RasterizationResolution" -> 
+         "TargetDevice", "RestPagesFooter" -> True, "RestPagesHeader" -> True,
+          "UnixShellPrintingCommand" -> Automatic, "UsePostScriptOutputFile" -> 
+         False, "UseUnixShellPrintingCommand" -> False, 
+         "VertexColorRenderingMethod" -> "RasterizeFeatures"}, 
+       ShowCellBracket -> Automatic, GroupOpenerColor -> GrayLevel[0.2], 
+       CellBracketOptions -> {
+        "Color" -> GrayLevel[0.8], "HoverColor" -> GrayLevel[0.2]}, 
+       ShowStringCharacters -> True, StyleMenuListing -> None, FontFamily -> 
+       "CMU Serif", 
+       GraphicsBoxOptions -> {
+        BaseStyle -> {
+          Arrowheads -> 0.04, CapForm -> "Round", JoinForm -> "Round", 
+           EdgeThickness -> Absolute[1.6], EdgeCapForm :> "Round", 
+           EdgeJoinForm :> "Round", PointSize -> Absolute[4], Thickness -> 
+           Absolute[1.6], FontFamily -> "CMU Serif", FontSize -> 14}, 
+         DefaultAxesStyle -> Directive["GraphicsAxes", 
+           AbsoluteThickness[1], 
+           GrayLevel[0]], DefaultFrameStyle -> Directive["GraphicsFrame", 
+           AbsoluteThickness[1], 
+           GrayLevel[0]], DefaultFrameTicksStyle -> 
+         Directive["GraphicsFrameTicks", 
+           GrayLevel[0], FontSize -> 12], DefaultTicksStyle -> 
+         Directive["GraphicsTicks", 
+           GrayLevel[0], FontSize -> 12], ImageSizeRaw -> {{180}, {180}}}, 
+       Graphics3DBoxOptions -> {
+        BaseStyle -> {
+          Arrowheads -> 0.04, CapForm -> "Round", JoinForm -> "Round", 
+           EdgeThickness -> Absolute[1.6], EdgeCapForm :> "Round", 
+           EdgeJoinForm :> "Round", PointSize -> Absolute[4], Thickness -> 
+           Absolute[1.6], FontFamily -> "CMU Serif", FontSize -> 14}, 
+         DefaultTicksStyle -> Directive["Graphics3DTicks", FontSize -> 12], 
+         ImageSizeRaw -> {{200}, {200}}}]}, Open]], 
+   Cell[
+    CellGroupData[{
+      Cell["Styles for Headings", "Section"], 
+      Cell[
+       CellGroupData[{
+         Cell["Titles", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Title"], CellMargins -> {{30, 30}, {5, 15}}, 
+             StyleKeyMapping -> {"Tab" -> "Subtitle"}, 
+             CellGroupingRules -> {"TitleGrouping", 0}, PageBreakBelow -> 
+             False, DefaultNewInlineCellStyle -> "None", TextAlignment -> 
+             Center, LanguageCategory -> "NaturalLanguage", CounterIncrements -> 
+             "Title", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subtitle", 0}, {"Subsubtitle", 0}}, 
+             MenuSortingValue -> 1100, FontFamily -> 
+             "CMU Sans Serif Demi Condensed", FontSize -> 36], 
+            Cell[
+             StyleData["Title", "Printout"], 
+             CellMargins -> {{10, 10}, {5, 15}}, FontFamily -> 
+             "CMU Sans Serif", FontWeight -> "Bold"]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subtitle"], CellMargins -> {{30, 30}, {5, 0}}, 
+             StyleKeyMapping -> {
+              "Tab" -> "Subsubtitle", KeyEvent["Tab", Modifiers -> {Shift}] -> 
+               "Title"}, CellGroupingRules -> {"TitleGrouping", 10}, 
+             PageBreakBelow -> False, DefaultNewInlineCellStyle -> "None", 
+             TextAlignment -> Center, LanguageCategory -> "NaturalLanguage", 
+             CounterIncrements -> "Subtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subsubtitle", 0}}, MenuSortingValue -> 1120, 
+             FontFamily -> "CMU Sans Serif Demi Condensed", FontSize -> 24], 
+            Cell[
+             StyleData["Subtitle", "Printout"], 
+             CellMargins -> {{10, 10}, {5, 0}}, FontFamily -> 
+             "CMU Sans Serif", FontWeight -> "Bold"]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubtitle"], CellMargins -> {{30, 30}, {5, 0}}, 
+             StyleKeyMapping -> {
+              KeyEvent["Tab", Modifiers -> {Shift}] -> "Subtitle"}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, DefaultNewInlineCellStyle -> "None", TextAlignment -> 
+             Center, LanguageCategory -> "NaturalLanguage", CounterIncrements -> 
+             "Subsubtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, MenuSortingValue -> 1140, FontFamily -> 
+             "CMU Sans Serif Demi Condensed", FontSize -> 18], 
+            Cell[
+             StyleData["Subsubtitle", "Printout"], 
+             CellMargins -> {{10, 10}, {5, 0}}, FontFamily -> 
+             "CMU Sans Serif", FontWeight -> "Bold"]}, Open]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Author", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Author"], CellMargins -> {{15, 15}, {0, 15}}, 
+             CellFrameLabels -> {{Inherited, Inherited}, {
+                Cell[
+                 BoxData[
+                  ButtonBox[
+                   StyleBox[
+                   "Date", FontFamily -> "CMU Serif Upright Italic", FontSize -> 
+                    14, FontVariations -> {"Underline" -> True}], 
+                   ButtonFunction :> 
+                   Module[{nb, cell}, nb = ButtonNotebook[]; 
+                    SelectionMove[nb, All, ButtonCell]; 
+                    cell = NotebookRead[nb]; NotebookWrite[nb, 
+                    Append[
+                    cell, CellFrameLabels -> {{Inherited, Inherited}, {
+                    Cell[
+                    TextData[{
+                    DateString["ISODate"]}]], Inherited}}]]], Active -> True, 
+                   Appearance -> None, Evaluator -> Automatic]]], Inherited}},
+              TextAlignment -> Center, ParagraphSpacing -> {0, 0}, 
+             MenuSortingValue -> 1180, FontFamily -> 
+             "CMU Serif Upright Italic", FontSize -> 14], 
+            Cell[
+             StyleData["Author", "Printout"], 
+             CellMargins -> {{0, 0}, {Inherited, Inherited}}]}, Open]]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Section", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Section"], CellFrame -> {{0, 0}, {0, 1}}, 
+             CellMargins -> {{30, Inherited}, {5, 30}}, 
+             StyleKeyMapping -> {"Tab" -> "Subsection"}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameMargins -> 4, DefaultNewInlineCellStyle -> 
+             "None", LineSpacing -> {1, 2}, LanguageCategory -> 
+             "NaturalLanguage", CounterIncrements -> "Section", 
+             CounterAssignments -> {{"Subsection", 0}, {"Subsubsection", 0}, {
+               "Item", 0}, {"Subitem", 0}, {"Subsubitem", 0}, {
+               "ItemNumbered", 0}, {"SubitemNumbered", 0}, {
+               "SubsubitemNumbered", 0}}, MenuSortingValue -> 1300, 
+             FontFamily -> "CMU Sans Serif", FontSize -> 21, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Section", "Printout"], 
+             CellMargins -> {{0, Inherited}, {5, 30}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsection"], CellDingbat -> 
+             Cell["\[FilledSmallSquare]"], 
+             CellMargins -> {{50, Inherited}, {5, 20}}, 
+             StyleKeyMapping -> {
+              "Tab" -> "Subsubsection", KeyEvent["Tab", Modifiers -> {Shift}] -> 
+               "Section"}, CellGroupingRules -> {"SectionGrouping", 40}, 
+             PageBreakBelow -> False, DefaultNewInlineCellStyle -> "None", 
+             LanguageCategory -> "NaturalLanguage", CounterIncrements -> 
+             "Subsection", 
+             CounterAssignments -> {{"Subsubsection", 0}, {"Item", 0}, {
+               "Subitem", 0}, {"Subsubitem", 0}, {"ItemNumbered", 0}, {
+               "SubitemNumbered", 0}, {"SubsubitemNumbered", 0}}, 
+             MenuSortingValue -> 1310, FontFamily -> "CMU Sans Serif", 
+             FontSize -> 18, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsection", "Printout"], 
+             CellMargins -> {{20, Inherited}, {5, 20}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsection"], CellDingbat -> 
+             Cell["\[FilledSmallSquare]"], 
+             CellMargins -> {{50, Inherited}, {5, 10}}, 
+             StyleKeyMapping -> {
+              "Tab" -> "Subsubsubsection", 
+               KeyEvent["Tab", Modifiers -> {Shift}] -> "Subsection"}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, LanguageCategory -> "NaturalLanguage", CounterIncrements -> 
+             "Subsubsection", 
+             CounterAssignments -> {{"Item", 0}, {"Subitem", 0}, {
+               "Subsubitem", 0}, {"ItemNumbered", 0}, {
+               "SubitemNumbered", 0}, {"SubsubitemNumbered", 0}}, 
+             MenuSortingValue -> 1320, MenuCommandKey :> "1", FontFamily -> 
+             "CMU Serif", FontSize -> 16, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsection", "Printout"], 
+             CellMargins -> {{20, Inherited}, {5, 10}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsubsection"], CellDingbat -> {
+               Cell["\[EmptySmallSquare]", FontSlant -> "Plain"]}, 
+             CellMargins -> {{60, Inherited}, {2, 5}}, 
+             StyleKeyMapping -> {
+              "Backspace" -> "Supplementary", 
+               KeyEvent["Tab", Modifiers -> {Shift}] -> "Subsubsection"}, 
+             CellGroupingRules -> {"SectionGrouping", 60}, PageBreakBelow -> 
+             False, LanguageCategory -> "NaturalLanguage", CounterIncrements -> 
+             "Subsubsubsection", 
+             CounterAssignments -> {{"Item", 0}, {"Subitem", 0}, {
+               "Subsubitem", 0}, {"ItemNumbered", 0}, {
+               "SubitemNumbered", 0}, {"SubsubitemNumbered", 0}}, 
+             MenuSortingValue -> 1330, FontFamily -> "CMU Serif", FontSize -> 
+             14, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsubsection", "Printout"], 
+             CellMargins -> {{30, Inherited}, {2, 5}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Supplementary"], ShowGroupOpener -> True, 
+             CellMargins -> {{60, Inherited}, {2, 5}}, 
+             StyleKeyMapping -> {
+              "Backspace" -> "Subsubsubsection", 
+               KeyEvent["Tab", Modifiers -> {Shift}] -> "Subsubsection"}, 
+             CellGroupingRules -> {"SectionGrouping", 70}, PageBreakBelow -> 
+             False, LanguageCategory -> "NaturalLanguage", CounterIncrements -> 
+             "Supplementary", 
+             CounterAssignments -> {{"Item", 0}, {"Subitem", 0}, {
+               "Subsubitem", 0}, {"ItemNumbered", 0}, {
+               "SubitemNumbered", 0}, {"SubsubitemNumbered", 0}}, 
+             MenuSortingValue -> 1340, FontFamily -> "CMU Serif", FontSize -> 
+             14, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Supplementary", "Printout"], 
+             CellMargins -> {{0, 0}, {0, 0}}, CellOpen -> False]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData[
+             "Passage", StyleDefinitions -> StyleData["Supplementary"]], 
+             MenuSortingValue -> 1350], 
+            Cell[
+             StyleData["Passage", "Printout"], 
+             CellMargins -> {{30, Inherited}, {2, 5}}, CellOpen -> True]}, 
+           Open]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Abstract", "Subsection", StyleMenuListing -> None], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData[
+             "AbstractSection", StyleDefinitions -> 
+              StyleData["Subsubsection"]], CellDingbat -> None, 
+             CellMargins -> {{80, 80}, {5, 15}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, 
+             DefaultNewCellStyle -> "Abstract", TextAlignment -> Center, 
+             MenuSortingValue -> 1200], 
+            Cell[
+             StyleData["AbstractSection", "Printout"], 
+             CellMargins -> {{40, 40}, {5, 15}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData[
+             "Abstract", StyleDefinitions -> StyleData["TextIndent"]], 
+             CellMargins -> {{80, 80}, {5, 5}}, CellGroupingRules -> 
+             "GraphicsGrouping", MenuSortingValue -> 1220], 
+            Cell[
+             StyleData["Abstract", "Printout"], 
+             CellMargins -> {{40, 40}, {5, 5}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Keywords", StyleDefinitions -> StyleData["Text"]], 
+             CellMargins -> {{80, 80}, {5, 0}}, CellFrameLabels -> {{
+                Cell[
+                 TextData[{
+                   StyleBox[
+                   "Keywords:", FontFamily -> "CMU Serif", FontWeight -> 
+                    "Bold"]}], CellBaseline -> Baseline], None}, {
+               None, None}}, CounterIncrements -> "Text", MenuSortingValue -> 
+             1280, FontFamily -> "CMU Concrete", FontSize -> 12], 
+            Cell[
+             StyleData["Keywords", "Printout"], 
+             CellMargins -> {{40, 40}, {5, 5}}]}, Open]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Reference", "Subsection", StyleMenuListing -> None], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData[
+             "ReferenceSection", StyleDefinitions -> 
+              StyleData["Subsubsection"]], CellDingbat -> None, 
+             CellMargins -> {{30, Inherited}, {5, 5}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, 
+             DefaultNewCellStyle -> "Reference", MenuSortingValue -> 1800], 
+            Cell[
+             StyleData["ReferenceSection", "Printout"], ShowGroupOpener -> 
+             False, CellMargins -> {{0, Inherited}, {5, 5}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Reference", StyleDefinitions -> StyleData["Text"]], 
+             CellMargins -> {{35, Inherited}, {2, 2}}, CellFrameLabels -> {{
+                Cell[
+                 TextData[{"[", 
+                   CounterBox["Reference"], "]"}], CellBaseline -> Baseline], 
+                None}, {None, None}}, DefaultNewCellStyle -> "Reference", 
+             ShowAutoSpellCheck -> False, IgnoreSpellCheck -> True, 
+             CounterIncrements -> "Reference", MenuSortingValue -> 1810, 
+             MenuCommandKey :> "5"], 
+            Cell[
+             StyleData["Reference", "Printout"], 
+             CellMargins -> {{5, Inherited}, {2, 2}}]}, Open]]}, Open]]}, 
+     Open]], 
+   Cell[
+    CellGroupData[{
+      Cell["Styles for Body Text", "Section"], 
+      Cell[
+       CellGroupData[{
+         Cell["Standard", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Text"], CellMargins -> {{50, 10}, {2, 2}}, 
+             TextJustification -> 1, Hyphenation -> True, 
+             HyphenationOptions -> {"HyphenationMinLengths" -> {3, 4}}, 
+             LineSpacing -> {1, 0}, LanguageCategory -> "NaturalLanguage", 
+             CounterIncrements -> "Text", StyleMenuListing -> None, 
+             FontFamily -> "CMU Serif", FontSize -> 14], 
+            Cell[
+             StyleData["Text", "Printout"], 
+             CellMargins -> {{20, 10}, {2, 2}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["TextIndent", StyleDefinitions -> StyleData["Text"]], 
+             CellMargins -> {{50, 10}, {2, 5}}, 
+             StyleKeyMapping -> {"Backspace" -> "TextNoIndent"}, 
+             DefaultDuplicateCellStyle -> "TextIndent", ParagraphIndent -> 14,
+              MenuSortingValue -> 1410], 
+            Cell[
+             StyleData["TextIndent", "Printout"], 
+             CellMargins -> {{20, 10}, {2, 5}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["TextNoIndent", StyleDefinitions -> StyleData["Text"]],
+              StyleKeyMapping -> {"Tab" -> "TextIndent"}, 
+             DefaultDuplicateCellStyle -> "TextNoIndent", MenuSortingValue -> 
+             1420, MenuCommandKey :> "2"], 
+            Cell[
+             StyleData["TextNoIndent", "Printout"]]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SmallText"], CellMargins -> {{60, 10}, {0, 0}}, 
+             CellGroupingRules -> "GraphicsGrouping", 
+             DefaultNewInlineCellStyle -> "None", TextAlignment -> Right, 
+             TextJustification -> 0., LineSpacing -> {1, 1}, LanguageCategory -> 
+             "NaturalLanguage", CounterIncrements -> "SmallText", 
+             MenuSortingValue -> 2000, MenuCommandKey :> "6", FontFamily -> 
+             "CMU Classical Serif", FontSize -> 9], 
+            Cell[
+             StyleData["SmallText", "Printout"], 
+             CellMargins -> {{0, 0}, {0, 0}}, CellOpen -> False]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["TextConcrete", StyleDefinitions -> StyleData["Text"]],
+              FontFamily -> "CMU Concrete"], 
+            Cell[
+             StyleData["TextConcrete", "Printout"]]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData[
+             "TextConcreteIndent", StyleDefinitions -> 
+              StyleData["TextConcrete"]], CellMargins -> {{50, 10}, {2, 5}}, 
+             StyleKeyMapping -> {"Backspace" -> "TextConcreteNoIndent"}, 
+             DefaultDuplicateCellStyle -> "TextConcreteIndent", 
+             ParagraphIndent -> 14, MenuSortingValue -> 1430], 
+            Cell[
+             StyleData["TextConcreteIndent", "Printout"], 
+             CellMargins -> {{20, 10}, {2, 5}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData[
+             "TextConcreteNoIndent", StyleDefinitions -> 
+              StyleData["TextConcrete"]], 
+             StyleKeyMapping -> {"Tab" -> "TextConcreteIndent"}, 
+             DefaultDuplicateCellStyle -> "TextConcreteNoIndent", 
+             MenuSortingValue -> 1440], 
+            Cell[
+             StyleData["TextConcreteNoIndent", "Printout"]]}, Open]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Display", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell["Formula", "Subsubsection"], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData[
+                "InlineFormula", StyleDefinitions -> StyleData["Text"]], 
+                StripStyleOnPaste -> True, DefaultFormatType -> 
+                "TraditionalForm", 
+                HyphenationOptions -> {
+                 "HyphenationCharacter" -> "\[Continuation]"}, 
+                LanguageCategory -> "Formula", ScriptLevel -> 1, 
+                SingleLetterItalics -> True], 
+               Cell[
+                StyleData["InlineFormula", "Printout"]]}, Open]], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData[
+                "DisplayFormula", StyleDefinitions -> 
+                 StyleData["InlineFormula"]], 
+                CellMargins -> {{80, 20}, {5, 5}}, 
+                CellGroupingRules -> {"GroupTogetherGrouping", 20000}, 
+                ScriptLevel -> 0, MenuSortingValue -> 1720], 
+               Cell[
+                StyleData["DisplayFormula", "Printout"], 
+                CellMargins -> {{50, 10}, {5, 5}}]}, Open]], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData[
+                "DisplayFormulaNumbered", StyleDefinitions -> 
+                 StyleData["DisplayFormula"]], CellFrameLabels -> {{None, 
+                   Cell[
+                    TextData[{"(", 
+                    CounterBox["DisplayFormulaNumbered"], ")"}]]}, {
+                  None, None}}, CounterIncrements -> "DisplayFormulaNumbered",
+                 MenuSortingValue -> 1740, MenuCommandKey :> "4"], 
+               Cell[
+                StyleData["DisplayFormulaNumbered", "Printout"], 
+                CellMargins -> {{50, 10}, {5, 5}}]}, Open]], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData[
+                "DisplayFormulaFramed", StyleDefinitions -> 
+                 StyleData["DisplayFormulaNumbered"]], CellFrame -> 1, 
+                CounterIncrements -> "DisplayFormulaNumbered", 
+                MenuSortingValue -> 1760], 
+               Cell[
+                StyleData["DisplayFormulaNumbered", "Printout"], 
+                CellMargins -> {{50, 10}, {5, 5}}]}, Open]], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData[
+                "DisplayFormulaConcrete", StyleDefinitions -> 
+                 StyleData["DisplayFormula"]], MenuSortingValue -> 1770, 
+                FontFamily -> "CMU Concrete"], 
+               Cell[
+                StyleData["DisplayFormulaConcrete", "Printout"]]}, Open]]}, 
+           Open]], 
+         Cell[
+          CellGroupData[{
+            Cell["Lists", "Subsubsection"], 
+            Cell[
+             CellGroupData[{
+               Cell["Bulleted", "Subsubsubsection"], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData["Item", StyleDefinitions -> StyleData["Text"]], 
+                   CellDingbat -> 
+                   Cell["\[FilledSmallCircle]", FontWeight -> "Bold"], 
+                   CellMargins -> {{65, 10}, {2, 5}}, ReturnCreatesNewCell -> 
+                   True, StyleKeyMapping -> {
+                    "Tab" -> "Subitem", "Backspace" -> "ItemParagraph"}, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15000}, 
+                   CellFrameLabelMargins -> 4, TextAlignment -> Left, 
+                   TextJustification -> 0., CounterIncrements -> "Item", 
+                   CounterAssignments -> {{"Subitem", 0}, {"Subsubitem", 0}}, 
+                   MenuSortingValue -> 1600, MenuCommandKey :> "3"], 
+                  Cell[
+                   StyleData["Item", "Printout"], 
+                   CellMargins -> {{35, 10}, {2, 5}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "ItemParagraph", StyleDefinitions -> StyleData["Text"]], 
+                   CellMargins -> {{65, 10}, {2, 2}}, ReturnCreatesNewCell -> 
+                   True, CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15000}, 
+                   DefaultNewCellStyle -> "Item", TextAlignment -> Left, 
+                   TextJustification -> 0., MenuSortingValue -> 1605], 
+                  Cell[
+                   StyleData["ItemParagraph", "Printout"], 
+                   CellMargins -> {{35, 10}, {2, 2}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "Subitem", StyleDefinitions -> StyleData["Text"]], 
+                   CellDingbat -> 
+                   Cell["\[FilledSmallCircle]", FontWeight -> "Bold"], 
+                   CellMargins -> {{80, 10}, {2, 5}}, ReturnCreatesNewCell -> 
+                   True, StyleKeyMapping -> {
+                    "Tab" -> "Subsubitem", 
+                    KeyEvent["Tab", Modifiers -> {Shift}] -> "Item", 
+                    "Backspace" -> "SubitemParagraph"}, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15100}, 
+                   CellFrameLabelMargins -> 4, DefaultNewCellStyle -> "Item", 
+                   TextAlignment -> Left, TextJustification -> 0., 
+                   CounterIncrements -> "Subitem", 
+                   CounterAssignments -> {{"Subsubitem", 0}}, 
+                   MenuSortingValue -> 1610], 
+                  Cell[
+                   StyleData["Subitem", "Printout"], 
+                   CellMargins -> {{50, 10}, {2, 5}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "SubitemParagraph", StyleDefinitions -> StyleData["Text"]],
+                    CellMargins -> {{80, 10}, {2, 2}}, ReturnCreatesNewCell -> 
+                   True, CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15100}, 
+                   CellFrameLabelMargins -> 4, DefaultNewCellStyle -> 
+                   "Subitem", TextAlignment -> Left, TextJustification -> 0., 
+                   MenuSortingValue -> 1615], 
+                  Cell[
+                   StyleData["SubitemParagraph", "Printout"], 
+                   CellMargins -> {{50, 10}, {2, 2}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "Subsubitem", StyleDefinitions -> StyleData["Text"]], 
+                   CellDingbat -> 
+                   Cell["\[FilledSmallCircle]", FontWeight -> "Bold"], 
+                   CellMargins -> {{95, 10}, {2, 5}}, ReturnCreatesNewCell -> 
+                   True, StyleKeyMapping -> {
+                    KeyEvent["Tab", Modifiers -> {Shift}] -> "Subitem", 
+                    "Backspace" -> "SubsubitemParagraph"}, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15200}, 
+                   CellFrameLabelMargins -> 4, DefaultNewCellStyle -> 
+                   "Subsubitem", TextAlignment -> Left, TextJustification -> 
+                   0., CounterIncrements -> "Subsubitem", MenuSortingValue -> 
+                   1620], 
+                  Cell[
+                   StyleData["Subsubitem", "Printout"], 
+                   CellMargins -> {{65, 10}, {2, 5}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "SubsubitemParagraph", StyleDefinitions -> 
+                    StyleData["Text"]], CellMargins -> {{95, 10}, {2, 2}}, 
+                   ReturnCreatesNewCell -> True, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15200}, 
+                   CellFrameLabelMargins -> 4, DefaultNewCellStyle -> 
+                   "Subsubitem", TextAlignment -> Left, TextJustification -> 
+                   0., CounterIncrements -> "Subsubitem", MenuSortingValue -> 
+                   1625], 
+                  Cell[
+                   StyleData["SubsubitemParagraph", "Printout"], 
+                   CellMargins -> {{65, 10}, {2, 2}}]}, Open]]}, Open]], 
+            Cell[
+             CellGroupData[{
+               Cell["Numbered", "Subsubsubsection"], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "ItemNumbered", StyleDefinitions -> StyleData["Text"]], 
+                   CellDingbat -> Cell[
+                    TextData[{
+                    CounterBox["ItemNumbered"], "."}], FontWeight -> "Bold"], 
+                   CellMargins -> {{65, 10}, {2, 5}}, ReturnCreatesNewCell -> 
+                   True, StyleKeyMapping -> {
+                    "Tab" -> "SubitemNumbered", "Backspace" -> 
+                    "ItemParagraph"}, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15000}, 
+                   CellFrameLabelMargins -> 4, CounterIncrements -> 
+                   "ItemNumbered", 
+                   CounterAssignments -> {{"SubitemNumbered", 0}, {
+                    "SubsubitemNumbered", 0}}, MenuSortingValue -> 1630], 
+                  Cell[
+                   StyleData["ItemNumbered", "Printout"], 
+                   CellMargins -> {{35, 10}, {2, 5}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "SubitemNumbered", StyleDefinitions -> StyleData["Text"]], 
+                   CellDingbat -> Cell[
+                    TextData[{
+                    CounterBox["ItemNumbered"], ".", 
+                    CounterBox["SubitemNumbered"], "."}], FontWeight -> 
+                    "Bold"], CellMargins -> {{80, 10}, {2, 5}}, 
+                   ReturnCreatesNewCell -> True, 
+                   StyleKeyMapping -> {
+                    "Tab" -> "SubsubitemNumbered", 
+                    KeyEvent["Tab", Modifiers -> {Shift}] -> "ItemNumbered", 
+                    "Backspace" -> "SubitemParagraph"}, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15100}, 
+                   CellFrameLabelMargins -> 4, DefaultNewCellStyle -> "Item", 
+                   CounterIncrements -> "SubitemNumbered", 
+                   CounterAssignments -> {{"SubsubitemNumbered", 0}}, 
+                   MenuSortingValue -> 1640], 
+                  Cell[
+                   StyleData["SubitemNumbered", "Printout"], 
+                   CellMargins -> {{50, 10}, {2, 5}}]}, Open]], 
+               Cell[
+                CellGroupData[{
+                  Cell[
+                   StyleData[
+                   "SubsubitemNumbered", StyleDefinitions -> 
+                    StyleData["Text"]], CellDingbat -> Cell[
+                    TextData[{
+                    CounterBox["ItemNumbered"], ".", 
+                    CounterBox["SubitemNumbered"], ".", 
+                    CounterBox["SubsubitemNumbered"], "."}], FontWeight -> 
+                    "Bold"], CellMargins -> {{95, 10}, {2, 5}}, 
+                   ReturnCreatesNewCell -> True, 
+                   StyleKeyMapping -> {
+                    KeyEvent["Tab", Modifiers -> {Shift}] -> 
+                    "SubitemNumbered", "Backspace" -> "SubsubitemParagraph"}, 
+                   CellGroupingRules -> {
+                    "GroupTogetherNestedGrouping", 15200}, 
+                   CellFrameLabelMargins -> 4, DefaultNewCellStyle -> 
+                   "SubitemNumbered", CounterIncrements -> 
+                   "SubsubitemNumbered", MenuSortingValue -> 1650], 
+                  Cell[
+                   StyleData["SubsubitemNumbered", "Printout"], 
+                   CellMargins -> {{65, 10}, {2, 5}}]}, Open]]}, Open]]}, 
+           Open]], 
+         Cell[
+          CellGroupData[{
+            Cell["Program", "Subsubsection"], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData["Program"], CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+                CellMargins -> {{60, 20}, {4, 4}}, StripStyleOnPaste -> True, 
+                Hyphenation -> False, TabSpacings -> {4}, LanguageCategory -> 
+                "Formula", ScriptLevel -> 1, MenuSortingValue -> 1900, 
+                MenuCommandKey :> "9", FontFamily -> "CMU Typewriter Text", 
+                FontSize -> 13], 
+               Cell[
+                StyleData["Program", "Printout"], 
+                CellMargins -> {{30, 20}, {4, 4}}]}, Open]]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell["Homework", "Subsubsection"], 
+            Cell[
+             CellGroupData[{
+               Cell[
+                StyleData["Homework", StyleDefinitions -> StyleData["Text"]], 
+                CellFrame -> {{3, 0}, {0, 0}}, 
+                CellMargins -> {{30, 40}, {4, 4}}, CellFrameLabels -> {{
+                   Cell[
+                    BoxData[
+                    PaneBox[
+                    StyleBox[
+                    GridBox[{{"HW"}, {
+                    CounterBox["Homework"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Center}}}], 
+                    FontFamily -> "CMU Sans Serif", FontSize -> 12, 
+                    FontWeight -> "Bold"], ImageSize -> 30, 
+                    Alignment -> {Center, Center}]], Background -> 
+                    Opacity[1]], Inherited}, {Inherited, Inherited}}, 
+                CounterIncrements -> "Homework", MenuSortingValue -> 1910, 
+                Background -> GrayLevel[0.8]], 
+               Cell[
+                StyleData["Homework", "Printout"], 
+                CellMargins -> {{0, 40}, {4, 4}}]}, Open]]}, Open]]}, Open]], 
+      
+      Cell[
+       CellGroupData[{
+         Cell["Editorial", "Subsection"], 
+         Cell[
+          StyleData[
+          "EditorialComment", StyleDefinitions -> StyleData["TextConcrete"]], 
+          CellFrame -> {{2, 2}, {0, 0}}, MenuSortingValue -> 2010, FontColor -> 
+          RGBColor[0.790588, 0.201176, 0.]]}, Open]]}, Open]], 
+   Cell[
+    CellGroupData[{
+      Cell["Styles for Input and Output Cells", "Section"], 
+      Cell[
+      "The cells in this section define styles used for input and output.", 
+       "Text"], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["Input"], ShowCellBracket -> True, MenuSortingValue -> 
+          1500, MenuCommandKey :> "7"], 
+         Cell[
+          StyleData["Input", "Printout"], ShowCellLabel -> False]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["Code"], ShowCellBracket -> True, PageBreakWithin -> True,
+           AutoIndent -> Automatic, 
+          InputAutoReplacements -> {"\n" -> "\[IndentingNewLine]"}, 
+          TabSpacings -> {3}, FormatType -> InputForm, AutoSpacing -> True, 
+          LineIndent -> 1, MenuSortingValue -> 1510, MenuCommandKey :> "8"], 
+         Cell[
+          StyleData["Code", "Printout"]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["Output"], ShowCellBracket -> True, MenuSortingValue -> 
+          1550], 
+         Cell[
+          StyleData["Output", "Printout"], ShowCellLabel -> False]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["Print"], ShowCellBracket -> True], 
+         Cell[
+          StyleData["Print", "Printout"]]}, Open]]}, Open]], 
+   Cell[
+    CellGroupData[{
+      Cell["Inline Formatting", "Section"], 
+      Cell[
+       StyleData["RM"], StyleMenuListing -> None, FontFamily -> "CMU Serif", 
+       FontWeight -> "Plain", FontSlant -> "Plain"], 
+      Cell[
+       StyleData["CT"], StyleMenuListing -> None, FontFamily -> 
+       "CMU Classical Serif"], 
+      Cell[
+       StyleData["BT"], StyleMenuListing -> None, FontFamily -> 
+       "CMU Sans Serif", FontVariations -> {"Underline" -> True}], 
+      Cell[
+       StyleData["$"], 
+       ConversionRules :> {
+        "TeX" -> {{"$", Automatic, "$"}, {"", Automatic, ""}}}, 
+       DefaultFormatType -> "TraditionalForm", 
+       HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"}, 
+       LanguageCategory -> "Formula", SingleLetterItalics -> True, FontFamily -> 
+       "CMU Serif", FontSize -> 14]}, Open]], 
+   Cell[
+    CellGroupData[{
+      Cell["Styles for Headers and Footers", "Section"], 
+      Cell[
+       StyleData["Toolbar"], ShowCellBracket -> False, ShowSelection -> True, 
+       PageBreakBelow -> False, TextAlignment -> Right, TextJustification -> 
+       1, StyleMenuListing -> None, FontSize -> 12], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["Header"], CellMargins -> {{0, 0}, {0, 0}}, 
+          LineSpacing -> {1, 8}, MenuSortingValue -> None, FontFamily -> 
+          "CMU Classical Serif", FontSize -> 7], 
+         Cell[
+          StyleData["Header", "Printout"], Magnification -> 1.]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["HeaderSection"], StyleMenuListing -> None], 
+         Cell[
+          StyleData["HeaderSection", "Printout"], Magnification -> 1.]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["HeaderSubsection"], StyleMenuListing -> None], 
+         Cell[
+          StyleData["HeaderSubsection", "Printout"], Magnification -> 1.]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["HeaderTitle"], StyleMenuListing -> None], 
+         Cell[
+          StyleData["HeaderTitle", "Printout"], Magnification -> 1.]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["Footer"], CellMargins -> {{0, 0}, {0, 0}}, 
+          MenuSortingValue -> None, FontFamily -> "CMU Classical Serif", 
+          FontSize -> 7], 
+         Cell[
+          StyleData["Footer", "Printout"], Magnification -> 1.]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["FooterSection"], StyleMenuListing -> None], 
+         Cell[
+          StyleData["FooterSection", "Printout"], Magnification -> 1.]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["FooterSubsection"], StyleMenuListing -> None], 
+         Cell[
+          StyleData["FooterSubsection", "Printout"], Magnification -> 1.]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["FooterTitle"], StyleMenuListing -> None], 
+         Cell[
+          StyleData["FooterTitle", "Printout"], Magnification -> 1.]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell[
+          StyleData["PageNumber"], LineSpacing -> {1, 8}, MenuSortingValue -> 
+          None, FontFamily -> "CMU Concrete", FontSize -> 7, FontWeight -> 
+          "Bold"], 
+         Cell[
+          StyleData["PageNumber", "Printout"], Magnification -> 1.]}, Open]]},
+      Open]]}, Visible -> False, FrontEndVersion -> 
+  "14.0 for Mac OS X ARM (64-bit) (December 12, 2023)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"decf7bd9-73cb-465c-aa7d-f1ddcc1464fc"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "eq: 2678166479532444448"->{
+  Cell[5609, 190, 680, 21, 63, "DisplayFormulaFramed",ExpressionUUID->"045cdefb-470c-4578-9d4c-0a84de65eb7a",
+   CellTags->"eq: 2678166479532444448"]},
+ "eq: 1107742002833268259"->{
+  Cell[7335, 249, 789, 23, 30, "DisplayFormulaNumbered",ExpressionUUID->"e8ec30cf-cc4e-4d89-9fcf-a09dc382b76a",
+   CellTags->"eq: 1107742002833268259"]},
+ "eq: 3845993496320827985"->{
+  Cell[25491, 819, 1647, 51, 66, "DisplayFormulaFramed",ExpressionUUID->"0f911d14-5523-4568-ac65-0c9612456d91",
+   CellTags->"eq: 3845993496320827985"]},
+ "eq: 2650570974792524985"->{
+  Cell[27357, 881, 1802, 57, 66, "DisplayFormulaFramed",ExpressionUUID->"9a2d7a7f-33db-437d-ab02-b88d60fb0b97",
+   CellTags->"eq: 2650570974792524985"]},
+ "eq: 2048359422744236814"->{
+  Cell[92574, 3006, 1302, 43, 75, "DisplayFormulaFramed",ExpressionUUID->"53ec45b3-a9d9-4687-a8c0-0291b6420d01",
+   CellTags->"eq: 2048359422744236814"]},
+ "eq: 5515499843479260558"->{
+  Cell[97616, 3175, 2066, 61, 75, "DisplayFormulaFramed",ExpressionUUID->"c3f9ed37-3ba5-4059-9702-6e2dc69dce83",
+   CellTags->"eq: 5515499843479260558"]},
+ "eq: 2576531109702945186"->{
+  Cell[112693, 3672, 1302, 43, 75, "DisplayFormulaFramed",ExpressionUUID->"0b44d810-c367-4a0f-9097-2d2a4076d8f4",
+   CellTags->"eq: 2576531109702945186"]},
+ "eq: 2438092776105532924"->{
+  Cell[116678, 3807, 2442, 73, 75, "DisplayFormulaFramed",ExpressionUUID->"12ee1ee8-ab33-456d-9856-31391d01723d",
+   CellTags->"eq: 2438092776105532924"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"eq: 2678166479532444448", 167462, 4931},
+ {"eq: 1107742002833268259", 167644, 4934},
+ {"eq: 3845993496320827985", 167828, 4937},
+ {"eq: 2650570974792524985", 168012, 4940},
+ {"eq: 2048359422744236814", 168196, 4943},
+ {"eq: 5515499843479260558", 168381, 4946},
+ {"eq: 2576531109702945186", 168566, 4949},
+ {"eq: 2438092776105532924", 168752, 4952}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 89, 0, 69, "Title",ExpressionUUID->"3c8ad64d-0f54-48ae-a066-84e52e5fe67e"],
+Cell[672, 24, 94, 0, 38, "Subtitle",ExpressionUUID->"996386ca-696e-493b-9c19-ede6ca0b43a8"],
+Cell[CellGroupData[{
+Cell[791, 28, 93, 0, 70, "Section",ExpressionUUID->"00b0d44c-c2fa-40c0-b2f5-2d75103497b0"],
+Cell[CellGroupData[{
+Cell[909, 32, 101, 0, 51, "Subsection",ExpressionUUID->"ca6949d5-0745-4146-94cb-faa22e6fe6c9"],
+Cell[1013, 34, 420, 11, 67, "TextIndent",ExpressionUUID->"45943c57-2932-42dc-92be-022c59740588"],
+Cell[CellGroupData[{
+Cell[1458, 49, 160, 4, 27, "Item",ExpressionUUID->"d4bb5926-3d54-4f55-88d2-a3c23fce0775"],
+Cell[1621, 55, 164, 4, 27, "Item",ExpressionUUID->"630e8335-0ad5-49ac-8a2f-993f50e64fca"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1822, 64, 98, 0, 37, "Subsubsection",ExpressionUUID->"685c49c7-9133-4e67-91fd-71572de3d42a"],
+Cell[1923, 66, 599, 17, 48, "TextIndent",ExpressionUUID->"4205c9fa-d3d8-40f6-91bd-1571825556eb"],
+Cell[CellGroupData[{
+Cell[2547, 87, 850, 26, 49, "Item",ExpressionUUID->"ad7f2b77-6eca-4e7a-9d53-2bdd2ab9e639"],
+Cell[3400, 115, 569, 19, 48, "Item",ExpressionUUID->"8d175e13-3878-4550-86b6-fe93677f42f1"],
+Cell[3972, 136, 947, 29, 48, "DisplayFormulaFramed",ExpressionUUID->"26d6e09e-083b-4b04-a84a-a27ffede0411"],
+Cell[4922, 167, 480, 14, 25, "ItemParagraph",ExpressionUUID->"a679b5ca-8af9-4932-8007-92447376dfd0"],
+Cell[5405, 183, 201, 5, 27, "Item",ExpressionUUID->"7ab6ee1f-6ce7-4120-a812-de7800ad7f3f"],
+Cell[5609, 190, 680, 21, 63, "DisplayFormulaFramed",ExpressionUUID->"045cdefb-470c-4578-9d4c-0a84de65eb7a",
+ CellTags->"eq: 2678166479532444448"],
+Cell[6292, 213, 425, 12, 25, "ItemParagraph",ExpressionUUID->"deca14ce-e7df-4f7e-8023-7aac5e3b8691"],
+Cell[6720, 227, 612, 20, 48, "Item",ExpressionUUID->"de9e89d8-707f-4a33-92aa-a1730611bdf7"],
+Cell[7335, 249, 789, 23, 30, "DisplayFormulaNumbered",ExpressionUUID->"e8ec30cf-cc4e-4d89-9fcf-a09dc382b76a",
+ CellTags->"eq: 1107742002833268259"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8173, 278, 99, 0, 37, "Subsubsection",ExpressionUUID->"c1f67965-31a9-421f-9323-c1da769aa606"],
+Cell[8275, 280, 340, 6, 67, "TextIndent",ExpressionUUID->"0308a728-22ce-4edd-b0dd-0b1d55d0a1ac"],
+Cell[CellGroupData[{
+Cell[8640, 290, 2110, 52, 165, "Input",ExpressionUUID->"68630331-3d0d-461f-bd7f-8f37f1df2c1c"],
+Cell[10753, 344, 1273, 26, 74, "Output",ExpressionUUID->"cceaadef-4e91-4f57-a4e1-857c21674ab3"]
+}, {2}]],
+Cell[12038, 373, 902, 25, 45, "TextNoIndent",ExpressionUUID->"d3c4eca8-9557-4429-8c97-0b1efb2e793a"],
+Cell[12943, 400, 487, 15, 30, "DisplayFormulaNumbered",ExpressionUUID->"387ab404-c873-4e20-b53c-df07b6505c29"],
+Cell[13433, 417, 520, 15, 48, "TextIndent",ExpressionUUID->"e0bac744-18c9-4e61-a9cf-061779b0de5a"],
+Cell[13956, 434, 1059, 32, 48, "DisplayFormulaFramed",ExpressionUUID->"117e6815-ac8b-40db-90a4-f667d202f052"],
+Cell[15018, 468, 263, 7, 44, "TextNoIndent",ExpressionUUID->"e6683d93-dec2-4c60-a779-11a951480fe8"],
+Cell[15284, 477, 478, 14, 30, "DisplayFormulaNumbered",ExpressionUUID->"1dc16260-f257-4149-921f-72c07a7305e6"],
+Cell[15765, 493, 343, 11, 44, "TextNoIndent",ExpressionUUID->"621fe1ae-4568-457e-81f8-a2c27e6c2bb0"],
+Cell[16111, 506, 624, 17, 30, "DisplayFormulaNumbered",ExpressionUUID->"fc18f855-67da-4803-b038-5bd486bce0f1"],
+Cell[16738, 525, 201, 5, 24, "TextNoIndent",ExpressionUUID->"2620d77e-f976-4dd5-b436-86f6de9bc18c"],
+Cell[16942, 532, 399, 11, 30, "DisplayFormulaNumbered",ExpressionUUID->"3bdd8784-1cce-482b-9b05-48f572abaee3"],
+Cell[17344, 545, 418, 13, 44, "TextNoIndent",ExpressionUUID->"bc620517-38b1-4710-b5fd-378acbeb647f"],
+Cell[CellGroupData[{
+Cell[17787, 562, 212, 6, 27, "Item",ExpressionUUID->"b5f1cfe0-4ee9-4218-8846-fa13fdbb3216"],
+Cell[18002, 570, 349, 10, 48, "DisplayFormulaFramed",ExpressionUUID->"210e7d4a-8346-4c80-b950-1f644226687c"],
+Cell[18354, 582, 215, 6, 27, "Item",ExpressionUUID->"7f2b5218-25d9-4b3e-af3e-4963c406f426"],
+Cell[18572, 590, 430, 13, 48, "DisplayFormulaFramed",ExpressionUUID->"b3c210f9-3eec-44e5-b538-cdc491e52889"],
+Cell[19005, 605, 455, 14, 25, "ItemParagraph",ExpressionUUID->"d0ad7d82-dc34-491c-a147-96b46a2579cd"],
+Cell[19463, 621, 2029, 56, 45, "DisplayFormulaNumbered",ExpressionUUID->"8c34de42-e5bc-45d8-a985-8c1f44c4e08a"],
+Cell[21495, 679, 851, 26, 45, "SubitemParagraph",ExpressionUUID->"2c8d162c-c82a-419d-9fff-b74ff91eb15a"],
+Cell[22349, 707, 478, 15, 49, "DisplayFormulaNumbered",ExpressionUUID->"e184fc63-6f8c-4155-9a3b-2406a0e3a4a2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22864, 727, 128, 0, 27, "Subsubsubsection",ExpressionUUID->"b3a04f84-32a1-440d-98ce-2209d2bc75bc"],
+Cell[22995, 729, 208, 3, 27, "TextIndent",ExpressionUUID->"5a1cbecb-4b23-4f87-bfa6-9aab171ffe9f"],
+Cell[CellGroupData[{
+Cell[23228, 736, 328, 8, 47, "Item",ExpressionUUID->"58dfae9c-7297-44b6-b903-268f241c777a"],
+Cell[23559, 746, 431, 16, 47, "Item",ExpressionUUID->"736e4f88-dd89-4d73-9bb6-e5f27016cc18"],
+Cell[23993, 764, 225, 3, 47, "Item",ExpressionUUID->"a764c8aa-cd4e-4266-aae7-8a0460f63068"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24279, 774, 108, 0, 37, "Subsubsection",ExpressionUUID->"542ae8db-0bd5-4be7-8e3a-46809e0e3648"],
+Cell[24390, 776, 866, 30, 68, "TextIndent",ExpressionUUID->"af2e5715-c0b5-4525-8c4c-c438f1cf2211"],
+Cell[CellGroupData[{
+Cell[25281, 810, 207, 7, 27, "Item",ExpressionUUID->"1859a7e2-ac6d-41d6-8465-b30389f376e0"],
+Cell[25491, 819, 1647, 51, 66, "DisplayFormulaFramed",ExpressionUUID->"0f911d14-5523-4568-ac65-0c9612456d91",
+ CellTags->"eq: 3845993496320827985"],
+Cell[27141, 872, 213, 7, 27, "Item",ExpressionUUID->"0ae1b510-2911-4e82-b4ed-21973a627a20"],
+Cell[27357, 881, 1802, 57, 66, "DisplayFormulaFramed",ExpressionUUID->"9a2d7a7f-33db-437d-ab02-b88d60fb0b97",
+ CellTags->"eq: 2650570974792524985"]
+}, Open  ]],
+Cell[29174, 941, 170, 3, 27, "TextIndent",ExpressionUUID->"2484e088-e55b-4b53-87fa-b297cdfaaf72"],
+Cell[CellGroupData[{
+Cell[29369, 948, 153, 4, 27, "Item",ExpressionUUID->"250472f0-627c-4cd2-8e7c-de352a184fae"],
+Cell[29525, 954, 2124, 69, 54, "DisplayFormulaNumbered",ExpressionUUID->"9ef48873-2717-4c40-b566-6746be670eea"],
+Cell[31652, 1025, 155, 4, 27, "Item",ExpressionUUID->"5c4f0f62-d6f9-4767-a47c-ab19c7f021af"],
+Cell[31810, 1031, 1914, 61, 54, "DisplayFormulaNumbered",ExpressionUUID->"b645708d-1042-4758-909d-f1ae607c036d"],
+Cell[33727, 1094, 240, 5, 44, "ItemParagraph",ExpressionUUID->"fc4d141a-6057-4434-a856-c208d46ce4b4"]
+}, Open  ]],
+Cell[33982, 1102, 251, 6, 28, "TextIndent",ExpressionUUID->"2b3dbb21-29ce-4561-8692-b5e08217d341"],
+Cell[CellGroupData[{
+Cell[34258, 1112, 110, 0, 27, "Item",ExpressionUUID->"c6efba9b-5813-4382-b4a9-4e57aa7941c1"],
+Cell[34371, 1114, 216, 6, 30, "DisplayFormulaNumbered",ExpressionUUID->"95b95928-fe04-41fb-ab2c-f5adf9a99b0a"],
+Cell[34590, 1122, 149, 5, 27, "Item",ExpressionUUID->"8dcf59fc-5951-48b5-90a0-97450d59df92"],
+Cell[34742, 1129, 445, 15, 46, "DisplayFormulaNumbered",ExpressionUUID->"fed5ed46-18a6-4fc6-a8c3-2685f1b13f14"],
+Cell[35190, 1146, 151, 5, 27, "Item",ExpressionUUID->"dfe5a2b0-361e-4d82-bf88-4a91ee6949fa"],
+Cell[35344, 1153, 379, 13, 46, "DisplayFormulaNumbered",ExpressionUUID->"945a2b8e-9c17-4b16-9540-fab16553328c"]
+}, Open  ]],
+Cell[35738, 1169, 806, 21, 65, "TextNoIndent",ExpressionUUID->"cf0cd537-35db-4d99-816a-4604ac9d7ba2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36581, 1195, 106, 0, 37, "Subsubsection",ExpressionUUID->"d0f6a3fc-f808-4eeb-a460-19532e3bf6c5"],
+Cell[36690, 1197, 325, 8, 47, "TextIndent",ExpressionUUID->"a032455d-d7eb-47c3-a828-835fce583138"],
+Cell[CellGroupData[{
+Cell[37040, 1209, 193, 5, 27, "Item",ExpressionUUID->"7aa97ce8-2c98-4b9f-bf36-cbdf548a5044"],
+Cell[37236, 1216, 205, 5, 27, "Item",ExpressionUUID->"16fea75c-b91b-4d19-acef-39c7ea88cf8f"]
+}, Open  ]],
+Cell[37456, 1224, 292, 6, 44, "TextNoIndent",ExpressionUUID->"aaf232c0-107f-48cc-96f0-69126ad19e78"],
+Cell[CellGroupData[{
+Cell[37773, 1234, 2490, 61, 222, "Input",ExpressionUUID->"6c0d69ff-ff01-4681-a4a5-94b74116c0ce"],
+Cell[40266, 1297, 1520, 31, 118, "Output",ExpressionUUID->"be140bab-4ea9-4bda-b8d5-192943333f49"]
+}, {2}]],
+Cell[41798, 1331, 254, 4, 44, "TextNoIndent",ExpressionUUID->"323b708f-49c5-4e35-86a1-c644a10977fb"],
+Cell[CellGroupData[{
+Cell[42077, 1339, 610, 19, 48, "Item",ExpressionUUID->"f416bd20-e5d5-46e5-90e2-3ae3865d6e0e"],
+Cell[42690, 1360, 674, 20, 48, "DisplayFormulaFramed",ExpressionUUID->"3023dce3-55ae-409b-b279-3554d9a83b3c"],
+Cell[43367, 1382, 529, 15, 25, "ItemParagraph",ExpressionUUID->"abf6bf51-c182-45db-b586-7a20d2d95ce1"],
+Cell[43899, 1399, 1798, 49, 45, "DisplayFormulaNumbered",ExpressionUUID->"b1d074fb-a442-454c-b7ea-dd0eb002b1fc"],
+Cell[45700, 1450, 319, 10, 28, "Subitem",ExpressionUUID->"fff51027-70d3-47a1-94ea-c4395e1de8b8"],
+Cell[46022, 1462, 615, 21, 28, "Subitem",ExpressionUUID->"224d82c2-d25f-47fc-9a4a-2a4b5c9fe4a6"],
+Cell[46640, 1485, 529, 15, 49, "Subitem",ExpressionUUID->"bbb1a16c-db58-44b3-997a-82557657f122"],
+Cell[47172, 1502, 432, 14, 28, "Item",ExpressionUUID->"e29d1a13-9103-41b3-8bca-27b1f434bf0a"],
+Cell[47607, 1518, 226, 6, 47, "Item",ExpressionUUID->"26c08ff8-1d5c-4e81-82ae-16fce38591cc"],
+Cell[47836, 1526, 255, 8, 47, "Item",ExpressionUUID->"f992aebe-dca3-470d-9113-b5d223cadc30"],
+Cell[48094, 1536, 616, 19, 45, "DisplayFormulaNumbered",ExpressionUUID->"b6093f69-e377-4f92-8e38-4df92646d56e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48759, 1561, 109, 0, 37, "Subsubsection",ExpressionUUID->"d60a1d20-a634-47ff-9dbd-f468a36eb864"],
+Cell[48871, 1563, 448, 15, 67, "TextIndent",ExpressionUUID->"858e7e94-31a9-49ca-bf46-1d85d954bd3d"],
+Cell[49322, 1580, 231, 8, 27, "TextIndent",ExpressionUUID->"f932c6bf-d85e-41a2-9f66-4564f191f423"],
+Cell[CellGroupData[{
+Cell[49578, 1592, 220, 5, 47, "Item",ExpressionUUID->"c9d5a44f-1923-4d9a-9478-5b6890eba530"],
+Cell[49801, 1599, 470, 14, 30, "DisplayFormulaNumbered",ExpressionUUID->"bdc50bf9-66c3-437c-8cf0-3732f379adc8"],
+Cell[50274, 1615, 230, 5, 44, "ItemParagraph",ExpressionUUID->"292be0d7-e48a-46c9-ba1e-e557d6d3f622"],
+Cell[50507, 1622, 522, 18, 30, "DisplayFormulaNumbered",ExpressionUUID->"a6488ce0-bfb7-47d6-93d1-27b7886be6bd"],
+Cell[51032, 1642, 772, 24, 46, "ItemParagraph",ExpressionUUID->"0ac4516a-e49d-4635-93cf-32dc6cd04d0c"],
+Cell[51807, 1668, 266, 8, 47, "Item",ExpressionUUID->"9d151264-5882-47f7-840b-c6e1fea234e0"],
+Cell[52076, 1678, 541, 15, 30, "DisplayFormulaNumbered",ExpressionUUID->"5aaf4cf7-5e0f-40bc-bb16-d65e40370e4e"],
+Cell[52620, 1695, 118, 0, 24, "ItemParagraph",ExpressionUUID->"5a9a2372-16d9-4cb4-9711-7c44d5fcaf4f"],
+Cell[52741, 1697, 3293, 105, 117, "DisplayFormulaNumbered",ExpressionUUID->"1a176226-54e2-4ca7-99d3-ec4b2a1fd7ab"],
+Cell[56037, 1804, 576, 14, 68, "Item",ExpressionUUID->"0770b162-eda6-4a66-962a-66fecade446c"],
+Cell[56616, 1820, 2481, 83, 96, "DisplayFormulaNumbered",ExpressionUUID->"622d16c8-6393-41ab-9053-36fec60ee66a"],
+Cell[59100, 1905, 223, 3, 44, "ItemParagraph",ExpressionUUID->"fa7db996-59af-4dd7-a694-c467ba4e097e"],
+Cell[59326, 1910, 6209, 198, 147, "DisplayFormulaNumbered",ExpressionUUID->"02585f01-cea9-4524-b2bd-ce5634898144"]
+}, Open  ]],
+Cell[65550, 2111, 157, 2, 24, "TextNoIndent",ExpressionUUID->"01de0aca-0666-48d8-8b68-ae8d0c2d5ed0"],
+Cell[CellGroupData[{
+Cell[65732, 2117, 139, 5, 27, "Item",ExpressionUUID->"a3c1ec4f-46cf-4d8f-a207-6d0fd9f9adcf"],
+Cell[65874, 2124, 965, 31, 64, "DisplayFormulaFramed",ExpressionUUID->"088d350f-e2dc-4a72-9031-a713e19a609f"],
+Cell[66842, 2157, 141, 5, 27, "Item",ExpressionUUID->"6fef56fd-8e68-448a-b397-c3470449f847"],
+Cell[66986, 2164, 770, 25, 67, "DisplayFormulaFramed",ExpressionUUID->"80cdc10a-e100-4e5b-897d-148f3e4967c9"]
+}, Open  ]],
+Cell[67771, 2192, 580, 15, 45, "TextNoIndent",ExpressionUUID->"6a8b89f2-ccd4-49f2-be0a-905e063793e9"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[68400, 2213, 112, 0, 51, "Subsection",ExpressionUUID->"dcd8cace-708e-4a34-8886-a1a9f3ae07a6"],
+Cell[CellGroupData[{
+Cell[68537, 2217, 108, 0, 37, "Subsubsection",ExpressionUUID->"37fc0e3a-a99e-41fa-a340-99916549487e"],
+Cell[68648, 2219, 763, 27, 87, "TextIndent",ExpressionUUID->"8e321999-d4cd-4297-9e5c-497f722206bf"],
+Cell[69414, 2248, 113, 0, 27, "TextIndent",ExpressionUUID->"7adefa4d-f7af-446a-bed0-016f07d0a32a"],
+Cell[CellGroupData[{
+Cell[69552, 2252, 604, 18, 28, "Item",ExpressionUUID->"6a86d662-5787-4a03-8e8e-108fcbcdb9e3"],
+Cell[70159, 2272, 874, 27, 28, "Item",ExpressionUUID->"3b6e58bb-27bf-4afd-8050-3981f7d72165"],
+Cell[71036, 2301, 753, 24, 28, "Item",ExpressionUUID->"10883ebe-efae-429d-8af2-034372339f08"]
+}, Open  ]],
+Cell[71804, 2328, 585, 18, 45, "TextNoIndent",ExpressionUUID->"a248b32b-b2ec-4bbc-bd3e-59a0d513174e"],
+Cell[CellGroupData[{
+Cell[72414, 2350, 296, 8, 28, "Item",ExpressionUUID->"a42663d2-f258-44d1-9ff8-5d1c16183571"],
+Cell[72713, 2360, 3112, 96, 54, "DisplayFormulaNumbered",ExpressionUUID->"a5e76b14-c100-40d4-a9dc-1f0e91a361ec"],
+Cell[75828, 2458, 84, 0, 27, "Item",ExpressionUUID->"487d6a7a-f910-4789-a279-3ecbab6b5e9f"],
+Cell[75915, 2460, 818, 24, 54, "DisplayFormulaNumbered",ExpressionUUID->"3fbcbb50-0801-41fc-be9b-b0c0907fb81c"],
+Cell[76736, 2486, 89, 0, 27, "Item",ExpressionUUID->"b4d05b2d-198f-4aec-adc5-59e67f4604b5"],
+Cell[76828, 2488, 3536, 107, 54, "DisplayFormulaNumbered",ExpressionUUID->"5ba51bd6-94b1-4528-84a1-18d5500a41bd"]
+}, Open  ]],
+Cell[80379, 2598, 1502, 42, 66, "TextNoIndent",ExpressionUUID->"b44a87c7-d191-47a6-a19c-dc22e1e15337"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[81918, 2645, 111, 0, 37, "Subsubsection",ExpressionUUID->"3fe0722d-dfe6-49a9-9664-d5647c6cf9b7"],
+Cell[CellGroupData[{
+Cell[82054, 2649, 1379, 44, 70, "Item",ExpressionUUID->"322a9943-497b-4f58-b2f8-e0fde8cd2ed9"],
+Cell[83436, 2695, 825, 25, 67, "DisplayFormulaFramed",ExpressionUUID->"fd7a4fe2-7e4b-497e-bff1-b5b4588ad3dc"],
+Cell[84264, 2722, 954, 31, 45, "ItemParagraph",ExpressionUUID->"e4066e31-dfa7-4228-b15c-eff122fe7bfb"],
+Cell[85221, 2755, 1539, 50, 70, "Item",ExpressionUUID->"04f6d724-5008-4237-96d2-539002f8123a"],
+Cell[86763, 2807, 777, 24, 67, "DisplayFormulaFramed",ExpressionUUID->"5d53c8ac-bcf2-4e80-bf87-50d8e3ba5519"],
+Cell[87543, 2833, 930, 30, 45, "ItemParagraph",ExpressionUUID->"21da1653-8fc9-4418-a69e-c198af1d91af"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[88510, 2868, 106, 0, 27, "Subsubsubsection",ExpressionUUID->"ad486398-7b7e-4d0b-8864-ec37f62bec10"],
+Cell[88619, 2870, 208, 3, 47, "TextIndent",ExpressionUUID->"39c8991d-da12-4134-81ec-cfb976b30cbd"],
+Cell[CellGroupData[{
+Cell[88852, 2877, 1868, 63, 128, "DisplayFormulaNumbered",ExpressionUUID->"f6d545b5-7156-4a54-8684-65a33492d129"],
+Cell[90723, 2942, 1738, 59, 126, "DisplayFormulaNumbered",ExpressionUUID->"78481b7d-7fe0-46e5-a921-5e9e5aed51fd"]
+}, Open  ]],
+Cell[92476, 3004, 95, 0, 24, "TextNoIndent",ExpressionUUID->"c05ed860-4650-4b2f-bc5e-3d1b9a68407d"],
+Cell[92574, 3006, 1302, 43, 75, "DisplayFormulaFramed",ExpressionUUID->"53ec45b3-a9d9-4687-a8c0-0291b6420d01",
+ CellTags->"eq: 2048359422744236814"],
+Cell[CellGroupData[{
+Cell[93901, 3053, 114, 0, 27, "Item",ExpressionUUID->"d6b62b65-db9c-41d6-a8db-4287999bdca1"],
+Cell[94018, 3055, 842, 26, 54, "DisplayFormulaNumbered",ExpressionUUID->"3c69d381-4c3d-4c59-9dd6-08b85f806eb3"],
+Cell[94863, 3083, 189, 5, 27, "Item",ExpressionUUID->"652567a2-6303-4786-a1d6-b997244b4b9c"],
+Cell[95055, 3090, 660, 20, 48, "DisplayFormulaFramed",ExpressionUUID->"f7f3fb88-4b17-40b8-b4b8-e4d7980fb25f"],
+Cell[95718, 3112, 649, 20, 25, "ItemParagraph",ExpressionUUID->"57d1841c-e3b5-4573-b03d-36d738e8b30c"]
+}, Open  ]],
+Cell[96382, 3135, 191, 3, 44, "TextNoIndent",ExpressionUUID->"52735e17-e694-45b8-afc8-06a32ead7c59"],
+Cell[96576, 3140, 747, 24, 69, "DisplayFormulaFramed",ExpressionUUID->"4cda94c6-690f-4d0f-bf28-b38cf0609a9b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[97360, 3169, 102, 0, 27, "Subsubsubsection",ExpressionUUID->"b3f381f8-8e32-4edd-934b-0fefa65d9b9b"],
+Cell[97465, 3171, 148, 2, 27, "TextIndent",ExpressionUUID->"c27d010a-0829-487d-942d-51796cfb195b"],
+Cell[97616, 3175, 2066, 61, 75, "DisplayFormulaFramed",ExpressionUUID->"c3f9ed37-3ba5-4059-9702-6e2dc69dce83",
+ CellTags->"eq: 5515499843479260558"],
+Cell[99685, 3238, 247, 5, 44, "TextNoIndent",ExpressionUUID->"3c59922b-979b-4b18-b4a2-35a19d235558"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[99969, 3248, 102, 0, 27, "Subsubsubsection",ExpressionUUID->"62fb69b8-3100-48eb-bfcc-9074c36e6ef6"],
+Cell[100074, 3250, 213, 5, 27, "TextIndent",ExpressionUUID->"f545ccc6-4460-4152-8067-0e479739d67a"],
+Cell[100290, 3257, 744, 22, 48, "DisplayFormulaFramed",ExpressionUUID->"716d532a-4a26-4771-9a6b-e639a1bca260"],
+Cell[101037, 3281, 243, 5, 44, "TextNoIndent",ExpressionUUID->"4f034f24-41ef-4d1c-bd60-b38260e5d44e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[101329, 3292, 113, 0, 37, "Subsubsection",ExpressionUUID->"60d8e72c-4ed1-4e65-8056-ddccd035a840"],
+Cell[CellGroupData[{
+Cell[101467, 3296, 1560, 50, 70, "Item",ExpressionUUID->"03f15506-3c5d-4dde-92a1-10f6045c8c56"],
+Cell[103030, 3348, 825, 25, 67, "DisplayFormulaFramed",ExpressionUUID->"2bccb0d0-f00e-4fc8-b33f-5153c3cceb5d"],
+Cell[103858, 3375, 959, 31, 45, "ItemParagraph",ExpressionUUID->"a2b53d5e-c4f5-49e4-95d8-8c44aee53de9"],
+Cell[104820, 3408, 1543, 50, 70, "Item",ExpressionUUID->"68783975-3577-450f-a93b-07d6966dd0d8"],
+Cell[106366, 3460, 777, 24, 67, "DisplayFormulaFramed",ExpressionUUID->"c6db2d51-cc0f-4d70-9026-effb992da53b"],
+Cell[107146, 3486, 935, 30, 45, "ItemParagraph",ExpressionUUID->"81710fdf-180a-4daf-a2c3-58f7ddb64cd8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[108118, 3521, 106, 0, 27, "Subsubsubsection",ExpressionUUID->"6ae7191a-740c-4d0d-8d81-743bbf0e8cf4"],
+Cell[108227, 3523, 208, 3, 47, "TextIndent",ExpressionUUID->"ad310716-436a-4085-98cc-e4c5a1300f99"],
+Cell[CellGroupData[{
+Cell[108460, 3530, 2620, 86, 75, "DisplayFormulaNumbered",ExpressionUUID->"1e75a53b-d027-4da2-a5ea-8c621295b82a"],
+Cell[111083, 3618, 1254, 40, 54, "DisplayFormulaNumbered",ExpressionUUID->"069ddab3-64fc-499e-8e97-f382ed959f3f"]
+}, Open  ]],
+Cell[112352, 3661, 338, 9, 25, "TextNoIndent",ExpressionUUID->"e7ef3b7b-9586-4264-bf35-a62a225c7441"],
+Cell[112693, 3672, 1302, 43, 75, "DisplayFormulaFramed",ExpressionUUID->"0b44d810-c367-4a0f-9097-2d2a4076d8f4",
+ CellTags->"eq: 2576531109702945186"],
+Cell[CellGroupData[{
+Cell[114020, 3719, 189, 5, 27, "Item",ExpressionUUID->"ed101cc0-5cd2-4367-959c-a5c764bb4853"],
+Cell[114212, 3726, 660, 20, 48, "DisplayFormulaFramed",ExpressionUUID->"8558190e-1bd5-402e-a820-0582c137eed6"],
+Cell[114875, 3748, 651, 20, 25, "ItemParagraph",ExpressionUUID->"bd2f4691-23be-4eb8-83dc-a70835426471"]
+}, Open  ]],
+Cell[115541, 3771, 193, 3, 44, "TextNoIndent",ExpressionUUID->"6be5686b-64a7-4e63-a454-cf9f06ebaf00"],
+Cell[115737, 3776, 648, 20, 48, "DisplayFormulaFramed",ExpressionUUID->"5aeca242-40c7-48ec-8aef-e6d60d2d218a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[116422, 3801, 102, 0, 27, "Subsubsubsection",ExpressionUUID->"283b4e9e-5b71-4a1d-b180-680197e20537"],
+Cell[116527, 3803, 148, 2, 27, "TextIndent",ExpressionUUID->"84e99004-8aa4-43f4-bac9-67cc929e3972"],
+Cell[116678, 3807, 2442, 73, 75, "DisplayFormulaFramed",ExpressionUUID->"12ee1ee8-ab33-456d-9856-31391d01723d",
+ CellTags->"eq: 2438092776105532924"],
+Cell[119123, 3882, 249, 5, 44, "TextNoIndent",ExpressionUUID->"fe3f1a58-5ce7-4d87-9941-c11b19005398"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119409, 3892, 102, 0, 27, "Subsubsubsection",ExpressionUUID->"3d248c98-fdbb-4597-8704-eb011816e7c3"],
+Cell[119514, 3894, 213, 5, 27, "TextIndent",ExpressionUUID->"f29eb48f-d792-4b4e-acb9-7bbeebeec868"],
+Cell[119730, 3901, 744, 22, 48, "DisplayFormulaFramed",ExpressionUUID->"5d619523-07e3-47cc-8447-881cd5d5c857"],
+Cell[120477, 3925, 245, 5, 44, "TextNoIndent",ExpressionUUID->"1fb9553e-b11d-4516-891b-6f28fb92a36d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

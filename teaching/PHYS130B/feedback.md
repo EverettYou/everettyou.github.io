@@ -12,6 +12,7 @@ Write feedback here. The Manager Agent reads this file at the start of each run 
 
 ## Feedback
 
+---
 (Write below this line)
 
 ## 2026-03-28

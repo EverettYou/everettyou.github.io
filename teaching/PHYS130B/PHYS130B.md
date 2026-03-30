@@ -52,7 +52,7 @@ Each student completes **two research projects** during the quarter, with AI ass
 
 The final exam is held in person with no AI access. Problems are drawn directly from the homework assignments, with possible slight variations. This is the primary test of whether students have internalized the physical worldview and problem-solving skills — not merely copied AI-generated solutions.
 
-- **Format:** In-person, closed-book, closed-AI. **10** problems.
+- **Format:** In-person, closed-book, closed-AI. **5** problems.
 - **Content:** Problems selected from the homework sets across all six chapters.
 - **Philosophy:** Students who genuinely learned from working with AI throughout the quarter — who built intuition, checked AI answers against physical reasoning, and developed their own understanding — will succeed.
 
@@ -63,7 +63,7 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 | Preview Reports | 10% | 1 report × 21 units | Completion |
 | Homework | 40% | 5 problems × 21 units | Timely submission |
 | Research Projects (x2) | 20% | 2 reports | Correctness, novelty, presentation |
-| Final Exam | 30% | 10 problems | Accuracy and understanding |
+| Final Exam | 30% | 5 problems | Accuracy and understanding |
 
 #### Submission
 
@@ -100,40 +100,40 @@ The course covers **6 chapters**, **21 units** (§x.y), and **63 lessons** (§x.
 
 **Chapter 1 — Qubit** (Tong §4)
 
-- **Unit 1.1** — States and Observables
-- **Unit 1.2** — Measurement
-- **Unit 1.3** — Time Evolution
+- **Unit 1.1** — States and Observables (§4.1)
+- **Unit 1.2** — Measurement (§4.2)
+- **Unit 1.3** — Time Evolution (§4.3)
 
 **Chapter 2 — Identical Particles** (Tong §8)
 
-- **Unit 2.1** — Bosons and Fermions
-- **Unit 2.2** — Angular Momentum
-- **Unit 2.3** — Anyons
+- **Unit 2.1** — Bosons and Fermions (§8.1)
+- **Unit 2.2** — Angular Momentum (§8.2)
+- **Unit 2.3** — Anyons (§8.3)
 
 **Chapter 3 — Path Integral** (Tong §15)
 
-- **Unit 3.1** — Quantization
-- **Unit 3.2** — Propagator
-- **Unit 3.3** — Stationary Phase
-- **Unit 3.4** — Imaginary Time
+- **Unit 3.1** — Quantization (§15)
+- **Unit 3.2** — Propagator (§15.1)
+- **Unit 3.3** — Stationary Phase (§15.2)
+- **Unit 3.4** — Imaginary Time (§15.3)
 
 **Chapter 4 — Phase and Gauge** (Tong §9, §11)
 
-- **Unit 4.1** — Gauge Field
-- **Unit 4.2** — Flux Ring
-- **Unit 4.3** — Landau Level
-- **Unit 4.4** — Spin and Monopole
-- **Unit 4.5** — Berry Phase
+- **Unit 4.1** — Gauge Field (§9.1)
+- **Unit 4.2** — Flux Ring (§9.4)
+- **Unit 4.3** — Landau Level (§9.2)
+- **Unit 4.4** — Spin and Monopole (§9.3, §9.5)
+- **Unit 4.5** — Berry Phase (§11.1)
 
 **Chapter 5 — Perturbation Theory** (Tong §10, §11)
 
-- **Unit 5.1** — Time-Independent Perturbation
-- **Unit 5.2** — Time-Dependent Perturbation
+- **Unit 5.1** — Time-Independent Perturbation (§10.1)
+- **Unit 5.2** — Time-Dependent Perturbation (§11.3)
 
 **Chapter 6 — Quantum Foundations** (Tong §16)
 
-- **Unit 6.1** — Density Matrix
-- **Unit 6.2** — Entanglement
-- **Unit 6.3** — Generalized Measurement
-- **Unit 6.4** — Open Quantum Systems
+- **Unit 6.1** — Density Matrix (§16.3)
+- **Unit 6.2** — Entanglement (§16.1, §16.2)
+- **Unit 6.3** — Generalized Measurement (§16.4)
+- **Unit 6.4** — Open Quantum Systems (§16.5)
 

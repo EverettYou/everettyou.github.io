@@ -66,7 +66,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.1.3 Hermitian Operators" href="1-1-3-hermitian-operators.html" />
-    <link rel="prev" title="1.1.1 Spins and Qubits" href="1-1-1-spins-and-qubits.html" />
+    <link rel="prev" title="1.1.1 What is a Qubit" href="1-1-1-what-is-a-qubit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
@@ -182,7 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chapter 1: Qubit</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="1-1-states-and-observables.html">1.1 States and Observables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="1-1-1-spins-and-qubits.html">1.1.1 Spins and Qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-1-1-what-is-a-qubit.html">1.1.1 What is a Qubit</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">1.1.2 State and Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
 </ul>
@@ -522,24 +522,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-quantum-states">Properties of Quantum States</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-system-for-a-qubit">Two-State System for a Qubit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-representation">Basis Representation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-basis-z-basis">Computational Basis (Z-basis)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-and-parameter-counting">Degrees of Freedom and Parameter Counting</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-transformations">Basis Transformations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#x-basis">X-basis</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#y-basis">Y-basis</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bloch-sphere">The Bloch Sphere</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametrization-and-geometry">Parametrization and Geometry</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-points-on-the-bloch-sphere">Key Points on the Bloch Sphere</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-spin-expectation-values">Connection to Spin Expectation Values</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ket-bra-and-inner-product">Ket, Bra, and Inner Product</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qubit-state">The Qubit State</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#born-s-rule-and-normalization">Born’s Rule and Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-counting-and-bloch-parametrization">Parameter Counting and Bloch Parametrization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bloch-sphere">The Bloch Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-expectation-values-and-the-bloch-vector">Spin Expectation Values and the Bloch Vector</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -560,219 +549,199 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is a quantum state as an abstract object in Hilbert space? How does <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> differ from its representation <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> in a basis?</p></li>
-<li><p>Why is global phase unobservable? If two states differ only by a global phase, why do they make identical predictions?</p></li>
-<li><p>How many independent real parameters specify a qubit state? Why is the Bloch sphere a useful geometry for visualizing qubits?</p></li>
-<li><p>What does normalization tell us physically? How does the constraint <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> connect to probability?</p></li>
-<li><p>Design an experiment using sequential measurements in different bases to verify that the same quantum state can have different component probabilities depending on measurement choice.</p></li>
+<li><p>What is a quantum state as an abstract object? How does the abstract ket <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> relate to its vector representation in a particular basis?</p></li>
+<li><p>A qubit state can be written as <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\theta/2)\vert 1\rangle\)</span>. Why does this require only two parameters (<span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>) when we started with four real numbers?</p></li>
+<li><p>Why is global phase unobservable? If we multiply a state by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\gamma}\)</span>, what changes and what stays the same in measurement predictions?</p></li>
+<li><p>The Bloch sphere maps each qubit state to a point on a 2-sphere. Why is this geometric picture useful? How do the angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span> on the sphere relate to measurement probabilities?</p></li>
+<li><p>Design a measurement protocol to determine whether a qubit is in state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>, <span class="math notranslate nohighlight">\(\vert +\rangle\)</span>, or <span class="math notranslate nohighlight">\(\vert \mathrm{i}\rangle\)</span>. What bases must you measure in, and what outcomes tell you which state you have?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Just as classical information is encoded in bit strings, quantum information is encoded in state vectors that live in a complex vector space. This section introduces the mathematical language of quantum mechanics—the Hilbert space formalism—and shows how different representations of a quantum state reveal different aspects of physical reality.</p>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>Quantum mechanics assigns to each physical system a <strong>state vector</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> that encodes all information necessary to predict measurement outcomes. This section develops the mathematical language—kets, bras, inner products, and basis representations—and introduces the <strong>Bloch sphere</strong>, a geometric visualization of the space of qubit states.</p>
+</section>
+<section id="ket-bra-and-inner-product">
+<h3>Ket, Bra, and Inner Product<a class="headerlink" href="#ket-bra-and-inner-product" title="Link to this heading">#</a></h3>
+<p><strong>Ket notation</strong> represents a quantum state as an abstract vector in a complex Hilbert space. For a two-level system (qubit), the state lives in <span class="math notranslate nohighlight">\(\mathcal{H} = \mathbb{C}^2\)</span>.</p>
 <div class="important admonition">
-<p class="admonition-title">Quantum State: Foundation of Predictions</p>
-<p>In quantum mechanics, a <strong>quantum state</strong> is a mathematical object that encodes all information about a system necessary to predict measurement outcomes. For a qubit, the state lives in a <strong>two-dimensional complex Hilbert space</strong>, denoted <span class="math notranslate nohighlight">\(\mathcal{H} = \mathbb{C}^2\)</span>.</p>
-<p><strong>Ket notation</strong>: We denote a state by the <strong>ket</strong> <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> (read “psi-ket”). This is an abstract vector—it has no particular representation yet. Mathematically, <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is an element of the Hilbert space.</p>
+<p class="admonition-title">Definition: Ket and Bra</p>
+<ul class="simple">
+<li><p>The <strong>ket</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is an abstract vector in Hilbert space.</p></li>
+<li><p>The <strong>bra</strong> <span class="math notranslate nohighlight">\(\langle \psi\vert \)</span> is the dual (Hermitian conjugate) of the ket: <span class="math notranslate nohighlight">\(\langle \psi\vert = (\vert \psi\rangle)^\dagger\)</span>.</p></li>
+<li><p>The <strong>inner product</strong> <span class="math notranslate nohighlight">\(\langle\phi\vert \psi\rangle\)</span> is a complex number defined by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\langle\phi\vert \psi\rangle \equiv \sum_i (\phi_i)^* \psi_i\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_i\)</span> and <span class="math notranslate nohighlight">\(\psi_i\)</span> are components in some basis.</p>
+<ul class="simple">
+<li><p><strong>Normalization</strong>: A state is <strong>normalized</strong> if <span class="math notranslate nohighlight">\(\langle\psi\vert \psi\rangle = 1\)</span>.</p></li>
+<li><p><strong>Orthogonality</strong>: Two states are <strong>orthogonal</strong> if <span class="math notranslate nohighlight">\(\langle\phi\vert \psi\rangle = 0\)</span>.</p></li>
+</ul>
 </div>
-<section id="properties-of-quantum-states">
-<h3>Properties of Quantum States<a class="headerlink" href="#properties-of-quantum-states" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Superposition principle</strong>: If <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(|\phi\rangle\)</span> are states, then any linear combination <span class="math notranslate nohighlight">\(\alpha|\psi\rangle + \beta|\phi\rangle\)</span> (with <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{C}\)</span>) is also a valid state.</p></li>
-<li><p><strong>Normalization</strong>: We restrict to <strong>normalized states</strong> with <span class="math notranslate nohighlight">\(\langle\psi|\psi\rangle = 1\)</span>. This ensures probability conservation.</p></li>
-<li><p><strong>Phase ambiguity</strong>: Two states <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\theta}|\psi\rangle\)</span> (differing by a global phase) represent the <strong>same physical state</strong>. Global phases are unobservable.</p></li>
-</ol>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Is global phase really unobservable?</strong> We assert that <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\theta}|\psi\rangle\)</span> are “the same physical state.” But what if there existed an exotic measurement that compared the phase of a quantum state to some external reference? Would global phase become observable? How would we ever know if such a measurement is impossible in principle (like Lorentz invariance in relativity) versus merely impossible with current technology?</p>
+<p><strong>In vector form</strong>, once we choose a basis:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Object</p></th>
+<th class="head"><p>Notation</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Representation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Ket</strong> (state)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span></p></td>
+<td><p>Column vector</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} \psi_1 \\ \psi_2 \end{pmatrix}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Bra</strong> (dual)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\langle\psi\vert\)</span></p></td>
+<td><p>Row vector</p></td>
+<td><p><span class="math notranslate nohighlight">\((\psi_1^*\ \ \psi_2^*)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Inner product</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\langle\phi\vert\psi\rangle\)</span></p></td>
+<td><p>Scalar</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_1^*\psi_1 + \phi_2^*\psi_2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Outer product</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\psi\rangle\langle\phi\vert\)</span></p></td>
+<td><p>Matrix</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} \psi_1\phi_1^* &amp; \psi_1\phi_2^* \\ \psi_2\phi_1^* &amp; \psi_2\phi_2^* \end{pmatrix}\)</span></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
-<section id="two-state-system-for-a-qubit">
-<h3>Two-State System for a Qubit<a class="headerlink" href="#two-state-system-for-a-qubit" title="Link to this heading">#</a></h3>
-<p>A qubit is defined by the existence of a distinguished <strong>computational basis</strong>—two orthonormal states we call <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> (also written as <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> for spin).</p>
-<p><strong>Orthonormality</strong>:</p>
+<section id="the-qubit-state">
+<h3>The Qubit State<a class="headerlink" href="#the-qubit-state" title="Link to this heading">#</a></h3>
+<p>A qubit is defined by the existence of two <strong>orthonormal computational basis states</strong> <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-orthonormal-computational">
-<span class="eqno">(2)<a class="headerlink" href="#equation-eq-orthonormal-computational" title="Link to this equation">#</a></span>\[
-\langle 0 | 0 \rangle = 1, \quad \langle 1 | 1 \rangle = 1, \quad \langle 0 | 1 \rangle = 0\]</div>
-<p><strong>General superposition</strong>:</p>
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-orthonormal-computational" title="Link to this equation">#</a></span>\[\langle 0\vert 0\rangle = 1, \quad \langle 1\vert 1\rangle = 1, \quad \langle 0\vert 1\rangle = 0\]</div>
+<p><strong>Any qubit state</strong> can be written as a superposition of these basis states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-general-qubit-state">
-<span class="eqno">(3)<a class="headerlink" href="#equation-eq-general-qubit-state" title="Link to this equation">#</a></span>\[
-|\psi\rangle = \alpha |0\rangle + \beta |1\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{C}\)</span> and the <strong>normalization condition</strong> is</p>
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-general-qubit-state" title="Link to this equation">#</a></span>\[|\psi\rangle = \alpha |0\rangle + \beta |1\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{C}\)</span> are <strong>amplitudes</strong> and the <strong>normalization condition</strong> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-normalization-condition">
-<span class="eqno">(4)<a class="headerlink" href="#equation-eq-normalization-condition" title="Link to this equation">#</a></span>\[
-|\alpha|^2 + |\beta|^2 = 1\]</div>
-</section>
-<section id="basis-representation">
-<h3>Basis Representation<a class="headerlink" href="#basis-representation" title="Link to this heading">#</a></h3>
-<p>While the abstract state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is basis-independent, once we choose a basis we can write it as a <strong>column vector</strong> (or <strong>state vector</strong>).</p>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Basis-independence: abstract freedom vs. experimental constraint</strong></p>
-<p>We claim the state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is “basis-independent”—the same physical state regardless of which basis we use to describe it. Yet in any actual experiment, we must choose which basis to measure.</p>
-<ul class="simple">
-<li><p>Write the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> in <em>three different bases</em>: computational (<span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span>), x-basis (<span class="math notranslate nohighlight">\(\{|+\rangle, |-\rangle\}\)</span>), and y-basis (<span class="math notranslate nohighlight">\(\{|{\mathrm{i}}\rangle, |{\bar{\mathrm{i}}}\rangle\}\)</span>). Show that the representation changes but the probabilities for measurement outcomes are consistent.</p></li>
-<li><p>If we measure this state in the computational basis, we get outcomes 0 and 1 with equal probability. If we measure in the x-basis, what probabilities do we get? Explain why the choice of measurement basis changes the predicted outcome probabilities, even though the state itself is unchanged.</p></li>
-<li><p>Does “basis-independence” mean the abstract state is somehow special or fundamental? Or is it just saying that the <em>mathematics</em> of Hilbert space is coordinate-free, while measurement always forces a concrete choice?</p></li>
-</ul>
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-normalization-condition" title="Link to this equation">#</a></span>\[|\alpha|^2 + |\beta|^2 = 1\]</div>
+<div class="note admonition">
+<p class="admonition-title">State vs. Representation</p>
+<p>Strictly speaking, <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is an abstract vector while <span class="math notranslate nohighlight">\(\begin{pmatrix} \alpha \\ \beta \end{pmatrix}\)</span> is its representation in a chosen basis. Throughout these notes we write <span class="math notranslate nohighlight">\(\vert \psi\rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}\)</span> using the equality sign, with the understanding that the right-hand side <strong>depends on the basis</strong>. If we switch to a different basis, the components change even though the state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is the same—just as a 3D vector has different components in Cartesian vs. spherical coordinates. The same remark applies to operators and their matrix representations.</p>
 </div>
-<section id="computational-basis-z-basis">
-<h4>Computational Basis (Z-basis)<a class="headerlink" href="#computational-basis-z-basis" title="Link to this heading">#</a></h4>
-<p>In the computational basis <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-computational-representation">
-<span class="eqno">(5)<a class="headerlink" href="#equation-eq-computational-representation" title="Link to this equation">#</a></span>\[\begin{split}
-|0\rangle \cong \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad
-|1\rangle \cong \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad
-|\psi\rangle \cong \begin{pmatrix} \alpha \\ \beta \end{pmatrix}\end{split}\]</div>
-<p>The symbol <span class="math notranslate nohighlight">\(\cong\)</span> means “is represented as”—the representation depends on the basis.</p>
-<p><strong>Inner product in matrix form</strong>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-inner-product-matrix">
-<span class="eqno">(6)<a class="headerlink" href="#equation-eq-inner-product-matrix" title="Link to this equation">#</a></span>\[\begin{split}
-\langle \psi | \phi \rangle = \begin{pmatrix} \alpha^* &amp; \beta^* \end{pmatrix} \begin{pmatrix} \gamma \\ \delta \end{pmatrix} = \alpha^* \gamma + \beta^* \delta\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(|\phi\rangle \cong \begin{pmatrix} \gamma \\ \delta \end{pmatrix}\)</span>.</p>
+<p><strong>Conversion between ket and vector notation</strong>: To express <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha \vert 0\rangle + \beta \vert 1\rangle\)</span> as components, write <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span>. To go the other way, interpret components <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> as the ket <span class="math notranslate nohighlight">\(\alpha \vert 0\rangle + \beta \vert 1\rangle\)</span>.</p>
+</section>
+<section id="born-s-rule-and-normalization">
+<h3>Born’s Rule and Normalization<a class="headerlink" href="#born-s-rule-and-normalization" title="Link to this heading">#</a></h3>
+<p>When we measure a qubit in the computational basis, the <strong>Born rule</strong> gives the measurement probabilities:</p>
 <div class="important admonition">
-<p class="admonition-title">Key Insight: Basis Dependence</p>
-<p>The abstract state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is <strong>unique and basis-independent</strong>. But the vector representation <span class="math notranslate nohighlight">\(\begin{pmatrix} \alpha \\ \beta \end{pmatrix}\)</span> <strong>depends on the choice of basis</strong>. If we rotate to a different basis, the components change, but the state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> remains the same.</p>
-<p>This is exactly like vectors in 3D space: a vector pointing north has different components in Cartesian vs. spherical coordinates, but it is the same geometric object.</p>
+<p class="admonition-title">Born Rule</p>
+<p>If <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha \vert 0\rangle + \beta \vert 1\rangle\)</span>, then measurement of the qubit in the computational basis <span class="math notranslate nohighlight">\(\{\vert 0\rangle, \vert 1\rangle\}\)</span> yields:</p>
+<div class="math notranslate nohighlight">
+\[P(\text{outcome } 0) = |\alpha|^2, \quad P(\text{outcome } 1) = |\beta|^2\]</div>
+<p>The normalization condition <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> ensures probabilities sum to unity: <span class="math notranslate nohighlight">\(P(0) + P(1) = 1\)</span>.</p>
 </div>
+<p><strong>Global phase is unobservable</strong>: Two states <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\gamma}\vert \psi\rangle\)</span> (differing by a global phase <span class="math notranslate nohighlight">\(\gamma \in \mathbb{R}\)</span>) give identical probabilities for all measurements. For example:</p>
+<div class="math notranslate nohighlight">
+\[|\psi\rangle = \alpha |0\rangle + \beta |1\rangle \quad \text{vs} \quad |\psi'\rangle = \mathrm{e}^{\mathrm{i}\gamma}(\alpha |0\rangle + \beta |1\rangle)\]</div>
+<p>Both have <span class="math notranslate nohighlight">\(P(0) = |\alpha|^2\)</span> and <span class="math notranslate nohighlight">\(P(1) = |\beta|^2\)</span>. Global phases do not affect physical predictions and can be freely removed.</p>
 </section>
-</section>
-<section id="degrees-of-freedom-and-parameter-counting">
-<h3>Degrees of Freedom and Parameter Counting<a class="headerlink" href="#degrees-of-freedom-and-parameter-counting" title="Link to this heading">#</a></h3>
-<p>How many independent real parameters describe a qubit state?</p>
-<p><strong>Naive count:</strong></p>
-<ul class="simple">
-<li><p>Two complex numbers <span class="math notranslate nohighlight">\(\alpha, \beta\)</span>: <span class="math notranslate nohighlight">\(2 \times 2 = 4\)</span> real parameters (real and imaginary parts of each).</p></li>
-</ul>
+<section id="parameter-counting-and-bloch-parametrization">
+<h3>Parameter Counting and Bloch Parametrization<a class="headerlink" href="#parameter-counting-and-bloch-parametrization" title="Link to this heading">#</a></h3>
+<p>How many independent real parameters specify a qubit state?</p>
+<p><strong>Naive count:</strong> Two complex amplitudes <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> give <span class="math notranslate nohighlight">\(2 \times 2 = 4\)</span> real parameters (real and imaginary parts).</p>
 <p><strong>Constraints:</strong></p>
 <ul class="simple">
-<li><p>Normalization: <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> removes <strong>1 real constraint</strong>.</p></li>
-<li><p>Global phase: <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\theta}|\psi\rangle\)</span> are physically identical, removing <strong>1 real parameter</strong> (the global phase <span class="math notranslate nohighlight">\(\theta\)</span>).</p></li>
+<li><p>Normalization: <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> removes <strong>1 constraint</strong>.</p></li>
+<li><p>Global phase: The freedom to multiply by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\gamma}\)</span> removes <strong>1 parameter</strong>.</p></li>
 </ul>
 <p><strong>Effective count:</strong> <span class="math notranslate nohighlight">\(4 - 1 - 1 = 2\)</span> independent real parameters.</p>
+<p>These two parameters naturally parametrize the qubit state:</p>
 <div class="important admonition">
-<p class="admonition-title">Qubit Parametrization</p>
-<p>A qubit state can be written uniquely as</p>
-<div class="math notranslate nohighlight" id="equation-eq-bloch-parametrization-detailed">
-<span class="eqno">(7)<a class="headerlink" href="#equation-eq-bloch-parametrization-detailed" title="Link to this equation">#</a></span>\[
-|\psi\rangle = \cos(\theta/2) |0\rangle + \mathrm{e}^{\mathrm{i}\phi} \sin(\theta/2) |1\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta \in [0, \pi]\)</span> and <span class="math notranslate nohighlight">\(\phi \in [0, 2\pi)\)</span> are two real angles.</p>
-<p><strong>Verification of normalization:</strong></p>
+<p class="admonition-title">Bloch Parametrization</p>
+<p>Every qubit state can be written uniquely as</p>
+<div class="math notranslate nohighlight" id="equation-eq-bloch-parametrization-standard">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-bloch-parametrization-standard" title="Link to this equation">#</a></span>\[|\psi\rangle = \cos(\theta/2) |0\rangle + \mathrm{e}^{\mathrm{i}\phi} \sin(\theta/2) |1\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta \in [0, \pi]\)</span> and <span class="math notranslate nohighlight">\(\phi \in [0, 2\pi)\)</span> are two real angles. This parametrization automatically satisfies normalization:</p>
 <div class="math notranslate nohighlight">
-\[
-\cos^2(\theta/2) + \sin^2(\theta/2) = 1 \quad \checkmark\]</div>
+\[\cos^2(\theta/2) + \sin^2(\theta/2) = 1 \quad \checkmark\]</div>
 </div>
 <div class="example admonition">
-<p class="admonition-title">Example: State Parametrization</p>
-<ol class="arabic simple">
-<li><p><strong>State <span class="math notranslate nohighlight">\(|0\rangle\)</span></strong> (north pole): <span class="math notranslate nohighlight">\(\theta = 0, \phi\)</span> arbitrary
-$<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(0) |0\rangle + \mathrm{e}^{\mathrm{i}\phi} \sin(0) |1\rangle = |0\rangle\)</span>$</p></li>
-<li><p><strong>State <span class="math notranslate nohighlight">\(|1\rangle\)</span></strong> (south pole): <span class="math notranslate nohighlight">\(\theta = \pi, \phi\)</span> arbitrary
-$<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/2) |0\rangle + \mathrm{e}^{\mathrm{i}\phi} \sin(\pi/2) |1\rangle = \mathrm{e}^{\mathrm{i}\phi} |1\rangle \approx |1\rangle\)</span>$</p></li>
-<li><p><strong>State <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span></strong> (positive x): <span class="math notranslate nohighlight">\(\theta = \pi/2, \phi = 0\)</span>
-$<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/4) |0\rangle + \mathrm{e}^{\mathrm{i} \cdot 0} \sin(\pi/4) |1\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \quad \checkmark\)</span>$</p></li>
-<li><p><strong>State <span class="math notranslate nohighlight">\(|\mathrm{i}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle)\)</span></strong>: <span class="math notranslate nohighlight">\(\theta = \pi/2, \phi = \pi/2\)</span>
-$<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/4) |0\rangle + \mathrm{e}^{\mathrm{i}\pi/2} \sin(\pi/4) |1\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle) \quad \checkmark\)</span>$</p></li>
+<p class="admonition-title">Example: Common Qubit States in Standard Form</p>
+<ol class="arabic">
+<li><p><strong>State <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span></strong>: <span class="math notranslate nohighlight">\(\theta = 0\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span> arbitrary</p>
+<div class="math notranslate nohighlight">
+\[\vert \psi\rangle = \cos(0)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(0)\vert 1\rangle = \vert 0\rangle\]</div>
+</li>
+<li><p><strong>State <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span></strong>: <span class="math notranslate nohighlight">\(\theta = \pi\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span> arbitrary</p>
+<div class="math notranslate nohighlight">
+\[\vert \psi\rangle = \cos(\pi/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\pi/2)\vert 1\rangle = \mathrm{e}^{\mathrm{i}\phi}\vert 1\rangle \cong \vert 1\rangle\]</div>
+</li>
+<li><p><strong>State <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span></strong>: <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span>, <span class="math notranslate nohighlight">\(\phi = 0\)</span></p>
+<div class="math notranslate nohighlight">
+\[\vert \psi\rangle = \cos(\pi/4)\vert 0\rangle + \mathrm{e}^{\mathrm{i} \cdot 0}\sin(\pi/4)\vert 1\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle) \quad \checkmark\]</div>
+</li>
 </ol>
 </div>
-</section>
-<section id="basis-transformations">
-<h3>Basis Transformations<a class="headerlink" href="#basis-transformations" title="Link to this heading">#</a></h3>
-<p>The choice of basis is arbitrary. Any two orthonormal bases are related by a <strong>unitary transformation</strong>.</p>
-<section id="x-basis">
-<h4>X-basis<a class="headerlink" href="#x-basis" title="Link to this heading">#</a></h4>
-<p>The <strong>x-basis</strong> (eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>) is</p>
-<div class="math notranslate nohighlight" id="equation-eq-x-basis">
-<span class="eqno">(8)<a class="headerlink" href="#equation-eq-x-basis" title="Link to this equation">#</a></span>\[
-|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad
-|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\]</div>
-<p>These states are orthonormal.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Orthonormality of X-basis</p>
-<div class="math notranslate nohighlight">
-\[
-\langle + | + \rangle = \frac{1}{2}(\langle 0| + \langle 1|)(|0\rangle + |1\rangle) = \frac{1}{2}(1 + 0 + 0 + 1) = 1 \quad \checkmark\]</div>
-<div class="math notranslate nohighlight">
-\[\langle + | - \rangle = \frac{1}{2}(\langle 0| + \langle 1|)(|0\rangle - |1\rangle) = \frac{1}{2}(1 - 0 + 0 - 1) = 0 \quad \checkmark\]</div>
-</div>
-<p><strong>Inverse relations</strong> (expressing computational basis in terms of x-basis):</p>
-<div class="math notranslate nohighlight" id="equation-eq-z-in-x-basis">
-<span class="eqno">(9)<a class="headerlink" href="#equation-eq-z-in-x-basis" title="Link to this equation">#</a></span>\[
-|0\rangle = \frac{1}{\sqrt{2}}(|+\rangle + |-\rangle), \quad
-|1\rangle = \frac{1}{\sqrt{2}}(|+\rangle - |-\rangle)\]</div>
-</section>
-<section id="y-basis">
-<h4>Y-basis<a class="headerlink" href="#y-basis" title="Link to this heading">#</a></h4>
-<p>The <strong>y-basis</strong> (eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>) is</p>
-<div class="math notranslate nohighlight" id="equation-eq-y-basis">
-<span class="eqno">(10)<a class="headerlink" href="#equation-eq-y-basis" title="Link to this equation">#</a></span>\[
-|{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle), \quad
-|{\bar{\mathrm{i}}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - \mathrm{i}|1\rangle)\]</div>
-</section>
 </section>
 <section id="the-bloch-sphere">
 <h3>The Bloch Sphere<a class="headerlink" href="#the-bloch-sphere" title="Link to this heading">#</a></h3>
+<p>The geometric picture of qubit states is the <strong>Bloch sphere</strong>: a unit 2-sphere in 3D space where each point represents a unique qubit state.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <figure class="align-default" id="fig-bloch-sphere">
 <a class="reference internal image-reference" href="../images/1-1-2-block_sphere.png"><img alt="../images/1-1-2-block_sphere.png" src="../images/1-1-2-block_sphere.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">The Bloch sphere: pure qubit states <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> map to points on <span class="math notranslate nohighlight">\(S^2\)</span>; polar angle <span class="math notranslate nohighlight">\(\theta\)</span> and azimuth <span class="math notranslate nohighlight">\(\phi\)</span> match the standard parametrization; basis kets lie at the poles and equator as labeled.</span><a class="headerlink" href="#fig-bloch-sphere" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">The Bloch sphere: pure qubit states map to points on the unit sphere. Polar angle <span class="math notranslate nohighlight">\(\theta\)</span> (from north pole) and azimuthal angle <span class="math notranslate nohighlight">\(\phi\)</span> (around z-axis) parametrize the state; basis states lie at the poles and equator.</span><a class="headerlink" href="#fig-bloch-sphere" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </aside>
-<p>The <strong>Bloch sphere</strong> is a geometric representation of the space of single-qubit pure states. Every normalized qubit state corresponds to a unique point on the unit sphere in 3D.</p>
-<section id="parametrization-and-geometry">
-<h4>Parametrization and Geometry<a class="headerlink" href="#parametrization-and-geometry" title="Link to this heading">#</a></h4>
-<p>Using spherical coordinates:</p>
+<div class="docutils">
+<p>In spherical coordinates, the Bloch parametrization becomes:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bloch-sphere-param">
-<span class="eqno">(11)<a class="headerlink" href="#equation-eq-bloch-sphere-param" title="Link to this equation">#</a></span>\[
-|\psi\rangle = \cos(\theta/2) |0\rangle + \mathrm{e}^{\mathrm{i}\phi} \sin(\theta/2) |1\rangle\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-bloch-sphere-param" title="Link to this equation">#</a></span>\[|\psi\rangle = \cos(\theta/2) |0\rangle + \mathrm{e}^{\mathrm{i}\phi} \sin(\theta/2) |1\rangle\]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\theta \in [0, \pi]\)</span>: <strong>polar angle</strong> from the north pole</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta \in [0, \pi]\)</span>: <strong>polar angle</strong> measured from the north pole (z-axis)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\phi \in [0, 2\pi)\)</span>: <strong>azimuthal angle</strong> around the z-axis</p></li>
 </ul>
-<p>These two angles are sufficient to specify any pure qubit state.</p>
-</section>
-<section id="key-points-on-the-bloch-sphere">
-<h4>Key Points on the Bloch Sphere<a class="headerlink" href="#key-points-on-the-bloch-sphere" title="Link to this heading">#</a></h4>
+<p><strong>Key basis states on the Bloch sphere:</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>State</p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(\theta\)</span></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(\phi\)</span></p></th>
-<th class="head"><p>Position</p></th>
+<th class="head"><p>Location</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(|0\rangle\)</span></p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\vert 0\rangle\)</span></p></td>
 <td><p>0</p></td>
 <td><p>any</p></td>
 <td><p>North pole</p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(|1\rangle\)</span></p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vert 1\rangle\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi\)</span></p></td>
 <td><p>any</p></td>
 <td><p>South pole</p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span></p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi/2\)</span></p></td>
 <td><p>0</p></td>
 <td><p>Positive x-axis</p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span></p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi/2\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi\)</span></p></td>
 <td><p>Negative x-axis</p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(|{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + i|1\rangle)\)</span></p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\vert \mathrm{i}\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \mathrm{i}\vert 1\rangle)\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi/2\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi/2\)</span></p></td>
 <td><p>Positive y-axis</p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(|{\bar{\mathrm{i}}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - i|1\rangle)\)</span></p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vert \bar{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \mathrm{i}\vert 1\rangle)\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\pi/2\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(3\pi/2\)</span></p></td>
 <td><p>Negative y-axis</p></td>
@@ -780,80 +749,81 @@ $<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/4) |0\rang
 </tbody>
 </table>
 </div>
-</section>
-<section id="connection-to-spin-expectation-values">
-<h4>Connection to Spin Expectation Values<a class="headerlink" href="#connection-to-spin-expectation-values" title="Link to this heading">#</a></h4>
-<p>For a qubit state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>, the <strong>expectation values</strong> of the Pauli operators form a 3D vector:</p>
-<div class="math notranslate nohighlight" id="equation-eq-bloch-vector">
-<span class="eqno">(12)<a class="headerlink" href="#equation-eq-bloch-vector" title="Link to this equation">#</a></span>\[
-\boldsymbol{n} = \langle\psi|\hat{\boldsymbol{\sigma}}|\psi\rangle = (\langle \hat{\sigma}^x \rangle, \langle \hat{\sigma}^y \rangle, \langle \hat{\sigma}^z \rangle) = (\sin\theta \cos\phi, \sin\theta \sin\phi, \cos\theta)\]</div>
-<p>This is a <strong>unit vector</strong> pointing from the origin to the location of <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> on the Bloch sphere.</p>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>The Bloch sphere has no generalization to qutrit (3-level) systems — why?</strong></p>
-<p>A qubit state is characterized by 2 real parameters (after removing global phase and normalization). These map to the surface of a 3D sphere <span class="math notranslate nohighlight">\(S^2\)</span>.</p>
-<ul class="simple">
-<li><p>Count the real parameters needed to specify a pure state of a qutrit (3-level system). After removing overall phase and normalization, how many free real parameters remain?</p></li>
-<li><p>For a qutrit, can you find a geometric space (like a sphere) that parametrizes all pure states? What is its dimension? (Hint: look up the “complex projective plane” <span class="math notranslate nohighlight">\(\mathbb{CP}^2\)</span>.)</p></li>
-<li><p>The Bloch sphere is particularly useful because rotations in 3D space (the <span class="math notranslate nohighlight">\(SU(2)\)</span> symmetry group) directly correspond to quantum gates acting on the qubit. Does a similar geometric picture hold for the qutrit, or is the special role of <span class="math notranslate nohighlight">\(S^2\)</span> unique to qubits?</p></li>
-<li><p>Measurement of a qubit gives 2 outcomes; measurement of a qutrit gives 3. How does the measurement formalism change? Can you still represent a qutrit state on a simple sphere?</p></li>
-</ul>
-</div>
-<div class="important admonition">
-<p class="admonition-title">Geometric Interpretation</p>
-<p>The Bloch sphere provides a complete geometric picture of all pure qubit states:</p>
-<ul class="simple">
-<li><p><strong>North pole</strong> (<span class="math notranslate nohighlight">\(|0\rangle\)</span>): Maximum z-spin, zero x and y spin.</p></li>
-<li><p><strong>South pole</strong> (<span class="math notranslate nohighlight">\(|1\rangle\)</span>): Opposite z-spin.</p></li>
-<li><p><strong>Equator</strong>: Superpositions with equal amplitudes in <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>; zero z-expectation, nonzero x and y.</p></li>
-<li><p><strong>Interior points</strong>: Not reachable by pure states (reserved for mixed states).</p></li>
-</ul>
-</div>
-<div class="important admonition">
-<p class="admonition-title">Born Rule: Amplitudes to Probabilities</p>
-<p>The coefficients <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> in the superposition</p>
+<h3 class="rubric" id="orthonormal-bases">Orthonormal Bases</h3>
+<p>Besides the computational (Z) basis, any orthonormal pair of states defines a valid basis. We highlight the X and Y bases:</p>
+<p><strong>X-basis</strong> (eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-x-basis">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-x-basis" title="Link to this equation">#</a></span>\[|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad |-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\]</div>
+<p><strong>Y-basis</strong> (eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-y-basis">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-y-basis" title="Link to this equation">#</a></span>\[|\mathrm{i}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle), \quad |\bar{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - \mathrm{i}|1\rangle)\]</div>
+<p>The <strong>inverse relations</strong> write the computational kets <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> in the X-basis and in the Y-basis (invert Eqs. <a class="reference internal" href="#equation-eq-x-basis">(7)</a> and <a class="reference internal" href="#equation-eq-y-basis">(8)</a>):</p>
+<p><strong>In the X-basis</strong> (<span class="math notranslate nohighlight">\(\{\vert +\rangle, \vert -\rangle\}\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-z-in-x-basis">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-z-in-x-basis" title="Link to this equation">#</a></span>\[|0\rangle = \frac{1}{\sqrt{2}}(|+\rangle + |-\rangle), \quad |1\rangle = \frac{1}{\sqrt{2}}(|+\rangle - |-\rangle)\]</div>
+<p><strong>In the Y-basis</strong> (<span class="math notranslate nohighlight">\(\{\vert \mathrm{i}\rangle, \vert \bar{\mathrm{i}}\rangle\}\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-z-in-y-basis">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-z-in-y-basis" title="Link to this equation">#</a></span>\[|0\rangle = \frac{1}{\sqrt{2}}(|\mathrm{i}\rangle + |\bar{\mathrm{i}}\rangle), \quad |1\rangle = -\frac{\mathrm{i}}{\sqrt{2}}(|\mathrm{i}\rangle - |\bar{\mathrm{i}}\rangle)\]</div>
+<p>Each basis corresponds to a pair of antipodal points on the Bloch sphere.</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">Basis Change Example</p>
+<p>To express a state in a different basis, substitute the inverse relations from Eq. <a class="reference internal" href="#equation-eq-z-in-x-basis">(9)</a> or <a class="reference internal" href="#equation-eq-z-in-y-basis">(10)</a>. For example, using the X-basis, <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha \vert 0\rangle + \beta \vert 1\rangle\)</span> becomes:</p>
 <div class="math notranslate nohighlight">
-\[
-|\psi\rangle = \alpha |0\rangle + \beta |1\rangle\]</div>
-<p>have a direct <strong>probabilistic interpretation</strong>:</p>
-<p><strong>If we measure the qubit in the computational basis</strong> <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span>:</p>
-<ul class="simple">
-<li><p>Outcome 0 occurs with probability <span class="math notranslate nohighlight">\(|\alpha|^2\)</span></p></li>
-<li><p>Outcome 1 occurs with probability <span class="math notranslate nohighlight">\(|\beta|^2\)</span></p></li>
-<li><p>The <strong>normalization condition</strong> <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> ensures that probabilities sum to 1.</p></li>
-</ul>
-<p><strong>Important:</strong> The phases of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> matter for predictions about other measurements, but they do not affect the probabilities for computational-basis measurements.</p>
+\[|\psi\rangle = \frac{\alpha + \beta}{\sqrt{2}}|+\rangle + \frac{\alpha - \beta}{\sqrt{2}}|-\rangle\]</div>
+</div>
 </div>
 </section>
+<section id="spin-expectation-values-and-the-bloch-vector">
+<h3>Spin Expectation Values and the Bloch Vector<a class="headerlink" href="#spin-expectation-values-and-the-bloch-vector" title="Link to this heading">#</a></h3>
+<p>For a qubit state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span>, the expectation values of the Pauli operators form a 3D unit vector:</p>
+<div class="important admonition">
+<p class="admonition-title">Bloch Vector</p>
+<p>For a state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\theta/2)\vert 1\rangle\)</span>, the Bloch vector is</p>
+<div class="math notranslate nohighlight" id="equation-eq-bloch-vector">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-bloch-vector" title="Link to this equation">#</a></span>\[\boldsymbol{n} = (\langle\hat{\sigma}^x\rangle, \langle\hat{\sigma}^y\rangle, \langle\hat{\sigma}^z\rangle) = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)\]</div>
+<p>This is a <strong>unit vector</strong>: <span class="math notranslate nohighlight">\(|\boldsymbol{n}| = 1\)</span>. It points from the origin directly to the state’s location on the Bloch sphere.</p>
+<p><strong>Physical interpretation</strong>: The Bloch vector describes the expected outcome of measuring spin in direction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span>.</p>
+</div>
+<p><strong>Note</strong>: The Pauli operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> are introduced formally in §1.1.3. For now, understand them as the three Hermitian observables whose eigenstates define the three orthonormal bases on the Bloch sphere.</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion</p>
+<p><strong>Why does the Bloch sphere fail for qubits with more than two levels?</strong></p>
+<p>A qubit state is specified by 2 real parameters, which naturally maps to a 2-sphere (the surface of a 3D ball). For a qutrit (3-level system), count the real parameters: <span class="math notranslate nohighlight">\(2n\)</span> from <span class="math notranslate nohighlight">\(n\)</span> complex amplitudes, minus 1 for normalization, minus 1 for global phase, gives <span class="math notranslate nohighlight">\(2(3) - 2 = 4\)</span> real parameters.</p>
+<ul class="simple">
+<li><p>Is there a simple geometric object (like a sphere) that parametrizes all pure qutrit states?</p></li>
+<li><p>How does the measurement formalism change for qubits vs. qutrits?</p></li>
+<li><p>The Bloch sphere is useful because rotations in 3D (<span class="math notranslate nohighlight">\(SU(2)\)</span> symmetry) correspond to quantum gates. Does a similar structure exist for higher-dimensional systems?</p></li>
+</ul>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A <strong>qubit state</strong> is an abstract vector <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> in a 2D complex Hilbert space.</p></li>
-<li><p><strong>Basis representation</strong> expresses the state as a column vector; the representation depends on the choice of basis.</p></li>
-<li><p>A general qubit state is parametrized by <strong>2 real angles</strong> (<span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span>) on the <strong>Bloch sphere</strong>.</p></li>
-<li><p><strong>Basis transformations</strong> relate different representations of the same state; unitary transformations rotate the state on the Bloch sphere.</p></li>
-<li><p>The <strong>Born rule</strong> connects the amplitudes <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to measurement probabilities.</p></li>
+<li><p>A <strong>quantum state</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is an abstract vector in a complex Hilbert space; its <strong>representation</strong> as components <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> depends on the chosen basis.</p></li>
+<li><p>The <strong>Born rule</strong> connects amplitudes to measurement probabilities: <span class="math notranslate nohighlight">\(P(0) = |\alpha|^2\)</span>, <span class="math notranslate nohighlight">\(P(1) = |\beta|^2\)</span>. Global phase is unobservable.</p></li>
+<li><p>A qubit state is specified by <strong>2 real parameters</strong>: the Bloch angles <span class="math notranslate nohighlight">\(\theta \in [0, \pi]\)</span> and <span class="math notranslate nohighlight">\(\phi \in [0, 2\pi)\)</span>.</p></li>
+<li><p>The <strong>Bloch sphere</strong> provides a complete geometric picture of all pure qubit states as points on a unit 2-sphere.</p></li>
+<li><p>Three orthonormal bases (Z, X, Y) correspond to three pairs of antipodal points on the Bloch sphere; measurement basis choice determines measurement outcome statistics.</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="1-1-1-spins-and-qubits.html"><span class="std std-doc">1.1.1 Spins and Qubits</span></a></strong>: Qubit states represent physical spin; return here to connect representation back to physics</p></li>
-<li><p><strong><a class="reference internal" href="1-1-3-hermitian-operators.html"><span class="std std-doc">1.1.3 Hermitian Operators</span></a></strong>: The computational basis diagonalizes certain observables; see how basis choice relates to operators</p></li>
-<li><p><strong><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="std std-doc">1.2.1 Measurement Postulate</span></a></strong>: When we measure, the qubit state collapses to an eigenstate; measurement selects the basis</p></li>
+<li><p><strong><a class="reference internal" href="1-1-1-what-is-a-qubit.html"><span class="std std-doc">1.1.1 Qubits</span></a></strong>: Return here to connect basis states and representation back to physical spin.</p></li>
+<li><p><strong><a class="reference internal" href="1-1-3-hermitian-operators.html"><span class="std std-doc">1.1.3 Hermitian Operators</span></a></strong>: Formally introduce the Pauli operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> and their eigenstate bases.</p></li>
+<li><p><strong><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="std std-doc">1.2.1 Measurement Postulate</span></a></strong>: Measurement postulate: when we measure, the state collapses to an eigenstate of the measured observable.</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{3}}|0\rangle + \sqrt{\frac{2}{3}}\,\mathrm{e}^{\mathrm{i}\pi/4}|1\rangle\)</span>. Find the Bloch sphere angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span> for this state by writing it in the standard parametrization <span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\theta/2)|0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\theta/2)|1\rangle\)</span>.</p>
-<p><strong>2.</strong> Show that two states <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}|\psi\rangle\)</span> (where <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}\)</span>) give the same measurement probabilities for any observable. That is, show <span class="math notranslate nohighlight">\(|\langle m | \psi \rangle|^2 = |\langle m | \mathrm{e}^{\mathrm{i}\alpha}\psi \rangle|^2\)</span> for any state <span class="math notranslate nohighlight">\(|m\rangle\)</span>. Why does this mean global phase is unobservable?</p>
-<p><strong>3.</strong> Express the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> in the X-basis <span class="math notranslate nohighlight">\(\{|+\rangle, |-\rangle\}\)</span>. Then express <span class="math notranslate nohighlight">\(|\phi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle)\)</span> in the X-basis. Compute the inner product <span class="math notranslate nohighlight">\(\langle\phi|\psi\rangle\)</span> in both the Z-basis and the X-basis representations and verify you get the same result.</p>
-<p><strong>4.</strong> Compute the Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\langle\hat{\sigma}^x\rangle, \langle\hat{\sigma}^y\rangle, \langle\hat{\sigma}^z\rangle)\)</span> for the state <span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/8)|0\rangle + \mathrm{e}^{\mathrm{i}\pi/3}\sin(\pi/8)|1\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(|\boldsymbol{n}| = 1\)</span>.</p>
-<p><strong>5.</strong> On the Bloch sphere, orthogonal quantum states correspond to antipodal points (diametrically opposite). Verify this explicitly: show that if <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> has Bloch angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span>, then the orthogonal state <span class="math notranslate nohighlight">\(|\psi^\perp\rangle\)</span> (satisfying <span class="math notranslate nohighlight">\(\langle\psi^\perp|\psi\rangle = 0\)</span>) has Bloch angles <span class="math notranslate nohighlight">\((\pi - \theta, \phi + \pi)\)</span>.</p>
-<p><strong>6.</strong> A qubit state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> has Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)\)</span>. Show that measuring in the computational basis gives <span class="math notranslate nohighlight">\(P(0) = \frac{1 + n_z}{2}\)</span> and <span class="math notranslate nohighlight">\(P(1) = \frac{1 - n_z}{2}\)</span>, where <span class="math notranslate nohighlight">\(n_z = \cos\theta\)</span>. Interpret this geometrically: how does the measurement probability relate to the “height” of the Bloch vector?</p>
-<p><strong>7.</strong> Consider the Y-basis states <span class="math notranslate nohighlight">\(|\mathrm{i}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle)\)</span> and <span class="math notranslate nohighlight">\(|\bar{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - \mathrm{i}|1\rangle)\)</span>. Express <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> in terms of <span class="math notranslate nohighlight">\(|\mathrm{i}\rangle\)</span> and <span class="math notranslate nohighlight">\(|\bar{\mathrm{i}}\rangle\)</span>. Then express the state <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> in the Y-basis.</p>
+<p><strong>1.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \frac{1}{\sqrt{3}}\vert 0\rangle + \sqrt{\frac{2}{3}}\,\mathrm{e}^{\mathrm{i}\pi/4}\vert 1\rangle\)</span>. Find the Bloch sphere angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span> for this state by writing it in the standard parametrization <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\theta/2)\vert 1\rangle\)</span>.</p>
+<p><strong>2.</strong> Show that two states <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\vert \psi\rangle\)</span> (where <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}\)</span>) give the same measurement probabilities for any observable. That is, show <span class="math notranslate nohighlight">\(|\langle m \vert \psi \rangle\vert ^2 = |\langle m \vert \mathrm{e}^{\mathrm{i}\alpha}\psi \rangle\vert ^2\)</span> for any state <span class="math notranslate nohighlight">\(\vert m\rangle\)</span>. Why does this mean global phase is unobservable?</p>
+<p><strong>3.</strong> Express the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> in the X-basis <span class="math notranslate nohighlight">\(\{\vert +\rangle, \vert -\rangle\}\)</span>. Then express <span class="math notranslate nohighlight">\(\vert \phi\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \mathrm{i}\vert 1\rangle)\)</span> in the X-basis. Compute the inner product <span class="math notranslate nohighlight">\(\langle\phi\vert \psi\rangle\)</span> in both the Z-basis and the X-basis representations and verify you get the same result.</p>
+<p><strong>4.</strong> Compute the Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\langle \hat{\sigma}^x\rangle, \langle\hat{\sigma}^y\rangle, \langle\hat{\sigma}^z\rangle)\)</span> for the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\pi/8)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\pi/3}\sin(\pi/8)\vert 1\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(\vert \boldsymbol{n}| = 1\)</span>.</p>
+<p><strong>5.</strong> On the Bloch sphere, orthogonal quantum states correspond to antipodal points (diametrically opposite). Verify this explicitly: show that if <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> has Bloch angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span>, then the orthogonal state <span class="math notranslate nohighlight">\(\vert \psi^\perp\rangle\)</span> (satisfying <span class="math notranslate nohighlight">\(\langle\psi^\perp\vert \psi\rangle = 0\)</span>) has Bloch angles <span class="math notranslate nohighlight">\((\pi - \theta, \phi + \pi)\)</span>.</p>
+<p><strong>6.</strong> A qubit state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> has Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)\)</span>. Show that measuring in the computational basis gives <span class="math notranslate nohighlight">\(P(0) = \frac{1 + n_z}{2}\)</span> and <span class="math notranslate nohighlight">\(P(1) = \frac{1 - n_z}{2}\)</span>, where <span class="math notranslate nohighlight">\(n_z = \cos\theta\)</span>. Interpret this geometrically: how does the measurement probability relate to the “height” of the Bloch vector?</p>
+<p><strong>7.</strong> The inverse relations are given in Eq. <a class="reference internal" href="#equation-eq-z-in-y-basis">(10)</a>. Use them to express <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> as a linear combination of <span class="math notranslate nohighlight">\(\vert \mathrm{i}\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert \bar{\mathrm{i}}\rangle\)</span>. Verify normalization and <span class="math notranslate nohighlight">\(\langle + \vert + \rangle = 1\)</span> using your Y-basis coefficients.</p>
 <p><strong>8.</strong> How many real parameters are needed to specify a general <span class="math notranslate nohighlight">\(n\)</span>-level quantum state (a “qudit”)? Start with the naive count of <span class="math notranslate nohighlight">\(2n\)</span> real numbers (from <span class="math notranslate nohighlight">\(n\)</span> complex amplitudes), then subtract constraints from normalization and global phase. Verify your formula gives 2 for <span class="math notranslate nohighlight">\(n = 2\)</span> (the qubit).</p>
 </section>
 </section>
@@ -889,12 +859,12 @@ $<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/4) |0\rang
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="1-1-1-spins-and-qubits.html"
+       href="1-1-1-what-is-a-qubit.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1.1.1 Spins and Qubits</p>
+        <p class="prev-next-title">1.1.1 What is a Qubit</p>
       </div>
     </a>
     <a class="right-next"
@@ -923,24 +893,13 @@ $<span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\pi/4) |0\rang
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-quantum-states">Properties of Quantum States</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-system-for-a-qubit">Two-State System for a Qubit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-representation">Basis Representation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-basis-z-basis">Computational Basis (Z-basis)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-and-parameter-counting">Degrees of Freedom and Parameter Counting</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-transformations">Basis Transformations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#x-basis">X-basis</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#y-basis">Y-basis</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bloch-sphere">The Bloch Sphere</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametrization-and-geometry">Parametrization and Geometry</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-points-on-the-bloch-sphere">Key Points on the Bloch Sphere</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-spin-expectation-values">Connection to Spin Expectation Values</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ket-bra-and-inner-product">Ket, Bra, and Inner Product</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qubit-state">The Qubit State</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#born-s-rule-and-normalization">Born’s Rule and Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-counting-and-bloch-parametrization">Parameter Counting and Bloch Parametrization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bloch-sphere">The Bloch Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-expectation-values-and-the-bloch-vector">Spin Expectation Values and the Bloch Vector</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

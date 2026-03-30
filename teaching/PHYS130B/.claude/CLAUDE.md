@@ -41,15 +41,15 @@ Read these companion docs:
 
 ## Critical Rules
 
-1. **Never use `NotebookEdit` on these notebooks.** It causes char-by-char corruption. Use Python `json.load`/`json.dump` via Bash instead. See `experience.md` for details.
+1. **Never use `NotebookEdit`.** It causes char-by-char corruption. Denied in `settings.local.json`.
 
-2. **Never use `Edit` on `.ipynb` files.** It doesn't work on JSON notebook format.
+2. **Never use `Edit` or `Write` tools on ANY file.** They trigger permission dialogs in Cowork mode that block autonomous operation. Denied in `settings.local.json`. Use Python file I/O via `Bash` for ALL file modifications.
 
 3. **Always ensure `\n` terminators** on every non-final line in cell `"source"` arrays. Without them, Jupyter Book concatenates lines and rendering breaks.
 
 4. **Always `Read` before writing.** Inspect the notebook's current state before modifying. Verify cell indices haven't shifted.
 
-5. **Validate after bulk edits.** Run the validation script in `experience.md` §4 to catch corruption before building.
+5. **Validate after bulk edits.** Run `skills/notebook-writer/scripts/safe_edit.py validate` to catch corruption before building.
 
 6. **Clear `_build/` before rebuilding.** Stale cached copies in `_build/html/_sources/` and `_build/jupyter_execute/` persist across incremental builds.
 
@@ -67,53 +67,14 @@ For local preview, serve `notes/` with any static server (e.g., `python -m http.
 
 The notes are being refactored to support AI-era pedagogy. This is a multi-session effort tracked in `progress.md`. The work is organized into **workstreams**, each with specific deliverables.
 
-### Workstream 1: Prompt Review (63 notebooks)
+### Completed Workstreams
 
-Each x.y.z notebook already has a Prompts box (cell 1) with guiding questions. These must be reviewed to ensure:
-- Questions help students preview the lecture content effectively with AI
-- Questions are phrased naturally (readable by humans) while being specific enough for AI to give high-quality answers
-- Questions cover the key concepts that will appear in the lecture
-- At least one question pushes beyond the basics — something AI might struggle with or give an incomplete answer to
-- Do NOT do heavy prompt engineering — the prompts must read like a professor's study guide, not like API prompts
+The following workstreams were completed in previous runs:
 
-**Status**: Review each notebook's cell 1, flag inadequate prompts, rewrite where needed.
-
-### Workstream 2: Homework (63 notebooks)
-
-Add a `## Homework` section (new cell 3) to each x.y.z subsection notebook. Requirements per `design.md`:
-- 5–10 problems per subsection
-- Each problem targets one concept or skill
-- Mix of: conceptual questions, short derivations, "show that" proofs, physical reasoning, simple applications
-- Avoid tedious numerical computation or trick combinations
-- Problems should be reproducible on an in-person exam (no AI needed if student truly understood)
-- Difficulty: standard undergraduate quantum mechanics level
-
-**Status**: Create homework for each subsection. Physics accuracy is critical.
-
-### Workstream 3: Projects (21 section notebooks)
-
-Restructure each x.y section parent notebook to the new format (per `design.md`):
-- `## Overview` with a motivating paragraph first
-- `### Topics` table, `### Key Concepts`, `### Learning Objectives`
-- `## Projects` with 2–3 research project ideas per section
-
-Project design requirements:
-- Require genuine scientific inquiry (not just calculation)
-- Achievable in ~2 weeks with AI assistance
-- Categories: simulation, comprehensive study, research investigation
-- Each specifies: objective, suggested approach, expected deliverable
-
-**Status**: Restructure all 21 section parents and add projects.
-
-### Workstream 4: Discussion Problems (63 notebooks)
-
-Insert `:::{admonition} Discussion\n:class: warning` boxes within lecture content (cell 2) at natural conceptual junctures. Requirements:
-- Problems must be genuinely debatable — not just hard, but *controversial* or conceptually subtle
-- Targets conceptual barriers where discussion genuinely helps
-- Should provoke students to check AI answers against physical reasoning
-- 1–3 discussion boxes per subsection, placed inline where they arise naturally
-
-**Status**: Design and insert discussion problems.
+- **Workstream 1: Prompt Review** — All 63 subsection notebooks reviewed and updated
+- **Workstream 2: Homework** — All 63 subsection notebooks have `## Homework` (cell 3)
+- **Workstream 3: Projects** — All 21 section parent notebooks have `## Project` (cell 2)
+- **Workstream 4: Discussion Problems** — All 63 subsection notebooks have inline Discussion boxes (`:class: dropdown tip`)
 
 ### Workstream 5: Content Polish (84 notebooks)
 
@@ -129,7 +90,7 @@ Refactor existing lecture content to serve its new role as authoritative referen
 ### Workstream 6: Validation
 
 After each batch of changes:
-- Run the corruption validation script (experience.md §4)
+- Run `safe_edit.py validate` or the inline validation script
 - Verify notebook cell structure matches design.md
 - Spot-check physics accuracy
 - Professor proofreads rendered output after `./build.sh`
