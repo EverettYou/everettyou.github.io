@@ -171,7 +171,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chapter 1: Qubit</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="1-1-states-and-observables.html">1.1 States and Observables</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="1-1-1-spins-and-qubits.html">1.1.1 Spins and Qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-1-1-what-is-a-qubit.html">1.1.1 What is a Qubit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">1.1.3 Hermitian Operators</a></li>
 </ul>
@@ -508,16 +508,14 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observables-as-hermitian-operators">Observables as Hermitian Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-conjugate-and-matrix-form">Hermitian Conjugate and Matrix Form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-hermitian">Why Hermitian?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-as-matrices">Operators as Matrices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pauli-matrices">The Pauli Matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values">Expectation Values</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-measurement-postulate">The Measurement Postulate</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#average-outcome">Average Outcome</a></li>
-</ul>
-</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition">Spectral Decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pauli-operators">Pauli Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pauli-algebra">Pauli Algebra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values">Expectation Values</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -538,259 +536,298 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>In classical mechanics, observables are just functions on phase space. Why does quantum mechanics require observables to be Hermitian <em>operators</em> rather than ordinary functions? What does Hermiticity buy us?</p></li>
-<li><p>Compute the eigenvalues and eigenvectors of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> by hand. Why do all Pauli matrices have eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>?</p></li>
-<li><p>Prove that if <span class="math notranslate nohighlight">\(\hat{O}\)</span> is Hermitian and <span class="math notranslate nohighlight">\(|\psi_1\rangle, |\psi_2\rangle\)</span> are eigenvectors with different eigenvalues, then they are orthogonal. What goes wrong if the eigenvalues are equal?</p></li>
-<li><p>For the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{3}}(|0\rangle + \sqrt{2}|1\rangle)\)</span>, compute <span class="math notranslate nohighlight">\(\langle \hat{\sigma}^z \rangle\)</span> and <span class="math notranslate nohighlight">\(\langle \hat{\sigma}^x \rangle\)</span> and interpret what these numbers mean physically.</p></li>
-<li><p>The expectation value formula <span class="math notranslate nohighlight">\(\langle \hat{O} \rangle = \langle \psi | \hat{O} | \psi \rangle\)</span> gives the average of many measurements. Is this the <em>same</em> as saying the expectation value equals the average outcome computed from the Born rule probabilities, or are these two different statements that happen to agree?</p></li>
+<li><p>Why must observables be represented by Hermitian operators rather than arbitrary operators? What special property of Hermitian operators makes them suitable for describing measurements?</p></li>
+<li><p>Find the eigenvalues and eigenvectors of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> by solving the characteristic equation. Why are all Pauli eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>?</p></li>
+<li><p>For a general qubit state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span>, write down the expectation values <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span> in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. What do these three numbers represent geometrically?</p></li>
+<li><p>Prove that eigenvectors of a Hermitian operator with different eigenvalues are orthogonal. Does this result depend on the eigenvectors being normalized?</p></li>
+<li><p>Interpret the Bloch vector: for a qubit state parameterized by angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span>, explain how the expectation values of the Pauli operators encode position on the Bloch sphere.</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Observation in quantum mechanics is not passive—it is fundamentally tied to the mathematical structure of reality through operators. To measure a physical quantity is to ask which values are possible, which states correspond to those values, and how certain we can be of the result. Hermitian operators encode this structure completely. They are the mathematical embodiment of our ability to know, predict, and control quantum systems, and understanding their properties is essential to understanding the bridge between theory and experiment.</p>
-<section id="observables-as-hermitian-operators">
-<h3>Observables as Hermitian Operators<a class="headerlink" href="#observables-as-hermitian-operators" title="Link to this heading">#</a></h3>
-<p>In quantum mechanics, a physical <strong>observable</strong> (measurable quantity) is represented by a <strong>Hermitian operator</strong> acting on the Hilbert space. This is one of the fundamental postulates of quantum mechanics.</p>
-<p><strong>Definition (Hermitian operator)</strong>: An operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> is <strong>Hermitian</strong> (or <strong>self-adjoint</strong>) if</p>
-<div class="math notranslate nohighlight" id="equation-eq-hermitian-def">
-<span class="eqno">(14)<a class="headerlink" href="#equation-eq-hermitian-def" title="Link to this equation">#</a></span>\[
-\hat{O}^\dagger = \hat{O}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{O}^\dagger\)</span> is the <strong>Hermitian conjugate</strong> (or <strong>adjoint</strong>), defined by the property</p>
-<div class="math notranslate nohighlight" id="equation-eq-hermitian-conjugate-def">
-<span class="eqno">(15)<a class="headerlink" href="#equation-eq-hermitian-conjugate-def" title="Link to this equation">#</a></span>\[
-\langle \psi | \hat{O} \phi \rangle = \langle \hat{O}^\dagger \psi | \phi \rangle\]</div>
-<p>for all states <span class="math notranslate nohighlight">\(|\psi\rangle, |\phi\rangle\)</span>.</p>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>In quantum mechanics, observables (measurable quantities) are represented by <strong>Hermitian operators</strong>. This is a fundamental postulate, not a mathematical curiosity. The connection between operator structure and measurement reality is profound: for measurement outcomes to be real numbers, the operators must have special properties. This section establishes the mathematical foundation—eigenvalues, spectral decomposition, and the Pauli matrices—that makes quantum predictions testable.</p>
 </section>
-<section id="hermitian-conjugate-and-matrix-form">
-<h3>Hermitian Conjugate and Matrix Form<a class="headerlink" href="#hermitian-conjugate-and-matrix-form" title="Link to this heading">#</a></h3>
-<p>For a matrix <span class="math notranslate nohighlight">\(M\)</span>, the Hermitian conjugate is the <strong>conjugate transpose</strong>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-hermitian-conjugate-matrix">
-<span class="eqno">(16)<a class="headerlink" href="#equation-eq-hermitian-conjugate-matrix" title="Link to this equation">#</a></span>\[
-M^\dagger = (M^*)^T = (M^T)^*\]</div>
+<section id="why-hermitian">
+<h3>Why Hermitian?<a class="headerlink" href="#why-hermitian" title="Link to this heading">#</a></h3>
+<p>A quantum state is described by complex numbers (coefficients in a superposition). Yet every measurement outcome is a <strong>real number</strong>. How do we extract reality from complexity?</p>
+<p><strong>Analogy from complex numbers</strong>: For a complex number <span class="math notranslate nohighlight">\(z = x + \mathrm{i}y\)</span>, the real part is <span class="math notranslate nohighlight">\(x = \frac{z + z^*}{2}\)</span>. The key property: <span class="math notranslate nohighlight">\(x = x^*\)</span> (the real part equals its own complex conjugate).</p>
+<p><strong>Same idea for operators</strong>: For an observable to yield real measurement outcomes, we require:</p>
+<div class="math notranslate nohighlight" id="equation-eq-hermitian-definition">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-hermitian-definition" title="Link to this equation">#</a></span>\[\hat{O}^\dagger = \hat{O}\]</div>
+<p>This is the definition of a <strong>Hermitian</strong> (or <strong>self-adjoint</strong>) operator, where <span class="math notranslate nohighlight">\(\hat{O}^\dagger\)</span> is the <strong>Hermitian conjugate</strong>.</p>
+<div class="important admonition">
+<p class="admonition-title">Definition: Hermitian Conjugate</p>
+<p>For an operator <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the Hermitian conjugate <span class="math notranslate nohighlight">\(\hat{O}^\dagger\)</span> is defined by:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-M = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix},\end{split}\]</div>
-<p>A matrix is Hermitian if <span class="math notranslate nohighlight">\(M = M^\dagger\)</span>. To compute the Hermitian conjugate:</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Hermitian Conjugate</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-M^\dagger = \begin{pmatrix} a^* &amp; c^* \\ b^* &amp; d^* \end{pmatrix}.\end{split}\]</div>
-<p>For Hermiticity, we need <span class="math notranslate nohighlight">\(M = M^\dagger\)</span>, which requires:</p>
-<ul class="simple">
-<li><p>Diagonal elements are <strong>real</strong>: <span class="math notranslate nohighlight">\(a, d \in \mathbb{R}\)</span></p></li>
-<li><p>Off-diagonal elements are <strong>conjugate pairs</strong>: <span class="math notranslate nohighlight">\(b = c^*\)</span></p></li>
-</ul>
+\[\langle \psi \vert \hat{O} \phi \rangle = \langle \hat{O}^\dagger \psi \vert \phi \rangle\]</div>
+<p>for all states <span class="math notranslate nohighlight">\(\vert \psi\rangle, \vert \phi\rangle\)</span>.</p>
+<p>For a matrix, <span class="math notranslate nohighlight">\(\hat{O}^\dagger = (\hat{O}^*)^T\)</span> (conjugate transpose).</p>
+<p>A matrix is Hermitian if all <strong>diagonal elements are real</strong> and <strong>off-diagonal elements are conjugate pairs</strong>: <span class="math notranslate nohighlight">\(O_{ij} = O_{ji}^*\)</span>.</p>
 </div>
-<p>Hermitian operators have the crucial property that their <strong>eigenvalues are real</strong>. Since measurement outcomes are real numbers (we observe real values on our instruments), the operators representing observables must be Hermitian. This is not just convenience—it’s a requirement for quantum mechanics to be physically sensible.</p>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Can we measure any operator? Construct a Hermitian operator and determine if it corresponds to a physical observable.</strong></p>
-<p>Suppose you construct the operator <span class="math notranslate nohighlight">\(\hat{M} \cong \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\)</span> (a diagonal matrix with distinct real eigenvalues 1 and 2). Is <span class="math notranslate nohighlight">\(\hat{M}\)</span> Hermitian? Can you measure <span class="math notranslate nohighlight">\(\hat{M}\)</span> on a qubit?</p>
-<p>Now consider a more subtle case: in a two-level atom with ground state <span class="math notranslate nohighlight">\(|g\rangle\)</span> and excited state <span class="math notranslate nohighlight">\(|e\rangle\)</span>, define <span class="math notranslate nohighlight">\(\hat{A} = |g\rangle\langle e|\)</span> (the lowering operator). Compute <span class="math notranslate nohighlight">\(\hat{A}^\dagger\)</span> and check if <span class="math notranslate nohighlight">\(\hat{A}\)</span> is Hermitian. What <em>is</em> <span class="math notranslate nohighlight">\(\hat{A}^\dagger \hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{A} \hat{A}^\dagger\)</span>? These non-Hermitian operators are still useful in quantum mechanics for describing <em>transitions</em>.</p>
-<p><strong>Your task</strong>: Explain why we restrict measurements to Hermitian observables (hint: think about eigenvalues). Then show that <span class="math notranslate nohighlight">\(\hat{N} = \hat{A}^\dagger \hat{A}\)</span> is Hermitian and has non-negative eigenvalues. What physical quantity does <span class="math notranslate nohighlight">\(\hat{N}\)</span> represent in an atom?</p>
+</section>
+<section id="operators-as-matrices">
+<h3>Operators as Matrices<a class="headerlink" href="#operators-as-matrices" title="Link to this heading">#</a></h3>
+<p>Quantum operators act on the Hilbert space (spanned by basis states <span class="math notranslate nohighlight">\(\vert 0\rangle, \vert 1\rangle, \ldots\)</span>). We represent operators as matrices using the rule:</p>
+<div class="math notranslate nohighlight" id="equation-eq-matrix-element">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-matrix-element" title="Link to this equation">#</a></span>\[O_{ij} = \langle i \vert \hat{O} \vert j \rangle\]</div>
+<p><strong>How to build a matrix</strong>: If you know how <span class="math notranslate nohighlight">\(\hat{O}\)</span> acts on each basis state, fill in the matrix column by column.</p>
+<div class="note admonition">
+<p class="admonition-title">Tip: Building a Matrix from Action Rules</p>
+<p>If <span class="math notranslate nohighlight">\(\hat{O}\vert j\rangle = \sum_i a_{ij}\vert i\rangle\)</span>, then the <span class="math notranslate nohighlight">\(j\)</span>-th column of the matrix is <span class="math notranslate nohighlight">\([a_{0j}, a_{1j}, a_{2j}, \ldots]^T\)</span>.</p>
+<p><strong>Example</strong>: For <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> on a qubit (basis <span class="math notranslate nohighlight">\(\vert 0\rangle, \vert 1\rangle\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{\sigma}^x\vert 0\rangle = \vert 1\rangle = 0\vert 0\rangle + 1\vert 1\rangle \quad \Rightarrow \text{column 0} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{\sigma}^x\vert 1\rangle = \vert 0\rangle = 1\vert 0\rangle + 0\vert 1\rangle \quad \Rightarrow \text{column 1} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Therefore} \quad \hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\end{split}\]</div>
 </div>
 </section>
 <section id="eigenvalues-and-eigenvectors">
 <h3>Eigenvalues and Eigenvectors<a class="headerlink" href="#eigenvalues-and-eigenvectors" title="Link to this heading">#</a></h3>
-<p>For a linear operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> acting on a state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>, there may exist special states (eigenstates) that are only <strong>rescaled</strong> by the operator:</p>
-<p><strong>Eigenvalue equation</strong>:</p>
+<p>Some special states <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> are only <strong>rescaled</strong> by an operator:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eigenvalue-equation">
-<span class="eqno">(17)<a class="headerlink" href="#equation-eq-eigenvalue-equation" title="Link to this equation">#</a></span>\[
-\hat{O} |\psi\rangle = \lambda |\psi\rangle\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is an <strong>eigenvector</strong> (or <strong>eigenstate</strong>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is the <strong>eigenvalue</strong>, a number (generally complex) that scales the eigenvector</p></li>
-</ul>
-<p>#:::{admonition} Theorem: Properties of Hermitian
-:class: important</p>
-<p>Let <span class="math notranslate nohighlight">\(\hat{O}\)</span> be a Hermitian operator. Then:</p>
-<ol class="arabic simple">
-<li><p><strong>Eigenvalues are real</strong>: If <span class="math notranslate nohighlight">\(\hat{O}|\psi\rangle = \lambda|\psi\rangle\)</span> with <span class="math notranslate nohighlight">\(\hat{O}^\dagger = \hat{O}\)</span>, then <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}\)</span>.</p></li>
-</ol>
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-eigenvalue-equation" title="Link to this equation">#</a></span>\[\hat{O}\vert \psi\rangle = \lambda \vert \psi\rangle\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is an <strong>eigenvector</strong> (eigenstate) and <span class="math notranslate nohighlight">\(\lambda\)</span> is its <strong>eigenvalue</strong>.</p>
+<div class="important admonition">
+<p class="admonition-title">Theorem: Hermitian Operators Have Real Eigenvalues</p>
+<p>If <span class="math notranslate nohighlight">\(\hat{O}\)</span> is Hermitian and <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is an eigenvector with eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span>, then <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}\)</span> (is real).</p>
+</div>
 <div class="dropdown note admonition">
-<p class="admonition-title">Proof: Eigenvalues are Real</p>
-<p>Take the inner product of the eigenvalue equation with <span class="math notranslate nohighlight">\(\langle\psi|\)</span>:</p>
+<p class="admonition-title">Proof</p>
+<p>Take the inner product of the eigenvalue equation with <span class="math notranslate nohighlight">\(\langle \psi\vert \)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\langle\psi|\hat{O}|\psi\rangle = \lambda \langle\psi|\psi\rangle = \lambda.\]</div>
-<p>Taking the complex conjugate:</p>
+\[\langle \psi\vert \hat{O}\vert \psi\rangle = \lambda \langle\psi\vert \psi\rangle = \lambda\]</div>
+<p>Take the complex conjugate of both sides:</p>
 <div class="math notranslate nohighlight">
-\[\langle\psi|\hat{O}|\psi\rangle^* = \lambda^*.\]</div>
+\[\langle \psi\vert \hat{O}\vert \psi\rangle^* = \lambda^*\]</div>
+<p>But using Hermiticity:</p>
+<div class="math notranslate nohighlight">
+\[\langle \psi\vert \hat{O}\vert \psi\rangle^* = (\langle \psi\vert \hat{O}\vert \psi\rangle)^* = \langle \psi\vert \hat{O}^\dagger\vert \psi\rangle = \langle \psi\vert \hat{O}\vert \psi\rangle = \lambda\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\lambda = \lambda^*\)</span>, so <span class="math notranslate nohighlight">\(\lambda\)</span> is real.</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Theorem: Orthogonality of Eigenvectors</p>
+<p>If <span class="math notranslate nohighlight">\(\hat{O}\)</span> is Hermitian and <span class="math notranslate nohighlight">\(\vert \psi_1\rangle, \vert \psi_2\rangle\)</span> are eigenvectors with <strong>different</strong> eigenvalues <span class="math notranslate nohighlight">\(\lambda_1 \neq \lambda_2\)</span>, then they are orthogonal:</p>
+<div class="math notranslate nohighlight">
+\[\langle\psi_1\vert \psi_2\rangle = 0\]</div>
+</div>
+<div class="dropdown note admonition">
+<p class="admonition-title">Proof</p>
+<p>Compute:</p>
+<div class="math notranslate nohighlight">
+\[\langle \psi_1\vert \hat{O}\vert \psi_2\rangle = \lambda_2 \langle\psi_1\vert \psi_2\rangle\]</div>
 <p>But also:</p>
 <div class="math notranslate nohighlight">
-\[\langle\psi|\hat{O}|\psi\rangle^* = \langle\psi|\hat{O}^\dagger|\psi\rangle = \langle\psi|\hat{O}|\psi\rangle = \lambda\]</div>
-<p>(using Hermiticity and the fact that <span class="math notranslate nohighlight">\(\langle\psi|\hat{O}|\psi\rangle\)</span> is a number). Thus <span class="math notranslate nohighlight">\(\lambda = \lambda^*\)</span>, so <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}\)</span>. ✓</p>
-</div>
-<ol class="arabic simple" start="2">
-<li><p><strong>Eigenvectors are orthogonal</strong> (for distinct eigenvalues): If <span class="math notranslate nohighlight">\(\hat{O}|\psi_1\rangle = \lambda_1|\psi_1\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{O}|\psi_2\rangle = \lambda_2|\psi_2\rangle\)</span> with <span class="math notranslate nohighlight">\(\lambda_1 \neq \lambda_2\)</span>, then <span class="math notranslate nohighlight">\(\langle\psi_1|\psi_2\rangle = 0\)</span>.</p></li>
-</ol>
-<div class="dropdown note admonition">
-<p class="admonition-title">Proof: Eigenvectors are Orthogonal</p>
+\[\langle \psi_1\vert \hat{O}\vert \psi_2\rangle = (\hat{O}\vert \psi_1\rangle)^\dagger\vert \psi_2\rangle = (\lambda_1\vert \psi_1\rangle)^\dagger\vert \psi_2\rangle = \lambda_1^* \langle\psi_1\vert \psi_2\rangle = \lambda_1 \langle\psi_1\vert \psi_2\rangle\]</div>
+<p>(using Hermiticity: <span class="math notranslate nohighlight">\(\lambda_1^* = \lambda_1\)</span>). Equating:</p>
 <div class="math notranslate nohighlight">
-\[\langle\psi_1|\hat{O}|\psi_2\rangle = \lambda_2 \langle\psi_1|\psi_2\rangle.\]</div>
-<p>Also:</p>
-<div class="math notranslate nohighlight">
-\[\langle\psi_1|\hat{O}|\psi_2\rangle = (\hat{O}|\psi_1\rangle)^\dagger|\psi_2\rangle = (\lambda_1|\psi_1\rangle)^\dagger|\psi_2\rangle = \lambda_1^* \langle\psi_1|\psi_2\rangle = \lambda_1 \langle\psi_1|\psi_2\rangle\]</div>
-<p>(since <span class="math notranslate nohighlight">\(\lambda_1\)</span> is real for Hermitian operators). Thus:</p>
-<div class="math notranslate nohighlight">
-\[\lambda_2 \langle\psi_1|\psi_2\rangle = \lambda_1 \langle\psi_1|\psi_2\rangle \implies (\lambda_2 - \lambda_1)\langle\psi_1|\psi_2\rangle = 0.\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\lambda_1 \neq \lambda_2\)</span>, we have <span class="math notranslate nohighlight">\(\langle\psi_1|\psi_2\rangle = 0\)</span>. ✓</p>
+\[\lambda_2 \langle\psi_1\vert \psi_2\rangle = \lambda_1 \langle\psi_1\vert \psi_2\rangle \quad \Rightarrow \quad (\lambda_2 - \lambda_1)\langle\psi_1\vert \psi_2\rangle = 0\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\lambda_2 \neq \lambda_1\)</span>, we have <span class="math notranslate nohighlight">\(\langle\psi_1\vert \psi_2\rangle = 0\)</span>.</p>
 </div>
-<div class="docutils">
-<ol class="arabic simple" start="3">
-<li><p><strong>Completeness</strong>: For a 2-dimensional system (like a qubit), there are at most <strong>two linearly independent eigenvectors</strong>. These span the entire Hilbert space and form a <strong>basis</strong> (the <strong>eigenbasis</strong> of the operator).</p></li>
-</ol>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Beyond finite dimensions: when is Hermitian different from self-adjoint?</strong></p>
-<p>In finite dimensions, “Hermitian” and “self-adjoint” are equivalent, and completeness is guaranteed. But in infinite-dimensional Hilbert spaces (like position and momentum operators on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>), these concepts differ subtly. A Hermitian operator may not be self-adjoint if its domain (the set of states it acts on) is not chosen carefully.</p>
-<p>For example, the position operator <span class="math notranslate nohighlight">\(\hat{x}\)</span> defined on the space of all smooth functions with compact support is Hermitian—but is it self-adjoint? One answer is “yes if we allow distributions.” Another is “only with boundary conditions.”</p>
-<p><strong>Your task</strong>:</p>
-<p>(a) State the formal definition of a self-adjoint operator: <span class="math notranslate nohighlight">\(\hat{O}\)</span> is self-adjoint if <span class="math notranslate nohighlight">\(\hat{O}^\dagger = \hat{O}\)</span> <em>and</em> the domain of <span class="math notranslate nohighlight">\(\hat{O}\)</span> equals the domain of <span class="math notranslate nohighlight">\(\hat{O}^\dagger\)</span>. Why does domain matter?</p>
-<p>(b) For a particle in a box with infinite walls, the momentum operator <span class="math notranslate nohighlight">\(\hat{p}\)</span> acting on smooth functions that vanish at the walls is Hermitian. Is it self-adjoint? Why or why not?</p>
-<p>(c) Does the distinction between Hermitian and self-adjoint affect physical predictions? That is, do eigenvalues and orthogonality of eigenvectors still hold? Or can domain pathologies lead to unexpected measurement outcomes?</p>
-</div>
-</div>
-</section>
-<section id="the-pauli-matrices">
-<h3>The Pauli Matrices<a class="headerlink" href="#the-pauli-matrices" title="Link to this heading">#</a></h3>
-<p>The most important Hermitian operators for a qubit are the <strong>Pauli matrices</strong>, representing spin along three orthogonal directions:</p>
-<div class="math notranslate nohighlight" id="equation-eq-pauli-matrices">
-<span class="eqno">(18)<a class="headerlink" href="#equation-eq-pauli-matrices" title="Link to this equation">#</a></span>\[\begin{split}
-\hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \quad
-\hat{\sigma}^y = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ i &amp; 0 \end{pmatrix}, \quad
-\hat{\sigma}^z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\end{split}\]</div>
-<p>All three are Hermitian (<span class="math notranslate nohighlight">\(\hat{\sigma}^i = (\hat{\sigma}^i)^\dagger\)</span>) with eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>.</p>
-<p>The Pauli matrices satisfy the algebra:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{\sigma}^i, \hat{\sigma}^j] = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\]</div>
-<p>where <span class="math notranslate nohighlight">\(\epsilon_{ijk}\)</span> is the Levi-Civita symbol. A detailed exploration of Pauli algebra, spin representations, and commutation relations is the focus of <strong>§2.2 in Chapter 2</strong>.</p>
-</section>
-<section id="expectation-values">
-<h3>Expectation Values<a class="headerlink" href="#expectation-values" title="Link to this heading">#</a></h3>
-<p>For a quantum state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the <strong>expectation value</strong> (or <strong>mean value</strong>) is</p>
-<div class="math notranslate nohighlight" id="equation-eq-expectation-value">
-<span class="eqno">(19)<a class="headerlink" href="#equation-eq-expectation-value" title="Link to this equation">#</a></span>\[
-\langle \hat{O} \rangle = \langle \psi | \hat{O} | \psi \rangle\]</div>
-<p><strong>Properties</strong>:</p>
-<ul class="simple">
-<li><p>For a Hermitian operator, <span class="math notranslate nohighlight">\(\langle \hat{O} \rangle\)</span> is <strong>real</strong> (automatically).</p></li>
-<li><p>It represents the <strong>average outcome</strong> if we measure <span class="math notranslate nohighlight">\(\hat{O}\)</span> on many identically prepared states.</p></li>
-</ul>
-<p>For the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and observable <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>:</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Calculation: Expectation Value</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\langle \hat{\sigma}^z \rangle = \frac{1}{2}(\langle 0| + \langle 1|) \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[= \frac{1}{2}(\langle 0| + \langle 1|)\frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) = \frac{1}{2\sqrt{2}}(1 - 1) = 0\]</div>
-</div>
-<p>This makes physical sense: the state is an equal superposition of spin-up and spin-down along z, so the average z-spin is zero.</p>
-</section>
-<section id="the-measurement-postulate">
-<h3>The Measurement Postulate<a class="headerlink" href="#the-measurement-postulate" title="Link to this heading">#</a></h3>
-<p><strong>Postulate (Measurement)</strong>: When we measure an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> on a system in state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>:</p>
-<ol class="arabic">
-<li><p><strong>Possible outcomes</strong>: The measurement result is an eigenvalue <span class="math notranslate nohighlight">\(\lambda_i\)</span> of <span class="math notranslate nohighlight">\(\hat{O}\)</span>.</p></li>
-<li><p><strong>Probability</strong>: The probability of obtaining outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-eq-measurement-probability">
-<span class="eqno">(20)<a class="headerlink" href="#equation-eq-measurement-probability" title="Link to this equation">#</a></span>\[
-   P_i = |\langle \psi_i | \psi \rangle|^2\]</div>
-<p>where <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span> is the normalized eigenvector corresponding to eigenvalue <span class="math notranslate nohighlight">\(\lambda_i\)</span>.</p>
-</li>
-<li><p><strong>State collapse</strong>: After the measurement, the state <strong>collapses</strong> to the eigenstate <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span> corresponding to the observed outcome.</p></li>
-</ol>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Measurement vs. evolution: at what point does collapse occur?</strong></p>
-<p>In quantum mechanics, the system evolves via the Schrödinger equation <span class="math notranslate nohighlight">\(\hat{H}|\psi\rangle\)</span> when left alone. But measuring the system is just another interaction—we apply a Hamiltonian and evolve. At what point does an interaction qualify as a “measurement”?</p>
-<p>Consider a photon entering a detector:</p>
-<ul class="simple">
-<li><p>Before photon enters: state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> (in superposition of being absorbed or reflected).</p></li>
-<li><p>Photon interacts with detector atoms via electromagnetic coupling (a Hamiltonian interaction).</p></li>
-<li><p>After <span class="math notranslate nohighlight">\(\sim 1~\mu\text{s}\)</span> of evolution: detector is “entangled” with photon. The photon state is now correlated with many detector atoms.</p></li>
-<li><p>After <span class="math notranslate nohighlight">\(\sim 1~\text{ms}\)</span>: heat from absorption has spread to <span class="math notranslate nohighlight">\(10^{23}\)</span> atoms. Reversing the interaction to recover the original superposition is thermodynamically impossible.</p></li>
-</ul>
-<p><strong>Your task</strong>:</p>
-<p>(a) Is the interaction itself a measurement? Or does measurement occur only when the environment gets involved and makes reversing the interaction impossible?</p>
-<p>(b) The <strong>Quantum Zeno Effect</strong> shows that rapid measurements suppress transitions. If you measure every <span class="math notranslate nohighlight">\(\Delta t = 10^{-9}~\text{s}\)</span>, you freeze the system. But if no single measurement is “special,” and each is just unitary evolution, how does frequent <em>evolution</em> prevent <em>further</em> evolution? Does this scenario resolve the question of whether collapse is real or just an update rule?</p>
-<p>(c) Propose a physical, observer-independent definition of when “measurement” occurs. What role does irreversibility play?</p>
-</div>
-<section id="average-outcome">
-<h4>Average Outcome<a class="headerlink" href="#average-outcome" title="Link to this heading">#</a></h4>
-<p>The <strong>expectation value</strong> is the average of all possible outcomes weighted by their probabilities:</p>
-<div class="math notranslate nohighlight" id="equation-eq-expectation-as-sum">
-<span class="eqno">(21)<a class="headerlink" href="#equation-eq-expectation-as-sum" title="Link to this equation">#</a></span>\[
-\langle \hat{O} \rangle = \sum_i \lambda_i P_i = \sum_i \lambda_i |\langle \psi_i | \psi \rangle|^2\]</div>
-<p>This is consistent with the definition <span class="math notranslate nohighlight">\(\langle \hat{O} \rangle = \langle \psi | \hat{O} | \psi \rangle\)</span>.</p>
-</section>
+<p><strong>Completeness for qubits</strong>: A 2×2 Hermitian matrix has exactly 2 linearly independent eigenvectors (counting multiplicity). These eigenvectors span the entire 2-dimensional Hilbert space and form an <strong>eigenbasis</strong>.</p>
 </section>
 <section id="spectral-decomposition">
 <h3>Spectral Decomposition<a class="headerlink" href="#spectral-decomposition" title="Link to this heading">#</a></h3>
-<p>Any Hermitian operator can be decomposed in terms of its eigenvalues and eigenprojectors:</p>
+<p>Any Hermitian operator can be decomposed as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-spectral-decomposition">
-<span class="eqno">(22)<a class="headerlink" href="#equation-eq-spectral-decomposition" title="Link to this equation">#</a></span>\[
-\hat{O} = \sum_i \lambda_i |\psi_i\rangle\langle\psi_i|\]</div>
-<p>where <span class="math notranslate nohighlight">\(|\psi_i\rangle\langle\psi_i|\)</span> is the <strong>projector</strong> onto the eigenstate <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span>.</p>
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-spectral-decomposition" title="Link to this equation">#</a></span>\[\hat{O} = \sum_i \lambda_i \vert \psi_i\rangle\langle \psi_i\vert \]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_i\)</span> are eigenvalues and <span class="math notranslate nohighlight">\(\vert \psi_i\rangle\langle \psi_i\vert \)</span> is the <strong>projector</strong> onto eigenstate <span class="math notranslate nohighlight">\(\vert \psi_i\rangle\)</span>.</p>
 <div class="dropdown note admonition">
-<p class="admonition-title">Example: Spectral Decomposition</p>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> with eigenstates <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span> (eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>):</p>
+<p class="admonition-title">Example: Spectral Decomposition of Pauli Operators</p>
+<p><strong><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></strong>: Eigenstates <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> (eigenvalue <span class="math notranslate nohighlight">\(-1\)</span>).</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^z = (+1)|0\rangle\langle 0| + (-1)|1\rangle\langle 1| = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} - \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \quad \checkmark\end{split}\]</div>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> with eigenstates <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and <span class="math notranslate nohighlight">\(|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span> (eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>):</p>
+\[\begin{split}\hat{\sigma}^z = (+1)\vert 0\rangle\langle 0\vert + (-1)\vert 1\rangle\langle 1\vert = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\end{split}\]</div>
+<p><strong><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></strong>: Eigenstates <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> (eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span> (eigenvalue <span class="math notranslate nohighlight">\(-1\)</span>).</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^x = (+1)|+\rangle\langle +| + (-1)|-\rangle\langle -| = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} - \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \quad \checkmark\end{split}\]</div>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span> with eigenstates <span class="math notranslate nohighlight">\(|\mathrm{i}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{i}|1\rangle)\)</span> and <span class="math notranslate nohighlight">\(|\bar{\mathrm{i}}\rangle = \frac{1}{\sqrt{2}}(|0\rangle - \mathrm{i}|1\rangle)\)</span> (eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>):</p>
+\[\hat{\sigma}^x = (+1)\vert +\rangle\langle +\vert + (-1)\vert -\rangle\langle -\vert \]</div>
+<p>As matrices:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^y = (+1)|\mathrm{i}\rangle\langle \mathrm{i}| + (-1)|\bar{\mathrm{i}}\rangle\langle \bar{\mathrm{i}}| = \frac{1}{2}\begin{pmatrix} 1 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 1 \end{pmatrix} - \frac{1}{2}\begin{pmatrix} 1 &amp; \mathrm{i} \\ -\mathrm{i} &amp; 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix} \quad \checkmark\end{split}\]</div>
+\[\begin{split}|+\rangle\langle +| = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}, \quad |-\rangle\langle -| = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{\sigma}^x = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} - \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \quad \checkmark\end{split}\]</div>
+</div>
+</section>
+<section id="pauli-operators">
+<h3>Pauli Operators<a class="headerlink" href="#pauli-operators" title="Link to this heading">#</a></h3>
+<p>For a qubit, every Hermitian operator can be written as a linear combination of the <strong>identity</strong> <span class="math notranslate nohighlight">\(\hat{I}\)</span> and the three <strong>Pauli operators</strong> <span class="math notranslate nohighlight">\(\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span>. These four matrices form a basis (4 linearly independent Hermitian 2×2 matrices exist, so any Hermitian 2×2 is uniquely expressible in this basis).</p>
+<div class="note admonition">
+<p class="admonition-title">Table: Pauli Operators</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Spin Notation</p></th>
+<th class="head"><p>QI Notation</p></th>
+<th class="head"><p>Matrix</p></th>
+<th class="head"><p>Action on <span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span></p></th>
+<th class="head"><p>Action on <span class="math notranslate nohighlight">\(\vert 1 \rangle\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>X</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></p></td>
+<td><p>X</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert 1 \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Y</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span></p></td>
+<td><p>Y</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{i}\vert 1 \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-\mathrm{i}\vert 0 \rangle\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Z</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p>Z</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-\vert 1 \rangle\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Table: Spectral Decomposition of Pauli Operators</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Eigenvalue <span class="math notranslate nohighlight">\(+1\)</span></p></th>
+<th class="head"><p>Eigenstate (ket)</p></th>
+<th class="head"><p>Eigenstate (vector)</p></th>
+<th class="head"><p>Projector <span class="math notranslate nohighlight">\(+1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert + \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{I} + \hat{\sigma}^x}{2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert \mathrm{i} \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ \mathrm{i} \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{I} + \hat{\sigma}^y}{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(+1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} 1 \\ 0 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{I} + \hat{\sigma}^z}{2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Eigenvalue <span class="math notranslate nohighlight">\(-1\)</span></p></th>
+<th class="head"><p>Eigenstate (ket)</p></th>
+<th class="head"><p>Eigenstate (vector)</p></th>
+<th class="head"><p>Projector <span class="math notranslate nohighlight">\(-1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert - \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{I} - \hat{\sigma}^x}{2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert \bar{\mathrm{i}} \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -\mathrm{i} \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{I} - \hat{\sigma}^y}{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert 1 \rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{I} - \hat{\sigma}^z}{2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="pauli-algebra">
+<h3>Pauli Algebra<a class="headerlink" href="#pauli-algebra" title="Link to this heading">#</a></h3>
+<p>The Pauli matrices satisfy elegant algebraic relations:</p>
+<div class="math notranslate nohighlight" id="equation-eq-pauli-multiplication">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-pauli-multiplication" title="Link to this equation">#</a></span>\[\hat{\sigma}^i \hat{\sigma}^j = \delta_{ij}\hat{I} + \mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\]</div>
+<p>Explicitly:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^x \hat{\sigma}^x = \hat{\sigma}^y \hat{\sigma}^y = \hat{\sigma}^z \hat{\sigma}^z = \hat{I}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^x \hat{\sigma}^y = \mathrm{i}\hat{\sigma}^z, \quad \hat{\sigma}^y \hat{\sigma}^z = \mathrm{i}\hat{\sigma}^x, \quad \hat{\sigma}^z \hat{\sigma}^x = \mathrm{i}\hat{\sigma}^y\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^y \hat{\sigma}^x = -\mathrm{i}\hat{\sigma}^z, \quad \hat{\sigma}^z \hat{\sigma}^y = -\mathrm{i}\hat{\sigma}^x, \quad \hat{\sigma}^x \hat{\sigma}^z = -\mathrm{i}\hat{\sigma}^y\]</div>
+<div class="important admonition">
+<p class="admonition-title">Commutation Relations</p>
+<div class="math notranslate nohighlight">
+\[[\hat{\sigma}^i, \hat{\sigma}^j] = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\]</div>
+<p>Explicitly: <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^y] = 2\mathrm{i}\hat{\sigma}^z\)</span> and cyclic permutations.</p>
+<p><strong>Key insight</strong>: The Pauli operators do NOT commute. Measuring along one axis disturbs the result of measuring along another.</p>
 </div>
 <div class="important admonition">
-<p class="admonition-title">Key Result: Measurement and Expectation</p>
-<p>The expectation value <span class="math notranslate nohighlight">\(\langle \hat{O} \rangle = \langle \psi | \hat{O} | \psi \rangle\)</span> is:</p>
-<ul class="simple">
-<li><p>The <strong>average result</strong> of many measurements on identically prepared states.</p></li>
-<li><p>Computable as a <strong>sum of eigenvalues weighted by probabilities</strong>.</p></li>
-<li><p>A <strong>real number</strong> (when <span class="math notranslate nohighlight">\(\hat{O}\)</span> is Hermitian).</p></li>
-<li><p>The <strong>one number that characterizes the state’s response to measurement</strong> of that observable.</p></li>
-</ul>
+<p class="admonition-title">Anti-Commutation Relations</p>
+<div class="math notranslate nohighlight">
+\[\{\hat{\sigma}^i, \hat{\sigma}^j\} = 2\delta_{ij}\hat{I}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\{\hat{A}, \hat{B}\} = \hat{A}\hat{B} + \hat{B}\hat{A}\)</span> is the anti-commutator.</p>
 </div>
+</section>
+<section id="expectation-values">
+<h3>Expectation Values<a class="headerlink" href="#expectation-values" title="Link to this heading">#</a></h3>
+<p>For a state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> and observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the <strong>expectation value</strong> is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-expectation-value">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-expectation-value" title="Link to this equation">#</a></span>\[\langle \hat{O} \rangle = \langle \psi \vert \hat{O} \vert \psi \rangle\]</div>
+<p>This represents the <strong>average outcome</strong> if you measure <span class="math notranslate nohighlight">\(\hat{O}\)</span> many times on identically prepared states.</p>
+<p><strong>For a qubit state</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span> (with <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-expectation-pauli-coords">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-expectation-pauli-coords" title="Link to this equation">#</a></span>\[\langle \hat{\sigma}^x \rangle = 2 \text{Re}(\alpha^* \beta), \quad \langle \hat{\sigma}^y \rangle = 2 \text{Im}(\alpha^* \beta), \quad \langle \hat{\sigma}^z \rangle = \vert \alpha|^2 - |\beta|^2\]</div>
+<div class="dropdown note admonition">
+<p class="admonition-title">Verification</p>
+<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\langle \hat{\sigma}^x \rangle = (\alpha^* \langle 0\vert + \beta^* \langle 1\vert ) \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} (\alpha\vert 0\rangle + \beta\vert 1\rangle)\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[= (\alpha^* \langle 0\vert + \beta^* \langle 1\vert )(\beta\vert 0\rangle + \alpha\vert 1\rangle) = \alpha^* \beta + \beta^* \alpha = 2\text{Re}(\alpha^* \beta)\]</div>
+<p>Similar calculations give the results for <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. ✓</p>
+</div>
+<p><strong>In the spherical parameterization</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\theta/2)\vert 1\rangle\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bloch-vector-spherical">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-bloch-vector-spherical" title="Link to this equation">#</a></span>\[\langle \hat{\sigma}^x \rangle = \sin\theta \cos\phi, \quad \langle \hat{\sigma}^y \rangle = \sin\theta \sin\phi, \quad \langle \hat{\sigma}^z \rangle = \cos\theta\]</div>
+<p>The vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)\)</span> is the <strong>Bloch vector</strong>, and it lies on the unit sphere (the <strong>Bloch sphere</strong>). The qubit state is completely encoded by this single point on the sphere.</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Observables</strong> are represented by <strong>Hermitian operators</strong>, which have real eigenvalues and orthogonal eigenvectors.</p></li>
-<li><p>The <strong>Pauli matrices</strong> <span class="math notranslate nohighlight">\(\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span> are the fundamental observables for a qubit, representing spin along the three axes.</p></li>
-<li><p><strong>Eigenvalues</strong> are the possible measurement outcomes; <strong>eigenvectors</strong> are the states with definite outcomes.</p></li>
-<li><p><strong>The measurement postulate</strong> connects theory to experiment: measurement outcomes are eigenvalues, with probabilities given by the Born rule.</p></li>
-<li><p><strong>Expectation values</strong> are averages of measurement outcomes and are computed as <span class="math notranslate nohighlight">\(\langle \hat{O} \rangle = \langle \psi | \hat{O} | \psi \rangle\)</span>.</p></li>
+<li><p><strong>Hermitian operators</strong> have real eigenvalues and orthogonal eigenvectors—essential for describing physical observables.</p></li>
+<li><p>The <strong>Pauli matrices</strong> <span class="math notranslate nohighlight">\(\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span> are the fundamental observables for a qubit, representing spin along three orthogonal directions.</p></li>
+<li><p><strong>Spectral decomposition</strong> expresses any observable as a sum of projectors onto its eigenstates, weighted by eigenvalues.</p></li>
+<li><p><strong>Pauli algebra</strong> (multiplication, commutation, anti-commutation relations) governs how spins interact and measure—non-commuting observables cannot be simultaneously diagonal.</p></li>
+<li><p><strong>Expectation values</strong> of Pauli operators encode the qubit state as a point on the <strong>Bloch sphere</strong>: a single state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> maps to one point <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="1-1-1-spins-and-qubits.html"><span class="std std-doc">1.1.1 Spins and Qubits</span></a></strong>: The Pauli matrices are concrete Hermitian operators for spin</p></li>
-<li><p><strong><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="std std-doc">1.2.1 Measurement Postulate</span></a></strong>: Hermitian operators represent physical observables; their eigenstates are measurement outcomes</p></li>
-<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html"><span class="std std-doc">2.2.1 Angular Momentum Algebra</span></a></strong>: Angular momentum operators are prime examples of Hermitian operators with rich algebraic structure</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
 <p><strong>1.</strong> Show that the Pauli matrix <span class="math notranslate nohighlight">\(\hat{\sigma}^y = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ i &amp; 0 \end{pmatrix}\)</span> is Hermitian by explicitly computing <span class="math notranslate nohighlight">\((\hat{\sigma}^y)^\dagger\)</span> and verifying it equals <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>. Then find its eigenvalues and normalized eigenvectors.</p>
 <p><strong>2.</strong> Consider the operator <span class="math notranslate nohighlight">\(\hat{A} = \begin{pmatrix} 1 &amp; \mathrm{i} \\ i &amp; 1 \end{pmatrix}\)</span>. Is <span class="math notranslate nohighlight">\(\hat{A}\)</span> Hermitian? If not, find <span class="math notranslate nohighlight">\(\hat{A}^\dagger\)</span> and construct a Hermitian operator from <span class="math notranslate nohighlight">\(\hat{A}\)</span> using the combination <span class="math notranslate nohighlight">\(\frac{1}{2}(\hat{A} + \hat{A}^\dagger)\)</span>.</p>
-<p><strong>3.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{3}}|0\rangle + \sqrt{\frac{2}{3}}|1\rangle\)</span>. Compute the expectation values <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, and <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle^2 + \langle\hat{\sigma}^y\rangle^2 + \langle\hat{\sigma}^z\rangle^2 = 1\)</span>.</p>
-<p><strong>4.</strong> The spectral decomposition of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> is <span class="math notranslate nohighlight">\(\hat{\sigma}^x = (+1)|+\rangle\langle+| + (-1)|-\rangle\langle-|\)</span>, where <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and <span class="math notranslate nohighlight">\(|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span>. Verify this by explicitly computing the right-hand side as a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix.</p>
-<p><strong>5.</strong> Show that the eigenvalues of any projector <span class="math notranslate nohighlight">\(\hat{P} = |\psi\rangle\langle\psi|\)</span> are 0 and 1. What are the corresponding eigenstates? Is a projector Hermitian?</p>
-<p><strong>6.</strong> A spin-1/2 particle is in the state <span class="math notranslate nohighlight">\(|\psi\rangle = \cos\alpha\,|\uparrow\rangle + \sin\alpha\,|\downarrow\rangle\)</span> (with <span class="math notranslate nohighlight">\(\alpha\)</span> real). You measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. What are the possible outcomes and their probabilities? Then compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span> directly from the definition <span class="math notranslate nohighlight">\(\langle\psi|\hat{\sigma}^z|\psi\rangle\)</span> and verify it equals <span class="math notranslate nohighlight">\(\sum_i \lambda_i P_i\)</span>.</p>
+<p><strong>3.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \frac{1}{\sqrt{3}}\vert 0\rangle + \sqrt{\frac{2}{3}}\vert 1\rangle\)</span>. Compute the expectation values <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, and <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle^2 + \langle\hat{\sigma}^y\rangle^2 + \langle\hat{\sigma}^z\rangle^2 = 1\)</span>.</p>
+<p><strong>4.</strong> The spectral decomposition of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> is <span class="math notranslate nohighlight">\(\hat{\sigma}^x = (+1)\vert +\rangle\langle +\vert + (-1)\vert -\rangle\langle -\vert \)</span>, where <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span>. Verify this by explicitly computing the right-hand side as a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix.</p>
+<p><strong>5.</strong> Show that the eigenvalues of any projector <span class="math notranslate nohighlight">\(\hat{P} = \vert \psi\rangle\langle \psi\vert \)</span> are 0 and 1. What are the corresponding eigenstates? Is a projector Hermitian?</p>
+<p><strong>6.</strong> A spin-1/2 particle is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos\alpha\,\vert \uparrow\rangle + \sin\alpha\,\vert \downarrow\rangle\)</span> (with <span class="math notranslate nohighlight">\(\alpha\)</span> real). You measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. What are the possible outcomes and their probabilities? Then compute <span class="math notranslate nohighlight">\(\langle \hat{\sigma}^z\rangle\)</span> directly from the definition <span class="math notranslate nohighlight">\(\langle\psi\vert \hat{\sigma}^z\vert \psi\rangle\)</span> and verify it equals <span class="math notranslate nohighlight">\(\sum_i \lambda_i P_i\)</span>.</p>
 <p><strong>7.</strong> The operator <span class="math notranslate nohighlight">\(\hat{n}\cdot\hat{\boldsymbol{\sigma}} = n_x \hat{\sigma}^x + n_y \hat{\sigma}^y + n_z \hat{\sigma}^z\)</span> represents spin along an arbitrary unit vector <span class="math notranslate nohighlight">\(\hat{n} = (n_x, n_y, n_z)\)</span> with <span class="math notranslate nohighlight">\(|\hat{n}| = 1\)</span>. Show that <span class="math notranslate nohighlight">\((\hat{n}\cdot\hat{\boldsymbol{\sigma}})^2 = \hat{I}\)</span> (the identity matrix). What does this imply about the eigenvalues of <span class="math notranslate nohighlight">\(\hat{n}\cdot\hat{\boldsymbol{\sigma}}\)</span>?</p>
 <p><strong>8.</strong> Using the result of Problem 7, show that the eigenvalues of <span class="math notranslate nohighlight">\(\hat{n}\cdot\hat{\boldsymbol{\sigma}}\)</span> are <span class="math notranslate nohighlight">\(\pm 1\)</span> for any unit vector <span class="math notranslate nohighlight">\(\hat{n}\)</span>. Find the eigenvector corresponding to eigenvalue <span class="math notranslate nohighlight">\(+1\)</span> for the case <span class="math notranslate nohighlight">\(\hat{n} = (\sin\theta, 0, \cos\theta)\)</span> (a vector in the <span class="math notranslate nohighlight">\(xz\)</span>-plane). Express your answer in terms of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<p><strong>9.</strong> Prove that the expectation value of any Hermitian operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> is real-valued for any state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>. That is, show <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle^* = \langle\hat{O}\rangle\)</span> using the definition <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle = \langle\psi|\hat{O}|\psi\rangle\)</span> and the Hermiticity condition.</p>
+<p><strong>9.</strong> Prove that the expectation value of any Hermitian operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> is real-valued for any state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span>. That is, show <span class="math notranslate nohighlight">\(\langle \hat{O}\rangle^* = \langle\hat{O}\rangle\)</span> using the definition <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle = \langle\psi\vert \hat{O}\vert \psi\rangle\)</span> and the Hermiticity condition.</p>
 </section>
 </section>
 
@@ -861,16 +898,14 @@ M^\dagger = \begin{pmatrix} a^* &amp; c^* \\ b^* &amp; d^* \end{pmatrix}.\end{sp
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observables-as-hermitian-operators">Observables as Hermitian Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-conjugate-and-matrix-form">Hermitian Conjugate and Matrix Form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-hermitian">Why Hermitian?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-as-matrices">Operators as Matrices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pauli-matrices">The Pauli Matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values">Expectation Values</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-measurement-postulate">The Measurement Postulate</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#average-outcome">Average Outcome</a></li>
-</ul>
-</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-decomposition">Spectral Decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pauli-operators">Pauli Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pauli-algebra">Pauli Algebra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values">Expectation Values</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
