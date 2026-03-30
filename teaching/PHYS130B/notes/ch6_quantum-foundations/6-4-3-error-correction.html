@@ -204,8 +204,8 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html">2.3.2 Fractional Quantum Hall Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html">2.3.3 Toric Code</a></li>
 </ul>
 </details></li>
 </ul>
@@ -521,9 +521,6 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#syndrome-measurement">Syndrome Measurement</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recovery">Recovery</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-quantum-error-correction">General Quantum Error Correction</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-for-a-code">Requirements for a Code</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-code-outlook">Surface Code (Outlook)</a></li>
 </ul>
@@ -616,13 +613,13 @@ U(|+\rangle \otimes |0\rangle) \stackrel{?}{=} |+\rangle \otimes |+\rangle = \fr
 <p><strong>Goal</strong>: Alice has unknown state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>; send it to Bob using entanglement + classical communication.</p>
 <p><strong>Requirements</strong>:</p>
 <ul class="simple">
-<li><p>Alice and Bob share a <strong>Bell pair</strong> (entangled state), e.g., <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|{\uparrow\uparrow}\rangle + |{\downarrow\downarrow}\rangle)\)</span>.</p></li>
+<li><p>Alice and Bob share a <strong>Bell pair</strong> (entangled state), e.g., <span class="math notranslate nohighlight">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|{00}\rangle + |{11}\rangle)\)</span>.</p></li>
 <li><p>Classical channel for Alice to send 2 bits to Bob.</p></li>
 <li><p>Alice <strong>destroys</strong> her copy via measurement (no-cloning consequence).</p></li>
 </ul>
 <section id="protocol-steps">
 <h4>Protocol Steps<a class="headerlink" href="#protocol-steps" title="Link to this heading">#</a></h4>
-<p><strong>Initial state</strong>: Alice holds qubit <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha|{\uparrow}\rangle + \beta|{\downarrow}\rangle\)</span>; shared Bell pair between Alice (A) and Bob (B):</p>
+<p><strong>Initial state</strong>: Alice holds qubit <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha|{0}\rangle + \beta|{1}\rangle\)</span>; shared Bell pair between Alice (A) and Bob (B):</p>
 <div class="math notranslate nohighlight">
 \[
 |\Psi_\text{initial}\rangle = |\psi\rangle_A |\Phi^+\rangle_{AB}\]</div>
@@ -655,10 +652,10 @@ U(|+\rangle \otimes |0\rangle) \stackrel{?}{=} |+\rangle \otimes |+\rangle = \fr
 <p><strong>Goal</strong>: Protect one logical qubit from single-qubit bit-flip errors using 3 physical qubits.</p>
 <p><strong>Encoding scheme</strong>: One logical qubit is encoded across three physical qubits by replicating the state:</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-3qubit-0">
-<span class="eqno">(368)<a class="headerlink" href="#equation-eq-qec-3qubit-0" title="Link to this equation">#</a></span>\[
+<span class="eqno">(360)<a class="headerlink" href="#equation-eq-qec-3qubit-0" title="Link to this equation">#</a></span>\[
 |0\rangle_L = |000\rangle \quad \text{(three identical qubits in $|0\rangle$)}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-qec-3qubit-1">
-<span class="eqno">(369)<a class="headerlink" href="#equation-eq-qec-3qubit-1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(361)<a class="headerlink" href="#equation-eq-qec-3qubit-1" title="Link to this equation">#</a></span>\[
 |1\rangle_L = |111\rangle \quad \text{(three identical qubits in $|1\rangle$)}\]</div>
 <p>A general logical state is:</p>
 <div class="math notranslate nohighlight">
@@ -685,7 +682,7 @@ U(|+\rangle \otimes |0\rangle) \stackrel{?}{=} |+\rangle \otimes |+\rangle = \fr
 \[|\psi\rangle_L = \alpha |000\rangle + \beta |111\rangle\]</div>
 <p><strong>Syndrome measurement</strong> (parity checks):</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-parity-check-1">
-<span class="eqno">(370)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(362)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[
 P_1 = Z_1 Z_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -745,7 +742,7 @@ P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
 <h4>Syndrome Measurement<a class="headerlink" href="#syndrome-measurement" title="Link to this heading">#</a></h4>
 <p>Measure <strong>parity checks</strong> (without measuring logical data):</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-parity-check-1-syndrome">
-<span class="eqno">(371)<a class="headerlink" href="#equation-eq-qec-parity-check-1-syndrome" title="Link to this equation">#</a></span>\[
+<span class="eqno">(363)<a class="headerlink" href="#equation-eq-qec-parity-check-1-syndrome" title="Link to this equation">#</a></span>\[
 P_1 = Z_1 Z_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -802,10 +799,6 @@ P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
 <li><p><strong>Doesn’t collapse logical data</strong>: Superposition <span class="math notranslate nohighlight">\(\alpha|000\rangle + \beta|111\rangle\)</span> is preserved; only error type is revealed.</p></li>
 <li><p><strong>Protects against single errors</strong>: Works if at most one qubit flips.</p></li>
 </ul>
-</section>
-</section>
-<section id="general-quantum-error-correction">
-<h3>General Quantum Error Correction<a class="headerlink" href="#general-quantum-error-correction" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">Knill-Laflamme Error Correction Conditions</p>
 <p>A quantum code with stabilizer generators <span class="math notranslate nohighlight">\(\{S_i\}\)</span> and Kraus error operators <span class="math notranslate nohighlight">\(\{E_a\}\)</span> can correct errors if and only if:</p>
@@ -818,6 +811,7 @@ P_2 = Z_2 Z_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
 E_a^\dagger E_b \in \text{span}(I, S_1, S_2, \ldots, S_k)\]</div>
 <p>This ensures that the error information is preserved in the stabilizers without disturbing the encoded logical state.</p>
 </div>
+</section>
 <section id="requirements-for-a-code">
 <h4>Requirements for a Code<a class="headerlink" href="#requirements-for-a-code" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
@@ -892,7 +886,7 @@ S_i |\psi\rangle_L = |\psi\rangle_L \quad \forall i\]</div>
 <section id="mechanism">
 <h4>Mechanism<a class="headerlink" href="#mechanism" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>System in superposition (e.g., <span class="math notranslate nohighlight">\(|{\uparrow}\rangle + |{\downarrow}\rangle\)</span>) interacts with environment.</p></li>
+<li><p>System in superposition (e.g., <span class="math notranslate nohighlight">\(|{0}\rangle + |{1}\rangle\)</span>) interacts with environment.</p></li>
 <li><p>Each environmental subsystem becomes entangled, encoding which state the system is in.</p></li>
 <li><p><strong>Multiple copies</strong> of state information exist in environment (redundancy).</p></li>
 <li><p>Observer can learn about system without directly accessing it; observing small environmental fragment reveals system state.</p></li>
@@ -935,7 +929,7 @@ S_i |\psi\rangle_L = |\psi\rangle_L \quad \forall i\]</div>
 <ul class="simple">
 <li><p><strong><a class="reference internal" href="6-4-2-lindblad-master-equation.html"><span class="std std-doc">6.4.2 Lindblad Master Equation</span></a></strong>: Decoherence mechanisms in qubits</p></li>
 <li><p><strong><a class="reference internal" href="6-2-3-bell-inequality.html"><span class="std std-doc">6.2.3 Bell Inequality</span></a></strong>: Entanglement for quantum error correction</p></li>
-<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html"><span class="std std-doc">2.3.3 Non-Abelian Anyons</span></a></strong>: Topological quantum error correction</p></li>
+<li><p><strong><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html"><span class="std std-doc">2.3.3 Toric Code</span></a></strong>: Topological quantum error correction</p></li>
 </ul>
 </div>
 </section>
@@ -1077,9 +1071,6 @@ S_i |\psi\rangle_L = |\psi\rangle_L \quad \forall i\]</div>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#syndrome-measurement">Syndrome Measurement</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recovery">Recovery</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-quantum-error-correction">General Quantum Error Correction</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-for-a-code">Requirements for a Code</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-code-outlook">Surface Code (Outlook)</a></li>
 </ul>

@@ -205,8 +205,8 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-abelian-anyons.html">2.3.2 Abelian Anyons</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-non-abelian-anyons.html">2.3.3 Non-Abelian Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html">2.3.2 Fractional Quantum Hall Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html">2.3.3 Toric Code</a></li>
 </ul>
 </details></li>
 </ul>
@@ -509,16 +509,14 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-equation-general-form">Master Equation: General Form</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lindblad-master-equation-gksl-form">The Lindblad Master Equation (GKSL Form)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning-of-terms">Physical Meaning of Terms</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-evolution">Unitary Evolution</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-term">Gain Term</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-term">Loss Term</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-lindblad-equation">Properties of the Lindblad Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{\downarrow}\rangle\langle{\uparrow}|\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-1-rangle-langle-0">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{1}\rangle\langle{0}|\)</span></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z">2. Phase Damping (Dephasing): <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\phi} \hat{\sigma}^z\)</span></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z">3. Depolarizing: <span class="math notranslate nohighlight">\(L_x = \sqrt{\Gamma_d/3} \hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(L_y = \sqrt{\Gamma_d/3} \hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(L_z = \sqrt{\Gamma_d/3} \hat{\sigma}^z\)</span></a></li>
 </ul>
@@ -571,7 +569,7 @@
 <section id="master-equation-general-form">
 <h3>Master Equation: General Form<a class="headerlink" href="#master-equation-general-form" title="Link to this heading">#</a></h3>
 <div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: When Is the Markovian Approximation Valid?</p>
+<p class="admonition-title">Discussion: Markovian Approximation</p>
 <p>The Lindblad equation assumes the system and environment are uncorrelated at each instant—a Markovian approximation. But in reality, the environment can have memory. How do we know when Markovian is okay?</p>
 <ul class="simple">
 <li><p>The Markovian approximation breaks down if the environment correlation time is comparable to the system timescale. How do we compute that correlation time from first principles?</p></li>
@@ -581,19 +579,19 @@
 </div>
 <p>For an open system coupled to environment (bath/reservoir), the <strong>master equation</strong> describes the reduced density matrix <span class="math notranslate nohighlight">\(\rho_S\)</span> (system only):</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-master-general">
-<span class="eqno">(359)<a class="headerlink" href="#equation-eq-lindblad-master-general" title="Link to this equation">#</a></span>\[
+<span class="eqno">(351)<a class="headerlink" href="#equation-eq-lindblad-master-general" title="Link to this equation">#</a></span>\[
 \frac{\mathrm{d}\rho_S}{dt} = \mathcal{L}(\rho_S)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is the <strong>Liouvillian superoperator</strong> (linear map on density matrices).</p>
 <p>We derive the Lindblad equation from first principles:</p>
 <div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Lindblad Master Equation from System-Environment</p>
+<p class="admonition-title">Derivation: Lindblad Equation</p>
 <p>Start with total Hamiltonian:</p>
 <div class="math notranslate nohighlight">
 \[
 H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
 <p>The full system+environment evolves unitarily. Tracing out the environment (and assuming <strong>Markovian approximation</strong>: short environment memory):</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-master-decomposed">
-<span class="eqno">(360)<a class="headerlink" href="#equation-eq-lindblad-master-decomposed" title="Link to this equation">#</a></span>\[
+<span class="eqno">(352)<a class="headerlink" href="#equation-eq-lindblad-master-decomposed" title="Link to this equation">#</a></span>\[
 \frac{\mathrm{d}\rho_S}{dt} = -\frac{\mathrm{i}}{\hbar}[H_S, \rho_S] + \mathcal{D}(\rho_S)\]</div>
 <p>where:</p>
 <ul class="simple">
@@ -601,14 +599,11 @@ H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
 <li><p>Second term: <strong>dissipation superoperator</strong> describing decoherence.</p></li>
 </ul>
 </div>
-</section>
-<section id="the-lindblad-master-equation-gksl-form">
-<h3>The Lindblad Master Equation (GKSL Form)<a class="headerlink" href="#the-lindblad-master-equation-gksl-form" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">Lindblad Master Equation (GKSL Form)</p>
 <p>The most general form preserving trace and positivity is the <strong>Lindblad equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-equation">
-<span class="eqno">(361)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(353)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[
 \frac{\mathrm{d}\rho}{dt} = -\frac{\mathrm{i}}{\hbar}[H, \rho] + \sum_k \gamma_k \left( L_k \rho L_k^\dagger - \frac{1}{2}\{L_k^\dagger L_k, \rho\} \right)\]</div>
 <p>where:</p>
 <ul class="simple">
@@ -646,10 +641,6 @@ H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
 \[
 \text{Tr}\left(-\frac{1}{2}\{L_k^\dagger L_k, \rho\}\right) = -\text{Tr}(L_k^\dagger L_k \rho) = -\text{Tr}(L_k \rho L_k^\dagger)\]</div>
 <p>Gain and loss balance to preserve <span class="math notranslate nohighlight">\(\text{Tr}(\rho) = 1\)</span>.</p>
-</section>
-</section>
-<section id="properties-of-the-lindblad-equation">
-<h3>Properties of the Lindblad Equation<a class="headerlink" href="#properties-of-the-lindblad-equation" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">Key Properties of Lindblad Evolution</p>
 <p>The Lindblad master equation preserves the fundamental properties of quantum states:</p>
@@ -663,7 +654,7 @@ H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
 </div>
 <p><strong>1. Trace Preservation:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-trace-preserving">
-<span class="eqno">(362)<a class="headerlink" href="#equation-eq-lindblad-trace-preserving" title="Link to this equation">#</a></span>\[
+<span class="eqno">(354)<a class="headerlink" href="#equation-eq-lindblad-trace-preserving" title="Link to this equation">#</a></span>\[
 \frac{\mathrm{d}}{\mathrm{d}t}\text{Tr}(\rho) = 0 \Rightarrow \text{Tr}(\rho(t)) = 1\]</div>
 <p><strong>2. Hermiticity Preservation:</strong>
 If <span class="math notranslate nohighlight">\(\rho(0)\)</span> is Hermitian, then <span class="math notranslate nohighlight">\(\rho(t)\)</span> remains Hermitian.</p>
@@ -672,24 +663,25 @@ If <span class="math notranslate nohighlight">\(\rho(0) \geq 0\)</span>, then <s
 <p><strong>4. CPTP (Completely Positive Trace-Preserving):</strong>
 The time evolution generates a CPTP map (quantum channel); formally equivalent to Kraus representation.</p>
 </section>
+</section>
 <section id="common-lindblad-operators">
 <h3>Common Lindblad Operators<a class="headerlink" href="#common-lindblad-operators" title="Link to this heading">#</a></h3>
-<section id="amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow">
-<h4>1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{\downarrow}\rangle\langle{\uparrow}|\)</span><a class="headerlink" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow" title="Link to this heading">#</a></h4>
+<section id="amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-1-rangle-langle-0">
+<h4>1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{1}\rangle\langle{0}|\)</span><a class="headerlink" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-1-rangle-langle-0" title="Link to this heading">#</a></h4>
 <p><strong>Physical</strong>: Excited state decays to ground state; energy dissipation at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>.</p>
 <p><strong>Master equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-amp-damping">
-<span class="eqno">(363)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[
+<span class="eqno">(355)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[
 \frac{\mathrm{d}\rho}{dt} = \Gamma_1 \left( \hat{\sigma}_- \rho \hat{\sigma}_+ - \frac{1}{2}\{\hat{\sigma}_+ \hat{\sigma}_-, \rho\} \right)\]</div>
 <p><strong>Effect on populations</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\rho_{\uparrow\uparrow}}{dt} = -\Gamma_1 \rho_{\uparrow\uparrow}, \quad \frac{\mathrm{d}\rho_{\downarrow\downarrow}}{dt} = +\Gamma_1 \rho_{\uparrow\uparrow}\]</div>
-<p>Population decays from excited (<span class="math notranslate nohighlight">\(|{\uparrow}\rangle\)</span>) to ground (<span class="math notranslate nohighlight">\(|{\downarrow}\rangle\)</span>) at rate <span class="math notranslate nohighlight">\(\Gamma_1\)</span>.</p>
+\frac{\mathrm{d}\rho_{00}}{dt} = -\Gamma_1 \rho_{00}, \quad \frac{\mathrm{d}\rho_{11}}{dt} = +\Gamma_1 \rho_{00}\]</div>
+<p>Population decays from excited (<span class="math notranslate nohighlight">\(|{1}\rangle\)</span>) to ground (<span class="math notranslate nohighlight">\(|{0}\rangle\)</span>) at rate <span class="math notranslate nohighlight">\(\Gamma_1\)</span>.</p>
 <p><strong>Effect on coherence</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\rho_{\uparrow\downarrow}}{dt} = -\frac{\Gamma_1}{2} \rho_{\uparrow\downarrow}\]</div>
+\frac{\mathrm{d}\rho_{01}}{dt} = -\frac{\Gamma_1}{2} \rho_{01}\]</div>
 <p>Coherences decay at half the rate (because excited state population decreases).</p>
 </section>
 <section id="phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z">
@@ -697,12 +689,12 @@ The time evolution generates a CPTP map (quantum channel); formally equivalent t
 <p><strong>Physical</strong>: Random phase fluctuations; coherences decay without energy loss at rate <span class="math notranslate nohighlight">\(\Gamma_\phi = 1/T_2\)</span> (where <span class="math notranslate nohighlight">\(T_2 &gt; T_1/2\)</span>).</p>
 <p><strong>Master equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-phase-damping">
-<span class="eqno">(364)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[
+<span class="eqno">(356)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[
 \frac{\mathrm{d}\rho}{dt} = \Gamma_\phi (\hat{\sigma}^z \rho \hat{\sigma}^z - \rho)\]</div>
 <p><strong>Effect</strong>: Only off-diagonal (coherence) terms decay:</p>
 <div class="math notranslate nohighlight">
 \[
-\rho_{\uparrow\downarrow}(t) = \mathrm{e}^{-\Gamma_\phi t} \rho_{\uparrow\downarrow}(0)\]</div>
+\rho_{01}(t) = \mathrm{e}^{-\Gamma_\phi t} \rho_{01}(0)\]</div>
 <p>Diagonal (population) terms unchanged. Dephasing creates classical mixtures.</p>
 </section>
 <section id="depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z">
@@ -715,24 +707,24 @@ The time evolution generates a CPTP map (quantum channel); formally equivalent t
 <h3>Steady States<a class="headerlink" href="#steady-states" title="Link to this heading">#</a></h3>
 <p>A <strong>steady state</strong> <span class="math notranslate nohighlight">\(\rho_\infty\)</span> satisfies:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-steady-state">
-<span class="eqno">(365)<a class="headerlink" href="#equation-eq-lindblad-steady-state" title="Link to this equation">#</a></span>\[
+<span class="eqno">(357)<a class="headerlink" href="#equation-eq-lindblad-steady-state" title="Link to this equation">#</a></span>\[
 \mathcal{L}(\rho_\infty) = 0\]</div>
 <p>i.e., <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\rho_\infty}{dt} = 0\)</span>; the state does not evolve.</p>
 <div class="example admonition">
 <p class="admonition-title">Example: Amplitude Damping</p>
-<p>From <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\rho_{\uparrow\uparrow}}{dt} = -\Gamma_1 \rho_{\uparrow\uparrow}\)</span>, steady state has <span class="math notranslate nohighlight">\(\rho_{\uparrow\uparrow}^\infty = 0\)</span>.</p>
-<p>Thus: <span class="math notranslate nohighlight">\(\rho_\infty = |{\downarrow}\rangle\langle{\downarrow}|\)</span> (ground state; all population decayed).</p>
+<p>From <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\rho_{00}}{dt} = -\Gamma_1 \rho_{00}\)</span>, steady state has <span class="math notranslate nohighlight">\(\rho_{00}^\infty = 0\)</span>.</p>
+<p>Thus: <span class="math notranslate nohighlight">\(\rho_\infty = |{1}\rangle\langle{1}|\)</span> (ground state; all population decayed).</p>
 </div>
 <div class="example admonition">
 <p class="admonition-title">Example: Amplitude Damping + Pumping</p>
 <p>If system is pumped into excited state at rate <span class="math notranslate nohighlight">\(\Gamma_2\)</span> (with operator <span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma_2} \hat{\sigma}_+\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\rho_{\uparrow\uparrow}}{dt} = -\Gamma_1 \rho_{\uparrow\uparrow} + \Gamma_2 \rho_{\downarrow\downarrow}\]</div>
+\frac{\mathrm{d}\rho_{00}}{dt} = -\Gamma_1 \rho_{00} + \Gamma_2 \rho_{11}\]</div>
 <p>Steady state: balance between decay and pumping.</p>
 <div class="math notranslate nohighlight">
 \[
-\rho_{\uparrow\uparrow}^\infty = \frac{\Gamma_2}{\Gamma_1 + \Gamma_2}, \quad \rho_{\downarrow\downarrow}^\infty = \frac{\Gamma_1}{\Gamma_1 + \Gamma_2}\]</div>
+\rho_{00}^\infty = \frac{\Gamma_2}{\Gamma_1 + \Gamma_2}, \quad \rho_{11}^\infty = \frac{\Gamma_1}{\Gamma_1 + \Gamma_2}\]</div>
 </div>
 </section>
 <section id="quantum-jump-picture-stochastic-interpretation">
@@ -755,7 +747,7 @@ The time evolution generates a CPTP map (quantum channel); formally equivalent t
 <h3>Quantum Regression Theorem<a class="headerlink" href="#quantum-regression-theorem" title="Link to this heading">#</a></h3>
 <p>For a system governed by Lindblad equation with steady state <span class="math notranslate nohighlight">\(\rho_\infty\)</span>, the <strong>two-time correlation</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-regression">
-<span class="eqno">(366)<a class="headerlink" href="#equation-eq-lindblad-regression" title="Link to this equation">#</a></span>\[
+<span class="eqno">(358)<a class="headerlink" href="#equation-eq-lindblad-regression" title="Link to this equation">#</a></span>\[
 \langle A(t) B(0) \rangle = \text{Tr}(A \mathcal{E}^{(t)}(B \rho_\infty))\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathcal{E}^{(t)}\)</span> is the time-evolved Liouvillian (solution of master equation).</p>
 <p><strong>Interpretation</strong>: Correlations at different times obey the same master equation as populations. One can predict oscillations and decay of correlations from the same Lindblad equation.</p>
@@ -771,15 +763,15 @@ The time evolution generates a CPTP map (quantum channel); formally equivalent t
 </ol>
 <div class="example admonition">
 <p class="admonition-title">Example: Decay from Excited State</p>
-<p>Initial condition: <span class="math notranslate nohighlight">\(\rho(0) = |{\uparrow}\rangle\langle{\uparrow}|\)</span>. Under amplitude damping:</p>
+<p>Initial condition: <span class="math notranslate nohighlight">\(\rho(0) = |{0}\rangle\langle{0}|\)</span>. Under amplitude damping:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \rho(t) = \begin{pmatrix} (1-\mathrm{e}^{-\Gamma_1 t}) &amp; 0 \\ 0 &amp; \mathrm{e}^{-\Gamma_1 t} \end{pmatrix}\end{split}\]</div>
-<p>Wait: Let me recalculate. <span class="math notranslate nohighlight">\(\rho_{\uparrow\uparrow}(t) = \mathrm{e}^{-\Gamma_1 t}\)</span>, so:</p>
+<p>Wait: Let me recalculate. <span class="math notranslate nohighlight">\(\rho_{00}(t) = \mathrm{e}^{-\Gamma_1 t}\)</span>, so:</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-decay-solution">
-<span class="eqno">(367)<a class="headerlink" href="#equation-eq-lindblad-decay-solution" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(359)<a class="headerlink" href="#equation-eq-lindblad-decay-solution" title="Link to this equation">#</a></span>\[\begin{split}
 \rho(t) = \begin{pmatrix} \mathrm{e}^{-\Gamma_1 t} &amp; 0 \\ 0 &amp; 1 - \mathrm{e}^{-\Gamma_1 t} \end{pmatrix}\end{split}\]</div>
-<p>Excited state population decays exponentially; ground state population grows. As <span class="math notranslate nohighlight">\(t \to \infty\)</span>: <span class="math notranslate nohighlight">\(\rho(\infty) = |{\downarrow}\rangle\langle{\downarrow}|\)</span> (ground state).</p>
+<p>Excited state population decays exponentially; ground state population grows. As <span class="math notranslate nohighlight">\(t \to \infty\)</span>: <span class="math notranslate nohighlight">\(\rho(\infty) = |{1}\rangle\langle{1}|\)</span> (ground state).</p>
 </div>
 <div class="attention admonition">
 <p class="admonition-title">Lindblad is Markovian</p>
@@ -976,16 +968,14 @@ D(\rho, \sigma) = \frac{1}{2}\text{Tr}(|\rho - \sigma|)\]</div>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-equation-general-form">Master Equation: General Form</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lindblad-master-equation-gksl-form">The Lindblad Master Equation (GKSL Form)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning-of-terms">Physical Meaning of Terms</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-evolution">Unitary Evolution</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-term">Gain Term</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-term">Loss Term</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-lindblad-equation">Properties of the Lindblad Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-downarrow-rangle-langle-uparrow">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{\downarrow}\rangle\langle{\uparrow}|\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma-sqrt-gamma-1-1-rangle-langle-0">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1} \hat{\sigma}_- = \sqrt{\Gamma_1} |{1}\rangle\langle{0}|\)</span></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-damping-dephasing-l-sqrt-gamma-phi-hat-sigma-z">2. Phase Damping (Dephasing): <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\phi} \hat{\sigma}^z\)</span></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#depolarizing-l-x-sqrt-gamma-d-3-hat-sigma-x-l-y-sqrt-gamma-d-3-hat-sigma-y-l-z-sqrt-gamma-d-3-hat-sigma-z">3. Depolarizing: <span class="math notranslate nohighlight">\(L_x = \sqrt{\Gamma_d/3} \hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(L_y = \sqrt{\Gamma_d/3} \hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(L_z = \sqrt{\Gamma_d/3} \hat{\sigma}^z\)</span></a></li>
 </ul>
