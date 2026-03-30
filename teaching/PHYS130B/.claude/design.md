@@ -1,5 +1,7 @@
 # Design Document — PHYS130B Lecture Notes
 
+Notebook-author conventions overlap with the PHYS 2C lecture-note spec at [`../../PHYS2C/notes_src/_design/design.md`](../../PHYS2C/notes_src/_design/design.md) (repo path: `teaching/PHYS2C/notes_src/_design/design.md`). **This file wins** when rules conflict (notably: **never use `---` horizontal rules** in 130B builds; PHYS 2C uses them between subsections).
+
 ## Teaching Philosophy: Physics Education in the AI Era
 
 ### The Problem
@@ -72,18 +74,36 @@ Therefore, the lecture notes serve a different purpose: they are the **authorita
 - **AI-friendly**: Written so that an AI reading the notes can accurately teach from them
 - **Not a specific narrative**: The notes don't try to tell one story for all students; they provide the skeleton that AI can flesh out differently for each learner
 
-### Admonition Classes (Extended for AI-Era Pedagogy)
+## Content selection and presentation
+
+In the AI era, emphasize **what humans uniquely need**—physical intuition, a coherent worldview, and modeling skills—rather than computational drill or formula memorization.
+
+**Keep it minimal and concise.** Teach only **essential** ideas; omit lengthy derivations in favor of physical argument. When in doubt, cut; students can use AI for details while the notes anchor intuition.
+
+**Prioritize principles and intuition.** Lead with **why** (meaning, causality) before **how** (formulas, procedures). Use analogies, figures, and examples. Highlight **unifying** structure (symmetry, conservation, limits) rather than isolated facts.
+
+**Build the knowledge graph.** Connect new material to prior topics and the broader course. Prefer a few deep links over many shallow ones. Use comparison tables and “vs.” framing where helpful.
+
+**Modeling and abstraction.** Say what is idealized, what is neglected, and why. Encourage defining the problem and choosing a model, not only executing calculations.
+
+### Admonition classes (extended for AI-era pedagogy)
 
 | Class | Use |
 |-------|-----|
 | `tip` | **Prompts** — guiding questions for AI-assisted preview (cell 1 of x.y.z) |
 | `example` | Worked examples with detailed calculations |
-| `note` | Physical intuition, conceptual insights |
-| `important` | Core definitions, fundamental equations |
-| `caution` | Common mistakes, pitfalls |
-| `seealso` | Cross-references to related sections |
-| `attention` | Subtle but important distinctions |
-| `warning` | **Discussion** — controversial/debatable problems for in-class discussion |
+| `note` | Background, clarifications, physical intuition, paradox setup/resolution |
+| `important` | Core definitions, theorems, fundamental equations students must retain |
+| `hint` | Nudge toward a solution without giving it away; “think about…” prompts |
+| `seealso` | Exercises, extra examples, animations, links to other sections or resources |
+| `attention` | Easy-to-miss subtleties and important distinctions |
+| `caution` | Sign conventions, common pitfalls, easy algebraic mistakes |
+| `warning` | **Discussion** — controversial or subtle **physics** questions for in-class debate (see Course Strategy); stronger conceptual traps than `caution` |
+| `danger` | Wrong approaches or formulas that do not apply in this context |
+| `error` | Explicit misconceptions, wrong statements, frequent exam mistakes |
+| `poll dropdown` | Optional: in-class poll/clicker prompts (collapsed by default) |
+
+**Discussion boxes:** Per Course Strategy §3, discussion prompts should be **collapsed by default** so they do not interrupt the lecture flow. Use the project’s established MyST pattern (e.g. `dropdown` combined with `warning`). **Do not nest** one `:::{admonition}` inside another `:::{admonition}`—nested `:::` breaks rendering (see MyST pitfalls); flatten inner content or use a single admonition with a title that signals “Discussion.”
 
 ## Notebook Architecture
 
@@ -158,13 +178,34 @@ Must require literature survey, computational exploration, and scientific writin
 - Each section has exactly ONE research-level project (not 2-3)
 - Projects should require genuine scientific inquiry at the frontier, not just calculation
 
-### Subsection Content Structure (x.y.z level)
+### Subsection content structure (x.y.z level)
 
-Within the `## Lecture Notes` cell (cell 2), content should follow this pattern:
-- Key definitions, results, and equations are visible and prominent
-- Extended derivations go in collapsible `dropdown` admonition boxes
-- Discussion boxes (`warning` class) are placed inline where conceptual debates naturally arise
-- Application examples go in `example` admonition boxes
+Within the `## Lecture Notes` cell (cell 2), use a clear arc (adapted from PHYS 2C, **without** horizontal rules):
+
+- Start with **`### Overview`** only (do not write `### Overview: [repeated title]`—the H1 already names the page): short bullets and, if useful, one key contrast.
+- **Body:** `###` subsections for each conceptual unit; key definitions and results stay **visible**; extended derivations go in **`:::{dropdown}`** (worked examples: state the problem, hide the solution behind a click).
+- **`:::{tab-set}` / tabs:** Use to compare alternatives (e.g. Schrödinger vs Heisenberg picture, two limits).
+- **Discussion** (`warning`) inline where debate helps; **application** blocks in `example` admonitions (see also “Application Sections → Example Boxes” below).
+- End with **`### Summary`**: 3–5 bullets recapping takeaways.
+
+**Do not use `---` between sections** (Jupyter Book / docutils error in this project). Separate major blocks with blank lines and heading level only.
+
+**Figures and layout (when useful):**
+
+- **Margin figure:** `:::{margin}` + `:::{figure}` for auxiliary diagrams; in margin use `:width: 100%`.
+- **Sidebar:** `:::{sidebar}` for asides (biography, further reading).
+- **Side-by-side:** `::::{grid} 1 1 2 2` with `:::{grid-item-card}` for comparisons.
+- **Figure options:** `:name:`, `:width: 80%` (or `100%` in margin/cards), `:align: center`.
+
+**Jupyter widgets with Matplotlib** (interactive demos):
+
+- Prefer `display(fig)` and `plt.close(fig)` over `plt.show()` (avoids leaking figures across cells). Never both `display(fig)` and `plt.show()`.
+- With `interactive_output` / `@interact`: either return `fig` **or** call `display(fig)` inside the callback—not both; end cells with `plt.figure(); plt.close()` if needed to suppress duplicate inline output.
+- Use `@interact` when each update creates a new figure; use manual `observe` + `Output` when reusing one figure or wiring Play + sliders + buttons.
+- In callbacks: `clear_output(wait=True)` before each `display(fig)` inside the target `Output`.
+- Wrap update callbacks with `plt.ioff()` … `plt.ion()` when suppressing spurious draws; for in-place figure updates, `%config InlineBackend.close_figures = False` in setup.
+- Define `Output` and control widgets **before** callbacks that reference them.
+- Prefer one update function, `continuous_update=False` on sliders, controls in `VBox`/`HBox`; document kernel restart if re-running widget cells leaves stale UI.
 
 The `## Homework` cell (cell 3) follows this format:
 ```
@@ -181,17 +222,7 @@ The `## Homework` cell (cell 3) follows this format:
 
 ## MyST Markdown Conventions
 
-### Admonition Classes
-
-| Class | Use |
-|-------|-----|
-| `example` | Worked examples with detailed calculations |
-| `note` | Physical intuition, conceptual insights |
-| `important` | Core definitions, fundamental equations |
-| `caution` | Common mistakes, pitfalls |
-| `seealso` | Cross-references to related sections |
-| `attention` | Subtle but important distinctions |
-| `tip` | Prompts / guiding questions (cell 1 of x.y.z) |
+Admonition classes are summarized in **Content selection → Admonition classes** above.
 
 Syntax:
 ```
@@ -210,7 +241,7 @@ Content here.
 - **`$$` display math MUST have blank lines above and below** — without them, the parser treats `$$` as inline math delimiters, merging the equation with adjacent text and producing stray `$` signs. This is the most common rendering bug.
 - **`myst_footnote_transition: false`** is set in `_config.yml` to work around a related docutils bug.
 
-### Equation Labels
+### Equation labels and citations
 
 Display math with labels (note the blank lines):
 ```
@@ -221,15 +252,23 @@ $$ (eq-section-name)
 
 ```
 
-Reference: `` {eq}`eq-section-name` ``
+**Cross-references:** Prefer MyST `` {eq}`eq-section-name` ``. The form `Eq. [](#eq-section-name)` is acceptable if you need prose “Eq. (…)” style and the label is defined as `$$ ... $$ (eq-section-name)` on its own lines.
 
-Label convention: `eq-{topic}-{description}` (e.g., `eq-mixed-purity`, `eq-6-1-pure-density`).
+Label every displayed equation that might be cited later; label convention: `eq-{topic}-{description}` (e.g., `eq-mixed-purity`, `eq-6-1-pure-density`).
+
+**LaTeX inside notebook JSON:** Do not split TeX across JSON strings in a way that inserts a real newline inside `\nabla`, `\nu`, `\partial`, etc.—the sequence `\n` is a newline, not part of the command.
 
 ### Application Sections → Example Boxes
 
 Sections titled `### Application: ...` that contain detailed calculations demonstrating theory should be wrapped in example admonition boxes, not left as regular subsections. Same for `#### Application at ...`.
 
 ## Math Notation Conventions
+
+**Display math:** `$$...$$` must have **blank lines above and below** (see “Things That Break Jupyter Book”).
+
+**Inline vs display:** Use `$...$` inline; reserve `$$...$$` for key displayed results.
+
+**Subscripts and norms:** Use `$i_{\text{enc}}$`, `$\Sigma_{\text{gap}}$` where words appear in subscripts. For evaluation bars or norms in tables, prefer `\vert` (e.g. `$\bigg\vert_\Sigma$`) to avoid clashing with Markdown pipe `|`.
 
 ### Vectors and Operators
 
@@ -262,10 +301,43 @@ Consistent across all notebooks:
 - Section references in prose: `§6.1.2` (with section symbol and dots)
 - File links in MyST: `[Topic Name](6-1-2-topic-name)` (dashes, no extension)
 - When reordering sections, use two-pass placeholder replacement to avoid circular substitutions
+- **Arbitrary targets:** Define labels with `(my-label)=` before a heading, or `:name: my-label` on figures/equations. Link with `` {ref}`my-label` ``.
+- **Figures:** Prefer `` {numref}`fig-label` `` (e.g. “see `` {numref}`fig-bloch` ``”) so the caption renders correctly. Avoid `Fig. [](#fig-label)` with empty link text when the caption contains math—Sphinx may show raw LaTeX in the link.
+- **Footnotes:** `[^1]` in text; `[^1]: Footnote text.` on its own line for the definition.
 
-## Content Style
+## Content style
 
 - Use bullet points within admonition boxes for key takeaways
 - Break large text blocks into digestible paragraphs (no wall-of-text)
 - Each `###` section within Lecture Notes should be a self-contained conceptual unit
-- Summary section at the end of each subsection notebook with bullet-point recap
+- End subsection notebooks with **`### Summary`** and 3–5 recap bullets (see Subsection content structure)
+
+### Prompt templates (for cell 1)
+
+Students use the **Prompts** box for AI-assisted preview. Questions should read like a professor’s study guide—natural and specific—not like API boilerplate (see `CLAUDE.md` Workstream 1). A useful pattern:
+
+```
+:::{admonition} Prompts
+:class: tip
+
+- Explain [main idea]. How does it differ from [related concept]?
+- What is [structure or object]? Why does [consequence] follow?
+- Walk me through [short derivation or argument]. What changes if [variation]?
+- Given [scenario], how do I use [method] to find [quantity]? Work a concrete example.
+- [Conceptual or comparison question that may stress-test AI answers]
+:::
+```
+
+Optional **student-facing** frameworks for structuring their own chats (from broader AI-literacy practice): **COSTAR** (Context, Objective, Style, Tone, Audience, Response format), **RACE** (Role, Action, Context, Expectation), **CREATE** (Character, Request, Examples, Additions, Type, Extras).
+
+### Checklist (new or heavily edited x.y.z notebooks)
+
+- [ ] Content matches **Content selection and presentation** (minimal, principled, connected)
+- [ ] Cell 0: `# x.y.z Title` (dots in title)
+- [ ] Cell 1: Prompts admonition, `:class: tip`, 4–5 questions
+- [ ] Cell 2: `## Lecture Notes` → `### Overview` (heading only) → body → `### Summary`
+- [ ] No `---` horizontal rules; no nested `:::` admonitions
+- [ ] Key equations labeled; citations via `` {eq}`...` ``
+- [ ] Tables where they clarify comparisons; figures use `:name:` when cross-referenced
+- [ ] Cell 3: `## Homework` with numbered problems
+- [ ] Widgets (if any): `display(fig)` / `plt.close(fig)`, `Output` defined before callbacks, no `plt.show()`
