@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -194,7 +194,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -550,8 +550,8 @@ document.write(`
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
 <li><p>Why must observables be represented by Hermitian operators rather than arbitrary operators? What special property of Hermitian operators makes them suitable for describing measurements?</p></li>
-<li><p>Find the eigenvalues and eigenvectors of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> by solving the characteristic equation. Why are all Pauli eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>?</p></li>
-<li><p>For a general qubit state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span>, write down the expectation values <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span> in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. What do these three numbers represent geometrically?</p></li>
+<li><p>Find the eigenvalues and eigenvectors of <span class="math notranslate nohighlight">\(\hat{X}\)</span> and <span class="math notranslate nohighlight">\(\hat{Z}\)</span> by solving the characteristic equation. Why are all Pauli eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>?</p></li>
+<li><p>For a general qubit state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span>, write down the expectation values <span class="math notranslate nohighlight">\(\langle\hat{X}\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{Y}\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{Z}\rangle\)</span> in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. What do these three numbers represent geometrically?</p></li>
 <li><p>Prove that eigenvectors of a Hermitian operator with different eigenvalues are orthogonal. Does this result depend on the eigenvectors being normalized?</p></li>
 <li><p>Interpret the Bloch vector: for a qubit state parameterized by angles <span class="math notranslate nohighlight">\((\theta, \phi)\)</span>, explain how the expectation values of the Pauli operators encode position on the Bloch sphere.</p></li>
 </ul>
@@ -618,7 +618,7 @@ document.write(`
 <p class="admonition-title">Theorem: Hermitian Operators Have Real Eigenvalues</p>
 <p>If <span class="math notranslate nohighlight">\(\hat{O}\)</span> is Hermitian and <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> is an eigenvector with eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span>, then <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}\)</span> (is real).</p>
 </div>
-<div class="dropdown note admonition">
+<div class="dropdown information admonition">
 <p class="admonition-title">Proof</p>
 <p>Take the inner product of the eigenvalue equation with <span class="math notranslate nohighlight">\(\langle \psi\vert \)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -637,7 +637,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\langle\psi_1\vert \psi_2\rangle = 0\]</div>
 </div>
-<div class="dropdown note admonition">
+<div class="dropdown information admonition">
 <p class="admonition-title">Proof</p>
 <p>Compute:</p>
 <div class="math notranslate nohighlight">
@@ -660,17 +660,17 @@ document.write(`
 <p>where <span class="math notranslate nohighlight">\(\lambda_i\)</span> are eigenvalues and <span class="math notranslate nohighlight">\(\vert \psi_i\rangle\langle \psi_i\vert \)</span> is the <strong>projector</strong> onto eigenstate <span class="math notranslate nohighlight">\(\vert \psi_i\rangle\)</span>.</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Example: Spectral Decomposition of Pauli Operators</p>
-<p><strong><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></strong>: Eigenstates <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> (eigenvalue <span class="math notranslate nohighlight">\(-1\)</span>).</p>
+<p><strong><span class="math notranslate nohighlight">\(\hat{Z}\)</span></strong>: Eigenstates <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> (eigenvalue <span class="math notranslate nohighlight">\(-1\)</span>).</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\hat{\sigma}^z = (+1)\vert 0\rangle\langle 0\vert + (-1)\vert 1\rangle\langle 1\vert = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\end{split}\]</div>
-<p><strong><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></strong>: Eigenstates <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> (eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span> (eigenvalue <span class="math notranslate nohighlight">\(-1\)</span>).</p>
+\[\begin{split}\hat{Z} = (+1)\vert 0\rangle\langle 0\vert + (-1)\vert 1\rangle\langle 1\vert = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\end{split}\]</div>
+<p><strong><span class="math notranslate nohighlight">\(\hat{X}\)</span></strong>: Eigenstates <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> (eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span> (eigenvalue <span class="math notranslate nohighlight">\(-1\)</span>).</p>
 <div class="math notranslate nohighlight">
-\[\hat{\sigma}^x = (+1)\vert +\rangle\langle +\vert + (-1)\vert -\rangle\langle -\vert \]</div>
+\[\hat{X} = (+1)\vert +\rangle\langle +\vert + (-1)\vert -\rangle\langle -\vert \]</div>
 <p>As matrices:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}|+\rangle\langle +| = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}, \quad |-\rangle\langle -| = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix}\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}\hat{\sigma}^x = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} - \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \quad \checkmark\end{split}\]</div>
+\[\begin{split}\hat{X} = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} - \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \quad \checkmark\end{split}\]</div>
 </div>
 </section>
 <section id="pauli-operators">
@@ -714,10 +714,10 @@ document.write(`
 <p class="admonition-title">Table: Spectral Decomposition of Pauli Operators</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<tr class="row-odd"><th class="head"><p>Operator <span class="math notranslate nohighlight">\(\hat{O}\)</span></p></th>
 <th class="head"><p>Eigenvalue</p></th>
 <th class="head"><p>Eigenstate</p></th>
-<th class="head"><p>Projector <span class="math notranslate nohighlight">\(+1\)</span></p></th>
+<th class="head"><p>Projector <span class="math notranslate nohighlight">\(\hat{P}_{O=+1}\)</span></p></th>
 </tr>
 </thead>
 <tbody>
@@ -741,10 +741,10 @@ document.write(`
 </div>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<tr class="row-odd"><th class="head"><p>Operator <span class="math notranslate nohighlight">\(\hat{O}\)</span></p></th>
 <th class="head"><p>Eigenvalue</p></th>
 <th class="head"><p>Eigenstate</p></th>
-<th class="head"><p>Projector <span class="math notranslate nohighlight">\(-1\)</span></p></th>
+<th class="head"><p>Projector <span class="math notranslate nohighlight">\(\hat{P}_{O=-1}\)</span></p></th>
 </tr>
 </thead>
 <tbody>
@@ -802,19 +802,19 @@ document.write(`
 <p>This represents the <strong>average outcome</strong> if you measure <span class="math notranslate nohighlight">\(\hat{O}\)</span> many times on identically prepared states.</p>
 <p><strong>For a qubit state</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span> (with <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-expectation-pauli-coords">
-<span class="eqno">(18)<a class="headerlink" href="#equation-eq-expectation-pauli-coords" title="Link to this equation">#</a></span>\[\langle \hat{\sigma}^x \rangle = 2 \text{Re}(\alpha^* \beta), \quad \langle \hat{\sigma}^y \rangle = 2 \text{Im}(\alpha^* \beta), \quad \langle \hat{\sigma}^z \rangle = \vert \alpha|^2 - |\beta|^2\]</div>
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-expectation-pauli-coords" title="Link to this equation">#</a></span>\[\langle \hat{X} \rangle = 2 \text{Re}(\alpha^* \beta), \quad \langle \hat{Y} \rangle = 2 \text{Im}(\alpha^* \beta), \quad \langle \hat{Z} \rangle = \vert \alpha|^2 - |\beta|^2\]</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Verification</p>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>:</p>
+<p>For <span class="math notranslate nohighlight">\(\hat{X} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\langle \hat{\sigma}^x \rangle = (\alpha^* \langle 0\vert + \beta^* \langle 1\vert ) \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} (\alpha\vert 0\rangle + \beta\vert 1\rangle)\end{split}\]</div>
+\[\begin{split}\langle \hat{X} \rangle = (\alpha^* \langle 0\vert + \beta^* \langle 1\vert ) \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} (\alpha\vert 0\rangle + \beta\vert 1\rangle)\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[= (\alpha^* \langle 0\vert + \beta^* \langle 1\vert )(\beta\vert 0\rangle + \alpha\vert 1\rangle) = \alpha^* \beta + \beta^* \alpha = 2\text{Re}(\alpha^* \beta)\]</div>
 <p>Similar calculations give the results for <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. ✓</p>
 </div>
 <p><strong>In the spherical parameterization</strong> <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\sin(\theta/2)\vert 1\rangle\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bloch-vector-spherical">
-<span class="eqno">(19)<a class="headerlink" href="#equation-eq-bloch-vector-spherical" title="Link to this equation">#</a></span>\[\langle \hat{\sigma}^x \rangle = \sin\theta \cos\phi, \quad \langle \hat{\sigma}^y \rangle = \sin\theta \sin\phi, \quad \langle \hat{\sigma}^z \rangle = \cos\theta\]</div>
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-bloch-vector-spherical" title="Link to this equation">#</a></span>\[\langle \hat{X} \rangle = \sin\theta \cos\phi, \quad \langle \hat{Y} \rangle = \sin\theta \sin\phi, \quad \langle \hat{Z} \rangle = \cos\theta\]</div>
 <p>The vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)\)</span> is the <strong>Bloch vector</strong>, and it lies on the unit sphere (the <strong>Bloch sphere</strong>). The qubit state is completely encoded by this single point on the sphere.</p>
 </section>
 <section id="summary">
@@ -824,7 +824,7 @@ document.write(`
 <li><p>The <strong>Pauli matrices</strong> <span class="math notranslate nohighlight">\(\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span> are the fundamental observables for a qubit, representing spin along three orthogonal directions.</p></li>
 <li><p><strong>Spectral decomposition</strong> expresses any observable as a sum of projectors onto its eigenstates, weighted by eigenvalues.</p></li>
 <li><p><strong>Pauli algebra</strong> (multiplication, commutation, anti-commutation relations) governs how spins interact and measure—non-commuting observables cannot be simultaneously diagonal.</p></li>
-<li><p><strong>Expectation values</strong> of Pauli operators encode the qubit state as a point on the <strong>Bloch sphere</strong>: a single state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> maps to one point <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>.</p></li>
+<li><p><strong>Expectation values</strong> of Pauli operators (<span class="math notranslate nohighlight">\(\hat{X}\)</span>, <span class="math notranslate nohighlight">\(\hat{Y}\)</span>, <span class="math notranslate nohighlight">\(\hat{Z}\)</span>) encode the qubit state as a point on the <strong>Bloch sphere</strong>: a single state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> maps to one point <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>.</p></li>
 </ul>
 </section>
 </section>
@@ -832,8 +832,8 @@ document.write(`
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
 <p><strong>1.</strong> Show that the Pauli matrix <span class="math notranslate nohighlight">\(\hat{\sigma}^y = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ i &amp; 0 \end{pmatrix}\)</span> is Hermitian by explicitly computing <span class="math notranslate nohighlight">\((\hat{\sigma}^y)^\dagger\)</span> and verifying it equals <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>. Then find its eigenvalues and normalized eigenvectors.</p>
 <p><strong>2.</strong> Consider the operator <span class="math notranslate nohighlight">\(\hat{A} = \begin{pmatrix} 1 &amp; \mathrm{i} \\ i &amp; 1 \end{pmatrix}\)</span>. Is <span class="math notranslate nohighlight">\(\hat{A}\)</span> Hermitian? If not, find <span class="math notranslate nohighlight">\(\hat{A}^\dagger\)</span> and construct a Hermitian operator from <span class="math notranslate nohighlight">\(\hat{A}\)</span> using the combination <span class="math notranslate nohighlight">\(\frac{1}{2}(\hat{A} + \hat{A}^\dagger)\)</span>.</p>
-<p><strong>3.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \frac{1}{\sqrt{3}}\vert 0\rangle + \sqrt{\frac{2}{3}}\vert 1\rangle\)</span>. Compute the expectation values <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, and <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle^2 + \langle\hat{\sigma}^y\rangle^2 + \langle\hat{\sigma}^z\rangle^2 = 1\)</span>.</p>
-<p><strong>4.</strong> The spectral decomposition of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> is <span class="math notranslate nohighlight">\(\hat{\sigma}^x = (+1)\vert +\rangle\langle +\vert + (-1)\vert -\rangle\langle -\vert \)</span>, where <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span>. Verify this by explicitly computing the right-hand side as a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix.</p>
+<p><strong>3.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \frac{1}{\sqrt{3}}\vert 0\rangle + \sqrt{\frac{2}{3}}\vert 1\rangle\)</span>. Compute the expectation values <span class="math notranslate nohighlight">\(\langle\hat{X}\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{Y}\rangle\)</span>, and <span class="math notranslate nohighlight">\(\langle\hat{Z}\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(\langle\hat{X}\rangle^2 + \langle\hat{Y}\rangle^2 + \langle\hat{Z}\rangle^2 = 1\)</span>.</p>
+<p><strong>4.</strong> The spectral decomposition of <span class="math notranslate nohighlight">\(\hat{X}\)</span> is <span class="math notranslate nohighlight">\(\hat{X} = (+1)\vert +\rangle\langle +\vert + (-1)\vert -\rangle\langle -\vert \)</span>, where <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span>. Verify this by explicitly computing the right-hand side as a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix.</p>
 <p><strong>5.</strong> Show that the eigenvalues of any projector <span class="math notranslate nohighlight">\(\hat{P} = \vert \psi\rangle\langle \psi\vert \)</span> are 0 and 1. What are the corresponding eigenstates? Is a projector Hermitian?</p>
 <p><strong>6.</strong> A spin-1/2 particle is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos\alpha\,\vert \uparrow\rangle + \sin\alpha\,\vert \downarrow\rangle\)</span> (with <span class="math notranslate nohighlight">\(\alpha\)</span> real). You measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. What are the possible outcomes and their probabilities? Then compute <span class="math notranslate nohighlight">\(\langle \hat{\sigma}^z\rangle\)</span> directly from the definition <span class="math notranslate nohighlight">\(\langle\psi\vert \hat{\sigma}^z\vert \psi\rangle\)</span> and verify it equals <span class="math notranslate nohighlight">\(\sum_i \lambda_i P_i\)</span>.</p>
 <p><strong>7.</strong> The operator <span class="math notranslate nohighlight">\(\hat{n}\cdot\hat{\boldsymbol{\sigma}} = n_x \hat{\sigma}^x + n_y \hat{\sigma}^y + n_z \hat{\sigma}^z\)</span> represents spin along an arbitrary unit vector <span class="math notranslate nohighlight">\(\hat{n} = (n_x, n_y, n_z)\)</span> with <span class="math notranslate nohighlight">\(|\hat{n}| = 1\)</span>. Show that <span class="math notranslate nohighlight">\((\hat{n}\cdot\hat{\boldsymbol{\sigma}})^2 = \hat{I}\)</span> (the identity matrix). What does this imply about the eigenvalues of <span class="math notranslate nohighlight">\(\hat{n}\cdot\hat{\boldsymbol{\sigma}}\)</span>?</p>

@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -195,7 +195,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -522,20 +522,19 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-labeling">The Problem of Labeling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-indistinguishability">Physical Indistinguishability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-points">Summary of Key Points</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-permutation-operator-and-its-eigenvalues">The Permutation Operator and Its Eigenvalues</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-the-permutation-operator">Definition of the Permutation Operator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-requirement-phase-eigenvalue">Physical Requirement: Phase Eigenvalue</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupation-number-constraints">Occupation Number Constraints</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences">Consequences</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slater-determinants">Slater Determinants</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permanents-symmetric-analog-of-determinants">Permanents: Symmetric Analog of Determinants</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-spin-and-total-wavefunction">Symmetry, Spin, and Total Wavefunction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-wavefunction-spatial-and-spin">The Full Wavefunction: Spatial and Spin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identical-particles">Identical Particles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-and-antisymmetric-states">Symmetric and Antisymmetric States</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bosonic-symmetric-states">Bosonic (Symmetric) States</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fermionic-antisymmetric-states">Fermionic (Antisymmetric) States</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pauli-exclusion-principle">Pauli Exclusion Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-and-deletion-rules">Insertion and Deletion Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boson-creation-and-annihilation-operators">Boson Creation and Annihilation Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fermion-creation-and-annihilation-operators">Fermion Creation and Annihilation Operators</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -556,317 +555,309 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What does it mean for particles to be identical in quantum mechanics, and how does indistinguishability constrain allowed quantum states?</p></li>
-<li><p>Explain the permutation operator <span class="math notranslate nohighlight">\(P^\pi\)</span> and why physical states must be eigenstates of permutation.</p></li>
-<li><p>What are symmetric and antisymmetric states, and why are only these two options allowed for exchanging two identical particles?</p></li>
-<li><p>State the Pauli exclusion principle and explain how it emerges directly from the antisymmetry requirement.</p></li>
-<li><p>What is a Slater determinant, and why is it the natural choice for describing multi-electron fermionic states?</p></li>
-<li><p>Is the symmetrization postulate (bosons are symmetric, fermions are antisymmetric) fundamental to nature, or does it follow from something deeper? What would change if it were violated?</p></li>
+<li><p>What does it mean for particles to be identical in quantum mechanics? Why is indistinguishability a fundamental principle, not a practical limitation?</p></li>
+<li><p>Why does indistinguishability constrain the wavefunction to be either symmetric or antisymmetric? Why are these the only two options?</p></li>
+<li><p>How do you construct a properly symmetrized (bosonic) or antisymmetrized (fermionic) state from single-particle wavefunctions?</p></li>
+<li><p>What are the insertion and deletion rules? How do they define the procedure for adding or removing a particle while preserving symmetry?</p></li>
+<li><p>State the Pauli exclusion principle. How does it follow from antisymmetry?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>Particles of the same type (electrons, photons, etc.) are absolutely identical in quantum mechanics—they carry no identity tags and are completely interchangeable. This indistinguishability is not a practical limitation but a fundamental principle that restricts which quantum states are physical: multi-particle states must be either symmetric (bosons) or antisymmetric (fermions) under particle exchange.</p>
+<p><strong>Analogy.</strong> Money in a bank account is identical. You cannot ask “Is this the dollar I deposited today or yesterday?”—dollars are indistinguishable. Identical particles are the same: two electrons have no labels. This simple observation has profound consequences for the structure of matter.</p>
+</section>
+<section id="identical-particles">
+<h3>Identical Particles<a class="headerlink" href="#identical-particles" title="Link to this heading">#</a></h3>
 <div class="important admonition">
-<p class="admonition-title">Key Concept: Identical Particles</p>
-<p>In quantum mechanics, particles of the same type (e.g., two electrons) are <strong>absolutely identical</strong>. They have the same mass, charge, spin, and—crucially—<strong>no inherent labels or identity tags</strong>. This indistinguishability is not an approximation; it is a fundamental principle that constrains which quantum states are physical.</p>
+<p class="admonition-title">Identical Particles</p>
+<p>Particles of the same type have identical mass, charge, spin, and <strong>no inherent labels</strong>. This indistinguishability is a fundamental principle that constrains which quantum states are physical.</p>
 </div>
-<section id="the-problem-of-labeling">
-<h3>The Problem of Labeling<a class="headerlink" href="#the-problem-of-labeling" title="Link to this heading">#</a></h3>
-<p>In classical mechanics, particles are distinguishable: we can label them as “particle 1,” “particle 2,” etc., and track each one’s trajectory.</p>
-<p>In quantum mechanics, particles of the same type face a profound constraint: if we prepare two identical particles in a given state and ask “which particle is where?,” the question itself is <strong>meaningless</strong>. Nature provides no answer.</p>
-</section>
-<section id="physical-indistinguishability">
-<h3>Physical Indistinguishability<a class="headerlink" href="#physical-indistinguishability" title="Link to this heading">#</a></h3>
-<p>The physical requirement is that swapping any two identical particles leaves the probability density unchanged:</p>
-<div class="math notranslate nohighlight" id="equation-eq-indistinguishability">
-<span class="eqno">(62)<a class="headerlink" href="#equation-eq-indistinguishability" title="Link to this equation">#</a></span>\[
-|\psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N)|^2 = |\psi(\boldsymbol{r}_{\sigma(1)}, \boldsymbol{r}_{\sigma(2)}, \ldots, \boldsymbol{r}_{\sigma(N)})|^2\]</div>
-<p>for any permutation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p><strong>Physical requirement.</strong> Let <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{ij}\)</span> be the permutation operator that swaps particles <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>. For identical particles, all observables must be invariant under permutation: <span class="math notranslate nohighlight">\(\langle\Psi\vert \hat{O}\vert\Psi\rangle = \langle\Psi\vert \hat{\mathcal{P}}_{ij}^\dagger \hat{O}\,\hat{\mathcal{P}}_{ij}\vert\Psi\rangle\)</span> for any observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>. This requires the state to be an eigenstate of every transposition:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathcal{P}}_{ij}\vert\Psi\rangle = \lambda\,\vert\Psi\rangle\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{ij}^2 = \hat{I}\)</span>, the eigenvalue satisfies <span class="math notranslate nohighlight">\(\lambda^2 = 1\)</span>, so <span class="math notranslate nohighlight">\(\lambda = \pm 1\)</span>.</p>
 <div class="important admonition">
-<p class="admonition-title">Consequence: Wave Function Symmetry</p>
-<p>This indistinguishability constraint implies that the wavefunction itself must be either:</p>
+<p class="admonition-title">Symmetry Constraint</p>
+<p>Under particle exchange, the many-body state must satisfy:</p>
 <ul class="simple">
-<li><p><strong>Symmetric</strong>: <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots) = \psi(\boldsymbol{r}_{\sigma(1)}, \boldsymbol{r}_{\sigma(2)}, \ldots)\)</span> (bosons)</p></li>
-<li><p><strong>Antisymmetric</strong>: <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots) = -\psi(\boldsymbol{r}_{\sigma(1)}, \boldsymbol{r}_{\sigma(2)}, \ldots)\)</span> (fermions)</p></li>
+<li><p><strong>Symmetric</strong> (<span class="math notranslate nohighlight">\(\lambda = +1\)</span>, <strong>bosons</strong>): <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{ij}\vert\Psi\rangle = +\vert\Psi\rangle\)</span></p></li>
+<li><p><strong>Antisymmetric</strong> (<span class="math notranslate nohighlight">\(\lambda = -1\)</span>, <strong>fermions</strong>): <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{ij}\vert\Psi\rangle = -\vert\Psi\rangle\)</span></p></li>
 </ul>
-<p>The choice between these two cases is dictated by particle spin (a deep consequence of relativistic quantum field theory).</p>
+<p>The choice is determined by particle spin (integer → boson, half-integer → fermion) via the spin-statistics theorem.</p>
 </div>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: When Does Symmetrization Matter?</p>
-<p>Symmetrization only affects overlaps <span class="math notranslate nohighlight">\(\langle \psi_1 | V | \psi_2 \rangle\)</span> when particles exchange positions. For two particles with a repulsive potential <span class="math notranslate nohighlight">\(V(|\boldsymbol{r}_1 - \boldsymbol{r}_2|)\)</span> that diverges as <span class="math notranslate nohighlight">\(|\boldsymbol{r}_1 - \boldsymbol{r}_2| \to 0\)</span>, the wavefunction vanishes in the region <span class="math notranslate nohighlight">\(\boldsymbol{r}_1 \approx \boldsymbol{r}_2\)</span> regardless of symmetry.</p>
-<p><strong>Question</strong>: Could two non-interacting fermions occupy the same state without violating physics (staying away from the overlap region)? Under what physical conditions can we ignore symmetrization, and what observable effects emerge when we cannot?</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion: Indistinguishability and Entanglement</p>
+<p>A symmetrized or antisymmetrized state is always an entangled superposition—you cannot assign a definite single-particle state to a specific particle. Is this “entanglement” the same as in a Bell pair, or is it fundamentally different? Can you design an experiment that distinguishes indistinguishability-entanglement from preparation-entanglement?</p>
 </div>
 </section>
-<section id="summary-of-key-points">
-<h3>Summary of Key Points<a class="headerlink" href="#summary-of-key-points" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Identical particles in quantum mechanics are absolutely indistinguishable</p></li>
-<li><p>Only symmetric (bosons) or antisymmetric (fermions) wavefunctions are physical</p></li>
-<li><p>Symmetry choice depends on particle spin, determined by relativistic field theory</p></li>
-<li><p>The Pauli exclusion principle emerges directly from fermionic antisymmetry</p></li>
-<li><p>Bosons allow multiple occupancy; fermions strictly limit single-particle state occupancy</p></li>
-</ul>
+<section id="symmetric-and-antisymmetric-states">
+<h3>Symmetric and Antisymmetric States<a class="headerlink" href="#symmetric-and-antisymmetric-states" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\{\vert\alpha\rangle\}\)</span> be an orthonormal basis for the single-particle Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>. A generic <span class="math notranslate nohighlight">\(N\)</span>-particle state in <span class="math notranslate nohighlight">\(\mathcal{H}^{\otimes N}\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-many-body-state">
+<span class="eqno">(34)<a class="headerlink" href="#equation-eq-many-body-state" title="Link to this equation">#</a></span>\[\vert\Psi\rangle = \sum_{\alpha_1, \ldots, \alpha_N} \Psi_{\alpha_1 \cdots \alpha_N}\;\vert\alpha_1\rangle \otimes \vert\alpha_2\rangle \otimes \cdots \otimes \vert\alpha_N\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Psi_{\alpha_1 \cdots \alpha_N}\)</span> is the many-body amplitude. For identical particles, only the symmetric or antisymmetric subspace of <span class="math notranslate nohighlight">\(\mathcal{H}^{\otimes N}\)</span> is physical.</p>
+<section id="bosonic-symmetric-states">
+<h4>Bosonic (Symmetric) States<a class="headerlink" href="#bosonic-symmetric-states" title="Link to this heading">#</a></h4>
+<p>For <span class="math notranslate nohighlight">\(N\)</span> bosons placed in <em>distinct</em> single-particle states <span class="math notranslate nohighlight">\(\vert\alpha_1\rangle, \ldots, \vert\alpha_N\rangle\)</span>, the symmetrized state is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-boson-symmetrized">
+<span class="eqno">(35)<a class="headerlink" href="#equation-eq-boson-symmetrized" title="Link to this equation">#</a></span>\[\vert\alpha_1, \ldots, \alpha_N\rangle_+ = \frac{1}{\sqrt{N!}} \sum_{\pi \in S_N} \vert\alpha_{\pi(1)}\rangle \otimes \vert\alpha_{\pi(2)}\rangle \otimes \cdots \otimes \vert\alpha_{\pi(N)}\rangle\]</div>
+<p>The sum (all signs positive) is the ket-space analog of the <strong>permanent</strong>. Multiple bosons can occupy the same state.</p>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: Two Bosons</p>
+<p><strong>Problem.</strong> Construct the symmetric state for two bosons in orthogonal states <span class="math notranslate nohighlight">\(\vert\alpha_1\rangle, \vert\alpha_2\rangle\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha_1, \alpha_2\rangle_+ = \frac{1}{\sqrt{2}} \bigl(\vert\alpha_1\rangle\vert\alpha_2\rangle + \vert\alpha_2\rangle\vert\alpha_1\rangle\bigr)\]</div>
+<p>If both bosons occupy the same state <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span>: <span class="math notranslate nohighlight">\(\vert\alpha, \alpha\rangle_+ = \vert\alpha\rangle\vert\alpha\rangle\)</span> (already symmetric).</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Normalization with Repeated States</p>
+<p>More generally, when <span class="math notranslate nohighlight">\(n_\alpha\)</span> bosons share the same single-particle state, the permanent acquires <span class="math notranslate nohighlight">\(n_\alpha !\)</span> identical terms, which should be further normalized by <span class="math notranslate nohighlight">\(\sqrt{n_\alpha !}\)</span>. So for <span class="math notranslate nohighlight">\(N\)</span> bosons with occupation numbers <span class="math notranslate nohighlight">\(\{n_\alpha\}\)</span>, the normalization factor is:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{N}_+ = \frac{1}{\sqrt{N! \prod_\alpha n_\alpha!}}\]</div>
+</div>
 </section>
-<section id="the-permutation-operator-and-its-eigenvalues">
-<h3>The Permutation Operator and Its Eigenvalues<a class="headerlink" href="#the-permutation-operator-and-its-eigenvalues" title="Link to this heading">#</a></h3>
+<section id="fermionic-antisymmetric-states">
+<h4>Fermionic (Antisymmetric) States<a class="headerlink" href="#fermionic-antisymmetric-states" title="Link to this heading">#</a></h4>
+<p>For <span class="math notranslate nohighlight">\(N\)</span> fermions placed in <em>distinct</em> single-particle states <span class="math notranslate nohighlight">\(\vert\alpha_1\rangle, \ldots, \vert\alpha_N\rangle\)</span>, the antisymmetrized state is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-fermion-antisymmetrized">
+<span class="eqno">(36)<a class="headerlink" href="#equation-eq-fermion-antisymmetrized" title="Link to this equation">#</a></span>\[\vert\alpha_1, \ldots, \alpha_N\rangle_- = \frac{1}{\sqrt{N!}} \sum_{\pi \in S_N} \mathrm{sgn}(\pi)\;\vert\alpha_{\pi(1)}\rangle \otimes \vert\alpha_{\pi(2)}\rangle \otimes \cdots \otimes \vert\alpha_{\pi(N)}\rangle\]</div>
+<p>This is the ket-space analog of the <strong>Slater determinant</strong>. Antisymmetry is automatic: swapping any two particle labels flips the sign. If <span class="math notranslate nohighlight">\(\vert\alpha_i\rangle = \vert\alpha_j\rangle\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span>, the state vanishes—this is the Pauli exclusion principle.</p>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: Two Fermions</p>
+<p><strong>Problem.</strong> Construct the antisymmetric state for two fermions in states <span class="math notranslate nohighlight">\(\vert\alpha_1\rangle, \vert\alpha_2\rangle\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha_1, \alpha_2\rangle_- = \frac{1}{\sqrt{2}} \bigl(\vert\alpha_1\rangle\vert\alpha_2\rangle - \vert\alpha_2\rangle\vert\alpha_1\rangle\bigr)\]</div>
+<p><strong>Check</strong>: Swap particle labels gives <span class="math notranslate nohighlight">\(-\vert\alpha_1, \alpha_2\rangle_-\)</span>. Set <span class="math notranslate nohighlight">\(\vert\alpha_1\rangle = \vert\alpha_2\rangle\)</span> gives zero.</p>
+</div>
 </section>
-<section id="definition-of-the-permutation-operator">
-<h3>Definition of the Permutation Operator<a class="headerlink" href="#definition-of-the-permutation-operator" title="Link to this heading">#</a></h3>
-<p>The <strong>permutation operator</strong> <span class="math notranslate nohighlight">\(P^\pi\)</span> corresponding to permutation <span class="math notranslate nohighlight">\(\pi\)</span> acts on a many-body state by relabeling spatial arguments:</p>
-<div class="math notranslate nohighlight" id="equation-eq-permutation-operator">
-<span class="eqno">(63)<a class="headerlink" href="#equation-eq-permutation-operator" title="Link to this equation">#</a></span>\[
-P^\pi |\psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N)\rangle = |\psi(\boldsymbol{r}_{\pi(1)}, \boldsymbol{r}_{\pi(2)}, \ldots, \boldsymbol{r}_{\pi(N)})\rangle\]</div>
-<p><strong>Example</strong>: The exchange of particles 1 and 2:</p>
-<div class="math notranslate nohighlight">
-\[
-P_{12} \psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \boldsymbol{r}_3, \ldots) = \psi(\boldsymbol{r}_2, \boldsymbol{r}_1, \boldsymbol{r}_3, \ldots)\]</div>
 </section>
-<section id="physical-requirement-phase-eigenvalue">
-<h3>Physical Requirement: Phase Eigenvalue<a class="headerlink" href="#physical-requirement-phase-eigenvalue" title="Link to this heading">#</a></h3>
-<p>Since probability density must be unchanged under permutation:</p>
-<div class="math notranslate nohighlight">
-\[
-|(P^\pi \psi)(\boldsymbol{r}_1, \ldots)|^2 = |\psi(\boldsymbol{r}_1, \ldots)|^2\]</div>
-<p>this means <span class="math notranslate nohighlight">\(P^\pi\)</span> can only change <span class="math notranslate nohighlight">\(\psi\)</span> by an <strong>overall phase factor</strong>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-permutation-eigenvalue">
-<span class="eqno">(64)<a class="headerlink" href="#equation-eq-permutation-eigenvalue" title="Link to this equation">#</a></span>\[
-P^\pi \psi = \mathrm{e}^{\mathrm{i}\theta_\pi} \psi\]</div>
-<p>::{admonition} Derivation: Constraint on Eigenvalues from Double Exchange
-:class: dropdown note</p>
-<p>For a two-particle exchange applied twice:</p>
-<div class="math notranslate nohighlight">
-\[
-P_{12}^2 \psi = \psi \quad \Rightarrow \quad \mathrm{e}^{2\mathrm{i}\theta} = 1 \quad \Rightarrow \quad \mathrm{e}^{\mathrm{i}\theta} = \pm 1\]</div>
-<p><strong>Only two possibilities</strong> exist for identical particles:</p>
-<div class="math notranslate nohighlight">
-\[
-P_{12} \psi = +\psi \quad \text{(symmetric, bosons)}\]</div>
-<div class="math notranslate nohighlight" id="equation-eq-boson-fermion-phases">
-<span class="eqno">(65)<a class="headerlink" href="#equation-eq-boson-fermion-phases" title="Link to this equation">#</a></span>\[P_{12} \psi = -\psi \quad \text{(antisymmetric, fermions)}\]</div>
-<div class="docutils">
-<h3 class="rubric" id="symmetric-and-antisymmetric-states">Symmetric and Antisymmetric States</h3>
-<h3 class="rubric" id="bosonic-symmetric-states">Bosonic (Symmetric) States</h3>
-<p>A <strong>symmetric</strong> state is invariant under all particle permutations:</p>
-<div class="math notranslate nohighlight" id="equation-eq-symmetric-state">
-<span class="eqno">(66)<a class="headerlink" href="#equation-eq-symmetric-state" title="Link to this equation">#</a></span>\[
-\psi_B(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N) = \psi_B(\boldsymbol{r}_{\sigma(1)}, \boldsymbol{r}_{\sigma(2)}, \ldots, \boldsymbol{r}_{\sigma(N)})\]</div>
-<p>for <strong>all</strong> permutations <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-<p><strong>Construction</strong>: Given <span class="math notranslate nohighlight">\(N\)</span> distinct single-particle wavefunctions <span class="math notranslate nohighlight">\(\phi_1(\boldsymbol{r}), \phi_2(\boldsymbol{r}), \ldots, \phi_N(\boldsymbol{r})\)</span>, the <strong>symmetrized product</strong> is:</p>
-<div class="math notranslate nohighlight" id="equation-eq-boson-state-construction">
-<span class="eqno">(67)<a class="headerlink" href="#equation-eq-boson-state-construction" title="Link to this equation">#</a></span>\[
-\psi_B(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_N) = \frac{1}{\sqrt{N!}} \sum_{\pi \in S_N} \phi_{\pi(1)}(\boldsymbol{r}_1) \phi_{\pi(2)}(\boldsymbol{r}_2) \cdots \phi_{\pi(N)}(\boldsymbol{r}_N)\]</div>
-<p>where the sum runs over all <span class="math notranslate nohighlight">\(N!\)</span> permutations of <span class="math notranslate nohighlight">\(\{1, 2, \ldots, N\}\)</span>.</p>
-<p><strong>Key properties</strong>:</p>
-<ul class="simple">
-<li><p>Multiple bosons can occupy the <strong>same</strong> single-particle state.</p></li>
-<li><p>Bose-Einstein condensation: in equilibrium, a macroscopic number can occupy the ground state.</p></li>
-<li><p>Examples: photons, <span class="math notranslate nohighlight">\(^4\)</span>He nuclei, phonons.</p></li>
-</ul>
-<h3 class="rubric" id="fermionic-antisymmetric-states">Fermionic (Antisymmetric) States</h3>
-<p>An <strong>antisymmetric</strong> state changes sign under all transpositions (two-particle exchanges):</p>
-<div class="math notranslate nohighlight" id="equation-eq-antisymmetric-state">
-<span class="eqno">(68)<a class="headerlink" href="#equation-eq-antisymmetric-state" title="Link to this equation">#</a></span>\[
-\psi_F(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_i, \ldots, \boldsymbol{r}_j, \ldots) = -\psi_F(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_j, \ldots, \boldsymbol{r}_i, \ldots)\]</div>
-<p>More generally, for a permutation <span class="math notranslate nohighlight">\(\pi\)</span> with <strong>signature</strong> <span class="math notranslate nohighlight">\(\text{sgn}(\pi) = \pm 1\)</span> (even or odd number of transpositions):</p>
-<div class="math notranslate nohighlight">
-\[
-P^\pi \psi_F = \text{sgn}(\pi) \cdot \psi_F\]</div>
-<p><strong>Construction</strong>: The <strong>Slater determinant</strong> (see next subsection) automatically encodes this antisymmetry.</p>
-<h3 class="rubric" id="the-pauli-exclusion-principle">The Pauli Exclusion Principle</h3>
-<h3 class="rubric" id="derivation-from-antisymmetry">Derivation from Antisymmetry</h3>
-<p>Consider two identical fermions with an <strong>antisymmetric</strong> wavefunction. Set both particles at the <strong>same position</strong> <span class="math notranslate nohighlight">\(\boldsymbol{r}_i = \boldsymbol{r}_j = \boldsymbol{r}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\psi_F(\boldsymbol{r}, \boldsymbol{r}, \boldsymbol{r}_3, \ldots) = -\psi_F(\boldsymbol{r}, \boldsymbol{r}, \boldsymbol{r}_3, \ldots)\]</div>
-<p>The only function satisfying <span class="math notranslate nohighlight">\(f = -f\)</span> is <span class="math notranslate nohighlight">\(f = 0\)</span>. Therefore:</p>
-<div class="math notranslate nohighlight" id="equation-eq-pauli-exclusion-1">
-<span class="eqno">(69)<a class="headerlink" href="#equation-eq-pauli-exclusion-1" title="Link to this equation">#</a></span>\[
-\psi_F(\boldsymbol{r}, \boldsymbol{r}, \boldsymbol{r}_3, \ldots) = 0\]</div>
-<p><strong>In the context of single-particle states</strong>: If two fermions occupy identical single-particle states (same spatial wavefunction, same spin), the many-body wavefunction vanishes.</p>
-<div class="math notranslate nohighlight" id="equation-eq-pauli-exclusion-principle">
-<span class="eqno">(70)<a class="headerlink" href="#equation-eq-pauli-exclusion-principle" title="Link to this equation">#</a></span>\[
-\boxed{\text{No two identical fermions can occupy the same single-particle quantum state.}}\]</div>
+<section id="pauli-exclusion-principle">
+<h3>Pauli Exclusion Principle<a class="headerlink" href="#pauli-exclusion-principle" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">Pauli Exclusion Principle</p>
-<p>No two identical fermions can occupy the same single-particle quantum state.</p>
-<p>In occupation number representation:</p>
-<ul class="simple">
-<li><p>Fermions: <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span> (at most one per state)</p></li>
-<li><p>Bosons: <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1, 2, 3, \ldots\}\)</span> (unlimited occupancy)</p></li>
-</ul>
+<p>No two identical <strong>fermions</strong> can occupy the same single-particle quantum state. The fermionic occupation number satisfies <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>.</p>
+<p>(<strong>Bosons</strong> have no such restriction: <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1, 2, \ldots\}\)</span>)</p>
 </div>
+<p>This follows directly from antisymmetry: if <span class="math notranslate nohighlight">\(\vert\alpha_i\rangle = \vert\alpha_j\rangle\)</span>, the antisymmetrized state has two identical columns in the Slater determinant and vanishes. The consequences are far-reaching: atomic shell structure, chemical bonding, degeneracy pressure in white dwarfs and neutron stars, and the stability of matter itself.</p>
+</section>
+<section id="insertion-and-deletion-rules">
+<h3>Insertion and Deletion Rules<a class="headerlink" href="#insertion-and-deletion-rules" title="Link to this heading">#</a></h3>
+<p>To add or remove a particle while preserving symmetry, we define <strong>insertion</strong> (<span class="math notranslate nohighlight">\(\rhd_\pm\)</span>) and <strong>deletion</strong> (<span class="math notranslate nohighlight">\(\lhd_\pm\)</span>) operations on first-quantized states. Let <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span> be a single-particle state, let <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> be the tensor identity (generator of the zero-particle space <span class="math notranslate nohighlight">\(\mathbb{C}\)</span>, satisfying <span class="math notranslate nohighlight">\(\vert\alpha\rangle \equiv \mathbb{1} \otimes \vert\alpha\rangle \equiv \vert\alpha\rangle \otimes \mathbb{1}\)</span>), and let <span class="math notranslate nohighlight">\(\vert\Psi\rangle = \vert\alpha_1\rangle \otimes \vert\alpha_2\rangle \otimes \cdots\)</span> be a generic tensor product state. The subscript <span class="math notranslate nohighlight">\(\pm\)</span> denotes symmetrization (+, bosons) or antisymmetrization (−, fermions).</p>
+<div class="important admonition">
+<p class="admonition-title">Insertion and Deletion Rules</p>
+<p><strong>Insertion</strong> <span class="math notranslate nohighlight">\(\rhd_\pm\)</span> (adds a particle symmetrically/antisymmetrically):</p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha\rangle \rhd_\pm \mathbb{1} = \vert\alpha\rangle, \qquad \vert\alpha\rangle \rhd_\pm (\vert\beta\rangle \otimes \vert\Psi\rangle) = \vert\alpha\rangle \otimes \vert\beta\rangle \otimes \vert\Psi\rangle \pm \vert\beta\rangle \otimes (\vert\alpha\rangle \rhd_\pm \vert\Psi\rangle)\]</div>
+<p><strong>Deletion</strong> <span class="math notranslate nohighlight">\(\lhd_\pm\)</span> (removes a particle symmetrically/antisymmetrically):</p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha\rangle \lhd_\pm \mathbb{1} = 0, \qquad \vert\alpha\rangle \lhd_\pm (\vert\beta\rangle \otimes \vert\Psi\rangle) = \delta_{\alpha\beta}\,\vert\Psi\rangle \pm \vert\beta\rangle \otimes (\vert\alpha\rangle \lhd_\pm \vert\Psi\rangle)\]</div>
+<p>Both operations are <strong>linear</strong> in the state being acted on.</p>
 </div>
-</section>
-<section id="occupation-number-constraints">
-<h3>Occupation Number Constraints<a class="headerlink" href="#occupation-number-constraints" title="Link to this heading">#</a></h3>
-<p>In terms of occupation numbers <span class="math notranslate nohighlight">\(n_\alpha\)</span> (number of fermions in single-particle state <span class="math notranslate nohighlight">\(\alpha\)</span>):</p>
+<p>The recursive structure means insertion places <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span> at every possible position with alternating signs (for fermions) or all-positive signs (for bosons). Deletion removes <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span> from every position where it appears, with the same sign pattern.</p>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: Insertion into a Two-Particle State</p>
+<p><strong>Problem.</strong> Compute <span class="math notranslate nohighlight">\(\vert\alpha\rangle \rhd_\pm (\vert\beta\rangle \otimes \vert\gamma\rangle)\)</span>.</p>
+<p><strong>Solution.</strong> Apply the recursive relation twice:</p>
 <div class="math notranslate nohighlight">
-\[
-n_\alpha \in \{0, 1\} \quad \text{(fermions only)}\]</div>
-<p>For bosons, there is no such restriction:</p>
+\[\vert\alpha\rangle \rhd_\pm (\vert\beta\rangle \otimes \vert\gamma\rangle) = \vert\alpha\rangle\vert\beta\rangle\vert\gamma\rangle \pm \vert\beta\rangle \otimes (\vert\alpha\rangle \rhd_\pm \vert\gamma\rangle)\]</div>
+<p>For the inner insertion, use <span class="math notranslate nohighlight">\(\vert\gamma\rangle = \vert\gamma\rangle \otimes \mathbb{1}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-n_\alpha \in \{0, 1, 2, 3, \ldots\} \quad \text{(bosons)}\]</div>
-</section>
-<section id="consequences">
-<h3>Consequences<a class="headerlink" href="#consequences" title="Link to this heading">#</a></h3>
-<p>The Pauli exclusion principle has profound physical consequences:</p>
-<ol class="arabic simple">
-<li><p><strong>Finite density</strong>: Fermionic matter has a maximum density; particles cannot be compressed beyond a certain limit.</p></li>
-<li><p><strong>Fermi surface</strong>: At zero temperature, fermions fill states up to a maximum energy (Fermi energy), creating a sharp boundary in momentum space.</p></li>
-<li><p><strong>Degeneracy pressure</strong>: The exclusion principle creates an effective repulsion that stabilizes compact objects (white dwarfs, neutron stars).</p></li>
-<li><p><strong>Chemistry</strong>: The shell structure of atoms and chemical bonding arise from electrons filling discrete orbitals subject to exclusion.</p></li>
-<li><p><strong>Ferromagnetism</strong>: Spin alignment in magnetic materials is partly enforced by exclusion combined with exchange interactions.</p></li>
-</ol>
-</section>
-<section id="slater-determinants">
-<h3>Slater Determinants<a class="headerlink" href="#slater-determinants" title="Link to this heading">#</a></h3>
-</section>
-<section id="definition">
-<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
-<p>The <strong>Slater determinant</strong> is a convenient way to construct an <strong>antisymmetric</strong> many-particle wavefunction from <span class="math notranslate nohighlight">\(N\)</span> single-particle wavefunctions <span class="math notranslate nohighlight">\(\phi_1, \phi_2, \ldots, \phi_N\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-slater-determinant">
-<span class="eqno">(71)<a class="headerlink" href="#equation-eq-slater-determinant" title="Link to this equation">#</a></span>\[
-\Psi(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N) = \frac{1}{\sqrt{N!}} \begin{vmatrix}
-\phi_1(\boldsymbol{r}_1) &amp; \phi_2(\boldsymbol{r}_1) &amp; \cdots &amp; \phi_N(\boldsymbol{r}_1) \
-\phi_1(\boldsymbol{r}_2) &amp; \phi_2(\boldsymbol{r}_2) &amp; \cdots &amp; \phi_N(\boldsymbol{r}_2) \
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \
-\phi_1(\boldsymbol{r}_N) &amp; \phi_2(\boldsymbol{r}_N) &amp; \cdots &amp; \phi_N(\boldsymbol{r}_N)
-\end{vmatrix}\]</div>
-<p>The factor <span class="math notranslate nohighlight">\(1/\sqrt{N!}\)</span> ensures normalization (assuming <span class="math notranslate nohighlight">\(\phi_i\)</span> are orthonormal).</p>
-</section>
-<section id="properties">
-<h3>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
-<p><strong>1. Automatic Antisymmetry</strong></p>
-<p>Swapping two rows of a determinant changes its sign:</p>
+\[\vert\alpha\rangle \rhd_\pm \vert\gamma\rangle = \vert\alpha\rangle\vert\gamma\rangle \pm \vert\gamma\rangle\vert\alpha\rangle\]</div>
+<p>So:</p>
 <div class="math notranslate nohighlight">
-\[
-\Psi(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_i, \ldots, \boldsymbol{r}_j, \ldots) = -\Psi(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_j, \ldots, \boldsymbol{r}_i, \ldots)\]</div>
-<p>This is a <strong>fundamental property of determinants</strong>, so antisymmetry is built in automatically.</p>
-<p><strong>2. Automatic Pauli Exclusion</strong></p>
-<p>If two orbitals are identical (<span class="math notranslate nohighlight">\(\phi_i = \phi_j\)</span>), then two columns of the determinant are identical, so:</p>
-<div class="math notranslate nohighlight">
-\[
-\Psi = 0\]</div>
-<p>This automatically encodes the Pauli exclusion principle.</p>
-<p><strong>3. Expansion Form</strong></p>
-<p>Expanding the Slater determinant explicitly:</p>
-<div class="math notranslate nohighlight" id="equation-eq-slater-expansion">
-<span class="eqno">(72)<a class="headerlink" href="#equation-eq-slater-expansion" title="Link to this equation">#</a></span>\[
-\Psi(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_N) = \frac{1}{\sqrt{N!}} \sum_{\pi \in S_N} \text{sgn}(\pi) \, \phi_{\pi(1)}(\boldsymbol{r}_1) \phi_{\pi(2)}(\boldsymbol{r}_2) \cdots \phi_{\pi(N)}(\boldsymbol{r}_N)\]</div>
-<p>The sum over permutations, weighted by their signature, creates antisymmetry.</p>
-</section>
-<section id="permanents-symmetric-analog-of-determinants">
-<h3>Permanents: Symmetric Analog of Determinants<a class="headerlink" href="#permanents-symmetric-analog-of-determinants" title="Link to this heading">#</a></h3>
-<p>For <strong>bosonic</strong> states, we might wish to construct a symmetric wavefunction. The analog of the Slater determinant is the <strong>permanent</strong>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-permanent">
-<span class="eqno">(73)<a class="headerlink" href="#equation-eq-permanent" title="Link to this equation">#</a></span>\[
-\Psi_B(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_N) = \frac{1}{\sqrt{N!}} \sum_{\pi \in S_N} \phi_{\pi(1)}(\boldsymbol{r}_1) \phi_{\pi(2)}(\boldsymbol{r}_2) \cdots \phi_{\pi(N)}(\boldsymbol{r}_N)\]</div>
-<p>Note: The permanent is like a determinant but <strong>all signs are positive</strong> (no <span class="math notranslate nohighlight">\(\text{sgn}(\pi)\)</span> factor).</p>
-<p><strong>Symmetry property</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\Psi_B(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_i, \ldots, \boldsymbol{r}_j, \ldots) = +\Psi_B(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_j, \ldots, \boldsymbol{r}_i, \ldots)\]</div>
-<p>The permanent is less commonly used in calculations (it’s harder to compute), but it appears in certain contexts like photon and boson condensate wavefunctions.</p>
-<div class="example admonition">
-<p class="admonition-title">Example: Two Identical Fermions</p>
-<h3 class="rubric" id="setup">Setup</h3>
-<p>Consider two identical fermions in single-particle states <span class="math notranslate nohighlight">\(|\phi_1\rangle\)</span> and <span class="math notranslate nohighlight">\(|\phi_2\rangle\)</span>.</p>
-<h3 class="rubric" id="the-slater-determinant">The Slater Determinant</h3>
-<div class="math notranslate nohighlight">
-\[
-\Psi(\boldsymbol{r}_1, \boldsymbol{r}_2) = \frac{1}{\sqrt{2}} \begin{vmatrix}
-\phi_1(\boldsymbol{r}_1) &amp; \phi_2(\boldsymbol{r}_1) \
-\phi_1(\boldsymbol{r}_2) &amp; \phi_2(\boldsymbol{r}_2)
-\end{vmatrix}\]</div>
-<div class="math notranslate nohighlight" id="equation-eq-two-fermion-slater">
-<span class="eqno">(74)<a class="headerlink" href="#equation-eq-two-fermion-slater" title="Link to this equation">#</a></span>\[= \frac{1}{\sqrt{2}} \left[ \phi_1(\boldsymbol{r}_1) \phi_2(\boldsymbol{r}_2) - \phi_1(\boldsymbol{r}_2) \phi_2(\boldsymbol{r}_1) \right]\]</div>
-<h3 class="rubric" id="check-antisymmetry">Check Antisymmetry</h3>
-<p>Exchange <span class="math notranslate nohighlight">\(\boldsymbol{r}_1 \leftrightarrow \boldsymbol{r}_2\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\Psi(\boldsymbol{r}_2, \boldsymbol{r}_1) = \frac{1}{\sqrt{2}} \left[ \phi_1(\boldsymbol{r}_2) \phi_2(\boldsymbol{r}_1) - \phi_1(\boldsymbol{r}_1) \phi_2(\boldsymbol{r}_2) \right] = -\Psi(\boldsymbol{r}_1, \boldsymbol{r}_2)\]</div>
-<p>✓ Antisymmetry is satisfied.</p>
-<h3 class="rubric" id="check-pauli-exclusion">Check Pauli Exclusion</h3>
-<p>If <span class="math notranslate nohighlight">\(\phi_1 = \phi_2\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\Psi(\boldsymbol{r}_1, \boldsymbol{r}_2) = \frac{1}{\sqrt{2}} \left[ \phi(\boldsymbol{r}_1) \phi(\boldsymbol{r}_2) - \phi(\boldsymbol{r}_2) \phi(\boldsymbol{r}_1) \right] = 0\]</div>
-<p>✓ Both fermions cannot be in the same state.</p>
-<h3 class="rubric" id="physical-interpretation">Physical Interpretation</h3>
-<p>The Slater determinant represents a state where:</p>
-<ul class="simple">
-<li><p>Particle 1 is equally likely to be in <span class="math notranslate nohighlight">\(\phi_1\)</span> or <span class="math notranslate nohighlight">\(\phi_2\)</span>.</p></li>
-<li><p>Particle 2 is in the complementary state.</p></li>
-<li><p>The particles are <strong>completely entangled</strong> in their orbital state.</p></li>
-</ul>
+\[\vert\alpha\rangle \rhd_\pm (\vert\beta\rangle\vert\gamma\rangle) = \vert\alpha\rangle\vert\beta\rangle\vert\gamma\rangle \pm \vert\beta\rangle\vert\alpha\rangle\vert\gamma\rangle \pm \vert\beta\rangle\vert\gamma\rangle\vert\alpha\rangle\]</div>
+<p>(dropping <span class="math notranslate nohighlight">\(\otimes\)</span> for brevity). For bosons (+): sum of all 3 cyclic insertions. For fermions (−): alternating signs <span class="math notranslate nohighlight">\(+1, -1, +1\)</span>.</p>
 </div>
-</section>
-<section id="symmetry-spin-and-total-wavefunction">
-<h3>Symmetry, Spin, and Total Wavefunction<a class="headerlink" href="#symmetry-spin-and-total-wavefunction" title="Link to this heading">#</a></h3>
-</section>
-<section id="the-full-wavefunction-spatial-and-spin">
-<h3>The Full Wavefunction: Spatial and Spin<a class="headerlink" href="#the-full-wavefunction-spatial-and-spin" title="Link to this heading">#</a></h3>
-<p>For fermions with both spatial and spin degrees of freedom, the <strong>total wavefunction</strong> is:</p>
-<div class="math notranslate nohighlight" id="equation-eq-total-fermion-wavefunction">
-<span class="eqno">(75)<a class="headerlink" href="#equation-eq-total-fermion-wavefunction" title="Link to this equation">#</a></span>\[
-\Psi_{\text{total}}(\boldsymbol{r}_1, s_1; \boldsymbol{r}_2, s_2; \ldots) = \Psi_\text{spatial}(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots) \times \chi_\text{spin}(s_1, s_2, \ldots)\]</div>
-<p><strong>Fundamental constraint</strong>: The total wavefunction must be <strong>antisymmetric</strong> under all particle exchanges.</p>
-<div class="math notranslate nohighlight">
-\[
-\Psi_\text{total} = \Psi_\text{spatial} \times \chi_\text{spin} \quad \text{is antisymmetric}\]</div>
-<p>This means:</p>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(\Psi_\text{spatial}\)</span> is <strong>symmetric</strong>, then <span class="math notranslate nohighlight">\(\chi_\text{spin}\)</span> must be <strong>antisymmetric</strong> (singlet).</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(\Psi_\text{spatial}\)</span> is <strong>antisymmetric</strong>, then <span class="math notranslate nohighlight">\(\chi_\text{spin}\)</span> must be <strong>symmetric</strong> (triplet).</p></li>
-</ul>
-<div class="example admonition">
-<p class="admonition-title">Example: Two Electrons (Spin-1/2)</p>
-<p><strong>Case 1</strong>: Both in the same spatial orbital (ground state of helium), so <span class="math notranslate nohighlight">\(\Psi_\text{spatial}\)</span> is <strong>symmetric</strong>.</p>
-<p>Then <span class="math notranslate nohighlight">\(\chi_\text{spin}\)</span> must be a <strong>singlet</strong> (antisymmetric):</p>
-<div class="math notranslate nohighlight">
-\[
-\chi_\text{singlet} = \frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle - |\downarrow\uparrow\rangle)\]</div>
-<p>The electrons must have <strong>opposite spins</strong>. This is the <strong>spin-paired</strong> configuration.</p>
-<p><strong>Case 2</strong>: In different spatial orbitals (excited state), so <span class="math notranslate nohighlight">\(\Psi_\text{spatial}\)</span> is <strong>antisymmetric</strong>.</p>
-<p>Then <span class="math notranslate nohighlight">\(\chi_\text{spin}\)</span> must be a <strong>triplet</strong> (symmetric):</p>
-<div class="math notranslate nohighlight">
-\[
-\chi_\text{triplet} = |\uparrow\uparrow\rangle, \quad \frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle + |\downarrow\uparrow\rangle), \quad |\downarrow\downarrow\rangle\]</div>
-<p>The electrons can have <strong>parallel spins</strong> and still be in an antisymmetric total state.</p>
+<section id="boson-creation-and-annihilation-operators">
+<h4>Boson Creation and Annihilation Operators<a class="headerlink" href="#boson-creation-and-annihilation-operators" title="Link to this heading">#</a></h4>
+<p>The <strong>boson creation operator</strong> <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha\)</span> and <strong>annihilation operator</strong> <span class="math notranslate nohighlight">\(\hat{b}_\alpha\)</span> are defined by normalizing the insertion and deletion operations acting on an <span class="math notranslate nohighlight">\(N\)</span>-particle state <span class="math notranslate nohighlight">\(\vert\Psi\rangle\)</span>:</p>
+<div class="important admonition">
+<p class="admonition-title">Definition: Boson Creation and Annihilation</p>
+<div class="math notranslate nohighlight" id="equation-eq-boson-op-def">
+<span class="eqno">(37)<a class="headerlink" href="#equation-eq-boson-op-def" title="Link to this equation">#</a></span>\[\hat{b}^\dagger_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N+1}}\;\vert\alpha\rangle \rhd_+ \vert\Psi\rangle, \qquad \hat{b}_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N}}\;\vert\alpha\rangle \lhd_+ \vert\Psi\rangle\]</div>
+<p>The factor <span class="math notranslate nohighlight">\(1/\sqrt{N+1}\)</span> (resp. <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span>) normalizes the <span class="math notranslate nohighlight">\((N{+}1)\)</span>-particle (resp. <span class="math notranslate nohighlight">\((N{-}1)\)</span>-particle) state produced by symmetric insertion (resp. deletion).</p>
 </div>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: <span class="math notranslate nohighlight">\(\hat{b}^\dagger_1 \vert 1_1, 1_2\rangle = \sqrt{2}\,\vert 2_1, 1_2\rangle\)</span></p>
+<p><strong>Problem.</strong> Create one more boson in state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>, starting from <span class="math notranslate nohighlight">\(\vert 1_1, 1_2\rangle = (\vert 1\rangle\vert 2\rangle + \vert 2\rangle\vert 1\rangle)/\sqrt{2}\)</span>.</p>
+<p><strong>Solution.</strong> Apply the definition <span class="math notranslate nohighlight">\(\hat{b}^\dagger_1 = \frac{1}{\sqrt{3}}\vert 1\rangle \rhd_+\)</span> (since <span class="math notranslate nohighlight">\(N=2\)</span>, so <span class="math notranslate nohighlight">\(N+1=3\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}^\dagger_1 \vert 1_1, 1_2\rangle = \frac{1}{\sqrt{2}} \left( \frac{1}{\sqrt{3}}\vert 1\rangle \rhd_+ \vert 1\rangle\vert 2\rangle + \frac{1}{\sqrt{3}}\vert 1\rangle \rhd_+ \vert 2\rangle\vert 1\rangle \right)\]</div>
+<p>Compute each insertion using the recursive rule:</p>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \rhd_+ \vert 1\rangle\vert 2\rangle = \vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle(\vert 1\rangle \rhd_+ \vert 2\rangle) = \vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 2\rangle\vert 1\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[= 2\,\vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 2\rangle\vert 1\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \rhd_+ \vert 2\rangle\vert 1\rangle = \vert 1\rangle\vert 2\rangle\vert 1\rangle + \vert 2\rangle(\vert 1\rangle \rhd_+ \vert 1\rangle) = \vert 1\rangle\vert 2\rangle\vert 1\rangle + \vert 2\rangle\vert 1\rangle\vert 1\rangle + \vert 2\rangle\vert 1\rangle\vert 1\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[= \vert 1\rangle\vert 2\rangle\vert 1\rangle + 2\,\vert 2\rangle\vert 1\rangle\vert 1\rangle\]</div>
+<p>Sum:</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}^\dagger_1 \vert 1_1, 1_2\rangle = \frac{2}{\sqrt{6}} (\vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 2\rangle\vert 1\rangle + \vert 2\rangle\vert 1\rangle\vert 1\rangle)\]</div>
+<p>Recognizing <span class="math notranslate nohighlight">\(\vert 2_1, 1_2\rangle = \frac{1}{\sqrt{3}} (\vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 2\rangle\vert 1\rangle + \vert 2\rangle\vert 1\rangle\vert 1\rangle)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}^\dagger_1 \vert 1_1, 1_2\rangle = \frac{2\sqrt{3}}{\sqrt{6}}\;\vert 2_1, 1_2\rangle = \sqrt{2}\;\vert 2_1, 1_2\rangle\]</div>
+<p>This confirms <span class="math notranslate nohighlight">\(\hat{b}^\dagger_1 \vert n_1, n_2\rangle = \sqrt{n_1+1}\;\vert n_1+1, n_2\rangle\)</span> with <span class="math notranslate nohighlight">\(n_1 = 1\)</span>.</p>
+</div>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: <span class="math notranslate nohighlight">\(\hat{b}_1 \vert 2_1, 1_2\rangle = \sqrt{2}\,\vert 1_1, 1_2\rangle\)</span></p>
+<p><strong>Problem.</strong> Annihilate a boson from state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>, starting from <span class="math notranslate nohighlight">\(\vert 2_1, 1_2\rangle = \frac{1}{\sqrt{3}}(\vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 2\rangle\vert 1\rangle + \vert 2\rangle\vert 1\rangle\vert 1\rangle)\)</span>.</p>
+<p><strong>Solution.</strong> Apply the definition <span class="math notranslate nohighlight">\(\hat{b}_1 = \frac{1}{\sqrt{3}}\vert 1\rangle \lhd_+\)</span> (since <span class="math notranslate nohighlight">\(N=3\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}_1 \vert 2_1, 1_2\rangle = \frac{1}{3}\bigl(\vert 1\rangle \lhd_+ \vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle \lhd_+ \vert 1\rangle\vert 2\rangle\vert 1\rangle + \vert 1\rangle \lhd_+ \vert 2\rangle\vert 1\rangle\vert 1\rangle\bigr)\]</div>
+<p>Compute each deletion using <span class="math notranslate nohighlight">\(\vert\alpha\rangle \lhd_+ (\vert\beta\rangle \otimes \vert\Psi\rangle) = \delta_{\alpha\beta}\vert\Psi\rangle + \vert\beta\rangle \otimes (\vert\alpha\rangle \lhd_+ \vert\Psi\rangle)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \lhd_+ \vert 1\rangle\vert 1\rangle\vert 2\rangle = \vert 1\rangle\vert 2\rangle + \vert 1\rangle(\vert 1\rangle \lhd_+ \vert 1\rangle\vert 2\rangle) = \vert 1\rangle\vert 2\rangle + \vert 1\rangle(\vert 2\rangle + 0) = 2\,\vert 1\rangle\vert 2\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \lhd_+ \vert 1\rangle\vert 2\rangle\vert 1\rangle = \vert 2\rangle\vert 1\rangle + \vert 1\rangle(\vert 1\rangle \lhd_+ \vert 2\rangle\vert 1\rangle) = \vert 2\rangle\vert 1\rangle + \vert 1\rangle(0 + \vert 2\rangle) = \vert 2\rangle\vert 1\rangle + \vert 1\rangle\vert 2\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \lhd_+ \vert 2\rangle\vert 1\rangle\vert 1\rangle = 0 + \vert 2\rangle(\vert 1\rangle \lhd_+ \vert 1\rangle\vert 1\rangle) = \vert 2\rangle(\vert 1\rangle + \vert 1\rangle) = 2\,\vert 2\rangle\vert 1\rangle\]</div>
+<p>Sum: <span class="math notranslate nohighlight">\(\frac{1}{3}(3\,\vert 1\rangle\vert 2\rangle + 3\,\vert 2\rangle\vert 1\rangle) = \vert 1\rangle\vert 2\rangle + \vert 2\rangle\vert 1\rangle = \sqrt{2}\,\vert 1_1, 1_2\rangle\)</span>.</p>
+</div>
+<p><strong>Action on single-mode Fock states.</strong> Starting from the vacuum <span class="math notranslate nohighlight">\(\vert 0_\alpha\rangle = \mathbb{1}\)</span> and applying <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha\)</span> repeatedly, one can derive the action on any Fock state:</p>
+<div class="important admonition">
+<p class="admonition-title">Boson Operators on Fock States</p>
+<div class="math notranslate nohighlight" id="equation-eq-boson-fock">
+<span class="eqno">(38)<a class="headerlink" href="#equation-eq-boson-fock" title="Link to this equation">#</a></span>\[\hat{b}^\dagger_\alpha \vert n_\alpha\rangle = \sqrt{n_\alpha + 1}\;\vert n_\alpha + 1\rangle, \qquad \hat{b}_\alpha \vert n_\alpha\rangle = \sqrt{n_\alpha}\;\vert n_\alpha - 1\rangle, \qquad \hat{b}_\alpha \vert 0\rangle = 0\]</div>
+</div>
+<div class="dropdown note admonition">
+<p class="admonition-title">Derivation: Action on Single-Mode Fock States</p>
+<p>The single-mode Fock state with <span class="math notranslate nohighlight">\(n\)</span> bosons is <span class="math notranslate nohighlight">\(\vert n_\alpha\rangle = \vert\alpha\rangle^{\otimes n} / \sqrt{n!}\)</span> (after normalization of the permanent). From the definition:</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}^\dagger_\alpha \vert n_\alpha\rangle = \frac{1}{\sqrt{n+1}} \;\vert\alpha\rangle \rhd_+ \frac{\vert\alpha\rangle^{\otimes n}}{\sqrt{n!}}\]</div>
+<p>Since all <span class="math notranslate nohighlight">\(n\)</span> particles are in the same state <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span>, the symmetric insertion <span class="math notranslate nohighlight">\(\vert\alpha\rangle \rhd_+ \vert\alpha\rangle^{\otimes n}\)</span> produces <span class="math notranslate nohighlight">\((n+1)\)</span> identical copies of <span class="math notranslate nohighlight">\(\vert\alpha\rangle^{\otimes(n+1)}\)</span> (one for each insertion position, all with <span class="math notranslate nohighlight">\(+\)</span> sign). So:</p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha\rangle \rhd_+ \vert\alpha\rangle^{\otimes n} = (n+1)\;\vert\alpha\rangle^{\otimes(n+1)}\]</div>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}^\dagger_\alpha \vert n_\alpha\rangle = \frac{(n+1)}{\sqrt{(n+1)\cdot n!}}\;\vert\alpha\rangle^{\otimes(n+1)} = \sqrt{n+1}\;\frac{\vert\alpha\rangle^{\otimes(n+1)}}{\sqrt{(n+1)!}} = \sqrt{n+1}\;\vert n+1\rangle\]</div>
+<p>Similarly for annihilation, the symmetric deletion <span class="math notranslate nohighlight">\(\vert\alpha\rangle \lhd_+ \vert\alpha\rangle^{\otimes n}\)</span> removes <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span> from each of the <span class="math notranslate nohighlight">\(n\)</span> positions (all giving <span class="math notranslate nohighlight">\(+\)</span> overlap), producing <span class="math notranslate nohighlight">\(n\;\vert\alpha\rangle^{\otimes(n-1)}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{b}_\alpha \vert n_\alpha\rangle = \frac{n}{\sqrt{n \cdot n!}}\;\vert\alpha\rangle^{\otimes(n-1)} = \sqrt{n}\;\vert n-1\rangle\]</div>
+</div>
+<p>All occupation number states can be constructed from the vacuum:</p>
+<div class="math notranslate nohighlight" id="equation-eq-boson-fock-construction">
+<span class="eqno">(39)<a class="headerlink" href="#equation-eq-boson-fock-construction" title="Link to this equation">#</a></span>\[\vert n_\alpha\rangle = \frac{(\hat{b}^\dagger_\alpha)^{n_\alpha}}{\sqrt{n_\alpha!}}\;\vert 0_\alpha\rangle\]</div>
+<p>The <strong>number operator</strong> <span class="math notranslate nohighlight">\(\hat{n}_\alpha = \hat{b}^\dagger_\alpha \hat{b}_\alpha\)</span> counts bosons: <span class="math notranslate nohighlight">\(\hat{n}_\alpha \vert n_\alpha\rangle = n_\alpha \vert n_\alpha\rangle\)</span>, with <span class="math notranslate nohighlight">\(n_\alpha = 0, 1, 2, \ldots\)</span> unbounded.</p>
+</section>
+<section id="fermion-creation-and-annihilation-operators">
+<h4>Fermion Creation and Annihilation Operators<a class="headerlink" href="#fermion-creation-and-annihilation-operators" title="Link to this heading">#</a></h4>
+<p>The <strong>fermion creation operator</strong> <span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha\)</span> and <strong>annihilation operator</strong> <span class="math notranslate nohighlight">\(\hat{c}_\alpha\)</span> are defined analogously, using antisymmetric insertion and deletion:</p>
+<div class="important admonition">
+<p class="admonition-title">Definition: Fermion Creation and Annihilation</p>
+<p>Acting on an <span class="math notranslate nohighlight">\(N\)</span>-particle state <span class="math notranslate nohighlight">\(\vert\Psi\rangle\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-fermion-op-def">
+<span class="eqno">(40)<a class="headerlink" href="#equation-eq-fermion-op-def" title="Link to this equation">#</a></span>\[\hat{c}^\dagger_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N+1}}\;\vert\alpha\rangle \rhd_- \vert\Psi\rangle, \qquad \hat{c}_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N}}\;\vert\alpha\rangle \lhd_- \vert\Psi\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rhd_-\)</span> inserts antisymmetrically and <span class="math notranslate nohighlight">\(\lhd_-\)</span> deletes antisymmetrically.</p>
+</div>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: <span class="math notranslate nohighlight">\(\hat{c}^\dagger_1 \vert 1_1, 1_2\rangle = 0\)</span> (Pauli Exclusion)</p>
+<p><strong>Problem.</strong> Attempt to create one more fermion in the already-occupied state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>, starting from <span class="math notranslate nohighlight">\(\vert 1_1, 1_2\rangle = (\vert 1\rangle\vert 2\rangle - \vert 2\rangle\vert 1\rangle)/\sqrt{2}\)</span>.</p>
+<p><strong>Solution.</strong> Apply <span class="math notranslate nohighlight">\(\hat{c}^\dagger_1 = \frac{1}{\sqrt{3}}\vert 1\rangle \rhd_-\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{c}^\dagger_1 \vert 1_1, 1_2\rangle = \frac{1}{\sqrt{2}} \left(\frac{1}{\sqrt{3}}\vert 1\rangle \rhd_- \vert 1\rangle\vert 2\rangle - \frac{1}{\sqrt{3}}\vert 1\rangle \rhd_- \vert 2\rangle\vert 1\rangle\right)\]</div>
+<p>Compute each antisymmetric insertion:</p>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \rhd_- \vert 1\rangle\vert 2\rangle = \vert 1\rangle\vert 1\rangle\vert 2\rangle - \vert 1\rangle(\vert 1\rangle \rhd_- \vert 2\rangle) = \vert 1\rangle\vert 1\rangle\vert 2\rangle - \vert 1\rangle\vert 1\rangle\vert 2\rangle + \vert 1\rangle\vert 2\rangle\vert 1\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\vert 1\rangle \rhd_- \vert 2\rangle\vert 1\rangle = \vert 1\rangle\vert 2\rangle\vert 1\rangle - \vert 2\rangle(\vert 1\rangle \rhd_- \vert 1\rangle) = \vert 1\rangle\vert 2\rangle\vert 1\rangle - \vert 2\rangle\vert 1\rangle\vert 1\rangle + \vert 2\rangle\vert 1\rangle\vert 1\rangle = \vert 1\rangle\vert 2\rangle\vert 1\rangle\]</div>
+<p>Sum: <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{6}}(\vert 1\rangle\vert 2\rangle\vert 1\rangle - \vert 1\rangle\vert 2\rangle\vert 1\rangle) = 0\)</span>.</p>
+<p>The antisymmetric insertion produces exact cancellation—no two fermions can occupy the same state.</p>
+</div>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: <span class="math notranslate nohighlight">\(\hat{c}_2 \vert 1_1, 1_2\rangle = -\vert 1_1, 0_2\rangle\)</span> (Fermion Sign)</p>
+<p><strong>Problem.</strong> Annihilate a fermion from state <span class="math notranslate nohighlight">\(\vert 2\rangle\)</span>, starting from <span class="math notranslate nohighlight">\(\vert 1_1, 1_2\rangle = (\vert 1\rangle\vert 2\rangle - \vert 2\rangle\vert 1\rangle)/\sqrt{2}\)</span>.</p>
+<p><strong>Solution.</strong> Apply <span class="math notranslate nohighlight">\(\hat{c}_2 = \frac{1}{\sqrt{2}}\vert 2\rangle \lhd_-\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{c}_2 \vert 1_1, 1_2\rangle = \frac{1}{\sqrt{2}}\left(\frac{1}{\sqrt{2}}\vert 2\rangle \lhd_- \vert 1\rangle\vert 2\rangle - \frac{1}{\sqrt{2}}\vert 2\rangle \lhd_- \vert 2\rangle\vert 1\rangle\right)\]</div>
+<p>Compute each antisymmetric deletion:</p>
+<div class="math notranslate nohighlight">
+\[\vert 2\rangle \lhd_- \vert 1\rangle\vert 2\rangle = \delta_{21}\vert 2\rangle - \vert 1\rangle(\vert 2\rangle \lhd_- \vert 2\rangle) = 0 - \vert 1\rangle \cdot 1 = -\vert 1\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\vert 2\rangle \lhd_- \vert 2\rangle\vert 1\rangle = \delta_{22}\vert 1\rangle - \vert 2\rangle(\vert 2\rangle \lhd_- \vert 1\rangle) = \vert 1\rangle - 0 = \vert 1\rangle\]</div>
+<p>Sum: <span class="math notranslate nohighlight">\(\frac{1}{2}(-\vert 1\rangle - \vert 1\rangle) = -\vert 1\rangle = -\vert 1_1, 0_2\rangle\)</span>.</p>
+<p>The <strong>minus sign</strong> (the fermion sign) appears because removing <span class="math notranslate nohighlight">\(\vert 2\rangle\)</span> requires “moving past” the occupied state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>, picking up a factor of <span class="math notranslate nohighlight">\((-1)\)</span>.</p>
+</div>
+<p><strong>Action on single-mode Fock states.</strong> Starting from the single-mode vacuum <span class="math notranslate nohighlight">\(\vert 0_\alpha\rangle = \mathbb{1}\)</span> and applying the fermion creation operator, one can derive the action on any Fock state:</p>
+<div class="important admonition">
+<p class="admonition-title">Fermion Operators on Single-Mode Fock States</p>
+<div class="math notranslate nohighlight" id="equation-eq-fermion-creation-single">
+<span class="eqno">(41)<a class="headerlink" href="#equation-eq-fermion-creation-single" title="Link to this equation">#</a></span>\[\hat{c}^\dagger_\alpha \vert 0_\alpha\rangle = \vert 1_\alpha\rangle, \qquad \hat{c}^\dagger_\alpha \vert 1_\alpha\rangle = 0\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-fermion-annihilation-single">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eq-fermion-annihilation-single" title="Link to this equation">#</a></span>\[\hat{c}_\alpha \vert 1_\alpha\rangle = \vert 0_\alpha\rangle, \qquad \hat{c}_\alpha \vert 0_\alpha\rangle = 0\]</div>
+<p>If the state is empty, creation fills it. If already occupied, creation gives zero (Pauli exclusion). The vacuum is quenched by annihilation.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Fermion Action on Single-Mode Fock States</p>
+<p>Apply the definitions
+<span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N+1}} \vert\alpha\rangle \rhd_- \vert\Psi\rangle\)</span>
+and
+<span class="math notranslate nohighlight">\(\hat{c}_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N}} \vert\alpha\rangle \lhd_- \vert\Psi\rangle\)</span>.</p>
+<p><strong>(A) Creation action</strong></p>
+<p>Starting from the vacuum:</p>
+<div class="math notranslate nohighlight">
+\[\hat{c}^\dagger_\alpha \vert 0_\alpha\rangle = \frac{1}{\sqrt{1}} \vert\alpha\rangle \rhd_- \mathbb{1} = \vert\alpha\rangle = \vert 1_\alpha\rangle\]</div>
+<p>On an already occupied state:</p>
+<div class="math notranslate nohighlight">
+\[\hat{c}^\dagger_\alpha \vert 1_\alpha\rangle = \frac{1}{\sqrt{2}} \vert\alpha\rangle \rhd_- \vert\alpha\rangle\]</div>
+<p>Using the recursive insertion rule:</p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha\rangle \rhd_- \vert\alpha\rangle = \vert\alpha\rangle \otimes \vert\alpha\rangle - \vert\alpha\rangle \otimes (\vert\alpha\rangle \rhd_- \mathbb{1}) = \vert\alpha\rangle\vert\alpha\rangle - \vert\alpha\rangle\vert\alpha\rangle = 0\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha \vert 1_\alpha\rangle = 0\)</span> (Pauli exclusion).</p>
+<p><strong>(B) Annihilation action</strong></p>
+<p>On an occupied state:</p>
+<div class="math notranslate nohighlight">
+\[\hat{c}_\alpha \vert 1_\alpha\rangle = \frac{1}{\sqrt{1}} \vert\alpha\rangle \lhd_- \vert\alpha\rangle\]</div>
+<p>Using the recursive deletion rule with <span class="math notranslate nohighlight">\(\vert\alpha\rangle = \vert\alpha\rangle \otimes \mathbb{1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\vert\alpha\rangle \lhd_- \vert\alpha\rangle = \delta_{\alpha\alpha}\,\mathbb{1} - \vert\alpha\rangle \otimes (\vert\alpha\rangle \lhd_- \mathbb{1}) = 1 \cdot \mathbb{1} - 0 = \mathbb{1} = \vert 0_\alpha\rangle\]</div>
+<p>On the vacuum:</p>
+<div class="math notranslate nohighlight">
+\[\hat{c}_\alpha \vert 0_\alpha\rangle = \vert\alpha\rangle \lhd_- \mathbb{1} = 0\]</div>
+<p>by the base case of the deletion rule (no fermion to remove).</p>
+</div>
+<p>The Fock state is constructed as <span class="math notranslate nohighlight">\(\vert n_\alpha\rangle = (\hat{c}^\dagger_\alpha)^{n_\alpha}\vert 0_\alpha\rangle\)</span> with <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>.</p>
+<p>The <strong>number operator</strong> <span class="math notranslate nohighlight">\(\hat{n}_\alpha = \hat{c}^\dagger_\alpha \hat{c}_\alpha\)</span> counts fermions: <span class="math notranslate nohighlight">\(\hat{n}_\alpha \vert n_\alpha\rangle = n_\alpha\vert n_\alpha\rangle\)</span>.</p>
+</section>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Identical particles</strong> are indistinguishable; swapping two must not change observable probabilities.</p></li>
-<li><p><strong>Permutation operator</strong> can only multiply the wavefunction by <span class="math notranslate nohighlight">\(\pm 1\)</span>, leading to two classes: symmetric (bosons) and antisymmetric (fermions).</p></li>
-<li><p><strong>Symmetric states</strong> (bosons) allow unlimited occupation per single-particle state.</p></li>
-<li><p><strong>Antisymmetric states</strong> (fermions) enforce the <strong>Pauli exclusion principle</strong>: <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>.</p></li>
-<li><p><strong>Slater determinants</strong> provide a systematic construction for antisymmetric fermionic states.</p></li>
-<li><p><strong>Permanents</strong> are the bosonic analog (symmetric construction).</p></li>
-<li><p><strong>Total wavefunction</strong> must respect the fermionic constraint: if spatial part is symmetric, spin part must be antisymmetric, and vice versa.</p></li>
+<li><p><strong>Identical particles</strong> have no labels; the many-body state <span class="math notranslate nohighlight">\(\vert\Psi\rangle\)</span> must be symmetric (bosons) or antisymmetric (fermions) under particle exchange.</p></li>
+<li><p><strong>Symmetric states</strong> are constructed by summing over all permutations of single-particle kets (the permanent); bosons allow multiple occupation.</p></li>
+<li><p><strong>Antisymmetric states</strong> are constructed with alternating signs (the Slater determinant); Pauli exclusion (<span class="math notranslate nohighlight">\(n_\alpha \in \{0,1\}\)</span>) follows automatically.</p></li>
+<li><p><strong>Insertion and deletion rules</strong> <span class="math notranslate nohighlight">\(\rhd_\pm\)</span> and <span class="math notranslate nohighlight">\(\lhd_\pm\)</span> define recursive procedures for adding/removing particles while preserving symmetry.</p></li>
+<li><p><strong>Boson operators</strong>: <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N+1}}\vert\alpha\rangle \rhd_+ \vert\Psi\rangle\)</span>; on Fock states, <span class="math notranslate nohighlight">\(\hat{b}^\dagger\vert n\rangle = \sqrt{n+1}\,\vert n+1\rangle\)</span>, <span class="math notranslate nohighlight">\(\hat{b}\,\vert n\rangle = \sqrt{n}\,\vert n-1\rangle\)</span>.</p></li>
+<li><p><strong>Fermion operators</strong>: <span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha \vert\Psi\rangle = \frac{1}{\sqrt{N+1}}\vert\alpha\rangle \rhd_- \vert\Psi\rangle\)</span>; on Fock states, <span class="math notranslate nohighlight">\(\hat{c}^\dagger\vert 0\rangle = \vert 1\rangle\)</span>, <span class="math notranslate nohighlight">\(\hat{c}^\dagger\vert 1\rangle = 0\)</span> (Pauli exclusion).</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="2-1-1-tensor-product.html"><span class="std std-doc">2 1 1 Tensor Product</span></a></strong>: Tensor product construction for combining quantum states</p></li>
-<li><p><strong><a class="reference internal" href="2-1-3-second-quantization.html"><span class="std std-doc">2 1 3 Second Quantization</span></a></strong>: Alternative formalism for many-particle systems built on symmetrization</p></li>
-<li><p><strong><a class="reference internal" href="2-3-1-exchange-statistics.html"><span class="std std-doc">2 3 1 Exchange Statistics</span></a></strong>: Physical origin of symmetrization: fundamental particles are indistinguishable</p></li>
+<li><p><strong><a class="reference internal" href="2-1-1-tensor-product.html"><span class="std std-doc">2.1.1 Tensor Product</span></a></strong>: Multi-particle Hilbert space construction and notation</p></li>
+<li><p><strong><a class="reference internal" href="2-1-3-second-quantization.html"><span class="std std-doc">2.1.3 Second Quantization</span></a></strong>: Full operator algebra, commutation/anticommutation relations, Fock space formalism</p></li>
+<li><p><strong><a class="reference internal" href="2-3-1-exchange-statistics.html"><span class="std std-doc">2.3.1 Exchange Statistics</span></a></strong>: Spin-statistics theorem and beyond (anyons)</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> Let <span class="math notranslate nohighlight">\(P_{12}\)</span> be the operator that swaps particles 1 and 2 in a two-particle state. Show that <span class="math notranslate nohighlight">\(P_{12}^2 = \hat{\mathbb{I}}\)</span>, and deduce that the eigenvalues of <span class="math notranslate nohighlight">\(P_{12}\)</span> can only be <span class="math notranslate nohighlight">\(+1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span>.</p>
-<p><strong>2.</strong> Two identical bosons occupy single-particle states <span class="math notranslate nohighlight">\(\phi_1(\boldsymbol{r})\)</span> and <span class="math notranslate nohighlight">\(\phi_2(\boldsymbol{r})\)</span> with <span class="math notranslate nohighlight">\(\langle \phi_1 | \phi_2 \rangle = 0\)</span>. Write the normalized symmetric two-particle wavefunction <span class="math notranslate nohighlight">\(\psi_B(\boldsymbol{r}_1, \boldsymbol{r}_2)\)</span>. What changes if <span class="math notranslate nohighlight">\(\phi_1 = \phi_2\)</span>?</p>
-<p><strong>3.</strong> Write out the <span class="math notranslate nohighlight">\(3 \times 3\)</span> Slater determinant for three fermions occupying orthonormal single-particle states <span class="math notranslate nohighlight">\(\phi_1, \phi_2, \phi_3\)</span>. Explicitly show that swapping particles 1 and 2 (i.e., <span class="math notranslate nohighlight">\(\boldsymbol{r}_1 \leftrightarrow \boldsymbol{r}_2\)</span>) multiplies the wavefunction by <span class="math notranslate nohighlight">\(-1\)</span>.</p>
-<p><strong>4.</strong> Using the properties of the determinant, prove the Pauli exclusion principle: if two fermions are forced into the same single-particle state (<span class="math notranslate nohighlight">\(\phi_i = \phi_j\)</span> for some <span class="math notranslate nohighlight">\(i \neq j\)</span>), the Slater determinant vanishes.</p>
-<p><strong>5.</strong> For two electrons (spin-1/2 fermions), the total wavefunction <span class="math notranslate nohighlight">\(\Psi_{\text{total}} = \Psi_{\text{spatial}} \times \chi_{\text{spin}}\)</span> must be antisymmetric. If the spatial part is <strong>symmetric</strong> under particle exchange, what constraint does this place on the spin state <span class="math notranslate nohighlight">\(\chi_{\text{spin}}\)</span>? What are the allowed spin states?</p>
-<p><strong>6.</strong> The permanent of a <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix <span class="math notranslate nohighlight">\(\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\)</span> is <span class="math notranslate nohighlight">\(ad + bc\)</span>. Write the normalized bosonic two-particle wavefunction for <span class="math notranslate nohighlight">\(\phi_1 \neq \phi_2\)</span> in terms of the permanent, and explain why the permanent naturally gives a symmetric state.</p>
-<p><strong>7.</strong> Show that for <span class="math notranslate nohighlight">\(N\)</span> fermions occupying <span class="math notranslate nohighlight">\(N\)</span> distinct orthonormal states, the Slater determinant is normalized: <span class="math notranslate nohighlight">\(\int |\Psi(\boldsymbol{r}_1, \ldots, \boldsymbol{r}_N)|^2 d^3r_1 \cdots d^3r_N = 1\)</span>.</p>
-<p><strong>8.</strong> How many independent antisymmetric (fermionic) states can be constructed by placing <span class="math notranslate nohighlight">\(N\)</span> fermions into <span class="math notranslate nohighlight">\(D\)</span> available single-particle states? Express your answer as a combinatorial formula. What happens when <span class="math notranslate nohighlight">\(N &gt; D\)</span>?</p>
+<p><strong>1.</strong> Let <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{12}\)</span> be the operator that swaps particles 1 and 2. Show that <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{12}^2 = \hat{I}\)</span>, and deduce that the eigenvalues of <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}_{12}\)</span> are <span class="math notranslate nohighlight">\(\pm 1\)</span>.</p>
+<p><strong>2.</strong> Two identical bosons occupy orthogonal single-particle states <span class="math notranslate nohighlight">\(\psi_1, \psi_2\)</span>. Write the normalized symmetric wavefunction. What changes if <span class="math notranslate nohighlight">\(\psi_1 = \psi_2\)</span>? Pay attention to normalization.</p>
+<p><strong>3.</strong> Two identical fermions occupy orthonormal states <span class="math notranslate nohighlight">\(\psi_1, \psi_2\)</span>. Write the normalized antisymmetric wavefunction. Verify it changes sign under <span class="math notranslate nohighlight">\(\boldsymbol{r}_1 \leftrightarrow \boldsymbol{r}_2\)</span>.</p>
+<p><strong>4.</strong> Prove the Pauli exclusion principle from antisymmetry: if <span class="math notranslate nohighlight">\(\psi_1 = \psi_2\)</span>, show the fermionic wavefunction vanishes identically.</p>
+<p><strong>5.</strong> Use the bosonic insertion rule to compute <span class="math notranslate nohighlight">\(\psi_\alpha \rhd_+ (\psi_\beta \otimes \psi_\gamma \otimes \psi_\delta)\)</span>. How many terms appear?</p>
+<p><strong>6.</strong> Use the fermionic insertion rule to compute <span class="math notranslate nohighlight">\(\psi_1 \rhd_- (\psi_1 \otimes \psi_2)\)</span>. Show that the result vanishes, demonstrating Pauli exclusion at the first-quantized level.</p>
+<p><strong>7.</strong> Starting from <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha \vert n_\alpha\rangle = \sqrt{n_\alpha + 1}\,\vert n_\alpha + 1\rangle\)</span>, show by induction that <span class="math notranslate nohighlight">\(\vert n_\alpha\rangle = \frac{(\hat{b}^\dagger_\alpha)^{n_\alpha}}{\sqrt{n_\alpha!}}\,\vert 0_\alpha\rangle\)</span>.</p>
+<p><strong>8.</strong> In a two-mode fermionic system <span class="math notranslate nohighlight">\((\alpha, \beta)\)</span>, verify explicitly that <span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha \hat{c}^\dagger_\beta \vert 0,0\rangle = -\hat{c}^\dagger_\beta \hat{c}^\dagger_\alpha \vert 0,0\rangle\)</span> using the Jordan-Wigner phase formula.</p>
+<p><strong>9.</strong> How many independent antisymmetric states can be formed by placing <span class="math notranslate nohighlight">\(N\)</span> fermions into <span class="math notranslate nohighlight">\(D\)</span> single-particle states? Give the combinatorial formula. What happens when <span class="math notranslate nohighlight">\(N &gt; D\)</span>?</p>
+<p><strong>10.</strong> Compute <span class="math notranslate nohighlight">\(\hat{c}_2 \vert 1_1, 1_2, 1_3\rangle\)</span> using the fermionic annihilation formula with the Jordan-Wigner phase. What is the sign of the result?</p>
 </section>
 </section>
 
@@ -935,20 +926,19 @@ n_\alpha \in \{0, 1, 2, 3, \ldots\} \quad \text{(bosons)}\]</div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-labeling">The Problem of Labeling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-indistinguishability">Physical Indistinguishability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-points">Summary of Key Points</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-permutation-operator-and-its-eigenvalues">The Permutation Operator and Its Eigenvalues</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-the-permutation-operator">Definition of the Permutation Operator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-requirement-phase-eigenvalue">Physical Requirement: Phase Eigenvalue</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupation-number-constraints">Occupation Number Constraints</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences">Consequences</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slater-determinants">Slater Determinants</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permanents-symmetric-analog-of-determinants">Permanents: Symmetric Analog of Determinants</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-spin-and-total-wavefunction">Symmetry, Spin, and Total Wavefunction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-wavefunction-spatial-and-spin">The Full Wavefunction: Spatial and Spin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identical-particles">Identical Particles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-and-antisymmetric-states">Symmetric and Antisymmetric States</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bosonic-symmetric-states">Bosonic (Symmetric) States</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fermionic-antisymmetric-states">Fermionic (Antisymmetric) States</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pauli-exclusion-principle">Pauli Exclusion Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-and-deletion-rules">Insertion and Deletion Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boson-creation-and-annihilation-operators">Boson Creation and Annihilation Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fermion-creation-and-annihilation-operators">Fermion Creation and Annihilation Operators</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

@@ -80,15 +80,95 @@
 ### 1.2 Measurement
 
 - 1.2.1 Measurement Postulate
-- 1.2.2 Uncertainty and Incompatibility
-- 1.2.3 Measurement Operators
 
+  - start with stern_gerlach experiement as a concrete example of measurement
+    - show setup picture in the main pannel 
+    - use a information box to discuss Z-Z-Z experiement, outside of box list what we learnt in items (outcome is binary, repeatedly measure Z can confirmed outcome -> existance of physical reality)
+    - use a information box for Z-X-Z experiement, outside of box list what we learnt in items (X measurement can wash out Z measurement outcomes -> non-commuting measurement can change reality)
+    (see QubitsAndEntanglement.nb in _refs for reference)
+
+  - state the goal: build a mathematical model for outcome probability distribution P(m|psi,O) for m=+-1
+    - constraint: P(m|psi,O) >=0
+    - solution: model P(m|psi,O) as an expectation value of a positive semi-definite operator <psi|P_{O=m}|psi>, a box to define what is PSD operator
+    - fact: repeatedly measure O on |O=m> state (the eigensate of O of eigenvalue m) will return m with probability 1 -> P_{O=m}= |O=m> <O=m|. 
+    add a dropdown box to show it is indeed the case that O=m has prob 1 and O=m' (m neq m') has prob 0. (see notation in 1-1-3)
+
+  - Directly state the measurement postulate (three axioms) use the notation developed above, state collapse can be represented using a long arrow with $O=m$ on top to denote prior state becomes posterior state (reuse some material from current note, the current Example: Probabilities and State Collapse has content leaked out, fix it)
+
+  [current note: expectation value and variance move to 1.2.2 and projective measurement move to 1.2.3]
+  - show how the theory explains SG experiement directly solving the puzzle at the begining
+
+
+- 1.2.2 Uncertainty and Incompatibility
+
+  - start with brief intro of statistics: expectation value and variance
+    - define them from probability thoery
+    - state the result of them for given state and observable
+
+  - Commutator
+    - A definition [A,B]=AB-BA in a box
+    - out site the box briefly comment physical meaning (operator applied order)
+    - example: A = take on socks, B= take on shoes, C=take on hat, AB not commuting, AC commute, -- build physical intuition: commuting ~ a sense of indenpendence
+    - briefly list properties of commutators
+    [No need to repeat commutator and anticommutator for Pauli]
+
+    - a box stating Theorem: Commuting Operators Share, a dropdown box for proof, and ouside: corollary
+
+  - Uncertainty principle
+    - a box to state the Theorem
+    - a note to emphasize the setting is repeated measurement of identical copies of the same state, not simutaneous or sequential measurement of a single copy of the state
+    - a hidden box to prove
+    
+    [No complementarity, no further discussion of sequential measurement]
+
+- 1.2.3 Measurement Operators
+  - Define measurement operator in a box
+    - list its properaties outside
+    - a box comment on spectral dec
+    - briefly remind how it is used in measurement prob and state collapse
+  - A table listing measurement operators for Pauli observables
+  - State Collapse as Bayesian Updating
+  - Degenerate Measurements
+
+  
 ### 1.3 Time Evolution
 
 - 1.3.1 Unitary Evolution
-- 1.3.2 Spin Dynamics
-- 1.3.3 Heisenberg Picture
 
+  - introduce unitary operator
+    - motivation: like a pure phase factor z* z = 1, s.t. z = e^{i theta} (theta in R)
+    - math defintion U^\dagger U = I
+      (implies U inverse by conjugate)
+      (key property: just discuss preserve inner product (both overlap and norm))
+    - Hermitian generator: U = exp(i G) such that G^\dagger = G
+      - define matrix exp via Taylor
+      - use spectiral decomposition to compute matrix exp
+      - for U(theta)=exp(i G theta), G can be extracted from derrivative
+  -  Why time evolution must be unitary? (see MatrixAlgebra argument, from information preservance) psi(t) = U(t) psi, phi(t) = U(t) phi
+    - Hamiltonian as generator of unitary time evolution. U(t)=exp(-iHt)
+    - Schordinger equation, derive in a box
+
+- 1.3.2 Schordinger Picture
+  - state evolves observable static
+  - Show Schordinger equation again
+    - Solution: time evolution operator 
+    - Properties of Time-evolution operator
+
+  - Briefly some examples for qubits
+    - Rabbi oscillator
+    - Spin precession
+  
+- 1.3.3 Heisenberg Picture
+  - state static observable evolves (more like the classical physics mindset)
+    because <O>(t)= <psi|U(t)dagger O U(t)|psi> has two interpretations
+  - Show Heisenberg equation (no need to subscript S or H, just be simple)
+    (hide derivation in box)
+     - a example in a box for spin precession in Heisenberg picture
+  - conserved quantitie and conservation laws
+    - [A,H]=0, implies d/dt <A>=0
+    - relation to symmetry, define symmetry as unitary transformation that leaves H invariant (conserved quantity generate unitary transformation)
+
+  - Extend the discussion to introduce Lie algebra and lie group, focus on U(1) and SU(2), use qubit as example, discuss the importance of these groups in descibing fudamental interactions U(1)xSU(2)xSU(3)
 **Narrative notes:**
 <!-- What story does this chapter tell? What question does it open for Ch2? -->
 
@@ -101,8 +181,42 @@
 ### 2.1 Bosons and Fermions
 
 - 2.1.1 Tensor Product
+
+  - start with a motivating paragraph about Extend the single-qubit framework to many-body systems. What new physics emerges?
+  - many-body states
+    - state space: each quantum system described by Hilbert space, composition = tensor product Hilbert space (as stated in the current Key Concept box)
+    - two qubits case: basis states, orthonormality
+    - general case: many-body system
+      [remove product state ande entangled state, they belongs to 6.2.1]
+      basis (standard notation, mode label alpha can label position, momentum, spin, or just generally single-particle mode), orthonormality, representation of generic state
+  - many-body operators
+    - single-body operators
+    - two-body operators
+    - general case: operator expanded by ket bra in many-body Hilbert space
+    - Example: Pauli string operator, multi-qubit system any Hermitian operator learning combination of Pauli strings with real coeff, O = \bigotimes_i O_i, where O_i=I_i,X_i,Y_i,Z_i (unify the symbol for identity operator, currently is a mix of I and mathbb I)
+  
 - 2.1.2 Symmetrization
+  - Introduce idea of identical particle
+    - analogy: money in the bank are identical, you can not talk about the $1 today vs $1 yesterday, they are indistinguishable.
+    - implication of probability
+    - consequence: wave funcation symmetry under permutation -> only two choices symmetric, antisymmetric
+
+  - Symmetric and antisymmetric states (adapt from current notes)
+    - To preserve symmetry, particle must be add to or removed from the system using insersion and deletion rules
+    - Describe how they works (follow notes in SecondeQuantization.nb)
+
 - 2.1.3 Second Quantization
+  - compare the picture between 1st and 2nd quantization
+  - Fock space 
+  - Ceation annihilation operators (better make a table for side-by-side compare of bosons and fermions)
+    - work out how creation/annihilation acts on bosons vs fermions states
+    - summarize creation annihilation algebraic relations (commutator or anticommutator)
+    - introduce number operator
+   [Try to make a big table to side-by-side compare bosons and fermions in all different aspects, wave function, state space, creation anihilation, number, and so on, think of most complete comparison]
+
+  - Boson enhancement (apply a^dagger on superposition state of multiple numbers, show that amplitude enhance by sqrt(n) for |n>)
+  - Pauli exclusion (apply a^dagger on 1 fermion state, state quenched, 0 probabiility)
+  [Current notes is detailed enough]
 
 ### 2.2 Angular Momentum
 

@@ -31,6 +31,19 @@ Constants and operators that are not variables use upright (roman) type:
 | Z (σ_z) — qubit | `\|0\rangle`, `\|1\rangle` |
 | Z (σ_z) — spin | `\|\uparrow\rangle`, `\|\downarrow\rangle` |
 
+## Notation Consistency: Spin vs QI
+
+Two notation systems coexist for qubit operators and states. **Never mix them within the same equation or problem.**
+
+| System | Operators | Ket states |
+|--------|-----------|------------|
+| **Spin** | `\hat{\sigma}^x`, `\hat{\sigma}^y`, `\hat{\sigma}^z` | `\vert\uparrow\rangle`, `\vert\downarrow\rangle`, `\vert+\rangle`, `\vert-\rangle` |
+| **QI (Quantum Information)** | `\hat{X}`, `\hat{Y}`, `\hat{Z}` | `\vert 0\rangle`, `\vert 1\rangle`, `\vert+\rangle`, `\vert-\rangle` |
+
+**Rule:** In any single equation or homework problem, pick one system and stick to it:
+- If kets use $\vert 0\rangle, \vert 1\rangle$, operators must be $\hat{X}, \hat{Y}, \hat{Z}$.
+- If kets use $\vert\uparrow\rangle, \vert\downarrow\rangle$, operators must be $\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z$.
+
 ## Display Math
 
 - `$$...$$` blocks MUST have blank lines above and below

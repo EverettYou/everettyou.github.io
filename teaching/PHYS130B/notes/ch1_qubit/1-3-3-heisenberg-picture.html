@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -66,7 +66,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Chapter 2: Identical Particles" href="../ch2_identical-particles/index.html" />
-    <link rel="prev" title="1.3.2 Spin Dynamics" href="1-3-2-spin-dynamics.html" />
+    <link rel="prev" title="1.3.2 Schrödinger Picture" href="1-3-2-schrodinger-picture.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
@@ -195,7 +195,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -522,23 +522,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pictures-schrodinger-vs-heisenberg">The Two Pictures: Schrödinger vs. Heisenberg</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#schrodinger-picture">Schrödinger Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Heisenberg Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation">Derivation</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conserved-quantities-and-conservation-laws">Conserved Quantities and Conservation Laws</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-examples">Physical Examples</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statement-and-derivation">Statement and Derivation</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-precession-in-the-heisenberg-picture">Example: Spin Precession in the Heisenberg Picture</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-operator-evolution">Computing the Operator Evolution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-larmor-precession-in-the-heisenberg-picture">Solution: Larmor Precession in the Heisenberg Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-two-pictures">Why Two Pictures?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heisenberg-equation-of-motion">Heisenberg Equation of Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-precession">Example: Spin Precession</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conserved-quantities-and-symmetry">Conserved Quantities and Symmetry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lie-groups-and-quantum-mechanics">Lie Groups and Quantum Mechanics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -559,264 +548,168 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>In the Schrödinger picture, states evolve and observables are fixed. In the Heisenberg picture, it’s the opposite. Are these just different languages for the same physics, or do they give different answers?</p></li>
-<li><p>Derive the Heisenberg equation of motion for an operator: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{A}}{dt} = \frac{1}{\mathrm{i}\hbar}[\hat{A},\hat{H}]\)</span>.</p></li>
-<li><p>For a spin in a magnetic field with <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span>, find how <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^y(t)\)</span> evolve in the Heisenberg picture. Describe the motion geometrically.</p></li>
-<li><p>What is the Ehrenfest theorem, and how does it show that quantum expectation values obey equations that look like classical equations of motion?</p></li>
-<li><p>Prove that if <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>, then <span class="math notranslate nohighlight">\(\hat{A}\)</span> is a conserved quantity. Why is this such a powerful result in both quantum and classical mechanics?</p></li>
-<li><p>Challenge: In the Heisenberg picture, observables evolve according to a Hamiltonian. In classical mechanics, observables (functions on phase space) evolve via Poisson brackets. Are these two frameworks saying the same thing in different languages?</p></li>
+<li><p>In the Schrödinger picture, states evolve and observables are fixed. What happens in the Heisenberg picture? Are both descriptions physically equivalent?</p></li>
+<li><p>Derive the Heisenberg equation of motion: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \mathrm{i}[\hat{H}, \hat{O}(t)]\)</span>. How does it differ from the Schrödinger equation?</p></li>
+<li><p>For a spin in a magnetic field with <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span>, find how <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> evolves. Describe the motion geometrically.</p></li>
+<li><p>What does it mean for an observable to be conserved? How does the commutator <span class="math notranslate nohighlight">\([\hat{A},\hat{H}] = 0\)</span> guarantee conservation?</p></li>
+<li><p>How do continuous symmetries (like rotations) generate conserved quantities? Give an example from the Standard Model.</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>So far, we have described quantum mechanics in the <strong>Schrödinger picture</strong>, where states evolve in time and observables remain fixed. This is intuitive for beginners, but there is a mathematically equivalent description—the <strong>Heisenberg picture</strong>—where operators evolve instead of states. This perspective is more natural when discussing conservation laws and conserved quantities, and it reveals deep connections between quantum and classical mechanics. In this section, we explore operator dynamics and meet the Heisenberg equation of motion.</p>
-<section id="the-two-pictures-schrodinger-vs-heisenberg">
-<h3>The Two Pictures: Schrödinger vs. Heisenberg<a class="headerlink" href="#the-two-pictures-schrodinger-vs-heisenberg" title="Link to this heading">#</a></h3>
-<section id="schrodinger-picture">
-<h4>Schrödinger Picture<a class="headerlink" href="#schrodinger-picture" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>States <span class="math notranslate nohighlight">\(|\psi(t)\rangle_S\)</span> evolve according to the Schrödinger equation: <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle_S = \hat{H}|\psi(t)\rangle_S\)</span></p></li>
-<li><p>Observables <span class="math notranslate nohighlight">\(\hat{A}_S\)</span> are time-independent</p></li>
-<li><p>Expectation values: <span class="math notranslate nohighlight">\(\langle A(t) \rangle = {}_S\langle\psi(t)|\hat{A}_S|\psi(t)\rangle_S\)</span></p></li>
-</ul>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>So far, we have described quantum mechanics in the <strong>Schrödinger picture</strong>, where states evolve in time and observables remain fixed. There is a mathematically equivalent description—the <strong>Heisenberg picture</strong>—where operators evolve instead of states. This perspective is more natural for discussing conservation laws and reveals deep connections between quantum and classical mechanics.</p>
 </section>
-<section id="id1">
-<h4>Heisenberg Picture<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>States <span class="math notranslate nohighlight">\(|\psi\rangle_H\)</span> are fixed (we choose the initial state)</p></li>
-<li><p>Observables <span class="math notranslate nohighlight">\(\hat{A}_H(t)\)</span> evolve in time</p></li>
-<li><p>Expectation values: <span class="math notranslate nohighlight">\(\langle A(t) \rangle = {}_H\langle\psi|\hat{A}_H(t)|\psi\rangle_H\)</span></p></li>
-</ul>
-<p>#:::{admonition} Equivalence of Pictures
-:class: important</p>
-<p>Both pictures give the <strong>same expectation values</strong> and observable predictions. They are related by a unitary transformation: if <span class="math notranslate nohighlight">\(U(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, then</p>
+<section id="why-two-pictures">
+<h3>Why Two Pictures?<a class="headerlink" href="#why-two-pictures" title="Link to this heading">#</a></h3>
+<p>In the Schrödinger picture, the expectation value of an observable at time <span class="math notranslate nohighlight">\(t\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{A}_H(t) = U^\dagger(t) \hat{A}_S U(t) \quad \text{and} \quad |\psi\rangle_H = U^\dagger(t) |\psi(t)\rangle_S\]</div>
-<div class="docutils">
-<h4 class="rubric" id="when-is-each-useful">When is Each Useful?</h4>
-<ul class="simple">
-<li><p><strong>Schrödinger picture</strong>: Easier for solving time-dependent problems with explicit states; natural for computing populations and transition probabilities.</p></li>
-<li><p><strong>Heisenberg picture</strong>: Better for identifying conserved quantities and symmetries; more closely mirrors classical mechanics; essential for understanding the correspondence principle.</p></li>
-</ul>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p>In classical mechanics, Hamilton’s equations relate the time derivative of a function on phase space to the Poisson bracket: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}f}{\mathrm{d}t} = \{f, H\}\)</span>.</p>
-<p>The Heisenberg equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{O}_H}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}_H]\)</span> looks structurally identical, with the commutator replacing the Poisson bracket.</p>
-<p>Does this mean quantum mechanics is “just” classical mechanics with a different algebra? Or does the commutator capture something fundamentally quantum that has no classical analogue? Can you think of a situation where the quantum and classical equations give the same time evolution? When do they differ qualitatively?</p>
-</div>
-</div>
+\[\langle \hat{O} \rangle(t) = \langle \psi(t) \vert \hat{O} \vert \psi(t) \rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vert \psi(t) \rangle = \hat{U}(t) \vert \psi(0) \rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t}\)</span> (setting <span class="math notranslate nohighlight">\(\hbar = 1\)</span>).</p>
+<p>We can rewrite this as:</p>
+<div class="math notranslate nohighlight">
+\[\langle \hat{O} \rangle(t) = \langle \psi(0) \vert \hat{U}^\dagger(t) \hat{O} \hat{U}(t) \vert \psi(0) \rangle\]</div>
+<p>This factorization suggests two interpretations:</p>
+<ol class="arabic simple">
+<li><p><strong>Schrödinger</strong>: state <span class="math notranslate nohighlight">\(\vert \psi(t) \rangle\)</span> evolves, operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> is constant.</p></li>
+<li><p><strong>Heisenberg</strong>: state <span class="math notranslate nohighlight">\(\vert \psi \rangle\)</span> is constant, operator <span class="math notranslate nohighlight">\(\hat{O}(t) = \hat{U}^\dagger(t) \hat{O} \hat{U}(t)\)</span> evolves.</p></li>
+</ol>
+<p>Both give identical physical predictions—they are two languages for the same physics.</p>
 </section>
-<section id="derivation">
-<h4>Derivation<a class="headerlink" href="#derivation" title="Link to this heading">#</a></h4>
-<p>To find how operators evolve in the Heisenberg picture, we start with the relation <span class="math notranslate nohighlight">\(\hat{A}_H(t) = U^\dagger(t) \hat{A}_S U(t)\)</span> and differentiate with respect to time:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{A}_H}{dt} = \frac{\mathrm{d} U^\dagger}{dt} \hat{A}_S U + U^\dagger \hat{A}_S \frac{\mathrm{d}U}{dt}\]</div>
-<p>Using <span class="math notranslate nohighlight">\(\frac{\mathrm{d}U}{dt} = -\frac{\mathrm{i}}{\hbar}\hat{H} U\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}U^\dagger}{dt} = \frac{\mathrm{i}}{\hbar}U^\dagger \hat{H}\)</span>, we have</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{A}_H}{dt} = \frac{\mathrm{i}}{\hbar}U^\dagger \hat{H} \hat{A}_S U - \frac{\mathrm{i}}{\hbar}U^\dagger \hat{A}_S \hat{H} U = \frac{\mathrm{i}}{\hbar}U^\dagger [\hat{H}, \hat{A}_S] U\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\hat{H}\)</span> commutes with both <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(U^\dagger\)</span> (it generates the evolution), this becomes the <strong>Heisenberg equation of motion</strong>.</p>
-<p>#:::{admonition} Heisenberg: Equation
-:class: important</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{A}_H}{dt} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{A}_H] + \left(\frac{\partial \hat{A}}{\partial t}\right)_H\]</div>
-<p>The first term represents evolution due to commutation with the Hamiltonian. The second term accounts for explicit time-dependence in the operator itself; for time-independent observables, it vanishes.</p>
-<div class="docutils">
-<div class="dropdown note admonition">
-<p class="admonition-title">Detailed Derivation</p>
-<p>Define the Heisenberg operator as <span class="math notranslate nohighlight">\(\hat{A}_H(t) = U^\dagger(t)\hat{A}_S U(t)\)</span>. Then:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{A}_H}{dt} = \left(\frac{\mathrm{d}U^\dagger}{dt}\right)\hat{A}_S U + U^\dagger\hat{A}_S\left(\frac{\mathrm{d}U}{dt}\right) + U^\dagger\left(\frac{\partial\hat{A}_S}{\partial t}\right)U\]</div>
-<p>From the Schrödinger equation, <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\dot{U} = \hat{H}U\)</span>, so <span class="math notranslate nohighlight">\(\dot{U} = \frac{\mathrm{i}}{\hbar}\hat{H}U\)</span> and <span class="math notranslate nohighlight">\(\dot{U}^\dagger = \frac{\mathrm{i}}{\hbar}U^\dagger\hat{H}\)</span> (since <span class="math notranslate nohighlight">\(\hat{H}\)</span> is Hermitian).</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{A}_H}{dt} = \frac{\mathrm{i}}{\hbar}U^\dagger\hat{H}\hat{A}_S U - \frac{\mathrm{i}}{\hbar}U^\dagger\hat{A}_S\hat{H}U + U^\dagger\left(\frac{\partial\hat{A}_S}{\partial t}\right)U\]</div>
-<div class="math notranslate nohighlight">
-\[= \frac{\mathrm{i}}{\hbar}U^\dagger[\hat{H}, \hat{A}_S]U + U^\dagger\left(\frac{\partial\hat{A}_S}{\partial t}\right)U = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{A}_H] + \left(\frac{\partial\hat{A}}{\partial t}\right)_H\]</div>
-<p>since <span class="math notranslate nohighlight">\(\hat{H}\)</span> is time-independent and commutes with <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(U^\dagger\)</span>.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="conserved-quantities-and-conservation-laws">
-<h3>Conserved Quantities and Conservation Laws<a class="headerlink" href="#conserved-quantities-and-conservation-laws" title="Link to this heading">#</a></h3>
-<p>A key insight emerges from the Heisenberg equation: if an observable <span class="math notranslate nohighlight">\(\hat{A}\)</span> has no explicit time-dependence and <strong>commutes with the Hamiltonian</strong>, then</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{A}, \hat{H}] = 0 \quad \Rightarrow \quad \frac{\mathrm{d}\hat{A}_H}{dt} = 0\]</div>
+<section id="heisenberg-equation-of-motion">
+<h3>Heisenberg Equation of Motion<a class="headerlink" href="#heisenberg-equation-of-motion" title="Link to this heading">#</a></h3>
 <div class="important admonition">
-<p class="admonition-title">Conserved Quantities</p>
-<p>An operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> is a <strong>constant of motion</strong> (conserved quantity) if and only if <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>. In this case, its expectation value is time-independent:</p>
+<p class="admonition-title">Heisenberg Equation of Motion</p>
+<p>In the Heisenberg picture, operators evolve according to:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{A}\rangle = 0\]</div>
-<p><strong>In quantum mechanics, commuting with the Hamiltonian is the precise condition for a conserved quantity.</strong> This is the quantum mechanical expression of Noether’s theorem and Wigner’s symmetry principle. For every continuous symmetry of the system, there is a conserved operator.</p>
+\boxed{\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \mathrm{i}[\hat{H}, \hat{O}(t)]}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\([\cdot,\cdot]\)</span> is the commutator and we use natural units <span class="math notranslate nohighlight">\(\hbar = 1\)</span>.</p>
 </div>
-<section id="physical-examples">
-<h4>Physical Examples<a class="headerlink" href="#physical-examples" title="Link to this heading">#</a></h4>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation</p>
+<p>Starting from <span class="math notranslate nohighlight">\(\hat{O}(t) = \hat{U}^\dagger(t) \hat{O} \hat{U}(t)\)</span>, we differentiate with respect to time:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \frac{\mathrm{d}\hat{U}^\dagger}{\mathrm{d}t} \hat{O} \hat{U} + \hat{U}^\dagger \hat{O} \frac{\mathrm{d}\hat{U}}{\mathrm{d}t}\]</div>
+<p>From the Schrödinger equation: <span class="math notranslate nohighlight">\(\mathrm{i}\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = \hat{H} \hat{U}\)</span>, so <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = -\mathrm{i}\hat{H} \hat{U}\)</span>.</p>
+<p>Thus: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}^\dagger}{\mathrm{d}t} = \mathrm{i}\hat{U}^\dagger \hat{H}\)</span>.</p>
+<p>Substituting:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \mathrm{i}\hat{U}^\dagger \hat{H} \hat{O} \hat{U} - \mathrm{i}\hat{U}^\dagger \hat{O} \hat{H} \hat{U}\]</div>
+<div class="math notranslate nohighlight">
+\[= \mathrm{i}\hat{U}^\dagger [\hat{H}, \hat{O}] \hat{U} = \mathrm{i}[\hat{H}, \hat{O}(t)]\]</div>
+</div>
+</section>
+<section id="example-spin-precession">
+<h3>Example: Spin Precession<a class="headerlink" href="#example-spin-precession" title="Link to this heading">#</a></h3>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: Spin in a Magnetic Field</p>
+<p><strong>Problem.</strong> A spin-1/2 particle evolves under <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span>. Find <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^y(t)\)</span> in the Heisenberg picture.</p>
+<p><strong>Solution.</strong></p>
+<p>The commutators are:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y, \quad [\hat{\sigma}^z, \hat{\sigma}^y] = -2\mathrm{i}\hat{\sigma}^x\]</div>
+<p>So:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^x = \mathrm{i}\omega[\hat{\sigma}^z, \hat{\sigma}^x] = 2\omega\hat{\sigma}^y\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^y = \mathrm{i}\omega[\hat{\sigma}^z, \hat{\sigma}^y] = -2\omega\hat{\sigma}^x\]</div>
+<p>These are coupled oscillator equations. Taking the second derivative of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}^2}{\mathrm{d}t^2}\hat{\sigma}^x = -4\omega^2\hat{\sigma}^x\]</div>
+<p>General solution: <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t) = A\cos(2\omega t) + B\sin(2\omega t)\)</span>.</p>
+<p>With initial conditions <span class="math notranslate nohighlight">\(\hat{\sigma}^x(0) = \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^x(0) = 2\omega\hat{\sigma}^y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^x(t) = \hat{\sigma}^x\cos(2\omega t) + \hat{\sigma}^y\sin(2\omega t)\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^y(t) = \hat{\sigma}^y\cos(2\omega t) - \hat{\sigma}^x\sin(2\omega t)\]</div>
+<p><strong>Physical interpretation:</strong> In the Heisenberg picture, the spin operators precess around the <span class="math notranslate nohighlight">\(z\)</span>-axis with frequency <span class="math notranslate nohighlight">\(2\omega\)</span>—exactly as they would orbit the magnetic field in the Schrödinger picture.</p>
+</div>
+</section>
+<section id="conserved-quantities-and-symmetry">
+<h3>Conserved Quantities and Symmetry<a class="headerlink" href="#conserved-quantities-and-symmetry" title="Link to this heading">#</a></h3>
+<p>An observable <span class="math notranslate nohighlight">\(\hat{A}\)</span> is <strong>conserved</strong> if its expectation value does not change in time:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = 0\]</div>
+<p>From the Heisenberg equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = \mathrm{i}\langle [\hat{H}, \hat{A}] \rangle\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat{A}\)</span> is conserved if and only if:</p>
+<div class="important admonition">
+<p class="admonition-title">Conservation Law</p>
+<div class="math notranslate nohighlight">
+\[[\hat{A}, \hat{H}] = 0\]</div>
+<p>An observable is conserved if and only if it commutes with the Hamiltonian.</p>
+</div>
+<p>This statement connects <strong>symmetries</strong> to <strong>conserved quantities</strong>. A <strong>symmetry</strong> is a unitary transformation <span class="math notranslate nohighlight">\(\hat{U}_\alpha(\theta)\)</span> that leaves the Hamiltonian invariant:</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}_\alpha^\dagger(\theta) \hat{H} \hat{U}_\alpha(\theta) = \hat{H}\]</div>
+<p>The <strong>generator</strong> of the symmetry is an operator <span class="math notranslate nohighlight">\(\hat{G}_\alpha\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}_\alpha(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}_\alpha\theta}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\hat{U}_\alpha^\dagger \hat{H} \hat{U}_\alpha = \hat{H}\)</span>, then <span class="math notranslate nohighlight">\([\hat{G}_\alpha, \hat{H}] = 0\)</span>, so <span class="math notranslate nohighlight">\(\hat{G}_\alpha\)</span> is conserved. <strong>Every continuous symmetry generates a conserved quantity.</strong></p>
+</section>
+<section id="lie-groups-and-quantum-mechanics">
+<h3>Lie Groups and Quantum Mechanics<a class="headerlink" href="#lie-groups-and-quantum-mechanics" title="Link to this heading">#</a></h3>
+<p>The study of symmetries in quantum mechanics naturally involves <strong>Lie groups</strong>—continuous families of matrices that form a group under multiplication. Two examples are central to fundamental physics:</p>
+<p><strong>U(1): Phase Rotations</strong></p>
+<p>The simplest symmetry is global phase rotation:</p>
+<div class="math notranslate nohighlight">
+\[\vert \psi \rangle \to \mathrm{e}^{\mathrm{i}\theta}\vert \psi \rangle\]</div>
+<p>This is generated by the identity operator (up to a constant), and is related to particle number conservation in field theory. The group U(1) is one-dimensional.</p>
+<p><strong>SU(2): Rotations in Spin Space</strong></p>
+<p>The Pauli operators generate rotations in a two-dimensional spin space. Any rotation of a spin-1/2 system can be written as:</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}(\boldsymbol{\theta}) = \mathrm{e}^{-\mathrm{i}\boldsymbol{\theta} \cdot \hat{\boldsymbol{\sigma}} / 2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = (\theta_x, \theta_y, \theta_z)\)</span> and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)\)</span>. This is the group SU(2), which has three generators (the three Pauli operators). Rotations on the Bloch sphere correspond to SU(2) transformations.</p>
+<p><strong>Gauge Symmetries in the Standard Model</strong></p>
+<p>The symmetry structure of the electroweak and strong interactions is <span class="math notranslate nohighlight">\(\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)\)</span>:</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\([\hat{L}_z, \hat{H}] = 0\)</span> (rotational symmetry about the z-axis), then angular momentum in the z-direction is conserved.</p></li>
-<li><p>If the Hamiltonian is time-independent (translational symmetry in time), then energy is conserved: <span class="math notranslate nohighlight">\([\hat{H}, \hat{H}] = 0\)</span> always.</p></li>
-<li><p>For a free particle, <span class="math notranslate nohighlight">\([\hat{\boldsymbol{p}}, \hat{H}] = 0\)</span>, so momentum is conserved.</p></li>
+<li><p><strong>U(1)</strong>: Electromagnetic interactions (photons, electron charge conservation)</p></li>
+<li><p><strong>SU(2)</strong>: Weak interactions (W and Z bosons)</p></li>
+<li><p><strong>SU(3)</strong>: Strong interactions (gluons, quark color charge)</p></li>
 </ul>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p>The Ehrenfest theorem says that the expectation values of position and momentum satisfy classical equations of motion:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\langle\hat{x}\rangle}{\mathrm{d}t} = \frac{\langle\hat{p}\rangle}{m}, \quad \frac{\mathrm{d}\langle\hat{p}\rangle}{\mathrm{d}t} = -\langle\frac{\mathrm{d}V}{\mathrm{d}x}\rangle\]</div>
-<p>This seems to suggest that quantum systems obey classical laws on average. But notice the last term: it involves <span class="math notranslate nohighlight">\(\langle\frac{\mathrm{d}V}{\mathrm{d}x}\rangle\)</span>, not <span class="math notranslate nohighlight">\(\frac{\mathrm{d}V}{\mathrm{d}\langle x\rangle}\)</span>. These are equal only if <span class="math notranslate nohighlight">\(V\)</span> is linear in <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>For a particle in a nonlinear potential (like a quantum harmonic oscillator), the expectation values obey the classical equations <em>exactly</em>. For a particle encountering a barrier or potential well, the expectation values can exhibit genuinely quantum behavior. Why is the potential’s shape crucial? Does Ehrenfest’s theorem mean classical mechanics emerges from quantum mechanics, or is it just a formal similarity?</p>
-</div>
-</section>
-<section id="statement-and-derivation">
-<h4>Statement and Derivation<a class="headerlink" href="#statement-and-derivation" title="Link to this heading">#</a></h4>
-<p>The Heisenberg equation connects quantum expectations to classical equations of motion. For a system with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hat{p}^2}{2m} + V(\hat{x})\)</span>, applying the Heisenberg equation to position and momentum gives</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{x}\rangle = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{x}]\rangle = \frac{1}{m}\langle\hat{p}\rangle\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{p}\rangle = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{p}]\rangle = -\langle \nabla V(\hat{x})\rangle \approx -V'\left(\langle\hat{x}\rangle\right)\]</div>
-<div class="important admonition">
-<p class="admonition-title">Ehrenfest Equations</p>
-<p>These are the <strong>Ehrenfest equations</strong>, with the same form as Newton’s second law:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\langle\hat{x}\rangle}{dt} = \frac{1}{m}\langle\hat{p}\rangle\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}\langle\hat{p}\rangle}{dt} = -V'\left(\langle\hat{x}\rangle\right)\]</div>
-<p><strong>Quantum expectations of position and momentum obey classical equations of motion, on average.</strong> This is the foundation of the <strong>correspondence principle</strong>.</p>
-</div>
-<div class="dropdown note admonition">
-<p class="admonition-title">Detailed Derivation</p>
-<p>For position:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{H}, \hat{x}] = \left[\frac{\hat{p}^2}{2m} + V(\hat{x}), \hat{x}\right] = \frac{1}{2m}[\hat{p}^2, \hat{x}]\]</div>
-<p>Using <span class="math notranslate nohighlight">\([\hat{p}, \hat{x}] = -\mathrm{i}\hbar\)</span>, we have</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{p}^2, \hat{x}] = \hat{p}[\hat{p}, \hat{x}] + [\hat{p}, \hat{x}]\hat{p} = -\mathrm{i}\hbar(\hat{p} + \hat{p}) = -2\mathrm{i}\hbar\hat{p}\]</div>
-<p>Thus <span class="math notranslate nohighlight">\([\hat{H}, \hat{x}] = \frac{1}{2m}(-2\mathrm{i}\hbar\hat{p}) = -\frac{\mathrm{i}\hbar}{m}\hat{p}\)</span>, so</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\langle\hat{x}\rangle}{dt} = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{x}]\rangle = \frac{1}{m}\langle\hat{p}\rangle\]</div>
-<p>For momentum:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{H}, \hat{p}] = [V(\hat{x}), \hat{p}] = -\mathrm{i}\hbar \frac{\mathrm{d}V}{\mathrm{d}\hat{x}}\]</div>
-<p>taking the derivative with respect to the operator <span class="math notranslate nohighlight">\(\hat{x}\)</span>. Thus</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\langle\hat{p}\rangle}{dt} = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{p}]\rangle = -\left\langle \frac{\mathrm{d}V}{\mathrm{d}\hat{x}}\right\rangle \approx -V'\left(\langle\hat{x}\rangle\right)\]</div>
-<p>in the limit where the wavefunction is well-localized.</p>
-</div>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: Classical Limit</p>
-<p><strong>Does Ehrenfest’s theorem imply that quantum mechanics reduces to classical mechanics for large systems?</strong> The Ehrenfest equations look identical to Newton’s laws. This suggests that quantum expectation values should follow classical trajectories. But there is a crucial catch: the validity of the approximation <span class="math notranslate nohighlight">\(\langle\nabla V(\hat{x})\rangle \approx V'(\langle\hat{x}\rangle)\)</span> breaks down when the wavefunction spreads or becomes significantly multi-modal. For a well-localized wavefunction, the quantum and classical predictions agree; but wave packets spread. So in what regime, if any, does quantum mechanics truly “reduce” to classical mechanics?</p>
-</div>
-</section>
-</section>
-<section id="example-spin-precession-in-the-heisenberg-picture">
-<h3>Example: Spin Precession in the Heisenberg Picture<a class="headerlink" href="#example-spin-precession-in-the-heisenberg-picture" title="Link to this heading">#</a></h3>
-<p>To see the Heisenberg picture in action, consider a spin in a static magnetic field with Hamiltonian</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{H} = \frac{\hbar\omega_0}{2}\hat{\sigma}^z\]</div>
-<p>We ask: what is the time-evolution of the Pauli operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^y(t)\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^z(t)\)</span> in the Heisenberg picture?</p>
-<section id="computing-the-operator-evolution">
-<h4>Computing the Operator Evolution<a class="headerlink" href="#computing-the-operator-evolution" title="Link to this heading">#</a></h4>
-<p>By the Heisenberg equation,</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\sigma}^z}{dt} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{\sigma}^z] = \frac{\mathrm{i}\omega_0}{2}[\hat{\sigma}^z, \hat{\sigma}^z] = 0\]</div>
-<p>So <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> is a constant of motion (as expected—the field is along z, so there is no torque in the z-direction).</p>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\sigma}^x}{dt} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{\sigma}^x] = \frac{\mathrm{i}\omega_0}{2}[\hat{\sigma}^z, \hat{\sigma}^x]\]</div>
-<p>Using the commutation relation <span class="math notranslate nohighlight">\([\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y\)</span>, we get</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\sigma}^x}{dt} = \frac{\mathrm{i}\omega_0}{2} \cdot 2\mathrm{i}\hat{\sigma}^y = -\omega_0 \hat{\sigma}^y\]</div>
-<p>Similarly,</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\sigma}^y}{dt} = \frac{\mathrm{i}\omega_0}{2}[\hat{\sigma}^z, \hat{\sigma}^y] = \frac{\mathrm{i}\omega_0}{2} \cdot (-2\mathrm{i}\hat{\sigma}^x) = \omega_0 \hat{\sigma}^x\]</div>
-</section>
-<section id="solution-larmor-precession-in-the-heisenberg-picture">
-<h4>Solution: Larmor Precession in the Heisenberg Picture<a class="headerlink" href="#solution-larmor-precession-in-the-heisenberg-picture" title="Link to this heading">#</a></h4>
-<p>These coupled equations have the solution</p>
-<div class="important admonition">
-<p class="admonition-title">Heisenberg Pauli Operators</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\sigma}^x(t) = \hat{\sigma}^x(0) \cos(\omega_0 t) - \hat{\sigma}^y(0) \sin(\omega_0 t)\]</div>
-<div class="math notranslate nohighlight">
-\[\hat{\sigma}^y(t) = \hat{\sigma}^x(0) \sin(\omega_0 t) + \hat{\sigma}^y(0) \cos(\omega_0 t)\]</div>
-<div class="math notranslate nohighlight">
-\[\hat{\sigma}^z(t) = \hat{\sigma}^z(0)\]</div>
-<p><strong>The operators precess around the z-axis at frequency <span class="math notranslate nohighlight">\(\omega_0\)</span></strong>, just as a classical magnetic moment would.</p>
-</div>
-</section>
-<section id="physical-interpretation">
-<h4>Physical Interpretation<a class="headerlink" href="#physical-interpretation" title="Link to this heading">#</a></h4>
-<p>If we start in a spin state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> (spin pointing in the x-direction), then</p>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<div class="math notranslate nohighlight">
-\[
-\langle\hat{\sigma}^x(t)\rangle = \cos(\omega_0 t), \quad \langle\hat{\sigma}^y(t)\rangle = \sin(\omega_0 t), \quad \langle\hat{\sigma}^z(t)\rangle = 0\]</div>
-<p>This is <strong>Larmor precession</strong> viewed from the Heisenberg picture, where the operators rotate while the quantum state remains fixed. The same physics emerges as in the Schrödinger picture, where states rotate and operators are fixed.</p>
-</div>
-</section>
+<p>Each symmetry group constrains possible interactions and provides conserved currents. This framework, beginning with the idea of operator evolution under symmetry, extends from simple qubits to the fundamental laws of nature.</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The <strong>Heisenberg picture</strong> is equivalent to the Schrödinger picture but exchanges the roles of states and operators.</p></li>
-<li><p><strong>Heisenberg equation of motion</strong>: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{A}_H}{dt} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{A}_H]\)</span></p></li>
-<li><p><strong>Conserved quantities</strong> are those operators that commute with the Hamiltonian: <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>.</p></li>
-<li><p>The <strong>Ehrenfest theorem</strong> shows that quantum expectations obey classical equations of motion, connecting quantum mechanics to classical mechanics.</p></li>
-<li><p><strong>Spin precession</strong> provides a concrete example: in a magnetic field <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hbar\omega_0}{2}\hat{\sigma}^z\)</span>, the Pauli operators rotate at the Larmor frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>.</p></li>
+<li><p>The <strong>Heisenberg picture</strong> is equivalent to the Schrödinger picture; operators evolve, states are fixed.</p></li>
+<li><p>The <strong>Heisenberg equation</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \mathrm{i}[\hat{H}, \hat{O}]\)</span> governs operator dynamics.</p></li>
+<li><p><strong>Conserved quantities</strong> satisfy <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>—they commute with the Hamiltonian.</p></li>
+<li><p><strong>Symmetries</strong> are unitary transformations leaving <span class="math notranslate nohighlight">\(\hat{H}\)</span> invariant; their generators are conserved.</p></li>
+<li><p><strong>Lie groups</strong> (U(1), SU(2), SU(3), …) describe symmetries; this structure underlies the Standard Model.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="1-3-1-unitary-evolution.html"><span class="std std-doc">1.3.1 Unitary Evolution</span></a></strong>: The Schrödinger and Heisenberg pictures are equivalent; they differ only in which object evolves</p></li>
-<li><p><strong><a class="reference internal" href="1-3-2-spin-dynamics.html"><span class="std std-doc">1.3.2 Spin Dynamics</span></a></strong>: See how spin observables evolve classically in the Heisenberg picture</p></li>
-<li><p><strong><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-gauge-invariance.html"><span class="std std-doc">4.2.3 Gauge Invariance</span></a></strong>: Gauge transformations leave the Heisenberg equations of motion invariant; a deeper symmetry principle</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> (Equivalence of pictures) Let <span class="math notranslate nohighlight">\(|\psi(t)\rangle_S = \hat{U}(t)|\psi(0)\rangle\)</span> be the Schrödinger-picture state. Define the Heisenberg operator <span class="math notranslate nohighlight">\(\hat{A}_H(t) = \hat{U}^\dagger(t)\hat{A}_S\hat{U}(t)\)</span>. Show step-by-step that</p>
+<p><strong>1.</strong> (Picture equivalence) Let <span class="math notranslate nohighlight">\(\vert \psi(t) \rangle = \hat{U}(t) \vert \psi(0) \rangle\)</span> be the Schrödinger-picture state, and define the Heisenberg operator <span class="math notranslate nohighlight">\(\hat{A}(t) = \hat{U}^\dagger(t) \hat{A} \hat{U}(t)\)</span>. Show that:</p>
 <div class="math notranslate nohighlight">
-\[
-{}_S\langle\psi(t)|\hat{A}_S|\psi(t)\rangle_S = \langle\psi(0)|\hat{A}_H(t)|\psi(0)\rangle\]</div>
-<p>This proves both pictures give identical physical predictions.</p>
-<p><strong>2.</strong> (Energy conservation) Show that the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> is always conserved in the Heisenberg picture: use the equation of motion <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{A}_H}{dt} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{A}_H]\)</span> with <span class="math notranslate nohighlight">\(\hat{A} = \hat{H}\)</span> and conclude <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{H}}{dt} = 0\)</span>.</p>
-<p><strong>3.</strong> (Spin z-component) For the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hbar\omega_0}{2}\hat{\sigma}^z\)</span>, use the Heisenberg equation of motion to compute <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\sigma}^z}{dt}\)</span>. Show that <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> is a constant of motion by evaluating the commutator <span class="math notranslate nohighlight">\([\hat{H}, \hat{\sigma}^z]\)</span> directly. Interpret this physically in terms of the direction of the magnetic field.</p>
-<p><strong>4.</strong> (Spin precession) Using <span class="math notranslate nohighlight">\([\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y\)</span> and <span class="math notranslate nohighlight">\([\hat{\sigma}^z, \hat{\sigma}^y] = -2\mathrm{i}\hat{\sigma}^x\)</span>, derive the coupled equations of motion for the Heisenberg-picture operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^y(t)\)</span>. Solve the coupled linear ODEs to show</p>
+\[\langle\psi(t) \vert \hat{A} \vert \psi(t)\rangle = \langle \psi(0) \vert \hat{A}(t) \vert \psi(0) \rangle\]</div>
+<p>This proves both pictures yield identical predictions.</p>
+<p><strong>2.</strong> (Energy conservation) Show that the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> is always conserved in the Heisenberg picture. Use <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{O}}{\mathrm{d}t} = \mathrm{i}[\hat{H}, \hat{O}]\)</span> with <span class="math notranslate nohighlight">\(\hat{O} = \hat{H}\)</span>.</p>
+<p><strong>3.</strong> (Commutation relations) For the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{\omega}{2}\hat{\sigma}^z\)</span>, verify that:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{\sigma}^x(t) = \hat{\sigma}^x(0)\cos(\omega_0 t) - \hat{\sigma}^y(0)\sin(\omega_0 t)\]</div>
+\[[\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y, \quad [\hat{\sigma}^z, \hat{\sigma}^y] = -2\mathrm{i}\hat{\sigma}^x\]</div>
+<p>Use these to check the form of <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> given in the worked example.</p>
+<p><strong>4.</strong> (Harmonic oscillator) Consider a harmonic oscillator <span class="math notranslate nohighlight">\(\hat{H} = \omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)\)</span>. Show that:</p>
 <div class="math notranslate nohighlight">
-\[\hat{\sigma}^y(t) = \hat{\sigma}^x(0)\sin(\omega_0 t) + \hat{\sigma}^y(0)\cos(\omega_0 t)\]</div>
-<p><strong>5.</strong> (Consistency check) Using the Heisenberg-picture operators from Problem 4, compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle(t)\)</span> for an initial state <span class="math notranslate nohighlight">\(|\psi(0)\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>. Show your result matches the Schrödinger-picture calculation from section 1.3.2.</p>
-<p><strong>6.</strong> (Ehrenfest theorem) For a particle with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hat{p}^2}{2m} + V(\hat{x})\)</span>, use the commutators <span class="math notranslate nohighlight">\([\hat{p}^2, \hat{x}] = -2\mathrm{i}\hbar\hat{p}\)</span> and <span class="math notranslate nohighlight">\([V(\hat{x}), \hat{p}] = -\mathrm{i}\hbar V'(\hat{x})\)</span> to derive:</p>
+\[[\hat{a}, \hat{H}] = -\omega\hat{a}, \quad [\hat{a}^\dagger, \hat{H}] = \omega\hat{a}^\dagger\]</div>
+<p>Solve the Heisenberg equations <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{a}}{\mathrm{d}t} = \mathrm{i}[\hat{H}, \hat{a}]\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{a}^\dagger}{\mathrm{d}t} = \mathrm{i}[\hat{H}, \hat{a}^\dagger]\)</span> to find <span class="math notranslate nohighlight">\(\hat{a}(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{a}^\dagger(t)\)</span>.</p>
+<p><strong>5.</strong> (Observable conservation) Prove: if <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>, then <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = 0\)</span> in any quantum state. What is the physical interpretation?</p>
+<p><strong>6.</strong> (SU(2) generators) Show that the Pauli operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> generate infinitesimal rotations on the Bloch sphere via:</p>
 <div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{x}\rangle = \frac{\langle\hat{p}\rangle}{m}, \qquad \frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{p}\rangle = -\langle V'(\hat{x})\rangle\]</div>
-<p>For a harmonic potential <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2\)</span>, show these reduce exactly to the classical harmonic oscillator equations of motion.</p>
-<p><strong>7.</strong> (Conserved vs. non-conserved) For <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hbar\omega_0}{2}\hat{\sigma}^z\)</span>, identify which of the three operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> are conserved quantities. For the one(s) that are not conserved, use the Heisenberg equation to write the explicit time-dependent operator. What symmetry of <span class="math notranslate nohighlight">\(\hat{H}\)</span> accounts for <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> being conserved?</p>
-<p><strong>8.</strong> (Interaction picture) There is a third picture — the <strong>interaction picture</strong> — used when <span class="math notranslate nohighlight">\(\hat{H} = \hat{H}_0 + \hat{V}\)</span>, where <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> is a solved “free” part and <span class="math notranslate nohighlight">\(\hat{V}\)</span> is a perturbation. States evolve only due to <span class="math notranslate nohighlight">\(\hat{V}\)</span>, and operators evolve only due to <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>. (a) Write the transformation that maps a Schrödinger-picture state <span class="math notranslate nohighlight">\(|\psi(t)\rangle_S\)</span> to the interaction-picture state <span class="math notranslate nohighlight">\(|\psi(t)\rangle_I\)</span>. (b) Show that if <span class="math notranslate nohighlight">\(\hat{V} = 0\)</span>, the interaction picture reduces to the Heisenberg picture.</p>
+\[\hat{U}(\theta) = \mathrm{e}^{-\mathrm{i}\theta\hat{\sigma}^z/2}\]</div>
+<p>Verify this rotates <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> to <span class="math notranslate nohighlight">\(\hat{\sigma}^x\cos\theta + \hat{\sigma}^y\sin\theta\)</span> (a rotation by angle <span class="math notranslate nohighlight">\(\theta\)</span> around the <span class="math notranslate nohighlight">\(z\)</span>-axis).</p>
+<p><strong>7.</strong> (Ehrenfest theorem) Show that the expectation value of position and momentum in a particle obey classical-like equations:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{p} \rangle = -\langle \nabla V \rangle, \quad \frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{x} \rangle = \frac{\langle \hat{p} \rangle}{m}\]</div>
+<p>These are the quantum Ehrenfest equations—why do they look classical?</p>
+<p><strong>8.</strong> (Two-state system with zero Hamiltonian) A two-level system has <span class="math notranslate nohighlight">\(\hat{H} = 0\)</span> (no Hamiltonian). What can you say about the time evolution of any observable in the Heisenberg picture? What does this tell you about the dynamics?</p>
+<p><strong>9.</strong> (Symmetry and conservation) If a unitary transformation <span class="math notranslate nohighlight">\(\hat{U}(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}\theta}\)</span> leaves the Hamiltonian invariant (<span class="math notranslate nohighlight">\([\hat{G}, \hat{H}] = 0\)</span>), then <span class="math notranslate nohighlight">\(\hat{G}\)</span> is conserved. Use this principle to explain: (a) why particle number is conserved in a system with U(1) phase symmetry, and (b) how gauge symmetries in the Standard Model lead to conserved currents (electric charge, weak isospin, color charge).</p>
 </section>
 </section>
 
@@ -851,12 +744,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="1-3-2-spin-dynamics.html"
+       href="1-3-2-schrodinger-picture.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1.3.2 Spin Dynamics</p>
+        <p class="prev-next-title">1.3.2 Schrödinger Picture</p>
       </div>
     </a>
     <a class="right-next"
@@ -885,23 +778,12 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pictures-schrodinger-vs-heisenberg">The Two Pictures: Schrödinger vs. Heisenberg</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#schrodinger-picture">Schrödinger Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Heisenberg Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation">Derivation</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conserved-quantities-and-conservation-laws">Conserved Quantities and Conservation Laws</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-examples">Physical Examples</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statement-and-derivation">Statement and Derivation</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-precession-in-the-heisenberg-picture">Example: Spin Precession in the Heisenberg Picture</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-operator-evolution">Computing the Operator Evolution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-larmor-precession-in-the-heisenberg-picture">Solution: Larmor Precession in the Heisenberg Picture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-interpretation">Physical Interpretation</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-two-pictures">Why Two Pictures?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heisenberg-equation-of-motion">Heisenberg Equation of Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-precession">Example: Spin Precession</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conserved-quantities-and-symmetry">Conserved Quantities and Symmetry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lie-groups-and-quantum-mechanics">Lie Groups and Quantum Mechanics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

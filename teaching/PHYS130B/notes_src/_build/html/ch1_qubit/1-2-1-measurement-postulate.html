@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -194,7 +194,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -521,15 +521,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-axioms-of-measurement">The Three Axioms of Measurement</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiom-1-possible-outcomes">Axiom 1: Possible Outcomes</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiom-2-the-born-rule-probabilities">Axiom 2: The Born Rule (Probabilities)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiom-3-state-collapse">Axiom 3: State Collapse</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values-from-the-born-rule">Expectation Values from the Born Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-and-uncertainty">Variance and Uncertainty</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projective-measurement">Projective Measurement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stern-gerlach-experiments-as-motivation">Stern-Gerlach Experiments as Motivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-mathematical-model">Building the Mathematical Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-measurement-postulate">The Measurement Postulate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explaining-the-stern-gerlach-experiments">Explaining the Stern-Gerlach Experiments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -551,249 +547,245 @@ document.write(`
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
 <li><p>State the three parts of the measurement postulate. For each part, explain why it must be true for measurement to connect theory to experiment.</p></li>
-<li><p>The Born rule says the probability of outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span> is <span class="math notranslate nohighlight">\(|\langle \psi_i | \psi \rangle|^2\)</span>. Why do we <em>square</em> the inner product instead of just taking the inner product itself or its absolute value?</p></li>
-<li><p>After measuring observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> and obtaining outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span>, the state collapses to the eigenstate <span class="math notranslate nohighlight">\(|\psi_i\rangle\)</span>. Is this a <em>physically real</em> event that happens in nature, or is it just a bookkeeping device—a rule for updating our knowledge?</p></li>
-<li><p>Suppose a qubit is in state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and we measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. Compute the probabilities of each outcome and write down the state after measurement for each possible outcome.</p></li>
+<li><p>The Born rule says the probability of outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span> is <span class="math notranslate nohighlight">\(|\langle \psi_i \vert \psi \rangle|^2\)</span>. Why do we <em>square</em> the inner product instead of just taking the inner product itself or its absolute value?</p></li>
+<li><p>After measuring observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> and obtaining outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span>, the state collapses to the eigenstate <span class="math notranslate nohighlight">\(\vert\psi_i\rangle\)</span>. Is this a <em>physically real</em> event that happens in nature, or is it just a bookkeeping device—a rule for updating our knowledge?</p></li>
+<li><p>Suppose a qubit is in state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \frac{1}{\sqrt{2}}(\vert0\rangle + \vert1\rangle)\)</span> and we measure <span class="math notranslate nohighlight">\(\hat{Z}\)</span>. Compute the probabilities of each outcome and write down the state after measurement for each possible outcome.</p></li>
 <li><p>Two experiments: (1) Prepare the state, measure once, record outcome. (2) Prepare the state, measure it, then immediately measure it again. Will the second measurement always give the same result as the first? Design an experiment to test this prediction.</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Quantum measurement is not a passive observation—it is a transformation that collapses the state to one of the observable’s eigenstates with probability given by the Born rule. This section formalizes measurement as a fundamental postulate of quantum mechanics and explores the profound implications of measurement-induced collapse for how we understand quantum systems.</p>
-<section id="the-three-axioms-of-measurement">
-<h3>The Three Axioms of Measurement<a class="headerlink" href="#the-three-axioms-of-measurement" title="Link to this heading">#</a></h3>
-<p>Quantum mechanics makes precise predictions about measurement outcomes through the <strong>measurement postulate</strong>. This postulate has three parts:</p>
-<section id="axiom-1-possible-outcomes">
-<h4>Axiom 1: Possible Outcomes<a class="headerlink" href="#axiom-1-possible-outcomes" title="Link to this heading">#</a></h4>
-<p>When we measure an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> (a Hermitian operator), the <strong>only possible outcomes</strong> are the <strong>eigenvalues</strong> of <span class="math notranslate nohighlight">\(\hat{O}\)</span>.</p>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>Quantum measurement is fundamentally different from passive observation. A measurement is a quantum operation that:</p>
+<ul class="simple">
+<li><p>Yields a definite outcome (an eigenvalue of the observable)</p></li>
+<li><p>Collapses the state irreversibly to an eigenstate</p></li>
+<li><p>Follows the <strong>Born rule</strong>: probability is the squared amplitude of overlap with the eigenstate</p></li>
+</ul>
+<p>This section formalizes measurement through the <strong>measurement postulate</strong> (three axioms) and demonstrates its power by explaining the classic Stern-Gerlach experiments.</p>
+</section>
+<section id="stern-gerlach-experiments-as-motivation">
+<h3>Stern-Gerlach Experiments as Motivation<a class="headerlink" href="#stern-gerlach-experiments-as-motivation" title="Link to this heading">#</a></h3>
+<p>The Stern-Gerlach apparatus measures spin by splitting an atomic beam in an inhomogeneous magnetic field.</p>
+<p>We will use the notation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle, \vert\downarrow\rangle\)</span>: eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> (z-basis)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vert\rightarrow\rangle, \vert\leftarrow\rangle\)</span>: eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> (x-basis)</p></li>
+</ul>
+<figure class="align-default" id="fig-stern-gerlach-setup">
+<a class="reference internal image-reference" href="../_images/1-2-1-stern_gerlach.png"><img alt="../_images/1-2-1-stern_gerlach.png" src="../_images/1-2-1-stern_gerlach.png" style="width: 60%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Stern-Gerlach setup: an inhomogeneous magnetic field spatially separates beams by spin projection, enabling state preparation and measurement.</span><a class="headerlink" href="#fig-stern-gerlach-setup" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="example admonition">
-<p class="admonition-title">Example: Spin-z Eigenvalues</p>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>, the eigenvalues are <span class="math notranslate nohighlight">\(\pm 1\)</span> with eigenstates <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>.</p>
+<p class="admonition-title">Experiment 1: Z-Z-Z (Sequential Stern-Gerlach)</p>
+<p>Assume we start with <strong>1000 atoms</strong> in an unpolarized (maximally mixed) ensemble
+<span class="math notranslate nohighlight">\(\rho_0 = \tfrac{1}{2}\vert\uparrow\rangle\langle\uparrow\vert + \tfrac{1}{2}\vert\downarrow\rangle\langle\downarrow\vert\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Observable</p></th>
+<th class="head"><p>Incoming state</p></th>
+<th class="head"><p>Outcomes (Born rule)</p></th>
+<th class="head"><p>Selection</p></th>
+<th class="head text-right"><p>Atoms (approx.)</p></th>
+<th class="head"><p>Outgoing state</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1 (prep)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p>depolarized ensemble</p></td>
+<td><p><span class="math notranslate nohighlight">\(P(m)=\begin{cases}\tfrac{1}{2}, &amp; m=+1\\ \tfrac{1}{2}, &amp; m=-1\end{cases}\)</span></p></td>
+<td><p>Keep <span class="math notranslate nohighlight">\(+1\)</span> branch</p></td>
+<td class="text-right"><p>500</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P(m)=\begin{cases}1, &amp; m=+1\\ 0, &amp; m=-1\end{cases}\)</span></p></td>
+<td><p>Keep <span class="math notranslate nohighlight">\(+1\)</span> branch</p></td>
+<td class="text-right"><p>500</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P(m)=\begin{cases}1, &amp; m=+1\\ 0, &amp; m=-1\end{cases}\)</span></p></td>
+<td><p>Keep <span class="math notranslate nohighlight">\(+1\)</span> branch</p></td>
+<td class="text-right"><p>500</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+<p><strong>What Experiment 1 teaches us</strong>:</p>
+<ul class="simple">
+<li><p>The measurement outcome is <strong>binary</strong>: the beam always splits into exactly two components, never a continuum.</p></li>
+<li><p>The first apparatus doubles as a <strong>state-preparation device</strong>: filtering one branch by post-selection prepares a definite pure state.</p></li>
+<li><p><strong>Repeatability</strong>: measuring the same observable twice in a row always confirms the first result — the outcome is <strong>reproducible</strong>, suggesting the existence of an underlying <strong>physical reality</strong> that persists between measurements.</p></li>
+</ul>
+<div class="example admonition">
+<p class="admonition-title">Experiment 2: Z-X-Z (Incompatible Measurements)</p>
+<p>Again start with <strong>1000 atoms</strong> in the same depolarized ensemble.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Observable</p></th>
+<th class="head"><p>Incoming state</p></th>
+<th class="head"><p>Outcomes (Born rule)</p></th>
+<th class="head"><p>Selection</p></th>
+<th class="head text-right"><p>Atoms (approx.)</p></th>
+<th class="head"><p>Outgoing state</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1 (prep)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p>depolarized ensemble</p></td>
+<td><p><span class="math notranslate nohighlight">\(P(m)=\begin{cases}\tfrac{1}{2}, &amp; m=+1\\ \tfrac{1}{2}, &amp; m=-1\end{cases}\)</span></p></td>
+<td><p>Keep <span class="math notranslate nohighlight">\(+1\)</span> branch</p></td>
+<td class="text-right"><p>500</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P(m)=\begin{cases}\tfrac{1}{2}, &amp; m=+1\\ \tfrac{1}{2}, &amp; m=-1\end{cases}\)</span></p></td>
+<td><p>Keep <span class="math notranslate nohighlight">\(+1\)</span> branch</p></td>
+<td class="text-right"><p>250</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\rightarrow\rangle\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\rightarrow\rangle\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P(m)=\begin{cases}\tfrac{1}{2}, &amp; m=+1\\ \tfrac{1}{2}, &amp; m=-1\end{cases}\)</span></p></td>
+<td><p>Keep <span class="math notranslate nohighlight">\(-1\)</span> branch</p></td>
+<td class="text-right"><p>125</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\downarrow\rangle\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>What Experiment 2 teaches us</strong>:</p>
+<ul class="simple">
+<li><p>The intermediate X measurement <strong>washes out</strong> the previously definite Z outcome — the final Z result is now random again.</p></li>
+<li><p>Measurement is <strong>invasive</strong>: it is not a passive readout of a pre-existing value, but an active intervention that can alter the state.</p></li>
+<li><p>Non-commuting measurements <strong>change reality</strong> — inserting <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> between two <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> measurements destroys the Z-definiteness that Experiment 1 established.</p></li>
+</ul>
 </section>
-<section id="axiom-2-the-born-rule-probabilities">
-<h4>Axiom 2: The Born Rule (Probabilities)<a class="headerlink" href="#axiom-2-the-born-rule-probabilities" title="Link to this heading">#</a></h4>
-<p>Suppose the system is in state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>, and we measure observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>. Let <span class="math notranslate nohighlight">\(\{|\phi_i\rangle\}\)</span> be the <strong>complete set of orthonormal eigenvectors</strong> of <span class="math notranslate nohighlight">\(\hat{O}\)</span>, with corresponding eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span>:</p>
+<section id="building-the-mathematical-model">
+<h3>Building the Mathematical Model<a class="headerlink" href="#building-the-mathematical-model" title="Link to this heading">#</a></h3>
+<p><strong>Goal</strong>: Find a formula <span class="math notranslate nohighlight">\(P(m \vert \psi, \hat{O})\)</span> for the probability of obtaining outcome <span class="math notranslate nohighlight">\(m\)</span> when measuring observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> on state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>.</p>
+<p><strong>Positivity constraint</strong>: Since <span class="math notranslate nohighlight">\(P(m \vert \psi, \hat{O}) \geq 0\)</span> for all states <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>, we need a mathematical object that is guaranteed non-negative for any input state. A natural choice is to model <span class="math notranslate nohighlight">\(P\)</span> as the expectation value of some operator <span class="math notranslate nohighlight">\(\hat{P}_{O=m}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{O} |\phi_i\rangle = \lambda_i |\phi_i\rangle\]</div>
-<p>The <strong>probability</strong> of obtaining outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-eq-born-rule">
-<span class="eqno">(20)<a class="headerlink" href="#equation-eq-born-rule" title="Link to this equation">#</a></span>\[
-P_i = |\langle \phi_i | \psi \rangle|^2\]</div>
-<p>This is the <strong>Born rule</strong>: the probability is the <strong>square of the amplitude</strong> of the overlap between the state and the eigenstate.</p>
-<p><strong>Normalization</strong>: The probabilities sum to 1 because <span class="math notranslate nohighlight">\(\{|\phi_i\rangle\}\)</span> form a complete orthonormal basis.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Verification: Probability Normalization</p>
+\[P(m \vert \psi, \hat{O}) = \langle \psi \vert \hat{P}_{O=m} \vert \psi \rangle\]</div>
+<p>This is automatically non-negative if <span class="math notranslate nohighlight">\(\hat{P}_{O=m}\)</span> is <strong>positive semi-definite</strong> (PSD).</p>
+<div class="note admonition">
+<p class="admonition-title">Positive Semi-Definite (PSD) Operator</p>
+<p>An operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> is positive semi-definite if <span class="math notranslate nohighlight">\(\langle \psi \vert \hat{A} \vert \psi \rangle \geq 0\)</span> for all states <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>. Equivalently, all eigenvalues of <span class="math notranslate nohighlight">\(\hat{A}\)</span> are <span class="math notranslate nohighlight">\(\geq 0\)</span>.</p>
+</div>
+<p><strong>Pinning down the operator</strong>: The SG experiments (Z-Z-Z) showed that repeatedly measuring the same observable on an eigenstate <span class="math notranslate nohighlight">\(\vert O{=}m\rangle\)</span> always returns <span class="math notranslate nohighlight">\(m\)</span>. This means:</p>
 <div class="math notranslate nohighlight">
-\[
-\sum_i P_i = \sum_i |\langle \phi_i | \psi \rangle|^2 = 1\]</div>
-<p>This follows from the completeness relation <span class="math notranslate nohighlight">\(\sum_i |\phi_i\rangle\langle\phi_i| = I\)</span> applied to the normalized state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>.</p>
+\[P(m \vert O{=}m, \hat{O}) = 1, \quad P(m' \vert O{=}m, \hat{O}) = 0 \text{ for } m' \neq m\]</div>
+<p>What PSD operator satisfies this? The <strong>projection operator</strong> <span class="math notranslate nohighlight">\(\hat{P}_{O=m} = \vert O{=}m\rangle\langle O{=}m\vert\)</span>.</p>
+<div class="dropdown example admonition">
+<p class="admonition-title">Verification: Projector Gives the Right Probabilities</p>
+<p>For eigenstate <span class="math notranslate nohighlight">\(\vert\psi\rangle = \vert O{=}m\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(m \vert O{=}m, \hat{O}) = \langle O{=}m \vert \hat{P}_{O=m} \vert O{=}m \rangle = \langle O{=}m \vert O{=}m\rangle \langle O{=}m \vert O{=}m \rangle = 1 \quad \checkmark\]</div>
+<p>For a different eigenstate <span class="math notranslate nohighlight">\(\vert\psi\rangle = \vert O{=}m'\rangle\)</span> with <span class="math notranslate nohighlight">\(m' \neq m\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(m \vert O{=}m', \hat{O}) = \langle O{=}m' \vert \hat{P}_{O=m} \vert O{=}m' \rangle = \vert\langle O{=}m \vert O{=}m' \rangle\vert^2 = 0 \quad \checkmark\]</div>
+<p>(using orthogonality of eigenstates).</p>
+<p>For a general superposition <span class="math notranslate nohighlight">\(\vert\psi\rangle = c_1 \vert O{=}m_1\rangle + c_2 \vert O{=}m_2\rangle\)</span> with <span class="math notranslate nohighlight">\(\vert c_1\vert^2 + \vert c_2\vert^2 = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(m_1 \vert \psi, \hat{O}) = \vert c_1\vert^2, \quad P(m_2 \vert \psi, \hat{O}) = \vert c_2\vert^2, \quad \text{sum} = 1 \quad \checkmark\]</div>
 </div>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Why do we square the amplitude instead of using linear probability?</strong></p>
-<p>Consider the double-slit experiment: a particle in state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|\text{slit 1}\rangle + |\text{slit 2}\rangle)\)</span> passes through both slits.</p>
-<p>Without the Born rule (linear version): <span class="math notranslate nohighlight">\(P = |c_1| + |c_2| = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} = \sqrt{2}\)</span> — this exceeds 1 and violates probability!</p>
-<p>With the Born rule (squared): <span class="math notranslate nohighlight">\(P = |c_1|^2 + |c_2|^2 + 2\text{Re}(c_1^* c_2) = \frac{1}{2} + \frac{1}{2} + \text{interference term}\)</span>.</p>
-<p><strong>Your task</strong>: Show that the interference term <span class="math notranslate nohighlight">\(2\text{Re}(c_1^* c_2)\)</span> is nonzero for this equal superposition, and explain why the Born rule’s squared amplitudes are essential to correctly predict quantum interference. What happens to the interference if you insert a which-path detector that projects onto a definite slit?</p>
-</div>
+<p>This gives us the <strong>Born rule</strong>: the probability of outcome <span class="math notranslate nohighlight">\(m\)</span> is the squared overlap with the corresponding eigenstate,</p>
+<div class="math notranslate nohighlight">
+\[P(m \vert \psi, \hat{O}) = \langle \psi \vert \hat{P}_{O=m} \vert \psi \rangle = \vert\langle O{=}m \vert \psi \rangle\vert^2\]</div>
 </section>
-<section id="axiom-3-state-collapse">
-<h4>Axiom 3: State Collapse<a class="headerlink" href="#axiom-3-state-collapse" title="Link to this heading">#</a></h4>
-<p>Immediately after the measurement returns outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span>, the state <strong>collapses</strong> (or <strong>projects</strong>) to the corresponding eigenstate:</p>
-<div class="math notranslate nohighlight" id="equation-eq-state-collapse">
-<span class="eqno">(21)<a class="headerlink" href="#equation-eq-state-collapse" title="Link to this equation">#</a></span>\[
-|\psi\rangle_{\text{after}} = |\phi_i\rangle\]</div>
-<p>This is sometimes called <strong>wavefunction collapse</strong> or the <strong>projection postulate</strong>. It is irreversible: the old state information is lost unless we knew the outcome beforehand.</p>
+<section id="the-measurement-postulate">
+<h3>The Measurement Postulate<a class="headerlink" href="#the-measurement-postulate" title="Link to this heading">#</a></h3>
 <div class="important admonition">
-<p class="admonition-title">Key Insight: Measurement is Destructive</p>
-<p>Measurement is fundamentally different from observation in classical mechanics. In classical physics, we can look at a system without changing it. In quantum mechanics, measurement <strong>irreversibly changes the state</strong>. This is not due to experimental imperfection—it is built into the theory.</p>
-<p>After measurement, all information about the superposition is gone. The state is now in a definite eigenstate, with complete certainty about that eigenvalue.</p>
-</div>
-<p>Consider a qubit in the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{3}}|0\rangle + \sqrt{\frac{2}{3}}|1\rangle\)</span> and we measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Example: Probabilities and State Collapse</p>
-<p>The eigenvalues are <span class="math notranslate nohighlight">\(\lambda_0 = +1\)</span> (eigenstate <span class="math notranslate nohighlight">\(|0\rangle\)</span>) and <span class="math notranslate nohighlight">\(\lambda_1 = -1\)</span> (eigenstate <span class="math notranslate nohighlight">\(|1\rangle\)</span>).</p>
-<p><strong>Probability of outcome +1</strong>:</p>
+<p class="admonition-title">The Measurement Postulate</p>
+<p><strong>Axiom 1 (Possible Outcomes):</strong> When measuring observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the only possible outcomes are its eigenvalues <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p><strong>Axiom 2 (Born Rule):</strong> The probability of obtaining outcome <span class="math notranslate nohighlight">\(m\)</span> from state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[
-P_+ = |\langle 0 | \psi \rangle|^2 = \left|\frac{1}{\sqrt{3}}\right|^2 = \frac{1}{3}\]</div>
-<p><strong>Probability of outcome -1</strong>:</p>
+\[P(m | \psi, \hat{O}) = |\langle O=m \vert \psi \rangle|^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(|O=m\rangle\)</span> is the (normalized) eigenstate corresponding to eigenvalue <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p><strong>Axiom 3 (State Collapse):</strong> Immediately after obtaining outcome <span class="math notranslate nohighlight">\(m\)</span>, the state collapses to the corresponding eigenstate:</p>
 <div class="math notranslate nohighlight">
-\[
-P_- = |\langle 1 | \psi \rangle|^2 = \left|\sqrt{\frac{2}{3}}\right|^2 = \frac{2}{3}\]</div>
-<p><strong>Verification</strong>: <span class="math notranslate nohighlight">\(P_+ + P_- = 1/3 + 2/3 = 1\)</span> ✓</p>
+\[\vert\psi\rangle \xrightarrow[\text{measure } \hat{O}]{\text{outcome } m} |O=m\rangle\]</div>
 </div>
-<p><strong>State after measurement</strong>:</p>
-<ul class="simple">
-<li><p>If we observe outcome <span class="math notranslate nohighlight">\(+1\)</span>, the state collapses to <span class="math notranslate nohighlight">\(|0\rangle\)</span>.</p></li>
-<li><p>If we observe outcome <span class="math notranslate nohighlight">\(-1\)</span>, the state collapses to <span class="math notranslate nohighlight">\(|1\rangle\)</span>.</p></li>
+<p><strong>Interpretation of collapse</strong>: After the measurement, the system is no longer in a superposition. All information about the pre-measurement state is lost (unless we knew the outcome beforehand). This is irreversible and fundamental to quantum mechanics.</p>
+</section>
+<section id="explaining-the-stern-gerlach-experiments">
+<h3>Explaining the Stern-Gerlach Experiments<a class="headerlink" href="#explaining-the-stern-gerlach-experiments" title="Link to this heading">#</a></h3>
+<p>The process tables above can be summarized algebraically:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>, so repeated Z-measurement is deterministic.</p></li>
+<li><p>Decomposed to <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>-basis:</p>
+<div class="math notranslate nohighlight">
+\[    \vert\uparrow\rangle = \frac{1}{\sqrt{2}}\left(\vert\rightarrow\rangle + \vert\leftarrow\rangle\right)\]</div>
+<p>On Z-basis state <span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span>, X-measurement outcomes 50-50.</p>
+<p><strong>Symmetry argument</strong>: <span class="math notranslate nohighlight">\(\vert\rightarrow\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\leftarrow\rangle\)</span> looks symmetric from <span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span> perspective, so they must have identical probability to be observed.</p>
+</li>
+<li><p>Select <span class="math notranslate nohighlight">\(\vert\rightarrow\rangle\)</span>, decompose to <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>-basis again:</p>
+<div class="math notranslate nohighlight">
+\[    \vert\rightarrow\rangle = \frac{1}{\sqrt{2}}\left(\vert\uparrow\rangle + \vert\downarrow\rangle\right)\]</div>
+<p>So selecting one X branch (e.g. <span class="math notranslate nohighlight">\(\vert\rightarrow\rangle\)</span>) makes the final Z outcomes 50-50. This is <strong>quantum complementarity</strong>: the intermediate X measurement erases prior Z-definiteness.</p>
+</li>
 </ul>
-<p>After the measurement, all memory of the original superposition is erased.</p>
-<div class="dropdown warning admonition">
+<div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
-<p><strong>Repeated measurement reproducibility: why do successive measurements give the same result?</strong></p>
-<p>Start with state <span class="math notranslate nohighlight">\(|+x\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>, obtaining outcome <span class="math notranslate nohighlight">\(+1\)</span> (collapse to <span class="math notranslate nohighlight">\(|0\rangle\)</span>).</p>
-<p>If you immediately measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> again, you will get <span class="math notranslate nohighlight">\(+1\)</span> with probability 1.</p>
-<p><strong>Your task</strong>:</p>
-<p>(a) Explain why this reproducibility is <em>automatic</em> once collapse to eigenstate <span class="math notranslate nohighlight">\(|0\rangle\)</span> has occurred.</p>
-<p>(b) Now suppose after the first measurement you <em>wait a time <span class="math notranslate nohighlight">\(t\)</span></em> in a magnetic field <span class="math notranslate nohighlight">\(B = B_0 \hat{z}\)</span> (which induces oscillations via <span class="math notranslate nohighlight">\(\hat{H} = -\gamma B_0 \hat{\sigma}^z / 2\)</span>). Show that the state evolves as <span class="math notranslate nohighlight">\(|\psi(t)\rangle = \mathrm{e}^{-\mathrm{i} \gamma B_0 t / 2} |0\rangle\)</span>. Then measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> again. Is the outcome still <span class="math notranslate nohighlight">\(+1\)</span>?</p>
-<p>(c) What if you rotate the measurement basis and measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> instead? Show that the probability of obtaining <span class="math notranslate nohighlight">\(+1\)</span> is now <span class="math notranslate nohighlight">\(\cos^2(\gamma B_0 t / 2)\)</span>, not 1. Where did the reproducibility go?</p>
+<p>Why can’t we prepare atoms to have definite spin-up in <em>both</em> z and x directions simultaneously?</p>
+<p>The eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> are <span class="math notranslate nohighlight">\(\{\vert\uparrow\rangle, \vert\downarrow\rangle\}\)</span>. The eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> are <span class="math notranslate nohighlight">\(\{\vert\rightarrow\rangle, \vert\leftarrow\rangle\}\)</span>. These bases are <em>orthogonal</em> (perpendicular in Hilbert space). A state that is an eigenstate of one operator is a superposition in the other operator’s basis.</p>
+<p>This is not a limitation of experiment—it is built into the structure of quantum mechanics. Non-commuting observables <em>cannot</em> be simultaneously definite.</p>
 </div>
-<p>Consider a qubit in state <span class="math notranslate nohighlight">\(|0\rangle\)</span> and we measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Example: Complementarity—Different Bases</p>
-<p>The eigenvalues of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> are <span class="math notranslate nohighlight">\(\pm 1\)</span> with eigenstates:</p>
-<div class="math notranslate nohighlight">
-\[
-|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad
-|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\]</div>
-<p><strong>Probability of outcome +1</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-P_+ = |\langle + | 0 \rangle|^2 = \left|\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}\]</div>
-<p><strong>Probability of outcome -1</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-P_- = |\langle - | 0 \rangle|^2 = \left|\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}\]</div>
-</div>
-<p><strong>Interpretation</strong>: Even though we prepared spin-up along z with certainty, measurement along x gives 50-50 outcomes. The z-basis state is a superposition in the x-basis:</p>
-<div class="math notranslate nohighlight">
-\[
-|0\rangle = \frac{1}{\sqrt{2}}|+\rangle + \frac{1}{\sqrt{2}}|-\rangle\]</div>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>The Quantum Zeno Effect: how does repeated measurement slow decay?</strong></p>
-<p>For a two-level system with decay rate <span class="math notranslate nohighlight">\(\Gamma\)</span>, consider a rapidly oscillating Rabi frequency <span class="math notranslate nohighlight">\(\Omega\)</span> and <span class="math notranslate nohighlight">\(N\)</span> measurements over total time <span class="math notranslate nohighlight">\(T\)</span>. The survival probability (probability of no decay) after <span class="math notranslate nohighlight">\(N\)</span> equally-spaced measurements is approximately</p>
-<div class="math notranslate nohighlight">
-\[
-P_N(T) = \cos^{2N}\left(\frac{\Omega T}{2N}\right).\]</div>
-<p><strong>Your task</strong>:</p>
-<p>(a) In the limit <span class="math notranslate nohighlight">\(N \to \infty\)</span> (infinitely frequent measurements), show that <span class="math notranslate nohighlight">\(P_N(T) \to 1\)</span>. That is, infinitely rapid projections freeze the system. (Hint: use <span class="math notranslate nohighlight">\(\lim_{n \to \infty} \cos(x/n)^n = 1\)</span> for small <span class="math notranslate nohighlight">\(x\)</span>.)</p>
-<p>(b) At what measurement frequency (number of measurements per unit time) does the Zeno effect become observable? Estimate the measurement rate needed to resolve decay in your favorite atomic system.</p>
-<p>(c) This seems to contradict the idea that “collapse is just a bookkeeping update”—rapid measurements are doing <em>real physical work</em> by preventing evolution. Does the Zeno effect resolve the debate about whether collapse is physical? Or does it only tell us that <em>collapse (whether real or not) has observable consequences</em>?</p>
-</div>
-<p>This is <strong>quantum complementarity</strong>: non-commuting observables cannot be simultaneously definite.</p>
-</section>
-</section>
-<section id="expectation-values-from-the-born-rule">
-<h3>Expectation Values from the Born Rule<a class="headerlink" href="#expectation-values-from-the-born-rule" title="Link to this heading">#</a></h3>
-<p>The <strong>expectation value</strong> (average outcome over many measurements) is</p>
-<div class="math notranslate nohighlight" id="equation-eq-expectation-from-probabilities">
-<span class="eqno">(22)<a class="headerlink" href="#equation-eq-expectation-from-probabilities" title="Link to this equation">#</a></span>\[
-\langle \hat{O} \rangle = \sum_i \lambda_i P_i = \sum_i \lambda_i |\langle \phi_i | \psi \rangle|^2\]</div>
-<p>This can be rewritten (using completeness of eigenbases) as</p>
-<div class="math notranslate nohighlight" id="equation-eq-expectation-operator">
-<span class="eqno">(23)<a class="headerlink" href="#equation-eq-expectation-operator" title="Link to this equation">#</a></span>\[
-\langle \hat{O} \rangle = \langle \psi | \hat{O} | \psi \rangle\]</div>
-<p>For the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{\sqrt{3}}|0\rangle + \sqrt{\frac{2}{3}}|1\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>:</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Verification: Expectation Value</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \hat{\sigma}^z \rangle = (+1) \cdot \frac{1}{3} + (-1) \cdot \frac{2}{3} = \frac{1}{3} - \frac{2}{3} = -\frac{1}{3}\]</div>
-<p>We can verify with the operator formula:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\langle \psi | \hat{\sigma}^z | \psi \rangle = \left(\frac{1}{\sqrt{3}}\langle 0| + \sqrt{\frac{2}{3}}\langle 1|\right) \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \left(\frac{1}{\sqrt{3}}|0\rangle + \sqrt{\frac{2}{3}}|1\rangle\right)\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[= \left(\frac{1}{\sqrt{3}}\langle 0| + \sqrt{\frac{2}{3}}\langle 1|\right) \left(\frac{1}{\sqrt{3}}|0\rangle - \sqrt{\frac{2}{3}}|1\rangle\right) = \frac{1}{3} - \frac{2}{3} = -\frac{1}{3} \quad \checkmark\]</div>
-</div>
-</section>
-<section id="variance-and-uncertainty">
-<h3>Variance and Uncertainty<a class="headerlink" href="#variance-and-uncertainty" title="Link to this heading">#</a></h3>
-<p>The <strong>variance</strong> of a measurement is</p>
-<div class="math notranslate nohighlight" id="equation-eq-variance">
-<span class="eqno">(24)<a class="headerlink" href="#equation-eq-variance" title="Link to this equation">#</a></span>\[
-\Delta^2 \hat{O} = \langle \hat{O}^2 \rangle - \langle \hat{O} \rangle^2 = \langle \psi | \hat{O}^2 | \psi \rangle - (\langle \psi | \hat{O} | \psi \rangle)^2\]</div>
-<p>The <strong>standard deviation</strong> is <span class="math notranslate nohighlight">\(\Delta \hat{O} = \sqrt{\Delta^2 \hat{O}}\)</span>.</p>
-<p><strong>Physical interpretation</strong>: <span class="math notranslate nohighlight">\(\Delta \hat{O}\)</span> measures the spread in measurement outcomes. If the state is an eigenstate of <span class="math notranslate nohighlight">\(\hat{O}\)</span>, then <span class="math notranslate nohighlight">\(\Delta \hat{O} = 0\)</span> (all measurements give the same result).</p>
-<p>For the state <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and observable <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>:</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Calculation: Variance for Superposition State</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \hat{\sigma}^z \rangle = 0 \quad \text{(equal superposition)}\]</div>
-<div class="math notranslate nohighlight">
-\[\langle (\hat{\sigma}^z)^2 \rangle = \langle + | I | + \rangle = 1 \quad \text{(since } (\hat{\sigma}^z)^2 = I\text{)}\]</div>
-<div class="math notranslate nohighlight">
-\[\Delta^2 \hat{\sigma}^z = 1 - 0 = 1 \implies \Delta \hat{\sigma}^z = 1\]</div>
-</div>
-<p>This makes sense: we get <span class="math notranslate nohighlight">\(\pm 1\)</span> with equal probability, so outcomes fluctuate maximally around the mean of 0.</p>
-</section>
-<section id="projective-measurement">
-<h3>Projective Measurement<a class="headerlink" href="#projective-measurement" title="Link to this heading">#</a></h3>
-<p>The <strong>projection operator</strong> onto eigenstate <span class="math notranslate nohighlight">\(|\phi_i\rangle\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-eq-projection-operator">
-<span class="eqno">(25)<a class="headerlink" href="#equation-eq-projection-operator" title="Link to this equation">#</a></span>\[
-P_i = |\phi_i\rangle\langle \phi_i|\]</div>
-<p><strong>Properties</strong>:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P_i^2 = P_i\)</span> (idempotence): applying twice is the same as applying once.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P_i^\dagger = P_i\)</span> (Hermiticity).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sum_i P_i = I\)</span> (completeness).</p></li>
-</ul>
-<p><strong>Measurement probability</strong> (alternative formula):</p>
-<div class="math notranslate nohighlight">
-\[
-P_i = \langle \psi | P_i | \psi \rangle = |\langle \phi_i | \psi \rangle|^2\]</div>
-<p><strong>State collapse</strong> (alternative formula):</p>
-<div class="math notranslate nohighlight">
-\[
-|\psi\rangle_{\text{after}} = \frac{P_i |\psi\rangle}{\sqrt{\langle \psi | P_i | \psi \rangle}} = \frac{|\phi_i\rangle\langle \phi_i | \psi \rangle}{|\langle \phi_i | \psi \rangle|}\]</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The <strong>measurement postulate</strong> has three parts: (1) outcomes are eigenvalues, (2) probabilities follow the Born rule <span class="math notranslate nohighlight">\(P_i = |\langle\phi_i|\psi\rangle|^2\)</span>, (3) the state collapses to the corresponding eigenstate.</p></li>
-<li><p><strong>Measurement is irreversible</strong>: information about superpositions is destroyed.</p></li>
-<li><p><strong>Expectation values</strong> are averages over many measurements and can be computed as <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle = \langle\psi|\hat{O}|\psi\rangle\)</span>.</p></li>
-<li><p><strong>Variance</strong> (<span class="math notranslate nohighlight">\(\Delta \hat{O}\)</span>) quantifies the spread in measurement outcomes; zero for eigenstates, maximal for superpositions of eigenstates with equal eigenvalues.</p></li>
-<li><p><strong>Projective measurement</strong> provides a formal framework: measurement is projection onto an eigenspace, with probability given by the norm squared of the projected state.</p></li>
-<li><p>The full theory of measurement, including the generalized framework beyond projective measurements, is developed in <strong>§6.3 of Chapter 6</strong>.</p></li>
+<li><p>Measurement is <strong>fundamental</strong>: it yields a definite outcome (an eigenvalue) and irreversibly collapses the state.</p></li>
+<li><p>The <strong>Born rule</strong> gives the probability as the squared overlap <span class="math notranslate nohighlight">\(|\langle O=m\vert\psi\rangle|^2\)</span>.</p></li>
+<li><p>The <strong>three axioms</strong> formalize the process: outcomes are eigenvalues, probabilities follow Born rule, state collapses to eigenstate.</p></li>
+<li><p>The <strong>Stern-Gerlach experiments</strong> directly demonstrate collapse and complementarity.</p></li>
+<li><p><strong>Repeated measurement</strong> of the same observable yields the same outcome with probability 1 (because the state is now an eigenstate).</p></li>
+<li><p><strong>Complementary measurements</strong> (non-commuting observables) can wipe out prior measurement information—this is not a flaw but a feature.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="1-1-3-hermitian-operators.html"><span class="std std-doc">1.1.3 Hermitian Operators</span></a></strong>: Observables are Hermitian operators; the Born rule uses their eigenvalues and eigenstates</p></li>
-<li><p><strong><a class="reference internal" href="1-2-2-uncertainty-and-incompatibility.html"><span class="std std-doc">1.2.2 Uncertainty and Incompatibility</span></a></strong>: Non-commuting operators cannot be measured simultaneously with arbitrary precision</p></li>
-<li><p><strong><a class="reference internal" href="1-3-1-unitary-evolution.html"><span class="std std-doc">1.3.1 Unitary Evolution</span></a></strong>: Between measurements, the qubit evolves via the Schrödinger equation; measurement is the only discontinuity</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{2|0\rangle + \sqrt{5}|1\rangle}{3}\)</span>.
-Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>.
-(a) Find the probability of each outcome.
-(b) What is the state immediately after observing outcome <span class="math notranslate nohighlight">\(-1\)</span>?
-(c) Compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span> from the Born rule (weighted average of eigenvalues).
-(d) Compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span> using the operator formula <span class="math notranslate nohighlight">\(\langle\psi|\hat{\sigma}^z|\psi\rangle\)</span> and verify agreement.</p>
-<p><strong>2.</strong> Start with the state <span class="math notranslate nohighlight">\(|{+}\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>.
-(a) Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>: find the probabilities and the post-measurement state for each outcome.
-(b) Immediately after measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> and obtaining outcome <span class="math notranslate nohighlight">\(+1\)</span>, measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>.
-What are the outcome probabilities now?
-(c) Compare to measuring only <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> on the original state <span class="math notranslate nohighlight">\(|{+}\rangle\)</span>. Explain the difference.</p>
-<p><strong>3.</strong> Show that for any qubit state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> and any Pauli operator <span class="math notranslate nohighlight">\(\hat{\sigma}^n = \boldsymbol{n}\cdot\hat{\boldsymbol{\sigma}}\)</span> (unit vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>), the variance satisfies</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta^2 \hat{\sigma}^n = 1 - \langle\hat{\sigma}^n\rangle^2.\]</div>
-<p>(Hint: Use <span class="math notranslate nohighlight">\((\hat{\sigma}^n)^2 = I\)</span>.)</p>
-<p><strong>4.</strong> Show that <span class="math notranslate nohighlight">\(\Delta \hat{O} = 0\)</span> if and only if <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{O}\)</span>.
-(a) If <span class="math notranslate nohighlight">\(\hat{O}|\psi\rangle = \lambda|\psi\rangle\)</span>, prove <span class="math notranslate nohighlight">\(\Delta\hat{O} = 0\)</span>.
-(b) If <span class="math notranslate nohighlight">\(\Delta\hat{O} = 0\)</span>, prove <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> must be an eigenstate.
-(Hint for (b): expand <span class="math notranslate nohighlight">\(\Delta^2\hat{O} = \langle(\hat{O} - \langle\hat{O}\rangle)^2\rangle\)</span> and use <span class="math notranslate nohighlight">\(\||\phi\rangle\|^2 \geq 0\)</span>.)</p>
-<p><strong>5.</strong> Prove that if measuring observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> yields outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span>, an immediately repeated measurement of <span class="math notranslate nohighlight">\(\hat{O}\)</span> gives <span class="math notranslate nohighlight">\(\lambda_i\)</span> again with probability 1.
-(Hint: Apply the collapse postulate, then the Born rule.)</p>
-<p><strong>6.</strong> Consider two states <span class="math notranslate nohighlight">\(|\psi_1\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and <span class="math notranslate nohighlight">\(|\psi_2\rangle = \frac{1}{\sqrt{2}}(|0\rangle + \mathrm{e}^{\mathrm{i}\varphi}|1\rangle)\)</span> for real <span class="math notranslate nohighlight">\(\varphi\)</span>.
-(a) Show that both states give identical measurement probabilities for <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>.
-(b) Compute the probability of outcome <span class="math notranslate nohighlight">\(+1\)</span> when measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> on <span class="math notranslate nohighlight">\(|\psi_2\rangle\)</span> as a function of <span class="math notranslate nohighlight">\(\varphi\)</span>. For what <span class="math notranslate nohighlight">\(\varphi\)</span> is this probability maximized? Minimized?
-(c) Explain physically why the relative phase is visible in <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> measurements but not <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> measurements.</p>
-<p><strong>7.</strong> A qubit is in the Bloch state <span class="math notranslate nohighlight">\(|\psi\rangle = \cos\tfrac{\theta}{2}|0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin\tfrac{\theta}{2}|1\rangle\)</span>.
-Compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span> in terms of <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\varphi\)</span>, and show that the result is the Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\varphi,\;\sin\theta\sin\varphi,\;\cos\theta)\)</span>.</p>
-<p><strong>8.</strong> For the state <span class="math notranslate nohighlight">\(|0\rangle\)</span>, compute <span class="math notranslate nohighlight">\(\Delta^2\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\Delta^2\hat{\sigma}^z\)</span>. Explain the results physically: why does one variance vanish and the other equal 1?</p>
+<p><strong>1.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \frac{2\vert0\rangle + \sqrt{5}\vert1\rangle}{3}\)</span>. Measure <span class="math notranslate nohighlight">\(\hat{Z}\)</span>.
+(a) Find the probability of each outcome using the Born rule.
+(b) Write down the state immediately after obtaining outcome <span class="math notranslate nohighlight">\(-1\)</span>.</p>
+<p><strong>2.</strong> Start with the state <span class="math notranslate nohighlight">\(\vert+\rangle = \frac{1}{\sqrt{2}}(\vert0\rangle + \vert1\rangle)\)</span>.
+(a) Measure <span class="math notranslate nohighlight">\(\hat{Z}\)</span>: find the probabilities and the post-measurement state for each outcome.
+(b) Immediately after measuring <span class="math notranslate nohighlight">\(\hat{Z}\)</span> and obtaining outcome <span class="math notranslate nohighlight">\(+1\)</span>, measure <span class="math notranslate nohighlight">\(\hat{X}\)</span>. What are the outcome probabilities now?
+(c) Compare to measuring only <span class="math notranslate nohighlight">\(\hat{X}\)</span> on the original state <span class="math notranslate nohighlight">\(\vert+\rangle\)</span>. Explain the difference physically.</p>
+<p><strong>3.</strong> Show that if measuring observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> yields outcome <span class="math notranslate nohighlight">\(m\)</span> (with eigenstate <span class="math notranslate nohighlight">\(\vert O=m\rangle\)</span>), an immediately repeated measurement of <span class="math notranslate nohighlight">\(\hat{O}\)</span> gives <span class="math notranslate nohighlight">\(m\)</span> again with probability 1. (Hint: Apply the collapse postulate, then the Born rule.)</p>
+<p><strong>4.</strong> The Stern-Gerlach experiment: A qubit prepared in state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \frac{1}{\sqrt{3}}\vert0\rangle + \sqrt{\frac{2}{3}}\vert1\rangle\)</span> is measured in sequence: first <span class="math notranslate nohighlight">\(\hat{Z}\)</span>, then <span class="math notranslate nohighlight">\(\hat{X}\)</span>, then <span class="math notranslate nohighlight">\(\hat{Z}\)</span> again.
+(a) Compute the probability of each outcome at each stage, assuming all measurements succeed.
+(b) Write down the final state after all three measurements.</p>
+<p><strong>5.</strong> For the state <span class="math notranslate nohighlight">\(\vert0\rangle\)</span>, show that measuring <span class="math notranslate nohighlight">\(\hat{X}\)</span> gives outcomes <span class="math notranslate nohighlight">\(+1\)</span> and <span class="math notranslate nohighlight">\(-1\)</span> with equal probability <span class="math notranslate nohighlight">\(1/2\)</span>. (Hint: Express <span class="math notranslate nohighlight">\(\vert0\rangle\)</span> in the <span class="math notranslate nohighlight">\(\hat{X}\)</span> eigenbasis <span class="math notranslate nohighlight">\(\{\vert+\rangle, \vert-\rangle\}\)</span>.)</p>
+<p><strong>6.</strong> Two states: <span class="math notranslate nohighlight">\(\vert\psi_1\rangle = \frac{1}{\sqrt{2}}(\vert0\rangle + \vert1\rangle)\)</span> and <span class="math notranslate nohighlight">\(\vert\psi_2\rangle = \frac{1}{\sqrt{2}}(\vert0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\vert1\rangle)\)</span> (real <span class="math notranslate nohighlight">\(\varphi\)</span>).
+(a) Show that both states give identical measurement probabilities for <span class="math notranslate nohighlight">\(\hat{Z}\)</span>.
+(b) Compute the probability of outcome <span class="math notranslate nohighlight">\(+1\)</span> when measuring <span class="math notranslate nohighlight">\(\hat{X}\)</span> on <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span> as a function of <span class="math notranslate nohighlight">\(\varphi\)</span>.
+(c) Explain why the relative phase is invisible in <span class="math notranslate nohighlight">\(\hat{Z}\)</span> measurements but affects <span class="math notranslate nohighlight">\(\hat{X}\)</span> measurements.</p>
+<p><strong>7.</strong> Consider the three-apparatus Stern-Gerlach experiment: <span class="math notranslate nohighlight">\(\hat{Z}\)</span> <span class="math notranslate nohighlight">\(\to\)</span> (filter <span class="math notranslate nohighlight">\(+1\)</span>) <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(\hat{X}\)</span> <span class="math notranslate nohighlight">\(\to\)</span> (filter <span class="math notranslate nohighlight">\(-1\)</span>) <span class="math notranslate nohighlight">\(\to\)</span> <span class="math notranslate nohighlight">\(\hat{Z}\)</span> again. Starting with <span class="math notranslate nohighlight">\(\vert0\rangle\)</span>, what fraction of atoms make it through all three stages? What is the final state for those that succeed?</p>
+<p><strong>8.</strong> Suppose we measure <span class="math notranslate nohighlight">\(\hat{Z}\)</span> on a superposition state and obtain outcome <span class="math notranslate nohighlight">\(-1\)</span>.
+(a) Write down the state after collapse.
+(b) If we immediately measure <span class="math notranslate nohighlight">\(\hat{Z}\)</span> again, what is the probability of obtaining <span class="math notranslate nohighlight">\(-1\)</span>?
+(c) If instead we measure <span class="math notranslate nohighlight">\(\hat{X}\)</span> immediately after, what are the outcome probabilities?</p>
 </section>
 </section>
 
@@ -862,15 +854,11 @@ Compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangl
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-axioms-of-measurement">The Three Axioms of Measurement</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiom-1-possible-outcomes">Axiom 1: Possible Outcomes</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiom-2-the-born-rule-probabilities">Axiom 2: The Born Rule (Probabilities)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiom-3-state-collapse">Axiom 3: State Collapse</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-values-from-the-born-rule">Expectation Values from the Born Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-and-uncertainty">Variance and Uncertainty</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projective-measurement">Projective Measurement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stern-gerlach-experiments-as-motivation">Stern-Gerlach Experiments as Motivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-mathematical-model">Building the Mathematical Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-measurement-postulate">The Measurement Postulate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explaining-the-stern-gerlach-experiments">Explaining the Stern-Gerlach Experiments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

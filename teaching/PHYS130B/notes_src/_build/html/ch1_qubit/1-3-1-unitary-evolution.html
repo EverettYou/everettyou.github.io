@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -65,7 +65,7 @@
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/ch1_qubit/1-3-1-unitary-evolution.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.3.2 Spin Dynamics" href="1-3-2-spin-dynamics.html" />
+    <link rel="next" title="1.3.2 Schrödinger Picture" href="1-3-2-schrodinger-picture.html" />
     <link rel="prev" title="1.3 Time Evolution" href="1-3-time-evolution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -194,7 +194,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -521,24 +521,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-operators">Unitary Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-generators-and-unitary-operators">Hermitian Generators and Unitary Operators</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-of-an-operator">The Exponential of an Operator</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-dependent-schrodinger-equation">The Time-Dependent Schrödinger Equation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-independent-vs-time-dependent">Time-Independent vs. Time-Dependent</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-the-time-evolution-operator">Solution: The Time-Evolution Operator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-time-evolution-operator">Properties of the Time-Evolution Operator</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-time-evolution-operator-for-22-systems">Computing the Time-Evolution Operator for 2×2 Systems</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-hat-u-t-for-hat-h-omega-hat-sigma-z">Computing <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}^z\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-transformations-and-unitary-changes-of-basis">Basis Transformations and Unitary Changes of Basis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-time-evolution-must-be-unitary">Why Time Evolution Must Be Unitary?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-generators-of-unitary-operators">Hermitian Generators of Unitary Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-hermitian-generator-to-time-evolution">From Hermitian Generator to Time Evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-eigenstates-and-stationary-states">Energy Eigenstates and Stationary States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
@@ -558,311 +547,152 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is a unitary operator, and why must quantum evolution be unitary? (What physical principle demands this?)</p></li>
-<li><p>Starting from the Schrödinger equation, derive the formal solution for the time-evolution operator <span class="math notranslate nohighlight">\(U(t)\)</span>.</p></li>
-<li><p>For a spin-1/2 particle with <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span>, compute <span class="math notranslate nohighlight">\(U(t)\)</span> explicitly and describe what it does geometrically.</p></li>
-<li><p>Why can we always write a unitary operator as the exponential of a Hermitian operator? What does this tell us about the relationship between symmetries and conservation laws?</p></li>
-<li><p>Does the time-evolution operator depend on what basis you choose to work in? If you compute <span class="math notranslate nohighlight">\(U(t)\)</span> in the <span class="math notranslate nohighlight">\(z\)</span>-basis vs. the <span class="math notranslate nohighlight">\(x\)</span>-basis, do you get the same result? (Hint: think about unitary change of basis.)</p></li>
+<li><p>Why must quantum time evolution be unitary? What physical principle demands this?</p></li>
+<li><p>How is a unitary operator defined mathematically, and what does it mean for <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{U} = \hat{I}\)</span>?</p></li>
+<li><p>If a Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> is Hermitian, why can the time-evolution operator always be written as <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>?</p></li>
+<li><p>Starting from <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, how would you derive the Schrödinger equation?</p></li>
+<li><p>What are energy eigenstates, and why do they evolve only by a global phase?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>Quantum systems do not stand still. They evolve in time according to the Schrödinger equation, a fundamental postulate of quantum mechanics. This evolution is governed by the Hamiltonian operator, which encodes the energy and symmetries of the system. A remarkable feature of quantum evolution is that it must be <strong>unitary</strong>: it preserves the normalization of quantum states and the probabilities of all outcomes. This section develops the theory of unitary operators, derives the time-dependent Schrödinger equation, and solves it to obtain the time-evolution operator.</p>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>Quantum systems evolve in time. The central postulate of quantum mechanics is that this evolution is <strong>unitary</strong>: it preserves the norm of any state and the inner product between states. Unitary evolution is not a choice or convenience—it is a fundamental constraint that follows from requiring quantum mechanics to preserve information. This section develops the theory of unitary operators, explains why time evolution must be unitary, and introduces the Hamiltonian as the generator of unitary transformations.</p>
+</section>
 <section id="unitary-operators">
 <h3>Unitary Operators<a class="headerlink" href="#unitary-operators" title="Link to this heading">#</a></h3>
-<p>In quantum mechanics, time evolution must satisfy a stringent requirement: it must preserve the normalization of states. If <span class="math notranslate nohighlight">\(|\psi(0)\rangle\)</span> is normalized, then <span class="math notranslate nohighlight">\(|\psi(t)\rangle\)</span> must remain normalized for all times <span class="math notranslate nohighlight">\(t\)</span>. This is achieved by <strong>unitary operators</strong>.</p>
-<p>#:::{admonition} Unitary Operators
-:class: important</p>
+<p>A <strong>unitary operator</strong> is a linear transformation that preserves inner products. Here is the defining property:</p>
+<div class="important admonition">
+<p class="admonition-title">Unitary Operator</p>
 <p>A linear operator <span class="math notranslate nohighlight">\(\hat{U}\)</span> is <strong>unitary</strong> if</p>
-<div class="math notranslate nohighlight" id="equation-eq-unitarity">
-<span class="eqno">(37)<a class="headerlink" href="#equation-eq-unitarity" title="Link to this equation">#</a></span>\[
-\hat{U}^\dagger \hat{U} = \hat{U}\hat{U}^\dagger = I\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{U}^\dagger\)</span> is the <strong>adjoint</strong> (conjugate transpose) and <span class="math notranslate nohighlight">\(I\)</span> is the identity.</p>
-<div class="docutils">
-<p><strong>Key properties of unitary operators:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Inverse</strong>: <span class="math notranslate nohighlight">\(\hat{U}^{-1} = \hat{U}^\dagger\)</span>. Unitary operators are always invertible.</p></li>
-<li><p><strong>Preserve inner products</strong>: If <span class="math notranslate nohighlight">\(\hat{U}\)</span> is unitary, then</p></li>
-</ol>
 <div class="math notranslate nohighlight">
-\[
-\langle \psi | \hat{U}^\dagger \hat{U} | \phi \rangle = \langle \psi | \phi \rangle\]</div>
-<p>This means <span class="math notranslate nohighlight">\(\hat{U}\)</span> preserves the overlap between any two states.</p>
-<ol class="arabic simple" start="3">
-<li><p><strong>Preserve normalization</strong>: For a normalized state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> with <span class="math notranslate nohighlight">\(\langle \psi | \psi \rangle = 1\)</span>,</p></li>
-</ol>
+\[\hat{U}^\dagger \hat{U} = \hat{I}\]</div>
+<p>equivalently, <span class="math notranslate nohighlight">\(\hat{U}^{-1} = \hat{U}^\dagger\)</span>.</p>
+</div>
+<p>Why does this definition matter? Suppose we apply <span class="math notranslate nohighlight">\(\hat{U}\)</span> to two states <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\phi\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-\langle \psi | \hat{U}^\dagger \hat{U} | \psi \rangle = \langle \psi | \psi \rangle = 1\]</div>
-<p>So <span class="math notranslate nohighlight">\(|\psi'\rangle = \hat{U}|\psi\rangle\)</span> is also normalized.</p>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: Unitarity Constraint</p>
-<p>The time-evolution operator <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> must be unitary to preserve probability. But unitarity alone is not the only constraint on time evolution. Consider these additional requirements:</p>
+\[\vert\psi'\rangle = \hat{U} \vert\psi\rangle, \quad \vert\phi'\rangle = \hat{U} \vert\phi\rangle\]</div>
+<p>Then the inner product is preserved:</p>
+<div class="math notranslate nohighlight">
+\[\langle\phi' \vert \psi'\rangle = \langle\phi \vert \hat{U}^\dagger \hat{U} \vert\psi\rangle = \langle\phi \vert \psi\rangle\]</div>
+<p>In particular, the norm is preserved: <span class="math notranslate nohighlight">\(\langle\psi'\vert\psi'\rangle = \langle\psi\vert\psi\rangle\)</span>, and so are all measurement probabilities.</p>
+</section>
+<section id="why-time-evolution-must-be-unitary">
+<h3>Why Time Evolution Must Be Unitary?<a class="headerlink" href="#why-time-evolution-must-be-unitary" title="Link to this heading">#</a></h3>
+<p>The requirement of unitarity follows from a single physical principle: <strong>quantum information is preserved under time evolution</strong>.</p>
+<p>What does this mean concretely? Consider two identical, isolated quantum systems. The preservation of quantum information demands:</p>
 <ul class="simple">
-<li><p><strong>Linearity</strong>: Suppose <span class="math notranslate nohighlight">\(|\psi_1\rangle \to \hat{U}|\psi_1\rangle\)</span> and <span class="math notranslate nohighlight">\(|\psi_2\rangle \to \hat{U}|\psi_2\rangle\)</span>. Why must <span class="math notranslate nohighlight">\(\alpha|\psi_1\rangle + \beta|\psi_2\rangle \to \alpha\hat{U}|\psi_1\rangle + \beta\hat{U}|\psi_2\rangle\)</span>? Is this a consequence of unitarity, or an additional postulate? (Hint: think about superposition being fundamental in quantum mechanics.)</p></li>
-<li><p><strong>Composition law</strong>: If evolution from <span class="math notranslate nohighlight">\(t=0\)</span> to <span class="math notranslate nohighlight">\(t_1\)</span> is given by <span class="math notranslate nohighlight">\(\hat{U}(t_1)\)</span>, and from <span class="math notranslate nohighlight">\(t_1\)</span> to <span class="math notranslate nohighlight">\(t_2\)</span> by <span class="math notranslate nohighlight">\(\hat{U}(t_2-t_1)\)</span>, the total must be <span class="math notranslate nohighlight">\(\hat{U}(t_2) = \hat{U}(t_2-t_1)\hat{U}(t_1)\)</span>. Show that if we require <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> to satisfy this composition law, be unitary, and satisfy <span class="math notranslate nohighlight">\(\hat{U}(0) = \boldsymbol{I}\)</span>, then <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> must have the form <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{G}t}\)</span> for some operator <span class="math notranslate nohighlight">\(\hat{G}\)</span>. (Hint: differentiate <span class="math notranslate nohighlight">\(\hat{U}(t)\hat{U}(s) = \hat{U}(t+s)\)</span> with respect to <span class="math notranslate nohighlight">\(t\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>.)</p></li>
-<li><p><strong>Hermitian generator</strong>: If <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{G}t}\)</span> is unitary for all real <span class="math notranslate nohighlight">\(t\)</span>, what must be true about <span class="math notranslate nohighlight">\(\hat{G}\)</span>? Differentiate <span class="math notranslate nohighlight">\(\hat{U}^\dagger(t)\hat{U}(t) = \boldsymbol{I}\)</span> and show that <span class="math notranslate nohighlight">\(\hat{G}\)</span> must be Hermitian.</p></li>
+<li><p><strong>Distinct states remain distinct.</strong> If two systems start in different (orthogonal) states, they must remain in different states at all later times—and also at all earlier times. Otherwise, the dynamics would erase information about the initial preparation.</p></li>
+<li><p><strong>Identical states follow identical evolution.</strong> If two systems start in the same state, they must follow the same trajectory—toward both the future and the past. Otherwise, the dynamics would create information out of nothing.</p></li>
 </ul>
+<div class="attention admonition">
+<p class="admonition-title">Attention</p>
+<p>Although <em>measurement</em> introduces apparent randomness, the <em>evolution</em> of the quantum state between measurements is fully deterministic. Unitarity governs this deterministic evolution.</p>
 </div>
-</div>
-<ol class="arabic simple" start="4">
-<li><p><strong>Preserve probabilities</strong>: Measurement probabilities are unchanged. If <span class="math notranslate nohighlight">\(\hat{O}\)</span> is an observable with eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> and eigenvectors <span class="math notranslate nohighlight">\(|\phi_i\rangle\)</span>, then measuring <span class="math notranslate nohighlight">\(\hat{O}\)</span> on the evolved state <span class="math notranslate nohighlight">\(\hat{U}|\psi\rangle\)</span> gives the same probability distribution as measuring <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{O} \hat{U}\)</span> on the original state.</p></li>
-</ol>
-<div class="dropdown note admonition">
-<p class="admonition-title">Unitarity: Preserves Probability</p>
-<p>Consider the probability of outcome <span class="math notranslate nohighlight">\(\lambda_i\)</span> when measuring <span class="math notranslate nohighlight">\(\hat{O}\)</span> on state <span class="math notranslate nohighlight">\(\hat{U}|\psi\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-P_i(t) = |\langle \phi_i | \hat{U} | \psi \rangle|^2 = \langle \psi | \hat{U}^\dagger | \phi_i \rangle \langle \phi_i | \hat{U} | \psi \rangle\]</div>
-<p>By linearity and unitarity (<span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{U} = I\)</span>), this equals</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \psi | \hat{U}^\dagger \hat{O}_i \hat{U} | \psi \rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{O}_i = |\phi_i\rangle\langle \phi_i|\)</span> is the projector onto the <span class="math notranslate nohighlight">\(i\)</span>-th eigenstate. The probability distribution depends only on the evolved state through the evolved observable <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{O} \hat{U}\)</span>, preserving all measurement statistics.</p>
-</div>
-</section>
-<section id="hermitian-generators-and-unitary-operators">
-<h3>Hermitian Generators and Unitary Operators<a class="headerlink" href="#hermitian-generators-and-unitary-operators" title="Link to this heading">#</a></h3>
-<p>A profound connection exists between <strong>Hermitian operators</strong> and <strong>unitary operators</strong>. Any unitary operator can be written as the exponential of a Hermitian operator multiplied by an imaginary constant.</p>
-<section id="the-exponential-of-an-operator">
-<h4>The Exponential of an Operator<a class="headerlink" href="#the-exponential-of-an-operator" title="Link to this heading">#</a></h4>
-<p>For a square matrix <span class="math notranslate nohighlight">\(\hat{A}\)</span>, the exponential <span class="math notranslate nohighlight">\(\mathrm{e}^{\hat{A}}\)</span> is defined via the Taylor series:</p>
-<div class="math notranslate nohighlight" id="equation-eq-operator-exponential">
-<span class="eqno">(38)<a class="headerlink" href="#equation-eq-operator-exponential" title="Link to this equation">#</a></span>\[
-\mathrm{e}^{\hat{A}} = I + \hat{A} + \frac{\hat{A}^2}{2!} + \frac{\hat{A}^3}{3!} + \cdots = \sum_{n=0}^\infty \frac{\hat{A}^n}{n!}\]</div>
-<p>#:::{admonition} Unitary: Hermitian Generator
-:class: important</p>
-<p>If <span class="math notranslate nohighlight">\(\hat{G}\)</span> is Hermitian (<span class="math notranslate nohighlight">\(\hat{G}^\dagger = \hat{G}\)</span>) and <span class="math notranslate nohighlight">\(\theta\)</span> is a real number, then</p>
-<div class="math notranslate nohighlight" id="equation-eq-unitary-from-hermitian">
-<span class="eqno">(39)<a class="headerlink" href="#equation-eq-unitary-from-hermitian" title="Link to this equation">#</a></span>\[
-\hat{U}(\theta) = \mathrm{e}^{\mathrm{i}\hat{G}\theta}\]</div>
-<p>is unitary.</p>
-<div class="docutils">
-<div class="dropdown note admonition">
-<p class="admonition-title">Verification</p>
-<p>To verify, compute:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}^\dagger \hat{U} = \mathrm{e}^{-\mathrm{i}\hat{G}\theta} \mathrm{e}^{\mathrm{i}\hat{G}\theta} = \mathrm{e}^0 = I\]</div>
-<p>The factor <span class="math notranslate nohighlight">\(i\)</span> in the exponent ensures unitarity: the exponent <span class="math notranslate nohighlight">\(\mathrm{i}\hat{G}\theta\)</span> is <strong>anti-Hermitian</strong> (its adjoint is the negative of itself), and exponentiating an anti-Hermitian operator yields a unitary matrix.</p>
-</div>
-</div>
-<div class="example admonition">
-<p class="admonition-title">Example: Pauli Rotations</p>
-<p>The Pauli operator <span class="math notranslate nohighlight">\(\hat{\sigma}^z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> is Hermitian. The unitary operator</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}(\theta) = \mathrm{e}^{-\mathrm{i}\hat{\sigma}^z \theta / 2}\]</div>
-<p>represents a rotation about the z-axis by angle <span class="math notranslate nohighlight">\(\theta\)</span> in the Bloch sphere. Expanding via the exponential:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\mathrm{e}^{-\mathrm{i}\hat{\sigma}^z \theta / 2} = \cos(\theta/2) I - i\sin(\theta/2) \hat{\sigma}^z = \begin{pmatrix} \mathrm{e}^{-\mathrm{i}\theta/2} &amp; 0 \\ 0 &amp; \mathrm{e}^{\mathrm{i}\theta/2} \end{pmatrix}\end{split}\]</div>
-<p>This is unitary and applies a phase rotation to the <span class="math notranslate nohighlight">\(|0\rangle\)</span> state and an opposite phase to <span class="math notranslate nohighlight">\(|1\rangle\)</span>.</p>
-</div>
-</section>
-</section>
-<section id="the-time-dependent-schrodinger-equation">
-<h3>The Time-Dependent Schrödinger Equation<a class="headerlink" href="#the-time-dependent-schrodinger-equation" title="Link to this heading">#</a></h3>
-<p>Quantum evolution is governed by a fundamental postulate: the <strong>time-dependent Schrödinger equation</strong>.</p>
-<p>#:::{admonition} Time-Dependent Schrödinger Equation
-:class: important</p>
-<p>For a quantum system with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> (the <strong>energy operator</strong>), the state <span class="math notranslate nohighlight">\(|\psi(t)\rangle\)</span> evolves according to</p>
-<div class="math notranslate nohighlight" id="equation-eq-tdse">
-<span class="eqno">(40)<a class="headerlink" href="#equation-eq-tdse" title="Link to this equation">#</a></span>\[
-\mathrm{i}\hbar \frac{\partial}{\partial t} |\psi(t)\rangle = \hat{H} |\psi(t)\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hbar = h/(2\pi)\)</span> is the reduced Planck constant and <span class="math notranslate nohighlight">\(\mathrm{i}\)</span> is the imaginary unit.</p>
-<div class="docutils">
-<h4 class="rubric" id="the-hamiltonian">The Hamiltonian</h4>
-<p>The <strong>Hamiltonian</strong> <span class="math notranslate nohighlight">\(\hat{H}\)</span> is the operator representing the <strong>total energy</strong> of the system:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{H} = \hat{T} + \hat{V}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{T}\)</span> is kinetic energy and <span class="math notranslate nohighlight">\(\hat{V}\)</span> is potential energy. For a single particle in 3D,</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} + V(\hat{\boldsymbol{r}})\]</div>
-<p>The Hamiltonian is <strong>always Hermitian</strong> (<span class="math notranslate nohighlight">\(\hat{H}^\dagger = \hat{H}\)</span>) because energy is a real, observable quantity. The eigenvalues of <span class="math notranslate nohighlight">\(\hat{H}\)</span> are the allowed <strong>energy levels</strong> of the system.</p>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: Unitary Breakdown</p>
-<p>In this section, we have shown that a closed quantum system evolves unitarily. But what happens when a system interacts with an environment?</p>
-<ul class="simple">
-<li><p><strong>Open system</strong>: Suppose a qubit is coupled to a thermal bath (reservoir of other spins). The full Hamiltonian includes qubit, bath, and interaction: <span class="math notranslate nohighlight">\(\hat{H}_\text{total} = \hat{H}_\text{qubit} + \hat{H}_\text{bath} + \hat{H}_\text{int}\)</span>. The total system (qubit + bath) evolves unitarily. But we only observe the qubit. Show (conceptually or by exploring an example) that if we <strong>trace over the bath</strong> (sum over bath states), the reduced density matrix <span class="math notranslate nohighlight">\(\rho_\text{qubit}(t) = \text{Tr}_\text{bath}[\rho_\text{total}(t)]\)</span> does NOT evolve unitarily. What does non-unitary evolution look like? (The general form is called a <strong>Lindblad master equation</strong>.)</p></li>
-<li><p><strong>Measurement collapse</strong>: In a Stern-Gerlach experiment, a spin state is prepared as a superposition. The apparatus separates spin-up from spin-down spatially. After measuring position, the spin state appears to “collapse.” Why is this not a violation of unitarity? (Hint: the apparatus is part of the system; entanglement between spin and apparatus makes the reduced spin density matrix non-unitary.)</p></li>
-<li><p><strong>Decoherence time scale</strong>: For a macroscopic object (say, a grain of dust with <span class="math notranslate nohighlight">\(\sim 10^{18}\)</span> atoms), the interaction with the environment is so strong that coherent superpositions become unobservable almost instantly. Is unitary evolution still happening, or has it been replaced? (Look up: “pointer basis” and “decoherence”.)</p></li>
-</ul>
-</div>
-</div>
-<section id="time-independent-vs-time-dependent">
-<h4>Time-Independent vs. Time-Dependent<a class="headerlink" href="#time-independent-vs-time-dependent" title="Link to this heading">#</a></h4>
-<p>The <strong>time-independent Schrödinger equation</strong> (TISE) applies when <span class="math notranslate nohighlight">\(\hat{H}\)</span> does not depend on time:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{H} |\psi\rangle = E |\psi\rangle\]</div>
-<p>This is an eigenvalue equation for the energy eigenstates and eigenvalues. Any solution to the TISE evolves in time with a simple phase factor:</p>
-<div class="math notranslate nohighlight">
-\[
-|\psi(t)\rangle = \mathrm{e}^{-\mathrm{i}Et/\hbar} |\psi\rangle\]</div>
-<p>The <strong>time-dependent Schrödinger equation</strong> (TDSE), equation <a class="reference internal" href="#equation-eq-tdse">(40)</a>, is the general postulate. When <span class="math notranslate nohighlight">\(\hat{H}\)</span> is time-independent, we can solve it and recover the TISE.</p>
-</section>
-</section>
-<section id="solution-the-time-evolution-operator">
-<h3>Solution: The Time-Evolution Operator<a class="headerlink" href="#solution-the-time-evolution-operator" title="Link to this heading">#</a></h3>
-<p>For a <strong>time-independent Hamiltonian</strong>, the general solution to the TDSE can be written using the <strong>time-evolution operator</strong>.</p>
-<p>#:::{admonition} Time-Evolution Operator
-:class: important</p>
-<p>The state at time <span class="math notranslate nohighlight">\(t\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-eq-time-evolution-formula">
-<span class="eqno">(41)<a class="headerlink" href="#equation-eq-time-evolution-formula" title="Link to this equation">#</a></span>\[
-|\psi(t)\rangle = \hat{U}(t) |\psi(0)\rangle\]</div>
-<p>where the <strong>time-evolution operator</strong> is</p>
-<div class="math notranslate nohighlight" id="equation-eq-time-evolution-operator">
-<span class="eqno">(42)<a class="headerlink" href="#equation-eq-time-evolution-operator" title="Link to this equation">#</a></span>\[
-\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\hat{H}\)</span> is Hermitian, <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> is unitary (with the Hermitian generator being <span class="math notranslate nohighlight">\(\hat{H}/\hbar\)</span> and the parameter being <span class="math notranslate nohighlight">\(-t\)</span>).</p>
-<div class="docutils">
-<p>#:::{admonition} Derivation: Time-Evolution
-:class: dropdown note</p>
-<p>Substituting <span class="math notranslate nohighlight">\(|\psi(t)\rangle = \hat{U}(t)|\psi(0)\rangle\)</span> into the TDSE:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathrm{i}\hbar \frac{\partial}{\partial t} \hat{U}(t) |\psi(0)\rangle = \hat{H} \hat{U}(t) |\psi(0)\rangle\]</div>
-<p>Taking the time derivative of <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial \hat{U}}{\partial t} = -\frac{\mathrm{i}}{\hbar} \hat{H} \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar} = -\frac{\mathrm{i}}{\hbar} \hat{H} \hat{U}(t)\]</div>
-<p>Thus</p>
-<div class="math notranslate nohighlight">
-\[
-\mathrm{i}\hbar \frac{\partial \hat{U}}{\partial t} = \hat{H} \hat{U}(t) \quad \checkmark\]</div>
-</div>
-<section id="properties-of-the-time-evolution-operator">
-<h4>Properties of the Time-Evolution Operator<a class="headerlink" href="#properties-of-the-time-evolution-operator" title="Link to this heading">#</a></h4>
-<p>The time-evolution operator satisfies several important properties:</p>
+<p>Translate these requirements into mathematics. Let <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> denote the time-evolution map: <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t)\vert\psi(0)\rangle\)</span>. The two conditions above imply:</p>
 <ol class="arabic simple">
-<li><p><strong>Composition law</strong>: Evolution for time <span class="math notranslate nohighlight">\(t_1\)</span> followed by evolution for time <span class="math notranslate nohighlight">\(t_2\)</span> equals evolution for time <span class="math notranslate nohighlight">\(t_1 + t_2\)</span>:</p></li>
+<li><p><strong>Norm preservation</strong> (same state remains the same):</p></li>
 </ol>
 <div class="math notranslate nohighlight">
-\[
-\hat{U}(t_1 + t_2) = \hat{U}(t_1) \hat{U}(t_2)\]</div>
-<p>This follows from <span class="math notranslate nohighlight">\(\mathrm{e}^{\hat{A}(t_1+t_2)} = \mathrm{e}^{\hat{A}t_1} \mathrm{e}^{\hat{A}t_2}\)</span> for any operator <span class="math notranslate nohighlight">\(\hat{A}\)</span>.</p>
+\[\langle\psi(0)\vert\psi(0)\rangle = 1 \;\Longrightarrow\; \langle\psi(t)\vert\psi(t)\rangle = \langle\psi(0)\vert \hat{U}(t)^\dagger \hat{U}(t) \vert\psi(0)\rangle = 1\]</div>
 <ol class="arabic simple" start="2">
-<li><p><strong>Initial condition</strong>: <span class="math notranslate nohighlight">\(\hat{U}(0) = \mathrm{e}^0 = I\)</span> (identity).</p></li>
-<li><p><strong>Inverse and adjoint</strong>: <span class="math notranslate nohighlight">\(\hat{U}^\dagger(t) = \mathrm{e}^{\mathrm{i}\hat{H}t/\hbar} = \hat{U}(-t)\)</span>. Evolution backward in time is the adjoint of forward evolution.</p></li>
+<li><p><strong>Orthogonality preservation</strong> (different states remain different):</p></li>
 </ol>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion: Hamiltonian Generator</p>
-<p>For a spin-1/2 in a magnetic field along <span class="math notranslate nohighlight">\(z\)</span>: <span class="math notranslate nohighlight">\(\hat{H} = -\frac{\hbar\omega}{2}\hat{\sigma}^z\)</span>.</p>
-<ul class="simple">
-<li><p><strong>Infinitesimal evolution</strong>: For small time step <span class="math notranslate nohighlight">\(\delta t\)</span>, the time-evolution operator is approximately <span class="math notranslate nohighlight">\(\hat{U}(\delta t) \approx \boldsymbol{I} - \frac{\mathrm{i}}{\hbar}\hat{H}\delta t + O(\delta t^2)\)</span>. (Derive this by expanding the exponential to first order.) This shows that <span class="math notranslate nohighlight">\(\hat{H}/\hbar\)</span> is the <strong>generator</strong> of infinitesimal time translations.</p></li>
-<li><p><strong>Action on superposition</strong>: Apply <span class="math notranslate nohighlight">\(\hat{U}(\delta t)\)</span> to the state <span class="math notranslate nohighlight">\(|{+x}\rangle = \frac{1}{\sqrt{2}}(|{+z}\rangle + |{-z}\rangle)\)</span> to first order in <span class="math notranslate nohighlight">\(\delta t\)</span>. What is the new state? Does it stay in the Bloch sphere, or does it move?</p></li>
-<li><p><strong>Rotation interpretation</strong>: The time-evolution operator for this system is</p></li>
-</ul>
 <div class="math notranslate nohighlight">
-\[\hat{U}(t) = \mathrm{e}^{\mathrm{i}\omega t \hat{\sigma}^z/2}\]</div>
-<p>Show that this is equivalent to a rotation by angle <span class="math notranslate nohighlight">\(\theta = \omega t\)</span> around the <span class="math notranslate nohighlight">\(z\)</span>-axis of the Bloch sphere. What is the geometric meaning: as time evolves, the state <strong>rotates</strong> around the Hamiltonian direction.</p>
-<ul class="simple">
-<li><p><strong>Ehrenfest theorem connection</strong>: In classical mechanics with Hamiltonian <span class="math notranslate nohighlight">\(H\)</span>, the equation of motion is <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\boldsymbol{q}}{\mathrm{d}t} = \frac{\partial H}{\partial \boldsymbol{p}}\)</span>. In quantum mechanics, <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\langle \hat{O} \rangle}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}\langle [\hat{H}, \hat{O}]\rangle\)</span>. Do these look related? (Hint: in quantum mechanics, the commutator plays the role of the Poisson bracket.)</p></li>
-</ul>
+\[\langle\phi(0)\vert\psi(0)\rangle = 0 \;\Longrightarrow\; \langle\phi(t)\vert\psi(t)\rangle = \langle\phi(0)\vert \hat{U}(t)^\dagger \hat{U}(t) \vert\psi(0)\rangle = 0\]</div>
+<p>Now consider a complete orthonormal basis <span class="math notranslate nohighlight">\(\{\vert e_n\rangle\}\)</span>. These basis states satisfy <span class="math notranslate nohighlight">\(\langle e_m \vert e_n\rangle = \delta_{mn}\)</span>. By the two conditions above, the evolved states <span class="math notranslate nohighlight">\(\hat{U}(t)\vert e_n\rangle\)</span> must also form an orthonormal set:</p>
+<div class="math notranslate nohighlight">
+\[\langle e_m \vert \hat{U}(t)^\dagger \hat{U}(t) \vert e_n\rangle = \delta_{mn}\]</div>
+<p>Since this holds for every pair of basis vectors, the operator <span class="math notranslate nohighlight">\(\hat{U}(t)^\dagger \hat{U}(t)\)</span> has matrix elements <span class="math notranslate nohighlight">\(\delta_{mn}\)</span> in every orthonormal basis—meaning it equals the identity:</p>
+<div class="important admonition">
+<p class="admonition-title">Unitarity from Information Preservation</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}(t)^\dagger \hat{U}(t) = \hat{I}\]</div>
+<p>Time evolution is unitary because quantum dynamics preserves information: it maps every orthonormal basis to another orthonormal basis, both forward and backward in time.</p>
 </div>
-<ol class="arabic simple" start="4">
-<li><p><strong>Unitarity</strong>: <span class="math notranslate nohighlight">\(\hat{U}^\dagger(t) \hat{U}(t) = I\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-</ol>
 </section>
-</section>
-<section id="computing-the-time-evolution-operator-for-22-systems">
-<h3>Computing the Time-Evolution Operator for 2×2 Systems<a class="headerlink" href="#computing-the-time-evolution-operator-for-22-systems" title="Link to this heading">#</a></h3>
-<p>For a qubit or spin-1/2 system, the Hamiltonian is a 2×2 matrix. The time-evolution operator can be computed explicitly using the spectral decomposition or by exploiting the structure of 2×2 matrices.</p>
-<p>#:::{admonition} Spectral: Time Evolution
-:class: important</p>
-<p>If <span class="math notranslate nohighlight">\(\hat{H}\)</span> has eigenvalues <span class="math notranslate nohighlight">\(E_1, E_2\)</span> and orthonormal eigenstates <span class="math notranslate nohighlight">\(|E_1\rangle, |E_2\rangle\)</span>, then</p>
+<section id="hermitian-generators-of-unitary-operators">
+<h3>Hermitian Generators of Unitary Operators<a class="headerlink" href="#hermitian-generators-of-unitary-operators" title="Link to this heading">#</a></h3>
+<p>A key insight is that every unitary operator can be written as the exponential of a <strong>Hermitian</strong> operator. If <span class="math notranslate nohighlight">\(\hat{G}\)</span> is Hermitian (<span class="math notranslate nohighlight">\(\hat{G}^\dagger = \hat{G}\)</span>), then</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{H} = E_1 |E_1\rangle\langle E_1| + E_2 |E_2\rangle\langle E_2|\]</div>
-<p>It follows that</p>
-<div class="math notranslate nohighlight" id="equation-eq-evolution-spectral">
-<span class="eqno">(43)<a class="headerlink" href="#equation-eq-evolution-spectral" title="Link to this equation">#</a></span>\[
-\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar} = \mathrm{e}^{-\mathrm{i}E_1 t/\hbar} |E_1\rangle\langle E_1| + \mathrm{e}^{-\mathrm{i}E_2 t/\hbar} |E_2\rangle\langle E_2|\]</div>
-<p>The eigenstates do not evolve in direction—they only accumulate phases proportional to their energies.</p>
-<div class="docutils">
+\[\hat{U}(\theta) = \mathrm{e}^{\mathrm{i}\hat{G}\theta}\]</div>
+<p>is unitary for any real parameter <span class="math notranslate nohighlight">\(\theta\)</span>. Here, <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\hat{G}\theta}\)</span> is defined via the Taylor series:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{e}^{\mathrm{i}\hat{G}\theta} = \sum_{n=0}^{\infty} \frac{(\mathrm{i}\hat{G}\theta)^n}{n!}\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Proof: Unitarity of Matrix Exponentials</p>
+<p>Using the Taylor series directly:</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}^\dagger = \left(\sum_n \frac{(\mathrm{i}\hat{G}\theta)^n}{n!}\right)^\dagger = \sum_n \frac{(-\mathrm{i}\hat{G}\theta)^n}{n!} = \mathrm{e}^{-\mathrm{i}\hat{G}\theta}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\hat{G}\)</span> is Hermitian and <span class="math notranslate nohighlight">\((\hat{G}^n)^\dagger = (\hat{G}^\dagger)^n = \hat{G}^n\)</span>.</p>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}^\dagger \hat{U} = \mathrm{e}^{-\mathrm{i}\hat{G}\theta} \mathrm{e}^{\mathrm{i}\hat{G}\theta} = \mathrm{e}^{0} = \hat{I}\]</div>
+<p>using the fact that <span class="math notranslate nohighlight">\(\hat{G}\)</span> commutes with itself.</p>
+</div>
+</section>
+<section id="from-hermitian-generator-to-time-evolution">
+<h3>From Hermitian Generator to Time Evolution<a class="headerlink" href="#from-hermitian-generator-to-time-evolution" title="Link to this heading">#</a></h3>
+<p>In quantum mechanics, time evolution is generated by the <strong>Hamiltonian</strong> <span class="math notranslate nohighlight">\(\hat{H}\)</span>, which is always Hermitian. The time-evolution operator is:</p>
+<div class="important admonition">
+<p class="admonition-title">Time-Evolution Operator</p>
+<div class="math notranslate nohighlight">
+\[\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hbar\)</span> is Planck’s constant and the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \hat{H}^\dagger\)</span> is Hermitian.</p>
+</div>
+<p>This form follows from integrating the fundamental equation of motion. The Schrödinger equation is:</p>
 <div class="dropdown note admonition">
-<p class="admonition-title">Derivation: Spectral Exponential</p>
-<p>For any operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> with spectral decomposition <span class="math notranslate nohighlight">\(\hat{A} = \sum_i \lambda_i |a_i\rangle\langle a_i|\)</span>, we have</p>
+<p class="admonition-title">Time-Dependent Schrödinger Equation</p>
+<p>Starting with <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t)\vert\psi(0)\rangle\)</span>, differentiate:</p>
 <div class="math notranslate nohighlight">
-\[
-\mathrm{e}^{\hat{A}} = \sum_i \mathrm{e}^{\lambda_i} |a_i\rangle\langle a_i|\]</div>
-<p>This is because powers of <span class="math notranslate nohighlight">\(\hat{A}\)</span> in the exponential series respect the projection structure. Applying this to <span class="math notranslate nohighlight">\(\hat{H}\)</span>:</p>
+\[\frac{\mathrm{d}}{\mathrm{d}t}\vert\psi(t)\rangle = \frac{\mathrm{d}\hat{U}}{\mathrm{d}t}\vert\psi(0)\rangle\]</div>
+<p>For <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, the derivative is</p>
 <div class="math notranslate nohighlight">
-\[
-\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar} = \sum_i \mathrm{e}^{-\mathrm{i}E_i t/\hbar} |E_i\rangle\langle E_i|\]</div>
-</div>
-</div>
-<section id="computing-hat-u-t-for-hat-h-omega-hat-sigma-z">
-<h4>Computing <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}^z\)</span><a class="headerlink" href="#computing-hat-u-t-for-hat-h-omega-hat-sigma-z" title="Link to this heading">#</a></h4>
-<p>A common case is a spin in a magnetic field along the z-direction: <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}^z = \omega \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>, where <span class="math notranslate nohighlight">\(\omega\)</span> is a frequency.</p>
-<p>The eigenvalues are <span class="math notranslate nohighlight">\(E_\pm = \pm \omega\)</span> with eigenstates <span class="math notranslate nohighlight">\(|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(|1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>.</p>
+\[\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}\hat{H} \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar} = -\frac{\mathrm{i}}{\hbar}\hat{H} \hat{U}(t)\]</div>
+<p>Therefore</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\omega t} |0\rangle\langle 0| + \mathrm{e}^{\mathrm{i}\omega t} |1\rangle\langle 1| = \begin{pmatrix} \mathrm{e}^{-\mathrm{i}\omega t} &amp; 0 \\ 0 &amp; \mathrm{e}^{\mathrm{i}\omega t} \end{pmatrix}\end{split}\]</div>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>A general state <span class="math notranslate nohighlight">\(|\psi\rangle = \alpha |0\rangle + \beta |1\rangle\)</span> evolves to</p>
+\[\frac{\mathrm{d}}{\mathrm{d}t}\vert\psi(t)\rangle = -\frac{\mathrm{i}}{\hbar}\hat{H} \hat{U}(t)\vert\psi(0)\rangle = -\frac{\mathrm{i}}{\hbar}\hat{H}\vert\psi(t)\rangle\]</div>
+<p>This is the <strong>time-dependent Schrödinger equation</strong>:</p>
 <div class="math notranslate nohighlight">
-\[
-|\psi(t)\rangle = \alpha \mathrm{e}^{-\mathrm{i}\omega t} |0\rangle + \beta \mathrm{e}^{\mathrm{i}\omega t} |1\rangle\]</div>
-<p>Each energy eigenstate accumulates its own phase factor; the relative phase between the two evolves with the energy difference <span class="math notranslate nohighlight">\(2\omega\)</span>.</p>
+\[\mathrm{i}\hbar \frac{\mathrm{d}}{\mathrm{d}t}\vert\psi(t)\rangle = \hat{H}\vert\psi(t)\rangle\]</div>
+<p>The Hamiltonian generates infinitesimal unitary transformations: the <span class="math notranslate nohighlight">\(\hbar\)</span> and <span class="math notranslate nohighlight">\(\mathrm{i}\)</span> are bookkeeping factors that ensure the exponential is unitary.</p>
 </div>
 </section>
-</section>
-<section id="basis-transformations-and-unitary-changes-of-basis">
-<h3>Basis Transformations and Unitary Changes of Basis<a class="headerlink" href="#basis-transformations-and-unitary-changes-of-basis" title="Link to this heading">#</a></h3>
-<p>In quantum mechanics, we often switch between different bases (e.g., from the computational basis <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span> to the eigenbasis of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>). These basis changes are performed by unitary transformations.</p>
-<p>#:::{admonition} Change-of-Basis Operator
-:class: important</p>
-<p>Suppose we have an orthonormal basis <span class="math notranslate nohighlight">\(\{|e_i\rangle\}\)</span> and another basis <span class="math notranslate nohighlight">\(\{|f_j\rangle\}\)</span>. The <strong>change-of-basis operator</strong> is</p>
-<div class="math notranslate nohighlight" id="equation-eq-change-of-basis">
-<span class="eqno">(44)<a class="headerlink" href="#equation-eq-change-of-basis" title="Link to this equation">#</a></span>\[
-\hat{U} = \sum_i |f_i\rangle\langle e_i|\]</div>
-<p>This unitary operator maps the first basis to the second: <span class="math notranslate nohighlight">\(\hat{U} |e_i\rangle = |f_i\rangle\)</span>. It is unitary because</p>
+<section id="energy-eigenstates-and-stationary-states">
+<h3>Energy Eigenstates and Stationary States<a class="headerlink" href="#energy-eigenstates-and-stationary-states" title="Link to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(\hat{H}\vert E_n\rangle = E_n \vert E_n\rangle\)</span> is an energy eigenstate, then applying the time-evolution operator is simple:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{U}^\dagger \hat{U} = \sum_i |e_i\rangle\langle f_i| \sum_j |f_j\rangle\langle e_j| = \sum_i |e_i\rangle\langle e_i| = I\]</div>
-<div class="docutils">
-<p>A state vector transforms as <span class="math notranslate nohighlight">\(|\psi'\rangle = \hat{U} |\psi\rangle\)</span>, and its components in the new basis are related to the old by unitary transformations of the coefficient vectors.</p>
-<h3 class="rubric" id="summary">Summary</h3>
-<ul class="simple">
-<li><p><strong>Unitary operators</strong> preserve inner products, normalization, and measurement probabilities. They form the foundation of reversible quantum evolution.</p></li>
-<li><p><strong>Hermitian operators</strong> generate unitary transformations: <span class="math notranslate nohighlight">\(\hat{U} = \mathrm{e}^{\mathrm{i}\hat{G}\theta}\)</span> where <span class="math notranslate nohighlight">\(\hat{G}^\dagger = \hat{G}\)</span>.</p></li>
-<li><p>The <strong>time-dependent Schrödinger equation</strong>, <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \partial_t|\psi\rangle = \hat{H}|\psi\rangle\)</span>, is the fundamental postulate governing quantum evolution. The Hamiltonian is the energy operator.</p></li>
-<li><p>The <strong>time-evolution operator</strong> <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> solves the Schrödinger equation. It is unitary and satisfies the composition law.</p></li>
-<li><p>For <strong>time-independent Hamiltonians</strong>, eigenstates evolve with phase factors <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E_n t/\hbar}\)</span> determined by their energies. This is the basis of energy-level diagrams and selection rules.</p></li>
-<li><p><strong>Basis transformations</strong> are unitary: any two orthonormal bases are related by a unitary operator.</p></li>
-<li><p>Energy eigenstates do not change in time—they only accumulate phases. Superpositions evolve, with relative phases oscillating at frequencies determined by energy differences.</p></li>
-</ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="std std-doc">1.2.1 Measurement Postulate</span></a></strong>: Evolution is unitary between measurements; measurement is the only non-unitary process in quantum mechanics</p></li>
-<li><p><strong><a class="reference internal" href="1-3-2-spin-dynamics.html"><span class="std std-doc">1.3.2 Spin Dynamics</span></a></strong>: Concrete example: a spin precesses under a magnetic field via unitary evolution</p></li>
-<li><p><strong><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html"><span class="std std-doc">5.1.1 Toy Model</span></a></strong>: Perturbation expansions for nearly solvable Hamiltonians when exact diagonalization is unavailable</p></li>
-</ul>
+\[\vert\psi(t)\rangle = \hat{U}(t) \vert E_n\rangle = \mathrm{e}^{-\mathrm{i}E_n t/\hbar} \vert E_n\rangle\]</div>
+<p>The state picks up only a <strong>global phase factor</strong> <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E_n t/\hbar}\)</span>. Since global phases do not affect measurement probabilities, energy eigenstates are <strong>stationary</strong>: they do not evolve in time (up to an unobservable phase).</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion</p>
+<p>If a state <span class="math notranslate nohighlight">\(\vert\psi(0)\rangle\)</span> is a superposition of energy eigenstates, <span class="math notranslate nohighlight">\(\vert\psi(0)\rangle = \sum_n c_n \vert E_n\rangle\)</span>, how does the state evolve? What happens to the relative phases between eigenstates? Does the time evolution preserve the squared amplitudes <span class="math notranslate nohighlight">\(|c_n|^2\)</span>?</p>
 </div>
-</div>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>unitary operator</strong> satisfies <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{U} = \hat{I}\)</span> and preserves inner products and norms.</p></li>
+<li><p><strong>Time evolution must be unitary</strong> to preserve quantum information and measurement probabilities.</p></li>
+<li><p>Every unitary operator is the exponential of a Hermitian generator: <span class="math notranslate nohighlight">\(\hat{U}(\theta) = \mathrm{e}^{\mathrm{i}\hat{G}\theta}\)</span>.</p></li>
+<li><p>The <strong>time-evolution operator</strong> is <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, where <span class="math notranslate nohighlight">\(\hat{H}\)</span> is the Hamiltonian.</p></li>
+<li><p>The <strong>Schrödinger equation</strong> <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \frac{\mathrm{d}}{\mathrm{d}t}\vert\psi\rangle = \hat{H}\vert\psi\rangle\)</span> encodes unitary evolution.</p></li>
+<li><p><strong>Energy eigenstates</strong> <span class="math notranslate nohighlight">\(\vert E_n\rangle\)</span> evolve only by a global phase factor and are stationary.</p></li>
+</ul>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> A linear operator <span class="math notranslate nohighlight">\(\hat{U} = \mathrm{e}^{\mathrm{i}\hat{G}\theta}\)</span> is claimed to be unitary whenever <span class="math notranslate nohighlight">\(\hat{G}\)</span> is Hermitian and <span class="math notranslate nohighlight">\(\theta\)</span> is real. Verify this by computing <span class="math notranslate nohighlight">\(\hat{U}^\dagger \hat{U}\)</span> using the Taylor series of the exponential and the property <span class="math notranslate nohighlight">\(\hat{G}^\dagger = \hat{G}\)</span>. What property of the exponent makes the result equal to the identity?</p>
-<p><strong>2.</strong> Let <span class="math notranslate nohighlight">\(\hat{H}\)</span> be a time-independent Hamiltonian with energy eigenstates <span class="math notranslate nohighlight">\(\hat{H}|E_n\rangle = E_n|E_n\rangle\)</span>. Show that if the initial state is an energy eigenstate <span class="math notranslate nohighlight">\(|\psi(0)\rangle = |E_n\rangle\)</span>, then <span class="math notranslate nohighlight">\(|\psi(t)\rangle = \mathrm{e}^{-\mathrm{i}E_n t/\hbar}|E_n\rangle\)</span>. Prove that all measurement probabilities are independent of time for such a state. Such states are called <strong>stationary states</strong> — explain physically why.</p>
-<p><strong>3.</strong> Consider the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = E_0|0\rangle\langle 0| + E_1|1\rangle\langle 1|\)</span> with <span class="math notranslate nohighlight">\(E_0 \neq E_1\)</span>. Starting from <span class="math notranslate nohighlight">\(|\psi(0)\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>, find <span class="math notranslate nohighlight">\(|\psi(t)\rangle\)</span> explicitly. At what time <span class="math notranslate nohighlight">\(T\)</span> does <span class="math notranslate nohighlight">\(|\psi(T)\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span> (up to a global phase)? Express <span class="math notranslate nohighlight">\(T\)</span> in terms of <span class="math notranslate nohighlight">\(E_0\)</span>, <span class="math notranslate nohighlight">\(E_1\)</span>, and <span class="math notranslate nohighlight">\(\hbar\)</span>.</p>
-<p><strong>4.</strong> Compute the time-evolution operator <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span> using the spectral decomposition method. Write the result as an explicit <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix and show that <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> is unitary.</p>
-<p><strong>5.</strong> (Composition law) Show that for a time-independent Hamiltonian, <span class="math notranslate nohighlight">\(\hat{U}(t_1)\hat{U}(t_2) = \hat{U}(t_1 + t_2)\)</span>. Use the properties of the matrix exponential. Why does this law fail if <span class="math notranslate nohighlight">\(\hat{H}\)</span> depends on time?</p>
-<p><strong>6.</strong> Using the Taylor series <span class="math notranslate nohighlight">\(\mathrm{e}^{\hat{A}} = I + \hat{A} + \frac{\hat{A}^2}{2!} + \cdots\)</span> and the identity <span class="math notranslate nohighlight">\((\hat{\sigma}^x)^2 = I\)</span>, show that</p>
-<div class="math notranslate nohighlight">
-\[
-\mathrm{e}^{-\mathrm{i}\theta\hat{\sigma}^x/2} = \cos(\theta/2)\,I - i\sin(\theta/2)\,\hat{\sigma}^x\]</div>
-<p>Evaluate this explicitly at <span class="math notranslate nohighlight">\(\theta = \pi\)</span> to get the matrix form of the <span class="math notranslate nohighlight">\(\pi\)</span>-pulse about the x-axis.</p>
-<p><strong>7.</strong> The change-of-basis operator between the computational basis <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span> and the <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> eigenbasis <span class="math notranslate nohighlight">\(\{|+\rangle, |-\rangle\}\)</span> is <span class="math notranslate nohighlight">\(\hat{V} = |+\rangle\langle 0| + |-\rangle\langle 1|\)</span>. Write <span class="math notranslate nohighlight">\(\hat{V}\)</span> as an explicit <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix (recall <span class="math notranslate nohighlight">\(|+\rangle = (|0\rangle + |1\rangle)/\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(|-\rangle = (|0\rangle - |1\rangle)/\sqrt{2}\)</span>). Verify that <span class="math notranslate nohighlight">\(\hat{V}\)</span> is unitary and show that <span class="math notranslate nohighlight">\(\hat{V}\hat{\sigma}^z\hat{V}^\dagger = \hat{\sigma}^x\)</span>.</p>
-<p><strong>8.</strong> An operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> evolves in time as <span class="math notranslate nohighlight">\(\hat{A}(t) = \hat{U}(t)\hat{A}\hat{U}^\dagger(t)\)</span>. (a) Show that if <span class="math notranslate nohighlight">\(\hat{A}\)</span> is Hermitian, then <span class="math notranslate nohighlight">\(\hat{A}(t)\)</span> is Hermitian for all <span class="math notranslate nohighlight">\(t\)</span>. (b) Show that eigenvalues of <span class="math notranslate nohighlight">\(\hat{A}(t)\)</span> do not change with time. (c) What does this imply physically about the spectrum of observables?</p>
+<p><strong>1.</strong> Verify that <span class="math notranslate nohighlight">\(\hat{U}(\theta) = \mathrm{e}^{\mathrm{i}\hat{G}\theta}\)</span> is unitary when <span class="math notranslate nohighlight">\(\hat{G}\)</span> is Hermitian. Compute <span class="math notranslate nohighlight">\(\hat{U}^\dagger(\theta) \hat{U}(\theta)\)</span> using the Taylor series expansion.</p>
+<p><strong>2.</strong> The Pauli matrix <span class="math notranslate nohighlight">\(\hat{\sigma}^x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span> is Hermitian. Compute <span class="math notranslate nohighlight">\(\hat{U}(\theta) = \mathrm{e}^{\mathrm{i}\hat{\sigma}^x \theta/2}\)</span> by first finding the eigenvalues and eigenvectors, then using the spectral decomposition.</p>
+<p><strong>3.</strong> Let <span class="math notranslate nohighlight">\(\hat{H} = E_0 \hat{I} + \Delta \hat{\sigma}^z\)</span> (a two-level system with an energy offset <span class="math notranslate nohighlight">\(E_0\)</span> and energy splitting <span class="math notranslate nohighlight">\(\Delta\)</span>). Write down the time-evolution operator <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> explicitly and show that an energy eigenstate picks up only a phase factor.</p>
+<p><strong>4.</strong> Starting from the time-evolution operator <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, derive the time-dependent Schrödinger equation. (Hint: differentiate <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t) \vert\psi(0)\rangle\)</span> with respect to <span class="math notranslate nohighlight">\(t\)</span>.)</p>
+<p><strong>5.</strong> Prove that if <span class="math notranslate nohighlight">\(\vert\psi(0)\rangle\)</span> is normalized, then <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t)\vert\psi(0)\rangle\)</span> is normalized for all <span class="math notranslate nohighlight">\(t\)</span>. What role does unitarity play?</p>
+<p><strong>6.</strong> Consider the superposition <span class="math notranslate nohighlight">\(\vert\psi(0)\rangle = \frac{1}{\sqrt{2}}(\vert E_1\rangle + \vert E_2\rangle)\)</span>, where <span class="math notranslate nohighlight">\(\vert E_1\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert E_2\rangle\)</span> are energy eigenstates with energies <span class="math notranslate nohighlight">\(E_1\)</span> and <span class="math notranslate nohighlight">\(E_2\)</span>. Find <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle\)</span> and interpret the time-dependent phase difference <span class="math notranslate nohighlight">\((E_2 - E_1) t / \hbar\)</span> physically.</p>
+<p><strong>7.</strong> Why can we always extract the Hamiltonian from the time-evolution operator? Specifically, if <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, what is <span class="math notranslate nohighlight">\(\hat{H}\)</span> in terms of <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}}{\mathrm{d}t}\big|_{t=0}\)</span>?</p>
+<p><strong>8.</strong> Explain why global phase factors (like the <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E_n t/\hbar}\)</span> for an energy eigenstate) do not affect measurement probabilities or expectation values. Show this explicitly for a two-level system.</p>
+<p><strong>9.</strong> Prove that <span class="math notranslate nohighlight">\(\hat{U}(t_1)\hat{U}(t_2) = \hat{U}(t_1 + t_2)\)</span> (composition property). Why is this property essential for the consistency of quantum mechanics?</p>
 </section>
 </section>
 
@@ -906,11 +736,11 @@ P_i(t) = |\langle \phi_i | \hat{U} | \psi \rangle|^2 = \langle \psi | \hat{U}^\d
       </div>
     </a>
     <a class="right-next"
-       href="1-3-2-spin-dynamics.html"
+       href="1-3-2-schrodinger-picture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1.3.2 Spin Dynamics</p>
+        <p class="prev-next-title">1.3.2 Schrödinger Picture</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -931,24 +761,13 @@ P_i(t) = |\langle \phi_i | \hat{U} | \psi \rangle|^2 = \langle \psi | \hat{U}^\d
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-operators">Unitary Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-generators-and-unitary-operators">Hermitian Generators and Unitary Operators</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-of-an-operator">The Exponential of an Operator</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-dependent-schrodinger-equation">The Time-Dependent Schrödinger Equation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-independent-vs-time-dependent">Time-Independent vs. Time-Dependent</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-the-time-evolution-operator">Solution: The Time-Evolution Operator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-time-evolution-operator">Properties of the Time-Evolution Operator</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-time-evolution-operator-for-22-systems">Computing the Time-Evolution Operator for 2×2 Systems</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-hat-u-t-for-hat-h-omega-hat-sigma-z">Computing <span class="math notranslate nohighlight">\(\hat{U}(t)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \omega \hat{\sigma}^z\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-transformations-and-unitary-changes-of-basis">Basis Transformations and Unitary Changes of Basis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-time-evolution-must-be-unitary">Why Time Evolution Must Be Unitary?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermitian-generators-of-unitary-operators">Hermitian Generators of Unitary Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-hermitian-generator-to-time-evolution">From Hermitian Generator to Time Evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-eigenstates-and-stationary-states">Energy Eigenstates and Stationary States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
