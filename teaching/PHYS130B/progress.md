@@ -26,6 +26,16 @@ The following workstreams were completed in previous runs:
 
 ### Completed
 
+- [x] 1-1-1-what-is-a-qubit.ipynb — 2026-03-30 — Full rewrite: narrative intro (quantum abstraction → ML paradigm → QM as vector framework), physical realizations table, removed SG digressions; renamed from spins-and-qubits
+- [x] 1-1-2-state-and-representation.ipynb — 2026-03-30 — Rewrote overview, added outer-product row to ket/bra table, converted cong→=, added state-vs-representation note box, fixed \vert throughout
+- [x] 1-1-3-hermitian-operators.ipynb — 2026-03-30 — Full rewrite: why Hermitian (Re(z) analogy), matrix rep tip, eigenvalues (dropdown proofs), spectral decomp, two Pauli tables (operators + spectral dec), algebraic properties, expectation values in α/β and θ/φ forms
+- [x] 1-2-1-measurement-postulate.ipynb — 2026-03-30 — Full rewrite: SG experiments (Z-Z-Z, Z-X-Z in note boxes), PSD/projection operator framework, three-axiom important box, collapse arrow notation, SG explanation; removed expectation value/projective measurement sections
+- [x] 1-2-2-uncertainty-and-incompatibility.ipynb — 2026-03-30 — Full rewrite: expectation value/variance (from 1.2.1), commutator definition + socks/shoes analogy + properties, commuting operators theorem (dropdown proof), Robertson uncertainty relation (dropdown Cauchy-Schwarz proof), qubit example; removed complementarity/sequential measurement sections
+- [x] 1-2-3-measurement-operators.ipynb — 2026-03-30 — Full rewrite: projector definition + properties + spectral decomp note + Born rule reminder, Pauli projectors table (all 6), Bayesian updating framing (epistemic interpretation), degenerate measurements with 2-qubit example
+- [x] 1-3-1-unitary-evolution.ipynb — 2026-03-30 — Full rewrite: unitary operators (motivation from phase factor, definition, inner product preservation), Hermitian generators (matrix exp, spectral decomp), why time evolution is unitary (information preservation), Hamiltonian as generator, Schrödinger equation (dropdown derivation)
+- [x] 1-3-2-schrodinger-picture.ipynb — 2026-03-30 — Full rewrite + rename from spin-dynamics: Schrödinger picture framework, time-evolution operator properties, spin precession example, Rabi oscillations example; removed damping/decoherence/arbitrary drive sections
+- [x] 1-3-3-heisenberg-picture.ipynb — 2026-03-30 — Full rewrite: Heisenberg picture motivation, equation of motion (dropdown derivation), spin precession example, conserved quantities and symmetry, Lie groups U(1)/SU(2) and Standard Model connection
+
 ### In Progress
 
 ### Pending
@@ -54,15 +64,6 @@ The following workstreams were completed in previous runs:
 - [ ] 6-4-open-quantum-systems
 
 #### Subsections (63)
-- [ ] 1-1-1-spins-and-qubits
-- [ ] 1-1-2-state-and-representation
-- [ ] 1-1-3-hermitian-operators
-- [ ] 1-2-1-measurement-postulate
-- [ ] 1-2-2-uncertainty-and-incompatibility
-- [ ] 1-2-3-measurement-operators
-- [ ] 1-3-1-unitary-evolution
-- [ ] 1-3-2-spin-dynamics
-- [ ] 1-3-3-heisenberg-picture
 - [ ] 2-1-1-tensor-product
 - [ ] 2-1-2-symmetrization
 - [ ] 2-1-3-second-quantization

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -184,7 +184,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -532,7 +532,7 @@
 <h1>1.2 Measurement<a class="headerlink" href="#measurement" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Measurement in quantum mechanics is fundamentally different from measurement in classical physics. In classical systems, we observe pre-existing properties. In quantum systems, measurement <strong>creates</strong> the outcome and <strong>collapses</strong> the state. This section explores three pillars: the Born rule and state collapse, the incompatibility of observables and uncertainty relations, and the general measurement formalism.</p>
+<p>How do we extract information from a quantum system? When we interact with a qubit — as in the Stern-Gerlach experiment — the result is random, irreversible, and state-altering. This section builds the complete mathematical framework for quantum measurement: the Born rule, the uncertainty principle, and the projector formalism that unifies them.</p>
 <section id="lessons">
 <h3>Lessons<a class="headerlink" href="#lessons" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -544,21 +544,21 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Lesson</p></th>
 <th class="head"><p>Title</p></th>
-<th class="head"><p>Keywords</p></th>
+<th class="head"><p>Core Question</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1.2.1</p></td>
 <td><p><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="doc std std-doc">Measurement Postulate</span></a></p></td>
-<td><p>Born rule, projective measurement, expectation values</p></td>
+<td><p>Why are measurement outcomes random, and how does measurement collapse the state?</p></td>
 </tr>
 <tr class="row-odd"><td><p>1.2.2</p></td>
 <td><p><a class="reference internal" href="1-2-2-uncertainty-and-incompatibility.html"><span class="doc std std-doc">Uncertainty and Incompatibility</span></a></p></td>
-<td><p>commutators, complementarity, Heisenberg principle</p></td>
+<td><p>When can two observables be measured simultaneously, and what limits joint precision?</p></td>
 </tr>
 <tr class="row-even"><td><p>1.2.3</p></td>
 <td><p><a class="reference internal" href="1-2-3-measurement-operators.html"><span class="doc std std-doc">Measurement Operators</span></a></p></td>
-<td><p>projectors, conditional probability, state collapse, Bayesian interpretation</p></td>
+<td><p>What is the mathematical structure of a measurement, and how does collapse update knowledge?</p></td>
 </tr>
 </tbody>
 </table>
@@ -567,19 +567,22 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Born rule</strong>: Probability of outcome <span class="math notranslate nohighlight">\(m\)</span> is <span class="math notranslate nohighlight">\(p(m|O,\psi) = \langle\psi|P_{O=m}|\psi\rangle\)</span>, where <span class="math notranslate nohighlight">\(P_{O=m} = |m\rangle\langle m|\)</span> is the measurement projector.</p></li>
-<li><p><strong>State collapse</strong>: After outcome <span class="math notranslate nohighlight">\(m\)</span>, the state updates to <span class="math notranslate nohighlight">\(|\psi'\rangle = P_{O=m}|\psi\rangle / \sqrt{p(m|O,\psi)}\)</span>. This extracts the component consistent with the observed outcome.</p></li>
-<li><p><strong>Commutation and compatibility</strong>: Observables <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> commute (<span class="math notranslate nohighlight">\([A,B]=0\)</span>) if and only if they share a common eigenbasis. Non-commuting observables are incompatible; measuring one destroys information about the other.</p></li>
-<li><p><strong>Uncertainty principle</strong>: For non-commuting observables, <span class="math notranslate nohighlight">\(\Delta A \cdot \Delta B \geq \frac{1}{2}|\langle[A,B]\rangle|\)</span>. This is fundamental, not experimental.</p></li>
-<li><p><strong>Bayesian view</strong>: State collapse can be understood as a knowledge update—the quantum state parameterizes our information about outcome probabilities.</p></li>
+<li><p><strong>Projection operator</strong>: <span class="math notranslate nohighlight">\(\hat{P}_{O=m} = \vert O{=}m\rangle\langle O{=}m\vert\)</span> — the mathematical object encoding a measurement outcome.</p></li>
+<li><p><strong>Born rule</strong>: <span class="math notranslate nohighlight">\(P(m\mid\psi) = \langle\psi\vert\hat{P}_{O=m}\vert\psi\rangle = \vert\langle O{=}m\vert\psi\rangle\vert^2\)</span> — probability from squared overlap.</p></li>
+<li><p><strong>State collapse</strong>: After outcome <span class="math notranslate nohighlight">\(m\)</span>, the state updates <span class="math notranslate nohighlight">\(\vert\psi\rangle \to \vert O{=}m\rangle\)</span> (Axiom 3 of the measurement postulate).</p></li>
+<li><p><strong>Commutator</strong>: <span class="math notranslate nohighlight">\([\hat{A},\hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}\)</span> — zero if and only if the two observables share a common eigenbasis.</p></li>
+<li><p><strong>Robertson uncertainty relation</strong>: <span class="math notranslate nohighlight">\(\Delta\hat{A}\cdot\Delta\hat{B} \geq \tfrac{1}{2}|\langle[\hat{A},\hat{B}]\rangle|\)</span> — fundamental, not a limitation of instruments.</p></li>
+<li><p><strong>Bayesian interpretation</strong>: State collapse is a knowledge update — the quantum state encodes a probability distribution that is refined upon measurement.</p></li>
 </ul>
 </section>
 <section id="learning-objectives">
 <h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Apply the Born rule to compute measurement probabilities.</p></li>
-<li><p>Evaluate commutators and verify uncertainty relations for Pauli observables.</p></li>
-<li><p>Describe state collapse and its interpretation as information refinement.</p></li>
+<li><p>State the three axioms of the measurement postulate and apply them to compute outcome probabilities and post-measurement states.</p></li>
+<li><p>Evaluate commutators for Pauli operators and identify which pairs of observables are compatible.</p></li>
+<li><p>Apply the Robertson uncertainty relation to derive and verify uncertainty bounds for qubit states.</p></li>
+<li><p>Write the projection operators for all Pauli eigenstates in both operator and matrix form.</p></li>
+<li><p>Interpret state collapse as Bayesian updating and identify the epistemic vs. ontic interpretations.</p></li>
 </ul>
 </section>
 </section>

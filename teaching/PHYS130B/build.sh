@@ -24,22 +24,15 @@ else
   cp -r notes_src/_build/html/* notes/
 fi
 
-# Copy assets (figures, etc.) from notes_src to notes
-if [ -d "notes_src/assets" ]; then
-  mkdir -p notes/assets
-  cp -r notes_src/assets/* notes/assets/
-fi
-
-# Copy _static and _images to non-underscore names and rewrite HTML
-# (GitHub Pages/Jekyll excludes _* directories from site output)
-if [ -d "notes/_static" ]; then
-  rm -rf notes/static
-  cp -r notes/_static notes/static
-fi
-if [ -d "notes/_images" ]; then
-  rm -rf notes/images
-  cp -r notes/_images notes/images
-fi
+# Rename _* directories to non-underscore names for GitHub Pages compatibility
+# (GitHub Pages/Jekyll excludes _* directories; rename avoids duplicating files)
+for dir in _static _images _sources; do
+  newdir="${dir#_}"
+  if [ -d "notes/$dir" ]; then
+    rm -rf "notes/$newdir"
+    mv "notes/$dir" "notes/$newdir"
+  fi
+done
 python3 -c "
 import os, re
 
@@ -65,7 +58,6 @@ for root, _, files in os.walk('notes'):
                 content = file.read()
             new = re.sub(r'_static\b', 'static', content)
             new = re.sub(r'_sources\b', 'sources', new)
-            new = re.sub(r'_sphinx_design_static\b', 'sphinx_design_static', new)
             new = re.sub(r'_images\b', 'images', new)
             # Replace or insert favicon to use site avatar (single source of truth)
             if re.search(r'<link\\s+rel=[\"\\'](?:shortcut\\s+)?icon[\"\\']', new):

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -184,7 +184,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -532,14 +532,7 @@
 <h1>2.1 Bosons and Fermions<a class="headerlink" href="#bosons-and-fermions" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The distinction between bosons and fermions is <strong>fundamental</strong> to all of physics:</p>
-<ul class="simple">
-<li><p><strong>Chemistry and atomic structure</strong> depend on the Pauli exclusion principle.</p></li>
-<li><p><strong>Superconductivity</strong> emerges from pairing of fermions.</p></li>
-<li><p><strong>Lasers and quantum optics</strong> exploit boson properties (unlimited occupation in one state).</p></li>
-<li><p><strong>Dense matter</strong> (white dwarfs, neutron stars) is supported by fermion degeneracy pressure.</p></li>
-<li><p><strong>Particle physics</strong> connects spin and statistics (spin-statistics theorem).</p></li>
-</ul>
+<p>Chapter 1 studied a single qubit. Real physics involves many particles—and when those particles are identical, entirely new phenomena emerge. This unit builds the many-body framework in three steps: tensor products for combining state spaces, symmetrization for imposing indistinguishability, and second quantization for encoding everything in an elegant operator algebra. The punchline: bosons and fermions behave in fundamentally different ways, and this distinction shapes all of chemistry, condensed matter, and particle physics.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Property</p></th>
@@ -552,25 +545,25 @@
 <td><p>Integer</p></td>
 <td><p>Half-integer</p></td>
 </tr>
-<tr class="row-odd"><td><p>Exchange behavior</p></td>
-<td><p>Symmetric</p></td>
-<td><p>Antisymmetric</p></td>
+<tr class="row-odd"><td><p>Wavefunction</p></td>
+<td><p>Symmetric (permanent)</p></td>
+<td><p>Antisymmetric (determinant)</p></td>
 </tr>
-<tr class="row-even"><td><p>Occupancy</p></td>
-<td><p>Unlimited per state</p></td>
-<td><p>At most 1 per state</p></td>
+<tr class="row-even"><td><p>Occupation</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_\alpha \in \{0,1,2,\ldots\}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_\alpha \in \{0,1\}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Algebra</p></td>
-<td><p>Commutation relations</p></td>
-<td><p>Anticommutation relations</p></td>
+<td><p><span class="math notranslate nohighlight">\([\hat{b},\hat{b}^\dagger]=1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\{\hat{c},\hat{c}^\dagger\}=1\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>Examples</p></td>
-<td><p>Photons, <span class="math notranslate nohighlight">\(^4\)</span>He, phonons</p></td>
+<td><p>Photons, phonons, <span class="math notranslate nohighlight">\(^4\)</span>He</p></td>
 <td><p>Electrons, quarks, <span class="math notranslate nohighlight">\(^3\)</span>He</p></td>
 </tr>
 <tr class="row-odd"><td><p>Consequence</p></td>
-<td><p>Bose condensation possible</p></td>
-<td><p>Degeneracy pressure</p></td>
+<td><p>BEC, stimulated emission</p></td>
+<td><p>Pauli exclusion, degeneracy pressure</p></td>
 </tr>
 </tbody>
 </table>
@@ -592,15 +585,15 @@
 <tbody>
 <tr class="row-even"><td><p>2.1.1</p></td>
 <td><p><a class="reference internal" href="2-1-1-tensor-product.html"><span class="doc std std-doc">Tensor Product</span></a></p></td>
-<td><p>exchange symmetry, bosons, fermions</p></td>
+<td><p>tensor product, many-body states, single/two-body operators, Pauli strings</p></td>
 </tr>
 <tr class="row-odd"><td><p>2.1.2</p></td>
 <td><p><a class="reference internal" href="2-1-2-symmetrization.html"><span class="doc std std-doc">Symmetrization</span></a></p></td>
-<td><p>symmetrization, Slater determinant, Pauli exclusion</p></td>
+<td><p>identical particles, permanent, Slater determinant, Pauli exclusion, insertion/deletion rules</p></td>
 </tr>
 <tr class="row-even"><td><p>2.1.3</p></td>
 <td><p><a class="reference internal" href="2-1-3-second-quantization.html"><span class="doc std std-doc">Second Quantization</span></a></p></td>
-<td><p>second quantization, creation/annihilation operators, Fock space</p></td>
+<td><p>Fock space, creation/annihilation operators, commutation/anticommutation, boson enhancement</p></td>
 </tr>
 </tbody>
 </table>
@@ -609,20 +602,23 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Tensor product</strong>: Composite Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span> for multi-particle systems.</p></li>
-<li><p><strong>Indistinguishability</strong>: Identical particles have no individual identity; states must be symmetrized or antisymmetrized.</p></li>
-<li><p><strong>Bosons and fermions</strong>: Symmetric (bosons) vs. antisymmetric (fermions) under particle exchange.</p></li>
-<li><p><strong>Pauli exclusion</strong>: No two identical fermions can occupy the same quantum state.</p></li>
-<li><p><strong>Second quantization</strong>: Creation and annihilation operators that automatically enforce exchange symmetry.</p></li>
+<li><p><strong>Tensor product</strong> <span class="math notranslate nohighlight">\(\mathcal{H}^{\otimes N}\)</span>: composite Hilbert space with dimension <span class="math notranslate nohighlight">\(d^N\)</span>; basis states are products of single-particle states.</p></li>
+<li><p><strong>Pauli strings</strong>: <span class="math notranslate nohighlight">\(\bigotimes_i \hat{\sigma}_i^{s_i}\)</span> form a complete orthogonal basis for multi-qubit Hermitian operators.</p></li>
+<li><p><strong>Indistinguishability</strong>: identical particles have no labels; wavefunctions must be symmetric (bosons) or antisymmetric (fermions).</p></li>
+<li><p><strong>Insertion/deletion rules</strong>: axiomatic procedure for adding/removing particles while preserving symmetry; the operational precursor to creation/annihilation operators.</p></li>
+<li><p><strong>Second quantization</strong>: occupation-number representation on Fock space <span class="math notranslate nohighlight">\(\mathcal{F} = \bigoplus_N \mathcal{H}_N\)</span>, where operator algebra automatically enforces quantum statistics.</p></li>
+<li><p><strong>Boson enhancement</strong>: <span class="math notranslate nohighlight">\(\hat{b}^\dagger\vert n\rangle = \sqrt{n+1}\,\vert n+1\rangle\)</span> makes occupation amplitudes grow, driving stimulated emission and BEC.</p></li>
+<li><p><strong>Pauli exclusion</strong>: <span class="math notranslate nohighlight">\((\hat{c}^\dagger_\alpha)^2 = 0\)</span> forbids double occupation; follows from fermionic anticommutation.</p></li>
 </ul>
 </section>
 <section id="learning-objectives">
 <h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Construct the tensor product space <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span> for composite quantum systems.</p></li>
-<li><p>Distinguish between bosons and fermions based on exchange symmetry and apply symmetrization/antisymmetrization to multi-particle states.</p></li>
-<li><p>Derive the Pauli exclusion principle from antisymmetric fermion wavefunctions.</p></li>
-<li><p>Apply creation and annihilation operators in second quantization to compute observables in Fock space.</p></li>
+<li><p>Construct tensor product spaces and decompose operators into Pauli strings.</p></li>
+<li><p>Explain why identical particles require symmetric or antisymmetric wavefunctions and apply the permanent/Slater determinant constructions.</p></li>
+<li><p>Use insertion/deletion rules to build symmetrized states incrementally.</p></li>
+<li><p>Work with Fock space, creation/annihilation operators, and occupation numbers.</p></li>
+<li><p>Contrast bosonic enhancement with fermionic exclusion and connect to physical phenomena.</p></li>
 </ul>
 </section>
 </section>

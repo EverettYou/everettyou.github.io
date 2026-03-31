@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=3ad29c79" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -184,7 +184,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-3-2-spin-dynamics.html">1.3.2 Spin Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
 </ul>
 </details></li>
@@ -508,15 +508,11 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-commutator">The Commutator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-commutators">Properties of Commutators</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commutators-of-pauli-matrices">Commutators of Pauli Matrices</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-commutators">Anti-commutators</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uncertainty-principle">The Uncertainty Principle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complementarity-and-sequential-measurements">Complementarity and Sequential Measurements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observable-algebras-and-quantum-complementarity">Observable Algebras and Quantum Complementarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-value-and-variance">Expectation Value and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-commutator">The Commutator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commuting-operators-share-eigenbasis">Commuting Operators Share Eigenbasis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heisenberg-uncertainty-principle">Heisenberg Uncertainty Principle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -537,277 +533,172 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Explain the commutator <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}\)</span> in words. When is the commutator zero, and what does that physically mean?</p></li>
-<li><p>Compute <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^z]\)</span> and <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^y]\)</span> by matrix multiplication. Do your results match the formula <span class="math notranslate nohighlight">\([\hat{\sigma}^i, \hat{\sigma}^j] = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\)</span>?</p></li>
-<li><p>Suppose <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> commute. Prove that there exists a set of states that are simultaneous eigenstates of both operators. What goes wrong if they don’t commute?</p></li>
-<li><p>State the uncertainty principle in mathematical form. Does it measure the <em>precision of our measurements</em> or something more fundamental about the quantum system itself?</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> don’t commute, can we design an apparatus that simultaneously measures both with arbitrary precision? Or is there a fundamental limit? Describe an experiment (real or thought) that demonstrates this incompatibility.</p></li>
+<li><p>What is the commutator <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}]\)</span>, and what does it tell you about two observables?</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^z]\)</span> directly from the Pauli matrices. What do you notice?</p></li>
+<li><p>If two observables commute, what does that imply about their simultaneous measurability?</p></li>
+<li><p>State the Heisenberg uncertainty principle. Why does the size of the commutator matter?</p></li>
+<li><p>For a qubit in state <span class="math notranslate nohighlight">\(|+\rangle\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>), what are <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^z\)</span>? Do they violate the uncertainty relation?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>The Heisenberg uncertainty principle is not about the limitations of our instruments; it is a deep feature of quantum reality stemming from the non-commutativity of observables. When two observables don’t commute, we cannot know both their values simultaneously—gaining knowledge of one necessarily destroys knowledge of the other.</p>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>Quantum mechanics places fundamental limits on the joint knowledge we can have of two observables. These limits arise not from measurement error, but from the non-commutativity of the corresponding operators. This section defines variance and expectation value, introduces the commutator, proves that commuting observables share an eigenbasis, and derives the Heisenberg uncertainty principle.</p>
+</section>
+<section id="expectation-value-and-variance">
+<h3>Expectation Value and Variance<a class="headerlink" href="#expectation-value-and-variance" title="Link to this heading">#</a></h3>
+<p>For a measurement outcome that is random, we characterize the distribution by its expectation value and variance. If observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> has eigenstates <span class="math notranslate nohighlight">\(\vert O=m \rangle\)</span> with eigenvalues <span class="math notranslate nohighlight">\(m\)</span>, and state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \sum_m \psi_m \vert O=m \rangle\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[\langle\hat{O}\rangle_\psi = \sum_m m \, P(m \vert \psi, \hat{O})\]</div>
+<p>where <span class="math notranslate nohighlight">\(P(m \vert \psi, \hat{O}) = |\psi_m|^2\)</span> is the probability of outcome <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Expectation Value and Variance</p>
+<p>For a Hermitian operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> and state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\langle\hat{O}\rangle_\psi = \langle\psi\vert\hat{O}\vert\psi\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{Var}(\hat{O}) = \langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta\hat{O} = \sqrt{\mathrm{Var}(\hat{O})}\]</div>
+<p>The uncertainty <span class="math notranslate nohighlight">\(\Delta\hat{O}\)</span> is the standard deviation of outcomes.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle_\psi = \langle\psi\vert\hat{O}\vert\psi\rangle\)</span></p>
+<p>Start from the spectral decomposition <span class="math notranslate nohighlight">\(\hat{O} = \sum_m m \, \hat{P}_{O=m} = \sum_m m \vert O{=}m\rangle\langle O{=}m\vert\)</span> and the Born rule <span class="math notranslate nohighlight">\(P(m\vert\psi) = |\psi_m|^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\langle\hat{O}\rangle_\psi = \sum_m m \, P(m\vert\psi) = \sum_m m \, |\psi_m|^2\]</div>
+<p>Expand <span class="math notranslate nohighlight">\(\vert\psi\rangle = \sum_{m'} \psi_{m'} \vert O{=}m'\rangle\)</span> and compute <span class="math notranslate nohighlight">\(\langle\psi\vert\hat{O}\vert\psi\rangle\)</span> directly:</p>
+<div class="math notranslate nohighlight">
+\[\langle\psi\vert\hat{O}\vert\psi\rangle = \sum_{m',m''} \psi_{m'}^* \psi_{m''} \langle O{=}m'\vert \hat{O} \vert O{=}m''\rangle = \sum_{m',m''} \psi_{m'}^* \psi_{m''} \, m'' \, \delta_{m'm''} = \sum_m m \, |\psi_m|^2\]</div>
+<p>which is the same expression. <span class="math notranslate nohighlight">\(\square\)</span></p>
+</div>
+</section>
 <section id="the-commutator">
 <h3>The Commutator<a class="headerlink" href="#the-commutator" title="Link to this heading">#</a></h3>
-<p>For two operators <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span>, the <strong>commutator</strong> is defined as</p>
-<div class="math notranslate nohighlight" id="equation-eq-commutator-def">
-<span class="eqno">(26)<a class="headerlink" href="#equation-eq-commutator-def" title="Link to this equation">#</a></span>\[
-[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}\]</div>
+<p>When two operators <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> applied in different orders yield different results, we measure this non-commutativity by the commutator:</p>
 <div class="important admonition">
-<p class="admonition-title">Commutator Definition</p>
-<p>The <strong>commutator</strong> <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}\)</span> measures whether two operators commute:</p>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>, the operators <strong>commute</strong>: they can be applied in any order.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] \neq 0\)</span>, the operators <strong>don’t commute</strong>: the order matters.</p></li>
-</ul>
-<p>This is the fundamental object that determines whether two observables can be measured simultaneously.</p>
+<p class="admonition-title">Commutator</p>
+<div class="math notranslate nohighlight">
+\[[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}\]</div>
+<p>If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>, the operators <strong>commute</strong>.</p>
 </div>
-<p><strong>Interpretation</strong>:</p>
+<p><strong>Physical meaning:</strong> The commutator measures whether operator application order matters. In classical mechanics, all observables commute. In quantum mechanics, non-commutativity reflects a deep constraint: we cannot simultaneously sharpen our knowledge of both observables.</p>
+<div class="note admonition">
+<p class="admonition-title">Analogy: Commute = Independent</p>
+<p>Think of getting dressed. Let</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span> (“they commute”), then the order of applying the operators doesn’t matter: <span class="math notranslate nohighlight">\(\hat{A}\hat{B} = \hat{B}\hat{A}\)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] \neq 0\)</span> (“they don’t commute”), the order matters: <span class="math notranslate nohighlight">\(\hat{A}\hat{B} \neq \hat{B}\hat{A}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{A}\)</span> = put on socks,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{B}\)</span> = put on shoes,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{C}\)</span> = put on a hat.</p></li>
 </ul>
-<section id="properties-of-commutators">
-<h4>Properties of Commutators<a class="headerlink" href="#properties-of-commutators" title="Link to this heading">#</a></h4>
-<ol class="arabic simple">
-<li><p><strong>Antisymmetry</strong>: <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = -[\hat{B}, \hat{A}]\)</span></p></li>
-<li><p><strong>Bilinearity</strong>: <span class="math notranslate nohighlight">\([c_1\hat{A}_1 + c_2\hat{A}_2, \hat{B}] = c_1[\hat{A}_1, \hat{B}] + c_2[\hat{A}_2, \hat{B}]\)</span></p></li>
-<li><p><strong>Jacobi identity</strong>: <span class="math notranslate nohighlight">\([\hat{A}, [\hat{B}, \hat{C}]] + [\hat{B}, [\hat{C}, \hat{A}]] + [\hat{C}, [\hat{A}, \hat{B}]] = 0\)</span></p></li>
-<li><p><strong>Self-commutation</strong>: <span class="math notranslate nohighlight">\([\hat{A}, \hat{A}] = 0\)</span></p></li>
-</ol>
-</section>
-<section id="commutators-of-pauli-matrices">
-<h4>Commutators of Pauli Matrices<a class="headerlink" href="#commutators-of-pauli-matrices" title="Link to this heading">#</a></h4>
-<p>The commutation relations among Pauli matrices are fundamental:</p>
-<div class="math notranslate nohighlight" id="equation-eq-pauli-commutators">
-<span class="eqno">(27)<a class="headerlink" href="#equation-eq-pauli-commutators" title="Link to this equation">#</a></span>\[
-[\hat{\sigma}^i, \hat{\sigma}^j] = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\]</div>
-<p>where <span class="math notranslate nohighlight">\(\epsilon_{ijk}\)</span> is the <strong>Levi-Civita symbol</strong> (totally antisymmetric in all indices).</p>
-<p><strong>Examples</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{\sigma}^x, \hat{\sigma}^y] = 2\mathrm{i}\hat{\sigma}^z\]</div>
-<div class="dropdown note admonition">
-<p class="admonition-title">Verification: Commutation Relation</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^x \hat{\sigma}^y = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 0 &amp; -\mathrm{i} \\ i &amp; 0 \end{pmatrix} = \begin{pmatrix} i &amp; 0 \\ 0 &amp; -i \end{pmatrix}\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}\hat{\sigma}^y \hat{\sigma}^x = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} -i &amp; 0 \\ 0 &amp; i \end{pmatrix}\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}[\hat{\sigma}^x, \hat{\sigma}^y] = \begin{pmatrix} i &amp; 0 \\ 0 &amp; -i \end{pmatrix} - \begin{pmatrix} -i &amp; 0 \\ 0 &amp; i \end{pmatrix} = \begin{pmatrix} 2i &amp; 0 \\ 0 &amp; -2i \end{pmatrix} = 2i \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = 2\mathrm{i}\hat{\sigma}^z \quad \checkmark\end{split}\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\hat{A}\hat{B} \neq \hat{B}\hat{A}\)</span> (socks then shoes is different from shoes then socks), but <span class="math notranslate nohighlight">\(\hat{A}\hat{C} = \hat{C}\hat{A}\)</span> (hat doesn’t care about the socks-shoes order). The hat and socks/shoes <em>commute</em> because they are <strong>independent</strong>.</p>
 </div>
-<p><strong>All commutation relations</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{\sigma}^x, \hat{\sigma}^y] = 2\mathrm{i}\hat{\sigma}^z, \quad [\hat{\sigma}^y, \hat{\sigma}^z] = 2\mathrm{i}\hat{\sigma}^x, \quad [\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y\]</div>
-<p>By antisymmetry, <span class="math notranslate nohighlight">\([\hat{\sigma}^i, \hat{\sigma}^i] = 0\)</span> for any <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p><strong>Key properties of the commutator:</strong></p>
+<ul class="simple">
+<li><p>Linearity: <span class="math notranslate nohighlight">\([\hat{A}, \hat{B} + \hat{C}] = [\hat{A}, \hat{B}] + [\hat{A}, \hat{C}]\)</span></p></li>
+<li><p>Antisymmetry: <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = -[\hat{B}, \hat{A}]\)</span></p></li>
+<li><p>Jacobi identity: <span class="math notranslate nohighlight">\([\hat{A}, [\hat{B}, \hat{C}]] + [\hat{B}, [\hat{C}, \hat{A}]] + [\hat{C}, [\hat{A}, \hat{B}]] = 0\)</span></p></li>
+<li><p>Product rule: <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}\hat{C}] = [\hat{A}, \hat{B}]\hat{C} + \hat{B}[\hat{A}, \hat{C}]\)</span></p></li>
+</ul>
 </section>
-<section id="anti-commutators">
-<h4>Anti-commutators<a class="headerlink" href="#anti-commutators" title="Link to this heading">#</a></h4>
-<p>The <strong>anti-commutator</strong> is</p>
-<div class="math notranslate nohighlight">
-\[
-\{\hat{A}, \hat{B}\} = \hat{A}\hat{B} + \hat{B}\hat{A}\]</div>
-<p><strong>For Pauli matrices</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\{\hat{\sigma}^i, \hat{\sigma}^j\} = 2\delta^{ij} I\]</div>
-<p>where <span class="math notranslate nohighlight">\(\delta^{ij}\)</span> is the Kronecker delta. This shows that Pauli matrices <strong>anti-commute</strong> when <span class="math notranslate nohighlight">\(i \neq j\)</span>.</p>
+<section id="commuting-operators-share-eigenbasis">
+<h3>Commuting Operators Share Eigenbasis<a class="headerlink" href="#commuting-operators-share-eigenbasis" title="Link to this heading">#</a></h3>
+<p>A central theorem relates commutativity to shared eigenstates:</p>
 <div class="important admonition">
-<p class="admonition-title">Theorem: Commuting Operators Share</p>
-<p>Two Hermitian operators <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> share the <strong>same set of eigenvectors</strong> (a common eigenbasis) if and only if <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>.</p>
-<p><strong>Consequence</strong>: Non-commuting observables cannot have simultaneous eigenstates—no quantum state can be a simultaneous eigenstate of both.</p>
+<p class="admonition-title">Theorem: Commuting Operators</p>
+<p>Two Hermitian operators <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> commute, i.e. <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>, if and only if they share a complete set of simultaneous eigenstates.</p>
+<p><strong>Equivalently</strong>: If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>, we can measure both <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> simultaneously with arbitrary precision on a single copy of the state.</p>
 </div>
-<div class="dropdown note admonition">
-<p class="admonition-title">Proof: Common Eigenbasis Implies</p>
-<p>Suppose <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> have the same eigenbasis <span class="math notranslate nohighlight">\(\{|\phi_i\rangle\}\)</span> with eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> and <span class="math notranslate nohighlight">\(\mu_i\)</span>:</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Proof</p>
+<p>Suppose <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span> and <span class="math notranslate nohighlight">\(\vert u\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{A}\)</span> with eigenvalue <span class="math notranslate nohighlight">\(a\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{A} |\phi_i\rangle = \lambda_i |\phi_i\rangle, \quad \hat{B} |\phi_i\rangle = \mu_i |\phi_i\rangle\]</div>
+\[\hat{A}\vert u\rangle = a\vert u\rangle\]</div>
 <p>Then:</p>
 <div class="math notranslate nohighlight">
-\[
-[\hat{A}, \hat{B}] |\phi_i\rangle = (\hat{A}\hat{B} - \hat{B}\hat{A})|\phi_i\rangle = \lambda_i \mu_i |\phi_i\rangle - \mu_i \lambda_i |\phi_i\rangle = 0\]</div>
-<p>Since this holds for all basis vectors, <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>.</p>
-</div>
-<p><strong>Corollary</strong>: Two non-commuting operators <strong>cannot</strong> share a complete set of eigenvectors. Therefore, a quantum state cannot be a simultaneous eigenstate of both operators.</p>
-<div class="example admonition">
-<p class="admonition-title">Example: <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span></p>
-<p>The eigenbases of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> are different:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> eigenbasis: <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> eigenbasis: <span class="math notranslate nohighlight">\(\{|+\rangle, |-\rangle\}\)</span></p></li>
-</ul>
-<p>Since <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^z] = -2\mathrm{i}\hat{\sigma}^y \neq 0\)</span>, they don’t commute. No state is a simultaneous eigenstate of both.</p>
-<p>For example, <span class="math notranslate nohighlight">\(|0\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> (eigenvalue +1) but <strong>not</strong> of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^x |0\rangle = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \end{pmatrix} = |1\rangle \neq \lambda |0\rangle\end{split}\]</div>
-<p>The state is a superposition in the <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> basis:</p>
-<div class="math notranslate nohighlight">
-\[
-|0\rangle = \frac{1}{\sqrt{2}}(|+\rangle + |-\rangle)\]</div>
-</div>
-<div class="docutils">
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p>Can a quantum state be a simultaneous eigenstate of two non-commuting operators in some special limiting case or under hidden conditions? We proved that two non-commuting Hermitian operators cannot share an eigenbasis. But what if we relax the problem: suppose we allow approximate eigenstates or mixed states. Does the fundamental barrier persist? Or is “no simultaneous eigenstates” merely a feature of pure states?</p>
-</div>
+\[\hat{A}(\hat{B}\vert u\rangle) = \hat{B}\hat{A}\vert u\rangle = \hat{B}(a\vert u\rangle) = a(\hat{B}\vert u\rangle)\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat{B}\vert u\rangle\)</span> is also an eigenstate of <span class="math notranslate nohighlight">\(\hat{A}\)</span> with the same eigenvalue <span class="math notranslate nohighlight">\(a\)</span>. If the eigenvalue <span class="math notranslate nohighlight">\(a\)</span> is non-degenerate, then <span class="math notranslate nohighlight">\(\hat{B}\vert u\rangle = b\vert u\rangle\)</span> for some <span class="math notranslate nohighlight">\(b\)</span>, making <span class="math notranslate nohighlight">\(\vert u\rangle\)</span> an eigenstate of both. For degenerate eigenvalues, <span class="math notranslate nohighlight">\(\hat{B}\)</span> acts within the degenerate subspace, and we can diagonalize it there. Iterating this construction yields a basis diagonalizing both <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> simultaneously.</p>
+<p>Conversely, if <span class="math notranslate nohighlight">\(\vert u_j\rangle\)</span> are simultaneous eigenstates with <span class="math notranslate nohighlight">\(\hat{A}\vert u_j\rangle = a_j\vert u_j\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\vert u_j\rangle = b_j\vert u_j\rangle\)</span>, then on this basis <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> are diagonal matrices, which commute.</p>
 </div>
 </section>
-</section>
-<section id="the-uncertainty-principle">
-<h3>The Uncertainty Principle<a class="headerlink" href="#the-uncertainty-principle" title="Link to this heading">#</a></h3>
-<p>The <strong>Heisenberg uncertainty principle</strong> relates the uncertainties (standard deviations) in measurements of two non-commuting observables.</p>
+<section id="heisenberg-uncertainty-principle">
+<h3>Heisenberg Uncertainty Principle<a class="headerlink" href="#heisenberg-uncertainty-principle" title="Link to this heading">#</a></h3>
+<p>The physical consequence of non-commutativity is the uncertainty principle:</p>
 <div class="important admonition">
-<p class="admonition-title">Heisenberg Uncertainty Principle</p>
-<p><strong>Theorem (Uncertainty Relation)</strong>:</p>
+<p class="admonition-title">Robertson Uncertainty Relation</p>
+<p>For any state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> and any two observables <span class="math notranslate nohighlight">\(\hat{A}\)</span>, <span class="math notranslate nohighlight">\(\hat{B}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\hat{A} \cdot \Delta\hat{B} \geq \frac{1}{2}|\langle[\hat{A}, \hat{B}]\rangle|\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta\hat{O} = \sqrt{\langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2}\)</span> and <span class="math notranslate nohighlight">\(\langle[\hat{A}, \hat{B}]\rangle = \langle\psi\vert[\hat{A}, \hat{B}]\vert\psi\rangle\)</span>.</p>
+</div>
+<p><strong>Interpretation:</strong> When two observables do not commute, the product of their uncertainties has a positive lower bound set by their commutator. The more strongly they fail to commute, the larger the lower bound on the product of uncertainties.</p>
+<div class="note admonition">
+<p class="admonition-title">Important: Repeated Identical Measurements</p>
+<p>The uncertainty principle describes repeated measurements on <strong>identical copies</strong> of the same prepared state, not sequential measurement of a single copy. If you measure <span class="math notranslate nohighlight">\(\hat{A}\)</span> first and then <span class="math notranslate nohighlight">\(\hat{B}\)</span> on the same particle, you collapse the state and <span class="math notranslate nohighlight">\(\hat{B}\)</span>’s outcome depends on <span class="math notranslate nohighlight">\(\hat{A}\)</span>’s result—that is a different story (back-action). Here we imagine preparing the state fresh many times and analyzing the distribution across those trials.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Proof: Robertson Uncertainty Relation</p>
+<p>Define <span class="math notranslate nohighlight">\(\Delta\hat{A} = \hat{A} - \langle\hat{A}\rangle\)</span> and similarly for <span class="math notranslate nohighlight">\(\hat{B}\)</span>. These are centered operators with zero expectation value.</p>
+<p>By Cauchy-Schwarz inequality,</p>
+<div class="math notranslate nohighlight">
+\[\|\Delta\hat{A}\vert\psi\rangle\|^2 \cdot \|\Delta\hat{B}\vert\psi\rangle\|^2 \geq |\langle\psi\vert(\Delta\hat{A})^\dagger\Delta\hat{B}\vert\psi\rangle|^2\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> are Hermitian, so are <span class="math notranslate nohighlight">\(\Delta\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\Delta\hat{B}\)</span>, and:</p>
+<div class="math notranslate nohighlight">
+\[\langle\psi\vert(\Delta\hat{A})^\dagger\Delta\hat{B}\vert\psi\rangle = \langle\psi\vert\Delta\hat{A}\Delta\hat{B}\vert\psi\rangle\]</div>
+<p>Decompose into symmetric and antisymmetric parts:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\hat{A}\Delta\hat{B} = \frac{1}{2}\{\Delta\hat{A}, \Delta\hat{B}\} + \frac{1}{2}[\Delta\hat{A}, \Delta\hat{B}]\]</div>
+<p>where the anticommutator <span class="math notranslate nohighlight">\(\{\hat{A}, \hat{B}\} = \hat{A}\hat{B} + \hat{B}\hat{A}\)</span> has real expectation value, and the commutator is anti-Hermitian. Thus:</p>
+<div class="math notranslate nohighlight">
+\[|\langle\psi\vert\Delta\hat{A}\Delta\hat{B}\vert\psi\rangle|^2 \geq |\langle\psi\vert\frac{1}{2}[\Delta\hat{A}, \Delta\hat{B}]\vert\psi\rangle|^2 = \frac{1}{4}|\langle[\hat{A}, \hat{B}]\rangle|^2\]</div>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[(\Delta\hat{A})^2(\Delta\hat{B})^2 \geq \frac{1}{4}|\langle[\hat{A}, \hat{B}]\rangle|^2\]</div>
+<p>Taking square roots gives the Robertson relation.</p>
+</div>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: Uncertainty Relation for Pauli Operators</p>
+<p>For a qubit with Pauli operators:</p>
 <div class="math notranslate nohighlight">
 \[
-\Delta \hat{A} \cdot \Delta \hat{B} \geq \frac{1}{2} |\langle [\hat{A}, \hat{B}] \rangle |\]</div>
-<p>This fundamental inequality states: <strong>if two observables don’t commute, they cannot be simultaneously measured to arbitrary precision.</strong> The uncertainty is ontological—a property of nature itself, not epistemic—a limitation of measurement apparatus.</p>
+[\hat{\sigma}^x, \hat{\sigma}^z] = -2\mathrm{i}\hat{\sigma}^y
+\]</div>
+<p>In state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \vert 0\rangle\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\hat{Z}\)</span>):</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle\hat{Z}\rangle = 1\)</span>, so <span class="math notranslate nohighlight">\(\Delta\hat{Z} = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle\hat{X}\rangle = 0\)</span>, and <span class="math notranslate nohighlight">\(\langle\hat{X}^{2}\rangle = 1\)</span>, so <span class="math notranslate nohighlight">\((\Delta\hat{X})^2 = 1\)</span></p></li>
+<li><p>The bound from Robertson: <span class="math notranslate nohighlight">\(\Delta\hat{X} \cdot \Delta\hat{Z} \geq \frac{1}{2}\vert\langle[\hat{X}, \hat{Z}]\rangle\vert = \frac{1}{2}\vert\langle -2\mathrm{i}\hat{Y}\rangle\vert = 0\)</span></p></li>
+</ul>
+<p>The bound is <strong>not violated</strong> because <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^z = 0\)</span> saturates the lower bound.</p>
 </div>
-<div class="math notranslate nohighlight" id="equation-eq-uncertainty-principle">
-<span class="eqno">(28)<a class="headerlink" href="#equation-eq-uncertainty-principle" title="Link to this equation">#</a></span>\[\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\Delta \hat{A} = \sqrt{\langle \hat{A}^2 \rangle - \langle \hat{A} \rangle^2}\)</span> is the standard deviation of <span class="math notranslate nohighlight">\(\hat{A}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta \hat{B} = \sqrt{\langle \hat{B}^2 \rangle - \langle \hat{B} \rangle^2}\)</span> is the standard deviation of <span class="math notranslate nohighlight">\(\hat{B}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\langle [\hat{A}, \hat{B}] \rangle = \langle \psi | [\hat{A}, \hat{B}] | \psi \rangle\)</span> is the expectation value of the commutator</p></li>
-</ul>
-<p><strong>Physical Interpretation</strong>: If two observables don’t commute (i.e., <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] \neq 0\)</span>), then we cannot simultaneously have small uncertainties in both measurements. This is not a limitation of our experimental technique—it is a fundamental property of quantum systems.</p>
-<p>For <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{\sigma}^x, \hat{\sigma}^z] = -2\mathrm{i}\hat{\sigma}^y\]</div>
-<p>The uncertainty relation becomes:</p>
-<div class="math notranslate nohighlight" id="equation-eq-uncertainty-pauli">
-<span class="eqno">(29)<a class="headerlink" href="#equation-eq-uncertainty-pauli" title="Link to this equation">#</a></span>\[
-\Delta \hat{\sigma}^x \cdot \Delta \hat{\sigma}^z \geq \frac{1}{2}|\langle -2\mathrm{i}\hat{\sigma}^y \rangle| = |\langle \hat{\sigma}^y \rangle|\]</div>
-<div class="dropdown note admonition">
-<p class="admonition-title">Example: State with Definite X-spin</p>
-<p>For the state <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>:</p>
-<p><strong>Z-component</strong>:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\langle \hat{\sigma}^z \rangle = 0\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\langle (\hat{\sigma}^z)^2 \rangle = 1\)</span>, so <span class="math notranslate nohighlight">\(\Delta \hat{\sigma}^z = 1\)</span></p></li>
-</ul>
-<p><strong>X-component</strong>:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\langle \hat{\sigma}^x \rangle = 1\)</span> (state is eigenstate of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta \hat{\sigma}^x = 0\)</span></p></li>
-</ul>
-<p>This state has <strong>definite</strong> x-spin but <strong>maximum</strong> uncertainty in z-spin. The product is <span class="math notranslate nohighlight">\(1 \cdot 0 = 0\)</span>, saturating the bound (since <span class="math notranslate nohighlight">\(\langle \hat{\sigma}^y \rangle = 0\)</span>).</p>
-</div>
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p>The uncertainty principle makes a quantitative prediction — test it on a specific state.</p>
-<p>The Robertson uncertainty relation states <span class="math notranslate nohighlight">\(\Delta \hat{A} \cdot \Delta \hat{B} \geq \frac{1}{2}|\langle [\hat{A}, \hat{B}] \rangle|\)</span> for any state.</p>
-<p>Consider the state <span class="math notranslate nohighlight">\(|\psi\rangle = \cos(\theta/2)|{+z}\rangle + \sin(\theta/2)|{-z}\rangle\)</span>.</p>
-<ul class="simple">
-<li><p>Compute <span class="math notranslate nohighlight">\(\Delta \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\Delta \hat{\sigma}^z\)</span> for this state as functions of <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
-<li><p>Compute the right-hand side <span class="math notranslate nohighlight">\(\frac{1}{2}|\langle [\hat{\sigma}^x, \hat{\sigma}^z] \rangle| = |\langle \hat{\sigma}^y \rangle|\)</span> for this state.</p></li>
-<li><p>Show that the Robertson inequality is saturated (becomes an equality) at <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span>. What is special about this state?</p></li>
-<li><p>Is there ANY state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> for which <span class="math notranslate nohighlight">\(\Delta \hat{\sigma}^x = \Delta \hat{\sigma}^z = 0\)</span> simultaneously? What does your calculation reveal?</p></li>
-</ul>
-</div>
-</section>
-<section id="complementarity-and-sequential-measurements">
-<h3>Complementarity and Sequential Measurements<a class="headerlink" href="#complementarity-and-sequential-measurements" title="Link to this heading">#</a></h3>
-<p>The non-commutativity of observables has a striking experimental consequence.</p>
-<p><strong>Gedankenexperiment</strong>: Consider a qubit in state <span class="math notranslate nohighlight">\(|0\rangle\)</span> (spin-up along z).</p>
-<p><strong>Scenario A (measure only <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>)</strong>:</p>
-<ul class="simple">
-<li><p>Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>: get outcome +1 with probability 1.</p></li>
-<li><p>Result: 100% of atoms are spin-up along z.</p></li>
-</ul>
-<p><strong>Scenario B (measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> first, then <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>)</strong>:</p>
-<ul class="simple">
-<li><p>Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>: get outcome <span class="math notranslate nohighlight">\(+1\)</span> with probability 1/2, outcome <span class="math notranslate nohighlight">\(-1\)</span> with probability 1/2.</p>
-<ul>
-<li><p>If outcome is +1, state collapses to <span class="math notranslate nohighlight">\(|+\rangle\)</span>.</p></li>
-<li><p>If outcome is -1, state collapses to <span class="math notranslate nohighlight">\(|-\rangle\)</span>.</p></li>
-</ul>
-</li>
-<li><p>Now measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>:</p>
-<ul>
-<li><p>Starting from <span class="math notranslate nohighlight">\(|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>: outcomes <span class="math notranslate nohighlight">\(\pm 1\)</span> with equal probability (50-50).</p></li>
-<li><p>Starting from <span class="math notranslate nohighlight">\(|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span>: outcomes <span class="math notranslate nohighlight">\(\pm 1\)</span> with equal probability (50-50).</p></li>
-</ul>
-</li>
-<li><p>Result: Overall, 25% of atoms are spin-up along z, 75% spin-down (or by symmetry, 50-50).</p></li>
-</ul>
-<p><strong>Conclusion</strong>: The intermediate <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> measurement <strong>destroys the z-information</strong>. We cannot simultaneously be prepared with definite z-spin and then measure it with certainty after measuring x.</p>
-<div class="docutils">
-<div class="dropdown warning admonition">
-<p class="admonition-title">Discussion</p>
-<p><strong>Sequential measurement and the no-cloning theorem.</strong></p>
-<p>An ideal projective measurement of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> on <span class="math notranslate nohighlight">\(|{+x}\rangle = (|{+z}\rangle + |{-z}\rangle)/\sqrt{2}\)</span> gives <span class="math notranslate nohighlight">\(+1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span> with equal probability. After the measurement, the state collapses.</p>
-<ul class="simple">
-<li><p>If we wanted to “copy” the pre-measurement state <span class="math notranslate nohighlight">\(|{+x}\rangle\)</span> before measuring, we could measure it and prepare a fresh <span class="math notranslate nohighlight">\(|{+x}\rangle\)</span>. Why does this NOT work for an unknown state? What is the no-cloning theorem?</p></li>
-<li><p>Suppose Alice has a particle in the state <span class="math notranslate nohighlight">\(\alpha|{+z}\rangle + \beta|{-z}\rangle\)</span> and wants to tell Bob what <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> is (the probability of measuring <span class="math notranslate nohighlight">\(+z\)</span>). Why must she measure MANY identically prepared copies of the state to determine <span class="math notranslate nohighlight">\(|\alpha|^2\)</span>? What is the minimum number of measurements needed to determine the state to precision <span class="math notranslate nohighlight">\(\epsilon\)</span>?</p></li>
-<li><p>In the sequential measurement experiment: prepare <span class="math notranslate nohighlight">\(|{+x}\rangle\)</span>, measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>, obtain <span class="math notranslate nohighlight">\(|{+z}\rangle\)</span>, then measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> again. What probability do you get for <span class="math notranslate nohighlight">\(\hat{\sigma}^x = +1\)</span>? Compare to measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> twice without intermediate <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> measurement.</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="observable-algebras-and-quantum-complementarity">
-<h3>Observable Algebras and Quantum Complementarity<a class="headerlink" href="#observable-algebras-and-quantum-complementarity" title="Link to this heading">#</a></h3>
-<p>Two observables are <strong>complementary</strong> if their eigenbases are “maximally different.” For a qubit:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> are complementary: if a state is an eigenstate of one, measurements of the other give completely random results (50-50).</p></li>
-<li><p>This is because the eigenvectors form a <strong>mutually unbiased basis</strong> (MUB).</p></li>
-</ul>
-<p><strong>Measurement of complementary observables</strong>:</p>
-<ul class="simple">
-<li><p>Measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> gives a definite outcome: <span class="math notranslate nohighlight">\(\langle \psi | \hat{\sigma}^z | \psi \rangle = \pm 1\)</span>.</p></li>
-<li><p>Measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> on the same state gives random 50-50 outcomes.</p></li>
-</ul>
-<p>This reflects the fundamental indeterminacy of quantum mechanics: not all properties can have simultaneous definite values.</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Commutators</strong> quantify non-commutativity: <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span> means the operators can be applied in any order.</p></li>
-<li><p><strong>Pauli matrices</strong> have non-zero commutation relations <span class="math notranslate nohighlight">\([\hat{\sigma}^i, \hat{\sigma}^j] = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\)</span>, reflecting the incompatibility of spin components.</p></li>
-<li><p><strong>Non-commuting observables</strong> cannot share an eigenbasis; no state is a simultaneous eigenstate of both.</p></li>
-<li><p><strong>Uncertainty principle</strong>: <span class="math notranslate nohighlight">\(\Delta \hat{A} \cdot \Delta \hat{B} \geq \frac{1}{2}|\langle [\hat{A}, \hat{B}] \rangle|\)</span> expresses fundamental incompatibility, not measurement imprecision.</p></li>
-<li><p><strong>Complementarity</strong>: Measuring one observable destroys information about a complementary one. Sequential measurements of non-commuting observables yield different results than measuring only the first one.</p></li>
+<li><p>The expectation value <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle = \langle\psi\vert\hat{O}\vert\psi\rangle\)</span> and variance <span class="math notranslate nohighlight">\(\mathrm{Var}(\hat{O}) = \langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2\)</span> quantify measurement distributions.</p></li>
+<li><p>The commutator <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}\)</span> measures whether operator order matters.</p></li>
+<li><p>Commuting observables share a simultaneous eigenbasis and can be measured together with arbitrary precision.</p></li>
+<li><p>The Robertson uncertainty relation <span class="math notranslate nohighlight">\(\Delta\hat{A} \cdot \Delta\hat{B} \geq \frac{1}{2}|\langle[\hat{A}, \hat{B}]\rangle|\)</span> is a fundamental constraint on non-commuting observables.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="1-1-3-hermitian-operators.html"><span class="std std-doc">1.1.3 Hermitian Operators</span></a></strong>: Uncertainty relies on the commutator <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}]\)</span>; non-Hermitian operators don’t represent observables</p></li>
-<li><p><strong><a class="reference internal" href="1-2-1-measurement-postulate.html"><span class="std std-doc">1.2.1 Measurement Postulate</span></a></strong>: Incompatible observables cannot share eigenstates; measurement of one disturbs the other</p></li>
-<li><p><strong><a class="reference internal" href="1-2-3-measurement-operators.html"><span class="std std-doc">1.2.3 Measurement Operators</span></a></strong>: Projective measurement assumes the measured operator is Hermitian; generalized measurements relax this</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> Compute <span class="math notranslate nohighlight">\([\hat{\sigma}^y, \hat{\sigma}^z]\)</span> directly by matrix multiplication and verify that it equals <span class="math notranslate nohighlight">\(2\mathrm{i}\hat{\sigma}^x\)</span>.</p>
-<p><strong>2.</strong> For the state <span class="math notranslate nohighlight">\(|\psi\rangle = \cos\alpha\,|0\rangle + \sin\alpha\,|1\rangle\)</span> (real <span class="math notranslate nohighlight">\(\alpha\)</span>), compute <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^x\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^z\rangle\)</span>, and then the uncertainties <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^z\)</span>.
-Verify that <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^x\cdot\Delta\hat{\sigma}^z \geq |\langle\hat{\sigma}^y\rangle|\)</span>.
-For what value of <span class="math notranslate nohighlight">\(\alpha\)</span> is the product <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^x\cdot\Delta\hat{\sigma}^z\)</span> minimized?</p>
-<p><strong>3.</strong> Suppose <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> satisfies <span class="math notranslate nohighlight">\(\hat{\sigma}^x|\psi\rangle = +|\psi\rangle\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> with eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>).
-Show explicitly that <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> cannot be an eigenstate of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>.
-(Hint: assume <span class="math notranslate nohighlight">\(\hat{\sigma}^z|\psi\rangle = \lambda|\psi\rangle\)</span> for some <span class="math notranslate nohighlight">\(\lambda\)</span> and derive a contradiction using the commutator <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^z] = -2\mathrm{i}\hat{\sigma}^y\)</span>.)</p>
-<p><strong>4.</strong> Show that for any two Hermitian operators <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span>, the commutator <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}]\)</span> is anti-Hermitian (i.e., <span class="math notranslate nohighlight">\(([\hat{A},\hat{B}])^\dagger = -[\hat{A},\hat{B}]\)</span>).
-Explain why <span class="math notranslate nohighlight">\(\langle[\hat{A},\hat{B}]\rangle\)</span> is therefore purely imaginary (or zero), so the uncertainty bound <span class="math notranslate nohighlight">\(\frac{1}{2}|\langle[\hat{A},\hat{B}]\rangle|\)</span> is real and non-negative.</p>
-<p><strong>5.</strong> For <span class="math notranslate nohighlight">\(i \neq j\)</span>, show that <span class="math notranslate nohighlight">\(\hat{\sigma}^i\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^j\)</span> anti-commute: <span class="math notranslate nohighlight">\(\{\hat{\sigma}^i, \hat{\sigma}^j\} = 0\)</span>.
-Combine this with <span class="math notranslate nohighlight">\(\hat{\sigma}^i\hat{\sigma}^j - \hat{\sigma}^j\hat{\sigma}^i = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\)</span> to derive the product formula <span class="math notranslate nohighlight">\(\hat{\sigma}^i\hat{\sigma}^j = \mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\)</span> for <span class="math notranslate nohighlight">\(i\neq j\)</span>.</p>
-<p><strong>6.</strong> A qubit starts in <span class="math notranslate nohighlight">\(|0\rangle\)</span>.
-(a) Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>. What are the outcome probabilities? What is the state after each outcome?
-(b) Then measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>. What are the outcome probabilities for each possible collapsed state from (a)?
-(c) What is the overall probability of getting <span class="math notranslate nohighlight">\(+1\)</span> for <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> after the <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> measurement?
-(d) Compare to measuring <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> on <span class="math notranslate nohighlight">\(|0\rangle\)</span> directly. Explain physically why the intermediate <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> measurement changed the result.</p>
-<p><strong>7.</strong> The uncertainty principle says <span class="math notranslate nohighlight">\(\Delta\hat{A}\cdot\Delta\hat{B} \geq \frac{1}{2}|\langle[\hat{A},\hat{B}]\rangle|\)</span>.
-For the state <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{A} = \hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{B} = \hat{\sigma}^z\)</span>:
-(a) Compute both sides explicitly.
-(b) Is the bound saturated (equality holds) or strict inequality?
-(c) For a general eigenstate <span class="math notranslate nohighlight">\(|\phi\rangle\)</span> of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>, show that the bound is always saturated. What does this say about the structure of the bound?</p>
+<p><strong>1.</strong> Compute <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^z]\)</span> directly by matrix multiplication and verify that it equals <span class="math notranslate nohighlight">\(-2\mathrm{i}\hat{\sigma}^y\)</span>.</p>
+<p><strong>2.</strong> For the state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \frac{1}{\sqrt{2}}(\vert0\rangle + \vert1\rangle)\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\hat{X}\)</span> with eigenvalue <span class="math notranslate nohighlight">\(+1\)</span>), compute:
+(a) <span class="math notranslate nohighlight">\(\langle\hat{X}\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{Y}\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{Z}\rangle\)</span>
+(b) <span class="math notranslate nohighlight">\(\Delta\hat{X}\)</span>, <span class="math notranslate nohighlight">\(\Delta\hat{Y}\)</span>, <span class="math notranslate nohighlight">\(\Delta\hat{Z}\)</span>
+(c) Check the uncertainty relation: <span class="math notranslate nohighlight">\(\Delta\hat{X} \cdot \Delta\hat{Z} \geq \frac{1}{2}|\langle[\hat{X}, \hat{Z}]\rangle|\)</span>.</p>
+<p><strong>3.</strong> Prove the product rule for commutators: <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}\hat{C}] = [\hat{A}, \hat{B}]\hat{C} + \hat{B}[\hat{A}, \hat{C}]\)</span>.</p>
+<p><strong>4.</strong> Verify all three Pauli commutation relations:
+(a) <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^y] = 2\mathrm{i}\hat{\sigma}^z\)</span>
+(b) <span class="math notranslate nohighlight">\([\hat{\sigma}^y, \hat{\sigma}^z] = 2\mathrm{i}\hat{\sigma}^x\)</span>
+(c) <span class="math notranslate nohighlight">\([\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y\)</span></p>
+<p><strong>5.</strong> Explain why the uncertainty principle does <strong>not</strong> prevent measuring <span class="math notranslate nohighlight">\(\hat{Z}\)</span> with zero uncertainty on the eigenstate <span class="math notranslate nohighlight">\(\vert0\rangle\)</span>. Does this violate the Robertson relation? Why or why not?</p>
+<p><strong>6.</strong> For the Pauli operators, show that <span class="math notranslate nohighlight">\([\hat{\sigma}^i, \hat{\sigma}^j] = 0\)</span> if and only if <span class="math notranslate nohighlight">\(i = j\)</span>. Use this to explain why the three Pauli operators cannot all be measured simultaneously with arbitrary precision.</p>
+<p><strong>7.</strong> A qubit is prepared in state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \cos\alpha\vert0\rangle + \sin\alpha\vert1\rangle\)</span> (real <span class="math notranslate nohighlight">\(\alpha\)</span>). Find the value(s) of <span class="math notranslate nohighlight">\(\alpha\)</span> that maximize <span class="math notranslate nohighlight">\(\Delta\hat{Z}\)</span>. Interpret your result.</p>
+<p><strong>8.</strong> Apply the Robertson uncertainty relation to the pair <span class="math notranslate nohighlight">\((\hat{\sigma}^x, \hat{\sigma}^z)\)</span>. For which state does the product of uncertainties <span class="math notranslate nohighlight">\(\Delta\hat{\sigma}^x \cdot \Delta\hat{\sigma}^z\)</span> achieve its minimum value? Compute that minimum.</p>
 </section>
 </section>
 
@@ -878,15 +769,11 @@ For the state <span class="math notranslate nohighlight">\(|0\rangle\)</span> an
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-commutator">The Commutator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-commutators">Properties of Commutators</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commutators-of-pauli-matrices">Commutators of Pauli Matrices</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-commutators">Anti-commutators</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uncertainty-principle">The Uncertainty Principle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complementarity-and-sequential-measurements">Complementarity and Sequential Measurements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observable-algebras-and-quantum-complementarity">Observable Algebras and Quantum Complementarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-value-and-variance">Expectation Value and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-commutator">The Commutator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commuting-operators-share-eigenbasis">Commuting Operators Share Eigenbasis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heisenberg-uncertainty-principle">Heisenberg Uncertainty Principle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
