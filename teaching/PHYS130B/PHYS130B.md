@@ -33,7 +33,7 @@ Before each **unit** (§x.y), students use AI to preview the upcoming material. 
 
 #### 2. Homework
 
-Each of the 63 **lessons** (§x.y.z) includes a Homework block with 5–10 problems. Choose **5** problems per **unit** (§x.y) to finish. You are welcome to use AI assistance.
+Each of the 60 **lessons** (§x.y.z) includes a Homework block with 5–10 problems. Choose **5** problems per **unit** (§x.y) to finish. You are welcome to use AI assistance.
 
 - **Grading:** Graded on timely submission, not correctness — since AI assistance makes correctness grading meaningless. Late submissions receive decaying credit.
 - **Numbering:** Problems are numbered 1, 2, 3, … within each lesson. Cross-references use format HW x.y.z.k (e.g., HW 1.1.1.3 = problem 3 of lesson §1.1.1).
@@ -60,8 +60,8 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 
 | Component | Weight | Workload | Grading Basis |
 |-----------|--------|----------|---------------|
-| Preview Reports | 10% | 1 report × 21 units | Completion |
-| Homework | 40% | 5 problems × 21 units | Timely submission |
+| Preview Reports | 10% | 1 report × 20 units | Completion |
+| Homework | 40% | 5 problems × 20 units | Timely submission |
 | Research Projects (x2) | 20% | 2 reports | Correctness, novelty, presentation |
 | Final Exam | 30% | 5 problems | Accuracy and understanding |
 
@@ -96,7 +96,7 @@ Some other books for reference:
   <span style="font-size: 0.8em;">Jupyter Book notes following David Tong's <i>Quantum Mechanics</i>, with consolidated lecture content, equations, and figures. Prepared with assistance from Claude Code and Cursor AI; all material has been reviewed by the instructor.</span>
 </div>
 
-The course covers **6 chapters**, **21 units** (§x.y), and **63 lessons** (§x.y.z). Each lesson corresponds roughly to one lecture’s worth of material. Two project periods (~2 weeks each) are distributed across the quarter for students to work on their chosen research projects.
+The course covers **6 chapters**, **20 units** (§x.y), and **60 lessons** (§x.y.z). Each lesson corresponds roughly to one lecture’s worth of material. Two project periods (~2 weeks each) are distributed across the quarter for students to work on their chosen research projects.
 
 **Chapter 1 — Qubit** (Tong §4)
 
@@ -120,10 +120,9 @@ The course covers **6 chapters**, **21 units** (§x.y), and **63 lessons** (§x.
 **Chapter 4 — Phase and Gauge** (Tong §9, §11)
 
 - **Unit 4.1** — Gauge Field (§9.1)
-- **Unit 4.2** — Flux Ring (§9.4)
+- **Unit 4.2** — Berry Phase (§9.4, §11.1)
 - **Unit 4.3** — Landau Level (§9.2)
 - **Unit 4.4** — Spin and Monopole (§9.3, §9.5)
-- **Unit 4.5** — Berry Phase (§11.1)
 
 **Chapter 5 — Perturbation Theory** (Tong §10, §11)
 
