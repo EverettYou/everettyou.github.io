@@ -39,7 +39,7 @@ Each of the 60 **lessons** (§x.y.z) includes a Homework block with 5–10 probl
 - **Numbering:** Problems are numbered 1, 2, 3, … within each lesson. Cross-references use format HW x.y.z.k (e.g., HW 1.1.1.3 = problem 3 of lesson §1.1.1).
 - **Connection to final exam:** The same problems will appear on the in-person final exam with possible slight variations, so students who genuinely engage with the homework — rather than passively copying AI output — will be well prepared.
 
-#### 4. Research Projects
+#### 3. Research Projects
 
 Each student completes **two research projects** during the quarter, with AI assistance. Each of the 21 **units** (§x.y) in the lecture notes includes a research project at the frontier of physics research. Choose **2** projects to finish and submit project reports. Projects require genuine scientific inquiry — literature survey, computational exploration, and scientific writing — not just extended calculation.
 
@@ -48,7 +48,7 @@ Each student completes **two research projects** during the quarter, with AI ass
 - **Grading:** Evaluated on correctness, novelty, and presentation quality (potentially with AI-assisted grading).
 - **AI policy:** AI can help with implementation (code, writing, calculations), but the student must drive the scientific inquiry and demonstrate understanding.
 
-#### 5. Final Exam (In-Person, No AI)
+#### 4. Final Exam (In-Person, No AI)
 
 The final exam is held in person with no AI access. Problems are drawn directly from the homework assignments, with possible slight variations. This is the primary test of whether students have internalized the physical worldview and problem-solving skills — not merely copied AI-generated solutions.
 
@@ -62,7 +62,7 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 |-----------|--------|----------|---------------|
 | Preview Reports | 10% | 1 report × 20 units | Completion |
 | Homework | 40% | 5 problems × 20 units | Timely submission |
-| Research Projects (x2) | 20% | 2 reports | Correctness, novelty, presentation |
+| Research Projects (x2) | 20% | 1 report | Correctness, novelty, presentation |
 | Final Exam | 30% | 5 problems | Accuracy and understanding |
 
 #### Submission
