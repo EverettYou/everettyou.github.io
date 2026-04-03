@@ -4,7 +4,7 @@ Welcome to the course notes for Quantum Mechanics.
 
 **Textbook**: David Tong, *Quantum Mechanics* (Lectures on Theoretical Physics Volume 3), Cambridge University Press.
 
-**Course structure:** Material is grouped into **chapters** (themes), **units** (*x.y*), and **lessons** (*x.y.z*). Each chapter index lists its units; each unit page lists its lessons. The Jupyter Book sidebar follows the same nesting (Jupyter Book’s config still uses the YAML key `sections` for both levels).
+**Course structure:** Material is grouped into **chapters** (themes), **units** (*x.y*), and **lessons** (*x.y.z*). Each chapter index lists its units; each unit page lists its lessons. The Jupyter Book sidebar follows the same nesting.
 
 ## Table of Contents
 
@@ -88,7 +88,7 @@ Welcome to the course notes for Quantum Mechanics.
   - [Gauge Field](ch4_phase-and-gauge/4-1-gauge-field)
   - §9.1
 * - 4.2
-  - [Flux Ring](ch4_phase-and-gauge/4-2-flux-ring)
+  - [Berry Phase](ch4_phase-and-gauge/4-2-berry-phase)
   - §9.4
 * - 4.3
   - [Landau Level](ch4_phase-and-gauge/4-3-landau-level)
@@ -96,9 +96,6 @@ Welcome to the course notes for Quantum Mechanics.
 * - 4.4
   - [Spin and Monopole](ch4_phase-and-gauge/4-4-spin-and-monopole)
   - §9.3, §9.5
-* - 4.5
-  - [Berry Phase](ch4_phase-and-gauge/4-5-berry-phase)
-  - §11.1
 ```
 
 **Chapter 5. [Perturbation Theory](ch5_perturbation-theory/index)**

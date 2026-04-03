@@ -28,11 +28,14 @@ Example: `/project:improve-unit 1.2`
    - `.claude/rules/content-style.md` — admonition classes, cell structure, banned patterns
    - `.claude/rules/physics-conventions.md` — notation conventions
    - `.claude/rules/notebook-editing.md` — safe editing (Bash only, never NotebookEdit/Edit/Write)
+   - `.claude/design.md` — teaching philosophy
    - `outline.md` — find the section for this unit; this is the narrative blueprint
 
 2. **Read current notebooks** for all x.y.z subsections and the x.y parent:
    - Use `Read` tool to inspect each notebook's current content
    - Note cell count, what content already exists (reuse the good parts), what to remove
+   - Check if the outline specifies a different title/topic than the current notebook
+     - If so, this notebook needs a title change AND file rename (handled in step 6)
 
 3. **Rewrite each x.y.z subsection notebook** following the outline narrative for this unit:
    - Cell 0: `# x.y.z Title` — concise, descriptive; if the title changes, note it for step 6
@@ -44,12 +47,26 @@ Example: `/project:improve-unit 1.2`
 4. **Edit via Bash Python only** (Edit/Write/NotebookEdit are ALL denied):
    ```python
    import json
+   def text_to_source(text):
+       lines = text.split('\n')
+       source = []
+       for i, line in enumerate(lines):
+           if i < len(lines) - 1:
+               source.append(line + '\n')
+           else:
+               if line:
+                   source.append(line)
+       return source
+
    with open(path) as f:
        nb = json.load(f)
-   nb['cells'][i]['source'] = new_source_list  # list of strings, \n on every non-final line
+   nb['cells'][i]['source'] = text_to_source(new_content)
    with open(path, 'w') as f:
        json.dump(nb, f, indent=1, ensure_ascii=False)
    ```
+
+   **LaTeX safety**: Never split TeX commands across JSON strings where `\n` occurs
+   inside commands like `\nabla`, `\nu`, `\partial`. Use raw strings or double backslashes.
 
 5. **Review Prompts, Homework, and unit Overview** — after subsection rewrites are done:
 
@@ -81,6 +98,7 @@ Example: `/project:improve-unit 1.2`
 6. **Rename files and update TOC/references if any notebook title changed:**
    - If a notebook's `# x.y.z Title` was changed, rename the `.ipynb` file to match:
      - Convention: `x-y-z-hyphenated-title.ipynb` (lowercase, spaces → hyphens, drop punctuation)
+     - Use `mv` in Bash to rename the file
    - Update `notes_src/_toc.yml` — find the old filename entry and replace with the new one
    - Update `notes_src/index.md` — the master TOC table links notebooks by filename
    - Update the chapter landing page `notes_src/ch{N}_*/index.md` — section table links
@@ -107,12 +125,51 @@ Example: `/project:improve-unit 1.2`
 
 8. **Update `progress.md`** under Workstream 5 with what was done.
 
-## Dispatch Strategy
+## Dispatch Strategy (for the manager agent)
 
-For a unit with three subsections, dispatch three parallel agents — one per notebook — for steps 3–4.
-Then handle step 5 (Prompts + Homework review, Overview update) and step 6 (renames/TOC) in a single
-follow-up pass after all three rewrites are confirmed complete, since the Overview and any rename
+For a unit with three subsections, dispatch **three parallel agents** — one per notebook — for steps 3–4.
+Each agent receives:
+- The full style principles and physics conventions (copy from rules)
+- The specific outline content for its notebook (extract from outline.md)
+- The current notebook content to reuse and build on (Read the notebook first)
+
+Then handle step 5 (Prompts + Homework review, Overview update) and step 6 (renames/TOC) in a **single
+follow-up pass** after all three rewrites are confirmed complete, since the Overview and any rename
 cascade both need to see all three notebooks' final state.
 
-Each rewrite agent should be given the full style principles, the specific outline content for its notebook,
-and the current notebook content to reuse and build on.
+## Structural Changes: Outline vs Current Files
+
+The outline has been redesigned and may differ from the current file structure. Key changes to watch for:
+
+### Ch3 — Title renames
+- 3.1.1: "Classical to Quantum" → "Geometric Optics"
+- 3.1.3: "Quantum Mechanics as Optics" → "Particle-Wave Unification"
+- 3.2.2 and 3.2.3: swapped order (Schrödinger Equation now 3.2.2, Free Particle Propagator now 3.2.3)
+
+### Ch4 — Restructured from 5 units to 4 units
+- 4.1: lesson titles changed (4.1.1 → "Gauge Principle", 4.1.2 → "Electromagnetic Coupling", 4.1.3 → "Gauge Invariance")
+- 4.2: completely new unit "Berry Phase" replacing old "Flux Ring"
+  - 4.2.1 Berry Phase (new content), 4.2.2 Aharonov-Bohm Effect, 4.2.3 Flux Ring
+  - Old files: 4-2-1-aharonov-bohm-effect, 4-2-2-flux-quantization, 4-2-3-gauge-invariance
+- 4.3: Landau Level — lessons renamed (4.3.1 adds Hall effect content)
+- 4.4: Spin and Monopole — 4.4.1 renamed to "Classical Spin"
+- Old 4.5 Berry Phase unit is REMOVED — content absorbed into new 4.2
+  - Old files 4-5-*.ipynb and 4-5-berry-phase.ipynb should be archived or deleted
+  - _toc.yml must be updated to remove 4.5 entries
+
+### Ch6 — Content reshuffled
+- 6.1.2: "Partial Trace" → "Entropy" (partial trace moved to 6.2.1)
+- 6.1.3: "Entropy" → "Quantum Statistics" (new content: Bose-Einstein/Fermi-Dirac)
+- 6.2.1: "Composite Systems" now includes partial trace content
+
+When working on any of these chapters, the manager agent MUST handle file renames, _toc.yml updates,
+index.md updates, and cross-reference fixes as part of step 6.
+
+## Important Reminders
+
+- **NEVER use Edit, Write, or NotebookEdit** — all three are denied. Use only Bash + Python.
+- **Always Read before writing** — verify cell structure hasn't changed.
+- **One unit at a time** — complete one unit fully before starting another.
+- **Depth over breadth** — finish completely, don't leave partially-done notebooks.
+- **Check outline.md for the canonical narrative** — the outline is the source of truth for content decisions.
+- **Preserve correct physics** — rewrite prose, don't invent new physics. When uncertain, flag for professor review.

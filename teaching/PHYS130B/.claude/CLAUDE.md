@@ -8,14 +8,14 @@ The notes live in `notes_src/` as `.ipynb` notebooks compiled to a static HTML s
 
 ## Course Structure
 
-6 chapters, 21 sections, 63 subsections = **84 notebooks** in a 3-level hierarchy:
+6 chapters, 20 sections, 60 subsections = **80 notebooks** in a 3-level hierarchy:
 
 | Chapter | Topic | Sections | Subsections | Textbook |
 |---------|-------|----------|-------------|----------|
 | Ch1 | Qubit | 3 | 9 | §4 |
 | Ch2 | Identical Particles | 3 | 9 | §8 |
 | Ch3 | Path Integral | 4 | 12 | §15 |
-| Ch4 | Phase and Gauge | 5 | 15 | §9, §11 |
+| Ch4 | Phase and Gauge | 4 | 12 | §9, §11 |
 | Ch5 | Perturbation Theory | 2 | 6 | §10, §11 |
 | Ch6 | Quantum Foundations | 4 | 12 | §16 |
 
@@ -71,10 +71,10 @@ The notes are being refactored to support AI-era pedagogy. This is a multi-sessi
 
 The following workstreams were completed in previous runs:
 
-- **Workstream 1: Prompt Review** — All 63 subsection notebooks reviewed and updated
-- **Workstream 2: Homework** — All 63 subsection notebooks have `## Homework` (cell 3)
-- **Workstream 3: Projects** — All 21 section parent notebooks have `## Project` (cell 2)
-- **Workstream 4: Discussion Problems** — All 63 subsection notebooks have inline Discussion boxes (`:class: dropdown tip`)
+- **Workstream 1: Prompt Review** — All 60 subsection notebooks reviewed and updated
+- **Workstream 2: Homework** — All 60 subsection notebooks have `## Homework` (cell 3)
+- **Workstream 3: Projects** — All 20 section parent notebooks have `## Project` (cell 2)
+- **Workstream 4: Discussion Problems** — All 60 subsection notebooks have inline Discussion boxes (`:class: dropdown tip`)
 
 ### Workstream 5: Content Polish (84 notebooks)
 

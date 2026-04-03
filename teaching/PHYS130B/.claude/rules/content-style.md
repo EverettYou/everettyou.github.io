@@ -41,6 +41,7 @@ Both Prompts and Discussion use `tip` (green, inviting). Differentiate by title:
 | `important` | Core definitions, theorems, fundamental equations | Key results students must memorize and retain. Prominently visible, never collapsed. |
 | `example` | Worked examples with detailed calculations | State the problem visibly; hide the full solution behind a `dropdown`. |
 | `note` | Background, clarifications, physical intuition, paradox setup | Supplementary context that enriches understanding but isn't essential to the main argument. |
+| `information` | Derivations and proofs | Extended mathematical derivations or formal proofs. Always collapsed (`dropdown information`). |
 | `hint` | Nudge toward a solution; "think about...", "recall that..." | Brief pointers that guide reasoning without giving away the answer. |
 | `seealso` | Cross-references, further reading, animations, external links | Pointers to related sections, textbook chapters, or online resources. |
 
@@ -58,7 +59,7 @@ Both Prompts and Discussion use `tip` (green, inviting). Differentiate by title:
 
 | Class | Role | When to Use |
 |-------|------|-------------|
-| `dropdown` | Collapsible container for derivations and extended content | Long derivations, proofs, or supplementary material that would interrupt flow. Combine with another class (e.g., `dropdown example`, `dropdown note`). |
+| `dropdown` | Collapsible container for derivations and extended content | Long derivations, proofs, or supplementary material that would interrupt flow. Combine with another class (e.g., `dropdown information` for derivations/proofs, `dropdown example` for worked examples, `dropdown note` for supplementary context). |
 | `poll dropdown` | In-class poll / clicker prompts | Optional quick-poll questions, collapsed by default. |
 
 ### Usage Examples
@@ -102,6 +103,15 @@ Every Hermitian operator $\hat{A}$ admits a spectral decomposition...
 :::
 ```
 
+
+**Derivation / Proof (always collapsed):**
+```
+:::{admonition} Derivation: Schrödinger Equation from Path Integral
+:class: dropdown information
+
+[Step-by-step derivation...]
+:::
+```
 **Misconception (myth-busting):**
 ```
 :::{admonition} Misconception: "Entanglement = Correlation"

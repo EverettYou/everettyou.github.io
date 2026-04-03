@@ -14,7 +14,7 @@
   - [Gauge Field](4-1-gauge-field)
   - §9.1
 * - 4.2
-  - [Flux Ring](4-2-flux-ring)
+  - [Berry Phase](4-2-berry-phase)
   - §9.4
 * - 4.3
   - [Landau Level](4-3-landau-level)
@@ -22,9 +22,6 @@
 * - 4.4
   - [Spin and Monopole](4-4-spin-and-monopole)
   - §9.3, §9.5
-* - 4.5
-  - [Berry Phase](4-5-berry-phase)
-  - §11.1
 ```
 
 ## Review & Summary
