@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -561,19 +561,19 @@ document.write(`
 <p class="admonition-title">Von Neumann Entropy</p>
 <p>For a density matrix <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> on a <span class="math notranslate nohighlight">\(d\)</span>-dimensional Hilbert space, the <strong>von Neumann entropy</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-definition">
-<span class="eqno">(100)<a class="headerlink" href="#equation-eq-entropy-definition" title="Link to this equation">#</a></span>\[
+<span class="eqno">(102)<a class="headerlink" href="#equation-eq-entropy-definition" title="Link to this equation">#</a></span>\[
 S(\hat{\rho}) = -\mathrm{Tr}(\hat{\rho} \ln \hat{\rho})
 \]</div>
 <p>Equivalently, using spectral decomposition <span class="math notranslate nohighlight">\(\hat{\rho} = \sum_i \lambda_i |\psi_i\rangle\langle\psi_i|\)</span> (eigenvalues <span class="math notranslate nohighlight">\(\lambda_i \geq 0\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-spectral">
-<span class="eqno">(101)<a class="headerlink" href="#equation-eq-entropy-spectral" title="Link to this equation">#</a></span>\[
+<span class="eqno">(103)<a class="headerlink" href="#equation-eq-entropy-spectral" title="Link to this equation">#</a></span>\[
 S(\hat{\rho}) = -\sum_i \lambda_i \ln \lambda_i
 \]</div>
 <p>with the convention <span class="math notranslate nohighlight">\(0 \ln 0 = 0\)</span>.</p>
 </div>
 <p><strong>Bounds and limits:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-bounds">
-<span class="eqno">(102)<a class="headerlink" href="#equation-eq-entropy-bounds" title="Link to this equation">#</a></span>\[
+<span class="eqno">(104)<a class="headerlink" href="#equation-eq-entropy-bounds" title="Link to this equation">#</a></span>\[
 0 \leq S(\hat{\rho}) \leq \ln d
 \]</div>
 <p>The minimum <span class="math notranslate nohighlight">\(S = 0\)</span> occurs for pure states (a single eigenvalue equals 1). The maximum <span class="math notranslate nohighlight">\(S = \ln d\)</span> occurs for the maximally mixed state <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{I}/d\)</span> (all eigenvalues equal <span class="math notranslate nohighlight">\(1/d\)</span>).</p>
@@ -595,6 +595,27 @@ S(\hat{\rho}) = -2 \cdot \frac{1}{2} \ln\frac{1}{2} = \ln 2
 <p class="admonition-title">Discussion</p>
 <p>A thermometer measures entropy by heat capacity. At high temperatures, a system has many accessible energy levels and entropy is large. At low temperatures, only the ground state is occupied and entropy vanishes. Why is entropy the right quantity to measure this ignorance?</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Entropy Bounds <span class="math notranslate nohighlight">\(0 \leq S \leq \ln d\)</span></p>
+<p><strong>Lower bound <span class="math notranslate nohighlight">\(S \geq 0\)</span>:</strong> For any eigenvalue <span class="math notranslate nohighlight">\(\lambda_i \in [0, 1]\)</span>, we have <span class="math notranslate nohighlight">\(\ln\lambda_i \leq 0\)</span>. Since <span class="math notranslate nohighlight">\(\lambda_i \geq 0\)</span>, each term <span class="math notranslate nohighlight">\(-\lambda_i\ln\lambda_i \geq 0\)</span> (using <span class="math notranslate nohighlight">\(\lim_{\lambda\to 0^+} -\lambda\ln\lambda = 0\)</span>). So <span class="math notranslate nohighlight">\(S = -\sum_i \lambda_i\ln\lambda_i \geq 0\)</span>.</p>
+<p>Equality (<span class="math notranslate nohighlight">\(S = 0\)</span>) requires every term to vanish, which happens when each <span class="math notranslate nohighlight">\(\lambda_i = 0\)</span> or <span class="math notranslate nohighlight">\(\lambda_i = 1\)</span>. Combined with <span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span>, exactly one <span class="math notranslate nohighlight">\(\lambda_i = 1\)</span> and the rest are zero: a pure state.</p>
+<p><strong>Upper bound <span class="math notranslate nohighlight">\(S \leq \ln d\)</span>:</strong> We use the inequality <span class="math notranslate nohighlight">\(\ln x \leq x - 1\)</span> (equality iff <span class="math notranslate nohighlight">\(x = 1\)</span>). Setting <span class="math notranslate nohighlight">\(x = (1/d)/\lambda_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\ln\frac{1}{d\lambda_i} \leq \frac{1}{d\lambda_i} - 1
+\]</div>
+<p>Multiply by <span class="math notranslate nohighlight">\(-\lambda_i\)</span> and sum over <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S = -\sum_i \lambda_i\ln\lambda_i = \sum_i \lambda_i\ln\frac{1}{d\lambda_i} + \ln d \leq \sum_i \lambda_i\left(\frac{1}{d\lambda_i} - 1\right) + \ln d = \frac{n}{d} - 1 + \ln d
+\]</div>
+<p>Wait — more directly: apply the <strong>Klein inequality</strong> (concavity of <span class="math notranslate nohighlight">\(\ln\)</span>). By Jensen’s inequality applied to the concave function <span class="math notranslate nohighlight">\(-x\ln x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S = \sum_i (-\lambda_i\ln\lambda_i) \leq d\cdot \left(-\frac{1}{d}\ln\frac{1}{d}\right) = \ln d
+\]</div>
+<p>with equality when all <span class="math notranslate nohighlight">\(\lambda_i = 1/d\)</span> (maximally mixed state <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{I}/d\)</span>).</p>
+</div>
 </section>
 <section id="properties-of-entropy">
 <h3>Properties of Entropy<a class="headerlink" href="#properties-of-entropy" title="Link to this heading">#</a></h3>
@@ -607,10 +628,38 @@ S(\hat{\rho}) = -2 \cdot \frac{1}{2} \ln\frac{1}{2} = \ln 2
 <li><p><strong>Concavity:</strong> For <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>,</p></li>
 </ol>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-concavity">
-<span class="eqno">(103)<a class="headerlink" href="#equation-eq-entropy-concavity" title="Link to this equation">#</a></span>\[
+<span class="eqno">(105)<a class="headerlink" href="#equation-eq-entropy-concavity" title="Link to this equation">#</a></span>\[
 S(p\hat{\rho}_1 + (1-p)\hat{\rho}_2) \geq p S(\hat{\rho}_1) + (1-p) S(\hat{\rho}_2)
 \]</div>
 <p>Mixing states increases entropy: ignorance about which mixture we’re in adds to internal entropy.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Concavity of Von Neumann Entropy</p>
+<p>We prove <span class="math notranslate nohighlight">\(S(p\hat{\rho}_1 + (1-p)\hat{\rho}_2) \geq pS(\hat{\rho}_1) + (1-p)S(\hat{\rho}_2)\)</span> for any <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>.</p>
+<p><strong>Setup.</strong> Introduce a classical ancilla qubit <span class="math notranslate nohighlight">\(A\)</span> that records which state was prepared, forming the joint state on system <span class="math notranslate nohighlight">\(S\)</span> and ancilla <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho}_{SA} = p\,\hat{\rho}_1^S \otimes \vert 0\rangle\langle 0\vert^A + (1-p)\,\hat{\rho}_2^S \otimes \vert 1\rangle\langle 1\vert^A
+\]</div>
+<p><strong>Step 1: Marginals.</strong> Tracing out <span class="math notranslate nohighlight">\(A\)</span> gives <span class="math notranslate nohighlight">\(\hat{\rho}_S = p\hat{\rho}_1 + (1-p)\hat{\rho}_2\)</span>. Tracing out <span class="math notranslate nohighlight">\(S\)</span> gives <span class="math notranslate nohighlight">\(\hat{\rho}_A = p\vert 0\rangle\langle 0\vert + (1-p)\vert 1\rangle\langle 1\vert\)</span>, with entropy <span class="math notranslate nohighlight">\(S(\hat{\rho}_A) = H(p) = -p\ln p - (1-p)\ln(1-p)\)</span> (binary Shannon entropy).</p>
+<p><strong>Step 2: Entropy of <span class="math notranslate nohighlight">\(\hat{\rho}_{SA}\)</span>.</strong> Since <span class="math notranslate nohighlight">\(\vert 0\rangle^A\)</span> and <span class="math notranslate nohighlight">\(\vert 1\rangle^A\)</span> are orthogonal, <span class="math notranslate nohighlight">\(\hat{\rho}_{SA}\)</span> is block-diagonal with orthogonal blocks. Its eigenvalues are <span class="math notranslate nohighlight">\(\{p\lambda_i^{(1)}\}\)</span> (from the <span class="math notranslate nohighlight">\(\hat{\rho}_1\)</span> block) and <span class="math notranslate nohighlight">\(\{(1-p)\mu_j^{(2)}\}\)</span> (from the <span class="math notranslate nohighlight">\(\hat{\rho}_2\)</span> block). Computing the entropy:</p>
+<div class="math notranslate nohighlight">
+\[
+S(\hat{\rho}_{SA}) = -\sum_i p\lambda_i^{(1)}\ln(p\lambda_i^{(1)}) - \sum_j (1-p)\mu_j^{(2)}\ln((1-p)\mu_j^{(2)})
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\(-p\lambda_i\ln(p\lambda_i) = -p\lambda_i\ln p - p\lambda_i\ln\lambda_i\)</span> and <span class="math notranslate nohighlight">\(\sum_i \lambda_i = \sum_j \mu_j = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S(\hat{\rho}_{SA}) = H(p) + p\,S(\hat{\rho}_1) + (1-p)\,S(\hat{\rho}_2)
+\]</div>
+<p><strong>Step 3: Subadditivity.</strong> For any bipartite state, the von Neumann entropy satisfies <strong>subadditivity</strong>: <span class="math notranslate nohighlight">\(S(\hat{\rho}_{SA}) \leq S(\hat{\rho}_S) + S(\hat{\rho}_A)\)</span>. (This follows from the non-negativity of quantum relative entropy: <span class="math notranslate nohighlight">\(D(\hat{\rho}_{SA}\|\hat{\rho}_S \otimes \hat{\rho}_A) \geq 0\)</span>.)</p>
+<p><strong>Step 4: Conclusion.</strong> Combining Steps 2 and 3:</p>
+<div class="math notranslate nohighlight">
+\[
+H(p) + p\,S(\hat{\rho}_1) + (1-p)\,S(\hat{\rho}_2) \leq S(p\hat{\rho}_1 + (1-p)\hat{\rho}_2) + H(p)
+\]</div>
+<p>Canceling <span class="math notranslate nohighlight">\(H(p)\)</span>: <span class="math notranslate nohighlight">\(\quad p\,S(\hat{\rho}_1) + (1-p)\,S(\hat{\rho}_2) \leq S(p\hat{\rho}_1 + (1-p)\hat{\rho}_2)\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Physical meaning.</strong> Mixing two states always increases (or preserves) entropy. This reflects our additional ignorance: we know neither which state the system is in, nor its internal uncertainty.</p>
 </div>
 </section>
 <section id="connection-to-information-theory">
@@ -626,6 +675,27 @@ H(P) = -\sum_i p_i \ln p_i
 <li><p><span class="math notranslate nohighlight">\(S = 0\)</span>: We know the state exactly (pure state).</p></li>
 <li><p><span class="math notranslate nohighlight">\(S &gt; 0\)</span>: We have incomplete information; measuring may yield different outcomes.</p></li>
 </ul>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Non-Negativity of Quantum Relative Entropy</p>
+<p>The <strong>quantum relative entropy</strong> between density matrices <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[S(\hat{\rho}\|\hat{\sigma}) = \mathrm{Tr}(\hat{\rho}\ln\hat{\rho}) - \mathrm{Tr}(\hat{\rho}\ln\hat{\sigma})\]</div>
+<p>We prove <span class="math notranslate nohighlight">\(S(\hat{\rho}\|\hat{\sigma}) \geq 0\)</span> with equality iff <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{\sigma}\)</span>.</p>
+<p><strong>Step 1: Spectral decompositions.</strong> Write <span class="math notranslate nohighlight">\(\hat{\rho} = \sum_i p_i\vert i\rangle\langle i\vert\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma} = \sum_j q_j\vert j\rangle\langle j\vert\)</span> in their respective eigenbases. The <strong>overlap matrix</strong> <span class="math notranslate nohighlight">\(t_{ij} = \vert\langle i\vert j\rangle\vert^2\)</span> is doubly stochastic: <span class="math notranslate nohighlight">\(t_{ij} \geq 0\)</span>, <span class="math notranslate nohighlight">\(\sum_j t_{ij} = 1\)</span> for each <span class="math notranslate nohighlight">\(i\)</span> (from completeness of <span class="math notranslate nohighlight">\(\{\vert j\rangle\}\)</span>).</p>
+<p><strong>Step 2: Expand the relative entropy.</strong> Expressing <span class="math notranslate nohighlight">\(\ln\hat{\sigma}\)</span> in its eigenbasis:</p>
+<div class="math notranslate nohighlight">
+\[S(\hat{\rho}\|\hat{\sigma}) = \sum_i p_i \ln p_i - \sum_{i,j} p_i\,t_{ij}\ln q_j\]</div>
+<p><strong>Step 3: Apply Jensen’s inequality.</strong> Since <span class="math notranslate nohighlight">\(\ln\)</span> is concave, Jensen’s inequality gives <span class="math notranslate nohighlight">\(\sum_j t_{ij}\ln q_j \leq \ln\!\left(\sum_j t_{ij}q_j\right)\)</span> for each fixed <span class="math notranslate nohighlight">\(i\)</span>. Therefore:</p>
+<div class="math notranslate nohighlight">
+\[S(\hat{\rho}\|\hat{\sigma}) \geq \sum_i p_i\ln p_i - \sum_i p_i\ln\!\left(\sum_j t_{ij}q_j\right) = \sum_i p_i \ln\frac{p_i}{\tilde{q}_i}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{q}_i = \sum_j t_{ij}q_j\)</span> defines a valid probability distribution (non-negative, <span class="math notranslate nohighlight">\(\sum_i \tilde{q}_i = \sum_j q_j = 1\)</span>).</p>
+<p><strong>Step 4: Classical KL divergence is non-negative.</strong> Using <span class="math notranslate nohighlight">\(\ln t \leq t - 1\)</span> (equivalently <span class="math notranslate nohighlight">\(\mathrm{e}^x \geq 1 + x\)</span>) with <span class="math notranslate nohighlight">\(t = \tilde{q}_i/p_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sum_i p_i \ln\frac{p_i}{\tilde{q}_i} = -\sum_i p_i\ln\frac{\tilde{q}_i}{p_i} \geq -\sum_i p_i\!\left(\frac{\tilde{q}_i}{p_i} - 1\right) = 1 - \sum_i \tilde{q}_i = 0\]</div>
+<p>Combining: <span class="math notranslate nohighlight">\(S(\hat{\rho}\|\hat{\sigma}) \geq 0\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Equality condition:</strong> Both Jensen and KL steps saturate iff <span class="math notranslate nohighlight">\(t_{ij}\)</span> is concentrated on single <span class="math notranslate nohighlight">\(j\)</span> values and <span class="math notranslate nohighlight">\(\tilde{q}_i = p_i\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> — forcing <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{\sigma}\)</span>.</p>
+<p><strong>Why this matters:</strong> Subadditivity <span class="math notranslate nohighlight">\(S(\hat{\rho}_{SA}) \leq S(\hat{\rho}_S) + S(\hat{\rho}_A)\)</span>, used in the concavity proof above, follows directly by applying this result to <span class="math notranslate nohighlight">\(S(\hat{\rho}_{SA}\|\hat{\rho}_S\otimes\hat{\rho}_A) \geq 0\)</span>. Non-negativity of relative entropy is thus the engine behind most entropy inequalities in quantum information.</p>
+</div>
 </section>
 <section id="maximum-entropy-principle">
 <h3>Maximum Entropy Principle<a class="headerlink" href="#maximum-entropy-principle" title="Link to this heading">#</a></h3>
@@ -659,13 +729,13 @@ H(P) = -\sum_i p_i \ln p_i
 <p class="admonition-title">Thermal State and Boltzmann Distribution</p>
 <p>The state maximizing entropy at fixed <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> is the <strong>thermal state</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-thermal">
-<span class="eqno">(104)<a class="headerlink" href="#equation-eq-entropy-thermal" title="Link to this equation">#</a></span>\[
+<span class="eqno">(106)<a class="headerlink" href="#equation-eq-entropy-thermal" title="Link to this equation">#</a></span>\[
 \hat{\rho}_{\text{thermal}} = \frac{\mathrm{e}^{-\beta \hat{H}}}{Z}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(Z = \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> is the <strong>partition function</strong> and <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span>.</p>
 <p>In the energy eigenbasis, diagonal elements are <strong>Boltzmann weights</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-boltzmann">
-<span class="eqno">(105)<a class="headerlink" href="#equation-eq-entropy-boltzmann" title="Link to this equation">#</a></span>\[
+<span class="eqno">(107)<a class="headerlink" href="#equation-eq-entropy-boltzmann" title="Link to this equation">#</a></span>\[
 P_n = \frac{\mathrm{e}^{-\beta E_n}}{Z}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(E_n\)</span> are energy eigenvalues.</p>
@@ -681,19 +751,19 @@ P_n = \frac{\mathrm{e}^{-\beta E_n}}{Z}
 <p>The partition function <span class="math notranslate nohighlight">\(Z(\beta) = \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> encodes all thermodynamic properties of a system at inverse temperature <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 <p><strong>Average Energy:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-average-energy">
-<span class="eqno">(106)<a class="headerlink" href="#equation-eq-entropy-average-energy" title="Link to this equation">#</a></span>\[
+<span class="eqno">(108)<a class="headerlink" href="#equation-eq-entropy-average-energy" title="Link to this equation">#</a></span>\[
 \langle E \rangle = \mathrm{Tr}(\hat{\rho}_{\text{thermal}} \hat{H}) = -\frac{\mathrm{d} \ln Z}{\mathrm{d} \beta}
 \]</div>
 <p><strong>Free Energy (Helmholtz):</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-free-energy">
-<span class="eqno">(107)<a class="headerlink" href="#equation-eq-entropy-free-energy" title="Link to this equation">#</a></span>\[
+<span class="eqno">(109)<a class="headerlink" href="#equation-eq-entropy-free-energy" title="Link to this equation">#</a></span>\[
 F = -k_B T \ln Z
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(T = 1/(k_B \beta)\)</span>.</p>
 <p><strong>Entropy in terms of <span class="math notranslate nohighlight">\(Z\)</span>:</strong></p>
 <p>From <span class="math notranslate nohighlight">\(\hat{\rho}_{\text{thermal}} = \mathrm{e}^{-\beta \hat{H}}/Z\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-from-partition">
-<span class="eqno">(108)<a class="headerlink" href="#equation-eq-entropy-from-partition" title="Link to this equation">#</a></span>\[
+<span class="eqno">(110)<a class="headerlink" href="#equation-eq-entropy-from-partition" title="Link to this equation">#</a></span>\[
 S(\hat{\rho}_{\text{thermal}}) = k_B [\beta \langle E \rangle + \ln Z]
 \]</div>
 <p>Equivalently, <span class="math notranslate nohighlight">\(S = -(\partial F/\partial T)|_V\)</span> (standard thermodynamic relation).</p>
@@ -708,7 +778,28 @@ S(\hat{\rho}_{\text{thermal}}) = k_B [\beta \langle E \rangle + \ln Z]
 \[
 S = \frac{\langle E \rangle - F}{T} = \frac{\langle E \rangle + k_B T \ln Z}{T}
 \]</div>
-<p>which is consistent with equation <a class="reference internal" href="#equation-eq-entropy-from-partition">(108)</a>.</p>
+<p>which is consistent with equation <a class="reference internal" href="#equation-eq-entropy-from-partition">(110)</a>.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Thermodynamic Identities from the Partition Function</p>
+<p>Start from <span class="math notranslate nohighlight">\(Z(\beta) = \operatorname{Tr}(\mathrm{e}^{-\beta\hat{H}}) = \sum_n \mathrm{e}^{-\beta E_n}\)</span> and <span class="math notranslate nohighlight">\(\hat{\rho} = \mathrm{e}^{-\beta\hat{H}}/Z\)</span>.</p>
+<p><strong>Average energy.</strong> Differentiate <span class="math notranslate nohighlight">\(\ln Z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+-\frac{\mathrm{d}\ln Z}{\mathrm{d}\beta} = -\frac{1}{Z}\frac{\mathrm{d}Z}{\mathrm{d}\beta} = -\frac{1}{Z}\operatorname{Tr}\!\left(-\hat{H}\,\mathrm{e}^{-\beta\hat{H}}\right) = \operatorname{Tr}(\hat{\rho}\hat{H}) = \langle E\rangle
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(\langle E\rangle = -\partial(\ln Z)/\partial\beta\)</span>.</p>
+<p><strong>Entropy.</strong> Using <span class="math notranslate nohighlight">\(\ln\hat{\rho} = -\beta\hat{H} - (\ln Z)\hat{I}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S = -\operatorname{Tr}(\hat{\rho}\ln\hat{\rho}) = -\operatorname{Tr}(\hat{\rho}(-\beta\hat{H} - \ln Z)) = \beta\langle E\rangle + \ln Z
+\]</div>
+<p><strong>Free energy.</strong> Multiply by <span class="math notranslate nohighlight">\(k_B T = 1/\beta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+k_B T S = k_B T \beta\langle E\rangle + k_B T\ln Z \implies \langle E\rangle - TS = -k_B T\ln Z \equiv F
+\]</div>
+<p>The free energy <span class="math notranslate nohighlight">\(F = \langle E\rangle - TS\)</span> is minimized at thermodynamic equilibrium — the thermal state achieves the minimum free energy (equivalently, maximum entropy) simultaneously.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>

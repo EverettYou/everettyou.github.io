@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -592,6 +592,29 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[v_x(t) = v_\perp \cos(\omega_c t + \phi_0), \quad v_y(t) = v_\perp \sin(\omega_c t + \phi_0)\]</div>
 <p>where <span class="math notranslate nohighlight">\(v_\perp = \sqrt{v_x^2 + v_y^2}\)</span> is the speed perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> and <span class="math notranslate nohighlight">\(\phi_0\)</span> is an arbitrary phase.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Solving the Cyclotron Equations of Motion</p>
+<p>Starting from Newton’s second law with the Lorentz force in a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[m\ddot{\boldsymbol{x}} = q\dot{\boldsymbol{x}} \times \boldsymbol{B}\]</div>
+<p>Writing in components (<span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}} \times B\hat{z} = \dot{x}B\hat{x}\times\hat{z} + \dot{y}B\hat{y}\times\hat{z} = -\dot{x}B\hat{y} + \dot{y}B\hat{x}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[m\dot{v}_x = qv_yB, \quad m\dot{v}_y = -qv_xB, \quad m\dot{v}_z = 0\]</div>
+<p>The <span class="math notranslate nohighlight">\(z\)</span>-component gives <span class="math notranslate nohighlight">\(v_z = \text{const}\)</span>. For the transverse motion, differentiate the first equation with respect to time:</p>
+<div class="math notranslate nohighlight">
+\[m\ddot{v}_x = qB\dot{v}_y = qB\left(-\frac{qB}{m}v_x\right) = -\frac{q^2B^2}{m}v_x\]</div>
+<p>This gives the simple harmonic oscillator equation <span class="math notranslate nohighlight">\(\ddot{v}_x + \omega_c^2 v_x = 0\)</span> with <span class="math notranslate nohighlight">\(\omega_c = qB/m\)</span>. The general solution is:</p>
+<div class="math notranslate nohighlight">
+\[v_x(t) = v_\perp \cos(\omega_c t + \phi_0)\]</div>
+<p>Substituting back into <span class="math notranslate nohighlight">\(m\dot{v}_x = qBv_y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[v_y = \frac{m}{qB}\dot{v}_x = \frac{1}{\omega_c}\dot{v}_x = -v_\perp\sin(\omega_c t + \phi_0)\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(v_y\)</span> is <em>not</em> an independent solution — it is determined by <span class="math notranslate nohighlight">\(v_x\)</span> through the original coupled equations. The sign structure ensures <span class="math notranslate nohighlight">\(v_x^2 + v_y^2 = v_\perp^2 = \text{const}\)</span>, confirming that the magnetic force does no work (<span class="math notranslate nohighlight">\(\boldsymbol{F} \cdot \boldsymbol{v} = q(\boldsymbol{v}\times\boldsymbol{B})\cdot\boldsymbol{v} = 0\)</span>).</p>
+<p>Integrating the velocity to get position:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = x_0 + \frac{v_\perp}{\omega_c}\sin(\omega_c t + \phi_0), \quad y(t) = y_0 + \frac{v_\perp}{\omega_c}\cos(\omega_c t + \phi_0)\]</div>
+<p>where <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> is an integration constant — the <strong>guiding center</strong>. The trajectory satisfies <span class="math notranslate nohighlight">\((x - x_0)^2 + (y - y_0)^2 = r_c^2\)</span> with cyclotron radius <span class="math notranslate nohighlight">\(r_c = v_\perp/\omega_c = mv_\perp/(qB)\)</span>.</p>
+</div>
 <p>Integrating to find position:</p>
 <div class="math notranslate nohighlight">
 \[x(t) = x_0 + \frac{v_\perp}{\omega_c}\sin(\omega_c t + \phi_0), \quad y(t) = y_0 - \frac{v_\perp}{\omega_c}\cos(\omega_c t + \phi_0)\]</div>
@@ -619,6 +642,30 @@ document.write(`
 \[T_c = \frac{2\pi}{\omega_c} = \frac{2\pi m}{qB}\]</div>
 <p><strong>Remarkable fact:</strong> <span class="math notranslate nohighlight">\(T_c\)</span> is completely independent of the particle’s kinetic energy or velocity. A slow particle and a fast particle orbit in circles of different radii, but they always take the same time to complete one loop.</p>
 <p>This is why cyclotron accelerators work: all particles, regardless of energy, take the same time to traverse a semicircle. By applying a radiofrequency voltage synchronized to <span class="math notranslate nohighlight">\(f_c = \omega_c/(2\pi)\)</span>, you can accelerate all particles in phase, building up their energy with each pass.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Guiding Center from Position and Kinetic Momentum</p>
+<p>The guiding center <span class="math notranslate nohighlight">\(\boldsymbol{\xi} = (\xi_x, \xi_y)\)</span> is the center of the cyclotron orbit. It can be expressed in terms of the instantaneous position and velocity. From the trajectory:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{x}(t) = \boldsymbol{\xi} + r_c\begin{pmatrix}\sin(\omega_c t + \phi_0) \\ \cos(\omega_c t + \phi_0)\end{pmatrix}\end{split}\]</div>
+<p>and the velocity:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{\boldsymbol{x}}(t) = v_c\begin{pmatrix}\cos(\omega_c t + \phi_0) \\ -\sin(\omega_c t + \phi_0)\end{pmatrix}\end{split}\]</div>
+<p>we can construct <span class="math notranslate nohighlight">\(\hat{z}\times\dot{\boldsymbol{x}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{z}\times\dot{\boldsymbol{x}} = v_c\begin{pmatrix}\cos(\omega_c t + \phi_0) \\ -\sin(\omega_c t + \phi_0)\end{pmatrix} \times \hat{z} \;\;\Rightarrow\;\; \left(\hat{z}\times\dot{\boldsymbol{x}}\right)_x = -\dot{y} = v_c\sin(\omega_c t + \phi_0)\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\left(\hat{z}\times\dot{\boldsymbol{x}}\right)_y = \dot{x} = v_c\cos(\omega_c t + \phi_0)\]</div>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{r_c}{v_c}\hat{z}\times\dot{\boldsymbol{x}} = r_c\begin{pmatrix}\sin(\omega_c t + \phi_0) \\ \cos(\omega_c t + \phi_0)\end{pmatrix}\end{split}\]</div>
+<p>Subtracting from <span class="math notranslate nohighlight">\(\boldsymbol{x}(t)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\xi} = \boldsymbol{x} - \frac{r_c}{v_c}\hat{z}\times\dot{\boldsymbol{x}}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(r_c/v_c = m/(qB)\)</span> and the kinetic momentum is <span class="math notranslate nohighlight">\(\boldsymbol{\pi} = m\dot{\boldsymbol{x}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\xi} = \boldsymbol{x} - \frac{1}{qB}\hat{z}\times\boldsymbol{\pi}\]</div>
+<p>This formula extracts the orbit center from the instantaneous state of the particle. It is a conserved quantity: <span class="math notranslate nohighlight">\(\dot{\boldsymbol{\xi}} = 0\)</span> for pure cyclotron motion. In quantum mechanics, the guiding center operators <span class="math notranslate nohighlight">\(\hat{\xi}_x, \hat{\xi}_y\)</span> satisfy <span class="math notranslate nohighlight">\([\hat{\xi}_x, \hat{\xi}_y] = -\mathrm{i}\hbar/(qB) = -\mathrm{i}\ell_B^2\)</span>, encoding the noncommutativity of position coordinates projected onto a Landau level.</p>
 </div>
 </section>
 </section>
@@ -652,6 +699,26 @@ document.write(`
 <li><p>Hall conductance: <span class="math notranslate nohighlight">\(\sigma_{xy} = 1/\rho_H = nq/B\)</span></p></li>
 <li><p>Classically, Hall conductance varies continuously with <span class="math notranslate nohighlight">\(B\)</span></p></li>
 </ul>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(\boldsymbol{E}\times\boldsymbol{B}\)</span> Drift and Hall Conductivity</p>
+<p>In crossed fields <span class="math notranslate nohighlight">\(\boldsymbol{E} = E\hat{y}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, the Lorentz force equation is:</p>
+<div class="math notranslate nohighlight">
+\[m\dot{\boldsymbol{v}} = q(\boldsymbol{E} + \boldsymbol{v}\times\boldsymbol{B})\]</div>
+<p>In steady state (<span class="math notranslate nohighlight">\(\dot{\boldsymbol{v}} = 0\)</span>), the force vanishes. The drift velocity <span class="math notranslate nohighlight">\(\boldsymbol{v}_d\)</span> that solves <span class="math notranslate nohighlight">\(\boldsymbol{E} + \boldsymbol{v}_d\times\boldsymbol{B} = 0\)</span> is found by taking the cross product with <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{E}\times\boldsymbol{B} + (\boldsymbol{v}_d\times\boldsymbol{B})\times\boldsymbol{B} = 0\]</div>
+<p>Using the BAC-CAB identity: <span class="math notranslate nohighlight">\((\boldsymbol{v}_d\times\boldsymbol{B})\times\boldsymbol{B} = \boldsymbol{B}(\boldsymbol{v}_d\cdot\boldsymbol{B}) - \boldsymbol{v}_d B^2\)</span>. For drift perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, we have <span class="math notranslate nohighlight">\(\boldsymbol{v}_d\cdot\boldsymbol{B} = 0\)</span>, giving:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{v}_d = \frac{\boldsymbol{E}\times\boldsymbol{B}}{B^2}\]</div>
+<p>For <span class="math notranslate nohighlight">\(\boldsymbol{E} = E\hat{y}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>: <span class="math notranslate nohighlight">\(\boldsymbol{v}_d = (E/B)\hat{x}\)</span>. The drift is perpendicular to <em>both</em> <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, and remarkably is <strong>independent of the charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span></strong>.</p>
+<p>With carrier density <span class="math notranslate nohighlight">\(n\)</span> (per unit area for 2D, per unit volume for 3D), the current density in the drift direction is:</p>
+<div class="math notranslate nohighlight">
+\[j_x = nqv_d = \frac{nqE}{B}\]</div>
+<p>The <strong>Hall conductivity</strong> relates the current perpendicular to the applied electric field:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_H \equiv \frac{j_x}{E_y} = \frac{nq}{B}\]</div>
+<p>The <strong>Hall resistivity</strong> is its inverse: <span class="math notranslate nohighlight">\(\rho_H = B/(nq)\)</span>. Since <span class="math notranslate nohighlight">\(\rho_H \propto B\)</span>, measuring the slope of <span class="math notranslate nohighlight">\(\rho_H\)</span> vs <span class="math notranslate nohighlight">\(B\)</span> directly yields <span class="math notranslate nohighlight">\(1/(nq)\)</span>, giving both the carrier density and sign.</p>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Note: Classical Expectation vs Quantum Reality</p>
@@ -707,14 +774,22 @@ document.write(`
 </div>
 <p>The magnetic length can be understood from the uncertainty principle. In the lowest Landau level, the minimum uncertainty in position is:</p>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Magnetic Length from Uncertainty</p>
-<p>In a magnetic field, the canonical momentum <span class="math notranslate nohighlight">\(\boldsymbol{\pi} = \boldsymbol{p} - q\boldsymbol{A}\)</span> does not commute with position. The commutation relations lead to minimum uncertainty relations:</p>
+<p class="admonition-title">Derivation: Magnetic Length from the Kinetic Momentum Commutator</p>
+<p>The kinetic momentum components <span class="math notranslate nohighlight">\(\hat{\pi}_i = \hat{p}_i - qA_i(\hat{\boldsymbol{x}})\)</span> satisfy the commutation relation (derived in §4.1.2):</p>
 <div class="math notranslate nohighlight">
-\[\Delta x \, \Delta y \sim \hbar / (qB)\]</div>
-<p>With equal uncertainty in both perpendicular directions, <span class="math notranslate nohighlight">\(\Delta x \approx \Delta y \approx \ell_B\)</span>:</p>
+\[[\hat{\pi}_x, \hat{\pi}_y] = \mathrm{i}\hbar qB\]</div>
+<p>This is structurally identical to <span class="math notranslate nohighlight">\([\hat{x}, \hat{p}] = \mathrm{i}\hbar\)</span>, with <span class="math notranslate nohighlight">\(\hat{\pi}_x\)</span> and <span class="math notranslate nohighlight">\(\hat{\pi}_y\)</span> playing the roles of conjugate “position” and “momentum” variables, and <span class="math notranslate nohighlight">\(\hbar \to \hbar qB\)</span>. The Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = (\hat{\pi}_x^2 + \hat{\pi}_y^2)/(2m)\)</span> is a harmonic oscillator in these variables.</p>
+<p>By the uncertainty principle applied to these conjugate variables:</p>
 <div class="math notranslate nohighlight">
-\[\ell_B^2 \sim \frac{\hbar}{qB}\]</div>
-<p>The precise coefficient (which gives the factor of 1 without a numerical prefactor) comes from detailed quantum mechanical analysis of the lowest Landau level. The result is <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(qB)}\)</span>.</p>
+\[\Delta\pi_x \cdot \Delta\pi_y \geq \frac{\hbar qB}{2}\]</div>
+<p>In the ground state (lowest Landau level), the uncertainty is minimized and distributed equally: <span class="math notranslate nohighlight">\(\Delta\pi_x = \Delta\pi_y \equiv \Delta\pi\)</span>, giving <span class="math notranslate nohighlight">\((\Delta\pi)^2 = \hbar qB/2\)</span>.</p>
+<p>The spatial extent follows from the relation between position and kinetic momentum. Using <span class="math notranslate nohighlight">\(\hat{\pi}_y = \hat{p}_y - q\hat{A}_y\)</span> and the position-momentum uncertainty <span class="math notranslate nohighlight">\(\Delta y \cdot \Delta p_y \geq \hbar/2\)</span>, the minimum spatial uncertainty is:</p>
+<div class="math notranslate nohighlight">
+\[\Delta x \sim \frac{\Delta\pi}{qB} \sim \sqrt{\frac{\hbar}{qB}} = \ell_B\]</div>
+<p>Equivalently, the guiding center coordinates satisfy <span class="math notranslate nohighlight">\([\hat{\xi}_x, \hat{\xi}_y] = -\mathrm{i}\hbar/(qB) = -\mathrm{i}\ell_B^2\)</span>, so the minimum area occupied by a quantum state in the plane is:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\xi_x \cdot \Delta\xi_y \geq \frac{\ell_B^2}{2} \quad \Longrightarrow \quad A_{\text{min}} \sim 2\pi\ell_B^2\]</div>
+<p>This explains why the degeneracy of each Landau level is <span class="math notranslate nohighlight">\(N_\phi = A/(2\pi\ell_B^2) = qBA/h\)</span>: the total area <span class="math notranslate nohighlight">\(A\)</span> divided by the minimum area per state.</p>
 </div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
@@ -722,6 +797,37 @@ document.write(`
 <p>(a) For an electron in a 10 T magnetic field, compute <span class="math notranslate nohighlight">\(\ell_B\)</span> in nanometers. Compare this to the Bohr radius <span class="math notranslate nohighlight">\(a_0 \approx 0.53\)</span> Å. In what sense is the quantum wavefunction “squeezed”?</p>
 <p>(b) In the quantum Hall regime, the magnetic length becomes the relevant length scale. Explain why the degeneracy of each Landau level is of order <span class="math notranslate nohighlight">\(A/\ell_B^2\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is the sample area.</p>
 <p>(c) The classical cyclotron radius is <span class="math notranslate nohighlight">\(r_c = mv_\perp/(qB)\)</span>. For an electron in the lowest Landau level, the “typical” momentum is <span class="math notranslate nohighlight">\(p \sim \hbar/\ell_B\)</span>. Show that <span class="math notranslate nohighlight">\(r_c \sim \hbar\omega_c/(\hbar/\ell_B) = \ell_B \omega_c/\omega_c\)</span>, and relate this to the expected orbital size in quantum mechanics.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Resistivity Tensor from the Drude Model in a Magnetic Field</p>
+<p>The Drude model gives the full resistivity tensor for free electrons in crossed electric and magnetic fields, recovering the classical Hall effect.</p>
+<p><strong>Equations of motion.</strong> An electron with relaxation time <span class="math notranslate nohighlight">\(\tau\)</span> experiences the Lorentz force and a phenomenological damping:</p>
+<div class="math notranslate nohighlight">
+\[
+m\dot{\boldsymbol{v}} = q(\boldsymbol{E} + \boldsymbol{v}\times\boldsymbol{B}) - \frac{m}{\tau}\boldsymbol{v}.
+\]</div>
+<p><strong>Steady state.</strong> Setting <span class="math notranslate nohighlight">\(\dot{\boldsymbol{v}} = 0\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{E} = (E_x, E_y, 0)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{m}{\tau}v_x = qE_x + qBv_y, \qquad \frac{m}{\tau}v_y = qE_y - qBv_x.
+\]</div>
+<p>Define the cyclotron frequency <span class="math notranslate nohighlight">\(\omega_c = qB/m\)</span> and the zero-field conductivity <span class="math notranslate nohighlight">\(\sigma_0 = nq^2\tau/m\)</span>. Solving the coupled equations:</p>
+<div class="math notranslate nohighlight">
+\[
+v_x = \frac{q\tau/m}{1+\omega_c^2\tau^2}\left(E_x + \omega_c\tau\, E_y\right), \qquad v_y = \frac{q\tau/m}{1+\omega_c^2\tau^2}\left(E_y - \omega_c\tau\, E_x\right).
+\]</div>
+<p><strong>Conductivity tensor.</strong> Using <span class="math notranslate nohighlight">\(\boldsymbol{j} = nq\boldsymbol{v} = \boldsymbol{\sigma}\boldsymbol{E}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xx} = \sigma_{yy} = \frac{\sigma_0}{1+\omega_c^2\tau^2}, \qquad \sigma_{xy} = -\sigma_{yx} = \frac{\sigma_0 \omega_c\tau}{1+\omega_c^2\tau^2}.
+\]</div>
+<p><strong>Hall coefficient.</strong> Inverting <span class="math notranslate nohighlight">\(\boldsymbol{j} = \boldsymbol{\sigma}\boldsymbol{E}\)</span> to get <span class="math notranslate nohighlight">\(\boldsymbol{E} = \boldsymbol{\rho}\boldsymbol{j}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{xy} = -\rho_{yx} = \frac{\sigma_{xy}}{\sigma_{xx}^2+\sigma_{xy}^2} = \frac{B}{nq}.
+\]</div>
+<p>The Hall coefficient <span class="math notranslate nohighlight">\(R_H = 1/nq\)</span> (in SI units for <span class="math notranslate nohighlight">\(q = -e\)</span>: <span class="math notranslate nohighlight">\(R_H = -1/ne\)</span>) depends only on the carrier density <span class="math notranslate nohighlight">\(n\)</span>, not on disorder (<span class="math notranslate nohighlight">\(\tau\)</span>). Measuring <span class="math notranslate nohighlight">\(\rho_{xy}\)</span> at fixed <span class="math notranslate nohighlight">\(B\)</span> directly gives <span class="math notranslate nohighlight">\(n\)</span>, which is why the Hall effect is the standard tool for carrier density measurement in semiconductors.</p>
+<p><strong>High-field limit.</strong> For <span class="math notranslate nohighlight">\(\omega_c\tau \gg 1\)</span>: <span class="math notranslate nohighlight">\(\sigma_{xx} \to 0\)</span>, <span class="math notranslate nohighlight">\(\sigma_{xy} \to nq/B = \)</span> const. The longitudinal resistance drops and the Hall resistance dominates — precisely the classical precursor to the quantum Hall effect.</p>
 </div>
 </section>
 <section id="summary">
@@ -733,7 +839,6 @@ document.write(`
 <li><p><strong>Integer Quantum Hall Effect</strong> shows that at low <span class="math notranslate nohighlight">\(T\)</span> and high <span class="math notranslate nohighlight">\(B\)</span>, the Hall conductance quantizes in exact units of <span class="math notranslate nohighlight">\(e^2/h\)</span>, with precision rivaling atomic clocks. This cannot be explained classically; it reveals the discrete Landau level structure of quantum electrons in strong fields.</p></li>
 <li><p><strong>Magnetic length</strong> <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/(qB)}\)</span> sets the size scale of quantum wavefunctions in a magnetic field. It emerges from the uncertainty principle and is independent of particle mass.</p></li>
 </ul>
-<div class="docutils">
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
@@ -741,7 +846,6 @@ document.write(`
 <li><p><strong><a class="reference internal" href="4-3-2-landau-quantization.html"><span class="doc std std-doc">4.3.2 Landau Quantization</span></a></strong>: Quantum treatment of cyclotron orbits and Landau levels</p></li>
 <li><p><strong><a class="reference internal" href="4-3-3-quantum-hall-effect.html"><span class="doc std std-doc">4.3.3 Quantum Hall Effect</span></a></strong>: Integer and fractional Hall states (future section)</p></li>
 </ul>
-</div>
 </div>
 </section>
 </section>

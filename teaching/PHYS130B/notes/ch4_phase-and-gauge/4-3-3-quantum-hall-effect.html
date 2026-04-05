@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -558,10 +558,10 @@ document.write(`
 <p>In a perpendicular magnetic field <span class="math notranslate nohighlight">\(B\)</span>, electron energy levels organize into Landau levels, each with degeneracy <span class="math notranslate nohighlight">\(N_\phi = BA\Phi_0^{-1} = BAe/h\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is the sample area. The key parameter is the <strong>filling factor</strong>.</p>
 <div class="important admonition">
 <p class="admonition-title">Filling Factor</p>
-<p>The filling factor is
-$<span class="math notranslate nohighlight">\(
-\nu = \frac{N_e}{N_\phi}
-\)</span>$</p>
+<p>The filling factor is</p>
+<div class="math notranslate nohighlight">
+\[
+\nu = \frac{N_e}{N_\phi}\]</div>
 <p>where <span class="math notranslate nohighlight">\(N_e\)</span> is the number of electrons and <span class="math notranslate nohighlight">\(N_\phi\)</span> is the number of flux quanta piercing the sample. When <span class="math notranslate nohighlight">\(\nu\)</span> is an integer, exactly <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are completely filled, and the Fermi level lies in a gap.</p>
 </div>
 <p>Integer filling (<span class="math notranslate nohighlight">\(\nu = 1, 2, 3, \ldots\)</span>) means all electrons fit neatly into <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels with empty levels above. The energy cost to excite an electron across the gap is <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> (the cyclotron energy). This gap is crucial: it prevents disorder from mixing states between filled and empty levels, protecting the quantization.</p>
@@ -577,9 +577,39 @@ $<span class="math notranslate nohighlight">\(
 <p>For each pumped charge <span class="math notranslate nohighlight">\(\nu e\)</span>, the Lorentz force on the edge drives a current <span class="math notranslate nohighlight">\(I = (d Q)/(d t) = \nu e \cdot (d\Phi)/(dt \Phi_0)\)</span>. The Hall voltage is set by the force balance and the edge geometry. Integrating over the full pumping cycle (<span class="math notranslate nohighlight">\(\Delta\Phi = \Phi_0\)</span>), the Hall conductance is:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{xy} = \frac{I}{E_y} = \nu \frac{e^2}{h}
-\]</div>
+\sigma_{xy} = \frac{I}{E_y} = \nu \frac{e^2}{h}\]</div>
 <p>This is exact and depends only on <span class="math notranslate nohighlight">\(\nu\)</span>, <span class="math notranslate nohighlight">\(e\)</span>, <span class="math notranslate nohighlight">\(h\)</span>—not on disorder, sample geometry, or microscopic details.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Spectral Flow under Flux Insertion</p>
+<p>We make the charge pumping argument quantitative using the Corbino disk (annular) geometry with a uniform perpendicular field <span class="math notranslate nohighlight">\(B\)</span> and an extra flux <span class="math notranslate nohighlight">\(\Phi(t)\)</span> threaded through the central hole.</p>
+<p><strong>Step 1: Orbit radii from flux quantization.</strong></p>
+<p>In the symmetric gauge, each Landau level state <span class="math notranslate nohighlight">\(\vert n, m\rangle\)</span> has its probability concentrated on a ring of radius <span class="math notranslate nohighlight">\(r_m\)</span>. The total magnetic flux enclosed by this ring must satisfy the Bohr-Sommerfeld (single-valuedness) condition:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{e}{\hbar}\left(\pi r_m^2 B + \Phi(t)\right) = 2\pi m,\]</div>
+<p>where <span class="math notranslate nohighlight">\(m = 1, 2, \ldots, N_\phi\)</span> labels the guiding center orbit. Solving for <span class="math notranslate nohighlight">\(r_m^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+r_m^2 = \frac{\Phi_0}{\pi B}\left(m - \frac{\Phi(t)}{\Phi_0}\right) = 2\ell_B^2\left(m - \frac{\Phi(t)}{\Phi_0}\right).\]</div>
+<p><strong>Step 2: Adiabatic evolution under flux insertion.</strong></p>
+<p>Thread the flux slowly: <span class="math notranslate nohighlight">\(\Phi(t) = \Phi_0 \cdot t/T\)</span> with <span class="math notranslate nohighlight">\(T \gg 1/\omega_c\)</span>. As <span class="math notranslate nohighlight">\(\Phi\)</span> increases from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(\Phi_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+r_m^2\Big\vert_{t=0} = 2\ell_B^2\, m \quad \longrightarrow \quad r_m^2\Big\vert_{t=T} = 2\ell_B^2\,(m - 1).\]</div>
+<p>Every orbit shrinks: the state originally at radius <span class="math notranslate nohighlight">\(\sqrt{2\ell_B^2\, m}\)</span> moves to the radius that was occupied by the state at <span class="math notranslate nohighlight">\(m-1\)</span>. The innermost state (<span class="math notranslate nohighlight">\(m = 1\)</span>) shrinks to <span class="math notranslate nohighlight">\(r = 0\)</span> and disappears into the hole; the outermost state moves inward, leaving the outer edge with one fewer electron.</p>
+<p><strong>Step 3: Net charge transfer.</strong></p>
+<p>For <strong>one filled Landau level</strong>, each of the <span class="math notranslate nohighlight">\(N_\phi\)</span> states shifts inward by one unit. The net effect is that exactly <strong>one electron</strong> is transferred from the outer edge to the inner edge per flux quantum <span class="math notranslate nohighlight">\(\Phi_0\)</span> inserted.</p>
+<p>For <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels, each level independently pumps one electron, giving a total charge transfer:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta Q = \nu e.\]</div>
+<p><strong>Step 4: Hall conductivity.</strong></p>
+<p>During the adiabatic process, the radial current density is <span class="math notranslate nohighlight">\(j_r = \Delta Q / (2\pi r \cdot T)\)</span> and the azimuthal electric field induced by the changing flux is <span class="math notranslate nohighlight">\(E_\theta = \Phi_0 / (2\pi r \cdot T)\)</span>. The <span class="math notranslate nohighlight">\(r\)</span>-dependence cancels:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_H = \frac{j_r}{E_\theta} = \frac{\nu e}{\Phi_0} = \nu \frac{e^2}{h}. \quad \checkmark\]</div>
+<p>The key point is that the charge transfer <span class="math notranslate nohighlight">\(\Delta Q = \nu e\)</span> is <strong>exact</strong> — it follows from the discrete shift <span class="math notranslate nohighlight">\(m \to m - 1\)</span> of the quantum numbers, which is topological and insensitive to smooth perturbations (disorder, interactions) as long as the gap remains open.</p>
 </div>
 <p>The charge pumping picture is the key to understanding <strong>topological protection</strong>: the quantization emerges from a global constraint (flux conservation and filling factor) combined with a gap that prevents local scattering from destroying the state.</p>
 <div class="dropdown tip admonition">
@@ -599,13 +629,13 @@ $<span class="math notranslate nohighlight">\(
 <div class="important admonition">
 <p class="admonition-title">Kubo Formula for Hall Conductivity</p>
 <div class="math notranslate nohighlight" id="equation-eq-kubo-hall">
-<span class="eqno">(65)<a class="headerlink" href="#equation-eq-kubo-hall" title="Link to this equation">#</a></span>\[
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-kubo-hall" title="Link to this equation">#</a></span>\[
 \sigma_H = \frac{1}{\mathrm{i} N_\phi} \sum_{\substack{n,m \in \text{occ}}} \sum_{n' \neq n} \frac{\langle n,m \vert \hat{\pi}_x \vert n',m \rangle \langle n',m \vert \hat{\pi}_y \vert n,m \rangle - \text{h.c.}}{(E_{n'} - E_n)^2}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\vert n,m\rangle\)</span> are Landau level states (with Landau level index <span class="math notranslate nohighlight">\(n\)</span> and guiding center label <span class="math notranslate nohighlight">\(m\)</span>), <span class="math notranslate nohighlight">\(E_n = \hbar\omega_c(n + \tfrac{1}{2})\)</span> are the Landau level energies, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> is the kinetic momentum operator, and the sum runs over all occupied states.</p>
 <p>Evaluating this using the ladder-operator representation <span class="math notranslate nohighlight">\(\hat{\pi}_x = \sqrt{\hbar\omega_c m/2}\,(\hat{a}^\dagger + \hat{a})\)</span>, <span class="math notranslate nohighlight">\(\hat{\pi}_y = \mathrm{i}\sqrt{\hbar\omega_c m/2}\,(\hat{a}^\dagger - \hat{a})\)</span> gives</p>
 <div class="math notranslate nohighlight" id="equation-eq-kubo-quantized">
-<span class="eqno">(66)<a class="headerlink" href="#equation-eq-kubo-quantized" title="Link to this equation">#</a></span>\[
+<span class="eqno">(68)<a class="headerlink" href="#equation-eq-kubo-quantized" title="Link to this equation">#</a></span>\[
 \sigma_H = \frac{1}{N_\phi} \sum_{\substack{n,m \in \text{occ}}} 1 = \nu \frac{e^2}{h}
 \]</div>
 <p>Each occupied state contributes exactly <span class="math notranslate nohighlight">\(1/N_\phi\)</span> (in units of <span class="math notranslate nohighlight">\(e^2/h\)</span>) to the Hall conductivity. When <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are completely filled, the sum yields <span class="math notranslate nohighlight">\(\sigma_H = \nu\, e^2/h\)</span> — the same quantization obtained from the charge pumping argument.</p>
@@ -617,78 +647,97 @@ $<span class="math notranslate nohighlight">\(
 <p>An oscillatory electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}(t) = \boldsymbol{E}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}\)</span> (adiabatically turned on) corresponds to a vector potential perturbation</p>
 <div class="math notranslate nohighlight">
 \[
-\delta\boldsymbol{A}(t) = \int_{-\infty}^t \boldsymbol{E}(t')\,\mathrm{d}t' = -\frac{\boldsymbol{E}}{\mathrm{i}\omega}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}.
-\]</div>
+\delta\boldsymbol{A}(t) = \int_{-\infty}^t \boldsymbol{E}(t')\,\mathrm{d}t' = -\frac{\boldsymbol{E}}{\mathrm{i}\omega}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}.\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\hat{H} = \tfrac{1}{2}(\hat{\boldsymbol{p}} - \boldsymbol{A})^2\)</span>, the perturbation to <span class="math notranslate nohighlight">\(\hat{H}\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \delta\boldsymbol{A}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
-\delta\hat{H}(t) = \frac{\partial \hat{H}}{\partial \boldsymbol{A}} \cdot \delta\boldsymbol{A}(t) = -\hat{\boldsymbol{\pi}} \cdot \delta\boldsymbol{A}(t) = \frac{1}{\mathrm{i}\omega}\,\boldsymbol{E} \cdot \hat{\boldsymbol{\pi}}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}.
-\]</div>
+\delta\hat{H}(t) = \frac{\partial \hat{H}}{\partial \boldsymbol{A}} \cdot \delta\boldsymbol{A}(t) = -\hat{\boldsymbol{\pi}} \cdot \delta\boldsymbol{A}(t) = \frac{1}{\mathrm{i}\omega}\,\boldsymbol{E} \cdot \hat{\boldsymbol{\pi}}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}.\]</div>
 <p><strong>Step 2: First-order perturbation theory (interaction picture).</strong></p>
 <p>Switch to the interaction picture. Define <span class="math notranslate nohighlight">\(\hat{\pi}_i(t) := \hat{G}_0(-\infty, t)\,\hat{\pi}_i\,\hat{G}_0(t, -\infty)\)</span> where <span class="math notranslate nohighlight">\(\hat{G}_0(t, t') = \sum_{n,m} \vert n,m\rangle\,\mathrm{e}^{-\mathrm{i}E_n(t-t')}\langle n,m\vert\)</span> is the unperturbed propagator.</p>
 <p>The Dyson series to first order gives the current density</p>
 <div class="math notranslate nohighlight">
 \[
-\langle \boldsymbol{j}(t)\rangle = \frac{B}{N_\phi} \sum_{n,m \in \text{occ}} \langle n,m\vert\left(\hat{\boldsymbol{\pi}}(t) + \mathrm{i}\int_{-\infty}^t \mathrm{d}t'\,[\delta\hat{H}_{\mathcal{I}}(t'), \hat{\boldsymbol{\pi}}(t)] + \cdots\right)\vert n,m\rangle.
-\]</div>
+\langle \boldsymbol{j}(t)\rangle = \frac{B}{N_\phi} \sum_{n,m \in \text{occ}} \langle n,m\vert\left(\hat{\boldsymbol{\pi}}(t) + \mathrm{i}\int_{-\infty}^t \mathrm{d}t'\,[\delta\hat{H}_{\mathcal{I}}(t'), \hat{\boldsymbol{\pi}}(t)] + \cdots\right)\vert n,m\rangle.\]</div>
 <p>The zeroth-order term vanishes: <span class="math notranslate nohighlight">\(\langle n,m\vert\hat{\boldsymbol{\pi}}\vert n,m\rangle = 0\)</span> because <span class="math notranslate nohighlight">\(\hat{\pi}_x \propto (\hat{a}^\dagger + \hat{a})\)</span> and <span class="math notranslate nohighlight">\(\hat{\pi}_y \propto \mathrm{i}(\hat{a}^\dagger - \hat{a})\)</span> are off-diagonal in the Landau level index.</p>
 <p>The first-order term yields</p>
 <div class="math notranslate nohighlight">
 \[
-\langle j_i(t)\rangle = E_j\,\sigma_{ji}(\omega)\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t},
-\]</div>
+\langle j_i(t)\rangle = E_j\,\sigma_{ji}(\omega)\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t},\]</div>
 <p>with the <strong>conductivity tensor</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{ji}(\omega) = \frac{B}{\omega N_\phi} \int_{-\infty}^0 \mathrm{d}t\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t} \sum_{n,m \in \text{occ}} \langle n,m\vert [\hat{\pi}_j(t), \hat{\pi}_i(0)]\vert n,m\rangle,
-\]</div>
+\sigma_{ji}(\omega) = \frac{B}{\omega N_\phi} \int_{-\infty}^0 \mathrm{d}t\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t} \sum_{n,m \in \text{occ}} \langle n,m\vert [\hat{\pi}_j(t), \hat{\pi}_i(0)]\vert n,m\rangle,\]</div>
 <p>where we used time-translation invariance to shift the integration variable.</p>
 <p><strong>Step 3: Insert a complete set and do the time integral.</strong></p>
 <p>Expanding the commutator by inserting a complete set <span class="math notranslate nohighlight">\(\sum_{n',m'} \vert n',m'\rangle\langle n',m'\vert\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\langle n,m\vert [\hat{\pi}_j(t), \hat{\pi}_i(0)]\vert n,m\rangle = \sum_{n'} \left(\langle n,m\vert \hat{\pi}_j\vert n',m\rangle\langle n',m\vert \hat{\pi}_i\vert n,m\rangle\,\mathrm{e}^{\mathrm{i}(E_n - E_{n'})t} - \text{h.c.}\right),
-\]</div>
+\langle n,m\vert [\hat{\pi}_j(t), \hat{\pi}_i(0)]\vert n,m\rangle = \sum_{n'} \left(\langle n,m\vert \hat{\pi}_j\vert n',m\rangle\langle n',m\vert \hat{\pi}_i\vert n,m\rangle\,\mathrm{e}^{\mathrm{i}(E_n - E_{n'})t} - \text{h.c.}\right),\]</div>
 <p>where <span class="math notranslate nohighlight">\(m' = m\)</span> because <span class="math notranslate nohighlight">\(\hat{\pi}_i\)</span> only changes the Landau level index <span class="math notranslate nohighlight">\(n\)</span>, not the guiding center label <span class="math notranslate nohighlight">\(m\)</span>.</p>
 <p>Performing the time integral and combining denominators:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{ji}(\omega) = \frac{\mathrm{i}B}{\omega N_\phi} \sum_{n,m \in \text{occ}} \sum_{n' \neq n} \left(\frac{\langle n,m\vert \hat{\pi}_j\vert n',m\rangle\langle n',m\vert \hat{\pi}_i\vert n,m\rangle}{\omega - E_n + E_{n'}} - \frac{\langle n,m\vert \hat{\pi}_i\vert n',m\rangle\langle n',m\vert \hat{\pi}_j\vert n,m\rangle}{\omega + E_n - E_{n'}}\right).
-\]</div>
+\sigma_{ji}(\omega) = \frac{\mathrm{i}B}{\omega N_\phi} \sum_{n,m \in \text{occ}} \sum_{n' \neq n} \left(\frac{\langle n,m\vert \hat{\pi}_j\vert n',m\rangle\langle n',m\vert \hat{\pi}_i\vert n,m\rangle}{\omega - E_n + E_{n'}} - \frac{\langle n,m\vert \hat{\pi}_i\vert n',m\rangle\langle n',m\vert \hat{\pi}_j\vert n,m\rangle}{\omega + E_n - E_{n'}}\right).\]</div>
 <p><strong>Step 4: DC limit <span class="math notranslate nohighlight">\(\omega \to 0\)</span>.</strong></p>
 <p>Expand each denominator to first order in <span class="math notranslate nohighlight">\(\omega\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{1}{\omega + E_{n'} - E_n} = \frac{1}{E_{n'} - E_n} - \frac{\omega}{(E_{n'} - E_n)^2} + \cdots
-\]</div>
+\frac{1}{\omega + E_{n'} - E_n} = \frac{1}{E_{n'} - E_n} - \frac{\omega}{(E_{n'} - E_n)^2} + \cdots\]</div>
 <p>The <span class="math notranslate nohighlight">\(O(1/\omega)\)</span> piece (from the leading terms) is symmetric in <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span> and contributes only to the <strong>longitudinal</strong> (dissipative) conductivity. The <strong>Hall conductivity</strong> <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> comes from the antisymmetric <span class="math notranslate nohighlight">\(O(1)\)</span> piece:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_H = \lim_{\omega \to 0} \sigma_{xy}(\omega) = \frac{B}{\mathrm{i}N_\phi} \sum_{n,m \in \text{occ}} \sum_{n' \neq n} \frac{\langle n,m\vert \hat{\pi}_x\vert n',m\rangle\langle n',m\vert \hat{\pi}_y\vert n,m\rangle - \text{h.c.}}{(E_{n'} - E_n)^2}.
-\]</div>
+\sigma_H = \lim_{\omega \to 0} \sigma_{xy}(\omega) = \frac{B}{\mathrm{i}N_\phi} \sum_{n,m \in \text{occ}} \sum_{n' \neq n} \frac{\langle n,m\vert \hat{\pi}_x\vert n',m\rangle\langle n',m\vert \hat{\pi}_y\vert n,m\rangle - \text{h.c.}}{(E_{n'} - E_n)^2}.\]</div>
 <p>This is the <strong>Kubo formula</strong> for the Hall conductivity.</p>
 <p><strong>Step 5: Evaluate using ladder operators.</strong></p>
 <p>Using <span class="math notranslate nohighlight">\(\hat{\pi}_x = \sqrt{B/2}\,(\hat{a}^\dagger + \hat{a})\)</span> and <span class="math notranslate nohighlight">\(\hat{\pi}_y = \mathrm{i}\sqrt{B/2}\,(\hat{a}^\dagger - \hat{a})\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\langle n,m\vert \hat{\pi}_x\vert n',m\rangle\langle n',m\vert \hat{\pi}_y\vert n,m\rangle = \frac{\mathrm{i}B}{2}\Big((n+1)\,\delta_{n', n+1} - n\,\delta_{n', n-1}\Big).
-\]</div>
+\langle n,m\vert \hat{\pi}_x\vert n',m\rangle\langle n',m\vert \hat{\pi}_y\vert n,m\rangle = \frac{\mathrm{i}B}{2}\Big((n+1)\,\delta_{n', n+1} - n\,\delta_{n', n-1}\Big).\]</div>
 <p>This expression is purely imaginary, so it equals its own “h.c.” with a sign flip. Substituting into the Kubo formula:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_H = \frac{B^2}{N_\phi} \sum_{n,m \in \text{occ}} \left(\frac{n+1}{(E_{n+1} - E_n)^2} - \frac{n}{(E_{n-1} - E_n)^2}\right).
-\]</div>
+\sigma_H = \frac{B^2}{N_\phi} \sum_{n,m \in \text{occ}} \left(\frac{n+1}{(E_{n+1} - E_n)^2} - \frac{n}{(E_{n-1} - E_n)^2}\right).\]</div>
 <p>Since <span class="math notranslate nohighlight">\(E_{n'} - E_n = B(n' - n)\)</span> (recall <span class="math notranslate nohighlight">\(E_n = B(n + \tfrac{1}{2})\)</span>), both denominators equal <span class="math notranslate nohighlight">\(B^2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_H = \frac{1}{N_\phi} \sum_{n,m \in \text{occ}} \Big((n+1) - n\Big) = \frac{1}{N_\phi} \sum_{n,m \in \text{occ}} 1.
-\]</div>
+\sigma_H = \frac{1}{N_\phi} \sum_{n,m \in \text{occ}} \Big((n+1) - n\Big) = \frac{1}{N_\phi} \sum_{n,m \in \text{occ}} 1.\]</div>
 <p>Each occupied state contributes <span class="math notranslate nohighlight">\(1/N_\phi\)</span>. For <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels (<span class="math notranslate nohighlight">\(N_\phi\)</span> states each):</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_H = \frac{\nu N_\phi}{N_\phi} = \nu.
-\]</div>
+\sigma_H = \frac{\nu N_\phi}{N_\phi} = \nu.\]</div>
 <p>Restoring units: <span class="math notranslate nohighlight">\(\sigma_H = \nu\, e^2/h\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Hall Conductivity as a Chern Number (TKNN)</p>
+<p>The Kubo formula for <span class="math notranslate nohighlight">\(\sigma_H\)</span> can be recast as a topological invariant — a <strong>Chern number</strong> — which explains why the quantization is exact and robust against perturbations.</p>
+<p><strong>Step 1: Kubo formula in terms of velocity operators.</strong></p>
+<p>For a periodic system (electrons on a lattice with magnetic field), Bloch’s theorem gives energy bands <span class="math notranslate nohighlight">\(E_n(\boldsymbol{k})\)</span> with Bloch states <span class="math notranslate nohighlight">\(\vert u_n(\boldsymbol{k})\rangle\)</span>. The velocity operator is <span class="math notranslate nohighlight">\(\hat{v}_i = \partial \hat{H}/\partial k_i\)</span>. The Kubo formula for the Hall conductivity of filled bands becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_H = \frac{e^2}{\hbar} \sum_{n \in \text{occ}} \sum_{n' \notin \text{occ}} \int_{\text{BZ}} \frac{\mathrm{d}^2 k}{(2\pi)^2} \frac{\langle u_n \vert \hat{v}_x \vert u_{n'}\rangle \langle u_{n'}\vert \hat{v}_y \vert u_n\rangle - \text{h.c.}}{\mathrm{i}(E_{n'} - E_n)^2}.\]</div>
+<p><strong>Step 2: Rewrite as Berry curvature.</strong></p>
+<p>Using the identity (from first-order perturbation theory)</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\langle u_n \vert \partial_{k_i} \hat{H} \vert u_{n'}\rangle}{E_{n'} - E_n} = \langle u_n \vert \partial_{k_i} u_{n'}\rangle \quad (n' \neq n),\]</div>
+<p>the numerator becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{n' \neq n} \left(\langle \partial_{k_x} u_n \vert u_{n'}\rangle \langle u_{n'} \vert \partial_{k_y} u_n\rangle - (x \leftrightarrow y)\right).\]</div>
+<p>Inserting the completeness relation <span class="math notranslate nohighlight">\(\sum_{n'} \vert u_{n'}\rangle\langle u_{n'}\vert = \hat{I}\)</span> and noting that the <span class="math notranslate nohighlight">\(n' = n\)</span> term cancels between the two terms:</p>
+<div class="math notranslate nohighlight">
+\[
+= \langle \partial_{k_x} u_n \vert \partial_{k_y} u_n\rangle - \langle \partial_{k_y} u_n \vert \partial_{k_x} u_n\rangle = -\mathrm{i}\, \Omega_n(\boldsymbol{k}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega_n(\boldsymbol{k}) = -2\,\text{Im}\langle \partial_{k_x} u_n \vert \partial_{k_y} u_n\rangle\)</span> is the <strong>Berry curvature</strong> of band <span class="math notranslate nohighlight">\(n\)</span> in momentum space.</p>
+<p><strong>Step 3: Chern number.</strong></p>
+<p>The Hall conductivity is therefore:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_H = \frac{e^2}{h} \sum_{n \in \text{occ}} \underbrace{\frac{1}{2\pi}\int_{\text{BZ}} \mathrm{d}^2 k\; \Omega_n(\boldsymbol{k})}_{C_n}.\]</div>
+<p>The integral <span class="math notranslate nohighlight">\(C_n\)</span> is the <strong>first Chern number</strong> of band <span class="math notranslate nohighlight">\(n\)</span>. By the theory of fiber bundles, <span class="math notranslate nohighlight">\(C_n\)</span> is always an <strong>integer</strong> — it counts the total Berry flux through the Brillouin zone torus, which is quantized for the same reason that the Dirac monopole charge is quantized.</p>
+<p><strong>Step 4: Topological protection.</strong></p>
+<p>Since <span class="math notranslate nohighlight">\(C_n \in \mathbb{Z}\)</span>, the Hall conductivity <span class="math notranslate nohighlight">\(\sigma_H = (e^2/h)\sum_n C_n\)</span> is exactly quantized. Any smooth deformation of the Hamiltonian (adding disorder, changing interactions) continuously deforms the Berry curvature <span class="math notranslate nohighlight">\(\Omega_n(\boldsymbol{k})\)</span>, but its integral over the closed Brillouin zone torus cannot change — it must jump by an integer. Such a jump requires closing the energy gap (a quantum phase transition). Therefore, <span class="math notranslate nohighlight">\(\sigma_H\)</span> is <strong>topologically protected</strong> as long as the gap remains open.</p>
+<p>For free electrons in a uniform field (the Landau level problem), each filled Landau level contributes <span class="math notranslate nohighlight">\(C_n = 1\)</span>, recovering <span class="math notranslate nohighlight">\(\sigma_H = \nu\, e^2/h\)</span>.</p>
 </div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
@@ -708,8 +757,7 @@ $<span class="math notranslate nohighlight">\(
 <p>Laughlin proposed an ansatz for the ground state at <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> (odd <span class="math notranslate nohighlight">\(m\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[
-\Psi_{\text{Laughlin}} = \prod_{i&lt;j} (z_i - z_j)^m \exp\left(-\frac{1}{4\ell_B^2}\sum_i |z_i|^2\right)
-\]</div>
+\Psi_{\text{Laughlin}} = \prod_{i&lt;j} (z_i - z_j)^m \exp\left(-\frac{1}{4\ell_B^2}\sum_i |z_i|^2\right)\]</div>
 <p>The factor <span class="math notranslate nohighlight">\((z_i - z_j)^m\)</span> enforces strong repulsion between electrons—the closer two electrons, the more suppressed the amplitude. This creates an incompressible quantum fluid with a gap to excitations.</p>
 </div>
 <p>The charge pumping argument extends to FQHE: when one flux quantum is added at filling <span class="math notranslate nohighlight">\(\nu = p/q\)</span>, exactly <span class="math notranslate nohighlight">\(p/q\)</span> of an electron is pumped out. This fractional pumping is possible because the ground state is a <strong>quantum fluid</strong> that can redistribute charge non-locally.</p>
@@ -719,9 +767,83 @@ $<span class="math notranslate nohighlight">\(
 <p>At fractional filling <span class="math notranslate nohighlight">\(\nu = p/q\)</span>, the Hall conductance is quantized as:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{xy} = \nu \frac{e^2}{h} = \frac{p}{q} \frac{e^2}{h}
-\]</div>
+\sigma_{xy} = \nu \frac{e^2}{h} = \frac{p}{q} \frac{e^2}{h}\]</div>
 <p>Quasiparticles carry charge <span class="math notranslate nohighlight">\(\pm e/q\)</span> and obey fractional Bragg statistics: exchanging two quasiparticles introduces a phase <span class="math notranslate nohighlight">\(\exp(2\pi \mathrm{i} p/q)\)</span>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Quasihole Charge from the Laughlin Wavefunction</p>
+<p>A <strong>quasihole</strong> at position <span class="math notranslate nohighlight">\(\eta\)</span> in the Laughlin <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> state is created by inserting one flux quantum at <span class="math notranslate nohighlight">\(\eta\)</span>. We show this produces a localized charge deficit of <span class="math notranslate nohighlight">\(e/m\)</span>.</p>
+<p><strong>Step 1: Quasihole wavefunction.</strong></p>
+<p>Threading a flux quantum at <span class="math notranslate nohighlight">\(\eta\)</span> multiplies the Laughlin wavefunction by a Jastrow factor:</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi_{\text{qh}}(\{z_i\}; \eta) = \prod_{i=1}^{N_e} (z_i - \eta) \cdot \Psi_{\text{Laughlin}}(\{z_i\}).\]</div>
+<p>Each electron picks up one extra zero at <span class="math notranslate nohighlight">\(z_i = \eta\)</span>, which pushes electron density away from <span class="math notranslate nohighlight">\(\eta\)</span>. The question is: how much charge is expelled?</p>
+<p><strong>Step 2: Counting orbitals.</strong></p>
+<p>In the Laughlin state without the quasihole, the highest angular momentum of any electron is <span class="math notranslate nohighlight">\(M_{\max} = m(N_e - 1)\)</span>, so the state occupies orbitals <span class="math notranslate nohighlight">\(\ell = 0, m, 2m, \ldots, m(N_e - 1)\)</span>, requiring <span class="math notranslate nohighlight">\(N_\phi = m(N_e - 1) + 1 \approx m N_e\)</span> flux quanta.</p>
+<p>After multiplying by <span class="math notranslate nohighlight">\(\prod_i (z_i - \eta)\)</span>, each electron’s angular momentum increases by 1: <span class="math notranslate nohighlight">\(M_{\max} \to m(N_e - 1) + 1\)</span>. The number of available orbitals increases by 1: <span class="math notranslate nohighlight">\(N_\phi \to N_\phi + 1\)</span>.</p>
+<p><strong>Step 3: Charge deficit.</strong></p>
+<p>The extra orbital accommodates <span class="math notranslate nohighlight">\(1/m\)</span> of an electron (since <span class="math notranslate nohighlight">\(\nu = N_e / N_\phi = 1/m\)</span>). But no new electrons were added — only the orbital count increased. Therefore, the quasihole represents a <strong>local deficit</strong> of <span class="math notranslate nohighlight">\(1/m\)</span> electrons, carrying charge:</p>
+<div class="math notranslate nohighlight">
+\[
+Q_{\text{qh}} = \frac{e}{m}.\]</div>
+<p><strong>Step 4: Plasma analogy verification.</strong></p>
+<p>The Laughlin wavefunction norm-squared <span class="math notranslate nohighlight">\(\vert\Psi\vert^2 \propto \exp(-\beta \mathcal{U})\)</span> maps to the Boltzmann weight of a 2D classical plasma with <span class="math notranslate nohighlight">\(\beta = 2/m\)</span> and logarithmic Coulomb interactions. Each electron is a charge-<span class="math notranslate nohighlight">\(m\)</span> particle, and the Gaussian factor provides a uniform neutralizing background of charge density <span class="math notranslate nohighlight">\(\bar{\rho} = 1/(2\pi m \ell_B^2)\)</span>.</p>
+<p>The quasihole factor <span class="math notranslate nohighlight">\(\prod_i (z_i - \eta)\)</span> introduces an additional unit point charge at <span class="math notranslate nohighlight">\(\eta\)</span> (charge 1, not <span class="math notranslate nohighlight">\(m\)</span>). By Gauss’s law, the plasma screens this impurity by creating a screening cloud that repels <span class="math notranslate nohighlight">\(1/m\)</span> of an electron charge — precisely <span class="math notranslate nohighlight">\(Q_{\text{qh}} = e/m\)</span>.</p>
+<p>This fractional charge has been directly measured via shot noise experiments (de Picciotto et al., 1997; Saminadayar et al., 1997), confirming <span class="math notranslate nohighlight">\(e^* = e/3\)</span> at <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Chiral Edge States from a Confining Potential</p>
+<p>The charge pumping and Kubo arguments both give <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span> from the bulk. Here we derive the same result from the <strong>edge</strong>: chiral one-dimensional modes that run along the sample boundary and carry the Hall current without backscattering.</p>
+<p><strong>Step 1: Bulk Landau levels in the Landau gauge.</strong></p>
+<p>Consider a strip <span class="math notranslate nohighlight">\(0 \leq y \leq L\)</span> in a perpendicular field <span class="math notranslate nohighlight">\(B\hat{z}\)</span>. Choose the Landau gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = (-By,0,0)\)</span>. The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H} = \frac{(\hat{p}_x - eBy)^2}{2m} + \frac{\hat{p}_y^2}{2m} + V(y),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(V(y)\)</span> is a hard-wall confinement that vanishes in the bulk <span class="math notranslate nohighlight">\(0 \ll y \ll L\)</span> and rises to <span class="math notranslate nohighlight">\(+\infty\)</span> at the edges.</p>
+<p>Since <span class="math notranslate nohighlight">\([\hat{H}, \hat{p}_x] = 0\)</span> in the bulk, <span class="math notranslate nohighlight">\(k_x\)</span> is a conserved quantum number. Writing <span class="math notranslate nohighlight">\(\psi(x,y) = \mathrm{e}^{\mathrm{i}k_x x}\phi(y)\)</span>, the <span class="math notranslate nohighlight">\(y\)</span>-equation becomes a harmonic oscillator:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}_{\mathrm{eff}}\phi = \left[-\frac{\hbar^2}{2m}\partial_y^2 + \frac{m\omega_c^2}{2}(y - y_0)^2\right]\phi, \quad y_0 = \frac{\hbar k_x}{eB} = \ell_B^2 k_x,
+\]</div>
+<p>with cyclotron frequency <span class="math notranslate nohighlight">\(\omega_c = eB/m\)</span>. In the bulk the energies are <strong>flat in <span class="math notranslate nohighlight">\(k_x\)</span></strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+E_n^{\mathrm{bulk}} = \hbar\omega_c\!\left(n + \tfrac{1}{2}\right), \quad n = 0, 1, 2, \ldots
+\]</div>
+<p><strong>Step 2: Tilting of levels near the boundary.</strong></p>
+<p>When the guiding-center position <span class="math notranslate nohighlight">\(y_0 = \ell_B^2 k_x\)</span> approaches an edge, the state <span class="math notranslate nohighlight">\(\phi(y)\)</span> begins to feel the confining wall. By first-order perturbation theory (or by noting that the wavefunction is concentrated near <span class="math notranslate nohighlight">\(y_0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+E_n(k_x) \approx \hbar\omega_c\!\left(n + \tfrac{1}{2}\right) + V(y_0) = \hbar\omega_c\!\left(n + \tfrac{1}{2}\right) + V(\ell_B^2 k_x).
+\]</div>
+<p>The flat Landau levels <strong>tilt upward</strong> as <span class="math notranslate nohighlight">\(k_x\)</span> is varied toward either wall:</p>
+<ul class="simple">
+<li><p>Near the right wall (<span class="math notranslate nohighlight">\(y_0 \to L\)</span>): <span class="math notranslate nohighlight">\(V(y_0)\)</span> increases with <span class="math notranslate nohighlight">\(k_x\)</span>, so <span class="math notranslate nohighlight">\(\partial E_n/\partial k_x &gt; 0\)</span>.</p></li>
+<li><p>Near the left wall (<span class="math notranslate nohighlight">\(y_0 \to 0\)</span>): <span class="math notranslate nohighlight">\(V(y_0)\)</span> increases as <span class="math notranslate nohighlight">\(k_x\)</span> decreases, so <span class="math notranslate nohighlight">\(\partial E_n/\partial k_x &lt; 0\)</span>.</p></li>
+</ul>
+<p><strong>Step 3: Chiral group velocity.</strong></p>
+<p>The group velocity along the edge is:</p>
+<div class="math notranslate nohighlight">
+\[
+v_x = \frac{1}{\hbar}\frac{\partial E_n}{\partial k_x} = \frac{\ell_B^2}{\hbar}V'(y_0).
+\]</div>
+<p>The sign of <span class="math notranslate nohighlight">\(v_x\)</span> is fixed by the sign of <span class="math notranslate nohighlight">\(V'\)</span> at the respective edge:</p>
+<ul class="simple">
+<li><p><strong>Right edge</strong>: <span class="math notranslate nohighlight">\(V'(L^-)&gt;0\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(v_x&gt;0\)</span> — a <strong>right-moving</strong> mode.</p></li>
+<li><p><strong>Left edge</strong>: <span class="math notranslate nohighlight">\(V'(0^+)&lt;0\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(v_x&lt;0\)</span> — a <strong>left-moving</strong> mode.</p></li>
+</ul>
+<p>For each of the <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels, there is exactly <strong>one</strong> value of <span class="math notranslate nohighlight">\(k_x\)</span> where <span class="math notranslate nohighlight">\(E_n(k_x)\)</span> crosses the Fermi energy <span class="math notranslate nohighlight">\(E_F\)</span>, producing one chiral mode per level per edge. The modes are localized on opposite sides of the sample.</p>
+<p><strong>Step 4: Robustness — no backscattering.</strong></p>
+<p>A right-mover lives at the right edge (<span class="math notranslate nohighlight">\(y \approx L\)</span>); its time-reversed partner, a left-mover, lives at the left edge (<span class="math notranslate nohighlight">\(y \approx 0\)</span>). For any elastic scattering event to turn a right-mover into a left-mover, the electron would need to tunnel a macroscopic distance <span class="math notranslate nohighlight">\(L \gg \ell_B\)</span> across the bulk — an exponentially suppressed process. Therefore disorder cannot create backscattering, and the transmission probability through each chiral mode is exactly 1.</p>
+<p><strong>Step 5: Hall conductance from the Landauer–Büttiker formula.</strong></p>
+<p>Each chiral edge channel is a perfectly transmitting one-dimensional wire. Applying a Hall voltage <span class="math notranslate nohighlight">\(V_H\)</span> between the two edges, the net current carried by one edge mode is <span class="math notranslate nohighlight">\(I_1 = (e^2/h)V_H\)</span> (the Landauer formula with <span class="math notranslate nohighlight">\(T=1\)</span>). With <span class="math notranslate nohighlight">\(\nu\)</span> channels per edge:</p>
+<div class="math notranslate nohighlight">
+\[
+I = \nu\frac{e^2}{h}V_H \quad\Longrightarrow\quad \sigma_{xy} = \nu\frac{e^2}{h}.
+\]</div>
+<p><strong>Bulk-edge correspondence.</strong> The number of chiral edge modes <span class="math notranslate nohighlight">\(\nu\)</span> equals the Chern number of the filled bulk bands (Step 4 in the TKNN derivation above). This is a manifestation of the <strong>bulk-boundary correspondence</strong>: a topological invariant of the bulk directly counts the number of protected boundary modes.</p>
 </div>
 </section>
 <section id="summary">

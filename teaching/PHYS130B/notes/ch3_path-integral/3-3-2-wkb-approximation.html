@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -577,14 +577,47 @@ document.write(`
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: WKB Equations from Schrödinger</p>
-<p>Substitute <span class="math notranslate nohighlight">\(\psi = A\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> into <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = -\frac{\hbar^2}{2m}\partial_x^2\psi + V\psi\)</span>. Computing derivatives:</p>
+<p>Substitute <span class="math notranslate nohighlight">\(\psi = A\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> into the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = -\frac{\hbar^2}{2m}\partial_x^2\psi + V\psi\)</span>. We compute each piece separately.</p>
+<p><strong>Time derivative:</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial^2\psi}{\partial x^2} = \left(A'' + \frac{2\mathrm{i}}{\hbar}A'S' + \frac{\mathrm{i}}{\hbar}AS'' - \frac{A}{\hbar^2}(S')^2\right) \mathrm{e}^{\mathrm{i}S/\hbar}
+\mathrm{i}\hbar\frac{\partial\psi}{\partial t} = \mathrm{i}\hbar\left(\dot{A} + \frac{\mathrm{i}}{\hbar}A\dot{S}\right)\mathrm{e}^{\mathrm{i}S/\hbar} = \left(\mathrm{i}\hbar\dot{A} - A\dot{S}\right)\mathrm{e}^{\mathrm{i}S/\hbar}
 \]</div>
-<p>Collecting by powers of <span class="math notranslate nohighlight">\(\hbar\)</span> after canceling <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>:</p>
-<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^0\)</span> (imaginary part):</strong> Hamilton-Jacobi equation for <span class="math notranslate nohighlight">\(S\)</span>.</p>
-<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^1\)</span> (real part):</strong> <span class="math notranslate nohighlight">\(\partial_t A + \frac{1}{m}A'S' + \frac{A}{2m}S'' = 0\)</span>, a continuity equation for <span class="math notranslate nohighlight">\(A^2\)</span> (probability density).</p>
+<p><strong>Spatial derivatives:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\psi}{\partial x} = \left(A' + \frac{\mathrm{i}}{\hbar}AS'\right)\mathrm{e}^{\mathrm{i}S/\hbar}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2\psi}{\partial x^2} = \left(A'' + \frac{2\mathrm{i}}{\hbar}A'S' + \frac{\mathrm{i}}{\hbar}AS'' - \frac{A}{\hbar^2}(S')^2\right)\mathrm{e}^{\mathrm{i}S/\hbar}
+\]</div>
+<p><strong>Substituting</strong> and canceling <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\dot{A} - A\dot{S} = -\frac{\hbar^2}{2m}\left(A'' + \frac{2\mathrm{i}}{\hbar}A'S' + \frac{\mathrm{i}}{\hbar}AS'' - \frac{A}{\hbar^2}(S')^2\right) + VA
+\]</div>
+<p>Rearranging and sorting by powers of <span class="math notranslate nohighlight">\(\hbar\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+A\left[\dot{S} + \frac{(S')^2}{2m} + V\right] + \mathrm{i}\hbar\left[-\dot{A} - \frac{A'S'}{m} - \frac{AS''}{2m}\right] + \hbar^2\left[\frac{A''}{2m}\right] = 0
+\]</div>
+<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^0\)</span>:</strong> Setting the leading (real) bracket to zero gives the <strong>Hamilton-Jacobi equation</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial S}{\partial t} + \frac{1}{2m}\left(\frac{\partial S}{\partial x}\right)^2 + V(x) = 0
+\]</div>
+<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^1\)</span>:</strong> Setting the next bracket to zero:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{A} + \frac{1}{m}A'S' + \frac{A}{2m}S'' = 0
+\]</div>
+<p>Multiplying by <span class="math notranslate nohighlight">\(2A\)</span> and recognizing <span class="math notranslate nohighlight">\(\partial_x(A^2 S'/m) = 2AA'S'/m + A^2 S''/m\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial(A^2)}{\partial t} + \frac{\partial}{\partial x}\left(\frac{A^2}{m}\frac{\partial S}{\partial x}\right) = 0
+\]</div>
+<p>This is a <strong>continuity equation</strong> for <span class="math notranslate nohighlight">\(\rho = A^2\)</span> with velocity <span class="math notranslate nohighlight">\(v = S'/m = p/m\)</span>, confirming probability conservation. The <span class="math notranslate nohighlight">\(\hbar^2\)</span> term <span class="math notranslate nohighlight">\(A''/2m\)</span> is dropped — this is the WKB approximation.</p>
 </div>
 </section>
 <section id="stationary-states-allowed-and-forbidden-regions">
@@ -605,6 +638,21 @@ document.write(`
 <p>where <span class="math notranslate nohighlight">\(\kappa(x) = \sqrt{2m(V(x) - E)}\)</span>.</p>
 </div>
 <p>The amplitude <span class="math notranslate nohighlight">\(1/\sqrt{p}\)</span> reflects <strong>probability conservation</strong>: where the particle moves slowly (small <span class="math notranslate nohighlight">\(p\)</span>), it spends more time, so the probability density is larger.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: WKB Amplitude from Probability Conservation</p>
+<p>For stationary states <span class="math notranslate nohighlight">\(S(x,t) = S_0(x) - Et\)</span>, we have <span class="math notranslate nohighlight">\(A = A(x)\)</span> only. The continuity equation <span class="math notranslate nohighlight">\(\partial_t(A^2) + \partial_x(A^2 p/m) = 0\)</span> reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}x}\left(A^2(x)\frac{p(x)}{m}\right) = 0
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(A^2\)</span> is time-independent. Therefore <span class="math notranslate nohighlight">\(A^2 p/m = \text{const}\)</span>, giving</p>
+<div class="math notranslate nohighlight">
+\[
+A(x) = \frac{C}{\sqrt{p(x)}}
+\]</div>
+<p>for some constant <span class="math notranslate nohighlight">\(C\)</span>. The <strong>physical meaning</strong> is transparent: the probability current <span class="math notranslate nohighlight">\(j = A^2 v = A^2 p/m\)</span> must be spatially uniform in a stationary state (no probability accumulation anywhere). Where the particle moves slowly (<span class="math notranslate nohighlight">\(p\)</span> small), <span class="math notranslate nohighlight">\(A^2\)</span> must be large to maintain constant current — hence <span class="math notranslate nohighlight">\(A \propto 1/\sqrt{p}\)</span>.</p>
+<p>In the forbidden region, <span class="math notranslate nohighlight">\(p(x) \to \mathrm{i}\kappa(x)\)</span> with <span class="math notranslate nohighlight">\(\kappa = \sqrt{2m(V-E)}\)</span>, and the same argument gives <span class="math notranslate nohighlight">\(A \propto 1/\sqrt{\kappa}\)</span>.</p>
+</div>
 </section>
 <section id="connection-formulas-at-turning-points">
 <h3>Connection Formulas at Turning Points<a class="headerlink" href="#connection-formulas-at-turning-points" title="Link to this heading">#</a></h3>
@@ -620,6 +668,45 @@ document.write(`
 \psi \sim \frac{C}{\sqrt{\kappa}} \exp\left(-\frac{1}{\hbar}\int_{x_0}^x \kappa\,\mathrm{d}x'\right)
 \]</div>
 <p>The <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift is essential — it accounts for the smooth transition through the turning point and determines the Maslov index in quantization conditions (§3.3.3).</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Connection Formulas via Airy Functions</p>
+<p>Near a turning point <span class="math notranslate nohighlight">\(x_0\)</span> where <span class="math notranslate nohighlight">\(E = V(x_0)\)</span>, the WKB approximation breaks down because <span class="math notranslate nohighlight">\(p(x_0) = 0\)</span>. To derive the connection formulas, we solve the Schrödinger equation exactly near <span class="math notranslate nohighlight">\(x_0\)</span> and match to WKB solutions on both sides.</p>
+<p><strong>Step 1: Linearize the potential.</strong> Near <span class="math notranslate nohighlight">\(x_0\)</span>, expand <span class="math notranslate nohighlight">\(V(x) \approx V(x_0) + V'(x_0)(x - x_0) = E + V'(x_0)(x - x_0)\)</span>. The Schrödinger equation becomes</p>
+<div class="math notranslate nohighlight">
+\[
+-\frac{\hbar^2}{2m}\psi'' + V'(x_0)(x - x_0)\psi = 0
+\]</div>
+<p>where we used <span class="math notranslate nohighlight">\(E = V(x_0)\)</span>. Consider a right turning point where <span class="math notranslate nohighlight">\(V' &gt; 0\)</span> (forbidden region to the right). Define the dimensionless variable</p>
+<div class="math notranslate nohighlight">
+\[
+z = \left(\frac{2mV'(x_0)}{\hbar^2}\right)^{1/3}(x - x_0) = \frac{x - x_0}{\ell}, \quad \ell = \left(\frac{\hbar^2}{2mV'(x_0)}\right)^{1/3}
+\]</div>
+<p>The equation becomes the <strong>Airy equation</strong>: <span class="math notranslate nohighlight">\(\psi''(z) = z\,\psi(z)\)</span>.</p>
+<p><strong>Step 2: Airy function asymptotics.</strong> The two independent solutions <span class="math notranslate nohighlight">\(\mathrm{Ai}(z)\)</span> and <span class="math notranslate nohighlight">\(\mathrm{Bi}(z)\)</span> have well-known asymptotics:</p>
+<p>For <span class="math notranslate nohighlight">\(z \to +\infty\)</span> (deep in forbidden region):</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Ai}(z) \sim \frac{1}{2\sqrt{\pi}\,z^{1/4}}\mathrm{e}^{-\frac{2}{3}z^{3/2}}, \quad \mathrm{Bi}(z) \sim \frac{1}{\sqrt{\pi}\,z^{1/4}}\mathrm{e}^{+\frac{2}{3}z^{3/2}}
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(z \to -\infty\)</span> (deep in allowed region):</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Ai}(z) \sim \frac{1}{\sqrt{\pi}\,\lvert z\rvert^{1/4}}\sin\!\left(\tfrac{2}{3}\lvert z\rvert^{3/2} + \tfrac{\pi}{4}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Bi}(z) \sim \frac{1}{\sqrt{\pi}\,\lvert z\rvert^{1/4}}\cos\!\left(\tfrac{2}{3}\lvert z\rvert^{3/2} + \tfrac{\pi}{4}\right)
+\]</div>
+<p><strong>Step 3: Match to WKB.</strong> Near <span class="math notranslate nohighlight">\(x_0\)</span> with <span class="math notranslate nohighlight">\(V(x) \approx E + V'(x_0)(x - x_0)\)</span>, the local momentum is <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - V)} = \sqrt{2mV'(x_0)}\sqrt{x_0 - x}\)</span> for <span class="math notranslate nohighlight">\(x &lt; x_0\)</span>, and <span class="math notranslate nohighlight">\(\kappa(x) = \sqrt{2mV'(x_0)}\sqrt{x - x_0}\)</span> for <span class="math notranslate nohighlight">\(x &gt; x_0\)</span>. The WKB phase integral evaluates to</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\hbar}\int_x^{x_0} p\,\mathrm{d}x' = \frac{2}{3}\lvert z\rvert^{3/2}
+\]</div>
+<p>Comparing the Airy asymptotics with WKB forms, a wavefunction that decays into the forbidden region must be proportional to <span class="math notranslate nohighlight">\(\mathrm{Ai}(z)\)</span> (since <span class="math notranslate nohighlight">\(\mathrm{Bi}\)</span> grows exponentially). Reading off both sides:</p>
+<p><strong>Forbidden side</strong> (<span class="math notranslate nohighlight">\(x &gt; x_0\)</span>, <span class="math notranslate nohighlight">\(z &gt; 0\)</span>): <span class="math notranslate nohighlight">\(\psi \propto \frac{1}{\sqrt{\kappa}}\mathrm{e}^{-\frac{1}{\hbar}\int_{x_0}^x \kappa\,\mathrm{d}x'}\)</span></p>
+<p><strong>Allowed side</strong> (<span class="math notranslate nohighlight">\(x &lt; x_0\)</span>, <span class="math notranslate nohighlight">\(z &lt; 0\)</span>): <span class="math notranslate nohighlight">\(\psi \propto \frac{1}{\sqrt{p}}\sin\!\left(\frac{1}{\hbar}\int_x^{x_0} p\,\mathrm{d}x' + \frac{\pi}{4}\right)\)</span></p>
+<p>The <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift arises directly from the Airy function asymptotic — it is a universal feature of any smooth turning point. A left turning point (forbidden region to the left) gives the same <span class="math notranslate nohighlight">\(\pi/4\)</span> shift by symmetry.</p>
+</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: WKB Exactness</p>
 <p>WKB is an approximation, yet it gives exact energy levels for the harmonic oscillator. This raises questions:</p>
@@ -641,6 +728,38 @@ T \approx \mathrm{e}^{-2\gamma}, \quad \gamma = \frac{1}{\hbar}\int_a^b \kappa(x
 \]</div>
 </div>
 <p>The tunneling probability is exponentially sensitive to the barrier width and height. The penetration depth into the forbidden region is <span class="math notranslate nohighlight">\(\lambda_\mathrm{decay} = \hbar/\kappa\)</span>.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: WKB Tunneling Formula</p>
+<p>Consider a potential barrier with two turning points <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> where <span class="math notranslate nohighlight">\(V(a) = V(b) = E\)</span>, and <span class="math notranslate nohighlight">\(V &gt; E\)</span> for <span class="math notranslate nohighlight">\(a &lt; x &lt; b\)</span>. We apply the connection formulas at each turning point.</p>
+<p><strong>Step 1: Set up the three regions.</strong></p>
+<p>Region I (<span class="math notranslate nohighlight">\(x &lt; a\)</span>, allowed): incoming + reflected wave</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_\mathrm{I} = \frac{A}{\sqrt{p}}\mathrm{e}^{+\frac{\mathrm{i}}{\hbar}\int_a^x p\,\mathrm{d}x'} + \frac{B}{\sqrt{p}}\mathrm{e}^{-\frac{\mathrm{i}}{\hbar}\int_a^x p\,\mathrm{d}x'}
+\]</div>
+<p>Region II (<span class="math notranslate nohighlight">\(a &lt; x &lt; b\)</span>, forbidden): growing + decaying</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_\mathrm{II} = \frac{C}{\sqrt{\kappa}}\mathrm{e}^{-\frac{1}{\hbar}\int_a^x \kappa\,\mathrm{d}x'} + \frac{D}{\sqrt{\kappa}}\mathrm{e}^{+\frac{1}{\hbar}\int_a^x \kappa\,\mathrm{d}x'}
+\]</div>
+<p>Region III (<span class="math notranslate nohighlight">\(x &gt; b\)</span>, allowed): transmitted wave only</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_\mathrm{III} = \frac{F}{\sqrt{p}}\mathrm{e}^{+\frac{\mathrm{i}}{\hbar}\int_b^x p\,\mathrm{d}x'}
+\]</div>
+<p><strong>Step 2: Apply connection formulas.</strong> At turning point <span class="math notranslate nohighlight">\(b\)</span>, the outgoing wave in Region III connects through the Airy-function matching to the forbidden region, selecting the decaying exponential. The connection formula at <span class="math notranslate nohighlight">\(b\)</span> relates <span class="math notranslate nohighlight">\(F\)</span> to the Region II amplitudes evaluated at <span class="math notranslate nohighlight">\(x = b\)</span>. The growing exponential <span class="math notranslate nohighlight">\(D\,\mathrm{e}^{+\gamma}\)</span> (where <span class="math notranslate nohighlight">\(\gamma = \frac{1}{\hbar}\int_a^b\kappa\,\mathrm{d}x'\)</span>) connects to a wave of amplitude <span class="math notranslate nohighlight">\(\sim D\,\mathrm{e}^{\gamma}\)</span> on the allowed side, while the decaying term <span class="math notranslate nohighlight">\(C\,\mathrm{e}^{-\gamma}\)</span> is exponentially suppressed.</p>
+<p><strong>Step 3: Transmission coefficient.</strong> In the limit of a thick barrier (<span class="math notranslate nohighlight">\(\gamma \gg 1\)</span>), the dominant contribution to the transmitted amplitude comes from the exponentially decaying piece. Tracing through both connection formulas:</p>
+<div class="math notranslate nohighlight">
+\[
+\left\lvert\frac{F}{A}\right\rvert^2 \approx \mathrm{e}^{-2\gamma}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma = \frac{1}{\hbar}\int_a^b \kappa(x)\,\mathrm{d}x = \frac{1}{\hbar}\int_a^b\sqrt{2m(V(x) - E)}\,\mathrm{d}x
+\]</div>
+<p>The transmission probability <span class="math notranslate nohighlight">\(T = |F/A|^2 \approx \mathrm{e}^{-2\gamma}\)</span> is exponentially suppressed by the “action” accumulated in the classically forbidden region. This result also follows directly from the path integral: tunneling paths traverse the barrier in imaginary time, contributing <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span> where <span class="math notranslate nohighlight">\(S_E\)</span> is the Euclidean action (see §3.4.3 on instantons).</p>
+</div>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Electron Tunneling</p>
 <p><strong>Problem.</strong> Estimate the tunneling probability for an electron through a 1 nm barrier with height 1 eV above its energy.</p>
@@ -655,6 +774,31 @@ T \approx \mathrm{e}^{-2\gamma}, \quad \gamma = \frac{1}{\hbar}\int_a^b \kappa(x
 \left|\frac{\mathrm{d}\ln p}{\mathrm{d}x}\right| = \left|\frac{V'(x)}{2(E - V(x))}\right| \ll 1
 \]</div>
 <p>This breaks down at turning points (remedied by connection formulas), potential discontinuities, and rapidly oscillating potentials.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: WKB Validity Criterion</p>
+<p>The WKB approximation drops the <span class="math notranslate nohighlight">\(\hbar^2\)</span> term <span class="math notranslate nohighlight">\(A''/(2m)\)</span> relative to the leading-order terms. For self-consistency, we need this dropped term to be much smaller than the retained terms. Since <span class="math notranslate nohighlight">\(A \propto 1/\sqrt{p}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+A = \frac{C}{\sqrt{p}}, \quad A' = -\frac{C\,p'}{2p^{3/2}}, \quad A'' = -\frac{C\,p''}{2p^{3/2}} + \frac{3C\,(p')^2}{4p^{5/2}}
+\]</div>
+<p>The ratio of the dropped <span class="math notranslate nohighlight">\(\hbar^2\)</span> term to the leading kinetic term <span class="math notranslate nohighlight">\(p^2/(2m)\)</span> is of order</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\hbar^2 A''/(2mA)}{p^2/(2m)} \sim \frac{\hbar^2}{p^2}\left(\frac{p''}{p} - \frac{3(p')^2}{2p^2}\right)
+\]</div>
+<p>For this to be small, we need (keeping the dominant piece):</p>
+<div class="math notranslate nohighlight">
+\[
+\hbar\left\lvert\frac{p'}{p^2}\right\rvert \ll 1 \implies \left\lvert\frac{\mathrm{d}p^{-1}}{\mathrm{d}x}\right\rvert \ll \frac{1}{\hbar} \implies \left\lvert\frac{\mathrm{d}\lambda}{\mathrm{d}x}\right\rvert \ll 2\pi
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda = 2\pi\hbar/p\)</span> is the local de Broglie wavelength. In words: <strong>the wavelength must change by much less than itself over one wavelength</strong> — the potential must be slowly varying on the scale of <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Using <span class="math notranslate nohighlight">\(p' = -mV'/(p)\)</span> and <span class="math notranslate nohighlight">\(p = \sqrt{2m(E-V)}\)</span>, this becomes</p>
+<div class="math notranslate nohighlight">
+\[
+\left\lvert\frac{\mathrm{d}\ln p}{\mathrm{d}x}\right\rvert = \frac{m\lvert V'\rvert}{p^2} = \frac{\lvert V'\rvert}{2(E - V)} \ll \frac{p}{\hbar} = \frac{1}{\lambda/(2\pi)}
+\]</div>
+<p>This diverges at turning points where <span class="math notranslate nohighlight">\(p \to 0\)</span>, confirming that the connection formula treatment is essential there.</p>
+</div>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">

@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -564,7 +564,7 @@ document.write(`
 <p class="admonition-title">Definition: Spectral Decomposition</p>
 <p>For a Hermitian operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> (observable), the <strong>spectral theorem</strong> states:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-spectral">
-<span class="eqno">(124)<a class="headerlink" href="#equation-eq-projmeas-spectral" title="Link to this equation">#</a></span>\[A = \sum_i a_i P_i\]</div>
+<span class="eqno">(126)<a class="headerlink" href="#equation-eq-projmeas-spectral" title="Link to this equation">#</a></span>\[A = \sum_i a_i P_i\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a_i\)</span> = eigenvalues (real, since <span class="math notranslate nohighlight">\(\hat{A}\)</span> is Hermitian)</p></li>
@@ -599,10 +599,10 @@ document.write(`
 <p class="admonition-title">Measurement Postulate: Probability and Collapse</p>
 <p><strong>Outcome</strong>: Measurement yields eigenvalue <span class="math notranslate nohighlight">\(a_i\)</span> with <strong>probability</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-probability">
-<span class="eqno">(125)<a class="headerlink" href="#equation-eq-projmeas-probability" title="Link to this equation">#</a></span>\[p_i = \text{Tr}(P_i \hat{\rho})\]</div>
+<span class="eqno">(127)<a class="headerlink" href="#equation-eq-projmeas-probability" title="Link to this equation">#</a></span>\[p_i = \text{Tr}(P_i \hat{\rho})\]</div>
 <p><strong>Post-measurement state</strong> (state collapse):</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-collapse">
-<span class="eqno">(126)<a class="headerlink" href="#equation-eq-projmeas-collapse" title="Link to this equation">#</a></span>\[\hat{\rho}' = \frac{P_i \hat{\rho} P_i}{\text{Tr}(P_i \hat{\rho})} = \frac{P_i \hat{\rho} P_i}{p_i}\]</div>
+<span class="eqno">(128)<a class="headerlink" href="#equation-eq-projmeas-collapse" title="Link to this equation">#</a></span>\[\hat{\rho}' = \frac{P_i \hat{\rho} P_i}{\text{Tr}(P_i \hat{\rho})} = \frac{P_i \hat{\rho} P_i}{p_i}\]</div>
 <p>The state is <strong>projected</strong> onto the eigenspace corresponding to the measured eigenvalue.</p>
 </div>
 <section id="normalization-check">
@@ -610,11 +610,41 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\text{Tr}(\hat{\rho}') = \frac{\text{Tr}(P_i \hat{\rho} P_i)}{p_i} = \frac{p_i}{p_i} = 1 \quad ✓\]</div>
 <p>since <span class="math notranslate nohighlight">\(P_i^2 = P_i\)</span> and <span class="math notranslate nohighlight">\(P_i\)</span> is Hermitian.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Post-Measurement State Is a Valid Density Matrix</p>
+<p>We verify that the collapsed state <span class="math notranslate nohighlight">\(\hat{\rho}' = P_i \hat{\rho} P_i / p_i\)</span> satisfies all three properties of a density matrix: unit trace, Hermiticity, and positive semi-definiteness.</p>
+<p><strong>1. Trace = 1 (normalization).</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\text{Tr}(\hat{\rho}') = \frac{\text{Tr}(P_i \hat{\rho} P_i)}{p_i}
+\]</div>
+<p>Using cyclicity of the trace and <span class="math notranslate nohighlight">\(P_i^2 = P_i\)</span> (projector is idempotent):</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Tr}(P_i \hat{\rho} P_i) = \text{Tr}(P_i^2 \hat{\rho}) = \text{Tr}(P_i \hat{\rho}) = p_i
+\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(\text{Tr}(\hat{\rho}') = p_i / p_i = 1\)</span> <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p><strong>2. Hermiticity.</strong></p>
+<p>Since <span class="math notranslate nohighlight">\(P_i\)</span> is Hermitian (<span class="math notranslate nohighlight">\(P_i^\dagger = P_i\)</span>) and <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is Hermitian (<span class="math notranslate nohighlight">\(\hat{\rho}^\dagger = \hat{\rho}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+(\hat{\rho}')^\dagger = \frac{(P_i \hat{\rho} P_i)^\dagger}{p_i} = \frac{P_i^\dagger \hat{\rho}^\dagger P_i^\dagger}{p_i} = \frac{P_i \hat{\rho} P_i}{p_i} = \hat{\rho}'
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat{\rho}'\)</span> is Hermitian <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p><strong>3. Positive semi-definiteness.</strong></p>
+<p>For any state <span class="math notranslate nohighlight">\(\vert\phi\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\phi\vert \hat{\rho}' \vert\phi\rangle = \frac{\langle\phi\vert P_i \hat{\rho} P_i \vert\phi\rangle}{p_i} = \frac{\langle\psi\vert \hat{\rho} \vert\psi\rangle}{p_i}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vert\psi\rangle = P_i\vert\phi\rangle\)</span>. Since <span class="math notranslate nohighlight">\(\hat{\rho} \geq 0\)</span>, the numerator <span class="math notranslate nohighlight">\(\langle\psi\vert\hat{\rho}\vert\psi\rangle \geq 0\)</span>, and <span class="math notranslate nohighlight">\(p_i &gt; 0\)</span> (we conditioned on outcome <span class="math notranslate nohighlight">\(i\)</span> occurring). Therefore <span class="math notranslate nohighlight">\(\hat{\rho}' \geq 0\)</span> <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p><strong>Physical consequence.</strong> The measurement postulate is self-consistent: repeated measurement of outcome <span class="math notranslate nohighlight">\(i\)</span> with certainty is guaranteed since <span class="math notranslate nohighlight">\(\hat{\rho}'\)</span> is supported on the eigenspace of <span class="math notranslate nohighlight">\(P_i\)</span>, giving <span class="math notranslate nohighlight">\(\text{Tr}(P_i \hat{\rho}') = \text{Tr}(P_i^2 \hat{\rho} P_i)/p_i = p_i/p_i = 1\)</span>.</p>
+</div>
 <div class="important admonition">
 <p class="admonition-title">Born Rule: Expectation Value</p>
 <p>The average outcome of repeated measurements is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-expectation">
-<span class="eqno">(127)<a class="headerlink" href="#equation-eq-projmeas-expectation" title="Link to this equation">#</a></span>\[\langle A \rangle = \sum_i a_i p_i = \sum_i a_i \text{Tr}(P_i \hat{\rho}) = \text{Tr}(A \hat{\rho})\]</div>
+<span class="eqno">(129)<a class="headerlink" href="#equation-eq-projmeas-expectation" title="Link to this equation">#</a></span>\[\langle A \rangle = \sum_i a_i p_i = \sum_i a_i \text{Tr}(P_i \hat{\rho}) = \text{Tr}(A \hat{\rho})\]</div>
 <p>This is the <strong>Born rule</strong> in density matrix form.</p>
 </div>
 <div class="important admonition">
@@ -622,13 +652,13 @@ document.write(`
 <p>For a <strong>pure state</strong> <span class="math notranslate nohighlight">\(\hat{\rho} = \vert\psi\rangle\langle\psi\vert\)</span>:</p>
 <p><strong>Probability</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-pure-prob">
-<span class="eqno">(128)<a class="headerlink" href="#equation-eq-projmeas-pure-prob" title="Link to this equation">#</a></span>\[p_i = \text{Tr}(P_i \vert\psi\rangle\langle\psi\vert) = \langle\psi\vert P_i \vert\psi\rangle\]</div>
+<span class="eqno">(130)<a class="headerlink" href="#equation-eq-projmeas-pure-prob" title="Link to this equation">#</a></span>\[p_i = \text{Tr}(P_i \vert\psi\rangle\langle\psi\vert) = \langle\psi\vert P_i \vert\psi\rangle\]</div>
 <p>If <span class="math notranslate nohighlight">\(\vert\psi\rangle = \sum_j c_j \vert u_j^{(i)}\rangle\)</span> where <span class="math notranslate nohighlight">\(\vert u_j^{(i)}\rangle\)</span> are eigenstates of eigenvalue <span class="math notranslate nohighlight">\(a_i\)</span> (with multiplicity <span class="math notranslate nohighlight">\(d_i\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[p_i = \sum_j \vert c_j\vert^2\]</div>
 <p><strong>Post-measurement state</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-projmeas-pure-collapse">
-<span class="eqno">(129)<a class="headerlink" href="#equation-eq-projmeas-pure-collapse" title="Link to this equation">#</a></span>\[\vert\psi'\rangle = \frac{P_i \vert\psi\rangle}{\sqrt{p_i}}\]</div>
+<span class="eqno">(131)<a class="headerlink" href="#equation-eq-projmeas-pure-collapse" title="Link to this equation">#</a></span>\[\vert\psi'\rangle = \frac{P_i \vert\psi\rangle}{\sqrt{p_i}}\]</div>
 <p>The state is <strong>normalized projection</strong> onto eigenspace <span class="math notranslate nohighlight">\(i\)</span>.</p>
 </div>
 <div class="example admonition">
@@ -714,9 +744,67 @@ document.write(`
 <li><p>Cannot assign simultaneous definite values.</p></li>
 <li><p>Measurement outcomes are <strong>incompatible</strong>.</p></li>
 </ul>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Commuting Operators Share a Simultaneous Eigenbasis</p>
+<p><strong>Claim:</strong> <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span> if and only if <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span> have a common orthonormal eigenbasis.</p>
+<p><strong>(<span class="math notranslate nohighlight">\(\Leftarrow\)</span>) Shared eigenbasis <span class="math notranslate nohighlight">\(\Rightarrow\)</span> commutativity.</strong> If <span class="math notranslate nohighlight">\(\vert n\rangle\)</span> satisfies <span class="math notranslate nohighlight">\(\hat{A}\vert n\rangle = a_n\vert n\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\vert n\rangle = b_n\vert n\rangle\)</span>, then on any such eigenstate <span class="math notranslate nohighlight">\([\hat{A},\hat{B}]\vert n\rangle = (a_n b_n - b_n a_n)\vert n\rangle = 0\)</span>. Since the eigenstates span the space, <span class="math notranslate nohighlight">\([\hat{A},\hat{B}] = 0\)</span>.</p>
+<p><strong>(<span class="math notranslate nohighlight">\(\Rightarrow\)</span>) Commutativity <span class="math notranslate nohighlight">\(\Rightarrow\)</span> shared eigenbasis.</strong> Let <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> be an eigenstate of <span class="math notranslate nohighlight">\(\hat{A}\)</span> with eigenvalue <span class="math notranslate nohighlight">\(a\)</span>: <span class="math notranslate nohighlight">\(\hat{A}\vert\psi\rangle = a\vert\psi\rangle\)</span>. Apply <span class="math notranslate nohighlight">\(\hat{B}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{A}(\hat{B}\vert\psi\rangle) = \hat{B}(\hat{A}\vert\psi\rangle) = a(\hat{B}\vert\psi\rangle)
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat{B}\vert\psi\rangle\)</span> is also an eigenstate of <span class="math notranslate nohighlight">\(\hat{A}\)</span> with eigenvalue <span class="math notranslate nohighlight">\(a\)</span>: <strong><span class="math notranslate nohighlight">\(\hat{B}\)</span> maps the eigenspace of <span class="math notranslate nohighlight">\(a\)</span> into itself</strong>.</p>
+<p>Case 1 (non-degenerate <span class="math notranslate nohighlight">\(a\)</span>): The eigenspace is 1-dimensional, so <span class="math notranslate nohighlight">\(\hat{B}\vert\psi\rangle = b\vert\psi\rangle\)</span> — <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> is automatically an eigenstate of <span class="math notranslate nohighlight">\(\hat{B}\)</span> too.</p>
+<p>Case 2 (degenerate <span class="math notranslate nohighlight">\(a\)</span>): <span class="math notranslate nohighlight">\(\hat{B}\)</span> restricted to the eigenspace of <span class="math notranslate nohighlight">\(a\)</span> is a Hermitian operator on that subspace. By the spectral theorem applied within the eigenspace, we can choose an orthonormal basis of common eigenstates of <span class="math notranslate nohighlight">\(\hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}\)</span>. Applying this to each eigenspace of <span class="math notranslate nohighlight">\(\hat{A}\)</span> and assembling the results gives the full simultaneous eigenbasis. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Physical consequence:</strong> If <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}] = 0\)</span>, measuring <span class="math notranslate nohighlight">\(A\)</span> leaves the system in an eigenstate of <span class="math notranslate nohighlight">\(B\)</span> (or a superposition of degenerate <span class="math notranslate nohighlight">\(B\)</span> eigenstates that are simultaneously <span class="math notranslate nohighlight">\(A\)</span> eigenstates). The measurement outcomes are <strong>compatible</strong>: measuring <span class="math notranslate nohighlight">\(A\)</span> then <span class="math notranslate nohighlight">\(B\)</span> gives the same result as measuring <span class="math notranslate nohighlight">\(B\)</span> then <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
 <div class="note admonition">
 <p class="admonition-title">Projective measurement is a special case</p>
 <p>Projective (von Neumann) measurements are the textbook case where outcomes correspond to orthogonal projectors summing to identity. The more general framework (POVM) relaxes orthogonality—see §6.3.2.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Measurement Order Matters for Non-Commuting Observables</p>
+<p><strong>Claim.</strong> For non-commuting observables <span class="math notranslate nohighlight">\([A, B] \neq 0\)</span>, the joint probability <span class="math notranslate nohighlight">\(P(A{=}a_i \text{ then } B{=}b_j)\)</span> generally differs from <span class="math notranslate nohighlight">\(P(B{=}b_j \text{ then } A{=}a_i)\)</span>.</p>
+<p><strong>General formula.</strong> From the measurement postulate applied sequentially:</p>
+<div class="math notranslate nohighlight">
+\[
+P(A{=}a_i\text{ then }B{=}b_j) = \mathrm{Tr}(P_j^B P_i^A \hat{\rho} P_i^A P_j^B)
+= \mathrm{Tr}(P_j^B P_i^A \hat{\rho} P_i^A)
+\]</div>
+<p>using cyclicity of trace and <span class="math notranslate nohighlight">\((P_j^B)^2 = P_j^B\)</span>. The reversed order gives:</p>
+<div class="math notranslate nohighlight">
+\[
+P(B{=}b_j\text{ then }A{=}a_i) = \mathrm{Tr}(P_i^A P_j^B \hat{\rho} P_j^B)
+\]</div>
+<p>These are equal iff <span class="math notranslate nohighlight">\([P_i^A, P_j^B] = 0\)</span> for all <span class="math notranslate nohighlight">\(i, j\)</span>, which holds iff <span class="math notranslate nohighlight">\([A, B] = 0\)</span>.</p>
+<p><strong>Concrete example: <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> then <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> vs. <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> then <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>, starting from <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>.</strong></p>
+<p>Since <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^z] = -2\mathrm{i}\hat{\sigma}^y \neq 0\)</span>, we expect the two orders to differ.</p>
+<p><strong>Order 1: Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> first, then <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>.</strong></p>
+<p>Step 1 — <span class="math notranslate nohighlight">\(P(\sigma^x = +1)\)</span>: The eigenstate of <span class="math notranslate nohighlight">\(\sigma^x\)</span> with eigenvalue <span class="math notranslate nohighlight">\(+1\)</span> is <span class="math notranslate nohighlight">\(\vert+\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+P(\sigma^x{=}+1) = \vert\langle +\vert 0\rangle\vert^2 = \tfrac{1}{2}
+\]</div>
+<p>Post-measurement state: <span class="math notranslate nohighlight">\(\vert+\rangle\)</span>.</p>
+<p>Step 2 — <span class="math notranslate nohighlight">\(P(\sigma^z = +1 \mid \text{state is }\vert+\rangle)\)</span>: The eigenstate of <span class="math notranslate nohighlight">\(\sigma^z\)</span> with <span class="math notranslate nohighlight">\(+1\)</span> is <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+P(\sigma^z{=}+1\mid\sigma^x{=}+1) = \vert\langle 0\vert+\rangle\vert^2 = \tfrac{1}{2}
+\]</div>
+<p>Joint probability: <span class="math notranslate nohighlight">\(P(\sigma^x{=}+1\text{ then }\sigma^z{=}+1) = \tfrac{1}{2} \times \tfrac{1}{2} = \boxed{\tfrac{1}{4}}\)</span>.</p>
+<p><strong>Order 2: Measure <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> first, then <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>.</strong></p>
+<p>Step 1 — <span class="math notranslate nohighlight">\(P(\sigma^z = +1)\)</span>: starting from <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>, <span class="math notranslate nohighlight">\(P(\sigma^z{=}+1) = 1\)</span>. Post-measurement state: <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>.</p>
+<p>Step 2 — <span class="math notranslate nohighlight">\(P(\sigma^x = +1 \mid \text{state is }\vert 0\rangle)\)</span>: <span class="math notranslate nohighlight">\(P(\sigma^x{=}+1) = \vert\langle+\vert 0\rangle\vert^2 = \tfrac{1}{2}\)</span>.</p>
+<p>Joint probability: <span class="math notranslate nohighlight">\(P(\sigma^z{=}+1\text{ then }\sigma^x{=}+1) = 1 \times \tfrac{1}{2} = \boxed{\tfrac{1}{2}}\)</span>.</p>
+<p><strong>Conclusion.</strong> <span class="math notranslate nohighlight">\(\tfrac{1}{4} \neq \tfrac{1}{2}\)</span>: the two measurement orders give different joint probabilities. This irreversibility of the measurement sequence is the quantum counterpart of non-commutativity.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Complete Set of Commuting Observables (CSCO)</p>
+<p>A <strong>complete set of commuting observables (CSCO)</strong> is a maximal set of mutually commuting Hermitian operators <span class="math notranslate nohighlight">\(\{\hat{A}_1, \hat{A}_2, \ldots, \hat{A}_k\}\)</span> whose simultaneous eigenvalues label every basis state uniquely. We prove that a CSCO always exists and uniquely determines the eigenbasis.</p>
+<p><strong>Step 1: Mutually commuting operators share a joint eigenbasis.</strong> If <span class="math notranslate nohighlight">\([\hat{A}_i, \hat{A}_j] = 0\)</span> for all <span class="math notranslate nohighlight">\(i, j\)</span>, then by the simultaneous diagonalizability theorem (extending “commuting operators share an eigenbasis” from §6.3.1), there exists an orthonormal basis <span class="math notranslate nohighlight">\(\{\vert\lambda\rangle\}\)</span> in which every <span class="math notranslate nohighlight">\(\hat{A}_i\)</span> is diagonal.</p>
+<p><strong>Step 2: When is the labeling complete?</strong> The simultaneous eigenvalues <span class="math notranslate nohighlight">\((a_1, a_2, \ldots, a_k)\)</span> uniquely label basis states if and only if no two basis states share the same tuple. Suppose <span class="math notranslate nohighlight">\(\hat{A}_1\)</span> alone has a degenerate eigenspace (multiple states with eigenvalue <span class="math notranslate nohighlight">\(a_1\)</span>). Then we need <span class="math notranslate nohighlight">\(\hat{A}_2\)</span> to split that degeneracy — i.e., the degenerate subspace of <span class="math notranslate nohighlight">\(\hat{A}_1\)</span> must itself be non-degenerate under <span class="math notranslate nohighlight">\(\hat{A}_2\)</span>. This continues until the degeneracy is fully lifted.</p>
+<p><strong>Step 3: Hydrogen atom example.</strong> The Coulomb Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> has degenerate energy levels <span class="math notranslate nohighlight">\(E_n\)</span> with <span class="math notranslate nohighlight">\(n^2\)</span>-fold degeneracy. Adding <span class="math notranslate nohighlight">\(\hat{L}^2\)</span> partially lifts the degeneracy (states labeled by <span class="math notranslate nohighlight">\(n, l\)</span>), and adding <span class="math notranslate nohighlight">\(\hat{L}_z\)</span> labels them by <span class="math notranslate nohighlight">\(n, l, m\)</span>. Spin adds <span class="math notranslate nohighlight">\(s, m_s\)</span>. The set <span class="math notranslate nohighlight">\(\{\hat{H}, \hat{L}^2, \hat{L}_z, \hat{S}^2, \hat{S}_z\}\)</span> is a CSCO for the hydrogen atom (without fine structure).</p>
+<p><strong>Completeness criterion.</strong> The CSCO is <strong>complete</strong> when the multiplicity of every joint eigenvalue <span class="math notranslate nohighlight">\((a_1, \ldots, a_k)\)</span> is exactly 1. The dimension of the simultaneous eigenspace determines how many more commuting operators are needed to complete the set.</p>
 </div>
 </section>
 <section id="summary">

@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -563,7 +563,7 @@ document.write(`
 \]</div>
 <p>where the free-particle (kinetic) kernel is</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-free-delta-t-one-step">
-<span class="eqno">(59)<a class="headerlink" href="#equation-eq-k-free-delta-t-one-step" title="Link to this equation">#</a></span>\[
+<span class="eqno">(61)<a class="headerlink" href="#equation-eq-k-free-delta-t-one-step" title="Link to this equation">#</a></span>\[
 K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi \mathrm{i}\hbar \delta t}\right)^{1/2} \exp\left(\frac{\mathrm{i}m(x - x')^2}{2\hbar \delta t}\right)
 \]</div>
 <p>To derive the Schrödinger equation, we expand both sides in powers of <span class="math notranslate nohighlight">\(\delta t\)</span> and identify the <span class="math notranslate nohighlight">\(O(\delta t)\)</span> term.</p>
@@ -607,14 +607,41 @@ K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi \mathrm{i}\hbar \delta t
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Gaussian Moments</p>
-<p>Write <span class="math notranslate nohighlight">\(\alpha = \mathrm{i}m/(2\hbar\,\delta t)\)</span> so that <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x) = (\alpha/\pi)^{1/2}\,\mathrm{e}^{\alpha(\delta x)^2}\)</span>.</p>
-<p>The zeroth moment is normalized by construction: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}\,\mathrm{d}(\delta x) = 1\)</span>.</p>
-<p>The first moment vanishes by symmetry (odd integrand).</p>
-<p>For the second moment, use the standard Gaussian results <span class="math notranslate nohighlight">\(\int \mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \sqrt{\pi/(-\alpha)}\)</span> and <span class="math notranslate nohighlight">\(\int x^2\,\mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \tfrac{1}{2}(-\alpha)^{-3/2}\sqrt{\pi}\)</span>:</p>
+<p><strong>Step 1: The fundamental Gaussian integral (from scratch).</strong>
+Consider <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty} \mathrm{e}^{-u^2}\,\mathrm{d}u\)</span>. The trick is to compute <span class="math notranslate nohighlight">\(I^2\)</span> by switching to polar coordinates:</p>
 <div class="math notranslate nohighlight">
 \[
-\int K_{\delta t}^{\text{free}}(\delta x)\,(\delta x)^2\,\mathrm{d}(\delta x) = \frac{1}{-2\alpha} = \frac{\mathrm{i}\hbar\,\delta t}{m}
+I^2 = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \mathrm{e}^{-(u^2+v^2)}\,\mathrm{d}u\,\mathrm{d}v = \int_0^{2\pi}\int_0^{\infty} \mathrm{e}^{-r^2}\,r\,\mathrm{d}r\,\mathrm{d}\theta = 2\pi \cdot \frac{1}{2} = \pi
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(\int_0^\infty r\,\mathrm{e}^{-r^2}\,\mathrm{d}r = \frac{1}{2}\)</span> follows from the substitution <span class="math notranslate nohighlight">\(s = r^2\)</span>. Therefore <span class="math notranslate nohighlight">\(I = \sqrt{\pi}\)</span>.</p>
+<p><strong>Step 2: Introduce a coefficient <span class="math notranslate nohighlight">\(\alpha\)</span>.</strong>
+Substitute <span class="math notranslate nohighlight">\(u = \sqrt{-\alpha}\,x\)</span> (valid for <span class="math notranslate nohighlight">\(\operatorname{Re}(-\alpha) &gt; 0\)</span>, extended to complex <span class="math notranslate nohighlight">\(\alpha\)</span> by analytic continuation):</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{\infty} \mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \frac{1}{\sqrt{-\alpha}}\int_{-\infty}^{\infty} \mathrm{e}^{-u^2}\,\mathrm{d}u = \sqrt{\frac{\pi}{-\alpha}}
+\]</div>
+<p><strong>Step 3: Generate higher moments by differentiating in <span class="math notranslate nohighlight">\(\alpha\)</span>.</strong>
+Differentiate both sides with respect to <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}\alpha}\int \mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \int x^2\,\mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \frac{\mathrm{d}}{\mathrm{d}\alpha}\sqrt{\frac{\pi}{-\alpha}} = \frac{1}{2}(-\alpha)^{-3/2}\sqrt{\pi}
+\]</div>
+<p>Repeating: <span class="math notranslate nohighlight">\(\int x^{2n}\mathrm{e}^{\alpha x^2}\mathrm{d}x = \frac{(2n-1)!!}{2^n}(-\alpha)^{-(2n+1)/2}\sqrt{\pi}\)</span> (all odd moments vanish by symmetry).</p>
+<p><strong>Step 4: Apply to the short-time propagator.</strong>
+Write <span class="math notranslate nohighlight">\(\alpha = \mathrm{i}m/(2\hbar\,\delta t)\)</span> so that <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x) = (\alpha/\pi)^{1/2}\,\mathrm{e}^{\alpha(\delta x)^2}\)</span>.</p>
+<ul class="simple">
+<li><p><em>Zeroth moment</em>: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}\,\mathrm{d}(\delta x) = (\alpha/\pi)^{1/2}\sqrt{\pi/(-\alpha)} = 1\)</span> (normalization).</p></li>
+<li><p><em>First moment</em>: vanishes by symmetry (odd integrand).</p></li>
+<li><p><em>Second moment</em>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\int K_{\delta t}^{\text{free}}(\delta x)\,(\delta x)^2\,\mathrm{d}(\delta x) = (\alpha/\pi)^{1/2} \cdot \frac{\sqrt{\pi}}{2(-\alpha)^{3/2}} = \frac{1}{-2\alpha} = \frac{\mathrm{i}\hbar\,\delta t}{m}
+\]</div>
+<p>This is <span class="math notranslate nohighlight">\(O(\delta t)\)</span>, which is why it contributes at leading order in the Taylor expansion of <span class="math notranslate nohighlight">\(\psi(x + \delta x)\)</span> that produces the Schrödinger equation.</p>
+<ul class="simple">
+<li><p><em>Fourth moment</em>: <span class="math notranslate nohighlight">\(\int (\delta x)^4\,K_{\delta t}^{\text{free}}\,\mathrm{d}(\delta x) = \frac{3}{4\alpha^2} = O(\delta t^2)\)</span>, which is subleading and can be dropped.</p></li>
+</ul>
 </div>
 </section>
 <section id="step-3-collecting-o-t-terms">
@@ -625,6 +652,51 @@ K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi \mathrm{i}\hbar \delta t
 <li><p>The first-moment term vanishes: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}} \, \delta x \cdot \frac{\partial}{\partial x} \psi \, \ldots = 0\)</span></p></li>
 <li><p>The second-moment term: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}} \, (\delta x)^2 \, \partial_i \partial_j \psi \, \ldots = -\frac{\mathrm{i}\hbar \delta t}{m} \frac{\partial^2}{\partial x^2} \psi\)</span></p></li>
 </ul>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Collecting the O(δt) Terms</p>
+<p>Starting from the integral after substitution <span class="math notranslate nohighlight">\(\delta x = x - x'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x, t + \delta t) = \mathrm{e}^{-\mathrm{i}V(x)\,\delta t/\hbar}\!\int \mathrm{d}(\delta x)\,K_{\delta t}^{\text{free}}(\delta x)\!\left[\psi + \delta x\,\partial_x\psi + \tfrac{1}{2}(\delta x)^2\,\partial_x^2\psi + \cdots\right]
+\]</div>
+<p>Evaluate each term using the Gaussian moments:</p>
+<p><strong>Zeroth-order term.</strong> The <span class="math notranslate nohighlight">\(\psi\)</span> piece gives</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{e}^{-\mathrm{i}V\delta t/\hbar}\!\int K_{\delta t}^{\text{free}}(\delta x)\,\psi\,\mathrm{d}(\delta x) = \mathrm{e}^{-\mathrm{i}V\delta t/\hbar}\,\psi
+\]</div>
+<p>since the kernel is normalized to unity. Expanding the exponential to <span class="math notranslate nohighlight">\(O(\delta t)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{e}^{-\mathrm{i}V\delta t/\hbar}\,\psi = \psi - \frac{\mathrm{i}}{\hbar}V\,\delta t\,\psi + O((\delta t)^2)
+\]</div>
+<p><strong>First-order term.</strong> The <span class="math notranslate nohighlight">\(\delta x\,\partial_x\psi\)</span> piece vanishes because the first moment of the Gaussian kernel is zero (odd integrand):</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{e}^{-\mathrm{i}V\delta t/\hbar}\!\int K_{\delta t}^{\text{free}}(\delta x)\,\delta x\,\partial_x\psi\,\mathrm{d}(\delta x) = 0
+\]</div>
+<p><strong>Second-order term.</strong> The <span class="math notranslate nohighlight">\(\tfrac{1}{2}(\delta x)^2\,\partial_x^2\psi\)</span> piece contributes at <span class="math notranslate nohighlight">\(O(\delta t)\)</span> via the second Gaussian moment. To leading order we drop the <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}V\delta t/\hbar}\)</span> correction (which would produce <span class="math notranslate nohighlight">\(O((\delta t)^2)\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\tfrac{1}{2}\!\int K_{\delta t}^{\text{free}}(\delta x)\,(\delta x)^2\,\partial_x^2\psi\,\mathrm{d}(\delta x) = \frac{1}{2}\cdot\frac{\mathrm{i}\hbar\,\delta t}{m}\,\partial_x^2\psi
+\]</div>
+<p><strong>Combining.</strong> Collecting all <span class="math notranslate nohighlight">\(O(\delta t)\)</span> contributions:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x, t+\delta t) = \psi + \frac{\mathrm{i}\hbar\,\delta t}{2m}\,\partial_x^2\psi - \frac{\mathrm{i}}{\hbar}V\,\delta t\,\psi + O((\delta t)^2)
+\]</div>
+<p>Moving <span class="math notranslate nohighlight">\(\psi\)</span> to the left and dividing by <span class="math notranslate nohighlight">\(\delta t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\psi(x, t+\delta t) - \psi(x,t)}{\delta t} = \frac{\mathrm{i}\hbar}{2m}\frac{\partial^2\psi}{\partial x^2} - \frac{\mathrm{i}}{\hbar}V(x)\,\psi
+\]</div>
+<p>Taking <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> on the left gives <span class="math notranslate nohighlight">\(\partial\psi/\partial t\)</span>. Multiplying both sides by <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\psi}{\partial x^2} + V(x)\,\psi = \hat{H}\psi
+\]</div>
+<p>which is the time-dependent Schrödinger equation.</p>
+</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -681,12 +753,131 @@ K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi \mathrm{i}\hbar \delta t
 \]</div>
 <p>with the initial condition <span class="math notranslate nohighlight">\(K(x_f, t_i; x', t_i) = \delta(x_f - x')\)</span>.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Propagator Satisfies the Schrödinger Equation</p>
+<p>We verify that the propagator <span class="math notranslate nohighlight">\(K(x, t; x', t')\)</span>, defined by the path integral, satisfies the Schrödinger equation in its first argument with a delta-function initial condition.</p>
+<p><strong>Step 1: Initial condition.</strong> At <span class="math notranslate nohighlight">\(t = t'\)</span>, the time-slicing formula reduces to a single slice with <span class="math notranslate nohighlight">\(\delta t = 0\)</span>. The free-particle kernel becomes</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}\right)^{1/2}\exp\!\left(\frac{\mathrm{i}m(x-x')^2}{2\hbar\,\delta t}\right) \xrightarrow{\delta t\to 0} \delta(x - x')
+\]</div>
+<p>since a normalized Gaussian with variance <span class="math notranslate nohighlight">\(\to 0\)</span> converges to a delta function. This gives the initial condition <span class="math notranslate nohighlight">\(K(x, t'; x', t') = \delta(x - x')\)</span>.</p>
+<p><strong>Step 2: Time evolution.</strong> For <span class="math notranslate nohighlight">\(t &gt; t'\)</span>, the composition property of the propagator reads</p>
+<div class="math notranslate nohighlight">
+\[
+K(x, t+\delta t; x', t') = \int K_{\delta t}(x, x'')\,K(x'', t; x', t')\,\mathrm{d}x''
+\]</div>
+<p>This has exactly the same structure as <span class="math notranslate nohighlight">\(\psi(x, t+\delta t) = \int K_{\delta t}(x, x'')\,\psi(x'', t)\,\mathrm{d}x''\)</span> with <span class="math notranslate nohighlight">\(\psi(x'',t) \equiv K(x'',t;x',t')\)</span>. The derivation of the Schrödinger equation from the time-slice formula therefore applies verbatim, giving</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\frac{\partial}{\partial t}K(x, t; x', t') = \hat{H}_x\,K(x, t; x', t')
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{H}_x = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x)\)</span> acts on the first position argument.</p>
+<p><strong>Step 3: Consistency.</strong> The general solution to the Schrödinger equation is then recovered by superposition:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x,t) = \int K(x,t;x',t')\,\psi(x',t')\,\mathrm{d}x'
+\]</div>
+<p>At <span class="math notranslate nohighlight">\(t = t'\)</span>, the delta-function initial condition ensures <span class="math notranslate nohighlight">\(\psi(x,t') = \int \delta(x-x')\,\psi(x',t')\,\mathrm{d}x' = \psi(x,t')\)</span> — a self-consistency check.</p>
+</div>
 <p>The wavefunction at any time is obtained by convolving the propagator with the initial state:</p>
 <div class="math notranslate nohighlight">
 \[
 \psi(x, t) = \int K(x, t; x', 0) \, \psi(x', 0) \, \mathrm{d}x'
 \]</div>
 <p>This shows that solving the Schrödinger equation is equivalent to evaluating the path integral.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Spectral Decomposition of the Propagator</p>
+<p>The propagator can be written explicitly in terms of the energy eigenstates. If <span class="math notranslate nohighlight">\(\hat{H}\psi_n(x) = E_n\psi_n(x)\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+K(x, t; x', 0) = \sum_n \psi_n(x)\,\psi_n^*(x')\,\mathrm{e}^{-\mathrm{i}E_n t/\hbar}
+\]</div>
+<p><strong>Step 1: Eigenfunction expansion.</strong> Since <span class="math notranslate nohighlight">\(\{\psi_n\}\)</span> forms a complete orthonormal basis, expand <span class="math notranslate nohighlight">\(K\)</span> at fixed <span class="math notranslate nohighlight">\((x', t)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+K(x, t; x', 0) = \sum_n c_n(x', t)\,\psi_n(x)
+\]</div>
+<p><strong>Step 2: Time evolution from the Schrödinger equation.</strong> Substitute into <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t K = \hat{H}_x K\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\sum_n \dot{c}_n\,\psi_n = \sum_n c_n\,E_n\,\psi_n
+\]</div>
+<p>Projecting onto <span class="math notranslate nohighlight">\(\psi_m\)</span> using orthonormality <span class="math notranslate nohighlight">\(\langle\psi_m|\psi_n\rangle = \delta_{mn}\)</span> gives <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\dot{c}_m = E_m c_m\)</span>, with solution</p>
+<div class="math notranslate nohighlight">
+\[
+c_n(x', t) = c_n(x', 0)\,\mathrm{e}^{-\mathrm{i}E_n t/\hbar}
+\]</div>
+<p><strong>Step 3: Initial condition.</strong> At <span class="math notranslate nohighlight">\(t = 0\)</span>, the propagator is a delta function: <span class="math notranslate nohighlight">\(K(x, 0; x', 0) = \delta(x - x')\)</span>. So</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_n c_n(x', 0)\,\psi_n(x) = \delta(x - x') = \sum_n \psi_n(x)\,\psi_n^*(x')
+\]</div>
+<p>where the second equality uses the completeness relation <span class="math notranslate nohighlight">\(\sum_n \psi_n(x)\psi_n^*(x') = \delta(x-x')\)</span>. Matching coefficients: <span class="math notranslate nohighlight">\(c_n(x', 0) = \psi_n^*(x')\)</span>.</p>
+<p><strong>Step 4: Result.</strong> Combining Steps 2 and 3:</p>
+<div class="math notranslate nohighlight">
+\[
+K(x, t; x', 0) = \sum_n \psi_n(x)\,\psi_n^*(x')\,\mathrm{e}^{-\mathrm{i}E_n t/\hbar}
+\]</div>
+<p><strong>Verification.</strong> Substituting into the superposition formula:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x, t) = \int K(x, t; x', 0)\,\psi(x', 0)\,\mathrm{d}x' = \sum_n \psi_n(x)\,\mathrm{e}^{-\mathrm{i}E_n t/\hbar}\underbrace{\int \psi_n^*(x')\,\psi(x', 0)\,\mathrm{d}x'}_{c_n(0)}
+\]</div>
+<p>This recovers the standard time-dependent superposition <span class="math notranslate nohighlight">\(\psi(x,t) = \sum_n c_n\,\psi_n(x)\,\mathrm{e}^{-\mathrm{i}E_n t/\hbar}\)</span>, confirming consistency.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Probability Current and Local Probability Conservation</p>
+<p>The Schrödinger equation guarantees that probability is <strong>locally conserved</strong> — it cannot be created or destroyed, only transported. We derive the <strong>continuity equation</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\rho}{\partial t} + \nabla\cdot\boldsymbol{j} = 0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho = \vert\psi\vert^2\)</span> is the probability density and <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> is the probability current.</p>
+<p><strong>Step 1: Time derivative of the probability density.</strong></p>
+<p>Write the Schrödinger equation and its complex conjugate:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\frac{\partial\psi}{\partial t} = \left(-\frac{\hbar^2}{2m}\nabla^2 + V\right)\psi, \qquad -\mathrm{i}\hbar\frac{\partial\psi^*}{\partial t} = \left(-\frac{\hbar^2}{2m}\nabla^2 + V\right)\psi^*
+\]</div>
+<p>Compute <span class="math notranslate nohighlight">\(\partial_t\rho = \partial_t(\psi^*\psi) = (\partial_t\psi^*)\psi + \psi^*(\partial_t\psi)\)</span>. Substituting the equations above:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\rho}{\partial t} = \frac{\mathrm{i}\hbar}{2m}\bigl(\psi\nabla^2\psi^* - \psi^*\nabla^2\psi\bigr)
+\]</div>
+<p>The real potential <span class="math notranslate nohighlight">\(V\)</span> cancels: <span class="math notranslate nohighlight">\(\tfrac{-1}{\mathrm{i}\hbar}V\psi^*\psi + \tfrac{1}{\mathrm{i}\hbar}V\psi^*\psi = 0\)</span>.</p>
+<p><strong>Step 2: Identify the divergence.</strong></p>
+<p>The vector identity <span class="math notranslate nohighlight">\(\nabla\cdot(f\nabla g) = (\nabla f)\cdot(\nabla g) + f\nabla^2 g\)</span> implies</p>
+<div class="math notranslate nohighlight">
+\[
+\psi\nabla^2\psi^* - \psi^*\nabla^2\psi = \nabla\cdot(\psi\nabla\psi^*) - \nabla\cdot(\psi^*\nabla\psi) = \nabla\cdot(\psi\nabla\psi^* - \psi^*\nabla\psi)
+\]</div>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\rho}{\partial t} = -\nabla\cdot\left[\frac{\hbar}{2m\mathrm{i}}(\psi^*\nabla\psi - \psi\nabla\psi^*)\right]
+\]</div>
+<p><strong>Step 3: Define the probability current.</strong></p>
+<p>The <strong>probability current density</strong> is</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{j} = \frac{\hbar}{2m\mathrm{i}}\bigl(\psi^*\nabla\psi - \psi\nabla\psi^*\bigr) = \frac{\hbar}{m}\,\mathrm{Im}(\psi^*\nabla\psi)
+\]</div>
+<p>In the polar form <span class="math notranslate nohighlight">\(\psi = R\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> (with <span class="math notranslate nohighlight">\(R, S\)</span> real), this becomes <span class="math notranslate nohighlight">\(\boldsymbol{j} = R^2\,\nabla S/m = \rho\,\boldsymbol{v}\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{v} = \nabla S/m\)</span> is the local flow velocity (classical momentum <span class="math notranslate nohighlight">\(p = \nabla S\)</span>).</p>
+<p><strong>Step 4: Global conservation.</strong></p>
+<p>The continuity equation <span class="math notranslate nohighlight">\(\partial_t\rho + \nabla\cdot\boldsymbol{j} = 0\)</span> integrates to</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}\int\vert\psi\vert^2\,\mathrm{d}^3x = -\oint_{\text{surface}}\boldsymbol{j}\cdot\mathrm{d}\boldsymbol{A} = 0
+\]</div>
+<p>(using the divergence theorem and <span class="math notranslate nohighlight">\(\psi \to 0\)</span> at infinity). Total probability is conserved for all time.</p>
+<p><strong>Gauge extension.</strong> For a charged particle in a magnetic field, minimal coupling <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> modifies the current to the gauge-invariant form:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{j} = \frac{1}{m}\,\mathrm{Re}\!\left[\psi^*\!\left(\frac{\hbar}{\mathrm{i}}\nabla - q\boldsymbol{A}\right)\!\psi\right] = \frac{\hbar}{m}\,\mathrm{Im}(\psi^*\nabla\psi) - \frac{q}{m}\boldsymbol{A}\vert\psi\vert^2
+\]</div>
+<p>This equals <span class="math notranslate nohighlight">\(\rho\,\boldsymbol{v}_{\rm kin}\)</span> with <span class="math notranslate nohighlight">\(m\boldsymbol{v}_{\rm kin} = \boldsymbol{p} - q\boldsymbol{A}\)</span> the kinetic momentum, consistent with the gauge-invariant velocity derived in <a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">4.1.2 Electromagnetic Coupling</span></a>.</p>
+</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
 <p>The derivation assumed that the <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> limit can be taken order-by-order, with Gaussian integrals evaluated exactly at each step. Several questions arise:</p>

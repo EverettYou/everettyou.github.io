@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -611,6 +611,16 @@ document.write(`
 <li><p><strong>Normalization</strong>: The condition <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> ensures the state is normalized. We interpret <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> as the probability of measuring the qubit in state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>.</p></li>
 <li><p><strong>Global phase</strong>: States that differ by a global phase (e.g., <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\phi}\vert \psi\rangle\)</span>) are physically identical. Thus a qubit is truly a two-parameter system (after factoring out global phase and normalization).</p></li>
 </ul>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Global Phase is Unobservable</p>
+<p>Let <span class="math notranslate nohighlight">\(\vert\psi'\rangle = \mathrm{e}^{\mathrm{i}\gamma}\vert\psi\rangle\)</span> for any real <span class="math notranslate nohighlight">\(\gamma\)</span>. For any measurement outcome <span class="math notranslate nohighlight">\(\vert m\rangle\)</span>, the Born rule gives:</p>
+<div class="math notranslate nohighlight">
+\[
+P(m \vert \psi') = \vert\langle m\vert\psi'\rangle\vert^2 = \vert\langle m\vert\mathrm{e}^{\mathrm{i}\gamma}\psi\rangle\vert^2 = \vert\mathrm{e}^{\mathrm{i}\gamma}\vert^2\,\vert\langle m\vert\psi\rangle\vert^2 = \vert\langle m\vert\psi\rangle\vert^2 = P(m \vert \psi)
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\vert\mathrm{e}^{\mathrm{i}\gamma}\vert = 1\)</span> for any real <span class="math notranslate nohighlight">\(\gamma\)</span>, every measurement probability is unchanged. Because all physical information about a quantum state is encoded in measurement probabilities, no experiment can ever distinguish <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> from <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\gamma}\vert\psi\rangle\)</span>.</p>
+<p>This freedom lets us fix the global phase arbitrarily — for example, by requiring the coefficient of <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> to be real and non-negative. Doing so removes one real parameter from the state description, reducing the four real numbers <span class="math notranslate nohighlight">\(\{\mathrm{Re}\,\alpha,\, \mathrm{Im}\,\alpha,\, \mathrm{Re}\,\beta,\, \mathrm{Im}\,\beta\}\)</span> to three, and then normalization removes one more, leaving exactly two free real parameters.</p>
+</div>
 </section>
 <section id="physical-realizations-of-qubits">
 <h3>Physical Realizations of Qubits<a class="headerlink" href="#physical-realizations-of-qubits" title="Link to this heading">#</a></h3>
@@ -706,6 +716,113 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: No-Cloning Theorem</p>
+<p><strong>Claim.</strong> There is no unitary operator <span class="math notranslate nohighlight">\(\hat{U}\)</span> on a two-qubit Hilbert space such that</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{U}\vert\psi\rangle\vert 0\rangle = \vert\psi\rangle\vert\psi\rangle \quad \text{for all }\vert\psi\rangle.
+\]</div>
+<p><strong>Proof (by linearity of quantum mechanics).</strong></p>
+<p>Suppose such a <span class="math notranslate nohighlight">\(\hat{U}\)</span> existed. Apply it to the two computational basis states:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{U}\vert 0\rangle\vert 0\rangle = \vert 0\rangle\vert 0\rangle, \qquad \hat{U}\vert 1\rangle\vert 0\rangle = \vert 1\rangle\vert 1\rangle.
+\]</div>
+<p>Now consider the superposition state <span class="math notranslate nohighlight">\(\vert+\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span>. By the assumed cloning property:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{U}\vert+\rangle\vert 0\rangle = \vert+\rangle\vert+\rangle = \frac{1}{2}(\vert 0\rangle + \vert 1\rangle)(\vert 0\rangle + \vert 1\rangle) = \frac{1}{2}(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle + \vert 11\rangle).
+\]</div>
+<p>But quantum mechanics is <strong>linear</strong>: since <span class="math notranslate nohighlight">\(\vert+\rangle\vert 0\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle\vert 0\rangle + \vert 1\rangle\vert 0\rangle)\)</span>, unitarity demands:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{U}\vert+\rangle\vert 0\rangle = \frac{1}{\sqrt{2}}\bigl(\hat{U}\vert 0\rangle\vert 0\rangle + \hat{U}\vert 1\rangle\vert 0\rangle\bigr) = \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle).
+\]</div>
+<p>These two outputs are <strong>different</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle + \vert 11\rangle) \neq \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle).
+\]</div>
+<p>The left side is a product state; the right side is a maximally entangled Bell state. This contradicts the assumption that <span class="math notranslate nohighlight">\(\hat{U}\)</span> clones all states. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+<p><strong>Alternative proof via inner products.</strong> Suppose <span class="math notranslate nohighlight">\(\hat{U}\)</span> clones two states <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\phi\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{U}\vert\psi\rangle\vert 0\rangle = \vert\psi\rangle\vert\psi\rangle, \qquad \hat{U}\vert\phi\rangle\vert 0\rangle = \vert\phi\rangle\vert\phi\rangle.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{U}\)</span> is unitary, it preserves inner products:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\phi\vert\psi\rangle = \langle\phi\vert\langle 0\vert \hat{U}^\dagger\hat{U} \vert\psi\rangle\vert 0\rangle = \langle\phi\vert\phi\vert\psi\rangle\vert\psi\rangle = (\langle\phi\vert\psi\rangle)^2.
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(c = \langle\phi\vert\psi\rangle\)</span>: the equation <span class="math notranslate nohighlight">\(c = c^2\)</span> has only two solutions, <span class="math notranslate nohighlight">\(c = 0\)</span> or <span class="math notranslate nohighlight">\(c = 1\)</span>. Therefore a cloning machine can only clone states that are <strong>identical</strong> (<span class="math notranslate nohighlight">\(c=1\)</span>) or <strong>perfectly distinguishable</strong> (<span class="math notranslate nohighlight">\(c=0\)</span>). An arbitrary unknown state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> cannot be cloned.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Complex Amplitudes Are Necessary — Real Amplitudes Cannot Describe All Qubit States</p>
+<p><strong>Claim.</strong> Describing a qubit requires complex amplitudes <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{C}\)</span>. Restricting to real amplitudes <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{R}\)</span> is physically insufficient.</p>
+<p><strong>Proof.</strong> For a real-amplitude state <span class="math notranslate nohighlight">\(\vert\psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span> with <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{R}\)</span>, compute the expectation value of <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle\hat{\sigma}^y\rangle = \langle\psi\vert\hat{\sigma}^y\vert\psi\rangle
+= \begin{pmatrix}\alpha &amp; \beta\end{pmatrix}\begin{pmatrix}0 &amp; -\mathrm{i}\\\mathrm{i} &amp; 0\end{pmatrix}\begin{pmatrix}\alpha\\\beta\end{pmatrix}
+= \begin{pmatrix}\alpha &amp; \beta\end{pmatrix}\begin{pmatrix}-\mathrm{i}\beta\\ \mathrm{i}\alpha\end{pmatrix}
+= -\mathrm{i}\alpha\beta + \mathrm{i}\beta\alpha = 0
+\end{split}\]</div>
+<p>for any real <span class="math notranslate nohighlight">\(\alpha, \beta\)</span>. So <strong>every real-amplitude state gives <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle = 0\)</span></strong>.</p>
+<p>By the Born rule, the Y-measurement probability is <span class="math notranslate nohighlight">\(P(Y{=}+1) = (1 + \langle\hat{\sigma}^y\rangle)/2 = 1/2\)</span> for all real-amplitude states. But the Y eigenstate <span class="math notranslate nohighlight">\(\vert\mathrm{i}\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle + \mathrm{i}\vert 1\rangle)\)</span> requires <span class="math notranslate nohighlight">\(P(Y{=}+1) = 1\)</span>. Since no real-amplitude state can achieve this, <strong>real amplitudes cannot represent the full set of qubit states</strong>.</p>
+<p><strong>What complex numbers add.</strong> Allowing <span class="math notranslate nohighlight">\(\alpha, \beta \in \mathbb{C}\)</span> introduces a <strong>relative phase</strong> <span class="math notranslate nohighlight">\(\phi = \arg(\beta) - \arg(\alpha)\)</span>. This phase controls the Y-component of the Bloch vector:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\hat{\sigma}^y\rangle = \sin\theta\sin\phi
+\]</div>
+<p>(from §1.1.2). When <span class="math notranslate nohighlight">\(\phi = \pi/2\)</span>, we get <span class="math notranslate nohighlight">\(\langle\hat{\sigma}^y\rangle = \sin\theta \neq 0\)</span> — only achievable with a complex relative phase. Restricting to <span class="math notranslate nohighlight">\(\phi \in \{0, \pi\}\)</span> (real amplitudes) reduces the Bloch sphere to the equatorial great circle in the XZ-plane, losing the entire Y direction.</p>
+<p><strong>Physical implication.</strong> Any experiment that distinguishes <span class="math notranslate nohighlight">\(\vert\mathrm{i}\rangle\)</span> from <span class="math notranslate nohighlight">\(\vert +\rangle\)</span> (Y-basis measurement) requires quantum mechanics to use <span class="math notranslate nohighlight">\(\mathbb{C}^2\)</span>, not <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Superposition Is Not a Classical Probability Mixture</p>
+<p>A quantum superposition <span class="math notranslate nohighlight">\(\vert\psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span> differs fundamentally from a classical probability distribution over the outcomes <span class="math notranslate nohighlight">\(\{0, 1\}\)</span>. We make this precise by showing that a quantum superposition exhibits <strong>interference</strong>, which a classical mixture cannot.</p>
+<p><strong>Setup.</strong> Compare two states with equal probabilities for <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>:</p>
+<ol class="arabic simple">
+<li><p><strong>Quantum superposition</strong>: <span class="math notranslate nohighlight">\(\vert\psi_\phi\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \mathrm{e}^{\mathrm{i}\phi}\vert 1\rangle)\)</span></p></li>
+<li><p><strong>Classical mixture</strong>: <span class="math notranslate nohighlight">\(\hat{\rho}_{\text{mix}} = \frac{1}{2}\vert 0\rangle\langle 0\vert + \frac{1}{2}\vert 1\rangle\langle 1\vert\)</span></p></li>
+</ol>
+<p>Both give the same probabilities <span class="math notranslate nohighlight">\(P(0) = P(1) = 1/2\)</span> when measured in the <span class="math notranslate nohighlight">\(\{\vert 0\rangle, \vert 1\rangle\}\)</span> basis.</p>
+<p><strong>Test: Measure in the X-basis.</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(\vert +\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> and <span class="math notranslate nohighlight">\(\vert -\rangle = \frac{1}{\sqrt{2}}(\vert 0\rangle - \vert 1\rangle)\)</span>.</p>
+<p><strong>Superposition</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(+\vert\psi_\phi) = \vert\langle +\vert\psi_\phi\rangle\vert^2 = \left\vert\frac{1}{\sqrt{2}}\cdot\frac{1}{\sqrt{2}}(1 + \mathrm{e}^{\mathrm{i}\phi})\right\vert^2 = \frac{\vert 1 + \mathrm{e}^{\mathrm{i}\phi}\vert^2}{4} = \frac{2 + 2\cos\phi}{4} = \cos^2\!\frac{\phi}{2}
+\]</div>
+<p>This <strong>oscillates</strong> with the phase <span class="math notranslate nohighlight">\(\phi\)</span>: from <span class="math notranslate nohighlight">\(P(+) = 1\)</span> when <span class="math notranslate nohighlight">\(\phi = 0\)</span> to <span class="math notranslate nohighlight">\(P(+) = 0\)</span> when <span class="math notranslate nohighlight">\(\phi = \pi\)</span>.</p>
+<p><strong>Classical mixture</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(+\vert\hat{\rho}_{\text{mix}}) = \text{Tr}(\vert +\rangle\langle +\vert\,\hat{\rho}_{\text{mix}}) = \frac{1}{2}\vert\langle +\vert 0\rangle\vert^2 + \frac{1}{2}\vert\langle +\vert 1\rangle\vert^2 = \frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2} = \frac{1}{2}
+\]</div>
+<p>This is <strong>always</strong> <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>, regardless of <span class="math notranslate nohighlight">\(\phi\)</span> — no interference.</p>
+<p><strong>Conclusion.</strong> The phase <span class="math notranslate nohighlight">\(\phi\)</span> is physically observable (through measurements in a different basis), even though it doesn’t affect measurements in the <span class="math notranslate nohighlight">\(\{\vert 0\rangle, \vert 1\rangle\}\)</span> basis. This is the defining feature of <strong>quantum coherence</strong>: relative phases in superpositions create interference effects that have no classical analogue. A qubit state is a superposition, not a mixture — <span class="math notranslate nohighlight">\(\phi\)</span> is real physics, not bookkeeping.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Measurement Inevitably Disturbs Non-Orthogonal States</p>
+<p><strong>Theorem.</strong> Any device that reliably distinguishes two quantum states <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span> while leaving each undisturbed must have <span class="math notranslate nohighlight">\(\langle\psi_1\vert\psi_2\rangle = 0\)</span>. Equivalently, non-orthogonal states cannot both be measured without disturbance.</p>
+<p><strong>Proof.</strong> Suppose a device operates as: given input <span class="math notranslate nohighlight">\(\vert\psi_i\rangle\)</span> (<span class="math notranslate nohighlight">\(i = 1, 2\)</span>), it always outputs outcome <span class="math notranslate nohighlight">\(i\)</span> and the post-measurement state remains <span class="math notranslate nohighlight">\(\vert\psi_i\rangle\)</span>.</p>
+<p><strong>Step 1 — Each state must be an eigenstate.</strong> For input <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span> to yield outcome <span class="math notranslate nohighlight">\(m_1\)</span> with certainty and leave the state unchanged, <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span> must be an eigenstate of the measurement observable <span class="math notranslate nohighlight">\(\hat{M}\)</span> with eigenvalue <span class="math notranslate nohighlight">\(m_1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}\vert\psi_1\rangle = m_1\vert\psi_1\rangle, \qquad \hat{M}\vert\psi_2\rangle = m_2\vert\psi_2\rangle, \quad m_1 \neq m_2.
+\]</div>
+<p>(An eigenstate yields a definite outcome and is unchanged by that measurement — these two properties are equivalent.)</p>
+<p><strong>Step 2 — Different eigenvalues force orthogonality.</strong> Since <span class="math notranslate nohighlight">\(\hat{M}\)</span> is Hermitian, compute:</p>
+<div class="math notranslate nohighlight">
+\[
+m_1\langle\psi_1\vert\psi_2\rangle = \langle\hat{M}\psi_1\vert\psi_2\rangle = \langle\psi_1\vert\hat{M}\psi_2\rangle = m_2\langle\psi_1\vert\psi_2\rangle.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(m_1 \neq m_2\)</span>, we conclude <span class="math notranslate nohighlight">\(\langle\psi_1\vert\psi_2\rangle = 0\)</span>. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+<p><strong>Contrapositive.</strong> If <span class="math notranslate nohighlight">\(\langle\psi_1\vert\psi_2\rangle \neq 0\)</span>, no non-disturbing device can reliably distinguish them. Any successful discrimination must disturb at least one state.</p>
+<p><strong>Comparison to no-cloning.</strong> Both theorems trace to the linearity of quantum mechanics applied to non-orthogonal states. No-cloning says we cannot copy an unknown qubit state; measurement disturbance says we cannot read it out without changing it. The two results reinforce each other: quantum information is neither copyable nor extractable without back-action.</p>
+<p><strong>Classical contrast.</strong> A classical bit can always be read non-invasively — <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> are perfectly distinguishable and orthogonal. For qubits, only mutually orthogonal states can be distinguished and left undisturbed. Any other pair, such as <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert+\rangle = (\vert 0\rangle+\vert 1\rangle)/\sqrt{2}\)</span> (with overlap <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span>), will be disturbed by any reliable measurement that distinguishes them.</p>
 </div>
 </section>
 <section id="summary">

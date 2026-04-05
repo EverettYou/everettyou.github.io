@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -557,7 +557,7 @@ document.write(`
 <section id="the-qubit-hamiltonian">
 <h3>The Qubit Hamiltonian<a class="headerlink" href="#the-qubit-hamiltonian" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight" id="equation-eq-5a-qubit-ham">
-<span class="eqno">(71)<a class="headerlink" href="#equation-eq-5a-qubit-ham" title="Link to this equation">#</a></span>\[\begin{split}H(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x = \begin{pmatrix} 1 &amp; \lambda \\ \lambda &amp; -1 \end{pmatrix}\end{split}\]</div>
+<span class="eqno">(73)<a class="headerlink" href="#equation-eq-5a-qubit-ham" title="Link to this equation">#</a></span>\[\begin{split}H(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x = \begin{pmatrix} 1 &amp; \lambda \\ \lambda &amp; -1 \end{pmatrix}\end{split}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(H_0 = \hat{\sigma}^z\)</span> is the unperturbed Hamiltonian with eigenstates <span class="math notranslate nohighlight">\(|0\rangle\)</span> (energy <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(|1\rangle\)</span> (energy <span class="math notranslate nohighlight">\(-1\)</span>), and <span class="math notranslate nohighlight">\(V = \hat{\sigma}^x\)</span> induces spin flips between them.</p>
 </section>
 <section id="exact-solution">
@@ -568,23 +568,62 @@ document.write(`
 <div class="important admonition">
 <p class="admonition-title">Exact Eigenvalues</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-exact-energies">
-<span class="eqno">(72)<a class="headerlink" href="#equation-eq-5a-exact-energies" title="Link to this equation">#</a></span>\[E_\pm(\lambda) = \pm\sqrt{1 + \lambda^2}\]</div>
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-5a-exact-energies" title="Link to this equation">#</a></span>\[E_\pm(\lambda) = \pm\sqrt{1 + \lambda^2}\]</div>
 <p>The energy gap <span class="math notranslate nohighlight">\(\Delta E = 2\sqrt{1+\lambda^2}\)</span> never closes for real <span class="math notranslate nohighlight">\(\lambda\)</span> — the two levels <strong>repel</strong> rather than cross.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Exact Eigenstates</p>
+<p>To find the eigenstate <span class="math notranslate nohighlight">\(|\psi_+\rangle\)</span> with eigenvalue <span class="math notranslate nohighlight">\(E_+ = \sqrt{1+\lambda^2}\)</span>, solve <span class="math notranslate nohighlight">\((H - E_+\hat{I})|\psi\rangle = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix} 1 - \sqrt{1+\lambda^2} &amp; \lambda \\ \lambda &amp; -1 - \sqrt{1+\lambda^2} \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} = 0\end{split}\]</div>
+<p>From the first row: <span class="math notranslate nohighlight">\((1 - \sqrt{1+\lambda^2})\,a + \lambda\,b = 0\)</span>, giving</p>
+<div class="math notranslate nohighlight">
+\[\frac{b}{a} = \frac{\sqrt{1+\lambda^2} - 1}{\lambda}\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(a = 1 + \sqrt{1+\lambda^2}\)</span> and <span class="math notranslate nohighlight">\(b = \lambda\)</span> (clearing the denominator), the norm is</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{N}^2 = (1+\sqrt{1+\lambda^2})^2 + \lambda^2 = 2(1+\lambda^2) + 2\sqrt{1+\lambda^2} = 2(1+\lambda^2+\sqrt{1+\lambda^2})\]</div>
+<p>so the normalized eigenstate is</p>
+<div class="math notranslate nohighlight">
+\[|\psi_+(\lambda)\rangle = \frac{(1+\sqrt{1+\lambda^2})|0\rangle + \lambda|1\rangle}{\sqrt{2(1+\lambda^2+\sqrt{1+\lambda^2})}}\]</div>
+<p>The other eigenstate <span class="math notranslate nohighlight">\(|\psi_-\rangle\)</span> follows from orthogonality (swap <span class="math notranslate nohighlight">\(|0\rangle\leftrightarrow|1\rangle\)</span> and flip the sign of <span class="math notranslate nohighlight">\(\lambda\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[|\psi_-(\lambda)\rangle = \frac{(1+\sqrt{1+\lambda^2})|1\rangle - \lambda|0\rangle}{\sqrt{2(1+\lambda^2+\sqrt{1+\lambda^2})}}\]</div>
+<p>At <span class="math notranslate nohighlight">\(\lambda = 0\)</span>: <span class="math notranslate nohighlight">\(|\psi_+\rangle = |0\rangle\)</span> and <span class="math notranslate nohighlight">\(|\psi_-\rangle = |1\rangle\)</span>, as expected.</p>
 </div>
 </section>
 <section id="taylor-expansion-recovering-the-perturbative-series">
 <h3>Taylor Expansion: Recovering the Perturbative Series<a class="headerlink" href="#taylor-expansion-recovering-the-perturbative-series" title="Link to this heading">#</a></h3>
 <p>Expanding <span class="math notranslate nohighlight">\(\sqrt{1+\lambda^2}\)</span> for small <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-energy-series">
-<span class="eqno">(73)<a class="headerlink" href="#equation-eq-5a-energy-series" title="Link to this equation">#</a></span>\[E_\pm(\lambda) = \pm\left(1 + \frac{\lambda^2}{2} - \frac{\lambda^4}{8} + O(\lambda^6)\right)\]</div>
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-5a-energy-series" title="Link to this equation">#</a></span>\[E_\pm(\lambda) = \pm\left(1 + \frac{\lambda^2}{2} - \frac{\lambda^4}{8} + O(\lambda^6)\right)\]</div>
 <p>Reading off the perturbative coefficients for the upper state:</p>
 <div class="math notranslate nohighlight">
 \[E_+^{(0)} = 1, \quad E_+^{(1)} = 0, \quad E_+^{(2)} = \frac{1}{2}, \quad E_+^{(3)} = 0, \quad E_+^{(4)} = -\frac{1}{8}\]</div>
 <p>All <strong>odd-order corrections vanish</strong> because <span class="math notranslate nohighlight">\(H(\lambda)\)</span> has a <span class="math notranslate nohighlight">\(\lambda \to -\lambda\)</span> symmetry (equivalently, <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> has zero diagonal elements in the <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span> basis, so <span class="math notranslate nohighlight">\(E_n^{(1)} = \langle n|\hat{\sigma}^x|n\rangle = 0\)</span>).</p>
 <p>The exact eigenstates expanded to low order:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-state-series-plus">
-<span class="eqno">(74)<a class="headerlink" href="#equation-eq-5a-state-series-plus" title="Link to this equation">#</a></span>\[|\psi_+(\lambda)\rangle = |0\rangle + \frac{\lambda}{2}|1\rangle - \frac{\lambda^2}{8}|0\rangle + O(\lambda^3)\]</div>
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-5a-state-series-plus" title="Link to this equation">#</a></span>\[|\psi_+(\lambda)\rangle = |0\rangle + \frac{\lambda}{2}|1\rangle - \frac{\lambda^2}{8}|0\rangle + O(\lambda^3)\]</div>
 <p>The admixture of <span class="math notranslate nohighlight">\(|1\rangle\)</span> grows linearly with <span class="math notranslate nohighlight">\(\lambda\)</span>, controlled by the ratio coupling/gap.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Binomial Series for <span class="math notranslate nohighlight">\(\sqrt{1+\lambda^2}\)</span></p>
+<p>Apply the generalized binomial series <span class="math notranslate nohighlight">\((1+x)^\alpha = \sum_{k=0}^\infty \binom{\alpha}{k} x^k\)</span> with <span class="math notranslate nohighlight">\(\alpha = 1/2\)</span> and <span class="math notranslate nohighlight">\(x = \lambda^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{1+\lambda^2} = 1 + \tfrac{1}{2}\lambda^2 + \tfrac{1}{2!}\tfrac{1}{2}(\tfrac{1}{2}-1)\lambda^4 + \tfrac{1}{3!}\tfrac{1}{2}(\tfrac{1}{2}-1)(\tfrac{1}{2}-2)\lambda^6 + \cdots\]</div>
+<p>Computing each coefficient:</p>
+<div class="math notranslate nohighlight">
+\[k=1:\quad \binom{1/2}{1} = \tfrac{1}{2}, \qquad k=2:\quad \binom{1/2}{2} = \tfrac{(1/2)(1/2-1)}{2!} = -\tfrac{1}{8}\]</div>
+<div class="math notranslate nohighlight">
+\[k=3:\quad \binom{1/2}{3} = \tfrac{(1/2)(-1/2)(-3/2)}{3!} = \tfrac{1}{16}\]</div>
+<p>So <span class="math notranslate nohighlight">\(E_\pm(\lambda) = \pm(1 + \tfrac{1}{2}\lambda^2 - \tfrac{1}{8}\lambda^4 + \tfrac{1}{16}\lambda^6 - \cdots)\)</span>, confirming <span class="math notranslate nohighlight">\(E_+^{(2)} = +\tfrac{1}{2}\)</span> and <span class="math notranslate nohighlight">\(E_+^{(4)} = -\tfrac{1}{8}\)</span>.</p>
+<p>For the eigenstates, expand <span class="math notranslate nohighlight">\(|\psi_+(\lambda)\rangle\)</span> by substituting <span class="math notranslate nohighlight">\(\sqrt{1+\lambda^2} = 1 + \tfrac{1}{2}\lambda^2 + \cdots\)</span> into the exact formula and Taylor-expanding the normalization factor <span class="math notranslate nohighlight">\(\mathcal{N}^{-1}\)</span>. At the numerator level:</p>
+<div class="math notranslate nohighlight">
+\[(1+\sqrt{1+\lambda^2})|0\rangle + \lambda|1\rangle = (2 + \tfrac{1}{2}\lambda^2 + \cdots)|0\rangle + \lambda|1\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\mathcal{N}^2 = 2(1+\lambda^2+\sqrt{1+\lambda^2}) = 2(2 + \tfrac{3}{2}\lambda^2 + \cdots) = 4(1 + \tfrac{3}{4}\lambda^2 + \cdots)\]</div>
+<div class="math notranslate nohighlight">
+\[\mathcal{N}^{-1} = \tfrac{1}{2}(1 - \tfrac{3}{8}\lambda^2 + \cdots)\]</div>
+<p>Combining: <span class="math notranslate nohighlight">\(|\psi_+\rangle = |0\rangle + \tfrac{\lambda}{2}|1\rangle - \tfrac{\lambda^2}{8}|0\rangle + O(\lambda^3)\)</span>, matching the perturbative result.</p>
+</div>
 </section>
 <section id="level-repulsion">
 <h3>Level Repulsion<a class="headerlink" href="#level-repulsion" title="Link to this heading">#</a></h3>
@@ -592,6 +631,41 @@ document.write(`
 <p class="admonition-title">Level Repulsion</p>
 <p>Two energy levels coupled by a perturbation <span class="math notranslate nohighlight">\(V\)</span> repel each other rather than crossing. The minimum gap at any <span class="math notranslate nohighlight">\(\lambda\)</span> is proportional to the matrix element <span class="math notranslate nohighlight">\(|\langle 1|V|0\rangle|\)</span>. In the qubit model, <span class="math notranslate nohighlight">\(\langle 1|\hat{\sigma}^x|0\rangle = 1\)</span>, so the levels never touch.</p>
 <p>This is a general phenomenon: for a <span class="math notranslate nohighlight">\(2\times 2\)</span> block with off-diagonal coupling <span class="math notranslate nohighlight">\(v\)</span>, the eigenvalues are <span class="math notranslate nohighlight">\(E_\pm = \bar{E} \pm \sqrt{\delta^2 + v^2}\)</span>, where <span class="math notranslate nohighlight">\(\delta\)</span> is the half-gap and <span class="math notranslate nohighlight">\(\bar{E}\)</span> the midpoint. The minimum splitting <span class="math notranslate nohighlight">\(2|v|\)</span> occurs at <span class="math notranslate nohighlight">\(\delta = 0\)</span>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Level Repulsion from Second-Order Perturbation Theory</p>
+<p>Level repulsion can be derived two ways: (i) from the exact 2×2 eigenvalue formula, and (ii) from the perturbative expansion. Both illuminate why coupling prevents level crossing.</p>
+<p><strong>Method 1: Exact 2×2 argument.</strong>
+For any Hermitian <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix with energies <span class="math notranslate nohighlight">\(E_0 &gt; E_1\)</span> (half-gap <span class="math notranslate nohighlight">\(\delta = (E_0-E_1)/2 &gt; 0\)</span>) and off-diagonal coupling <span class="math notranslate nohighlight">\(v\)</span> (real for simplicity):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{H} = \bar{E}\hat{I} + \begin{pmatrix} \delta &amp; v \\ v &amp; -\delta \end{pmatrix}, \qquad E_\pm = \bar{E} \pm \sqrt{\delta^2 + v^2}
+\end{split}\]</div>
+<p>The eigenvalue gap is <span class="math notranslate nohighlight">\(\Delta E = 2\sqrt{\delta^2 + v^2} \geq 2\delta\)</span>, with equality only when <span class="math notranslate nohighlight">\(v = 0\)</span>. For any non-zero coupling, the gap <strong>strictly exceeds</strong> the unperturbed gap <span class="math notranslate nohighlight">\(2\delta\)</span>. Levels can only cross if both <span class="math notranslate nohighlight">\(v = 0\)</span> and <span class="math notranslate nohighlight">\(\delta = 0\)</span> simultaneously — a codimension-2 condition that requires tuning two parameters.</p>
+<p><strong>Method 2: Second-order perturbation theory.</strong>
+Apply non-degenerate perturbation theory to <span class="math notranslate nohighlight">\(\hat{H} = \hat{H}_0 + \lambda\hat{V}\)</span> with <span class="math notranslate nohighlight">\(\hat{H}_0 = \hat{\sigma}^z\)</span>, <span class="math notranslate nohighlight">\(\hat{V} = \hat{\sigma}^x\)</span>. Unperturbed: <span class="math notranslate nohighlight">\(E_0^{(0)} = +1\)</span>, <span class="math notranslate nohighlight">\(E_1^{(0)} = -1\)</span>, with <span class="math notranslate nohighlight">\(\hat{V}_{10} = \langle 1|\hat{\sigma}^x|0\rangle = 1\)</span>.</p>
+<p><strong>First-order corrections:</strong> <span class="math notranslate nohighlight">\(E_n^{(1)} = \langle n|\hat{V}|n\rangle = \langle n|\hat{\sigma}^x|n\rangle = 0\)</span> (diagonal Pauli matrix elements vanish). No first-order energy shift.</p>
+<p><strong>Second-order corrections:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+E_0^{(2)} = \frac{|\langle 1|\lambda\hat{V}|0\rangle|^2}{E_0^{(0)} - E_1^{(0)}} = \frac{\lambda^2 \cdot 1}{1 - (-1)} = +\frac{\lambda^2}{2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E_1^{(2)} = \frac{|\langle 0|\lambda\hat{V}|1\rangle|^2}{E_1^{(0)} - E_0^{(0)}} = \frac{\lambda^2 \cdot 1}{-1 - 1} = -\frac{\lambda^2}{2}
+\]</div>
+<p><strong>The gap grows:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\Delta E = E_0 - E_1 = 2 + \lambda^2 + O(\lambda^4)
+\]</div>
+<p>The upper level rises, the lower level falls — they repel. This matches the exact result <span class="math notranslate nohighlight">\(2\sqrt{1+\lambda^2} = 2 + \lambda^2 - \frac{\lambda^4}{4} + \cdots\)</span>.</p>
+<p><strong>General rule.</strong> For any two levels with <span class="math notranslate nohighlight">\(E_n &gt; E_m\)</span>, the second-order energy denominators satisfy <span class="math notranslate nohighlight">\(E_n - E_m &gt; 0\)</span> and <span class="math notranslate nohighlight">\(E_m - E_n &lt; 0\)</span>, so:</p>
+<div class="math notranslate nohighlight">
+\[
+E_n^{(2)} = \sum_{k \neq n}\frac{|V_{kn}|^2}{E_n - E_k} &gt; 0 \quad (\text{from the }k=m\text{ term}), \qquad E_m^{(2)} = \sum_{k \neq m}\frac{|V_{km}|^2}{E_m - E_k} &lt; 0 \quad (\text{from the }k=n\text{ term})
+\]</div>
+<p>The coupling <span class="math notranslate nohighlight">\(V\)</span> <strong>always</strong> pushes states of different energy apart at second order, regardless of the sign or magnitude of <span class="math notranslate nohighlight">\(V\)</span>. This is the perturbative origin of the universal level repulsion phenomenon.</p>
 </div>
 </section>
 <section id="convergence">
@@ -603,10 +677,43 @@ document.write(`
 \[\lambda \|V\| \ll \Delta E\]</div>
 <p>For the qubit, the convergence radius is <span class="math notranslate nohighlight">\(R = 1\)</span>, set by the branch points at <span class="math notranslate nohighlight">\(\lambda = \pm\mathrm{i}\)</span> in the complex plane where <span class="math notranslate nohighlight">\(E^2 = 1 + \lambda^2 = 0\)</span>.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Convergence Radius from Branch Points</p>
+<p>The energy <span class="math notranslate nohighlight">\(E_\pm(\lambda) = \pm\sqrt{1+\lambda^2}\)</span> is analytic in <span class="math notranslate nohighlight">\(\lambda\)</span> except where <span class="math notranslate nohighlight">\(1+\lambda^2 = 0\)</span>, i.e., at <span class="math notranslate nohighlight">\(\lambda = \pm\mathrm{i}\)</span>. These are <strong>branch points</strong> of the square root.</p>
+<p>The Taylor series centered at <span class="math notranslate nohighlight">\(\lambda = 0\)</span> converges in the largest disk in the complex <span class="math notranslate nohighlight">\(\lambda\)</span>-plane that contains no singularity. The nearest singularity is at distance <span class="math notranslate nohighlight">\(|\lambda| = 1\)</span> from the origin, so the convergence radius is</p>
+<div class="math notranslate nohighlight">
+\[R = \min_{\text{singularities}} |\lambda_*| = |\pm\mathrm{i}| = 1\]</div>
+<p><strong>Physical interpretation</strong>: at <span class="math notranslate nohighlight">\(\lambda = \pm\mathrm{i}\)</span> the two energy levels coalesce (<span class="math notranslate nohighlight">\(E_+ = E_- = 0\)</span>), forming an <strong>exceptional point</strong> — a non-Hermitian degeneracy (since <span class="math notranslate nohighlight">\(H(\pm\mathrm{i})\)</span> is not Hermitian). The perturbative series, built on the assumption that the two levels are distinct, cannot be continued past this point.</p>
+<p>More generally, for a <span class="math notranslate nohighlight">\(2\times 2\)</span> system with gap <span class="math notranslate nohighlight">\(\Delta E\)</span> and coupling <span class="math notranslate nohighlight">\(v\)</span>, the branch points are at <span class="math notranslate nohighlight">\(\lambda_* = \pm\mathrm{i}\,\Delta E/(2v)\)</span>, giving convergence radius <span class="math notranslate nohighlight">\(R = \Delta E/(2|v|)\)</span>, confirming the general criterion <span class="math notranslate nohighlight">\(\lambda|v| \ll \Delta E\)</span>.</p>
+</div>
 <p>Beyond <span class="math notranslate nohighlight">\(|\lambda| = R\)</span>, the series diverges even though the exact solution remains valid. Perturbation theory breaks down precisely when the coupling becomes comparable to the energy gap — the perturbation can no longer be treated as “small.”</p>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
 <p>The first-order corrections <span class="math notranslate nohighlight">\(E_\pm^{(1)} = 0\)</span> vanish because <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> has zero diagonal elements. This is not a coincidence but a consequence of parity symmetry. More generally, when does symmetry guarantee that certain perturbative corrections vanish? Can you think of physical examples where recognizing this saves enormous computational effort?</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Any 2<span class="math notranslate nohighlight">\(\times\)</span>2 Hamiltonian Near Degeneracy Reduces to the Toy Model</p>
+<p>The two-level qubit Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \delta\hat{Z}/2 + \lambda\hat{X}/2\)</span> is not merely a pedagogical toy — it is the <strong>universal</strong> description of any two-level quantum system near a degeneracy.</p>
+<p><strong>General 2×2 Hermitian Hamiltonian.</strong> Any <span class="math notranslate nohighlight">\(2\times 2\)</span> Hermitian matrix can be written in the Pauli basis:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H} = h_0 \hat{I} + h_x \hat{X} + h_y \hat{Y} + h_z \hat{Z}.
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(h_0 \hat{I}\)</span> term shifts all energies equally and can be absorbed into a reference. The remaining <span class="math notranslate nohighlight">\(2\times 2\)</span> traceless part has three real parameters <span class="math notranslate nohighlight">\((h_x, h_y, h_z)\)</span>.</p>
+<p><strong>Rotating to the toy-model form.</strong> By choosing the quantization axis <span class="math notranslate nohighlight">\(\hat{z}\)</span> along the field <span class="math notranslate nohighlight">\(\boldsymbol{h} = (h_x, h_y, h_z)\)</span>, we can always rotate so that the off-diagonal element becomes real. Specifically, define:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\delta = 2h_z\)</span> (energy splitting along the chosen axis)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda = 2|h_\perp|\)</span> where <span class="math notranslate nohighlight">\(h_\perp = \sqrt{h_x^2 + h_y^2}\)</span> (transverse coupling)</p></li>
+<li><p>Rotate <span class="math notranslate nohighlight">\(\hat{X}\)</span> to align with <span class="math notranslate nohighlight">\(\hat{h}_\perp\)</span></p></li>
+</ul>
+<p>After this rotation, <span class="math notranslate nohighlight">\(\hat{H} = \tfrac{\delta}{2}\hat{Z} + \tfrac{\lambda}{2}\hat{X}\)</span> — exactly the toy model.</p>
+<p><strong>Consequences.</strong> Every property of the toy model holds universally:</p>
+<ul class="simple">
+<li><p><strong>Level repulsion</strong>: the gap is always <span class="math notranslate nohighlight">\(\sqrt{\delta^2+\lambda^2} \geq \delta\)</span> — coupling always pushes levels apart.</p></li>
+<li><p><strong>Perturbative expansion</strong>: convergent for <span class="math notranslate nohighlight">\(|\lambda| &lt; |\delta|\)</span>, with <span class="math notranslate nohighlight">\(R = |\delta/\lambda|\)</span> determining the series radius (§Convergence).</p></li>
+<li><p><strong>Exceptional points</strong>: at <span class="math notranslate nohighlight">\(\delta = 0, \lambda \to i|\delta|\)</span> in the complex extension (non-Hermitian physics).</p></li>
+</ul>
+<p>The lesson from the toy model — that perturbation theory breaks down at degeneracy and that coupling always repels levels — applies to any quantum system, including molecular bonding, nuclear structure, and quantum dots.</p>
 </div>
 </section>
 <section id="summary">

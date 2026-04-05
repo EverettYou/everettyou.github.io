@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -543,8 +543,8 @@ document.write(`
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
 <li><p>In the Schrödinger picture, states evolve and observables are fixed. What happens in the Heisenberg picture? Are both descriptions physically equivalent?</p></li>
-<li><p>Derive the Heisenberg equation of motion: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \mathrm{i}[\hat{H}, \hat{O}(t)]\)</span>. How does it differ from the Schrödinger equation?</p></li>
-<li><p>For a spin in a magnetic field with <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span>, find how <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> evolves. Describe the motion geometrically.</p></li>
+<li><p>Derive the Heisenberg equation of motion: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}(t)]\)</span>. How does it differ from the Schrödinger equation?</p></li>
+<li><p>For a spin in a magnetic field with <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hbar\omega}{2}\hat{\sigma}^z\)</span> (as in §1.3.2), find how <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> evolves. Describe the motion geometrically.</p></li>
 <li><p>What does it mean for an observable to be conserved? How does the commutator <span class="math notranslate nohighlight">\([\hat{A},\hat{H}] = 0\)</span> guarantee conservation?</p></li>
 <li><p>How do continuous symmetries (like rotations) generate conserved quantities? Give an example from the Standard Model.</p></li>
 </ul>
@@ -560,7 +560,7 @@ document.write(`
 <p>In the Schrödinger picture, the expectation value of an observable at time <span class="math notranslate nohighlight">\(t\)</span> is:</p>
 <div class="math notranslate nohighlight">
 \[\langle \hat{O} \rangle(t) = \langle \psi(t) \vert \hat{O} \vert \psi(t) \rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vert \psi(t) \rangle = \hat{U}(t) \vert \psi(0) \rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t}\)</span> (setting <span class="math notranslate nohighlight">\(\hbar = 1\)</span>).</p>
+<p>where <span class="math notranslate nohighlight">\(\vert \psi(t) \rangle = \hat{U}(t) \vert \psi(0) \rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>, matching §1.3.2.</p>
 <p>We can rewrite this as:</p>
 <div class="math notranslate nohighlight">
 \[\langle \hat{O} \rangle(t) = \langle \psi(0) \vert \hat{U}^\dagger(t) \hat{O} \hat{U}(t) \vert \psi(0) \rangle\]</div>
@@ -578,48 +578,48 @@ document.write(`
 <p>In the Heisenberg picture, operators evolve according to:</p>
 <div class="math notranslate nohighlight">
 \[
-\boxed{\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \mathrm{i}[\hat{H}, \hat{O}(t)]}
+\boxed{\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}(t)]}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\([\cdot,\cdot]\)</span> is the commutator and we use natural units <span class="math notranslate nohighlight">\(\hbar = 1\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\([\cdot,\cdot]\)</span> is the commutator, using the same convention as the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\partial_t\vert\psi\rangle = \hat{H}\vert\psi\rangle\)</span>.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation</p>
+<p class="admonition-title">Derivation: Heisenberg Equation from the Schrödinger Picture</p>
 <p>Starting from <span class="math notranslate nohighlight">\(\hat{O}(t) = \hat{U}^\dagger(t) \hat{O} \hat{U}(t)\)</span>, we differentiate with respect to time:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \frac{\mathrm{d}\hat{U}^\dagger}{\mathrm{d}t} \hat{O} \hat{U} + \hat{U}^\dagger \hat{O} \frac{\mathrm{d}\hat{U}}{\mathrm{d}t}\]</div>
-<p>From the Schrödinger equation: <span class="math notranslate nohighlight">\(\mathrm{i}\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = \hat{H} \hat{U}\)</span>, so <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = -\mathrm{i}\hat{H} \hat{U}\)</span>.</p>
-<p>Thus: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}^\dagger}{\mathrm{d}t} = \mathrm{i}\hat{U}^\dagger \hat{H}\)</span>.</p>
+<p>From the Schrödinger equation for the propagator: <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = \hat{H} \hat{U}\)</span>, so <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}\hat{H} \hat{U}\)</span>.</p>
+<p>Thus: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}^\dagger}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}\hat{U}^\dagger \hat{H}\)</span>.</p>
 <p>Substituting:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \mathrm{i}\hat{U}^\dagger \hat{H} \hat{O} \hat{U} - \mathrm{i}\hat{U}^\dagger \hat{O} \hat{H} \hat{U}\]</div>
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{O}(t) = \frac{\mathrm{i}}{\hbar}\hat{U}^\dagger \hat{H} \hat{O} \hat{U} - \frac{\mathrm{i}}{\hbar}\hat{U}^\dagger \hat{O} \hat{H} \hat{U}\]</div>
 <div class="math notranslate nohighlight">
-\[= \mathrm{i}\hat{U}^\dagger [\hat{H}, \hat{O}] \hat{U} = \mathrm{i}[\hat{H}, \hat{O}(t)]\]</div>
+\[= \frac{\mathrm{i}}{\hbar}\hat{U}^\dagger [\hat{H}, \hat{O}] \hat{U} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}(t)]\]</div>
 </div>
 </section>
 <section id="example-spin-precession">
 <h3>Example: Spin Precession<a class="headerlink" href="#example-spin-precession" title="Link to this heading">#</a></h3>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Spin in a Magnetic Field</p>
-<p><strong>Problem.</strong> A spin-1/2 particle evolves under <span class="math notranslate nohighlight">\(\hat{H} = \omega\hat{\sigma}^z\)</span>. Find <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^y(t)\)</span> in the Heisenberg picture.</p>
+<p><strong>Problem.</strong> A spin-1/2 particle evolves under <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hbar\omega}{2}\hat{\sigma}^z\)</span> (the same static-field Hamiltonian as in §1.3.2, with Larmor frequency <span class="math notranslate nohighlight">\(\omega\)</span>). Find <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^y(t)\)</span> in the Heisenberg picture.</p>
 <p><strong>Solution.</strong></p>
 <p>The commutators are:</p>
 <div class="math notranslate nohighlight">
 \[[\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y, \quad [\hat{\sigma}^z, \hat{\sigma}^y] = -2\mathrm{i}\hat{\sigma}^x\]</div>
-<p>So:</p>
+<p>So, using <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}]\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^x = \mathrm{i}\omega[\hat{\sigma}^z, \hat{\sigma}^x] = 2\omega\hat{\sigma}^y\]</div>
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^x = \frac{\mathrm{i}}{\hbar}\left[\frac{\hbar\omega}{2}\hat{\sigma}^z, \hat{\sigma}^x\right] = -\omega\hat{\sigma}^y\]</div>
 <div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^y = \mathrm{i}\omega[\hat{\sigma}^z, \hat{\sigma}^y] = -2\omega\hat{\sigma}^x\]</div>
+\[\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^y = \frac{\mathrm{i}}{\hbar}\left[\frac{\hbar\omega}{2}\hat{\sigma}^z, \hat{\sigma}^y\right] = \omega\hat{\sigma}^x\]</div>
 <p>These are coupled oscillator equations. Taking the second derivative of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}^2}{\mathrm{d}t^2}\hat{\sigma}^x = -4\omega^2\hat{\sigma}^x\]</div>
-<p>General solution: <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t) = A\cos(2\omega t) + B\sin(2\omega t)\)</span>.</p>
-<p>With initial conditions <span class="math notranslate nohighlight">\(\hat{\sigma}^x(0) = \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^x(0) = 2\omega\hat{\sigma}^y\)</span>:</p>
+\[\frac{\mathrm{d}^2}{\mathrm{d}t^2}\hat{\sigma}^x = -\omega^2\hat{\sigma}^x\]</div>
+<p>General solution: <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t) = A\cos(\omega t) + B\sin(\omega t)\)</span>.</p>
+<p>With initial conditions <span class="math notranslate nohighlight">\(\hat{\sigma}^x(0) = \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{\sigma}^x(0) = -\omega\hat{\sigma}^y\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\hat{\sigma}^x(t) = \hat{\sigma}^x\cos(2\omega t) + \hat{\sigma}^y\sin(2\omega t)\]</div>
+\[\hat{\sigma}^x(t) = \hat{\sigma}^x\cos(\omega t) - \hat{\sigma}^y\sin(\omega t)\]</div>
 <div class="math notranslate nohighlight">
-\[\hat{\sigma}^y(t) = \hat{\sigma}^y\cos(2\omega t) - \hat{\sigma}^x\sin(2\omega t)\]</div>
-<p><strong>Physical interpretation:</strong> In the Heisenberg picture, the spin operators precess around the <span class="math notranslate nohighlight">\(z\)</span>-axis with frequency <span class="math notranslate nohighlight">\(2\omega\)</span>—exactly as they would orbit the magnetic field in the Schrödinger picture.</p>
+\[\hat{\sigma}^y(t) = \hat{\sigma}^y\cos(\omega t) + \hat{\sigma}^x\sin(\omega t)\]</div>
+<p><strong>Physical interpretation:</strong> In the Heisenberg picture, the spin operators precess around the <span class="math notranslate nohighlight">\(z\)</span>-axis at the <strong>Larmor frequency</strong> <span class="math notranslate nohighlight">\(\omega\)</span>—the same rate as Bloch-vector precession in the Schrödinger picture (§1.3.2).</p>
 </div>
 </section>
 <section id="conserved-quantities-and-symmetry">
@@ -629,7 +629,7 @@ document.write(`
 \[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = 0\]</div>
 <p>From the Heisenberg equation:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = \mathrm{i}\langle [\hat{H}, \hat{A}] \rangle\]</div>
+\[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = \frac{\mathrm{i}}{\hbar}\langle [\hat{H}, \hat{A}] \rangle\]</div>
 <p>So <span class="math notranslate nohighlight">\(\hat{A}\)</span> is conserved if and only if:</p>
 <div class="important admonition">
 <p class="admonition-title">Conservation Law</p>
@@ -637,13 +637,35 @@ document.write(`
 \[[\hat{A}, \hat{H}] = 0\]</div>
 <p>An observable is conserved if and only if it commutes with the Hamiltonian.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Ehrenfest Theorem</p>
+<p>The Heisenberg equation gives the time evolution of any observable’s expectation value. For position and momentum operators in a general potential <span class="math notranslate nohighlight">\(V(\hat{x})\)</span>, this yields <strong>Ehrenfest’s theorem</strong>: quantum expectation values obey classical-looking equations of motion.</p>
+<p>For a particle with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \hat{p}^2/(2m) + V(\hat{x})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{x}\rangle = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{x}]\rangle = \frac{1}{m}\langle\hat{p}\rangle\]</div>
+<p>using <span class="math notranslate nohighlight">\([\hat{p}^2, \hat{x}] = -2\mathrm{i}\hbar\hat{p}\)</span>. Similarly:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{p}\rangle = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{p}]\rangle = -\langle V'(\hat{x})\rangle\]</div>
+<p>using <span class="math notranslate nohighlight">\([V(\hat{x}), \hat{p}] = \mathrm{i}\hbar V'(\hat{x})\)</span>. Together: <span class="math notranslate nohighlight">\(m\frac{\mathrm{d}^2}{\mathrm{d}t^2}\langle\hat{x}\rangle = -\langle V'(\hat{x})\rangle\)</span>, which resembles Newton’s second law <span class="math notranslate nohighlight">\(F = ma\)</span>. The quantum correction is that <span class="math notranslate nohighlight">\(\langle V'(\hat{x})\rangle \neq V'(\langle\hat{x}\rangle)\)</span> in general—expectation values follow classical trajectories exactly only when <span class="math notranslate nohighlight">\(V\)</span> is at most quadratic (free particle, harmonic oscillator, uniform field).</p>
+</div>
 <p>This statement connects <strong>symmetries</strong> to <strong>conserved quantities</strong>. A <strong>symmetry</strong> is a unitary transformation <span class="math notranslate nohighlight">\(\hat{U}_\alpha(\theta)\)</span> that leaves the Hamiltonian invariant:</p>
 <div class="math notranslate nohighlight">
 \[\hat{U}_\alpha^\dagger(\theta) \hat{H} \hat{U}_\alpha(\theta) = \hat{H}\]</div>
 <p>The <strong>generator</strong> of the symmetry is an operator <span class="math notranslate nohighlight">\(\hat{G}_\alpha\)</span> such that:</p>
 <div class="math notranslate nohighlight">
-\[\hat{U}_\alpha(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}_\alpha\theta}\]</div>
+\[\hat{U}_\alpha(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}_\alpha\theta/\hbar}\]</div>
 <p>If <span class="math notranslate nohighlight">\(\hat{U}_\alpha^\dagger \hat{H} \hat{U}_\alpha = \hat{H}\)</span>, then <span class="math notranslate nohighlight">\([\hat{G}_\alpha, \hat{H}] = 0\)</span>, so <span class="math notranslate nohighlight">\(\hat{G}_\alpha\)</span> is conserved. <strong>Every continuous symmetry generates a conserved quantity.</strong></p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Symmetry Implies Conservation</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\hat{U}_\alpha(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}_\alpha\theta/\hbar}\)</span> is a symmetry, meaning <span class="math notranslate nohighlight">\(\hat{U}_\alpha^\dagger(\theta)\hat{H}\hat{U}_\alpha(\theta) = \hat{H}\)</span> for all <span class="math notranslate nohighlight">\(\theta\)</span>. Differentiate both sides with respect to <span class="math notranslate nohighlight">\(\theta\)</span> at <span class="math notranslate nohighlight">\(\theta = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}\theta}\bigg\vert_{\theta=0} \hat{U}_\alpha^\dagger(\theta)\hat{H}\hat{U}_\alpha(\theta) = 0\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}_\alpha}{\mathrm{d}\theta}\big\vert_{\theta=0} = -\frac{\mathrm{i}}{\hbar}\hat{G}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{U}_\alpha^\dagger}{\mathrm{d}\theta}\big\vert_{\theta=0} = +\frac{\mathrm{i}}{\hbar}\hat{G}_\alpha\)</span>, the product rule gives:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{i}}{\hbar}\hat{G}_\alpha \hat{H} - \frac{\mathrm{i}}{\hbar}\hat{H}\hat{G}_\alpha = \frac{\mathrm{i}}{\hbar}[\hat{G}_\alpha, \hat{H}] = 0\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\([\hat{G}_\alpha, \hat{H}] = 0\)</span>, and by the Heisenberg equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\langle\hat{G}_\alpha\rangle = \frac{\mathrm{i}}{\hbar}\langle[\hat{H}, \hat{G}_\alpha]\rangle = 0\)</span>. The generator is conserved.</p>
+<p>This is the quantum version of <strong>Noether’s theorem</strong>: continuous symmetries of the Hamiltonian correspond to conserved observables.</p>
+</div>
 </section>
 <section id="lie-groups-and-quantum-mechanics">
 <h3>Lie Groups and Quantum Mechanics<a class="headerlink" href="#lie-groups-and-quantum-mechanics" title="Link to this heading">#</a></h3>
@@ -666,6 +688,36 @@ document.write(`
 <li><p><strong>SU(3)</strong>: Strong interactions (gluons, quark color charge)</p></li>
 </ul>
 <p>Each symmetry group constrains possible interactions and provides conserved currents. This framework, beginning with the idea of operator evolution under symmetry, extends from simple qubits to the fundamental laws of nature.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Free Spin Precession in the Heisenberg Picture</p>
+<p>Consider a spin-1/2 in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>. The Hamiltonian is</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} = -\frac{\hbar\omega_0}{2}\hat{\sigma}^z, \qquad \omega_0 = \frac{q B}{m}\]</div>
+<p>We compute the Heisenberg-picture operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t), \hat{\sigma}^y(t), \hat{\sigma}^z(t)\)</span> directly from the Heisenberg equation <span class="math notranslate nohighlight">\(\dot{\hat{O}} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}]\)</span>.</p>
+<p><strong>Step 1: Commutators with <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span>.</strong> Using <span class="math notranslate nohighlight">\([\hat{\sigma}^i, \hat{\sigma}^j] = 2\mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y, \qquad [\hat{\sigma}^z, \hat{\sigma}^y] = -2\mathrm{i}\hat{\sigma}^x, \qquad [\hat{\sigma}^z, \hat{\sigma}^z] = 0\]</div>
+<p><strong>Step 2: Heisenberg equations of motion.</strong></p>
+<div class="math notranslate nohighlight">
+\[\dot{\hat{\sigma}}^x = \frac{\mathrm{i}}{\hbar}\left(-\frac{\hbar\omega_0}{2}\right)[\hat{\sigma}^z, \hat{\sigma}^x] = \frac{\mathrm{i}}{\hbar}\left(-\frac{\hbar\omega_0}{2}\right)(2\mathrm{i}\hat{\sigma}^y) = \omega_0\hat{\sigma}^y\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{\hat{\sigma}}^y = \frac{\mathrm{i}}{\hbar}\left(-\frac{\hbar\omega_0}{2}\right)[\hat{\sigma}^z, \hat{\sigma}^y] = \frac{\mathrm{i}}{\hbar}\left(-\frac{\hbar\omega_0}{2}\right)(-2\mathrm{i}\hat{\sigma}^x) = -\omega_0\hat{\sigma}^x\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{\hat{\sigma}}^z = 0 \implies \hat{\sigma}^z(t) = \hat{\sigma}^z(0)\]</div>
+<p><strong>Step 3: Solve the coupled ODEs.</strong> Define <span class="math notranslate nohighlight">\(\hat{\sigma}^\pm = \hat{\sigma}^x \pm \mathrm{i}\hat{\sigma}^y\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\dot{\hat{\sigma}}^+ = \omega_0\hat{\sigma}^y + \mathrm{i}(-\omega_0\hat{\sigma}^x) = -\mathrm{i}\omega_0(\hat{\sigma}^x + \mathrm{i}\hat{\sigma}^y) = -\mathrm{i}\omega_0\hat{\sigma}^+\]</div>
+<p>This decouples: <span class="math notranslate nohighlight">\(\hat{\sigma}^+(t) = \mathrm{e}^{-\mathrm{i}\omega_0 t}\hat{\sigma}^+(0)\)</span>, and similarly <span class="math notranslate nohighlight">\(\hat{\sigma}^-(t) = \mathrm{e}^{+\mathrm{i}\omega_0 t}\hat{\sigma}^-(0)\)</span>.</p>
+<p><strong>Step 4: Extract <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> components.</strong></p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^x(t) = \frac{\hat{\sigma}^+(t)+\hat{\sigma}^-(t)}{2} = \cos(\omega_0 t)\hat{\sigma}^x(0) + \sin(\omega_0 t)\hat{\sigma}^y(0)\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^y(t) = \frac{\hat{\sigma}^+(t)-\hat{\sigma}^-(t)}{2\mathrm{i}} = -\sin(\omega_0 t)\hat{\sigma}^x(0) + \cos(\omega_0 t)\hat{\sigma}^y(0)\]</div>
+<p><strong>Interpretation.</strong> This is a <strong>rotation in the xy-plane</strong> at angular frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}\hat{\sigma}^x(t)\\\hat{\sigma}^y(t)\end{pmatrix} = \begin{pmatrix}\cos\omega_0 t &amp; \sin\omega_0 t\\ -\sin\omega_0 t &amp; \cos\omega_0 t\end{pmatrix} \begin{pmatrix}\hat{\sigma}^x(0)\\\hat{\sigma}^y(0)\end{pmatrix}\end{split}\]</div>
+<p>The Bloch vector <strong>precesses</strong> around the <span class="math notranslate nohighlight">\(z\)</span>-axis at the Larmor frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>. This is the quantum-mechanical analog of classical spin precession — but here it is the operator itself that rotates, not the state.</p>
+</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
 <p><strong>Is symmetry more fundamental than dynamics?</strong></p>
@@ -674,15 +726,52 @@ document.write(`
 <ul class="simple">
 <li><p>If symmetry determines dynamics, what determines the symmetry? Why <span class="math notranslate nohighlight">\(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)\)</span> and not some other group?</p></li>
 <li><p>In condensed matter physics, <em>emergent</em> symmetries appear at low energies that are not present in the microscopic Hamiltonian. Does this mean symmetry is more fundamental than the Hamiltonian, or less?</p></li>
-<li><p>The Heisenberg equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \mathrm{i}[\hat{H}, \hat{O}]\)</span> says dynamics = commutator with <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Conservation = commuting with <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Is the Hamiltonian itself just a way of encoding which symmetries are broken?</p></li>
+<li><p>The Heisenberg equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}]\)</span> says dynamics = commutator with <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Conservation = commuting with <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Is the Hamiltonian itself just a way of encoding which symmetries are broken?</p></li>
 </ul>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Quantum-Classical Correspondence via Poisson Brackets</p>
+<p>The <strong>Heisenberg equation</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{A}}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{A}]\)</span> is the quantum counterpart of Hamilton’s classical equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}A}{\mathrm{d}t} = \{H, A\}\)</span>, where <span class="math notranslate nohighlight">\(\{\cdot,\cdot\}\)</span> is the Poisson bracket. We make this correspondence explicit.</p>
+<p><strong>Step 1: Recall the Poisson bracket.</strong> For functions of canonical variables <span class="math notranslate nohighlight">\((x,p)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\{f, g\} = \frac{\partial f}{\partial x}\frac{\partial g}{\partial p} - \frac{\partial f}{\partial p}\frac{\partial g}{\partial x}
+\]</div>
+<p>The fundamental brackets are <span class="math notranslate nohighlight">\(\{x, p\} = 1\)</span>, <span class="math notranslate nohighlight">\(\{x, x\} = 0\)</span>, <span class="math notranslate nohighlight">\(\{p, p\} = 0\)</span>.</p>
+<p><strong>Step 2: Derive the fundamental commutator identities.</strong> From <span class="math notranslate nohighlight">\([\hat{x}, \hat{p}] = \mathrm{i}\hbar\)</span>, we derive rules for commutators with functions. Using the product rule <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}\hat{C}] = \hat{B}[\hat{A},\hat{C}] + [\hat{A},\hat{B}]\hat{C}\)</span> repeatedly:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{x},\, \hat{p}^n] = \mathrm{i}\hbar\, n\hat{p}^{n-1} = \mathrm{i}\hbar\,\frac{\partial \hat{p}^n}{\partial \hat{p}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+[\hat{p},\, \hat{x}^n] = -\mathrm{i}\hbar\, n\hat{x}^{n-1} = -\mathrm{i}\hbar\,\frac{\partial \hat{x}^n}{\partial \hat{x}}
+\]</div>
+<p>By linearity, for any polynomial <span class="math notranslate nohighlight">\(h(\hat{x},\hat{p})\)</span> in which all <span class="math notranslate nohighlight">\(\hat{x}\)</span> appear to the left of all <span class="math notranslate nohighlight">\(\hat{p}\)</span> (normal ordering):</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{x},\, h(\hat{x},\hat{p})] = \mathrm{i}\hbar\,\frac{\partial h}{\partial \hat{p}}, \qquad [\hat{p},\, h(\hat{x},\hat{p})] = -\mathrm{i}\hbar\,\frac{\partial h}{\partial \hat{x}}
+\]</div>
+<p><strong>Step 3: General commutator reduces to Poisson bracket at leading order in <span class="math notranslate nohighlight">\(\hbar\)</span>.</strong> For two functions <span class="math notranslate nohighlight">\(f(\hat{x},\hat{p})\)</span> and <span class="math notranslate nohighlight">\(g(\hat{x},\hat{p})\)</span>, apply the commutator using the rules above. The leading-order (in <span class="math notranslate nohighlight">\(\hbar\)</span>) term is:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{f}, \hat{g}] = \mathrm{i}\hbar\left(\frac{\partial f}{\partial \hat{x}}\frac{\partial g}{\partial \hat{p}} - \frac{\partial f}{\partial \hat{p}}\frac{\partial g}{\partial \hat{x}}\right) + O(\hbar^2) = \mathrm{i}\hbar\,\{f, g\} + O(\hbar^2)
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(O(\hbar^2)\)</span> corrections arise from the non-commutativity of <span class="math notranslate nohighlight">\(\hat{x}\)</span> and <span class="math notranslate nohighlight">\(\hat{p}\)</span> in the product — they vanish classically.</p>
+<p><strong>Step 4: Classical limit of the Heisenberg equation.</strong> Substituting into the Heisenberg equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}A}{\mathrm{d}t} = \lim_{\hbar \to 0}\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{A}] = \lim_{\hbar \to 0}\frac{\mathrm{i}}{\hbar}\cdot\mathrm{i}\hbar\,\{H,A\} = \{H, A\}
+\]</div>
+<p>This is precisely <strong>Hamilton’s equation of motion</strong> — quantum dynamics reduces to classical Hamiltonian mechanics in the <span class="math notranslate nohighlight">\(\hbar \to 0\)</span> limit.</p>
+<p><strong>Canonical quantization</strong> is the inverse: replace all Poisson brackets by <span class="math notranslate nohighlight">\([\cdot,\cdot]/(\mathrm{i}\hbar)\)</span>. This procedure is consistent precisely because the commutator algebra of <span class="math notranslate nohighlight">\(\hat{x}, \hat{p}\)</span> reproduces the Poisson bracket algebra at leading order. The Ehrenfest theorem (above) is a direct consequence: since <span class="math notranslate nohighlight">\(\{H, x\} = p/m\)</span> and <span class="math notranslate nohighlight">\(\{H, p\} = -\partial_x V\)</span>, the quantum expectation values obey classical Newton’s law.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The <strong>Heisenberg picture</strong> is equivalent to the Schrödinger picture; operators evolve, states are fixed.</p></li>
-<li><p>The <strong>Heisenberg equation</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \mathrm{i}[\hat{H}, \hat{O}]\)</span> governs operator dynamics.</p></li>
+<li><p>The <strong>Heisenberg equation</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}]\)</span> governs operator dynamics (same <span class="math notranslate nohighlight">\(\hbar\)</span> as <span class="math notranslate nohighlight">\(\hat{U}(t) = \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> in §1.3.2).</p></li>
 <li><p><strong>Conserved quantities</strong> satisfy <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>—they commute with the Hamiltonian.</p></li>
 <li><p><strong>Symmetries</strong> are unitary transformations leaving <span class="math notranslate nohighlight">\(\hat{H}\)</span> invariant; their generators are conserved.</p></li>
 <li><p><strong>Lie groups</strong> (U(1), SU(2), SU(3), …) describe symmetries; this structure underlies the Standard Model.</p></li>
@@ -695,15 +784,15 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\langle\psi(t) \vert \hat{A} \vert \psi(t)\rangle = \langle \psi(0) \vert \hat{A}(t) \vert \psi(0) \rangle\]</div>
 <p>This proves both pictures yield identical predictions.</p>
-<p><strong>2.</strong> (Energy conservation) Show that the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> is always conserved in the Heisenberg picture. Use <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{O}}{\mathrm{d}t} = \mathrm{i}[\hat{H}, \hat{O}]\)</span> with <span class="math notranslate nohighlight">\(\hat{O} = \hat{H}\)</span>.</p>
-<p><strong>3.</strong> (Commutation relations) For the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{\omega}{2}\hat{\sigma}^z\)</span>, verify that:</p>
+<p><strong>2.</strong> (Energy conservation) Show that the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> is always conserved in the Heisenberg picture. Use <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{O}}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}]\)</span> with <span class="math notranslate nohighlight">\(\hat{O} = \hat{H}\)</span>.</p>
+<p><strong>3.</strong> (Commutation relations) For the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{\hbar\omega}{2}\hat{\sigma}^z\)</span>, verify that:</p>
 <div class="math notranslate nohighlight">
 \[[\hat{\sigma}^z, \hat{\sigma}^x] = 2\mathrm{i}\hat{\sigma}^y, \quad [\hat{\sigma}^z, \hat{\sigma}^y] = -2\mathrm{i}\hat{\sigma}^x\]</div>
 <p>Use these to check the form of <span class="math notranslate nohighlight">\(\hat{\sigma}^x(t)\)</span> given in the worked example.</p>
-<p><strong>4.</strong> (Harmonic oscillator) Consider a harmonic oscillator <span class="math notranslate nohighlight">\(\hat{H} = \omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)\)</span>. Show that:</p>
+<p><strong>4.</strong> (Harmonic oscillator) Consider a harmonic oscillator <span class="math notranslate nohighlight">\(\hat{H} = \hbar\omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)\)</span>. Show that:</p>
 <div class="math notranslate nohighlight">
-\[[\hat{a}, \hat{H}] = -\omega\hat{a}, \quad [\hat{a}^\dagger, \hat{H}] = \omega\hat{a}^\dagger\]</div>
-<p>Solve the Heisenberg equations <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{a}}{\mathrm{d}t} = \mathrm{i}[\hat{H}, \hat{a}]\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{a}^\dagger}{\mathrm{d}t} = \mathrm{i}[\hat{H}, \hat{a}^\dagger]\)</span> to find <span class="math notranslate nohighlight">\(\hat{a}(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{a}^\dagger(t)\)</span>.</p>
+\[[\hat{a}, \hat{H}] = -\hbar\omega\hat{a}, \quad [\hat{a}^\dagger, \hat{H}] = \hbar\omega\hat{a}^\dagger\]</div>
+<p>Solve the Heisenberg equations <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{a}}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{a}]\)</span> and <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{a}^\dagger}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{a}^\dagger]\)</span> to find <span class="math notranslate nohighlight">\(\hat{a}(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{a}^\dagger(t)\)</span>.</p>
 <p><strong>5.</strong> (Observable conservation) Prove: if <span class="math notranslate nohighlight">\([\hat{A}, \hat{H}] = 0\)</span>, then <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{A} \rangle = 0\)</span> in any quantum state. What is the physical interpretation?</p>
 <p><strong>6.</strong> (SU(2) generators) Show that the Pauli operators <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^y\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> generate infinitesimal rotations on the Bloch sphere via:</p>
 <div class="math notranslate nohighlight">
@@ -714,7 +803,7 @@ document.write(`
 \[\frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{p} \rangle = -\langle \nabla V \rangle, \quad \frac{\mathrm{d}}{\mathrm{d}t}\langle \hat{x} \rangle = \frac{\langle \hat{p} \rangle}{m}\]</div>
 <p>These are the quantum Ehrenfest equations—why do they look classical?</p>
 <p><strong>8.</strong> (Two-state system with zero Hamiltonian) A two-level system has <span class="math notranslate nohighlight">\(\hat{H} = 0\)</span> (no Hamiltonian). What can you say about the time evolution of any observable in the Heisenberg picture? What does this tell you about the dynamics?</p>
-<p><strong>9.</strong> (Symmetry and conservation) If a unitary transformation <span class="math notranslate nohighlight">\(\hat{U}(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}\theta}\)</span> leaves the Hamiltonian invariant (<span class="math notranslate nohighlight">\([\hat{G}, \hat{H}] = 0\)</span>), then <span class="math notranslate nohighlight">\(\hat{G}\)</span> is conserved. Use this principle to explain: (a) why particle number is conserved in a system with U(1) phase symmetry, and (b) how gauge symmetries in the Standard Model lead to conserved currents (electric charge, weak isospin, color charge).</p>
+<p><strong>9.</strong> (Symmetry and conservation) If a unitary transformation <span class="math notranslate nohighlight">\(\hat{U}(\theta) = \mathrm{e}^{-\mathrm{i}\hat{G}\theta/\hbar}\)</span> leaves the Hamiltonian invariant (<span class="math notranslate nohighlight">\([\hat{G}, \hat{H}] = 0\)</span>), then <span class="math notranslate nohighlight">\(\hat{G}\)</span> is conserved. Use this principle to explain: (a) why particle number is conserved in a system with U(1) phase symmetry, and (b) how gauge symmetries in the Standard Model lead to conserved currents (electric charge, weak isospin, color charge).</p>
 </section>
 </section>
 

@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -588,6 +588,23 @@ document.write(`
 \[\mathrm{e}^{\mathrm{i}S/\hbar} \to \mathrm{e}^{-S_E/\hbar}\]</div>
 </div>
 <p>The <strong>rapidly oscillating phase</strong> <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> becomes a <strong>rapidly decaying exponential</strong> <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span>. This convergence is crucial for numerical simulations and analytical approximations.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Euclidean Equations of Motion</p>
+<p>The Euclidean action is <span class="math notranslate nohighlight">\(S_E[x] = \int_0^{\beta\hbar}\left(\frac{m}{2}\dot{x}^2 + V(x)\right)\mathrm{d}\tau\)</span>, where <span class="math notranslate nohighlight">\(\dot{x} = \mathrm{d}x/\mathrm{d}\tau\)</span>. The classical Euclidean path extremizes <span class="math notranslate nohighlight">\(S_E\)</span>.</p>
+<p><strong>Euler-Lagrange equation.</strong> Varying <span class="math notranslate nohighlight">\(S_E\)</span> with respect to <span class="math notranslate nohighlight">\(x(\tau)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\delta S_E}{\delta x} = 0 \implies m\ddot{x} = +\frac{\mathrm{d}V}{\mathrm{d}x}
+\]</div>
+<p>Compare with the real-time equation <span class="math notranslate nohighlight">\(m\ddot{x} = -\mathrm{d}V/\mathrm{d}x\)</span> (Newton’s second law). The Euclidean equation of motion describes a particle moving in the <strong>inverted potential</strong> <span class="math notranslate nohighlight">\(-V(x)\)</span>.</p>
+<p><strong>Physical interpretation.</strong> Under <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span>, the kinetic energy is unchanged but the force reverses sign. A particle that oscillates in a potential well in real time instead rolls over the inverted barrier in Euclidean time. This is the mechanism behind tunneling: the Euclidean trajectory that crosses a barrier corresponds to a classically forbidden real-time process.</p>
+<p><strong>Energy conservation.</strong> The Euclidean “energy” (conserved along Euclidean trajectories) is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{E}_E = \frac{m}{2}\dot{x}^2 - V(x)
+\]</div>
+<p>Note the minus sign before <span class="math notranslate nohighlight">\(V\)</span> — this is the Hamiltonian for the inverted potential. For a tunneling solution starting and ending at rest (<span class="math notranslate nohighlight">\(\dot{x} = 0\)</span>) at the same potential height, <span class="math notranslate nohighlight">\(\mathcal{E}_E = -V(x_0)\)</span> where <span class="math notranslate nohighlight">\(x_0\)</span> is the starting point.</p>
+</div>
 <div class="attention admonition">
 <p class="admonition-title">Why Wick Rotation Matters</p>
 <p>Real-time path integrals with <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> are <strong>highly oscillatory</strong>—contributions from different paths interfere constructively and destructively, making direct integration intractable.</p>
@@ -612,6 +629,25 @@ document.write(`
 <li><p><strong>Positive measure</strong>: Unlike the oscillating real-time path integral, the Euclidean integral has a well-defined probability measure (positive definite). This is essential for Monte Carlo simulations.</p></li>
 <li><p><strong>Periodicity</strong>: The periodicity in imaginary time <span class="math notranslate nohighlight">\(\tau\)</span> reflects the <strong>cyclic nature</strong> of the thermal density matrix in quantum statistical mechanics.</p></li>
 </ol>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Free Particle Euclidean Propagator</p>
+<p>For a free particle (<span class="math notranslate nohighlight">\(V = 0\)</span>), the Euclidean propagator <span class="math notranslate nohighlight">\(K_E(x', \tau; x, 0) = \langle x' | \mathrm{e}^{-\hat{H}\tau/\hbar} | x \rangle\)</span> can be computed exactly.</p>
+<p><strong>Step 1: Classical Euclidean action.</strong>
+The Euclidean equation of motion <span class="math notranslate nohighlight">\(m\ddot{x} = 0\)</span> gives <span class="math notranslate nohighlight">\(x_{\mathrm{cl}}(\tau') = x + (x' - x)\tau'/\tau\)</span>. The classical Euclidean action is:</p>
+<div class="math notranslate nohighlight">
+\[
+S_E^{\mathrm{cl}} = \int_0^{\tau} \frac{m}{2}\left(\frac{x'-x}{\tau}\right)^2 \mathrm{d}\tau' = \frac{m(x'-x)^2}{2\tau}
+\]</div>
+<p><strong>Step 2: Fluctuation integral.</strong>
+Writing <span class="math notranslate nohighlight">\(x(\tau') = x_{\mathrm{cl}}(\tau') + y(\tau')\)</span> with <span class="math notranslate nohighlight">\(y(0) = y(\tau) = 0\)</span>, the action separates: <span class="math notranslate nohighlight">\(S_E = S_E^{\mathrm{cl}} + S_E^{\mathrm{fluct}}\)</span>. The fluctuation integral is a Gaussian over <span class="math notranslate nohighlight">\(y(\tau')\)</span> and gives a <span class="math notranslate nohighlight">\(\tau\)</span>-dependent prefactor.</p>
+<p><strong>Step 3: Result.</strong>
+Combining (or equivalently, inserting a complete set of momentum eigenstates <span class="math notranslate nohighlight">\(\langle x' | \mathrm{e}^{-\hat{p}^2\tau/(2m\hbar)} | x \rangle\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+K_E(x', \tau; x, 0) = \sqrt{\frac{m}{2\pi\hbar\tau}} \exp\left(-\frac{m(x'-x)^2}{2\hbar\tau}\right)
+\]</div>
+<p><strong>Comparison with real time.</strong> The real-time propagator <span class="math notranslate nohighlight">\(K(x',t;x,0) = \sqrt{\frac{m}{2\pi\mathrm{i}\hbar t}}\exp\left(\frac{\mathrm{i}m(x'-x)^2}{2\hbar t}\right)\)</span> is obtained by the replacement <span class="math notranslate nohighlight">\(\tau \to \mathrm{i}t\)</span>, confirming the analytic continuation. The Euclidean propagator is a Gaussian that decays with distance — a <strong>heat kernel</strong> — while the real-time propagator oscillates.</p>
+</div>
 </section>
 <section id="connection-to-the-partition-function">
 <h3>Connection to the Partition Function<a class="headerlink" href="#connection-to-the-partition-function" title="Link to this heading">#</a></h3>
@@ -630,6 +666,57 @@ document.write(`
 <li><p><strong>Path integral</strong>: sums over all closed paths in imaginary time</p></li>
 </ul>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Partition Function from Periodic Path Integral</p>
+<p>We show that <span class="math notranslate nohighlight">\(Z(\beta) = \text{Tr}(\mathrm{e}^{-\beta\hat{H}}) = \int_{\text{periodic}} \mathrm{e}^{-S_E[x]/\hbar}\,\mathcal{D}[x]\)</span>, where the functional integral runs over paths with <span class="math notranslate nohighlight">\(x(0) = x(\beta\hbar)\)</span>.</p>
+<p><strong>Step 1: Write the trace as a position integral.</strong>
+Using position eigenstates <span class="math notranslate nohighlight">\(\{\vert x\rangle\}\)</span> as a basis:</p>
+<div class="math notranslate nohighlight">
+\[
+Z(\beta) = \text{Tr}(\mathrm{e}^{-\beta\hat{H}}) = \int \mathrm{d}x\, \langle x|\mathrm{e}^{-\beta\hat{H}}|x\rangle = \int \mathrm{d}x\, K_E(x, \beta\hbar; x, 0)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(K_E(x', \tau; x, 0) = \langle x'|\mathrm{e}^{-\tau\hat{H}/\hbar}|x\rangle\)</span> is the Euclidean propagator. The trace forces initial and final positions to coincide: <span class="math notranslate nohighlight">\(x(0) = x(\beta\hbar)\)</span> — this is the origin of the <strong>periodic boundary condition</strong>.</p>
+<p><strong>Step 2: Time-slice the Euclidean propagator.</strong>
+Divide the imaginary-time interval <span class="math notranslate nohighlight">\([0, \beta\hbar]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> steps of size <span class="math notranslate nohighlight">\(\epsilon = \beta\hbar/N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{e}^{-\beta\hat{H}} = \left(\mathrm{e}^{-\epsilon\hat{H}/\hbar}\right)^N
+\]</div>
+<p>Insert <span class="math notranslate nohighlight">\(N-1\)</span> complete sets of position eigenstates <span class="math notranslate nohighlight">\(\int \mathrm{d}x_j\,\vert x_j\rangle\langle x_j\vert = \hat{I}\)</span> between each factor:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle x_N|\mathrm{e}^{-\beta\hat{H}}|x_0\rangle = \int \prod_{j=1}^{N-1}\mathrm{d}x_j \prod_{j=0}^{N-1} \langle x_{j+1}|\mathrm{e}^{-\epsilon\hat{H}/\hbar}|x_j\rangle
+\]</div>
+<p><strong>Step 3: Evaluate the short-imaginary-time matrix element.</strong>
+For small <span class="math notranslate nohighlight">\(\epsilon\)</span>, use <span class="math notranslate nohighlight">\(\hat{H} = \hat{p}^2/(2m) + V(\hat{x})\)</span>. Insert a complete set of momentum eigenstates and use the Trotter approximation <span class="math notranslate nohighlight">\(\mathrm{e}^{-\epsilon\hat{H}/\hbar} \approx \mathrm{e}^{-\epsilon\hat{p}^2/(2m\hbar)}\mathrm{e}^{-\epsilon V(\hat{x})/\hbar}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle x_{j+1}|\mathrm{e}^{-\epsilon\hat{H}/\hbar}|x_j\rangle \approx \int \frac{\mathrm{d}p}{2\pi\hbar}\, \mathrm{e}^{\mathrm{i}p(x_{j+1}-x_j)/\hbar} \mathrm{e}^{-\epsilon p^2/(2m\hbar) - \epsilon V(x_j)/\hbar}
+\]</div>
+<p>Complete the square in <span class="math notranslate nohighlight">\(p\)</span>. The Gaussian integral <span class="math notranslate nohighlight">\(\int \frac{\mathrm{d}p}{2\pi\hbar} \mathrm{e}^{-\epsilon p^2/(2m\hbar) + \mathrm{i}p(x_{j+1}-x_j)/\hbar}\)</span> evaluates to <span class="math notranslate nohighlight">\(\sqrt{\frac{m}{2\pi\hbar\epsilon}}\,\mathrm{e}^{-m(x_{j+1}-x_j)^2/(2\hbar\epsilon)}\)</span>. So:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle x_{j+1}|\mathrm{e}^{-\epsilon\hat{H}/\hbar}|x_j\rangle \approx \sqrt{\frac{m}{2\pi\hbar\epsilon}}\exp\!\left(-\frac{m(x_{j+1}-x_j)^2}{2\hbar\epsilon} - \frac{\epsilon}{\hbar}V(x_j)\right)
+\]</div>
+<p><strong>Step 4: Assemble the full partition function.</strong>
+Set <span class="math notranslate nohighlight">\(x_N = x_0 = x\)</span> (periodic BC) and integrate over <span class="math notranslate nohighlight">\(x\)</span>. Each of the <span class="math notranslate nohighlight">\(N\)</span> short-time factors contributes. Combining all terms:</p>
+<div class="math notranslate nohighlight">
+\[
+Z(\beta) = \int \prod_{j=0}^{N-1}\mathrm{d}x_j\,\left(\frac{m}{2\pi\hbar\epsilon}\right)^{N/2} \exp\!\left(-\frac{1}{\hbar}\sum_{j=0}^{N-1}\left[\frac{m(x_{j+1}-x_j)^2}{2\epsilon} + \epsilon V(x_j)\right]\right)
+\]</div>
+<p><strong>Step 5: Take the continuum limit <span class="math notranslate nohighlight">\(N\to\infty\)</span>.</strong>
+Recognize that <span class="math notranslate nohighlight">\(\frac{(x_{j+1}-x_j)}{\epsilon} \to \dot{x}(\tau)\)</span> and the sum becomes a Riemann integral:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{\hbar}\sum_{j=0}^{N-1}\left[\frac{m(x_{j+1}-x_j)^2}{2\epsilon} + \epsilon V(x_j)\right] \xrightarrow{N\to\infty} \frac{1}{\hbar}\int_0^{\beta\hbar}\!\left[\frac{m}{2}\dot{x}^2 + V(x)\right]\mathrm{d}\tau = \frac{S_E[x]}{\hbar}
+\]</div>
+<p>The prefactor and integration measure define the functional measure <span class="math notranslate nohighlight">\(\mathcal{D}[x]\)</span>. The result is:</p>
+<div class="math notranslate nohighlight">
+\[
+Z(\beta) = \int_{x(0)=x(\beta\hbar)}\!\mathcal{D}[x]\,\mathrm{e}^{-S_E[x]/\hbar}
+\]</div>
+<p><strong>Physical interpretation.</strong> The trace forces periodicity — we sum over all closed paths in imaginary time of period <span class="math notranslate nohighlight">\(\beta\hbar\)</span>. This is identical in structure to the real-time path integral (§3.2.1), but with <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> and the paths forming closed loops. The classical saddle point <span class="math notranslate nohighlight">\(\delta S_E = 0\)</span> among periodic paths gives the dominant contribution; quantum fluctuations around it are the corrections.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
@@ -639,6 +726,38 @@ document.write(`
 <li><p><strong>Partition function</strong>: <span class="math notranslate nohighlight">\(Z(\beta) = \int_{\text{periodic}}\mathrm{e}^{-S_E/\hbar}\mathcal{D}[x]\)</span> — path integral over periodic paths of period <span class="math notranslate nohighlight">\(\beta\hbar\)</span></p></li>
 <li><p><strong>Temperature duality</strong>: quantum mechanics in imaginary time <span class="math notranslate nohighlight">\(\beta\hbar\)</span> is thermal statistical mechanics at temperature <span class="math notranslate nohighlight">\(T = 1/(k_B \beta)\)</span></p></li>
 </ul>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Matsubara Frequencies from Periodic Boundary Conditions</p>
+<p>The imaginary-time path integral <span class="math notranslate nohighlight">\(Z = \int_{\text{periodic}} \mathrm{e}^{-S_E/\hbar}\mathcal{D}[x]\)</span> sums over paths satisfying <span class="math notranslate nohighlight">\(x(\beta\hbar) = x(0)\)</span>. Expanding in Fourier modes reveals a discrete frequency structure.</p>
+<p><strong>Step 1: Fourier decomposition.</strong> Any periodic path <span class="math notranslate nohighlight">\(x(\tau)\)</span> on the interval <span class="math notranslate nohighlight">\([0, \beta\hbar]\)</span> with period <span class="math notranslate nohighlight">\(\beta\hbar\)</span> can be expanded as</p>
+<div class="math notranslate nohighlight">
+\[
+x(\tau) = \frac{1}{\beta\hbar}\sum_{n=-\infty}^{\infty} \tilde{x}_n\, \mathrm{e}^{\mathrm{i}\omega_n \tau}, \qquad \omega_n = \frac{2\pi n}{\beta\hbar},
+\]</div>
+<p>where the discrete frequencies <span class="math notranslate nohighlight">\(\omega_n\)</span> are the <strong>bosonic Matsubara frequencies</strong>. Periodicity <span class="math notranslate nohighlight">\(x(\beta\hbar) = x(0)\)</span> is automatically satisfied since <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\omega_n \beta\hbar} = \mathrm{e}^{2\pi\mathrm{i}n} = 1\)</span>.</p>
+<p><strong>Step 2: Euclidean action in Fourier space.</strong> For the harmonic oscillator <span class="math notranslate nohighlight">\(S_E = \int_0^{\beta\hbar} \left(\frac{m}{2}\dot{x}^2 + \frac{m\omega^2}{2}x^2\right)\mathrm{d}\tau\)</span>, substituting the Fourier expansion and using the Parseval identity:</p>
+<div class="math notranslate nohighlight">
+\[
+S_E = \frac{m}{2\beta\hbar}\sum_n (\omega_n^2 + \omega^2)\,|\tilde{x}_n|^2.
+\]</div>
+<p>Each Fourier mode decouples — the path integral becomes a <strong>product of independent Gaussian integrals</strong>, one per mode.</p>
+<p><strong>Step 3: Partition function as a product.</strong> Integrating over each <span class="math notranslate nohighlight">\(\tilde{x}_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+Z = \prod_{n=-\infty}^{\infty} \sqrt{\frac{2\pi\hbar}{m(\omega_n^2 + \omega^2)/\beta\hbar}} = \prod_{n=-\infty}^{\infty} \sqrt{\frac{2\pi\beta\hbar^2}{m(\omega_n^2 + \omega^2)}}.
+\]</div>
+<p><strong>Step 4: Product formula for <span class="math notranslate nohighlight">\(\sinh\)</span>.</strong> The Weierstrass product formula gives</p>
+<div class="math notranslate nohighlight">
+\[
+\prod_{n=1}^{\infty}\left(1 + \frac{\omega^2\beta^2\hbar^2}{4\pi^2 n^2}\right) = \frac{\sinh(\beta\hbar\omega/2)}{\beta\hbar\omega/2},
+\]</div>
+<p>and collecting the <span class="math notranslate nohighlight">\(n = 0\)</span> mode and all positive and negative <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+Z = \frac{1}{2\sinh(\beta\hbar\omega/2)},
+\]</div>
+<p>recovering the exact harmonic oscillator partition function. The Matsubara decomposition converts a functional integral into an infinite product of ordinary Gaussian integrals — a technique that extends to quantum field theory at finite temperature.</p>
+</div>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">

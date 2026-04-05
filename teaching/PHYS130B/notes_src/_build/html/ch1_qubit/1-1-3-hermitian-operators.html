@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=b5e19b90" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -672,7 +672,35 @@ document.write(`
 <p>How many independent Hermitian operators exist on a qubit? A general <span class="math notranslate nohighlight">\(2\times 2\)</span> Hermitian matrix has the form</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{pmatrix} a &amp; b+\mathrm{i}c \\ b-\mathrm{i}c &amp; d \end{pmatrix}, \quad a,b,c,d \in \mathbb{R}\end{split}\]</div>
-<p>giving <strong>4 real degrees of freedom</strong>. Thus there are exactly <strong>4 linearly independent</strong> Hermitian <span class="math notranslate nohighlight">\(2\times 2\)</span> matrices. The standard choice is the <strong>identity</strong> <span class="math notranslate nohighlight">\(\hat{I}\)</span> and the three <strong>Pauli operators</strong> <span class="math notranslate nohighlight">\(\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span>: every Hermitian <span class="math notranslate nohighlight">\(2\times 2\)</span> operator can be uniquely written as <span class="math notranslate nohighlight">\(a_0\hat{I} + a_x\hat{\sigma}^x + a_y\hat{\sigma}^y + a_z\hat{\sigma}^z\)</span> with <span class="math notranslate nohighlight">\(a_0,a_x,a_y,a_z\in\mathbb{R}\)</span>.</p>
+<p>giving <strong>4 real degrees of freedom</strong>. Thus there are exactly <strong>4 linearly independent</strong> Hermitian <span class="math notranslate nohighlight">\(2\times 2\)</span> matrices.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Completeness of the Pauli Basis</p>
+<p><strong>Goal:</strong> Show that every <span class="math notranslate nohighlight">\(2\times 2\)</span> Hermitian matrix <span class="math notranslate nohighlight">\(\hat{M}\)</span> has a unique decomposition <span class="math notranslate nohighlight">\(\hat{M} = a_0\hat{I} + a_x\hat{\sigma}^x + a_y\hat{\sigma}^y + a_z\hat{\sigma}^z\)</span> with real coefficients.</p>
+<p><strong>Step 1: General Hermitian form.</strong> A <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix satisfies <span class="math notranslate nohighlight">\(M_{ij} = M_{ji}^*\)</span> (Hermitian condition):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{M} = \begin{pmatrix} a &amp; b + \mathrm{i}c \\ b - \mathrm{i}c &amp; d \end{pmatrix}, \quad a, b, c, d \in \mathbb{R}
+\end{split}\]</div>
+<p>This has exactly 4 real parameters.</p>
+<p><strong>Step 2: Express the Pauli combination as a matrix.</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+a_0\hat{I} + a_x\hat{\sigma}^x + a_y\hat{\sigma}^y + a_z\hat{\sigma}^z = \begin{pmatrix} a_0 + a_z &amp; a_x - \mathrm{i}a_y \\ a_x + \mathrm{i}a_y &amp; a_0 - a_z \end{pmatrix}
+\end{split}\]</div>
+<p><strong>Step 3: Match coefficients.</strong> Comparing with <span class="math notranslate nohighlight">\(\hat{M}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+a_0 = \frac{a + d}{2} = \frac{\mathrm{Tr}(\hat{M})}{2}, \quad a_z = \frac{a - d}{2}, \quad a_x = b = \mathrm{Re}(M_{12}), \quad a_y = c = -\mathrm{Im}(M_{12})
+\]</div>
+<p>All four coefficients are real and uniquely determined by <span class="math notranslate nohighlight">\(\hat{M}\)</span>.</p>
+<p><strong>Orthogonality relation.</strong> The four basis matrices satisfy <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\sigma}^\mu \hat{\sigma}^\nu) = 2\delta_{\mu\nu}\)</span> (where <span class="math notranslate nohighlight">\(\hat{\sigma}^0 \equiv \hat{I}\)</span>). This gives a direct formula for the coefficients:</p>
+<div class="math notranslate nohighlight">
+\[
+a_\mu = \frac{1}{2}\mathrm{Tr}(\hat{\sigma}^\mu \hat{M})
+\]</div>
+<p>just as Fourier coefficients are extracted by inner products with basis functions.</p>
+</div>
+<p>The standard choice is the <strong>identity</strong> <span class="math notranslate nohighlight">\(\hat{I}\)</span> and the three <strong>Pauli operators</strong> <span class="math notranslate nohighlight">\(\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\)</span>: every Hermitian <span class="math notranslate nohighlight">\(2\times 2\)</span> operator can be uniquely written as <span class="math notranslate nohighlight">\(a_0\hat{I} + a_x\hat{\sigma}^x + a_y\hat{\sigma}^y + a_z\hat{\sigma}^z\)</span> with <span class="math notranslate nohighlight">\(a_0,a_x,a_y,a_z\in\mathbb{R}\)</span>.</p>
 <div class="note admonition">
 <p class="admonition-title">Table: Pauli Operators</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -777,6 +805,38 @@ document.write(`
 \[\hat{\sigma}^x \hat{\sigma}^y = \mathrm{i}\hat{\sigma}^z, \quad \hat{\sigma}^y \hat{\sigma}^z = \mathrm{i}\hat{\sigma}^x, \quad \hat{\sigma}^z \hat{\sigma}^x = \mathrm{i}\hat{\sigma}^y\]</div>
 <div class="math notranslate nohighlight">
 \[\hat{\sigma}^y \hat{\sigma}^x = -\mathrm{i}\hat{\sigma}^z, \quad \hat{\sigma}^z \hat{\sigma}^y = -\mathrm{i}\hat{\sigma}^x, \quad \hat{\sigma}^x \hat{\sigma}^z = -\mathrm{i}\hat{\sigma}^y\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Pauli Multiplication Rule</p>
+<p>We verify <span class="math notranslate nohighlight">\(\hat{\sigma}^i\hat{\sigma}^j = \delta_{ij}\hat{I} + \mathrm{i}\epsilon_{ijk}\hat{\sigma}^k\)</span> by explicit matrix computation.</p>
+<p><strong>Diagonal products</strong> (<span class="math notranslate nohighlight">\(i = j\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+(\hat{\sigma}^x)^2 = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \hat{I}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+(\hat{\sigma}^y)^2 = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \hat{I}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+(\hat{\sigma}^z)^2 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \hat{I}
+\end{split}\]</div>
+<p><strong>Off-diagonal products</strong> (the cyclic pattern):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\sigma}^x\hat{\sigma}^y = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix} = \begin{pmatrix} \mathrm{i} &amp; 0 \\ 0 &amp; -\mathrm{i} \end{pmatrix} = \mathrm{i}\hat{\sigma}^z \quad\checkmark
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\sigma}^y\hat{\sigma}^x = \begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} -\mathrm{i} &amp; 0 \\ 0 &amp; \mathrm{i} \end{pmatrix} = -\mathrm{i}\hat{\sigma}^z \quad\checkmark
+\end{split}\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\([\hat{\sigma}^x, \hat{\sigma}^y] = 2\mathrm{i}\hat{\sigma}^z\)</span> and <span class="math notranslate nohighlight">\(\{\hat{\sigma}^x, \hat{\sigma}^y\} = 0\)</span>. The remaining cyclic products follow the same pattern:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}^y\hat{\sigma}^z = \mathrm{i}\hat{\sigma}^x, \quad \hat{\sigma}^z\hat{\sigma}^y = -\mathrm{i}\hat{\sigma}^x, \quad \hat{\sigma}^z\hat{\sigma}^x = \mathrm{i}\hat{\sigma}^y, \quad \hat{\sigma}^x\hat{\sigma}^z = -\mathrm{i}\hat{\sigma}^y
+\]</div>
+<p>The sign pattern follows the Levi-Civita symbol: <span class="math notranslate nohighlight">\(\epsilon_{xyz} = \epsilon_{yzx} = \epsilon_{zxy} = +1\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{yxz} = \epsilon_{xzy} = \epsilon_{zyx} = -1\)</span>.</p>
+</div>
 <div class="important admonition">
 <p class="admonition-title">Commutation Relations</p>
 <div class="math notranslate nohighlight">
