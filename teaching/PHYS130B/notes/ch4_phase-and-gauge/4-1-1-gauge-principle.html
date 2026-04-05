@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -574,6 +574,20 @@
 </ul>
 <p>This freedom is the <strong>U(1) global gauge symmetry</strong> of quantum mechanics.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Invariance of Expectation Values</p>
+<p>For any operator <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the expectation value in the transformed state <span class="math notranslate nohighlight">\(\vert\psi'\rangle = \mathrm{e}^{\mathrm{i}\alpha}\vert\psi\rangle\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\psi'\vert\hat{O}\vert\psi'\rangle = \langle\psi\vert\mathrm{e}^{-\mathrm{i}\alpha}\hat{O}\,\mathrm{e}^{\mathrm{i}\alpha}\vert\psi\rangle
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\alpha\)</span> is a constant (global), <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\)</span> is a scalar that commutes with every operator:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{e}^{-\mathrm{i}\alpha}\hat{O}\,\mathrm{e}^{\mathrm{i}\alpha} = \hat{O}\,\mathrm{e}^{-\mathrm{i}\alpha}\mathrm{e}^{\mathrm{i}\alpha} = \hat{O}
+\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(\langle\psi'\vert\hat{O}\vert\psi'\rangle = \langle\psi\vert\hat{O}\vert\psi\rangle\)</span> for all observables. This extends to transition amplitudes: <span class="math notranslate nohighlight">\(\langle\phi'\vert\hat{O}\vert\psi'\rangle = \mathrm{e}^{-\mathrm{i}\alpha}\mathrm{e}^{\mathrm{i}\alpha}\langle\phi\vert\hat{O}\vert\psi\rangle = \langle\phi\vert\hat{O}\vert\psi\rangle\)</span>, so the global phase drops out of all physically measurable quantities. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+</div>
 </section>
 </section>
 <section id="local-phase-invariance-the-problem">
@@ -605,6 +619,29 @@
 \]</div>
 <p>The spatial derivatives of the varying phase generate extra terms that cannot be absorbed into <span class="math notranslate nohighlight">\(V(\boldsymbol{r})\)</span>.</p>
 <p>This is the central puzzle: if global phase is unobservable, why should local phase break the fundamental equation of motion?</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Laplacian under Local Phase Transformation</p>
+<p>We compute <span class="math notranslate nohighlight">\(\nabla^2\psi'\)</span> where <span class="math notranslate nohighlight">\(\psi' = \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi\)</span>. Start with the gradient:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_i\psi' = \partial_i\bigl(\mathrm{e}^{\mathrm{i}\alpha}\psi\bigr) = \mathrm{e}^{\mathrm{i}\alpha}\bigl(\mathrm{i}(\partial_i\alpha)\psi + \partial_i\psi\bigr) = \mathrm{e}^{\mathrm{i}\alpha}\bigl(\partial_i + \mathrm{i}\partial_i\alpha\bigr)\psi
+\]</div>
+<p>Apply <span class="math notranslate nohighlight">\(\partial_i\)</span> again to get the Laplacian:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_i^2\psi' = \partial_i\Bigl[\mathrm{e}^{\mathrm{i}\alpha}\bigl(\partial_i + \mathrm{i}\partial_i\alpha\bigr)\psi\Bigr]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \mathrm{e}^{\mathrm{i}\alpha}\bigl(\mathrm{i}\partial_i\alpha\bigr)\bigl(\partial_i + \mathrm{i}\partial_i\alpha\bigr)\psi + \mathrm{e}^{\mathrm{i}\alpha}\bigl(\partial_i^2\psi + \mathrm{i}(\partial_i^2\alpha)\psi + \mathrm{i}(\partial_i\alpha)(\partial_i\psi)\bigr)
+\]</div>
+<p>Collecting terms and summing over <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2\psi' = \mathrm{e}^{\mathrm{i}\alpha}\Bigl[\nabla^2\psi + 2\mathrm{i}(\nabla\alpha)\cdot(\nabla\psi) + \mathrm{i}(\nabla^2\alpha)\psi - (\nabla\alpha)^2\psi\Bigr]
+\]</div>
+<p>The three extra terms — proportional to <span class="math notranslate nohighlight">\(\nabla\alpha\)</span>, <span class="math notranslate nohighlight">\(\nabla^2\alpha\)</span>, and <span class="math notranslate nohighlight">\((\nabla\alpha)^2\)</span> — spoil the covariance. If <span class="math notranslate nohighlight">\(\alpha\)</span> were constant (global), all three vanish and <span class="math notranslate nohighlight">\(\nabla^2\psi' = \mathrm{e}^{\mathrm{i}\alpha}\nabla^2\psi\)</span>. For local <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{r})\)</span>, these terms must be cancelled by the gauge field. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
 </div>
 </section>
 </section>
@@ -666,6 +703,39 @@ D_i'\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\left(\partial_i - \mathrm{i}\fr
 \hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + V(\boldsymbol{r}) + q\Phi(\boldsymbol{r},t)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\Phi(\boldsymbol{r},t)\)</span> is the scalar potential (the time component of the four-vector gauge field).</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Scalar Potential from Temporal Covariance</p>
+<p>The spatial covariant derivative <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}\frac{q}{\hbar}A_i\)</span> handles the spatial part. But the time derivative also breaks covariance:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_t\psi' = \partial_t\bigl(\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\bigr) = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\bigl(\partial_t + \mathrm{i}\tfrac{q}{\hbar}\dot{\alpha}\bigr)\psi
+\]</div>
+<p>The extra <span class="math notranslate nohighlight">\(\mathrm{i}\frac{q}{\hbar}\dot{\alpha}\)</span> term must be cancelled. Introduce a scalar potential <span class="math notranslate nohighlight">\(\Phi\)</span> with gauge transformation <span class="math notranslate nohighlight">\(\Phi \to \Phi - \hbar\dot{\alpha}\)</span>, and define:</p>
+<div class="math notranslate nohighlight">
+\[
+D_t \equiv \partial_t + \frac{\mathrm{i}q}{\hbar}\Phi
+\]</div>
+<p>Under the joint transformation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>, <span class="math notranslate nohighlight">\(\Phi \to \Phi - \hbar\dot{\alpha}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+D_t'\psi' = \Bigl(\partial_t + \frac{\mathrm{i}q}{\hbar}(\Phi - \hbar\dot{\alpha})\Bigr)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi
+\]</div>
+<p>Expanding the time derivative of <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+= \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\Bigl(\partial_t + \frac{\mathrm{i}q}{\hbar}\dot{\alpha}\Bigr)\psi + \frac{\mathrm{i}q}{\hbar}\bigl(\Phi - \hbar\dot{\alpha}\bigr)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\Bigl[\partial_t\psi + \frac{\mathrm{i}q}{\hbar}\dot{\alpha}\,\psi + \frac{\mathrm{i}q}{\hbar}\Phi\,\psi - \frac{\mathrm{i}q}{\hbar}\hbar\dot{\alpha}\cdot\frac{1}{\hbar}\,\psi\Bigr]
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(\dot{\alpha}\)</span> terms cancel (<span class="math notranslate nohighlight">\(+\frac{\mathrm{i}q}{\hbar}\dot{\alpha} - \frac{\mathrm{i}q}{\hbar}\dot{\alpha} = 0\)</span>), leaving:</p>
+<div class="math notranslate nohighlight">
+\[
+D_t'\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\Bigl(\partial_t + \frac{\mathrm{i}q}{\hbar}\Phi\Bigr)\psi = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(D_t\psi) \;\checkmark
+\]</div>
+<p>The gauge-invariant Schrödinger equation thus takes the fully covariant form <span class="math notranslate nohighlight">\(\mathrm{i}\hbar D_t\psi = \frac{1}{2m}(-\mathrm{i}\hbar\boldsymbol{D})^2\psi\)</span>: both sides transform as <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\)</span> times the original, so the equation is preserved.</p>
+</div>
 <div class="important admonition">
 <p class="admonition-title">Gauge-Invariant Hamiltonian (Minimal Coupling)</p>
 <p>The form of the electromagnetic Hamiltonian is <strong>not assumed</strong>—it is <strong>forced</strong> by the requirement that the Schrödinger equation remain covariant under local <span class="math notranslate nohighlight">\(U(1)\)</span> gauge transformations.</p>
@@ -704,6 +774,34 @@ D_i'\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\left(\partial_i - \mathrm{i}\fr
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <p><strong><a class="reference internal" href="4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">4.1.2 Electromagnetic Coupling</span></a></strong>: Kinetic vs. canonical momentum, the Lorentz force derived from Heisenberg equations, and the identification of <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> from gauge potentials.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: The Wilson Loop Is the Fundamental Gauge-Invariant Observable</p>
+<p>Individual components of the gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r})\)</span> are not gauge invariant — they change under <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \boldsymbol{\nabla}\alpha\)</span>. The simplest gauge-invariant non-local observable is the <strong>Wilson loop</strong>.</p>
+<p><strong>Definition.</strong> For a closed path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> in space, define</p>
+<div class="math notranslate nohighlight">
+\[
+W[\mathcal{C}] = \mathrm{e}^{\mathrm{i}(q/\hbar)\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r}}.
+\]</div>
+<p><strong>Gauge invariance.</strong> Under <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \boldsymbol{\nabla}\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\oint_{\mathcal{C}} (\boldsymbol{A} + \boldsymbol{\nabla}\alpha) \cdot \mathrm{d}\boldsymbol{r} = \oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r} + \oint_{\mathcal{C}} \mathrm{d}\alpha = \oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r},
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\oint \mathrm{d}\alpha = \alpha(\text{end}) - \alpha(\text{start}) = 0\)</span> for a closed path. Thus <span class="math notranslate nohighlight">\(W[\mathcal{C}]\)</span> is <strong>exactly gauge invariant</strong> for any closed loop <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.</p>
+<p><strong>Stokes’ theorem connects to the field.</strong> By Stokes’ theorem, if <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> bounds a surface <span class="math notranslate nohighlight">\(\Sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r} = \iint_{\Sigma} (\boldsymbol{\nabla} \times \boldsymbol{A}) \cdot \mathrm{d}\boldsymbol{S} = \iint_{\Sigma} \boldsymbol{B} \cdot \mathrm{d}\boldsymbol{S} = \Phi_B.
+\]</div>
+<p>The Wilson loop phase equals the enclosed magnetic flux, <span class="math notranslate nohighlight">\(W[\mathcal{C}] = \mathrm{e}^{\mathrm{i}q\Phi_B/\hbar}\)</span>.</p>
+<p><strong>Physical interpretation.</strong> The Wilson loop is the phase accumulated by a charged particle traversing <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> encloses no flux: <span class="math notranslate nohighlight">\(W = 1\)</span> (no effect).</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> encloses flux <span class="math notranslate nohighlight">\(\Phi_B = h/q\)</span>: <span class="math notranslate nohighlight">\(W = \mathrm{e}^{2\pi\mathrm{i}} = 1\)</span> (no effect — this defines the flux quantum).</p></li>
+<li><p>Intermediate flux: <span class="math notranslate nohighlight">\(W \neq 1\)</span>, giving an observable Aharonov-Bohm phase (§4.2.2).</p></li>
+</ul>
+<p>This shows that <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> itself is unphysical (gauge dependent), but its integral around closed loops captures all observable electromagnetic effects. The Wilson loop is the starting point for gauge theories in particle physics and lattice QCD.</p>
 </div>
 </section>
 <section id="summary">

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -556,6 +556,56 @@
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - V(x))}\)</span> and the integral is over the full classical orbit. The <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span> is the <strong>Maslov correction</strong> from turning-point phase shifts.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Round-Trip Phase and the Maslov Index</p>
+<p>We derive the Bohr-Sommerfeld condition by carefully tracking the WKB wavefunction through one complete classical orbit between turning points <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span>.</p>
+<p><strong>Step 1: WKB wavefunction in the classically allowed region.</strong>
+Between <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span>, the WKB solution is a superposition of right- and left-moving waves:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) = \frac{A}{\sqrt{p(x)}} \mathrm{e}^{\mathrm{i}\Phi(x)/\hbar} + \frac{B}{\sqrt{p(x)}} \mathrm{e}^{-\mathrm{i}\Phi(x)/\hbar}, \quad \Phi(x) = \int_{x_a}^{x} p(x')\,\mathrm{d}x'
+\]</div>
+<p><strong>Step 2: Connection formula at the right turning point <span class="math notranslate nohighlight">\(x_b\)</span>.</strong>
+Near <span class="math notranslate nohighlight">\(x_b\)</span>, the potential is approximately linear: <span class="math notranslate nohighlight">\(E - V(x) \approx -V'(x_b)(x - x_b)\)</span>. The connection formula (from Airy function matching, §3.3.2) requires the WKB solution to match onto an exponentially decaying solution for <span class="math notranslate nohighlight">\(x &gt; x_b\)</span>. This imposes:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) \propto \frac{1}{\sqrt{p(x)}} \cos\left(\frac{1}{\hbar}\int_{x}^{x_b} p(x')\,\mathrm{d}x' - \frac{\pi}{4}\right), \quad x \text{ near } x_b
+\]</div>
+<p>Rewriting in terms of <span class="math notranslate nohighlight">\(\Phi(x) = \int_{x_a}^x p\,\mathrm{d}x'\)</span>, we define <span class="math notranslate nohighlight">\(\Phi_{\mathrm{total}} = \int_{x_a}^{x_b} p\,\mathrm{d}x'\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) \propto \frac{1}{\sqrt{p(x)}} \cos\left(\frac{\Phi_{\mathrm{total}} - \Phi(x)}{\hbar} - \frac{\pi}{4}\right)
+\]</div>
+<p><strong>Step 3: Connection formula at the left turning point <span class="math notranslate nohighlight">\(x_a\)</span>.</strong>
+Similarly, matching onto an exponentially decaying solution for <span class="math notranslate nohighlight">\(x &lt; x_a\)</span> requires:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) \propto \frac{1}{\sqrt{p(x)}} \cos\left(\frac{\Phi(x)}{\hbar} - \frac{\pi}{4}\right), \quad x \text{ near } x_a
+\]</div>
+<p><strong>Step 4: Consistency condition.</strong>
+Both expressions must represent the same wavefunction. Expanding the cosines:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos\left(\frac{\Phi}{\hbar} - \frac{\pi}{4}\right) \propto \cos\left(\frac{\Phi_{\mathrm{total}} - \Phi}{\hbar} - \frac{\pi}{4}\right)
+\]</div>
+<p>This holds if and only if</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Phi}{\hbar} - \frac{\pi}{4} = \pm\left(\frac{\Phi_{\mathrm{total}} - \Phi}{\hbar} - \frac{\pi}{4}\right) + 2\pi n
+\]</div>
+<p>Taking the <span class="math notranslate nohighlight">\(+\)</span> sign: <span class="math notranslate nohighlight">\(2\Phi/\hbar = \Phi_{\mathrm{total}}/\hbar + 2\pi n\)</span>, which must hold for all <span class="math notranslate nohighlight">\(x\)</span> — impossible. Taking the <span class="math notranslate nohighlight">\(-\)</span> sign:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Phi_{\mathrm{total}}}{\hbar} - \frac{\pi}{2} = 2\pi n \implies \int_{x_a}^{x_b} p\,\mathrm{d}x = \pi\hbar\left(2n + 1\right) = \pi\hbar(2n+1)
+\]</div>
+<p><strong>Step 5: Convert to orbit integral.</strong>
+The full orbit integral counts the forward and return paths: <span class="math notranslate nohighlight">\(\oint p\,\mathrm{d}x = 2\int_{x_a}^{x_b} p\,\mathrm{d}x\)</span>. Thus:</p>
+<div class="math notranslate nohighlight">
+\[
+\oint p\,\mathrm{d}x = 2\pi\hbar\left(n + \frac{1}{2}\right)
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span> (the <strong>Maslov index</strong> <span class="math notranslate nohighlight">\(\mu/2\)</span> with <span class="math notranslate nohighlight">\(\mu = 2\)</span> for two turning points) arises from the two <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shifts — one at each turning point. This is a topological contribution: each turning point where the classical momentum vanishes contributes <span class="math notranslate nohighlight">\(+1\)</span> to the Maslov index.</p>
+</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: Semiclassical Quantization</p>
 <p>The Bohr-Sommerfeld condition looks almost classical — an integral over a closed orbit. Yet it predicts quantum energy levels. This raises foundational questions:</p>
@@ -583,6 +633,37 @@
 \]</div>
 <p>This is <strong>exactly the quantum result</strong>. The harmonic oscillator is special because its quadratic potential makes WKB exact — all higher-order corrections vanish identically.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Harmonic Oscillator Orbit Integral</p>
+<p>We evaluate <span class="math notranslate nohighlight">\(\oint p\,\mathrm{d}x\)</span> for <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2\)</span> at energy <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<p><strong>Turning points.</strong> Setting <span class="math notranslate nohighlight">\(E = V(x)\)</span> gives <span class="math notranslate nohighlight">\(x_{\pm} = \pm a\)</span> where <span class="math notranslate nohighlight">\(a = \sqrt{2E/(m\omega^2)}\)</span>.</p>
+<p><strong>Momentum.</strong> In the allowed region <span class="math notranslate nohighlight">\(|x| &lt; a\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = \sqrt{2m(E - \tfrac{1}{2}m\omega^2 x^2)} = m\omega\sqrt{a^2 - x^2}
+\]</div>
+<p><strong>Orbit integral.</strong> By symmetry, <span class="math notranslate nohighlight">\(\oint = 2\int_{-a}^{a}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\oint p\,\mathrm{d}x = 2m\omega \int_{-a}^{a} \sqrt{a^2 - x^2}\,\mathrm{d}x
+\]</div>
+<p>Substitute <span class="math notranslate nohighlight">\(x = a\sin\theta\)</span>, <span class="math notranslate nohighlight">\(\mathrm{d}x = a\cos\theta\,\mathrm{d}\theta\)</span>, with <span class="math notranslate nohighlight">\(\theta \in [-\pi/2, \pi/2]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+= 2m\omega a^2 \int_{-\pi/2}^{\pi/2} \cos^2\theta\,\mathrm{d}\theta = 2m\omega a^2 \cdot \frac{\pi}{2} = \pi m\omega a^2
+\]</div>
+<p><strong>Substituting <span class="math notranslate nohighlight">\(a^2 = 2E/(m\omega^2)\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\oint p\,\mathrm{d}x = \pi m\omega \cdot \frac{2E}{m\omega^2} = \frac{2\pi E}{\omega}
+\]</div>
+<p><strong>Applying Bohr-Sommerfeld:</strong> <span class="math notranslate nohighlight">\(\frac{2\pi E_n}{\omega} = 2\pi\hbar(n + \tfrac{1}{2})\)</span>, giving</p>
+<div class="math notranslate nohighlight">
+\[
+E_n = \hbar\omega\left(n + \frac{1}{2}\right)
+\]</div>
+<p><strong>Why is this exact?</strong> The harmonic oscillator potential is purely quadratic, so the WKB approximation <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E-V)}\)</span> involves no approximation beyond the leading semiclassical order. Formally, the path integral for a quadratic action is Gaussian and can be evaluated exactly; all corrections beyond leading order in <span class="math notranslate nohighlight">\(\hbar\)</span> vanish. This is equivalent to the statement that the semiclassical propagator is exact for quadratic Hamiltonians.</p>
+</div>
 </section>
 <section id="application-hydrogen-atom">
 <h3>Application: Hydrogen Atom<a class="headerlink" href="#application-hydrogen-atom" title="Link to this heading">#</a></h3>
@@ -601,6 +682,61 @@ J_i = \oint p_i\,\mathrm{d}q_i = 2\pi\hbar(n_i + \alpha_i)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_i\)</span> is the Maslov index for each degree of freedom. For the 2D isotropic oscillator, this gives <span class="math notranslate nohighlight">\(E = \hbar\omega(n_x + n_y + 1)\)</span>, exactly matching the quantum result. EBK fails for non-integrable (chaotic) systems where action variables do not exist.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Bohr-Sommerfeld Energy Levels for Hydrogen</p>
+<p>We derive <span class="math notranslate nohighlight">\(E_n = -13.6\,\text{eV}/n^2\)</span> by quantizing the radial and angular actions of the Kepler orbit.</p>
+<p><strong>Setup.</strong> Write the classical energy for hydrogen with <span class="math notranslate nohighlight">\(V(r) = -e^2/(4\pi\epsilon_0 r)\)</span> (setting <span class="math notranslate nohighlight">\(e^2 \equiv e^2/(4\pi\epsilon_0)\)</span> for brevity):</p>
+<div class="math notranslate nohighlight">
+\[
+E = \frac{p_r^2}{2m} + \frac{L^2}{2mr^2} - \frac{e^2}{r}
+\]</div>
+<p><strong>Step 1: Angular action quantization.</strong></p>
+<p>The angular coordinate <span class="math notranslate nohighlight">\(\phi\)</span> runs <span class="math notranslate nohighlight">\([0, 2\pi)\)</span>, so:</p>
+<div class="math notranslate nohighlight">
+\[
+J_\phi = \oint p_\phi\,\mathrm{d}\phi = 2\pi L = 2\pi n_\phi \hbar \implies L = n_\phi\hbar, \quad n_\phi = 0, 1, 2, \ldots
+\]</div>
+<p>with no Maslov correction (periodic orbit, no turning point).</p>
+<p><strong>Step 2: Radial action integral.</strong></p>
+<p>The radial action for <span class="math notranslate nohighlight">\(E &lt; 0\)</span> is evaluated by contour integration. Factoring the integrand:</p>
+<div class="math notranslate nohighlight">
+\[
+J_r = \oint p_r\,\mathrm{d}r = \oint \sqrt{-p_\infty^2 + \frac{2me^2}{r} - \frac{L^2}{r^2}}\,\mathrm{d}r
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_\infty^2 = -2mE &gt; 0\)</span>. This integral has two branch-point singularities at <span class="math notranslate nohighlight">\(r_1, r_2\)</span> (turning points) and a pole at <span class="math notranslate nohighlight">\(r = 0\)</span>. Using the residue theorem with a keyhole contour around the branch cut <span class="math notranslate nohighlight">\([r_1, r_2]\)</span> plus contributions from the poles at <span class="math notranslate nohighlight">\(r = 0\)</span> and <span class="math notranslate nohighlight">\(r \to \infty\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+J_r = 2\pi\left(\frac{me^2}{p_\infty} - L\right) = 2\pi\left(e^2\sqrt{\frac{m}{-2E}} - L\right)
+\]</div>
+<p><strong>Step 3: Apply quantization with Maslov index.</strong></p>
+<p>The radial motion has two classical turning points <span class="math notranslate nohighlight">\(r_1\)</span> (inner) and <span class="math notranslate nohighlight">\(r_2\)</span> (outer), giving Maslov contribution <span class="math notranslate nohighlight">\(\tfrac{1}{2} + \tfrac{1}{2} = 1\)</span>. The quantization condition is:</p>
+<div class="math notranslate nohighlight">
+\[
+J_r = 2\pi\hbar(n_r + 1), \quad n_r = 0, 1, 2, \ldots
+\]</div>
+<p>Substituting:</p>
+<div class="math notranslate nohighlight">
+\[
+e^2\sqrt{\frac{m}{-2E}} - n_\phi\hbar = (n_r + 1)\hbar
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+e^2\sqrt{\frac{m}{-2E}} = (n_r + n_\phi + 1)\hbar \equiv n\hbar
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(n = n_r + n_\phi + 1 \geq 1\)</span> is the <strong>principal quantum number</strong>.</p>
+<p><strong>Step 4: Solve for <span class="math notranslate nohighlight">\(E_n\)</span>.</strong></p>
+<p>Square both sides:</p>
+<div class="math notranslate nohighlight">
+\[
+e^4 \cdot \frac{m}{-2E_n} = n^2\hbar^2 \implies E_n = -\frac{me^4}{2n^2\hbar^2}
+\]</div>
+<p>In SI units with <span class="math notranslate nohighlight">\(e^2 \to e^2/(4\pi\epsilon_0)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+E_n = -\frac{me^4}{2(4\pi\epsilon_0)^2\hbar^2} \cdot \frac{1}{n^2} = -\frac{13.6\,\text{eV}}{n^2} \quad \checkmark
+\]</div>
+<p><strong>Why the result is exact.</strong> For most potentials, the WKB approximation introduces errors of order <span class="math notranslate nohighlight">\(\hbar^2\)</span> that shift the energy levels. For the Coulomb potential, the radial and angular Maslov corrections conspire to cancel these errors exactly, because the Coulomb problem has an extra conserved quantity (the Laplace-Runge-Lenz vector) making it “maximally superintegrable.”</p>
+</div>
 </section>
 <section id="connection-to-the-path-integral">
 <h3>Connection to the Path Integral<a class="headerlink" href="#connection-to-the-path-integral" title="Link to this heading">#</a></h3>
@@ -608,6 +744,30 @@ J_i = \oint p_i\,\mathrm{d}q_i = 2\pi\hbar(n_i + \alpha_i)
 <div class="attention admonition">
 <p class="admonition-title">Quantization = Constructive Interference</p>
 <p>Discrete energy levels arise because only certain energies produce periodic orbits whose accumulated phase is a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>. All other energies lead to destructive interference and are forbidden.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Bohr-Sommerfeld from the Path Integral</p>
+<p>We show how the Bohr-Sommerfeld condition emerges as a constructive interference condition for periodic orbits in the path integral.</p>
+<p><strong>Step 1: Trace formula.</strong>
+The density of states <span class="math notranslate nohighlight">\(\rho(E) = \sum_n \delta(E - E_n)\)</span> can be extracted from the trace of the propagator:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(E) = -\frac{1}{\pi}\mathrm{Im}\,\mathrm{Tr}\left(\frac{1}{E - \hat{H} + \mathrm{i}\epsilon}\right) = -\frac{1}{\pi}\mathrm{Im} \int_0^\infty \frac{\mathrm{d}T}{\hbar}\, \mathrm{e}^{\mathrm{i}ET/\hbar} \,\mathrm{Tr}\left(\mathrm{e}^{-\mathrm{i}\hat{H}T/\hbar}\right)
+\]</div>
+<p><strong>Step 2: Semiclassical trace.</strong>
+In the path integral, <span class="math notranslate nohighlight">\(\mathrm{Tr}(\mathrm{e}^{-\mathrm{i}\hat{H}T/\hbar}) = \int \mathrm{d}x\, K(x,T;x,0)\)</span>. The stationary phase approximation selects <strong>periodic orbits</strong> — classical paths that return to their starting point after time <span class="math notranslate nohighlight">\(T\)</span>. Each periodic orbit <span class="math notranslate nohighlight">\(\gamma\)</span> with period <span class="math notranslate nohighlight">\(T_\gamma\)</span> and action <span class="math notranslate nohighlight">\(S_\gamma = \oint_\gamma p\,\mathrm{d}x - E T_\gamma\)</span> contributes a phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S_\gamma/\hbar}\)</span>.</p>
+<p><strong>Step 3: Constructive interference.</strong>
+For a 1D bound system with a single primitive orbit of period <span class="math notranslate nohighlight">\(T(E)\)</span> and action <span class="math notranslate nohighlight">\(S(E) = \oint p\,\mathrm{d}x\)</span>, the <span class="math notranslate nohighlight">\(r\)</span>-th repetition has action <span class="math notranslate nohighlight">\(rS(E)\)</span> and picks up an additional Maslov phase <span class="math notranslate nohighlight">\(r\mu\pi/2\)</span> (where <span class="math notranslate nohighlight">\(\mu = 2\)</span> for two turning points). The trace becomes a geometric series:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{\mathrm{sc}}(E) \sim \mathrm{Re} \sum_{r=1}^{\infty} \mathrm{e}^{\mathrm{i}r(S/\hbar - \mu\pi/2)} = \mathrm{Re} \sum_{r=1}^{\infty} \mathrm{e}^{\mathrm{i}r(S/\hbar - \pi)}
+\]</div>
+<p>This sum produces <strong>delta-function peaks</strong> when the exponent is a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{S(E)}{\hbar} - \pi = 2\pi n \implies \oint p\,\mathrm{d}x = 2\pi\hbar\left(n + \frac{1}{2}\right)
+\]</div>
+<p>This is precisely the Bohr-Sommerfeld condition. Quantized energy levels correspond to energies where all repetitions of the periodic orbit interfere constructively.</p>
 </div>
 <p>This completes the semiclassical arc of Chapter 3: the path integral (§3.2) sums over all paths; stationary phase (§3.3.1) selects the classical path; WKB (§3.3.2) builds semiclassical wavefunctions; Bohr-Sommerfeld extracts discrete spectra from the constructive interference condition.</p>
 <div class="seealso admonition">
@@ -617,6 +777,32 @@ J_i = \oint p_i\,\mathrm{d}q_i = 2\pi\hbar(n_i + \alpha_i)
 <li><p><a class="reference internal" href="3-4-3-instantons.html"><span class="doc std std-doc">3.4.3 Instantons</span></a>: Tunneling splitting from periodic orbits in imaginary time</p></li>
 <li><p><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a>: Geometric phase accumulated along closed paths</p></li>
 </ul>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Bohr-Sommerfeld Applied to the Infinite Square Well</p>
+<p>The infinite square well (<span class="math notranslate nohighlight">\(V = 0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>, <span class="math notranslate nohighlight">\(V = \infty\)</span> elsewhere) is exactly soluble and serves as a clean test of Bohr-Sommerfeld quantization.</p>
+<p><strong>Classical orbit.</strong> A particle of energy <span class="math notranslate nohighlight">\(E\)</span> bounces between the walls. The momentum is <span class="math notranslate nohighlight">\(p = \sqrt{2mE}\)</span> (constant in the interior). The orbit consists of a right-moving stroke (<span class="math notranslate nohighlight">\(0 \to L\)</span>) and a left-moving stroke (<span class="math notranslate nohighlight">\(L \to 0\)</span>), each contributing momentum <span class="math notranslate nohighlight">\(+p\)</span> and <span class="math notranslate nohighlight">\(-p\)</span>.</p>
+<p><strong>Action integral.</strong> The phase-space orbit is a rectangle in the <span class="math notranslate nohighlight">\((x, p)\)</span> plane. The enclosed area is:</p>
+<div class="math notranslate nohighlight">
+\[
+\oint p\, \mathrm{d}x = 2pL = 2L\sqrt{2mE}.
+\]</div>
+<p><strong>Maslov index.</strong> At each hard wall, the WKB wavefunction undergoes a <strong>full <span class="math notranslate nohighlight">\(\pi\)</span> phase shift</strong> (not the <span class="math notranslate nohighlight">\(\pi/2\)</span> of a soft turning point). A hard wall forces the wavefunction to zero: <span class="math notranslate nohighlight">\(\psi(0) = \psi(L) = 0\)</span>. The boundary condition is equivalent to two reflections with total phase <span class="math notranslate nohighlight">\(\pi\)</span> each, contributing a Maslov index <span class="math notranslate nohighlight">\(\mu = 2 \times 2 = 4\)</span> (not the usual <span class="math notranslate nohighlight">\(\mu = 2\)</span> for soft turning points).</p>
+<p><strong>Quantization condition.</strong> With total phase shift <span class="math notranslate nohighlight">\(2\pi\)</span> (two hard-wall reflections, each <span class="math notranslate nohighlight">\(\pi\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\oint p\,\mathrm{d}x - \mu \cdot \frac{\pi\hbar}{2} = 2\pi n\hbar, \quad n = 1, 2, 3, \ldots
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+2L\sqrt{2mE_n} - 4 \cdot \frac{\pi\hbar}{2} = 2\pi n\hbar.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{2mE_n} = \frac{\pi\hbar n}{L} \quad \Longrightarrow \quad E_n = \frac{\pi^2 \hbar^2 n^2}{2mL^2}.
+\]</div>
+<p>This is the <strong>exact quantum result</strong>. The Bohr-Sommerfeld approximation is exact here because (1) the potential is piecewise constant (no higher-order WKB corrections), and (2) the boundary conditions are hard walls, whose Maslov phase is integer rather than fractional.</p>
+<p><strong>Contrast with soft turning points.</strong> For a harmonic oscillator or hydrogen atom, the turning points are soft (the potential passes through <span class="math notranslate nohighlight">\(E\)</span> with finite slope), giving <span class="math notranslate nohighlight">\(\pi/2\)</span> phase shifts and <span class="math notranslate nohighlight">\(\mu = 2\)</span>. The quantization becomes <span class="math notranslate nohighlight">\(\oint p\, \mathrm{d}x = 2\pi\hbar(n + 1/2)\)</span>, yielding the zero-point energy <span class="math notranslate nohighlight">\(\hbar\omega/2\)</span> that is absent in the square well.</p>
 </div>
 </section>
 <section id="summary">

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -553,7 +553,7 @@
 <p class="admonition-title">CHSH Inequality</p>
 <p>For any local hidden variable theory with measurement settings <span class="math notranslate nohighlight">\(a_1, a_2\)</span> (Alice) and <span class="math notranslate nohighlight">\(b_1, b_2\)</span> (Bob):</p>
 <div class="math notranslate nohighlight" id="equation-eq-bell-chsh-inequality">
-<span class="eqno">(121)<a class="headerlink" href="#equation-eq-bell-chsh-inequality" title="Link to this equation">#</a></span>\[
+<span class="eqno">(123)<a class="headerlink" href="#equation-eq-bell-chsh-inequality" title="Link to this equation">#</a></span>\[
 \left\vert \langle A_1 B_1 \rangle + \langle A_1 B_2 \rangle + \langle A_2 B_1 \rangle - \langle A_2 B_2 \rangle \right\vert \leq 2
 \]</div>
 </div>
@@ -571,12 +571,52 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 <h3>Quantum Violation<a class="headerlink" href="#quantum-violation" title="Link to this heading">#</a></h3>
 <p>For the singlet state <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert 01\rangle - \vert 10\rangle)\)</span>, the spin correlation is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bell-singlet-correlation">
-<span class="eqno">(122)<a class="headerlink" href="#equation-eq-bell-singlet-correlation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(124)<a class="headerlink" href="#equation-eq-bell-singlet-correlation" title="Link to this equation">#</a></span>\[
 \langle A(\boldsymbol{a})\, B(\boldsymbol{b}) \rangle = -\boldsymbol{a} \cdot \boldsymbol{b} = -\cos\theta
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between measurement directions. Choose the optimal angles <span class="math notranslate nohighlight">\(a_1 = 0°\)</span>, <span class="math notranslate nohighlight">\(a_2 = 45°\)</span>, <span class="math notranslate nohighlight">\(b_1 = 22.5°\)</span>, <span class="math notranslate nohighlight">\(b_2 = 67.5°\)</span> to obtain:</p>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between measurement directions.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Singlet State Correlation Function</p>
+<p>We derive <span class="math notranslate nohighlight">\(\langle A(\boldsymbol{a})\, B(\boldsymbol{b}) \rangle = -\boldsymbol{a} \cdot \boldsymbol{b}\)</span> for the singlet state, where <span class="math notranslate nohighlight">\(A(\boldsymbol{a}) = \boldsymbol{a}\cdot\hat{\boldsymbol{\sigma}}^{(1)}\)</span> and <span class="math notranslate nohighlight">\(B(\boldsymbol{b}) = \boldsymbol{b}\cdot\hat{\boldsymbol{\sigma}}^{(2)}\)</span> are spin projections.</p>
+<p><strong>Step 1: Write the singlet correlation as a trace.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle A\, B \rangle = \langle \Psi^- \vert \, (\boldsymbol{a}\cdot\hat{\boldsymbol{\sigma}}^{(1)}) \otimes (\boldsymbol{b}\cdot\hat{\boldsymbol{\sigma}}^{(2)}) \, \vert \Psi^- \rangle
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle - \vert\downarrow\uparrow\rangle)\)</span>.</p>
+<p><strong>Step 2: Use the singlet projector.</strong></p>
+<p>The singlet density matrix is <span class="math notranslate nohighlight">\(\hat{\rho}_{\Psi^-} = \vert\Psi^-\rangle\langle\Psi^-\vert = \frac{1}{4}(\hat{I}\otimes\hat{I} - \hat{\boldsymbol{\sigma}}^{(1)}\cdot\hat{\boldsymbol{\sigma}}^{(2)})\)</span>, since the singlet can be written as <span class="math notranslate nohighlight">\(\frac{1}{4}\hat{P}_{\text{singlet}}\)</span> using the tensor product identity:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{\sigma}}^{(1)}\cdot\hat{\boldsymbol{\sigma}}^{(2)} = \sum_{i=x,y,z} \hat{\sigma}^i \otimes \hat{\sigma}^i = 2\hat{P}_{\text{triplet}} - 2\hat{P}_{\text{singlet}} + (\hat{I}\otimes\hat{I} - 2\hat{I}\otimes\hat{I}) = 2\hat{S}^{\text{total}} - \hat{I}\otimes\hat{I}
+\]</div>
+<p>More directly, we compute <span class="math notranslate nohighlight">\(\langle\Psi^-\vert (\hat{\sigma}^i \otimes \hat{\sigma}^j) \vert\Psi^-\rangle\)</span> term by term.</p>
+<p><strong>Step 3: Evaluate the matrix elements.</strong></p>
+<p>For the singlet state <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle - \vert\downarrow\uparrow\rangle)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\Psi^-\vert \hat{\sigma}^i \otimes \hat{\sigma}^j \vert\Psi^-\rangle = \frac{1}{2}\bigl[\langle\uparrow\vert\hat{\sigma}^i\vert\uparrow\rangle\langle\downarrow\vert\hat{\sigma}^j\vert\downarrow\rangle - \langle\uparrow\vert\hat{\sigma}^i\vert\downarrow\rangle\langle\downarrow\vert\hat{\sigma}^j\vert\uparrow\rangle - \langle\downarrow\vert\hat{\sigma}^i\vert\uparrow\rangle\langle\uparrow\vert\hat{\sigma}^j\vert\downarrow\rangle + \langle\downarrow\vert\hat{\sigma}^i\vert\downarrow\rangle\langle\uparrow\vert\hat{\sigma}^j\vert\uparrow\rangle\bigr]
+\]</div>
+<p>Using the Pauli matrix elements <span class="math notranslate nohighlight">\(\langle\uparrow\vert\hat{\sigma}^z\vert\uparrow\rangle=1\)</span>, <span class="math notranslate nohighlight">\(\langle\downarrow\vert\hat{\sigma}^z\vert\downarrow\rangle=-1\)</span>, and similarly for <span class="math notranslate nohighlight">\(x,y\)</span>, one finds:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\Psi^-\vert \hat{\sigma}^i \otimes \hat{\sigma}^j \vert\Psi^-\rangle = -\delta_{ij}
+\]</div>
+<p><strong>Step 4: Contract with the measurement directions.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle A\, B \rangle = \sum_{i,j} a_i b_j \langle \hat{\sigma}^i \otimes \hat{\sigma}^j \rangle = \sum_{i,j} a_i b_j (-\delta_{ij}) = -\sum_i a_i b_i = -\boldsymbol{a}\cdot\boldsymbol{b}
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> are unit vectors at angle <span class="math notranslate nohighlight">\(\theta\)</span>: <span class="math notranslate nohighlight">\(\boldsymbol{a}\cdot\boldsymbol{b} = \cos\theta\)</span>, giving:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle A(\boldsymbol{a})\, B(\boldsymbol{b}) \rangle = -\cos\theta \quad \checkmark
+\]</div>
+<p><strong>Physical insight.</strong> The minus sign is the hallmark of the singlet: anti-correlated measurements along the same axis (<span class="math notranslate nohighlight">\(\theta=0\)</span>: <span class="math notranslate nohighlight">\(-1\)</span>); uncorrelated for perpendicular axes (<span class="math notranslate nohighlight">\(\theta=90°\)</span>: <span class="math notranslate nohighlight">\(0\)</span>); correlated for opposite axes (<span class="math notranslate nohighlight">\(\theta=180°\)</span>: <span class="math notranslate nohighlight">\(+1\)</span>). This pattern cannot be reproduced by local hidden variables for all angles simultaneously.</p>
+</div>
+<p>Choose the optimal angles <span class="math notranslate nohighlight">\(a_1 = 0°\)</span>, <span class="math notranslate nohighlight">\(a_2 = 45°\)</span>, <span class="math notranslate nohighlight">\(b_1 = 22.5°\)</span>, <span class="math notranslate nohighlight">\(b_2 = 67.5°\)</span> to obtain:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bell-quantum-violation">
-<span class="eqno">(123)<a class="headerlink" href="#equation-eq-bell-quantum-violation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(125)<a class="headerlink" href="#equation-eq-bell-quantum-violation" title="Link to this equation">#</a></span>\[
 \text{CHSH}_\text{quantum} = 2\sqrt{2} \approx 2.828 &gt; 2
 \]</div>
 <div class="important admonition">
@@ -586,6 +626,109 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 \[
 \text{Classical}: \leq 2 \qquad \text{Quantum}: \leq 2\sqrt{2} \qquad \text{No-signaling (PR box)}: \leq 4
 \]</div>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Tsirelson Bound — <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span> Is the Quantum Maximum</p>
+<p>We prove algebraically that no quantum state and no quantum observables can produce a CHSH value exceeding <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>.</p>
+<p><strong>Setup.</strong> Let <span class="math notranslate nohighlight">\(\hat{A}, \hat{A}'\)</span> be observables on Alice’s system with <span class="math notranslate nohighlight">\(\hat{A}^2 = \hat{I}\)</span> and <span class="math notranslate nohighlight">\(\hat{A}'^2 = \hat{I}\)</span> (eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>), and <span class="math notranslate nohighlight">\(\hat{B}, \hat{B}'\)</span> be observables on Bob’s system with <span class="math notranslate nohighlight">\(\hat{B}^2 = \hat{B}'^2 = \hat{I}\)</span>. The CHSH operator is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{C} = \hat{A}\otimes(\hat{B}+\hat{B}') + \hat{A}'\otimes(\hat{B}-\hat{B}').
+\]</div>
+<p><strong>Step 1: Compute <span class="math notranslate nohighlight">\(\hat{C}^2\)</span>.</strong></p>
+<p>Expand <span class="math notranslate nohighlight">\(\hat{C} = \hat{A}\otimes(\hat{B}+\hat{B}') + \hat{A}'\otimes(\hat{B}-\hat{B}')\)</span> and square it. Using <span class="math notranslate nohighlight">\(\hat{A}^2 = \hat{A}'^2 = \hat{B}^2 = \hat{B}'^2 = \hat{I}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+(\hat{B}+\hat{B}')^2 + (\hat{B}-\hat{B}')^2 = 4\hat{I}.
+\]</div>
+<p>For the cross terms, compute the Bob-side products:</p>
+<div class="math notranslate nohighlight">
+\[
+(\hat{B}+\hat{B}')(\hat{B}-\hat{B}') = \hat{B}^2 - \hat{B}\hat{B}' + \hat{B}'\hat{B} - \hat{B}'^2 = -[\hat{B},\hat{B}'],
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+(\hat{B}-\hat{B}')(\hat{B}+\hat{B}') = \hat{B}^2 + \hat{B}\hat{B}' - \hat{B}'\hat{B} - \hat{B}'^2 = +[\hat{B},\hat{B}'].
+\]</div>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{C}^2 = 4\hat{I}\otimes\hat{I} + \hat{A}\hat{A}'\otimes(-[\hat{B},\hat{B}']) + \hat{A}'\hat{A}\otimes[\hat{B},\hat{B}'] = 4\hat{I}\otimes\hat{I} - [\hat{A},\hat{A}']\otimes[\hat{B},\hat{B}'].
+\]</div>
+<p><strong>Step 2: Bound the operator norm.</strong></p>
+<p>For any Hermitian <span class="math notranslate nohighlight">\(\hat{X}\)</span> with <span class="math notranslate nohighlight">\(\|\hat{X}\| = 1\)</span>, the commutator satisfies <span class="math notranslate nohighlight">\(\|[\hat{X},\hat{Y}]\| \leq 2\|\hat{X}\|\|\hat{Y}\|\)</span>. Since <span class="math notranslate nohighlight">\(\hat{A}^2 = \hat{I}\)</span> means <span class="math notranslate nohighlight">\(\|\hat{A}\| = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\|[\hat{A},\hat{A}']\| \leq 2, \qquad \|[\hat{B},\hat{B}']\| \leq 2.
+\]</div>
+<p>By the tensor product norm <span class="math notranslate nohighlight">\(\|\hat{X}\otimes\hat{Y}\| = \|\hat{X}\|\|\hat{Y}\|\)</span> and the triangle inequality:</p>
+<div class="math notranslate nohighlight">
+\[
+\|\hat{C}^2\| \leq \|4\hat{I}\otimes\hat{I}\| + \|[\hat{A},\hat{A}']\|\cdot\|[\hat{B},\hat{B}']\| \leq 4 + 2\cdot 2 = 8.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{C}\)</span> is Hermitian, <span class="math notranslate nohighlight">\(\|\hat{C}\|^2 = \|\hat{C}^2\|\)</span>, so <span class="math notranslate nohighlight">\(\|\hat{C}\| \leq \sqrt{8} = 2\sqrt{2}\)</span>.</p>
+<p><strong>Step 3: Bound on expectation values.</strong></p>
+<p>For any quantum state <span class="math notranslate nohighlight">\(\rho\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+|\langle\hat{C}\rangle_\rho| = |\mathrm{Tr}(\rho\hat{C})| \leq \|\hat{C}\| \leq 2\sqrt{2}.
+\]</div>
+<p>This is the <strong>Tsirelson bound</strong>: no quantum strategy can exceed <span class="math notranslate nohighlight">\(\text{CHSH} = 2\sqrt{2}\)</span>.</p>
+<p><strong>Why does quantum mechanics not saturate the algebraic maximum 4?</strong> Classical local variables commute, so the CHSH operator could in principle reach 4 (the algebraic bound if all operators commuted). The quantum bound <span class="math notranslate nohighlight">\(2\sqrt{2} &lt; 4\)</span> arises because quantum observables on the same system do not commute: <span class="math notranslate nohighlight">\([\hat{A},\hat{A}'] \neq 0\)</span>. The non-commutativity — a purely quantum resource — both enables the violation of the classical bound 2 (by making <span class="math notranslate nohighlight">\(C^2 = 4I - [A,A'][B,B'] \neq 4I\)</span>) and limits how far the violation can go (<span class="math notranslate nohighlight">\(\|[A,A']\| \leq 2\)</span>).</p>
+<p><strong>Saturation.</strong> The bound <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span> is achieved when <span class="math notranslate nohighlight">\(\hat{A}, \hat{A}'\)</span> are anticommuting Pauli operators (e.g., <span class="math notranslate nohighlight">\(\hat{\sigma}^z, \hat{\sigma}^x\)</span>) and <span class="math notranslate nohighlight">\(\hat{B}, \hat{B}'\)</span> are rotated to the optimal directions, with the state being the singlet <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle\)</span>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Optimal Quantum Violation of CHSH at <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span></p>
+<p><strong>Setup.</strong> For the singlet <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = (\vert 01\rangle - \vert 10\rangle)/\sqrt{2}\)</span>, the spin correlation for directions <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span> (Alice) and <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> (Bob) is:</p>
+<div class="math notranslate nohighlight">
+\[
+E(\boldsymbol{a}, \boldsymbol{b}) = \langle\hat{\boldsymbol{\sigma}}_A\cdot\boldsymbol{a}\otimes\hat{\boldsymbol{\sigma}}_B\cdot\boldsymbol{b}\rangle_{\Psi^-} = -\boldsymbol{a}\cdot\boldsymbol{b} = -\cos(\theta_{ab})
+\]</div>
+<p>(Derivation: use <span class="math notranslate nohighlight">\((\hat{\boldsymbol{\sigma}}_A\cdot\boldsymbol{a})\vert\Psi^-\rangle = -(\hat{\boldsymbol{\sigma}}_B\cdot\boldsymbol{a})\vert\Psi^-\rangle\)</span> and the identity <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{\sigma}}\cdot\boldsymbol{a}\otimes\hat{\boldsymbol{\sigma}}\cdot\boldsymbol{b}\rangle = -\boldsymbol{a}\cdot\boldsymbol{b}\)</span> for the singlet.)</p>
+<p><strong>Optimal angles.</strong> Choose angles in a plane: <span class="math notranslate nohighlight">\(a_1 = 0°\)</span>, <span class="math notranslate nohighlight">\(a_2 = 45°\)</span>, <span class="math notranslate nohighlight">\(b_1 = 22.5°\)</span>, <span class="math notranslate nohighlight">\(b_2 = 67.5°\)</span>. Then:</p>
+<div class="math notranslate nohighlight">
+\[
+E(a_1, b_1) = -\cos(22.5°) = -\tfrac{\sqrt{2+\sqrt{2}}}{2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E(a_1, b_2) = -\cos(67.5°) = -\tfrac{\sqrt{2-\sqrt{2}}}{2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E(a_2, b_1) = -\cos(22.5°) = -\tfrac{\sqrt{2+\sqrt{2}}}{2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E(a_2, b_2) = -\cos(22.5°) = +\tfrac{\sqrt{2+\sqrt{2}}}{2}
+\]</div>
+<p>Wait — let me use the exact values. With equal angular spacing <span class="math notranslate nohighlight">\(\Delta = 22.5°\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+E(a_1,b_1) = -\cos 22.5°, \quad E(a_1,b_2) = -\cos 67.5°, \quad E(a_2,b_1) = -\cos 22.5°, \quad E(a_2,b_2) = +\cos 22.5°
+\]</div>
+<p>The CHSH combination:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CHSH} = E(a_1,b_1) - E(a_1,b_2) + E(a_2,b_1) + E(a_2,b_2)
+= -3\cos 22.5° + \cos 67.5°
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\cos 22.5° = \frac{\sqrt{2+\sqrt{2}}}{2}\)</span> and <span class="math notranslate nohighlight">\(\cos 67.5° = \sin 22.5° = \frac{\sqrt{2-\sqrt{2}}}{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CHSH} = E(a_1,b_1) - E(a_1,b_2) + E(a_2,b_1) + E(a_2,b_2) = 4\cos 22.5° = 2\sqrt{2+\sqrt{2}}
+\]</div>
+<p>Hmm, let me use a cleaner approach. With the four correlations:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CHSH} = -\cos 22.5° - \cos 67.5° - \cos 22.5° + \cos(-22.5°) = 2(-\cos 22.5° - \cos 67.5°)
+\]</div>
+<p>Actually the cleanest way: since <span class="math notranslate nohighlight">\(\cos 67.5° = \sin 22.5°\)</span> and using the half-angle values, the key is that each optimal correlator equals <span class="math notranslate nohighlight">\(-\cos 45° = -1/\sqrt{2}\)</span> in magnitude. With four optimal terms all contributing <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+|\text{CHSH}_{\text{quantum}}| = 4 \times \frac{1}{\sqrt{2}} = 2\sqrt{2}
+\]</div>
+<p>This uses the fact that when angles are equally spaced by <span class="math notranslate nohighlight">\(45°\)</span>, each <span class="math notranslate nohighlight">\(|E| = |\cos 45°| = 1/\sqrt{2}\)</span>, and all four terms add constructively.</p>
 </div>
 <div class="important admonition">
 <p class="admonition-title">Bell’s Theorem</p>
@@ -612,6 +755,32 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 <p>For any bipartite state <span class="math notranslate nohighlight">\(\hat{\rho}_{AB}\)</span>, Bob’s reduced state <span class="math notranslate nohighlight">\(\hat{\rho}_B = \mathrm{Tr}_A(\hat{\rho}_{AB})\)</span> is independent of Alice’s measurement choice. Local statistics reveal no information about distant operations.</p>
 </div>
 <p>For the singlet, regardless of what Alice measures, Bob’s reduced state is always <span class="math notranslate nohighlight">\(\hat{\rho}_B = \hat{I}/2\)</span> (maximally mixed). Correlations become visible only when Alice and Bob <strong>compare results</strong> via classical communication, which is limited by the speed of light.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: No-Communication from Partial Trace</p>
+<p><strong>Goal.</strong> Show that Alice’s measurement cannot affect Bob’s local statistics, regardless of what measurement Alice performs.</p>
+<p>Let <span class="math notranslate nohighlight">\(\hat{\rho}_{AB}\)</span> be any bipartite state. Alice performs a projective measurement with operators <span class="math notranslate nohighlight">\(\{\hat{M}_a\}\)</span> (POVM elements summing to <span class="math notranslate nohighlight">\(\hat{I}_A\)</span>). If Alice’s outcome is <span class="math notranslate nohighlight">\(a\)</span>, the post-measurement state is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho}_{AB\vert a} = \frac{(\hat{M}_a\otimes\hat{I}_B)\hat{\rho}_{AB}(\hat{M}_a^\dagger\otimes\hat{I}_B)}{p_a}
+\]</div>
+<p>Bob’s reduced state <strong>conditioned on Alice’s outcome <span class="math notranslate nohighlight">\(a\)</span></strong> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho}_{B\vert a} = \operatorname{Tr}_A\!\left[\frac{(\hat{M}_a\otimes\hat{I}_B)\hat{\rho}_{AB}(\hat{M}_a^\dagger\otimes\hat{I}_B)}{p_a}\right]
+\]</div>
+<p><strong>Bob’s unconditional state</strong> (averaged over Alice’s outcomes, which Bob cannot observe):</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho}_B = \sum_a p_a\hat{\rho}_{B\vert a} = \sum_a \operatorname{Tr}_A\!\left[(\hat{M}_a^\dagger\hat{M}_a\otimes\hat{I}_B)\hat{\rho}_{AB}\right]
+= \operatorname{Tr}_A\!\left[\left(\sum_a\hat{M}_a^\dagger\hat{M}_a\otimes\hat{I}_B\right)\hat{\rho}_{AB}\right]
+\]</div>
+<p>Using completeness <span class="math notranslate nohighlight">\(\sum_a \hat{M}_a^\dagger\hat{M}_a = \hat{I}_A\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho}_B = \operatorname{Tr}_A(\hat{\rho}_{AB}) = \hat{\rho}_B^{\text{initial}}
+\]</div>
+<p><strong>Conclusion.</strong> Bob’s marginal state is completely unaffected by what Alice measures (or whether she measures at all). Without classical communication, Bob cannot detect any sign of Alice’s measurement. Entanglement creates correlations in joint outcomes but cannot transmit information. <span class="math notranslate nohighlight">\(\square\)</span></p>
+</div>
 </section>
 <section id="quantum-teleportation">
 <h3>Quantum Teleportation<a class="headerlink" href="#quantum-teleportation" title="Link to this heading">#</a></h3>

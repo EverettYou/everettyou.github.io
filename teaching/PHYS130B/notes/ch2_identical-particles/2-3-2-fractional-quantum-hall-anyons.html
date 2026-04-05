@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -550,6 +550,24 @@ u = 1/m\)</span>, the ground state is an incompressible quantum liquid whose ele
 <div class="math notranslate nohighlight">
 \[\psi(z_1, \ldots, z_N) = \prod_{i &lt; j} (z_i - z_j)^m \, \mathrm{e}^{-\sum_k |z_k|^2 / 4\ell_B^2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(z_k = x_k + \mathrm{i} y_k\)</span> are complex coordinates, <span class="math notranslate nohighlight">\(m\)</span> is an odd integer, <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/eB}\)</span> is the magnetic length, and <span class="math notranslate nohighlight">\(\nu = 1/m\)</span>.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Filling Fraction <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> from the Laughlin Wavefunction</p>
+<p>The Laughlin wavefunction for <span class="math notranslate nohighlight">\(N\)</span> electrons is</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(z_1, \ldots, z_N) = \prod_{i &lt; j} (z_i - z_j)^m \, \mathrm{e}^{-\sum_k |z_k|^2 / 4\ell_B^2}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(z_k = x_k + \mathrm{i} y_k\)</span> and the magnetic length is <span class="math notranslate nohighlight">\(\ell_B = \sqrt{\hbar/eB}\)</span>.</p>
+<p><strong>Step 1: Highest power of any single coordinate.</strong> Focus on <span class="math notranslate nohighlight">\(z_1\)</span>. It appears in <span class="math notranslate nohighlight">\((z_1 - z_j)^m\)</span> for each <span class="math notranslate nohighlight">\(j = 2, \ldots, N\)</span>, so the highest power of <span class="math notranslate nohighlight">\(z_1\)</span> in the polynomial part is <span class="math notranslate nohighlight">\(m(N-1)\)</span>.</p>
+<p><strong>Step 2: Relate to Landau level orbitals.</strong> In the lowest Landau level (LLL), the single-particle orbitals are <span class="math notranslate nohighlight">\(\phi_n(z) \propto z^n \, \mathrm{e}^{-|z|^2/4\ell_B^2}\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots\)</span> The orbital <span class="math notranslate nohighlight">\(\phi_n\)</span> is localized on a ring of radius <span class="math notranslate nohighlight">\(r_n = \sqrt{2n}\,\ell_B\)</span>. Since the highest power is <span class="math notranslate nohighlight">\(m(N-1)\)</span>, the wavefunction uses orbitals up to <span class="math notranslate nohighlight">\(n_{\max} = m(N-1)\)</span>.</p>
+<p><strong>Step 3: Count flux quanta.</strong> The number of available single-particle states (flux quanta threading the sample) is <span class="math notranslate nohighlight">\(N_\phi = n_{\max} + 1 \approx m(N-1) + 1 \approx mN\)</span> for large <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p><strong>Step 4: Filling fraction.</strong> The filling fraction is the ratio of electrons to flux quanta:</p>
+<div class="math notranslate nohighlight">
+\[
+\nu = \frac{N}{N_\phi} = \frac{N}{mN} = \frac{1}{m}
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(m = 3\)</span>: each electron occupies <span class="math notranslate nohighlight">\(m = 3\)</span> flux quanta worth of space, giving <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>.</p>
+</div>
 <div class="important admonition">
 <p class="admonition-title">Anyon Excitation Properties at <span class="math notranslate nohighlight">\(\nu = 1/3\)</span></p>
 <p>The elementary excitations of the <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> state are <strong>anyons</strong> with:</p>
@@ -558,6 +576,25 @@ u = 1/m\)</span>, the ground state is an incompressible quantum liquid whose ele
 <li><p><strong>Fractional statistics</strong>: statistical angle <span class="math notranslate nohighlight">\(\theta = \pi/3\)</span> (exchange phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi/3}\)</span>)</p></li>
 </ul>
 <p>These properties have been confirmed experimentally through shot noise measurements (charge) and interferometry (statistics).</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Fractional Charge <span class="math notranslate nohighlight">\(e/m\)</span> via Laughlin’s Gauge Argument</p>
+<p>Laughlin’s original argument (1983) derives the quasihole charge by adiabatically inserting a flux quantum through the center of a disk-shaped sample.</p>
+<p><strong>Setup.</strong> Consider <span class="math notranslate nohighlight">\(N\)</span> electrons in the <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> Laughlin state on a disk. Thread a thin solenoid through the center, and slowly increase the flux <span class="math notranslate nohighlight">\(\Phi\)</span> from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(\Phi_0 = h/e\)</span> (one flux quantum).</p>
+<p><strong>Step 1: Gauge invariance.</strong> By the Aharonov-Bohm effect, inserting flux <span class="math notranslate nohighlight">\(\Phi\)</span> into the solenoid is equivalent to the gauge transformation <span class="math notranslate nohighlight">\(z_k \to z_k\)</span> with each orbital shifting: <span class="math notranslate nohighlight">\(\phi_n(z) \propto z^n \to z^{n+1}\)</span>. After inserting exactly one flux quantum <span class="math notranslate nohighlight">\(\Phi_0\)</span>, each single-particle orbital maps to the next: <span class="math notranslate nohighlight">\(n \to n + 1\)</span>.</p>
+<p><strong>Step 2: Effect on the Laughlin state.</strong> Under <span class="math notranslate nohighlight">\(z_k^n \to z_k^{n+1}\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>, the Laughlin wavefunction transforms as</p>
+<div class="math notranslate nohighlight">
+\[
+\prod_{i&lt;j} (z_i - z_j)^m \to \left(\prod_k z_k\right) \prod_{i&lt;j}(z_i - z_j)^m
+\]</div>
+<p>The new state has a <strong>quasihole</strong> at the origin: the factor <span class="math notranslate nohighlight">\(\prod_k z_k\)</span> forces all electrons away from <span class="math notranslate nohighlight">\(z = 0\)</span>.</p>
+<p><strong>Step 3: Charge of the quasihole.</strong> The Hall conductance at <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> is <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu \, e^2/h = e^2/(mh)\)</span>. The radial current response to the adiabatic flux insertion transfers charge</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \sigma_{xy} \cdot \Phi_0 = \frac{e^2}{mh} \cdot \frac{h}{e} = \frac{e}{m}
+\]</div>
+<p>from the interior to the edge. The quasihole left behind therefore carries charge <span class="math notranslate nohighlight">\(q^* = e/m\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(m = 3\)</span>: inserting one flux quantum creates a quasihole of charge <span class="math notranslate nohighlight">\(e/3\)</span>.</p>
 </div>
 </section>
 <section id="applying-the-charge-flux-picture">
@@ -570,13 +607,123 @@ u = 1/m\)</span>, the ground state is an incompressible quantum liquid whose ele
 \[\theta_{\mathrm{br}} = \frac{q^*\,\Phi^*}{\hbar} = \frac{(e/3)(h/e)}{\hbar} = \frac{2\pi}{3}\]</div>
 <p>The exchange phase is half the braiding phase: <span class="math notranslate nohighlight">\(\theta_{\mathrm{ex}} = \theta_{\mathrm{br}}/2 = \pi/3\)</span>. The spin quantum number is <span class="math notranslate nohighlight">\(s = \theta_{\mathrm{ex}}/(2\pi) = 1/6\)</span>.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Anyon Statistics at General <span class="math notranslate nohighlight">\(\nu = 1/m\)</span></p>
+<p>At filling <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> (with <span class="math notranslate nohighlight">\(m\)</span> an odd integer), the quasihole has charge <span class="math notranslate nohighlight">\(q^* = e/m\)</span> and carries one flux quantum <span class="math notranslate nohighlight">\(\Phi^* = \Phi_0 = h/e\)</span>. Using the charge-flux composite picture from §2.3.1:</p>
+<p><strong>Braiding phase</strong> (one quasihole makes a full loop around another):</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_{\mathrm{br}} = \frac{q^* \Phi^*}{\hbar} = \frac{(e/m)(h/e)}{\hbar} = \frac{h}{m\hbar} = \frac{2\pi}{m}
+\]</div>
+<p><strong>Exchange phase</strong> (half-braid):</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_{\mathrm{ex}} = \frac{\theta_{\mathrm{br}}}{2} = \frac{\pi}{m}
+\]</div>
+<p><strong>Topological spin:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+s = \frac{\theta_{\mathrm{ex}}}{2\pi} = \frac{1}{2m}
+\]</div>
+<p><strong>Verification against the Laughlin wavefunction.</strong> The same result follows directly from the analytic structure of <span class="math notranslate nohighlight">\(\psi\)</span>. When two quasiholes at positions <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span> are exchanged, the wavefunction acquires a phase from the factor</p>
+<div class="math notranslate nohighlight">
+\[
+(\eta_1 - \eta_2)^{1/m}
+\]</div>
+<p>that appears in the quasihole-quasihole correlation. Under the exchange <span class="math notranslate nohighlight">\(\eta_1 \leftrightarrow \eta_2\)</span>, this factor picks up <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi/m}\)</span>, confirming <span class="math notranslate nohighlight">\(\theta_{\mathrm{ex}} = \pi/m\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\nu = 1/m\)</span></p></th>
+<th class="head"><p>Charge <span class="math notranslate nohighlight">\(q^*\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\theta_{\mathrm{br}}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\theta_{\mathrm{ex}}\)</span></p></th>
+<th class="head"><p>Spin <span class="math notranslate nohighlight">\(s\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(1/3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e/3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi/3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\pi/3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1/6\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(1/5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e/5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi/5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\pi/5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1/10\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(1/7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e/7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\pi/7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\pi/7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1/14\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The charge-flux picture reduces the exotic phenomenon of fractional statistics to the Aharonov-Bohm effect — a charge moving around a flux picks up a phase proportional to the enclosed flux.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Laughlin’s Plasma Analogy and Ground State Density</p>
+<p>The Laughlin wavefunction can be analyzed exactly using an analogy to a classical 2D plasma, revealing why the electron density is uniform at <span class="math notranslate nohighlight">\(\rho_0 = \nu/(2\pi\ell_B^2)\)</span>.</p>
+<p><strong>Rewrite as a Boltzmann weight.</strong> Write <span class="math notranslate nohighlight">\(|\psi|^2 = \mathrm{e}^{-\beta U_\mathrm{cl}}\)</span> where we identify <span class="math notranslate nohighlight">\(\beta = 2/m\)</span> and the classical energy:</p>
+<div class="math notranslate nohighlight">
+\[
+U_\mathrm{cl} = -m^2 \sum_{i&lt;j} \ln|z_i - z_j| + \frac{m}{2}\sum_k \frac{|z_k|^2}{2\ell_B^2}
+\]</div>
+<p>This is the energy of a <strong>2D one-component plasma</strong> (OCP): <span class="math notranslate nohighlight">\(N\)</span> “charges” of magnitude <span class="math notranslate nohighlight">\(m\)</span> embedded in a uniform neutralizing background with charge density <span class="math notranslate nohighlight">\(\rho_\mathrm{bg} = 1/(2\pi\ell_B^2)\)</span>.</p>
+<p><strong>Plasma equilibrium.</strong> In the OCP, the particles distribute to screen the background charge. The equilibrium condition (Poisson equation in 2D) requires that each plasma particle sits in a potential created by all others plus the background. The system reaches electrical neutrality when the particle density satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+m \cdot \rho_\mathrm{el} = \rho_\mathrm{bg} = \frac{1}{2\pi\ell_B^2}
+\]</div>
+<p>Solving: <span class="math notranslate nohighlight">\(\rho_\mathrm{el} = 1/(2\pi m \ell_B^2)\)</span>.</p>
+<p><strong>Electron density and filling fraction.</strong> Since each plasma particle represents one electron, the electron number density is</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_e = \frac{1}{2\pi m \ell_B^2}
+\]</div>
+<p>The number of flux quanta per unit area is <span class="math notranslate nohighlight">\(1/(2\pi\ell_B^2)\)</span> (one flux quantum per area <span class="math notranslate nohighlight">\(2\pi\ell_B^2\)</span>). The filling fraction is therefore</p>
+<div class="math notranslate nohighlight">
+\[
+\nu = \frac{\rho_e}{1/(2\pi\ell_B^2)} = \frac{1}{m}
+\]</div>
+<p>confirming that the Laughlin state describes a uniform, incompressible liquid at filling <span class="math notranslate nohighlight">\(\nu = 1/m\)</span>. The plasma analogy provides the key insight: the Jastrow factor <span class="math notranslate nohighlight">\(\prod_{i&lt;j}|z_i-z_j|^m\)</span> is not just an ansatz — it encodes the optimal screening of the background potential.</p>
+</div>
 </section>
 <section id="emergent-statistics">
 <h3>Emergent Statistics<a class="headerlink" href="#emergent-statistics" title="Link to this heading">#</a></h3>
 <div class="attention admonition">
 <p class="admonition-title">Statistics Is Emergent</p>
 <p>The anyonic statistics of FQHE quasiparticles is <strong>not</strong> a fundamental property of elementary particles — it <strong>emerges</strong> from the collective behavior of many strongly correlated electrons in a magnetic field. A single electron in vacuum is always a fermion. Only when <span class="math notranslate nohighlight">\(\sim 10^{10}\)</span> electrons form an incompressible quantum liquid does the effective low-energy description produce quasiparticles with fractional charge and fractional statistics. This is a hallmark of <strong>topological order</strong>: the statistics is encoded in the global entanglement pattern of the ground state, not in any local property.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Composite Fermion Picture and the Jain Sequence</p>
+<p>The <strong>composite fermion</strong> (CF) construction of Jain extends the Laughlin description to a broader family of filling fractions <span class="math notranslate nohighlight">\(\nu = p/(2sp + 1)\)</span> for integers <span class="math notranslate nohighlight">\(p, s \geq 1\)</span>.</p>
+<p><strong>Step 1: Attach flux quanta.</strong> Attach <span class="math notranslate nohighlight">\(2s\)</span> flux quanta <span class="math notranslate nohighlight">\(\Phi_0 = h/e\)</span> to each electron to form a <strong>composite fermion</strong>. The attachment is achieved via a singular gauge transformation (Chern-Simons transformation); the resulting quasi-particles are still fermions (attaching an even number of flux quanta preserves statistics).</p>
+<p><strong>Step 2: Mean-field effective magnetic field.</strong> In a uniform electron density <span class="math notranslate nohighlight">\(n_e\)</span>, the attached flux partially cancels the external field:</p>
+<div class="math notranslate nohighlight">
+\[
+B^* = B - 2s n_e \Phi_0.
+\]</div>
+<p>At filling fraction <span class="math notranslate nohighlight">\(\nu = n_e h / (eB)\)</span>, substituting <span class="math notranslate nohighlight">\(n_e = \nu eB/h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+B^* = B\left(1 - 2s\nu\right).
+\]</div>
+<p><strong>Step 3: Composite fermions fill integer Landau levels.</strong> In the reduced field <span class="math notranslate nohighlight">\(B^*\)</span>, the composite fermions themselves fill <span class="math notranslate nohighlight">\(p\)</span> complete Landau levels (integer filling <span class="math notranslate nohighlight">\(\nu^* = p\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\nu^* = \frac{n_e h}{eB^*} = p \quad \Longrightarrow \quad \nu = \frac{n_e h}{eB} = \frac{\nu^*}{1 + 2s\nu^*} = \frac{p}{2sp + 1}.
+\]</div>
+<p><strong>Step 4: Jain sequence.</strong> Setting <span class="math notranslate nohighlight">\(s=1\)</span> and varying <span class="math notranslate nohighlight">\(p = 1, 2, 3, \ldots\)</span> gives the principal Jain sequence</p>
+<div class="math notranslate nohighlight">
+\[
+\nu = \frac{1}{3},\; \frac{2}{5},\; \frac{3}{7},\; \frac{4}{9},\; \ldots
+\]</div>
+<p>observed experimentally. The <span class="math notranslate nohighlight">\(p = 1, s = 1\)</span> case recovers the Laughlin <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> state. Negative <span class="math notranslate nohighlight">\(B^*\)</span> (composite fermions filling <span class="math notranslate nohighlight">\(p\)</span> levels in the opposite direction) gives the particle-hole conjugate sequence <span class="math notranslate nohighlight">\(\nu = p/(2sp - 1) = 2/3, 3/5, \ldots\)</span>.</p>
+<p><strong>Step 5: Why this explains the gap.</strong> Composite fermions in an integer number of filled Landau levels have a gap <span class="math notranslate nohighlight">\(\hbar\omega^*_c = \hbar eB^*/m^*\)</span> to the next CF Landau level. This gap persists (with corrections from interactions) back in the original electron system—explaining the incompressible nature of FQHE states across the entire Jain sequence.</p>
 </div>
 </section>
 <section id="summary">

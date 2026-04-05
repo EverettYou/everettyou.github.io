@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -568,6 +568,24 @@ P(t) = \sin^2\left(\frac{\Omega_R t}{2}\right) \quad \text{where} \quad \Omega_R
 \]</div>
 <p>is the Rabi frequency. Population coherently oscillates between the two states at rate <span class="math notranslate nohighlight">\(\Omega_R\)</span>. A <span class="math notranslate nohighlight">\(\pi\)</span>-pulse (<span class="math notranslate nohighlight">\(\Omega_R t = \pi\)</span>) completely flips the state.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Rabi Oscillations from the Two-Level System</p>
+<p>Consider a two-level system <span class="math notranslate nohighlight">\(\{\vert i\rangle, \vert f\rangle\}\)</span> driven by a harmonic perturbation. In the rotating frame (interaction picture with the drive frequency <span class="math notranslate nohighlight">\(\omega\)</span>), the Hamiltonian reduces to a time-independent <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix. Writing <span class="math notranslate nohighlight">\(\delta = \omega_{fi} - \omega\)</span> for the detuning and <span class="math notranslate nohighlight">\(\Omega_R = \vert V_{fi}\vert/\hbar\)</span> for the on-resonance Rabi frequency:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{H}_{\text{RWA}} = \frac{\hbar}{2}\begin{pmatrix} \delta &amp; \Omega_R \\ \Omega_R &amp; -\delta \end{pmatrix}
+\end{split}\]</div>
+<p>(assuming real <span class="math notranslate nohighlight">\(V_{fi}\)</span>; this is the <strong>rotating wave approximation</strong> — the counter-rotating term oscillating at <span class="math notranslate nohighlight">\(2\omega\)</span> is dropped as non-resonant).</p>
+<p><strong>Eigenvalues.</strong> The generalized Rabi frequency is <span class="math notranslate nohighlight">\(\Omega = \sqrt{\delta^2 + \Omega_R^2}\)</span>, giving eigenvalues <span class="math notranslate nohighlight">\(\pm\hbar\Omega/2\)</span>.</p>
+<p><strong>Transition probability.</strong> Starting in <span class="math notranslate nohighlight">\(\vert i\rangle = (1, 0)^\top\)</span> at <span class="math notranslate nohighlight">\(t = 0\)</span>, the exact time evolution gives:</p>
+<div class="math notranslate nohighlight">
+\[
+P_{i\to f}(t) = \frac{\Omega_R^2}{\Omega^2}\sin^2\!\left(\frac{\Omega t}{2}\right)
+\]</div>
+<p><strong>On resonance</strong> (<span class="math notranslate nohighlight">\(\delta = 0\)</span>, <span class="math notranslate nohighlight">\(\Omega = \Omega_R\)</span>): <span class="math notranslate nohighlight">\(P_{i\to f}(t) = \sin^2(\Omega_R t/2)\)</span> — complete population oscillation at frequency <span class="math notranslate nohighlight">\(\Omega_R\)</span>. A <span class="math notranslate nohighlight">\(\pi\)</span>-pulse (<span class="math notranslate nohighlight">\(\Omega_R t = \pi\)</span>) achieves full inversion.</p>
+<p><strong>Off resonance</strong> (<span class="math notranslate nohighlight">\(\delta \neq 0\)</span>): the frequency increases to <span class="math notranslate nohighlight">\(\Omega &gt; \Omega_R\)</span> but the amplitude <span class="math notranslate nohighlight">\(\Omega_R^2/\Omega^2 &lt; 1\)</span>. As <span class="math notranslate nohighlight">\(|\delta| \to \infty\)</span>, the probability is suppressed as <span class="math notranslate nohighlight">\((\Omega_R/\delta)^2 \ll 1\)</span>.</p>
+<p><strong>Connection to first-order perturbation theory.</strong> For weak coupling and short times (<span class="math notranslate nohighlight">\(\Omega_R t \ll 1\)</span>, <span class="math notranslate nohighlight">\(\delta \approx 0\)</span>): <span class="math notranslate nohighlight">\(\sin^2(\Omega_R t/2) \approx \Omega_R^2 t^2/4 = \vert V_{fi}\vert^2 t^2/(4\hbar^2)\)</span>, reproducing the quadratic short-time growth of first-order TDPT.</p>
+</div>
 <p>A key application: <strong>scanning the driving frequency <span class="math notranslate nohighlight">\(\omega\)</span> probes the energy level spacing</strong>. Each resonance reveals <span class="math notranslate nohighlight">\(E_f - E_i\)</span>, forming the basis of spectroscopy.</p>
 </section>
 <section id="electric-dipole-transitions">
@@ -612,7 +630,89 @@ V(t) = -\boldsymbol{d} \cdot \boldsymbol{E}(t) = -(-e\boldsymbol{r}) \cdot \bold
 \]</div>
 <p>This gives a <strong>natural linewidth</strong> in the emission spectrum. The lineshape is Lorentzian, centered at the transition energy <span class="math notranslate nohighlight">\(E_i - E_f\)</span> with width <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Lorentzian Lineshape from Exponential Decay</p>
+<p>When an excited state <span class="math notranslate nohighlight">\(\vert i\rangle\)</span> decays at rate <span class="math notranslate nohighlight">\(\Gamma\)</span>, the Wigner–Weisskopf theory models its amplitude as:</p>
+<div class="math notranslate nohighlight">
+\[
+c_i(t) = \mathrm{e}^{-\mathrm{i}E_i t/\hbar}\,\mathrm{e}^{-\Gamma t/2}, \qquad t \geq 0
+\]</div>
+<p>so that the population <span class="math notranslate nohighlight">\(\vert c_i(t)\vert^2 = \mathrm{e}^{-\Gamma t} = \mathrm{e}^{-t/\tau}\)</span> decays with lifetime <span class="math notranslate nohighlight">\(\tau = 1/\Gamma\)</span>.</p>
+<p><strong>Energy spectrum.</strong> The Fourier transform gives the amplitude at energy <span class="math notranslate nohighlight">\(E\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{c}_i(E) = \int_0^\infty \mathrm{e}^{\mathrm{i}(E-E_i)t/\hbar}\,\mathrm{e}^{-\Gamma t/2}\,\mathrm{d}t = \frac{\mathrm{i}\hbar}{E - E_i + \mathrm{i}\hbar\Gamma/2}
+\]</div>
+<p>The spectral probability density (lineshape) is:</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\tilde{c}_i(E)\vert^2 \propto \frac{1}{(E - E_i)^2 + (\hbar\Gamma/2)^2}
+\]</div>
+<p>This is a <strong>Lorentzian</strong> centered at <span class="math notranslate nohighlight">\(E_i\)</span> with full width at half-maximum:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta E_{\text{FWHM}} = \hbar\Gamma = \frac{\hbar}{\tau}
+\]</div>
+<p>This is the <strong>natural linewidth</strong> — a consequence of the energy-time uncertainty <span class="math notranslate nohighlight">\(\Delta E\cdot\tau \sim \hbar\)</span>. In the limit <span class="math notranslate nohighlight">\(\Gamma \to 0\)</span> (infinite lifetime), the Lorentzian narrows to <span class="math notranslate nohighlight">\(\delta(E - E_i)\)</span>, recovering the sharp spectral line of a stationary state.</p>
+</div>
 <p>For instance, the 2p state of hydrogen has <span class="math notranslate nohighlight">\(\tau \sim 1.6 \times 10^{-9}\)</span> s (lifetime), corresponding to <span class="math notranslate nohighlight">\(\Gamma \sim 0.1\)</span> eV (linewidth).</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Einstein A and B Coefficients from Thermal Equilibrium</p>
+<p>Consider a two-level atom with ground state <span class="math notranslate nohighlight">\(\vert g\rangle\)</span> and excited state <span class="math notranslate nohighlight">\(\vert e\rangle\)</span> (energy gap <span class="math notranslate nohighlight">\(\hbar\omega_0\)</span>) in thermal equilibrium with radiation at temperature <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p><strong>Three radiative processes</strong> occur simultaneously:</p>
+<ol class="arabic simple">
+<li><p><strong>Absorption</strong>: atom absorbs a photon, jumping <span class="math notranslate nohighlight">\(\vert g\rangle\to\vert e\rangle\)</span>. Rate <span class="math notranslate nohighlight">\(= B_{ge}\,u(\omega_0)\)</span>, where <span class="math notranslate nohighlight">\(u(\omega_0)\)</span> is the spectral energy density.</p></li>
+<li><p><strong>Stimulated emission</strong>: a photon triggers <span class="math notranslate nohighlight">\(\vert e\rangle\to\vert g\rangle\)</span> (emitting a second identical photon). Rate <span class="math notranslate nohighlight">\(= B_{eg}\,u(\omega_0)\)</span>.</p></li>
+<li><p><strong>Spontaneous emission</strong>: <span class="math notranslate nohighlight">\(\vert e\rangle\to\vert g\rangle\)</span> without external radiation, rate <span class="math notranslate nohighlight">\(= A_{eg}\)</span> (independent of <span class="math notranslate nohighlight">\(u\)</span>).</p></li>
+</ol>
+<p><strong>Detailed balance.</strong> In thermal equilibrium the Boltzmann ratio fixes populations:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{N_e}{N_g} = \mathrm{e}^{-\hbar\omega_0/k_{\mathrm{B}}T}
+\]</div>
+<p>Setting the total upward rate equal to the total downward rate:</p>
+<div class="math notranslate nohighlight">
+\[
+N_g\,B_{ge}\,u(\omega_0) = N_e\bigl[A_{eg} + B_{eg}\,u(\omega_0)\bigr]
+\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(u(\omega_0)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+u(\omega_0) = \frac{A_{eg}}{B_{ge}\,\mathrm{e}^{\hbar\omega_0/k_{\mathrm{B}}T} - B_{eg}}
+\]</div>
+<p><strong>Matching Planck’s law.</strong> The Planck distribution at frequency <span class="math notranslate nohighlight">\(\omega_0\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+u(\omega_0) = \frac{\hbar\omega_0^3}{\pi^2 c^3}\,\frac{1}{\mathrm{e}^{\hbar\omega_0/k_{\mathrm{B}}T}-1}
+\]</div>
+<p>For the two expressions to agree <strong>at every temperature</strong> <span class="math notranslate nohighlight">\(T\)</span>, we need both the exponential coefficient and the constant term to match:</p>
+<div class="math notranslate nohighlight">
+\[
+B_{ge} = B_{eg} \equiv B \qquad \text{(stimulated rates are equal)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{A_{eg}}{B} = \frac{\hbar\omega_0^3}{\pi^2 c^3} \qquad \text{(Einstein relation)}
+\]</div>
+<p><strong>Why <span class="math notranslate nohighlight">\(B_{ge} = B_{eg}\)</span>.</strong> This follows directly from Fermi’s golden rule: since <span class="math notranslate nohighlight">\(\vert\langle e\vert\hat{V}\vert g\rangle\vert^2 = \vert\langle g\vert\hat{V}\vert e\rangle\vert^2\)</span> by Hermiticity, absorption and stimulated emission have identical matrix elements. Population inversion (needed for lasing) requires external pumping to push the system away from equilibrium.</p>
+<p><strong>The <span class="math notranslate nohighlight">\(A/B\)</span> ratio and vacuum fluctuations.</strong> The spontaneous emission rate grows as <span class="math notranslate nohighlight">\(\omega_0^3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+A_{eg} = \frac{\hbar\omega_0^3}{\pi^2 c^3}\,B
+\]</div>
+<p>Physically, <span class="math notranslate nohighlight">\(A/B\)</span> is proportional to the electromagnetic mode density <span class="math notranslate nohighlight">\(\rho(\omega_0) = \omega_0^2/(\pi^2 c^3)\)</span>: spontaneous emission is stimulated emission driven by <strong>vacuum fluctuations</strong> in those modes. Placing the atom in a cavity that suppresses (or enhances) modes at <span class="math notranslate nohighlight">\(\omega_0\)</span> changes <span class="math notranslate nohighlight">\(A\)</span> — this is the <strong>Purcell effect</strong>.</p>
+<p><strong>Connection to Fermi’s golden rule.</strong> Applying FGR to the dipole coupling <span class="math notranslate nohighlight">\(\hat{V} = -\hat{\boldsymbol{d}}\cdot\boldsymbol{E}\)</span> and averaging over polarization directions:</p>
+<div class="math notranslate nohighlight">
+\[
+B = \frac{\pi}{3\hbar^2\epsilon_0}\bigl\vert\langle e\vert\hat{\boldsymbol{d}}\vert g\rangle\bigr\vert^2
+\]</div>
+<p>Substituting into the Einstein relation gives the spontaneous emission rate:</p>
+<div class="math notranslate nohighlight">
+\[
+A_{eg} = \frac{\omega_0^3}{3\pi\hbar\epsilon_0 c^3}\bigl\vert\langle e\vert\hat{\boldsymbol{d}}\vert g\rangle\bigr\vert^2
+\]</div>
+<p>For hydrogen <span class="math notranslate nohighlight">\(2p\to 1s\)</span>: <span class="math notranslate nohighlight">\(\omega_0\approx 1.55\times 10^{16}\)</span> rad/s and <span class="math notranslate nohighlight">\(\vert\langle\hat{d}\rangle\vert\approx 0.86\,ea_0\)</span>, giving <span class="math notranslate nohighlight">\(\tau = 1/A_{eg}\approx 1.6\)</span> ns, consistent with the measured lifetime quoted above.</p>
+</div>
 </section>
 <section id="linear-response-and-hall-conductance">
 <h3>Linear Response and Hall Conductance<a class="headerlink" href="#linear-response-and-hall-conductance" title="Link to this heading">#</a></h3>
@@ -649,6 +749,70 @@ j_\alpha(t) = \sum_\beta \sigma_{\alpha\beta} E_\beta(t)
 <li><p>The integer <span class="math notranslate nohighlight">\(\nu\)</span> counts filled Landau levels. What is the physical meaning of this number from the perspective of topology and winding numbers?</p></li>
 <li><p>If we gradually deform the Hamiltonian without closing a gap, can <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> change? What happens if we allow the gap to close?</p></li>
 </ul>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Kubo Formula from Linear Response Theory</p>
+<p>Apply a weak electric field <span class="math notranslate nohighlight">\(E_\beta(t) = E_\beta\,\mathrm{e}^{-\mathrm{i}\omega t+\epsilon t}\)</span> (adiabatically switched on from <span class="math notranslate nohighlight">\(-\infty\)</span>). The dipole perturbation in the interaction picture is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{V}(t) = -e\hat{r}_\beta E_\beta\,\mathrm{e}^{-\mathrm{i}\omega t+\epsilon t}
+\]</div>
+<p><strong>First-order current response.</strong> From the Kubo formula of linear response theory, the change in the current expectation value is:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta\langle\hat{j}_\alpha\rangle = \frac{1}{\mathrm{i}\hbar}\int_{-\infty}^t \langle[\hat{j}_\alpha(t),\hat{V}(t')]\rangle_0\,\mathrm{d}t'
+\]</div>
+<p>Inserting a complete set of states <span class="math notranslate nohighlight">\(\sum_m\vert m\rangle\langle m\vert\)</span> and using <span class="math notranslate nohighlight">\(\hat{j}_\alpha = -e\hat{v}_\alpha\)</span>, and <span class="math notranslate nohighlight">\(\langle n\vert\hat{v}_\alpha\vert m\rangle = \mathrm{i}(E_m-E_n)\langle n\vert\hat{r}_\alpha\vert m\rangle/\hbar\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{\alpha\beta}(\omega) = \frac{\mathrm{i}e^2}{\hbar}\sum_n f(E_n)\sum_{m\neq n}\frac{\langle n\vert\hat{v}_\alpha\vert m\rangle\langle m\vert\hat{v}_\beta\vert n\rangle}{\omega_{mn}+\omega+\mathrm{i}\epsilon} + \text{h.c.}
+\]</div>
+<p><strong>Hall conductance at <span class="math notranslate nohighlight">\(T=0\)</span>.</strong> Taking <span class="math notranslate nohighlight">\(\omega\to 0\)</span> and the imaginary part relevant for <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy} = \frac{2\pi e^2}{\hbar}\sum_{n\text{ filled}}\sum_{m\text{ empty}}\frac{2\operatorname{Im}\langle n\vert\hat{v}_x\vert m\rangle\langle m\vert\hat{v}_y\vert n\rangle}{(E_n-E_m)^2}
+\]</div>
+<p><strong>Berry curvature form.</strong> Using <span class="math notranslate nohighlight">\(\langle n\vert\hat{v}_\alpha\vert m\rangle = (E_m-E_n)\langle n\vert\partial_{k_\alpha}\vert m\rangle/\hbar\)</span> (from the Bloch Hamiltonian) and the identity for the Berry curvature <span class="math notranslate nohighlight">\(F_{xy}^{(n)} = -2\operatorname{Im}\sum_{m\neq n}\langle n\vert\partial_{k_x}\hat{H}\vert m\rangle\langle m\vert\partial_{k_y}\hat{H}\vert n\rangle/(E_m-E_n)^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy} = \frac{e^2}{h}\cdot\frac{1}{2\pi}\sum_{\text{filled bands}}\int_{\text{BZ}}F_{xy}^{(n)}(\boldsymbol{k})\,\mathrm{d}^2k = \frac{e^2}{h}\,\nu
+\]</div>
+<p>The Brillouin-zone integral of the Berry curvature is <span class="math notranslate nohighlight">\(2\pi\)</span> times the <strong>Chern number</strong> <span class="math notranslate nohighlight">\(\nu\)</span> — an integer by topology. This makes <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> <strong>exactly quantized</strong> and immune to disorder or interactions as long as the bulk gap is open.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Optical Bloch Equations — Coherent Drive with Spontaneous Decay</p>
+<p>The Rabi solution (§5.2.3) describes a coherently driven two-level system with no decay. Real atoms also undergo spontaneous emission at rate <span class="math notranslate nohighlight">\(\Gamma = A_{21}\)</span> (Einstein <span class="math notranslate nohighlight">\(A\)</span> coefficient). Combining both gives the <strong>optical Bloch equations</strong>.</p>
+<p><strong>Bloch vector.</strong> Represent the density matrix of the two-level system as a Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{r} = (r_x, r_y, r_z) = (\text{Re}\rho_{ge}, \text{Im}\rho_{ge}, \rho_{ee} - \rho_{gg})\)</span>. In the rotating frame with detuning <span class="math notranslate nohighlight">\(\Delta = \omega - \omega_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{r}_x = \Delta\, r_y - \frac{\Gamma}{2} r_x,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\dot{r}_y = -\Delta\, r_x + \Omega\, r_z - \frac{\Gamma}{2} r_y,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\dot{r}_z = -\Omega\, r_y - \Gamma(r_z + 1).
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\Omega = q|E_0|\langle g|z|e\rangle/\hbar\)</span> is the Rabi frequency and <span class="math notranslate nohighlight">\(\Gamma\)</span> enters as the transverse decay rate <span class="math notranslate nohighlight">\(T_1 = 1/\Gamma\)</span> (population) and the coherence decay rate <span class="math notranslate nohighlight">\(T_2 = 2/\Gamma\)</span> (pure radiative limit with <span class="math notranslate nohighlight">\(T_2 = 2T_1\)</span>).</p>
+<p><strong>Steady state.</strong> Setting <span class="math notranslate nohighlight">\(\dot{\boldsymbol{r}} = 0\)</span> and solving:</p>
+<div class="math notranslate nohighlight">
+\[
+r_z^{(\mathrm{ss})} = -\frac{1 + (2\Delta/\Gamma)^2}{1 + (2\Delta/\Gamma)^2 + 2\Omega^2/\Gamma^2}.
+\]</div>
+<p><strong>Saturation.</strong> Define the saturation parameter <span class="math notranslate nohighlight">\(s = 2\Omega^2/\Gamma^2\)</span>. At resonance (<span class="math notranslate nohighlight">\(\Delta = 0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+r_z^{(\mathrm{ss})} = -\frac{1}{1+s}.
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(s \gg 1\)</span> (strong drive), <span class="math notranslate nohighlight">\(r_z \to 0\)</span>: equal population in ground and excited states — saturation. The population difference <span class="math notranslate nohighlight">\(\rho_{ee} = (1 - r_z)/2 \to 1/2\)</span>.</p>
+<p><strong>Power-broadened linewidth.</strong> The steady-state excited population <span class="math notranslate nohighlight">\(\rho_{ee}(\Delta) = \frac{s/2}{1+s+(2\Delta/\Gamma)^2}\)</span> is a Lorentzian in <span class="math notranslate nohighlight">\(\Delta\)</span> with <strong>power-broadened</strong> half-width</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta_{1/2} = \frac{\Gamma}{2}\sqrt{1+s}.
+\]</div>
+<p>At strong drive, the linewidth grows as <span class="math notranslate nohighlight">\(\sqrt{s} \propto \Omega\)</span>: the spectral line broadens beyond the natural linewidth <span class="math notranslate nohighlight">\(\Gamma\)</span>, a direct consequence of saturation.</p>
 </div>
 </section>
 <section id="summary">

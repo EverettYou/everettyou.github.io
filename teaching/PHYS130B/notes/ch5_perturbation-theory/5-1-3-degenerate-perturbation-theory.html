@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -558,6 +558,54 @@
 <div><p>Within the degenerate subspace, <span class="math notranslate nohighlight">\(V\)</span> acts as a <span class="math notranslate nohighlight">\(d\times d\)</span> matrix. The correct zeroth-order states are its eigenvectors, and the first-order energies are its eigenvalues.</p>
 </div></blockquote>
 <p>This is the essence of degenerate perturbation theory: diagonalize the perturbation restricted to the degenerate subspace.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Generalized Hellmann-Feynman Theorems (Degenerate Case)</p>
+<p>When <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> has degenerate levels, label basis states by two indices: a <strong>principal</strong> index <span class="math notranslate nohighlight">\(n\)</span> (identifying the degenerate subspace, with common energy <span class="math notranslate nohighlight">\(E_n^{(0)}\)</span>) and a <strong>secondary</strong> index <span class="math notranslate nohighlight">\(\alpha\)</span> (distinguishing orthogonal states within the subspace):</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}_0|n,\alpha\rangle = E_n^{(0)}|n,\alpha\rangle, \qquad \langle m,\alpha|n,\beta\rangle = \delta_{mn}\delta_{\alpha\beta}.
+\]</div>
+<p>For the perturbed Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{H}_0 + \lambda\hat{V}\)</span>, block-diagonalization requires:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}(\lambda)|n,\beta(\lambda)\rangle = \sum_{\alpha}|n,\alpha(\lambda)\rangle\, E_{n,\alpha\beta}(\lambda).
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(E_{n,\alpha\beta}(\lambda)\)</span> is the matrix of the <strong>effective Hamiltonian</strong> in the <span class="math notranslate nohighlight">\(n\)</span>-th degenerate subspace, with <span class="math notranslate nohighlight">\(E_{n,\alpha\beta}(0) = E_n^{(0)}\delta_{\alpha\beta}\)</span>.</p>
+<p><strong>Step 1: Differentiate the block-diagonalization condition.</strong></p>
+<p>Apply <span class="math notranslate nohighlight">\(\partial_\lambda\)</span> to <span class="math notranslate nohighlight">\(\hat{H}(\lambda)|n,\beta(\lambda)\rangle = \sum_\alpha |n,\alpha(\lambda)\rangle E_{n,\alpha\beta}(\lambda)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{V}|n,\beta\rangle + \hat{H}|\partial_\lambda n,\beta\rangle = \sum_\alpha \left(|\partial_\lambda n,\alpha\rangle E_{n,\alpha\beta} + |n,\alpha\rangle\partial_\lambda E_{n,\alpha\beta}\right).
+\]</div>
+<p><strong>Step 2: Overlap with <span class="math notranslate nohighlight">\(\langle m,\gamma|\)</span> (evaluated at <span class="math notranslate nohighlight">\(\lambda=0\)</span>).</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle m,\gamma|\hat{V}|n,\beta\rangle + E_m^{(0)}\langle m,\gamma|\partial_\lambda n,\beta\rangle = \sum_\alpha \left(\langle m,\gamma|\partial_\lambda n,\alpha\rangle E_n^{(0)}\delta_{\alpha\beta} + \delta_{mn}\partial_\lambda E_{n,\gamma\beta}\right).
+\]</div>
+<p>Rearranging, using <span class="math notranslate nohighlight">\(\langle m,\gamma|\hat{H}_0 = E_m^{(0)}\langle m,\gamma|\)</span> and <span class="math notranslate nohighlight">\(\langle m,\gamma|n,\alpha\rangle = \delta_{mn}\delta_{\gamma\alpha}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+V_{m\gamma,n\beta} = \delta_{mn}\,\partial_\lambda E_{n,\gamma\beta} + (E_n^{(0)} - E_m^{(0)})\langle m,\gamma|\partial_\lambda n,\beta\rangle,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_{m\gamma,n\beta} \equiv \langle m,\gamma|\hat{V}|n,\beta\rangle\)</span>.</p>
+<p><strong>Step 3: Two cases.</strong></p>
+<ul class="simple">
+<li><p><strong>Same subspace (<span class="math notranslate nohighlight">\(m = n\)</span>):</strong> The last term vanishes, giving the <strong>first generalized Hellmann-Feynman theorem</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\partial_\lambda E_{n,\gamma\beta} = V_{n\gamma,n\beta} \quad (\text{matrix of }\hat{V}\text{ within the degenerate subspace}).
+\]</div>
+<p>This replaces the scalar first-order shift <span class="math notranslate nohighlight">\(V_{nn}\)</span> of the non-degenerate theory with the full <span class="math notranslate nohighlight">\(d\times d\)</span> matrix <span class="math notranslate nohighlight">\(P_n\hat{V}P_n\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Different subspace (<span class="math notranslate nohighlight">\(m \neq n\)</span>):</strong> The first term vanishes (<span class="math notranslate nohighlight">\(\delta_{mn}=0\)</span>), giving the <strong>second generalized Hellmann-Feynman theorem</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle m,\gamma|\partial_\lambda n,\beta\rangle = \frac{V_{m\gamma,n\beta}}{E_n^{(0)} - E_m^{(0)}}, \qquad m\neq n.
+\]</div>
+<p>The energy denominator <span class="math notranslate nohighlight">\(E_n^{(0)} - E_m^{(0)} \neq 0\)</span> because <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> label <em>different</em> degenerate subspaces. There is <strong>no divergence</strong> here — the divergence of non-degenerate theory arose from mixing states <em>within</em> the same subspace, which is now forbidden by the block-diagonalization structure.</p>
+</div>
 </section>
 <section id="effective-hamiltonian">
 <h3>Effective Hamiltonian<a class="headerlink" href="#effective-hamiltonian" title="Link to this heading">#</a></h3>
@@ -568,7 +616,7 @@
 <p class="admonition-title">Effective Hamiltonian</p>
 <p>The <strong>effective Hamiltonian</strong> acting within the degenerate subspace is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5c-heff">
-<span class="eqno">(79)<a class="headerlink" href="#equation-eq-5c-heff" title="Link to this equation">#</a></span>\[H_n^{\text{eff}} = E_n^{(0)}\hat{I}_d + \lambda\, P_n V P_n + \lambda^2\, P_n V Q_n \frac{1}{E_n^{(0)} - Q_n H_0 Q_n} Q_n V P_n + O(\lambda^3)\]</div>
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-5c-heff" title="Link to this equation">#</a></span>\[H_n^{\text{eff}} = E_n^{(0)}\hat{I}_d + \lambda\, P_n V P_n + \lambda^2\, P_n V Q_n \frac{1}{E_n^{(0)} - Q_n H_0 Q_n} Q_n V P_n + O(\lambda^3)\]</div>
 <ul class="simple">
 <li><p><strong>First-order</strong> (<span class="math notranslate nohighlight">\(P_n V P_n\)</span>): direct matrix elements of <span class="math notranslate nohighlight">\(V\)</span> within the subspace.</p></li>
 <li><p><strong>Second-order</strong>: virtual transitions <em>out</em> of the subspace and back, mediated by the resolvent.</p></li>
@@ -579,8 +627,54 @@
 \[(P_n V P_n)_{\alpha\beta} = \langle n,\alpha|V|n,\beta\rangle\]</div>
 <p><strong>Diagonalizing</strong> this matrix yields the first-order energy shifts <span class="math notranslate nohighlight">\(\Delta E_{n,\alpha}^{(1)}\)</span> (eigenvalues) and the correct zeroth-order states <span class="math notranslate nohighlight">\(|n,\alpha'\rangle\)</span> (eigenvectors).</p>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Second-Order Virtual Transitions</p>
-<p>The second-order term arises from expanding the eigenvalue equation to <span class="math notranslate nohighlight">\(O(\lambda^2)\)</span>. The intermediate states live in the <span class="math notranslate nohighlight">\(Q_n\)</span> subspace (outside the degenerate manifold), so the energy denominators <span class="math notranslate nohighlight">\(E_n^{(0)} - E_m^{(0)} \neq 0\)</span> are safe. The result is the same structure as non-degenerate second-order corrections, but now acting as a matrix within the degenerate subspace rather than giving a scalar shift.</p>
+<p class="admonition-title">Derivation: Effective Hamiltonian to Second Order</p>
+<p>We derive <span class="math notranslate nohighlight">\(H_n^{\text{eff}}\)</span> by projecting the Schrödinger equation with <span class="math notranslate nohighlight">\(P_n\)</span> and <span class="math notranslate nohighlight">\(Q_n\)</span>.</p>
+<p><strong>Setup.</strong> Any state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> splits as <span class="math notranslate nohighlight">\(|\psi\rangle = |\psi_P\rangle + |\psi_Q\rangle\)</span> with <span class="math notranslate nohighlight">\(|\psi_P\rangle = P_n|\psi\rangle\)</span>, <span class="math notranslate nohighlight">\(|\psi_Q\rangle = Q_n|\psi\rangle\)</span>.</p>
+<p><strong>Step 1: Project the eigenvalue equation <span class="math notranslate nohighlight">\((\hat{H}_0 + \lambda\hat{V})|\psi\rangle = E|\psi\rangle\)</span>.</strong></p>
+<p>Apply <span class="math notranslate nohighlight">\(P_n\)</span> from the left:</p>
+<div class="math notranslate nohighlight">
+\[
+E_n^{(0)}|\psi_P\rangle + \lambda P_n\hat{V}(|\psi_P\rangle + |\psi_Q\rangle) = E|\psi_P\rangle.
+\]</div>
+<p>Apply <span class="math notranslate nohighlight">\(Q_n\)</span> from the left:</p>
+<div class="math notranslate nohighlight">
+\[
+Q_n\hat{H}_0|\psi_Q\rangle + \lambda Q_n\hat{V}(|\psi_P\rangle + |\psi_Q\rangle) = E|\psi_Q\rangle.
+\]</div>
+<p>(We used <span class="math notranslate nohighlight">\(P_n\hat{H}_0 = E_n^{(0)}P_n\)</span> and <span class="math notranslate nohighlight">\(Q_n\hat{H}_0Q_n = Q_n\hat{H}_0\)</span>, since <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> is block-diagonal in <span class="math notranslate nohighlight">\(P_n/Q_n\)</span>.)</p>
+<p><strong>Step 2: Solve for <span class="math notranslate nohighlight">\(|\psi_Q\rangle\)</span> perturbatively.</strong></p>
+<p>Rearranging the <span class="math notranslate nohighlight">\(Q_n\)</span> equation:</p>
+<div class="math notranslate nohighlight">
+\[
+(E - Q_n\hat{H}_0)|\psi_Q\rangle = \lambda Q_n\hat{V}(|\psi_P\rangle + |\psi_Q\rangle).
+\]</div>
+<p>To zeroth order in <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(|\psi_Q\rangle = 0\)</span> and <span class="math notranslate nohighlight">\(E = E_n^{(0)}\)</span>. To first order:</p>
+<div class="math notranslate nohighlight">
+\[
+|\psi_Q\rangle = \lambda(E_n^{(0)} - Q_n\hat{H}_0Q_n)^{-1}Q_n\hat{V}|\psi_P\rangle + O(\lambda^2).
+\]</div>
+<p>The operator <span class="math notranslate nohighlight">\((E_n^{(0)} - Q_n\hat{H}_0Q_n)^{-1}\)</span> is well-defined because <span class="math notranslate nohighlight">\(Q_n\hat{H}_0Q_n\)</span> has eigenvalues <span class="math notranslate nohighlight">\(E_m^{(0)} \neq E_n^{(0)}\)</span> for all <span class="math notranslate nohighlight">\(m\neq n\)</span>. In component form:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle m,\gamma|\psi_Q\rangle = \lambda\frac{\langle m,\gamma|\hat{V}|\psi_P\rangle}{E_n^{(0)} - E_m^{(0)}}, \qquad m\neq n.
+\]</div>
+<p><strong>Step 3: Substitute back into the <span class="math notranslate nohighlight">\(P_n\)</span> equation.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+E_n^{(0)}|\psi_P\rangle + \lambda P_n\hat{V}|\psi_P\rangle + \lambda^2 P_n\hat{V}Q_n\frac{1}{E_n^{(0)} - Q_n\hat{H}_0Q_n}Q_n\hat{V}|\psi_P\rangle + O(\lambda^3) = E|\psi_P\rangle.
+\]</div>
+<p>This is a <strong>closed eigenvalue equation within the <span class="math notranslate nohighlight">\(P_n\)</span> subspace</strong>, defining the effective Hamiltonian:</p>
+<div class="math notranslate nohighlight">
+\[
+H_n^{\text{eff}} = E_n^{(0)}\hat{I}_d + \lambda\, P_n\hat{V}P_n + \lambda^2\, P_n\hat{V}Q_n\frac{1}{E_n^{(0)} - Q_n\hat{H}_0Q_n}Q_n\hat{V}P_n + O(\lambda^3).
+\]</div>
+<p><strong>Step 4: Matrix elements in the degenerate basis.</strong></p>
+<p>In the basis <span class="math notranslate nohighlight">\(\{|n,\alpha\rangle\}\)</span>, taking <span class="math notranslate nohighlight">\(\langle n,\alpha|H_n^{\text{eff}}|n,\beta\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+E_{n,\alpha\beta}(\lambda) = E_n^{(0)}\delta_{\alpha\beta} + \lambda\, V_{n\alpha,n\beta} + \lambda^2\sum_{m\neq n}\sum_{\gamma}\frac{V_{n\alpha,m\gamma}\,V_{m\gamma,n\beta}}{E_n^{(0)} - E_m^{(0)}} + O(\lambda^3).
+\]</div>
+<p>This agrees with the result from the generalized Hellmann-Feynman theorem obtained by differentiating twice. The <strong>second-order term</strong> represents virtual transitions: the system leaves the degenerate subspace to a state <span class="math notranslate nohighlight">\(|m,\gamma\rangle\)</span> (with <span class="math notranslate nohighlight">\(m\neq n\)</span>) via <span class="math notranslate nohighlight">\(V_{m\gamma,n\beta}\)</span>, propagates at an energy cost <span class="math notranslate nohighlight">\(E_n^{(0)} - E_m^{(0)}\)</span>, then returns via <span class="math notranslate nohighlight">\(V_{n\alpha,m\gamma}\)</span>. Because <span class="math notranslate nohighlight">\(m\neq n\)</span>, the denominator is always nonzero — there is no divergence.</p>
 </div>
 </section>
 <section id="application-spin-1-model">
@@ -607,9 +701,140 @@
 <p><strong>Problem.</strong> Apply a uniform electric field <span class="math notranslate nohighlight">\(\boldsymbol{E} = \mathcal{E}_0\hat{z}\)</span> to the hydrogen atom <span class="math notranslate nohighlight">\(n=2\)</span> level (fourfold degenerate, ignoring spin): <span class="math notranslate nohighlight">\(|2,0,0\rangle\)</span>, <span class="math notranslate nohighlight">\(|2,1,0\rangle\)</span>, <span class="math notranslate nohighlight">\(|2,1,{\pm}1\rangle\)</span>.</p>
 <p><strong>Solution.</strong> The perturbation <span class="math notranslate nohighlight">\(V = e\mathcal{E}_0 z = e\mathcal{E}_0 r\cos\theta\)</span> has selection rules <span class="math notranslate nohighlight">\(\Delta\ell = \pm 1\)</span>, <span class="math notranslate nohighlight">\(\Delta m_\ell = 0\)</span>. Only the pair <span class="math notranslate nohighlight">\(|2,0,0\rangle \leftrightarrow |2,1,0\rangle\)</span> couples; the <span class="math notranslate nohighlight">\(m_\ell = \pm 1\)</span> states decouple completely. The <span class="math notranslate nohighlight">\(4\times 4\)</span> effective Hamiltonian is block-diagonal: a <span class="math notranslate nohighlight">\(2\times 2\)</span> block that splits linearly in <span class="math notranslate nohighlight">\(\mathcal{E}_0\)</span> (the <strong>linear Stark effect</strong>), plus two zero eigenvalues. The linear splitting occurs because the <span class="math notranslate nohighlight">\(n=2\)</span> subspace contains states of opposite parity (<span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(p\)</span>), allowing first-order mixing.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Hydrogen <span class="math notranslate nohighlight">\(n=2\)</span> Stark Effect Matrix Element</p>
+<p>We compute <span class="math notranslate nohighlight">\(\langle 2,0,0\vert z\vert 2,1,0\rangle\)</span> explicitly, confirming the first-order Stark splitting <span class="math notranslate nohighlight">\(\Delta E^{(1)} = \pm 3ea_0\mathcal{E}_0\)</span>.</p>
+<p><strong>Step 1: Parity forces diagonal elements to vanish.</strong></p>
+<p>The operator <span class="math notranslate nohighlight">\(z = r\cos\theta\)</span> has odd parity: <span class="math notranslate nohighlight">\(\hat{\mathcal{P}} z \hat{\mathcal{P}}^{-1} = -z\)</span>. The hydrogen eigenstates have definite parity <span class="math notranslate nohighlight">\((-1)^l\)</span>: <span class="math notranslate nohighlight">\(\hat{\mathcal{P}}\vert n,l,m\rangle = (-1)^l\vert n,l,m\rangle\)</span>.</p>
+<p>For a matrix element <span class="math notranslate nohighlight">\(\langle n,l,m\vert z\vert n,l',m'\rangle\)</span> to be non-zero, we need:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle nlm\vert z\vert nl'm'\rangle = \langle nlm\vert \hat{\mathcal{P}}^{-1}\hat{\mathcal{P}}\,z\,\hat{\mathcal{P}}^{-1}\hat{\mathcal{P}}\vert nl'm'\rangle = (-1)^{l+1+l'}\langle nlm\vert z\vert nl'm'\rangle
+\]</div>
+<p>Non-zero requires <span class="math notranslate nohighlight">\((-1)^{l+l'+1} = +1\)</span>, i.e., <span class="math notranslate nohighlight">\(l + l'\)</span> must be <strong>odd</strong>. In particular, diagonal elements (<span class="math notranslate nohighlight">\(l = l'\)</span>) give <span class="math notranslate nohighlight">\((-1)^{2l+1} = -1\)</span>, so <span class="math notranslate nohighlight">\(\langle nlm\vert z\vert nlm\rangle = 0\)</span> for all states. There is <strong>no first-order energy shift</strong> for any hydrogen level with definite parity.</p>
+<p>For the <span class="math notranslate nohighlight">\(n=2\)</span> subspace: <span class="math notranslate nohighlight">\(l=0\)</span> has parity <span class="math notranslate nohighlight">\(+1\)</span>; <span class="math notranslate nohighlight">\(l=1\)</span> has parity <span class="math notranslate nohighlight">\(-1\)</span>. The only coupling is between <span class="math notranslate nohighlight">\(l=0\)</span> and <span class="math notranslate nohighlight">\(l=1\)</span> states, and further by the <span class="math notranslate nohighlight">\(\Delta m = 0\)</span> selection rule (since <span class="math notranslate nohighlight">\(z \propto Y_1^0\)</span>), only <span class="math notranslate nohighlight">\(\langle 2,0,0\vert z\vert 2,1,0\rangle \neq 0\)</span>.</p>
+<p><strong>Step 2: Separate angular and radial integrals.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle 2,0,0\vert z\vert 2,1,0\rangle = \underbrace{\int_0^\infty R_{20}(r)\,r\,R_{21}(r)\,r^2\,\mathrm{d}r}_{I_r} \cdot \underbrace{\int Y_0^{0*}\cos\theta\,Y_1^0\,\mathrm{d}\Omega}_{I_\Omega}
+\]</div>
+<p>In atomic units (<span class="math notranslate nohighlight">\(a_0 = 1\)</span>), the normalized radial functions for <span class="math notranslate nohighlight">\(n=2\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{20}(r) = \frac{(2-r)\,\mathrm{e}^{-r/2}}{2\sqrt{2}}, \qquad R_{21}(r) = \frac{r\,\mathrm{e}^{-r/2}}{2\sqrt{6}}
+\]</div>
+<p><strong>Step 3: Angular integral.</strong></p>
+<p>Using <span class="math notranslate nohighlight">\(Y_0^0 = 1/\sqrt{4\pi}\)</span> and <span class="math notranslate nohighlight">\(Y_1^0 = \sqrt{3/4\pi}\cos\theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+I_\Omega = \frac{1}{\sqrt{4\pi}}\sqrt{\frac{3}{4\pi}} \int_0^{2\pi}\mathrm{d}\phi \int_0^\pi \cos^2\theta\sin\theta\,\mathrm{d}\theta = \frac{\sqrt{3}}{4\pi}\cdot 2\pi \cdot \frac{2}{3} = \frac{1}{\sqrt{3}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\int_0^\pi\cos^2\theta\sin\theta\,\mathrm{d}\theta = \int_{-1}^{1}x^2\,\mathrm{d}x = 2/3\)</span>.</p>
+<p><strong>Step 4: Radial integral.</strong></p>
+<p>Note that <span class="math notranslate nohighlight">\(R_{21}(r) \propto r\)</span>, so the integrand has an extra power of <span class="math notranslate nohighlight">\(r\)</span> compared to a naive estimate:</p>
+<div class="math notranslate nohighlight">
+\[
+I_r = \int_0^\infty \frac{(2-r)\,\mathrm{e}^{-r/2}}{2\sqrt{2}} \cdot r \cdot \frac{r\,\mathrm{e}^{-r/2}}{2\sqrt{6}} \cdot r^2\,\mathrm{d}r = \frac{1}{4\sqrt{12}}\int_0^\infty (2-r)\,r^4\,\mathrm{e}^{-r}\,\mathrm{d}r
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\int_0^\infty r^n \mathrm{e}^{-r}\mathrm{d}r = n!\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_0^\infty (2-r)r^4\,\mathrm{e}^{-r}\,\mathrm{d}r = 2\cdot 4! - 5! = 48 - 120 = -72
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+I_r = \frac{-72}{4\sqrt{12}} = \frac{-18}{\sqrt{12}} = \frac{-18}{2\sqrt{3}} = \frac{-9}{\sqrt{3}} = -3\sqrt{3}
+\]</div>
+<p><strong>Step 5: Combine.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle 2,0,0\vert z\vert 2,1,0\rangle = I_r\cdot I_\Omega = (-3\sqrt{3})\cdot\frac{1}{\sqrt{3}} = -3a_0
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(4\times 4\)</span> effective Hamiltonian in the <span class="math notranslate nohighlight">\(n=2\)</span> subspace (ordered as <span class="math notranslate nohighlight">\(\vert 200\rangle, \vert 210\rangle, \vert 211\rangle, \vert 21{-}1\rangle\)</span>) is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_2 V P_2 = e\mathcal{E}_0 \begin{pmatrix} 0 &amp; -3a_0 &amp; 0 &amp; 0 \\ -3a_0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}
+\end{split}\]</div>
+<p>Diagonalizing the <span class="math notranslate nohighlight">\(2\times 2\)</span> block gives eigenvalues <span class="math notranslate nohighlight">\(\pm 3ea_0\mathcal{E}_0\)</span>: the linear Stark effect. The <span class="math notranslate nohighlight">\(m_\ell = \pm 1\)</span> states are unmoved at first order (their parity selection rule removes all first-order couplings within the <span class="math notranslate nohighlight">\(n=2\)</span> shell) and require a second-order calculation.</p>
+</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
 <p>In degenerate perturbation theory, you diagonalize <span class="math notranslate nohighlight">\(V\)</span> within the degenerate subspace to find the “good basis.” But what if <span class="math notranslate nohighlight">\(V\)</span> itself has degenerate eigenvalues within that subspace? Can you determine the energy levels from first-order alone, or must you go to second order? Give an example where residual degeneracy is lifted only at second order.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Symmetry Selects the Good Basis</p>
+<p>In practice, finding the ‘good basis’ that diagonalizes <span class="math notranslate nohighlight">\(P_n V P_n\)</span> is greatly simplified by symmetry. If a Hermitian operator <span class="math notranslate nohighlight">\(\hat{A}\)</span> commutes with both <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> and <span class="math notranslate nohighlight">\(\hat{V}\)</span>, then its eigenstates within each degenerate subspace are the good states — the ones that diagonalize <span class="math notranslate nohighlight">\(P_n V P_n\)</span> automatically.</p>
+<p><strong>Setup.</strong> Suppose <span class="math notranslate nohighlight">\([\hat{H}_0, \hat{A}] = 0\)</span> and <span class="math notranslate nohighlight">\([\hat{V}, \hat{A}] = 0\)</span>. Label states in the degenerate subspace <span class="math notranslate nohighlight">\(\mathcal{H}_n\)</span> by their <span class="math notranslate nohighlight">\(\hat{A}\)</span>-eigenvalues: <span class="math notranslate nohighlight">\(\hat{A}|n,\alpha\rangle = a_\alpha|n,\alpha\rangle\)</span>.</p>
+<p><strong>Claim.</strong> <span class="math notranslate nohighlight">\(\langle n,\beta\vert\hat{V}\vert n,\alpha\rangle = 0\)</span> whenever <span class="math notranslate nohighlight">\(a_\beta \neq a_\alpha\)</span>.</p>
+<p><strong>Proof.</strong> Sandwich <span class="math notranslate nohighlight">\([\hat{V}, \hat{A}] = 0\)</span> between <span class="math notranslate nohighlight">\(\langle n,\beta\vert\)</span> and <span class="math notranslate nohighlight">\(\vert n,\alpha\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle n,\beta\vert[\hat{V},\hat{A}]\vert n,\alpha\rangle = \langle n,\beta\vert\hat{V}\hat{A} - \hat{A}\hat{V}\vert n,\alpha\rangle = 0
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{A}\)</span> is Hermitian:</p>
+<div class="math notranslate nohighlight">
+\[
+a_\alpha\,\langle n,\beta\vert\hat{V}\vert n,\alpha\rangle - a_\beta\,\langle n,\beta\vert\hat{V}\vert n,\alpha\rangle = (a_\alpha - a_\beta)\,V_{\beta\alpha} = 0
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(a_\alpha \neq a_\beta\)</span>, then <span class="math notranslate nohighlight">\(V_{\beta\alpha} = 0\)</span>. Therefore <span class="math notranslate nohighlight">\(P_n\hat{V}P_n\)</span> is block-diagonal in the <span class="math notranslate nohighlight">\(\hat{A}\)</span>-eigenbasis, with diagonal blocks corresponding to states sharing the same <span class="math notranslate nohighlight">\(\hat{A}\)</span>-eigenvalue.</p>
+<p><strong>Implication.</strong> The matrix <span class="math notranslate nohighlight">\(P_n V P_n\)</span> is already block-diagonal; diagonalizing it reduces to diagonalizing each block (often <span class="math notranslate nohighlight">\(1\times 1\)</span> if all eigenvalues of <span class="math notranslate nohighlight">\(\hat{A}\)</span> are non-degenerate within <span class="math notranslate nohighlight">\(\mathcal{H}_n\)</span>). The good quantum number labeling states is the eigenvalue of <span class="math notranslate nohighlight">\(\hat{A}\)</span>.</p>
+<p><strong>Example: Hydrogen <span class="math notranslate nohighlight">\(n=2\)</span> Stark Effect.</strong> The perturbation <span class="math notranslate nohighlight">\(\hat{V} = e\mathcal{E}_0 z\)</span> commutes with <span class="math notranslate nohighlight">\(\hat{L}_z\)</span> because <span class="math notranslate nohighlight">\(z = r\cos\theta\)</span> is rotationally symmetric about <span class="math notranslate nohighlight">\(\hat{z}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{L}_z, \hat{V}] = [\hat{L}_z, e\mathcal{E}_0 z] = e\mathcal{E}_0[\hat{L}_z, z] = 0
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\hat{L}_z = -\mathrm{i}\hbar\partial_\phi\)</span> and <span class="math notranslate nohighlight">\(z = r\cos\theta\)</span> is <span class="math notranslate nohighlight">\(\phi\)</span>-independent. Therefore <span class="math notranslate nohighlight">\(m_\ell\)</span> is a good quantum number: matrix elements <span class="math notranslate nohighlight">\(\langle n,\ell',m'\vert z\vert n,\ell,m\rangle\)</span> vanish unless <span class="math notranslate nohighlight">\(m' = m\)</span>. The <span class="math notranslate nohighlight">\(n=2\)</span> subspace separates into the <span class="math notranslate nohighlight">\(m_\ell=0\)</span> block <span class="math notranslate nohighlight">\(\{\vert 2,0,0\rangle, \vert 2,1,0\rangle\}\)</span> and the <span class="math notranslate nohighlight">\(m_\ell=\pm 1\)</span> blocks (which see no first-order splitting, since <span class="math notranslate nohighlight">\(\langle 2,1,\pm 1\vert z\vert 2,1,\pm 1\rangle = 0\)</span> by parity).</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Dark State and Coherent Population Trapping</p>
+<p>Consider a three-level <strong>Λ-system</strong>: two degenerate ground states <span class="math notranslate nohighlight">\(|1\rangle\)</span>, <span class="math notranslate nohighlight">\(|2\rangle\)</span> at <span class="math notranslate nohighlight">\(E=0\)</span>, an excited state <span class="math notranslate nohighlight">\(|3\rangle\)</span> at energy <span class="math notranslate nohighlight">\(\Delta&gt;0\)</span>, and a perturbation (real couplings for clarity)</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{V} = \lambda_1\bigl(|3\rangle\langle 1| + |1\rangle\langle 3|\bigr) + \lambda_2\bigl(|3\rangle\langle 2| + |2\rangle\langle 3|\bigr).
+\]</div>
+<p>This system demonstrates that second-order degenerate PT can produce an <strong>exact</strong> dark eigenstate.</p>
+<p><strong>Step 1: First-order effective Hamiltonian vanishes.</strong></p>
+<p><span class="math notranslate nohighlight">\(\hat{V}\)</span> connects <span class="math notranslate nohighlight">\(\{|1\rangle,|2\rangle\}\)</span> only to <span class="math notranslate nohighlight">\(|3\rangle\)</span>, never within the degenerate subspace. Therefore <span class="math notranslate nohighlight">\(P_0\hat{V}P_0 = 0\)</span> and there is no first-order splitting.</p>
+<p><strong>Step 2: Compute the second-order effective Hamiltonian.</strong></p>
+<p>Using <span class="math notranslate nohighlight">\(P_0 = |1\rangle\langle 1| + |2\rangle\langle 2|\)</span>, <span class="math notranslate nohighlight">\(Q_0 = |3\rangle\langle 3|\)</span>, and the resolvent</p>
+<div class="math notranslate nohighlight">
+\[
+\bigl(E_0^{(0)} - Q_0\hat{H}_0 Q_0\bigr)^{-1} = -\frac{1}{\Delta}|3\rangle\langle 3|,
+\]</div>
+<p>the second-order term from <a class="reference internal" href="#equation-eq-5c-heff">(81)</a> gives</p>
+<div class="math notranslate nohighlight">
+\[
+H_0^{\mathrm{eff}(2)} = P_0\hat{V}Q_0\Bigl(-\frac{1}{\Delta}|3\rangle\langle 3|\Bigr)Q_0\hat{V}P_0.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{V}|3\rangle = \lambda_1|1\rangle + \lambda_2|2\rangle \equiv |\lambda\rangle\)</span> and <span class="math notranslate nohighlight">\(\langle 3|\hat{V} = \lambda_1\langle 1| + \lambda_2\langle 2| = \langle\lambda|\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+H_0^{\mathrm{eff}(2)} = -\frac{1}{\Delta}|\lambda\rangle\langle\lambda|,
+\]</div>
+<p>a <strong>rank-1 operator</strong> in the degenerate subspace.</p>
+<p><strong>Step 3: Eigenvalues and eigenvectors.</strong></p>
+<p>A rank-1 operator <span class="math notranslate nohighlight">\(-|\lambda\rangle\langle\lambda|/\Delta\)</span> has exactly one nonzero eigenvalue. Define <span class="math notranslate nohighlight">\(|\boldsymbol{\lambda}|^2 = \lambda_1^2 + \lambda_2^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Bright state:}\quad |B\rangle = \frac{|\lambda\rangle}{|\boldsymbol{\lambda}|} = \frac{\lambda_1|1\rangle + \lambda_2|2\rangle}{|\boldsymbol{\lambda}|}, \qquad E_B^{(2)} = -\frac{|\boldsymbol{\lambda}|^2}{\Delta}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Dark state:}\quad |D\rangle = \frac{\lambda_2|1\rangle - \lambda_1|2\rangle}{|\boldsymbol{\lambda}|}, \qquad E_D^{(2)} = 0.
+\]</div>
+<p>The dark state is orthogonal to <span class="math notranslate nohighlight">\(|\lambda\rangle\)</span> and is annihilated by <span class="math notranslate nohighlight">\(H_0^{\mathrm{eff}(2)}\)</span>.</p>
+<p><strong>Step 4: The dark state is an exact eigenstate of the full <span class="math notranslate nohighlight">\(\hat{H}\)</span>.</strong></p>
+<p>Compute <span class="math notranslate nohighlight">\(\hat{V}|D\rangle\)</span> directly. The h.c. part of <span class="math notranslate nohighlight">\(\hat{V}\)</span> gives zero because <span class="math notranslate nohighlight">\(\langle 3|D\rangle = 0\)</span>. The direct part gives</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{V}|D\rangle = \bigl(\lambda_1\langle 1|D\rangle + \lambda_2\langle 2|D\rangle\bigr)|3\rangle = \frac{\lambda_1\lambda_2 - \lambda_2\lambda_1}{|\boldsymbol{\lambda}|}|3\rangle = 0.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\hat{H}_0|D\rangle = 0\)</span> as well, we conclude</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}|D\rangle = \hat{H}_0|D\rangle + \hat{V}|D\rangle = 0.
+\]</div>
+<p>The dark state is an <strong>exact zero-energy eigenstate</strong> of the full Hamiltonian to all orders in <span class="math notranslate nohighlight">\(\lambda_{1,2}\)</span>. This result — a state that completely decouples from the coupling field — is the quantum-optical phenomenon of <strong>coherent population trapping</strong>, exploited in laser cooling and electromagnetically induced transparency.</p>
 </div>
 </section>
 <section id="comparison-degenerate-vs-non-degenerate">

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -551,9 +551,39 @@
 \[\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}, \qquad \boldsymbol{v} = \frac{\hat{\boldsymbol{\pi}}}{m}\]</div>
 <p>The <strong>kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> determines the particle’s velocity. The canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> is gauge-dependent; only <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> is directly observable.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Velocity from the Heisenberg Equation</p>
+<p>We compute <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\langle\hat{\boldsymbol{x}}\rangle}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}\langle[\hat{\boldsymbol{x}}, \hat{H}]\rangle\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\([\hat{x}_i, q\Phi(\hat{\boldsymbol{x}})] = 0\)</span> (both depend only on <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}\)</span>), only the kinetic term contributes. Using the product rule <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}\hat{C}] = \hat{B}[\hat{A}, \hat{C}] + [\hat{A}, \hat{B}]\hat{C}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{x}_i, (\hat{p}_j - qA_j)(\hat{p}_j - qA_j)] = (\hat{p}_j - qA_j)[\hat{x}_i, \hat{p}_j - qA_j] + [\hat{x}_i, \hat{p}_j - qA_j](\hat{p}_j - qA_j)\]</div>
+<p>Since <span class="math notranslate nohighlight">\([\hat{x}_i, A_j(\hat{\boldsymbol{x}})] = 0\)</span> and <span class="math notranslate nohighlight">\([\hat{x}_i, \hat{p}_j] = \mathrm{i}\hbar\delta_{ij}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{x}_i, \hat{p}_j - qA_j] = \mathrm{i}\hbar\delta_{ij}\]</div>
+<p>Substituting back and summing over <span class="math notranslate nohighlight">\(j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{x}_i, (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2] = (\hat{p}_i - qA_i)\,\mathrm{i}\hbar + \mathrm{i}\hbar\,(\hat{p}_i - qA_i) = 2\mathrm{i}\hbar\,\hat{\pi}_i\]</div>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}\langle\hat{x}_i\rangle}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar} \cdot \frac{1}{2m} \cdot 2\mathrm{i}\hbar\langle\hat{\pi}_i\rangle = \frac{\langle\hat{\pi}_i\rangle}{m}\]</div>
+<p>confirming <span class="math notranslate nohighlight">\(\boldsymbol{v} = \hat{\boldsymbol{\pi}}/m\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+</div>
 <div class="caution admonition">
 <p class="admonition-title">Caution: Kinetic Momentum Does Not Commute</p>
 <p>Unlike canonical momentum (<span class="math notranslate nohighlight">\([\hat{p}_i, \hat{p}_j] = 0\)</span>), kinetic momentum components satisfy <span class="math notranslate nohighlight">\([\hat{\pi}_i, \hat{\pi}_j] = \mathrm{i}q\hbar\epsilon_{ijk}B_k\)</span> in a magnetic field. This noncommutativity is central to Landau quantization (§4.3).</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Kinetic Momentum Commutator</p>
+<p>We compute <span class="math notranslate nohighlight">\([\hat{\pi}_i, \hat{\pi}_j]\)</span> where <span class="math notranslate nohighlight">\(\hat{\pi}_i = \hat{p}_i - qA_i(\hat{\boldsymbol{x}})\)</span>. Since <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{p}_j] = 0\)</span> and <span class="math notranslate nohighlight">\([A_i, A_j] = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{\pi}_i, \hat{\pi}_j] = [\hat{p}_i - qA_i,\, \hat{p}_j - qA_j] = -q[\hat{p}_i, A_j] - q[A_i, \hat{p}_j]\]</div>
+<p>Using <span class="math notranslate nohighlight">\([\hat{p}_i, f(\hat{\boldsymbol{x}})] = -\mathrm{i}\hbar\,\partial_i f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{\pi}_i, \hat{\pi}_j] = -q(-\mathrm{i}\hbar\,\partial_i A_j) - q(\mathrm{i}\hbar\,\partial_j A_i) = \mathrm{i}q\hbar(\partial_i A_j - \partial_j A_i)\]</div>
+<p>Recognizing the antisymmetric combination as the curl via the Levi-Civita symbol, <span class="math notranslate nohighlight">\(\partial_i A_j - \partial_j A_i = \epsilon_{ijk}B_k\)</span> where <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[[\hat{\pi}_i, \hat{\pi}_j] = \mathrm{i}q\hbar\,\epsilon_{ijk}B_k\]</div>
+<p>In a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, this gives <span class="math notranslate nohighlight">\([\hat{\pi}_x, \hat{\pi}_y] = \mathrm{i}q\hbar B\)</span>, which is the noncommutativity responsible for Landau level quantization (§4.3).</p>
 </div>
 </section>
 <section id="the-lorentz-force-law">
@@ -568,13 +598,25 @@
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Equation of Motion for Kinetic Momentum</p>
-<p>Expand <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}}^2 - q\boldsymbol{A}\cdot\hat{\boldsymbol{p}} - q\hat{\boldsymbol{p}}\cdot\boldsymbol{A} + q^2\boldsymbol{A}^2) + q\Phi\)</span>. The relevant commutators are:</p>
+<p><strong>Step 1: Compute <span class="math notranslate nohighlight">\([\hat{\boldsymbol{p}}, \hat{H}]\)</span>.</strong> The Hamiltonian is <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span>. We need two types of commutator.</p>
+<p><strong>(a) <span class="math notranslate nohighlight">\([\hat{p}_i, q\Phi]\)</span>:</strong> Since <span class="math notranslate nohighlight">\(\Phi = \Phi(\hat{\boldsymbol{x}})\)</span> and <span class="math notranslate nohighlight">\([\hat{p}_i, f(\hat{\boldsymbol{x}})] = -\mathrm{i}\hbar\,\partial_i f\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[[\hat{p}_i, A_j\hat{p}_j] = -\mathrm{i}\hbar(\partial_i A_j)\hat{p}_j, \quad [\hat{p}_i, A_j^2] = -2\mathrm{i}\hbar A_j(\partial_i A_j), \quad [\hat{p}_i, q\Phi] = -\mathrm{i}\hbar q\,\partial_i\Phi\]</div>
-<p>Collecting all terms in <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\langle\hat{\boldsymbol{p}}\rangle}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}\langle[\hat{\boldsymbol{p}}, \hat{H}]\rangle\)</span> and using the total time derivative <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\boldsymbol{\pi}}}{\mathrm{d}t} = \frac{\mathrm{d}\hat{\boldsymbol{p}}}{\mathrm{d}t} - q\frac{\partial\boldsymbol{A}}{\partial t}\)</span>:</p>
+\[[\hat{p}_i, q\Phi] = -\mathrm{i}\hbar\,q\,\partial_i\Phi\]</div>
+<p><strong>(b) <span class="math notranslate nohighlight">\([\hat{\boldsymbol{p}}, (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2]\)</span>:</strong> Using the kinetic momentum commutator <span class="math notranslate nohighlight">\([\hat{\pi}_i, \hat{\pi}_j] = \mathrm{i}q\hbar\epsilon_{ijk}B_k\)</span> and <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{\pi}_j] = [\hat{p}_i, \hat{p}_j - qA_j] = -q[\hat{p}_i, A_j] = \mathrm{i}q\hbar\,\partial_i A_j\)</span>, apply the product rule:</p>
 <div class="math notranslate nohighlight">
-\[m\frac{\mathrm{d}\langle\boldsymbol{v}\rangle}{\mathrm{d}t} = q\left(-\langle\nabla\Phi\rangle - \left\langle\frac{\partial\boldsymbol{A}}{\partial t}\right\rangle\right) + \frac{q}{m}\langle(\nabla\boldsymbol{A} - (\nabla\boldsymbol{A})^T)\cdot\hat{\boldsymbol{\pi}}\rangle\]</div>
-<p>Recognizing <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\((\nabla\boldsymbol{A} - (\nabla\boldsymbol{A})^T)_{ij} = \partial_i A_j - \partial_j A_i = \epsilon_{ijk}B_k\)</span> yields the Lorentz force.</p>
+\[[\hat{p}_i, \hat{\pi}_j\hat{\pi}_j] = \hat{\pi}_j[\hat{p}_i, \hat{\pi}_j] + [\hat{p}_i, \hat{\pi}_j]\hat{\pi}_j = \mathrm{i}q\hbar\bigl(\hat{\pi}_j\,\partial_i A_j + (\partial_i A_j)\hat{\pi}_j\bigr)\]</div>
+<p>Combining: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\langle\hat{p}_i\rangle}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}\langle[\hat{p}_i, \hat{H}]\rangle = \frac{q}{2m}\langle\hat{\pi}_j\,\partial_i A_j + (\partial_i A_j)\hat{\pi}_j\rangle - q\langle\partial_i\Phi\rangle\)</span>.</p>
+<p><strong>Step 2: From canonical to kinetic momentum.</strong> The kinetic momentum satisfies:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}\hat{\pi}_i}{\mathrm{d}t} = \frac{\mathrm{d}\hat{p}_i}{\mathrm{d}t} - q\frac{\partial A_i}{\partial t}\]</div>
+<p>So <span class="math notranslate nohighlight">\(m\frac{\mathrm{d}\langle v_i\rangle}{\mathrm{d}t} = \frac{q}{2m}\langle\hat{\pi}_j\,\partial_i A_j + (\partial_i A_j)\hat{\pi}_j\rangle - q\langle\partial_i\Phi\rangle - q\left\langle\frac{\partial A_i}{\partial t}\right\rangle\)</span>.</p>
+<p><strong>Step 3: Identify E and v×B.</strong> The last two terms give the electric field: <span class="math notranslate nohighlight">\(-q\nabla\Phi - q\partial_t\boldsymbol{A} = q\boldsymbol{E}\)</span>. For the magnetic term, symmetrize using <span class="math notranslate nohighlight">\(\partial_i A_j = \frac{1}{2}(\partial_i A_j + \partial_j A_i) + \frac{1}{2}(\partial_i A_j - \partial_j A_i)\)</span>. The symmetric part contributes <span class="math notranslate nohighlight">\(\frac{q}{2m}\langle\hat{\pi}_j\,\partial_j A_i + (\partial_j A_i)\hat{\pi}_j\rangle = q\langle v_j\,\partial_j A_i\rangle\)</span>, which combines with <span class="math notranslate nohighlight">\(-q\partial_t A_i\)</span> into <span class="math notranslate nohighlight">\(-q\frac{\mathrm{d}A_i}{\mathrm{d}t}\)</span>, canceling part of the kinetic momentum conversion. The antisymmetric part gives:</p>
+<div class="math notranslate nohighlight">
+\[\frac{q}{2m}\langle\hat{\pi}_j(\partial_i A_j - \partial_j A_i) + (\partial_i A_j - \partial_j A_i)\hat{\pi}_j\rangle = \frac{q}{2}\langle v_j\epsilon_{ijk}B_k + \epsilon_{ijk}B_k\,v_j\rangle\]</div>
+<p>This is the symmetrized cross product <span class="math notranslate nohighlight">\(\frac{q}{2}\langle\boldsymbol{v}\times\boldsymbol{B} - \boldsymbol{B}\times\boldsymbol{v}\rangle\)</span>, which equals <span class="math notranslate nohighlight">\(q\langle\boldsymbol{v}\times\boldsymbol{B}\rangle\)</span> in the semiclassical limit. Combining all terms yields the quantum Lorentz force:</p>
+<div class="math notranslate nohighlight">
+\[m\frac{\mathrm{d}\langle\boldsymbol{v}\rangle}{\mathrm{d}t} = q\langle\boldsymbol{E}\rangle + \frac{q}{2}\langle\boldsymbol{v}\times\boldsymbol{B} - \boldsymbol{B}\times\boldsymbol{v}\rangle\]</div>
+<p>The symmetrization <span class="math notranslate nohighlight">\(\frac{1}{2}(\boldsymbol{v}\times\boldsymbol{B} - \boldsymbol{B}\times\boldsymbol{v})\)</span> is required because <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}}\)</span> and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{B}}\)</span> are operators that generally do not commute. In the semiclassical limit (replacing operators by their expectation values), this reduces to <span class="math notranslate nohighlight">\(q(\boldsymbol{E} + \boldsymbol{v}\times\boldsymbol{B})\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
 </div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
@@ -593,6 +635,19 @@
 \[F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\]</div>
 <p><span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span> is <strong>gauge-invariant</strong>: under <span class="math notranslate nohighlight">\(A_\mu \to A_\mu + \partial_\mu\chi\)</span>, the antisymmetry gives <span class="math notranslate nohighlight">\(F'_{\mu\nu} = F_{\mu\nu}\)</span> because <span class="math notranslate nohighlight">\(\partial_\mu\partial_\nu\chi = \partial_\nu\partial_\mu\chi\)</span>.</p>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Gauge Invariance of the Field Strength Tensor</p>
+<p>Under gauge transformation <span class="math notranslate nohighlight">\(A_\mu \to A'_\mu = A_\mu + \partial_\mu\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[F'_{\mu\nu} = \partial_\mu A'_\nu - \partial_\nu A'_\mu = \partial_\mu(A_\nu + \partial_\nu\alpha) - \partial_\nu(A_\mu + \partial_\mu\alpha)\]</div>
+<p>Expanding:</p>
+<div class="math notranslate nohighlight">
+\[F'_{\mu\nu} = \partial_\mu A_\nu + \partial_\mu\partial_\nu\alpha - \partial_\nu A_\mu - \partial_\nu\partial_\mu\alpha\]</div>
+<p>Since partial derivatives commute (<span class="math notranslate nohighlight">\(\partial_\mu\partial_\nu\alpha = \partial_\nu\partial_\mu\alpha\)</span>), the <span class="math notranslate nohighlight">\(\alpha\)</span>-dependent terms cancel:</p>
+<div class="math notranslate nohighlight">
+\[F'_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu = F_{\mu\nu} \quad\checkmark\]</div>
+<p>This means <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, as components of <span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span>, are gauge-invariant and physically observable, while <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> individually are not.</p>
+</div>
 </section>
 <section id="the-gauge-principle-requires-electromagnetism">
 <h3>The Gauge Principle Requires Electromagnetism<a class="headerlink" href="#the-gauge-principle-requires-electromagnetism" title="Link to this heading">#</a></h3>
@@ -605,6 +660,44 @@
 </ol>
 <p>we were <strong>forced</strong> to introduce a gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, replace <span class="math notranslate nohighlight">\(\nabla \to \nabla - \mathrm{i}(q/\hbar)\boldsymbol{A}\)</span> (covariant derivative), and adopt <span class="math notranslate nohighlight">\(\hat{H} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m} + q\Phi\)</span>. From this, the Lorentz force and the electric/magnetic fields emerged automatically.</p>
 <p><strong>Symmetry <span class="math notranslate nohighlight">\(\to\)</span> Interaction</strong>: The gauge field is not freely chosen—it is required by quantum consistency. Every charged particle couples to the same universal gauge field.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Gauge-Invariant Probability Current with Minimal Coupling</p>
+<p>The free-particle probability current <span class="math notranslate nohighlight">\(\boldsymbol{j}_0 = \frac{\hbar}{2m\mathrm{i}}(\psi^*\nabla\psi - \psi\nabla\psi^*)\)</span> is <strong>not</strong> gauge-invariant: under <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\chi/\hbar}\psi\)</span>, each gradient picks up a <span class="math notranslate nohighlight">\(\nabla\chi\)</span> term. We derive the correct gauge-invariant current from the continuity equation for <span class="math notranslate nohighlight">\(\rho = |\psi|^2\)</span>.</p>
+<p><strong>Step 1: Derive the continuity equation.</strong> Multiply the minimal-coupling Schrödinger equation by <span class="math notranslate nohighlight">\(\psi^*\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\psi^*\partial_t\psi = \frac{1}{2m}\psi^*(-\mathrm{i}\hbar\nabla - q\boldsymbol{A})^2\psi + q\Phi|\psi|^2
+\]</div>
+<p>Subtract the complex conjugate (multiply the conjugate equation by <span class="math notranslate nohighlight">\(\psi\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar\partial_t|\psi|^2 = \frac{1}{2m}\bigl[\psi^*(-\mathrm{i}\hbar\nabla - q\boldsymbol{A})^2\psi - \psi(\mathrm{i}\hbar\nabla - q\boldsymbol{A})^2\psi^*\bigr]
+\]</div>
+<p>The scalar potential <span class="math notranslate nohighlight">\(q\Phi|\psi|^2\)</span> cancels.</p>
+<p><strong>Step 2: Expand using covariant derivatives.</strong> Let <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = -\mathrm{i}\hbar\nabla - q\boldsymbol{A}\)</span>. The <span class="math notranslate nohighlight">\(q^2A^2|\psi|^2\)</span> terms also cancel. Using the vector identity <span class="math notranslate nohighlight">\(\psi^*\nabla^2\psi - \psi\nabla^2\psi^* = \nabla\cdot(\psi^*\nabla\psi - \psi\nabla\psi^*)\)</span> and grouping the vector potential terms:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi^*\hat{\boldsymbol{\pi}}^2\psi - \psi(\hat{\boldsymbol{\pi}}^*)^2\psi^*
+= -\hbar^2\nabla\cdot(\psi^*\nabla\psi - \psi\nabla\psi^*) - 2\mathrm{i}q\hbar\,\nabla\cdot(\boldsymbol{A}|\psi|^2)
+\]</div>
+<p>where the cross terms combine as <span class="math notranslate nohighlight">\(\boldsymbol{A}\cdot\nabla|\psi|^2 + (\nabla\cdot\boldsymbol{A})|\psi|^2 = \nabla\cdot(\boldsymbol{A}|\psi|^2)\)</span>.</p>
+<p><strong>Step 3: Identify the current.</strong> Dividing by <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_t\rho = -\nabla\cdot\underbrace{\left[\frac{\hbar}{2m\mathrm{i}}(\psi^*\nabla\psi - \psi\nabla\psi^*) + \frac{q}{m}\boldsymbol{A}|\psi|^2\right]}_{\boldsymbol{j}}
+\]</div>
+<p>So the <strong>gauge-invariant probability current</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{j} = \frac{1}{m}\,\mathrm{Re}\bigl[\psi^*(-\mathrm{i}\hbar\nabla - q\boldsymbol{A})\psi\bigr] = \frac{1}{m}\,\mathrm{Re}[\psi^*\hat{\boldsymbol{\pi}}\psi] = \rho\,\boldsymbol{v}
+\]</div>
+<p><strong>Step 4: Verify gauge invariance.</strong> Under <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\chi/\hbar}\psi\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\chi\)</span>:</p>
+<ul class="simple">
+<li><p>The gradient term <span class="math notranslate nohighlight">\(\psi^*\nabla\psi\)</span> acquires <span class="math notranslate nohighlight">\(+\frac{\mathrm{i}q}{\hbar}|\psi|^2\nabla\chi\)</span> and its conjugate <span class="math notranslate nohighlight">\(-\frac{\mathrm{i}q}{\hbar}|\psi|^2\nabla\chi\)</span>, contributing <span class="math notranslate nohighlight">\(-\frac{q}{m}(\nabla\chi)|\psi|^2\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span>.</p></li>
+<li><p>The vector potential term <span class="math notranslate nohighlight">\(\frac{q}{m}\boldsymbol{A}|\psi|^2\)</span> acquires <span class="math notranslate nohighlight">\(+\frac{q}{m}(\nabla\chi)|\psi|^2\)</span>.</p></li>
+<li><p>These two contributions cancel exactly, leaving <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> unchanged. <span class="math notranslate nohighlight">\(\checkmark\)</span></p></li>
+</ul>
 </div>
 </section>
 <section id="summary">

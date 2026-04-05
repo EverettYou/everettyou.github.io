@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -511,6 +511,7 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#refraction">Refraction</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ray-equation">The Ray Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -616,8 +617,20 @@ v = \frac{c}{n}
 \]</div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Reflection from Fermat’s Principle</p>
-<p>Consider a ray in a uniform medium reflecting off a flat mirror. By Fermat’s principle, the path minimizes the geometric path length (since <span class="math notranslate nohighlight">\(n\)</span> is constant).</p>
-<p>By the geometry of reflection, “unfold” the mirror by reflecting the destination <span class="math notranslate nohighlight">\(B\)</span> to its mirror image <span class="math notranslate nohighlight">\(B'\)</span>. The shortest path from source <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(B'\)</span> is a straight line. Folding back gives the actual ray path with angle of incidence = angle of reflection.</p>
+<p>Consider a ray traveling from source <span class="math notranslate nohighlight">\(A = (0, h_1)\)</span> to target <span class="math notranslate nohighlight">\(B = (d, h_2)\)</span>, reflecting off a flat mirror at <span class="math notranslate nohighlight">\(y = 0\)</span>. The reflection point is <span class="math notranslate nohighlight">\((x, 0)\)</span>.</p>
+<p>The total path length (with constant <span class="math notranslate nohighlight">\(n\)</span>) is</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(x) = \sqrt{x^2 + h_1^2} + \sqrt{(d - x)^2 + h_2^2}
+\]</div>
+<p><strong>Calculus approach.</strong> Setting <span class="math notranslate nohighlight">\(\mathrm{d}\ell/\mathrm{d}x = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{x}{\sqrt{x^2 + h_1^2}} - \frac{d - x}{\sqrt{(d - x)^2 + h_2^2}} = 0
+\]</div>
+<p>The first term is <span class="math notranslate nohighlight">\(\sin\theta_i\)</span> (sine of incidence angle) and the second is <span class="math notranslate nohighlight">\(\sin\theta_r\)</span> (sine of reflection angle), so <span class="math notranslate nohighlight">\(\sin\theta_i = \sin\theta_r\)</span>, giving <span class="math notranslate nohighlight">\(\theta_i = \theta_r\)</span>.</p>
+<p><strong>Image method.</strong> Alternatively, reflect <span class="math notranslate nohighlight">\(B\)</span> to its mirror image <span class="math notranslate nohighlight">\(B' = (d, -h_2)\)</span>. Any path <span class="math notranslate nohighlight">\(A \to (x, 0) \to B\)</span> has the same length as <span class="math notranslate nohighlight">\(A \to (x, 0) \to B'\)</span>. The shortest such path is the straight line <span class="math notranslate nohighlight">\(A \to B'\)</span>, which gives <span class="math notranslate nohighlight">\(\theta_i = \theta_r\)</span> by vertical symmetry.</p>
+<p>To verify the extremum is a minimum, compute <span class="math notranslate nohighlight">\(\mathrm{d}^2\ell/\mathrm{d}x^2 = h_1^2 (x^2 + h_1^2)^{-3/2} + h_2^2 ((d-x)^2 + h_2^2)^{-3/2} &gt; 0\)</span>.</p>
 </div>
 </div>
 </section>
@@ -641,17 +654,23 @@ n_1 \sin \theta_1 = n_2 \sin \theta_2
 \]</div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Snell’s Law from Fermat’s Principle</p>
-<p>Place the interface at <span class="math notranslate nohighlight">\(z = 0\)</span>, source <span class="math notranslate nohighlight">\(A\)</span> at <span class="math notranslate nohighlight">\((0, 0, -h_1)\)</span> and target <span class="math notranslate nohighlight">\(B\)</span> at <span class="math notranslate nohighlight">\((d, 0, h_2)\)</span>. The ray crosses the interface at <span class="math notranslate nohighlight">\((x, 0, 0)\)</span>. The total optical path length is</p>
+<p>Place the interface along <span class="math notranslate nohighlight">\(y = 0\)</span>, with source <span class="math notranslate nohighlight">\(A = (0, h_1)\)</span> in medium <span class="math notranslate nohighlight">\(n_1\)</span> and target <span class="math notranslate nohighlight">\(B = (d, -h_2)\)</span> in medium <span class="math notranslate nohighlight">\(n_2\)</span>. The ray crosses the interface at <span class="math notranslate nohighlight">\((x, 0)\)</span>. The total optical path length is</p>
 <div class="math notranslate nohighlight">
 \[
 L(x) = n_1 \sqrt{x^2 + h_1^2} + n_2 \sqrt{(d-x)^2 + h_2^2}
 \]</div>
-<p>Applying Fermat’s condition <span class="math notranslate nohighlight">\(\mathrm{d}L / \mathrm{d}x = 0\)</span>:</p>
+<p><strong>Step 1.</strong> Differentiate and set <span class="math notranslate nohighlight">\(\mathrm{d}L / \mathrm{d}x = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-n_1 \frac{x}{\sqrt{x^2 + h_1^2}} = n_2 \frac{d - x}{\sqrt{(d-x)^2 + h_2^2}}
+\frac{\mathrm{d}L}{\mathrm{d}x} = n_1 \frac{x}{\sqrt{x^2 + h_1^2}} - n_2 \frac{d - x}{\sqrt{(d-x)^2 + h_2^2}} = 0
 \]</div>
-<p>Identifying <span class="math notranslate nohighlight">\(\sin \theta_1 = x / \sqrt{x^2 + h_1^2}\)</span> and <span class="math notranslate nohighlight">\(\sin \theta_2 = (d-x) / \sqrt{(d-x)^2 + h_2^2}\)</span> recovers Snell’s law.</p>
+<p><strong>Step 2.</strong> Identify the geometric meaning of each term. From the ray geometry, <span class="math notranslate nohighlight">\(\sin \theta_1 = x / \sqrt{x^2 + h_1^2}\)</span> is the sine of the incidence angle (measured from the normal), and <span class="math notranslate nohighlight">\(\sin \theta_2 = (d-x) / \sqrt{(d-x)^2 + h_2^2}\)</span> is the sine of the refraction angle. Substituting:</p>
+<div class="math notranslate nohighlight">
+\[
+n_1 \sin\theta_1 = n_2 \sin\theta_2
+\]</div>
+<p><strong>Step 3.</strong> Verify the extremum is a minimum: <span class="math notranslate nohighlight">\(\mathrm{d}^2 L / \mathrm{d}x^2 = n_1 h_1^2 (x^2 + h_1^2)^{-3/2} + n_2 h_2^2 ((d-x)^2 + h_2^2)^{-3/2} &gt; 0\)</span>, confirming the stationary point is a minimum of optical path length.</p>
+<p><strong>Physical interpretation.</strong> The quantity <span class="math notranslate nohighlight">\(n \sin\theta\)</span> is conserved across the interface. This is the <strong>transverse component of the optical momentum</strong> <span class="math notranslate nohighlight">\(n \hat{\boldsymbol{e}}_{\text{ray}}\)</span>, analogous to conservation of transverse momentum in mechanics when the potential depends only on <span class="math notranslate nohighlight">\(y\)</span>.</p>
 </div>
 </div>
 <div class="dropdown tip admonition">
@@ -660,12 +679,152 @@ n_1 \frac{x}{\sqrt{x^2 + h_1^2}} = n_2 \frac{d - x}{\sqrt{(d-x)^2 + h_2^2}}
 </div>
 </section>
 </section>
+<section id="the-ray-equation">
+<h3>The Ray Equation<a class="headerlink" href="#the-ray-equation" title="Link to this heading">#</a></h3>
+<p>Fermat’s principle can be applied to media where <span class="math notranslate nohighlight">\(n(\boldsymbol{r})\)</span> varies continuously (<strong>gradient-index</strong> or GRIN media). The resulting <strong>ray equation</strong> is the Euler-Lagrange equation for the optical path length functional.</p>
+<div class="important admonition">
+<p class="admonition-title">Ray Equation</p>
+<p>For a ray path <span class="math notranslate nohighlight">\(\boldsymbol{r}(s)\)</span> parametrized by arc length <span class="math notranslate nohighlight">\(s\)</span> in a medium with refractive index <span class="math notranslate nohighlight">\(n(\boldsymbol{r})\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ray-equation">
+<span class="eqno">(56)<a class="headerlink" href="#equation-eq-ray-equation" title="Link to this equation">#</a></span>\[
+\frac{\mathrm{d}}{\mathrm{d}s}\!\left(n \frac{\mathrm{d}\boldsymbol{r}}{\mathrm{d}s}\right) = \boldsymbol{\nabla} n
+\]</div>
+</div>
+<p>This is Newton’s second law for light: the “optical momentum” <span class="math notranslate nohighlight">\(n \, \mathrm{d}\boldsymbol{r}/\mathrm{d}s\)</span> changes in response to the “force” <span class="math notranslate nohighlight">\(\boldsymbol{\nabla} n\)</span>. Light bends toward regions of higher refractive index, just as a particle accelerates toward lower potential energy.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Ray Equation from Fermat’s Principle</p>
+<p>Parametrize the ray path by arc length <span class="math notranslate nohighlight">\(s\)</span>, so <span class="math notranslate nohighlight">\(|\mathrm{d}\boldsymbol{r}/\mathrm{d}s| = 1\)</span>. The optical path length functional is</p>
+<div class="math notranslate nohighlight">
+\[
+L[\boldsymbol{r}] = \int n(\boldsymbol{r}(s)) \, \mathrm{d}s
+\]</div>
+<p>This has the form of a Lagrangian mechanics problem with “Lagrangian” <span class="math notranslate nohighlight">\(\mathcal{L} = n(\boldsymbol{r}) \, |\dot{\boldsymbol{r}}|\)</span> where <span class="math notranslate nohighlight">\(\dot{\boldsymbol{r}} = \mathrm{d}\boldsymbol{r}/\mathrm{d}s\)</span>. Since <span class="math notranslate nohighlight">\(|\dot{\boldsymbol{r}}| = 1\)</span> on a path parametrized by arc length, <span class="math notranslate nohighlight">\(\mathcal{L} = n(\boldsymbol{r})\)</span>.</p>
+<p><strong>Euler-Lagrange equation.</strong> For the functional <span class="math notranslate nohighlight">\(L = \int \mathcal{L}(\boldsymbol{r}, \dot{\boldsymbol{r}}) \, \mathrm{d}s\)</span> with the constraint <span class="math notranslate nohighlight">\(|\dot{\boldsymbol{r}}| = 1\)</span>, the Euler-Lagrange equation gives:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}s}\frac{\partial(n |\dot{\boldsymbol{r}}|)}{\partial \dot{\boldsymbol{r}}} = \frac{\partial(n |\dot{\boldsymbol{r}}|)}{\partial \boldsymbol{r}}
+\]</div>
+<p>Computing each side:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial(n |\dot{\boldsymbol{r}}|)}{\partial \dot{\boldsymbol{r}}} = n \frac{\dot{\boldsymbol{r}}}{|\dot{\boldsymbol{r}}|} = n \dot{\boldsymbol{r}}, \qquad \frac{\partial(n |\dot{\boldsymbol{r}}|)}{\partial \boldsymbol{r}} = |\dot{\boldsymbol{r}}| \, \boldsymbol{\nabla} n = \boldsymbol{\nabla} n
+\]</div>
+<p>Substituting yields the ray equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}s}\!\left(n \frac{\mathrm{d}\boldsymbol{r}}{\mathrm{d}s}\right) = \boldsymbol{\nabla} n
+\]</div>
+<p><strong>Recovery of Snell’s law.</strong> At a sharp interface (step-function <span class="math notranslate nohighlight">\(n\)</span>), integrate the ray equation across the boundary. The component of <span class="math notranslate nohighlight">\(n \, \mathrm{d}\boldsymbol{r}/\mathrm{d}s\)</span> tangent to the interface is continuous, giving <span class="math notranslate nohighlight">\(n_1 \sin\theta_1 = n_2 \sin\theta_2\)</span>.</p>
+<p><strong>Analogy with Newton’s second law.</strong> Writing <span class="math notranslate nohighlight">\(\boldsymbol{p}_{\text{opt}} = n \hat{\boldsymbol{e}}\)</span> where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{e}} = \mathrm{d}\boldsymbol{r}/\mathrm{d}s\)</span> is the ray direction, the ray equation reads <span class="math notranslate nohighlight">\(\mathrm{d}\boldsymbol{p}_{\text{opt}}/\mathrm{d}s = \boldsymbol{\nabla} n\)</span>. Light bends toward regions of higher <span class="math notranslate nohighlight">\(n\)</span>, just as a particle accelerates toward lower potential.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: The Eikonal Equation from the Wave Equation</p>
+<p>The eikonal equation is the mathematical bridge between wave optics and geometric optics. We derive it by inserting a WKB-like ansatz into the scalar wave equation and taking the short-wavelength limit.</p>
+<p><strong>Setup.</strong> In a medium with spatially varying refractive index <span class="math notranslate nohighlight">\(n(\boldsymbol{r})\)</span>, a monochromatic wave at frequency <span class="math notranslate nohighlight">\(\omega\)</span> satisfies the <strong>Helmholtz equation</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 u + k_0^2 n^2(\boldsymbol{r}) u = 0, \qquad k_0 = \frac{\omega}{c}
+\]</div>
+<p><strong>Step 1: WKB ansatz.</strong> Write the wave field as</p>
+<div class="math notranslate nohighlight">
+\[
+u(\boldsymbol{r}) = A(\boldsymbol{r})\, \mathrm{e}^{\mathrm{i} k_0 S(\boldsymbol{r})}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A(\boldsymbol{r})\)</span> is a slowly varying real amplitude and <span class="math notranslate nohighlight">\(S(\boldsymbol{r})\)</span> is the <strong>eikonal</strong> (optical phase function, measured in units of length). Surfaces of constant <span class="math notranslate nohighlight">\(S\)</span> are the wavefronts.</p>
+<p><strong>Step 2: Compute the Laplacian.</strong> Applying <span class="math notranslate nohighlight">\(\nabla\)</span> twice to the ansatz:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla u = \left(\nabla A + \mathrm{i} k_0 A\, \nabla S\right)\mathrm{e}^{\mathrm{i} k_0 S}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\nabla^2 u = \left[\nabla^2 A + 2\mathrm{i} k_0 (\nabla A)\cdot(\nabla S) + \mathrm{i} k_0 A\, \nabla^2 S - k_0^2 A\, |\nabla S|^2\right]\mathrm{e}^{\mathrm{i} k_0 S}
+\]</div>
+<p><strong>Step 3: Substitute into the Helmholtz equation.</strong> Dividing by <span class="math notranslate nohighlight">\(A\,\mathrm{e}^{\mathrm{i} k_0 S}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\nabla^2 A}{A} + 2\mathrm{i} k_0 \frac{\nabla A}{A}\cdot\nabla S + \mathrm{i} k_0 \nabla^2 S - k_0^2 |\nabla S|^2 + k_0^2 n^2 = 0
+\]</div>
+<p><strong>Step 4: Separate real and imaginary parts.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\underbrace{\left(n^2 - |\nabla S|^2\right)k_0^2 + \frac{\nabla^2 A}{A}}_{\text{real}} + \mathrm{i}\underbrace{\left(2\nabla A\cdot\nabla S + A\,\nabla^2 S\right)k_0}_{\text{imaginary}} = 0
+\]</div>
+<p><strong>Step 5: Short-wavelength limit.</strong> In the geometric optics regime <span class="math notranslate nohighlight">\(k_0 \to \infty\)</span> (i.e., wavelength <span class="math notranslate nohighlight">\(\lambda = 2\pi/k_0 \to 0\)</span>), the term <span class="math notranslate nohighlight">\(\nabla^2 A/A\)</span> is <span class="math notranslate nohighlight">\(O(1)\)</span> and becomes negligible compared to the <span class="math notranslate nohighlight">\(O(k_0^2)\)</span> terms. Setting each part to zero at leading order:</p>
+<ul class="simple">
+<li><p><strong>Real part</strong> (<span class="math notranslate nohighlight">\(O(k_0^2)\)</span>): the <strong>Eikonal equation</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-eikonal">
+<span class="eqno">(57)<a class="headerlink" href="#equation-eq-eikonal" title="Link to this equation">#</a></span>\[
+|\nabla S|^2 = n^2(\boldsymbol{r})
+\]</div>
+<ul class="simple">
+<li><p><strong>Imaginary part</strong> (<span class="math notranslate nohighlight">\(O(k_0)\)</span>): the <strong>Transport equation</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+2\nabla A\cdot\nabla S + A\,\nabla^2 S = 0 \quad \Longleftrightarrow \quad \nabla\cdot\left(A^2\,\nabla S\right) = 0
+\]</div>
+<p>The transport equation says that the intensity <span class="math notranslate nohighlight">\(I = A^2\)</span> is conserved along ray tubes.</p>
+<p><strong>Step 6: Ray direction from the eikonal.</strong> The eikonal <span class="math notranslate nohighlight">\(S\)</span> plays the role of Hamilton’s principal function. Comparing with Fermat’s principle, the optical momentum is</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{p}_{\text{opt}} = \nabla S, \qquad |\boldsymbol{p}_{\text{opt}}| = n
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\nabla S\)</span> is everywhere tangent to the rays with magnitude <span class="math notranslate nohighlight">\(n\)</span>. The ray direction is <span class="math notranslate nohighlight">\(\hat{\boldsymbol{e}} = \nabla S / n\)</span>.</p>
+<p><strong>Step 7: Recover the ray equation.</strong> Differentiate the eikonal equation along the ray (parametrized by arc length <span class="math notranslate nohighlight">\(s\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}s}(n\hat{\boldsymbol{e}}) = \frac{\mathrm{d}}{\mathrm{d}s}(\nabla S) = (\hat{\boldsymbol{e}}\cdot\nabla)\nabla S
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\hat{\boldsymbol{e}} = \nabla S/n\)</span> and <span class="math notranslate nohighlight">\(|\nabla S|^2 = n^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+(\hat{\boldsymbol{e}}\cdot\nabla)\nabla S = \frac{(\nabla S\cdot\nabla)\nabla S}{n} = \frac{\nabla|\nabla S|^2/2}{n} = \frac{\nabla n^2/2}{n} = \nabla n
+\]</div>
+<p>This reproduces the <strong>ray equation</strong> <span class="math notranslate nohighlight">\(\mathrm{d}(n\hat{\boldsymbol{e}})/\mathrm{d}s = \nabla n\)</span>, confirming consistency.</p>
+<p><strong>Analogy with Hamilton-Jacobi mechanics.</strong> The eikonal equation <span class="math notranslate nohighlight">\(|\nabla S|^2 = n^2\)</span> is structurally identical to the classical Hamilton-Jacobi equation <span class="math notranslate nohighlight">\(|\nabla S_{\text{mech}}|^2/2m + V = E\)</span> for a particle with energy <span class="math notranslate nohighlight">\(E\)</span> in potential <span class="math notranslate nohighlight">\(V\)</span>. The identification <span class="math notranslate nohighlight">\(n^2 \leftrightarrow 2m(E - V)\)</span> is the optical-mechanical analogy that Schrödinger used to develop wave mechanics — and that the path integral makes precise.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Snell’s Law as Conservation of Canonical Momentum</p>
+<p>In classical mechanics, a cyclic coordinate (one that does not appear in the Lagrangian) has a conserved conjugate momentum. The same principle governs ray optics.</p>
+<p><strong>Setup.</strong> Parameterize a ray in a 2D plane by the horizontal coordinate <span class="math notranslate nohighlight">\(x\)</span>, with <span class="math notranslate nohighlight">\(y(x)\)</span> describing the ray path. The <strong>optical Lagrangian</strong> is the optical path length per unit <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(y, y') = n(x, y)\sqrt{1 + y^{\prime 2}}, \qquad y' = \frac{\mathrm{d}y}{\mathrm{d}x}.
+\]</div>
+<p><strong>Canonical momentum.</strong> The canonical momentum conjugate to <span class="math notranslate nohighlight">\(y\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+p = \frac{\partial \mathcal{L}}{\partial y'} = \frac{n\, y'}{\sqrt{1 + y^{\prime 2}}} = n\sin\theta,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle the ray makes with the <span class="math notranslate nohighlight">\(x\)</span>-axis. This is the <strong>transverse momentum</strong> of the ray.</p>
+<p><strong>Euler-Lagrange equation.</strong> The equation of motion is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}}{\mathrm{d}x}\left(n\sin\theta\right) = \frac{\partial \mathcal{L}}{\partial y} = \frac{\partial n}{\partial y}\sqrt{1+y^{\prime 2}}.
+\]</div>
+<p><strong>Conservation and Snell’s law.</strong> If the medium is <strong>stratified</strong> — <span class="math notranslate nohighlight">\(n = n(x)\)</span> independent of <span class="math notranslate nohighlight">\(y\)</span> — then <span class="math notranslate nohighlight">\(\partial \mathcal{L}/\partial y = 0\)</span> and the canonical momentum is <strong>conserved</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+p = n(x)\sin\theta(x) = \text{const}.
+\]</div>
+<p>At a sharp interface between media <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>, continuity of <span class="math notranslate nohighlight">\(p\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[
+n_1 \sin\theta_1 = n_2 \sin\theta_2.
+\]</div>
+<p>This is Snell’s law — not an independent postulate, but a <strong>conservation law</strong> following from the translational symmetry of the medium. The analogy with mechanics is perfect: in a uniform potential, the component of momentum along the symmetry direction is conserved.</p>
+<p><strong>Paraxial limit.</strong> For small angles (<span class="math notranslate nohighlight">\(\sin\theta \approx \theta\)</span>), <span class="math notranslate nohighlight">\(p \approx n\theta\)</span>. The canonical mechanics description becomes linear — the <strong>ABCD matrix formalism</strong> for paraxial optics — in exact parallel with the linearization of Hamilton’s equations near equilibrium.</p>
+</div>
+</section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Historical debate</strong>: Newton’s corpuscle theory and Huygens’ wave theory both predict the same geometric laws, but the corpuscle picture offers no mechanism for diffraction or interference. These phenomena ultimately reveal the wave nature of light (§3.1.2).</p></li>
 <li><p><strong>Speed of light in media</strong>: <span class="math notranslate nohighlight">\(v = c/n\)</span>; the refractive index <span class="math notranslate nohighlight">\(n &gt; 1\)</span> encodes how a medium slows light.</p></li>
 <li><p><strong>Fermat’s Principle</strong>: Light travels paths where the optical path length <span class="math notranslate nohighlight">\(L = \int n \, \mathrm{d}s\)</span> is stationary. All three laws of geometric optics follow from <span class="math notranslate nohighlight">\(\delta L = 0\)</span>.</p></li>
+<li><p><strong>Ray equation</strong>: In a continuously varying medium, <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}s}(n \, \mathrm{d}\boldsymbol{r}/\mathrm{d}s) = \boldsymbol{\nabla} n\)</span>. Light bends toward regions of higher refractive index.</p></li>
 <li><p><strong>Action parallel</strong>: Optical path length plays the role of action for light; Fermat’s principle (<span class="math notranslate nohighlight">\(\delta L = 0\)</span>) mirrors Hamilton’s principle (<span class="math notranslate nohighlight">\(\delta S = 0\)</span>). This parallel is the key to the path integral (§3.1.3).</p></li>
 </ul>
 <div class="seealso admonition">
@@ -764,6 +923,7 @@ n_1 \frac{x}{\sqrt{x^2 + h_1^2}} = n_2 \frac{d - x}{\sqrt{(d-x)^2 + h_2^2}}
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#refraction">Refraction</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ray-equation">The Ray Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
