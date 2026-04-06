@@ -267,6 +267,9 @@ Ch1 establishes the complete quantum framework on a single qubit: states are vec
     - (2j+1)-dimensional irreducible representation
     - rotation operator D^j(R) = exp(-i theta n.J)
     - Wigner D-matrices (define, no need to derive)
+  - Combining spatial and spin degrees of freedom
+    - total wavefunction = spatial part x spinor
+    - probability density includes spin index
 
 - 2.2.3 Addition of Angular Momenta
 

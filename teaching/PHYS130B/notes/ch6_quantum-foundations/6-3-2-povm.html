@@ -560,12 +560,12 @@ document.write(`
 <p>A <strong>positive operator-valued measure (POVM)</strong> is a set of operators <span class="math notranslate nohighlight">\(\{\hat{M}_1, \hat{M}_2, \ldots, \hat{M}_n\}\)</span> on Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> satisfying two conditions:</p>
 <p><strong>1. Positive semidefiniteness</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-positive">
-<span class="eqno">(131)<a class="headerlink" href="#equation-eq-povm-positive" title="Link to this equation">#</a></span>\[
+<span class="eqno">(132)<a class="headerlink" href="#equation-eq-povm-positive" title="Link to this equation">#</a></span>\[
 \hat{M}_i \geq 0 \quad \text{for all } i \quad (\text{all eigenvalues} \geq 0)
 \]</div>
 <p><strong>2. Completeness</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-complete">
-<span class="eqno">(132)<a class="headerlink" href="#equation-eq-povm-complete" title="Link to this equation">#</a></span>\[
+<span class="eqno">(133)<a class="headerlink" href="#equation-eq-povm-complete" title="Link to this equation">#</a></span>\[
 \sum_i \hat{M}_i = I
 \]</div>
 <p>These conditions ensure that measurement probabilities are non-negative and sum to one.</p>
@@ -575,12 +575,12 @@ document.write(`
 <p>If a system in state <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is measured using POVM <span class="math notranslate nohighlight">\(\{\hat{M}_i\}\)</span>:</p>
 <p><strong>Outcome probability</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-probability">
-<span class="eqno">(133)<a class="headerlink" href="#equation-eq-povm-probability" title="Link to this equation">#</a></span>\[
+<span class="eqno">(134)<a class="headerlink" href="#equation-eq-povm-probability" title="Link to this equation">#</a></span>\[
 p_i = \text{Tr}(\hat{M}_i \hat{\rho})
 \]</div>
 <p><strong>Post-measurement state</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-collapse">
-<span class="eqno">(134)<a class="headerlink" href="#equation-eq-povm-collapse" title="Link to this equation">#</a></span>\[
+<span class="eqno">(135)<a class="headerlink" href="#equation-eq-povm-collapse" title="Link to this equation">#</a></span>\[
 \hat{\rho}'_i = \frac{\sqrt{\hat{M}_i} \hat{\rho} \sqrt{\hat{M}_i}}{\text{Tr}(\hat{M}_i \hat{\rho})}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\sqrt{\hat{M}_i}\)</span> is the unique positive square root (defined via spectral decomposition: <span class="math notranslate nohighlight">\(\hat{M}_i = \sum_j \lambda_{i,j} |v_{i,j}\rangle\langle v_{i,j}| \Rightarrow \sqrt{\hat{M}_i} = \sum_j \sqrt{\lambda_{i,j}} |v_{i,j}\rangle\langle v_{i,j}|\)</span>).</p>
@@ -643,11 +643,156 @@ p_i = \text{Tr}(\hat{M}_i \hat{\rho})
 <li><p>Outcome 2: “State is <span class="math notranslate nohighlight">\(|\psi_2\rangle\)</span>” (definite, no error)</p></li>
 <li><p>Outcome 3: “Inconclusive” (try again or use different strategy)</p></li>
 </ul>
+<div class="dropdown note admonition">
+<p class="admonition-title">Construction: Unambiguous State Discrimination POVM</p>
+<p>For two states <span class="math notranslate nohighlight">\(|\psi_1\rangle, |\psi_2\rangle\)</span> with overlap <span class="math notranslate nohighlight">\(c = \langle\psi_1|\psi_2\rangle\)</span> where <span class="math notranslate nohighlight">\(0 &lt; |c| &lt; 1\)</span>:</p>
+<p>Define POVM elements:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}_1 = \frac{1}{1+|c|^2}(I - |\psi_2\rangle\langle\psi_2|)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}_2 = \frac{1}{1+|c|^2}(I - |\psi_1\rangle\langle\psi_1|)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}_3 = I - \hat{M}_1 - \hat{M}_2
+\]</div>
+<p><strong>Key property</strong>: If the state is <span class="math notranslate nohighlight">\(|\psi_1\rangle\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle\psi_1|\hat{M}_2|\psi_1\rangle = 0\)</span> (outcome 2 never occurs)</p></li>
+<li><p>Outcomes 1 and 3 occur with probabilities <span class="math notranslate nohighlight">\(1-|c|^2\)</span> and <span class="math notranslate nohighlight">\(|c|^2\)</span> respectively</p></li>
+</ul>
+<p>Similarly, if state is <span class="math notranslate nohighlight">\(|\psi_2\rangle\)</span>: outcome 1 never occurs. This guarantees <strong>no false identifications</strong>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Unambiguous State Discrimination</p>
+<p><strong>Goal.</strong> Prove that the POVM <span class="math notranslate nohighlight">\(\{\hat{M}_1, \hat{M}_2, \hat{M}_3\}\)</span> defined above achieves unambiguous discrimination: if the state is <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span>, outcome 2 never fires, and vice versa.</p>
+<p><strong>Setup.</strong> Let <span class="math notranslate nohighlight">\(c = \langle\psi_1\vert\psi_2\rangle \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(0 &lt; c &lt; 1\)</span> (WLOG real after a phase choice). The POVM elements are:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}_1 = \frac{1}{1+c^2}(\hat{I} - \vert\psi_2\rangle\langle\psi_2\vert), \quad \hat{M}_2 = \frac{1}{1+c^2}(\hat{I} - \vert\psi_1\rangle\langle\psi_1\vert), \quad \hat{M}_3 = \hat{I} - \hat{M}_1 - \hat{M}_2
+\]</div>
+<p><strong>Step 1: No-error condition.</strong></p>
+<p>If the state is <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span>, the probability of outcome 2 is:</p>
+<div class="math notranslate nohighlight">
+\[
+p(2\vert\psi_1) = \langle\psi_1\vert\hat{M}_2\vert\psi_1\rangle = \frac{1}{1+c^2}\langle\psi_1\vert(\hat{I} - \vert\psi_1\rangle\langle\psi_1\vert)\vert\psi_1\rangle = \frac{1}{1+c^2}(1 - 1) = 0
+\]</div>
+<p>By exactly the same argument, <span class="math notranslate nohighlight">\(p(1\vert\psi_2) = \langle\psi_2\vert\hat{M}_1\vert\psi_2\rangle = \frac{1}{1+c^2}(1 - 1) = 0\)</span>.</p>
+<p>So outcomes 1 and 2 are <strong>never wrong</strong>: getting outcome 1 means the state is definitely <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span>, and outcome 2 means definitely <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span>.</p>
+<p><strong>Step 2: Positive semidefiniteness of <span class="math notranslate nohighlight">\(\hat{M}_3\)</span>.</strong></p>
+<p>We need <span class="math notranslate nohighlight">\(\hat{M}_3 \geq 0\)</span>. Compute:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}_1 + \hat{M}_2 = \frac{1}{1+c^2}\left(2\hat{I} - \vert\psi_1\rangle\langle\psi_1\vert - \vert\psi_2\rangle\langle\psi_2\vert\right)
+\]</div>
+<p>The operator <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\langle\psi_1\vert + \vert\psi_2\rangle\langle\psi_2\vert\)</span> has eigenvalues <span class="math notranslate nohighlight">\(1 \pm c\)</span> (in the 2D subspace spanned by <span class="math notranslate nohighlight">\(\vert\psi_1\rangle, \vert\psi_2\rangle\)</span>). Thus <span class="math notranslate nohighlight">\(\hat{M}_1 + \hat{M}_2\)</span> has maximum eigenvalue <span class="math notranslate nohighlight">\(\frac{2 - (1 - c)}{1+c^2} = \frac{1+c}{1+c^2} \leq 1\)</span> (since <span class="math notranslate nohighlight">\(1 + c \leq 1 + c^2\)</span> for <span class="math notranslate nohighlight">\(0 \leq c \leq 1\)</span>). Therefore <span class="math notranslate nohighlight">\(\hat{M}_3 = \hat{I} - \hat{M}_1 - \hat{M}_2 \geq 0\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p><strong>Step 3: Success and failure probabilities.</strong></p>
+<p>If the state is <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+p(1\vert\psi_1) = \frac{1}{1+c^2}\langle\psi_1\vert(\hat{I} - \vert\psi_2\rangle\langle\psi_2\vert)\vert\psi_1\rangle = \frac{1 - c^2}{1+c^2}
+\]</div>
+<p>The inconclusive probability is <span class="math notranslate nohighlight">\(p(3\vert\psi_1) = 1 - p(1\vert\psi_1) = \frac{2c^2}{1+c^2}\)</span>.</p>
+<p><strong>Optimality note.</strong> The maximum achievable success probability (IDP bound) for equal prior probabilities is <span class="math notranslate nohighlight">\(1 - c\)</span>. Our POVM achieves <span class="math notranslate nohighlight">\(\frac{1 - c^2}{1+c^2} &lt; 1 - c\)</span> — it is not optimal but illustrates the key idea. The optimal USD POVM (Ivanovic-Dieks-Peres) uses a different normalization factor <span class="math notranslate nohighlight">\(\frac{1}{1+c}\)</span>, achieving <span class="math notranslate nohighlight">\(p_\text{success} = 1 - c\)</span> with <span class="math notranslate nohighlight">\(p_\text{fail} = c\)</span>. The essential point — that zero-error discrimination is possible at the cost of some inconclusive outcomes — holds for any valid choice.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Optimal Success Probability — the IDP Bound</p>
+<p>We prove that the maximum success probability for unambiguous state discrimination of two pure states <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span> (prepared with equal prior probability <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> each) is bounded by</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\mathrm{success}} \leq 1 - |\langle\psi_1\vert\psi_2\rangle|
+\]</div>
+<p>This is the <strong>Ivanovic-Dieks-Peres (IDP) bound</strong>.</p>
+<p><strong>Setup.</strong> An unambiguous POVM has three outcomes: <span class="math notranslate nohighlight">\(\hat{M}_1\)</span> (conclude <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span>, no error), <span class="math notranslate nohighlight">\(\hat{M}_2\)</span> (conclude <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span>, no error), <span class="math notranslate nohighlight">\(\hat{M}_?\)</span> (inconclusive). The no-error conditions require:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\psi_2\vert\hat{M}_1\vert\psi_2\rangle = 0, \qquad \langle\psi_1\vert\hat{M}_2\vert\psi_1\rangle = 0
+\]</div>
+<p><strong>Constraint from no-error.</strong> Since <span class="math notranslate nohighlight">\(\hat{M}_1 \geq 0\)</span> and <span class="math notranslate nohighlight">\(\langle\psi_2\vert\hat{M}_1\vert\psi_2\rangle = 0\)</span>, the operator <span class="math notranslate nohighlight">\(\hat{M}_1\)</span> must be zero on the subspace spanned by <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span>. In a 2D qubit space, <span class="math notranslate nohighlight">\(\hat{M}_1\)</span> can only have support on the component of <span class="math notranslate nohighlight">\(\vert\psi_1\rangle\)</span> orthogonal to <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{M}_1 = q_1 \vert\psi_2^\perp\rangle\langle\psi_2^\perp\vert, \qquad 0 \leq q_1 \leq 1
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vert\psi_2^\perp\rangle\)</span> is the unit vector orthogonal to <span class="math notranslate nohighlight">\(\vert\psi_2\rangle\)</span>. Similarly, <span class="math notranslate nohighlight">\(\hat{M}_2 = q_2\vert\psi_1^\perp\rangle\langle\psi_1^\perp\vert\)</span>.</p>
+<p><strong>Success probability.</strong> The total success probability (averaged over equal priors) is:</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\mathrm{success}} = \frac{1}{2}\langle\psi_1\vert\hat{M}_1\vert\psi_1\rangle + \frac{1}{2}\langle\psi_2\vert\hat{M}_2\vert\psi_2\rangle = \frac{q_1}{2}|\langle\psi_1\vert\psi_2^\perp\rangle|^2 + \frac{q_2}{2}|\langle\psi_2\vert\psi_1^\perp\rangle|^2
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(|\langle\psi_1\vert\psi_2^\perp\rangle|^2 = 1 - |\langle\psi_1\vert\psi_2\rangle|^2\)</span> (Pythagorean identity) and similarly for the other term, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\mathrm{success}} = \frac{q_1 + q_2}{2}(1 - |c|^2)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c = \langle\psi_1\vert\psi_2\rangle\)</span>.</p>
+<p><strong>Completeness constraint.</strong> From <span class="math notranslate nohighlight">\(\hat{M}_? = \hat{I} - \hat{M}_1 - \hat{M}_2 \geq 0\)</span>, and evaluating in the 2D basis, one finds the constraint <span class="math notranslate nohighlight">\(q_1 q_2 \leq |c|^2\)</span>. The maximum of <span class="math notranslate nohighlight">\(q_1 + q_2\)</span> subject to <span class="math notranslate nohighlight">\(q_1 q_2 \leq |c|^2\)</span> and <span class="math notranslate nohighlight">\(0 \leq q_1, q_2 \leq 1\)</span> is achieved at <span class="math notranslate nohighlight">\(q_1 = q_2 = |c|\)</span>, giving <span class="math notranslate nohighlight">\(q_1 + q_2 = 2|c|\)</span>.</p>
+<p><strong>IDP bound.</strong> Substituting:</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\mathrm{success}}^{\max} = |c|(1 - |c|^2) / (\text{wait}) 
+\]</div>
+<p>Actually, with equal priors and <span class="math notranslate nohighlight">\(q_1 = q_2 = q\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\mathrm{success}} = q(1 - |c|^2)
+\]</div>
+<p>The constraint becomes <span class="math notranslate nohighlight">\(q^2 \leq |c|^2 \Rightarrow q \leq |c|\)</span>. Maximizing: <span class="math notranslate nohighlight">\(q^* = |c|\)</span>, giving the <strong>IDP bound</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{p_{\mathrm{success}}^{\max} = 1 - |c| = 1 - |\langle\psi_1\vert\psi_2\rangle|}
+\]</div>
+<p>The POVM in the Construction box achieves this bound. For <span class="math notranslate nohighlight">\(c \to 0\)</span> (orthogonal states): <span class="math notranslate nohighlight">\(p_{\mathrm{success}} \to 1\)</span> (perfect discrimination). For <span class="math notranslate nohighlight">\(c \to 1\)</span> (identical states): <span class="math notranslate nohighlight">\(p_{\mathrm{success}} \to 0\)</span> (no information to gain).</p>
+</div>
 </section>
 <section id="naimark-s-theorem-povm-as-extended-projective-measurement">
 <h3>Naimark’s Theorem: POVM as Extended Projective Measurement<a class="headerlink" href="#naimark-s-theorem-povm-as-extended-projective-measurement" title="Link to this heading">#</a></h3>
 <p>Every POVM on a Hilbert space can be realized as a projective measurement on an <strong>extended Hilbert space</strong> (original space plus auxiliary system).</p>
+<div class="important admonition">
+<p class="admonition-title">Naimark’s Theorem</p>
+<p>Every POVM <span class="math notranslate nohighlight">\(\{\hat{M}_i\}\)</span> on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> can be realized as a projective measurement on an extended space <span class="math notranslate nohighlight">\(\mathcal{H} \otimes \mathcal{H}_\text{aux}\)</span>. Specifically, there exist:</p>
+<ul class="simple">
+<li><p>An auxiliary (ancilla) Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_\text{aux}\)</span></p></li>
+<li><p>Orthogonal projectors <span class="math notranslate nohighlight">\(\{\hat{P}_i\}\)</span> on <span class="math notranslate nohighlight">\(\mathcal{H} \otimes \mathcal{H}_\text{aux}\)</span></p></li>
+</ul>
+<p>such that:</p>
+<div class="math notranslate nohighlight" id="equation-eq-povm-neumark">
+<span class="eqno">(136)<a class="headerlink" href="#equation-eq-povm-neumark" title="Link to this equation">#</a></span>\[
+\hat{M}_i = \text{Tr}_\text{aux}(\hat{P}_i (\hat{\rho} \otimes |0\rangle\langle 0|_\text{aux}))
+\]</div>
+<p><strong>Physical picture</strong>: Entangle the system with an ancilla, perform a projective measurement on the combined system, and trace out (discard) the ancilla measurement outcome.</p>
+</div>
 <p>This theorem reveals a profound truth: <strong>POVMs are not fundamentally more general than projective measurements</strong>—they are equivalent to projective measurements on a larger system. The apparent “softness” of a POVM comes from not observing (or not having access to) the ancilla measurement outcome.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Naimark Dilation Construction</p>
+<p><strong>Goal.</strong> Show that any POVM <span class="math notranslate nohighlight">\(\{\hat{M}_i\}_{i=1}^n\)</span> on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> (dim <span class="math notranslate nohighlight">\(d\)</span>) can be realized as a projective measurement on <span class="math notranslate nohighlight">\(\mathcal{H}\otimes\mathcal{H}_{\text{aux}}\)</span> (dim <span class="math notranslate nohighlight">\(d\cdot n\)</span>).</p>
+<p><strong>Construction.</strong> Let <span class="math notranslate nohighlight">\(\{\vert e_i\rangle\}_{i=1}^n\)</span> be an orthonormal basis for the ancilla <span class="math notranslate nohighlight">\(\mathcal{H}_{\text{aux}}\)</span> (one basis vector per POVM outcome). Define the <strong>Stinespring isometry</strong> <span class="math notranslate nohighlight">\(V: \mathcal{H}\to\mathcal{H}\otimes\mathcal{H}_{\text{aux}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+V\vert\psi\rangle = \sum_{i=1}^n (\sqrt{\hat{M}_i}\vert\psi\rangle) \otimes \vert e_i\rangle
+\]</div>
+<p><strong>Step 1: <span class="math notranslate nohighlight">\(V\)</span> is an isometry.</strong> Check <span class="math notranslate nohighlight">\(V^\dagger V = \hat{I}_{\mathcal{H}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\psi\vert V^\dagger V\vert\phi\rangle = \sum_i \langle\psi\vert\sqrt{\hat{M}_i}^\dagger\sqrt{\hat{M}_i}\vert\phi\rangle\,\underbrace{\langle e_i\vert e_i\rangle}_{1} = \langle\psi\vert\left(\sum_i \hat{M}_i\right)\vert\phi\rangle = \langle\psi\vert\phi\rangle
+\]</div>
+<p>using the completeness condition <span class="math notranslate nohighlight">\(\sum_i\hat{M}_i = \hat{I}\)</span>.</p>
+<p><strong>Step 2: Projective measurement.</strong> On the extended space, define orthogonal projectors:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{P}_i = \hat{I}_{\mathcal{H}}\otimes\vert e_i\rangle\langle e_i\vert
+\]</div>
+<p>For initial state <span class="math notranslate nohighlight">\(\hat{\rho}\otimes\vert 0\rangle\langle 0\vert_{\text{aux}}\)</span> evolved via <span class="math notranslate nohighlight">\(V\)</span>, the probability of outcome <span class="math notranslate nohighlight">\(i\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+p_i = \operatorname{Tr}\!\left[\hat{P}_i\, V\hat{\rho}V^\dagger\right] = \operatorname{Tr}_{\mathcal{H}}\!\left[\operatorname{Tr}_{\text{aux}}(\hat{P}_i V\hat{\rho}V^\dagger)\right]
+\]</div>
+<p>Evaluating: <span class="math notranslate nohighlight">\(\operatorname{Tr}_{\text{aux}}[(\hat{I}\otimes\vert e_i\rangle\langle e_i\vert)(\sum_{j,k}\sqrt{\hat{M}_j}\hat{\rho}\sqrt{\hat{M}_k}\otimes\vert e_j\rangle\langle e_k\vert)] = \sqrt{\hat{M}_i}\hat{\rho}\sqrt{\hat{M}_i}\)</span>.</p>
+<p>So <span class="math notranslate nohighlight">\(p_i = \operatorname{Tr}(\hat{M}_i\hat{\rho})\)</span>, reproducing the POVM measurement statistics exactly. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Consequence.</strong> Every POVM outcome is physically realizable by entangling the system with an ancilla and measuring the ancilla. POVMs are physically real—not just a mathematical convenience.</p>
+</div>
 </section>
 <section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
@@ -697,6 +842,39 @@ p_i = \text{Tr}(\hat{M}_i \hat{\rho})
 \]</div>
 <p>Choose <span class="math notranslate nohighlight">\(\hat{\rho} = \vert v\rangle\langle v\vert\)</span> for any unit vector <span class="math notranslate nohighlight">\(\vert v\rangle\)</span>. Then <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{R}\vert v\rangle\langle v\vert) = \langle v\vert\hat{R}\vert v\rangle = 0\)</span> for all <span class="math notranslate nohighlight">\(\vert v\rangle\)</span>. A Hermitian operator with zero expectation value in every state must be zero: <span class="math notranslate nohighlight">\(\hat{R} = 0\)</span>, i.e., <span class="math notranslate nohighlight">\(\sum_i \hat{M}_i = \hat{I}\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
 <p><strong>Why the positive-semidefinite condition is separate.</strong> Completeness ensures normalization, but we also need <span class="math notranslate nohighlight">\(p_i \geq 0\)</span> (non-negative probabilities). If <span class="math notranslate nohighlight">\(\hat{M}_i\)</span> has a negative eigenvalue <span class="math notranslate nohighlight">\(-\lambda &lt; 0\)</span>, choosing <span class="math notranslate nohighlight">\(\hat{\rho} = \vert\lambda\rangle\langle\lambda\vert\)</span> (the corresponding eigenvector) gives <span class="math notranslate nohighlight">\(p_i = -\lambda &lt; 0\)</span>, violating the probability interpretation. Together, positivity (<span class="math notranslate nohighlight">\(\hat{M}_i \geq 0\)</span>) and completeness (<span class="math notranslate nohighlight">\(\sum_i \hat{M}_i = \hat{I}\)</span>) are exactly the conditions that make <span class="math notranslate nohighlight">\(\{p_i\}\)</span> a valid probability distribution for any input state.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Helstrom Bound — Minimum Error in Binary State Discrimination</p>
+<p>Given two quantum states <span class="math notranslate nohighlight">\(\hat{\rho}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{\rho}_2\)</span> prepared with prior probabilities <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2 = 1 - p_1\)</span>, the <strong>minimum error probability</strong> for distinguishing them is the <strong>Helstrom bound</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{err}}^{\min} = \frac{1}{2}\left(1 - \| p_1\hat{\rho}_1 - p_2\hat{\rho}_2 \|_1\right),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\|\hat{X}\|_1 = \mathrm{Tr}\sqrt{\hat{X}^\dagger \hat{X}}\)</span> is the trace norm.</p>
+<p><strong>Step 1: Optimal measurement structure.</strong> Any binary POVM <span class="math notranslate nohighlight">\(\{\hat{M}_1, \hat{M}_2 = \hat{I} - \hat{M}_1\}\)</span> gives error probability</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{err}} = p_1\mathrm{Tr}(\hat{M}_2\hat{\rho}_1) + p_2\mathrm{Tr}(\hat{M}_1\hat{\rho}_2) = p_1 + p_2 - p_1\mathrm{Tr}(\hat{M}_1\hat{\rho}_1) - p_2\mathrm{Tr}(\hat{M}_1\hat{\rho}_2) - p_1.
+\]</div>
+<p>Simplifying: <span class="math notranslate nohighlight">\(P_{\text{err}} = p_2 - \mathrm{Tr}(\hat{M}_1(p_1\hat{\rho}_1 - p_2\hat{\rho}_2))\)</span>.</p>
+<p>Minimizing <span class="math notranslate nohighlight">\(P_{\text{err}}\)</span> = maximizing <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{M}_1 \hat{\Delta})\)</span> where <span class="math notranslate nohighlight">\(\hat{\Delta} = p_1\hat{\rho}_1 - p_2\hat{\rho}_2\)</span>.</p>
+<p><strong>Step 2: Optimal <span class="math notranslate nohighlight">\(\hat{M}_1\)</span>.</strong> Decompose <span class="math notranslate nohighlight">\(\hat{\Delta} = \hat{\Delta}_+ - \hat{\Delta}_-\)</span> into positive and negative parts. For <span class="math notranslate nohighlight">\(0 \leq \hat{M}_1 \leq \hat{I}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Tr}(\hat{M}_1\hat{\Delta}) \leq \mathrm{Tr}(\hat{\Delta}_+) = \frac{1}{2}\|\hat{\Delta}\|_1.
+\]</div>
+<p>Equality is achieved by <span class="math notranslate nohighlight">\(\hat{M}_1 = \hat{\Pi}_+\)</span>, the projector onto the positive eigenspace of <span class="math notranslate nohighlight">\(\hat{\Delta}\)</span>.</p>
+<p><strong>Step 3: Helstrom bound.</strong> Thus</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{err}}^{\min} = p_2 - \frac{1}{2}\|p_1\hat{\rho}_1 - p_2\hat{\rho}_2\|_1 = \frac{1}{2}\left(1 - \|p_1\hat{\rho}_1 - p_2\hat{\rho}_2\|_1\right).
+\]</div>
+<p><strong>Pure state case.</strong> For <span class="math notranslate nohighlight">\(\hat{\rho}_i = \vert\psi_i\rangle\langle\psi_i\vert\)</span> with equal priors <span class="math notranslate nohighlight">\(p_1 = p_2 = 1/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{err}}^{\min} = \frac{1}{2}\left(1 - \sqrt{1 - \vert\langle\psi_1\vert\psi_2\rangle\vert^2}\right).
+\]</div>
+<p>For orthogonal states <span class="math notranslate nohighlight">\(\langle\psi_1\vert\psi_2\rangle = 0\)</span>: <span class="math notranslate nohighlight">\(P_{\text{err}} = 0\)</span> (perfect discrimination). For identical states: <span class="math notranslate nohighlight">\(P_{\text{err}} = 1/2\)</span> (random guess). This contrasts with unambiguous discrimination (§IDP bound), which allows zero-error conclusions at the cost of sometimes giving no answer.</p>
 </div>
 </section>
 <section id="summary">

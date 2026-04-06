@@ -820,6 +820,38 @@ document.write(`
 <section id="multipartite-systems">
 <h3>Multipartite Systems<a class="headerlink" href="#multipartite-systems" title="Link to this heading">#</a></h3>
 <p>For <span class="math notranslate nohighlight">\(N\)</span> systems, the Hilbert space is <span class="math notranslate nohighlight">\(\mathcal{H}_{1\cdots N} = \mathcal{H}_1 \otimes \cdots \otimes \mathcal{H}_N\)</span> with dimension <span class="math notranslate nohighlight">\(\prod_i d_i\)</span>. Multipartite entanglement is richer than bipartite: states can have entanglement that cannot be localized to a single bipartition, giving rise to genuinely multipartite phenomena. This is a frontier of current research in quantum information and many-body physics.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Subadditivity and Mutual Information</p>
+<p><strong>Subadditivity</strong> states that the entropy of a composite system is bounded by the sum of the subsystem entropies:</p>
+<div class="math notranslate nohighlight">
+\[
+S(AB) \leq S(A) + S(B).
+\]</div>
+<p><strong>Proof via Klein’s inequality.</strong> Define <span class="math notranslate nohighlight">\(\tau_{AB} = \rho_A \otimes \rho_B\)</span> (the product of reduced states). The quantum relative entropy satisfies <span class="math notranslate nohighlight">\(S(\rho_{AB}\|\tau_{AB}) \geq 0\)</span> (proved in §6.1.2), which expands as:</p>
+<div class="math notranslate nohighlight">
+\[
+S(\rho_{AB}\|\tau_{AB}) = \mathrm{Tr}(\rho_{AB}\ln\rho_{AB}) - \mathrm{Tr}(\rho_{AB}\ln\tau_{AB}) \geq 0.
+\]</div>
+<p>The second term: <span class="math notranslate nohighlight">\(\ln\tau_{AB} = \ln(\rho_A \otimes \rho_B) = \ln\rho_A \otimes I_B + I_A \otimes \ln\rho_B\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Tr}(\rho_{AB}\ln\tau_{AB}) = \mathrm{Tr}_A(\rho_A\ln\rho_A) + \mathrm{Tr}_B(\rho_B\ln\rho_B) = -S(A) - S(B).
+\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(-S(AB) - (-S(A) - S(B)) \geq 0\)</span>, giving <span class="math notranslate nohighlight">\(S(AB) \leq S(A) + S(B)\)</span>.</p>
+<p><strong>Mutual information.</strong> Define the <strong>mutual information</strong> as the gap:</p>
+<div class="math notranslate nohighlight">
+\[
+I(A:B) = S(A) + S(B) - S(AB) \geq 0.
+\]</div>
+<p>Subadditivity says <span class="math notranslate nohighlight">\(I(A:B) \geq 0\)</span>; equality holds iff <span class="math notranslate nohighlight">\(\rho_{AB} = \rho_A \otimes \rho_B\)</span> (no correlations).</p>
+<p><strong>Correlation bound.</strong> The mutual information bounds all bipartite correlations:</p>
+<div class="math notranslate nohighlight">
+\[
+I(A:B) \geq \frac{\left(\langle \hat{O}_A \otimes \hat{O}_B\rangle - \langle\hat{O}_A\rangle\langle\hat{O}_B\rangle\right)^2}{2\|\hat{O}_A\|_\infty^2 \|\hat{O}_B\|_\infty^2}.
+\]</div>
+<p>A state with small mutual information has exponentially small connected correlations — making <span class="math notranslate nohighlight">\(I(A:B)\)</span> a quantitative measure of all quantum and classical correlations combined.</p>
+<p><strong>Pure state.</strong> For a bipartite pure state <span class="math notranslate nohighlight">\(\vert\psi_{AB}\rangle\)</span>: <span class="math notranslate nohighlight">\(S(AB) = 0\)</span>, so <span class="math notranslate nohighlight">\(I(A:B) = 2S(A) = 2S(B)\)</span> — the mutual information is exactly twice the entanglement entropy, confirming that <span class="math notranslate nohighlight">\(S(A)\)</span> captures all correlations in the pure-state case.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>

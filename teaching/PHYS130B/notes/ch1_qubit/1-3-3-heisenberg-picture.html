@@ -729,6 +729,43 @@ document.write(`
 <li><p>The Heisenberg equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\hat{O} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{O}]\)</span> says dynamics = commutator with <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Conservation = commuting with <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Is the Hamiltonian itself just a way of encoding which symmetries are broken?</p></li>
 </ul>
 </div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Quantum-Classical Correspondence via Poisson Brackets</p>
+<p>The <strong>Heisenberg equation</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{A}}{\mathrm{d}t} = \frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{A}]\)</span> is the quantum counterpart of Hamilton’s classical equation <span class="math notranslate nohighlight">\(\frac{\mathrm{d}A}{\mathrm{d}t} = \{H, A\}\)</span>, where <span class="math notranslate nohighlight">\(\{\cdot,\cdot\}\)</span> is the Poisson bracket. We make this correspondence explicit.</p>
+<p><strong>Step 1: Recall the Poisson bracket.</strong> For functions of canonical variables <span class="math notranslate nohighlight">\((x,p)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\{f, g\} = \frac{\partial f}{\partial x}\frac{\partial g}{\partial p} - \frac{\partial f}{\partial p}\frac{\partial g}{\partial x}
+\]</div>
+<p>The fundamental brackets are <span class="math notranslate nohighlight">\(\{x, p\} = 1\)</span>, <span class="math notranslate nohighlight">\(\{x, x\} = 0\)</span>, <span class="math notranslate nohighlight">\(\{p, p\} = 0\)</span>.</p>
+<p><strong>Step 2: Derive the fundamental commutator identities.</strong> From <span class="math notranslate nohighlight">\([\hat{x}, \hat{p}] = \mathrm{i}\hbar\)</span>, we derive rules for commutators with functions. Using the product rule <span class="math notranslate nohighlight">\([\hat{A}, \hat{B}\hat{C}] = \hat{B}[\hat{A},\hat{C}] + [\hat{A},\hat{B}]\hat{C}\)</span> repeatedly:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{x},\, \hat{p}^n] = \mathrm{i}\hbar\, n\hat{p}^{n-1} = \mathrm{i}\hbar\,\frac{\partial \hat{p}^n}{\partial \hat{p}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+[\hat{p},\, \hat{x}^n] = -\mathrm{i}\hbar\, n\hat{x}^{n-1} = -\mathrm{i}\hbar\,\frac{\partial \hat{x}^n}{\partial \hat{x}}
+\]</div>
+<p>By linearity, for any polynomial <span class="math notranslate nohighlight">\(h(\hat{x},\hat{p})\)</span> in which all <span class="math notranslate nohighlight">\(\hat{x}\)</span> appear to the left of all <span class="math notranslate nohighlight">\(\hat{p}\)</span> (normal ordering):</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{x},\, h(\hat{x},\hat{p})] = \mathrm{i}\hbar\,\frac{\partial h}{\partial \hat{p}}, \qquad [\hat{p},\, h(\hat{x},\hat{p})] = -\mathrm{i}\hbar\,\frac{\partial h}{\partial \hat{x}}
+\]</div>
+<p><strong>Step 3: General commutator reduces to Poisson bracket at leading order in <span class="math notranslate nohighlight">\(\hbar\)</span>.</strong> For two functions <span class="math notranslate nohighlight">\(f(\hat{x},\hat{p})\)</span> and <span class="math notranslate nohighlight">\(g(\hat{x},\hat{p})\)</span>, apply the commutator using the rules above. The leading-order (in <span class="math notranslate nohighlight">\(\hbar\)</span>) term is:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{f}, \hat{g}] = \mathrm{i}\hbar\left(\frac{\partial f}{\partial \hat{x}}\frac{\partial g}{\partial \hat{p}} - \frac{\partial f}{\partial \hat{p}}\frac{\partial g}{\partial \hat{x}}\right) + O(\hbar^2) = \mathrm{i}\hbar\,\{f, g\} + O(\hbar^2)
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(O(\hbar^2)\)</span> corrections arise from the non-commutativity of <span class="math notranslate nohighlight">\(\hat{x}\)</span> and <span class="math notranslate nohighlight">\(\hat{p}\)</span> in the product — they vanish classically.</p>
+<p><strong>Step 4: Classical limit of the Heisenberg equation.</strong> Substituting into the Heisenberg equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}A}{\mathrm{d}t} = \lim_{\hbar \to 0}\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{A}] = \lim_{\hbar \to 0}\frac{\mathrm{i}}{\hbar}\cdot\mathrm{i}\hbar\,\{H,A\} = \{H, A\}
+\]</div>
+<p>This is precisely <strong>Hamilton’s equation of motion</strong> — quantum dynamics reduces to classical Hamiltonian mechanics in the <span class="math notranslate nohighlight">\(\hbar \to 0\)</span> limit.</p>
+<p><strong>Canonical quantization</strong> is the inverse: replace all Poisson brackets by <span class="math notranslate nohighlight">\([\cdot,\cdot]/(\mathrm{i}\hbar)\)</span>. This procedure is consistent precisely because the commutator algebra of <span class="math notranslate nohighlight">\(\hat{x}, \hat{p}\)</span> reproduces the Poisson bracket algebra at leading order. The Ehrenfest theorem (above) is a direct consequence: since <span class="math notranslate nohighlight">\(\{H, x\} = p/m\)</span> and <span class="math notranslate nohighlight">\(\{H, p\} = -\partial_x V\)</span>, the quantum expectation values obey classical Newton’s law.</p>
+</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>

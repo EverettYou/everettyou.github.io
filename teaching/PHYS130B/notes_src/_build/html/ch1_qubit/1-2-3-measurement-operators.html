@@ -679,7 +679,7 @@ document.write(`
 \[\begin{split}(+1)\hat{P}_0 + (-1)\hat{P}_1 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} - \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = \sigma^z \quad \checkmark\end{split}\]</div>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Proof: Why Divide by <span class="math notranslate nohighlight">\(\sqrt{P(m\vert\psi)}\)</span> — Post-Measurement Normalization</p>
+<p class="admonition-title">Derivation: Why Divide by <span class="math notranslate nohighlight">\(\sqrt{P(m\vert\psi)}\)</span> — Post-Measurement Normalization</p>
 <p><strong>Claim.</strong> After measuring outcome <span class="math notranslate nohighlight">\(m\)</span> on state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>, the correctly normalized post-measurement state is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -738,6 +738,37 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\hat{P}_{O=m} = \sum_{i=1}^{d_m} \vert O{=}m, i \rangle \langle O{=}m, i \vert\]</div>
 <p>where <span class="math notranslate nohighlight">\(d_m\)</span> is the degeneracy. All four properties (Hermitian, idempotent, PSD, completeness) still hold.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Properties of Degenerate Projectors</p>
+<p>Let eigenvalue <span class="math notranslate nohighlight">\(m\)</span> have degeneracy <span class="math notranslate nohighlight">\(d_m\)</span> with orthonormal eigenstates <span class="math notranslate nohighlight">\(\{\vert O{=}m,i\rangle\}_{i=1}^{d_m}\)</span>, so <span class="math notranslate nohighlight">\(\langle O{=}m,i\vert O{=}m,j\rangle = \delta_{ij}\)</span>. The degenerate projector is <span class="math notranslate nohighlight">\(\hat{P}_{O=m} = \sum_{i=1}^{d_m} \vert O{=}m,i\rangle\langle O{=}m,i\vert\)</span>.</p>
+<p><strong>Hermiticity:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\hat{P}_{O=m}^\dagger = \left(\sum_i \vert O{=}m,i\rangle\langle O{=}m,i\vert\right)^\dagger = \sum_i \vert O{=}m,i\rangle\langle O{=}m,i\vert = \hat{P}_{O=m} \quad \checkmark
+\]</div>
+<p><strong>Idempotence:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\hat{P}_{O=m}^2 = \sum_{i,j} \vert O{=}m,i\rangle\underbrace{\langle O{=}m,i\vert O{=}m,j\rangle}_{=\delta_{ij}}\langle O{=}m,j\vert = \sum_i \vert O{=}m,i\rangle\langle O{=}m,i\vert = \hat{P}_{O=m} \quad \checkmark
+\]</div>
+<p><strong>Positive semi-definiteness:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle\psi\vert\hat{P}_{O=m}\vert\psi\rangle = \sum_i \langle\psi\vert O{=}m,i\rangle\langle O{=}m,i\vert\psi\rangle = \sum_i \vert\langle O{=}m,i\vert\psi\rangle\vert^2 \geq 0 \quad \checkmark
+\]</div>
+<p><strong>Completeness</strong> (summing over all eigenvalues):</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_m \hat{P}_{O=m} = \sum_m \sum_{i=1}^{d_m} \vert O{=}m,i\rangle\langle O{=}m,i\vert = \hat{I}
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\{\vert O{=}m,i\rangle\}\)</span> (all eigenvalues <span class="math notranslate nohighlight">\(m\)</span>, all basis states <span class="math notranslate nohighlight">\(i\)</span>) form a complete orthonormal basis for the Hilbert space. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p><strong>Orthogonality between eigenspaces</strong> (for <span class="math notranslate nohighlight">\(m \neq m'\)</span>): Eigenstates of a Hermitian operator belonging to distinct eigenvalues are orthogonal. (Proof: if <span class="math notranslate nohighlight">\(\hat{O}\vert m\rangle = m\vert m\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{O}\vert m'\rangle = m'\vert m'\rangle\)</span>, then <span class="math notranslate nohighlight">\(\langle m'\vert\hat{O}\vert m\rangle = m\langle m'\vert m\rangle\)</span> and also <span class="math notranslate nohighlight">\(= m'\langle m'\vert m\rangle\)</span>; subtracting, <span class="math notranslate nohighlight">\((m-m')\langle m'\vert m\rangle = 0\)</span>, so <span class="math notranslate nohighlight">\(\langle m'\vert m\rangle = 0\)</span> since <span class="math notranslate nohighlight">\(m \neq m'\)</span>.) Therefore <span class="math notranslate nohighlight">\(\langle O{=}m,i\vert O{=}m',j\rangle = 0\)</span> for <span class="math notranslate nohighlight">\(m \neq m'\)</span>, and:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{P}_{O=m}\hat{P}_{O=m'} = \sum_{i,j} \vert O{=}m,i\rangle\underbrace{\langle O{=}m,i\vert O{=}m',j\rangle}_{=0}\langle O{=}m',j\vert = 0 \quad \checkmark
+\]</div>
+<p>Projectors onto distinct eigenspaces annihilate each other — measuring <span class="math notranslate nohighlight">\(m\)</span> and then <span class="math notranslate nohighlight">\(m'\)</span> gives zero. <span class="math notranslate nohighlight">\(\square\)</span></p>
+</div>
 <p>Upon measuring outcome <span class="math notranslate nohighlight">\(m\)</span>, the state collapses to:</p>
 <div class="math notranslate nohighlight">
 \[\vert \psi' \rangle = \frac{\hat{P}_{O=m} \vert \psi \rangle}{\sqrt{P(m \mid \psi)}}\]</div>
@@ -753,6 +784,58 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\hat{P}_{-1}\vert \Psi \rangle = \frac{1}{2}\vert 10\rangle + \frac{1}{2}\vert 11\rangle, \quad \vert \Psi' \rangle = \frac{\hat{P}_{-1}\vert \Psi \rangle}{\sqrt{P(-1)}} = \frac{1}{\sqrt{2}}(\vert 10\rangle + \vert 11\rangle)\]</div>
 <p>The first qubit is now definitely <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>, but the second qubit remains in the superposition <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> — the measurement collapsed the state <em>into</em> the degenerate eigenspace preserving the <em>coherence</em> within the eigenspace.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Sequential Measurement Probabilities and Order Dependence</p>
+<p><strong>Setup.</strong> Measure observable <span class="math notranslate nohighlight">\(\hat{A}\)</span> on state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>, obtaining outcome <span class="math notranslate nohighlight">\(a\)</span>, then immediately measure observable <span class="math notranslate nohighlight">\(\hat{B}\)</span>.</p>
+<p><strong>Step 1: Joint probability formula.</strong></p>
+<p>After getting outcome <span class="math notranslate nohighlight">\(a\)</span> with probability <span class="math notranslate nohighlight">\(p_a = \langle\psi\vert\hat{P}_a\vert\psi\rangle\)</span>, the state collapses to <span class="math notranslate nohighlight">\(\vert\psi_a\rangle = \hat{P}_a\vert\psi\rangle/\sqrt{p_a}\)</span>. The probability of then getting <span class="math notranslate nohighlight">\(b\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+P(a, \text{ then } b) = p_a \cdot \langle\psi_a\vert\hat{P}_b\vert\psi_a\rangle
+= p_a \cdot \frac{\langle\psi\vert\hat{P}_a\hat{P}_b\hat{P}_a\vert\psi\rangle}{p_a}
+= \langle\psi\vert\hat{P}_a\hat{P}_b\hat{P}_a\vert\psi\rangle
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\hat{P}_b^2 = \hat{P}_b\)</span> and Hermiticity <span class="math notranslate nohighlight">\(\hat{P}_b^\dagger = \hat{P}_b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(a, \text{ then } b) = \Vert \hat{P}_b\hat{P}_a\vert\psi\rangle\Vert^2
+\]</div>
+<p><strong>Step 2: Order dependence.</strong> The joint probability in the other order is:</p>
+<div class="math notranslate nohighlight">
+\[
+P(b, \text{ then } a) = \Vert \hat{P}_a\hat{P}_b\vert\psi\rangle\Vert^2
+\]</div>
+<p>These are equal if and only if <span class="math notranslate nohighlight">\(\Vert\hat{P}_b\hat{P}_a\vert\psi\rangle\Vert = \Vert\hat{P}_a\hat{P}_b\vert\psi\rangle\Vert\)</span> for all <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>, which requires <span class="math notranslate nohighlight">\(\hat{P}_a\hat{P}_b = \hat{P}_b\hat{P}_a\)</span>, i.e., the projectors commute.</p>
+<p><strong>Step 3: Commutativity condition.</strong> For a Pauli observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>, the projectors <span class="math notranslate nohighlight">\(\hat{P}_{O=m} = \tfrac{1}{2}(\hat{I}+m\hat{O})\)</span>. Two Pauli projectors commute iff the corresponding operators commute: <span class="math notranslate nohighlight">\([\hat{P}_{A=a}, \hat{P}_{B=b}] = \tfrac{1}{4}[\hat{A},\hat{B}]\)</span>. Therefore measurement order matters precisely when <span class="math notranslate nohighlight">\([\hat{A},\hat{B}]\neq 0\)</span>.</p>
+<p><strong>Step 4: Qubit example.</strong> Let <span class="math notranslate nohighlight">\(\vert\psi\rangle = \vert 0\rangle\)</span>, measure <span class="math notranslate nohighlight">\(\hat{X}\)</span> then <span class="math notranslate nohighlight">\(\hat{Z}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(\hat{X}{=}+1, \text{ then } \hat{Z}{=}+1) = \Vert\hat{P}_{Z=+1}\hat{P}_{X=+1}\vert 0\rangle\Vert^2
+\]</div>
+<p><span class="math notranslate nohighlight">\(\hat{P}_{X=+1}\vert 0\rangle = \tfrac{1}{2}(\hat{I}+\hat{X})\vert 0\rangle = \tfrac{1}{2}(\vert 0\rangle + \vert 1\rangle) = \vert+\rangle/\sqrt{1}\)</span>… wait, more carefully: <span class="math notranslate nohighlight">\(\hat{P}_{X=+1}\vert 0\rangle = \tfrac{1}{\sqrt{2}}\vert+\rangle \cdot \tfrac{1}{\sqrt{2}} = \vert+\rangle\langle+\vert 0\rangle\vert+\rangle = \tfrac{1}{\sqrt{2}}\vert+\rangle\)</span>.</p>
+<p>Then <span class="math notranslate nohighlight">\(\hat{P}_{Z=+1}\tfrac{1}{\sqrt{2}}\vert+\rangle = \tfrac{1}{\sqrt{2}}\hat{P}_{Z=+1}\tfrac{1}{\sqrt{2}}(\vert 0\rangle+\vert 1\rangle) = \tfrac{1}{2\sqrt{2}} \cdot 2\vert 0\rangle \cdot \langle 0\vert 0\rangle\)</span>… let us be explicit:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{P}_{X=+1} = \frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;1\end{pmatrix}, \quad
+\hat{P}_{Z=+1} = \begin{pmatrix}1&amp;0\\0&amp;0\end{pmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{P}_{Z=+1}\hat{P}_{X=+1}\vert 0\rangle
+= \begin{pmatrix}1&amp;0\\0&amp;0\end{pmatrix}\frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;1\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}
+= \begin{pmatrix}1&amp;0\\0&amp;0\end{pmatrix}\frac{1}{2}\begin{pmatrix}1\\1\end{pmatrix}
+= \frac{1}{2}\begin{pmatrix}1\\0\end{pmatrix}
+\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(P(X{=}+1 \text{ then } Z{=}+1) = \Vert\tfrac{1}{2}\vert 0\rangle\Vert^2 = \tfrac{1}{4}\)</span>.</p>
+<p>In the other order (<span class="math notranslate nohighlight">\(\hat{Z}\)</span> then <span class="math notranslate nohighlight">\(\hat{X}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{P}_{X=+1}\hat{P}_{Z=+1}\vert 0\rangle
+= \frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;1\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}
+= \frac{1}{2}\begin{pmatrix}1\\1\end{pmatrix}, \quad \text{norm}^2 = \frac{1}{2}
+\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(P(Z{=}+1 \text{ then } X{=}+1) = \tfrac{1}{2}\)</span>, which is different from <span class="math notranslate nohighlight">\(\tfrac{1}{4}\)</span>. The measurement order matters, reflecting <span class="math notranslate nohighlight">\([\hat{X},\hat{Z}]\neq 0\)</span>. This order-dependence is the operational signature of quantum incompatibility.</p>
 </div>
 </section>
 <section id="summary">
