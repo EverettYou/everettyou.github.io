@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -564,7 +564,7 @@ document.write(`
 <h3>Decoherence Process<a class="headerlink" href="#decoherence-process" title="Link to this heading">#</a></h3>
 <p>Consider a qubit <span class="math notranslate nohighlight">\(S\)</span> initially in a superposition, coupled to environment <span class="math notranslate nohighlight">\(E\)</span> (bath of many modes). After interaction, the total state evolves to:</p>
 <div class="math notranslate nohighlight" id="equation-eq-decoherence-entangled-state">
-<span class="eqno">(150)<a class="headerlink" href="#equation-eq-decoherence-entangled-state" title="Link to this equation">#</a></span>\[
+<span class="eqno">(148)<a class="headerlink" href="#equation-eq-decoherence-entangled-state" title="Link to this equation">#</a></span>\[
 \alpha\vert 0\rangle_S \vert E_0\rangle_E + \beta\vert 1\rangle_S \vert E_1\rangle_E \;\longrightarrow\; \alpha\vert 0\rangle_S \vert E_0(t)\rangle_E + \beta\vert 1\rangle_S \vert E_1(t)\rangle_E
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\vert E_0(t)\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert E_1(t)\rangle\)</span> are (nearly) orthogonal environmental states. The environment has become a <strong>which-path detector</strong>: it encodes information about which branch the system is in.</p>
@@ -579,51 +579,21 @@ document.write(`
 <h3>Reduced Density Matrix<a class="headerlink" href="#reduced-density-matrix" title="Link to this heading">#</a></h3>
 <p>Tracing out the environment gives the <strong>reduced density matrix</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-decoherence-reduced">
-<span class="eqno">(151)<a class="headerlink" href="#equation-eq-decoherence-reduced" title="Link to this equation">#</a></span>\[
+<span class="eqno">(149)<a class="headerlink" href="#equation-eq-decoherence-reduced" title="Link to this equation">#</a></span>\[
 \hat{\rho}_S(t) = \text{Tr}_E\!\left(\vert\Psi(t)\rangle\langle\Psi(t)\vert\right)
 \]</div>
 <p>Computing explicitly:</p>
 <div class="math notranslate nohighlight" id="equation-eq-decoherence-reduced-explicit">
-<span class="eqno">(152)<a class="headerlink" href="#equation-eq-decoherence-reduced-explicit" title="Link to this equation">#</a></span>\[
+<span class="eqno">(150)<a class="headerlink" href="#equation-eq-decoherence-reduced-explicit" title="Link to this equation">#</a></span>\[
 \hat{\rho}_S(t) = \vert\alpha\vert^2 \vert 0\rangle\langle 0\vert + \vert\beta\vert^2 \vert 1\rangle\langle 1\vert + \alpha^*\beta\,\langle E_1(t)\vert E_0(t)\rangle\,\vert 0\rangle\langle 1\vert + \beta^*\alpha\,\langle E_0(t)\vert E_1(t)\rangle\,\vert 1\rangle\langle 0\vert
 \]</div>
 <p>As the environmental states become orthogonal (<span class="math notranslate nohighlight">\(\langle E_0\vert E_1\rangle \to 0\)</span>), the off-diagonal coherences vanish. The system transitions from a pure state to a mixed state — not from any measurement postulate, but purely from entanglement with the environment.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Reduced Density Matrix Shows Decoherence</p>
-<p>Starting from the entangled state <span class="math notranslate nohighlight">\(\vert\Psi(t)\rangle = \alpha\vert 0\rangle_S\vert E_0(t)\rangle_E + \beta\vert 1\rangle_S\vert E_1(t)\rangle_E\)</span>, compute the full density matrix:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_{SE}(t) = \vert\alpha\vert^2\vert 0\rangle\langle 0\vert_S \otimes \vert E_0\rangle\langle E_0\vert_E + \alpha^*\beta\,\vert 1\rangle\langle 0\vert_S \otimes \vert E_0\rangle\langle E_1\vert_E + \beta^*\alpha\,\vert 0\rangle\langle 1\vert_S \otimes \vert E_1\rangle\langle E_0\vert_E + \vert\beta\vert^2\vert 1\rangle\langle 1\vert_S \otimes \vert E_1\rangle\langle E_1\vert_E
-\]</div>
-<p><strong>Partial trace over the environment.</strong> Insert <span class="math notranslate nohighlight">\(\sum_n\vert\xi_n\rangle_E\langle\xi_n\vert_E = \hat{I}_E\)</span> (orthonormal environment basis):</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_S(t) = \operatorname{Tr}_E\hat{\rho}_{SE}(t) = \sum_n\langle\xi_n\vert_E\hat{\rho}_{SE}(t)\vert\xi_n\rangle_E
-\]</div>
-<p>The diagonal blocks give:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_S^{00}(t) = \vert\alpha\vert^2\vert 0\rangle\langle 0\vert\underbrace{\langle E_0\vert E_0\rangle}_{1} = \vert\alpha\vert^2\vert 0\rangle\langle 0\vert
-\]</div>
-<p>The off-diagonal (coherence) block:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_S^{01}(t) = \alpha\beta^*\vert 0\rangle\langle 1\vert\underbrace{\langle E_1(t)\vert E_0(t)\rangle}_{= D(t)}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(D(t) = \langle E_1(t)\vert E_0(t)\rangle\)</span> is the <strong>decoherence factor</strong> — the overlap between the two environmental branches.</p>
-<p><strong>Result:</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\rho}_S(t) = \begin{pmatrix} \vert\alpha\vert^2 &amp; \alpha\beta^*\,D(t) \\ \alpha^*\beta\,D^*(t) &amp; \vert\beta\vert^2 \end{pmatrix}
-\end{split}\]</div>
-<p>As <span class="math notranslate nohighlight">\(D(t) \to 0\)</span> (environment becomes orthogonal), the off-diagonal coherences vanish: <span class="math notranslate nohighlight">\(\hat{\rho}_S \to \vert\alpha\vert^2\vert 0\rangle\langle 0\vert + \vert\beta\vert^2\vert 1\rangle\langle 1\vert\)</span> — a classical mixture. <strong>Decoherence = environment becoming a which-branch detector.</strong> No measurement postulate needed; it follows directly from entanglement and partial trace.</p>
-</div>
 </section>
 <section id="decoherence-timescale">
 <h3>Decoherence Timescale<a class="headerlink" href="#decoherence-timescale" title="Link to this heading">#</a></h3>
 <p>In the <strong>weak coupling limit</strong>, the environmental overlap decays exponentially:</p>
 <div class="math notranslate nohighlight" id="equation-eq-decoherence-exponential">
-<span class="eqno">(153)<a class="headerlink" href="#equation-eq-decoherence-exponential" title="Link to this equation">#</a></span>\[
+<span class="eqno">(151)<a class="headerlink" href="#equation-eq-decoherence-exponential" title="Link to this equation">#</a></span>\[
 \langle E_0(t) \vert E_1(t)\rangle \approx \mathrm{e}^{-t/T_2}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(T_2 = 1/\gamma\)</span> is the <strong>dephasing time</strong>. The microscopic derivation:</p>
@@ -647,38 +617,10 @@ document.write(`
 </ol>
 <p>The result is exactly the dephasing channel:</p>
 <div class="math notranslate nohighlight" id="equation-eq-decoherence-dephasing-channel">
-<span class="eqno">(154)<a class="headerlink" href="#equation-eq-decoherence-dephasing-channel" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(152)<a class="headerlink" href="#equation-eq-decoherence-dephasing-channel" title="Link to this equation">#</a></span>\[\begin{split}
 \mathcal{E}(\hat{\rho}) = \begin{pmatrix} \hat{\rho}_{00} &amp; \hat{\rho}_{01}\,\mathrm{e}^{-t/T_2} \\\ \hat{\rho}_{10}\,\mathrm{e}^{-t/T_2} &amp; \hat{\rho}_{11} \end{pmatrix}
 \end{split}\]</div>
 <p>This identification — decoherence = quantum channel — means the full machinery of §6.3.3 applies to open-system evolution without any new framework.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Random Phase Kicks Produce the Dephasing Channel</p>
-<p>A simple stochastic model: at each time step, the qubit receives a random phase kick <span class="math notranslate nohighlight">\(\hat{U}(\phi) = \mathrm{e}^{\mathrm{i}\phi\hat{Z}/2}\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is drawn from a Gaussian with zero mean and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
-<p><strong>Single-kick action on density matrix.</strong> For <span class="math notranslate nohighlight">\(\hat\rho = \begin{pmatrix}\rho_{00}&amp;\rho_{01}\\\rho_{10}&amp;\rho_{11}\end{pmatrix}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{U}(\phi)\hat{\rho}\hat{U}^\dagger(\phi) = \begin{pmatrix}\rho_{00} &amp; \mathrm{e}^{\mathrm{i}\phi}\rho_{01} \\ \mathrm{e}^{-\mathrm{i}\phi}\rho_{10} &amp; \rho_{11}\end{pmatrix}
-\end{split}\]</div>
-<p>(The diagonal elements are unchanged; only the coherences acquire a phase factor.)</p>
-<p><strong>Averaging over the random kick.</strong> The channel is the ensemble average over <span class="math notranslate nohighlight">\(\phi \sim \mathcal{N}(0, \sigma^2)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{E}(\hat{\rho}) = \int_{-\infty}^{+\infty} \frac{\mathrm{e}^{-\phi^2/(2\sigma^2)}}{\sqrt{2\pi\sigma^2}} \hat{U}(\phi)\hat{\rho}\hat{U}^\dagger(\phi)\,\mathrm{d}\phi
-\]</div>
-<p>For the off-diagonal element <span class="math notranslate nohighlight">\(\rho_{01}\)</span>, this gives:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{E}(\hat{\rho})_{01} = \rho_{01} \int_{-\infty}^{+\infty} \frac{\mathrm{e}^{-\phi^2/(2\sigma^2)}}{\sqrt{2\pi\sigma^2}} \mathrm{e}^{\mathrm{i}\phi}\,\mathrm{d}\phi = \rho_{01} \cdot \mathrm{e}^{-\sigma^2/2}
-\]</div>
-<p>where the last step uses the Gaussian characteristic function <span class="math notranslate nohighlight">\(\langle\mathrm{e}^{\mathrm{i}k\phi}\rangle_{\mathcal{N}(0,\sigma^2)} = \mathrm{e}^{-k^2\sigma^2/2}\)</span> with <span class="math notranslate nohighlight">\(k=1\)</span>.</p>
-<p><strong>Result: dephasing channel.</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\mathcal{E}(\hat{\rho}) = \begin{pmatrix}\rho_{00} &amp; \mathrm{e}^{-\sigma^2/2}\rho_{01}\\ \mathrm{e}^{-\sigma^2/2}\rho_{10} &amp; \rho_{11}\end{pmatrix}
-\end{split}\]</div>
-<p>Identifying <span class="math notranslate nohighlight">\(\mathrm{e}^{-\sigma^2/2} = \mathrm{e}^{-t/T_2}\)</span> relates the noise variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> to the dephasing time <span class="math notranslate nohighlight">\(T_2 = 2/\sigma^2\)</span> per step. Accumulated over <span class="math notranslate nohighlight">\(N\)</span> kicks: <span class="math notranslate nohighlight">\(\sigma^2_\text{total} = N\sigma^2\)</span>, so decoherence builds up linearly in time.</p>
-<p><strong>Kraus representation.</strong> The Gaussian average can be written as a Kraus sum with infinitely many operators <span class="math notranslate nohighlight">\(K_\phi = \sqrt{P(\phi)}\hat{U}(\phi)\)</span>. However, the same channel also has a two-Kraus representation: <span class="math notranslate nohighlight">\(K_0 = \sqrt{p}\hat{I}\)</span>, <span class="math notranslate nohighlight">\(K_1 = \sqrt{1-p}\hat{Z}\)</span> (phase-flip channel), with <span class="math notranslate nohighlight">\(p = (1 + \mathrm{e}^{-\sigma^2/2})/2\)</span>, confirming the identification with the phase-flip / dephasing channel.</p>
-</div>
 <div class="caution admonition">
 <p class="admonition-title">Decoherence is not measurement collapse</p>
 <p>Decoherence explains why off-diagonal elements of <span class="math notranslate nohighlight">\(\hat{\rho}_S\)</span> decay, making interference unobservable. But the full system+environment state remains <strong>pure</strong> — decoherence does not select a single outcome. The measurement problem (why we observe definite results) is a separate philosophical question.</p>
@@ -701,107 +643,6 @@ document.write(`
 (\hat{\sigma}^z_1 + \hat{\sigma}^z_2)\,\vert\Psi^-\rangle = 0, \qquad \vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert 01\rangle - \vert 10\rangle)
 \]</div>
 <p>The singlet’s total <span class="math notranslate nohighlight">\(z\)</span>-spin is zero, so the common-mode dephasing leaves it unchanged. Decoherence-free subspaces are a foundation of quantum error correction (§6.4.3).</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Decoherence-Free Subspace Criterion</p>
-<p>A subspace <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is <strong>decoherence-free</strong> if every state <span class="math notranslate nohighlight">\(\vert\psi\rangle \in \mathcal{S}\)</span> evolves unitarily despite coupling to the environment. We derive the necessary and sufficient condition.</p>
-<p><strong>Setup.</strong> Model the system–environment interaction via Lindblad operators <span class="math notranslate nohighlight">\(\{L_k\}\)</span> (§6.4.2). The master equation is:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] + \sum_k \left(L_k \hat{\rho} L_k^\dagger - \frac{1}{2}\{L_k^\dagger L_k, \hat{\rho}\}\right)
-\]</div>
-<p>For a state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> to evolve unitarily (no decoherence), the dissipator <span class="math notranslate nohighlight">\(\mathcal{D}[\hat{\rho}]\)</span> must vanish on <span class="math notranslate nohighlight">\(\hat{\rho} = \vert\psi\rangle\langle\psi\vert\)</span>.</p>
-<p><strong>Step 1: Necessary condition — DFS criterion.</strong></p>
-<p>The dissipator <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> vanishes on <span class="math notranslate nohighlight">\(\hat{\rho} = \vert\psi\rangle\langle\psi\vert\)</span> if and only if each <span class="math notranslate nohighlight">\(L_k\)</span> maps <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> to a multiple of itself:</p>
-<div class="math notranslate nohighlight">
-\[
-L_k\vert\psi\rangle = \lambda_k^{(\psi)}\vert\psi\rangle \quad \text{for all } k
-\]</div>
-<p><strong>Proof of necessity.</strong> Compute <span class="math notranslate nohighlight">\(\operatorname{Tr}(\hat{\rho}\,\mathcal{D}[\hat{\rho}])\)</span> with <span class="math notranslate nohighlight">\(\hat{\rho} = \vert\psi\rangle\langle\psi\vert\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Tr}(\hat{\rho}\,\mathcal{D}[\hat{\rho}]) = \sum_k \operatorname{Tr}\!\left(\hat{\rho} L_k\hat{\rho}L_k^\dagger - \tfrac{1}{2}\hat{\rho}^2 L_k^\dagger L_k - \tfrac{1}{2} L_k^\dagger L_k \hat{\rho}^2\right)
-\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\hat{\rho}^2 = \hat{\rho}\)</span> for a pure state:</p>
-<div class="math notranslate nohighlight">
-\[
-= \sum_k \left[\langle\psi\vert L_k\vert\psi\rangle\langle\psi\vert L_k^\dagger\vert\psi\rangle - \langle\psi\vert L_k^\dagger L_k\vert\psi\rangle\right] = \sum_k \left[\vert\langle\psi\vert L_k\vert\psi\rangle\vert^2 - \langle L_k^\dagger L_k\rangle\right]
-\]</div>
-<p>By the Cauchy–Schwarz inequality, <span class="math notranslate nohighlight">\(\vert\langle\psi\vert L_k\vert\psi\rangle\vert^2 \leq \langle\psi\vert L_k^\dagger L_k\vert\psi\rangle\)</span> with equality iff <span class="math notranslate nohighlight">\(L_k\vert\psi\rangle \propto \vert\psi\rangle\)</span>. For <span class="math notranslate nohighlight">\(\mathcal{D}[\hat{\rho}] = 0\)</span>, the quantity must be zero for every <span class="math notranslate nohighlight">\(k\)</span>, requiring <span class="math notranslate nohighlight">\(L_k\vert\psi\rangle = \lambda_k\vert\psi\rangle\)</span>.</p>
-<p><strong>Step 2: Consistency for a subspace.</strong></p>
-<p>For the entire subspace <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> (not just a single state) to be DFS, the eigenvalue <span class="math notranslate nohighlight">\(\lambda_k\)</span> must be <strong>the same</strong> for all states in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-L_k\vert\psi\rangle = \lambda_k\vert\psi\rangle \quad \forall\, \vert\psi\rangle \in \mathcal{S}, \; \forall\, k
-\]</div>
-<p>i.e., each <span class="math notranslate nohighlight">\(L_k\)</span> acts as a <strong>scalar</strong> <span class="math notranslate nohighlight">\(\lambda_k \hat{I}\)</span> on <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
-<p><strong>Proof.</strong> Suppose <span class="math notranslate nohighlight">\(L_k\vert\psi_1\rangle = \lambda_k^{(1)}\vert\psi_1\rangle\)</span> and <span class="math notranslate nohighlight">\(L_k\vert\psi_2\rangle = \lambda_k^{(2)}\vert\psi_2\rangle\)</span>. For the superposition <span class="math notranslate nohighlight">\(\vert\psi_+\rangle = (\vert\psi_1\rangle + \vert\psi_2\rangle)/\sqrt{2}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-L_k\vert\psi_+\rangle = \frac{\lambda_k^{(1)}\vert\psi_1\rangle + \lambda_k^{(2)}\vert\psi_2\rangle}{\sqrt{2}}
-\]</div>
-<p>For this to be <span class="math notranslate nohighlight">\(\propto \vert\psi_+\rangle\)</span>, we need <span class="math notranslate nohighlight">\(\lambda_k^{(1)} = \lambda_k^{(2)} \equiv \lambda_k\)</span>.</p>
-<p><strong>Step 3: Application to the dephasing example.</strong></p>
-<p>For common-mode dephasing with <span class="math notranslate nohighlight">\(L = \hat{\sigma}^z_1 + \hat{\sigma}^z_2\)</span>, the singlet <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = (\vert01\rangle - \vert10\rangle)/\sqrt{2}\)</span> satisfies:</p>
-<div class="math notranslate nohighlight">
-\[
-(\hat{\sigma}^z_1 + \hat{\sigma}^z_2)\vert 01\rangle = (1-1)\vert 01\rangle + ... \;\to\; L\vert\Psi^-\rangle = 0 \cdot \vert\Psi^-\rangle
-\]</div>
-<p>So <span class="math notranslate nohighlight">\(\lambda = 0\)</span> for the singlet, confirming it forms a DFS with <span class="math notranslate nohighlight">\(L_k\vert\psi\rangle = 0\)</span> (the null eigenvalue case). Any superposition of states in this one-dimensional DFS is stable: no information is leaked to the environment.</p>
-<p><strong>DFS Criterion Summary.</strong> A subspace <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is decoherence-free if and only if the Lindblad operators act as scalars on <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\boxed{L_k\big\vert_{\mathcal{S}} = \lambda_k \hat{I}_{\mathcal{S}} \quad \forall\, k}
-\]</div>
-<p>This is a symmetry condition: the environment “cannot distinguish” states within <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, so no which-state information leaks out and no decoherence occurs.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: The <span class="math notranslate nohighlight">\(T_2 \leq 2T_1\)</span> Bound on Coherence Time</p>
-<p>The dephasing time <span class="math notranslate nohighlight">\(T_2\)</span> cannot exceed twice the energy relaxation time <span class="math notranslate nohighlight">\(T_1\)</span>. This fundamental bound follows directly from the Lindblad equation.</p>
-<p><strong>Setup.</strong> A qubit subject to both energy relaxation (amplitude damping) and pure dephasing has two Lindblad operators:</p>
-<div class="math notranslate nohighlight">
-\[
-L_1 = \sqrt{\Gamma_1}\,\hat{\sigma}_-, \qquad L_2 = \sqrt{\tfrac{\Gamma_\varphi}{2}}\,\hat{\sigma}^z
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span> is the decay rate and <span class="math notranslate nohighlight">\(\Gamma_\varphi\)</span> is the pure dephasing rate.</p>
-<p><strong>Step 1: Lindblad equation for <span class="math notranslate nohighlight">\(\hat{\rho}\)</span>.</strong></p>
-<p>Using <span class="math notranslate nohighlight">\(\hat{\sigma}_- = \vert 0\rangle\langle 1\vert\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^z = \vert 0\rangle\langle 0\vert - \vert 1\rangle\langle 1\vert\)</span>, the Lindblad superoperator <span class="math notranslate nohighlight">\(\mathcal{L}[L]\hat{\rho} = L\hat{\rho}L^\dagger - \tfrac{1}{2}\{L^\dagger L, \hat{\rho}\}\)</span> gives:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}[L_1]\hat{\rho} = \Gamma_1\left(\hat{\sigma}_-\hat{\rho}\hat{\sigma}_+ - \tfrac{1}{2}\hat{\sigma}_+\hat{\sigma}_-\hat{\rho} - \tfrac{1}{2}\hat{\rho}\hat{\sigma}_+\hat{\sigma}_-\right)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}[L_2]\hat{\rho} = \tfrac{\Gamma_\varphi}{2}\left(\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z - \hat{\rho}\right)
-\]</div>
-<p><strong>Step 2: Bloch vector equations.</strong></p>
-<p>Writing <span class="math notranslate nohighlight">\(\hat{\rho} = \tfrac{1}{2}(I + \boldsymbol{r}\cdot\hat{\boldsymbol{\sigma}})\)</span> and evaluating <span class="math notranslate nohighlight">\(\dot{\hat{\rho}} = \mathcal{L}[L_1]\hat{\rho} + \mathcal{L}[L_2]\hat{\rho}\)</span> component by component:</p>
-<ul class="simple">
-<li><p><strong>Diagonal</strong> (<span class="math notranslate nohighlight">\(z\)</span>-component): <span class="math notranslate nohighlight">\(\dot{r}_z = -\Gamma_1(1+r_z)\)</span>, giving <span class="math notranslate nohighlight">\(T_1 = 1/\Gamma_1\)</span>.</p></li>
-<li><p><strong>Off-diagonal</strong> (<span class="math notranslate nohighlight">\(x,y\)</span>-components): Using <span class="math notranslate nohighlight">\(\hat{\sigma}^z\hat{\sigma}^{x,y}\hat{\sigma}^z = -\hat{\sigma}^{x,y}\)</span> so <span class="math notranslate nohighlight">\(\mathcal{L}[L_2]\)</span> contributes <span class="math notranslate nohighlight">\(-\Gamma_\varphi r_{x,y}\)</span>, and <span class="math notranslate nohighlight">\(\mathcal{L}[L_1]\)</span> contributes <span class="math notranslate nohighlight">\(-\tfrac{\Gamma_1}{2}r_{x,y}\)</span>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\dot{r}_x = -\left(\frac{\Gamma_1}{2} + \Gamma_\varphi\right)r_x, \qquad \dot{r}_y = -\left(\frac{\Gamma_1}{2} + \Gamma_\varphi\right)r_y
-\]</div>
-<p><strong>Step 3: Read off <span class="math notranslate nohighlight">\(T_2\)</span>.</strong></p>
-<p>The coherence <span class="math notranslate nohighlight">\(r_x + \mathrm{i}r_y \propto \hat{\rho}_{01}\)</span> decays as <span class="math notranslate nohighlight">\(\mathrm{e}^{-t/T_2}\)</span> with:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{1}{T_2} = \frac{\Gamma_1}{2} + \Gamma_\varphi = \frac{1}{2T_1} + \Gamma_\varphi
-\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\Gamma_\varphi \geq 0\)</span>, we immediately obtain:</p>
-<div class="math notranslate nohighlight">
-\[
-\boxed{\frac{1}{T_2} \geq \frac{1}{2T_1}} \quad\Longleftrightarrow\quad T_2 \leq 2T_1
-\]</div>
-<p><strong>Step 4: Physical interpretation.</strong></p>
-<ul class="simple">
-<li><p><strong>Equality <span class="math notranslate nohighlight">\(T_2 = 2T_1\)</span></strong>: Achieved when <span class="math notranslate nohighlight">\(\Gamma_\varphi = 0\)</span> (no pure dephasing). Coherence is lost only because energy relaxation randomly projects the qubit — each <span class="math notranslate nohighlight">\(T_1\)</span> event destroys the phase with probability <span class="math notranslate nohighlight">\(1/2\)</span>.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(T_2 &lt; 2T_1\)</span></strong>: Pure dephasing adds extra phase randomization on top of the amplitude damping contribution.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(T_2 \ll T_1\)</span></strong>: Dephasing is the dominant noise (e.g., charge noise in superconducting qubits).</p></li>
-</ul>
-<p>This bound is fundamental: even a perfectly isolated qubit that decays at rate <span class="math notranslate nohighlight">\(\Gamma_1\)</span> loses coherence at least at rate <span class="math notranslate nohighlight">\(\Gamma_1/2\)</span> from the inherent randomness of when it decays.</p>
-</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>

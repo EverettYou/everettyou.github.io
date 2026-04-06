@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -610,31 +610,6 @@ document.write(`
 \[Z(\beta) = \int d^3\boldsymbol{x} \int_{\text{periodic in } \tau} \mathrm{e}^{-S_E[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}]\]</div>
 <p>The <strong>periodicity condition</strong> <span class="math notranslate nohighlight">\(\boldsymbol{x}(\beta\hbar) = \boldsymbol{x}(0)\)</span> arises naturally from the trace (i.e., the integration over initial positions).</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Harmonic Oscillator Partition Function</p>
-<p>We compute <span class="math notranslate nohighlight">\(Z(\beta)\)</span> for <span class="math notranslate nohighlight">\(\hat{H} = \hbar\omega(\hat{a}^\dagger\hat{a} + \tfrac{1}{2})\)</span> with eigenvalues <span class="math notranslate nohighlight">\(E_n = \hbar\omega(n + \tfrac{1}{2})\)</span>.</p>
-<p><strong>Step 1: Direct sum over states.</strong></p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) = \sum_{n=0}^{\infty} \mathrm{e}^{-\beta E_n} = \sum_{n=0}^{\infty} \mathrm{e}^{-\beta\hbar\omega(n+1/2)} = \mathrm{e}^{-\beta\hbar\omega/2} \sum_{n=0}^{\infty} \left(\mathrm{e}^{-\beta\hbar\omega}\right)^n
-\]</div>
-<p>This is a geometric series with ratio <span class="math notranslate nohighlight">\(r = \mathrm{e}^{-\beta\hbar\omega} &lt; 1\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) = \frac{\mathrm{e}^{-\beta\hbar\omega/2}}{1 - \mathrm{e}^{-\beta\hbar\omega}} = \frac{1}{2\sinh(\beta\hbar\omega/2)}
-\]</div>
-<p><strong>Step 2: Thermodynamic quantities.</strong></p>
-<p>Free energy: <span class="math notranslate nohighlight">\(F = -k_BT\ln Z = k_BT\ln\left(2\sinh\frac{\beta\hbar\omega}{2}\right)\)</span></p>
-<p>Mean energy: <span class="math notranslate nohighlight">\(\langle E \rangle = -\frac{\partial\ln Z}{\partial\beta} = \frac{\hbar\omega}{2}\coth\frac{\beta\hbar\omega}{2} = \hbar\omega\left(\bar{n} + \frac{1}{2}\right)\)</span></p>
-<p>where <span class="math notranslate nohighlight">\(\bar{n} = (\mathrm{e}^{\beta\hbar\omega} - 1)^{-1}\)</span> is the <strong>Bose-Einstein distribution</strong> — the mean occupation number at temperature <span class="math notranslate nohighlight">\(T\)</span>.</p>
-<p><strong>Step 3: Limiting cases.</strong></p>
-<ul class="simple">
-<li><p><em>Low temperature</em> (<span class="math notranslate nohighlight">\(\beta\hbar\omega \gg 1\)</span>): <span class="math notranslate nohighlight">\(Z \approx \mathrm{e}^{-\beta\hbar\omega/2}\)</span>, <span class="math notranslate nohighlight">\(\langle E \rangle \approx \frac{1}{2}\hbar\omega\)</span> (zero-point energy dominates).</p></li>
-<li><p><em>High temperature</em> (<span class="math notranslate nohighlight">\(\beta\hbar\omega \ll 1\)</span>): <span class="math notranslate nohighlight">\(Z \approx \frac{1}{\beta\hbar\omega} = \frac{k_BT}{\hbar\omega}\)</span>, <span class="math notranslate nohighlight">\(\langle E \rangle \approx k_BT\)</span> (equipartition theorem).</p></li>
-</ul>
-<p><strong>Step 4: Path integral verification.</strong>
-The same result can be obtained from the Euclidean path integral over periodic paths <span class="math notranslate nohighlight">\(x(\tau+\beta\hbar) = x(\tau)\)</span>. Expanding in Matsubara modes <span class="math notranslate nohighlight">\(x(\tau) = \sum_n c_n \mathrm{e}^{\mathrm{i}\omega_n\tau}\)</span> with <span class="math notranslate nohighlight">\(\omega_n = 2\pi n/(\beta\hbar)\)</span>, the Gaussian integral factorizes over modes, yielding <span class="math notranslate nohighlight">\(Z = \prod_n (\omega_n^2 + \omega^2)^{-1/2}\)</span>. The regularized infinite product reproduces <span class="math notranslate nohighlight">\(Z = [2\sinh(\beta\hbar\omega/2)]^{-1}\)</span>.</p>
-</div>
 </section>
 <section id="thermal-averages-from-path-integral">
 <h3>Thermal Averages from Path Integral<a class="headerlink" href="#thermal-averages-from-path-integral" title="Link to this heading">#</a></h3>
@@ -680,38 +655,6 @@ The same result can be obtained from the Euclidean path integral over periodic p
 <div class="math notranslate nohighlight">
 \[\rho(\boldsymbol{x}', \boldsymbol{x}) \approx \sqrt{\frac{m}{2\pi\hbar^2 \beta}} \mathrm{e}^{-V(\boldsymbol{x})/(k_B T)} \delta(\boldsymbol{x}' - \boldsymbol{x})\]</div>
 <p>The system is <strong>classical</strong>: particles bounce around in the potential, governed by Boltzmann statistics <span class="math notranslate nohighlight">\(\mathrm{e}^{-V/(k_B T)}\)</span>.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: High-Temperature (Classical) Limit</p>
-<p>We show that the quantum partition function reduces to the classical Boltzmann integral as <span class="math notranslate nohighlight">\(T \to \infty\)</span> (<span class="math notranslate nohighlight">\(\beta \to 0\)</span>).</p>
-<p><strong>Step 1: Short imaginary-time expansion.</strong>
-For small <span class="math notranslate nohighlight">\(\beta\hbar\)</span>, the imaginary-time path integral is dominated by paths that don’t wander far from their starting point. Write <span class="math notranslate nohighlight">\(x(\tau) = x_0 + \xi(\tau)\)</span> where <span class="math notranslate nohighlight">\(x_0\)</span> is a constant and <span class="math notranslate nohighlight">\(\xi\)</span> represents fluctuations with <span class="math notranslate nohighlight">\(\xi(0) = \xi(\beta\hbar) = 0\)</span>.</p>
-<p><strong>Step 2: Separate zero mode and fluctuations.</strong>
-The Euclidean action splits:</p>
-<div class="math notranslate nohighlight">
-\[
-S_E = \int_0^{\beta\hbar} \left(\frac{m}{2}\dot{\xi}^2 + V(x_0 + \xi)\right)\mathrm{d}\tau \approx \beta\hbar\, V(x_0) + \int_0^{\beta\hbar} \frac{m}{2}\dot{\xi}^2\,\mathrm{d}\tau + \cdots
-\]</div>
-<p>For small <span class="math notranslate nohighlight">\(\beta\hbar\)</span>, the fluctuations <span class="math notranslate nohighlight">\(\xi\)</span> are confined to a tiny interval and contribute only through the free-particle propagator.</p>
-<p><strong>Step 3: Free-particle trace.</strong>
-The trace of the free-particle propagator over interval <span class="math notranslate nohighlight">\(\beta\hbar\)</span> gives:</p>
-<div class="math notranslate nohighlight">
-\[
-\int \mathrm{d}x_0\, K_E^{\text{free}}(x_0, \beta\hbar; x_0, 0) = \int \mathrm{d}x_0 \sqrt{\frac{m}{2\pi\hbar^2\beta}} = L\sqrt{\frac{m}{2\pi\hbar^2\beta}}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(L\)</span> is the system size. This is the <strong>thermal de Broglie wavelength</strong> factor <span class="math notranslate nohighlight">\(\lambda_{\mathrm{th}} = \sqrt{2\pi\hbar^2\beta/m}\)</span>, giving one state per <span class="math notranslate nohighlight">\(\lambda_{\mathrm{th}}\)</span> of length.</p>
-<p><strong>Step 4: Classical partition function.</strong>
-Combining:</p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) \approx \frac{1}{\lambda_{\mathrm{th}}} \int \mathrm{d}x_0\, \mathrm{e}^{-\beta V(x_0)}
-\]</div>
-<p>In <span class="math notranslate nohighlight">\(d\)</span> dimensions with <span class="math notranslate nohighlight">\(N\)</span> particles, including the momentum integral explicitly:</p>
-<div class="math notranslate nohighlight">
-\[
-Z_{\mathrm{classical}} = \frac{1}{N! h^{dN}} \int \mathrm{d}^{dN}\boldsymbol{q}\,\mathrm{d}^{dN}\boldsymbol{p}\, \mathrm{e}^{-\beta H(\boldsymbol{q},\boldsymbol{p})}
-\]</div>
-<p>This is the classical phase-space partition function. The <span class="math notranslate nohighlight">\(h^{dN}\)</span> factor (Planck’s constant to the power <span class="math notranslate nohighlight">\(dN\)</span>) is a remnant of quantum mechanics — it sets the phase-space cell size and cannot be derived classically.</p>
-</div>
 </section>
 <section id="low-temperature-limit-beta-to-infty">
 <h4>Low-Temperature Limit (<span class="math notranslate nohighlight">\(\beta \to \infty\)</span>)<a class="headerlink" href="#low-temperature-limit-beta-to-infty" title="Link to this heading">#</a></h4>
@@ -719,62 +662,6 @@ Z_{\mathrm{classical}} = \frac{1}{N! h^{dN}} \int \mathrm{d}^{dN}\boldsymbol{q}\
 <div class="math notranslate nohighlight">
 \[\rho(\boldsymbol{x}', \boldsymbol{x}) \to |\phi_0(\boldsymbol{x}')\rangle\langle\phi_0(\boldsymbol{x})|\]</div>
 <p>where <span class="math notranslate nohighlight">\(|\phi_0\rangle\)</span> is the ground state. The system is <strong>purely quantum</strong>: in its lowest energy state, exhibiting zero-point energy and quantum correlations.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Low-Temperature Limit and Ground State Dominance</p>
-<p>As <span class="math notranslate nohighlight">\(\beta \to \infty\)</span> (temperature <span class="math notranslate nohighlight">\(T \to 0\)</span>), the partition function is dominated by the lowest energy state, giving a precise way to extract ground-state properties from the thermal path integral.</p>
-<p><strong>Step 1: Spectral decomposition of the partition function.</strong></p>
-<p>Insert the energy eigenbasis <span class="math notranslate nohighlight">\(\hat{H}\vert n\rangle = E_n\vert n\rangle\)</span> (ordered <span class="math notranslate nohighlight">\(E_0 \leq E_1 \leq E_2 \leq \cdots\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) = \mathrm{Tr}(\mathrm{e}^{-\beta\hat{H}}) = \sum_{n=0}^{\infty} \mathrm{e}^{-\beta E_n}.
-\]</div>
-<p>Factor out the ground state:</p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) = \mathrm{e}^{-\beta E_0}\left(1 + \sum_{n=1}^{\infty} \mathrm{e}^{-\beta(E_n - E_0)}\right).
-\]</div>
-<p>As <span class="math notranslate nohighlight">\(\beta \to \infty\)</span>, each term with <span class="math notranslate nohighlight">\(n \geq 1\)</span> is suppressed by <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\Delta_n}\)</span> where <span class="math notranslate nohighlight">\(\Delta_n = E_n - E_0 &gt; 0\)</span> is the excitation gap:</p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) \xrightarrow{\beta\to\infty} \mathrm{e}^{-\beta E_0}\left(1 + \mathrm{e}^{-\beta\Delta_1} + \cdots\right) \approx \mathrm{e}^{-\beta E_0}.
-\]</div>
-<p><strong>Step 2: Ground-state density matrix.</strong></p>
-<p>The unnormalized density matrix in position space is:</p>
-<div class="math notranslate nohighlight">
-\[
-\rho(\boldsymbol{x}', \boldsymbol{x}; \beta) = \langle \boldsymbol{x}'\vert \mathrm{e}^{-\beta\hat{H}}\vert \boldsymbol{x}\rangle = \sum_n \psi_n^*(\boldsymbol{x}')\,\psi_n(\boldsymbol{x})\,\mathrm{e}^{-\beta E_n}.
-\]</div>
-<p>Factoring out <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta E_0}\)</span> and taking <span class="math notranslate nohighlight">\(\beta \to \infty\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\rho(\boldsymbol{x}', \boldsymbol{x}; \beta) \xrightarrow{\beta\to\infty} \mathrm{e}^{-\beta E_0}\,\psi_0^*(\boldsymbol{x}')\,\psi_0(\boldsymbol{x}).
-\]</div>
-<p>Normalizing by <span class="math notranslate nohighlight">\(Z(\beta) \approx \mathrm{e}^{-\beta E_0}\)</span>, the <strong>thermal state</strong> approaches the <strong>projector onto the ground state</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}(\beta) = \frac{\mathrm{e}^{-\beta\hat{H}}}{Z} \xrightarrow{\beta\to\infty} \vert\psi_0\rangle\langle\psi_0\vert.
-\]</div>
-<p><strong>Step 3: Path-integral interpretation of ground-state wavefunction.</strong></p>
-<p>For the thermal density matrix in imaginary time <span class="math notranslate nohighlight">\(\tau = \hbar\beta\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\rho(x', x; \beta) = K_E(x', \tau; x, 0) = \int_{x(0)=x}^{x(\tau)=x'} \mathcal{D}[x]\,\mathrm{e}^{-S_E/\hbar}.
-\]</div>
-<p>At <span class="math notranslate nohighlight">\(\tau \to \infty\)</span>, only the lowest-action (ground-state) classical trajectory survives. Setting <span class="math notranslate nohighlight">\(x \to -\infty\)</span> (the vacuum) and integrating over all initial positions:</p>
-<div class="math notranslate nohighlight">
-\[
-\psi_0(x') \propto \lim_{\tau\to\infty} \int \mathrm{d}x\, K_E(x', \tau; x, 0) = \int_{x(-\infty)=\text{any}}^{x(0)=x'} \mathcal{D}[x]\, \mathrm{e}^{-S_E/\hbar}.
-\]</div>
-<p>This is the <strong>Euclidean path integral formula for the ground-state wavefunction</strong>: a path that begins at arbitrary position in the infinite past and ends at <span class="math notranslate nohighlight">\(x'\)</span> in Euclidean time, weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E}\)</span>.</p>
-<p><strong>Step 4: Free energy and gap extraction.</strong></p>
-<p>The <strong>Helmholtz free energy</strong> at low temperature:</p>
-<div class="math notranslate nohighlight">
-\[
-F = -k_BT\ln Z \xrightarrow{T\to 0} E_0 - k_BT\,\mathrm{e}^{-\Delta_1/(k_BT)} + O(\mathrm{e}^{-2\Delta_1/(k_BT)}).
-\]</div>
-<p>The exponential approach of <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(E_0\)</span> means that thermodynamic quantities like the heat capacity <span class="math notranslate nohighlight">\(C_V = -T\partial^2 F/\partial T^2\)</span> vanish <strong>exponentially</strong> at low temperatures (not as a power law), reflecting the discrete energy gap <span class="math notranslate nohighlight">\(\Delta_1 &gt; 0\)</span>.</p>
-<p><strong>Physical summary.</strong> Zero temperature = infinite imaginary time. In the <span class="math notranslate nohighlight">\(\beta\to\infty\)</span> limit, the Euclidean path integral selects the longest-lived (lowest-action) trajectory, which is the ground state. This is the path-integral version of the <strong>variational principle</strong>: the configuration that minimizes the Euclidean action dominates at zero temperature.</p>
-</div>
 </section>
 </section>
 <section id="computational-advantage-monte-carlo-simulations">
@@ -811,31 +698,6 @@ L_\tau = \beta\hbar = \frac{\hbar}{k_B T}
 <li><p><strong>Low <span class="math notranslate nohighlight">\(T\)</span></strong> (long imaginary-time circle): the extra dimension opens up; full quantum fluctuations dominate.</p></li>
 </ul>
 <p><strong>Practical consequence:</strong> every tool developed for classical statistical mechanics — transfer matrices, Monte Carlo sampling, renormalization group — applies directly to quantum systems via imaginary time. Lattice QCD and quantum Monte Carlo methods for condensed matter both rest on this duality.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Quantum-Classical Dimensional Reduction</p>
-<p>We prove that a <span class="math notranslate nohighlight">\(d\)</span>-dimensional quantum system at temperature <span class="math notranslate nohighlight">\(T\)</span> maps to a <span class="math notranslate nohighlight">\((d+1)\)</span>-dimensional classical system.</p>
-<p><strong>Step 1: Path integral as a classical system.</strong>
-The partition function is</p>
-<div class="math notranslate nohighlight">
-\[
-Z = \int_{\text{periodic}} \mathrm{e}^{-S_E[x]/\hbar}\,\mathcal{D}[x], \quad S_E = \int_0^{\beta\hbar} \left(\frac{m}{2}\dot{x}^2 + V(x)\right)\mathrm{d}\tau
-\]</div>
-<p>The paths <span class="math notranslate nohighlight">\(x(\tau)\)</span> for <span class="math notranslate nohighlight">\(\tau \in [0, \beta\hbar]\)</span> can be viewed as <strong>configurations of a classical elastic string</strong> in one extra dimension (the imaginary-time direction <span class="math notranslate nohighlight">\(\tau\)</span>).</p>
-<p><strong>Step 2: Lattice discretization.</strong>
-Discretize <span class="math notranslate nohighlight">\(\tau\)</span> into <span class="math notranslate nohighlight">\(N\)</span> slices of width <span class="math notranslate nohighlight">\(\epsilon = \beta\hbar/N\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-Z = \left(\frac{m}{2\pi\hbar\epsilon}\right)^{N/2} \int \prod_{j=1}^N \mathrm{d}x_j \exp\left(-\frac{1}{\hbar}\sum_{j=1}^N \left[\frac{m(x_{j+1}-x_j)^2}{2\epsilon} + \epsilon V(x_j)\right]\right)
-\]</div>
-<p>with periodic boundary condition <span class="math notranslate nohighlight">\(x_{N+1} = x_1\)</span>. This is the partition function of a <strong>classical chain</strong> of <span class="math notranslate nohighlight">\(N\)</span> particles on a ring, with nearest-neighbor harmonic coupling <span class="math notranslate nohighlight">\(\frac{m}{2\epsilon}(x_{j+1}-x_j)^2\)</span> and on-site potential <span class="math notranslate nohighlight">\(\epsilon V(x_j)\)</span>.</p>
-<p><strong>Step 3: Dimensional interpretation.</strong>
-For a <span class="math notranslate nohighlight">\(d\)</span>-dimensional quantum system, each time-slice variable <span class="math notranslate nohighlight">\(x_j\)</span> is <span class="math notranslate nohighlight">\(d\)</span>-dimensional. The full lattice is <span class="math notranslate nohighlight">\((d+1)\)</span>-dimensional: <span class="math notranslate nohighlight">\(d\)</span> spatial dimensions <span class="math notranslate nohighlight">\(\times\)</span> 1 imaginary-time dimension. The extent of the extra dimension is <span class="math notranslate nohighlight">\(L_\tau = \beta\hbar = \hbar/(k_BT)\)</span>:</p>
-<ul class="simple">
-<li><p><strong>High <span class="math notranslate nohighlight">\(T\)</span></strong>: <span class="math notranslate nohighlight">\(L_\tau \to 0\)</span>, the extra dimension collapses, recovering <span class="math notranslate nohighlight">\(d\)</span>-dimensional classical stat mech.</p></li>
-<li><p><strong>Low <span class="math notranslate nohighlight">\(T\)</span></strong>: <span class="math notranslate nohighlight">\(L_\tau \to \infty\)</span>, the extra dimension opens up fully, and full quantum fluctuations dominate.</p></li>
-</ul>
-<p>This mapping is the foundation of <strong>quantum Monte Carlo</strong> methods: simulate a <span class="math notranslate nohighlight">\((d+1)\)</span>-dimensional classical system using standard Monte Carlo techniques to extract quantum thermodynamic properties.</p>
 </div>
 </section>
 <section id="summary">

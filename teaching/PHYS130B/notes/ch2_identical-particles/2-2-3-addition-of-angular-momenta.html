@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -570,15 +570,7 @@ J \in \{\vert j_1 - j_2\vert,\; \vert j_1 - j_2\vert + 1,\; \ldots,\; j_1 + j_2\
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Triangle Rule</p>
-<p><strong>Step 1: Maximum <span class="math notranslate nohighlight">\(J\)</span>.</strong> The highest possible <span class="math notranslate nohighlight">\(M = m_1 + m_2\)</span> is <span class="math notranslate nohighlight">\(j_1 + j_2\)</span> (when both projections are maximal). Only one uncoupled state achieves this: <span class="math notranslate nohighlight">\(\vert j_1, j_1\rangle\vert j_2, j_2\rangle\)</span>. This must be <span class="math notranslate nohighlight">\(\vert J_{\max}, J_{\max}\rangle\)</span> with <span class="math notranslate nohighlight">\(J_{\max} = j_1 + j_2\)</span>.</p>
-<p><strong>Step 2: Counting by subtraction.</strong> At <span class="math notranslate nohighlight">\(M = j_1 + j_2 - 1\)</span>, there are two uncoupled states (one from lowering each <span class="math notranslate nohighlight">\(m\)</span>), but one belongs to the <span class="math notranslate nohighlight">\(J = j_1 + j_2\)</span> multiplet. The remaining state starts a new multiplet with <span class="math notranslate nohighlight">\(J = j_1 + j_2 - 1\)</span>. Continuing: at each step, the number of uncoupled states with a given <span class="math notranslate nohighlight">\(M\)</span> exceeds those already assigned, until we reach <span class="math notranslate nohighlight">\(M = \vert j_1 - j_2\vert\)</span>, after which no new multiplets appear.</p>
-<p><strong>Step 3: Minimum <span class="math notranslate nohighlight">\(J\)</span>.</strong> The process terminates at <span class="math notranslate nohighlight">\(J_{\min} = \vert j_1 - j_2\vert\)</span>, where the state count is exactly exhausted.</p>
-<p><strong>Step 4: Dimension check.</strong> The total number of states is:</p>
-<div class="math notranslate nohighlight">
-\[
-\sum_{J=\vert j_1 - j_2\vert}^{j_1+j_2}(2J+1)
-\]</div>
-<p>Setting <span class="math notranslate nohighlight">\(k = J - \vert j_1-j_2\vert\)</span> and summing the arithmetic series gives <span class="math notranslate nohighlight">\((2j_1+1)(2j_2+1)\)</span>, matching the dimension of <span class="math notranslate nohighlight">\(\mathcal{H}_{j_1}\otimes\mathcal{H}_{j_2}\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p>The maximum <span class="math notranslate nohighlight">\(M\)</span> is <span class="math notranslate nohighlight">\(m_1 + m_2 = j_1 + j_2\)</span>, so <span class="math notranslate nohighlight">\(J_{\max} = j_1 + j_2\)</span>. Ladder operators connect all <span class="math notranslate nohighlight">\(M\)</span> values within a given <span class="math notranslate nohighlight">\(J\)</span>, so each <span class="math notranslate nohighlight">\(J\)</span> contributes <span class="math notranslate nohighlight">\(2J+1\)</span> states. Subtracting the <span class="math notranslate nohighlight">\(J_{\max}\)</span> multiplet and repeating gives <span class="math notranslate nohighlight">\(J_{\min} = \vert j_1 - j_2\vert\)</span>. The dimension sum verifies the count. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
 </div>
 </section>
 <section id="clebsch-gordan-coefficients">
@@ -598,46 +590,6 @@ J \in \{\vert j_1 - j_2\vert,\; \vert j_1 - j_2\vert + 1,\; \ldots,\; j_1 + j_2\
 </ul>
 </div>
 <p>In practice, CG coefficients are looked up in tables or computed by algebra systems. For simple cases they can be derived by applying ladder operators starting from the stretched state <span class="math notranslate nohighlight">\(\vert J_{\max}, J_{\max}\rangle = \vert j_1, j_1\rangle\vert j_2, j_2\rangle\)</span>.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Recursion Relations for Clebsch-Gordan Coefficients</p>
-<p>The CG coefficients can be computed systematically via recursion. The idea: apply <span class="math notranslate nohighlight">\(\hat{J}_-\)</span> to the expansion of <span class="math notranslate nohighlight">\(\vert J,M\rangle\)</span> and project onto uncoupled states.</p>
-<p><strong>Notation.</strong> Write <span class="math notranslate nohighlight">\(C(m_1, m_2\,|\,M) \equiv \langle j_1,m_1;j_2,m_2\vert J,M\rangle\)</span> (suppressing fixed <span class="math notranslate nohighlight">\(j_1, j_2, J\)</span>).</p>
-<p><strong>Step 1: Apply the total lowering operator.</strong></p>
-<p>Start from <span class="math notranslate nohighlight">\(\vert J, M\rangle = \sum_{m_1+m_2=M} C(m_1,m_2\,|\,M)\,\vert j_1,m_1;j_2,m_2\rangle\)</span> and apply <span class="math notranslate nohighlight">\(\hat{J}_- = \hat{J}_{1-} + \hat{J}_{2-}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}_-\vert J,M\rangle = \hbar\sqrt{J(J+1)-M(M-1)}\,\vert J,M-1\rangle
-\]</div>
-<p>On the right side, <span class="math notranslate nohighlight">\(\hat{J}_{1-}\)</span> acts on particle 1 and <span class="math notranslate nohighlight">\(\hat{J}_{2-}\)</span> on particle 2:</p>
-<div class="math notranslate nohighlight">
-\[
-(\hat{J}_{1-}+\hat{J}_{2-})\vert j_1,m_1;j_2,m_2\rangle = \hbar\sqrt{j_1(j_1+1)-m_1(m_1-1)}\,\vert j_1,m_1{-}1;j_2,m_2\rangle + \hbar\sqrt{j_2(j_2+1)-m_2(m_2-1)}\,\vert j_1,m_1;j_2,m_2{-}1\rangle
-\]</div>
-<p><strong>Step 2: Project onto <span class="math notranslate nohighlight">\(\langle j_1,m_1';j_2,m_2'\vert\)</span> with <span class="math notranslate nohighlight">\(m_1'+m_2' = M-1\)</span>.</strong></p>
-<p>Equating the <span class="math notranslate nohighlight">\(\vert j_1,m_1';j_2,m_2'\rangle\)</span> component on both sides:</p>
-<div class="math notranslate nohighlight">
-\[
-\boxed{\sqrt{J(J+1)-M(M-1)}\;C(m_1',m_2'\,|\,M{-}1) = \sqrt{j_1(j_1+1)-m_1'(m_1'{+}1)}\;C(m_1'{+}1,m_2'\,|\,M) + \sqrt{j_2(j_2+1)-m_2'(m_2'{+}1)}\;C(m_1',m_2'{+}1\,|\,M)}
-\]</div>
-<p>This is the <strong>lowering recursion relation</strong> — given the column <span class="math notranslate nohighlight">\(M\)</span>, it determines column <span class="math notranslate nohighlight">\(M-1\)</span>.</p>
-<p><strong>Step 3: Starting condition.</strong></p>
-<p>For each <span class="math notranslate nohighlight">\(J\)</span>, the unique state with <span class="math notranslate nohighlight">\(M = J\)</span> and <span class="math notranslate nohighlight">\(m_1 = j_1\)</span> (maximum) has:
-$<span class="math notranslate nohighlight">\(
-C(j_1,\,J-j_1\,|\,J) = 1 \quad \text{(positive by convention, normalized)}
-\)</span>$</p>
-<p>Applying the recursion downward (decreasing <span class="math notranslate nohighlight">\(M\)</span>) generates all <span class="math notranslate nohighlight">\(C(m_1', m_2'\,|\,M)\)</span> for <span class="math notranslate nohighlight">\(M = J-1, J-2, \ldots, -J\)</span>.</p>
-<p><strong>Step 4: Verification for <span class="math notranslate nohighlight">\(j_1 = j_2 = \tfrac{1}{2}\)</span>, <span class="math notranslate nohighlight">\(J = 1\)</span>.</strong></p>
-<p>Start: <span class="math notranslate nohighlight">\(C(+\tfrac{1}{2},+\tfrac{1}{2}\,|\,1) = 1\)</span>. Apply recursion with <span class="math notranslate nohighlight">\(M=1, m_1' = -\tfrac{1}{2}, m_2' = +\tfrac{1}{2}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\sqrt{1 \cdot 2 - 1 \cdot 0}\;C(-\tfrac{1}{2},+\tfrac{1}{2}\,|\,0) = \sqrt{\tfrac{3}{4}-(-\tfrac{1}{2})(+\tfrac{1}{2})}\; C(+\tfrac{1}{2},+\tfrac{1}{2}\,|\,1) + 0
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\sqrt{2}\;C(-\tfrac{1}{2},+\tfrac{1}{2}\,|\,0) = 1 \implies C(-\tfrac{1}{2},+\tfrac{1}{2}\,|\,0) = \tfrac{1}{\sqrt{2}}
-\]</div>
-<p>By symmetry (or applying with <span class="math notranslate nohighlight">\(m_1' = +\tfrac{1}{2}, m_2' = -\tfrac{1}{2}\)</span>): <span class="math notranslate nohighlight">\(C(+\tfrac{1}{2},-\tfrac{1}{2}\,|\,0) = \tfrac{1}{\sqrt{2}}\)</span>. This gives <span class="math notranslate nohighlight">\(\vert 1,0\rangle = \tfrac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle + \vert\downarrow\uparrow\rangle)\)</span>, confirming the result in the key example. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-</div>
 </section>
 <section id="key-example-two-spin-1-2-particles">
 <h3>Key Example: Two Spin-1/2 Particles<a class="headerlink" href="#key-example-two-spin-1-2-particles" title="Link to this heading">#</a></h3>
@@ -666,26 +618,6 @@ C(j_1,\,J-j_1\,|\,J) = 1 \quad \text{(positive by convention, normalized)}
 \]</div>
 <p>The singlet is <strong>antisymmetric</strong>: <span class="math notranslate nohighlight">\(\hat{P}_{12}\vert 0, 0\rangle = -\vert 0, 0\rangle\)</span>. It has <strong>zero total spin</strong> and is <strong>maximally entangled</strong> — measuring one particle’s spin along any axis completely determines the other’s.</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Two Spin-1/2 Clebsch-Gordan Coefficients</p>
-<p><strong>Stretched state.</strong> The highest-weight state is unique: <span class="math notranslate nohighlight">\(\vert 1, 1\rangle = \vert\uparrow\uparrow\rangle\)</span>.</p>
-<p><strong>Lowering to <span class="math notranslate nohighlight">\(M = 0\)</span>.</strong> Apply <span class="math notranslate nohighlight">\(\hat{J}_- = \hat{J}_{1-} + \hat{J}_{2-}\)</span> to <span class="math notranslate nohighlight">\(\vert 1, 1\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}_-\vert 1,1\rangle = \hbar\sqrt{2}\,\vert 1, 0\rangle
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-(\hat{J}_{1-} + \hat{J}_{2-})\vert\uparrow\uparrow\rangle = \hbar\vert\downarrow\uparrow\rangle + \hbar\vert\uparrow\downarrow\rangle
-\]</div>
-<p>Equating: <span class="math notranslate nohighlight">\(\vert 1, 0\rangle = \frac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle + \vert\downarrow\uparrow\rangle)\)</span>. Lowering again gives <span class="math notranslate nohighlight">\(\vert 1, -1\rangle = \vert\downarrow\downarrow\rangle\)</span>.</p>
-<p><strong>Singlet by orthogonality.</strong> At <span class="math notranslate nohighlight">\(M = 0\)</span> there are two uncoupled states: <span class="math notranslate nohighlight">\(\vert\uparrow\downarrow\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\downarrow\uparrow\rangle\)</span>. The <span class="math notranslate nohighlight">\(J = 0\)</span> state must be orthogonal to <span class="math notranslate nohighlight">\(\vert 1, 0\rangle\)</span> within this subspace:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert 0, 0\rangle = \frac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle - \vert\downarrow\uparrow\rangle)
-\]</div>
-<p><strong>Verification.</strong> Check <span class="math notranslate nohighlight">\(\hat{J}_+\vert 0,0\rangle = 0\)</span>: <span class="math notranslate nohighlight">\((\hat{J}_{1+} + \hat{J}_{2+})\frac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle - \vert\downarrow\uparrow\rangle) = \frac{\hbar}{\sqrt{2}}(\vert\uparrow\uparrow\rangle - \vert\uparrow\uparrow\rangle) = 0\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-</div>
 <p><strong>Physical consequences:</strong></p>
 <ul class="simple">
 <li><p><strong>Helium ground state</strong>: Two electrons in the <span class="math notranslate nohighlight">\(1s\)</span> orbital have a symmetric spatial wavefunction, so the spin part must be the antisymmetric singlet — the electrons are spin-paired.</p></li>
@@ -711,60 +643,7 @@ C(j_1,\,J-j_1\,|\,J) = 1 \quad \text{(positive by convention, normalized)}
 \langle \hat{\boldsymbol{L}} \cdot \hat{\boldsymbol{S}} \rangle = \frac{\hbar^2}{2}[j(j+1) - \ell(\ell+1) - s(s+1)]
 \]</div>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}}\cdot\hat{\boldsymbol{S}}\)</span> in Terms of <span class="math notranslate nohighlight">\(\hat{J}^2\)</span></p>
-<p>From <span class="math notranslate nohighlight">\(\hat{\boldsymbol{J}} = \hat{\boldsymbol{L}} + \hat{\boldsymbol{S}}\)</span>, square both sides:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}^2 = (\hat{\boldsymbol{L}} + \hat{\boldsymbol{S}})^2 = \hat{L}^2 + \hat{S}^2 + 2\hat{\boldsymbol{L}}\cdot\hat{\boldsymbol{S}}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}}\cdot\hat{\boldsymbol{S}} = \hat{L}_x\hat{S}_x + \hat{L}_y\hat{S}_y + \hat{L}_z\hat{S}_z\)</span> (the cross terms <span class="math notranslate nohighlight">\(\hat{L}_i\hat{S}_j\)</span> with <span class="math notranslate nohighlight">\(i \neq j\)</span> cancel in the expansion because <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}}\)</span> and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{S}}\)</span> act on different Hilbert spaces and thus commute). Solving:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\boldsymbol{L}}\cdot\hat{\boldsymbol{S}} = \frac{1}{2}(\hat{J}^2 - \hat{L}^2 - \hat{S}^2)
-\]</div>
-<p>In the coupled basis <span class="math notranslate nohighlight">\(\vert \ell, s; j, m_j\rangle\)</span>, all three operators on the right are diagonal, giving:</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \hat{\boldsymbol{L}}\cdot\hat{\boldsymbol{S}}\rangle = \frac{\hbar^2}{2}[j(j+1) - \ell(\ell+1) - s(s+1)] \quad \checkmark
-\]</div>
-</div>
 <p>For an electron (<span class="math notranslate nohighlight">\(s = 1/2\)</span>) with orbital quantum number <span class="math notranslate nohighlight">\(\ell \geq 1\)</span>, two values are allowed: <span class="math notranslate nohighlight">\(j = \ell + 1/2\)</span> and <span class="math notranslate nohighlight">\(j = \ell - 1/2\)</span>. Their energy splitting is the <strong>fine structure</strong> — a small but measurable correction. Example: the hydrogen <span class="math notranslate nohighlight">\(2p\)</span> level splits into <span class="math notranslate nohighlight">\(2p_{3/2}\)</span> and <span class="math notranslate nohighlight">\(2p_{1/2}\)</span>, a preview of perturbation theory in <a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html"><span class="doc std std-doc">§5.1</span></a>.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Wigner–Eckart Theorem</p>
-<p>The <strong>Wigner–Eckart theorem</strong> generalizes the selection rule <span class="math notranslate nohighlight">\(\Delta m = q\)</span> to a precise factorization of all matrix elements of tensor operators. It is one of the most powerful tools in quantum mechanics, reducing complicated multi-index matrix element computations to a single reduced matrix element times a known Clebsch–Gordan coefficient.</p>
-<p><strong>Spherical tensor operators.</strong> An operator <span class="math notranslate nohighlight">\(\hat{T}^{(k)}_q\)</span> (<span class="math notranslate nohighlight">\(-k \le q \le k\)</span>) is a <strong>spherical tensor of rank <span class="math notranslate nohighlight">\(k\)</span></strong> if it transforms under rotations the same way as <span class="math notranslate nohighlight">\(\vert k, q\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{J}_z,\, \hat{T}^{(k)}_q] = \hbar q\, \hat{T}^{(k)}_q, \qquad [\hat{J}_\pm,\, \hat{T}^{(k)}_q] = \hbar\sqrt{k(k+1) - q(q\pm 1)}\; \hat{T}^{(k)}_{q\pm 1}.
-\]</div>
-<p>Examples: scalar operators have <span class="math notranslate nohighlight">\(k=0\)</span>; vector components <span class="math notranslate nohighlight">\(\hat{V}_{\pm1} = \mp(\hat{V}_x \pm \mathrm{i}\hat{V}_y)/\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(\hat{V}_0 = \hat{V}_z\)</span> form a <span class="math notranslate nohighlight">\(k=1\)</span> tensor; the <span class="math notranslate nohighlight">\(n=2\)</span> spherical harmonics form a <span class="math notranslate nohighlight">\(k=2\)</span> tensor.</p>
-<p><strong>Step 1: Selection rule from <span class="math notranslate nohighlight">\(\hat{J}_z\)</span>.</strong></p>
-<p>Sandwich <span class="math notranslate nohighlight">\([\hat{J}_z, \hat{T}^{(k)}_q] = \hbar q\,\hat{T}^{(k)}_q\)</span> between <span class="math notranslate nohighlight">\(\langle j', m'\vert\)</span> and <span class="math notranslate nohighlight">\(\vert j, m\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-(m' - m - q)\, \hbar \langle j',m'\vert \hat{T}^{(k)}_q \vert j,m\rangle = 0.
-\]</div>
-<p>Therefore <span class="math notranslate nohighlight">\(\langle j',m'\vert \hat{T}^{(k)}_q \vert j,m\rangle = 0\)</span> unless <span class="math notranslate nohighlight">\(m' = m + q\)</span>.</p>
-<p><strong>Step 2: Recursion from <span class="math notranslate nohighlight">\(\hat{J}_\pm\)</span>.</strong></p>
-<p>Sandwich <span class="math notranslate nohighlight">\([\hat{J}_\pm, \hat{T}^{(k)}_q]\vert j,m\rangle = \hbar\sqrt{k(k\!+\!1)-q(q\pm 1)}\,\hat{T}^{(k)}_{q\pm 1}\vert j,m\rangle\)</span> with <span class="math notranslate nohighlight">\(\langle j',m'\vert\)</span>, and rewrite <span class="math notranslate nohighlight">\(\langle j',m'\vert\hat{J}_\pm\)</span> using <span class="math notranslate nohighlight">\(\hat{J}_\pm^\dagger = \hat{J}_\mp\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\sqrt{j'(j'\!+\!1) - m'(m'\!\mp\! 1)}\,\langle j', m'\!\mp\! 1\vert \hat{T}^{(k)}_q\vert j,m\rangle + \sqrt{j(j\!+\!1) - m(m\!\pm\! 1)}\,\langle j',m'\vert \hat{T}^{(k)}_q\vert j, m\!\pm\! 1\rangle = \sqrt{k(k\!+\!1) - q(q\!\pm\! 1)}\,\langle j',m'\vert \hat{T}^{(k)}_{q\pm 1}\vert j,m\rangle.
-\]</div>
-<p><strong>Step 3: Identifying the Clebsch–Gordan recursion.</strong></p>
-<p>These are exactly the <strong>same recursion relations</strong> satisfied by the Clebsch–Gordan coefficients <span class="math notranslate nohighlight">\(\langle j,m;k,q\vert j',m'\rangle\)</span>! (Compare the recursion in the previous derivation box.) Since both <span class="math notranslate nohighlight">\(\langle j',m'\vert\hat{T}^{(k)}_q\vert j,m\rangle\)</span> and <span class="math notranslate nohighlight">\(\langle j,m;k,q\vert j',m'\rangle\)</span> satisfy the same linear recursion with the same boundary conditions (up to <span class="math notranslate nohighlight">\(j'\)</span>-dependent normalization), they are proportional.</p>
-<p><strong>Step 4: The Wigner–Eckart theorem.</strong></p>
-<p>The proportionality constant can depend only on <span class="math notranslate nohighlight">\(j\)</span>, <span class="math notranslate nohighlight">\(j'\)</span>, and <span class="math notranslate nohighlight">\(k\)</span> — it is independent of <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(m'\)</span>, and <span class="math notranslate nohighlight">\(q\)</span>. It defines the <strong>reduced matrix element</strong> <span class="math notranslate nohighlight">\(\langle j'\Vert\hat{T}^{(k)}\Vert j\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\langle j',m'\vert\hat{T}^{(k)}_q\vert j,m\rangle = \frac{\langle j,m;\,k,q\,\vert j',m'\rangle}{\sqrt{2j'+1}}\,\langle j'\Vert\hat{T}^{(k)}\Vert j\rangle.
-\]</div>
-<p>(The <span class="math notranslate nohighlight">\(1/\sqrt{2j'+1}\)</span> normalization is a convention chosen so that <span class="math notranslate nohighlight">\(\langle j'\Vert\hat{T}^{(k)}\Vert j\rangle\)</span> is symmetric in <span class="math notranslate nohighlight">\(j\leftrightarrow j'\)</span> for Hermitian operators.)</p>
-<p><strong>Step 5: Selection rules and physical applications.</strong></p>
-<p>The CG coefficient <span class="math notranslate nohighlight">\(\langle j,m;k,q\vert j',m'\rangle\)</span> vanishes unless (i) <span class="math notranslate nohighlight">\(m' = m+q\)</span> and (ii) <span class="math notranslate nohighlight">\(\vert j - k\vert \le j' \le j + k\)</span> (triangle rule). These are the <strong>angular momentum selection rules</strong>: any operator of rank <span class="math notranslate nohighlight">\(k\)</span> can only connect states satisfying both conditions.</p>
-<p><strong>Example — electric dipole transitions in atoms.</strong> The dipole operator <span class="math notranslate nohighlight">\(\hat{r}\)</span> is a rank-<span class="math notranslate nohighlight">\(k=1\)</span> tensor (vector). So radiative transitions require <span class="math notranslate nohighlight">\(\vert\Delta l\vert = 0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> (triangle rule with <span class="math notranslate nohighlight">\(k=1\)</span>), <span class="math notranslate nohighlight">\(m' = m, m\pm 1\)</span> (from <span class="math notranslate nohighlight">\(q=0,\pm 1\)</span> components), and parity change. These are the standard <strong>electric dipole selection rules</strong>, now proven from first principles rather than guessed.</p>
-</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>

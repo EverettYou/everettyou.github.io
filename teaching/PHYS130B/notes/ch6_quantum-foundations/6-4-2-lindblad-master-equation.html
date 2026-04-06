@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -575,7 +575,7 @@ document.write(`
 <div class="important admonition">
 <p class="admonition-title">Lindblad Master Equation (GKSL Form)</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-equation">
-<span class="eqno">(155)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{\rho}] + \sum_k \gamma_k \left( \hat{L}_k \hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k, \hat{\rho}\} \right)\]</div>
+<span class="eqno">(153)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{\rho}] + \sum_k \gamma_k \left( \hat{L}_k \hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k, \hat{\rho}\} \right)\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H\)</span> = system Hamiltonian (Hermitian), governing unitary evolution.</p></li>
@@ -587,70 +587,14 @@ document.write(`
 </div>
 <p>The Lindblad equation is derived by tracing out the environment from unitary system+environment evolution:</p>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Lindblad Equation from the GKSL Theorem</p>
-<p><strong>Goal:</strong> Derive the most general time-local (Markovian) master equation for the density matrix of an open quantum system.</p>
-<p><strong>Setup: Quantum dynamical semigroup.</strong> Markovian evolution means the map <span class="math notranslate nohighlight">\(\Lambda_t : \hat{\rho}(0) \mapsto \hat{\rho}(t)\)</span> satisfies the <strong>semigroup property</strong>:</p>
+<p class="admonition-title">Derivation: Lindblad Equation</p>
+<p>Start with total Hamiltonian:</p>
 <div class="math notranslate nohighlight">
-\[
-\Lambda_{t+s} = \Lambda_t \circ \Lambda_s, \qquad \Lambda_0 = \mathrm{id}.
-\]</div>
-<p>(Past history is irrelevant; only the current state matters.) Each <span class="math notranslate nohighlight">\(\Lambda_t\)</span> must be a CPTP (completely positive, trace-preserving) map. The generator <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is defined by</p>
+\[H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
+<p>The full system+environment evolves unitarily. Tracing out the environment and assuming the <strong>Markovian approximation</strong> (short environment memory, <span class="math notranslate nohighlight">\(\tau_E \ll \tau_S\)</span>) gives:</p>
 <div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \mathcal{L}(\hat{\rho}) = \lim_{\varepsilon\to 0^+}\frac{\Lambda_\varepsilon(\hat{\rho}) - \hat{\rho}}{\varepsilon}.
-\]</div>
-<p><strong>Step 1: Kraus expansion for infinitesimal <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</strong> By the Kraus theorem, every CPTP map <span class="math notranslate nohighlight">\(\Lambda_\varepsilon\)</span> has a Kraus decomposition:</p>
-<div class="math notranslate nohighlight">
-\[
-\Lambda_\varepsilon(\hat{\rho}) = \sum_\mu K_\mu(\varepsilon)\,\hat{\rho}\,K_\mu^\dagger(\varepsilon), \qquad \sum_\mu K_\mu^\dagger K_\mu = \hat{I}.
-\]</div>
-<p>For small <span class="math notranslate nohighlight">\(\varepsilon\)</span>, one Kraus operator is close to the identity while the others vanish:</p>
-<div class="math notranslate nohighlight">
-\[
-K_0(\varepsilon) = \hat{I} + \varepsilon \hat{F} + O(\varepsilon^2), \qquad
-K_k(\varepsilon) = \sqrt{\varepsilon}\,\hat{L}_k + O(\varepsilon^{3/2}), \quad k \geq 1.
-\]</div>
-<p>The scaling <span class="math notranslate nohighlight">\(K_k \sim \sqrt{\varepsilon}\)</span> (not <span class="math notranslate nohighlight">\(\sim \varepsilon\)</span>) ensures that the <span class="math notranslate nohighlight">\(K_k\)</span>-terms contribute at <span class="math notranslate nohighlight">\(O(\varepsilon)\)</span> when squared.</p>
-<p><strong>Step 2: Trace-preservation constraint.</strong> The condition <span class="math notranslate nohighlight">\(\sum_\mu K_\mu^\dagger K_\mu = \hat{I}\)</span> at order <span class="math notranslate nohighlight">\(\varepsilon\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K_0^\dagger K_0 + \sum_{k\geq 1} K_k^\dagger K_k = \hat{I}.
-\]</div>
-<p>Substituting:</p>
-<div class="math notranslate nohighlight">
-\[
-(\hat{I} + \varepsilon\hat{F}^\dagger)(\hat{I} + \varepsilon\hat{F}) + \varepsilon\sum_k \hat{L}_k^\dagger\hat{L}_k = \hat{I} + O(\varepsilon^2).
-\]</div>
-<p>At order <span class="math notranslate nohighlight">\(\varepsilon\)</span>: <span class="math notranslate nohighlight">\(\hat{F} + \hat{F}^\dagger + \sum_k \hat{L}_k^\dagger\hat{L}_k = 0\)</span>.</p>
-<p>Decompose <span class="math notranslate nohighlight">\(\hat{F}\)</span> into Hermitian and anti-Hermitian parts: <span class="math notranslate nohighlight">\(\hat{F} = -\mathrm{i}\hat{H}/\hbar - \hat{\Gamma}/2\)</span>, where <span class="math notranslate nohighlight">\(\hat{H} = \hat{H}^\dagger\)</span> (effective system Hamiltonian) and <span class="math notranslate nohighlight">\(\hat{\Gamma} = \hat{\Gamma}^\dagger\)</span>. Then <span class="math notranslate nohighlight">\(\hat{F} + \hat{F}^\dagger = -\hat{\Gamma}\)</span>, so the constraint gives:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\Gamma} = \sum_k \hat{L}_k^\dagger\hat{L}_k \quad\Rightarrow\quad
-K_0(\varepsilon) = \hat{I} + \varepsilon\left(-\frac{\mathrm{i}\hat{H}}{\hbar} - \frac{1}{2}\sum_k \hat{L}_k^\dagger\hat{L}_k\right) + O(\varepsilon^2).
-\]</div>
-<p><strong>Step 3: Compute the generator.</strong> Assemble <span class="math notranslate nohighlight">\(\Lambda_\varepsilon(\hat{\rho}) = K_0\hat{\rho}K_0^\dagger + \varepsilon\sum_k \hat{L}_k\hat{\rho}\hat{L}_k^\dagger + O(\varepsilon^2)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K_0\hat{\rho}K_0^\dagger = \hat{\rho} + \varepsilon\!\left(\hat{F}\hat{\rho} + \hat{\rho}\hat{F}^\dagger\right) + O(\varepsilon^2)
-= \hat{\rho} + \varepsilon\!\left(-\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] - \frac{1}{2}\sum_k\!\{\hat{L}_k^\dagger\hat{L}_k, \hat{\rho}\}\right) + O(\varepsilon^2).
-\]</div>
-<p>Adding the jump terms <span class="math notranslate nohighlight">\(\varepsilon\sum_k \hat{L}_k\hat{\rho}\hat{L}_k^\dagger\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\Lambda_\varepsilon(\hat{\rho}) = \hat{\rho} + \varepsilon\left[-\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] + \sum_k\left(\hat{L}_k\hat{\rho}\hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger\hat{L}_k,\hat{\rho}\}\right)\right] + O(\varepsilon^2).
-\]</div>
-<p>Dividing by <span class="math notranslate nohighlight">\(\varepsilon\)</span> and taking <span class="math notranslate nohighlight">\(\varepsilon\to 0\)</span> yields the <strong>GKSL (Lindblad) master equation</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] + \sum_k\left(\hat{L}_k\hat{\rho}\hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger\hat{L}_k,\hat{\rho}\}\right).
-\]</div>
-<p><strong>Physical interpretation of each term:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(-\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}]\)</span>: unitary evolution under the system Hamiltonian (includes any Lamb-shift from the bath).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\hat{L}_k\hat{\rho}\hat{L}_k^\dagger\)</span>: <strong>quantum jumps</strong> — inflow of probability from the <span class="math notranslate nohighlight">\(k\)</span>-th dissipation channel.</p></li>
-<li><p><span class="math notranslate nohighlight">\(-\frac{1}{2}\{\hat{L}_k^\dagger\hat{L}_k,\hat{\rho}\}\)</span>: <strong>no-jump evolution</strong> — outflow of probability maintaining trace preservation.</p></li>
-</ul>
-<p><strong>Uniqueness:</strong> The decomposition into <span class="math notranslate nohighlight">\(\hat{H}\)</span> and <span class="math notranslate nohighlight">\(\{\hat{L}_k\}\)</span> is not unique (unitary freedom in the Lindblad operators and basis changes in jump-operator space), but the physical dynamics is unique.</p>
+\[\frac{\mathrm{d}\hat{\rho}_S}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[H_S, \hat{\rho}_S] + \mathcal{D}(\hat{\rho}_S)\]</div>
+<p>The dissipation superoperator <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> must preserve trace and positivity. The most general form satisfying these constraints is precisely the Lindblad form <span class="math notranslate nohighlight">\(\sum_k\gamma_k(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\})\)</span>.</p>
 </div>
 </section>
 <section id="properties-of-lindblad-evolution">
@@ -663,19 +607,6 @@ K_0\hat{\rho}K_0^\dagger = \hat{\rho} + \varepsilon\!\left(\hat{F}\hat{\rho} + \
 <p><strong>3. Positivity</strong>: If <span class="math notranslate nohighlight">\(\hat{\rho}(0) \geq 0\)</span>, then <span class="math notranslate nohighlight">\(\hat{\rho}(t) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span> (valid quantum state).</p>
 <p><strong>4. CPTP map</strong>: The time evolution <span class="math notranslate nohighlight">\(\hat{\rho}(0) \mapsto \hat{\rho}(t)\)</span> is a completely positive trace-preserving (quantum) channel, equivalent to the Kraus representation <span class="math notranslate nohighlight">\(\hat{\rho}(t) = \sum_\mu K_\mu \hat{\rho}(0) K_\mu^\dagger\)</span> with <span class="math notranslate nohighlight">\(\sum_\mu K_\mu^\dagger K_\mu = I\)</span>.</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Trace Preservation and Dissipation Rates</p>
-<p><strong>Trace preservation.</strong> Compute <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\operatorname{Tr}(\hat{\rho})\)</span> using the Lindblad equation <span class="math notranslate nohighlight">\(\dot{\hat{\rho}} = -\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] + \sum_k\gamma_k\mathcal{D}[\hat{L}_k]\hat{\rho}\)</span>, where <span class="math notranslate nohighlight">\(\mathcal{D}[\hat{L}]\hat{\rho} = \hat{L}\hat{\rho}\hat{L}^\dagger - \frac{1}{2}\{\hat{L}^\dagger\hat{L},\hat{\rho}\}\)</span>.</p>
-<p>The Hamiltonian term: <span class="math notranslate nohighlight">\(\operatorname{Tr}([\hat{H},\hat{\rho}]) = \operatorname{Tr}(\hat{H}\hat{\rho} - \hat{\rho}\hat{H}) = 0\)</span> (cyclicity of trace).</p>
-<p>Each jump term:</p>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{Tr}(\mathcal{D}[\hat{L}]\hat{\rho}) = \operatorname{Tr}(\hat{L}\hat{\rho}\hat{L}^\dagger) - \frac{1}{2}\operatorname{Tr}(\hat{L}^\dagger\hat{L}\hat{\rho}) - \frac{1}{2}\operatorname{Tr}(\hat{\rho}\hat{L}^\dagger\hat{L}) = \operatorname{Tr}(\hat{L}^\dagger\hat{L}\hat{\rho}) - \operatorname{Tr}(\hat{L}^\dagger\hat{L}\hat{\rho}) = 0
-\]</div>
-<p>using cyclicity. So <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\operatorname{Tr}(\hat{\rho}) = 0\)</span> — trace is exactly preserved.</p>
-<p><strong>Positivity of dissipation rates.</strong> The rates <span class="math notranslate nohighlight">\(\gamma_k \geq 0\)</span> are required for positivity of <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span>. Negative rates would cause population inversion without input, violating the second law. The Markovian approximation ensures <span class="math notranslate nohighlight">\(\gamma_k &gt; 0\)</span> when the environment is in a thermal state at positive temperature.</p>
-<p><strong>Equilibrium state.</strong> At long times, <span class="math notranslate nohighlight">\(\dot{\hat{\rho}} = 0\)</span>. For a single mode at rate <span class="math notranslate nohighlight">\(\gamma\)</span> with jump operator <span class="math notranslate nohighlight">\(\hat{L} = \hat{a}\)</span> (amplitude damping), the steady state is the <strong>vacuum</strong>: <span class="math notranslate nohighlight">\(\hat{\rho}_{\text{ss}} = \vert 0\rangle\langle 0\vert\)</span>. For the thermal Lindblad (both loss <span class="math notranslate nohighlight">\(\hat{L}_- = \hat{a}\)</span> and gain <span class="math notranslate nohighlight">\(\hat{L}_+ = \hat{a}^\dagger\)</span> at rates <span class="math notranslate nohighlight">\(\gamma(\bar{n}+1)\)</span> and <span class="math notranslate nohighlight">\(\gamma\bar{n}\)</span>), the steady state is the <strong>thermal state</strong> <span class="math notranslate nohighlight">\(\hat{\rho}_{\text{th}} = \mathrm{e}^{-\beta\hbar\omega\hat{a}^\dagger\hat{a}}/Z\)</span>, as expected.</p>
-</div>
 <p><strong>Gain and loss balance</strong>: The <span class="math notranslate nohighlight">\(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger\)</span> term represents <em>gain</em> (probability inflow from quantum jumps), while <span class="math notranslate nohighlight">\(-\frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\}\)</span> represents <em>loss</em> (probability outflow). Their combined action preserves trace:</p>
 <div class="math notranslate nohighlight">
 \[\text{Tr}\left(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\}\right) = \text{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho}) - \text{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho}) = 0\]</div>
@@ -686,7 +617,7 @@ K_0\hat{\rho}K_0^\dagger = \hat{\rho} + \varepsilon\!\left(\hat{F}\hat{\rho} + \
 <h4>1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1}\,\hat{\sigma}_-\)</span><a class="headerlink" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma" title="Link to this heading">#</a></h4>
 <p><strong>Physical process</strong>: Excited state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> decays to ground state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (energy dissipation, spontaneous emission) at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-amp-damping">
-<span class="eqno">(156)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_1\!\left(\hat{\sigma}_-\hat{\rho}\hat{\sigma}_+ - \frac{1}{2}\{\hat{\sigma}_+\hat{\sigma}_-,\hat{\rho}\}\right)\]</div>
+<span class="eqno">(154)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_1\!\left(\hat{\sigma}_-\hat{\rho}\hat{\sigma}_+ - \frac{1}{2}\{\hat{\sigma}_+\hat{\sigma}_-,\hat{\rho}\}\right)\]</div>
 <p><strong>Effect on populations</strong>: <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{11} = -\Gamma_1\hat{\rho}_{11}\)</span> (exponential decay), <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{00} = +\Gamma_1\hat{\rho}_{11}\)</span> (gain).</p>
 <p><strong>Effect on coherences</strong>: <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{01} = -\frac{\Gamma_1}{2}\hat{\rho}_{01}\)</span> (decay at half the rate).</p>
 </section>
@@ -694,7 +625,7 @@ K_0\hat{\rho}K_0^\dagger = \hat{\rho} + \varepsilon\!\left(\hat{F}\hat{\rho} + \
 <h4>2. Phase Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\,\hat{\sigma}^z\)</span><a class="headerlink" href="#phase-damping-l-sqrt-gamma-varphi-hat-sigma-z" title="Link to this heading">#</a></h4>
 <p><strong>Physical process</strong>: Random phase fluctuations (dephasing) with no energy loss at rate <span class="math notranslate nohighlight">\(\Gamma_\varphi = 1/T_\varphi\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-phase-damping">
-<span class="eqno">(157)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_\varphi\!\left(\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z - \hat{\rho}\right)\]</div>
+<span class="eqno">(155)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_\varphi\!\left(\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z - \hat{\rho}\right)\]</div>
 <p><strong>Effect</strong>: Only off-diagonal terms decay: <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(t) = \mathrm{e}^{-2\Gamma_\varphi t}\hat{\rho}_{01}(0)\)</span>. Diagonal (population) terms unchanged. This is the microscopic realization of the dephasing channel (§6.3.3 and §6.4.1).</p>
 </section>
 <section id="depolarizing-l-mu-sqrt-gamma-d-3-hat-sigma-mu-for-mu-x-y-z">
@@ -717,47 +648,6 @@ K_0\hat{\rho}K_0^\dagger = \hat{\rho} + \varepsilon\!\left(\hat{F}\hat{\rho} + \
 <p><strong>Problem.</strong> For an atom coupled to a thermal bath at temperature <span class="math notranslate nohighlight">\(T\)</span>, include both decay (<span class="math notranslate nohighlight">\(L_1 = \sqrt{\Gamma\bar{n}_\text{th}+\Gamma}\,\hat{\sigma}_-\)</span>) and absorption (<span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma\bar{n}_\text{th}}\,\hat{\sigma}_+\)</span>). Find the steady state.</p>
 <p><strong>Solution.</strong> Balancing gain and loss: <span class="math notranslate nohighlight">\(\hat{\rho}_{11}^\infty/\hat{\rho}_{00}^\infty = \bar{n}_\text{th}/(\bar{n}_\text{th}+1) = \mathrm{e}^{-\hbar\omega/k_BT}\)</span>, which is the <strong>Boltzmann factor</strong>. The steady state is the thermal density matrix <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = \mathrm{e}^{-\beta \hat{H}}/Z\)</span>, consistent with §6.1.2.</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Bloch Equations from the Lindblad Equation</p>
-<p>We derive the equations of motion for the <strong>Bloch vector</strong> <span class="math notranslate nohighlight">\(\boldsymbol{r} = (r_x, r_y, r_z)\)</span>, where <span class="math notranslate nohighlight">\(r_\mu = \langle\hat\sigma^\mu\rangle = \text{Tr}(\hat\sigma^\mu\hat\rho)\)</span>, from the Lindblad equation with amplitude damping and pure dephasing.</p>
-<p><strong>Lindblad operators.</strong> Consider two jump operators:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(L_1 = \sqrt{\Gamma_1}\,\hat{\sigma}_-\)</span> (amplitude damping, rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma_\varphi/2}\,\hat{\sigma}^z\)</span> (pure dephasing, rate <span class="math notranslate nohighlight">\(\Gamma_\varphi\)</span>)</p></li>
-</ul>
-<p><strong>Equation of motion for <span class="math notranslate nohighlight">\(\rho_{11}\)</span> (excited state population).</strong></p>
-<p>Using <span class="math notranslate nohighlight">\(\hat{\sigma}_+\hat{\sigma}_- = \vert 1\rangle\langle 1\vert\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\dot\rho_{11} = \Gamma_1(\hat\sigma_-\hat\rho\hat\sigma_+)_{11} - \Gamma_1(\hat\sigma_+\hat\sigma_-\hat\rho)_{11} = \Gamma_1\cdot 0 - \Gamma_1\rho_{11} = -\Gamma_1\rho_{11}
-\]</div>
-<p>(Dephasing <span class="math notranslate nohighlight">\(L_2\)</span> does not change populations.) Therefore the <span class="math notranslate nohighlight">\(z\)</span>-component relaxes as:</p>
-<div class="math notranslate nohighlight">
-\[
-\dot{r}_z = \dot\rho_{00} - \dot\rho_{11} = \Gamma_1\rho_{11} + \Gamma_1\rho_{11} = 2\Gamma_1\frac{1-r_z}{2} = \Gamma_1(1 - r_z)
-\]</div>
-<p>which gives <span class="math notranslate nohighlight">\(r_z(t) = 1 - (1-r_z(0))\mathrm{e}^{-t/T_1}\)</span>, decaying toward the ground state <span class="math notranslate nohighlight">\(r_z = +1\)</span>.</p>
-<p><strong>Equation of motion for <span class="math notranslate nohighlight">\(\rho_{01}\)</span> (coherence).</strong></p>
-<p>From amplitude damping: <span class="math notranslate nohighlight">\(\dot\rho_{01}^{(1)} = -\tfrac{\Gamma_1}{2}\rho_{01}\)</span> (half the population decay rate damps coherences).</p>
-<p>From pure dephasing: <span class="math notranslate nohighlight">\(L_2\hat\rho L_2^\dagger = \tfrac{\Gamma_\varphi}{2}\hat\sigma^z\hat\rho\hat\sigma^z\)</span>. The off-diagonal element picks up <span class="math notranslate nohighlight">\((-1)(+1) = -1\)</span> from the <span class="math notranslate nohighlight">\(\hat\sigma^z\)</span> eigenvalues, so:</p>
-<div class="math notranslate nohighlight">
-\[
-\dot\rho_{01}^{(2)} = \tfrac{\Gamma_\varphi}{2}(-1)(+1)\rho_{01} - \tfrac{\Gamma_\varphi}{2}\rho_{01} = -\Gamma_\varphi\rho_{01}
-\]</div>
-<p>Combining:</p>
-<div class="math notranslate nohighlight">
-\[
-\dot\rho_{01} = -\left(\tfrac{\Gamma_1}{2} + \Gamma_\varphi\right)\rho_{01} \equiv -\frac{1}{T_2}\rho_{01}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\frac{1}{T_2} = \frac{\Gamma_1}{2} + \Gamma_\varphi\)</span> is the <strong>total dephasing rate</strong>.</p>
-<p><strong>Bloch equations.</strong> Since <span class="math notranslate nohighlight">\(r_x = \rho_{01} + \rho_{10}\)</span> and <span class="math notranslate nohighlight">\(r_y = \mathrm{i}(\rho_{01} - \rho_{10})\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\boxed{\dot{r}_x = -\frac{r_x}{T_2}, \quad \dot{r}_y = -\frac{r_y}{T_2}, \quad \dot{r}_z = -\frac{r_z - 1}{T_1}}
-\]</div>
-<p>with <span class="math notranslate nohighlight">\(1/T_1 = \Gamma_1\)</span> (energy relaxation) and <span class="math notranslate nohighlight">\(1/T_2 = \Gamma_1/2 + \Gamma_\varphi\)</span> (total transverse decay).</p>
-<p><strong>Physical insight.</strong> The factor of 2: <span class="math notranslate nohighlight">\(T_2 \leq 2T_1\)</span>. Energy relaxation always contributes <span class="math notranslate nohighlight">\(\Gamma_1/2\)</span> to dephasing (population decay randomizes phase); pure dephasing adds extra <span class="math notranslate nohighlight">\(\Gamma_\varphi\)</span>. The bound <span class="math notranslate nohighlight">\(1/T_2 \geq 1/(2T_1)\)</span> (i.e., <span class="math notranslate nohighlight">\(T_2 \leq 2T_1\)</span>) is fundamental to all qubit experiments.</p>
-</div>
 </section>
 <section id="quantum-jump-picture">
 <h3>Quantum Jump Picture<a class="headerlink" href="#quantum-jump-picture" title="Link to this heading">#</a></h3>
@@ -766,80 +656,13 @@ K_0\hat{\rho}K_0^\dagger = \hat{\rho} + \varepsilon\!\left(\hat{F}\hat{\rho} + \
 <li><p><strong>Between jumps</strong>: The state evolves under the <em>non-Hermitian</em> effective Hamiltonian</p></li>
 </ol>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-heff">
-<span class="eqno">(158)<a class="headerlink" href="#equation-eq-lindblad-heff" title="Link to this equation">#</a></span>\[H_\text{eff} = H - \frac{\mathrm{i}\hbar}{2}\sum_k\gamma_k \hat{L}_k^\dagger \hat{L}_k\]</div>
+<span class="eqno">(156)<a class="headerlink" href="#equation-eq-lindblad-heff" title="Link to this equation">#</a></span>\[H_\text{eff} = H - \frac{\mathrm{i}\hbar}{2}\sum_k\gamma_k \hat{L}_k^\dagger \hat{L}_k\]</div>
 <p>(non-Hermitian: the norm decreases, tracking the “no-jump” probability.)</p>
 <ol class="arabic simple" start="2">
 <li><p><strong>At random times</strong> (Poisson process), a <strong>quantum jump</strong> <span class="math notranslate nohighlight">\(\hat{L}_k\)</span> occurs: <span class="math notranslate nohighlight">\(\hat{\rho} \to \hat{L}_k\hat{\rho} \hat{L}_k^\dagger/p_k\)</span> with probability <span class="math notranslate nohighlight">\(p_k \propto \gamma_k\,\text{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho})\,\mathrm{d}t\)</span>.</p></li>
 <li><p><strong>Averaging</strong> over all trajectories (all possible jump sequences and times) recovers the Lindblad master equation.</p></li>
 </ol>
 <p><strong>Physical interpretation</strong>: Each quantum jump corresponds to a physical event — photon emission, phonon absorption, spin flip. Decoherence and dissipation arise from random jumps; the deterministic master equation is the statistical average.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Exponential Decay of Coherences Under the Dephasing Channel</p>
-<p><strong>Setup.</strong> The simplest Lindblad equation describes pure <strong>dephasing</strong> of a qubit with jump operator <span class="math notranslate nohighlight">\(\hat{L} = \hat{\sigma}^z\)</span> and rate <span class="math notranslate nohighlight">\(\gamma\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \gamma\!\left(\hat{\sigma}^z \hat{\rho} \hat{\sigma}^z - \hat{\rho}\right)
-\]</div>
-<p>(no Hamiltonian term for simplicity). Write <span class="math notranslate nohighlight">\(\hat{\rho} = \begin{pmatrix} \rho_{00} &amp; \rho_{01} \\ \rho_{10} &amp; \rho_{11} \end{pmatrix}\)</span> and compute each matrix element using <span class="math notranslate nohighlight">\(\hat{\sigma}^z = \begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}\)</span>.</p>
-<p><strong>Step 1: Compute <span class="math notranslate nohighlight">\(\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z\)</span>.</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z = \begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}\begin{pmatrix}\rho_{00}&amp;\rho_{01}\\\rho_{10}&amp;\rho_{11}\end{pmatrix}\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}
-= \begin{pmatrix}\rho_{00}&amp;-\rho_{01}\\-\rho_{10}&amp;\rho_{11}\end{pmatrix}
-\end{split}\]</div>
-<p><strong>Step 2: Form the Lindblad superoperator.</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z - \hat{\rho} = \begin{pmatrix}0&amp;-2\rho_{01}\\-2\rho_{10}&amp;0\end{pmatrix}
-\end{split}\]</div>
-<p><strong>Step 3: Read off the equations of motion.</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\dot{\rho}_{00} = 0, \quad \dot{\rho}_{11} = 0, \quad \dot{\rho}_{01} = -2\gamma\rho_{01}, \quad \dot{\rho}_{10} = -2\gamma\rho_{10}
-\]</div>
-<p><strong>Step 4: Solve.</strong></p>
-<ul class="simple">
-<li><p><strong>Diagonal elements</strong> (populations) are <strong>constant</strong>: <span class="math notranslate nohighlight">\(\rho_{00}(t) = \rho_{00}(0)\)</span>, <span class="math notranslate nohighlight">\(\rho_{11}(t) = \rho_{11}(0)\)</span>.</p></li>
-<li><p><strong>Off-diagonal elements</strong> (coherences) decay exponentially:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\rho_{01}(t) = \rho_{01}(0)\,\mathrm{e}^{-2\gamma t}, \qquad \rho_{10}(t) = \rho_{10}(0)\,\mathrm{e}^{-2\gamma t}
-\]</div>
-<p><strong>Bloch vector picture.</strong> With <span class="math notranslate nohighlight">\(\hat{\rho} = (\hat{I} + \boldsymbol{r}\cdot\hat{\boldsymbol{\sigma}})/2\)</span>, the dephasing equation gives:</p>
-<div class="math notranslate nohighlight">
-\[
-\dot{r}_x = -2\gamma r_x, \quad \dot{r}_y = -2\gamma r_y, \quad \dot{r}_z = 0
-\]</div>
-<p>The Bloch vector <strong>contracts toward the Z-axis</strong> with timescale <span class="math notranslate nohighlight">\(T_2 = 1/(2\gamma)\)</span>, while its Z-component is preserved. This is the physics of decoherence: the qubit loses phase information (coherence) while retaining energy information (populations). After time <span class="math notranslate nohighlight">\(t \gg T_2\)</span>, any initial pure state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> approaches the maximally mixed state <span class="math notranslate nohighlight">\(\hat{\rho} \to \rho_{00}\vert 0\rangle\langle 0\vert + \rho_{11}\vert 1\rangle\langle 1\vert\)</span> with no off-diagonal elements.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Quantum Jump (Monte Carlo) Unraveling of the Lindblad Equation</p>
-<p>The Lindblad equation <span class="math notranslate nohighlight">\(\dot{\hat{\rho}} = -\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] + \sum_k (\hat{L}_k\hat{\rho}\hat{L}_k^\dagger - \frac{1}{2}\hat{L}_k^\dagger\hat{L}_k\hat{\rho} - \frac{1}{2}\hat{\rho}\hat{L}_k^\dagger\hat{L}_k)\)</span> can be written as an average over <strong>stochastic quantum trajectories</strong> — the quantum jump unraveling.</p>
-<p><strong>No-jump evolution.</strong> Define the non-Hermitian effective Hamiltonian:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{H}_{\mathrm{eff}} = \hat{H} - \frac{\mathrm{i}\hbar}{2}\sum_k \hat{L}_k^\dagger \hat{L}_k.
-\]</div>
-<p>Between jump events, a pure state <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle\)</span> evolves as</p>
-<div class="math notranslate nohighlight">
-\[
-\vert\tilde{\psi}(t+\mathrm{d}t)\rangle = \left(\hat{I} - \frac{\mathrm{i}}{\hbar}\hat{H}_{\mathrm{eff}}\,\mathrm{d}t\right)\vert\psi(t)\rangle.
-\]</div>
-<p>This <strong>non-unitary</strong> evolution causes <span class="math notranslate nohighlight">\(\Vert\vert\tilde{\psi}\rangle\Vert^2 = 1 - \delta p\)</span> to decrease, where <span class="math notranslate nohighlight">\(\delta p = \mathrm{d}t \sum_k \langle\hat{L}_k^\dagger\hat{L}_k\rangle\)</span> is the total jump probability in time <span class="math notranslate nohighlight">\(\mathrm{d}t\)</span>.</p>
-<p><strong>Jump events.</strong> With probability <span class="math notranslate nohighlight">\(\delta p_k = \mathrm{d}t\langle\hat{L}_k^\dagger\hat{L}_k\rangle\)</span>, a quantum jump of type <span class="math notranslate nohighlight">\(k\)</span> occurs:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert\psi\rangle \to \frac{\hat{L}_k\vert\psi\rangle}{\sqrt{\langle\hat{L}_k^\dagger\hat{L}_k\rangle}}.
-\]</div>
-<p><strong>Recovery of Lindblad.</strong> The density matrix is the average over all trajectories. In time <span class="math notranslate nohighlight">\(\mathrm{d}t\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}(t+\mathrm{d}t) = (1-\delta p)\frac{\vert\tilde{\psi}\rangle\langle\tilde{\psi}\vert}{1-\delta p} + \sum_k \delta p_k \frac{\hat{L}_k\vert\psi\rangle\langle\psi\vert\hat{L}_k^\dagger}{\langle\hat{L}_k^\dagger\hat{L}_k\rangle}.
-\]</div>
-<p>Expanding to first order in <span class="math notranslate nohighlight">\(\mathrm{d}t\)</span> and averaging over the stochastic trajectories exactly recovers <span class="math notranslate nohighlight">\(\dot{\hat{\rho}} = \mathcal{L}[\hat{\rho}]\)</span>.</p>
-<p><strong>Practical value.</strong> For a large Hilbert space of dimension <span class="math notranslate nohighlight">\(d\)</span>, the density matrix requires <span class="math notranslate nohighlight">\(d^2\)</span> numbers; each quantum trajectory requires only <span class="math notranslate nohighlight">\(d\)</span> numbers. Simulating <span class="math notranslate nohighlight">\(N_{\mathrm{traj}}\)</span> trajectories with <span class="math notranslate nohighlight">\(N_{\mathrm{traj}} \gg 1\)</span> is far more efficient than integrating the full Lindblad equation, making the quantum jump method essential for simulating open many-body systems.</p>
-</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>

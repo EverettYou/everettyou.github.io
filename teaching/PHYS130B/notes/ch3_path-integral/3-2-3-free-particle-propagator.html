@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -592,30 +592,6 @@ document.write(`
 <p class="admonition-title">Note: Plane Waves as Momentum Eigenstates</p>
 <p>Each plane wave with momentum <span class="math notranslate nohighlight">\(p = \hbar k\)</span> is a momentum eigenstate <span class="math notranslate nohighlight">\(\vert p \rangle = (2\pi\hbar)^{-d/2} \mathrm{e}^{\mathrm{i}px/\hbar}\)</span>. The propagator is the momentum-space integral of the projector <span class="math notranslate nohighlight">\(\vert p \rangle \langle p \vert\)</span> evolved by the time operator <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = \hat{p}^2/(2m)\)</span>. This connection to spectral decomposition will be formalized later.</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Propagator from Spectral Decomposition</p>
-<p>The propagator can be derived rigorously from the operator formalism. By definition,</p>
-<div class="math notranslate nohighlight">
-\[
-K_{\text{free}}(x, t; x_0, 0) = \langle x \vert \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar} \vert x_0 \rangle
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{H} = \hat{p}^2/(2m)\)</span>. Insert the momentum resolution of identity <span class="math notranslate nohighlight">\(\hat{I} = \int \mathrm{d}p\,\vert p\rangle\langle p\vert\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K_{\text{free}} = \int \mathrm{d}p\,\langle x \vert \mathrm{e}^{-\mathrm{i}\hat{p}^2 t/(2m\hbar)} \vert p\rangle\langle p \vert x_0\rangle
-\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\vert p\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{p}\)</span> with eigenvalue <span class="math notranslate nohighlight">\(p\)</span>, we have <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{p}^2 t/(2m\hbar)}\vert p\rangle = \mathrm{e}^{-\mathrm{i}p^2 t/(2m\hbar)}\vert p\rangle\)</span>. The position-space wavefunctions are <span class="math notranslate nohighlight">\(\langle x\vert p\rangle = (2\pi\hbar)^{-1/2}\mathrm{e}^{\mathrm{i}px/\hbar}\)</span> and <span class="math notranslate nohighlight">\(\langle p\vert x_0\rangle = (2\pi\hbar)^{-1/2}\mathrm{e}^{-\mathrm{i}px_0/\hbar}\)</span>. Therefore:</p>
-<div class="math notranslate nohighlight">
-\[
-K_{\text{free}} = \int \frac{\mathrm{d}p}{2\pi\hbar}\,\exp\!\left(\frac{\mathrm{i}p(x-x_0)}{\hbar} - \frac{\mathrm{i}p^2 t}{2m\hbar}\right)
-\]</div>
-<p>Substituting <span class="math notranslate nohighlight">\(k = p/\hbar\)</span> (so <span class="math notranslate nohighlight">\(\mathrm{d}p = \hbar\,\mathrm{d}k\)</span>) recovers exactly</p>
-<div class="math notranslate nohighlight">
-\[
-K_{\text{free}} = \int \frac{\mathrm{d}k}{2\pi}\,\exp\!\left(\mathrm{i}k(x-x_0) - \mathrm{i}\frac{\hbar k^2}{2m}t\right)
-\]</div>
-<p>which is the plane-wave superposition formula. This shows that summing plane waves over all momenta is equivalent to evaluating <span class="math notranslate nohighlight">\(\langle x\vert \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\vert x_0\rangle\)</span> via spectral decomposition.</p>
-</div>
 </section>
 <section id="evaluating-the-gaussian-integral-in-momentum-space">
 <h3>Evaluating the Gaussian Integral in Momentum Space<a class="headerlink" href="#evaluating-the-gaussian-integral-in-momentum-space" title="Link to this heading">#</a></h3>
@@ -624,7 +600,7 @@ K_{\text{free}} = \int \frac{\mathrm{d}k}{2\pi}\,\exp\!\left(\mathrm{i}k(x-x_0) 
 <p class="admonition-title">The Free-Particle Propagator</p>
 <div class="math notranslate nohighlight">
 \[K_\text{free}(x, t; x_0, 0) = \left(\frac{m}{2\pi \mathrm{i}\hbar t}\right)^{1/2} \exp\left(\mathrm{i}\frac{m}{2\hbar t}(x - x_0)^2\right)\]</div>
-<p>This agrees with the one-step free kernel <a class="reference internal" href="3-2-2-schrodinger-equation.html#equation-eq-k-free-delta-t-one-step">(61)</a> from §3.2.2: set the elapsed time to <span class="math notranslate nohighlight">\(\delta t\)</span> (so <span class="math notranslate nohighlight">\(t \to \delta t\)</span>) and identify endpoints as in time-slicing (<span class="math notranslate nohighlight">\(x_0 \leftrightarrow x'\)</span>). The Gaussian prefactor and phase then match exactly—<strong>self-consistency</strong> between the short-time path-integral factor and the exact momentum superposition.</p>
+<p>This agrees with the one-step free kernel <a class="reference internal" href="3-2-2-schrodinger-equation.html#equation-eq-k-free-delta-t-one-step">(59)</a> from §3.2.2: set the elapsed time to <span class="math notranslate nohighlight">\(\delta t\)</span> (so <span class="math notranslate nohighlight">\(t \to \delta t\)</span>) and identify endpoints as in time-slicing (<span class="math notranslate nohighlight">\(x_0 \leftrightarrow x'\)</span>). The Gaussian prefactor and phase then match exactly—<strong>self-consistency</strong> between the short-time path-integral factor and the exact momentum superposition.</p>
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Gaussian Evaluation</p>
@@ -648,62 +624,6 @@ K_{\text{free}} = \int \frac{\mathrm{d}k}{2\pi}\,\exp\!\left(\mathrm{i}k(x-x_0) 
 <div class="math notranslate nohighlight">
 \[K_\text{free} = \frac{1}{(2\pi)^d} \left(\frac{2\pi m}{\mathrm{i}\hbar t}\right)^{1/2} \exp\left(\mathrm{i}\frac{m}{2\hbar t}(x - x_0)^2\right) = \left(\frac{m}{2\pi \mathrm{i}\hbar t}\right)^{1/2} \exp\left(\mathrm{i}\frac{m}{2\hbar t}(x - x_0)^2\right)\]</div>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Composition Property of the Propagator</p>
-<p>The propagator satisfies the <strong>composition (Chapman–Kolmogorov) property</strong>: for any intermediate time <span class="math notranslate nohighlight">\(t_i &lt; t' &lt; t_f\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[
-K(x_f, t_f;\, x_i, t_i) = \int_{-\infty}^{\infty} K(x_f, t_f;\, x', t')\, K(x', t';\, x_i, t_i)\, \mathrm{d}x'.
-\]</div>
-<p><strong>Step 1: Operator proof.</strong></p>
-<p>The propagator is a matrix element of the time-evolution operator:</p>
-<div class="math notranslate nohighlight">
-\[
-K(x_f, t_f; x_i, t_i) = \langle x_f\vert \hat{U}(t_f, t_i)\vert x_i\rangle.
-\]</div>
-<p>The group property of time evolution gives <span class="math notranslate nohighlight">\(\hat{U}(t_f, t_i) = \hat{U}(t_f, t')\hat{U}(t', t_i)\)</span> for any <span class="math notranslate nohighlight">\(t' \in (t_i, t_f)\)</span>. Inserting the position completeness relation <span class="math notranslate nohighlight">\(\int \mathrm{d}x'\,\vert x'\rangle\langle x'\vert = \hat{I}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K(x_f, t_f; x_i, t_i) = \langle x_f\vert \hat{U}(t_f, t')\hat{U}(t', t_i)\vert x_i\rangle = \int_{-\infty}^{\infty} \langle x_f\vert \hat{U}(t_f, t')\vert x'\rangle\langle x'\vert \hat{U}(t', t_i)\vert x_i\rangle\,\mathrm{d}x'.
-\]</div>
-<p>Identifying each factor as a propagator gives the composition formula.</p>
-<p><strong>Step 2: Explicit verification for the free particle.</strong></p>
-<p>We verify that convolving two free propagators over an intermediate time gives the correct total propagator. Define <span class="math notranslate nohighlight">\(t_1 = t' - t_i\)</span> and <span class="math notranslate nohighlight">\(t_2 = t_f - t'\)</span>. The free propagator is (in 1D):</p>
-<div class="math notranslate nohighlight">
-\[
-K_\mathrm{free}(x, t; x_0, 0) = \sqrt{\frac{m}{2\pi \mathrm{i}\hbar t}}\exp\!\left(\frac{\mathrm{i}m(x-x_0)^2}{2\hbar t}\right).
-\]</div>
-<p>We need to evaluate:</p>
-<div class="math notranslate nohighlight">
-\[
-I = \int_{-\infty}^{\infty} \sqrt{\frac{m}{2\pi\mathrm{i}\hbar t_2}}\,\mathrm{e}^{\mathrm{i}m(x_f-x')^2/(2\hbar t_2)} \cdot \sqrt{\frac{m}{2\pi\mathrm{i}\hbar t_1}}\,\mathrm{e}^{\mathrm{i}m(x'-x_i)^2/(2\hbar t_1)}\,\mathrm{d}x'.
-\]</div>
-<p><strong>Step 3: Complete the square.</strong></p>
-<p>The exponent in the integrand is:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{i}m}{2\hbar}\left[\frac{(x_f-x')^2}{t_2} + \frac{(x'-x_i)^2}{t_1}\right].
-\]</div>
-<p>Expand and collect terms in <span class="math notranslate nohighlight">\(x'\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-= \frac{\mathrm{i}m}{2\hbar}\left[\frac{t_1+t_2}{t_1 t_2}x'^2 - 2\left(\frac{x_f}{t_2}+\frac{x_i}{t_1}\right)x' + \frac{x_f^2}{t_2}+\frac{x_i^2}{t_1}\right].
-\]</div>
-<p>Let <span class="math notranslate nohighlight">\(T = t_1 + t_2\)</span>. Complete the square: the <span class="math notranslate nohighlight">\(x'\)</span>-dependent terms form a Gaussian with center <span class="math notranslate nohighlight">\(\bar{x} = (t_1 x_f + t_2 x_i)/T\)</span> and width <span class="math notranslate nohighlight">\(\sigma^2 = \mathrm{i}\hbar t_1 t_2/(mT)\)</span>.</p>
-<p>The Gaussian integral over <span class="math notranslate nohighlight">\(x'\)</span> contributes <span class="math notranslate nohighlight">\(\sqrt{2\pi\sigma^2} = \sqrt{2\pi\mathrm{i}\hbar t_1 t_2/(mT)}\)</span>.</p>
-<p>The remaining constant exponent is:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\mathrm{i}m}{2\hbar}\left[\frac{x_f^2}{t_2}+\frac{x_i^2}{t_1} - \frac{(t_1 x_f+t_2 x_i)^2}{t_1 t_2 T}\right] = \frac{\mathrm{i}m}{2\hbar}\cdot\frac{(x_f-x_i)^2}{T}.
-\]</div>
-<p><strong>Step 4: Assemble.</strong></p>
-<div class="math notranslate nohighlight">
-\[
-I = \frac{m}{2\pi\mathrm{i}\hbar\sqrt{t_1 t_2}}\cdot\sqrt{\frac{2\pi\mathrm{i}\hbar t_1 t_2}{mT}}\cdot\exp\!\left(\frac{\mathrm{i}m(x_f-x_i)^2}{2\hbar T}\right) = \sqrt{\frac{m}{2\pi\mathrm{i}\hbar T}}\exp\!\left(\frac{\mathrm{i}m(x_f-x_i)^2}{2\hbar T}\right).
-\]</div>
-<p>This is exactly <span class="math notranslate nohighlight">\(K_\mathrm{free}(x_f, T+t_i; x_i, t_i)\)</span> with total time <span class="math notranslate nohighlight">\(T = t_1+t_2\)</span>. ✓</p>
-<p><strong>Physical interpretation.</strong> The composition property encodes the quantum version of the <strong>sum over histories</strong>: a particle traveling from <span class="math notranslate nohighlight">\(x_i\)</span> to <span class="math notranslate nohighlight">\(x_f\)</span> must pass through <em>some</em> intermediate point <span class="math notranslate nohighlight">\(x'\)</span> at time <span class="math notranslate nohighlight">\(t'\)</span>, and these intermediate histories are summed (integrated) coherently. It is the mathematical expression of the path integral idea: the amplitude for a journey equals the sum over all ways to complete it.</p>
-</div>
 </section>
 <section id="phase-classical-action">
 <h3>Phase = Classical Action<a class="headerlink" href="#phase-classical-action" title="Link to this heading">#</a></h3>
@@ -719,27 +639,6 @@ I = \frac{m}{2\pi\mathrm{i}\hbar\sqrt{t_1 t_2}}\cdot\sqrt{\frac{2\pi\mathrm{i}\h
 <p>The normalization prefactor <span class="math notranslate nohighlight">\((m/2\pi \mathrm{i}\hbar t)^{1/2}\)</span> is the “quantum correction” to the amplitude. The exponent <span class="math notranslate nohighlight">\(\mathrm{i}S_\text{cl}/\hbar\)</span> is pure classical action. Together they form the complete quantum propagator.</p>
 <p>This is the exact realization of the ansatz from §3.1.3: <span class="math notranslate nohighlight">\(\psi \sim \exp(\mathrm{i}S/\hbar)\)</span> is not metaphorical—for the free particle it is mathematically exact.</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Initial-Condition Check <span class="math notranslate nohighlight">\(K \to \delta(x - x_0)\)</span> as <span class="math notranslate nohighlight">\(t \to 0\)</span></p>
-<p>A valid propagator must satisfy <span class="math notranslate nohighlight">\(K(x, 0; x_0, 0) = \delta(x - x_0)\)</span>. We verify this for the free-particle result.</p>
-<p>The propagator is a Gaussian in <span class="math notranslate nohighlight">\((x - x_0)\)</span> with width <span class="math notranslate nohighlight">\(\sigma^2 = \mathrm{i}\hbar t / m\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K_{\text{free}}(x, t; x_0, 0) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\!\left(-\frac{(x-x_0)^2}{2\sigma^2}\right), \qquad \sigma^2 = \frac{\mathrm{i}\hbar t}{m}
-\]</div>
-<p>As <span class="math notranslate nohighlight">\(t \to 0^+\)</span>, <span class="math notranslate nohighlight">\(\vert\sigma\vert \to 0\)</span>, so the Gaussian becomes infinitely narrow and tall while maintaining unit normalization:</p>
-<div class="math notranslate nohighlight">
-\[
-\int_{-\infty}^{\infty} K_{\text{free}}(x, t; x_0, 0)\,\mathrm{d}x = 1 \quad \text{for all } t &gt; 0
-\]</div>
-<p>(This follows from the standard Gaussian integral <span class="math notranslate nohighlight">\(\int \mathrm{e}^{-\alpha x^2}\mathrm{d}x = \sqrt{\pi/\alpha}\)</span> with <span class="math notranslate nohighlight">\(\alpha = m/(2\mathrm{i}\hbar t)\)</span>, and the normalization prefactor is chosen to cancel this exactly.)</p>
-<p>A normalized function that concentrates to a point is precisely the definition of the delta distribution:</p>
-<div class="math notranslate nohighlight">
-\[
-\lim_{t \to 0^+} K_{\text{free}}(x, t; x_0, 0) = \delta(x - x_0)
-\]</div>
-<p>This confirms the propagator has the correct initial condition. Physically, at <span class="math notranslate nohighlight">\(t = 0\)</span> the particle has not moved: the transition amplitude from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x\)</span> is nonzero only when <span class="math notranslate nohighlight">\(x = x_0\)</span>.</p>
-</div>
 </section>
 <section id="closing-the-circle">
 <h3>Closing the Circle<a class="headerlink" href="#closing-the-circle" title="Link to this heading">#</a></h3>
@@ -752,47 +651,6 @@ K_{\text{free}}(x, t; x_0, 0) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\!\left(-\frac{
 </ul>
 <p>The propagator closes the loop: the path integral (which sums all classical actions) produces a result whose exponent is exactly the classical action. No approximation. No stationary-phase argument yet. This is exact.</p>
 <p>In §3.3 we will use the stationary-phase approximation to extend this insight to general potentials: the dominant classical path contributions to the integral will emerge.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Free-Particle Propagator via Time-Slicing</p>
-<p>The spectral method above derives <span class="math notranslate nohighlight">\(K_{\text{free}}\)</span> by solving the Schrödinger equation and summing plane waves. Here we verify the same result directly from the path integral, confirming that the two approaches agree.</p>
-<p><strong>Step 1: Set up the time-sliced integral.</strong>
-Divide the interval <span class="math notranslate nohighlight">\([0, t]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equal slices of width <span class="math notranslate nohighlight">\(\epsilon = t/N\)</span>. From §3.2.1, the path integral is</p>
-<div class="math notranslate nohighlight">
-\[
-K = \lim_{N\to\infty} \left(\frac{m}{2\pi\mathrm{i}\hbar\epsilon}\right)^{N/2} \int \mathrm{d}x_1\cdots\mathrm{d}x_{N-1}\,\exp\!\left(\frac{\mathrm{i}m}{2\hbar\epsilon}\sum_{k=0}^{N-1}(x_{k+1}-x_k)^2\right)
-\]</div>
-<p>with <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_N = x\)</span> fixed.</p>
-<p><strong>Step 2: Evaluate the nested Gaussians iteratively.</strong>
-The key identity is: for a Gaussian integral over <span class="math notranslate nohighlight">\(x_j\)</span> appearing in two consecutive terms <span class="math notranslate nohighlight">\((x_j - x_{j-1})^2 + (x_{j+1} - x_j)^2\)</span>, completing the square in <span class="math notranslate nohighlight">\(x_j\)</span> gives</p>
-<div class="math notranslate nohighlight">
-\[
-\int_{-\infty}^{\infty} \mathrm{d}x_j\,\exp\!\left(\frac{\mathrm{i}m}{2\hbar\epsilon}\left[(x_j-x_{j-1})^2+(x_{j+1}-x_j)^2\right]\right) = \sqrt{\frac{\mathrm{i}\pi\hbar\epsilon}{m}}\,\exp\!\left(\frac{\mathrm{i}m}{2\hbar(2\epsilon)}(x_{j+1}-x_{j-1})^2\right)
-\]</div>
-<p>The result is again a Gaussian in the distance <span class="math notranslate nohighlight">\(x_{j+1}-x_{j-1}\)</span> but with time interval <span class="math notranslate nohighlight">\(2\epsilon\)</span>.</p>
-<p><strong>Step 3: Induction.</strong>
-After integrating out <span class="math notranslate nohighlight">\(x_1\)</span>, we have a single Gaussian in <span class="math notranslate nohighlight">\((x_2 - x_0)^2\)</span> with time <span class="math notranslate nohighlight">\(2\epsilon\)</span>. After integrating out <span class="math notranslate nohighlight">\(x_2\)</span>, a Gaussian in <span class="math notranslate nohighlight">\((x_3 - x_0)^2\)</span> with time <span class="math notranslate nohighlight">\(3\epsilon\)</span>. After all <span class="math notranslate nohighlight">\(N-1\)</span> integrations, the pattern gives</p>
-<div class="math notranslate nohighlight">
-\[
-K = \left(\frac{m}{2\pi\mathrm{i}\hbar\epsilon}\right)^{N/2} \cdot \left(\frac{\mathrm{i}\pi\hbar\epsilon}{m}\right)^{(N-1)/2} \cdot \frac{1}{\sqrt{N}}\,\exp\!\left(\frac{\mathrm{i}m}{2\hbar(N\epsilon)}(x-x_0)^2\right)
-\]</div>
-<p><strong>Step 4: Collect prefactors.</strong>
-The ratio of prefactors simplifies:</p>
-<div class="math notranslate nohighlight">
-\[
-\left(\frac{m}{2\pi\mathrm{i}\hbar\epsilon}\right)^{N/2} \cdot \left(\frac{\mathrm{i}\pi\hbar\epsilon}{m}\right)^{(N-1)/2} = \left(\frac{m}{2\pi\mathrm{i}\hbar\epsilon}\right)^{1/2} \cdot \left(\frac{1}{2}\right)^{(N-1)/2} \cdot \ldots
-\]</div>
-<p>A cleaner route: track only the final result of the induction. After integrating <span class="math notranslate nohighlight">\(k\)</span> intermediate points, the accumulated propagator from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_{k+1}\)</span> over time <span class="math notranslate nohighlight">\((k+1)\epsilon\)</span> has the form</p>
-<div class="math notranslate nohighlight">
-\[
-\left(\frac{m}{2\pi\mathrm{i}\hbar(k+1)\epsilon}\right)^{1/2}\exp\!\left(\frac{\mathrm{i}m(x_{k+1}-x_0)^2}{2\hbar(k+1)\epsilon}\right)
-\]</div>
-<p>This is verified by induction: integrate against the one-step kernel using the Gaussian convolution identity from Step 2. Setting <span class="math notranslate nohighlight">\(k+1 = N\)</span> and <span class="math notranslate nohighlight">\(N\epsilon = t\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K_{\text{free}}(x,t;x_0,0) = \left(\frac{m}{2\pi\mathrm{i}\hbar t}\right)^{1/2}\exp\!\left(\frac{\mathrm{i}m(x-x_0)^2}{2\hbar t}\right)
-\]</div>
-<p>This matches the spectral-decomposition result exactly, confirming the consistency between the path integral and Schrödinger equation approaches.</p>
-</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: Why Is the Factor i Important?</p>
 <p>The exponent is <span class="math notranslate nohighlight">\(+\mathrm{i}S_\text{cl}/\hbar\)</span>, not <span class="math notranslate nohighlight">\(-\mathrm{i}S_\text{cl}/\hbar\)</span> (as in the path integral formulation itself, which has <span class="math notranslate nohighlight">\(\mathcal{S}/\hbar\)</span> with <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> defined with a +i sign in the path integral definition). This is crucial:</p>

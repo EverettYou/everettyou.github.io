@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -594,7 +594,7 @@ document.write(`
 <p class="admonition-title">3-Qubit Bit-Flip Code</p>
 <p>Encode the two logical basis states as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-3qubit-encoding">
-<span class="eqno">(159)<a class="headerlink" href="#equation-eq-qec-3qubit-encoding" title="Link to this equation">#</a></span>\[\vert 0\rangle_L = \vert 000\rangle, \quad \vert 1\rangle_L = \vert 111\rangle\]</div>
+<span class="eqno">(157)<a class="headerlink" href="#equation-eq-qec-3qubit-encoding" title="Link to this equation">#</a></span>\[\vert 0\rangle_L = \vert 000\rangle, \quad \vert 1\rangle_L = \vert 111\rangle\]</div>
 <p>A general logical state encodes as <span class="math notranslate nohighlight">\(\vert\psi\rangle_L = \alpha\vert 000\rangle + \beta\vert 111\rangle\)</span>. This is not a copy of <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> — the superposition is preserved but distributed.</p>
 <p><strong>Key idea</strong>: Measure <em>what error occurred</em> (syndrome), not <em>what state the qubit is in</em>.</p>
 </div>
@@ -612,7 +612,7 @@ document.write(`
 <h4>Syndrome Measurement<a class="headerlink" href="#syndrome-measurement" title="Link to this heading">#</a></h4>
 <p>Measure <strong>parity checks</strong> without measuring the logical data:</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-parity-check-1">
-<span class="eqno">(160)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[\hat{P}_1 = \hat{Z}_1 \hat{Z}_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
+<span class="eqno">(158)<a class="headerlink" href="#equation-eq-qec-parity-check-1" title="Link to this equation">#</a></span>\[\hat{P}_1 = \hat{Z}_1 \hat{Z}_2 \quad \text{(parity of qubits 1 and 2)}\]</div>
 <div class="math notranslate nohighlight">
 \[\hat{P}_2 = \hat{Z}_2 \hat{Z}_3 \quad \text{(parity of qubits 2 and 3)}\]</div>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -649,89 +649,11 @@ document.write(`
 </div>
 <p><strong>Recovery</strong>: Apply <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> to the identified qubit. The logical state <span class="math notranslate nohighlight">\(\alpha\vert 000\rangle + \beta\vert 111\rangle\)</span> is restored.</p>
 <p><strong>Why syndrome measurement is non-destructive</strong>: <span class="math notranslate nohighlight">\(\hat{P}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{P}_2\)</span> measure parity (even/odd), not individual qubits. The superposition <span class="math notranslate nohighlight">\(\alpha\vert 000\rangle + \beta\vert 111\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{P}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{P}_2\)</span> with eigenvalue <span class="math notranslate nohighlight">\(+1\)</span> — measuring them reveals nothing about <span class="math notranslate nohighlight">\(\alpha\)</span> or <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Parity Checks Are Stabilizers of the Code Space</p>
-<p>We prove that measuring the syndrome operators <span class="math notranslate nohighlight">\(\hat{P}_1 = \hat{Z}_1\hat{Z}_2\)</span> and <span class="math notranslate nohighlight">\(\hat{P}_2 = \hat{Z}_2\hat{Z}_3\)</span> does not disturb any logical state. The key is that every codeword is a <span class="math notranslate nohighlight">\(+1\)</span> eigenstate of both parity checks.</p>
-<p><strong>Step 1: Verify code words are <span class="math notranslate nohighlight">\(+1\)</span> eigenstates.</strong></p>
-<p>For <span class="math notranslate nohighlight">\(\hat{P}_1 = \hat{Z}_1\hat{Z}_2\)</span> (checks whether qubits 1 and 2 have the same value):</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{P}_1\vert 000\rangle = (+1)(+1)\vert 000\rangle = +\vert 000\rangle
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\hat{P}_1\vert 111\rangle = (-1)(-1)\vert 111\rangle = +\vert 111\rangle
-\]</div>
-<p>Similarly <span class="math notranslate nohighlight">\(\hat{P}_2\vert 000\rangle = +\vert 000\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{P}_2\vert 111\rangle = +\vert 111\rangle\)</span>.</p>
-<p><strong>Step 2: Superpositions are also <span class="math notranslate nohighlight">\(+1\)</span> eigenstates.</strong></p>
-<p>For any logical state <span class="math notranslate nohighlight">\(\vert\psi\rangle_L = \alpha\vert 000\rangle + \beta\vert 111\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{P}_1\vert\psi\rangle_L = \alpha\hat{P}_1\vert 000\rangle + \beta\hat{P}_1\vert 111\rangle = \alpha\vert 000\rangle + \beta\vert 111\rangle = +\vert\psi\rangle_L
-\]</div>
-<p>So <span class="math notranslate nohighlight">\(\vert\psi\rangle_L\)</span> is a <span class="math notranslate nohighlight">\(+1\)</span> eigenstate of <span class="math notranslate nohighlight">\(\hat{P}_1\)</span> regardless of <span class="math notranslate nohighlight">\(\alpha, \beta\)</span>.</p>
-<p><strong>Step 3: Syndrome measurement is non-destructive.</strong></p>
-<p>Since <span class="math notranslate nohighlight">\(\vert\psi\rangle_L\)</span> is already an eigenstate of <span class="math notranslate nohighlight">\(\hat{P}_1\)</span>, measuring <span class="math notranslate nohighlight">\(\hat{P}_1\)</span> yields outcome <span class="math notranslate nohighlight">\(+1\)</span> with certainty and does not change the state (eigenstates are unchanged by measurements of their own observables). The same holds for <span class="math notranslate nohighlight">\(\hat{P}_2\)</span>.</p>
-<p><strong>Step 4: Errors break the stabilizer condition.</strong></p>
-<p>Apply <span class="math notranslate nohighlight">\(\hat{X}_1\)</span> (bit-flip error on qubit 1): <span class="math notranslate nohighlight">\(\hat{X}_1\vert 000\rangle = \vert 100\rangle\)</span>, <span class="math notranslate nohighlight">\(\hat{X}_1\vert 111\rangle = \vert 011\rangle\)</span>. Now:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{P}_1(\alpha\vert 100\rangle + \beta\vert 011\rangle) = \alpha\hat{Z}_1\hat{Z}_2\vert 100\rangle + \beta\hat{Z}_1\hat{Z}_2\vert 011\rangle
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \alpha(-1)(+1)\vert 100\rangle + \beta(+1)(-1)\vert 011\rangle = -(\alpha\vert 100\rangle + \beta\vert 011\rangle)
-\]</div>
-<p>So the error state is a <span class="math notranslate nohighlight">\(-1\)</span> eigenstate of <span class="math notranslate nohighlight">\(\hat{P}_1\)</span> — the syndrome <span class="math notranslate nohighlight">\(s_1 = 1\)</span> is detected without collapsing <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. The syndrome tells us <strong>which qubit was flipped</strong> (the error location), not <strong>what logical state is encoded</strong> (the information). The two pieces of data are in orthogonal sectors of the Hilbert space.</p>
-</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Construction: Full 3-Qubit Code Details</p>
 <p>The encoding circuit uses two CNOT gates: <span class="math notranslate nohighlight">\(\vert\psi\rangle\vert 00\rangle \xrightarrow{\text{CNOT}_{12}} \xrightarrow{\text{CNOT}_{13}} \alpha\vert 000\rangle + \beta\vert 111\rangle\)</span>.</p>
 <p>The two syndrome bits yield <span class="math notranslate nohighlight">\(2^2 = 4\)</span> possible outcomes — enough to distinguish 3 errors + no error. This works because single-qubit errors land in orthogonal sectors of the 8-dimensional Hilbert space.</p>
 <p><strong>Shor code extension</strong>: The 9-qubit Shor code concatenates two 3-qubit codes to protect against both bit-flip and phase-flip errors on any single qubit, demonstrating that any single-qubit error can be corrected.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Phase-Flip Code via Hadamard Conjugation and the Shor 9-Qubit Code</p>
-<p>The 3-qubit bit-flip code corrects <span class="math notranslate nohighlight">\(\hat{X}\)</span> errors. An analogous construction corrects <span class="math notranslate nohighlight">\(\hat{Z}\)</span> (phase-flip) errors, and <strong>concatenating</strong> the two gives the Shor code that corrects any single-qubit error.</p>
-<p><strong>Step 1 — Hadamard conjugation maps <span class="math notranslate nohighlight">\(\hat{Z}\)</span> to <span class="math notranslate nohighlight">\(\hat{X}\)</span>.</strong> The Hadamard gate <span class="math notranslate nohighlight">\(H = (\hat{X}+\hat{Z})/\sqrt{2}\)</span> satisfies <span class="math notranslate nohighlight">\(H\hat{Z}H = \hat{X}\)</span> and <span class="math notranslate nohighlight">\(H\hat{X}H = \hat{Z}\)</span>. Therefore, a phase-flip <span class="math notranslate nohighlight">\(\hat{Z}_j\)</span> in the computational basis becomes a bit-flip <span class="math notranslate nohighlight">\(\hat{X}_j\)</span> in the Hadamard (X) basis. This is the key insight: work in the <span class="math notranslate nohighlight">\(\{\vert+\rangle, \vert-\rangle\}\)</span> basis and phase flips become detectable bit flips.</p>
-<p><strong>Step 2 — Phase-flip code codewords.</strong> Encode:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert 0\rangle_L = \vert{+}{+}{+}\rangle = \frac{1}{2\sqrt{2}}(\vert 0\rangle+\vert 1\rangle)^{\otimes 3}, \quad \vert 1\rangle_L = \vert{-}{-}{-}\rangle = \frac{1}{2\sqrt{2}}(\vert 0\rangle-\vert 1\rangle)^{\otimes 3}
-\]</div>
-<p>A phase-flip error <span class="math notranslate nohighlight">\(\hat{Z}_j\)</span> maps <span class="math notranslate nohighlight">\(\vert+\rangle \to \vert-\rangle\)</span>, acting as a bit-flip in the X-basis. The syndrome operators are:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{X}_1\hat{X}_2, \quad \hat{X}_2\hat{X}_3
-\]</div>
-<p>(X-parity checks, analogous to <span class="math notranslate nohighlight">\(\hat{Z}_1\hat{Z}_2\)</span> and <span class="math notranslate nohighlight">\(\hat{Z}_2\hat{Z}_3\)</span> for the bit-flip code). Measuring these identifies which qubit was phase-flipped; applying <span class="math notranslate nohighlight">\(\hat{Z}\)</span> to that qubit restores the codeword.</p>
-<p><strong>Step 3 — Shor 9-qubit code by concatenation.</strong> Encode each qubit of the phase-flip code using the bit-flip code. The logical codewords become:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert 0\rangle_L = \frac{1}{2\sqrt{2}}(\vert 000\rangle+\vert 111\rangle)^{\otimes 3}, \quad \vert 1\rangle_L = \frac{1}{2\sqrt{2}}(\vert 000\rangle-\vert 111\rangle)^{\otimes 3}
-\]</div>
-<p>using 9 physical qubits. Each block of 3 is a bit-flip code protecting against <span class="math notranslate nohighlight">\(\hat{X}\)</span>; the three blocks together form a phase-flip code protecting against <span class="math notranslate nohighlight">\(\hat{Z}\)</span>.</p>
-<p><strong>Step 4 — Correctability of any single-qubit error.</strong> Any error on qubit <span class="math notranslate nohighlight">\(j\)</span> decomposes as <span class="math notranslate nohighlight">\(E = \alpha I + \beta\hat{X}_j + \gamma\hat{Y}_j + \delta\hat{Z}_j\)</span> with <span class="math notranslate nohighlight">\(\hat{Y}_j = \mathrm{i}\hat{X}_j\hat{Z}_j\)</span>. The syndrome detects:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Error type</p></th>
-<th class="head"><p>Detection mechanism</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Bit flip <span class="math notranslate nohighlight">\(\hat{X}_j\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\hat{Z}_k\hat{Z}_l\)</span> parity check within the 3-qubit block containing <span class="math notranslate nohighlight">\(j\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p>Phase flip <span class="math notranslate nohighlight">\(\hat{Z}_j\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\hat{X}_k\hat{X}_l\)</span> parity check between blocks</p></td>
-</tr>
-<tr class="row-even"><td><p>Both <span class="math notranslate nohighlight">\(\hat{Y}_j\)</span></p></td>
-<td><p>Both sets of checks simultaneously</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The 8 syndrome bits distinguish all <span class="math notranslate nohighlight">\(3\times 4 = 12\)</span> single-qubit errors (3 qubits per block, 4 error types) plus the no-error case. Since all error syndromes are distinct, the Knill-Laflamme conditions are satisfied for the full Pauli error set on any one qubit. The Shor code is an <span class="math notranslate nohighlight">\([[9,1,3]]\)</span> code. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
 </div>
 </section>
 </section>
@@ -749,34 +671,8 @@ document.write(`
 <p class="admonition-title">Knill-Laflamme Conditions</p>
 <p>A code with projector <span class="math notranslate nohighlight">\(\hat{\Pi}\)</span> onto the code space can correct a set of errors <span class="math notranslate nohighlight">\(\{\hat{E}_a\}\)</span> if and only if:</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-knill-laflamme">
-<span class="eqno">(161)<a class="headerlink" href="#equation-eq-qec-knill-laflamme" title="Link to this equation">#</a></span>\[\hat{\Pi} \hat{E}_a^\dagger \hat{E}_b \hat{\Pi} = C_{ab}\,\hat{\Pi}\]</div>
+<span class="eqno">(159)<a class="headerlink" href="#equation-eq-qec-knill-laflamme" title="Link to this equation">#</a></span>\[\hat{\Pi} \hat{E}_a^\dagger \hat{E}_b \hat{\Pi} = C_{ab}\,\hat{\Pi}\]</div>
 <p>for all errors <span class="math notranslate nohighlight">\(\hat{E}_a, \hat{E}_b\)</span>, where <span class="math notranslate nohighlight">\(C_{ab}\)</span> is a constant independent of the code state. This ensures that error information is encoded in the syndrome, not in the logical state.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Why Knill-Laflamme Guarantees Correctability</p>
-<p><strong>Goal.</strong> Show that <span class="math notranslate nohighlight">\(\hat{\Pi}\hat{E}_a^\dagger\hat{E}_b\hat{\Pi} = C_{ab}\hat{\Pi}\)</span> is necessary and sufficient for the code to correct errors <span class="math notranslate nohighlight">\(\{\hat{E}_a\}\)</span>.</p>
-<p><strong>Setup.</strong> Let <span class="math notranslate nohighlight">\(\{\vert\bar{0}\rangle, \vert\bar{1}\rangle\}\)</span> be orthonormal logical codewords spanning the code space (image of <span class="math notranslate nohighlight">\(\hat{\Pi}\)</span>). An arbitrary logical state is <span class="math notranslate nohighlight">\(\vert\bar{\psi}\rangle = \alpha\vert\bar{0}\rangle + \beta\vert\bar{1}\rangle\)</span>.</p>
-<p><strong>Error occurs.</strong> After error <span class="math notranslate nohighlight">\(\hat{E}_a\)</span>, the state is <span class="math notranslate nohighlight">\(\hat{E}_a\vert\bar{\psi}\rangle = \alpha\hat{E}_a\vert\bar{0}\rangle + \beta\hat{E}_a\vert\bar{1}\rangle\)</span>.</p>
-<p><strong>Syndrome measurement.</strong> For correction to work, the syndrome measurement must:</p>
-<ol class="arabic simple">
-<li><p><strong>Identify which error occurred</strong> (distinguish <span class="math notranslate nohighlight">\(a\)</span> from <span class="math notranslate nohighlight">\(b\)</span>).</p></li>
-<li><p><strong>Not reveal any information about the logical state</strong> (not distinguish <span class="math notranslate nohighlight">\(\alpha,\beta\)</span>).</p></li>
-</ol>
-<p><strong>Condition analysis.</strong> For two code states <span class="math notranslate nohighlight">\(\vert\bar{i}\rangle, \vert\bar{j}\rangle \in\)</span> code space, the KL conditions require:</p>
-<div class="math notranslate nohighlight">
-\[
-\langle\bar{i}\vert\hat{E}_a^\dagger\hat{E}_b\vert\bar{j}\rangle = C_{ab}\,\delta_{ij}
-\]</div>
-<ul class="simple">
-<li><p><strong>Off-diagonal (<span class="math notranslate nohighlight">\(i\neq j\)</span>)</strong>: <span class="math notranslate nohighlight">\(\langle\bar{0}\vert\hat{E}_a^\dagger\hat{E}_b\vert\bar{1}\rangle = 0\)</span>. This ensures error <span class="math notranslate nohighlight">\(\hat{E}_a\)</span> maps <span class="math notranslate nohighlight">\(\vert\bar{0}\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\bar{1}\rangle\)</span> to orthogonal error spaces — syndrome identifies the error without leaking logical info.</p></li>
-<li><p><strong>Diagonal (<span class="math notranslate nohighlight">\(i=j\)</span>)</strong>: <span class="math notranslate nohighlight">\(\langle\bar{0}\vert\hat{E}_a^\dagger\hat{E}_b\vert\bar{0}\rangle = \langle\bar{1}\vert\hat{E}_a^\dagger\hat{E}_b\vert\bar{1}\rangle = C_{ab}\)</span>. This ensures the error syndrome value <span class="math notranslate nohighlight">\(C_{ab}\)</span> is the same regardless of the logical state — measurement doesn’t collapse the logical qubit.</p></li>
-</ul>
-<p><strong>Recovery operation.</strong> Given syndrome <span class="math notranslate nohighlight">\(a\)</span> (error <span class="math notranslate nohighlight">\(\hat{E}_a\)</span> occurred), apply <span class="math notranslate nohighlight">\(\hat{R}_a = \hat{E}_a^\dagger\hat{\Pi}\)</span> (or more precisely the appropriate unitary within the error subspace). This maps:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{R}_a\hat{E}_a\vert\bar{\psi}\rangle = \hat{E}_a^\dagger\hat{E}_a\vert\bar{\psi}\rangle = C_{aa}\vert\bar{\psi}\rangle \propto \vert\bar{\psi}\rangle
-\]</div>
-<p>restoring the original logical state. The condition <span class="math notranslate nohighlight">\(C_{ab}\)</span> being a <span class="math notranslate nohighlight">\(c\)</span>-number (not an operator) ensures recovery is a valid unitary on the code space. <span class="math notranslate nohighlight">\(\square\)</span></p>
 </div>
 <p><strong>Examples of stabilizer codes</strong>:</p>
 <ul class="simple">
@@ -799,7 +695,7 @@ document.write(`
 <p class="admonition-title">Threshold Theorem</p>
 <p>For a distance-<span class="math notranslate nohighlight">\(d\)</span> code (such as the surface code), the logical error rate scales as</p>
 <div class="math notranslate nohighlight" id="equation-eq-qec-threshold-scaling">
-<span class="eqno">(162)<a class="headerlink" href="#equation-eq-qec-threshold-scaling" title="Link to this equation">#</a></span>\[
+<span class="eqno">(160)<a class="headerlink" href="#equation-eq-qec-threshold-scaling" title="Link to this equation">#</a></span>\[
 p_{\mathrm{logical}} \sim \left(\frac{p}{p_{\mathrm{th}}}\right)^{(d+1)/2}
 \]</div>
 <p>If <span class="math notranslate nohighlight">\(p &lt; p_{\mathrm{th}}\)</span>, increasing <span class="math notranslate nohighlight">\(d\)</span> suppresses the logical error exponentially. If <span class="math notranslate nohighlight">\(p &gt; p_{\mathrm{th}}\)</span>, increasing <span class="math notranslate nohighlight">\(d\)</span> makes the logical qubit <em>worse</em>.</p>
@@ -807,7 +703,7 @@ p_{\mathrm{logical}} \sim \left(\frac{p}{p_{\mathrm{th}}}\right)^{(d+1)/2}
 <p>For the surface code, <span class="math notranslate nohighlight">\(p_{\mathrm{th}} \approx 1\%\)</span>; current superconducting qubits achieve <span class="math notranslate nohighlight">\(p \sim 10^{-3}\)</span>, placing the ratio <span class="math notranslate nohighlight">\(p/p_{\mathrm{th}} \approx 0.1\)</span>.</p>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Threshold Scaling Law</p>
-<p>The scaling <a class="reference internal" href="#equation-eq-qec-threshold-scaling">(162)</a> follows from a leading-order combinatorial argument.</p>
+<p>The scaling <a class="reference internal" href="#equation-eq-qec-threshold-scaling">(160)</a> follows from a leading-order combinatorial argument.</p>
 <p><strong>Step 1 — Minimum uncorrectable error weight.</strong> A code with distance <span class="math notranslate nohighlight">\(d\)</span> corrects any pattern of up to <span class="math notranslate nohighlight">\(t = \lfloor(d-1)/2\rfloor\)</span> errors. A logical failure requires at least</p>
 <div class="math notranslate nohighlight">
 \[

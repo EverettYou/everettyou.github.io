@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -573,23 +573,16 @@ document.write(`
 <p>For orbital angular momentum, these follow from the canonical commutation relation <span class="math notranslate nohighlight">\([\hat{r}_i, \hat{p}_j] = \mathrm{i}\hbar \delta_{ij}\)</span>. For spin, they are <strong>postulated</strong> — the requirement is that angular momentum generates rotations, so it must satisfy the Lie algebra of SO(3).</p>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Orbital Angular Momentum Commutators</p>
-<p>Starting from <span class="math notranslate nohighlight">\(\hat{L}_i = \epsilon_{imn} \hat{r}_m \hat{p}_n\)</span> and the canonical commutation relation <span class="math notranslate nohighlight">\([\hat{r}_m, \hat{p}_q] = \mathrm{i}\hbar \delta_{mq}\)</span>, we compute <span class="math notranslate nohighlight">\([\hat{L}_x, \hat{L}_y]\)</span> explicitly. With <span class="math notranslate nohighlight">\(\hat{L}_x = \hat{y}\hat{p}_z - \hat{z}\hat{p}_y\)</span> and <span class="math notranslate nohighlight">\(\hat{L}_y = \hat{z}\hat{p}_x - \hat{x}\hat{p}_z\)</span>:</p>
+<p>With <span class="math notranslate nohighlight">\(\hat{L}_i = \epsilon_{imn} \hat{r}_m \hat{p}_n\)</span> and the canonical relation <span class="math notranslate nohighlight">\([\hat{r}_m, \hat{p}_q] = \mathrm{i}\hbar \delta_{mq}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-[\hat{L}_x, \hat{L}_y] = [\hat{y}\hat{p}_z - \hat{z}\hat{p}_y,\; \hat{z}\hat{p}_x - \hat{x}\hat{p}_z]
+[\hat{L}_i, \hat{L}_j] = \epsilon_{imn} \epsilon_{jpq} [\hat{r}_m \hat{p}_n, \hat{r}_p \hat{p}_q]
 \]</div>
-<p>Expanding the four commutator terms using <span class="math notranslate nohighlight">\([\hat{A}\hat{B}, \hat{C}\hat{D}] = \hat{A}[\hat{B}, \hat{C}]\hat{D} + \hat{C}[\hat{A}, \hat{D}]\hat{B} + \ldots\)</span> and noting that operators acting on different coordinates commute:</p>
+<p>Expanding and using the identity <span class="math notranslate nohighlight">\(\epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-= [\hat{y}\hat{p}_z, \hat{z}\hat{p}_x] - [\hat{y}\hat{p}_z, \hat{x}\hat{p}_z] - [\hat{z}\hat{p}_y, \hat{z}\hat{p}_x] + [\hat{z}\hat{p}_y, \hat{x}\hat{p}_z]
+[\hat{L}_i, \hat{L}_j] = \mathrm{i}\hbar \epsilon_{ijk} \hat{L}_k \quad \checkmark
 \]</div>
-<p>The middle two terms vanish (no conjugate pairs share a coordinate). The surviving terms give:</p>
-<div class="math notranslate nohighlight">
-\[
-= \hat{y}[\hat{p}_z, \hat{z}]\hat{p}_x + \hat{x}[\hat{z}, \hat{p}_z]\hat{p}_y = \hat{y}(-\mathrm{i}\hbar)\hat{p}_x + \hat{x}(\mathrm{i}\hbar)\hat{p}_y = \mathrm{i}\hbar(\hat{x}\hat{p}_y - \hat{y}\hat{p}_x) = \mathrm{i}\hbar \hat{L}_z
-\]</div>
-<p>The other two relations follow by cyclic permutation <span class="math notranslate nohighlight">\((x \to y \to z \to x)\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-<p><strong>General form.</strong> In index notation with <span class="math notranslate nohighlight">\(\hat{L}_i = \epsilon_{imn}\hat{r}_m\hat{p}_n\)</span>, the product of Levi-Civita symbols satisfies the contraction identity <span class="math notranslate nohighlight">\(\epsilon_{imn}\epsilon_{jpq} = \delta_{ij}(\delta_{mp}\delta_{nq} - \delta_{mq}\delta_{np}) + \text{cyclic}\)</span>, which reduces the general commutator to <span class="math notranslate nohighlight">\([\hat{L}_i, \hat{L}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{L}_k\)</span>.</p>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Connection to Rotations</p>
@@ -641,21 +634,6 @@ document.write(`
 [\hat{J}_z, \hat{J}_\pm] = \pm\hbar \hat{J}_\pm, \quad [\hat{J}_+, \hat{J}_-] = 2\hbar \hat{J}_z, \quad [\hat{J}^2, \hat{J}_\pm] = 0
 \]</div>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Ladder Operator Commutation Relations</p>
-<p><strong><span class="math notranslate nohighlight">\([\hat{J}_z, \hat{J}_\pm] = \pm\hbar \hat{J}_\pm\)</span>:</strong> Using <span class="math notranslate nohighlight">\(\hat{J}_+ = \hat{J}_x + \mathrm{i}\hat{J}_y\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{J}_z, \hat{J}_+] = [\hat{J}_z, \hat{J}_x] + \mathrm{i}[\hat{J}_z, \hat{J}_y] = \mathrm{i}\hbar\hat{J}_y + \mathrm{i}(-\mathrm{i}\hbar\hat{J}_x) = \hbar(\hat{J}_x + \mathrm{i}\hat{J}_y) = +\hbar\hat{J}_+
-\]</div>
-<p>Similarly <span class="math notranslate nohighlight">\([\hat{J}_z, \hat{J}_-] = -\hbar\hat{J}_-\)</span>. This means <span class="math notranslate nohighlight">\(\hat{J}_\pm\)</span> shifts the <span class="math notranslate nohighlight">\(\hat{J}_z\)</span> eigenvalue by <span class="math notranslate nohighlight">\(\pm\hbar\)</span>.</p>
-<p><strong><span class="math notranslate nohighlight">\([\hat{J}_+, \hat{J}_-] = 2\hbar\hat{J}_z\)</span>:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{J}_+, \hat{J}_-] = [\hat{J}_x + \mathrm{i}\hat{J}_y,\, \hat{J}_x - \mathrm{i}\hat{J}_y] = -\mathrm{i}[\hat{J}_x, \hat{J}_y] + \mathrm{i}[\hat{J}_y, \hat{J}_x] = -2\mathrm{i}[\hat{J}_x, \hat{J}_y] = -2\mathrm{i}(\mathrm{i}\hbar\hat{J}_z) = 2\hbar\hat{J}_z
-\]</div>
-<p><strong><span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_\pm] = 0\)</span>:</strong> Follows from <span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_x] = [\hat{J}^2, \hat{J}_y] = 0\)</span>, since <span class="math notranslate nohighlight">\(\hat{J}_\pm\)</span> is a linear combination of <span class="math notranslate nohighlight">\(\hat{J}_x\)</span> and <span class="math notranslate nohighlight">\(\hat{J}_y\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-</div>
 <p>The key property: <span class="math notranslate nohighlight">\(\hat{J}_+\)</span> raises <span class="math notranslate nohighlight">\(m\)</span> by one, <span class="math notranslate nohighlight">\(\hat{J}_-\)</span> lowers it by one.</p>
 <div class="important admonition">
 <p class="admonition-title">Ladder Operator Action</p>
@@ -677,17 +655,7 @@ document.write(`
 \hat{J}_z \vert\psi\rangle = \hbar(m+1)\vert\psi\rangle
 \]</div>
 <p>From <span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_+] = 0\)</span>: <span class="math notranslate nohighlight">\(\hat{J}^2 \vert\psi\rangle = \hbar^2 j(j+1)\vert\psi\rangle\)</span>. So <span class="math notranslate nohighlight">\(\vert\psi\rangle \propto \vert j, m+1\rangle\)</span>.</p>
-<p>For the norm, first derive the identity <span class="math notranslate nohighlight">\(\hat{J}_- \hat{J}_+ = \hat{J}^2 - \hat{J}_z^2 - \hbar\hat{J}_z\)</span>. Writing <span class="math notranslate nohighlight">\(\hat{J}_x = \frac{1}{2}(\hat{J}_+ + \hat{J}_-)\)</span> and <span class="math notranslate nohighlight">\(\hat{J}_y = \frac{1}{2\mathrm{i}}(\hat{J}_+ - \hat{J}_-)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}_x^2 + \hat{J}_y^2 = \frac{1}{2}(\hat{J}_+\hat{J}_- + \hat{J}_-\hat{J}_+) = \hat{J}^2 - \hat{J}_z^2
-\]</div>
-<p>Using <span class="math notranslate nohighlight">\([\hat{J}_+, \hat{J}_-] = 2\hbar\hat{J}_z\)</span> gives <span class="math notranslate nohighlight">\(\hat{J}_+\hat{J}_- = \hat{J}_-\hat{J}_+ + 2\hbar\hat{J}_z\)</span>, so:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}_-\hat{J}_+ = \hat{J}^2 - \hat{J}_z^2 - \hbar\hat{J}_z, \qquad \hat{J}_+\hat{J}_- = \hat{J}^2 - \hat{J}_z^2 + \hbar\hat{J}_z
-\]</div>
-<p>Then:</p>
+<p>For the norm, use <span class="math notranslate nohighlight">\(\hat{J}_- \hat{J}_+ = \hat{J}^2 - \hat{J}_z^2 - \hbar\hat{J}_z\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \|\hat{J}_+ \vert j, m\rangle\|^2 = \langle j,m\vert \hat{J}_- \hat{J}_+ \vert j,m\rangle = \hbar^2[j(j+1) - m(m+1)] = \hbar^2(j-m)(j+m+1)

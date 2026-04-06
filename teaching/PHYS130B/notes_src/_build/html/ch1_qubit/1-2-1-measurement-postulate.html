@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ec196327" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -705,14 +705,6 @@ document.write(`
 <p>This gives us the <strong>Born rule</strong>: the probability of outcome <span class="math notranslate nohighlight">\(m\)</span> is the squared overlap with the corresponding eigenstate,</p>
 <div class="math notranslate nohighlight">
 \[P(m \vert \psi, \hat{O}) = \langle \psi \vert \hat{P}_{O=m} \vert \psi \rangle = \vert\langle O{=}m \vert \psi \rangle\vert^2\]</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Probability Normalization from Completeness</p>
-<p>The Born rule assigns <span class="math notranslate nohighlight">\(P(m \vert \psi, \hat{O}) = \langle \psi \vert \hat{P}_{O=m} \vert \psi \rangle\)</span> to each outcome <span class="math notranslate nohighlight">\(m\)</span>. We must verify that these probabilities sum to 1 for any state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>.</p>
-<p>Using the <strong>completeness relation</strong> <span class="math notranslate nohighlight">\(\sum_m \hat{P}_{O=m} = \hat{I}\)</span> (the projectors onto all eigenspaces exhaust the full Hilbert space):</p>
-<div class="math notranslate nohighlight">
-\[\sum_m P(m \vert \psi, \hat{O}) = \sum_m \langle \psi \vert \hat{P}_{O=m} \vert \psi \rangle = \langle \psi \vert \left(\sum_m \hat{P}_{O=m}\right) \vert \psi \rangle = \langle \psi \vert \hat{I} \vert \psi \rangle = \langle \psi \vert \psi \rangle = 1\]</div>
-<p>The last step uses the normalization of quantum states. Thus <strong>completeness of the eigenbasis guarantees probability normalization</strong> — the measurement must yield <em>some</em> outcome with certainty. <span class="math notranslate nohighlight">\(\square\)</span></p>
-</div>
 </section>
 <section id="the-measurement-postulate">
 <h3>The Measurement Postulate<a class="headerlink" href="#the-measurement-postulate" title="Link to this heading">#</a></h3>
@@ -751,51 +743,6 @@ document.write(`
 <p>Why can’t we prepare atoms to have definite spin-up in <em>both</em> z and x directions simultaneously?</p>
 <p>The eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> are <span class="math notranslate nohighlight">\(\{\vert\uparrow\rangle, \vert\downarrow\rangle\}\)</span>. The eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> are <span class="math notranslate nohighlight">\(\{\vert\rightarrow\rangle, \vert\leftarrow\rangle\}\)</span>. These bases are <em>orthogonal</em> (perpendicular in Hilbert space). A state that is an eigenstate of one operator is a superposition in the other operator’s basis.</p>
 <p>This is not a limitation of experiment—it is built into the structure of quantum mechanics. Non-commuting observables <em>cannot</em> be simultaneously definite.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Expected Value Formula from the Born Rule</p>
-<p>The <strong>expected value</strong> of an observable <span class="math notranslate nohighlight">\(\hat{O}\)</span> in state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> is the average outcome over many repetitions:</p>
-<div class="math notranslate nohighlight">
-\[\langle\hat{O}\rangle = \sum_m m\, P(m\vert\psi, \hat{O})\]</div>
-<p><strong>Step 1: Substitute the Born rule.</strong></p>
-<div class="math notranslate nohighlight">
-\[\langle\hat{O}\rangle = \sum_m m\, \langle\psi\vert\hat{P}_{O=m}\vert\psi\rangle = \sum_m m\, \vert\langle O{=}m\vert\psi\rangle\vert^2\]</div>
-<p><strong>Step 2: Rewrite using the projector.</strong> Since <span class="math notranslate nohighlight">\(\hat{P}_{O=m} = \vert O{=}m\rangle\langle O{=}m\vert\)</span> is Hermitian and <span class="math notranslate nohighlight">\(\langle\psi\vert\hat{P}_{O=m}\vert\psi\rangle\)</span> is real,</p>
-<div class="math notranslate nohighlight">
-\[\langle\hat{O}\rangle = \sum_m m\, \langle\psi\vert O{=}m\rangle\langle O{=}m\vert\psi\rangle = \langle\psi\vert \left(\sum_m m\, \vert O{=}m\rangle\langle O{=}m\vert\right)\vert\psi\rangle\]</div>
-<p><strong>Step 3: Recognize the spectral decomposition.</strong> The quantity in parentheses is exactly the spectral decomposition of <span class="math notranslate nohighlight">\(\hat{O}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{O} = \sum_m m\, \vert O{=}m\rangle\langle O{=}m\vert\]</div>
-<p>Therefore:</p>
-<div class="math notranslate nohighlight">
-\[\langle\hat{O}\rangle = \langle\psi\vert\hat{O}\vert\psi\rangle\]</div>
-<p><strong>Interpretation.</strong> This formula is the quantum analog of the classical average <span class="math notranslate nohighlight">\(\langle f\rangle = \sum_i p_i f_i\)</span>. The operator <span class="math notranslate nohighlight">\(\hat{O}\)</span> encodes both the eigenvalues (possible outcomes) and the projection operators (probabilities) in one object, so the inner product <span class="math notranslate nohighlight">\(\langle\psi\vert\hat{O}\vert\psi\rangle\)</span> computes the weighted average in a single step.</p>
-<p><strong>Variance.</strong> Similarly, the variance follows from the same argument applied to <span class="math notranslate nohighlight">\(\hat{O}^2\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\mathrm{Var}(\hat{O}) = \langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2 = \langle\psi\vert\hat{O}^2\vert\psi\rangle - \langle\psi\vert\hat{O}\vert\psi\rangle^2\]</div>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Repeated Measurement Always Gives the Same Outcome</p>
-<p><strong>Claim.</strong> If a measurement of <span class="math notranslate nohighlight">\(\hat{O}\)</span> yields outcome <span class="math notranslate nohighlight">\(m\)</span>, then immediately repeating the measurement on the same system yields outcome <span class="math notranslate nohighlight">\(m\)</span> with probability 1, and every other outcome <span class="math notranslate nohighlight">\(m' \neq m\)</span> with probability 0.</p>
-<p><strong>Setup.</strong> Before the first measurement, the state is <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>. After obtaining outcome <span class="math notranslate nohighlight">\(m\)</span>, the <strong>collapse postulate</strong> (Axiom 3) says the state becomes the eigenstate:</p>
-<div class="math notranslate nohighlight">
-\[\vert\psi\rangle \xrightarrow{\text{outcome }m} \vert O{=}m\rangle\]</div>
-<p><strong>Probability of <span class="math notranslate nohighlight">\(m\)</span> on second measurement:</strong></p>
-<div class="math notranslate nohighlight">
-\[P(m\,\vert\, O{=}m,\, \hat{O}) = \vert\langle O{=}m\vert O{=}m\rangle\vert^2 = 1^2 = 1\]</div>
-<p>since <span class="math notranslate nohighlight">\(\vert O{=}m\rangle\)</span> is normalized. The eigenstate is its own eigenstate, so the outcome is certain.</p>
-<p><strong>Probability of <span class="math notranslate nohighlight">\(m' \neq m\)</span> on second measurement:</strong></p>
-<div class="math notranslate nohighlight">
-\[P(m'\,\vert\, O{=}m,\, \hat{O}) = \vert\langle O{=}m'\vert O{=}m\rangle\vert^2 = 0\]</div>
-<p>because eigenstates of a Hermitian operator corresponding to <strong>distinct eigenvalues are orthogonal</strong>: <span class="math notranslate nohighlight">\(\langle O{=}m'\vert O{=}m\rangle = 0\)</span> for <span class="math notranslate nohighlight">\(m' \neq m\)</span>.</p>
-<p><em>Proof of orthogonality.</em> Let <span class="math notranslate nohighlight">\(\hat{O}\vert m\rangle = m\vert m\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{O}\vert m'\rangle = m'\vert m'\rangle\)</span>. Compute <span class="math notranslate nohighlight">\(\langle m'\vert\hat{O}\vert m\rangle\)</span> two ways:</p>
-<div class="math notranslate nohighlight">
-\[\langle m'\vert\hat{O}\vert m\rangle = m\langle m'\vert m\rangle \quad\text{(act right)}, \qquad
-\langle m'\vert\hat{O}\vert m\rangle = (\langle m'\vert\hat{O}^\dagger)\vert m\rangle = m'^* \langle m'\vert m\rangle = m'\langle m'\vert m\rangle \quad\text{(act left, using }\hat{O}^\dagger = \hat{O}\text{)}
-\]</div>
-<p>Subtracting: <span class="math notranslate nohighlight">\((m - m')\langle m'\vert m\rangle = 0\)</span>. Since <span class="math notranslate nohighlight">\(m \neq m'\)</span>, we conclude <span class="math notranslate nohighlight">\(\langle m'\vert m\rangle = 0\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
-<p><strong>Why this matters.</strong> The collapse postulate is precisely what makes the eigenvalue <span class="math notranslate nohighlight">\(m\)</span> a “definite property” of the post-measurement state. The collapse guarantees <strong>repeatability</strong>: a second observer measuring immediately after the first will always agree on the outcome. This is the quantum analog of “measurement doesn’t disturb what you already know.”</p>
-<p><strong>Contrast: non-repeated measurement.</strong> Before any measurement, the probability of outcome <span class="math notranslate nohighlight">\(m\)</span> is <span class="math notranslate nohighlight">\(\vert\langle O{=}m\vert\psi\rangle\vert^2\)</span>, which can be anywhere from 0 to 1. After a single measurement, that probability jumps discontinuously to either 0 or 1. This discontinuous “update” is <strong>wavefunction collapse</strong> — fundamentally non-unitary and irreversible.</p>
 </div>
 </section>
 <section id="summary">
