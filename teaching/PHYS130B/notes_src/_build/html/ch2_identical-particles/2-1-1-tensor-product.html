@@ -620,11 +620,13 @@ document.write(`
 <p class="admonition-title">Derivation: Operators on Different Particles Commute</p>
 <p>Consider <span class="math notranslate nohighlight">\(N=2\)</span> for clarity (the general case is identical). Let <span class="math notranslate nohighlight">\(\hat{A}_1 = \hat{A} \otimes \hat{I}\)</span> and <span class="math notranslate nohighlight">\(\hat{B}_2 = \hat{I} \otimes \hat{B}\)</span>. Their products are:</p>
 <div class="math notranslate nohighlight">
-\[\hat{A}_1 \hat{B}_2 = (\hat{A} \otimes \hat{I})(\hat{I} \otimes \hat{B}) = \hat{A}\hat{I} \otimes \hat{I}\hat{B} = \hat{A} \otimes \hat{B}\]</div>
+\[
+\hat{A}_1 \hat{B}_2 = (\hat{A} \otimes \hat{I})(\hat{I} \otimes \hat{B}) = \hat{A}\hat{I} \otimes \hat{I}\hat{B} = \hat{A} \otimes \hat{B}
+\]</div>
 <div class="math notranslate nohighlight">
 \[\hat{B}_2 \hat{A}_1 = (\hat{I} \otimes \hat{B})(\hat{A} \otimes \hat{I}) = \hat{I}\hat{A} \otimes \hat{B}\hat{I} = \hat{A} \otimes \hat{B}\]</div>
 <p>where we used the tensor product multiplication rule <span class="math notranslate nohighlight">\((\hat{C}_1 \otimes \hat{C}_2)(\hat{D}_1 \otimes \hat{D}_2) = \hat{C}_1\hat{D}_1 \otimes \hat{C}_2\hat{D}_2\)</span>. Both products give the same result, so <span class="math notranslate nohighlight">\([\hat{A}_1, \hat{B}_2] = 0\)</span>.</p>
-<p>For general <span class="math notranslate nohighlight">\(N\)</span>: all tensor factors except <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> carry <span class="math notranslate nohighlight">\(\hat{I}\)</span> in both operators, so they multiply trivially. The factors at positions <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> involve <span class="math notranslate nohighlight">\(\hat{A} \cdot \hat{I}\)</span> vs <span class="math notranslate nohighlight">\(\hat{I} \cdot \hat{A}\)</span> and <span class="math notranslate nohighlight">\(\hat{I} \cdot \hat{B}\)</span> vs <span class="math notranslate nohighlight">\(\hat{B} \cdot \hat{I}\)</span>, which commute.</p>
+<p>For general <span class="math notranslate nohighlight">\(N\)</span>: all tensor factors except <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> carry <span class="math notranslate nohighlight">\(\hat{I}\)</span> in both operators, so they multiply trivially. The factors at positions <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> involve <span class="math notranslate nohighlight">\((\hat{A} \hat{I})_i\)</span> vs <span class="math notranslate nohighlight">\((\hat{I} \hat{A})_i\)</span> and <span class="math notranslate nohighlight">\((\hat{I} \hat{B})_j\)</span> vs <span class="math notranslate nohighlight">\((\hat{B} \hat{I})_j\)</span>, which commute.</p>
 </div>
 </section>
 <section id="two-body-operators">
@@ -682,133 +684,6 @@ document.write(`
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: Exponential Complexity</p>
 <p>The number of Pauli strings grows as <span class="math notranslate nohighlight">\(4^N\)</span>, which is exponential in <span class="math notranslate nohighlight">\(N\)</span>. This means specifying a general <span class="math notranslate nohighlight">\(N\)</span>-qubit Hamiltonian requires exponentially many parameters. In practice, physical Hamiltonians are <strong>local</strong> (each term couples only a few nearby qubits), so only polynomially many Pauli strings have nonzero coefficients. What are the implications for classical simulation of quantum systems?</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Entanglement Exists — The Bell State Cannot Be Factored</p>
-<p><strong>Claim.</strong> The two-qubit state <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle = \tfrac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle)\)</span> is <strong>entangled</strong>: it cannot be written as a product state <span class="math notranslate nohighlight">\(\vert a\rangle \otimes \vert b\rangle\)</span> for any single-qubit states <span class="math notranslate nohighlight">\(\vert a\rangle, \vert b\rangle\)</span>.</p>
-<p><strong>Proof by contradiction.</strong> Suppose</p>
-<div class="math notranslate nohighlight">
-\[
-\vert\Phi^+\rangle = (\alpha\vert 0\rangle + \beta\vert 1\rangle) \otimes (\gamma\vert 0\rangle + \delta\vert 1\rangle)
-= \alpha\gamma\vert 00\rangle + \alpha\delta\vert 01\rangle + \beta\gamma\vert 10\rangle + \beta\delta\vert 11\rangle
-\]</div>
-<p>for some <span class="math notranslate nohighlight">\(\alpha, \beta, \gamma, \delta \in \mathbb{C}\)</span>. Matching the four basis-state coefficients of <span class="math notranslate nohighlight">\(\tfrac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle)\)</span>:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Basis state</p></th>
-<th class="head"><p><span class="math notranslate nohighlight">\(\vert\Phi^+\rangle\)</span> coefficient</p></th>
-<th class="head"><p>Product-state coefficient</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\vert 00\rangle\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\alpha\gamma\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vert 01\rangle\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\alpha\delta\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\vert 10\rangle\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\beta\gamma\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vert 11\rangle\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\beta\delta\)</span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>From the <span class="math notranslate nohighlight">\(\vert 01\rangle\)</span> equation: <span class="math notranslate nohighlight">\(\alpha\delta = 0\)</span>, so either <span class="math notranslate nohighlight">\(\alpha = 0\)</span> or <span class="math notranslate nohighlight">\(\delta = 0\)</span>.</p>
-<ul class="simple">
-<li><p><strong>Case 1: <span class="math notranslate nohighlight">\(\alpha = 0\)</span>.</strong> Then <span class="math notranslate nohighlight">\(\alpha\gamma = 0 \neq 1/\sqrt{2}\)</span>. Contradiction.</p></li>
-<li><p><strong>Case 2: <span class="math notranslate nohighlight">\(\delta = 0\)</span>.</strong> Then <span class="math notranslate nohighlight">\(\beta\delta = 0 \neq 1/\sqrt{2}\)</span>. Contradiction.</p></li>
-</ul>
-<p>Both cases are impossible. Therefore no product-state factorization exists. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
-<p><strong>Why this matters.</strong> The fact that entangled states exist shows that the tensor product of Hilbert spaces is strictly larger than the set of product states. Most states in <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span> are entangled — the set of separable (product) states has measure zero in the full state space. The four Bell states <span class="math notranslate nohighlight">\(\vert\Phi^\pm\rangle = (\vert 00\rangle \pm \vert 11\rangle)/\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(\vert\Psi^\pm\rangle = (\vert 01\rangle \pm \vert 10\rangle)/\sqrt{2}\)</span> form an orthonormal basis of the two-qubit space consisting entirely of entangled states.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: The Swap Operator in the Pauli String Basis</p>
-<p>The <strong>swap operator</strong> <span class="math notranslate nohighlight">\(\hat{S}\)</span> exchanges two particles:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{S}\vert ab\rangle = \vert ba\rangle \quad \text{for all basis states } a, b\in\{0,1\}
-\]</div>
-<p>We show it equals a particular Pauli string sum, then deduce its spectrum.</p>
-<p><strong>Claim.</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\hat{S} = \frac{1}{2}\bigl(\hat{I}\otimes\hat{I} + \hat{\sigma}^x\otimes\hat{\sigma}^x + \hat{\sigma}^y\otimes\hat{\sigma}^y + \hat{\sigma}^z\otimes\hat{\sigma}^z\bigr) = \frac{1}{2}\sum_{\mu\in\{0,x,y,z\}}\hat{\sigma}^\mu\otimes\hat{\sigma}^\mu
-\]</div>
-<p><strong>Proof via the Pauli completeness relation.</strong> The four matrices <span class="math notranslate nohighlight">\(\{\hat{I},\hat{\sigma}^x,\hat{\sigma}^y,\hat{\sigma}^z\}\)</span> form a complete (Hilbert–Schmidt-orthonormal) basis for all <span class="math notranslate nohighlight">\(2\times 2\)</span> operators (see §1.1.3). Any <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix <span class="math notranslate nohighlight">\(M\)</span> expands as:</p>
-<div class="math notranslate nohighlight">
-\[
-M = \sum_\mu \frac{\mathrm{Tr}(\hat{\sigma}^\mu M)}{2}\,\hat{\sigma}^\mu
-\]</div>
-<p>Apply this to the rank-1 “matrix unit” <span class="math notranslate nohighlight">\(M = \vert a\rangle\langle c\vert\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert a\rangle\langle c\vert = \sum_\mu \frac{\mathrm{Tr}(\hat{\sigma}^\mu \vert a\rangle\langle c\vert)}{2}\,\hat{\sigma}^\mu = \sum_\mu \frac{(\hat{\sigma}^\mu)_{ca}}{2}\,\hat{\sigma}^\mu
-\]</div>
-<p>Taking matrix elements <span class="math notranslate nohighlight">\(\langle b\vert\cdot\vert d\rangle\)</span> of both sides:</p>
-<div class="math notranslate nohighlight">
-\[
-\delta_{ab}\delta_{cd} = \sum_\mu \frac{(\hat{\sigma}^\mu)_{ca}}{2}\,(\hat{\sigma}^\mu)_{bd} \quad \Longrightarrow \quad \sum_\mu (\hat{\sigma}^\mu)_{ac}(\hat{\sigma}^\mu)_{bd} = 2\delta_{ad}\delta_{bc}
-\]</div>
-<p>The matrix element of the candidate operator <span class="math notranslate nohighlight">\(\tfrac{1}{2}\sum_\mu \hat{\sigma}^\mu\otimes\hat{\sigma}^\mu\)</span> in the two-qubit basis <span class="math notranslate nohighlight">\(\vert ab\rangle\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[
-\Bigl\langle ab\Bigl\vert\frac{1}{2}\sum_\mu\hat{\sigma}^\mu\otimes\hat{\sigma}^\mu\Bigr\vert cd\Bigr\rangle = \frac{1}{2}\sum_\mu(\hat{\sigma}^\mu)_{ac}(\hat{\sigma}^\mu)_{bd} = \delta_{ad}\delta_{bc}
-\]</div>
-<p>The matrix element of <span class="math notranslate nohighlight">\(\hat{S}\)</span> is <span class="math notranslate nohighlight">\(\langle ab\vert\hat{S}\vert cd\rangle = \langle ab\vert dc\rangle = \delta_{ad}\delta_{bc}\)</span>.</p>
-<p>The two matrix elements are identical, so <span class="math notranslate nohighlight">\(\hat{S} = \tfrac{1}{2}\sum_\mu\hat{\sigma}^\mu\otimes\hat{\sigma}^\mu\)</span>. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
-<p><strong>Spectrum.</strong> Since <span class="math notranslate nohighlight">\(\hat{S}^2 = \hat{I}\)</span> (swapping twice returns to the original state), the eigenvalues of <span class="math notranslate nohighlight">\(\hat{S}\)</span> are <span class="math notranslate nohighlight">\(\pm 1\)</span>:</p>
-<ul class="simple">
-<li><p><strong>Symmetric subspace</strong> (<span class="math notranslate nohighlight">\(\hat{S} = +1\)</span>): the three triplet states <span class="math notranslate nohighlight">\(\{\vert 00\rangle,\,\tfrac{1}{\sqrt{2}}(\vert 01\rangle+\vert 10\rangle),\,\vert 11\rangle\}\)</span>.</p></li>
-<li><p><strong>Antisymmetric subspace</strong> (<span class="math notranslate nohighlight">\(\hat{S} = -1\)</span>): the singlet <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \tfrac{1}{\sqrt{2}}(\vert 01\rangle-\vert 10\rangle)\)</span>.</p></li>
-</ul>
-<p>From the Pauli string form: <span class="math notranslate nohighlight">\(\hat{S} = \tfrac{1}{2}\hat{I}\otimes\hat{I} + \tfrac{1}{2}\hat{\boldsymbol{\sigma}}_1\cdot\hat{\boldsymbol{\sigma}}_2\)</span>, so the eigenvalues of <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\sigma}}_1\cdot\hat{\boldsymbol{\sigma}}_2\)</span> (the Heisenberg exchange interaction) are <span class="math notranslate nohighlight">\(+1\)</span> (triplet) and <span class="math notranslate nohighlight">\(-3\)</span> (singlet). This is the foundation of the Heisenberg spin model in condensed matter physics and directly anticipates the symmetrization postulate of §2.1.2.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Schmidt Decomposition via Singular Value Decomposition</p>
-<p>Every pure state <span class="math notranslate nohighlight">\(\vert\psi\rangle \in \mathcal{H}_A \otimes \mathcal{H}_B\)</span> (with <span class="math notranslate nohighlight">\(\dim\mathcal{H}_A = d_A\)</span>, <span class="math notranslate nohighlight">\(\dim\mathcal{H}_B = d_B\)</span>) can be written as:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert\psi\rangle = \sum_{k=1}^{r} \lambda_k \vert u_k\rangle_A \vert v_k\rangle_B
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\{\vert u_k\rangle\}\)</span> and <span class="math notranslate nohighlight">\(\{\vert v_k\rangle\}\)</span> are orthonormal sets, <span class="math notranslate nohighlight">\(\lambda_k &gt; 0\)</span>, and <span class="math notranslate nohighlight">\(r \leq \min(d_A, d_B)\)</span> is the <strong>Schmidt rank</strong>.</p>
-<p><strong>Step 1: Coefficient matrix.</strong> Choose fixed orthonormal bases <span class="math notranslate nohighlight">\(\{\vert i\rangle_A\}\)</span>, <span class="math notranslate nohighlight">\(\{\vert j\rangle_B\}\)</span>. Expand:</p>
-<div class="math notranslate nohighlight">
-\[
-\vert\psi\rangle = \sum_{i,j} C_{ij} \vert i\rangle_A \vert j\rangle_B
-\]</div>
-<p>where the coefficient matrix <span class="math notranslate nohighlight">\(C\)</span> is <span class="math notranslate nohighlight">\(d_A \times d_B\)</span> with <span class="math notranslate nohighlight">\(\sum_{ij}\vert C_{ij}\vert^2 = 1\)</span> (from normalization).</p>
-<p><strong>Step 2: Apply SVD.</strong> By the singular value decomposition, any complex matrix <span class="math notranslate nohighlight">\(C\)</span> can be written as <span class="math notranslate nohighlight">\(C = U \Lambda V^\dagger\)</span>, where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(U\)</span> is <span class="math notranslate nohighlight">\(d_A \times d_A\)</span> unitary with columns <span class="math notranslate nohighlight">\(\boldsymbol{u}_k\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(V\)</span> is <span class="math notranslate nohighlight">\(d_B \times d_B\)</span> unitary with columns <span class="math notranslate nohighlight">\(\boldsymbol{v}_k\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\Lambda = \mathrm{diag}(\lambda_1, \ldots, \lambda_r, 0, \ldots)\)</span> with <span class="math notranslate nohighlight">\(\lambda_k &gt; 0\)</span> (singular values)</p></li>
-</ul>
-<p>So <span class="math notranslate nohighlight">\(C_{ij} = \sum_k U_{ik} \lambda_k V_{jk}^*\)</span>.</p>
-<p><strong>Step 3: Substitute back.</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\vert\psi\rangle = \sum_{i,j} \sum_k U_{ik}\lambda_k V_{jk}^* \vert i\rangle_A \vert j\rangle_B
-= \sum_k \lambda_k \underbrace{\Bigl(\sum_i U_{ik}\vert i\rangle_A\Bigr)}_{= \vert u_k\rangle_A} \underbrace{\Bigl(\sum_j V_{jk}^*\vert j\rangle_B\Bigr)}_{= \vert v_k\rangle_B}
-\]</div>
-<p>The new states <span class="math notranslate nohighlight">\(\vert u_k\rangle_A = \sum_i U_{ik}\vert i\rangle_A\)</span> and <span class="math notranslate nohighlight">\(\vert v_k\rangle_B = \sum_j V_{jk}^*\vert j\rangle_B\)</span> form orthonormal sets because <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are unitary: <span class="math notranslate nohighlight">\(\langle u_k\vert u_{k'}\rangle = \sum_i U_{ik}^* U_{ik'} = (U^\dagger U)_{kk'} = \delta_{kk'}\)</span>.</p>
-<p><strong>Step 4: Normalization.</strong> <span class="math notranslate nohighlight">\(\sum_k \lambda_k^2 = \sum_k (\Lambda^\dagger\Lambda)_{kk} = \mathrm{Tr}(V C^\dagger U^\dagger U C V^\dagger) = \mathrm{Tr}(C^\dagger C) = \sum_{ij}\vert C_{ij}\vert^2 = 1\)</span>.</p>
-<p><strong>Step 5: Entanglement criterion.</strong> The reduced density matrix of <span class="math notranslate nohighlight">\(A\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_A = \mathrm{Tr}_B(\vert\psi\rangle\langle\psi\vert) = \sum_k \lambda_k^2 \vert u_k\rangle\langle u_k\vert
-\]</div>
-<ul class="simple">
-<li><p><strong>Schmidt rank 1</strong> (<span class="math notranslate nohighlight">\(r = 1\)</span>): <span class="math notranslate nohighlight">\(\vert\psi\rangle = \vert u_1\rangle_A\vert v_1\rangle_B\)</span> is a <strong>product state</strong>; <span class="math notranslate nohighlight">\(\hat{\rho}_A = \vert u_1\rangle\langle u_1\vert\)</span> is pure.</p></li>
-<li><p><strong>Schmidt rank</strong> <span class="math notranslate nohighlight">\(r \geq 2\)</span>: <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span> has at least two nonzero eigenvalues — the state is <strong>entangled</strong>; <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}_A^2) = \sum_k \lambda_k^4 &lt; 1\)</span>.</p></li>
-</ul>
-<p>The Schmidt rank is thus the cleanest basis-independent criterion for bipartite entanglement. <span class="math notranslate nohighlight">\(\square\)</span></p>
 </div>
 </section>
 </section>
