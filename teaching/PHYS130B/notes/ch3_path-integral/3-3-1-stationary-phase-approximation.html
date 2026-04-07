@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -570,77 +570,6 @@ I \approx \mathrm{e}^{\mathrm{i}\Phi(x_0)/\hbar} f(x_0) \int \mathrm{e}^{\mathrm
 \]</div>
 <p>Using the Fresnel integral <span class="math notranslate nohighlight">\(\int \mathrm{e}^{\mathrm{i}ax^2} \mathrm{d}x = \sqrt{\pi/(\mathrm{i}a)}\)</span>, the result follows.</p>
 </div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Fresnel Gaussian Integral</p>
-<p>The key mathematical result underlying the stationary phase approximation is the <strong>Fresnel integral</strong>. Unlike the real Gaussian <span class="math notranslate nohighlight">\(\int \mathrm{e}^{-ax^2}\mathrm{d}x = \sqrt{\pi/a}\)</span> (<span class="math notranslate nohighlight">\(a&gt;0\)</span>), the oscillatory version requires analytic continuation.</p>
-<p><strong>Step 1: Rotate the contour.</strong></p>
-<p>For <span class="math notranslate nohighlight">\(a &gt; 0\)</span>, consider the integral <span class="math notranslate nohighlight">\(I(\epsilon) = \int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}(a + \mathrm{i}\epsilon)x^2}\,\mathrm{d}x\)</span> with <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>. The factor <span class="math notranslate nohighlight">\(\mathrm{e}^{-\epsilon x^2}\)</span> ensures convergence, so <span class="math notranslate nohighlight">\(I(\epsilon)\)</span> is well-defined.</p>
-<p>Substitute <span class="math notranslate nohighlight">\(u = \sqrt{a + \mathrm{i}\epsilon}\, x\)</span> (rotating the integration variable into the complex plane):</p>
-<div class="math notranslate nohighlight">
-\[
-I(\epsilon) = \frac{1}{\sqrt{a + \mathrm{i}\epsilon}}\int_{\mathcal{C}} \mathrm{e}^{\mathrm{i}u^2}\,\mathrm{d}u
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is the ray <span class="math notranslate nohighlight">\(\arg(u) = \tfrac{1}{2}\arg(a + \mathrm{i}\epsilon)\)</span>, tilted slightly above the real axis.</p>
-<p><strong>Step 2: Deform to the real axis.</strong></p>
-<p>By Cauchy’s theorem, the contour <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> can be deformed back to the real axis without crossing any singularities (the integrand <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}u^2}\)</span> is entire). The contributions from the arcs at <span class="math notranslate nohighlight">\(|u|\to\infty\)</span> vanish because <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}u^2}\)</span> decays in the upper half-plane when <span class="math notranslate nohighlight">\(\arg(u) \in (0, \pi/2)\)</span>. Therefore:</p>
-<div class="math notranslate nohighlight">
-\[
-\int_{\mathcal{C}} \mathrm{e}^{\mathrm{i}u^2}\,\mathrm{d}u = \int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}u^2}\,\mathrm{d}u
-\]</div>
-<p><strong>Step 3: Evaluate via the standard Gaussian.</strong></p>
-<p>The Euler-Poisson trick gives <span class="math notranslate nohighlight">\(\int_{-\infty}^\infty \mathrm{e}^{-t^2}\,\mathrm{d}t = \sqrt{\pi}\)</span>. Setting <span class="math notranslate nohighlight">\(u = \mathrm{e}^{\mathrm{i}\pi/4}t\)</span> (i.e., rotating 45°) transforms <span class="math notranslate nohighlight">\(u^2 = \mathrm{i}t^2\)</span>, so:</p>
-<div class="math notranslate nohighlight">
-\[
-\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}u^2}\,\mathrm{d}u = \mathrm{e}^{\mathrm{i}\pi/4}\int_{-\infty}^{\infty} \mathrm{e}^{-t^2}\,\mathrm{d}t = \sqrt{\pi}\,\mathrm{e}^{\mathrm{i}\pi/4} = \sqrt{\pi\mathrm{i}}
-\]</div>
-<p>using <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi/4} = (1+\mathrm{i})/\sqrt{2}\)</span> so <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi/2} = \mathrm{i}\)</span> and <span class="math notranslate nohighlight">\(\sqrt{\pi}\cdot\mathrm{e}^{\mathrm{i}\pi/4} = \sqrt{\pi}\cdot\sqrt{\mathrm{i}} = \sqrt{\pi\mathrm{i}}\)</span>.</p>
-<p><strong>Step 4: Take <span class="math notranslate nohighlight">\(\epsilon \to 0^+\)</span>.</strong></p>
-<div class="math notranslate nohighlight">
-\[
-I(\epsilon) = \frac{\sqrt{\pi\mathrm{i}}}{\sqrt{a + \mathrm{i}\epsilon}} \xrightarrow{\epsilon\to 0^+} \frac{\sqrt{\pi\mathrm{i}}}{\sqrt{a}} = \sqrt{\frac{\pi\mathrm{i}}{a}} = \sqrt{\frac{\pi}{\mathrm{i}a}}\cdot\mathrm{i} = \sqrt{\frac{\pi}{-\mathrm{i}a}\cdot(-1)} 
-\]</div>
-<p>More directly: <span class="math notranslate nohighlight">\(\sqrt{\pi\mathrm{i}/a} = \sqrt{\pi/(a/\mathrm{i})} = \sqrt{\pi\mathrm{i}/a}\)</span>. Using <span class="math notranslate nohighlight">\(1/\mathrm{i} = -\mathrm{i}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\boxed{\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}ax^2}\,\mathrm{d}x = \sqrt{\frac{\pi}{\mathrm{i}a}}, \quad a &gt; 0}
-\]</div>
-<p>The factor <span class="math notranslate nohighlight">\(1/\sqrt{\mathrm{i}a}\)</span> combines a magnitude <span class="math notranslate nohighlight">\(1/\sqrt{a}\)</span> (the “width” of the oscillation region) and a phase <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\pi/4}\)</span> (the <strong>Maslov phase</strong> shift from the 45° rotation).</p>
-<p><strong>Extension to <span class="math notranslate nohighlight">\(a &lt; 0\)</span>:</strong> Replace <span class="math notranslate nohighlight">\(a \to |a|\mathrm{e}^{\mathrm{i}\pi}\)</span> and rotate the contour by <span class="math notranslate nohighlight">\(-\pi/4\)</span> instead, giving <span class="math notranslate nohighlight">\(\sqrt{\pi/|\mathrm{i}a|} = \sqrt{\pi/(\mathrm{i}a)}\)</span> with <span class="math notranslate nohighlight">\(a &lt; 0\)</span> (now <span class="math notranslate nohighlight">\(1/(\mathrm{i}a) &gt; 0\)</span> since <span class="math notranslate nohighlight">\(a&lt;0\)</span>). The formula <span class="math notranslate nohighlight">\(\sqrt{\pi/(\mathrm{i}a)}\)</span> holds for all real <span class="math notranslate nohighlight">\(a \neq 0\)</span>, with the square root branch chosen to have positive real part.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Detailed Stationary Phase with Higher-Order Corrections</p>
-<p>We give a more careful derivation showing how the error term arises.</p>
-<p><strong>Setup.</strong> Consider <span class="math notranslate nohighlight">\(I = \int f(x)\,\mathrm{e}^{\mathrm{i}\Phi(x)/\hbar}\,\mathrm{d}x\)</span> with <span class="math notranslate nohighlight">\(\Phi'(x_0) = 0\)</span> and <span class="math notranslate nohighlight">\(\Phi''(x_0) \neq 0\)</span>.</p>
-<p><strong>Step 1: Localize.</strong> Substitute <span class="math notranslate nohighlight">\(x = x_0 + u\)</span> and expand:</p>
-<div class="math notranslate nohighlight">
-\[
-\Phi(x_0 + u) = \Phi(x_0) + \tfrac{1}{2}\Phi''(x_0)\,u^2 + \tfrac{1}{6}\Phi'''(x_0)\,u^3 + \tfrac{1}{24}\Phi^{(4)}(x_0)\,u^4 + \cdots
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-f(x_0 + u) = f(x_0) + f'(x_0)\,u + \tfrac{1}{2}f''(x_0)\,u^2 + \cdots
-\]</div>
-<p><strong>Step 2: Gaussian integral.</strong> The leading term is</p>
-<div class="math notranslate nohighlight">
-\[
-I_0 = f(x_0)\,\mathrm{e}^{\mathrm{i}\Phi(x_0)/\hbar} \int \mathrm{e}^{\mathrm{i}\Phi''(x_0)\,u^2/(2\hbar)}\,\mathrm{d}u = f(x_0)\,\mathrm{e}^{\mathrm{i}\Phi(x_0)/\hbar}\sqrt{\frac{2\pi\hbar}{\mathrm{i}\Phi''(x_0)}}
-\]</div>
-<p>where we used the Fresnel integral <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}au^2}\,\mathrm{d}u = \sqrt{\pi/(\mathrm{i}a)}\)</span> with <span class="math notranslate nohighlight">\(a = \Phi''(x_0)/(2\hbar)\)</span>.</p>
-<p><strong>Step 3: Corrections.</strong> The next corrections come from:</p>
-<ul class="simple">
-<li><p>The <span class="math notranslate nohighlight">\(u^3\)</span> term in <span class="math notranslate nohighlight">\(\Phi\)</span>: contributes at <span class="math notranslate nohighlight">\(O(\hbar^{1/2})\)</span> but vanishes by oddness of <span class="math notranslate nohighlight">\(u^3 \cdot \mathrm{e}^{\mathrm{i}au^2}\)</span>.</p></li>
-<li><p>The <span class="math notranslate nohighlight">\(u^4\)</span> term in <span class="math notranslate nohighlight">\(\Phi\)</span> crossed with the leading <span class="math notranslate nohighlight">\(f(x_0)\)</span>: contributes at <span class="math notranslate nohighlight">\(O(\hbar)\)</span>.</p></li>
-<li><p>The <span class="math notranslate nohighlight">\(f'(x_0)\,u\)</span> term: vanishes by oddness.</p></li>
-<li><p>The <span class="math notranslate nohighlight">\(f''(x_0)\,u^2/2\)</span> term: contributes at <span class="math notranslate nohighlight">\(O(\hbar)\)</span>.</p></li>
-</ul>
-<p>The first nonvanishing correction is <span class="math notranslate nohighlight">\(O(\hbar)\)</span> relative to <span class="math notranslate nohighlight">\(I_0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-I = I_0\left[1 + O\!\left(\frac{\hbar\,\Phi^{(4)}}{(\Phi'')^2}\right) + O\!\left(\frac{\hbar\,f''}{f\,\Phi''}\right)\right]
-\]</div>
-<p>The SPA is accurate when <span class="math notranslate nohighlight">\(\hbar\)</span> is small compared to the scales set by <span class="math notranslate nohighlight">\(\Phi''\)</span>, <span class="math notranslate nohighlight">\(\Phi^{(4)}\)</span>, and the variation of <span class="math notranslate nohighlight">\(f\)</span>.</p>
-<p><strong>Step 4: Square root branch.</strong> The square root <span class="math notranslate nohighlight">\(\sqrt{1/(\mathrm{i}\Phi'')}\)</span> requires a branch choice. For <span class="math notranslate nohighlight">\(\Phi'' &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\sqrt{1/\mathrm{i}} = \mathrm{e}^{-\mathrm{i}\pi/4}\)</span>; for <span class="math notranslate nohighlight">\(\Phi'' &lt; 0\)</span>, <span class="math notranslate nohighlight">\(\sqrt{1/(-\mathrm{i})} = \mathrm{e}^{+\mathrm{i}\pi/4}\)</span>. This phase is the <strong>Maslov index</strong> contribution, important in semiclassical quantization (§3.3.3).</p>
-</div>
 <p>The width of the region that contributes is <span class="math notranslate nohighlight">\(\Delta x \sim \sqrt{\hbar/|\Phi''|}\)</span>. As <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, this region shrinks to zero — only the stationary point survives.</p>
 </section>
 <section id="why-the-classical-path-dominates">
@@ -678,39 +607,6 @@ S[\boldsymbol{x}_\mathrm{cl} + \delta\boldsymbol{x}] \approx S_\mathrm{cl} + \fr
 K \approx \mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar} \cdot \frac{1}{\sqrt{\det M}}
 \]</div>
 <p>The phase comes from the classical action; the prefactor encodes quantum fluctuations.</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Fluctuation Determinant from Gaussian Functional Integral</p>
-<p>We derive the prefactor <span class="math notranslate nohighlight">\(1/\sqrt{\det M}\)</span> in the semiclassical propagator.</p>
-<p><strong>Step 1: Discretize.</strong> Write <span class="math notranslate nohighlight">\(\delta x(t) = \sum_n c_n \phi_n(t)\)</span> where <span class="math notranslate nohighlight">\(\{\phi_n\}\)</span> are orthonormal eigenfunctions of the second-variation operator <span class="math notranslate nohighlight">\(M\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-M\,\phi_n = \lambda_n\,\phi_n, \qquad \int \phi_n(t)\,\phi_m(t)\,\mathrm{d}t = \delta_{nm}
-\]</div>
-<p>with boundary conditions <span class="math notranslate nohighlight">\(\phi_n(t_i) = \phi_n(t_f) = 0\)</span> (fluctuations vanish at the endpoints).</p>
-<p><strong>Step 2: Diagonalize.</strong> In these coordinates, the second variation becomes</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{1}{2}\int \delta x \cdot M \cdot \delta x\,\mathrm{d}t = \frac{1}{2}\sum_n \lambda_n\,c_n^2
-\]</div>
-<p>The functional integral factorizes into a product of ordinary Gaussian integrals:</p>
-<div class="math notranslate nohighlight">
-\[
-\int \mathcal{D}[\delta x]\,\exp\!\left(\frac{\mathrm{i}}{2\hbar}\sum_n \lambda_n\,c_n^2\right) = \prod_n \int \mathrm{d}c_n\,\exp\!\left(\frac{\mathrm{i}\lambda_n}{2\hbar}\,c_n^2\right)
-\]</div>
-<p><strong>Step 3: Evaluate.</strong> Each Gaussian integral gives <span class="math notranslate nohighlight">\(\sqrt{2\pi\hbar/(\mathrm{i}\lambda_n)}\)</span>, so the product is</p>
-<div class="math notranslate nohighlight">
-\[
-\prod_n \sqrt{\frac{2\pi\hbar}{\mathrm{i}\lambda_n}} = \left(\frac{2\pi\hbar}{\mathrm{i}}\right)^{N/2}\frac{1}{\sqrt{\prod_n \lambda_n}} = \frac{\text{const}}{\sqrt{\det M}}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\det M = \prod_n \lambda_n\)</span> is the functional determinant (regularized by the ratio with a reference operator).</p>
-<p><strong>Step 4: Combine.</strong> Including the classical phase:</p>
-<div class="math notranslate nohighlight">
-\[
-K \approx \left(\frac{1}{2\pi\mathrm{i}\hbar}\right)^{1/2}\frac{1}{\sqrt{\det M / \det M_{\text{free}}}}\,\mathrm{e}^{\mathrm{i}S_{\text{cl}}/\hbar}
-\]</div>
-<p>The ratio <span class="math notranslate nohighlight">\(\det M / \det M_{\text{free}}\)</span> ensures proper normalization — the free-particle case (<span class="math notranslate nohighlight">\(V = 0\)</span>) reproduces the known result <span class="math notranslate nohighlight">\(K_{\text{free}} = (m/2\pi\mathrm{i}\hbar t)^{1/2}\,\mathrm{e}^{\mathrm{i}S_{\text{cl}}/\hbar}\)</span>.</p>
-<p>This procedure — expand to second order, diagonalize, evaluate Gaussian integrals — is the prototype for all semiclassical and perturbative calculations in quantum field theory.</p>
 </div>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Electron vs Baseball</p>
@@ -755,40 +651,6 @@ K \approx \left(\frac{1}{2\pi\mathrm{i}\hbar}\right)^{1/2}\frac{1}{\sqrt{\det M 
 <li><p><a class="reference internal" href="3-3-2-wkb-approximation.html"><span class="doc std std-doc">3.3.2 WKB Approximation</span></a>: Semiclassical wavefunctions from stationary phase</p></li>
 <li><p><a class="reference internal" href="3-4-1-wick-rotation.html"><span class="doc std std-doc">3.4.1 Wick Rotation</span></a>: Analytic continuation to imaginary time</p></li>
 </ul>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Multiple Stationary Points and Semiclassical Interference</p>
-<p>When a physical amplitude receives contributions from <strong>two or more classical paths</strong>, the semiclassical approximation is a superposition. The resulting interference encodes the quantum mechanical principle that probability amplitudes — not probabilities — add.</p>
-<p><strong>Setup.</strong> Suppose the path integral <span class="math notranslate nohighlight">\(K(x_f, x_i; t) = \int \mathrm{e}^{\mathrm{i}S[x]/\hbar}\mathcal{D}[x]\)</span> has two stationary-phase paths <span class="math notranslate nohighlight">\(x_\alpha(t)\)</span> (<span class="math notranslate nohighlight">\(\alpha=1,2\)</span>), each satisfying <span class="math notranslate nohighlight">\(\delta S = 0\)</span>. The semiclassical propagator is</p>
-<div class="math notranslate nohighlight">
-\[
-K \approx \sum_{\alpha=1}^2 C_\alpha\, \mathrm{e}^{\mathrm{i}S_{cl}^{(\alpha)}/\hbar - \mathrm{i}\pi\nu_\alpha/2},
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(S_{cl}^{(\alpha)}\)</span> is the classical action along path <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(C_\alpha = \sqrt{|{-}\partial^2 S_{cl}^{(\alpha)}/\partial x_f\partial x_i|/(2\pi\mathrm{i}\hbar)}\)</span> is the fluctuation amplitude (Van Vleck factor), and <span class="math notranslate nohighlight">\(\nu_\alpha\)</span> is the Maslov index (number of conjugate points, contributing phase <span class="math notranslate nohighlight">\(-\pi/2\)</span> each).</p>
-<p><strong>Step 1: Detection probability.</strong></p>
-<p>The probability density at <span class="math notranslate nohighlight">\(x_f\)</span> is <span class="math notranslate nohighlight">\(|K|^2 \approx |C_1|^2 + |C_2|^2 + 2\,\mathrm{Re}\bigl(C_1 C_2^*\, \mathrm{e}^{\mathrm{i}\Delta S/\hbar}\bigr)\)</span>, where <span class="math notranslate nohighlight">\(\Delta S = S_{cl}^{(1)} - S_{cl}^{(2)} - \tfrac{\pi\hbar}{2}(\nu_1 - \nu_2)\)</span>. The <strong>cross term</strong> is the interference; it oscillates between constructive and destructive as the phase difference <span class="math notranslate nohighlight">\(\Delta S/\hbar\)</span> varies.</p>
-<p><strong>Step 2: Double-slit as the canonical example.</strong></p>
-<p>Two slits at positions <span class="math notranslate nohighlight">\(\pm d/2\)</span> (separation <span class="math notranslate nohighlight">\(d\)</span>), screen at distance <span class="math notranslate nohighlight">\(L\)</span>. A particle of momentum <span class="math notranslate nohighlight">\(p = mv = h/\lambda_\mathrm{dB}\)</span> travels from source to slit <span class="math notranslate nohighlight">\(\alpha\)</span>, then to the screen at position <span class="math notranslate nohighlight">\(y\)</span>.</p>
-<p>The classical action for each path is (approximately, for <span class="math notranslate nohighlight">\(y \ll L\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[
-S_{cl}^{(\alpha)} = p \cdot r_\alpha, \quad r_\alpha = \sqrt{L^2 + (y \mp d/2)^2} \approx L + \frac{(y \mp d/2)^2}{2L}.
-\]</div>
-<p>The action difference is</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta S = S_{cl}^{(1)} - S_{cl}^{(2)} \approx p\cdot\frac{-2y\cdot d/2}{L} \cdot \frac{1}{1} = \frac{-pyd}{L} = -\frac{2\pi d\sin\theta}{\lambda_\mathrm{dB}},
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\sin\theta \approx y/L\)</span> is the diffraction angle.</p>
-<p><strong>Step 3: Interference pattern.</strong></p>
-<p>Both paths have equal Maslov index and equal prefactors <span class="math notranslate nohighlight">\(|C_1| = |C_2| \equiv C\)</span> (by symmetry). The intensity is</p>
-<div class="math notranslate nohighlight">
-\[
-I(y) \propto |C\,\mathrm{e}^{\mathrm{i}S_1/\hbar} + C\,\mathrm{e}^{\mathrm{i}S_2/\hbar}|^2 = 2C^2\bigl(1 + \cos(\Delta S/\hbar)\bigr) = 4C^2\cos^2\!\left(\frac{\pi d\sin\theta}{\lambda_\mathrm{dB}}\right).
-\]</div>
-<p>This is the standard double-slit fringe formula. <strong>Constructive interference</strong> occurs when <span class="math notranslate nohighlight">\(d\sin\theta = n\lambda_\mathrm{dB}\)</span> (integer <span class="math notranslate nohighlight">\(n\)</span>); <strong>destructive</strong> when <span class="math notranslate nohighlight">\(d\sin\theta = (n+\tfrac{1}{2})\lambda_\mathrm{dB}\)</span>.</p>
-<p><strong>Step 4: Why classical mechanics does not interfere.</strong></p>
-<p>In classical mechanics, probabilities — not amplitudes — add: <span class="math notranslate nohighlight">\(P = P_1 + P_2 = 2C^2\)</span>, independent of <span class="math notranslate nohighlight">\(y\)</span>. The interference term appears only because we sum complex amplitudes <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> before squaring. The fringe visibility goes to zero as <span class="math notranslate nohighlight">\(\hbar \to 0\)</span> faster than the fringe spacing shrinks — in the classical limit, fringes become unresolvably dense and wash out, leaving the uniform <span class="math notranslate nohighlight">\(2C^2\)</span> classical answer. This is how the semiclassical limit recovers classical probability from quantum interference.</p>
 </div>
 </section>
 <section id="summary">

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -558,7 +558,7 @@
 <p>The uncertainty <span class="math notranslate nohighlight">\(\Delta\hat{O}\)</span> is the standard deviation of outcomes.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Expectation-Value Formula</p>
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle_\psi = \langle\psi\vert\hat{O}\vert\psi\rangle\)</span></p>
 <p>Start from the spectral decomposition <span class="math notranslate nohighlight">\(\hat{O} = \sum_m m \, \hat{P}_{O=m} = \sum_m m \vert O{=}m\rangle\langle O{=}m\vert\)</span> and the Born rule <span class="math notranslate nohighlight">\(P(m\vert\psi) = |\psi_m|^2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\langle\hat{O}\rangle_\psi = \sum_m m \, P(m\vert\psi) = \sum_m m \, |\psi_m|^2\]</div>
@@ -566,17 +566,6 @@
 <div class="math notranslate nohighlight">
 \[\langle\psi\vert\hat{O}\vert\psi\rangle = \sum_{m',m''} \psi_{m'}^* \psi_{m''} \langle O{=}m'\vert \hat{O} \vert O{=}m''\rangle = \sum_{m',m''} \psi_{m'}^* \psi_{m''} \, m'' \, \delta_{m'm''} = \sum_m m \, |\psi_m|^2\]</div>
 <p>which is the same expression. <span class="math notranslate nohighlight">\(\square\)</span></p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Variance Formula</p>
-<p>We show that <span class="math notranslate nohighlight">\(\mathrm{Var}(\hat{O}) = \langle(\hat{O} - \langle\hat{O}\rangle)^2\rangle = \langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2\)</span>.</p>
-<p>Define the centered operator <span class="math notranslate nohighlight">\(\Delta\hat{O} = \hat{O} - \langle\hat{O}\rangle\hat{I}\)</span>, where <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle\)</span> is a scalar. Then:</p>
-<div class="math notranslate nohighlight">
-\[\langle(\Delta\hat{O})^2\rangle = \langle(\hat{O} - \langle\hat{O}\rangle)^2\rangle = \langle\hat{O}^2 - 2\langle\hat{O}\rangle\hat{O} + \langle\hat{O}\rangle^2\rangle\]</div>
-<p>Using linearity of the expectation value:</p>
-<div class="math notranslate nohighlight">
-\[= \langle\hat{O}^2\rangle - 2\langle\hat{O}\rangle\langle\hat{O}\rangle + \langle\hat{O}\rangle^2 = \langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2\]</div>
-<p>This is non-negative because <span class="math notranslate nohighlight">\(\langle(\Delta\hat{O})^2\rangle = \langle\psi\vert(\Delta\hat{O})^\dagger\Delta\hat{O}\vert\psi\rangle = \|\Delta\hat{O}\vert\psi\rangle\|^2 \geq 0\)</span>, using the fact that <span class="math notranslate nohighlight">\(\Delta\hat{O}\)</span> is Hermitian. Equality holds if and only if <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{O}\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
 </div>
 </section>
 <section id="the-commutator">
@@ -643,7 +632,7 @@
 <p>The uncertainty principle describes repeated measurements on <strong>identical copies</strong> of the same prepared state, not sequential measurement of a single copy. If you measure <span class="math notranslate nohighlight">\(\hat{A}\)</span> first and then <span class="math notranslate nohighlight">\(\hat{B}\)</span> on the same particle, you collapse the state and <span class="math notranslate nohighlight">\(\hat{B}\)</span>’s outcome depends on <span class="math notranslate nohighlight">\(\hat{A}\)</span>’s result—that is a different story (back-action). Here we imagine preparing the state fresh many times and analyzing the distribution across those trials.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Robertson Uncertainty Relation</p>
+<p class="admonition-title">Proof: Robertson Uncertainty Relation</p>
 <p>Define <span class="math notranslate nohighlight">\(\Delta\hat{A} = \hat{A} - \langle\hat{A}\rangle\)</span> and similarly for <span class="math notranslate nohighlight">\(\hat{B}\)</span>. These are centered operators with zero expectation value.</p>
 <p>By Cauchy-Schwarz inequality,</p>
 <div class="math notranslate nohighlight">
@@ -654,12 +643,9 @@
 <p>Decompose into symmetric and antisymmetric parts:</p>
 <div class="math notranslate nohighlight">
 \[\Delta\hat{A}\Delta\hat{B} = \frac{1}{2}\{\Delta\hat{A}, \Delta\hat{B}\} + \frac{1}{2}[\Delta\hat{A}, \Delta\hat{B}]\]</div>
-<p>The anticommutator <span class="math notranslate nohighlight">\(\{\Delta\hat{A}, \Delta\hat{B}\}\)</span> is Hermitian (product of two Hermitian operators, symmetrized), so <span class="math notranslate nohighlight">\(\langle\psi\vert\tfrac{1}{2}\{\Delta\hat{A}, \Delta\hat{B}\}\vert\psi\rangle\)</span> is <strong>real</strong>. The commutator <span class="math notranslate nohighlight">\([\Delta\hat{A}, \Delta\hat{B}]\)</span> is anti-Hermitian (<span class="math notranslate nohighlight">\([\hat{A},\hat{B}]^\dagger = -[\hat{A},\hat{B}]\)</span> for Hermitian <span class="math notranslate nohighlight">\(\hat{A},\hat{B}\)</span>), so <span class="math notranslate nohighlight">\(\langle\psi\vert\tfrac{1}{2}[\Delta\hat{A}, \Delta\hat{B}]\vert\psi\rangle\)</span> is <strong>purely imaginary</strong>. Writing <span class="math notranslate nohighlight">\(z = \langle\psi\vert\Delta\hat{A}\Delta\hat{B}\vert\psi\rangle\)</span>:</p>
+<p>where the anticommutator <span class="math notranslate nohighlight">\(\{\hat{A}, \hat{B}\} = \hat{A}\hat{B} + \hat{B}\hat{A}\)</span> has real expectation value, and the commutator is anti-Hermitian. Thus:</p>
 <div class="math notranslate nohighlight">
-\[|z|^2 = (\operatorname{Re} z)^2 + (\operatorname{Im} z)^2 \geq (\operatorname{Im} z)^2 = \left|\frac{1}{2}\langle[\Delta\hat{A}, \Delta\hat{B}]\rangle\right|^2\]</div>
-<p>Finally, note that <span class="math notranslate nohighlight">\([\Delta\hat{A}, \Delta\hat{B}] = [\hat{A} - \langle\hat{A}\rangle, \hat{B} - \langle\hat{B}\rangle] = [\hat{A}, \hat{B}]\)</span> (scalar shifts cancel in commutators). Therefore:</p>
-<div class="math notranslate nohighlight">
-\[|\langle\psi\vert\Delta\hat{A}\Delta\hat{B}\vert\psi\rangle|^2 \geq \frac{1}{4}|\langle[\hat{A}, \hat{B}]\rangle|^2\]</div>
+\[|\langle\psi\vert\Delta\hat{A}\Delta\hat{B}\vert\psi\rangle|^2 \geq |\langle\psi\vert\frac{1}{2}[\Delta\hat{A}, \Delta\hat{B}]\vert\psi\rangle|^2 = \frac{1}{4}|\langle[\hat{A}, \hat{B}]\rangle|^2\]</div>
 <p>Therefore:</p>
 <div class="math notranslate nohighlight">
 \[(\Delta\hat{A})^2(\Delta\hat{B})^2 \geq \frac{1}{4}|\langle[\hat{A}, \hat{B}]\rangle|^2\]</div>

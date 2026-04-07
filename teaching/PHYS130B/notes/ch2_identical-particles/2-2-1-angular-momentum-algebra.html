@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -503,11 +503,18 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-commutation-relations">Angular Momentum Commutation Relations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casimir-operator-hat-j-2">Casimir Operator <span class="math notranslate nohighlight">\(\hat{J}^2\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operators">Ladder Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-quantization">Angular Momentum Quantization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-representations">Matrix Representations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Angular Momentum Algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#casimir-operator">Casimir Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operators">Ladder Operators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-representation-theory">Angular Momentum Representation Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-eigenstates-of-hat-j-2-and-hat-j-z">Common Eigenstates of <span class="math notranslate nohighlight">\(\hat J^2\)</span> and <span class="math notranslate nohighlight">\(\hat J_z\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operator-action">Ladder Operator Action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-quantization">Angular Momentum Quantization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-representations">Matrix Representations</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -541,167 +548,237 @@
 <p>In Chapter 1, we studied a single qubit — the spin-1/2 system with two eigenstates. This raises a natural question: <strong>what about higher spin?</strong> What constrains the possible values of angular momentum, and how do they arise?</p>
 <p>The answer is remarkable: angular momentum quantization follows entirely from <strong>commutation relations</strong>, without solving any differential equation. All forms of angular momentum — orbital (<span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span>), spin (<span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>), and total (<span class="math notranslate nohighlight">\(\boldsymbol{J} = \boldsymbol{L} + \boldsymbol{S}\)</span>) — satisfy the same algebra. This algebra is the <strong>Lie algebra of SU(2)</strong>, the group of rotations we met in <a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html"><span class="doc std std-doc">§1.3.3</span></a>. The physical content is simple: rotations in 3D do not commute, and angular momentum operators are their generators.</p>
 </section>
-<section id="angular-momentum-commutation-relations">
-<h3>Angular Momentum Commutation Relations<a class="headerlink" href="#angular-momentum-commutation-relations" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h3>Angular Momentum Algebra<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="important admonition">
 <p class="admonition-title">Defining Relation</p>
-<p>The three components of any angular momentum operator <span class="math notranslate nohighlight">\(\hat{\boldsymbol{J}} = (\hat{J}_x, \hat{J}_y, \hat{J}_z)\)</span> satisfy:</p>
+<p>The three components of any angular momentum operator <span class="math notranslate nohighlight">\(\hat{\boldsymbol{J}}=(\hat J_x,\hat J_y,\hat J_z)\)</span> satisfy</p>
 <div class="math notranslate nohighlight" id="equation-eq-am-commutation">
-<span class="eqno">(34)<a class="headerlink" href="#equation-eq-am-commutation" title="Link to this equation">#</a></span>\[
-[\hat{J}_i, \hat{J}_j] = \mathrm{i}\hbar \epsilon_{ijk} \hat{J}_k
+<span class="eqno">(38)<a class="headerlink" href="#equation-eq-am-commutation" title="Link to this equation">#</a></span>\[
+[\hat J_i,\hat J_j]=\mathrm{i}\hbar\,\epsilon_{ijk}\hat J_k
 \]</div>
-<p>Explicitly:</p>
+<p>Explicitly,</p>
 <div class="math notranslate nohighlight">
 \[
-[\hat{J}_x, \hat{J}_y] = \mathrm{i}\hbar \hat{J}_z, \quad [\hat{J}_y, \hat{J}_z] = \mathrm{i}\hbar \hat{J}_x, \quad [\hat{J}_z, \hat{J}_x] = \mathrm{i}\hbar \hat{J}_y
+[\hat J_x,\hat J_y]=\mathrm{i}\hbar\hat J_z,
+\quad
+[\hat J_y,\hat J_z]=\mathrm{i}\hbar\hat J_x,
+\quad
+[\hat J_z,\hat J_x]=\mathrm{i}\hbar\hat J_y.
 \]</div>
-<p>These are <strong>cyclic</strong> in <span class="math notranslate nohighlight">\((x, y, z)\)</span>. The Levi-Civita symbol <span class="math notranslate nohighlight">\(\epsilon_{ijk}\)</span> is <span class="math notranslate nohighlight">\(+1\)</span> for even permutations of <span class="math notranslate nohighlight">\((1,2,3)\)</span>, <span class="math notranslate nohighlight">\(-1\)</span> for odd, and <span class="math notranslate nohighlight">\(0\)</span> if any index repeats.</p>
 </div>
-<p>For orbital angular momentum, these follow from the canonical commutation relation <span class="math notranslate nohighlight">\([\hat{r}_i, \hat{p}_j] = \mathrm{i}\hbar \delta_{ij}\)</span>. For spin, they are <strong>postulated</strong> — the requirement is that angular momentum generates rotations, so it must satisfy the Lie algebra of SO(3).</p>
+<p>For orbital angular momentum these follow from <span class="math notranslate nohighlight">\([\hat r_i,\hat p_j]=\mathrm{i}\hbar\delta_{ij}\)</span>; for spin they are postulated as the rotation-generator algebra.</p>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Orbital Angular Momentum Commutators</p>
-<p>Starting from <span class="math notranslate nohighlight">\(\hat{L}_i = \epsilon_{imn} \hat{r}_m \hat{p}_n\)</span> and the canonical commutation relation <span class="math notranslate nohighlight">\([\hat{r}_m, \hat{p}_q] = \mathrm{i}\hbar \delta_{mq}\)</span>, we compute <span class="math notranslate nohighlight">\([\hat{L}_x, \hat{L}_y]\)</span> explicitly. With <span class="math notranslate nohighlight">\(\hat{L}_x = \hat{y}\hat{p}_z - \hat{z}\hat{p}_y\)</span> and <span class="math notranslate nohighlight">\(\hat{L}_y = \hat{z}\hat{p}_x - \hat{x}\hat{p}_z\)</span>:</p>
+<p>Using <span class="math notranslate nohighlight">\(\hat L_i=\epsilon_{imn}\hat r_m\hat p_n\)</span> and the canonical commutators
+<span class="math notranslate nohighlight">\([\hat r_a,\hat p_b]=\mathrm{i}\hbar\delta_{ab}\)</span>, <span class="math notranslate nohighlight">\([\hat r_a,\hat r_b]=[\hat p_a,\hat p_b]=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+[\hat L_i,\hat L_j]
+&amp;=\epsilon_{imn}\epsilon_{jpq}[\hat r_m\hat p_n,\hat r_p\hat p_q]\\
+&amp;=\epsilon_{imn}\epsilon_{jpq}\Bigl(
+\hat r_m[\hat p_n,\hat r_p]\hat p_q
++\hat r_p\hat r_m[\hat p_n,\hat p_q]
++[\hat r_m,\hat r_p]\hat p_q\hat p_n
++\hat r_p[\hat r_m,\hat p_q]\hat p_n
+\Bigr)\\
+&amp;=\epsilon_{imn}\epsilon_{jpq}\Bigl(
+-\mathrm{i}\hbar\,\delta_{np}\,\hat r_m\hat p_q
++\mathrm{i}\hbar\,\delta_{mq}\,\hat r_p\hat p_n
+\Bigr)\\
+&amp;=-\mathrm{i}\hbar\,\epsilon_{imn}\epsilon_{jnq}\hat r_m\hat p_q
++\mathrm{i}\hbar\,\epsilon_{inq}\epsilon_{jpm}\hat r_p\hat p_n.
+\end{split}
+\end{split}\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\epsilon_{abc}\epsilon_{ade}=\delta_{bd}\delta_{ce}-\delta_{be}\delta_{cd}\)</span> gives</p>
 <div class="math notranslate nohighlight">
 \[
-[\hat{L}_x, \hat{L}_y] = [\hat{y}\hat{p}_z - \hat{z}\hat{p}_y,\; \hat{z}\hat{p}_x - \hat{x}\hat{p}_z]
+[\hat L_i,\hat L_j]=\mathrm{i}\hbar\,(\hat r_i\hat p_j-\hat r_j\hat p_i)
+=\mathrm{i}\hbar\,\epsilon_{ijk}\hat L_k.
 \]</div>
-<p>Expanding the four commutator terms using <span class="math notranslate nohighlight">\([\hat{A}\hat{B}, \hat{C}\hat{D}] = \hat{A}[\hat{B}, \hat{C}]\hat{D} + \hat{C}[\hat{A}, \hat{D}]\hat{B} + \ldots\)</span> and noting that operators acting on different coordinates commute:</p>
-<div class="math notranslate nohighlight">
-\[
-= [\hat{y}\hat{p}_z, \hat{z}\hat{p}_x] - [\hat{y}\hat{p}_z, \hat{x}\hat{p}_z] - [\hat{z}\hat{p}_y, \hat{z}\hat{p}_x] + [\hat{z}\hat{p}_y, \hat{x}\hat{p}_z]
-\]</div>
-<p>The middle two terms vanish (no conjugate pairs share a coordinate). The surviving terms give:</p>
-<div class="math notranslate nohighlight">
-\[
-= \hat{y}[\hat{p}_z, \hat{z}]\hat{p}_x + \hat{x}[\hat{z}, \hat{p}_z]\hat{p}_y = \hat{y}(-\mathrm{i}\hbar)\hat{p}_x + \hat{x}(\mathrm{i}\hbar)\hat{p}_y = \mathrm{i}\hbar(\hat{x}\hat{p}_y - \hat{y}\hat{p}_x) = \mathrm{i}\hbar \hat{L}_z
-\]</div>
-<p>The other two relations follow by cyclic permutation <span class="math notranslate nohighlight">\((x \to y \to z \to x)\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-<p><strong>General form.</strong> In index notation with <span class="math notranslate nohighlight">\(\hat{L}_i = \epsilon_{imn}\hat{r}_m\hat{p}_n\)</span>, the product of Levi-Civita symbols satisfies the contraction identity <span class="math notranslate nohighlight">\(\epsilon_{imn}\epsilon_{jpq} = \delta_{ij}(\delta_{mp}\delta_{nq} - \delta_{mq}\delta_{np}) + \text{cyclic}\)</span>, which reduces the general commutator to <span class="math notranslate nohighlight">\([\hat{L}_i, \hat{L}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{L}_k\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\checkmark\)</span></p>
 </div>
-<div class="note admonition">
-<p class="admonition-title">Connection to Rotations</p>
-<p>The commutation relations encode the geometry of 3D rotations: rotating first about <span class="math notranslate nohighlight">\(x\)</span> then about <span class="math notranslate nohighlight">\(y\)</span> differs from <span class="math notranslate nohighlight">\(y\)</span> then <span class="math notranslate nohighlight">\(x\)</span>. Mathematically, <span class="math notranslate nohighlight">\([\hat{J}_i, \hat{J}_j] = \mathrm{i}\hbar \epsilon_{ijk} \hat{J}_k\)</span> is the <strong>Lie algebra <span class="math notranslate nohighlight">\(\mathfrak{su}(2)\)</span></strong> — the same algebra that appeared in <a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html"><span class="doc std std-doc">§1.3.3</span></a> as the algebra of SU(2) generators. The angular momentum operators <span class="math notranslate nohighlight">\(\hat{J}_i\)</span> generate rotations via <span class="math notranslate nohighlight">\(\hat{U}(\boldsymbol{n}, \theta) = \mathrm{e}^{-\mathrm{i}\theta \boldsymbol{n} \cdot \hat{\boldsymbol{J}}/\hbar}\)</span>.</p>
-</div>
-</section>
-<section id="casimir-operator-hat-j-2">
-<h3>Casimir Operator <span class="math notranslate nohighlight">\(\hat{J}^2\)</span><a class="headerlink" href="#casimir-operator-hat-j-2" title="Link to this heading">#</a></h3>
+<section id="casimir-operator">
+<h4>Casimir Operator<a class="headerlink" href="#casimir-operator" title="Link to this heading">#</a></h4>
 <div class="important admonition">
 <p class="admonition-title">Casimir Operator</p>
-<p>The <strong>total angular momentum squared</strong>:</p>
+<p>The total angular momentum squared</p>
 <div class="math notranslate nohighlight" id="equation-eq-casimir">
-<span class="eqno">(35)<a class="headerlink" href="#equation-eq-casimir" title="Link to this equation">#</a></span>\[
-\hat{J}^2 = \hat{J}_x^2 + \hat{J}_y^2 + \hat{J}_z^2
+<span class="eqno">(39)<a class="headerlink" href="#equation-eq-casimir" title="Link to this equation">#</a></span>\[
+\hat J^2=\hat J_x^2+\hat J_y^2+\hat J_z^2
 \]</div>
 <p>commutes with every component:</p>
 <div class="math notranslate nohighlight" id="equation-eq-casimir-commutes">
-<span class="eqno">(36)<a class="headerlink" href="#equation-eq-casimir-commutes" title="Link to this equation">#</a></span>\[
-[\hat{J}^2, \hat{J}_i] = 0 \quad \text{for } i = x, y, z
+<span class="eqno">(40)<a class="headerlink" href="#equation-eq-casimir-commutes" title="Link to this equation">#</a></span>\[
+[\hat J^2,\hat J_i]=0\qquad(i=x,y,z).
 \]</div>
 </div>
-<p>Because <span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_z] = 0\)</span>, we can find <strong>simultaneous eigenstates</strong> of both operators, labeled <span class="math notranslate nohighlight">\(\vert j, m\rangle\)</span>.</p>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_z] = 0\)</span></p>
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\([\hat J^2,\hat J_z]=0\)</span></p>
 <div class="math notranslate nohighlight">
 \[
-[\hat{J}^2, \hat{J}_z] = [\hat{J}_x^2, \hat{J}_z] + [\hat{J}_y^2, \hat{J}_z]
+[\hat J^2,\hat J_z]=[\hat J_x^2,\hat J_z]+[\hat J_y^2,\hat J_z].
 \]</div>
-<p>Using <span class="math notranslate nohighlight">\([\hat{A}^2, \hat{B}] = \hat{A}[\hat{A}, \hat{B}] + [\hat{A}, \hat{B}]\hat{A}\)</span>:</p>
+<p>Using <span class="math notranslate nohighlight">\([\hat A^2,\hat B]=\hat A[\hat A,\hat B]+[\hat A,\hat B]\hat A\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-[\hat{J}_x^2, \hat{J}_z] = -\mathrm{i}\hbar(\hat{J}_x \hat{J}_y + \hat{J}_y \hat{J}_x), \quad [\hat{J}_y^2, \hat{J}_z] = +\mathrm{i}\hbar(\hat{J}_y \hat{J}_x + \hat{J}_x \hat{J}_y)
+[\hat J_x^2,\hat J_z]= -\mathrm{i}\hbar(\hat J_x\hat J_y+\hat J_y\hat J_x),
 \]</div>
-<p>These cancel exactly. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+[\hat J_y^2,\hat J_z]= +\mathrm{i}\hbar(\hat J_y\hat J_x+\hat J_x\hat J_y),
+\]</div>
+<p>which cancel exactly.</p>
 </div>
 </section>
 <section id="ladder-operators">
-<h3>Ladder Operators<a class="headerlink" href="#ladder-operators" title="Link to this heading">#</a></h3>
+<h4>Ladder Operators<a class="headerlink" href="#ladder-operators" title="Link to this heading">#</a></h4>
 <div class="important admonition">
 <p class="admonition-title">Ladder Operators</p>
-<p>The <strong>raising</strong> and <strong>lowering</strong> operators:</p>
+<p>Define</p>
 <div class="math notranslate nohighlight" id="equation-eq-ladder-def">
-<span class="eqno">(37)<a class="headerlink" href="#equation-eq-ladder-def" title="Link to this equation">#</a></span>\[
-\hat{J}_+ = \hat{J}_x + \mathrm{i}\hat{J}_y, \quad \hat{J}_- = \hat{J}_x - \mathrm{i}\hat{J}_y
+<span class="eqno">(41)<a class="headerlink" href="#equation-eq-ladder-def" title="Link to this equation">#</a></span>\[
+\hat J_+=\hat J_x+\mathrm{i}\hat J_y,
+\qquad
+\hat J_-=\hat J_x-\mathrm{i}\hat J_y.
 \]</div>
-<p>satisfy:</p>
+<p>They satisfy</p>
 <div class="math notranslate nohighlight">
 \[
-[\hat{J}_z, \hat{J}_\pm] = \pm\hbar \hat{J}_\pm, \quad [\hat{J}_+, \hat{J}_-] = 2\hbar \hat{J}_z, \quad [\hat{J}^2, \hat{J}_\pm] = 0
+[\hat J_z,\hat J_\pm]=\pm\hbar\hat J_\pm,
+\qquad
+[\hat J_+,\hat J_-]=2\hbar\hat J_z,
+\qquad
+[\hat J^2,\hat J_\pm]=0.
 \]</div>
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Ladder Operator Commutation Relations</p>
-<p><strong><span class="math notranslate nohighlight">\([\hat{J}_z, \hat{J}_\pm] = \pm\hbar \hat{J}_\pm\)</span>:</strong> Using <span class="math notranslate nohighlight">\(\hat{J}_+ = \hat{J}_x + \mathrm{i}\hat{J}_y\)</span>:</p>
+<p>From <span class="math notranslate nohighlight">\(\hat J_\pm=\hat J_x\pm\mathrm{i}\hat J_y\)</span> and <span class="math notranslate nohighlight">\([\hat J_i,\hat J_j]=\mathrm{i}\hbar\epsilon_{ijk}\hat J_k\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-[\hat{J}_z, \hat{J}_+] = [\hat{J}_z, \hat{J}_x] + \mathrm{i}[\hat{J}_z, \hat{J}_y] = \mathrm{i}\hbar\hat{J}_y + \mathrm{i}(-\mathrm{i}\hbar\hat{J}_x) = \hbar(\hat{J}_x + \mathrm{i}\hat{J}_y) = +\hbar\hat{J}_+
-\]</div>
-<p>Similarly <span class="math notranslate nohighlight">\([\hat{J}_z, \hat{J}_-] = -\hbar\hat{J}_-\)</span>. This means <span class="math notranslate nohighlight">\(\hat{J}_\pm\)</span> shifts the <span class="math notranslate nohighlight">\(\hat{J}_z\)</span> eigenvalue by <span class="math notranslate nohighlight">\(\pm\hbar\)</span>.</p>
-<p><strong><span class="math notranslate nohighlight">\([\hat{J}_+, \hat{J}_-] = 2\hbar\hat{J}_z\)</span>:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{J}_+, \hat{J}_-] = [\hat{J}_x + \mathrm{i}\hat{J}_y,\, \hat{J}_x - \mathrm{i}\hat{J}_y] = -\mathrm{i}[\hat{J}_x, \hat{J}_y] + \mathrm{i}[\hat{J}_y, \hat{J}_x] = -2\mathrm{i}[\hat{J}_x, \hat{J}_y] = -2\mathrm{i}(\mathrm{i}\hbar\hat{J}_z) = 2\hbar\hat{J}_z
-\]</div>
-<p><strong><span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_\pm] = 0\)</span>:</strong> Follows from <span class="math notranslate nohighlight">\([\hat{J}^2, \hat{J}_x] = [\hat{J}^2, \hat{J}_y] = 0\)</span>, since <span class="math notranslate nohighlight">\(\hat{J}_\pm\)</span> is a linear combination of <span class="math notranslate nohighlight">\(\hat{J}_x\)</span> and <span class="math notranslate nohighlight">\(\hat{J}_y\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-</div>
-<p>The key property: <span class="math notranslate nohighlight">\(\hat{J}_+\)</span> raises <span class="math notranslate nohighlight">\(m\)</span> by one, <span class="math notranslate nohighlight">\(\hat{J}_-\)</span> lowers it by one.</p>
-<div class="important admonition">
-<p class="admonition-title">Ladder Operator Action</p>
-<div class="math notranslate nohighlight" id="equation-eq-ladder-action">
-<span class="eqno">(38)<a class="headerlink" href="#equation-eq-ladder-action" title="Link to this equation">#</a></span>\[\begin{split}
+\[\begin{split}
 \begin{split}
-\hat{J}_+ \vert j,m\rangle &amp;= \hbar\sqrt{j(j+1)-m(m+1)}\,\vert j,m+1\rangle,\\
-\hat{J}_- \vert j,m\rangle &amp;= \hbar\sqrt{j(j+1)-m(m-1)}\,\vert j,m-1\rangle.
+[\hat J_z,\hat J_+]
+&amp;=[\hat J_z,\hat J_x]+\mathrm{i}[\hat J_z,\hat J_y]
+=\mathrm{i}\hbar\hat J_y+\hbar\hat J_x
+=\hbar\hat J_+,\\
+[\hat J_z,\hat J_-]
+&amp;=[\hat J_z,\hat J_x]-\mathrm{i}[\hat J_z,\hat J_y]
+=\mathrm{i}\hbar\hat J_y-\hbar\hat J_x
+=-\hbar\hat J_-.
 \end{split}
 \end{split}\]</div>
-<p>The coefficients vanish at the boundaries: <span class="math notranslate nohighlight">\(\hat{J}_+\vert j,j\rangle=0\)</span> and <span class="math notranslate nohighlight">\(\hat{J}_-\vert j,-j\rangle=0\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+[\hat J_+,\hat J_-]
+&amp;=[\hat J_x+\mathrm{i}\hat J_y,\hat J_x-\mathrm{i}\hat J_y]
+=-\mathrm{i}[\hat J_x,\hat J_y]+\mathrm{i}[\hat J_y,\hat J_x]\\
+&amp;=-2\mathrm{i}[\hat J_x,\hat J_y]
+=-2\mathrm{i}(\mathrm{i}\hbar\hat J_z)=2\hbar\hat J_z.
+\end{split}
+\end{split}\]</div>
+<p>And by linearity,</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat J^2,\hat J_\pm]=[\hat J^2,\hat J_x\pm\mathrm{i}\hat J_y]
+=[\hat J^2,\hat J_x]\pm\mathrm{i}[\hat J^2,\hat J_y]=0.
+\]</div>
+</div>
+<p>These commutation relations imply two useful operator identities:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ladder-products">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eq-ladder-products" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\hat J_-\hat J_+ &amp;= \hat J^2-\hat J_z^2-\hbar\hat J_z,\\
+\hat J_+\hat J_- &amp;= \hat J^2-\hat J_z^2+\hbar\hat J_z.
+\end{split}
+\end{split}\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Ladder Product Identities</p>
+<p>From</p>
+<div class="math notranslate nohighlight">
+\[
+\hat J_x=\frac{1}{2}(\hat J_++\hat J_-),
+\qquad
+\hat J_y=\frac{1}{2\mathrm{i}}(\hat J_+-\hat J_-),
+\]</div>
+<p>we get</p>
+<div class="math notranslate nohighlight">
+\[
+\hat J_x^2+\hat J_y^2=\frac{1}{2}(\hat J_+\hat J_-+\hat J_-\hat J_+)=\hat J^2-\hat J_z^2.
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\([\hat J_+,\hat J_-]=2\hbar\hat J_z\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat J_+\hat J_-=\hat J_-\hat J_+ + 2\hbar\hat J_z.
+\]</div>
+<p>Solving these two equations gives <a class="reference internal" href="#equation-eq-ladder-products">(42)</a>.</p>
+</div>
+</section>
+</section>
+<section id="angular-momentum-representation-theory">
+<h3>Angular Momentum Representation Theory<a class="headerlink" href="#angular-momentum-representation-theory" title="Link to this heading">#</a></h3>
+<p>Because <span class="math notranslate nohighlight">\([\hat J^2,\hat J_z]=0\)</span>, we can choose simultaneous eigenstates and build irreducible multiplets algebraically.</p>
+<section id="common-eigenstates-of-hat-j-2-and-hat-j-z">
+<h4>Common Eigenstates of <span class="math notranslate nohighlight">\(\hat J^2\)</span> and <span class="math notranslate nohighlight">\(\hat J_z\)</span><a class="headerlink" href="#common-eigenstates-of-hat-j-2-and-hat-j-z" title="Link to this heading">#</a></h4>
+<div class="important admonition">
+<p class="admonition-title">Simultaneous Eigenstates</p>
+<p>Let <span class="math notranslate nohighlight">\(\vert j,m\rangle\)</span> satisfy</p>
+<div class="math notranslate nohighlight" id="equation-eq-am-eigen">
+<span class="eqno">(43)<a class="headerlink" href="#equation-eq-am-eigen" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\hat J^2\vert j,m\rangle &amp;= \hbar^2 j(j+1)\vert j,m\rangle,\\
+\hat J_z\vert j,m\rangle &amp;= \hbar m\vert j,m\rangle.
+\end{split}
+\end{split}\]</div>
+<p>At this stage, <span class="math notranslate nohighlight">\(j,m\in\mathbb{R}\)</span> are labels; quantization is derived below.</p>
+</div>
+</section>
+<section id="ladder-operator-action">
+<h4>Ladder Operator Action<a class="headerlink" href="#ladder-operator-action" title="Link to this heading">#</a></h4>
+<div class="important admonition">
+<p class="admonition-title">Ladder Action on <span class="math notranslate nohighlight">\(\vert j,m\rangle\)</span></p>
+<div class="math notranslate nohighlight" id="equation-eq-ladder-action">
+<span class="eqno">(44)<a class="headerlink" href="#equation-eq-ladder-action" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\hat J_+\vert j,m\rangle &amp;= \hbar\sqrt{j(j+1)-m(m+1)}\,\vert j,m+1\rangle,\\
+\hat J_-\vert j,m\rangle &amp;= \hbar\sqrt{j(j+1)-m(m-1)}\,\vert j,m-1\rangle.
+\end{split}
+\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat J_+\)</span> raises <span class="math notranslate nohighlight">\(m\)</span> by one and <span class="math notranslate nohighlight">\(\hat J_-\)</span> lowers <span class="math notranslate nohighlight">\(m\)</span> by one.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Normalization Coefficients</p>
-<p>From <span class="math notranslate nohighlight">\([\hat{J}_z,\hat{J}_\pm]=\pm\hbar\hat{J}_\pm\)</span> and <span class="math notranslate nohighlight">\([\hat{J}^2,\hat{J}_\pm]=0\)</span>, the states <span class="math notranslate nohighlight">\(\hat{J}_\pm\vert j,m\rangle\)</span> (when nonzero) are proportional to <span class="math notranslate nohighlight">\(\vert j,m\pm1\rangle\)</span> in the same <span class="math notranslate nohighlight">\(j\)</span> multiplet.</p>
-<p>To fix normalization, use</p>
+<p class="admonition-title">Derivation: Ladder-Action Coefficients</p>
+<p>From <span class="math notranslate nohighlight">\([\hat J_z,\hat J_\pm]=\pm\hbar\hat J_\pm\)</span> and <span class="math notranslate nohighlight">\([\hat J^2,\hat J_\pm]=0\)</span>, the states
+<span class="math notranslate nohighlight">\(\hat J_\pm\vert j,m\rangle\)</span> lie in the same <span class="math notranslate nohighlight">\(j\)</span> multiplet with <span class="math notranslate nohighlight">\(m\to m\pm1\)</span>.</p>
+<p>For normalization, use <a class="reference internal" href="#equation-eq-ladder-products">(42)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{J}_x=\frac{1}{2}(\hat{J}_+ + \hat{J}_-),
-\qquad
-\hat{J}_y=\frac{1}{2\mathrm{i}}(\hat{J}_+ - \hat{J}_-),
-\]</div>
-<p>which gives</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}_-\hat{J}_+ = \hat{J}^2 - \hat{J}_z^2 - \hbar\hat{J}_z,
-\qquad
-\hat{J}_+\hat{J}_- = \hat{J}^2 - \hat{J}_z^2 + \hbar\hat{J}_z.
-\]</div>
-<p>Evaluating on <span class="math notranslate nohighlight">\(\vert j,m\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\|\hat{J}_+\vert j,m\rangle\|^2
-= \langle j,m\vert\hat{J}_-\hat{J}_+\vert j,m\rangle
-= \hbar^2\bigl[j(j+1)-m(m+1)\bigr],
+\|\hat J_+\vert j,m\rangle\|^2
+=\langle j,m\vert\hat J_-\hat J_+\vert j,m\rangle
+=\hbar^2\bigl[j(j+1)-m(m+1)\bigr],
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\|\hat{J}_-\vert j,m\rangle\|^2
-= \langle j,m\vert\hat{J}_+\hat{J}_-\vert j,m\rangle
-= \hbar^2\bigl[j(j+1)-m(m-1)\bigr].
+\|\hat J_-\vert j,m\rangle\|^2
+=\langle j,m\vert\hat J_+\hat J_-\vert j,m\rangle
+=\hbar^2\bigl[j(j+1)-m(m-1)\bigr].
 \]</div>
-<p>Taking square roots yields <a class="reference internal" href="#equation-eq-ladder-action">(38)</a>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p>Taking square roots yields <a class="reference internal" href="#equation-eq-ladder-action">(44)</a>.</p>
 </div>
 </section>
 <section id="angular-momentum-quantization">
-<h3>Angular Momentum Quantization<a class="headerlink" href="#angular-momentum-quantization" title="Link to this heading">#</a></h3>
-<p>The quantization of <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(m\)</span> follows purely from the algebra — no differential equation needed.</p>
+<h4>Angular Momentum Quantization<a class="headerlink" href="#angular-momentum-quantization" title="Link to this heading">#</a></h4>
 <div class="important admonition">
 <p class="admonition-title">Quantization Rules</p>
 <div class="math notranslate nohighlight" id="equation-eq-quantization">
-<span class="eqno">(39)<a class="headerlink" href="#equation-eq-quantization" title="Link to this equation">#</a></span>\[
-j \in \{0,\; \tfrac{1}{2},\; 1,\; \tfrac{3}{2},\; 2,\; \ldots\}, \qquad m \in \{-j,\; -j+1,\; \ldots,\; j-1,\; j\}
+<span class="eqno">(45)<a class="headerlink" href="#equation-eq-quantization" title="Link to this equation">#</a></span>\[
+j\in\left\{0,\tfrac12,1,\tfrac32,2,\ldots\right\},
+\qquad
+m\in\{-j,-j+1,\ldots,j\}.
 \]</div>
-<p>For each <span class="math notranslate nohighlight">\(j\)</span>, there are <span class="math notranslate nohighlight">\(2j+1\)</span> states. The eigenvalues are:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{J}^2 \vert j,m\rangle = \hbar^2 j(j+1)\vert j,m\rangle, \qquad \hat{J}_z \vert j,m\rangle = \hbar m \vert j,m\rangle
-\]</div>
+<p>For each <span class="math notranslate nohighlight">\(j\)</span>, the multiplet dimension is <span class="math notranslate nohighlight">\(2j+1\)</span>.</p>
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Proof: Quantum bootstrap argument</p>
@@ -710,15 +787,8 @@ j \in \{0,\; \tfrac{1}{2},\; 1,\; \tfrac{3}{2},\; 2,\; \ldots\}, \qquad m \in \{
 \[
 \|\hat A\vert\psi\rangle\|^2\ge 0.
 \]</div>
-<p>Applied to angular momentum, this single principle is enough to recover quantization.</p>
-<p>From <span class="math notranslate nohighlight">\([\hat J^2,\hat J_z]=0\)</span>, choose simultaneous eigenstates <span class="math notranslate nohighlight">\(\vert j,m\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat J^2\vert j,m\rangle=\hbar^2 j(j+1)\vert j,m\rangle,
-\qquad
-\hat J_z\vert j,m\rangle=\hbar m\vert j,m\rangle.
-\]</div>
-<p>At this stage, <span class="math notranslate nohighlight">\(j,m\in\mathbb{R}\)</span> are only labels.</p>
+<p>Applied to angular momentum, this principle fixes the allowed values of <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>From <a class="reference internal" href="#equation-eq-am-eigen">(43)</a>, take simultaneous eigenstates <span class="math notranslate nohighlight">\(\vert j,m\rangle\)</span> of <span class="math notranslate nohighlight">\(\hat J^2\)</span> and <span class="math notranslate nohighlight">\(\hat J_z\)</span>.</p>
 <p><strong>(1) Positivity constraints.</strong> Apply positivity to <span class="math notranslate nohighlight">\(\hat A=\hat J_+\)</span> and <span class="math notranslate nohighlight">\(\hat A=\hat J_-\)</span> on <span class="math notranslate nohighlight">\(\vert j,m\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -726,162 +796,81 @@ j \in \{0,\; \tfrac{1}{2},\; 1,\; \tfrac{3}{2},\; 2,\; \ldots\}, \qquad m \in \{
 \qquad
 \|\hat J_-\vert j,m\rangle\|^2\ge0.
 \]</div>
-<p>Using <a class="reference internal" href="#equation-eq-ladder-action">(38)</a>, these become</p>
+<p>Using <a class="reference internal" href="#equation-eq-ladder-action">(44)</a>, these become</p>
 <div class="math notranslate nohighlight" id="equation-eq-am-ladder-positivity">
-<span class="eqno">(40)<a class="headerlink" href="#equation-eq-am-ladder-positivity" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(46)<a class="headerlink" href="#equation-eq-am-ladder-positivity" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{split}
 \text{(raising)}\;&amp; j(j+1)-m(m+1)\ge 0,\\
 \text{(lowering)}\;&amp; j(j+1)-m(m-1)\ge 0.
 \end{split}
 \end{split}\]</div>
-<p>Solving each quadratic inequality gives intervals</p>
-<div class="math notranslate nohighlight">
-\[
--j-1\le m\le j,
-\qquad
--j\le m\le j+1.
-\]</div>
-<p>Together they force</p>
-<div class="math notranslate nohighlight">
-\[
--j\le m\le j.
-\]</div>
-<p><strong>(2) Unit-step ladder structure.</strong> From <span class="math notranslate nohighlight">\([\hat J_z,\hat J_\pm]=\pm\hbar\hat J_\pm\)</span>, repeated ladder actions change <span class="math notranslate nohighlight">\(m\)</span> by exactly one unit:</p>
-<div class="math notranslate nohighlight">
-\[
-m\to m\pm1\to m\pm2\to\cdots
-\]</div>
-<p>So all <span class="math notranslate nohighlight">\(m\)</span> values in one multiplet differ by integers.</p>
-<p><strong>(3) Finite-dimensional irreducibility implies termination.</strong> In a finite-dimensional irrep, the ladder cannot continue forever. Therefore there exist top and bottom states,</p>
+<p>So <span class="math notranslate nohighlight">\(m\)</span> is bounded: <span class="math notranslate nohighlight">\(-j\le m\le j\)</span>.</p>
+<p><strong>(2) Ladder unit-step structure.</strong> From <span class="math notranslate nohighlight">\([\hat J_z,\hat J_\pm]=\pm\hbar\hat J_\pm\)</span>, each ladder action changes <span class="math notranslate nohighlight">\(m\)</span> by exactly one unit. Therefore all <span class="math notranslate nohighlight">\(m\)</span> values in one multiplet differ by integers.</p>
+<p><strong>(3) Finite-dimensional irreducibility.</strong> In a finite-dimensional irrep, the ladder must terminate at top and bottom states:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat J_+\vert j,m_{\max}\rangle=0,
 \qquad
 \hat J_-\vert j,m_{\min}\rangle=0.
 \]</div>
-<p>Using <a class="reference internal" href="#equation-eq-ladder-action">(38)</a>, vanishing coefficients imply</p>
+<p>By <a class="reference internal" href="#equation-eq-ladder-action">(44)</a>, vanishing coefficients imply</p>
 <div class="math notranslate nohighlight">
 \[
 m_{\max}=j,
 \qquad
 m_{\min}=-j.
 \]</div>
-<p>Hence the multiplet is</p>
+<p>Hence the ladder runs</p>
 <div class="math notranslate nohighlight">
 \[
-m=-j,-j+1,\ldots,j-1,j.
+m=-j,-j+1,\ldots,j,
 \]</div>
-<p>The number of states is</p>
-<div class="math notranslate nohighlight">
-\[
-N=m_{\max}-m_{\min}+1=2j+1.
-\]</div>
-<p>Because <span class="math notranslate nohighlight">\(N\in\mathbb{N}\)</span>, we must have</p>
-<div class="math notranslate nohighlight">
-\[
-2j\in\mathbb{N}_0,
-\qquad
-j\in\left\{0,\tfrac12,1,\tfrac32,\ldots\right\}.
-\]</div>
-<p>So algebra plus positivity gives exactly</p>
+<p>with <span class="math notranslate nohighlight">\(N=2j+1\)</span> states.</p>
+<p>Since <span class="math notranslate nohighlight">\(N\in\mathbb N\)</span>, we must have <span class="math notranslate nohighlight">\(2j\in\mathbb N_0\)</span>. Therefore</p>
 <div class="math notranslate nohighlight">
 \[
 j\in\left\{0,\tfrac12,1,\tfrac32,\ldots\right\},
 \qquad
 m\in\{-j,-j+1,\ldots,j\}.
 \]</div>
-<p>This is the angular-momentum quantization rule, obtained without solving a wave equation.</p>
+<p>So quantization follows from algebra + positivity + finite-dimensional irreducibility.</p>
 </div>
-<p><strong>Integer vs. half-integer:</strong> Orbital angular momentum (<span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}} = \hat{\boldsymbol{r}} \times \hat{\boldsymbol{p}}\)</span>) only admits integer <span class="math notranslate nohighlight">\(\ell\)</span> because the wavefunctions <span class="math notranslate nohighlight">\(Y_\ell^m(\theta,\phi)\)</span> must be single-valued on the sphere. Spin has no spatial wavefunction, so half-integer <span class="math notranslate nohighlight">\(j\)</span> is allowed. The <strong>spin-statistics theorem</strong> (proved in QFT) links this to particle statistics: integer spin <span class="math notranslate nohighlight">\(\to\)</span> bosons, half-integer spin <span class="math notranslate nohighlight">\(\to\)</span> fermions.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>Angular momentum quantization follows from algebra alone — no differential equation, no specific Hamiltonian. Does this mean any operator satisfying <span class="math notranslate nohighlight">\([\hat{J}_i, \hat{J}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{J}_k\)</span> must have quantized eigenvalues? Could there be physical systems where the algebra is deformed (e.g., <span class="math notranslate nohighlight">\(q\)</span>-deformed angular momentum)? What would change?</p>
-</div>
+<p><strong>Integer vs. half-integer:</strong> Orbital angular momentum (<span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}}=\hat{\boldsymbol{r}}\times\hat{\boldsymbol{p}}\)</span>) gives only integer <span class="math notranslate nohighlight">\(\ell\)</span> from single-valued wavefunctions, while spin admits half-integer <span class="math notranslate nohighlight">\(j\)</span>.</p>
 </section>
 <section id="matrix-representations">
-<h3>Matrix Representations<a class="headerlink" href="#matrix-representations" title="Link to this heading">#</a></h3>
-<p>For a given <span class="math notranslate nohighlight">\(j\)</span>, the operators act on the <span class="math notranslate nohighlight">\((2j+1)\)</span>-dimensional space spanned by <span class="math notranslate nohighlight">\(\{\vert j, m\rangle : m = -j, \ldots, j\}\)</span>.</p>
+<h4>Matrix Representations<a class="headerlink" href="#matrix-representations" title="Link to this heading">#</a></h4>
+<p>For fixed <span class="math notranslate nohighlight">\(j\)</span>, the operators act on a <span class="math notranslate nohighlight">\((2j+1)\)</span>-dimensional space.</p>
 <div class="important admonition">
 <p class="admonition-title">Spin-1/2: Pauli Matrices</p>
-<p>For <span class="math notranslate nohighlight">\(j = 1/2\)</span>, the two basis states are <span class="math notranslate nohighlight">\(\vert\uparrow\rangle = \vert\tfrac{1}{2}, +\tfrac{1}{2}\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\downarrow\rangle = \vert\tfrac{1}{2}, -\tfrac{1}{2}\rangle\)</span>. The angular momentum operators are <span class="math notranslate nohighlight">\(\hat{J}_i = \frac{\hbar}{2}\hat{\sigma}^i\)</span>:</p>
+<p>For <span class="math notranslate nohighlight">\(j=1/2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\hat{J}_z = \frac{\hbar}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}, \quad \hat{J}_x = \frac{\hbar}{2}\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \quad \hat{J}_y = \frac{\hbar}{2}\begin{pmatrix} 0 &amp; -\mathrm{i} \\ \mathrm{i} &amp; 0 \end{pmatrix}
+\hat J_z=\frac{\hbar}{2}
+\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix},
+\quad
+\hat J_x=\frac{\hbar}{2}
+\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix},
+\quad
+\hat J_y=\frac{\hbar}{2}
+\begin{pmatrix}0&amp;-\mathrm{i}\\\mathrm{i}&amp;0\end{pmatrix}.
 \end{split}\]</div>
-<p>These are the Pauli matrices from <a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html"><span class="doc std std-doc">§1.1.3</span></a>, now understood as the <span class="math notranslate nohighlight">\(j = 1/2\)</span> representation of angular momentum.</p>
 </div>
 <div class="important admonition">
-<p class="admonition-title">Spin-1: 3×3 Matrices</p>
-<p>For <span class="math notranslate nohighlight">\(j = 1\)</span>, three basis states <span class="math notranslate nohighlight">\(\vert 1, +1\rangle\)</span>, <span class="math notranslate nohighlight">\(\vert 1, 0\rangle\)</span>, <span class="math notranslate nohighlight">\(\vert 1, -1\rangle\)</span>:</p>
+<p class="admonition-title">Spin-1: 3<span class="math notranslate nohighlight">\(\times\)</span>3 Matrices</p>
+<p>For <span class="math notranslate nohighlight">\(j=1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\hat{J}_z = \hbar\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}, \quad \hat{J}_x = \frac{\hbar}{\sqrt{2}}\begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 0 \end{pmatrix}, \quad \hat{J}_y = \frac{\hbar}{\sqrt{2}}\begin{pmatrix} 0 &amp; -\mathrm{i} &amp; 0 \\ \mathrm{i} &amp; 0 &amp; -\mathrm{i} \\ 0 &amp; \mathrm{i} &amp; 0 \end{pmatrix}
+\hat J_z=\hbar
+\begin{pmatrix}1&amp;0&amp;0\\0&amp;0&amp;0\\0&amp;0&amp;-1\end{pmatrix},
+\quad
+\hat J_x=\frac{\hbar}{\sqrt2}
+\begin{pmatrix}0&amp;1&amp;0\\1&amp;0&amp;1\\0&amp;1&amp;0\end{pmatrix},
+\quad
+\hat J_y=\frac{\hbar}{\sqrt2}
+\begin{pmatrix}0&amp;-\mathrm{i}&amp;0\\\mathrm{i}&amp;0&amp;-\mathrm{i}\\0&amp;\mathrm{i}&amp;0\end{pmatrix}.
 \end{split}\]</div>
-<p>The factors of <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> come from the ladder operator formula with <span class="math notranslate nohighlight">\(j = 1\)</span>.</p>
 </div>
-<div class="dropdown example admonition">
-<p class="admonition-title">Example: Reconstructing Spin-1 from Ladders</p>
-<p><strong>Goal.</strong> Use only ladder algebra to reconstruct the full spin-1 representation and perform a structural consistency check.</p>
-<p>Choose the ordered basis</p>
-<div class="math notranslate nohighlight">
-\[
-\bigl\{\vert 1,1\rangle,\ \vert 1,0\rangle,\ \vert 1,-1\rangle\bigr\}.
-\]</div>
-<p>From <a class="reference internal" href="#equation-eq-ladder-action">(38)</a> with <span class="math notranslate nohighlight">\(j=1\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat J_+\vert 1,-1\rangle=\hbar\sqrt2\,\vert1,0\rangle,
-\qquad
-\hat J_+\vert1,0\rangle=\hbar\sqrt2\,\vert1,1\rangle,
-\qquad
-\hat J_+\vert1,1\rangle=0,
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\hat J_-\vert1,1\rangle=\hbar\sqrt2\,\vert1,0\rangle,
-\qquad
-\hat J_-\vert1,0\rangle=\hbar\sqrt2\,\vert1,-1\rangle,
-\qquad
-\hat J_-\vert1,-1\rangle=0.
-\]</div>
-<p>Therefore</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\hat J_+=\hbar\sqrt2
-\begin{pmatrix}
-0&amp;1&amp;0\\
-0&amp;0&amp;1\\
-0&amp;0&amp;0
-\end{pmatrix},
-\qquad
-\hat J_-=\hbar\sqrt2
-\begin{pmatrix}
-0&amp;0&amp;0\\
-1&amp;0&amp;0\\
-0&amp;1&amp;0
-\end{pmatrix}.
-\end{split}\]</div>
-<p>Now form</p>
-<div class="math notranslate nohighlight">
-\[
-\hat J_x=\frac{1}{2}(\hat J_++\hat J_-),
-\qquad
-\hat J_y=\frac{1}{2\mathrm i}(\hat J_+-\hat J_-).
-\]</div>
-<p>These reproduce the spin-1 matrices listed above.</p>
-<p><strong>Meaningful check.</strong> The ladder-built matrices satisfy</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat J_x,\hat J_y]=\mathrm i\hbar\hat J_z,
-\]</div>
-<p>and</p>
-<div class="math notranslate nohighlight">
-\[
-\hat J^2=\hat J_x^2+\hat J_y^2+\hat J_z^2=2\hbar^2\,\hat I,
-\]</div>
-<p>which is exactly <span class="math notranslate nohighlight">\(j(j+1)\hbar^2\)</span> for <span class="math notranslate nohighlight">\(j=1\)</span>. So ladder rules alone reconstruct the full representation and verify internal algebraic consistency.</p>
-</div>
-<p><strong>General pattern:</strong> For spin-<span class="math notranslate nohighlight">\(j\)</span>, the operators are <span class="math notranslate nohighlight">\((2j+1) \times (2j+1)\)</span> matrices. Each representation is <strong>irreducible</strong> — it cannot be block-diagonalized while preserving the algebra.</p>
+</section>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
@@ -974,11 +963,18 @@ m\in\{-j,-j+1,\ldots,j\}.
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-commutation-relations">Angular Momentum Commutation Relations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casimir-operator-hat-j-2">Casimir Operator <span class="math notranslate nohighlight">\(\hat{J}^2\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operators">Ladder Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-quantization">Angular Momentum Quantization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-representations">Matrix Representations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Angular Momentum Algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#casimir-operator">Casimir Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operators">Ladder Operators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-representation-theory">Angular Momentum Representation Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-eigenstates-of-hat-j-2-and-hat-j-z">Common Eigenstates of <span class="math notranslate nohighlight">\(\hat J^2\)</span> and <span class="math notranslate nohighlight">\(\hat J_z\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ladder-operator-action">Ladder Operator Action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-momentum-quantization">Angular Momentum Quantization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-representations">Matrix Representations</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

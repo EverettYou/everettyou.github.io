@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -577,121 +577,317 @@
 <p>The <strong>creation operator</strong> <span class="math notranslate nohighlight">\(\hat{a}^\dagger_\alpha\)</span> adds a particle to mode <span class="math notranslate nohighlight">\(\alpha\)</span>; the <strong>annihilation operator</strong> <span class="math notranslate nohighlight">\(\hat{a}_\alpha\)</span> removes one. Their action on Fock states differs for bosons and fermions.</p>
 <section id="bosonic-operators-hat-b-alpha-hat-b-dagger-alpha">
 <h4>Bosonic Operators (<span class="math notranslate nohighlight">\(\hat{b}_\alpha\)</span>, <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha\)</span>)<a class="headerlink" href="#bosonic-operators-hat-b-alpha-hat-b-dagger-alpha" title="Link to this heading">#</a></h4>
+<p>For bosons, creation and annihilation operators are defined from the symmetric insertion/deletion operators <span class="math notranslate nohighlight">\(\rhd_+\)</span> and <span class="math notranslate nohighlight">\(\lhd_+\)</span>. On an <span class="math notranslate nohighlight">\(N\)</span>-particle first-quantized state <span class="math notranslate nohighlight">\(\vert\Psi_N\rangle\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-boson-op-insert-delete">
+<span class="eqno">(34)<a class="headerlink" href="#equation-eq-boson-op-insert-delete" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\hat{b}_\alpha^\dagger\vert\Psi_N\rangle&amp;=\frac{1}{\sqrt{N+1}}\left(\vert\alpha\rangle\rhd_+\vert\Psi_N\rangle\right),\\
+\hat{b}_\alpha\vert\Psi_N\rangle&amp;=\frac{1}{\sqrt{N}}\left(\vert\alpha\rangle\lhd_+\vert\Psi_N\rangle\right).
+\end{split}
+\end{split}\]</div>
+<p>Therefore in occupation-number basis,</p>
 <div class="math notranslate nohighlight">
-\[\hat{b}^\dagger_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha + 1}\;\vert \ldots, n_\alpha + 1, \ldots\rangle\]</div>
+\[
+\hat{b}^\dagger_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha + 1}\;\vert \ldots, n_\alpha + 1, \ldots\rangle
+\]</div>
 <div class="math notranslate nohighlight">
-\[\hat{b}_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha}\;\vert \ldots, n_\alpha - 1, \ldots\rangle\]</div>
-<p>The <span class="math notranslate nohighlight">\(\sqrt{n+1}\)</span> and <span class="math notranslate nohighlight">\(\sqrt{n}\)</span> factors ensure normalization.</p>
+\[
+\hat{b}_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \sqrt{n_\alpha}\;\vert \ldots, n_\alpha - 1, \ldots\rangle
+\]</div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Origin of the <span class="math notranslate nohighlight">\(\sqrt{n}\)</span> Factors</p>
-<p>The <span class="math notranslate nohighlight">\(\sqrt{n+1}\)</span> and <span class="math notranslate nohighlight">\(\sqrt{n}\)</span> factors are uniquely determined by three requirements: (1) <span class="math notranslate nohighlight">\(\hat{b}^\dagger\)</span> is the adjoint of <span class="math notranslate nohighlight">\(\hat{b}\)</span>, (2) <span class="math notranslate nohighlight">\(\hat{n} = \hat{b}^\dagger \hat{b}\)</span> has eigenvalue <span class="math notranslate nohighlight">\(n\)</span> on <span class="math notranslate nohighlight">\(\vert n\rangle\)</span>, and (3) <span class="math notranslate nohighlight">\(\hat{b}\vert 0\rangle = 0\)</span>.</p>
-<p><strong>From the number operator.</strong> Define <span class="math notranslate nohighlight">\(\hat{b}^\dagger\vert n\rangle = f(n)\vert n+1\rangle\)</span> for some function <span class="math notranslate nohighlight">\(f(n)\)</span> to be determined. Since <span class="math notranslate nohighlight">\(\hat{b}^\dagger\)</span> and <span class="math notranslate nohighlight">\(\hat{b}\)</span> are adjoints:</p>
+<p class="admonition-title">Derivation: Bosonic action on Fock states</p>
+<p>Using the bosonic operator definition in <a class="reference internal" href="#equation-eq-boson-op-insert-delete">(34)</a>, we now compute the action explicitly from insertion/deletion rules.</p>
+<p>For a single mode, denote <span class="math notranslate nohighlight">\(\vert n_\alpha\rangle\equiv\vert\alpha\rangle^{\otimes n_\alpha}\)</span>.</p>
+<p><strong>Claim.</strong></p>
 <div class="math notranslate nohighlight">
-\[\langle n\vert \hat{b}\hat{b}^\dagger \vert n\rangle = \langle n+1\vert f(n)^* f(n) \vert n+1\rangle = \vert f(n)\vert^2\]</div>
-<p>Using the commutation relation <span class="math notranslate nohighlight">\(\hat{b}\hat{b}^\dagger = \hat{b}^\dagger\hat{b} + 1 = \hat{n} + 1\)</span>:</p>
+\[\begin{split}
+\begin{split}
+\hat{b}_\alpha^\dagger\vert n_\alpha\rangle&amp;=\sqrt{n_\alpha+1}\;\vert n_\alpha+1\rangle,\\
+\hat{b}_\alpha\vert n_\alpha\rangle&amp;=\sqrt{n_\alpha}\;\vert n_\alpha-1\rangle.
+\end{split}
+\end{split}\]</div>
+<p><strong>Proof.</strong>
+Using <a class="reference internal" href="#equation-eq-boson-op-insert-delete">(34)</a>,</p>
 <div class="math notranslate nohighlight">
-\[\langle n\vert (\hat{n} + 1)\vert n\rangle = n + 1\]</div>
-<p>Equating: <span class="math notranslate nohighlight">\(\vert f(n)\vert^2 = n + 1\)</span>, so <span class="math notranslate nohighlight">\(f(n) = \sqrt{n+1}\)</span> (choosing the positive real convention). Therefore:</p>
+\[
+\hat{b}_\alpha^\dagger\vert n_\alpha\rangle
+=\frac{1}{\sqrt{n_\alpha+1}}\left(\vert\alpha\rangle\rhd_+\vert\alpha\rangle^{\otimes n_\alpha}\right).
+\]</div>
+<p>The recursive insertion rule generates one term for each insertion position. For
+<span class="math notranslate nohighlight">\(\vert\alpha\rangle^{\otimes n_\alpha}\)</span> there are exactly <span class="math notranslate nohighlight">\(n_\alpha+1\)</span> insertion slots (before the 1st factor, between adjacent factors, and after the last factor), and all produced tensors are identical in the bosonic single-mode case:</p>
 <div class="math notranslate nohighlight">
-\[\hat{b}^\dagger\vert n\rangle = \sqrt{n+1}\,\vert n+1\rangle\]</div>
-<p>For the annihilation operator, use <span class="math notranslate nohighlight">\(\hat{b} = (\hat{b}^\dagger)^\dagger\)</span> and compute the matrix element:</p>
+\[
+\vert\alpha\rangle\rhd_+\vert\alpha\rangle^{\otimes n_\alpha}
+=(n_\alpha+1)\vert\alpha\rangle^{\otimes(n_\alpha+1)}.
+\]</div>
+<p>Combining this combinatorial factor with the operator normalization <span class="math notranslate nohighlight">\(1/\sqrt{n_\alpha+1}\)</span> gives</p>
 <div class="math notranslate nohighlight">
-\[\langle n-1\vert \hat{b}\vert n\rangle = \langle n\vert \hat{b}^\dagger\vert n-1\rangle^* = \sqrt{n}\]</div>
-<p>giving <span class="math notranslate nohighlight">\(\hat{b}\vert n\rangle = \sqrt{n}\,\vert n-1\rangle\)</span>. The entire Fock space is generated by repeated creation: <span class="math notranslate nohighlight">\(\vert n\rangle = \frac{(\hat{b}^\dagger)^n}{\sqrt{n!}}\vert 0\rangle\)</span>.</p>
+\[
+\hat{b}_\alpha^\dagger\vert n_\alpha\rangle
+=\frac{1}{\sqrt{n_\alpha+1}}\cdot(n_\alpha+1)\vert\alpha\rangle^{\otimes(n_\alpha+1)}
+=\sqrt{n_\alpha+1}\;\vert n_\alpha+1\rangle.
+\]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{b}_\alpha\vert n_\alpha\rangle
+=\frac{1}{\sqrt{n_\alpha}}\left(\vert\alpha\rangle\lhd_+\vert\alpha\rangle^{\otimes n_\alpha}\right).
+\]</div>
+<p>The recursive deletion rule sums over all removable copies of <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span>; now there are exactly <span class="math notranslate nohighlight">\(n_\alpha\)</span> deletion choices:</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\alpha\rangle\lhd_+\vert\alpha\rangle^{\otimes n_\alpha}
+=n_\alpha\vert\alpha\rangle^{\otimes(n_\alpha-1)}.
+\]</div>
+<p>Combining this with the normalization <span class="math notranslate nohighlight">\(1/\sqrt{n_\alpha}\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{b}_\alpha\vert n_\alpha\rangle
+=\frac{1}{\sqrt{n_\alpha}}\cdot n_\alpha\vert\alpha\rangle^{\otimes(n_\alpha-1)}
+=\sqrt{n_\alpha}\;\vert n_\alpha-1\rangle.
+\]</div>
+<p>So the different prefactors come from different combinatorial counts: <span class="math notranslate nohighlight">\(n_\alpha+1\)</span> insertion slots versus <span class="math notranslate nohighlight">\(n_\alpha\)</span> deletion choices.
+For multiple modes <span class="math notranslate nohighlight">\(\vert\ldots,n_\beta,n_\alpha,n_\gamma,\ldots\rangle\)</span>, the same coefficients follow: other modes are independent tensor factors, bosonic insertion has no sign change when passing other factors, and deletion picks only matching mode contributions via <span class="math notranslate nohighlight">\(\langle\alpha\vert\beta\rangle=\delta_{\alpha\beta}\)</span>. Hence only <span class="math notranslate nohighlight">\(n_\alpha\)</span> changes.</p>
 </div>
 </section>
 <section id="fermionic-operators-hat-c-alpha-hat-c-dagger-alpha">
 <h4>Fermionic Operators (<span class="math notranslate nohighlight">\(\hat{c}_\alpha\)</span>, <span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha\)</span>)<a class="headerlink" href="#fermionic-operators-hat-c-alpha-hat-c-dagger-alpha" title="Link to this heading">#</a></h4>
-<p>With <span class="math notranslate nohighlight">\(n_\alpha \in \{0,1\}\)</span>:</p>
+<p>For fermions, creation and annihilation operators are defined from antisymmetric insertion/deletion operators <span class="math notranslate nohighlight">\(\rhd_-\)</span> and <span class="math notranslate nohighlight">\(\lhd_-\)</span>. On an <span class="math notranslate nohighlight">\(N\)</span>-particle first-quantized state <span class="math notranslate nohighlight">\(\vert\Psi_N\rangle\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-fermion-op-insert-delete">
+<span class="eqno">(35)<a class="headerlink" href="#equation-eq-fermion-op-insert-delete" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\hat{c}_\alpha^\dagger\vert\Psi_N\rangle&amp;=\frac{1}{\sqrt{N+1}}\left(\vert\alpha\rangle\rhd_-\vert\Psi_N\rangle\right),\\
+\hat{c}_\alpha\vert\Psi_N\rangle&amp;=\frac{1}{\sqrt{N}}\left(\vert\alpha\rangle\lhd_-\vert\Psi_N\rangle\right).
+\end{split}
+\end{split}\]</div>
+<p>Therefore in occupation-number basis (<span class="math notranslate nohighlight">\(n_\alpha\in\{0,1\}\)</span>),</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\hat{c}^\dagger_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \begin{cases} (-1)^{P_\alpha} \vert \ldots, 1, \ldots\rangle &amp; n_\alpha = 0 \\ 0 &amp; n_\alpha = 1 \end{cases}\end{split}\]</div>
+\[\begin{split}
+\hat{c}^\dagger_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \begin{cases} (-1)^{P_\alpha} \vert \ldots, 1, \ldots\rangle &amp; n_\alpha = 0 \\ 0 &amp; n_\alpha = 1 \end{cases}
+\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}\hat{c}_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \begin{cases} (-1)^{P_\alpha} \vert \ldots, 0, \ldots\rangle &amp; n_\alpha = 1 \\ 0 &amp; n_\alpha = 0 \end{cases}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(P_\alpha = \sum_{i&lt;\alpha} n_i\)</span> counts fermions in earlier modes. The phase <span class="math notranslate nohighlight">\((-1)^{P_\alpha}\)</span> enforces antisymmetry under particle exchange.</p>
+\[\begin{split}
+\hat{c}_\alpha \vert \ldots, n_\alpha, \ldots\rangle = \begin{cases} (-1)^{P_\alpha} \vert \ldots, 0, \ldots\rangle &amp; n_\alpha = 1 \\ 0 &amp; n_\alpha = 0 \end{cases}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_\alpha = \sum_{i&lt;\alpha} n_i\)</span> counts occupied modes before <span class="math notranslate nohighlight">\(\alpha\)</span> in the canonical mode ordering.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Fermionic action on Fock states</p>
+<p>We derive the formulas directly from <a class="reference internal" href="#equation-eq-fermion-op-insert-delete">(35)</a> by falling back to first-quantized states.</p>
+<p><strong>Single mode.</strong></p>
+<p>Take one mode <span class="math notranslate nohighlight">\(\alpha\)</span>, with <span class="math notranslate nohighlight">\(\vert0_\alpha\rangle\equiv\mathbb{1}\)</span> and <span class="math notranslate nohighlight">\(\vert1_\alpha\rangle\equiv\vert\alpha\rangle\)</span>.</p>
+<p>From the vacuum rules,</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\alpha\rangle\rhd_-\mathbb{1}=\vert\alpha\rangle,
+\qquad
+\vert\alpha\rangle\lhd_-\mathbb{1}=0.
+\]</div>
+<p>Using the recursive insertion rule on the occupied state,</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\alpha\rangle\rhd_-\vert\alpha\rangle
+=\vert\alpha\alpha\rangle-\vert\alpha\alpha\rangle=0,
+\]</div>
+<p>which is Pauli exclusion at the insertion-operator level.</p>
+<p>Using the recursive deletion rule,</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\alpha\rangle\lhd_-\vert\alpha\rangle
+=\langle\alpha\vert\alpha\rangle\mathbb{1}-\vert\alpha\rangle\otimes(\vert\alpha\rangle\lhd_-\mathbb{1})
+=\mathbb{1}.
+\]</div>
+<p>Now apply the operator definitions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\hat c_\alpha^\dagger\vert0_\alpha\rangle
+&amp;=\frac{1}{\sqrt{1}}(\vert\alpha\rangle\rhd_-\mathbb{1})=\vert1_\alpha\rangle,\\
+\hat c_\alpha\vert0_\alpha\rangle
+&amp;=0,\\
+\hat c_\alpha^\dagger\vert1_\alpha\rangle
+&amp;=\frac{1}{\sqrt{2}}(\vert\alpha\rangle\rhd_-\vert\alpha\rangle)=0,\\
+\hat c_\alpha\vert1_\alpha\rangle
+&amp;=\frac{1}{\sqrt{1}}(\vert\alpha\rangle\lhd_-\vert\alpha\rangle)=\vert0_\alpha\rangle.
+\end{split}
+\end{split}\]</div>
+<p>So the single-mode action is fully derived from <span class="math notranslate nohighlight">\(\rhd_-\)</span> and <span class="math notranslate nohighlight">\(\lhd_-\)</span>, with no extra assumptions.</p>
+<p><strong>Multi-mode sign <span class="math notranslate nohighlight">\((-1)^{P_\alpha}\)</span>.</strong></p>
+<p>Because of Pauli exclusion, each mode can be occupied at most once. So a fermion Fock basis state is equivalent to choosing a subset of occupied modes,</p>
+<div class="math notranslate nohighlight">
+\[
+S=\{\alpha_1,\alpha_2,\ldots,\alpha_N\}.
+\]</div>
+<p>A set is orderless, but to define states and signs unambiguously we choose the canonical ordered representative</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_1&lt;\alpha_2&lt;\cdots&lt;\alpha_N,
+\qquad
+\vert S\rangle_-\equiv\vert\alpha_1,\alpha_2,\ldots,\alpha_N\rangle_-.
+\]</div>
+<p>Adding a fermion in mode <span class="math notranslate nohighlight">\(\alpha\)</span> means adding a new element to the subset, <span class="math notranslate nohighlight">\(S\to S\cup\{\alpha\}\)</span> (if <span class="math notranslate nohighlight">\(\alpha\notin S\)</span>). In the antisymmetric insertion picture, this new mode must be permuted into canonical order. If exactly <span class="math notranslate nohighlight">\(P_\alpha\)</span> occupied modes in <span class="math notranslate nohighlight">\(S\)</span> are smaller than <span class="math notranslate nohighlight">\(\alpha\)</span>, then the insertion crosses those <span class="math notranslate nohighlight">\(P_\alpha\)</span> modes, giving</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\alpha\rangle\rhd_-\vert \alpha_1,\ldots,\alpha_N\rangle_-
+=(-1)^{P_\alpha}\vert \alpha_1,\ldots,\alpha,\ldots,\alpha_N\rangle_-.
+\]</div>
+<p>Deletion is the reverse operation and carries the same crossing-count phase. Therefore in occupation notation,
+<span class="math notranslate nohighlight">\(P_\alpha=\sum_{\beta&lt;\alpha}n_\beta\)</span>, and the operator actions acquire the factor <span class="math notranslate nohighlight">\((-1)^{P_\alpha}\)</span>.</p>
+</div>
 </section>
 <section id="algebraic-relations">
 <h4>Algebraic Relations<a class="headerlink" href="#algebraic-relations" title="Link to this heading">#</a></h4>
+<p>The following algebras are equivalent to the operator definitions above, and in practice are often used as defining relations for boson/fermion operators.</p>
 <div class="important admonition">
 <p class="admonition-title">Commutation Relations (Bosons)</p>
-<div class="math notranslate nohighlight">
-\[[\hat{b}_\alpha, \hat{b}^\dagger_\beta] = \delta_{\alpha\beta}, \quad [\hat{b}_\alpha, \hat{b}_\beta] = 0, \quad [\hat{b}^\dagger_\alpha, \hat{b}^\dagger_\beta] = 0\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-boson-commutation">
+<span class="eqno">(36)<a class="headerlink" href="#equation-eq-boson-commutation" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+[\hat{b}_\alpha, \hat{b}^\dagger_\beta] &amp;= \delta_{\alpha\beta},\\
+[\hat{b}_\alpha, \hat{b}_\beta] &amp;= 0,\\
+[\hat{b}^\dagger_\alpha, \hat{b}^\dagger_\beta] &amp;= 0.
+\end{split}
+\end{split}\]</div>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Bosonic Commutation Relation</p>
-<p>We verify <span class="math notranslate nohighlight">\([\hat{b}_\alpha, \hat{b}^\dagger_\beta] = \delta_{\alpha\beta}\)</span> by acting on an arbitrary Fock state. Consider a single mode first (<span class="math notranslate nohighlight">\(\alpha = \beta\)</span>):</p>
+<p class="admonition-title">Derivation: Bosonic commutators on Fock basis</p>
+<p>Use the bosonic Fock-action formulas above, <a class="reference internal" href="#equation-eq-boson-op-insert-delete">(34)</a> and
+<span class="math notranslate nohighlight">\(\hat{b}_\alpha^\dagger\vert\ldots,n_\alpha,\ldots\rangle=\sqrt{n_\alpha+1}\,\vert\ldots,n_\alpha+1,\ldots\rangle\)</span>,
+<span class="math notranslate nohighlight">\(\hat{b}_\alpha\vert\ldots,n_\alpha,\ldots\rangle=\sqrt{n_\alpha}\,\vert\ldots,n_\alpha-1,\ldots\rangle\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\vert\mathbf{n}\rangle\equiv\vert\ldots,n_\alpha,\ldots,n_\beta,\ldots\rangle\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(\alpha\neq\beta\)</span>, both orders give the same final state with the same coefficient,</p>
 <div class="math notranslate nohighlight">
-\[\hat{b}\hat{b}^\dagger \vert n\rangle = \hat{b}\bigl(\sqrt{n+1}\,\vert n+1\rangle\bigr) = \sqrt{n+1}\cdot\sqrt{n+1}\,\vert n\rangle = (n+1)\vert n\rangle\]</div>
+\[
+\hat{b}_\alpha\hat{b}_\beta^\dagger\vert\mathbf{n}\rangle
+=\hat{b}_\beta^\dagger\hat{b}_\alpha\vert\mathbf{n}\rangle
+=\sqrt{n_\alpha}\sqrt{n_\beta+1}\,\vert\ldots,n_\alpha-1,\ldots,n_\beta+1,\ldots\rangle,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\([\hat{b}_\alpha,\hat{b}_\beta^\dagger]\vert\mathbf{n}\rangle=0\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(\alpha=\beta\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[\hat{b}^\dagger\hat{b} \vert n\rangle = \hat{b}^\dagger\bigl(\sqrt{n}\,\vert n-1\rangle\bigr) = \sqrt{n}\cdot\sqrt{n}\,\vert n\rangle = n\vert n\rangle\]</div>
-<p>Subtracting: <span class="math notranslate nohighlight">\([\hat{b}, \hat{b}^\dagger]\vert n\rangle = (n+1-n)\vert n\rangle = \vert n\rangle\)</span>. Since this holds for every basis state <span class="math notranslate nohighlight">\(\vert n\rangle\)</span>, we conclude <span class="math notranslate nohighlight">\([\hat{b}, \hat{b}^\dagger] = \hat{I}\)</span>.</p>
-<p>For different modes (<span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span>): the operators act on independent tensor factors. Since <span class="math notranslate nohighlight">\(\hat{b}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\beta\)</span> act on different modes, they commute by the same tensor product argument as in <a class="reference internal" href="2-1-1-tensor-product.html"><span class="doc std std-doc">§2.1.1</span></a>. Hence <span class="math notranslate nohighlight">\([\hat{b}_\alpha, \hat{b}^\dagger_\beta] = 0\)</span> for <span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span>, and combining: <span class="math notranslate nohighlight">\([\hat{b}_\alpha, \hat{b}^\dagger_\beta] = \delta_{\alpha\beta}\)</span>.</p>
-<p>Similarly, <span class="math notranslate nohighlight">\([\hat{b}^\dagger_\alpha, \hat{b}^\dagger_\beta] = 0\)</span> because applying two creation operators in either order gives the same result: <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha \hat{b}^\dagger_\beta \vert\ldots, n_\alpha, \ldots, n_\beta, \ldots\rangle = \sqrt{(n_\alpha+1)(n_\beta+1)}\,\vert\ldots, n_\alpha+1, \ldots, n_\beta+1, \ldots\rangle\)</span> regardless of order.</p>
+\[\begin{split}
+\begin{split}
+\hat{b}_\alpha\hat{b}_\alpha^\dagger\vert\mathbf{n}\rangle&amp;=(n_\alpha+1)\vert\mathbf{n}\rangle,\\
+\hat{b}_\alpha^\dagger\hat{b}_\alpha\vert\mathbf{n}\rangle&amp;=n_\alpha\vert\mathbf{n}\rangle,
+\end{split}
+\end{split}\]</div>
+<p>hence <span class="math notranslate nohighlight">\([\hat{b}_\alpha,\hat{b}_\alpha^\dagger]\vert\mathbf{n}\rangle=\vert\mathbf{n}\rangle\)</span>.
+Combining both cases gives
+<span class="math notranslate nohighlight">\([\hat{b}_\alpha,\hat{b}_\beta^\dagger]\vert\mathbf{n}\rangle=\delta_{\alpha\beta}\vert\mathbf{n}\rangle\)</span>.</p>
+<p>Similarly, <span class="math notranslate nohighlight">\(\hat{b}_\alpha\hat{b}_\beta\)</span> and <span class="math notranslate nohighlight">\(\hat{b}_\beta\hat{b}_\alpha\)</span> (and likewise two creation operators) produce identical states with identical coefficients, so
+<span class="math notranslate nohighlight">\([\hat{b}_\alpha,\hat{b}_\beta]=0\)</span> and
+<span class="math notranslate nohighlight">\([\hat{b}_\alpha^\dagger,\hat{b}_\beta^\dagger]=0\)</span> on every basis state.</p>
 </div>
 <div class="important admonition">
 <p class="admonition-title">Anticommutation Relations (Fermions)</p>
-<div class="math notranslate nohighlight">
-\[\{\hat{c}_\alpha, \hat{c}^\dagger_\beta\} = \delta_{\alpha\beta}, \quad \{\hat{c}_\alpha, \hat{c}_\beta\} = 0, \quad \{\hat{c}^\dagger_\alpha, \hat{c}^\dagger_\beta\} = 0\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-fermion-anticommutation">
+<span class="eqno">(37)<a class="headerlink" href="#equation-eq-fermion-anticommutation" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\{\hat{c}_\alpha, \hat{c}^\dagger_\beta\} &amp;= \delta_{\alpha\beta},\\
+\{\hat{c}_\alpha, \hat{c}_\beta\} &amp;= 0,\\
+\{\hat{c}^\dagger_\alpha, \hat{c}^\dagger_\beta\} &amp;= 0.
+\end{split}
+\end{split}\]</div>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Fermionic Anticommutation Relation</p>
-<p>We verify <span class="math notranslate nohighlight">\(\{\hat{c}_\alpha, \hat{c}^\dagger_\alpha\} = 1\)</span> for a single mode with <span class="math notranslate nohighlight">\(n_\alpha \in \{0, 1\}\)</span>.</p>
-<p><strong>Case <span class="math notranslate nohighlight">\(n_\alpha = 0\)</span>:</strong></p>
+<p class="admonition-title">Derivation: Fermionic anticommutators on Fock basis</p>
+<p>Use the fermionic Fock-action formulas above from <a class="reference internal" href="#equation-eq-fermion-op-insert-delete">(35)</a>:
+<span class="math notranslate nohighlight">\(\hat{c}_\alpha^\dagger\vert\ldots,n_\alpha,\ldots\rangle\)</span> and
+<span class="math notranslate nohighlight">\(\hat{c}_\alpha\vert\ldots,n_\alpha,\ldots\rangle\)</span> with the phase <span class="math notranslate nohighlight">\((-1)^{P_\alpha}\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(\alpha=\beta\)</span>, evaluate on <span class="math notranslate nohighlight">\(\vert\mathbf{n}\rangle\)</span> by cases:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(n_\alpha=0\)</span>: <span class="math notranslate nohighlight">\(\hat{c}_\alpha\hat{c}_\alpha^\dagger\vert\mathbf{n}\rangle=\vert\mathbf{n}\rangle\)</span>, while <span class="math notranslate nohighlight">\(\hat{c}_\alpha^\dagger\hat{c}_\alpha\vert\mathbf{n}\rangle=0\)</span>;</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(n_\alpha=1\)</span>: <span class="math notranslate nohighlight">\(\hat{c}_\alpha\hat{c}_\alpha^\dagger\vert\mathbf{n}\rangle=0\)</span>, while <span class="math notranslate nohighlight">\(\hat{c}_\alpha^\dagger\hat{c}_\alpha\vert\mathbf{n}\rangle=\vert\mathbf{n}\rangle\)</span>.</p></li>
+</ul>
+<p>So in either case,
+<span class="math notranslate nohighlight">\(\{\hat{c}_\alpha,\hat{c}_\alpha^\dagger\}\vert\mathbf{n}\rangle=\vert\mathbf{n}\rangle\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(\alpha\neq\beta\)</span>, both orderings lead to the same occupation pattern, but one path has exactly one extra fermionic swap relative to the other; therefore the two amplitudes are negatives and cancel:</p>
 <div class="math notranslate nohighlight">
-\[\hat{c}\hat{c}^\dagger \vert 0\rangle = \hat{c}\vert 1\rangle = \vert 0\rangle, \qquad \hat{c}^\dagger\hat{c}\vert 0\rangle = \hat{c}^\dagger \cdot 0 = 0\]</div>
-<p>So <span class="math notranslate nohighlight">\(\{\hat{c}, \hat{c}^\dagger\}\vert 0\rangle = 1 \cdot \vert 0\rangle\)</span>.</p>
-<p><strong>Case <span class="math notranslate nohighlight">\(n_\alpha = 1\)</span>:</strong></p>
-<div class="math notranslate nohighlight">
-\[\hat{c}\hat{c}^\dagger \vert 1\rangle = \hat{c}\cdot 0 = 0, \qquad \hat{c}^\dagger\hat{c}\vert 1\rangle = \hat{c}^\dagger\vert 0\rangle = \vert 1\rangle\]</div>
-<p>So <span class="math notranslate nohighlight">\(\{\hat{c}, \hat{c}^\dagger\}\vert 1\rangle = 1 \cdot \vert 1\rangle\)</span>.</p>
-<p>Both cases give <span class="math notranslate nohighlight">\(\{\hat{c}, \hat{c}^\dagger\} = \hat{I}\)</span> on the single-mode space.</p>
-<p><strong>For different modes (<span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span>):</strong> we must verify <span class="math notranslate nohighlight">\(\{\hat{c}_\alpha, \hat{c}^\dagger_\beta\} = 0\)</span>. Acting on a Fock state <span class="math notranslate nohighlight">\(\vert n_\alpha, n_\beta\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{c}_\alpha \hat{c}^\dagger_\beta \vert n_\alpha, n_\beta\rangle = (-1)^{P_\beta}\hat{c}_\alpha \vert n_\alpha, n_\beta + 1\rangle = (-1)^{P_\beta}(-1)^{P'_\alpha}\vert n_\alpha - 1, n_\beta + 1\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(P'_\alpha\)</span> is the parity count with the updated occupations. The key point is that adding a fermion to mode <span class="math notranslate nohighlight">\(\beta\)</span> (if <span class="math notranslate nohighlight">\(\beta &lt; \alpha\)</span>) changes the parity count <span class="math notranslate nohighlight">\(P_\alpha\)</span> by 1, so <span class="math notranslate nohighlight">\(P'_\alpha = P_\alpha + 1\)</span>. This extra sign flip ensures <span class="math notranslate nohighlight">\(\hat{c}_\alpha \hat{c}^\dagger_\beta = -\hat{c}^\dagger_\beta \hat{c}_\alpha\)</span>, giving <span class="math notranslate nohighlight">\(\{\hat{c}_\alpha, \hat{c}^\dagger_\beta\} = 0\)</span>.</p>
-<p>The anticommutation <span class="math notranslate nohighlight">\(\{\hat{c}^\dagger_\alpha, \hat{c}^\dagger_\beta\} = 0\)</span> (for <span class="math notranslate nohighlight">\(\alpha \neq \beta\)</span>) follows similarly: the phase factors from the ordering convention produce a sign flip when the two creation operators are exchanged, so <span class="math notranslate nohighlight">\(\hat{c}^\dagger_\alpha \hat{c}^\dagger_\beta = -\hat{c}^\dagger_\beta \hat{c}^\dagger_\alpha\)</span>. Setting <span class="math notranslate nohighlight">\(\alpha = \beta\)</span> gives <span class="math notranslate nohighlight">\((\hat{c}^\dagger_\alpha)^2 = 0\)</span> — the Pauli exclusion principle.</p>
+\[
+\hat{c}_\alpha\hat{c}_\beta^\dagger\vert\mathbf{n}\rangle
+=-\hat{c}_\beta^\dagger\hat{c}_\alpha\vert\mathbf{n}\rangle,
+\]</div>
+<p>including occupancy-forbidden cases where both sides are zero. Hence
+<span class="math notranslate nohighlight">\(\{\hat{c}_\alpha,\hat{c}_\beta^\dagger\}\vert\mathbf{n}\rangle=0\)</span> for <span class="math notranslate nohighlight">\(\alpha\neq\beta\)</span>.</p>
+<p>The same sign-cancellation argument gives
+<span class="math notranslate nohighlight">\(\{\hat{c}_\alpha,\hat{c}_\beta\}=0\)</span> and
+<span class="math notranslate nohighlight">\(\{\hat{c}_\alpha^\dagger,\hat{c}_\beta^\dagger\}=0\)</span> on the full Fock basis.</p>
 </div>
 </section>
 <section id="number-operator">
 <h4>Number Operator<a class="headerlink" href="#number-operator" title="Link to this heading">#</a></h4>
 <p>The <strong>number operator</strong> <span class="math notranslate nohighlight">\(\hat{n}_\alpha = \hat{a}^\dagger_\alpha \hat{a}_\alpha\)</span> counts particles in mode <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{n}_\alpha \vert \ldots, n_\alpha, \ldots\rangle = n_\alpha \vert \ldots, n_\alpha, \ldots\rangle
-\]</div>
+\[\hat{n}_\alpha \vert \ldots, n_\alpha, \ldots\rangle = n_\alpha \vert \ldots, n_\alpha, \ldots\rangle\]</div>
 <p>Fock states are eigenstates of every <span class="math notranslate nohighlight">\(\hat{n}_\alpha\)</span> simultaneously.</p>
-<div class="dropdown note admonition">
-<p class="admonition-title">Number Operator Eigenvalues</p>
-<p>We prove from the algebra that the eigenvalues of <span class="math notranslate nohighlight">\(\hat{n}_\alpha = \hat{a}^\dagger_\alpha \hat{a}_\alpha\)</span> must be non-negative integers. The argument is parallel to the harmonic oscillator but applies to both bosons and fermions.</p>
-<p><strong>Setup.</strong> Let <span class="math notranslate nohighlight">\(\vert n\rangle\)</span> be an eigenstate of <span class="math notranslate nohighlight">\(\hat{n}_\alpha\)</span> with eigenvalue <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Number operator for bosons and fermions</p>
+<p>Use the operator actions already derived above.</p>
+<p>For bosons,</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{n}_\alpha \vert n\rangle = n \vert n\rangle
+\hat{b}_\alpha^\dagger\hat{b}_\alpha\vert\ldots,n_\alpha,\ldots\rangle
+=\hat{b}_\alpha^\dagger\left(\sqrt{n_\alpha}\vert\ldots,n_\alpha-1,\ldots\rangle\right)
+=n_\alpha\vert\ldots,n_\alpha,\ldots\rangle.
 \]</div>
-<p><strong>Step 1: Eigenvalue is non-negative.</strong></p>
+<p>So the bosonic number operator in mode <span class="math notranslate nohighlight">\(\alpha\)</span> is <span class="math notranslate nohighlight">\(\hat{n}_\alpha^{(B)}=\hat{b}_\alpha^\dagger\hat{b}_\alpha\)</span>.</p>
+<p>For fermions (<span class="math notranslate nohighlight">\(n_\alpha\in\{0,1\}\)</span>), check both cases:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\hat{c}_\alpha^\dagger\hat{c}_\alpha\vert\ldots,0,\ldots\rangle&amp;=0,\\
+\hat{c}_\alpha^\dagger\hat{c}_\alpha\vert\ldots,1,\ldots\rangle&amp;=\vert\ldots,1,\ldots\rangle.
+\end{split}
+\end{split}\]</div>
+<p>Hence <span class="math notranslate nohighlight">\(\hat{c}_\alpha^\dagger\hat{c}_\alpha\vert\ldots,n_\alpha,\ldots\rangle=n_\alpha\vert\ldots,n_\alpha,\ldots\rangle\)</span>, so
+<span class="math notranslate nohighlight">\(\hat{n}_\alpha^{(F)}=\hat{c}_\alpha^\dagger\hat{c}_\alpha\)</span>.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Proof: Quantization of Boson Number</p>
+<p>For one bosonic mode, let</p>
 <div class="math notranslate nohighlight">
 \[
-n = \langle n \vert \hat{a}^\dagger_\alpha \hat{a}_\alpha \vert n \rangle = \Vert \hat{a}_\alpha \vert n \rangle \Vert^2 \geq 0
+\hat{n}\vert n\rangle=n\vert n\rangle.
 \]</div>
-<p>(norm squared is always non-negative). Equality <span class="math notranslate nohighlight">\(n = 0\)</span> iff <span class="math notranslate nohighlight">\(\hat{a}_\alpha \vert n \rangle = 0\)</span>.</p>
-<p><strong>Step 2: Ladder operator action changes eigenvalue by <span class="math notranslate nohighlight">\(\pm 1\)</span>.</strong></p>
-<p>From the (anti)commutation relations:</p>
-<ul class="simple">
-<li><p><strong>Bosons</strong>: <span class="math notranslate nohighlight">\([\hat{n}_\alpha, \hat{b}^\dagger_\alpha] = [\hat{b}^\dagger_\alpha \hat{b}_\alpha, \hat{b}^\dagger_\alpha] = \hat{b}^\dagger_\alpha [\hat{b}_\alpha, \hat{b}^\dagger_\alpha] = \hat{b}^\dagger_\alpha\)</span></p></li>
-<li><p><strong>Fermions</strong>: <span class="math notranslate nohighlight">\([\hat{n}_\alpha, \hat{c}^\dagger_\alpha] = [\hat{c}^\dagger_\alpha \hat{c}_\alpha, \hat{c}^\dagger_\alpha] = \hat{c}^\dagger_\alpha\{\hat{c}_\alpha, \hat{c}^\dagger_\alpha\} - \{\hat{c}^\dagger_\alpha, \hat{c}^\dagger_\alpha\}\hat{c}_\alpha = \hat{c}^\dagger_\alpha\)</span></p></li>
-</ul>
-<p>Similarly <span class="math notranslate nohighlight">\([\hat{n}_\alpha, \hat{a}_\alpha] = -\hat{a}_\alpha\)</span> for both types. Therefore:</p>
+<p>Using positivity, for every integer <span class="math notranslate nohighlight">\(m\ge 0\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{n}_\alpha (\hat{a}^\dagger_\alpha \vert n\rangle) = (\hat{a}^\dagger_\alpha \hat{n}_\alpha + \hat{a}^\dagger_\alpha) \vert n\rangle = (n+1)(\hat{a}^\dagger_\alpha \vert n\rangle)
+\langle n\vert(\hat{b}^\dagger)^m(\hat{b})^m\vert n\rangle\ge 0.
 \]</div>
+<p>To evaluate this matrix element, expand only the lowering action:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\hat b\vert n\rangle&amp;=\sqrt n\,\vert n-1\rangle,\\
+\hat b^2\vert n\rangle&amp;=\sqrt{n(n-1)}\,\vert n-2\rangle,\\
+&amp;\ \vdots\\
+\hat b^m\vert n\rangle&amp;=\sqrt{n(n-1)\cdots(n-m+1)}\,\vert n-m\rangle.
+\end{split}
+\end{split}\]</div>
+<p>Now use
+<span class="math notranslate nohighlight">\(\langle n\vert(\hat b^\dagger)^m\hat b^m\vert n\rangle=\|\hat b^m\vert n\rangle\|^2\)</span>.
+Squaring the coefficient gives</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{n}_\alpha (\hat{a}_\alpha \vert n\rangle) = (\hat{a}_\alpha \hat{n}_\alpha - \hat{a}_\alpha) \vert n\rangle = (n-1)(\hat{a}_\alpha \vert n\rangle)
+\langle n\vert(\hat b^\dagger)^m\hat b^m\vert n\rangle
+=n(n-1)\cdots(n-m+1)
+=\prod_{\ell=0}^{m-1}(n-\ell)\ge 0,
+\qquad (\forall m\in\mathbb{N}).
 \]</div>
-<p><strong>Step 3: Eigenvalues are non-negative integers.</strong></p>
-<p>Starting from any eigenvalue <span class="math notranslate nohighlight">\(n \geq 0\)</span>, repeated application of <span class="math notranslate nohighlight">\(\hat{a}_\alpha\)</span> gives eigenvalues <span class="math notranslate nohighlight">\(n, n-1, n-2, \ldots\)</span>. By Step 1, these must all be <span class="math notranslate nohighlight">\(\geq 0\)</span>. The sequence must terminate when <span class="math notranslate nohighlight">\(\hat{a}_\alpha \vert n_0 \rangle = 0\)</span> for some <span class="math notranslate nohighlight">\(n_0 \geq 0\)</span>.</p>
-<p>For <strong>bosons</strong>: The condition <span class="math notranslate nohighlight">\(\hat{b}_\alpha \vert n_0 \rangle = 0\)</span> is only consistent with <span class="math notranslate nohighlight">\(n_0 = 0\)</span> (since the lowering step gives <span class="math notranslate nohighlight">\(n_0 - 1\)</span> but this must be non-negative, so <span class="math notranslate nohighlight">\(n_0 = 0\)</span>). Starting from <span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span> and applying <span class="math notranslate nohighlight">\(\hat{b}^\dagger_\alpha\)</span> repeatedly: eigenvalues are <span class="math notranslate nohighlight">\(n = 0, 1, 2, 3, \ldots\)</span> (all non-negative integers).</p>
-<p>For <strong>fermions</strong>: The anticommutation relation <span class="math notranslate nohighlight">\(\{\hat{c}^\dagger_\alpha, \hat{c}^\dagger_\alpha\} = 2(\hat{c}^\dagger_\alpha)^2 = 0\)</span> forces <span class="math notranslate nohighlight">\((\hat{c}^\dagger_\alpha)^2 = 0\)</span>, so the raising sequence terminates after one step. Starting from <span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span>: only <span class="math notranslate nohighlight">\(\vert 0 \rangle\)</span> and <span class="math notranslate nohighlight">\(\vert 1 \rangle = \hat{c}^\dagger_\alpha \vert 0 \rangle\)</span> exist. Eigenvalues are <span class="math notranslate nohighlight">\(n \in \{0, 1\}\)</span> — the Pauli exclusion principle emerges directly from the algebra.</p>
+<p>The first few constraints are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+m=1&amp;:\quad n\ge 0,\\
+m=2&amp;:\quad n(n-1)\ge 0,\\
+m=3&amp;:\quad n(n-1)(n-2)\ge 0,\ \ldots
+\end{split}
+\end{split}\]</div>
+<p>The only values satisfying all of them simultaneously are</p>
+<div class="math notranslate nohighlight">
+\[
+n\in\{0,1,2,\ldots\}=\mathbb{N}_0.
+\]</div>
+<p>So bosonic number-operator eigenvalues are nonnegative integers.</p>
 </div>
 </section>
 </section>
@@ -753,7 +949,7 @@ n = \langle n \vert \hat{a}^\dagger_\alpha \hat{a}_\alpha \vert n \rangle = \Ver
 <h3>Boson Enhancement<a class="headerlink" href="#boson-enhancement" title="Link to this heading">#</a></h3>
 <p>Apply <span class="math notranslate nohighlight">\(\hat{b}^\dagger\)</span> to a superposition of Fock states:</p>
 <div class="math notranslate nohighlight">
-\[\hat{b}^\dagger \vert\psi\rangle = \hat{b}^\dagger \sum_n \psi_n \vert n\rangle = \sum_n \psi_n \sqrt{n+1}\;\vert n+1\rangle\]</div>
+\[\hat{b}^\dagger \vert\psi\rangle = \hat{b}^\dagger \sum_n c_n \vert n\rangle = \sum_n c_n \sqrt{n+1}\;\vert n+1\rangle\]</div>
 <p>The <span class="math notranslate nohighlight">\(\sqrt{n+1}\)</span> factor means it is <strong>more probable to add a boson to a mode that already contains many bosons</strong>. This “rich get richer” effect is the origin of stimulated emission—the transition rate into a mode with <span class="math notranslate nohighlight">\(n\)</span> bosons is proportional to <span class="math notranslate nohighlight">\(n+1\)</span> (stimulated + spontaneous). It also drives Bose-Einstein condensation.</p>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Stimulated Emission</p>

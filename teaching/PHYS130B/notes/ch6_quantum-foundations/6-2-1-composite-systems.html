@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -606,27 +606,6 @@
 <p>To compute <span class="math notranslate nohighlight">\(\hat{\rho}_A = \text{Tr}_B(\hat{\rho}_{AB})\)</span>, insert a complete basis for <span class="math notranslate nohighlight">\(B\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\hat{\rho}_A = \sum_j (I_A \otimes \langle j\vert_B) \hat{\rho}_{AB} (I_A \otimes \vert j\rangle_B)\]</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Expectation Value via Partial Trace</p>
-<p>We show that <span class="math notranslate nohighlight">\(\langle\hat{O}_A\rangle = \operatorname{Tr}_A(\hat{\rho}_A\hat{O}_A)\)</span> where <span class="math notranslate nohighlight">\(\hat{\rho}_A = \operatorname{Tr}_B(\hat{\rho}_{AB})\)</span>.</p>
-<p>Start from the bipartite expectation value. Using bases <span class="math notranslate nohighlight">\(\{\vert i\rangle_A\}\)</span> and <span class="math notranslate nohighlight">\(\{\vert j\rangle_B\}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\langle\hat{O}_A\otimes\hat{I}_B\rangle = \operatorname{Tr}_{AB}(\hat{\rho}_{AB}(\hat{O}_A\otimes\hat{I}_B)) = \sum_{i,j}(\langle i\vert_A\otimes\langle j\vert_B)\hat{\rho}_{AB}(\hat{O}_A\otimes\hat{I}_B)(\vert i\rangle_A\otimes\vert j\rangle_B)
-\]</div>
-<p>Using <span class="math notranslate nohighlight">\((\hat{O}_A\otimes\hat{I}_B)(\vert i\rangle_A\otimes\vert j\rangle_B) = (\hat{O}_A\vert i\rangle_A)\otimes\vert j\rangle_B\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-= \sum_{i,j}\langle i\vert_A\otimes\langle j\vert_B\,\hat{\rho}_{AB}\,(\hat{O}_A\vert i\rangle_A)\otimes\vert j\rangle_B
-= \sum_i\langle i\vert_A\!\left(\sum_j\langle j\vert_B\hat{\rho}_{AB}\vert j\rangle_B\right)\!\hat{O}_A\vert i\rangle_A
-\]</div>
-<p>The expression in parentheses is exactly <span class="math notranslate nohighlight">\(\hat{\rho}_A = \operatorname{Tr}_B(\hat{\rho}_{AB})\)</span>, so:</p>
-<div class="math notranslate nohighlight">
-\[
-\langle\hat{O}_A\otimes\hat{I}_B\rangle = \sum_i\langle i\vert_A\hat{\rho}_A\hat{O}_A\vert i\rangle_A = \operatorname{Tr}_A(\hat{\rho}_A\hat{O}_A)
-\]</div>
-<p>This justifies why <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span> is the correct reduced description for subsystem <span class="math notranslate nohighlight">\(A\)</span> — it reproduces all expectation values of <span class="math notranslate nohighlight">\(A\)</span>-only observables. <span class="math notranslate nohighlight">\(\square\)</span></p>
-</div>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Two-Qubit Bell State</p>
 <p><strong>Problem.</strong> Find the reduced density matrix <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span> for the Bell state <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle)\)</span>.</p>
@@ -647,25 +626,6 @@
 <section id="key-property-eigenvalues-from-schmidt-coefficients">
 <h4>Key Property: Eigenvalues from Schmidt Coefficients<a class="headerlink" href="#key-property-eigenvalues-from-schmidt-coefficients" title="Link to this heading">#</a></h4>
 <p>For a bipartite <strong>pure</strong> state <span class="math notranslate nohighlight">\(\vert\Psi\rangle_{AB}\)</span>, the eigenvalues of the reduced density matrices are the squares of the Schmidt coefficients. This will be shown below via the Schmidt decomposition.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Reduced State Has Squared Schmidt Coefficients as Eigenvalues</p>
-<p>Given the Schmidt decomposition <span class="math notranslate nohighlight">\(\vert\Psi\rangle_{AB} = \sum_k \lambda_k\vert u_k\rangle_A\vert v_k\rangle_B\)</span> (orthonormal <span class="math notranslate nohighlight">\(\{\vert u_k\rangle_A\}\)</span>, <span class="math notranslate nohighlight">\(\{\vert v_k\rangle_B\}\)</span>, and <span class="math notranslate nohighlight">\(\sum_k\lambda_k^2 = 1\)</span>), we compute <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_{AB} = \vert\Psi\rangle\langle\Psi\vert = \sum_{k,k'}\lambda_k\lambda_{k'}\vert u_k\rangle_A\langle u_{k'}\vert_A\otimes\vert v_k\rangle_B\langle v_{k'}\vert_B
-\]</div>
-<p>Trace over <span class="math notranslate nohighlight">\(B\)</span> using <span class="math notranslate nohighlight">\(\{\vert v_m\rangle_B\}\)</span> as the orthonormal basis:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_A = \operatorname{Tr}_B(\hat{\rho}_{AB}) = \sum_{m}\langle v_m\vert_B\hat{\rho}_{AB}\vert v_m\rangle_B = \sum_{k,k'}\lambda_k\lambda_{k'}\vert u_k\rangle_A\langle u_{k'}\vert_A\underbrace{\langle v_m\vert v_k\rangle_B\langle v_{k'}\vert v_m\rangle_B}_{\delta_{mk}\delta_{k'm}}
-\]</div>
-<p>Summing over <span class="math notranslate nohighlight">\(m\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\rho}_A = \sum_k\lambda_k^2\vert u_k\rangle_A\langle u_k\vert_A
-\]</div>
-<p>This is already the spectral decomposition of <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span>! The eigenvalues are <span class="math notranslate nohighlight">\(\{\lambda_k^2\}\)</span> and the eigenvectors are <span class="math notranslate nohighlight">\(\{\vert u_k\rangle_A\}\)</span>. By the same calculation, <span class="math notranslate nohighlight">\(\hat{\rho}_B = \sum_k\lambda_k^2\vert v_k\rangle_B\langle v_k\vert_B\)</span>, so <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span> and <span class="math notranslate nohighlight">\(\hat{\rho}_B\)</span> have the same nonzero eigenvalues. Hence <span class="math notranslate nohighlight">\(S(A) = S(B)\)</span> for any bipartite pure state. <span class="math notranslate nohighlight">\(\square\)</span></p>
-</div>
 </section>
 </section>
 <section id="schmidt-decomposition">
@@ -726,33 +686,6 @@
 <div class="math notranslate nohighlight">
 \[\text{Tr}(\hat{\rho}_A^2) = \sum_k \lambda_k^4\]</div>
 <p>equals 1 iff <span class="math notranslate nohighlight">\(r=1\)</span> (product), and is minimized when all <span class="math notranslate nohighlight">\(\lambda_k\)</span> are equal (maximally entangled).</p>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Purity of the Reduced State as an Entanglement Criterion</p>
-<p>We prove that <strong>a bipartite pure state is separable iff its reduced state is pure</strong>, quantified by purity <span class="math notranslate nohighlight">\(\text{Tr}(\hat{\rho}_A^2)\)</span>.</p>
-<p><strong>Step 1: Compute purity from Schmidt coefficients.</strong></p>
-<p>From the spectral form <span class="math notranslate nohighlight">\(\hat{\rho}_A = \sum_k \lambda_k^2 \vert u_k\rangle\langle u_k\vert\)</span>, the purity is:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Tr}(\hat{\rho}_A^2) = \text{Tr}\!\left(\sum_{k,l} \lambda_k^2 \lambda_l^2 \vert u_k\rangle\langle u_k \vert u_l\rangle\langle u_l\vert\right) = \sum_k \lambda_k^4
-\]</div>
-<p>using orthonormality <span class="math notranslate nohighlight">\(\langle u_k\vert u_l\rangle = \delta_{kl}\)</span>.</p>
-<p><strong>Step 2: Purity is bounded by 1.</strong></p>
-<p>Since all <span class="math notranslate nohighlight">\(\lambda_k^2 \leq \sum_l \lambda_l^2 = 1\)</span> and <span class="math notranslate nohighlight">\(\lambda_k^2 \geq 0\)</span>, each term satisfies <span class="math notranslate nohighlight">\(\lambda_k^4 \leq \lambda_k^2\)</span>. Summing:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Tr}(\hat{\rho}_A^2) = \sum_k \lambda_k^4 \leq \sum_k \lambda_k^2 = 1
-\]</div>
-<p>with equality iff only one <span class="math notranslate nohighlight">\(\lambda_k\)</span> is nonzero, i.e., Schmidt rank <span class="math notranslate nohighlight">\(r = 1\)</span>.</p>
-<p><strong>Step 3: Purity 1 iff product state.</strong></p>
-<p>Schmidt rank <span class="math notranslate nohighlight">\(r = 1\)</span> means <span class="math notranslate nohighlight">\(\vert\Psi\rangle = \vert u_1\rangle_A \vert v_1\rangle_B\)</span> (separable). In this case <span class="math notranslate nohighlight">\(\hat{\rho}_A = \vert u_1\rangle\langle u_1\vert\)</span> is a <strong>pure state</strong> projector.</p>
-<p>For an entangled state (<span class="math notranslate nohighlight">\(r \geq 2\)</span>): <span class="math notranslate nohighlight">\(\text{Tr}(\hat{\rho}_A^2) = \sum_k \lambda_k^4 &lt; (\sum_k \lambda_k^2)^2 = 1\)</span>, so <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span> is <strong>mixed</strong>.</p>
-<p><strong>Summary:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\text{Separable} \iff r = 1 \iff \hat{\rho}_A \text{ is pure} \iff \text{Tr}(\hat{\rho}_A^2) = 1 \iff S(A) = 0
-\]</div>
-<p>The degree of mixing of <span class="math notranslate nohighlight">\(\hat{\rho}_A\)</span> — measured by <span class="math notranslate nohighlight">\(1 - \text{Tr}(\hat{\rho}_A^2)\)</span> or by <span class="math notranslate nohighlight">\(S(A)\)</span> — quantifies how entangled the state is. For the Bell state: <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2 = 1/\sqrt{2}\)</span>, so <span class="math notranslate nohighlight">\(\text{Tr}(\hat{\rho}_A^2) = 2 \cdot (1/2)^2 = 1/2\)</span> (maximally mixed).</p>
 </div>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Bell State Schmidt Rank</p>

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=b5e19b90" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
   
   <!-- So that users can add custom icons -->
   <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -597,16 +597,6 @@
 <li><p><strong>Normalization</strong>: The condition <span class="math notranslate nohighlight">\(|\alpha|^2 + |\beta|^2 = 1\)</span> ensures the state is normalized. We interpret <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> as the probability of measuring the qubit in state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>.</p></li>
 <li><p><strong>Global phase</strong>: States that differ by a global phase (e.g., <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\phi}\vert \psi\rangle\)</span>) are physically identical. Thus a qubit is truly a two-parameter system (after factoring out global phase and normalization).</p></li>
 </ul>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Global Phase is Unobservable</p>
-<p>Let <span class="math notranslate nohighlight">\(\vert\psi'\rangle = \mathrm{e}^{\mathrm{i}\gamma}\vert\psi\rangle\)</span> for any real <span class="math notranslate nohighlight">\(\gamma\)</span>. For any measurement outcome <span class="math notranslate nohighlight">\(\vert m\rangle\)</span>, the Born rule gives:</p>
-<div class="math notranslate nohighlight">
-\[
-P(m \vert \psi') = \vert\langle m\vert\psi'\rangle\vert^2 = \vert\langle m\vert\mathrm{e}^{\mathrm{i}\gamma}\psi\rangle\vert^2 = \vert\mathrm{e}^{\mathrm{i}\gamma}\vert^2\,\vert\langle m\vert\psi\rangle\vert^2 = \vert\langle m\vert\psi\rangle\vert^2 = P(m \vert \psi)
-\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\vert\mathrm{e}^{\mathrm{i}\gamma}\vert = 1\)</span> for any real <span class="math notranslate nohighlight">\(\gamma\)</span>, every measurement probability is unchanged. Because all physical information about a quantum state is encoded in measurement probabilities, no experiment can ever distinguish <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> from <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\gamma}\vert\psi\rangle\)</span>.</p>
-<p>This freedom lets us fix the global phase arbitrarily — for example, by requiring the coefficient of <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> to be real and non-negative. Doing so removes one real parameter from the state description, reducing the four real numbers <span class="math notranslate nohighlight">\(\{\mathrm{Re}\,\alpha,\, \mathrm{Im}\,\alpha,\, \mathrm{Re}\,\beta,\, \mathrm{Im}\,\beta\}\)</span> to three, and then normalization removes one more, leaving exactly two free real parameters.</p>
-</div>
 </section>
 <section id="physical-realizations-of-qubits">
 <h3>Physical Realizations of Qubits<a class="headerlink" href="#physical-realizations-of-qubits" title="Link to this heading">#</a></h3>
@@ -702,47 +692,6 @@ P(m \vert \psi') = \vert\langle m\vert\psi'\rangle\vert^2 = \vert\langle m\vert\
 </tr>
 </tbody>
 </table>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Proof: No-Cloning Theorem</p>
-<p><strong>Claim.</strong> There is no unitary operator <span class="math notranslate nohighlight">\(\hat{U}\)</span> on a two-qubit Hilbert space such that</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}\vert\psi\rangle\vert 0\rangle = \vert\psi\rangle\vert\psi\rangle \quad \text{for all }\vert\psi\rangle.
-\]</div>
-<p><strong>Proof (by linearity of quantum mechanics).</strong></p>
-<p>Suppose such a <span class="math notranslate nohighlight">\(\hat{U}\)</span> existed. Apply it to the two computational basis states:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}\vert 0\rangle\vert 0\rangle = \vert 0\rangle\vert 0\rangle, \qquad \hat{U}\vert 1\rangle\vert 0\rangle = \vert 1\rangle\vert 1\rangle.
-\]</div>
-<p>Now consider the superposition state <span class="math notranslate nohighlight">\(\vert+\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span>. By the assumed cloning property:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}\vert+\rangle\vert 0\rangle = \vert+\rangle\vert+\rangle = \frac{1}{2}(\vert 0\rangle + \vert 1\rangle)(\vert 0\rangle + \vert 1\rangle) = \frac{1}{2}(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle + \vert 11\rangle).
-\]</div>
-<p>But quantum mechanics is <strong>linear</strong>: since <span class="math notranslate nohighlight">\(\vert+\rangle\vert 0\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle\vert 0\rangle + \vert 1\rangle\vert 0\rangle)\)</span>, unitarity demands:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}\vert+\rangle\vert 0\rangle = \frac{1}{\sqrt{2}}\bigl(\hat{U}\vert 0\rangle\vert 0\rangle + \hat{U}\vert 1\rangle\vert 0\rangle\bigr) = \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle).
-\]</div>
-<p>These two outputs are <strong>different</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{1}{2}(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle + \vert 11\rangle) \neq \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle).
-\]</div>
-<p>The left side is a product state; the right side is a maximally entangled Bell state. This contradicts the assumption that <span class="math notranslate nohighlight">\(\hat{U}\)</span> clones all states. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
-<p><strong>Alternative proof via inner products.</strong> Suppose <span class="math notranslate nohighlight">\(\hat{U}\)</span> clones two states <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert\phi\rangle\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{U}\vert\psi\rangle\vert 0\rangle = \vert\psi\rangle\vert\psi\rangle, \qquad \hat{U}\vert\phi\rangle\vert 0\rangle = \vert\phi\rangle\vert\phi\rangle.
-\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\hat{U}\)</span> is unitary, it preserves inner products:</p>
-<div class="math notranslate nohighlight">
-\[
-\langle\phi\vert\psi\rangle = \langle\phi\vert\langle 0\vert \hat{U}^\dagger\hat{U} \vert\psi\rangle\vert 0\rangle = \langle\phi\vert\phi\vert\psi\rangle\vert\psi\rangle = (\langle\phi\vert\psi\rangle)^2.
-\]</div>
-<p>Setting <span class="math notranslate nohighlight">\(c = \langle\phi\vert\psi\rangle\)</span>: the equation <span class="math notranslate nohighlight">\(c = c^2\)</span> has only two solutions, <span class="math notranslate nohighlight">\(c = 0\)</span> or <span class="math notranslate nohighlight">\(c = 1\)</span>. Therefore a cloning machine can only clone states that are <strong>identical</strong> (<span class="math notranslate nohighlight">\(c=1\)</span>) or <strong>perfectly distinguishable</strong> (<span class="math notranslate nohighlight">\(c=0\)</span>). An arbitrary unknown state <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> cannot be cloned.</p>
 </div>
 </section>
 <section id="summary">
