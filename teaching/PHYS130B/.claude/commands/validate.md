@@ -14,32 +14,26 @@ Run comprehensive validation across all 84 notebooks to catch corruption and str
 
 ## Instructions
 
-1. **Run the corruption validation script** (`skills/notebook-writer/scripts/safe_edit.py validate`):
-   - Char-by-char corruption (source elements mostly ≤2 chars)
-   - Collapsed content (lines >1000 chars)
-   - Missing `\n` terminators on non-final lines
+1. **Run the unified validator**:
+   - Full validation:
+     - `python3 .claude/scripts/validate_project.py`
+   - Chapter scope:
+     - `python3 .claude/scripts/validate_project.py --scope ch3`
+   - Single notebook:
+     - `python3 .claude/scripts/validate_project.py --scope 6-1-1-mixed-states`
+   - Docs only (rules/design consistency):
+     - `python3 .claude/scripts/validate_project.py --docs-only`
 
-2. **Check cell structure** per `design.md`:
-   - x.y.z notebooks: exactly 4 cells (title, prompts, lecture notes, homework)
-   - x.y notebooks: exactly 3 cells (title, overview, project)
-   - Verify heading formats match `# x.y.z Title` pattern
+2. **Validator covers**:
+   - Notebook corruption checks (char-by-char, long collapsed lines, missing newline terminators)
+   - Notebook structure checks (x.y vs x.y.z cell counts and title format)
+   - MyST display math checks (`$$` blank lines outside, no blank lines inside)
+   - Banned patterns (`---`, `plt.show()`)
+   - Rule/design consistency checks between `rules/physics-conventions.md` and `design.md`
 
-3. **Check LaTeX conventions:**
-   - `\mathrm{i}` for imaginary unit (not bare `i` in exponents)
-   - `\mathrm{e}` for Euler's number (not bare `e`)
-   - `\mathrm{d}` for differential operator (not bare `d`)
-   - `\boldsymbol` for vectors (not `\vec`)
-   - `\hat` for operators
-   - Display math `$$` has blank lines above and below
-
-4. **Check for banned patterns:**
-   - `---` horizontal rules
-   - Nested `:::` admonitions
-   - `plt.show()` (should use `display(fig)`)
-
-5. **Report results** as a summary table:
+3. **Report results** as a summary table:
    ```
    | Notebook | Corruption | Structure | LaTeX | Other |
    ```
 
-6. **If issues found**, create entries in `progress.md` → Issues section.
+4. **If issues found**, create entries in `progress.md` → Issues section.

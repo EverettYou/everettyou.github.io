@@ -47,9 +47,12 @@ Two notation systems coexist for qubit operators and states. **Never mix them wi
 ## Display Math
 
 - `$$...$$` blocks MUST have blank lines above and below
+- Do NOT put blank lines inside a `$$...$$` block (equation lines must be contiguous)
 - Label important equations: `$$ E = mc^2 $$ (eq-section-description)`
 - Label convention: `eq-{topic}-{description}` (e.g., `eq-mixed-purity`)
 - Cross-reference: `` {eq}`eq-section-name` ``
+- For multiline equations, always use `\begin{split} ... \end{split}` inside `$$...$$`
+- Do NOT use `align` or `aligned` environments in notebooks (unsafe parsing around leading commutators like `[A,B]`)
 
 ## Ket/Bra Notation and Pipe Characters
 

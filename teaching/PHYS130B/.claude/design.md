@@ -102,6 +102,8 @@ $$ (eq-section-name)
 ```
 
 No blank lines *within* `$$...$$`, only outside. Prefer `` {eq}`eq-section-name` `` for cross-refs. Label convention: `eq-{topic}-{description}`.
+For multiline equations, always use `\begin{split}...\end{split}` inside `$$...$$`.
+Do not use `align` or `aligned` in notebooks.
 
 ## Cross-Reference Conventions
 
