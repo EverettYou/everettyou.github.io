@@ -103,6 +103,83 @@ def _check_display_math_lines(lines: list[str], label: str) -> list[Issue]:
     return issues
 
 
+def _iter_math_segments(text: str) -> Iterable[str]:
+    """Yield LaTeX math segments from markdown text."""
+    pattern = re.compile(r"\$\$(.*?)\$\$|\$(.*?)\$", re.DOTALL)
+    for m in pattern.finditer(text):
+        seg = m.group(1) if m.group(1) is not None else m.group(2)
+        if seg:
+            yield seg
+
+
+def _check_content_style(text: str, label: str) -> list[Issue]:
+    """Checks from rules/content-style.md that are safe to enforce globally."""
+    issues: list[Issue] = []
+
+    if re.search(r"(?m)^###\s+Application:", text):
+        issues.append(Issue(label, "contains banned heading pattern '### Application:'; use an example admonition"))
+
+    # Nested admonitions frequently break MyST rendering.
+    # We only track admonition blocks, not generic directives like margin/figure.
+    admonition_depth = 0
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith(":::{admonition"):
+            if admonition_depth > 0:
+                issues.append(Issue(label, "contains nested admonition start ':::{'"))
+                break
+            admonition_depth += 1
+        elif s == ":::":
+            if admonition_depth > 0:
+                admonition_depth -= 1
+
+    return issues
+
+
+def _check_physics_conventions(text: str, label: str) -> list[Issue]:
+    """Checks from rules/physics-conventions.md not covered by parser checks."""
+    issues: list[Issue] = []
+    math_segments = list(_iter_math_segments(text))
+
+    if any(r"\vec{" in seg for seg in math_segments):
+        issues.append(Issue(label, r"uses \vec{...}; use \boldsymbol{...} for vectors"))
+
+    # Differential should be upright in standard calculus patterns.
+    bad_diff_integral = re.compile(r"\\int[^\n]*?(?<![A-Za-z\\])d\s*(?:\\[A-Za-z]+|[A-Za-z])")
+    bad_diff_deriv = re.compile(r"\\frac\{d\}\{d[^}]+\}")
+    for seg in math_segments:
+        if bad_diff_integral.search(seg) or bad_diff_deriv.search(seg):
+            issues.append(Issue(label, r"uses bare differential d; use \mathrm{d}"))
+            break
+
+    # Euler's number in exponentials should be upright.
+    bare_e_exp = re.compile(r"(?<![A-Za-z\\])e\^\{")
+    if any(bare_e_exp.search(seg) for seg in math_segments):
+        issues.append(Issue(label, r"uses bare e^{...}; use \mathrm{e}^{...}"))
+
+    # Imaginary unit in exponentials should be upright.
+    exp_with_i = re.compile(r"(?:\\mathrm\{e\}|e)\^\{[^}]*i[^}]*\}")
+    for seg in math_segments:
+        m = exp_with_i.search(seg)
+        if m and r"\mathrm{i}" not in m.group(0):
+            issues.append(Issue(label, r"uses bare i in exponential phase; use \mathrm{i}"))
+            break
+
+    # In markdown tables, use \vert for ket/bra pipe symbols.
+    for line in text.splitlines():
+        if "|" not in line or "$" not in line:
+            continue
+        if r"\rangle" not in line and r"\langle" not in line:
+            continue
+        for seg in _iter_math_segments(line):
+            raw_ket_pipe = re.search(r"\|[^$]*\\rangle", seg) or re.search(r"\\langle[^$]*\|", seg)
+            if raw_ket_pipe and r"\vert" not in seg:
+                issues.append(Issue(label, r"uses raw | in ket/bra inside table; use \vert"))
+                return issues
+
+    return issues
+
+
 def infer_notebook_kind(path: str) -> str:
     """
     subsection: x-y-z-...
@@ -153,6 +230,8 @@ def validate_notebook(path: str) -> list[Issue]:
             issues.append(Issue(label, "contains banned horizontal rule '---'"))
         if "plt.show()" in text:
             issues.append(Issue(label, "contains plt.show(); use display(fig) + plt.close(fig)"))
+        issues.extend(_check_content_style(text, label))
+        issues.extend(_check_physics_conventions(text, label))
 
     return issues
 
