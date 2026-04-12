@@ -215,7 +215,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-geometric-optics.html">3.1.1 Geometric Optics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-particle-wave-unification.html">3.1.3 Particle-Wave Unification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-wave-particle-duality.html">3.1.3 Wave-Particle Duality</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -503,20 +503,10 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-phase-symmetry">Global Phase Symmetry</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-global-phase-is-unobservable">Why Global Phase is Unobservable</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-phase-invariance-the-problem">Local Phase Invariance: The Problem</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-kinetic-energy-breaks-covariance">The Kinetic Energy Breaks Covariance</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fix-introducing-a-gauge-field">The Fix: Introducing a Gauge Field</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-covariant-derivative">The Covariant Derivative</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-global-to-local">From Global to Local</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-covariant-derivative">The Covariant Derivative</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariant-hamiltonian">Gauge-Invariant Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-gauge-symmetry-to-electromagnetism">From Gauge Symmetry to Electromagnetism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-momentum">Kinetic Momentum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -537,210 +527,204 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Why does the wavefunction <span class="math notranslate nohighlight">\(\psi\)</span> and the phase-rotated version <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\psi\)</span> describe the same physics? What is the global U(1) symmetry?</p></li>
-<li><p>What goes wrong when you try to make the phase local, <span class="math notranslate nohighlight">\(\alpha \to \alpha(x)\)</span>? Why does the spatial derivative cause the Schrödinger equation to break?</p></li>
-<li><p>How does introducing a gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> fix the gauge problem? What is the covariant derivative, and why must it transform covariantly?</p></li>
-<li><p>Explain why demanding local phase invariance forces the Hamiltonian to take the form <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span>. Is this an assumption or a consequence?</p></li>
-<li><p>Does gauge invariance derive electromagnetism from pure symmetry, or is there hidden physical input in the argument?</p></li>
+<li><p>We know global phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\psi\)</span> is unobservable. What goes wrong when you try to make <span class="math notranslate nohighlight">\(\alpha\)</span> depend on position? Why does the ordinary derivative <span class="math notranslate nohighlight">\(\partial_i\)</span> fail?</p></li>
+<li><p>What is the covariant derivative <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}(q/\hbar)A_i\)</span>, and why does it fix the problem? Walk me through the cancellation when both <span class="math notranslate nohighlight">\(\psi\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> transform.</p></li>
+<li><p>Explain why demanding local phase invariance <strong>forces</strong> the kinetic energy to take the form <span class="math notranslate nohighlight">\(\frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span>. Is the coupling to <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> an assumption or a consequence?</p></li>
+<li><p>Why is <span class="math notranslate nohighlight">\(\boldsymbol{\pi} = \boldsymbol{p} - q\boldsymbol{A}\)</span> the kinetic momentum? Show that it equals <span class="math notranslate nohighlight">\(m \boldsymbol{v}\)</span>.</p></li>
+<li><p>Expand <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span> and identify the paramagnetic and diamagnetic terms. What is the Coulomb gauge, and why does it simplify things?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The gauge principle is a profound statement: the fact that global phase is unobservable suggests that <strong>local phase should also be unobservable</strong>. Promoting this symmetry from global to local requires introducing a new field—the gauge field—that couples to the wavefunction and restores the equations of motion. This principle lies at the heart of all modern physics, showing how fundamental forces emerge from the requirement that quantum mechanics be invariant under local phase rotations.</p>
+<p>Global phase is unobservable (<a class="reference internal" href="../ch1_qubit/1-1-1-what-is-a-qubit.html"><span class="doc std std-doc">§1.1.1</span></a>). What happens when we promote the phase to a function of position? The Schrödinger equation breaks—and fixing it forces us to introduce a gauge field and a new kind of derivative.</p>
 </section>
-<section id="global-phase-symmetry">
-<h3>Global Phase Symmetry<a class="headerlink" href="#global-phase-symmetry" title="Link to this heading">#</a></h3>
-<section id="why-global-phase-is-unobservable">
-<h4>Why Global Phase is Unobservable<a class="headerlink" href="#why-global-phase-is-unobservable" title="Link to this heading">#</a></h4>
-<p>Consider two wavefunctions differing by a constant (global) phase:</p>
+<section id="from-global-to-local">
+<h3>From Global to Local<a class="headerlink" href="#from-global-to-local" title="Link to this heading">#</a></h3>
+<p>Under a <strong>global</strong> phase rotation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}\alpha}\psi\)</span> (<span class="math notranslate nohighlight">\(\alpha\)</span> constant), all observables are unchanged—this is the U(1) global symmetry (<a class="reference internal" href="../ch1_qubit/1-1-1-what-is-a-qubit.html"><span class="doc std std-doc">§1.1.1</span></a>). If physics is truly local, the description should not depend on a choice of phase convention at each point. This is the <strong>local phase ambiguity</strong>.</p>
+<p>Promote <span class="math notranslate nohighlight">\(\alpha\)</span> to a function of position:</p>
 <div class="math notranslate nohighlight">
 \[
-\psi'(\boldsymbol{r}) = \mathrm{e}^{\mathrm{i}\alpha}\psi(\boldsymbol{r})
+\psi(\boldsymbol{r}) \to \psi'(\boldsymbol{r}) = \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is independent of position and time. The Born rule gives:</p>
+<p>The probability density is still invariant:</p>
 <div class="math notranslate nohighlight">
 \[
-|\psi'(\boldsymbol{r})|^2 = |\mathrm{e}^{\mathrm{i}\alpha}|^2|\psi(\boldsymbol{r})|^2 = |\psi(\boldsymbol{r})|^2
+|\psi'(\boldsymbol{r})|^2 = |\mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})|^2 = |\psi(\boldsymbol{r})|^2
 \]</div>
-<div class="important admonition">
-<p class="admonition-title">Global Phase Redundancy</p>
-<p>The global phase <span class="math notranslate nohighlight">\(\alpha\)</span> is <strong>completely unobservable</strong>:</p>
-<ul class="simple">
-<li><p>Probability densities are identical</p></li>
-<li><p>All expectation values <span class="math notranslate nohighlight">\(\langle\psi'|\hat{O}|\psi'\rangle = \langle\psi|\hat{O}|\psi\rangle\)</span> are identical</p></li>
-<li><p>No measurement can distinguish between <span class="math notranslate nohighlight">\(\psi\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\psi\)</span></p></li>
-</ul>
-<p>This freedom is the <strong>U(1) global gauge symmetry</strong> of quantum mechanics.</p>
-</div>
-</section>
-</section>
-<section id="local-phase-invariance-the-problem">
-<h3>Local Phase Invariance: The Problem<a class="headerlink" href="#local-phase-invariance-the-problem" title="Link to this heading">#</a></h3>
-<p>Now suppose the phase depends on position: <span class="math notranslate nohighlight">\(\alpha \to \alpha(\boldsymbol{r},t)\)</span>. We want to ask: is the physics still unchanged under</p>
+<p>But check the Schrödinger equation <span class="math notranslate nohighlight">\(\hat{H}\psi = E\psi\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = -\frac{\hbar^2}{2m}\nabla^2\)</span>. We say an equation is <strong>covariant</strong> under a transformation if it keeps the same form. For a global phase, <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\)</span> factors through <span class="math notranslate nohighlight">\(\nabla^2\)</span> and cancels—covariance holds. For a local phase, the derivative picks up an extra term:</p>
 <div class="math notranslate nohighlight">
 \[
-\psi(\boldsymbol{r},t) \to \psi'(\boldsymbol{r},t) = \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r},t)}\psi(\boldsymbol{r},t)?
+\partial_i\psi' = \mathrm{e}^{\mathrm{i}\alpha}\left(\partial_i + \mathrm{i}\,\partial_i\alpha\right)\psi
 \]</div>
-<p>The probability density is still invariant. But the equations of motion are not.</p>
-<section id="the-kinetic-energy-breaks-covariance">
-<h4>The Kinetic Energy Breaks Covariance<a class="headerlink" href="#the-kinetic-energy-breaks-covariance" title="Link to this heading">#</a></h4>
-<p>When we compute spatial derivatives:</p>
+<p>The gradient of <span class="math notranslate nohighlight">\(\alpha\)</span> does not cancel. The Laplacian is worse:</p>
 <div class="math notranslate nohighlight">
 \[
-\partial_i\psi' = \partial_i\left(\mathrm{e}^{\mathrm{i}\alpha}\psi\right) = \mathrm{e}^{\mathrm{i}\alpha}\left(\mathrm{i}\partial_i\alpha + \partial_i\right)\psi
-\]</div>
-<p>The kinetic energy term in the Schrödinger equation involves <span class="math notranslate nohighlight">\(\nabla^2\psi\)</span>, which becomes:</p>
-<div class="math notranslate nohighlight">
-\[
-\nabla^2\psi' = \mathrm{e}^{\mathrm{i}\alpha}\left[(\nabla\alpha) \cdot (\nabla\alpha) + 2\mathrm{i}\nabla\alpha \cdot \nabla + \nabla^2\right]\psi
+\nabla^2\psi' = \mathrm{e}^{\mathrm{i}\alpha}\left[\nabla^2 + 2\mathrm{i}(\nabla\alpha) \cdot \nabla + \mathrm{i}(\nabla^2\alpha) - (\nabla\alpha) \cdot (\nabla\alpha)\right]\psi
 \]</div>
 <div class="important admonition">
 <p class="admonition-title">The Gauge Problem</p>
-<p>Under a <strong>local</strong> phase transformation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r},t)}\psi\)</span>, the Schrödinger equation is <strong>not covariant</strong>—it does not maintain the same form:</p>
+<p>Under <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi\)</span>, the Schrödinger equation is <strong>not covariant</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-\mathrm{i}\hbar\frac{\partial\psi'}{{\partial t}} \neq -\frac{\hbar^2}{2m}\nabla^2\psi' + V(\boldsymbol{r})\psi'
+-\frac{\hbar^2}{2m}\nabla^2\psi' \neq \mathrm{e}^{\mathrm{i}\alpha}\left(-\frac{\hbar^2}{2m}\nabla^2\psi\right)
 \]</div>
-<p>The spatial derivatives of the varying phase generate extra terms that cannot be absorbed into <span class="math notranslate nohighlight">\(V(\boldsymbol{r})\)</span>.</p>
-<p>This is the central puzzle: if global phase is unobservable, why should local phase break the fundamental equation of motion?</p>
+<p>Global phase invariance does not extend to local phase invariance. If we want local phase to be as unobservable as global phase, the theory must be modified.</p>
 </div>
 </section>
-</section>
-<section id="the-fix-introducing-a-gauge-field">
-<h3>The Fix: Introducing a Gauge Field<a class="headerlink" href="#the-fix-introducing-a-gauge-field" title="Link to this heading">#</a></h3>
-<p>The resolution is to introduce a new field—the <strong>gauge field</strong> <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r},t)\)</span>—that transforms to cancel the unwanted terms.</p>
 <section id="the-covariant-derivative">
-<h4>The Covariant Derivative<a class="headerlink" href="#the-covariant-derivative" title="Link to this heading">#</a></h4>
-<p>Define:</p>
+<h3>The Covariant Derivative<a class="headerlink" href="#the-covariant-derivative" title="Link to this heading">#</a></h3>
+<p>The extra terms come from <span class="math notranslate nohighlight">\(\partial_i\)</span> acting on <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\)</span>. The fix: introduce a vector field <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r})\)</span>—the <strong>gauge field</strong>—and define the <strong>covariant derivative</strong></p>
 <div class="math notranslate nohighlight">
 \[
 D_i = \partial_i - \mathrm{i}\frac{q}{\hbar}A_i
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(q\)</span> is the particle’s charge and <span class="math notranslate nohighlight">\(\hbar\)</span> is Planck’s constant divided by <span class="math notranslate nohighlight">\(2\pi\)</span>.</p>
-<div class="important admonition">
-<p class="admonition-title">Covariant Derivative and Gauge Field</p>
-<p>Under a local phase transformation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol{r},t)/\hbar}\psi\)</span>, the gauge field must transform as:</p>
+<p>where <span class="math notranslate nohighlight">\(q\)</span> is the particle’s charge. If we require <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> to shift as</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha
+\boldsymbol{A} \to \boldsymbol{A} + \frac{\hbar}{q}\nabla\alpha
 \]</div>
-<p>With this choice, the covariant derivative transforms <strong>covariantly</strong>:</p>
+<p>whenever we rotate <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>, then the shift in <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> cancels the unwanted gradient. This compensating shift is called a <strong>gauge transformation</strong>.</p>
+<div class="important admonition">
+<p class="admonition-title">Covariant Derivative</p>
+<p>Under <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 D_i\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(D_i\psi)
 \]</div>
-<p>This means <span class="math notranslate nohighlight">\((\nabla\alpha) \cdot \psi\)</span> cancels the unwanted gradient terms from the phase transformation, leaving the kinetic energy with the same form.</p>
+<p>The covariant derivative transforms like <span class="math notranslate nohighlight">\(\psi\)</span> itself—unlike the ordinary derivative <span class="math notranslate nohighlight">\(\partial_i\)</span>.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Why Covariance Works</p>
+<p class="admonition-title">Derivation: Covariance of <span class="math notranslate nohighlight">\(D_i\)</span></p>
 <p>Under <span class="math notranslate nohighlight">\(\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A}' = \boldsymbol{A} + \nabla\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-D_i'\psi' = \left(\partial_i - \mathrm{i}\frac{q}{\hbar}A_i'\right)\psi' = \left(\partial_i - \mathrm{i}\frac{q}{\hbar}(A_i + \partial_i\alpha)\right)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \mathrm{i}\frac{q}{\hbar}(\partial_i\alpha)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi + \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(\partial_i\psi) - \mathrm{i}\frac{q}{\hbar}A_i\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi - \mathrm{i}\frac{q}{\hbar}(\partial_i\alpha)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi
-\]</div>
+\[\begin{split}
+\begin{split}
+D_i'\psi' &amp;= \left(\partial_i - \mathrm{i}\frac{q}{\hbar}(A_i + \partial_i\alpha)\right)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi \\
+&amp;= \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\left(\mathrm{i}\frac{q}{\hbar}\partial_i\alpha\right)\psi + \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\partial_i\psi - \mathrm{i}\frac{q}{\hbar}A_i\,\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi - \mathrm{i}\frac{q}{\hbar}(\partial_i\alpha)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi
+\end{split}
+\end{split}\]</div>
 <p>The first and last terms cancel:</p>
 <div class="math notranslate nohighlight">
 \[
 D_i'\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\left(\partial_i - \mathrm{i}\frac{q}{\hbar}A_i\right)\psi = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(D_i\psi)
 \]</div>
-<p>This is the key: the covariant derivative transforms exactly like the wavefunction itself.</p>
 </div>
-</section>
 </section>
 <section id="gauge-invariant-hamiltonian">
 <h3>Gauge-Invariant Hamiltonian<a class="headerlink" href="#gauge-invariant-hamiltonian" title="Link to this heading">#</a></h3>
-<p>The requirement of local phase covariance forces us to replace the ordinary momentum operator with the covariant derivative everywhere:</p>
+<p>Replace every <span class="math notranslate nohighlight">\(\partial_i\)</span> with <span class="math notranslate nohighlight">\(D_i\)</span>—the <strong>minimal coupling prescription</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}
+\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla \;\longrightarrow\; \hat{\boldsymbol{p}} - q\boldsymbol{A} = -\mathrm{i}\hbar\boldsymbol{D}
 \]</div>
-<p>This is the <strong>minimal coupling prescription</strong>. The Hamiltonian becomes:</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + V(\boldsymbol{r}) + q\Phi(\boldsymbol{r},t)
+\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + V(\boldsymbol{r})
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi(\boldsymbol{r},t)\)</span> is the scalar potential (the time component of the four-vector gauge field).</p>
+<p>Since <span class="math notranslate nohighlight">\(D_i\psi\)</span> transforms like <span class="math notranslate nohighlight">\(\psi\)</span>, so does <span class="math notranslate nohighlight">\(D_iD_j\psi\)</span>, and the Schrödinger equation with this Hamiltonian is covariant under local gauge transformations.</p>
 <div class="important admonition">
-<p class="admonition-title">Gauge-Invariant Hamiltonian (Minimal Coupling)</p>
-<p>The form of the electromagnetic Hamiltonian is <strong>not assumed</strong>—it is <strong>forced</strong> by the requirement that the Schrödinger equation remain covariant under local <span class="math notranslate nohighlight">\(U(1)\)</span> gauge transformations.</p>
-<p>This is the deepest insight of gauge theory: <strong>forces emerge from symmetry principles</strong>, not from external assumptions about how fields should couple to matter.</p>
+<p class="admonition-title">The Gauge Principle</p>
+<p>Requiring local phase covariance <strong>forces</strong>:</p>
+<ol class="arabic simple">
+<li><p>A gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r})\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>.</p></li>
+<li><p>The covariant derivative <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}(q/\hbar)A_i\)</span>.</p></li>
+<li><p>The kinetic energy <span class="math notranslate nohighlight">\(\frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span>.</p></li>
+</ol>
+<p>The coupling to <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is a consequence of the symmetry, not an assumption.</p>
 </div>
+</section>
+<section id="kinetic-momentum">
+<h3>Kinetic Momentum<a class="headerlink" href="#kinetic-momentum" title="Link to this heading">#</a></h3>
+<p>The combination <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> that appears in the Hamiltonian has a direct physical meaning. From Hamilton’s equation <span class="math notranslate nohighlight">\(\dot{\boldsymbol{r}} = \partial H / \partial \boldsymbol{p}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+m\dot{\boldsymbol{r}} = \hat{\boldsymbol{p}} - q\boldsymbol{A} = \hat{\boldsymbol{\pi}}
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> is the <strong>kinetic momentum</strong>—it equals <span class="math notranslate nohighlight">\(m\boldsymbol{v}\)</span>, the mass times velocity. The canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> includes an additional contribution <span class="math notranslate nohighlight">\(q\boldsymbol{A}\)</span> from the gauge field. The distinction between canonical and kinetic momentum, and which quantities are gauge-invariant, will be discussed in <a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">§4.1.3</span></a>.</p>
 <div class="dropdown example admonition">
 <p class="admonition-title">Expansion of the Kinetic Energy</p>
-<p><strong>Problem.</strong> Expand <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span> and identify the different couplings to the gauge field.</p>
+<p><strong>Problem.</strong> Expand <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span> and identify the couplings.</p>
 <p><strong>Solution.</strong></p>
 <div class="math notranslate nohighlight">
 \[
 (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 = \hat{\boldsymbol{p}}^2 - q(\hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}}) + q^2\boldsymbol{A}^2
 \]</div>
-<p>Using <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span>, the middle term becomes:</p>
+<p>Using <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{\boldsymbol{p}} \cdot \boldsymbol{A} + \boldsymbol{A} \cdot \hat{\boldsymbol{p}} = -\mathrm{i}\hbar(\nabla \cdot \boldsymbol{A} + 2\boldsymbol{A} \cdot \nabla)
 \]</div>
-<p>For the Coulomb gauge where <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>:</p>
+<p>In the Coulomb gauge <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 = \frac{\hat{\boldsymbol{p}}^2}{2m} - \frac{q}{m}\boldsymbol{A} \cdot \hat{\boldsymbol{p}} + \frac{q^2}{2m}\boldsymbol{A}^2
 \]</div>
-<p>The second term is <strong>linear in <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span></strong> (dipole coupling); the third is <strong>quadratic</strong> (paramagnetic term).</p>
-</div>
-</section>
-<section id="from-gauge-symmetry-to-electromagnetism">
-<h3>From Gauge Symmetry to Electromagnetism<a class="headerlink" href="#from-gauge-symmetry-to-electromagnetism" title="Link to this heading">#</a></h3>
-<p>The gauge-invariant Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span> contains more physics than its origin suggests. Computing equations of motion in the Heisenberg picture extracts the Lorentz force <span class="math notranslate nohighlight">\(\boldsymbol{F} = q(\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B})\)</span> directly from the gauge structure — with no additional assumptions about electromagnetic forces. This derivation is carried out in §4.1.2.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: Is Electromagnetism Derived?</p>
-<p>A remarkable fact: if we demand that quantum mechanics respect local phase invariance (that local phase should be as unobservable as global phase), we are <strong>forced</strong> to introduce electromagnetic fields coupled in exactly the way nature couples them.</p>
-<p>This suggests that electromagnetism is not an independent phenomenon—it is a consequence of quantum mechanics plus the requirement of local gauge invariance. But is there hidden input? The assumption of U(1) gauge structure and the definition of “unobservable” are themselves non-trivial choices.</p>
-<p><strong>Question for discussion:</strong> Could other gauge structures (non-Abelian groups) arise from the same principle applied to different symmetries?</p>
+<p>The linear term is the <strong>paramagnetic</strong> coupling; the quadratic term is the <strong>diamagnetic</strong> coupling.</p>
 </div>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
-<p><strong><a class="reference internal" href="4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">4.1.2 Electromagnetic Coupling</span></a></strong>: Kinetic vs. canonical momentum, the Lorentz force derived from Heisenberg equations, and the identification of <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> from gauge potentials.</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ch1_qubit/1-1-1-what-is-a-qubit.html"><span class="doc std std-doc">1.1.1 What is a Qubit</span></a></strong>: Global phase redundancy.</p></li>
+<li><p><strong><a class="reference internal" href="4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">4.1.2 Electromagnetic Coupling</span></a></strong>: Spacetime gauge extension, Lorentz force, <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>.</p></li>
+<li><p><strong><a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a></strong>: Canonical vs kinetic vs field momentum; gauge invariance as redundancy.</p></li>
+</ul>
+</div>
+<div class="dropdown poll admonition">
+<p class="admonition-title">Poll: Local phase and the ordinary derivative</p>
+<p>Under <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})\)</span>, the ordinary derivative transforms as <span class="math notranslate nohighlight">\(\partial_i\psi' = \mathrm{e}^{\mathrm{i}\alpha}(\partial_i + \mathrm{i}\partial_i\alpha)\psi\)</span>. What is the role of <span class="math notranslate nohighlight">\(A_i\)</span> in the covariant derivative <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}(q/\hbar)A_i\)</span>?</p>
+<p>(A) <span class="math notranslate nohighlight">\(A_i\)</span> shifts as <span class="math notranslate nohighlight">\(A_i \to A_i + (\hbar/q)\partial_i\alpha\)</span>, cancelling the extra <span class="math notranslate nohighlight">\(\mathrm{i}(\partial_i\alpha)\psi\)</span> term so that <span class="math notranslate nohighlight">\(D_i\psi\)</span> transforms like <span class="math notranslate nohighlight">\(\psi\)</span>.</p>
+<p>(B) <span class="math notranslate nohighlight">\(A_i\)</span> makes the wavefunction real-valued, eliminating the need for complex phases.</p>
+<p>(C) <span class="math notranslate nohighlight">\(A_i\)</span> ensures that <span class="math notranslate nohighlight">\(\partial_i\psi' = \mathrm{e}^{\mathrm{i}\alpha}\partial_i\psi\)</span> without any additional terms.</p>
+<p>(D) <span class="math notranslate nohighlight">\(A_i\)</span> is a mathematical convenience with no physical consequence—it can always be set to zero.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Global phase</strong> <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}\alpha}\psi\)</span> is unobservable because probability and all observables are unchanged. This is the <strong>U(1) global gauge symmetry</strong>.</p></li>
-<li><p><strong>Local phase</strong> transformations <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})\)</span> break the Schrödinger equation because spatial derivatives of the varying phase generate new terms.</p></li>
-<li><p>To restore covariance, we introduce a <strong>gauge field</strong> <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> that transforms as <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>.</p></li>
-<li><p>The <strong>covariant derivative</strong> <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}(q/\hbar)A_i\)</span> transforms covariantly: <span class="math notranslate nohighlight">\(D_i\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(D_i\psi)\)</span>.</p></li>
-<li><p>The requirement of local gauge invariance <strong>forces</strong> the Hamiltonian to have the form <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + V + q\Phi\)</span>. This is not an assumption but a consequence of the symmetry principle.</p></li>
-<li><p>The <strong>gauge principle</strong> shows that fundamental forces emerge from symmetry; electromagnetism is derived from demanding local phase invariance in quantum mechanics.</p></li>
+<li><p><strong>Local phase ambiguity</strong> (motivated by local frame independence) breaks the eigenvalue equation because <span class="math notranslate nohighlight">\(\partial_i\)</span> acting on <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\)</span> generates extra terms.</p></li>
+<li><p>The <strong>covariant derivative</strong> <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}(q/\hbar)A_i\)</span>, with <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>, transforms like <span class="math notranslate nohighlight">\(\psi\)</span> and restores covariance.</p></li>
+<li><p>The <strong>gauge principle</strong>: local phase covariance forces <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + V\)</span>.</p></li>
+<li><p>The <strong>kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A} = m\boldsymbol{v}\)</span> is the physical momentum that determines velocity.</p></li>
 </ul>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> Show that the global phase transformation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}\alpha}\psi\)</span> leaves all measurable quantities unchanged. Explicitly compute (a) the probability density <span class="math notranslate nohighlight">\(|\psi'|^2\)</span>, and (b) the expectation value <span class="math notranslate nohighlight">\(\langle\psi'|\hat{O}|\psi'\rangle\)</span> for an arbitrary observable <span class="math notranslate nohighlight">\(\hat{O}\)</span>. Why is global phase called “unobservable”?</p>
-<p><strong>2.</strong> Consider a local phase transformation <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})\)</span>. Show that:
-(a) The probability density <span class="math notranslate nohighlight">\(|\psi|^2\)</span> remains invariant.
-(b) The spatial derivatives transform as <span class="math notranslate nohighlight">\(\partial_i\psi' = \mathrm{e}^{\mathrm{i}\alpha}(\mathrm{i}\partial_i\alpha + \partial_i)\psi\)</span>.
-(c) The kinetic energy term <span class="math notranslate nohighlight">\(\hat{T}\psi\)</span> does NOT transform as <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\hat{T}\psi\)</span>. What extra terms appear?</p>
-<p><strong>3.</strong> The covariant derivative is <span class="math notranslate nohighlight">\(D_i = \partial_i - \mathrm{i}(q/\hbar)A_i\)</span>. Show that if the gauge field transforms as <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span> under <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>, then the covariant derivative transforms covariantly:</p>
+<p><strong>1. Gauge transform of a wavefunction.</strong> A particle has wavefunction <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) = \frac{1}{\sqrt{\pi a_0^3}}\mathrm{e}^{-r/a_0}\)</span> (hydrogen ground state) in a region with vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r})\)</span>. A gauge transformation with <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{r}) = k x\)</span> is applied.</p>
+<p>(a) Write down the transformed wavefunction <span class="math notranslate nohighlight">\(\psi'(\boldsymbol{r})\)</span>.</p>
+<p>(b) Verify that the probability density is unchanged: <span class="math notranslate nohighlight">\(\vert\psi'(\boldsymbol{r})\vert^2 = \vert\psi(\boldsymbol{r})\vert^2\)</span>.</p>
+<p>(c) How does the vector potential transform: <span class="math notranslate nohighlight">\(\boldsymbol{A}'= ?\)</span> Write <span class="math notranslate nohighlight">\(\boldsymbol{A}' - \boldsymbol{A}\)</span> explicitly for this choice of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p><strong>2. Covariant derivative check.</strong> The covariant derivative is <span class="math notranslate nohighlight">\(D_i = \partial_i + \mathrm{i}(q/\hbar)A_i\)</span>.</p>
+<p>(a) For a 1D gauge transformation <span class="math notranslate nohighlight">\(\psi'(x) = \mathrm{e}^{\mathrm{i}q\alpha(x)/\hbar}\psi(x)\)</span>, <span class="math notranslate nohighlight">\(A' = A + \partial_x\alpha\)</span>, show by direct computation that <span class="math notranslate nohighlight">\(D'_x\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}D_x\psi\)</span>. This confirms covariance.</p>
+<p>(b) Show that the ordinary derivative <span class="math notranslate nohighlight">\(\partial_x\psi'\)</span> does NOT transform covariantly — it picks up an extra term proportional to <span class="math notranslate nohighlight">\(\partial_x\alpha\)</span>.</p>
+<p>(c) Explain in one sentence why the covariant derivative is needed to make the kinetic energy gauge-invariant.</p>
+<p><strong>3. Gauging a plane wave.</strong> A free particle has wavefunction <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) = \mathrm{e}^{\mathrm{i}\boldsymbol{k}\cdot\boldsymbol{r}}\)</span> (a momentum eigenstate with <span class="math notranslate nohighlight">\(\boldsymbol{p} = \hbar\boldsymbol{k}\)</span>). A spatially varying gauge transformation <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{r}) = \boldsymbol{c}\cdot\boldsymbol{r}\)</span> is applied, where <span class="math notranslate nohighlight">\(\boldsymbol{c}\)</span> is a constant vector.</p>
+<p>(a) Write the new wavefunction <span class="math notranslate nohighlight">\(\psi'\)</span>. Show it is still a plane wave but with a shifted wavevector.</p>
+<p>(b) What is the new canonical momentum <span class="math notranslate nohighlight">\(\hbar\boldsymbol{k}'\)</span>? Is it the same as the old one?</p>
+<p>(c) Compute the kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\psi' = (\hat{\boldsymbol{p}} - q\boldsymbol{A}')\psi'\)</span> and show it equals the original kinetic momentum applied to <span class="math notranslate nohighlight">\(\psi\)</span> and then gauge-transformed. This confirms kinetic momentum is gauge-invariant.</p>
+<p><strong>4. Coulomb gauge expansion.</strong> Expand <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A})^2/(2m)\)</span> and use the Coulomb gauge condition <span class="math notranslate nohighlight">\(\nabla\cdot\boldsymbol{A} = 0\)</span> to show that the Hamiltonian becomes:</p>
 <div class="math notranslate nohighlight">
-\[D_i\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(D_i\psi)\]</div>
-<p><strong>4.</strong> The minimal coupling prescription says: replace <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> in the free-particle Hamiltonian. Show that the resulting Hamiltonian is invariant under the combined gauge transformation: <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>.</p>
-<p><strong>5.</strong> Expand <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span> explicitly. In the Coulomb gauge (<span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>), identify:
-(a) The linear coupling term (proportional to <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>).
-(b) The quadratic term (proportional to <span class="math notranslate nohighlight">\(\boldsymbol{A}^2\)</span>).
-(c) In what regime might one term dominate over the other?</p>
-<p><strong>6.</strong> Consider two gauge choices for a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>:</p>
-<ul class="simple">
-<li><p>Symmetric gauge: <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span></p></li>
-<li><p>Landau gauge: <span class="math notranslate nohighlight">\(\boldsymbol{A} = (0, Bx, 0)\)</span></p></li>
-</ul>
-<p>Show that both yield the same magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>. Are the resulting Schrödinger equations the same, or different? Discuss why gauge freedom is useful despite this.</p>
-<p><strong>7.</strong> <strong>Conceptual:</strong> A student argues: “Since local phase is supposedly unobservable, the gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> must be unobservable too. But then how can it have physical effects?” Address this concern. Describe one quantum phenomenon where <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> has observable consequences even when the magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> vanishes in a region.</p>
-<p><strong>8.</strong> Show that the <strong>canonical momentum</strong> <span class="math notranslate nohighlight">\(\boldsymbol{\pi} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> is invariant (unchanged) under a gauge transformation. Explain why this quantity, rather than the kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span>, is the natural momentum in the presence of a gauge field.</p>
+\[
+\hat{H} = \frac{\hat{\boldsymbol{p}}^2}{2m} - \frac{q}{m}\boldsymbol{A}\cdot\hat{\boldsymbol{p}} + \frac{q^2\boldsymbol{A}^2}{2m} + q\Phi
+\]</div>
+<p>For a hydrogen atom in a weak uniform magnetic field, estimate the ratio of the <span class="math notranslate nohighlight">\(\boldsymbol{A}^2\)</span> term to the <span class="math notranslate nohighlight">\(\boldsymbol{A}\cdot\hat{\boldsymbol{p}}\)</span> term. Under what conditions can <span class="math notranslate nohighlight">\(\boldsymbol{A}^2\)</span> be neglected?</p>
+<p><strong>5. Gravity as a gauge theory.</strong> Consider a particle in a gravitational potential <span class="math notranslate nohighlight">\(V(\boldsymbol{r}) = mgz\)</span>. A student claims: “I can remove the gravitational potential by a local phase transformation, just like removing a vector potential by a gauge transformation.”</p>
+<p>(a) Try to find <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{r})\)</span> that eliminates <span class="math notranslate nohighlight">\(V\)</span> from the Schrödinger equation. Where does the attempt fail?</p>
+<p>(b) What is the key difference between the scalar potential <span class="math notranslate nohighlight">\(V\)</span> and the gauge coupling via <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>?</p>
+<p>(c) Explain why gravity couples to mass (not charge) and does not arise from a U(1) gauge symmetry.</p>
+<p><strong>6. The wrong covariant derivative.</strong> A student proposes <span class="math notranslate nohighlight">\(\tilde{D}_i = \partial_i + (q/\hbar)^2 A_i^2\)</span> (a quadratic coupling) instead of the standard <span class="math notranslate nohighlight">\(D_i = \partial_i + \mathrm{i}(q/\hbar)A_i\)</span>.</p>
+<p>(a) Check whether <span class="math notranslate nohighlight">\(\tilde{D}_i\psi'\)</span> transforms covariantly under <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>, <span class="math notranslate nohighlight">\(A_i \to A_i + \partial_i\alpha\)</span>.</p>
+<p>(b) Explain why only the linear coupling <span class="math notranslate nohighlight">\(\mathrm{i}(q/\hbar)A_i\)</span> works.</p>
+<p><strong>7. Inventing the covariant derivative.</strong> Suppose you know only that (i) the ordinary derivative <span class="math notranslate nohighlight">\(\partial_i\psi'\)</span> picks up an unwanted term <span class="math notranslate nohighlight">\(\mathrm{i}(\partial_i\alpha)\psi'\)</span> under a gauge transformation and (ii) <span class="math notranslate nohighlight">\(A_i \to A_i + \partial_i\alpha\)</span>.</p>
+<p>(a) Construct the unique first-order differential operator <span class="math notranslate nohighlight">\(D_i = \partial_i + c\,A_i\)</span> (with constant <span class="math notranslate nohighlight">\(c\)</span>) such that <span class="math notranslate nohighlight">\(D_i'\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}D_i\psi\)</span>.</p>
+<p>(b) Determine <span class="math notranslate nohighlight">\(c\)</span>. Why is <span class="math notranslate nohighlight">\(c\)</span> imaginary?</p>
+<p>(c) Explain why the gauge principle <em>forces</em> the form of the interaction — the coupling constant and the structure of the Hamiltonian are not free parameters.</p>
+<p><strong>8. Classical limit.</strong> In classical mechanics, a charged particle in a magnetic field obeys Hamilton’s equations with <span class="math notranslate nohighlight">\(H = (\boldsymbol{p} - q\boldsymbol{A})^2/(2m)\)</span>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\dot{x}_i = \partial H/\partial p_i\)</span> and show <span class="math notranslate nohighlight">\(m\dot{\boldsymbol{x}} = \boldsymbol{p} - q\boldsymbol{A} = \boldsymbol{\pi}\)</span>.</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(\dot{p}_i = -\partial H/\partial x_i\)</span> and use <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}\)</span> from (a) to show <span class="math notranslate nohighlight">\(m\ddot{\boldsymbol{x}} = q\dot{\boldsymbol{x}}\times\boldsymbol{B}\)</span>.</p>
+<p>(c) Explain how the quantum gauge-invariant Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \hat{\boldsymbol{\pi}}^2/(2m)\)</span> naturally yields the classical Lorentz force in the correspondence limit.</p>
 </section>
 </section>
 
@@ -812,20 +796,10 @@ D_i'\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\left(\partial_i - \mathrm{i}\fr
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-phase-symmetry">Global Phase Symmetry</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-global-phase-is-unobservable">Why Global Phase is Unobservable</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-phase-invariance-the-problem">Local Phase Invariance: The Problem</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-kinetic-energy-breaks-covariance">The Kinetic Energy Breaks Covariance</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fix-introducing-a-gauge-field">The Fix: Introducing a Gauge Field</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-covariant-derivative">The Covariant Derivative</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-global-to-local">From Global to Local</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-covariant-derivative">The Covariant Derivative</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariant-hamiltonian">Gauge-Invariant Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-gauge-symmetry-to-electromagnetism">From Gauge Symmetry to Electromagnetism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-momentum">Kinetic Momentum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

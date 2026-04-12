@@ -215,7 +215,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-geometric-optics.html">3.1.1 Geometric Optics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-particle-wave-unification.html">3.1.3 Particle-Wave Unification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-wave-particle-duality.html">3.1.3 Wave-Particle Duality</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -504,8 +504,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-transformations">Gauge Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-canonical-kinetic-and-field">Momentum: Canonical, Kinetic, and Field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-kinetic-potential-and-total">Energy: Kinetic, Potential, and Total</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariant-vs-gauge-dependent-quantities">Gauge-Invariant vs Gauge-Dependent Quantities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-symmetry-as-redundancy">Gauge Symmetry as Redundancy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-as-redundancy">Gauge Invariance as Redundancy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-fixing">Gauge Fixing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
@@ -527,190 +529,277 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How do <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, and <span class="math notranslate nohighlight">\(\Phi\)</span> each transform under a gauge transformation? Why must they transform together for the Schrödinger equation to be invariant?</p></li>
-<li><p>What quantities are gauge-invariant (physical and observable) and what are gauge-dependent (unphysical, convention)? Give examples of each.</p></li>
-<li><p>Why is canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> gauge-dependent while kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> is gauge-invariant? Which one corresponds to what you’d measure in an experiment?</p></li>
-<li><p>“Gauge symmetry is not a symmetry of nature — it is a redundancy of description.” What does this mean? How is it different from a true physical symmetry like rotation invariance?</p></li>
+<li><p>How do <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, and <span class="math notranslate nohighlight">\(\Phi\)</span> transform under a gauge transformation? Why must all three transform together?</p></li>
+<li><p>What are the three types of momentum (canonical, kinetic, field) and which are gauge-invariant? Make the same distinction for energy.</p></li>
+<li><p>Which physical quantities are gauge-invariant and which are gauge-dependent? How would you organize them?</p></li>
+<li><p>Explain the statement “gauge invariance is not a symmetry—it is a redundancy.” How does this differ from a physical symmetry like rotation?</p></li>
+<li><p>What is the Aharonov-Bohm effect, and how is it consistent with <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> being gauge-dependent?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>Physical quantities must be independent of the choice of gauge. Different physicists can choose different gauges—Coulomb, Lorenz, radiation—for convenience, but all must arrive at identical predictions for energy levels, transition probabilities, and observable properties. This section clarifies what is gauge-invariant (the real physics) and what is gauge-dependent (mere mathematical convention), and explains why gauge symmetry is a redundancy of description, not a physical symmetry.</p>
+<p>In §4.1.1–4.1.2, we built the gauge-invariant Hamiltonian and derived the electromagnetic fields and forces. This section asks: which quantities in this framework are physical (gauge-invariant) and which are conventional (gauge-dependent)? The answer reveals that gauge invariance is not a symmetry of nature—it is a <strong>redundancy</strong> in our description.</p>
 </section>
 <section id="gauge-transformations">
 <h3>Gauge Transformations<a class="headerlink" href="#gauge-transformations" title="Link to this heading">#</a></h3>
-<p>A <strong>gauge transformation</strong> modifies the potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> while simultaneously changing the wavefunction phase, leaving all physical observables unchanged.</p>
+<p>A <strong>gauge transformation</strong> modifies the potentials and the wavefunction simultaneously, leaving all physics unchanged:</p>
 <div class="important admonition">
-<p class="admonition-title">Gauge Transformation Rules</p>
-<p>Under a gauge transformation parameterized by an arbitrary scalar function <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{x}, t)\)</span>:</p>
+<p class="admonition-title">Gauge Transformation</p>
 <div class="math notranslate nohighlight">
-\[\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi, \qquad \boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha, \qquad \Phi \to \Phi - \partial_t\alpha\]</div>
-<p>All three act in concert: the simultaneous change ensures that the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = \hat{H}\psi\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span> takes the same form in the new gauge.</p>
+\[
+\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi, \qquad \boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha, \qquad \Phi \to \Phi - \partial_t\alpha
+\]</div>
+<p>All three transform in concert: the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = \hat{H}\psi\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span> takes the same form in every gauge.</p>
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Gauge Invariance of the Schrödinger Equation</p>
-<p>Set <span class="math notranslate nohighlight">\(\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>. The key identity is:</p>
+<p>Set <span class="math notranslate nohighlight">\(\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>. The covariant derivative gives (§4.1.1):</p>
 <div class="math notranslate nohighlight">
-\[(\hat{\boldsymbol{p}} - q\boldsymbol{A}')\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(\hat{\boldsymbol{p}} - q\boldsymbol{A})\psi\]</div>
-<p>This holds because applying <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> to <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span> generates a term <span class="math notranslate nohighlight">\(q\nabla\alpha\)</span> that cancels the shift <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>. Squaring:</p>
+\[
+(\hat{\boldsymbol{p}} - q\boldsymbol{A}')\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(\hat{\boldsymbol{p}} - q\boldsymbol{A})\psi
+\]</div>
+<p>Squaring: <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A}')^2\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\psi\)</span>. For the time derivative:</p>
 <div class="math notranslate nohighlight">
-\[(\hat{\boldsymbol{p}} - q\boldsymbol{A}')^2\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\psi\]</div>
-<p>For the time derivative:</p>
-<div class="math notranslate nohighlight">
-\[\mathrm{i}\hbar\partial_t\psi' = -q(\partial_t\alpha)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi + \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\mathrm{i}\hbar\partial_t\psi\]</div>
-<p>The <span class="math notranslate nohighlight">\(-q\partial_t\alpha\)</span> term is compensated by <span class="math notranslate nohighlight">\(\Phi \to \Phi - \partial_t\alpha\)</span> in the Hamiltonian, giving <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi' = \hat{H}'\psi'\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+\[
+\mathrm{i}\hbar\partial_t\psi' = -q(\partial_t\alpha)\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi + \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\mathrm{i}\hbar\partial_t\psi
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(-q\partial_t\alpha\)</span> term is compensated by <span class="math notranslate nohighlight">\(\Phi \to \Phi - \partial_t\alpha\)</span> in the Hamiltonian.</p>
+</div>
+</section>
+<section id="momentum-canonical-kinetic-and-field">
+<h3>Momentum: Canonical, Kinetic, and Field<a class="headerlink" href="#momentum-canonical-kinetic-and-field" title="Link to this heading">#</a></h3>
+<p>The gauge-invariant Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span> gives rise to three distinct momentum quantities:</p>
+<div class="important admonition">
+<p class="admonition-title">Three Types of Momentum</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Canonical</p></th>
+<th class="head"><p>Kinetic</p></th>
+<th class="head"><p>Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Symbol</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(q\boldsymbol{A}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Operator</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(-\mathrm{i}\hbar\nabla\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(q\boldsymbol{A}(\boldsymbol{r})\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Gauge</strong></p></td>
+<td><p>Dependent</p></td>
+<td><p>Invariant</p></td>
+<td><p>Dependent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Conserved</strong></p></td>
+<td><p>Only if <span class="math notranslate nohighlight">\(\partial_i\hat{H} = 0\)</span></p></td>
+<td><p>No (Lorentz force)</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The relation <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = \hat{\boldsymbol{\pi}} + q\boldsymbol{A}\)</span> decomposes canonical momentum into a physical part (kinetic, <span class="math notranslate nohighlight">\(= m\boldsymbol{v}\)</span>) and a field part.</p>
+</div>
+</section>
+<section id="energy-kinetic-potential-and-total">
+<h3>Energy: Kinetic, Potential, and Total<a class="headerlink" href="#energy-kinetic-potential-and-total" title="Link to this heading">#</a></h3>
+<p>The same distinction applies to energy:</p>
+<div class="important admonition">
+<p class="admonition-title">Three Types of Energy</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Kinetic</p></th>
+<th class="head"><p>Potential</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Expression</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\hat{\boldsymbol{\pi}}^2}{2m} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(q\Phi\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{H} = \frac{\hat{\boldsymbol{\pi}}^2}{2m} + q\Phi\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gauge</strong></p></td>
+<td><p>Invariant</p></td>
+<td><p>Dependent</p></td>
+<td><p>Dependent</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Conserved</strong></p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes (if <span class="math notranslate nohighlight">\(\hat{H}\)</span> is time-independent)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The kinetic energy <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}^2/2m\)</span> is gauge-invariant (built from gauge-invariant <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span>). The potential energy <span class="math notranslate nohighlight">\(q\Phi\)</span> is gauge-dependent (since <span class="math notranslate nohighlight">\(\Phi\)</span> shifts). The total energy (Hamiltonian eigenvalue) is gauge-invariant—energy eigenvalues do not depend on gauge choice.</p>
+</div>
+<div class="caution admonition">
+<p class="admonition-title">Caution: Total Hamiltonian vs Energy Eigenvalues</p>
+<p>The <em>operator</em> <span class="math notranslate nohighlight">\(\hat{H}\)</span> changes form under a gauge transformation (because <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> shift), but its <em>eigenvalues</em> <span class="math notranslate nohighlight">\(E_n\)</span> do not. The gauge-transformed eigenstate <span class="math notranslate nohighlight">\(\psi_n' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi_n\)</span> satisfies <span class="math notranslate nohighlight">\(\hat{H}'\psi_n' = E_n\psi_n'\)</span> with the same <span class="math notranslate nohighlight">\(E_n\)</span>.</p>
 </div>
 </section>
 <section id="gauge-invariant-vs-gauge-dependent-quantities">
 <h3>Gauge-Invariant vs Gauge-Dependent Quantities<a class="headerlink" href="#gauge-invariant-vs-gauge-dependent-quantities" title="Link to this heading">#</a></h3>
 <div class="important admonition">
-<p class="admonition-title">Physical vs Conventional Quantities</p>
+<p class="admonition-title">Classification of Physical Quantities</p>
+<p><strong>Gauge-invariant (physical):</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Quantity</p></th>
-<th class="head"><p>Status</p></th>
-<th class="head"><p>Reason</p></th>
+<th class="head"><p>Symbol</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> (fields)</p></td>
-<td><p>Gauge-invariant</p></td>
-<td><p>Derivatives of potentials; <span class="math notranslate nohighlight">\(\nabla\alpha\)</span> terms cancel</p></td>
+<tr class="row-even"><td><p>Electric field</p></td>
+<td><p><span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\vert\psi\vert^2\)</span> (probability density)</p></td>
-<td><p>Gauge-invariant</p></td>
-<td><p>Phase shift cancels in <span class="math notranslate nohighlight">\(\vert\psi\vert^2\)</span></p></td>
+<tr class="row-odd"><td><p>Magnetic field</p></td>
+<td><p><span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> (probability current)</p></td>
-<td><p>Gauge-invariant</p></td>
-<td><p>Built from kinetic momentum</p></td>
+<tr class="row-even"><td><p>Field strength tensor</p></td>
+<td><p><span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>Energy eigenvalues, transition probabilities</p></td>
-<td><p>Gauge-invariant</p></td>
-<td><p>Spectrum and overlaps are physical</p></td>
+<tr class="row-odd"><td><p>Kinetic momentum</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> (kinetic momentum)</p></td>
-<td><p>Gauge-invariant</p></td>
-<td><p>Shift in <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> cancels shift in <span class="math notranslate nohighlight">\(q\boldsymbol{A}\)</span></p></td>
+<tr class="row-even"><td><p>Kinetic energy</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}^2/2m\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\Phi\)</span> (potentials)</p></td>
-<td><p>Gauge-dependent</p></td>
-<td><p>Directly shifted by <span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<tr class="row-odd"><td><p>Energy eigenvalues</p></td>
+<td><p><span class="math notranslate nohighlight">\(E_n\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> (canonical momentum)</p></td>
-<td><p>Gauge-dependent</p></td>
-<td><p>Depends on phase convention</p></td>
+<tr class="row-even"><td><p>Probability density</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\psi\vert^2\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>Phase of <span class="math notranslate nohighlight">\(\psi\)</span></p></td>
-<td><p>Gauge-dependent</p></td>
-<td><p>Transforms as <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span></p></td>
+<tr class="row-odd"><td><p>Probability current</p></td>
+<td><p><span class="math notranslate nohighlight">\(\boldsymbol{j} = \frac{1}{m}\mathrm{Re}(\psi^*\hat{\boldsymbol{\pi}}\psi)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Transition probabilities</p></td>
+<td><p><span class="math notranslate nohighlight">\(\vert\langle\phi\vert\psi\rangle\vert^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Closed-loop phase</p></td>
+<td><p><span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Gauge-dependent (conventional):</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quantity</p></th>
+<th class="head"><p>Symbol</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vector potential</p></td>
+<td><p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Scalar potential</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Canonical momentum</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Potential energy</p></td>
+<td><p><span class="math notranslate nohighlight">\(q\Phi\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Wavefunction phase</p></td>
+<td><p><span class="math notranslate nohighlight">\(\arg(\psi)\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="caution admonition">
-<p class="admonition-title">Canonical vs Kinetic Momentum</p>
-<p>In the presence of electromagnetic fields, the canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> is <strong>gauge-dependent and not directly observable</strong>. What experiments measure is the <strong>kinetic momentum</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\]</div>
-<p>Different gauge choices give different values of <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span>, but all agree on <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{\pi}}\rangle\)</span>. The kinetic momentum appears in the probability current, energy expressions, and equations of motion.</p>
-</div>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>When you expand a wavefunction in the plane-wave basis <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\boldsymbol{p}\cdot\boldsymbol{r}/\hbar}\)</span>, you are expanding in canonical momentum eigenstates. In the presence of a magnetic field, canonical and kinetic momenta differ. Is the momentum you measure in a time-of-flight experiment the canonical or kinetic momentum? How can two physicists in different gauges both report correct “momentum measurements”?</p>
-</div>
 </section>
-<section id="gauge-symmetry-as-redundancy">
-<h3>Gauge Symmetry as Redundancy<a class="headerlink" href="#gauge-symmetry-as-redundancy" title="Link to this heading">#</a></h3>
-<div class="attention admonition">
-<p class="admonition-title">Gauge = Redundancy of Description</p>
-<p>Gauge symmetry is fundamentally different from physical symmetries like rotations or translations:</p>
-<ul class="simple">
-<li><p><strong>Physical symmetry</strong> (e.g., rotation): maps one state to a <em>different</em> state.</p></li>
-<li><p><strong>Gauge symmetry</strong>: maps one <em>description</em> to another description of the <em>same</em> state.</p></li>
-</ul>
-<p>The set of gauge-equivalent descriptions forms an equivalence class. The physical state is the class itself, not any particular gauge choice. This redundancy is nonetheless powerful: the requirement that theories be gauge-invariant constrains what interactions are possible, leading directly to the minimal coupling prescription of §4.1.1.</p>
+<section id="gauge-invariance-as-redundancy">
+<h3>Gauge Invariance as Redundancy<a class="headerlink" href="#gauge-invariance-as-redundancy" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Gauge Invariance Is Not a Symmetry</p>
+<p>A <strong>physical symmetry</strong> (rotation, translation) maps one physical state to a <em>different</em> physical state that happens to obey the same laws.</p>
+<p>A <strong>gauge transformation</strong> maps one <em>description</em> to another description of the <strong>same</strong> physical state. The physics has not changed—only the bookkeeping.</p>
+<p>Gauge invariance is therefore a <strong>redundancy</strong>: multiple mathematical descriptions (<span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\Phi\)</span> in different gauges) correspond to one physical reality. Requiring gauge invariance is not imposing a new law of nature—it is <strong>projecting out the redundant degrees of freedom</strong> to identify what is physical.</p>
 </div>
+<p>This perspective explains why gauge invariance is so powerful: it constrains the theory not because it adds structure, but because it <em>removes</em> unphysical freedom. The minimal coupling prescription, the form of the Hamiltonian, the Lorentz force—all follow from demanding that the redundant description be self-consistent.</p>
 </section>
 <section id="gauge-fixing">
 <h3>Gauge Fixing<a class="headerlink" href="#gauge-fixing" title="Link to this heading">#</a></h3>
-<p>In practice, we choose a gauge to perform calculations. The choice is arbitrary—all gauges give identical physics—but some simplify particular problems.</p>
+<p>In practice, we choose a gauge to simplify calculations. Common choices:</p>
 <div class="note admonition">
 <p class="admonition-title">Common Gauge Choices</p>
 <ul class="simple">
-<li><p><strong>Coulomb gauge</strong> (<span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>): Useful for nonrelativistic atomic and solid-state physics. <span class="math notranslate nohighlight">\(\Phi\)</span> becomes the instantaneous Coulomb potential.</p></li>
+<li><p><strong>Coulomb gauge</strong> (<span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>): Standard for nonrelativistic problems. <span class="math notranslate nohighlight">\(\Phi\)</span> becomes the instantaneous Coulomb potential.</p></li>
 <li><p><strong>Lorenz gauge</strong> (<span class="math notranslate nohighlight">\(\partial_\mu A^\mu = 0\)</span>): Manifestly Lorentz-covariant; preferred in relativistic QFT.</p></li>
-<li><p><strong>Temporal gauge</strong> (<span class="math notranslate nohighlight">\(\Phi = 0\)</span>): Used in lattice gauge theory and quantum simulation.</p></li>
+<li><p><strong>Temporal gauge</strong> (<span class="math notranslate nohighlight">\(\Phi = 0\)</span>): Used in lattice gauge theory.</p></li>
 </ul>
-<p>The gauge freedom is a computational <strong>advantage</strong>: choose whichever gauge simplifies your problem.</p>
+<p>All gauges give identical physics; the choice is a computational convenience.</p>
 </div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion</p>
-<p>The Aharonov-Bohm effect (§4.2.2) shows that the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> produces observable phase shifts in a region where <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span>. This seems to contradict the claim that <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent and unphysical. How do you reconcile this? What quantity is actually gauge-invariant in the AB effect? (Hint: think about the <em>line integral</em> <span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span>.)</p>
+<p>The Aharonov-Bohm effect shows that <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> produces observable phase shifts in a region where <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span>. This seems to contradict the claim that <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent. How do you reconcile this? (Hint: the observable is <span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span>, which is gauge-invariant.)</p>
+</div>
+<div class="dropdown poll admonition">
+<p class="admonition-title">Poll: Observable quantities under gauge freedom</p>
+<p>Which of the following is NOT gauge-invariant?</p>
+<p>(A) The electric field <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span>.</p>
+<p>(B) The probability density <span class="math notranslate nohighlight">\(\vert\psi(\boldsymbol{r},t)\vert^2\)</span>.</p>
+<p>(C) The canonical momentum expectation value <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span>.</p>
+<p>(D) The magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a></strong>: Spatial gauge principle and covariant derivative.</p></li>
+<li><p><strong><a class="reference internal" href="4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">4.1.2 Electromagnetic Coupling</span></a></strong>: Spacetime gauge, Lorentz force, <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>.</p></li>
+<li><p><strong><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a></strong>: Observable interference from gauge potentials.</p></li>
+</ul>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Gauge transformations</strong> act simultaneously on <span class="math notranslate nohighlight">\(\psi\)</span> (phase), <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> (gradient), and <span class="math notranslate nohighlight">\(\Phi\)</span> (time derivative), preserving the Schrödinger equation.</p></li>
-<li><p><strong>Gauge-invariant</strong>: fields <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, energy levels, transition probabilities, kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>.</p></li>
-<li><p><strong>Gauge-dependent</strong>: potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\Phi\)</span>, canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span>, wavefunction phase.</p></li>
-<li><p><strong>Gauge symmetry is redundancy</strong>: multiple descriptions of the same physics, not a map between distinct states.</p></li>
-<li><p><strong>Gauge fixing</strong> is a computational choice; all gauges yield identical physical predictions.</p></li>
+<li><p><strong>Gauge transformations</strong> act on <span class="math notranslate nohighlight">\(\psi\)</span> (phase), <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> (gradient), and <span class="math notranslate nohighlight">\(\Phi\)</span> (time derivative) simultaneously, preserving all physics.</p></li>
+<li><p><strong>Momentum</strong>: canonical <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> (gauge-dependent), kinetic <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> (gauge-invariant), field <span class="math notranslate nohighlight">\(q\boldsymbol{A}\)</span> (gauge-dependent).</p></li>
+<li><p><strong>Energy</strong>: kinetic <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}^2/2m\)</span> (gauge-invariant), potential <span class="math notranslate nohighlight">\(q\Phi\)</span> (gauge-dependent), eigenvalues <span class="math notranslate nohighlight">\(E_n\)</span> (gauge-invariant).</p></li>
+<li><p><strong>Gauge invariance is redundancy</strong>, not symmetry: multiple descriptions of the same state, projected to physical reality by requiring consistency.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a>: Local phase invariance and the origin of gauge fields</p></li>
-<li><p><a class="reference internal" href="4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">4.1.2 Electromagnetic Coupling</span></a>: Lorentz force from Heisenberg equations of motion</p></li>
-<li><p><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a>: Observable interference from gauge potentials</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> Verify that the Schrödinger equation with the minimal-coupling Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2 + q\Phi\)</span> is invariant under the simultaneous gauge transformation:</p>
-<div class="math notranslate nohighlight">
-\[\psi \to \psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi, \quad \boldsymbol{A} \to \boldsymbol{A}' = \boldsymbol{A} + \nabla\alpha, \quad \Phi \to \Phi' = \Phi - \partial_t\alpha\]</div>
-<p>Show that if <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x}, t)\)</span> satisfies <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = \hat{H}\psi\)</span> with potentials <span class="math notranslate nohighlight">\((\boldsymbol{A}, \Phi)\)</span>, then <span class="math notranslate nohighlight">\(\psi'\)</span> satisfies the same equation with potentials <span class="math notranslate nohighlight">\((\boldsymbol{A}', \Phi')\)</span>.</p>
-<p><strong>2.</strong> Show that the charge density <span class="math notranslate nohighlight">\(\rho = q|\psi|^2\)</span> and probability current <span class="math notranslate nohighlight">\(\boldsymbol{j} = \frac{1}{m}\text{Im}(\psi^*\hat{\boldsymbol{\pi}}\psi)\)</span> (where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>) are both gauge-invariant:</p>
-<p>(a) Show that <span class="math notranslate nohighlight">\(|\psi'|^2 = |\psi|^2\)</span> under a gauge transformation.</p>
-<p>(b) Show that <span class="math notranslate nohighlight">\(\psi'^*\hat{\boldsymbol{\pi}}'\psi' = \psi^*\hat{\boldsymbol{\pi}}\psi\)</span> (the kinetic momentum is gauge-invariant).</p>
-<p>(c) Explain why the continuity equation <span class="math notranslate nohighlight">\(\partial_t\rho + \nabla \cdot \boldsymbol{j} = 0\)</span> holds in all gauges.</p>
-<p><strong>3.</strong> In the Coulomb gauge <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>, the gauge-fixing condition leaves a residual gauge freedom: <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{x}, t)\)</span> can be any function satisfying <span class="math notranslate nohighlight">\(\nabla^2\alpha = 0\)</span> (harmonic functions).</p>
-<p>(a) Show that if <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> satisfies <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>, then <span class="math notranslate nohighlight">\(\boldsymbol{A}' = \boldsymbol{A} + \nabla\alpha\)</span> also satisfies the Coulomb gauge if <span class="math notranslate nohighlight">\(\nabla^2\alpha = 0\)</span>.</p>
-<p>(b) Give an explicit example of a harmonic function <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{x})\)</span> that generates a residual gauge transformation.</p>
-<p>(c) Explain physically: does this residual freedom change any physics?</p>
-<p><strong>4.</strong> Two physicists compute the expectation value of canonical momentum <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span> for an electron in a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{\boldsymbol{z}}\)</span>. Physicist A uses the Coulomb gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span> (symmetric gauge). Physicist B uses the Landau gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = (0, Bx, 0)\)</span>.</p>
-<p>(a) Explain why they will compute different values for <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span> in their respective gauges.</p>
-<p>(b) Which momentum is gauge-invariant: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> or <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>?</p>
-<p>(c) Show that they both obtain the same value for the kinetic momentum <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{\pi}}\rangle\)</span>.</p>
-<p>(d) In an experiment, what quantity would actually be measured?</p>
-<p><strong>5.</strong> Show that energy eigenvalues are gauge-invariant: if <span class="math notranslate nohighlight">\(\psi_n\)</span> is an energy eigenstate in one gauge with eigenvalue <span class="math notranslate nohighlight">\(E_n\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\hat{H}[\boldsymbol{A}, \Phi]\psi_n = E_n\psi_n\]</div>
-<p>then the gauge-transformed state <span class="math notranslate nohighlight">\(\psi_n' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi_n\)</span> is an eigenstate of the transformed Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}'[\boldsymbol{A}', \Phi']\)</span> with the same eigenvalue <span class="math notranslate nohighlight">\(E_n\)</span>.</p>
-<p><strong>6.</strong> A particle moves from point A to point B in an electromagnetic field. The phase acquired along a path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is determined by the path integral of the kinetic momentum:</p>
-<div class="math notranslate nohighlight">
-\[\phi_\mathcal{C} = \frac{q}{\hbar}\int_\mathcal{C} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r}\]</div>
-<p>Show that this phase difference (in interference patterns) is <strong>gauge-invariant</strong> even though the local vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent. Specifically, show that if two paths enclose a region with magnetic flux <span class="math notranslate nohighlight">\(\Phi_B\)</span>, the phase difference is:</p>
-<div class="math notranslate nohighlight">
-\[\Delta\phi = \frac{q}{\hbar}\oint (\boldsymbol{A} + \nabla\alpha) \cdot \mathrm{d}\boldsymbol{r} = \frac{q}{\hbar}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r}\]</div>
-<p>(Use Stokes’ theorem and the fact that <span class="math notranslate nohighlight">\(\oint \nabla\alpha \cdot \mathrm{d}\boldsymbol{r} = 0\)</span> for a closed loop.)</p>
-<p><strong>7.</strong> Explain conceptually why “gauge symmetry is a redundancy of description, not a physical symmetry of nature.” Compare and contrast gauge symmetry with a true physical symmetry, such as rotational invariance.</p>
-<p>(a) How does rotational symmetry map physical states to different physical states?</p>
-<p>(b) How does gauge symmetry map descriptions to different descriptions of the same state?</p>
-<p>(c) Why is gauge freedom useful in practice, while physical symmetries are fundamental principles of nature?</p>
-<p>(d) Give an example of how two physicists using different gauges (Coulomb vs. Lorenz) would report different intermediate results but agree on all physical predictions.</p>
-<p><strong>8.</strong> The Aharonov-Bohm effect (discussed in 4.2.1) produces observable interference patterns due to the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> in a region where the magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> everywhere on the particle’s path.</p>
-<p>(a) Explain how this is consistent with the statement that <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is gauge-dependent and unphysical.</p>
-<p>(b) What quantity in the Aharonov-Bohm effect is actually gauge-invariant: the local <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, or the integrated phase <span class="math notranslate nohighlight">\(\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{r}\)</span>?</p>
-<p>(c) Show that the Aharonov-Bohm phase shift is gauge-invariant by using the result from Problem 6.</p>
-<p>(d) Discuss why the Aharonov-Bohm effect demonstrates that the potentials (<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\Phi\)</span>) are more fundamental in quantum mechanics than in classical mechanics, even though they remain gauge-dependent quantities.</p>
+<p><strong>1. Gauge-transforming an observable.</strong> Consider the expectation value <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle = \langle\psi\vert\hat{O}\vert\psi\rangle\)</span>.</p>
+<p>(a) Under the gauge transformation <span class="math notranslate nohighlight">\(\vert\psi\rangle \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\vert\psi\rangle\)</span>, show that <span class="math notranslate nohighlight">\(\langle\hat{O}\rangle\)</span> is invariant if and only if <span class="math notranslate nohighlight">\([\hat{O}, \mathrm{e}^{\mathrm{i}q\alpha/\hbar}] = 0\)</span>. Which familiar operators satisfy this, and which do not?</p>
+<p>(b) One claims that <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span> is gauge-invariant because “momentum is physical.” Find the flaw by computing <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span> in two gauges for a particle in a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>.</p>
+<p>(c) Construct a gauge-invariant momentum operator from <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>.</p>
+<p><strong>2. Probability current.</strong> The probability current is <span class="math notranslate nohighlight">\(\boldsymbol{j} = \frac{1}{m}\mathrm{Re}(\psi^*\hat{\boldsymbol{\pi}}\psi)\)</span> with <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> is gauge-invariant.</p>
+<p>(b) Show that the continuity equation <span class="math notranslate nohighlight">\(\partial_t\vert\psi\vert^2 + \nabla \cdot \boldsymbol{j} = 0\)</span> holds in every gauge.</p>
+<p><strong>3. Canonical momentum shifts.</strong> Two physicists compute <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span> for the same electron in a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>. Physicist A uses the symmetric gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span>; physicist B uses the Landau gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = (0, Bx, 0)\)</span>.</p>
+<p>(a) Explain why they get different values of <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span>.</p>
+<p>(b) Show that both agree on <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{\pi}}\rangle\)</span>.</p>
+<p>(c) Which quantity would be measured in an experiment?</p>
+<p><strong>4. Energy under gauge transformation.</strong> One might argue: “The eigenvalue equation <span class="math notranslate nohighlight">\(\hat{H}\psi_n = E_n\psi_n\)</span> contains <span class="math notranslate nohighlight">\(\hat{H}\)</span>, which depends on <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span>. So changing gauge must change the energy eigenvalues.”</p>
+<p>(a) Refute this by showing explicitly that if <span class="math notranslate nohighlight">\(\hat{H}\psi_n = E_n\psi_n\)</span>, then <span class="math notranslate nohighlight">\(\hat{H}'\psi_n' = E_n\psi_n'\)</span> with the transformed <span class="math notranslate nohighlight">\(\hat{H}'\)</span> and <span class="math notranslate nohighlight">\(\psi_n' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi_n\)</span>.</p>
+<p>(b) The kinetic energy <span class="math notranslate nohighlight">\(\frac{1}{2m}\langle\hat{\boldsymbol{\pi}}^2\rangle\)</span> is gauge-invariant, but <span class="math notranslate nohighlight">\(q\langle\Phi\rangle\)</span> is not. How can <span class="math notranslate nohighlight">\(E_n\)</span> be gauge-invariant if one of its terms is not? Resolve the apparent paradox.</p>
+<p>(c) An experimentalist measures the hydrogen atom spectrum. In what sense is the result “gauge-invariant” even though the calculation was done in a specific gauge?</p>
+<p><strong>5. Coulomb gauge residual freedom.</strong> In the Coulomb gauge <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A} = 0\)</span>, show that the gauge is not fully fixed: <span class="math notranslate nohighlight">\(\boldsymbol{A}' = \boldsymbol{A} + \nabla\alpha\)</span> still satisfies <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{A}' = 0\)</span> provided <span class="math notranslate nohighlight">\(\nabla^2\alpha = 0\)</span>. Give an explicit example of such a residual transformation.</p>
+<p><strong>6. Gauge-invariant classification.</strong> Classify each of the following quantities as gauge-invariant or gauge-dependent. For each gauge-dependent quantity, construct a related gauge-invariant one.</p>
+<p>(a) <span class="math notranslate nohighlight">\(\vert\psi(\boldsymbol{r})\vert^2\)</span>, <span class="math notranslate nohighlight">\(\arg(\psi(\boldsymbol{r}))\)</span>, <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{p}}\rangle\)</span></p>
+<p>(b) <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{A}(\boldsymbol{r})\)</span>, <span class="math notranslate nohighlight">\(\oint \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l}\)</span> (closed loop)</p>
+<p>(c) The energy eigenvalue <span class="math notranslate nohighlight">\(E_n\)</span>, the canonical momentum eigenvalue <span class="math notranslate nohighlight">\(\hbar k\)</span>, the Berry phase <span class="math notranslate nohighlight">\(\gamma = \oint \mathcal{A}\cdot\mathrm{d}\boldsymbol{R}\)</span></p>
+<p><strong>7. Symmetry vs redundancy.</strong> Explain conceptually why gauge invariance is a redundancy, not a physical symmetry.</p>
+<p>(a) How does a rotation map one physical state to a different physical state?</p>
+<p>(b) How does a gauge transformation map one description to another description of the same state?</p>
+<p>(c) Why is the redundancy nevertheless useful for constraining the theory?</p>
+<p><strong>8. Aharonov-Bohm phase.</strong> A particle travels along two paths enclosing a region with magnetic flux <span class="math notranslate nohighlight">\(\Phi_B = \oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span>. Show that the phase difference <span class="math notranslate nohighlight">\(\Delta\phi = \frac{q}{\hbar}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span> is gauge-invariant by verifying <span class="math notranslate nohighlight">\(\oint \nabla\alpha \cdot \mathrm{d}\boldsymbol{l} = 0\)</span> for any single-valued <span class="math notranslate nohighlight">\(\alpha\)</span>. Explain how <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> can produce observable effects in a region where <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span>.</p>
 </section>
 </section>
 
@@ -783,8 +872,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-transformations">Gauge Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-canonical-kinetic-and-field">Momentum: Canonical, Kinetic, and Field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-kinetic-potential-and-total">Energy: Kinetic, Potential, and Total</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariant-vs-gauge-dependent-quantities">Gauge-Invariant vs Gauge-Dependent Quantities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-symmetry-as-redundancy">Gauge Symmetry as Redundancy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-invariance-as-redundancy">Gauge Invariance as Redundancy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauge-fixing">Gauge Fixing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>

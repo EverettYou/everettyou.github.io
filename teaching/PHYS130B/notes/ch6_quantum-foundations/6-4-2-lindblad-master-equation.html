@@ -215,7 +215,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-geometric-optics.html">3.1.1 Geometric Optics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-particle-wave-unification.html">3.1.3 Particle-Wave Unification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-wave-particle-duality.html">3.1.3 Wave-Particle Duality</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -505,12 +505,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Lindblad Master Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-lindblad-evolution">Properties of Lindblad Evolution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1}\,\hat{\sigma}_-\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-damping-l-sqrt-gamma-varphi-hat-sigma-z">2. Phase Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\,\hat{\sigma}^z\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#depolarizing-l-mu-sqrt-gamma-d-3-hat-sigma-mu-for-mu-x-y-z">3. Depolarizing: <span class="math notranslate nohighlight">\(L_\mu = \sqrt{\Gamma_d/3}\,\hat{\sigma}^\mu\)</span> for <span class="math notranslate nohighlight">\(\mu = x,y,z\)</span></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-states">Steady States</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-jump-picture">Quantum Jump Picture</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
@@ -542,16 +537,20 @@
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
-<p>For an isolated system, the Schrödinger equation perfectly captures quantum evolution. But real systems interact with their surroundings — heat baths, photon fields, uncontrolled degrees of freedom. The Lindblad master equation describes how open systems evolve, accounting for both unitary dynamics and the irreversible effects of environmental coupling. It is the most general form of Markovian (memoryless) evolution compatible with quantum mechanics.</p>
+<p>For an isolated system, the Schrödinger equation perfectly captures quantum evolution. But real systems interact with their surroundings. The Lindblad master equation describes how open systems evolve, accounting for both unitary dynamics and irreversible environmental effects. It is the most general Markovian (memoryless) evolution compatible with quantum mechanics.</p>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The Lindblad equation decomposes open-system evolution into two parts: (1) unitary evolution under the system Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span>, and (2) dissipation described by jump operators <span class="math notranslate nohighlight">\(\{\hat{L}_k\}\)</span> with rates <span class="math notranslate nohighlight">\(\{\gamma_k\}\)</span>. The equation preserves trace, Hermiticity, and positivity — necessary conditions for valid quantum dynamics. Every quantum channel (§6.3.3) is obtained from a Lindblad equation integrated over a fixed time interval.</p>
+<p>The Lindblad equation decomposes open-system evolution into: (1) unitary evolution under the system Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span>, and (2) dissipation described by jump operators <span class="math notranslate nohighlight">\(\{\hat{L}_k\}\)</span> with rates <span class="math notranslate nohighlight">\(\{\gamma_k\}\)</span>. The equation preserves trace, Hermiticity, and positivity — necessary conditions for valid quantum dynamics. Every quantum channel (§6.3.3) is obtained from a Lindblad equation integrated over a fixed time interval.</p>
+<div class="note admonition">
+<p class="admonition-title">Physical Example: Spontaneously Emitting Atom</p>
+<p>Consider a two-level atom in an excited state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> coupled to the electromagnetic field. The excited state decays to the ground state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> by emitting a photon at rate <span class="math notranslate nohighlight">\(\gamma\)</span>. In the Lindblad picture, the upper level’s population decays as <span class="math notranslate nohighlight">\(\dot{\rho}_{11} = -\gamma\rho_{11}\)</span>. Remarkably, coherences between <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> decay at the slower rate <span class="math notranslate nohighlight">\(\dot{\rho}_{01} = -(\gamma/2)\rho_{01}\)</span>. This asymmetry—coherences outlive populations by a factor of 2—is the simplest Lindblad process.</p>
+</div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: Markovian Approximation</p>
-<p>The Lindblad equation assumes the system and environment are uncorrelated at each instant — a Markovian (memoryless) approximation. But real environments can have memory: the environment’s response depends on the system’s past state. How do we know when Markovian is justified?</p>
+<p>The Lindblad equation assumes uncorrelated system and environment at each instant—a Markovian approximation. But real environments can have memory. How do we know when Markovian is justified?</p>
 <ul class="simple">
-<li><p>The approximation breaks down if the environment correlation time <span class="math notranslate nohighlight">\(\tau_E\)</span> is comparable to the system timescale. For typical quantum optics setups, <span class="math notranslate nohighlight">\(\tau_E \sim 10^{-15}\)</span> s while atomic evolution is <span class="math notranslate nohighlight">\(\sim 10^{-9}\)</span> s — safely Markovian.</p></li>
-<li><p>Some systems show “non-Markovian revivals” — coherence temporarily returns after decoherence. Does this invalidate the Lindblad equation, or is it simply outside its regime?</p></li>
+<li><p>The approximation breaks down if environment correlation time <span class="math notranslate nohighlight">\(\tau_E\)</span> is comparable to the system timescale. For quantum optics, <span class="math notranslate nohighlight">\(\tau_E \sim 10^{-15}\)</span> s while atomic evolution is <span class="math notranslate nohighlight">\(\sim 10^{-9}\)</span> s—safely Markovian.</p></li>
+<li><p>Some systems show “non-Markovian revivals”—coherence temporarily returns. Does this invalidate the Lindblad equation, or is it simply outside its regime?</p></li>
 </ul>
 </div>
 </section>
@@ -561,7 +560,9 @@
 <div class="important admonition">
 <p class="admonition-title">Lindblad Master Equation (GKSL Form)</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-equation">
-<span class="eqno">(159)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{\rho}] + \sum_k \gamma_k \left( \hat{L}_k \hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k, \hat{\rho}\} \right)\]</div>
+<span class="eqno">(153)<a class="headerlink" href="#equation-eq-lindblad-equation" title="Link to this equation">#</a></span>\[
+\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[\hat{H}, \hat{\rho}] + \sum_k \gamma_k \left( \hat{L}_k \hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k, \hat{\rho}\} \right)
+\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H\)</span> = system Hamiltonian (Hermitian), governing unitary evolution.</p></li>
@@ -576,128 +577,128 @@
 <p class="admonition-title">Derivation: Lindblad Equation</p>
 <p>Start with total Hamiltonian:</p>
 <div class="math notranslate nohighlight">
-\[H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}\]</div>
-<p>The full system+environment evolves unitarily. Tracing out the environment and assuming the <strong>Markovian approximation</strong> (short environment memory, <span class="math notranslate nohighlight">\(\tau_E \ll \tau_S\)</span>) gives:</p>
+\[
+H_\text{total} = H_S \otimes I_E + I_S \otimes H_E + H_\text{int}
+\]</div>
+<p>The full system+environment evolves unitarily. Tracing out the environment and assuming the <strong>Markovian approximation</strong> gives:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}\hat{\rho}_S}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[H_S, \hat{\rho}_S] + \mathcal{D}(\hat{\rho}_S)\]</div>
-<p>The dissipation superoperator <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> must preserve trace and positivity. The most general form satisfying these constraints is precisely the Lindblad form <span class="math notranslate nohighlight">\(\sum_k\gamma_k(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\})\)</span>.</p>
+\[
+\frac{\mathrm{d}\hat{\rho}_S}{\mathrm{d}t} = -\frac{\mathrm{i}}{\hbar}[H_S, \hat{\rho}_S] + \mathcal{D}(\hat{\rho}_S)
+\]</div>
+<p>The dissipation superoperator <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> must preserve trace and positivity. The most general form satisfying these constraints is the Lindblad form <span class="math notranslate nohighlight">\(\sum_k\gamma_k(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\})\)</span>.</p>
+</div>
+<div class="dropdown poll admonition">
+<p class="admonition-title">Poll: Lindblad operators and physical processes</p>
+<p>The Lindblad master equation includes jump operators <span class="math notranslate nohighlight">\(\hat{L}_k\)</span> with rates <span class="math notranslate nohighlight">\(\gamma_k\)</span>. The term <span class="math notranslate nohighlight">\(\hat{L}_k\rho\hat{L}_k^\dagger\)</span> describes how a physical process (e.g., photon emission) affects the density matrix. What does <span class="math notranslate nohighlight">\(\hat{L}_k\rho\hat{L}_k^\dagger\)</span> physically represent?</p>
+<p>(A) A transition induced by the operator <span class="math notranslate nohighlight">\(\hat{L}_k\)</span>; the rate is proportional to <span class="math notranslate nohighlight">\(\gamma_k\)</span>.</p>
+<p>(B) The steady-state density matrix of the system.</p>
+<p>(C) The effect of measurement on the system; the outcome is proportional to <span class="math notranslate nohighlight">\(\gamma_k\)</span>.</p>
+<p>(D) Virtual processes that do not change the observable probability distribution.</p>
 </div>
 </section>
 <section id="properties-of-lindblad-evolution">
 <h3>Properties of Lindblad Evolution<a class="headerlink" href="#properties-of-lindblad-evolution" title="Link to this heading">#</a></h3>
-<div class="note admonition">
-<p class="admonition-title">Properties of the Lindblad Equation</p>
 <p>The Lindblad equation preserves all fundamental properties of quantum states:</p>
-<p><strong>1. Trace preservation</strong>: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\text{Tr}(\hat{\rho}) = 0\)</span>, so <span class="math notranslate nohighlight">\(\text{Tr}(\hat{\rho}(t)) = 1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><strong>1. Trace preservation</strong>: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\operatorname{Tr}(\hat{\rho}) = 0\)</span>, so <span class="math notranslate nohighlight">\(\operatorname{Tr}(\hat{\rho}(t)) = 1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p><strong>2. Hermiticity preservation</strong>: If <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \hat{\rho}(0)^\dagger\)</span>, then <span class="math notranslate nohighlight">\(\hat{\rho}(t) = \hat{\rho}(t)^\dagger\)</span>.</p>
-<p><strong>3. Positivity</strong>: If <span class="math notranslate nohighlight">\(\hat{\rho}(0) \geq 0\)</span>, then <span class="math notranslate nohighlight">\(\hat{\rho}(t) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span> (valid quantum state).</p>
-<p><strong>4. CPTP map</strong>: The time evolution <span class="math notranslate nohighlight">\(\hat{\rho}(0) \mapsto \hat{\rho}(t)\)</span> is a completely positive trace-preserving (quantum) channel, equivalent to the Kraus representation <span class="math notranslate nohighlight">\(\hat{\rho}(t) = \sum_\mu K_\mu \hat{\rho}(0) K_\mu^\dagger\)</span> with <span class="math notranslate nohighlight">\(\sum_\mu K_\mu^\dagger K_\mu = I\)</span>.</p>
-</div>
-<p><strong>Gain and loss balance</strong>: The <span class="math notranslate nohighlight">\(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger\)</span> term represents <em>gain</em> (probability inflow from quantum jumps), while <span class="math notranslate nohighlight">\(-\frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\}\)</span> represents <em>loss</em> (probability outflow). Their combined action preserves trace:</p>
+<p><strong>3. Positivity</strong>: If <span class="math notranslate nohighlight">\(\hat{\rho}(0) \geq 0\)</span>, then <span class="math notranslate nohighlight">\(\hat{\rho}(t) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><strong>4. CPTP map</strong>: The time evolution is a completely positive trace-preserving (quantum) channel: <span class="math notranslate nohighlight">\(\hat{\rho}(t) = \sum_\mu K_\mu \hat{\rho}(0) K_\mu^\dagger\)</span> with <span class="math notranslate nohighlight">\(\sum_\mu K_\mu^\dagger K_\mu = I\)</span>.</p>
+<p><strong>Gain and loss balance</strong>: The <span class="math notranslate nohighlight">\(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger\)</span> term represents <em>gain</em> (probability inflow), while <span class="math notranslate nohighlight">\(-\frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\}\)</span> represents <em>loss</em> (probability outflow). Together they preserve trace:</p>
 <div class="math notranslate nohighlight">
-\[\text{Tr}\left(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\}\right) = \text{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho}) - \text{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho}) = 0\]</div>
+\[
+\operatorname{Tr}\left(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\}\right) = 0
+\]</div>
 </section>
 <section id="common-lindblad-operators">
 <h3>Common Lindblad Operators<a class="headerlink" href="#common-lindblad-operators" title="Link to this heading">#</a></h3>
-<section id="amplitude-damping-l-sqrt-gamma-1-hat-sigma">
-<h4>1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1}\,\hat{\sigma}_-\)</span><a class="headerlink" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma" title="Link to this heading">#</a></h4>
-<p><strong>Physical process</strong>: Excited state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> decays to ground state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (energy dissipation, spontaneous emission) at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>.</p>
+<p><strong>1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1}\,\hat{\sigma}_-\)</span>.</strong></p>
+<p><strong>Physical process</strong>: Excited state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> decays to ground state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (spontaneous emission) at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>. For the two-level atom, the Lindblad operator <span class="math notranslate nohighlight">\(\hat{L} = \sqrt{\gamma}\,\vert 0\rangle\langle 1\vert\)</span> describes spontaneous emission at rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-amp-damping">
-<span class="eqno">(160)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_1\!\left(\hat{\sigma}_-\hat{\rho}\hat{\sigma}_+ - \frac{1}{2}\{\hat{\sigma}_+\hat{\sigma}_-,\hat{\rho}\}\right)\]</div>
-<p><strong>Effect on populations</strong>: <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{11} = -\Gamma_1\hat{\rho}_{11}\)</span> (exponential decay), <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{00} = +\Gamma_1\hat{\rho}_{11}\)</span> (gain).</p>
-<p><strong>Effect on coherences</strong>: <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{01} = -\frac{\Gamma_1}{2}\hat{\rho}_{01}\)</span> (decay at half the rate).</p>
-</section>
-<section id="phase-damping-l-sqrt-gamma-varphi-hat-sigma-z">
-<h4>2. Phase Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\,\hat{\sigma}^z\)</span><a class="headerlink" href="#phase-damping-l-sqrt-gamma-varphi-hat-sigma-z" title="Link to this heading">#</a></h4>
+<span class="eqno">(154)<a class="headerlink" href="#equation-eq-lindblad-amp-damping" title="Link to this equation">#</a></span>\[
+\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_1\!\left(\hat{\sigma}_-\hat{\rho}\hat{\sigma}_+ - \frac{1}{2}\{\hat{\sigma}_+\hat{\sigma}_-,\hat{\rho}\}\right)
+\]</div>
+<p><strong>Effect</strong>: <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{11} = -\Gamma_1\hat{\rho}_{11}\)</span> (decay), <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{00} = +\Gamma_1\hat{\rho}_{11}\)</span> (gain), <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{01} = -\frac{\Gamma_1}{2}\hat{\rho}_{01}\)</span> (coherences decay at half rate).</p>
+<p><strong>2. Phase Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\,\hat{\sigma}^z\)</span>.</strong></p>
 <p><strong>Physical process</strong>: Random phase fluctuations (dephasing) with no energy loss at rate <span class="math notranslate nohighlight">\(\Gamma_\varphi = 1/T_\varphi\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-phase-damping">
-<span class="eqno">(161)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_\varphi\!\left(\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z - \hat{\rho}\right)\]</div>
-<p><strong>Effect</strong>: Only off-diagonal terms decay: <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(t) = \mathrm{e}^{-2\Gamma_\varphi t}\hat{\rho}_{01}(0)\)</span>. Diagonal (population) terms unchanged. This is the microscopic realization of the dephasing channel (§6.3.3 and §6.4.1).</p>
-</section>
-<section id="depolarizing-l-mu-sqrt-gamma-d-3-hat-sigma-mu-for-mu-x-y-z">
-<h4>3. Depolarizing: <span class="math notranslate nohighlight">\(L_\mu = \sqrt{\Gamma_d/3}\,\hat{\sigma}^\mu\)</span> for <span class="math notranslate nohighlight">\(\mu = x,y,z\)</span><a class="headerlink" href="#depolarizing-l-mu-sqrt-gamma-d-3-hat-sigma-mu-for-mu-x-y-z" title="Link to this heading">#</a></h4>
-<p><strong>Physical process</strong>: Symmetric noise on all three axes; generic random error channel at rate <span class="math notranslate nohighlight">\(\Gamma_d\)</span>.</p>
+<span class="eqno">(155)<a class="headerlink" href="#equation-eq-lindblad-phase-damping" title="Link to this equation">#</a></span>\[
+\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = \Gamma_\varphi\!\left(\hat{\sigma}^z\hat{\rho}\hat{\sigma}^z - \hat{\rho}\right)
+\]</div>
+<p><strong>Effect</strong>: Only off-diagonal terms decay: <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(t) = \mathrm{e}^{-2\Gamma_\varphi t}\hat{\rho}_{01}(0)\)</span>. Diagonal terms unchanged—this is the microscopic realization of the dephasing channel (§6.3.3, §6.4.1).</p>
+<p><strong>3. Depolarizing: <span class="math notranslate nohighlight">\(L_\mu = \sqrt{\Gamma_d/3}\,\hat{\sigma}^\mu\)</span> for <span class="math notranslate nohighlight">\(\mu = x,y,z\)</span>.</strong></p>
+<p><strong>Physical process</strong>: Symmetric noise at rate <span class="math notranslate nohighlight">\(\Gamma_d\)</span>.</p>
 <p><strong>Effect</strong>: Drives any state toward the maximally mixed state <span class="math notranslate nohighlight">\(I/2\)</span> on timescale <span class="math notranslate nohighlight">\(1/\Gamma_d\)</span>.</p>
-</section>
 </section>
 <section id="steady-states">
 <h3>Steady States<a class="headerlink" href="#steady-states" title="Link to this heading">#</a></h3>
-<p>A <strong>steady state</strong> <span class="math notranslate nohighlight">\(\hat{\rho}_\infty\)</span> satisfies <span class="math notranslate nohighlight">\(\mathcal{L}(\hat{\rho}_\infty) = 0\)</span>, i.e., <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\rho}_\infty}{\mathrm{d}t} = 0\)</span>.</p>
+<p>A <strong>steady state</strong> <span class="math notranslate nohighlight">\(\hat{\rho}_\infty\)</span> satisfies <span class="math notranslate nohighlight">\(\mathcal{L}(\hat{\rho}_\infty) = 0\)</span>.</p>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Amplitude Damping</p>
 <p><strong>Problem.</strong> Find the steady state for amplitude damping <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1}\hat{\sigma}_-\)</span>.</p>
-<p><strong>Solution.</strong> From <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{11} = -\Gamma_1\hat{\rho}_{11} = 0\)</span> we get <span class="math notranslate nohighlight">\(\hat{\rho}_{11}^\infty = 0\)</span>, hence <span class="math notranslate nohighlight">\(\hat{\rho}_{00}^\infty = 1\)</span>.</p>
-<p>The steady state is <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = \vert 0\rangle\langle 0\vert\)</span> — all population has decayed to the ground state.</p>
+<p><strong>Solution.</strong> From <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{11} = -\Gamma_1\hat{\rho}_{11} = 0\)</span> we get <span class="math notranslate nohighlight">\(\hat{\rho}_{11}^\infty = 0\)</span>, so <span class="math notranslate nohighlight">\(\hat{\rho}_{00}^\infty = 1\)</span>. The steady state is <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = \vert 0\rangle\langle 0\vert\)</span>.</p>
 </div>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Thermal Steady State</p>
-<p><strong>Problem.</strong> For an atom coupled to a thermal bath at temperature <span class="math notranslate nohighlight">\(T\)</span>, include both decay (<span class="math notranslate nohighlight">\(L_1 = \sqrt{\Gamma\bar{n}_\text{th}+\Gamma}\,\hat{\sigma}_-\)</span>) and absorption (<span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma\bar{n}_\text{th}}\,\hat{\sigma}_+\)</span>). Find the steady state.</p>
-<p><strong>Solution.</strong> Balancing gain and loss: <span class="math notranslate nohighlight">\(\hat{\rho}_{11}^\infty/\hat{\rho}_{00}^\infty = \bar{n}_\text{th}/(\bar{n}_\text{th}+1) = \mathrm{e}^{-\hbar\omega/k_BT}\)</span>, which is the <strong>Boltzmann factor</strong>. The steady state is the thermal density matrix <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = \mathrm{e}^{-\beta \hat{H}}/Z\)</span>, consistent with §6.1.2.</p>
+<p><strong>Problem.</strong> For an atom in a thermal bath at temperature <span class="math notranslate nohighlight">\(T\)</span>, include decay (<span class="math notranslate nohighlight">\(L_1 = \sqrt{\Gamma\bar{n}_\text{th}+\Gamma}\,\hat{\sigma}_-\)</span>) and absorption (<span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma\bar{n}_\text{th}}\,\hat{\sigma}_+\)</span>). Find the steady state.</p>
+<p><strong>Solution.</strong> Balancing gain and loss: <span class="math notranslate nohighlight">\(\hat{\rho}_{11}^\infty/\hat{\rho}_{00}^\infty = \bar{n}_\text{th}/(\bar{n}_\text{th}+1) = \mathrm{e}^{-\hbar\omega/k_BT}\)</span> (Boltzmann factor). The steady state is thermal: <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = \mathrm{e}^{-\beta \hat{H}}/Z\)</span> (§6.1.2).</p>
 </div>
 </section>
 <section id="quantum-jump-picture">
 <h3>Quantum Jump Picture<a class="headerlink" href="#quantum-jump-picture" title="Link to this heading">#</a></h3>
-<p>The Lindblad equation averages over an ensemble of quantum trajectories. Each individual trajectory evolves stochastically:</p>
+<p>The Lindblad equation averages over an ensemble of quantum trajectories. Each trajectory evolves stochastically:</p>
 <ol class="arabic simple">
 <li><p><strong>Between jumps</strong>: The state evolves under the <em>non-Hermitian</em> effective Hamiltonian</p></li>
 </ol>
 <div class="math notranslate nohighlight" id="equation-eq-lindblad-heff">
-<span class="eqno">(162)<a class="headerlink" href="#equation-eq-lindblad-heff" title="Link to this equation">#</a></span>\[H_\text{eff} = H - \frac{\mathrm{i}\hbar}{2}\sum_k\gamma_k \hat{L}_k^\dagger \hat{L}_k\]</div>
-<p>(non-Hermitian: the norm decreases, tracking the “no-jump” probability.)</p>
+<span class="eqno">(156)<a class="headerlink" href="#equation-eq-lindblad-heff" title="Link to this equation">#</a></span>\[
+H_\text{eff} = H - \frac{\mathrm{i}\hbar}{2}\sum_k\gamma_k \hat{L}_k^\dagger \hat{L}_k
+\]</div>
+<p>The imaginary part causes the norm to decay, tracking the “no-jump” probability.</p>
 <ol class="arabic simple" start="2">
-<li><p><strong>At random times</strong> (Poisson process), a <strong>quantum jump</strong> <span class="math notranslate nohighlight">\(\hat{L}_k\)</span> occurs: <span class="math notranslate nohighlight">\(\hat{\rho} \to \hat{L}_k\hat{\rho} \hat{L}_k^\dagger/p_k\)</span> with probability <span class="math notranslate nohighlight">\(p_k \propto \gamma_k\,\text{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho})\,\mathrm{d}t\)</span>.</p></li>
-<li><p><strong>Averaging</strong> over all trajectories (all possible jump sequences and times) recovers the Lindblad master equation.</p></li>
+<li><p><strong>At random times</strong> (Poisson process), a <strong>quantum jump</strong> <span class="math notranslate nohighlight">\(\hat{L}_k\)</span> occurs: <span class="math notranslate nohighlight">\(\hat{\rho} \to \hat{L}_k\hat{\rho} \hat{L}_k^\dagger/p_k\)</span> with probability <span class="math notranslate nohighlight">\(p_k \propto \gamma_k\,\operatorname{Tr}(\hat{L}_k^\dagger \hat{L}_k\hat{\rho})\,\mathrm{d}t\)</span>.</p></li>
+<li><p><strong>Averaging</strong> over all trajectories recovers the Lindblad master equation.</p></li>
 </ol>
-<p><strong>Physical interpretation</strong>: Each quantum jump corresponds to a physical event — photon emission, phonon absorption, spin flip. Decoherence and dissipation arise from random jumps; the deterministic master equation is the statistical average.</p>
+<p><strong>Physical interpretation</strong>: Each quantum jump corresponds to a physical event—photon emission, phonon absorption, spin flip. The non-Hermitian Hamiltonian reduces the state’s norm between jumps, tracking the probability that no jump has occurred. When a jump happens, the state is projected and renormalized. Averaging over many trajectories with different jump sequences recovers the Lindblad master equation.</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The Lindblad equation <span class="math notranslate nohighlight">\(\dot{\hat{\rho}} = -\frac{\mathrm{i}}{\hbar}[\hat{H},\hat{\rho}] + \sum_k\gamma_k(\hat{L}_k\hat{\rho} \hat{L}_k^\dagger - \frac{1}{2}\{\hat{L}_k^\dagger \hat{L}_k,\hat{\rho}\})\)</span> is the most general Markovian master equation for open quantum systems.</p></li>
-<li><p>Lindblad operators <span class="math notranslate nohighlight">\(\hat{L}_k\)</span> represent quantum jumps; rates <span class="math notranslate nohighlight">\(\gamma_k \geq 0\)</span>; the equation preserves trace, Hermiticity, and positivity (CPTP).</p></li>
-<li><p>Amplitude damping (<span class="math notranslate nohighlight">\(L = \hat{\sigma}_-\)</span>): decay to ground state. Phase damping (<span class="math notranslate nohighlight">\(L = \hat{\sigma}^z\)</span>): coherence decay without energy loss. Depolarizing (<span class="math notranslate nohighlight">\(L_\mu = \hat{\sigma}^\mu\)</span>): drives state to <span class="math notranslate nohighlight">\(I/2\)</span>.</p></li>
-<li><p>Steady states satisfy <span class="math notranslate nohighlight">\(\mathcal{L}(\hat{\rho}_\infty) = 0\)</span>; for thermal baths the steady state is the Boltzmann distribution <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta \hat{H}}/Z\)</span>.</p></li>
-<li><p>The quantum jump picture: Lindblad evolution is the average over stochastic trajectories where jumps occur at random times.</p></li>
+<li><p><strong>Lindblad master equation:</strong> <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = -\mathrm{i}[\hat{H}, \hat{\rho}] + \sum_k \gamma_k (L_k \hat{\rho} L_k^\dagger - \frac{1}{2}\{L_k^\dagger L_k, \hat{\rho}\})\)</span> (GKSL); describes Markovian open-system dynamics.</p></li>
+<li><p><strong>Jump operators <span class="math notranslate nohighlight">\(L_k\)</span>:</strong> Represent decoherence and dissipation; decay rates <span class="math notranslate nohighlight">\(\gamma_k \geq 0\)</span>. Amplitude damping, dephasing, and decay are modeled by specific choices.</p></li>
+<li><p><strong>Steady state:</strong> Long-time limit <span class="math notranslate nohighlight">\(\hat{\rho}(t \to \infty) = \hat{\rho}_{ss}\)</span> satisfies <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\rho}}{\mathrm{d}t} = 0\)</span>. Describes equilibrium or thermal state.</p></li>
+<li><p><strong>Detailed balance:</strong> For systems in contact with thermal bath, jump operators and rates obey detailed balance; entropy increases monotonically.</p></li>
+<li><p><strong>Positivity and CPTP:</strong> Lindblad form guarantees complete positivity and trace preservation for any <span class="math notranslate nohighlight">\(L_k\)</span> and <span class="math notranslate nohighlight">\(\gamma_k \geq 0\)</span>.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="6-4-1-decoherence.html"><span class="doc std std-doc">6.4.1 Decoherence</span></a></strong>: Microscopic origin of dephasing and decoherence</p></li>
-<li><p><strong><a class="reference internal" href="6-3-3-quantum-channels.html"><span class="doc std std-doc">6.3.3 Quantum Channels</span></a></strong>: Channels as the integrated form of Lindblad evolution</p></li>
-<li><p><strong><a class="reference internal" href="6-1-2-entropy.html"><span class="doc std std-doc">6.1.2 Entropy</span></a></strong>: Thermal states as Lindblad steady states</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong> Consider a qubit under amplitude damping, <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma}\hat{\sigma}_-\)</span> where <span class="math notranslate nohighlight">\(\hat{\sigma}_- = \vert 0\rangle\langle 1\vert\)</span>.</p>
-<p>(a) Show that <span class="math notranslate nohighlight">\(\text{Tr}(\mathrm{d}\hat{\rho}/\mathrm{d}t) = 0\)</span> (trace is conserved). Use the cyclic property of trace.</p>
+<p><strong>1. Amplitude Damping Lindblad.</strong> Consider a qubit under amplitude damping, <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma}\hat{\sigma}_-\)</span> where <span class="math notranslate nohighlight">\(\hat{\sigma}_- = \vert 0\rangle\langle 1\vert\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(\operatorname{Tr}(\mathrm{d}\hat{\rho}/\mathrm{d}t) = 0\)</span> (trace is conserved). Use the cyclic property of trace.</p>
 <p>(b) Verify <span class="math notranslate nohighlight">\(\hat{\sigma}_+\hat{\sigma}_- = \vert 1\rangle\langle 1\vert\)</span> (projector onto excited state). Use this to write the loss term explicitly.</p>
 <p>(c) Show that if <span class="math notranslate nohighlight">\(\hat{\rho}(0)\)</span> is Hermitian, then <span class="math notranslate nohighlight">\(\mathrm{d}\hat{\rho}/\mathrm{d}t\)</span> is also Hermitian (Hermiticity is preserved).</p>
-<p><strong>2.</strong> A qubit decays via amplitude damping at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>. Start with <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \vert 1\rangle\langle 1\vert\)</span>.</p>
+<p><strong>2. Decay Rate Dynamics.</strong> A qubit decays via amplitude damping at rate <span class="math notranslate nohighlight">\(\Gamma_1 = 1/T_1\)</span>. Start with <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \vert 1\rangle\langle 1\vert\)</span>.</p>
 <p>(a) Write the Lindblad master equation explicitly for populations <span class="math notranslate nohighlight">\(\hat{\rho}_{00}(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\rho}_{11}(t)\)</span>.</p>
 <p>(b) Solve to find <span class="math notranslate nohighlight">\(\hat{\rho}_{11}(t) = \mathrm{e}^{-t/T_1}\)</span> and <span class="math notranslate nohighlight">\(\hat{\rho}_{00}(t) = 1 - \mathrm{e}^{-t/T_1}\)</span>.</p>
 <p>(c) Show the steady state is <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = \vert 0\rangle\langle 0\vert\)</span> (all population in the ground state).</p>
-<p>(d) Starting from <span class="math notranslate nohighlight">\(\hat{\rho}(0)\)</span> with coherence <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(0) 
-eq 0\)</span>, show that <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(t) = \hat{\rho}_{01}(0)\,\mathrm{e}^{-t/(2T_1)}\)</span>. Coherences decay at half the relaxation rate.</p>
-<p><strong>3.</strong> A qubit undergoes pure dephasing via <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\hat{\sigma}^z\)</span>. Start with <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \vert+\rangle\langle+\vert\)</span>.</p>
+<p>(d) Starting from <span class="math notranslate nohighlight">\(\hat{\rho}(0)\)</span> with coherence <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(0) \neq 0\)</span>, show that <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(t) = \hat{\rho}_{01}(0)\,\mathrm{e}^{-t/(2T_1)}\)</span>. Coherences decay at half the relaxation rate.</p>
+<p><strong>3. Pure Dephasing Lindblad.</strong> A qubit undergoes pure dephasing via <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\hat{\sigma}^z\)</span>. Start with <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \vert+\rangle\langle+\vert\)</span>.</p>
 <p>(a) Write <span class="math notranslate nohighlight">\(\hat{\rho}(0)\)</span> explicitly as a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix.</p>
 <p>(b) Apply the Lindblad superoperator: show that diagonal elements (populations) are unchanged and off-diagonal elements decay as <span class="math notranslate nohighlight">\(\hat{\rho}_{01}(t) = \mathrm{e}^{-2\Gamma_\varphi t}\hat{\rho}_{01}(0)\)</span>.</p>
 <p>(c) As <span class="math notranslate nohighlight">\(t \to \infty\)</span>, show that <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = I/2\)</span> (maximally mixed state). Explain physically: why does dephasing destroy coherence while preserving energy?</p>
-<p><strong>4.</strong> An atom couples to a thermal radiation field at temperature <span class="math notranslate nohighlight">\(T\)</span>. The relevant processes are spontaneous emission at rate <span class="math notranslate nohighlight">\(A\)</span>, absorption at rate <span class="math notranslate nohighlight">\(Bn_\text{th}\)</span> (where <span class="math notranslate nohighlight">\(n_\text{th} = 1/(\mathrm{e}^{\hbar\omega/k_BT}-1)\)</span>), and dephasing at rate <span class="math notranslate nohighlight">\(\gamma_\varphi\)</span>.</p>
+<p><strong>4. Thermal Radiation Coupling.</strong> An atom couples to a thermal radiation field at temperature <span class="math notranslate nohighlight">\(T\)</span>. The relevant processes are spontaneous emission at rate <span class="math notranslate nohighlight">\(A\)</span>, absorption at rate <span class="math notranslate nohighlight">\(Bn_\text{th}\)</span> (where <span class="math notranslate nohighlight">\(n_\text{th} = 1/(\mathrm{e}^{\hbar\omega/k_BT}-1)\)</span>), and dephasing at rate <span class="math notranslate nohighlight">\(\gamma_\varphi\)</span>.</p>
 <p>(a) Write the three Lindblad operators <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span>, <span class="math notranslate nohighlight">\(L_3\)</span> for these processes.</p>
 <p>(b) At <span class="math notranslate nohighlight">\(T = 0\)</span>: <span class="math notranslate nohighlight">\(n_\text{th} \to 0\)</span>, so only spontaneous emission survives. Write the simplified master equation and find the steady state.</p>
 <p>(c) At high temperature (<span class="math notranslate nohighlight">\(k_BT \gg \hbar\omega\)</span>): <span class="math notranslate nohighlight">\(n_\text{th} \approx k_BT/\hbar\omega\)</span>. Show that the steady state approaches <span class="math notranslate nohighlight">\(\hat{\rho}_\infty \propto \mathrm{e}^{-\beta\hbar\omega\hat{\sigma}^z/2}\)</span> (Boltzmann distribution).</p>
-<p><strong>5.</strong> In the quantum jump picture, the system evolves under <span class="math notranslate nohighlight">\(H_\text{eff} = -\frac{\mathrm{i}\hbar\Gamma}{2}\vert 1\rangle\langle 1\vert\)</span> (for amplitude damping) between jumps.</p>
+<p><strong>5. Quantum Problem.</strong> In the quantum jump picture, the system evolves under <span class="math notranslate nohighlight">\(H_\text{eff} = -\frac{\mathrm{i}\hbar\Gamma}{2}\vert 1\rangle\langle 1\vert\)</span> (for amplitude damping) between jumps.</p>
 <p>(a) For initial state <span class="math notranslate nohighlight">\(\vert\psi(0)\rangle = \vert 1\rangle\)</span>, show that the no-jump evolution gives <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle \propto \mathrm{e}^{-\Gamma t/2}\vert 1\rangle\)</span>. The squared norm <span class="math notranslate nohighlight">\(\Vert\psi(t)\Vert^2 = \mathrm{e}^{-\Gamma t}\)</span> is the probability that no jump has occurred.</p>
 <p>(b) If a jump occurs at time <span class="math notranslate nohighlight">\(t\)</span>, the state becomes <span class="math notranslate nohighlight">\(\hat{\sigma}_-\vert\psi(t)\rangle \propto \vert 0\rangle\)</span> (ground state). Interpret this physically: what is the jump event?</p>
 <p>(c) Show that averaging over all possible trajectories (no jump with probability <span class="math notranslate nohighlight">\(\mathrm{e}^{-\Gamma t}\)</span>, one jump at time <span class="math notranslate nohighlight">\(\tau\)</span> with probability <span class="math notranslate nohighlight">\(\Gamma\mathrm{e}^{-\Gamma\tau}\mathrm{d}\tau\)</span>) reproduces the Lindblad master equation solution <span class="math notranslate nohighlight">\(\hat{\rho}(t) = \mathrm{e}^{-\Gamma t}\vert 1\rangle\langle 1\vert + (1 - \mathrm{e}^{-\Gamma t})\vert 0\rangle\langle 0\vert\)</span>.</p>
-<p><strong>6.</strong> A qubit undergoes depolarizing noise via <span class="math notranslate nohighlight">\(L_\mu = \sqrt{\Gamma/3}\hat{\sigma}^\mu\)</span> for <span class="math notranslate nohighlight">\(\mu = x,y,z\)</span>.</p>
+<p><strong>6. Depolarizing Lindblad Equation.</strong> A qubit undergoes depolarizing noise via <span class="math notranslate nohighlight">\(L_\mu = \sqrt{\Gamma/3}\hat{\sigma}^\mu\)</span> for <span class="math notranslate nohighlight">\(\mu = x,y,z\)</span>.</p>
 <p>(a) Show that <span class="math notranslate nohighlight">\(\hat{\rho}_\infty = I/2\)</span> is a steady state: <span class="math notranslate nohighlight">\(\mathcal{L}(I/2) = 0\)</span>. (Hint: Use <span class="math notranslate nohighlight">\(\hat{\sigma}^\mu(I/2)\hat{\sigma}^\mu = I/2\)</span> for each Pauli.)</p>
-<p>(b) Starting from <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \vert 0\rangle\langle 0\vert\)</span>, define purity <span class="math notranslate nohighlight">\(\mathcal{P}(t) = \text{Tr}(\hat{\rho}(t)^2)\)</span>. Show that <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\mathcal{P}}{\mathrm{d}t} = -2\Gamma(\mathcal{P} - 1/2)\)</span>. Solve to get <span class="math notranslate nohighlight">\(\mathcal{P}(t) = \frac{1}{2} + \frac{1}{2}\mathrm{e}^{-2\Gamma t}\)</span>.</p>
+<p>(b) Starting from <span class="math notranslate nohighlight">\(\hat{\rho}(0) = \vert 0\rangle\langle 0\vert\)</span>, define purity <span class="math notranslate nohighlight">\(\mathcal{P}(t) = \operatorname{Tr}(\hat{\rho}(t)^2)\)</span>. Show that <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\mathcal{P}}{\mathrm{d}t} = -2\Gamma(\mathcal{P} - 1/2)\)</span>. Solve to get <span class="math notranslate nohighlight">\(\mathcal{P}(t) = \frac{1}{2} + \frac{1}{2}\mathrm{e}^{-2\Gamma t}\)</span>.</p>
 <p>(c) Identify the Kraus operators <span class="math notranslate nohighlight">\(\{K_\mu\}\)</span> for the depolarizing channel (integrated Lindblad evolution for short time <span class="math notranslate nohighlight">\(\mathrm{d}t\)</span>). Show the channel matches the form from §6.3.3.</p>
-<p><strong>7.</strong> A Lindblad equation has two operators: decay <span class="math notranslate nohighlight">\(L_1 = \sqrt{\Gamma_1}\hat{\sigma}_-\)</span> and dephasing <span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma_\varphi}\hat{\sigma}^z\)</span>.</p>
+<p><strong>7. Multiple Jump Operators.</strong> A Lindblad equation has two operators: decay <span class="math notranslate nohighlight">\(L_1 = \sqrt{\Gamma_1}\hat{\sigma}_-\)</span> and dephasing <span class="math notranslate nohighlight">\(L_2 = \sqrt{\Gamma_\varphi}\hat{\sigma}^z\)</span>.</p>
 <p>(a) Write the full master equation for <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{11}\)</span> and <span class="math notranslate nohighlight">\(\dot{\hat{\rho}}_{01}\)</span>. Show that populations decay at rate <span class="math notranslate nohighlight">\(\Gamma_1\)</span> and coherences decay at rate <span class="math notranslate nohighlight">\(\Gamma_1/2 + 2\Gamma_\varphi\)</span>.</p>
 <p>(b) Identify the dephasing time <span class="math notranslate nohighlight">\(T_2\)</span> from the coherence decay rate. Show that <span class="math notranslate nohighlight">\(\frac{1}{T_2} = \frac{1}{2T_1} + \frac{1}{T_\varphi}\)</span> where <span class="math notranslate nohighlight">\(T_1 = 1/\Gamma_1\)</span> and <span class="math notranslate nohighlight">\(T_\varphi = 1/(2\Gamma_\varphi)\)</span>.</p>
 <p>(c) Explain physically why <span class="math notranslate nohighlight">\(T_2 \leq 2T_1\)</span>. Under what condition is this bound saturated?</p>
@@ -774,12 +775,7 @@ eq 0\)</span>, show that <span class="math notranslate nohighlight">\(\hat{\rho}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Lindblad Master Equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-lindblad-evolution">Properties of Lindblad Evolution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-damping-l-sqrt-gamma-1-hat-sigma">1. Amplitude Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_1}\,\hat{\sigma}_-\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-damping-l-sqrt-gamma-varphi-hat-sigma-z">2. Phase Damping: <span class="math notranslate nohighlight">\(L = \sqrt{\Gamma_\varphi}\,\hat{\sigma}^z\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#depolarizing-l-mu-sqrt-gamma-d-3-hat-sigma-mu-for-mu-x-y-z">3. Depolarizing: <span class="math notranslate nohighlight">\(L_\mu = \sqrt{\Gamma_d/3}\,\hat{\sigma}^\mu\)</span> for <span class="math notranslate nohighlight">\(\mu = x,y,z\)</span></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-lindblad-operators">Common Lindblad Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-states">Steady States</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-jump-picture">Quantum Jump Picture</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
