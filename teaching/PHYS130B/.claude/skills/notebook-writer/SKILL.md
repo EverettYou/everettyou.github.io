@@ -1,43 +1,44 @@
-# Skill: Notebook Writer
+---
+name: phys130b-notebook
+description: Safe read/write and validation for PHYS130B Jupyter notebooks under notes_src. Use when editing, fixing, or restructuring any .ipynb.
+---
 
-Safely write and edit Jupyter notebook (.ipynb) cells for the PHYS130B lecture notes project.
+# Skill: Notebook writer (PHYS130B)
 
-## When to Use
+Programmatic editing of `.ipynb` only—never `NotebookEdit` or `Edit`/`Write` on notebooks in Cowork.
 
-- Implementing new content (homework, discussion problems, prompts) into notebooks
-- Fixing corrupted cells
-- Restructuring notebook cell layout
-- Any programmatic modification of .ipynb files
+## Activation (auto)
 
-## Critical Rules
+- Start of session: see **`.claude/README.md`** (feedback → progress → work).
+- Any task that **modifies** `notes_src/**/*.ipynb` (content, structure, or metadata).
+- Fixing issues from `feedback.md` / `progress.md` that require JSON cell edits.
+- After another skill proposes changes—**this skill applies the patch** and runs validation.
 
-1. **NEVER** use `NotebookEdit` or `Edit` on .ipynb files
-2. **ALWAYS** use Python `json.load`/`json.dump` via Bash
-3. **ALWAYS** read the notebook before writing
-4. **ALWAYS** validate after writing
+## Non-goals
+
+- Does **not** replace a physics or pedagogy pass—pair with `science-reviewer` or `lecture-content` when content changes.
+- Does **not** run `./build.sh` or `jupyter-book build` (`rules/validation.md`).
+
+## Fallback / de-escalation
+
+1. If validation reports corruption, **stop feature work**—repair using `rules/troubleshooting-ipynb.md`, re-validate, then continue.
+2. If unsure about cell indices, **read** the notebook and print a cell summary before writing.
+3. If a write might conflict with parallel edits, prefer **one notebook at a time** and re-read before save.
+
+## Absolute rules
+
+1. **NEVER** `NotebookEdit` on `.ipynb`.
+2. **NEVER** `Edit`/`Write` on `.ipynb` in Cowork—use Bash + `json.load` / `json.dump`.
+3. **`json.dump(nb, f, indent=1, ensure_ascii=False)`** always.
+4. **`text_to_source`** for markdown strings—canonical implementation: `skills/notebook-writer/scripts/safe_edit.py` (same logic as `rules/notebook-editing.md`).
+5. **Read** before write; **validate** after write.
 
 ## Workflow
 
-### Step 1: Read the Target Notebook
-
 ```python
 import json
-with open(path) as f:
-    nb = json.load(f)
-print(f"Cells: {len(nb['cells'])}")
-for i, c in enumerate(nb['cells']):
-    preview = ''.join(c['source'])[:80]
-    print(f"  [{i}] {c['cell_type']}: {preview}")
-```
 
-### Step 2: Prepare Content
-
-Use the `text_to_source` helper to convert markdown text to proper source arrays:
-
-```python
 def text_to_source(text):
-    """Convert markdown string to proper ipynb source array.
-    Every line except the last gets a \\n terminator."""
     lines = text.split('\n')
     source = []
     for i, line in enumerate(lines):
@@ -47,39 +48,37 @@ def text_to_source(text):
             if line:
                 source.append(line)
     return source
-```
 
-### Step 3: Modify the Notebook
-
-```python
-# Replace a cell's content
+with open(path) as f:
+    nb = json.load(f)
+# inspect len(nb['cells']), then:
 nb['cells'][CELL_INDEX]['source'] = text_to_source(new_content)
-
-# Insert a new cell
-new_cell = {
-    "cell_type": "markdown",
-    "metadata": {},
-    "source": text_to_source(content)
-}
-nb['cells'].insert(INDEX, new_cell)
-```
-
-### Step 4: Write Back
-
-```python
 with open(path, 'w') as f:
     json.dump(nb, f, indent=1, ensure_ascii=False)
 ```
 
-### Step 5: Validate
+## Validation (after every write)
 
-Run the validation script from `.claude/scripts/validate_notebooks.py` on the modified file. Check for:
-- Char-by-char corruption
-- Missing `\n` terminators
-- Collapsed content (lines >1000 chars)
+```bash
+python3 .claude/skills/notebook-writer/scripts/safe_edit.py validate path/to.ipynb
+```
+
+For broader checks (structure, MyST, notation heuristics):
+
+```bash
+python3 .claude/scripts/validate_project.py --scope <chapter-or-file-stem>
+```
+
+Full list of checks: see former validate playbook—**corruption**, **cell counts/titles**, **`$$` blank lines**, **banned patterns** (`---`, nested `:::`, `plt.show()`, etc.), **notation hints** in math (script docstring).
+
+Report results in a small table if many files: `| Notebook | Corruption | Structure | Other |`.
+
+## Fix workflow (from feedback)
+
+1. `json.load` the notebook; locate cell/line from the report.
+2. Classify: char-by-char / missing `\n` / collapsed line / content violation of `rules/` (architecture, MyST, style).
+3. Patch with `json.dump`; **validate**; update `progress.md` or annotate `feedback.md` when resolved.
 
 ## References
 
-- `.claude/experience.md` — Full corruption patterns and fix recipes
-- `.claude/design.md` — Cell structure specs
-- `.claude/rules/notebook-editing.md` — Editing rules summary
+- `CLAUDE.md`, `.claude/README.md`, `rules/notebook-editing.md`, `rules/tooling-security.md`, `rules/validation.md`, `rules/troubleshooting-ipynb.md`

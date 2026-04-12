@@ -22,6 +22,12 @@ Constants and operators that are not variables use upright (roman) type:
 | Pauli matrices (explicit 2x2) | Plain with superscript | `\sigma^x`, `\sigma^y`, `\sigma^z` |
 | Vectorized Pauli | Both | `\hat{\boldsymbol{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)` |
 
+## Dot Product (`\cdot`)
+
+- `\cdot` is **only** for dot products between vectors: `\boldsymbol{a} \cdot \boldsymbol{b}`, `\nabla \cdot \boldsymbol{j}`.
+- **Never** use `\cdot` between scalar quantities (e.g., `\partial_x \cdot j` is wrong; write `\partial_x j` or `\frac{\partial j}{\partial x}`).
+- In 1D, the continuity equation is `\partial_t \rho + \frac{\partial j}{\partial x} = 0`; in 3D, use `\partial_t \rho + \nabla \cdot \boldsymbol{j} = 0`.
+
 ## Eigenstate Notation
 
 | Observable | Eigenstates |
@@ -57,6 +63,7 @@ Two notation systems coexist for qubit operators and states. **Never mix them wi
 ## Ket/Bra Notation and Pipe Characters
 
 - Use `\vert` for `|` in kets and bras throughout: `$\vert\psi\rangle$`, `$\langle\phi\vert$`, `$\vert 0\rangle$`.
+- **Never glue `\vert` to a following letter or digit** (wrong: `\vertV`, `\vertn`, `\vert0\rangle`; right: `\vert V\vert`, `\vert n\rangle`, `\vert 0\rangle`). Otherwise MathJax may misparse. Matrix elements: `\langle m\vert V\vert n\rangle`. For operator norms prefer `\|V\|` or `\lVert V\rVert`. `validate_project.py` flags glued `\vert` inside `$...$` / `$$...$$`.
 - This is **required** inside markdown tables (bare `|` clashes with pipe syntax) and **recommended** everywhere else for consistency.
 
 ## Inline vs Display

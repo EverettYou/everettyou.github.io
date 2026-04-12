@@ -1,50 +1,34 @@
-# Rule: Safe Notebook Editing
+# Rule: Safe notebook editing (`.ipynb`)
 
-These rules are mandatory for ANY edit to `.ipynb` files in this project.
+Mandatory for any change to Jupyter notebooks in this project.
 
-## Banned Tools
+## Banned tools
 
-- **NEVER use `NotebookEdit`** — it produces char-by-char corruption where each character becomes a separate array element.
-- **NEVER use `Edit`** on ANY file — it triggers an "Always allow?" permission dialog on every invocation in Cowork mode, blocking autonomous operation. Denied in `settings.local.json`.
-- **NEVER use `Write`** tool — same permission issue as `Edit`. Denied in `settings.local.json`.
+See **`rules/tooling-security.md`** for why `NotebookEdit`, `Edit`, and `Write` are disallowed for agents and what to use instead.
 
-All three tools are in the `deny` list. Agents that attempt to call them will be blocked.
+## Required method
 
-## Required Method: Bash for ALL File Modifications
+All writes go through **Bash** using Python:
 
-Every file write — `.ipynb`, `.md`, `.json`, `.py`, anything — must go through **Bash** using Python file I/O. This is the only tool that runs without permission prompts in Cowork mode.
-
-**For `.ipynb` notebooks:**
 ```python
 import json
 with open(path) as f:
     nb = json.load(f)
-nb['cells'][i]['source'] = new_source_list
+nb['cells'][i]['source'] = new_source_list  # use text_to_source() for markdown strings
 with open(path, 'w') as f:
     json.dump(nb, f, indent=1, ensure_ascii=False)
 ```
 
-**For `.md` / `.json` / `.py` / any text file:**
-```python
-# Create or overwrite
-with open(path, 'w') as f:
-    f.write(new_content)
+For plain text files (`.md`, `.yml`, `.py`), use normal `open` read/write or `str.replace` patterns in `tooling-security.md`.
 
-# Find-and-replace
-with open(path) as f:
-    content = f.read()
-content = content.replace(old_string, new_string)
-with open(path, 'w') as f:
-    f.write(content)
-```
+## Source array format
 
-## Source Array Format
+Each cell `"source"` is a list of strings. **Every line except the last must end with `\n`.**
 
-Each cell's `"source"` is a list of strings. Every line **except the last** must end with `\n`:
+Canonical helper (duplicate of `skills/notebook-writer/scripts/safe_edit.py`):
 
 ```python
 def text_to_source(text):
-    """Convert markdown string to proper ipynb source array."""
     lines = text.split('\n')
     source = []
     for i, line in enumerate(lines):
@@ -56,19 +40,44 @@ def text_to_source(text):
     return source
 ```
 
-## Pre-edit Checklist
+## Pre-edit checklist
 
-1. Always `Read` the notebook first — verify cell count and indices
-2. Never assume cell indices — they may have shifted from prior edits
-3. Back up or git commit before bulk changes
+1. Read the notebook first—cell count and indices.
+2. Never assume indices unchanged after prior edits.
+3. Git commit before bulk or risky passes.
 
-## Post-edit Checklist
+## Post-edit checklist
 
-1. Run `safe_edit.py validate` or the inline validation checks on every modified file
-2. Verify no char-by-char corruption
-3. Verify no missing `\n` terminators
-4. Verify no collapsed content (lines >1000 chars)
+1. `safe_edit.py validate <path>` and/or `validate_project.py --scope …` (`rules/validation.md`).
+2. No char-by-char corruption, missing `\n`, or lines >1000 chars (collapsed cells).
 
-## LaTeX in JSON
+## LaTeX in JSON — escape character hazards
 
-Do not split TeX commands across JSON strings in a way that produces `\n` (newline) inside commands like `\nabla`, `\nu`, `\partial`. The sequence `\n` in JSON is a newline character, not a backslash followed by `n`.
+JSON and Python share several escape sequences that silently corrupt LaTeX commands. When writing notebook source via Python, **always use raw strings** (`r"..."`) or **double every backslash** (`"\\\\rho"`). Never write LaTeX in regular Python strings.
+
+| Escape | Char | LaTeX commands corrupted |
+|--------|------|------------------------|
+| `\n` | newline (0x0A) | `\nabla`, `\nu`, `\neq`, `\not`, `\nrightarrow` |
+| `\r` | CR (0x0D) | `\rho`, `\rangle`, `\rightarrow`, `\Re` |
+| `\t` | TAB (0x09) | `\text`, `\theta`, `\tau`, `\tanh`, `\to`, `\times` |
+| `\b` | BS (0x08) | `\beta`, `\boldsymbol`, `\begin`, `\bar`, `\bra` |
+| `\f` | FF (0x0C) | `\frac`, `\forall` |
+| `\a` | BEL (0x07) | `\alpha`, `\approx` |
+| `\v` | VT (0x0B) | `\varepsilon`, `\vert`, `\varphi`, `\vec` |
+
+**Root cause:** Python code that builds LaTeX strings without raw-string syntax:
+```python
+# WRONG — \rho becomes CR+ho, \text becomes TAB+ext
+cell['source'] = text_to_source("$\rho$ and $\text{Tr}$")
+
+# CORRECT — raw string preserves backslashes
+cell['source'] = text_to_source(r"$\rho$ and $\text{Tr}$")
+```
+
+**Detection:** `validate_project.py` checks for control characters in markdown cells (`\r`, `\a`, `\b`, `\f`, `\v`, `\t`) and runs a raw-byte scan of the JSON file. The `\n` corruption is detected heuristically (source-array boundary patterns).
+
+**In JSON files directly:** Every LaTeX backslash must be `\\` (double-escaped). If you see `\text` in raw JSON, it should be `\\text`. The validator's raw-byte check catches this.
+
+## Deeper repairs
+
+Char-by-char and collapsed-cell recipes: **`rules/troubleshooting-ipynb.md`**.

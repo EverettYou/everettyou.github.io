@@ -1,75 +1,59 @@
-# Skill: Science Reviewer
+---
+name: phys130b-physics-review
+description: Physics correctness, notation, homework and discussion sanity for PHYS130B quantum mechanics notes. Use when equations, problems, or claims change.
+---
 
-Review notebook content for physics correctness, notation consistency, and conceptual accuracy.
+# Skill: Science reviewer (PHYS130B)
 
-## When to Use
+Expert-level **quantum mechanics** check: equations, definitions, homework/discussion/project feasibility, notation vs `rules/physics-conventions.md`.
 
-- After new content is written (homework, discussion problems, projects)
-- When professor flags potential errors
-- As part of the validation pipeline before publishing
-- When reviewing AI-generated physics content
+## Activation (auto)
 
-## Review Checklist
+- Any edit touching **display math**, **inline physics**, **homework** “show that” targets, **numeric factors**, or **new claims**.
+- After substantial lecture rewrites that introduce new derivations or examples.
+- When `feedback.md` flags a possible error.
 
-### 1. Equations and Mathematics
+## Non-goals
 
-- All equations are dimensionally consistent
-- Signs and factors are correct (especially factors of 2, π, ℏ)
-- Operator ordering is correct (quantum operators don't commute)
-- Bra-ket notation is properly matched
-- Display math has blank lines above and below `$$`
+- **Not** for pure Markdown formatting or cell-count fixes—`notebook-writer`.
+- **Not** for narrative pacing without physics impact—`lecture-content`.
+- Never run **`./build.sh`** or **`jupyter-book build`** (sandbox). Does **not** require a successful book build—use validators only (`rules/validation.md`).
 
-### 2. Notation Consistency
+## Fallback / de-escalation
 
-Per `.claude/rules/physics-conventions.md`:
-- `\mathrm{i}` for imaginary unit, `\mathrm{e}` for Euler's number, `\mathrm{d}` for differentials
-- `\boldsymbol` for vectors, `\hat` for operators
-- Pauli operators with superscript indices: `\hat{\sigma}^x`
-- Eigenstate notation matches the standard table
+- If a possible ERROR depends on convention choice, mark **WARNING** and cite Tong or standard QM text.
+- If the notebook is corrupted, **stop**—require `notebook-writer` + `troubleshooting-ipynb` first, then re-run science review.
 
-### 3. Physical Concepts
+## Checklist (summary)
 
-- Definitions are precise and complete
-- Physical interpretations are correct
-- Approximations are stated and justified
-- Limiting cases are consistent
-- No conflation of distinct concepts (e.g., entanglement vs. correlation)
+1. **Equations:** dimensions, signs, factors of 2, π, ℏ; operator order; matched bras/kets.
+2. **Notation:** `\mathrm{i}`, `\mathrm{e}`, `\mathrm{d}`; `\boldsymbol` not `\vec`; Pauli `\hat{\sigma}^x`; eigenstate table.
+3. **Concepts:** definitions, limits, approximations; no conflation (e.g. entanglement vs correlation).
+4. **Homework:** “show that” true; setups physical; data sufficient; difficulty OK.
+5. **Discussion:** debatable but resolvable with physics; tied to lecture.
+6. **Projects:** real topics; feasible with AI + ~2 weeks; deliverables clear.
 
-### 4. Homework Problems
+**Textbook:** David Tong, *Quantum Mechanics* (CUP). Standard checks: commutators, spectral decompositions, inequalities (Heisenberg, Bell), symmetries.
 
-- "Show that" targets are mathematically correct
-- Problem setups are physically realistic
-- Given information is sufficient to solve each problem
-- Expected difficulty is appropriate for undergraduates
-- Solutions exist and are unique (unless stated otherwise)
+## Output format
 
-### 5. Discussion Problems
+```markdown
+## Science Review: [notebook-name]
 
-- Questions have verifiable physics answers (not pure philosophy)
-- The "controversial" aspect is genuine (not manufactured)
-- Multiple defensible positions exist
-- The question connects to specific lecture content
+### Status: PASS | ERRORS FOUND
 
-### 6. Projects
+### Errors (must fix)
+- Cell N: [wrong result / claim; give correction]
 
-- Research topics are real and current
-- Suggested approaches are feasible with AI + 2 weeks
-- Expected deliverables are well-defined
-- Background references exist and are accessible
+### Warnings (should fix)
+- Cell N: [notation / clarity]
 
-## Workflow
+### Notes (optional)
+- [improvement]
+```
 
-1. Load the notebook and read all cells
-2. Check each equation against known results (textbook, established references)
-3. Verify notation consistency across the notebook and with neighboring notebooks
-4. Flag issues with severity:
-   - **ERROR**: Incorrect physics, wrong equations, misleading statements
-   - **WARNING**: Notation inconsistency, unclear wording, missing context
-   - **NOTE**: Style suggestions, alternative approaches worth mentioning
-5. Report findings and update `progress.md`
+**Severity:** ERROR = wrong physics; WARNING = notation/clarity; NOTE = optional.
 
 ## References
 
-- David Tong, *Quantum Mechanics* (Cambridge University Press) — primary textbook
-- `.claude/design.md` — Notation and structure conventions
-- `.claude/rules/physics-conventions.md` — LaTeX and notation rules
+- `rules/physics-conventions.md`, `rules/teaching-philosophy.md`, `rules/notebook-architecture.md`, `CLAUDE.md`

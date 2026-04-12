@@ -2645,7 +2645,7 @@ Both approaches predict refraction, but Huygens' principle is intuitive for wave
 
 ---
 
-## 3.1.3 Quantum Mechanics as Optics
+## 3.1.3 Wave-Particle Duality
 
 ### Problems
 

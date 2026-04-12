@@ -62,7 +62,7 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 |-----------|--------|----------|---------------|
 | Preview Reports | 10% | 1 report × 20 units | Completion |
 | Homework | 40% | 5 problems × 20 units | Timely submission |
-| Research Projects (x2) | 20% | 1 report | Correctness, novelty, presentation |
+| Research Projects (x1) | 20% | 1 report | Correctness, novelty, presentation |
 | Final Exam | 30% | 5 problems | Accuracy and understanding |
 
 #### Submission
