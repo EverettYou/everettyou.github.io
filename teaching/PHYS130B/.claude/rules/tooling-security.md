@@ -35,3 +35,20 @@ Outside Cowork, permissions may allow `Write`/`Edit`; **`NotebookEdit` should st
 |----------------|----------------------|
 | `Read`, `Glob`, `Grep`, `Bash` (Python I/O) | `Edit`, `Write`, `NotebookEdit` |
 | Validator scripts | Shell `>` into mount |
+
+
+## _build/ exclusion in glob patterns
+
+When running batch operations over notebooks (e.g., `glob.glob('notes_src/**/*.ipynb', recursive=True)`), **always exclude `_build/`** paths. The Jupyter Book build cache at `notes_src/_build/` contains copies of every `.ipynb` file. Without exclusion:
+
+- Edits intended for source files also modify cached copies.
+- Audit scripts report false positives from stale cache files.
+- Recovery from mistakes becomes impossible (cache copies are overwritten too).
+
+**Pattern:**
+
+```python
+for p in sorted(glob.glob('notes_src/**/*.ipynb', recursive=True)):
+    if '/_build/' in p: continue  # skip build cache
+    ...
+```

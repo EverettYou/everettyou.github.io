@@ -37,7 +37,7 @@ Improve **teaching clarity**, **structure**, and **alignment** with `rules/teach
 ## Content review
 
 - **Narrative:** one main thread; cut tangents; optional **short** worked examples (one idea each).
-- **Prompts:** natural, specific, map to what cell 2 actually teaches.
+- **Prompts:** natural, specific, map to what cell 2 actually teaches. For detailed audit workflow, see **`skills/prompt-auditor/SKILL.md`**.
 - **Homework:** 5–10 problems, one focus each; mix conceptual / derive / apply / reason; exam-ready, not tedious (`content-style.md`).
 - **Discussion:** genuinely debatable, physics-grounded, `dropdown tip` inline.
 - **Project (x.y):** research-level, feasible ~2 weeks with AI; literature + computation + writing.
@@ -60,7 +60,25 @@ Improve **teaching clarity**, **structure**, and **alignment** with `rules/teach
 1. [Concrete edit for notebook-writer]
 ```
 
+## Reference materials (`_refs/`)
+
+The `_refs/` directory at the project root contains the professor's **original lecture notes** (Mathematica `.nb` and exported `.md`). **Before writing or rewriting any derivation, worked example, or physics argument, read the corresponding `_refs/` file first.** The professor's presentation is the ground truth.
+
+| File | Covers |
+|------|--------|
+| `QubitsAndEntanglement.nb` | Ch 1 |
+| `SecondQuantization.nb` | Ch 2 |
+| `PathIntegral.nb` | Ch 3 |
+| `PhaseAndGauge.nb/.md` | Ch 4 |
+| `PerturbationTheory.nb/.md` | Ch 5 |
+| `QuantumStatistics.nb` | Ch 6 |
+| `HOMEWORK.md` | Original homework problems |
+
+The `.md` files are directly readable; `.nb` files are Mathematica notebooks (ASCII text with LaTeX formulas) — search for section headings or LaTeX commands to locate specific derivations.
+
 ## References
 
 - `rules/teaching-philosophy.md`, `rules/notebook-architecture.md`, `rules/content-style.md`, `rules/maintenance-scope.md`, `rules/prompt-templates.md`, `rules/physics-conventions.md`, `.claude/README.md`
 - `skills/homework-designer/SKILL.md` (homework design, quality, formatting)
+- `skills/prompt-auditor/SKILL.md` (prompt audit, quality, LLM-friendliness)
+- `_refs/` (professor's original lecture notes — read before writing derivations)

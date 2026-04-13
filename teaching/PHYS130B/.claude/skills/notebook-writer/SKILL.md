@@ -82,3 +82,4 @@ Report results in a small table if many files: `| Notebook | Corruption | Struct
 ## References
 
 - `CLAUDE.md`, `.claude/README.md`, `rules/notebook-editing.md`, `rules/tooling-security.md`, `rules/validation.md`, `rules/troubleshooting-ipynb.md`
+- **`_refs/`** (project root): Professor's original lecture notes. **Read the corresponding `_refs/` file before writing or rewriting any derivation or physics content.** See `CLAUDE.md` § "Reference materials" for the chapter-to-file mapping.

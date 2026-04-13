@@ -6,13 +6,15 @@
 :::{admonition} Prompts
 :class: tip
 
-- Explain [main idea]. How does it differ from [related concept]?
-- What is [structure]? Why does [consequence] follow?
-- Walk me through [derivation]. What changes if [variation]?
-- Given [scenario], use [method] to find [quantity]. Work a concrete example.
-- [Conceptual question that may stress-test AI answers]
+- What is [concept], and why does [key property] follow? How does it differ from [related concept]?
+- Derive [result]. Why does [notable feature] emerge from the derivation?
+- How does [object A] relate to [object B]? What does this connection reveal about [physics]?
+- For [specific setup], [compute/show] [quantity]. What does the result tell us about [interpretation]?
+- Why does [surprising fact] hold? What would go wrong if [alternative]?
 :::
 ```
+
+Each prompt should be **specific enough** for an LLM to give a focused, lecture-relevant answer — name the concept or object precisely (short inline math like `$\hat{\rho}$` or `$K(x,t;x',t')$` is fine to identify objects). Avoid pasting full Hamiltonians or long expressions; refer to them by name instead.
 
 Student-facing prompt frameworks: **COSTAR** (Context, Objective, Style, Tone, Audience, Response), **RACE** (Role, Action, Context, Expectation), **CREATE** (Character, Request, Examples, Additions, Type, Extras).
 
@@ -29,3 +31,5 @@ Student-facing prompt frameworks: **COSTAR** (Context, Objective, Style, Tone, A
 - [ ] Widgets: `display(fig)` / `plt.close(fig)`, `Output` before callbacks
 
 See **`content-style.md`** for admonition classes and homework/project norms.
+
+**Comprehensive prompt guide:** For audit workflow, quality principles, and LLM-friendliness rules, see **`skills/prompt-auditor/SKILL.md`**.

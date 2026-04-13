@@ -61,6 +61,26 @@ Details: `rules/validation.md`.
 | Other `rules/*.md` | Editing, security, validation, physics, style, troubleshooting |
 | `skills/` | Context-triggered workflows |
 | `progress.md`, `feedback.md` | Project root; tracking and professor notes |
+| **`_refs/`** (project root) | Professor's original lecture notes — authoritative source for derivations and physics content |
+
+## Reference materials (`_refs/`)
+
+The `_refs/` directory at the project root contains the professor's **original lecture notes** (Mathematica `.nb` and exported `.md`). These are the authoritative source for physics content, derivations, notation choices, and presentation style.
+
+| File | Covers |
+|------|--------|
+| `QubitsAndEntanglement.nb` | Ch 1 (qubits) |
+| `SecondQuantization.nb` | Ch 2 (identical particles) |
+| `PathIntegral.nb` | Ch 3 (path integral) |
+| `PhaseAndGauge.nb/.md` | Ch 4 (phase and gauge) |
+| `PerturbationTheory.nb/.md` | Ch 5 (perturbation theory) |
+| `QuantumStatistics.nb` | Ch 6 (quantum foundations) |
+| `AlgebraicMethods.nb` | Algebraic methods |
+| `MatrixMechanics.nb` | Matrix mechanics |
+| `PiecewisePotentials.nb` | Piecewise potentials |
+| `HOMEWORK.md` | Original homework problems |
+
+**Rule:** Before writing or rewriting any derivation, worked example, or physics argument, **read the corresponding `_refs/` file first**. The professor's presentation is the ground truth; do not reinvent derivations from scratch.
 
 ## Human loop
 

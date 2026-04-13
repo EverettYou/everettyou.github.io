@@ -271,3 +271,4 @@ Follow `rules/physics-conventions.md`:
 - `rules/notebook-editing.md` (safe JSON editing)
 - `skills/lecture-content/SKILL.md` (content review context)
 - `skills/science-reviewer/SKILL.md` (physics verification)
+- **`_refs/`** (project root): Professor's original lecture notes and `HOMEWORK.md` (original homework problems). Read the relevant `_refs/` file before designing problems to ensure alignment with the professor's presentation and notation. See `CLAUDE.md` § "Reference materials" for the chapter-to-file mapping.

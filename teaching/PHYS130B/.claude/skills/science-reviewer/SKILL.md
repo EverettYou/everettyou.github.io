@@ -57,3 +57,4 @@ Expert-level **quantum mechanics** check: equations, definitions, homework/discu
 ## References
 
 - `rules/physics-conventions.md`, `rules/teaching-philosophy.md`, `rules/notebook-architecture.md`, `CLAUDE.md`
+- **`_refs/`** (project root): Professor's original lecture notes — the **authoritative source** for derivations, sign conventions, and physics arguments. Always cross-check against the corresponding `_refs/` file before flagging a derivation as incorrect or rewriting it.
