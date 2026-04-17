@@ -69,7 +69,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.3 Generalized Measurement" href="6-3-generalized-measurement.html" />
-    <link rel="prev" title="6.2.2 Entanglement Measures" href="6-2-2-entanglement-measures.html" />
+    <link rel="prev" title="6.2.2 Entanglement Entropy" href="6-2-2-entanglement-entropy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -288,8 +288,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="6-2-entanglement.html">6.2 Entanglement</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="6-2-1-composite-systems.html">6.2.1 Composite Systems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="6-2-2-entanglement-measures.html">6.2.2 Entanglement Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-2-1-product-and-entangled-states.html">6.2.1 Product and Entangled States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-2-2-entanglement-entropy.html">6.2.2 Entanglement Entropy</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">6.2.3 Bell Inequality</a></li>
 </ul>
 </details></li>
@@ -503,6 +503,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entanglement-witnesses">Entanglement Witnesses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-epr-paradox">The EPR Paradox</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chsh-inequality">CHSH Inequality</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-violation">Quantum Violation</a></li>
@@ -529,7 +530,8 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What was the EPR argument, and how does Bell’s theorem refute the idea that physical properties exist independently of measurement?</p></li>
+<li><p>What is an entanglement witness? Why does <span class="math notranslate nohighlight">\(\langle\hat{W}\rangle &lt; 0\)</span> certify entanglement, and why does no single witness detect all entangled states?</p></li>
+<li><p>In what sense is a Bell inequality a special case of an entanglement witness? Why can Bell inequalities only detect a subset of entangled states?</p></li>
 <li><p>Derive the CHSH inequality step by step. Show that the singlet state achieves the Tsirelson bound <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>, surpassing the classical limit of 2.</p></li>
 <li><p>Explain the no-communication theorem: why can’t entanglement transmit information faster than light, even though measurements are correlated?</p></li>
 <li><p>Walk through the quantum teleportation protocol in detail. Why does Bob need exactly 2 classical bits from Alice to recover the unknown state?</p></li>
@@ -539,7 +541,30 @@
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>Bell’s theorem (1964) settles the EPR debate: no local hidden variable theory can reproduce quantum predictions. The CHSH inequality provides the sharpest test — classical theories are bounded at 2, but quantum mechanics achieves <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>. We also establish the no-communication theorem and quantum teleportation, showing that entanglement powers nonlocal correlations without enabling faster-than-light signaling.</p>
+<p>How can one <em>certify</em> that a state is entangled without reconstructing it in full? The answer is an <strong>entanglement witness</strong>: a single Hermitian observable whose expectation value exceeds a known classical bound only if the state is entangled. The Bell inequalities are the most famous historical example — they express classical bounds on correlation sums that every separable state must obey. Quantum violation of a Bell inequality therefore certifies entanglement, and more: it rules out <strong>any</strong> local hidden variable description of nature. We develop the general witness framework, then specialize to the CHSH inequality, its quantum (Tsirelson) bound <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>, and the loophole-free experimental confirmations. Finally we establish the no-communication theorem and the teleportation protocol — showing that entanglement powers nonlocal correlations without enabling faster-than-light signaling.</p>
+</section>
+<section id="entanglement-witnesses">
+<h3>Entanglement Witnesses<a class="headerlink" href="#entanglement-witnesses" title="Link to this heading">#</a></h3>
+<p>Full state tomography — reconstructing <span class="math notranslate nohighlight">\(\hat{\rho}_{AB}\)</span> from measurements — is exponentially expensive in system size. <strong>Entanglement witnesses</strong> give a shortcut: a single Hermitian operator <span class="math notranslate nohighlight">\(\hat{W}\)</span> whose expectation value distinguishes separable states from (some) entangled ones.</p>
+<div class="important admonition">
+<p class="admonition-title">Definition: Entanglement Witness</p>
+<p>A Hermitian operator <span class="math notranslate nohighlight">\(\hat{W}\)</span> is an <strong>entanglement witness</strong> if</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{W}\hat{\rho}_{\mathrm{sep}}) \geq 0\)</span> for every separable state <span class="math notranslate nohighlight">\(\hat{\rho}_{\mathrm{sep}} = \sum_i p_i\, \hat{\rho}_A^{(i)} \otimes \hat{\rho}_B^{(i)}\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{W}\hat{\rho}_{\mathrm{ent}}) &lt; 0\)</span> for at least one entangled state.</p></li>
+</ul>
+<p>A measured value <span class="math notranslate nohighlight">\(\langle\hat{W}\rangle &lt; 0\)</span> therefore <strong>certifies</strong> that the state is entangled.</p>
+</div>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: Witness for a Bell State</p>
+<p><strong>Problem.</strong> Construct a witness that detects <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle\langle\Phi^+\vert\)</span>.</p>
+<p><strong>Solution.</strong> Take <span class="math notranslate nohighlight">\(\hat{W} = \tfrac{1}{2}\hat{I} - \vert\Phi^+\rangle\langle\Phi^+\vert\)</span>. For any separable two-qubit state <span class="math notranslate nohighlight">\(\hat{\rho}_{\mathrm{sep}}\)</span>, one can show <span class="math notranslate nohighlight">\(\langle\Phi^+\vert\hat{\rho}_{\mathrm{sep}}\vert\Phi^+\rangle \leq \tfrac{1}{2}\)</span>, so <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{W}\hat{\rho}_{\mathrm{sep}}) \geq 0\)</span>. On <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle\)</span> itself, <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{W}\vert\Phi^+\rangle\langle\Phi^+\vert) = -\tfrac{1}{2} &lt; 0\)</span>, so <span class="math notranslate nohighlight">\(\hat{W}\)</span> detects this Bell state.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Witnesses are complete but not universal</p>
+<p>By the Hahn–Banach separation theorem, <strong>every</strong> entangled state admits <em>some</em> witness. But <strong>no single witness</strong> detects all entangled states — a given <span class="math notranslate nohighlight">\(\hat{W}\)</span> only detects those states lying on the “wrong” side of the separable hyperplane it defines.</p>
+</div>
+<p><strong>Bell inequalities as witnesses.</strong> The CHSH inequality below is a canonical witness: the CHSH observable <span class="math notranslate nohighlight">\(\hat{S}_{\mathrm{CHSH}}\)</span> satisfies <span class="math notranslate nohighlight">\(\langle\hat{S}_{\mathrm{CHSH}}\rangle \leq 2\)</span> for every local hidden variable theory and every separable quantum state, while the singlet attains <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>. Equivalently, <span class="math notranslate nohighlight">\(\hat{W}_{\mathrm{CHSH}} = 2\,\hat{I} - \hat{S}_{\mathrm{CHSH}}\)</span> is a witness for states that violate local realism. Bell inequalities are thus a historically important — and experimentally accessible — <em>family</em> of entanglement witnesses, detecting every state whose nonlocal correlations exceed the classical bound.</p>
 </section>
 <section id="the-epr-paradox">
 <h3>The EPR Paradox<a class="headerlink" href="#the-epr-paradox" title="Link to this heading">#</a></h3>
@@ -553,30 +578,49 @@
 <p class="admonition-title">CHSH Inequality</p>
 <p>For any local hidden variable theory with measurement settings <span class="math notranslate nohighlight">\(a_1, a_2\)</span> (Alice) and <span class="math notranslate nohighlight">\(b_1, b_2\)</span> (Bob):</p>
 <div class="math notranslate nohighlight" id="equation-eq-bell-chsh-inequality">
-<span class="eqno">(123)<a class="headerlink" href="#equation-eq-bell-chsh-inequality" title="Link to this equation">#</a></span>\[
+<span class="eqno">(124)<a class="headerlink" href="#equation-eq-bell-chsh-inequality" title="Link to this equation">#</a></span>\[
 \left\vert \langle A_1 B_1 \rangle + \langle A_1 B_2 \rangle + \langle A_2 B_1 \rangle - \langle A_2 B_2 \rangle \right\vert \leq 2
 \]</div>
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: CHSH Bound</p>
-<p>For any realization of <span class="math notranslate nohighlight">\(\lambda\)</span>, all outcomes are <span class="math notranslate nohighlight">\(\pm 1\)</span>. Write:</p>
+<p><strong>Setup.</strong> In a local hidden variable theory, a shared hidden state <span class="math notranslate nohighlight">\(\lambda\)</span> is drawn from some distribution <span class="math notranslate nohighlight">\(\rho(\lambda)\)</span>. For every realization of <span class="math notranslate nohighlight">\(\lambda\)</span>, Alice’s outcome <span class="math notranslate nohighlight">\(A_i(\lambda) \in \{+1,-1\}\)</span> depends only on her setting <span class="math notranslate nohighlight">\(i \in \{1,2\}\)</span> and on <span class="math notranslate nohighlight">\(\lambda\)</span>, and Bob’s outcome <span class="math notranslate nohighlight">\(B_j(\lambda) \in \{+1,-1\}\)</span> depends only on his setting <span class="math notranslate nohighlight">\(j\)</span> and on <span class="math notranslate nohighlight">\(\lambda\)</span>. Expectation values are averages over <span class="math notranslate nohighlight">\(\rho(\lambda)\)</span>: <span class="math notranslate nohighlight">\(\langle A_i B_j\rangle = \int \rho(\lambda)\,A_i(\lambda)B_j(\lambda)\,\mathrm{d}\lambda\)</span>.</p>
+<p><strong>Step 1 — bound the integrand pointwise.</strong> If the quantity</p>
 <div class="math notranslate nohighlight">
 \[
-A_1(B_1 + B_2) + A_2(B_1 - B_2)
+S(\lambda) \;=\; A_1 B_1 + A_1 B_2 + A_2 B_1 - A_2 B_2
 \]</div>
-<p>Since <span class="math notranslate nohighlight">\(B_1, B_2 \in \{\pm 1\}\)</span>, either <span class="math notranslate nohighlight">\(B_1 + B_2 = \pm 2\)</span> and <span class="math notranslate nohighlight">\(B_1 - B_2 = 0\)</span>, or vice versa. In either case the expression equals <span class="math notranslate nohighlight">\(\pm 2\)</span>. Averaging over <span class="math notranslate nohighlight">\(\lambda\)</span> gives the bound.</p>
+<p>satisfies <span class="math notranslate nohighlight">\(|S(\lambda)| \leq 2\)</span> for every single realization of <span class="math notranslate nohighlight">\(\lambda\)</span>, then averaging preserves the bound: <span class="math notranslate nohighlight">\(\vert\langle S\rangle\vert \leq 2\)</span>. So hold <span class="math notranslate nohighlight">\(\lambda\)</span> fixed and treat <span class="math notranslate nohighlight">\(A_1, A_2, B_1, B_2\)</span> as four specific numbers in <span class="math notranslate nohighlight">\(\{+1,-1\}\)</span>.</p>
+<p><strong>Step 2 — regroup.</strong> Factor out Alice’s outcomes:</p>
+<div class="math notranslate nohighlight">
+\[
+S = A_1(B_1 + B_2) + A_2(B_1 - B_2).
+\]</div>
+<p><strong>Step 3 — Bob’s values force one parenthesis to zero.</strong> Because <span class="math notranslate nohighlight">\(B_1, B_2 \in \{+1,-1\}\)</span>, only two cases occur:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(B_1 = B_2\)</span>, then <span class="math notranslate nohighlight">\(B_1 + B_2 = \pm 2\)</span> and <span class="math notranslate nohighlight">\(B_1 - B_2 = 0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(B_1 \neq B_2\)</span>, then <span class="math notranslate nohighlight">\(B_1 + B_2 = 0\)</span> and <span class="math notranslate nohighlight">\(B_1 - B_2 = \pm 2\)</span>.</p></li>
+</ul>
+<p>Exactly one of the two parentheses equals <span class="math notranslate nohighlight">\(\pm 2\)</span>; the other vanishes.</p>
+<p><strong>Step 4 — the sum is <span class="math notranslate nohighlight">\(\pm 2\)</span>.</strong> In either case the non-vanishing term is <span class="math notranslate nohighlight">\(A_i \cdot (\pm 2)\)</span> with <span class="math notranslate nohighlight">\(A_i \in \{+1,-1\}\)</span>, so <span class="math notranslate nohighlight">\(S \in \{+2, -2\}\)</span> — in particular <span class="math notranslate nohighlight">\(|S| \leq 2\)</span>.</p>
+<p><strong>Step 5 — average.</strong> Since <span class="math notranslate nohighlight">\(|S(\lambda)| \leq 2\)</span> holds for every <span class="math notranslate nohighlight">\(\lambda\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\left\vert \langle A_1 B_1\rangle + \langle A_1 B_2\rangle + \langle A_2 B_1\rangle - \langle A_2 B_2\rangle \right\vert \leq 2.
+\]</div>
+<p><strong>Where locality enters.</strong> The grouping in Step 2 treats <span class="math notranslate nohighlight">\(A_1, A_2, B_1, B_2\)</span> as four numbers coexisting for the same <span class="math notranslate nohighlight">\(\lambda\)</span>. This is exactly the assumption that each outcome depends only on the local setting and the shared <span class="math notranslate nohighlight">\(\lambda\)</span> — not on the distant setting. Quantum mechanically, <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span> correspond to non-commuting observables (e.g. <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span>), so no single state assigns simultaneous values to both. The CHSH inequality is built precisely to detect this: any violation rules out the existence of such pre-assigned joint values.</p>
 </div>
 </section>
 <section id="quantum-violation">
 <h3>Quantum Violation<a class="headerlink" href="#quantum-violation" title="Link to this heading">#</a></h3>
 <p>For the singlet state <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert 01\rangle - \vert 10\rangle)\)</span>, the spin correlation is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bell-singlet-correlation">
-<span class="eqno">(124)<a class="headerlink" href="#equation-eq-bell-singlet-correlation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(125)<a class="headerlink" href="#equation-eq-bell-singlet-correlation" title="Link to this equation">#</a></span>\[
 \langle A(\boldsymbol{a})\, B(\boldsymbol{b}) \rangle = -\boldsymbol{a} \cdot \boldsymbol{b} = -\cos\theta
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between measurement directions. Choosing optimal angles, the singlet achieves:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bell-quantum-violation">
-<span class="eqno">(125)<a class="headerlink" href="#equation-eq-bell-quantum-violation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(126)<a class="headerlink" href="#equation-eq-bell-quantum-violation" title="Link to this equation">#</a></span>\[
 \text{CHSH}_\text{quantum} = 2\sqrt{2} \approx 2.828 &gt; 2
 \]</div>
 <div class="dropdown information admonition">
@@ -584,13 +628,13 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 <p>For the singlet state, the spin correlation between measurement directions <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> is <span class="math notranslate nohighlight">\(\langle \hat{\boldsymbol{a}}\cdot\hat{\boldsymbol{\sigma}} \otimes \hat{\boldsymbol{b}}\cdot\hat{\boldsymbol{\sigma}} \rangle = -\boldsymbol{a} \cdot \boldsymbol{b}\)</span>. To maximize CHSH, we choose:</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{a}_1 = (0, 0, 1), \quad \boldsymbol{a}_2 = (1, 0, 0)
+\boldsymbol{a}_1 = (1, 0, 0), \quad \boldsymbol{a}_2 = (0, 0, 1)
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{b}_1 = \frac{1}{\sqrt{2}}(-1, 0, -1), \quad \boldsymbol{b}_2 = \frac{1}{\sqrt{2}}(1, 0, -1)
+\boldsymbol{b}_1 = \frac{1}{\sqrt{2}}(1, 0, 1), \quad \boldsymbol{b}_2 = \frac{1}{\sqrt{2}}(1, 0, -1)
 \]</div>
-<p>These give <span class="math notranslate nohighlight">\(\boldsymbol{a}_1 \cdot \boldsymbol{b}_1 = -1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{a}_1 \cdot \boldsymbol{b}_2 = -1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{a}_2 \cdot \boldsymbol{b}_1 = 1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{a}_2 \cdot \boldsymbol{b}_2 = 1/\sqrt{2}\)</span>. The CHSH sum becomes:</p>
+<p>These give <span class="math notranslate nohighlight">\(\boldsymbol{a}_1 \cdot \boldsymbol{b}_1 = 1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{a}_1 \cdot \boldsymbol{b}_2 = 1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{a}_2 \cdot \boldsymbol{b}_1 = 1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{a}_2 \cdot \boldsymbol{b}_2 = -1/\sqrt{2}\)</span>. The CHSH sum becomes:</p>
 <div class="math notranslate nohighlight">
 \[
 \text{CHSH} = \left\vert \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} \right\vert = \frac{4}{\sqrt{2}} = 2\sqrt{2}
@@ -674,7 +718,8 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Bell’s theorem</strong>: no local hidden variable theory reproduces quantum predictions; the CHSH bound <span class="math notranslate nohighlight">\(\leq 2\)</span> is violated by quantum mechanics at <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>.</p></li>
+<li><p><strong>Entanglement witnesses</strong>: a Hermitian <span class="math notranslate nohighlight">\(\hat{W}\)</span> with <span class="math notranslate nohighlight">\(\langle\hat{W}\rangle \geq 0\)</span> on all separable states and <span class="math notranslate nohighlight">\(\langle\hat{W}\rangle &lt; 0\)</span> on some entangled state; every entangled state admits a witness, but no one witness detects all.</p></li>
+<li><p><strong>Bell’s theorem</strong>: no local hidden variable theory reproduces quantum predictions; the CHSH bound <span class="math notranslate nohighlight">\(\leq 2\)</span> is violated by quantum mechanics at the Tsirelson bound <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>. Bell inequalities are a specific family of entanglement witnesses.</p></li>
 <li><p><strong>Loophole-free experiments</strong> (2015+) confirm quantum nonlocality with high confidence.</p></li>
 <li><p><strong>No-communication</strong>: entanglement creates correlations, not signals; local statistics are independent of distant operations.</p></li>
 <li><p><strong>Quantum teleportation</strong>: entanglement + 2 classical bits transmit an unknown quantum state without physical transport.</p></li>
@@ -682,7 +727,7 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="6-2-2-entanglement-measures.html"><span class="doc std std-doc">6.2.2 Entanglement Measures</span></a>: Bell states and entanglement characterization</p></li>
+<li><p><a class="reference internal" href="6-2-2-entanglement-entropy.html"><span class="doc std std-doc">6.2.2 Entanglement Entropy</span></a>: Bell states and entanglement characterization</p></li>
 <li><p><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html"><span class="doc std std-doc">2.1.1 Tensor Product</span></a>: composite system structure</p></li>
 <li><p><a class="reference internal" href="6-3-2-povm.html"><span class="doc std std-doc">6.3.2 POVM</span></a>: optimal measurement bases for Bell tests</p></li>
 </ul>
@@ -691,14 +736,28 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Classical CHSH Bound.</strong> (Classical bound) Let <span class="math notranslate nohighlight">\(A, A' \in \{\pm 1\}\)</span> and <span class="math notranslate nohighlight">\(B, B' \in \{\pm 1\}\)</span> be four <span class="math notranslate nohighlight">\(\pm 1\)</span>-valued random variables. Show that <span class="math notranslate nohighlight">\(AB + AB' + A'B - A'B' = \pm 2\)</span> for any single realization, and conclude that <span class="math notranslate nohighlight">\(\vert\langle AB \rangle + \langle AB' \rangle + \langle A'B \rangle - \langle A'B' \rangle\vert \leq 2\)</span>.</p>
-<p><strong>2. Singlet Correlations.</strong> (Singlet correlation) For the singlet state <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert 01\rangle - \vert 10\rangle)\)</span>, show that <span class="math notranslate nohighlight">\(\langle \hat{\boldsymbol{a}}\cdot\hat{\boldsymbol{\sigma}} \otimes \hat{\boldsymbol{b}}\cdot\hat{\boldsymbol{\sigma}} \rangle = -\hat{\boldsymbol{a}}\cdot\hat{\boldsymbol{b}}\)</span>.</p>
-<p><strong>3. Optimal Measurement Angles.</strong> (Optimal angles) Choose measurement directions <span class="math notranslate nohighlight">\(\hat{a} = \hat{z}\)</span>, <span class="math notranslate nohighlight">\(\hat{a}' = \hat{x}\)</span>, <span class="math notranslate nohighlight">\(\hat{b} = \frac{1}{\sqrt{2}}(-\hat{z} - \hat{x})\)</span>, <span class="math notranslate nohighlight">\(\hat{b}' = \frac{1}{\sqrt{2}}(\hat{z} - \hat{x})\)</span>. Compute the four correlators for the singlet and show <span class="math notranslate nohighlight">\(\text{CHSH} = 2\sqrt{2}\)</span>.</p>
-<p><strong>4. Observables.</strong> (Tsirelson bound) Prove that for any quantum state and any choice of <span class="math notranslate nohighlight">\(\pm 1\)</span>-valued observables, <span class="math notranslate nohighlight">\(\vert\langle \text{CHSH} \rangle\vert \leq 2\sqrt{2}\)</span>. (<em>Hint</em>: compute <span class="math notranslate nohighlight">\(\hat{C}^2\)</span> where <span class="math notranslate nohighlight">\(\hat{C} = \hat{A}\otimes\hat{B} + \hat{A}\otimes\hat{B}' + \hat{A}'\otimes\hat{B} - \hat{A}'\otimes\hat{B}'\)</span>, and use <span class="math notranslate nohighlight">\(\hat{A}^2 = \hat{I}\)</span>.)</p>
-<p><strong>5. EPR Local Realism.</strong> (EPR reasoning) For the singlet state, if Alice measures <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> and gets <span class="math notranslate nohighlight">\(+1\)</span>, what is Bob’s state? If she measures <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and gets <span class="math notranslate nohighlight">\(+1\)</span>? Explain why EPR argued that “elements of reality” must exist for Bob’s particle before measurement, and how Bell’s theorem refutes this reasoning.</p>
-<p><strong>6. Werner State Violations.</strong> (Werner state) The Werner state <span class="math notranslate nohighlight">\(\hat{\rho}_W(p) = p\vert\Psi^-\rangle\langle\Psi^-\vert + (1-p)\frac{\hat{I}}{4}\)</span> interpolates between maximally entangled (<span class="math notranslate nohighlight">\(p=1\)</span>) and maximally mixed (<span class="math notranslate nohighlight">\(p=0\)</span>). Show that its maximum CHSH value is <span class="math notranslate nohighlight">\(2\sqrt{2}\,p\)</span>, and find the critical <span class="math notranslate nohighlight">\(p\)</span> above which Bell inequality is violated.</p>
-<p><strong>7. No-Signaling Constraint.</strong> (No-signaling) Show that <span class="math notranslate nohighlight">\(\sum_{a} p(a,b\vert x,y) = \sum_{a} p(a,b\vert x',y)\)</span> for quantum probabilities <span class="math notranslate nohighlight">\(p(a,b\vert x,y) = \mathrm{Tr}[(\hat{M}_a^x \otimes \hat{M}_b^y)\hat{\rho}]\)</span>. Interpret: Alice’s measurement choice cannot affect Bob’s marginal distribution.</p>
-<p><strong>8. Quantum Teleportation.</strong> (Teleportation) Verify the teleportation protocol: starting from <span class="math notranslate nohighlight">\(\vert\psi\rangle_C \otimes \vert\Phi^+\rangle_{AB}\)</span>, show that after Alice’s Bell measurement with outcome <span class="math notranslate nohighlight">\((m_1, m_2)\)</span>, Bob’s correction <span class="math notranslate nohighlight">\(\hat{X}^{m_2}\hat{Z}^{m_1}\)</span> recovers <span class="math notranslate nohighlight">\(\vert\psi\rangle_B\)</span>. Work through all four Bell outcomes explicitly.</p>
+<p><strong>1. Entanglement witness.</strong> For the Bell state <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle)\)</span>, define the witness <span class="math notranslate nohighlight">\(\hat{W} = \frac{\hat{I}}{2} - \vert\Phi^+\rangle\langle\Phi^+\vert\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{W}\hat{\rho}_{\mathrm{sep}}) \geq 0\)</span> for any separable state (it suffices to check product states <span class="math notranslate nohighlight">\(\hat{\rho}_A\otimes\hat{\rho}_B\)</span>).</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{W}\vert\Phi^+\rangle\langle\Phi^+\vert)\)</span> and verify it is negative, so <span class="math notranslate nohighlight">\(\hat{W}\)</span> detects <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle\)</span>.</p>
+<p>(c) For the Werner state <span class="math notranslate nohighlight">\(\hat{\rho}(p) = p\,\vert\Phi^+\rangle\langle\Phi^+\vert + (1-p)\,\tfrac{\hat{I}}{4}\)</span>, find the threshold <span class="math notranslate nohighlight">\(p_c\)</span> above which the witness signals entanglement.</p>
+<p>(d) Explain briefly why no single witness can detect all entangled states.</p>
+<p><strong>2. Classical CHSH Bound.</strong> (Classical bound) Let <span class="math notranslate nohighlight">\(A, A' \in \{\pm 1\}\)</span> and <span class="math notranslate nohighlight">\(B, B' \in \{\pm 1\}\)</span> be four <span class="math notranslate nohighlight">\(\pm 1\)</span>-valued random variables. Show that <span class="math notranslate nohighlight">\(AB + AB' + A'B - A'B' = \pm 2\)</span> for any single realization, and conclude that <span class="math notranslate nohighlight">\(\vert\langle AB \rangle + \langle AB' \rangle + \langle A'B \rangle - \langle A'B' \rangle\vert \leq 2\)</span>.</p>
+<p><strong>3. Singlet Correlations.</strong> (Singlet correlation) For the singlet state <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert 01\rangle - \vert 10\rangle)\)</span>, show that <span class="math notranslate nohighlight">\(\langle \hat{\boldsymbol{a}}\cdot\hat{\boldsymbol{\sigma}} \otimes \hat{\boldsymbol{b}}\cdot\hat{\boldsymbol{\sigma}} \rangle = -\hat{\boldsymbol{a}}\cdot\hat{\boldsymbol{b}}\)</span>.</p>
+<p><strong>4. Optimal Measurement Angles.</strong> (Optimal angles) Choose measurement directions <span class="math notranslate nohighlight">\(\hat{a} = \hat{z}\)</span>, <span class="math notranslate nohighlight">\(\hat{a}' = \hat{x}\)</span>, <span class="math notranslate nohighlight">\(\hat{b} = \frac{1}{\sqrt{2}}(-\hat{z} - \hat{x})\)</span>, <span class="math notranslate nohighlight">\(\hat{b}' = \frac{1}{\sqrt{2}}(\hat{z} - \hat{x})\)</span>. Compute the four correlators for the singlet and show <span class="math notranslate nohighlight">\(\text{CHSH} = 2\sqrt{2}\)</span>.</p>
+<p><strong>5. Observables.</strong> (Tsirelson bound) Prove that for any quantum state and any choice of <span class="math notranslate nohighlight">\(\pm 1\)</span>-valued observables, <span class="math notranslate nohighlight">\(\vert\langle \text{CHSH} \rangle\vert \leq 2\sqrt{2}\)</span>. (<em>Hint</em>: compute <span class="math notranslate nohighlight">\(\hat{C}^2\)</span> where <span class="math notranslate nohighlight">\(\hat{C} = \hat{A}\otimes\hat{B} + \hat{A}\otimes\hat{B}' + \hat{A}'\otimes\hat{B} - \hat{A}'\otimes\hat{B}'\)</span>, and use <span class="math notranslate nohighlight">\(\hat{A}^2 = \hat{I}\)</span>.)</p>
+<p><strong>6. EPR Local Realism.</strong> (EPR reasoning) For the singlet state, if Alice measures <span class="math notranslate nohighlight">\(\hat{\sigma}^z\)</span> and gets <span class="math notranslate nohighlight">\(+1\)</span>, what is Bob’s state? If she measures <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> and gets <span class="math notranslate nohighlight">\(+1\)</span>? Explain why EPR argued that “elements of reality” must exist for Bob’s particle before measurement, and how Bell’s theorem refutes this reasoning.</p>
+<p><strong>7. Werner State Violations.</strong> (Werner state) The Werner state <span class="math notranslate nohighlight">\(\hat{\rho}_W(p) = p\vert\Psi^-\rangle\langle\Psi^-\vert + (1-p)\frac{\hat{I}}{4}\)</span> interpolates between maximally entangled (<span class="math notranslate nohighlight">\(p=1\)</span>) and maximally mixed (<span class="math notranslate nohighlight">\(p=0\)</span>). Show that its maximum CHSH value is <span class="math notranslate nohighlight">\(2\sqrt{2}\,p\)</span>, and find the critical <span class="math notranslate nohighlight">\(p\)</span> above which Bell inequality is violated.</p>
+<p><strong>8. No-Signaling Constraint.</strong> (No-signaling) Show that <span class="math notranslate nohighlight">\(\sum_{a} p(a,b\vert x,y) = \sum_{a} p(a,b\vert x',y)\)</span> for quantum probabilities <span class="math notranslate nohighlight">\(p(a,b\vert x,y) = \mathrm{Tr}[(\hat{M}_a^x \otimes \hat{M}_b^y)\hat{\rho}]\)</span>. Interpret: Alice’s measurement choice cannot affect Bob’s marginal distribution.</p>
+<p><strong>9. Bell measurement and teleportation.</strong> Consider two qubits <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> with the stabilizer observables <span class="math notranslate nohighlight">\(\hat{X}_A\hat{X}_B\)</span> and <span class="math notranslate nohighlight">\(\hat{Z}_A\hat{Z}_B\)</span>.</p>
+<p>(a) Write <span class="math notranslate nohighlight">\(\hat{X}_A\hat{X}_B\)</span> and <span class="math notranslate nohighlight">\(\hat{Z}_A\hat{Z}_B\)</span> as <span class="math notranslate nohighlight">\(4\times 4\)</span> matrices in the computational basis <span class="math notranslate nohighlight">\(\{\vert 00\rangle, \vert 01\rangle, \vert 10\rangle, \vert 11\rangle\}\)</span>.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\([\hat{X}_A\hat{X}_B, \hat{Z}_A\hat{Z}_B] = 0\)</span>, so they can be measured simultaneously. Find the four joint eigenvalues <span class="math notranslate nohighlight">\((x, z) \in \{(\pm 1, \pm 1)\}\)</span> and show that the corresponding eigenstates are the four Bell states.</p>
+<p>(c) A third qubit <span class="math notranslate nohighlight">\(C\)</span> is in an unknown state <span class="math notranslate nohighlight">\(\vert\psi\rangle_C = \alpha\vert 0\rangle + \beta\vert 1\rangle\)</span>. The full state is <span class="math notranslate nohighlight">\(\vert\psi\rangle_C \otimes \vert\Phi^+\rangle_{AB}\)</span>, where <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle)\)</span>. Rewrite this state by expanding qubits <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(A\)</span> in the Bell basis.</p>
+<p>(d) After a Bell measurement on <span class="math notranslate nohighlight">\((C, A)\)</span> yields outcome <span class="math notranslate nohighlight">\((x, z)\)</span>, show that Bob can recover <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> on qubit <span class="math notranslate nohighlight">\(B\)</span> by applying a single-qubit correction <span class="math notranslate nohighlight">\(\hat{X}^{(1-z)/2}\hat{Z}^{(1-x)/2}\)</span>. This is quantum teleportation.</p>
+<p><strong>10. Entanglement swapping.</strong> Four spin-1/2 particles <span class="math notranslate nohighlight">\(A, B, C, D\)</span> are prepared in a product of two singlet pairs: <span class="math notranslate nohighlight">\(\vert\Psi\rangle = \vert\Psi^-\rangle_{AB} \otimes \vert\Psi^-\rangle_{CD}\)</span>, where <span class="math notranslate nohighlight">\(\vert\Psi^-\rangle = \frac{1}{\sqrt{2}}(\vert\uparrow\downarrow\rangle - \vert\downarrow\uparrow\rangle)\)</span>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\hat{\boldsymbol{S}}_{BC}^2 = (\hat{\boldsymbol{S}}_B + \hat{\boldsymbol{S}}_C)^2\)</span>. What are the possible eigenvalues of <span class="math notranslate nohighlight">\(\hat{\boldsymbol{S}}_{BC}^2\)</span>, and what values of <span class="math notranslate nohighlight">\(s_{BC}\)</span> do they correspond to?</p>
+<p>(b) One measures <span class="math notranslate nohighlight">\(\hat{\boldsymbol{S}}_{BC}^2\)</span> and obtains <span class="math notranslate nohighlight">\(s_{BC} = 0\)</span> (singlet). Show that after this measurement, spins <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are in a singlet state, even though they never interacted directly.</p>
+<p>(c) If instead <span class="math notranslate nohighlight">\(s_{BC} = 1\)</span> (triplet) and <span class="math notranslate nohighlight">\(m_{BC} = 0\)</span> are measured, find the resulting state of spins <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<p>(d) Explain why this protocol is called entanglement swapping: entanglement is transferred from the pairs <span class="math notranslate nohighlight">\((A, B)\)</span> and <span class="math notranslate nohighlight">\((C, D)\)</span> to the pair <span class="math notranslate nohighlight">\((A, D)\)</span> via a measurement on <span class="math notranslate nohighlight">\((B, C)\)</span>.</p>
 </section>
 </section>
 
@@ -733,12 +792,12 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="6-2-2-entanglement-measures.html"
+       href="6-2-2-entanglement-entropy.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">6.2.2 Entanglement Measures</p>
+        <p class="prev-next-title">6.2.2 Entanglement Entropy</p>
       </div>
     </a>
     <a class="right-next"
@@ -770,6 +829,7 @@ A_1(B_1 + B_2) + A_2(B_1 - B_2)
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entanglement-witnesses">Entanglement Witnesses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-epr-paradox">The EPR Paradox</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chsh-inequality">CHSH Inequality</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-violation">Quantum Violation</a></li>
