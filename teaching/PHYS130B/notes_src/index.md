@@ -2,6 +2,8 @@
 
 Welcome to the course notes for Quantum Mechanics.
 
+← <a href="/teaching/PHYS130B/">Back to the PHYS 130B course page</a>
+
 **Textbook**: David Tong, *Quantum Mechanics* (Lectures on Theoretical Physics Volume 3), Cambridge University Press.
 
 **Course structure:** Material is grouped into **chapters** (themes), **units** (*x.y*), and **lessons** (*x.y.z*). Each chapter index lists its units; each unit page lists its lessons. The Jupyter Book sidebar follows the same nesting.
