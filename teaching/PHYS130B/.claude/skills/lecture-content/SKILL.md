@@ -68,7 +68,7 @@ The `_refs/` directory at the project root contains the professor's **original l
 |------|--------|
 | `QubitsAndEntanglement.nb` | Ch 1 |
 | `SecondQuantization.nb` | Ch 2 |
-| `PathIntegral.nb` | Ch 3 |
+| `PathIntegral.nb/.md` | Ch 3 |
 | `PhaseAndGauge.nb/.md` | Ch 4 |
 | `PerturbationTheory.nb/.md` | Ch 5 |
 | `QuantumStatistics.nb` | Ch 6 |
