@@ -528,7 +528,7 @@
 <h1>3.2 Propagator<a class="headerlink" href="#propagator" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Unit 3.1 established the guiding idea: quantum amplitudes are weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>, and quantization means summing over all paths. This unit makes the idea precise and extracts its most important consequence — the Schrödinger equation is not a postulate but a <strong>derivation</strong> from the path integral.</p>
+<p>Section 3.1 introduced the guiding principle “phase = action”: every quantum amplitude is built from <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> summed over paths. So far this is abstract. Section 3.2 makes it concrete: it defines the propagator (the position-space matrix element of the time-evolution operator), reduces it to a time-sliced product, derives the Schrödinger equation from a single slice, and computes the free propagator in closed form — closing the loop between path integral, slice formula, and matter-wave picture.</p>
 <section id="topics">
 <h3>Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -541,15 +541,15 @@
 <tbody>
 <tr class="row-even"><td><p>3.2.1</p></td>
 <td><p><a class="reference internal" href="3-2-1-path-integral-formulation.html"><span class="doc std std-doc">Path Integral Formulation</span></a></p></td>
-<td><p>How do we formalize “sum over all paths”?</p></td>
+<td><p>What does the symbol <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> actually mean, and what is the contribution of one slice?</p></td>
 </tr>
 <tr class="row-odd"><td><p>3.2.2</p></td>
 <td><p><a class="reference internal" href="3-2-2-schrodinger-equation.html"><span class="doc std std-doc">Schrödinger Equation</span></a></p></td>
-<td><p>What differential equation does the path integral imply?</p></td>
+<td><p>What does <em>one</em> slice predict for the wavefunction, and how does the Schrödinger equation emerge?</p></td>
 </tr>
 <tr class="row-even"><td><p>3.2.3</p></td>
 <td><p><a class="reference internal" href="3-2-3-free-particle-propagator.html"><span class="doc std std-doc">Free Particle Propagator</span></a></p></td>
-<td><p>Does the free-particle propagator confirm Phase = Action?</p></td>
+<td><p>Does the closed-form propagator confirm the slice formula and recover the classical particle picture?</p></td>
 </tr>
 </tbody>
 </table>
@@ -558,20 +558,22 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Propagator</strong> <span class="math notranslate nohighlight">\(K(x,t;x',t')\)</span> — transition amplitude between positions</p></li>
-<li><p><strong>Feynman path integral</strong> — <span class="math notranslate nohighlight">\(K = \int \mathcal{D}[x]\, \mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span></p></li>
-<li><p><strong>Time-slice formula</strong> — infinitesimal propagator over <span class="math notranslate nohighlight">\(\delta t\)</span></p></li>
-<li><p><strong>Gaussian integration</strong> — the technical engine for extracting the Schrödinger equation</p></li>
-<li><p><strong>Phase = Classical Action</strong> — the free propagator exponent is <span class="math notranslate nohighlight">\(\mathrm{i}S_{\text{cl}}/\hbar\)</span></p></li>
+<li><p><strong>Propagator</strong> <span class="math notranslate nohighlight">\(K(x,t;x',t') = \langle x\vert\hat{U}(t,t')\vert x'\rangle\)</span> — kernel that evolves any wavefunction.</p></li>
+<li><p><strong>Composition (semigroup) property</strong> — the engine of time slicing.</p></li>
+<li><p><strong>Slice propagator</strong> <span class="math notranslate nohighlight">\(K_{\delta t}\)</span> — phase fixed by <span class="math notranslate nohighlight">\(S_{\text{slice}}\)</span>, amplitude fixed by self-consistency at <span class="math notranslate nohighlight">\(\delta t = 0\)</span>.</p></li>
+<li><p><strong>Path integral as a limit</strong> — <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span> defined as <span class="math notranslate nohighlight">\(N\to\infty\)</span> of the slicing.</p></li>
+<li><p><strong>Schrödinger equation</strong> — derived from one slice; emerges as the local content of phase = action.</p></li>
+<li><p><strong>Free propagator</strong> <span class="math notranslate nohighlight">\(K_{\text{free}} = (m/2\pi\mathrm{i}\hbar t)^{d/2}\,\mathrm{e}^{\mathrm{i}S_{\text{cl}}/\hbar}\)</span> — phase = classical action, exactly.</p></li>
 </ul>
 </section>
 <section id="learning-objectives">
 <h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>State the propagator and explain how it evolves wavefunctions.</p></li>
-<li><p>Write down the Feynman path integral and explain the meaning of each part.</p></li>
-<li><p>Derive the Schrödinger equation from the time-slice path integral via Gaussian integration.</p></li>
-<li><p>Compute the free-particle propagator and identify the classical action in its phase.</p></li>
+<li><p>Define the propagator and explain how it evolves wavefunctions and composes over intermediate times.</p></li>
+<li><p>Write the path integral as the <span class="math notranslate nohighlight">\(N\to\infty\)</span> limit of time-sliced integrals; identify what <span class="math notranslate nohighlight">\(\mathcal{D}[x]\)</span> means.</p></li>
+<li><p>Derive the Schrödinger equation from the one-slice path integral and explain how the requirement at <span class="math notranslate nohighlight">\(\delta t = 0\)</span> fixes the slice normalization.</p></li>
+<li><p>Compute the free-particle propagator from a superposition of plane waves and identify its phase as the classical action.</p></li>
+<li><p>Articulate the two conceptual closures: (i) the slice formula was already exact for the free particle, (ii) the propagator picture restores the classical particle that a single plane wave seems to lose.</p></li>
 </ul>
 </section>
 </section>

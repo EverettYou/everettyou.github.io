@@ -505,11 +505,12 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-slice-propagator-revisited">The Time-Slice Propagator Revisited</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-gaussian-integral-and-taylor-expansion">Step 1: Gaussian Integral and Taylor Expansion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-gaussian-moments">Step 2: Gaussian Moments</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-collecting-o-t-terms">Step 3: Collecting O(δt) Terms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-equivalent-formulations">Two Equivalent Formulations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-one-slice">Setting Up One Slice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-taylor-expand-the-source-wave">Step 1 — Taylor Expand the Source Wave</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-the-gaussian-moments">Step 2 — Compute the Gaussian Moments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-self-consistency-fixes-a-delta-t">Step 3 — Self-Consistency Fixes <span class="math notranslate nohighlight">\(A(\delta t)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-free-schrodinger-equation">The Free Schrödinger Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-the-potential">Adding the Potential</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -530,212 +531,234 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How does taking the limit <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> in the path integral formula transform it into a differential equation?</p></li>
-<li><p>What role do Gaussian integrals play in deriving the Laplacian term? Why does the kinetic energy lead to <span class="math notranslate nohighlight">\(\partial^2/\partial x^2\)</span>?</p></li>
-<li><p>In what sense is the Schrödinger equation <em>derived</em> rather than postulated? What assumptions underlie the small-<span class="math notranslate nohighlight">\(\delta t\)</span> expansion?</p></li>
-<li><p>How does the propagator <span class="math notranslate nohighlight">\(K(x, t; x', 0)\)</span> encode the same physics as the wavefunction evolution <span class="math notranslate nohighlight">\(\psi(x, t) = \int K \psi_0(x') \mathrm{d}x'\)</span>?</p></li>
+<li><p>Why does the slice integral <span class="math notranslate nohighlight">\(\psi(x,t+\delta t) = \int K_{\delta t}\,\psi(x',t)\,\mathrm{d}x'\)</span> produce only an infinitesimal change in <span class="math notranslate nohighlight">\(\psi\)</span> as <span class="math notranslate nohighlight">\(\delta t\to 0\)</span>?</p></li>
+<li><p>Compute the Gaussian moments <span class="math notranslate nohighlight">\(M_0\)</span>, <span class="math notranslate nohighlight">\(M_1\)</span>, <span class="math notranslate nohighlight">\(M_2\)</span> of the slice kinetic kernel. Why do only these three contribute at order <span class="math notranslate nohighlight">\(\delta t\)</span>?</p></li>
+<li><p>The slice ansatz carries an undetermined amplitude <span class="math notranslate nohighlight">\(A(\delta t)\)</span>. What self-consistency condition fixes it, and what value does it take?</p></li>
+<li><p>Derive the free Schrödinger equation from the small-<span class="math notranslate nohighlight">\(\delta t\)</span> expansion. In what sense is this a <em>derivation</em> rather than a postulate?</p></li>
+<li><p>How does adding a potential <span class="math notranslate nohighlight">\(V(x)\)</span> modify the slice phase and produce the full Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\partial_t\psi = \hat{H}\psi\)</span>?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The Schrödinger equation is traditionally <em>postulated</em> as a fundamental axiom. Here we <em>derive</em> it from the path integral by taking the limit <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> in the time-slice propagator formula. This reveals that the two formulations of quantum mechanics—the path integral (global sum over histories) and the Schrödinger equation (local differential equation)—are mathematically equivalent. The propagator emerges as the Green’s function of the Schrödinger equation.</p>
+<p>In §3.1 we met the path-integral idea as a global principle: quantum amplitudes are organized by phase = action and summed over histories. In §3.2.2 we now turn that abstract principle into practical machinery. We analyze one infinitesimal time slice, then connect the slices in a controlled limit, and each step sharpens the same physical picture: local wave evolution emerges from interference of nearby paths. The purpose is singular and concrete: derive the Schrödinger equation — the working equation we use to solve quantum-mechanical problems — directly from the path-integral formulation rather than introducing it as an independent postulate.</p>
 </section>
-<section id="the-time-slice-propagator-revisited">
-<h3>The Time-Slice Propagator Revisited<a class="headerlink" href="#the-time-slice-propagator-revisited" title="Link to this heading">#</a></h3>
-<p>Recall from §3.2.1 that for a small time interval <span class="math notranslate nohighlight">\(\delta t\)</span>, the propagator factorizes as</p>
+<section id="setting-up-one-slice">
+<h3>Setting Up One Slice<a class="headerlink" href="#setting-up-one-slice" title="Link to this heading">#</a></h3>
+<p>Combining the wave-evolution rule <a class="reference internal" href="3-2-1-path-integral-formulation.html#equation-eq-wave-evolution">(63)</a> with the slice ansatz <a class="reference internal" href="3-2-1-path-integral-formulation.html#equation-eq-k-delta-t-ansatz">(68)</a>, the wavefunction one slice later is</p>
+<div class="math notranslate nohighlight" id="equation-eq-one-slice-integral">
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq-one-slice-integral" title="Link to this equation">#</a></span>\[
+\psi(x,t+\delta t) = A(\delta t)\int\exp\!\left[\frac{\mathrm{i}\,m\,(x-x')^{2}}{2\hbar\,\delta t}\right]\psi(x',t)\,\mathrm{d}x'.
+\]</div>
+<p><strong>Physical picture.</strong> The amplitude at the observation point <span class="math notranslate nohighlight">\((x,t+\delta t)\)</span> is built by collecting contributions from every source point <span class="math notranslate nohighlight">\(x'\)</span> on the previous wavefront <span class="math notranslate nohighlight">\(\psi(\cdot,t)\)</span>, propagated to <span class="math notranslate nohighlight">\(x\)</span> by the slice propagator. Different sources interfere through their relative phases. To make the geometry transparent, parameterize a source by its displacement from <span class="math notranslate nohighlight">\(x\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\psi(x, t + \delta t) = \int K_{\delta t}^{\text{free}}(x, x') \, \mathrm{e}^{-\mathrm{i}V(x') \delta t / \hbar} \, \psi(x', t) \, \mathrm{d}x'
+x' = x - \delta x,
 \]</div>
-<p>where the free-particle (kinetic) kernel is</p>
-<div class="math notranslate nohighlight" id="equation-eq-k-free-delta-t-one-step">
-<span class="eqno">(63)<a class="headerlink" href="#equation-eq-k-free-delta-t-one-step" title="Link to this equation">#</a></span>\[
-K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi \mathrm{i}\hbar \delta t}\right)^{1/2} \exp\left(\frac{\mathrm{i}m(x - x')^2}{2\hbar \delta t}\right)
+<p>so <span class="math notranslate nohighlight">\(\delta x\)</span> is the (signed) distance the wave travels in time <span class="math notranslate nohighlight">\(\delta t\)</span>. The slice integral becomes</p>
+<div class="math notranslate nohighlight" id="equation-eq-one-slice-deltax">
+<span class="eqno">(72)<a class="headerlink" href="#equation-eq-one-slice-deltax" title="Link to this equation">#</a></span>\[
+\psi(x,t+\delta t) = A(\delta t)\int\mathrm{e}^{\mathrm{i}\alpha(\delta x)^{2}}\,\psi(x-\delta x,t)\,\mathrm{d}(\delta x),
 \]</div>
-<p>To derive the Schrödinger equation, we expand both sides in powers of <span class="math notranslate nohighlight">\(\delta t\)</span> and identify the <span class="math notranslate nohighlight">\(O(\delta t)\)</span> term.</p>
+<p>with the kinetic-phase coefficient</p>
+<div class="math notranslate nohighlight" id="equation-eq-alpha-def">
+<span class="eqno">(73)<a class="headerlink" href="#equation-eq-alpha-def" title="Link to this equation">#</a></span>\[
+\alpha = \frac{m}{2\hbar\,\delta t}.
+\]</div>
+<p>For small <span class="math notranslate nohighlight">\(\delta t\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span> is <em>large</em>, so <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha(\delta x)^{2}}\)</span> oscillates rapidly except where the displacement is small — only sources within roughly <span class="math notranslate nohighlight">\(\vert\delta x\vert\lesssim 1/\sqrt{\alpha}\sim\sqrt{\hbar\,\delta t/m}\)</span> contribute coherently. The slowly varying <span class="math notranslate nohighlight">\(\psi\)</span> may therefore be Taylor-expanded around <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </section>
-<section id="step-1-gaussian-integral-and-taylor-expansion">
-<h3>Step 1: Gaussian Integral and Taylor Expansion<a class="headerlink" href="#step-1-gaussian-integral-and-taylor-expansion" title="Link to this heading">#</a></h3>
-<p>Substitute <span class="math notranslate nohighlight">\(\delta x = x - x'\)</span>. The kinetic phase</p>
-<div class="math notranslate nohighlight">
-\[
-\exp\left(\frac{\mathrm{i} m(\delta x)^2}{2\hbar \delta t}\right)
+<section id="step-1-taylor-expand-the-source-wave">
+<h3>Step 1 — Taylor Expand the Source Wave<a class="headerlink" href="#step-1-taylor-expand-the-source-wave" title="Link to this heading">#</a></h3>
+<p>To second order (we will see only the <span class="math notranslate nohighlight">\(n\le 2\)</span> moments survive in the limit),</p>
+<div class="math notranslate nohighlight" id="equation-eq-taylor-source">
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-taylor-source" title="Link to this equation">#</a></span>\[
+\psi(x-\delta x,t) = \psi(x,t) - \delta x\,\partial_{x}\psi(x,t) + \frac{1}{2}(\delta x)^{2}\,\partial_{x}^{2}\psi(x,t) + O((\delta x)^{3}).
 \]</div>
-<p>oscillates rapidly unless <span class="math notranslate nohighlight">\(|\delta x| \sim \sqrt{\hbar \delta t / m}\)</span>, a width that shrinks to zero as <span class="math notranslate nohighlight">\(\delta t \to 0\)</span>. This allows us to Taylor-expand <span class="math notranslate nohighlight">\(\psi(x', t)\)</span> around <span class="math notranslate nohighlight">\(x'\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\psi(x' + \delta x, t) = \psi(x', t) + \delta x \cdot \frac{\partial}{\partial x} \psi(x', t) + \frac{1}{2}(\delta x)^2 \frac{\partial^2 \psi}{\partial x^2} + \ldots
+<p>Substitute into <a class="reference internal" href="#equation-eq-one-slice-deltax">(72)</a>. The integral splits term by term into Gaussian moments,</p>
+<div class="math notranslate nohighlight" id="equation-eq-evolved-in-moments">
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-evolved-in-moments" title="Link to this equation">#</a></span>\[
+\psi(x,t+\delta t) = A(\delta t)\Bigl[\,M_{0}\,\psi - M_{1}\,\partial_{x}\psi + \tfrac{1}{2}M_{2}\,\partial_{x}^{2}\psi + O(\delta t^{\,2})\Bigr],
 \]</div>
-<p>Changing variables to <span class="math notranslate nohighlight">\(x' = x - \delta x\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\psi(x, t + \delta t) = \int \mathrm{d}(\delta x) \, K_{\delta t}^{\text{free}}(\delta x) \left[ \psi + \delta x \cdot \frac{\partial}{\partial x} \psi + \frac{1}{2}(\delta x)^2 \partial_x^2 \psi \right] \mathrm{e}^{-\mathrm{i}V(x) \delta t / \hbar}
+<p>with</p>
+<div class="math notranslate nohighlight" id="equation-eq-moments-def">
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-moments-def" title="Link to this equation">#</a></span>\[
+M_{n} \;\equiv\; \int_{-\infty}^{\infty}(\delta x)^{n}\,\mathrm{e}^{\mathrm{i}\alpha(\delta x)^{2}}\,\mathrm{d}(\delta x).
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x) = (m / 2\pi \mathrm{i}\hbar \delta t)^{1/2} \exp(\mathrm{i}m(\delta x)^2 / 2\hbar \delta t)\)</span>.</p>
 </section>
-<section id="step-2-gaussian-moments">
-<h3>Step 2: Gaussian Moments<a class="headerlink" href="#step-2-gaussian-moments" title="Link to this heading">#</a></h3>
-<div class="note admonition">
-<p class="admonition-title">Key Gaussian Integrals</p>
-<p>For the normalized Gaussian kernel <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x) = \left(\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}\right)^{1/2} \exp\!\left(\frac{\mathrm{i}m(\delta x)^2}{2\hbar\,\delta t}\right)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\int K_{\delta t}^{\text{free}}(\delta x) \, \mathrm{d}(\delta x) = 1
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\int K_{\delta t}^{\text{free}}(\delta x) \, \delta x \, \mathrm{d}(\delta x) = 0 \quad \text{(odd integrand)}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\int K_{\delta t}^{\text{free}}(\delta x) \, (\delta x)^2 \, \mathrm{d}(\delta x) = \frac{\mathrm{i}\hbar\,\delta t}{m}
+<section id="step-2-compute-the-gaussian-moments">
+<h3>Step 2 — Compute the Gaussian Moments<a class="headerlink" href="#step-2-compute-the-gaussian-moments" title="Link to this heading">#</a></h3>
+<p>Three short calculations give all we need.</p>
+<div class="important admonition">
+<p class="admonition-title">Gaussian moments</p>
+<div class="math notranslate nohighlight" id="equation-eq-moments-result">
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-moments-result" title="Link to this equation">#</a></span>\[
+M_{0} = \sqrt{\frac{\mathrm{i}\pi}{\alpha}} = \sqrt{\frac{2\pi\mathrm{i}\hbar\,\delta t}{m}},\qquad
+M_{1} = 0,\qquad
+M_{2} = \frac{\mathrm{i}\hbar\,\delta t}{m}\,M_{0}.
 \]</div>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Gaussian Moments</p>
-<p>Write <span class="math notranslate nohighlight">\(\alpha = \mathrm{i}m/(2\hbar\,\delta t)\)</span> so that <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x) = (\alpha/\pi)^{1/2}\,\mathrm{e}^{\alpha(\delta x)^2}\)</span>.</p>
-<p>The zeroth moment is normalized by construction: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}\,\mathrm{d}(\delta x) = 1\)</span>.</p>
-<p>The first moment vanishes by symmetry (odd integrand).</p>
-<p>For the second moment, use the standard Gaussian results <span class="math notranslate nohighlight">\(\int \mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \sqrt{\pi/(-\alpha)}\)</span> and <span class="math notranslate nohighlight">\(\int x^2\,\mathrm{e}^{\alpha x^2}\,\mathrm{d}x = \tfrac{1}{2}(-\alpha)^{-3/2}\sqrt{\pi}\)</span>:</p>
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(M_{0}\)</span> from the 2D polar trick</p>
+<p>Start from the real Gaussian <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty}\mathrm{e}^{-x^{2}}\,\mathrm{d}x\)</span>. Square it and pass to polar coordinates:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+I^{2}
+&amp;= \int\!\!\int\mathrm{e}^{-(x^{2}+y^{2})}\,\mathrm{d}x\,\mathrm{d}y\\
+&amp;= \int_{0}^{2\pi}\mathrm{d}\theta\int_{0}^{\infty}\mathrm{e}^{-r^{2}}\,r\,\mathrm{d}r
+   = 2\pi\cdot\tfrac{1}{2} = \pi,
+\end{split}
+\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(I = \sqrt{\pi}\)</span>. By scaling, <span class="math notranslate nohighlight">\(\int\mathrm{e}^{-ax^{2}}\,\mathrm{d}x = \sqrt{\pi/a}\)</span>. Analytically continuing to imaginary <span class="math notranslate nohighlight">\(a = -\mathrm{i}\alpha\)</span> (rotating the contour by <span class="math notranslate nohighlight">\(\pi/4\)</span> keeps the integral convergent for <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span>),</p>
 <div class="math notranslate nohighlight">
 \[
-\int K_{\delta t}^{\text{free}}(\delta x)\,(\delta x)^2\,\mathrm{d}(\delta x) = \frac{1}{-2\alpha} = \frac{\mathrm{i}\hbar\,\delta t}{m}
+M_{0} = \sqrt{\frac{\pi}{-\mathrm{i}\alpha}} = \sqrt{\frac{\mathrm{i}\pi}{\alpha}}.
+\]</div>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(M_{1}\)</span> by parity</p>
+<p>The integrand <span class="math notranslate nohighlight">\(\delta x\,\mathrm{e}^{\mathrm{i}\alpha(\delta x)^{2}}\)</span> is odd under <span class="math notranslate nohighlight">\(\delta x\mapsto-\delta x\)</span>, while the integration domain <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span> is symmetric. Hence <span class="math notranslate nohighlight">\(M_{1} = 0\)</span>. Every odd moment vanishes for the same reason.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: <span class="math notranslate nohighlight">\(M_{2}\)</span> by the derivative trick</p>
+<p>Differentiate <span class="math notranslate nohighlight">\(M_{0}(\alpha)\)</span> with respect to <span class="math notranslate nohighlight">\(\alpha\)</span> to lower an extra <span class="math notranslate nohighlight">\((\delta x)^{2}\)</span> from the exponent:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial M_{0}}{\partial\alpha}
+= \mathrm{i}\int(\delta x)^{2}\,\mathrm{e}^{\mathrm{i}\alpha(\delta x)^{2}}\,\mathrm{d}(\delta x)
+= \mathrm{i}\,M_{2}.
+\]</div>
+<p>From <span class="math notranslate nohighlight">\(M_{0} = \sqrt{\mathrm{i}\pi/\alpha}\)</span>, <span class="math notranslate nohighlight">\(\partial M_{0}/\partial\alpha = -M_{0}/(2\alpha)\)</span>. Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+M_{2} = \frac{1}{\mathrm{i}}\,\frac{\partial M_{0}}{\partial\alpha}
+= \frac{\mathrm{i}\,M_{0}}{2\alpha}
+= \frac{\mathrm{i}\hbar\,\delta t}{m}\,M_{0}.
 \]</div>
 </div>
 </section>
-<section id="step-3-collecting-o-t-terms">
-<h3>Step 3: Collecting O(δt) Terms<a class="headerlink" href="#step-3-collecting-o-t-terms" title="Link to this heading">#</a></h3>
-<p>Using the moments from Step 2:</p>
-<ul class="simple">
-<li><p>The zeroth-order term: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}} \psi \, \mathrm{e}^{-\mathrm{i}V \delta t/\hbar} \approx \psi(1 - \mathrm{i}V \delta t/\hbar) = \psi - (\mathrm{i}V \delta t/\hbar) \psi\)</span></p></li>
-<li><p>The first-moment term vanishes: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}} \, \delta x \cdot \frac{\partial}{\partial x} \psi \, \ldots = 0\)</span></p></li>
-<li><p>The second-moment term: <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}} \, (\delta x)^2 \, \partial_i \partial_j \psi \, \ldots = -\frac{\mathrm{i}\hbar \delta t}{m} \frac{\partial^2}{\partial x^2} \psi\)</span></p></li>
-</ul>
-<p>Therefore:</p>
+<section id="step-3-self-consistency-fixes-a-delta-t">
+<h3>Step 3 — Self-Consistency Fixes <span class="math notranslate nohighlight">\(A(\delta t)\)</span><a class="headerlink" href="#step-3-self-consistency-fixes-a-delta-t" title="Link to this heading">#</a></h3>
+<p>Substitute the moments <a class="reference internal" href="#equation-eq-moments-result">(77)</a> into <a class="reference internal" href="#equation-eq-evolved-in-moments">(75)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-evolved-collected">
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-evolved-collected" title="Link to this equation">#</a></span>\[
+\psi(x,t+\delta t) = A(\delta t)\,M_{0}\,\Bigl[\,\psi(x,t) + \frac{\mathrm{i}\hbar\,\delta t}{2m}\,\partial_{x}^{2}\psi(x,t) + O(\delta t^{\,2})\,\Bigr].
+\]</div>
+<p>Take <span class="math notranslate nohighlight">\(\delta t\to 0\)</span>. The right-hand side must reduce to <span class="math notranslate nohighlight">\(\psi(x,t)\)</span>, which forces <span class="math notranslate nohighlight">\(A(\delta t)\,M_{0} = 1\)</span>:</p>
+<div class="attention admonition">
+<p class="admonition-title">Slice normalization (free particle)</p>
+<div class="math notranslate nohighlight" id="equation-eq-a-fixed">
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-a-fixed" title="Link to this equation">#</a></span>\[
+A(\delta t) = \frac{1}{M_{0}} = \sqrt{\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}}.
+\]</div>
+<p>The normalization is <em>not</em> postulated. It is fixed by the requirement that a slice of zero duration leave the wavefunction unchanged.</p>
+</div>
+<p>The free slice propagator is therefore the closed-form expression</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-delta-t-free">
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-k-delta-t-free" title="Link to this equation">#</a></span>\[
+K_{\delta t}^{\text{free}}(x,x') = \sqrt{\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}}\,\exp\!\left[\frac{\mathrm{i}\,m\,(x-x')^{2}}{2\hbar\,\delta t}\right].
+\]</div>
+</section>
+<section id="the-free-schrodinger-equation">
+<h3>The Free Schrödinger Equation<a class="headerlink" href="#the-free-schrodinger-equation" title="Link to this heading">#</a></h3>
+<p>With <span class="math notranslate nohighlight">\(A\,M_{0} = 1\)</span>, the small-<span class="math notranslate nohighlight">\(\delta t\)</span> expansion <a class="reference internal" href="#equation-eq-evolved-collected">(78)</a> simplifies to</p>
 <div class="math notranslate nohighlight">
 \[
-\psi(x, t + \delta t) - \psi(x, t) = -\frac{\mathrm{i}\hbar \delta t}{m} \frac{\partial^2}{\partial x^2} \psi - \frac{\mathrm{i}}{\hbar} V(x) \delta t \, \psi + O((\delta t)^2)
+\psi(x,t+\delta t) - \psi(x,t) = \frac{\mathrm{i}\hbar\,\delta t}{2m}\,\partial_{x}^{2}\psi(x,t) + O(\delta t^{\,2}).
 \]</div>
-<p>Dividing by <span class="math notranslate nohighlight">\(\delta t\)</span> and taking <span class="math notranslate nohighlight">\(\delta t \to 0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial \psi}{\partial t} = \frac{\mathrm{i}\hbar}{2m} \frac{\partial^2}{\partial x^2} \psi - \frac{\mathrm{i}}{\hbar} V(x) \psi
-\]</div>
-<p>Multiplying by <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\)</span>:</p>
+<p>Divide by <span class="math notranslate nohighlight">\(\delta t\)</span>, take <span class="math notranslate nohighlight">\(\delta t\to 0\)</span>, and multiply through by <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\)</span>:</p>
 <div class="important admonition">
-<p class="admonition-title">The Schrödinger Equation</p>
-<div class="math notranslate nohighlight">
-\[
-\mathrm{i}\hbar \frac{\partial \psi}{\partial t} = \left(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x)\right) \psi = \hat{H} \psi
+<p class="admonition-title">Free Schrödinger equation</p>
+<div class="math notranslate nohighlight" id="equation-eq-schrodinger-free">
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-schrodinger-free" title="Link to this equation">#</a></span>\[
+\mathrm{i}\hbar\,\partial_{t}\psi(x,t) = -\frac{\hbar^{2}}{2m}\,\partial_{x}^{2}\psi(x,t).
 \]</div>
-<p>The Schrödinger equation is <strong>derived</strong> from the path integral, not postulated. The kinetic term produces the Laplacian <span class="math notranslate nohighlight">\(\frac{\partial^2}{\partial x^2}\)</span>, and the potential appears as a multiplicative factor.</p>
+<p>Historically this equation entered physics as an oracle from the sky. Here it has been <em>derived</em> from the same principle phase = action that organized §3.1.3. Wave mechanics is not an extra postulate; it is the local content of the global phase = action.</p>
 </div>
 </section>
-<section id="two-equivalent-formulations">
-<h3>Two Equivalent Formulations<a class="headerlink" href="#two-equivalent-formulations" title="Link to this heading">#</a></h3>
-<p>The derivation reveals a deep equivalence:</p>
+<section id="adding-the-potential">
+<h3>Adding the Potential<a class="headerlink" href="#adding-the-potential" title="Link to this heading">#</a></h3>
+<p>For a particle in a potential the Lagrangian is <span class="math notranslate nohighlight">\(L = \tfrac{1}{2}m\dot x^{2} - V(x)\)</span>, so the slice action picks up an additional <span class="math notranslate nohighlight">\(-V(x)\,\delta t\)</span> (HW 3.2.1.4). The slice propagator therefore acquires an additional phase factor:</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-delta-t-with-v">
+<span class="eqno">(82)<a class="headerlink" href="#equation-eq-k-delta-t-with-v" title="Link to this equation">#</a></span>\[
+K_{\delta t}(x,x') = K_{\delta t}^{\text{free}}(x,x')\;\exp\!\left[-\frac{\mathrm{i}\,V(x)\,\delta t}{\hbar}\right].
+\]</div>
+<p>Because the kinetic Gaussian peaks at <span class="math notranslate nohighlight">\(\delta x = 0\)</span>, the choice of where to evaluate <span class="math notranslate nohighlight">\(V\)</span> within the slice (endpoint, midpoint, or starting point) only changes the slice action by <span class="math notranslate nohighlight">\(O(\delta t^{\,2})\)</span> and does not affect the limit. Denote the kinetic-only result <a class="reference internal" href="#equation-eq-evolved-collected">(78)</a> (now with <span class="math notranslate nohighlight">\(A\)</span> fixed) by</p>
+<div class="math notranslate nohighlight" id="equation-eq-psi-kin">
+<span class="eqno">(83)<a class="headerlink" href="#equation-eq-psi-kin" title="Link to this equation">#</a></span>\[
+\psi_{\text{kin}}(x,t+\delta t) \;\equiv\; \psi(x,t) + \frac{\mathrm{i}\hbar\,\delta t}{2m}\,\partial_{x}^{2}\psi(x,t).
+\]</div>
+<p>The full slice evolution is then <span class="math notranslate nohighlight">\(\psi_{\text{kin}}\)</span> multiplied by the potential phase and expanded to first order:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x,t+\delta t) = \Bigl[1 - \frac{\mathrm{i}\,V(x)\,\delta t}{\hbar} + O(\delta t^{\,2})\Bigr]\,\psi_{\text{kin}}(x,t+\delta t).
+\]</div>
+<p>Multiplying out and keeping <span class="math notranslate nohighlight">\(O(\delta t)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x,t+\delta t) - \psi(x,t) = \frac{\mathrm{i}\hbar\,\delta t}{2m}\,\partial_{x}^{2}\psi(x,t) - \frac{\mathrm{i}\,V(x)\,\delta t}{\hbar}\,\psi(x,t) + O(\delta t^{\,2}).
+\]</div>
+<p>Dividing by <span class="math notranslate nohighlight">\(\delta t\)</span>, taking <span class="math notranslate nohighlight">\(\delta t\to 0\)</span>, and multiplying by <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\)</span> gives the result:</p>
 <div class="important admonition">
-<p class="admonition-title">Path Integral ↔ Schrödinger Equation</p>
-<p>Quantum mechanics admits two mathematically equivalent formulations:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Aspect</p></th>
-<th class="head"><p>Path Integral</p></th>
-<th class="head"><p>Schrödinger Equation</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Perspective</strong></p></td>
-<td><p>Global: sum over all histories</p></td>
-<td><p>Local: differential equation</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Central Object</strong></p></td>
-<td><p>Propagator <span class="math notranslate nohighlight">\(K = \sum \mathrm{e}^{\mathrm{i}S/\hbar}\)</span></p></td>
-<td><p>Wavefunction <span class="math notranslate nohighlight">\(\psi(x, t)\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Equation Satisfied</strong></p></td>
-<td><p>Schrödinger equation with delta-function initial condition</p></td>
-<td><p>Schrödinger equation with arbitrary initial state</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The propagator <span class="math notranslate nohighlight">\(K(x, t_f; x', t_i)\)</span> is the Green’s function of the Schrödinger equation:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathrm{i}\hbar \frac{\partial K}{\partial t_f} = \hat{H}_{x_f} K(x_f, t_f; x', t_i)
+<p class="admonition-title">Schrödinger equation</p>
+<div class="math notranslate nohighlight" id="equation-eq-schrodinger">
+<span class="eqno">(84)<a class="headerlink" href="#equation-eq-schrodinger" title="Link to this equation">#</a></span>\[
+\mathrm{i}\hbar\,\partial_{t}\psi(x,t) = \hat{H}\,\psi(x,t),\qquad
+\hat{H} = -\frac{\hbar^{2}}{2m}\,\partial_{x}^{2} + V(x).
 \]</div>
-<p>with the initial condition <span class="math notranslate nohighlight">\(K(x_f, t_i; x', t_i) = \delta(x_f - x')\)</span>.</p>
-</div>
-<p>The wavefunction at any time is obtained by convolving the propagator with the initial state:</p>
-<div class="math notranslate nohighlight">
-\[
-\psi(x, t) = \int K(x, t; x', 0) \, \psi(x', 0) \, \mathrm{d}x'
-\]</div>
-<p>This shows that solving the Schrödinger equation is equivalent to evaluating the path integral.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>The derivation assumed that the <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> limit can be taken order-by-order, with Gaussian integrals evaluated exactly at each step. Several questions arise:</p>
-<ul class="simple">
-<li><p>Is this limiting procedure always justified mathematically, or are there boundary cases where it breaks down?</p></li>
-<li><p>Starting from the Schrödinger equation, can we uniquely reconstruct the path integral?</p></li>
-<li><p>For time-dependent Hamiltonians <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span>, how does the path integral formulation change?</p></li>
-<li><p>Does the choice of splitting (kinetic vs potential factor ordering) affect the <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> limit?</p></li>
-</ul>
+<p>The kinetic energy emerges from the second Gaussian moment of the slice propagator; the potential energy emerges from the extra slice phase <span class="math notranslate nohighlight">\(-V(x)\,\delta t/\hbar\)</span>. The Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}\)</span> is the small-<span class="math notranslate nohighlight">\(\delta t\)</span> generator of the propagator.</p>
 </div>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Derivation from path integral</p>
-<p>The Schrödinger equation can be derived from the path integral by considering the short-time propagator. For a small time step <span class="math notranslate nohighlight">\(\delta t\)</span>, the amplitude to propagate from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{x}'\)</span> is proportional to <span class="math notranslate nohighlight">\(\exp(\mathrm{i}\mathcal{L}\delta t / \hbar)\)</span> where <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is the Lagrangian. Which statement correctly describes how this leads to the Schrödinger equation?</p>
-<p>(A) Taking the derivative with respect to <span class="math notranslate nohighlight">\(\delta t\)</span> and using the chain rule directly gives <span class="math notranslate nohighlight">\(\mathrm{i}\hbar \partial_t \psi = \hat{H} \psi\)</span>.</p>
-<p>(B) Expanding the exponential in powers of <span class="math notranslate nohighlight">\(\delta t\)</span> and matching orders recovers the Hamiltonian structure <span class="math notranslate nohighlight">\(\hat{H} = \hat{T} + \hat{V}\)</span>.</p>
-<p>(C) The Lagrangian <span class="math notranslate nohighlight">\(\mathcal{L} = \hat{T} - \hat{V}\)</span> is related to the Hamiltonian, and the path integral naturally encodes the kinetic and potential energy in the propagator.</p>
-<p>(D) The Schrödinger equation must be imposed as an additional constraint; the path integral alone cannot determine it.</p>
+<p class="admonition-title">Poll: what fixes the slice normalization?</p>
+<p>In the derivation above the slice normalization <span class="math notranslate nohighlight">\(A(\delta t) = \sqrt{m/(2\pi\mathrm{i}\hbar\,\delta t)}\)</span> was determined by demanding a specific consistency condition. Which condition is it?</p>
+<p>(A) Probability conservation: <span class="math notranslate nohighlight">\(\int\vert\psi(x,t+\delta t)\vert^{2}\,\mathrm{d}x = 1\)</span> at every step.</p>
+<p>(B) Composition of two slices reproduces a slice of double duration: <span class="math notranslate nohighlight">\(K_{2\delta t} = K_{\delta t}\circ K_{\delta t}\)</span>.</p>
+<p>(C) Setting <span class="math notranslate nohighlight">\(\delta t = 0\)</span> leaves the wavefunction unchanged: <span class="math notranslate nohighlight">\(\psi(x,t) = \psi(x,t)\)</span>.</p>
+<p>(D) The classical limit <span class="math notranslate nohighlight">\(\hbar\to 0\)</span> should reproduce Newton’s equation <span class="math notranslate nohighlight">\(m\ddot x = -V'(x)\)</span>.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The Schrödinger equation emerges from the path integral via <strong>small-time-step expansion</strong>: each <span class="math notranslate nohighlight">\(\delta t\)</span> slice contributes a kinetic Gaussian and a potential phase.</p></li>
-<li><p>The three-step derivation shows: (1) Taylor expand the wavefunction, (2) evaluate Gaussian moments, (3) collect <span class="math notranslate nohighlight">\(O(\delta t)\)</span> terms.</p></li>
-<li><p>The kinetic energy produces the <strong>Laplacian <span class="math notranslate nohighlight">\(\frac{\partial^2}{\partial x^2}\)</span></strong>; the potential acts as a <strong>multiplicative factor</strong>.</p></li>
-<li><p>The path integral (global, sum over histories) and the Schrödinger equation (local, differential) are <strong>mathematically equivalent</strong>.</p></li>
-<li><p>The <strong>propagator</strong> is the Green’s function of the Schrödinger equation and solves it with a delta-function source.</p></li>
+<li><p><strong>One slice → PDE.</strong> Taylor-expanding the source wavefunction inside the slice integral <a class="reference internal" href="#equation-eq-one-slice-deltax">(72)</a> reduces the time evolution at order <span class="math notranslate nohighlight">\(\delta t\)</span> to a sum of Gaussian moments <a class="reference internal" href="#equation-eq-evolved-in-moments">(75)</a>.</p></li>
+<li><p><strong>Three moments suffice.</strong> Only <span class="math notranslate nohighlight">\(M_{0}\)</span>, <span class="math notranslate nohighlight">\(M_{1} = 0\)</span>, and <span class="math notranslate nohighlight">\(M_{2}\)</span> contribute at order <span class="math notranslate nohighlight">\(\delta t\)</span> (<a class="reference internal" href="#equation-eq-moments-result">(77)</a>).</p></li>
+<li><p><strong>Self-consistency fixes <span class="math notranslate nohighlight">\(A\)</span>.</strong> Demanding <span class="math notranslate nohighlight">\(\psi(x,0) = \psi(x,0)\)</span> at <span class="math notranslate nohighlight">\(\delta t = 0\)</span> forces <span class="math notranslate nohighlight">\(A(\delta t) = 1/M_{0}\)</span> (<a class="reference internal" href="#equation-eq-a-fixed">(79)</a>); the slice propagator <a class="reference internal" href="#equation-eq-k-delta-t-free">(80)</a> is then complete.</p></li>
+<li><p><strong>Free Schrödinger</strong> <a class="reference internal" href="#equation-eq-schrodinger-free">(81)</a> follows from the second moment.</p></li>
+<li><p><strong>Adding <span class="math notranslate nohighlight">\(V(x)\)</span></strong> appends a slice phase <span class="math notranslate nohighlight">\(-V(x)\,\delta t/\hbar\)</span>; the full Schrödinger equation <a class="reference internal" href="#equation-eq-schrodinger">(84)</a> follows, and the Hamiltonian is read off as the infinitesimal generator.</p></li>
 </ul>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Gaussian moments.</strong> The free-particle kernel for a small time step <span class="math notranslate nohighlight">\(\delta t\)</span> is <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x) = (m/2\pi\mathrm{i}\hbar\,\delta t)^{1/2}\exp(\mathrm{i}m(\delta x)^2/2\hbar\,\delta t)\)</span>.</p>
-<p>(a) Show that the zeroth moment <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}(\delta x)\,\mathrm{d}(\delta x) = 1\)</span> (the kernel is normalized).</p>
-<p>(b) Show that the first moment <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}(\delta x)\,\delta x\,\mathrm{d}(\delta x) = 0\)</span> by a symmetry argument.</p>
-<p>(c) Compute the second moment <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}(\delta x)\,(\delta x)^2\,\mathrm{d}(\delta x) = \mathrm{i}\hbar\,\delta t/m\)</span> using the standard Gaussian identity.</p>
-<p><strong>2. Fresnel integral.</strong> Verify the Fresnel integral formula: for real <span class="math notranslate nohighlight">\(a \neq 0\)</span>,</p>
+<p><strong>1. Zeroth Gaussian moment.</strong> Use the polar-coordinate trick to derive <span class="math notranslate nohighlight">\(\int\mathrm{e}^{-r^{2}}\mathrm{d}^{2}r = \pi\)</span> in the plane.</p>
+<p>(a) From this, derive <span class="math notranslate nohighlight">\(\int\mathrm{e}^{-bx^{2}}\,\mathrm{d}x = \sqrt{\pi/b}\)</span> for <span class="math notranslate nohighlight">\(\operatorname{Re}b&gt;0\)</span> by separating the 2D integral and rescaling.</p>
+<p>(b) Analytically continue <span class="math notranslate nohighlight">\(b\to-\mathrm{i}\alpha\)</span> with <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span> (rotate the contour by <span class="math notranslate nohighlight">\(\pi/4\)</span> and check convergence) to obtain <span class="math notranslate nohighlight">\(M_{0} = \sqrt{\mathrm{i}\pi/\alpha}\)</span>.</p>
+<p><strong>2. Second Gaussian moment.</strong> Starting from <span class="math notranslate nohighlight">\(M_{0}(\alpha) = \sqrt{\mathrm{i}\pi/\alpha}\)</span>, use the derivative trick <span class="math notranslate nohighlight">\(\partial_{\alpha}M_{0} = \mathrm{i}M_{2}\)</span> to compute <span class="math notranslate nohighlight">\(M_{2}\)</span> and verify the result <span class="math notranslate nohighlight">\(M_{2} = (\mathrm{i}\hbar\,\delta t/m)\,M_{0}\)</span> stated in <a class="reference internal" href="#equation-eq-moments-result">(77)</a>.</p>
+<p><strong>3. Verifying the slice normalization.</strong> For the closed-form free slice propagator <a class="reference internal" href="#equation-eq-k-delta-t-free">(80)</a>, evaluate <span class="math notranslate nohighlight">\(\int K_{\delta t}^{\text{free}}(x,x')\,\mathrm{d}x'\)</span> by Gaussian integration. Show that the result equals <span class="math notranslate nohighlight">\(1\)</span>, independent of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\delta t\)</span>. What does this say about how a constant initial wavefunction evolves over one slice?</p>
+<p><strong>4. Composition of two slices.</strong> Compute</p>
 <div class="math notranslate nohighlight">
 \[
-\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}ax^2}\,\mathrm{d}x = \mathrm{e}^{\mathrm{i}\,\operatorname{sgn}(a)\,\pi/4}\left(\frac{\pi}{\vert a\vert}\right)^{1/2}.
+K_{2\delta t}^{\text{free}}(x,x'') \;=\; \int K_{\delta t}^{\text{free}}(x,x')\,K_{\delta t}^{\text{free}}(x',x'')\,\mathrm{d}x'
 \]</div>
-<p>(a) Starting from the known real Gaussian <span class="math notranslate nohighlight">\(\int\mathrm{e}^{-bx^2}\mathrm{d}x = \sqrt{\pi/b}\)</span> for <span class="math notranslate nohighlight">\(b &gt; 0\)</span>, analytically continue <span class="math notranslate nohighlight">\(b \to -\mathrm{i}a\)</span> and justify the contour rotation.</p>
-<p>(b) Check the formula for <span class="math notranslate nohighlight">\(a &gt; 0\)</span> and <span class="math notranslate nohighlight">\(a &lt; 0\)</span> separately, confirming the sign-dependent phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\pm\mathrm{i}\pi/4}\)</span>.</p>
-<p><strong>3. Potential placement.</strong> In the time-slice propagator, the potential appears as <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}V(x')\delta t/\hbar}\)</span> evaluated at the initial point <span class="math notranslate nohighlight">\(x'\)</span>.</p>
-<p>(a) Suppose one uses <span class="math notranslate nohighlight">\(V(x)\)</span> (the endpoint) instead of <span class="math notranslate nohighlight">\(V(x')\)</span>. Show that the difference is <span class="math notranslate nohighlight">\(V(x) - V(x') = V'(x)\,\delta x + O((\delta x)^2)\)</span> and argue that this makes no difference at order <span class="math notranslate nohighlight">\(\delta t\)</span> because the first Gaussian moment vanishes.</p>
-<p>(b) Suppose one uses the midpoint <span class="math notranslate nohighlight">\(V((x + x')/2)\)</span>. Does the Schrödinger equation change? Explain why all three choices agree in the <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> limit.</p>
-<p><strong>4. Green’s function.</strong> The propagator <span class="math notranslate nohighlight">\(K(x, t; x', 0)\)</span> satisfies two properties: (i) <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\partial_t K = \hat{H}_x K\)</span> and (ii) <span class="math notranslate nohighlight">\(K(x, 0; x', 0) = \delta(x - x')\)</span>.</p>
-<p>(a) Explain why these two properties uniquely determine <span class="math notranslate nohighlight">\(K\)</span> and justify calling it the Green’s function of the Schrödinger equation.</p>
-<p>(b) Verify consistency: if <span class="math notranslate nohighlight">\(\psi(x, t) = \int K(x, t; x', 0)\,\psi(x', 0)\,\mathrm{d}x'\)</span>, show that <span class="math notranslate nohighlight">\(\psi\)</span> satisfies the Schrödinger equation and the correct initial condition.</p>
-<p><strong>5. Probability conservation.</strong> Starting from the Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = -\frac{\hbar^2}{2m}\partial_x^2\psi + V\psi\)</span> with real <span class="math notranslate nohighlight">\(V(x)\)</span>, derive the continuity equation <span class="math notranslate nohighlight">\(\partial_t\rho + \frac{\partial j}{\partial x} = 0\)</span> where <span class="math notranslate nohighlight">\(\rho = \vert\psi\vert^2\)</span> and <span class="math notranslate nohighlight">\(j = \frac{\hbar}{2m\mathrm{i}}(\psi^*\partial_x\psi - \psi\partial_x\psi^*)\)</span>.</p>
-<p>(a) Compute <span class="math notranslate nohighlight">\(\partial_t\vert\psi\vert^2\)</span> using the Schrödinger equation and its complex conjugate.</p>
-<p>(b) Identify the probability current <span class="math notranslate nohighlight">\(j(x,t)\)</span> and verify <span class="math notranslate nohighlight">\(\partial_t\rho + \partial_x j = 0\)</span>.</p>
-<p>(c) Integrate over all space to show that <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\int\vert\psi\vert^2\mathrm{d}x = 0\)</span> (total probability is conserved), assuming <span class="math notranslate nohighlight">\(\psi \to 0\)</span> at infinity.</p>
-<p><strong>6. Kinetic Gaussian width.</strong> The kinetic kernel <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(\delta x)\)</span> has an effective Gaussian width <span class="math notranslate nohighlight">\(\sigma \sim \sqrt{\hbar\delta t/m}\)</span>.</p>
-<p>(a) Show that the exponent <span class="math notranslate nohighlight">\(\mathrm{i}m(\delta x)^2/(2\hbar\delta t)\)</span> becomes of order unity when <span class="math notranslate nohighlight">\(\vert\delta x\vert \sim \sqrt{\hbar\delta t/m}\)</span>, so only displacements of this size contribute significantly.</p>
-<p>(b) For an electron (<span class="math notranslate nohighlight">\(m \approx 10^{-30}\,\text{kg}\)</span>) with <span class="math notranslate nohighlight">\(\delta t = 10^{-16}\,\text{s}\)</span> (a typical atomic time scale), compute <span class="math notranslate nohighlight">\(\sigma\)</span>. How does it compare to atomic dimensions (<span class="math notranslate nohighlight">\(\sim 10^{-10}\,\text{m}\)</span>)?</p>
-<p>(c) Relate <span class="math notranslate nohighlight">\(\sigma\)</span> to the de Broglie wavelength <span class="math notranslate nohighlight">\(\lambda = h/p\)</span> for a particle with kinetic energy <span class="math notranslate nohighlight">\(E \sim \hbar/\delta t\)</span>. Explain why the Gaussian width sets the spatial resolution of each time step.</p>
-<p><strong>7. Path integral from Schrödinger.</strong> The derivation in the lecture goes from the path integral to the Schrödinger equation. Show that the reverse direction also works.</p>
-<p>(a) Starting from <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = \hat{H}\psi\)</span>, write the formal solution <span class="math notranslate nohighlight">\(\psi(t + \delta t) = \mathrm{e}^{-\mathrm{i}\hat{H}\delta t/\hbar}\psi(t)\)</span>.</p>
-<p>(b) Use the Trotter product formula <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}(\hat{T}+\hat{V})\delta t/\hbar} \approx \mathrm{e}^{-\mathrm{i}\hat{T}\delta t/\hbar}\mathrm{e}^{-\mathrm{i}\hat{V}\delta t/\hbar} + O(\delta t^2)\)</span> to factor the kinetic and potential contributions.</p>
-<p>(c) Insert a complete set of position states <span class="math notranslate nohighlight">\(\int\vert x'\rangle\langle x'\vert\,\mathrm{d}x' = 1\)</span> and show that the matrix element <span class="math notranslate nohighlight">\(\langle x\vert\mathrm{e}^{-\mathrm{i}\hat{T}\delta t/\hbar}\vert x'\rangle\)</span> reproduces the free-particle kernel <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}(x, x')\)</span>. Iterating <span class="math notranslate nohighlight">\(N\)</span> times recovers the path integral.</p>
+<p>by completing the square in <span class="math notranslate nohighlight">\(x'\)</span>.</p>
+<p>(a) Show that the resulting kernel has the same functional form as <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}\)</span> with <span class="math notranslate nohighlight">\(\delta t\)</span> replaced by <span class="math notranslate nohighlight">\(2\delta t\)</span>.</p>
+<p>(b) Comment on what this verifies about the slice propagator (cf. HW 3.2.1.6).</p>
+<p><strong>5. Probability conservation.</strong> Starting from <a class="reference internal" href="#equation-eq-schrodinger">(84)</a> with real <span class="math notranslate nohighlight">\(V(x)\)</span>, derive the continuity equation <span class="math notranslate nohighlight">\(\partial_{t}\rho + \partial_{x}j = 0\)</span> with <span class="math notranslate nohighlight">\(\rho = \vert\psi\vert^{2}\)</span> and <span class="math notranslate nohighlight">\(j = (\hbar/m)\operatorname{Im}(\psi^{*}\partial_{x}\psi)\)</span>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\partial_{t}\vert\psi\vert^{2}\)</span> using the Schrödinger equation and its complex conjugate.</p>
+<p>(b) Identify the probability current <span class="math notranslate nohighlight">\(j\)</span> and verify <span class="math notranslate nohighlight">\(\partial_{t}\rho + \partial_{x}j = 0\)</span>.</p>
+<p>(c) Integrate over all <span class="math notranslate nohighlight">\(x\)</span>, assuming <span class="math notranslate nohighlight">\(\psi\to 0\)</span> at infinity, to conclude that <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}t}\int\vert\psi\vert^{2}\,\mathrm{d}x = 0\)</span>.</p>
+<p><strong>6. Higher moments do not matter.</strong> The Taylor expansion <a class="reference internal" href="#equation-eq-taylor-source">(74)</a> produces moments <span class="math notranslate nohighlight">\(M_{n}\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, 2, 3, 4, \ldots\)</span>.</p>
+<p>(a) Use the derivative trick repeatedly to show that <span class="math notranslate nohighlight">\(M_{2k} = c_{k}\,M_{0}\,\alpha^{-k}\)</span> for some dimensionless constants <span class="math notranslate nohighlight">\(c_{k}\)</span>.</p>
+<p>(b) Substituting <span class="math notranslate nohighlight">\(\alpha = m/(2\hbar\,\delta t)\)</span>, conclude that <span class="math notranslate nohighlight">\(A\,M_{2k} = O(\delta t^{\,k})\)</span>. Why does the small-<span class="math notranslate nohighlight">\(\delta t\)</span> limit therefore truncate exactly at the second moment?</p>
+<p><strong>7. Wavepacket spreading time scale.</strong> A free particle is initially localized to a position uncertainty <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>(a) Use the de Broglie / Heisenberg estimate <span class="math notranslate nohighlight">\(\sigma_{p}\sim\hbar/\sigma\)</span> to argue that the typical velocity uncertainty is <span class="math notranslate nohighlight">\(v\sim\hbar/(m\sigma)\)</span>.</p>
+<p>(b) Estimate the time <span class="math notranslate nohighlight">\(\tau\)</span> at which the wavepacket has spread to roughly twice its initial width.</p>
+<p>(c) Evaluate <span class="math notranslate nohighlight">\(\tau\)</span> for an electron with <span class="math notranslate nohighlight">\(\sigma = 1\)</span> Å and for a baseball with <span class="math notranslate nohighlight">\(\sigma = 1\)</span> mm. Comment on why classical baseballs behave classically.</p>
+<p><strong>8. Potential placement freedom.</strong> Repeat the derivation of the full Schrödinger equation, but evaluate the slice potential at the source point <span class="math notranslate nohighlight">\(x' = x - \delta x\)</span> instead of the endpoint <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>(a) Show that the additional slice phase becomes <span class="math notranslate nohighlight">\(\exp[-\mathrm{i}V(x-\delta x)\,\delta t/\hbar]\)</span>.</p>
+<p>(b) Expand <span class="math notranslate nohighlight">\(V(x-\delta x) = V(x) - \delta x\,V'(x) + O((\delta x)^{2})\)</span> and use the Gaussian moments to show that the difference relative to evaluating <span class="math notranslate nohighlight">\(V\)</span> at <span class="math notranslate nohighlight">\(x\)</span> contributes only at <span class="math notranslate nohighlight">\(O(\delta t^{\,2})\)</span>.</p>
+<p>(c) Conclude that the Schrödinger equation is independent of where <span class="math notranslate nohighlight">\(V\)</span> is sampled within the slice, and explain in one sentence why this freedom matches the analogous freedom for the slice action (HW 3.2.1.4).</p>
 </section>
 </section>
 
@@ -807,11 +830,12 @@ K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi \mathrm{i}\hbar \delta t
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-slice-propagator-revisited">The Time-Slice Propagator Revisited</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-gaussian-integral-and-taylor-expansion">Step 1: Gaussian Integral and Taylor Expansion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-gaussian-moments">Step 2: Gaussian Moments</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-collecting-o-t-terms">Step 3: Collecting O(δt) Terms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-equivalent-formulations">Two Equivalent Formulations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-one-slice">Setting Up One Slice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-taylor-expand-the-source-wave">Step 1 — Taylor Expand the Source Wave</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-the-gaussian-moments">Step 2 — Compute the Gaussian Moments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-self-consistency-fixes-a-delta-t">Step 3 — Self-Consistency Fixes <span class="math notranslate nohighlight">\(A(\delta t)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-free-schrodinger-equation">The Free Schrödinger Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-the-potential">Adding the Potential</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

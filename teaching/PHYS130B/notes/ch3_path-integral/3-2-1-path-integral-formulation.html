@@ -505,10 +505,10 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-propagator-transition-amplitude">The Propagator: Transition Amplitude</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feynman-s-path-integral">Feynman’s Path Integral</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-infinitesimal-propagator-one-time-slice">The Infinitesimal Propagator: One Time Slice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing-turning-paths-into-integrals">Time-Slicing: Turning Paths into Integrals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-propagator">The Propagator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing">Time Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-path-integral-as-a-limit">The Path Integral as a Limit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategy-master-one-slice-first">Strategy: Master One Slice First</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -529,160 +529,188 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Define the propagator <span class="math notranslate nohighlight">\(K(x, t; x', t')\)</span>. Why is it the central object in quantum mechanics? How does it determine the wavefunction at any later time?</p></li>
-<li><p>Feynman’s path integral says <span class="math notranslate nohighlight">\(K = \int \mathcal{D}[x] \, \mathrm{e}^{\mathrm{i}S/\hbar}\)</span>. Why does each path contribute with the same amplitude but different phase? What happens in the <span class="math notranslate nohighlight">\(\hbar \to 0\)</span> limit?</p></li>
-<li><p>What does ‘time-slicing’ mean? How does inserting complete position bases at each time step turn the functional integral into ordinary integrals?</p></li>
-<li><p>How does the path integral relate to Huygens’ principle in wave optics? What is the deep connection between “all paths contribute with different phases” and “wavelets build the next wavefront”?</p></li>
+<li><p>What is the propagator <span class="math notranslate nohighlight">\(K(x,t;x',t')\)</span>? Why does knowing it give the time evolution of <em>any</em> wavefunction?</p></li>
+<li><p>State the composition (semigroup) property of the propagator. How does it follow from inserting a position resolution of identity?</p></li>
+<li><p>Apply the “phase = action” principle to a short time slice <span class="math notranslate nohighlight">\(\delta t\)</span>. What is the phase of <span class="math notranslate nohighlight">\(K_{\delta t}\)</span>, and why is its amplitude not yet fixed?</p></li>
+<li><p>What does <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span> actually mean as the <span class="math notranslate nohighlight">\(N\to\infty\)</span> limit of time-sliced integrals?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>Section 3.1.3 (Wave-Particle Duality) ended with the core idea: quantization means <strong>action becomes the phase exponent</strong>, and quantum mechanics is a <strong>sum over all paths</strong>. This section makes that precise. We introduce the <strong>propagator</strong> — the fundamental transition amplitude — express it as Feynman’s <strong>path integral</strong> (sum over paths weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>), and decode the functional integral via <strong>time-slicing</strong> into concrete integrals over single time steps. The result: a complete, equivalent reformulation of quantum mechanics that makes the classical limit transparent.</p>
+<p>In §3.1.3 we adopted the guiding principle “phase = action”: every quantum amplitude is built from <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> summed over paths. So far this is abstract. To extract a concrete, quantitative prediction we need a definite object to compute. That object is the <strong>propagator</strong> — the position-space matrix element of the time-evolution operator. Our job in §3.2.1 is to set up the problem cleanly: define the propagator, decompose long times into short slices, write down the contribution of one slice from the phase-action principle, and reach a precise definition of the formal “path integral” <span class="math notranslate nohighlight">\(\int \mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>.</p>
 </section>
-<section id="the-propagator-transition-amplitude">
-<h3>The Propagator: Transition Amplitude<a class="headerlink" href="#the-propagator-transition-amplitude" title="Link to this heading">#</a></h3>
+<section id="the-propagator">
+<h3>The Propagator<a class="headerlink" href="#the-propagator" title="Link to this heading">#</a></h3>
 <div class="important admonition">
-<p class="admonition-title">Propagator Definition</p>
-<p>The <strong>propagator</strong> <span class="math notranslate nohighlight">\(K(x, t; x', t')\)</span> is the quantum amplitude for a particle at position <span class="math notranslate nohighlight">\(x'\)</span> at time <span class="math notranslate nohighlight">\(t'\)</span> to be found at position <span class="math notranslate nohighlight">\(x\)</span> at time <span class="math notranslate nohighlight">\(t &gt; t'\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K(x, t; x', t') = \langle x \vert \hat{U}(t, t') \vert x' \rangle
+<p class="admonition-title">Propagator</p>
+<p>Let <span class="math notranslate nohighlight">\(\hat{U}(t,t')\)</span> denote the unitary that implements time evolution from <span class="math notranslate nohighlight">\(t'\)</span> to <span class="math notranslate nohighlight">\(t\)</span>. The <strong>propagator</strong> is its position-space matrix element:</p>
+<div class="math notranslate nohighlight" id="equation-eq-propagator-def">
+<span class="eqno">(62)<a class="headerlink" href="#equation-eq-propagator-def" title="Link to this equation">#</a></span>\[
+K(x,t;x',t') = \langle x\vert \hat{U}(t,t')\vert x'\rangle.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{U}(t, t') = \mathrm{e}^{-\mathrm{i}\hat{H}(t-t')/\hbar}\)</span> is the time-evolution operator.</p>
+<p>It is the quantum amplitude for a particle prepared at <span class="math notranslate nohighlight">\(x'\)</span> at time <span class="math notranslate nohighlight">\(t'\)</span> to be detected at <span class="math notranslate nohighlight">\(x\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 </div>
-<ul>
-<li><p>It determines everything: Given any initial state <span class="math notranslate nohighlight">\(\psi(x', t')\)</span>, the state at any later time is</p>
-<div class="math notranslate nohighlight">
-\[
-    \psi(x, t) = \int K(x, t; x', t') \, \psi(x', t') \, \mathrm{d}x'
-    \]</div>
-</li>
-<li><p>The propagator also satisfies a <strong>composition property</strong>: you can split a path at any intermediate time <span class="math notranslate nohighlight">\(t_m\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-    K(x, t; x', t') = \int K(x, t; x_m, t_m) \, K(x_m, t_m; x', t') \, \mathrm{d}x_m
-    \]</div>
-<p>This follows from inserting the identity <span class="math notranslate nohighlight">\(\int \vert x_m \rangle \langle x_m \vert \, \mathrm{d}x_m\)</span> into the product <span class="math notranslate nohighlight">\(\hat{U}(t, t') = \hat{U}(t, t_m) \hat{U}(t_m, t')\)</span>.</p>
-</li>
-</ul>
-</section>
-<section id="feynman-s-path-integral">
-<h3>Feynman’s Path Integral<a class="headerlink" href="#feynman-s-path-integral" title="Link to this heading">#</a></h3>
-<div class="important admonition">
-<p class="admonition-title">The Path Integral</p>
-<p>The propagator equals a <strong>functional integral over all paths</strong> from <span class="math notranslate nohighlight">\((x', t')\)</span> to <span class="math notranslate nohighlight">\((x, t)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-K(x, t; x', t') = \int_{x(t')=x'}^{x(t)=x} \mathrm{e}^{\mathrm{i}S[x]/\hbar} \, \mathcal{D}[x]
+<p>The propagator is the central object of this chapter for two reasons.</p>
+<p><strong>Wave evolution.</strong> Inserting the position resolution of identity into <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t,t')\vert\psi(t')\rangle\)</span> gives</p>
+<div class="math notranslate nohighlight" id="equation-eq-wave-evolution">
+<span class="eqno">(63)<a class="headerlink" href="#equation-eq-wave-evolution" title="Link to this equation">#</a></span>\[
+\psi(x,t) = \int K(x,t;x',t')\,\psi(x',t')\,\mathrm{d}x'.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(S[x] = \int_{t'}^{t} L(x, \dot{x}, \tau) \, \mathrm{d}\tau\)</span> is the action along path <span class="math notranslate nohighlight">\(x(\tau)\)</span>.</p>
-</div>
-<p>Each path contributes with <strong>unit probability weight</strong> <span class="math notranslate nohighlight">\(\vert\mathrm{e}^{\mathrm{i}S/\hbar}\vert=1\)</span> but <strong>different phase</strong> <span class="math notranslate nohighlight">\(S/\hbar\)</span>. Paths with similar action interfere constructively; paths with wildly different action oscillate and cancel.</p>
-<p>This is the <strong>stationary-phase principle</strong> from §3.1.3 (Wave-Particle Duality) realized exactly: the classical path (where <span class="math notranslate nohighlight">\(\delta S = 0\)</span>) is surrounded by neighboring paths with nearly equal phase, so they all add coherently. Off the classical path, the phase varies rapidly and neighboring paths cancel. Thus the classical path dominates, and quantum effects emerge from the sum of near-classical paths.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: Is the Functional Integral Real?</p>
-<p>Summing over uncountably many paths seems ill-defined. Yet the path integral must give the same results as the Schrödinger equation—both describe the same physics. The resolution is <strong>time-slicing</strong>: discretize time, perform finitely many ordinary integrals, then take the continuum limit carefully. The mathematical details are subtle, but the result is rigorous and equivalent to Schrödinger.</p>
-</div>
-</section>
-<section id="the-infinitesimal-propagator-one-time-slice">
-<h3>The Infinitesimal Propagator: One Time Slice<a class="headerlink" href="#the-infinitesimal-propagator-one-time-slice" title="Link to this heading">#</a></h3>
-<p>For a single small time step <span class="math notranslate nohighlight">\(\delta t\)</span>, we focus on the <strong>short-time propagator</strong> <span class="math notranslate nohighlight">\(K_{\delta t}(x, x')\)</span> from <span class="math notranslate nohighlight">\(x'\)</span> to <span class="math notranslate nohighlight">\(x\)</span> in time <span class="math notranslate nohighlight">\(\delta t\)</span>.</p>
-<p>For a nonrelativistic particle with Lagrangian <span class="math notranslate nohighlight">\(L = \tfrac{1}{2}m\dot{x}^2 - V(x)\)</span>, the action over one slice (midpoint rule for the potential) is</p>
-<div class="math notranslate nohighlight">
-\[
-S_{\text{slice}} = \tfrac{1}{2}m\frac{(x - x')^2}{\delta t} - V\!\left(\frac{x+x'}{2}\right) \delta t
+<p>So <span class="math notranslate nohighlight">\(K\)</span> is the kernel that propagates any initial wavefunction forward in time. Knowing <span class="math notranslate nohighlight">\(K\)</span> is knowing all of the dynamics.</p>
+<p><strong>Composition (semigroup).</strong> For any intermediate time <span class="math notranslate nohighlight">\(t'&lt;t_m&lt;t\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-propagator-composition">
+<span class="eqno">(64)<a class="headerlink" href="#equation-eq-propagator-composition" title="Link to this equation">#</a></span>\[
+K(x,t;x',t') = \int K(x,t;x_m,t_m)\,K(x_m,t_m;x',t')\,\mathrm{d}x_m.
 \]</div>
-<div class="important admonition">
-<p class="admonition-title">One-step propagator (1D)</p>
-<p>The Gaussian integration over momentum yields the <strong>short-time propagator</strong> for one step <span class="math notranslate nohighlight">\(\delta t\)</span>:</p>
-<div class="math notranslate nohighlight" id="equation-eq-k-delta-t-one-step">
-<span class="eqno">(62)<a class="headerlink" href="#equation-eq-k-delta-t-one-step" title="Link to this equation">#</a></span>\[
-K_{\delta t}(x, x') = \left(\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}\right)^{1/2} \exp\left\{\frac{\mathrm{i}}{\hbar}\left[\frac{m(x-x')^2}{2\,\delta t} - V\!\left(\frac{x+x'}{2}\right)\delta t\right]\right\}
-\]</div>
-</div>
-<p>For a <strong>free particle</strong> (<span class="math notranslate nohighlight">\(V=0\)</span>), this reduces to</p>
-<div class="math notranslate nohighlight">
-\[K_{\delta t}^{\text{free}}(x, x') = \left(\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}\right)^{1/2} \exp\!\left(\frac{\mathrm{i}m(x-x')^2}{2\hbar\,\delta t}\right).\]</div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Short-Time Propagator</p>
-<p>Over an infinitesimal time step, <span class="math notranslate nohighlight">\(\hat{U}(\delta t) = \mathrm{e}^{-\mathrm{i}\hat{H}\delta t/\hbar}\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = \tfrac{\hat{p}^2}{2m} + V(\hat{x})\)</span>. Using the Trotter-Suzuki formula:</p>
+<p class="admonition-title">Derivation: composition from resolution of identity</p>
+<p>Start from <span class="math notranslate nohighlight">\(\hat{U}(t,t') = \hat{U}(t,t_m)\,\hat{U}(t_m,t')\)</span> and insert <span class="math notranslate nohighlight">\(\int\vert x_m\rangle\langle x_m\vert\,\mathrm{d}x_m = \hat{I}\)</span> between the two factors:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+K(x,t;x',t')
+&amp;= \langle x\vert\hat{U}(t,t_m)\,\hat{U}(t_m,t')\vert x'\rangle\\
+&amp;= \int\langle x\vert\hat{U}(t,t_m)\vert x_m\rangle\,\langle x_m\vert\hat{U}(t_m,t')\vert x'\rangle\,\mathrm{d}x_m\\
+&amp;= \int K(x,t;x_m,t_m)\,K(x_m,t_m;x',t')\,\mathrm{d}x_m.
+\end{split}
+\end{split}\]</div>
+</div>
+<p>The composition property is the engine of everything that follows: a long propagation factorizes into shorter ones, with each intermediate position summed over.</p>
+</section>
+<section id="time-slicing">
+<h3>Time Slicing<a class="headerlink" href="#time-slicing" title="Link to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<figure class="align-center" id="fig-time-slicing-discretized-path">
+<a class="reference internal image-reference" href="../images/3-2-1-time_slicing.png"><img alt="../images/3-2-1-time_slicing.png" src="../images/3-2-1-time_slicing.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">A discretized path with fixed endpoints and uniform time slices <span class="math notranslate nohighlight">\(\delta t\)</span>.</span><a class="headerlink" href="#fig-time-slicing-discretized-path" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</aside>
+<div class="docutils">
+<p>Iterate composition <span class="math notranslate nohighlight">\(N\)</span> times. Divide the interval <span class="math notranslate nohighlight">\([t',t]\)</span> into equal slices of duration</p>
 <div class="math notranslate nohighlight">
 \[
-\mathrm{e}^{-\mathrm{i}\hat{H}\delta t/\hbar} \approx \mathrm{e}^{-\mathrm{i}V(\hat{x})\delta t/2\hbar} \, \mathrm{e}^{-\mathrm{i}\hat{p}^2\delta t/2m\hbar} \, \mathrm{e}^{-\mathrm{i}V(\hat{x})\delta t/2\hbar}
+\delta t = \frac{t-t'}{N},
 \]</div>
-<p>Insert momentum and position resolutions of identity: <span class="math notranslate nohighlight">\(\int \frac{\mathrm{d}p}{2\pi\hbar}\)</span> and <span class="math notranslate nohighlight">\(\int \vert x_n \rangle \langle x_n \vert \mathrm{d}x_n\)</span>. The momentum integral is Gaussian:</p>
+<p>with intermediate times <span class="math notranslate nohighlight">\(t_n = t' + n\,\delta t\)</span> and intermediate positions <span class="math notranslate nohighlight">\(x_n\)</span>, fixing the endpoints <span class="math notranslate nohighlight">\((x_0, t_0) = (x',t')\)</span> and <span class="math notranslate nohighlight">\((x_N,t_N) = (x,t)\)</span>. The composition rule gives</p>
+<div class="math notranslate nohighlight" id="equation-eq-time-slicing">
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-time-slicing" title="Link to this equation">#</a></span>\[
+K(x,t;x',t') = \int \left[\,\prod_{n=1}^{N-1}\mathrm{d}x_n\,\right]\;\prod_{n=0}^{N-1} K_{\delta t}(x_{n+1},x_n),
+\]</div>
+<p>where the <strong>slice propagator</strong> is the short-time piece</p>
+<div class="math notranslate nohighlight" id="equation-eq-slice-propagator-def">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-slice-propagator-def" title="Link to this equation">#</a></span>\[
+K_{\delta t}(x_{n+1},x_n) \;\equiv\; K(x_{n+1},t_{n+1};x_n,t_n).
+\]</div>
+<p>Each ordered tuple <span class="math notranslate nohighlight">\((x_0,x_1,\ldots,x_N)\)</span> is a <em>discretized path</em>, so the right-hand side is a sum over piecewise-linear histories connecting <span class="math notranslate nohighlight">\(x'\)</span> to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<h3 class="rubric" id="the-slice-propagator-from-phase-action">The Slice Propagator from “Phase = Action”</h3>
+<p>For a <em>short</em> slice, approximate the path by the straight-line segment from <span class="math notranslate nohighlight">\(x_n\)</span> to <span class="math notranslate nohighlight">\(x_{n+1}\)</span> at constant velocity <span class="math notranslate nohighlight">\(v_n = (x_{n+1}-x_n)/\delta t\)</span>. The action of a free particle accumulated over this segment is</p>
+<div class="math notranslate nohighlight" id="equation-eq-slice-action-free">
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-slice-action-free" title="Link to this equation">#</a></span>\[
+S_{\text{slice}} \;=\; \int_{t_n}^{t_{n+1}}\frac{1}{2}m\,v_n^{\,2}\,\mathrm{d}\tau \;=\; \frac{m\,(x_{n+1}-x_n)^2}{2\,\delta t}.
+\]</div>
+<p>Apply the principle “phase = action” from §3.1.3 to this single slice: the slice propagator should carry a phase equal to <span class="math notranslate nohighlight">\(S_{\text{slice}}/\hbar\)</span>. The principle fixes only the <em>phase</em>; the overall <em>amplitude</em> is not specified.</p>
+<div class="important admonition">
+<p class="admonition-title">Slice propagator (free, ansatz)</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-delta-t-ansatz">
+<span class="eqno">(68)<a class="headerlink" href="#equation-eq-k-delta-t-ansatz" title="Link to this equation">#</a></span>\[
+K_{\delta t}(x_{n+1},x_n) \;=\; A(\delta t)\;\exp\!\left[\,\frac{\mathrm{i}}{\hbar}\,\frac{m\,(x_{n+1}-x_n)^2}{2\,\delta t}\,\right],
+\]</div>
+<p>with a <span class="math notranslate nohighlight">\(\delta t\)</span>-dependent normalization <span class="math notranslate nohighlight">\(A(\delta t)\)</span> that the phase-action principle does <strong>not</strong> determine.</p>
+</div>
+</div>
+<p>We will pin down <span class="math notranslate nohighlight">\(A(\delta t)\)</span> in §3.2.2 by demanding self-consistency of the one-slice evolution at <span class="math notranslate nohighlight">\(\delta t = 0\)</span>.</p>
+</section>
+<section id="the-path-integral-as-a-limit">
+<h3>The Path Integral as a Limit<a class="headerlink" href="#the-path-integral-as-a-limit" title="Link to this heading">#</a></h3>
+<p>Fix the endpoints <span class="math notranslate nohighlight">\(x_0=x'\)</span> and <span class="math notranslate nohighlight">\(x_N=x\)</span>. As <span class="math notranslate nohighlight">\(N\to\infty\)</span> the discretized path <span class="math notranslate nohighlight">\((x_0,\ldots,x_N)\)</span> approaches a continuous curve <span class="math notranslate nohighlight">\(x(\tau)\)</span>, and the discretized action becomes the classical action functional,</p>
 <div class="math notranslate nohighlight">
 \[
-K_{\delta t}(x, x') = \int \frac{\mathrm{d}p}{2\pi\hbar} \exp\left[\frac{\mathrm{i}}{\hbar}\left(p \cdot (x - x') - \frac{\delta t p^2}{2m} - V\left(\frac{x+x'}{2}\right)\delta t\right)\right]
+\sum_{n=0}^{N-1} S_{\text{slice}}(x_{n+1},x_n) \;\longrightarrow\; S[x] \;=\; \int_{t'}^{t} L(x,\dot x)\,\mathrm{d}\tau.
 \]</div>
-<p>Completing the Gaussian integral over <span class="math notranslate nohighlight">\(p\)</span> gives the one-step propagator <a class="reference internal" href="#equation-eq-k-delta-t-one-step">(62)</a>. The prefactor <span class="math notranslate nohighlight">\((m/2\pi\mathrm{i}\hbar\,\delta t)^{1/2}\)</span> per slice ensures proper normalization across the full time evolution.</p>
+<p>Bundle the per-slice integrations and amplitude factors into a single symbol <span class="math notranslate nohighlight">\(\mathcal{D}[x]\)</span>:</p>
+<div class="important admonition">
+<p class="admonition-title">Path integral (definition)</p>
+<div class="math notranslate nohighlight" id="equation-eq-path-integral">
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq-path-integral" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+K(x,t;x',t')
+&amp;\;\equiv\; \lim_{N\to\infty}\int\left[\,\prod_{n=1}^{N-1}\mathrm{d}x_n\,\right]\prod_{n=0}^{N-1}K_{\delta t}(x_{n+1},x_n)\\
+&amp;\;=:\;\int_{x(t')=x'}^{x(t)=x}\mathcal{D}[x]\;\mathrm{e}^{\mathrm{i}S[x]/\hbar}.
+\end{split}
+\end{split}\]</div>
+<p>The Feynman path integral <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span> <strong>is</strong> the <span class="math notranslate nohighlight">\(N\to\infty\)</span> limit of the time-sliced product <a class="reference internal" href="#equation-eq-time-slicing">(65)</a>. It has no other meaning.</p>
+</div>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion: is the continuum path integral well defined?</p>
+<p>The set of continuous paths between two spacetime points is uncountable, and writing <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\)</span> as a true measure-theoretic integral on path space is delicate. The slicing form sidesteps this difficulty: every quantity is a finite-dimensional ordinary integral, and the continuum object is <em>defined</em> as the <span class="math notranslate nohighlight">\(N\to\infty\)</span> limit. The slicing is not a calculational trick — it is the operational definition.</p>
 </div>
 </section>
-<section id="time-slicing-turning-paths-into-integrals">
-<h3>Time-Slicing: Turning Paths into Integrals<a class="headerlink" href="#time-slicing-turning-paths-into-integrals" title="Link to this heading">#</a></h3>
-<p>Divide the total time interval from <span class="math notranslate nohighlight">\(t'\)</span> to <span class="math notranslate nohighlight">\(t\)</span> into <span class="math notranslate nohighlight">\(N\)</span> small steps of duration <span class="math notranslate nohighlight">\(\delta t = (t-t')/N\)</span>. Insert complete sets of position eigenstates at each intermediate time <span class="math notranslate nohighlight">\(t_0 &lt; t_1 &lt; \cdots &lt; t_N\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\int \vert x_n \rangle \langle x_n \vert \, \mathrm{d}x_n = \hat{I}
+<section id="strategy-master-one-slice-first">
+<h3>Strategy: Master One Slice First<a class="headerlink" href="#strategy-master-one-slice-first" title="Link to this heading">#</a></h3>
+<p>Equation <a class="reference internal" href="#equation-eq-time-slicing">(65)</a> reduces a quantum dynamics problem to an ordinary <span class="math notranslate nohighlight">\((N{-}1)\)</span>-fold integral. For large <span class="math notranslate nohighlight">\(N\)</span> this is still intractable; we cannot evaluate all slices simultaneously. The pedagogical move is to study how <em>one</em> slice transforms the wavefunction. Combining <a class="reference internal" href="#equation-eq-wave-evolution">(63)</a> with the definition of <span class="math notranslate nohighlight">\(K_{\delta t}\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-one-step-evolution">
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq-one-step-evolution" title="Link to this equation">#</a></span>\[
+\psi(x,t+\delta t) \;=\; \int K_{\delta t}(x,x')\,\psi(x',t)\,\mathrm{d}x'.
 \]</div>
-<p>The full propagator factorizes:</p>
-<div class="math notranslate nohighlight">
-\[
-K(x, t; x', t') = \int \prod_{n=1}^{N-1} \mathrm{d}x_n \, \prod_{n=0}^{N-1} K_{\delta t}(x_{n+1}, x_n)
-\]</div>
-<p>Each factor <span class="math notranslate nohighlight">\(K_{\delta t}\)</span> is the one-step kernel <a class="reference internal" href="#equation-eq-k-delta-t-one-step">(62)</a>. Multiplying the exponentials builds up the total phase along a discretized path; in the limit <span class="math notranslate nohighlight">\(N \to \infty\)</span> (<span class="math notranslate nohighlight">\(\delta t \to 0\)</span>), this becomes the continuum path integral.</p>
-<div class="note admonition">
-<p class="admonition-title">Connection to Huygens’ Principle</p>
-<p>Compare this to Huygens’ principle (§3.1.2): each point <span class="math notranslate nohighlight">\(x_n\)</span> at time <span class="math notranslate nohighlight">\(t_n\)</span> acts as a source of matter wavelets that propagate to <span class="math notranslate nohighlight">\(x_{n+1}\)</span>, with phase proportional to the action <span class="math notranslate nohighlight">\(S_{\text{slice}}\)</span>. The time-sliced path integral is exactly this: <strong>a chain of wavelets</strong>, each with phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S_{\text{slice}}/\hbar}\)</span>, summed over all paths.</p>
-</div>
+<p>A single slice should advance time by an infinitesimal amount, producing only an infinitesimal change in <span class="math notranslate nohighlight">\(\psi\)</span>. Expanding both sides to first order in <span class="math notranslate nohighlight">\(\delta t\)</span> should turn this integral relation into a partial differential equation — which we will recognize as the Schrödinger equation. That is the program of §3.2.2.</p>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Classical vs. quantum path contributions</p>
-<p>In the path integral formulation, the quantum amplitude to go from <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> to <span class="math notranslate nohighlight">\(\mathbf{x}_f\)</span> involves a sum over <em>all</em> possible paths, with each path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> contributing a phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S[\mathcal{C}]/\hbar}\)</span> where <span class="math notranslate nohighlight">\(S\)</span> is the action. In the classical limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, why does the path integral recover classical mechanics?</p>
-<p>(A) Most paths contribute equally, so their average gives the classical result.</p>
-<p>(B) Only the path of extremal (stationary) action contributes; all other paths have wildly different phases and cancel by destructive interference.</p>
-<p>(C) The classical path has infinite phase, drowning out all others.</p>
-<p>(D) Quantum mechanics becomes deterministic in the limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, so there is only one path.</p>
+<p class="admonition-title">Poll: meaning of <span class="math notranslate nohighlight">\(\mathcal{D}[x]\)</span></p>
+<p>In the path integral <span class="math notranslate nohighlight">\(K = \int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span>, what does the symbol <span class="math notranslate nohighlight">\(\mathcal{D}[x]\)</span> stand for?</p>
+<p>(A) An ordinary one-dimensional measure <span class="math notranslate nohighlight">\(\mathrm{d}x\)</span> over the spatial coordinate <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>(B) A formal limit of <span class="math notranslate nohighlight">\((N{-}1)\)</span>-fold integrals over intermediate positions <span class="math notranslate nohighlight">\(x_1,\ldots,x_{N-1}\)</span>, together with normalization factors per slice, as <span class="math notranslate nohighlight">\(N\to\infty\)</span>.</p>
+<p>(C) A measure on phase space; the position <span class="math notranslate nohighlight">\(x\)</span> and momentum <span class="math notranslate nohighlight">\(p\)</span> are integrated independently.</p>
+<p>(D) A symbol meaning “the classical path”; only one path contributes once the limit is taken.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The <strong>propagator</strong> <span class="math notranslate nohighlight">\(K(x, t; x', t') = \langle x \vert \hat{U} \vert x' \rangle\)</span> is the central transition amplitude; it encodes the full time evolution.</p></li>
-<li><p><strong>Feynman’s path integral</strong> expresses <span class="math notranslate nohighlight">\(K\)</span> as a sum over all histories, each weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>. The classical path dominates via <strong>stationary phase</strong>; quantum paths contribute through interference.</p></li>
-<li><p>The <strong>one-step propagator</strong> <span class="math notranslate nohighlight">\(K_{\delta t}\)</span> is given explicitly in <a class="reference internal" href="#equation-eq-k-delta-t-one-step">(62)</a> (free-particle limit and <span class="math notranslate nohighlight">\(d\)</span>-dimensional prefactor noted there).</p></li>
-<li><p><strong>Time-slicing</strong> converts the functional integral into a sequence of ordinary integrals over intermediate positions, which converges to the continuum path integral as <span class="math notranslate nohighlight">\(N \to \infty\)</span>.</p></li>
+<li><p><strong>Propagator:</strong> <span class="math notranslate nohighlight">\(K(x,t;x',t') = \langle x\vert\hat U(t,t')\vert x'\rangle\)</span> is the kernel that evolves any initial wavefunction (Eq. <a class="reference internal" href="#equation-eq-wave-evolution">(63)</a>) and obeys the composition rule (Eq. <a class="reference internal" href="#equation-eq-propagator-composition">(64)</a>).</p></li>
+<li><p><strong>Time slicing:</strong> iterating composition turns <span class="math notranslate nohighlight">\(K\)</span> into an <span class="math notranslate nohighlight">\((N{-}1)\)</span>-fold integral over intermediate positions weighted by a product of slice propagators (Eq. <a class="reference internal" href="#equation-eq-time-slicing">(65)</a>).</p></li>
+<li><p><strong>Slice propagator:</strong> the principle phase = action fixes the <em>phase</em> of <span class="math notranslate nohighlight">\(K_{\delta t}\)</span> to <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S_{\text{slice}}/\hbar}\)</span>; the <em>amplitude</em> <span class="math notranslate nohighlight">\(A(\delta t)\)</span> remains undetermined for now (Eq. <a class="reference internal" href="#equation-eq-k-delta-t-ansatz">(68)</a>).</p></li>
+<li><p><strong>Path integral:</strong> <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span> is <em>defined</em> as the <span class="math notranslate nohighlight">\(N\to\infty\)</span> limit of the slicing formula (Eq. <a class="reference internal" href="#equation-eq-path-integral">(69)</a>).</p></li>
+<li><p><strong>Next step:</strong> evaluate the one-slice evolution <a class="reference internal" href="#equation-eq-one-step-evolution">(70)</a> to first order in <span class="math notranslate nohighlight">\(\delta t\)</span> — the result will be the Schrödinger equation, and the requirement that <span class="math notranslate nohighlight">\(\psi\)</span> be unchanged at <span class="math notranslate nohighlight">\(\delta t = 0\)</span> will fix <span class="math notranslate nohighlight">\(A(\delta t)\)</span>.</p></li>
 </ul>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Wavefunction evolution.</strong> From the definition <span class="math notranslate nohighlight">\(K(x, t; x', t') = \langle x\vert\hat{U}(t, t')\vert x'\rangle\)</span> and the completeness relation <span class="math notranslate nohighlight">\(\int\vert x'\rangle\langle x'\vert\,\mathrm{d}x' = 1\)</span>, derive the wavefunction evolution formula <span class="math notranslate nohighlight">\(\psi(x, t) = \int K(x, t; x', t')\,\psi(x', t')\,\mathrm{d}x'\)</span>.</p>
-<p><strong>2. Composition property.</strong> Prove that for <span class="math notranslate nohighlight">\(t' &lt; t_m &lt; t\)</span>,</p>
+<p><strong>1. Wave evolution from completeness.</strong> Starting from <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t,t')\vert\psi(t')\rangle\)</span> and the position completeness <span class="math notranslate nohighlight">\(\int\vert x'\rangle\langle x'\vert\,\mathrm{d}x' = \hat{I}\)</span>, derive the wave-evolution formula <a class="reference internal" href="#equation-eq-wave-evolution">(63)</a>. Identify each factor with a piece of the propagator definition <a class="reference internal" href="#equation-eq-propagator-def">(62)</a>.</p>
+<p><strong>2. Slicing into three.</strong> Apply the composition property <a class="reference internal" href="#equation-eq-propagator-composition">(64)</a> twice to express <span class="math notranslate nohighlight">\(K(x,t;x',t')\)</span> as a double integral over two intermediate positions <span class="math notranslate nohighlight">\(x_1,x_2\)</span> at times <span class="math notranslate nohighlight">\(t' &lt; t_1 &lt; t_2 &lt; t\)</span>.</p>
+<p>(a) Write the result as <span class="math notranslate nohighlight">\(K = \iint K_3\,K_2\,K_1\,\mathrm{d}x_1\,\mathrm{d}x_2\)</span> and identify each kernel.</p>
+<p>(b) Argue, by induction on <span class="math notranslate nohighlight">\(N\)</span>, that the same construction with <span class="math notranslate nohighlight">\(N-1\)</span> intermediate times reproduces the time-sliced formula <a class="reference internal" href="#equation-eq-time-slicing">(65)</a>.</p>
+<p><strong>3. Free-particle slice action.</strong> Verify Eq. <a class="reference internal" href="#equation-eq-slice-action-free">(67)</a> by evaluating <span class="math notranslate nohighlight">\(S = \int_{t_n}^{t_{n+1}}\tfrac{1}{2}m\dot{x}^2\,\mathrm{d}\tau\)</span> along the straight-line path <span class="math notranslate nohighlight">\(x(\tau) = x_n + (x_{n+1}-x_n)(\tau-t_n)/\delta t\)</span>.</p>
+<p><strong>4. Slice action with a potential.</strong> For the Lagrangian <span class="math notranslate nohighlight">\(L = \tfrac{1}{2}m\dot{x}^2 - V(x)\)</span>, repeat the straight-line estimate over a single slice and show that, to first order in <span class="math notranslate nohighlight">\(\delta t\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-K(x, t; x', t') = \int K(x, t; x_m, t_m)\,K(x_m, t_m; x', t')\,\mathrm{d}x_m.
+S_{\text{slice}} \;=\; \frac{m\,(x_{n+1}-x_n)^2}{2\,\delta t} \;-\; V\!\left(\tfrac{x_n+x_{n+1}}{2}\right)\delta t \;+\; O(\delta t^{\,2}).
 \]</div>
-<p>(a) Insert the resolution of identity <span class="math notranslate nohighlight">\(\int\vert x_m\rangle\langle x_m\vert\,\mathrm{d}x_m = 1\)</span> into <span class="math notranslate nohighlight">\(\hat{U}(t, t') = \hat{U}(t, t_m)\hat{U}(t_m, t')\)</span> and identify each factor.</p>
-<p>(b) Interpret this result physically: why does summing over all intermediate positions <span class="math notranslate nohighlight">\(x_m\)</span> correspond to summing over all paths passing through time <span class="math notranslate nohighlight">\(t_m\)</span>?</p>
-<p><strong>3. Classical action.</strong> For a free particle (<span class="math notranslate nohighlight">\(V = 0\)</span>) in one dimension, the classical path from <span class="math notranslate nohighlight">\((x', t')\)</span> to <span class="math notranslate nohighlight">\((x, t)\)</span> is a straight line with constant velocity <span class="math notranslate nohighlight">\(v = (x - x')/(t - t')\)</span>.</p>
-<p>(a) Compute the action <span class="math notranslate nohighlight">\(S_\text{cl} = \int_{t'}^{t}\frac{m}{2}\dot{x}^2\,\mathrm{d}\tau\)</span> along this path.</p>
-<p>(b) Express <span class="math notranslate nohighlight">\(S_\text{cl}\)</span> in terms of <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(\Delta x = x - x'\)</span>, and <span class="math notranslate nohighlight">\(\Delta t = t - t'\)</span>.</p>
-<p><strong>4. Interference of paths.</strong> Two nearby paths have actions <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> differing by <span class="math notranslate nohighlight">\(\delta S = S_1 - S_2\)</span>.</p>
-<p>(a) Show that the relative phase between their contributions to the path integral is <span class="math notranslate nohighlight">\(\delta S/\hbar\)</span>. For what values of <span class="math notranslate nohighlight">\(\delta S/\hbar\)</span> do the paths interfere constructively?</p>
-<p>(b) Explain why the classical path (<span class="math notranslate nohighlight">\(\delta S = 0\)</span> for all nearby paths) collects the most constructive interference.</p>
-<p>(c) In the limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, argue that only an infinitesimally narrow tube of paths around the classical trajectory contributes. This is the classical limit.</p>
-<p><strong>5. Normalization factor.</strong> The one-step propagator includes a prefactor <span class="math notranslate nohighlight">\((m/2\pi\mathrm{i}\hbar\,\delta t)^{1/2}\)</span> per time slice.</p>
-<p>(a) Show that without this factor, the free-particle propagator would not be correctly normalized: <span class="math notranslate nohighlight">\(\int K(x, t; x', t')\,\mathrm{d}x'\)</span> would not equal <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p>(b) How does the total normalization scale with the number of time slices <span class="math notranslate nohighlight">\(N\)</span>? Explain why this is absorbed into the measure <span class="math notranslate nohighlight">\(\mathcal{D}[x]\)</span> in the continuum limit.</p>
-<p><strong>6. Two-step free propagator.</strong> Verify the composition property by direct calculation for a free particle with two time steps. Split the interval <span class="math notranslate nohighlight">\([0, T]\)</span> into two equal steps <span class="math notranslate nohighlight">\(\delta t = T/2\)</span> with intermediate position <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
-<p>(a) Write <span class="math notranslate nohighlight">\(K(x_f, T; x_i, 0) = \int K(x_f, T; x_1, T/2)\,K(x_1, T/2; x_i, 0)\,\mathrm{d}x_1\)</span> using the one-step free-particle kernel.</p>
-<p>(b) Evaluate the Gaussian integral over <span class="math notranslate nohighlight">\(x_1\)</span> explicitly (complete the square).</p>
-<p>(c) Show that the result equals the exact free-particle propagator <span class="math notranslate nohighlight">\((m/2\pi\mathrm{i}\hbar T)^{1/2}\exp(\mathrm{i}m(x_f - x_i)^2/2\hbar T)\)</span>.</p>
-<p><strong>7. Time-evolution operator.</strong> The path integral provides a third formulation of quantum mechanics alongside the Schrödinger and Heisenberg pictures.</p>
-<p>(a) In the Schrödinger picture, the state evolves as <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\vert\psi\rangle = \hat{H}\vert\psi\rangle\)</span>. Show that <span class="math notranslate nohighlight">\(K(x, t; x', 0) = \langle x\vert\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\vert x'\rangle\)</span> satisfies the same equation in <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>(b) Explain what new physical insight the path integral provides that is not obvious from the differential-equation formulation: the propagator is a sum over all classical histories, weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>, making the classical limit (<span class="math notranslate nohighlight">\(S \gg \hbar\)</span>) transparent.</p>
+<p>(a) Approximate <span class="math notranslate nohighlight">\(x(\tau)\)</span> by the straight-line segment.</p>
+<p>(b) Estimate <span class="math notranslate nohighlight">\(\int_{t_n}^{t_{n+1}} V(x(\tau))\,\mathrm{d}\tau\)</span> using the midpoint value of <span class="math notranslate nohighlight">\(x(\tau)\)</span> and explain why corrections are <span class="math notranslate nohighlight">\(O(\delta t^{\,2})\)</span>.</p>
+<p><strong>5. Phase difference between nearby slices.</strong> Two slice paths share the initial point <span class="math notranslate nohighlight">\(x_n\)</span> but end at <span class="math notranslate nohighlight">\(x_{n+1}\)</span> and <span class="math notranslate nohighlight">\(x_{n+1} + \Delta\)</span> respectively, with <span class="math notranslate nohighlight">\(\vert\Delta\vert\)</span> small.</p>
+<p>(a) Compute the difference <span class="math notranslate nohighlight">\(\Delta S_{\text{slice}}\)</span> between their free-particle slice actions to first order in <span class="math notranslate nohighlight">\(\Delta\)</span>.</p>
+<p>(b) Identify the slice momentum <span class="math notranslate nohighlight">\(p_n = m(x_{n+1}-x_n)/\delta t\)</span> and rewrite <span class="math notranslate nohighlight">\(\Delta S_{\text{slice}}/\hbar\)</span> as <span class="math notranslate nohighlight">\(p_n\,\Delta/\hbar\)</span>.</p>
+<p>(c) Comment on this result in light of the de Broglie relation <span class="math notranslate nohighlight">\(p = \hbar k\)</span>: what is the effective wavelength of the slice propagator as a function of <span class="math notranslate nohighlight">\(x_{n+1}\)</span>?</p>
+<p><strong>6. Functional equation from composition.</strong> Suppose the slice propagator depends on its arguments only through the displacement: <span class="math notranslate nohighlight">\(K_{\delta t}(x',x) = A(\delta t)\,F(x'-x;\delta t)\)</span>.</p>
+<p>(a) Apply the composition property <a class="reference internal" href="#equation-eq-propagator-composition">(64)</a> to two consecutive slices of duration <span class="math notranslate nohighlight">\(\delta t\)</span> each and show that</p>
+<div class="math notranslate nohighlight">
+\[
+F(x'-x;2\delta t) \;=\; A(\delta t)\int F(x'-y;\delta t)\,F(y-x;\delta t)\,\mathrm{d}y.
+\]</div>
+<p>(b) Verify dimensional consistency. (We do not yet know <span class="math notranslate nohighlight">\(A\)</span> or <span class="math notranslate nohighlight">\(F\)</span>; the eventual closed form derived in §3.2.2 must satisfy this constraint.)</p>
+<p><strong>7. Typical paths in the slicing.</strong> Argue that the typical path that contributes coherently to <a class="reference internal" href="#equation-eq-time-slicing">(65)</a> for a free particle has slice displacements of order</p>
+<div class="math notranslate nohighlight">
+\[
+\vert x_{n+1} - x_n\vert \;\sim\; \sqrt{\frac{\hbar\,\delta t}{m}}.
+\]</div>
+<p>(a) Show that this is the value of <span class="math notranslate nohighlight">\(\vert x_{n+1}-x_n\vert\)</span> at which the phase <span class="math notranslate nohighlight">\(S_{\text{slice}}/\hbar\)</span> in <a class="reference internal" href="#equation-eq-k-delta-t-ansatz">(68)</a> is of order unity, so that contributions from larger displacements oscillate and cancel.</p>
+<p>(b) Compare this to the smooth scaling <span class="math notranslate nohighlight">\(\vert x_{n+1}-x_n\vert \sim v\,\delta t\)</span> that a classical trajectory would have, and conclude that as <span class="math notranslate nohighlight">\(\delta t\to 0\)</span> the typical path is <em>not</em> differentiable. (Quantum paths are more like Brownian trajectories than classical orbits.)</p>
 </section>
 </section>
 
@@ -754,10 +782,10 @@ K(x, t; x', t') = \int K(x, t; x_m, t_m)\,K(x_m, t_m; x', t')\,\mathrm{d}x_m.
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-propagator-transition-amplitude">The Propagator: Transition Amplitude</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feynman-s-path-integral">Feynman’s Path Integral</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-infinitesimal-propagator-one-time-slice">The Infinitesimal Propagator: One Time Slice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing-turning-paths-into-integrals">Time-Slicing: Turning Paths into Integrals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-propagator">The Propagator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-slicing">Time Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-path-integral-as-a-limit">The Path Integral as a Limit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategy-master-one-slice-first">Strategy: Master One Slice First</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
