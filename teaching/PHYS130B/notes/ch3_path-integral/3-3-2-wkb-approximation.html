@@ -234,7 +234,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-4-3-instantons.html">3.4.3 Instantons</a></li>
 </ul>
 </details></li>
@@ -506,10 +506,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wkb-ansatz">The WKB Ansatz</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-states-allowed-and-forbidden-regions">Stationary States: Allowed and Forbidden Regions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-formulas-at-turning-points">Connection Formulas at Turning Points</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tunneling">Tunneling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validity-of-wkb">Validity of WKB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allowed-and-forbidden-regions">Allowed and Forbidden Regions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-at-a-turning-point">Connection at a Turning Point</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tunneling-through-a-smooth-barrier">Tunneling Through a Smooth Barrier</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -530,186 +529,277 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the WKB ansatz <span class="math notranslate nohighlight">\(\psi = A \mathrm{e}^{\mathrm{i}S/\hbar}\)</span>, and how does it reduce the Schrödinger equation to the Hamilton-Jacobi equation?</p></li>
-<li><p>How does WKB describe tunneling through a classically forbidden barrier?</p></li>
-<li><p>What are turning points, and why do connection formulas require a <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift?</p></li>
-<li><p>When does the WKB approximation break down, and what is the precise validity criterion?</p></li>
+<li><p>What is the WKB ansatz <span class="math notranslate nohighlight">\(\psi = A(x)\,\mathrm{e}^{\mathrm{i}W(x)/\hbar}\,\mathrm{e}^{-\mathrm{i}Et/\hbar}\)</span>, and how does it reduce the time-independent Schrödinger equation to the Hamilton-Jacobi equation?</p></li>
+<li><p>Why does the WKB amplitude take the form <span class="math notranslate nohighlight">\(A \propto 1/\sqrt{p(x)}\)</span> in the classically allowed region, and how does this reflect probability conservation?</p></li>
+<li><p>How does WKB describe tunneling through a classically forbidden barrier, and where does the factor <span class="math notranslate nohighlight">\(T \approx \mathrm{e}^{-2\gamma}\)</span> come from?</p></li>
+<li><p>What are turning points, and why does the connection formula across a soft turning point require a <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift?</p></li>
+<li><p>When does the WKB approximation break down, and what is the dimensionful validity criterion?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The <strong>WKB (Wentzel-Kramers-Brillouin) approximation</strong> solves the Schrödinger equation semiclassically when the potential varies slowly compared to the de Broglie wavelength. The ansatz <span class="math notranslate nohighlight">\(\psi = A\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> splits the wavefunction into a rapidly oscillating phase and a slowly varying amplitude. At leading order in <span class="math notranslate nohighlight">\(\hbar\)</span>, the phase satisfies the <strong>Hamilton-Jacobi equation</strong> — classical mechanics — while the amplitude is fixed by probability conservation.</p>
+<p>Section 3.3.1 showed that stationary phase turns the path integral into a semiclassical propagator: a rapidly varying classical-action phase multiplied by a slowly varying fluctuation prefactor. For an energy eigenstate the classical action separates into a spatial part and a time part, <span class="math notranslate nohighlight">\(S_\mathrm{cl}=W(x)-Et\)</span>, so the same structure becomes a wavefunction with phase <span class="math notranslate nohighlight">\(W(x)/\hbar\)</span> and amplitude <span class="math notranslate nohighlight">\(A(x)\)</span>. This is the WKB approximation. Its physical picture is direct: the phase records the local classical action, while the amplitude records how nearby paths spread or concentrate. In this note we turn that picture into a practical approximation by substituting the WKB form into the Schrödinger equation: the leading term gives Hamilton-Jacobi mechanics, the next term fixes the amplitude, and continuing to imaginary momentum describes tunneling.</p>
 </section>
 <section id="the-wkb-ansatz">
 <h3>The WKB Ansatz<a class="headerlink" href="#the-wkb-ansatz" title="Link to this heading">#</a></h3>
-<p>Write the wavefunction as</p>
-<div class="math notranslate nohighlight">
-\[
-\psi(x, t) = A(x, t) \, \mathrm{e}^{\mathrm{i}S(x, t)/\hbar}
+<p>Motivated by the semiclassical propagator, look for stationary states of energy <span class="math notranslate nohighlight">\(E\)</span> in the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-ansatz">
+<span class="eqno">(100)<a class="headerlink" href="#equation-eq-wkb-ansatz" title="Link to this equation">#</a></span>\[
+\psi(x,t) = A(x)\,\exp\!\left[\frac{\mathrm{i}\,W(x)}{\hbar}\right]\,\mathrm{e}^{-\mathrm{i}Et/\hbar}.
 \]</div>
-<p>Substituting into the Schrödinger equation and expanding in powers of <span class="math notranslate nohighlight">\(\hbar\)</span>:</p>
+<p>Substituting into the time-independent Schrödinger equation <span class="math notranslate nohighlight">\(-(\hbar^{2}/2m)\psi'' + V\psi = E\psi\)</span> and collecting terms order by order in <span class="math notranslate nohighlight">\(\hbar\)</span> produces a hierarchy of equations:</p>
 <div class="important admonition">
-<p class="admonition-title">WKB Hierarchy</p>
-<ul class="simple">
-<li><p><strong>Leading order</strong> (<span class="math notranslate nohighlight">\(\hbar^0\)</span>): the phase <span class="math notranslate nohighlight">\(S\)</span> satisfies the <strong>Hamilton-Jacobi equation</strong></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial S}{\partial t} + \frac{1}{2m}\left(\frac{\partial S}{\partial x}\right)^2 + V(x) = 0
-\]</div>
-<ul class="simple">
-<li><p><strong>Next order</strong> (<span class="math notranslate nohighlight">\(\hbar^1\)</span>): the amplitude <span class="math notranslate nohighlight">\(A\)</span> satisfies a <strong>continuity equation</strong> — probability conservation.</p></li>
+<p class="admonition-title">WKB equations</p>
+<ul>
+<li><p><strong>Leading order (<span class="math notranslate nohighlight">\(\hbar^{0}\)</span>):</strong> <span class="math notranslate nohighlight">\(W(x)\)</span> obeys the (time-independent) <strong>Hamilton-Jacobi equation</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-hj-stationary">
+<span class="eqno">(101)<a class="headerlink" href="#equation-eq-hj-stationary" title="Link to this equation">#</a></span>\[
+    \frac{1}{2m}\!\left(\frac{\mathrm{d}W}{\mathrm{d}x}\right)^{2} + V(x) = E.
+    \]</div>
+</li>
+<li><p><strong>Next order (<span class="math notranslate nohighlight">\(\hbar^{1}\)</span>):</strong> <span class="math notranslate nohighlight">\(A(x)\)</span> obeys a <strong>continuity equation</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-amplitude">
+<span class="eqno">(102)<a class="headerlink" href="#equation-eq-wkb-amplitude" title="Link to this equation">#</a></span>\[
+    \frac{\mathrm{d}}{\mathrm{d}x}\!\left(A^{2}\,W'\right) = 0.
+    \]</div>
+</li>
 </ul>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: WKB Equations from Schrödinger</p>
-<p>Substitute <span class="math notranslate nohighlight">\(\psi = A\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> into <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\partial_t\psi = -\frac{\hbar^2}{2m}\partial_x^2\psi + V\psi\)</span>. Computing derivatives:</p>
+<p class="admonition-title">Derivation: WKB equations from Schrödinger</p>
+<p>Substitute the WKB ansatz <a class="reference internal" href="#equation-eq-wkb-ansatz">(100)</a> into the time-independent Schrödinger equation <span class="math notranslate nohighlight">\(-(\hbar^{2}/2m)\psi'' + V\psi = E\psi\)</span>. Compute the second derivative,</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial^2\psi}{\partial x^2} = \left(A'' + \frac{2\mathrm{i}}{\hbar}A'S' + \frac{\mathrm{i}}{\hbar}AS'' - \frac{A}{\hbar^2}(S')^2\right) \mathrm{e}^{\mathrm{i}S/\hbar}
+\psi'' = \left(A'' + \frac{2\mathrm{i}}{\hbar}A'\,W' + \frac{\mathrm{i}}{\hbar}A\,W'' - \frac{1}{\hbar^{2}}A\,(W')^{2}\right)\,\mathrm{e}^{\mathrm{i}W/\hbar}\,\mathrm{e}^{-\mathrm{i}Et/\hbar}.
 \]</div>
-<p>Collecting by powers of <span class="math notranslate nohighlight">\(\hbar\)</span> after canceling <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>:</p>
-<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^0\)</span> (imaginary part):</strong> Hamilton-Jacobi equation for <span class="math notranslate nohighlight">\(S\)</span>.</p>
-<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^1\)</span> (real part):</strong> <span class="math notranslate nohighlight">\(\partial_t A + \frac{1}{m}A'S' + \frac{A}{2m}S'' = 0\)</span>, a continuity equation for <span class="math notranslate nohighlight">\(A^2\)</span> (probability density).</p>
+<p>Multiply by <span class="math notranslate nohighlight">\(-\hbar^{2}/(2m)\)</span>, add <span class="math notranslate nohighlight">\((V-E)\psi\)</span>, cancel the common phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}W/\hbar}\,\mathrm{e}^{-\mathrm{i}Et/\hbar}\)</span>, and multiply through by <span class="math notranslate nohighlight">\(2m\)</span> to expose the ordering in <span class="math notranslate nohighlight">\(\hbar\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-collected-orders">
+<span class="eqno">(103)<a class="headerlink" href="#equation-eq-wkb-collected-orders" title="Link to this equation">#</a></span>\[
+\underbrace{A\left[(W')^{2}+2m(V-E)\right]}_{\hbar^{0}}
+\;-\;\mathrm{i}\hbar\,\underbrace{\bigl(2A'W'+AW''\bigr)}_{\hbar^{1}}
+\;-\;\hbar^{2}\,\underbrace{A''}_{\hbar^{2}}
+\;=\;0.
+\]</div>
+<p>For the equation to hold at every order in <span class="math notranslate nohighlight">\(\hbar\)</span> (treating <span class="math notranslate nohighlight">\(\hbar\)</span> as a small parameter), each bracketed group must vanish separately.</p>
+<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^{0}\)</span>.</strong> Setting the first bracket to zero gives the Hamilton-Jacobi equation <a class="reference internal" href="#equation-eq-hj-stationary">(101)</a>. Solving for the phase gradient defines the local momentum <a class="reference internal" href="#equation-eq-wkb-p">(104)</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+W'(x) \;=\; p(x) \;=\; \pm\sqrt{2m\,(E - V(x))}.
+\]</div>
+<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^{1}\)</span>.</strong> Setting the second bracket to zero gives the amplitude equation <a class="reference internal" href="#equation-eq-wkb-amplitude">(102)</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+2A'\,W' + A\,W'' = 0.
+\]</div>
+<p>Substituting <span class="math notranslate nohighlight">\(W' = p\)</span> (so <span class="math notranslate nohighlight">\(W'' = p'\)</span>),</p>
+<div class="math notranslate nohighlight">
+\[
+2A'\,p + A\,p' = 0.
+\]</div>
+<p>Multiplying by <span class="math notranslate nohighlight">\(A\)</span> turns the left-hand side into a total derivative,</p>
+<div class="math notranslate nohighlight">
+\[
+2A\,A'\,p + A^{2}\,p' \;=\; \frac{\mathrm{d}}{\mathrm{d}x}\bigl(A^{2}\,p\bigr) \;=\; 0,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(A^{2}p\)</span> is constant in <span class="math notranslate nohighlight">\(x\)</span> and the WKB amplitude takes the form <span class="math notranslate nohighlight">\(A(x) = C/\sqrt{p(x)}\)</span> — Eq. <a class="reference internal" href="#equation-eq-wkb-amplitude-form">(106)</a>. Constancy of <span class="math notranslate nohighlight">\(A^{2}p\)</span> is exactly probability-current conservation <span class="math notranslate nohighlight">\(j = (\hbar/m)\,A^{2}p/\hbar = A^{2}p/m\)</span>.</p>
+<p><strong>Order <span class="math notranslate nohighlight">\(\hbar^{2}\)</span>.</strong> The remaining <span class="math notranslate nohighlight">\(-\hbar^{2}A''/(2m)\)</span> piece is dropped — it would couple <span class="math notranslate nohighlight">\(A\)</span> back into the Hamilton-Jacobi equation as a quantum correction (the <strong>Bohm potential</strong>) and lies beyond the leading-order WKB approximation.</p>
 </div>
-</section>
-<section id="stationary-states-allowed-and-forbidden-regions">
-<h3>Stationary States: Allowed and Forbidden Regions<a class="headerlink" href="#stationary-states-allowed-and-forbidden-regions" title="Link to this heading">#</a></h3>
-<p>For energy eigenstates with <span class="math notranslate nohighlight">\(S(x,t) = S_0(x) - Et\)</span>, the Hamilton-Jacobi equation gives <span class="math notranslate nohighlight">\(\partial_x S_0(x) = \pm p(x)\)</span> where <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - V(x))}\)</span> is the local classical momentum.</p>
+<p>The Hamilton-Jacobi equation says: <strong>the phase gradient is the local momentum</strong> of a classical particle of energy <span class="math notranslate nohighlight">\(E\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-p">
+<span class="eqno">(104)<a class="headerlink" href="#equation-eq-wkb-p" title="Link to this equation">#</a></span>\[
+p(x) \;\equiv\; \frac{\mathrm{d}W}{\mathrm{d}x} \;=\; \pm\sqrt{2m\,\bigl(E - V(x)\bigr)}.
+\]</div>
+<p>Substituting <span class="math notranslate nohighlight">\(W'=p\)</span> into the amplitude equation <a class="reference internal" href="#equation-eq-wkb-amplitude">(102)</a> gives <span class="math notranslate nohighlight">\(\frac{\mathrm{d}}{\mathrm{d}x}(A^{2}p)=0\)</span>. The phase and amplitude are therefore fixed together:</p>
 <div class="important admonition">
-<p class="admonition-title">WKB Wavefunctions</p>
-<ul>
-<li><p><strong>Classically allowed</strong> (<span class="math notranslate nohighlight">\(E &gt; V\)</span>, real momentum):</p>
-<div class="math notranslate nohighlight">
-\[
-    \psi(x) \sim \frac{1}{\sqrt{p(x)}} \exp\left(\pm\frac{\mathrm{i}}{\hbar}\int^x p(x')\,\mathrm{d}x'\right)
-    \]</div>
-<p>where <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E - V(x))}\)</span>.</p>
-</li>
-<li><p><strong>Classically forbidden</strong> (<span class="math notranslate nohighlight">\(E &lt; V\)</span>, imaginary momentum <span class="math notranslate nohighlight">\(p \to \mathrm{i}\kappa\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[
-    \psi(x) \sim \frac{1}{\sqrt{\kappa(x)}} \exp\left(\mp\frac{1}{\hbar}\int^x \kappa(x')\,\mathrm{d}x'\right)
-    \]</div>
-<p>where <span class="math notranslate nohighlight">\(\kappa(x) = \sqrt{2m(V(x) - E)}\)</span>.</p>
-</li>
-</ul>
+<p class="admonition-title">WKB solutions</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-action-integral">
+<span class="eqno">(105)<a class="headerlink" href="#equation-eq-wkb-action-integral" title="Link to this equation">#</a></span>\[
+W(x) = W(x_{*}) + \int_{x_{*}}^{x} p(x')\,\mathrm{d}x'.
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-amplitude-form">
+<span class="eqno">(106)<a class="headerlink" href="#equation-eq-wkb-amplitude-form" title="Link to this equation">#</a></span>\[
+A(x) = \frac{C}{\sqrt{p(x)}}.
+\]</div>
 </div>
-<p>The amplitude <span class="math notranslate nohighlight">\(1/\sqrt{p}\)</span> reflects <strong>probability conservation</strong>: where the particle moves slowly (small <span class="math notranslate nohighlight">\(p\)</span>), it spends more time, so the probability density is larger.</p>
+<p>The two signs in <a class="reference internal" href="#equation-eq-wkb-p">(104)</a> give the two WKB branches, corresponding to waves whose phase accumulates with positive or negative local momentum. The probability current <span class="math notranslate nohighlight">\(A^{2}\,p/m\)</span> is constant in <span class="math notranslate nohighlight">\(x\)</span>; where the particle moves slowly (small <span class="math notranslate nohighlight">\(p\)</span>), it spends more time, so <span class="math notranslate nohighlight">\(\vert\psi\vert^{2}\propto 1/p\)</span> is larger.</p>
 </section>
-<section id="connection-formulas-at-turning-points">
-<h3>Connection Formulas at Turning Points<a class="headerlink" href="#connection-formulas-at-turning-points" title="Link to this heading">#</a></h3>
-<p>At a <strong>turning point</strong> <span class="math notranslate nohighlight">\(x_0\)</span> where <span class="math notranslate nohighlight">\(E = V(x_0)\)</span>, the momentum vanishes and the WKB solutions diverge. The exact solution near <span class="math notranslate nohighlight">\(x_0\)</span> (an Airy function) bridges the two regions:</p>
-<p><strong>Allowed side</strong> (<span class="math notranslate nohighlight">\(x &lt; x_0\)</span>):</p>
+<section id="allowed-and-forbidden-regions">
+<h3>Allowed and Forbidden Regions<a class="headerlink" href="#allowed-and-forbidden-regions" title="Link to this heading">#</a></h3>
+<p>Equation <a class="reference internal" href="#equation-eq-wkb-p">(104)</a> gives a real <span class="math notranslate nohighlight">\(p(x)\)</span> where <span class="math notranslate nohighlight">\(E &gt; V(x)\)</span> — the <strong>classically allowed</strong> region — and an imaginary <span class="math notranslate nohighlight">\(p\)</span> where <span class="math notranslate nohighlight">\(E &lt; V(x)\)</span> — the <strong>classically forbidden</strong> region.</p>
+<div class="important admonition">
+<p class="admonition-title">WKB wavefunctions</p>
+<p>In the <strong>allowed region</strong> (<span class="math notranslate nohighlight">\(E &gt; V\)</span>), with <span class="math notranslate nohighlight">\(p(x) = \sqrt{2m(E-V)}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-allowed">
+<span class="eqno">(107)<a class="headerlink" href="#equation-eq-wkb-allowed" title="Link to this equation">#</a></span>\[
+\psi(x) \;\sim\; \frac{1}{\sqrt{p(x)}}\,\exp\!\left[\pm\frac{\mathrm{i}}{\hbar}\int^{x}p(x')\,\mathrm{d}x'\right].
+\]</div>
+<p>In the <strong>forbidden region</strong> (<span class="math notranslate nohighlight">\(E &lt; V\)</span>), with <span class="math notranslate nohighlight">\(\kappa(x) = \sqrt{2m(V-E)}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-forbidden">
+<span class="eqno">(108)<a class="headerlink" href="#equation-eq-wkb-forbidden" title="Link to this equation">#</a></span>\[
+\psi(x) \;\sim\; \frac{1}{\sqrt{\kappa(x)}}\,\exp\!\left[\mp\frac{1}{\hbar}\int^{x}\kappa(x')\,\mathrm{d}x'\right].
+\]</div>
+<p>The two signs in each formula give independent solutions — right- vs left-moving in the allowed region; exponentially decaying vs growing in the forbidden region.</p>
+</div>
+<div class="caution admonition">
+<p class="admonition-title">Validity of WKB approximation</p>
+<p>WKB assumes a local classical momentum: over one de Broglie wavelength, the potential should look almost constant. Equivalently, the local wavelength</p>
 <div class="math notranslate nohighlight">
 \[
-\psi \sim \frac{C}{\sqrt{p}} \sin\left(\frac{1}{\hbar}\int_x^{x_0} p\,\mathrm{d}x' + \frac{\pi}{4}\right)
+\lambda(x)=\frac{2\pi\hbar}{p(x)}
 \]</div>
-<p><strong>Forbidden side</strong> (<span class="math notranslate nohighlight">\(x &gt; x_0\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[
-\psi \sim \frac{C}{\sqrt{\kappa}} \exp\left(-\frac{1}{\hbar}\int_{x_0}^x \kappa\,\mathrm{d}x'\right)
+<p>should change by much less than one wavelength over a wavelength:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-validity">
+<span class="eqno">(109)<a class="headerlink" href="#equation-eq-wkb-validity" title="Link to this equation">#</a></span>\[
+\left|\frac{\mathrm{d}\lambda}{\mathrm{d}x}\right| \;\ll\; 2\pi.
 \]</div>
-<p>The <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift is essential — it accounts for the smooth transition through the turning point and determines the Maslov index in quantization conditions (§3.3.3).</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: WKB Exactness</p>
-<p>WKB is an approximation, yet it gives exact energy levels for the harmonic oscillator. This raises questions:</p>
+<p>Using <span class="math notranslate nohighlight">\(p(x)=\sqrt{2m(E-V)}\)</span>, this becomes the dimensionful condition</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-validity-explicit">
+<span class="eqno">(110)<a class="headerlink" href="#equation-eq-wkb-validity-explicit" title="Link to this equation">#</a></span>\[
+\hbar\,\bigl|\,V'(x)\bigr| \;\ll\; 2\sqrt{2m}\,\bigl(E - V(x)\bigr)^{3/2}.
+\]</div>
+<p>This criterion makes the failure modes easy to diagnose:</p>
 <ul class="simple">
-<li><p>For which potentials is WKB exact? What special property must they have?</p></li>
-<li><p>WKB predicts tunneling rates via <span class="math notranslate nohighlight">\(T \propto \mathrm{e}^{-2\gamma}\)</span>. Can you design a potential where WKB gives a very wrong tunneling rate?</p></li>
-<li><p>Why does WKB work well for atomic energy levels when <span class="math notranslate nohighlight">\(\hbar\)</span> is not truly small? Is there a hidden small parameter?</p></li>
+<li><p><strong>Near a turning point</strong>, <span class="math notranslate nohighlight">\(E=V(x)\)</span>, the right-hand side vanishes and the WKB amplitude <span class="math notranslate nohighlight">\(1/\sqrt{p}\)</span> diverges. The local plane-wave picture cannot be trusted there.</p></li>
+<li><p><strong>At a discontinuity</strong>, <span class="math notranslate nohighlight">\(V'(x)\)</span> is undefined, so there is no slowly varying potential to expand around.</p></li>
+<li><p><strong>Where the potential changes on the scale of a wavelength</strong>, neighboring points no longer have nearly the same local momentum, so the slowly varying amplitude assumption breaks down.</p></li>
 </ul>
+<p>The cure near a smooth turning point is not to abandon semiclassics, but to replace the local WKB form by an Airy-function matching region.</p>
 </div>
 </section>
-<section id="tunneling">
-<h3>Tunneling<a class="headerlink" href="#tunneling" title="Link to this heading">#</a></h3>
-<p>For a particle incident on a barrier where <span class="math notranslate nohighlight">\(V &gt; E\)</span> between turning points <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>:</p>
-<figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="../images/3-3-2-tunneling.png"><img alt="Smooth potential barrier V(x) in black and real part of the wavefunction Re psi(x) in red; oscillations on the left with beating from reflection, exponential damping through the barrier, smaller transmitted oscillations on the right" src="../images/3-3-2-tunneling.png" style="width: 75%;" />
+<section id="connection-at-a-turning-point">
+<h3>Connection at a Turning Point<a class="headerlink" href="#connection-at-a-turning-point" title="Link to this heading">#</a></h3>
+<p>At a turning point <span class="math notranslate nohighlight">\(x_{0}\)</span> where <span class="math notranslate nohighlight">\(E = V(x_{0})\)</span>, the WKB amplitude <span class="math notranslate nohighlight">\(1/\sqrt{p}\)</span> diverges. The remedy is to linearize the potential locally — <span class="math notranslate nohighlight">\(V(x) \approx V(x_{0}) + V'(x_{0})(x - x_{0})\)</span> — turning the Schrödinger equation into the <strong>Airy equation</strong> <span class="math notranslate nohighlight">\(\psi'' = z\psi\)</span> for an appropriate dimensionless <span class="math notranslate nohighlight">\(z\)</span>. The Airy function bridges the oscillatory and exponential WKB regions, and matching the asymptotic forms gives a definite phase shift (HW 3.3.2.6):</p>
+<div class="important admonition">
+<p class="admonition-title">Connection formula at a soft turning point</p>
+<p>For a turning point at <span class="math notranslate nohighlight">\(x_{0}\)</span> with <span class="math notranslate nohighlight">\(V'(x_{0}) &gt; 0\)</span> (allowed on the left, forbidden on the right), the decaying-exponential solution on the forbidden side matches a <em>cosine with a <span class="math notranslate nohighlight">\(\pi/4\)</span> shift</em> on the allowed side:</p>
+<div class="math notranslate nohighlight" id="equation-eq-connection">
+<span class="eqno">(111)<a class="headerlink" href="#equation-eq-connection" title="Link to this equation">#</a></span>\[
+\frac{1}{\sqrt{\kappa}}\,\exp\!\left[-\frac{1}{\hbar}\int_{x_{0}}^{x}\kappa\,\mathrm{d}x'\right]
+\;\longleftrightarrow\;
+\frac{2}{\sqrt{p}}\,\cos\!\left[\frac{1}{\hbar}\int_{x}^{x_{0}}p\,\mathrm{d}x' - \frac{\pi}{4}\right].
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(\pi/4\)</span> shift comes from the asymptotic forms of the Airy function and is essential for the bound-state quantization rule of §3.3.3.</p>
+</div>
+</section>
+<section id="tunneling-through-a-smooth-barrier">
+<h3>Tunneling Through a Smooth Barrier<a class="headerlink" href="#tunneling-through-a-smooth-barrier" title="Link to this heading">#</a></h3>
+<p>Consider a particle of energy <span class="math notranslate nohighlight">\(E\)</span> incident on a smooth barrier with <span class="math notranslate nohighlight">\(V &gt; E\)</span> between turning points <span class="math notranslate nohighlight">\(a &lt; b\)</span> (Fig. <a class="reference internal" href="#fig-wkb-tunneling"><span class="std std-numref">Fig. 16</span></a>).</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<figure class="align-default" id="fig-wkb-tunneling">
+<a class="reference internal image-reference" href="../images/3-3-2-tunneling.png"><img alt="Smooth potential barrier V(x) and real part of WKB wavefunction Re ψ(x): oscillations on the left, exponential decay through the barrier, smaller oscillations on the right." src="../images/3-3-2-tunneling.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Potential <span class="math notranslate nohighlight">\(V(x)\)</span> and <span class="math notranslate nohighlight">\(\mathrm{Re}\,\psi(x)\)</span> for tunneling at energy <span class="math notranslate nohighlight">\(E\)</span> below the barrier top: oscillatory regions outside the barrier and decay inside (compare the square barrier in homework <strong>5</strong>).</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">A smooth tunneling barrier with <span class="math notranslate nohighlight">\(E\)</span> below the top: the WKB wavefunction <span class="math notranslate nohighlight">\(\mathrm{Re}\,\psi(x)\)</span> oscillates outside the barrier and decays exponentially inside.</span><a class="headerlink" href="#fig-wkb-tunneling" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+</aside>
+<div class="docutils">
 <div class="important admonition">
-<p class="admonition-title">WKB Tunneling Probability</p>
+<p class="admonition-title">WKB tunneling probability</p>
+<p>Stitching the WKB solutions across both turning points gives the celebrated tunneling formula:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-tunneling">
+<span class="eqno">(112)<a class="headerlink" href="#equation-eq-wkb-tunneling" title="Link to this equation">#</a></span>\[
+T \;\approx\; \mathrm{e}^{-2\gamma}.
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-wkb-tunneling-exponent">
+<span class="eqno">(113)<a class="headerlink" href="#equation-eq-wkb-tunneling-exponent" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\gamma
+&amp;\;=\; \frac{1}{\hbar}\int_{a}^{b}\kappa(x)\,\mathrm{d}x\\
+&amp;\;=\; \frac{1}{\hbar}\int_{a}^{b}\sqrt{2m\,\bigl(V(x)-E\bigr)}\,\mathrm{d}x.
+\end{split}
+\end{split}\]</div>
+<p>Transmission is exponentially sensitive to the integrated <span class="math notranslate nohighlight">\(\sqrt{V-E}\)</span> across the barrier.</p>
+</div>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: tunneling exponent from connection formulas</p>
+<p>Pick the WKB solution with only an <em>outgoing</em> (right-moving) wave on the right of the barrier, <span class="math notranslate nohighlight">\(x &gt; b\)</span>, with amplitude <span class="math notranslate nohighlight">\(F\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-T \approx \mathrm{e}^{-2\gamma}, \quad \gamma = \frac{1}{\hbar}\int_a^b \kappa(x)\,\mathrm{d}x = \frac{1}{\hbar}\int_a^b \sqrt{2m(V(x) - E)}\,\mathrm{d}x
+\psi(x) \sim \frac{F}{\sqrt{p}}\,\mathrm{e}^{\mathrm{i}\int_{b}^{x}p\,\mathrm{d}x'/\hbar}.
 \]</div>
+<p>Apply the connection formula <a class="reference internal" href="#equation-eq-connection">(111)</a> at <span class="math notranslate nohighlight">\(x = b\)</span> (allowed <span class="math notranslate nohighlight">\(\to\)</span> forbidden, going leftward into the barrier): the outgoing oscillation matches a <em>purely decaying</em> exponential just inside the barrier,</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) \sim \frac{F'}{\sqrt{\kappa}}\,\mathrm{e}^{-\frac{1}{\hbar}\int_{b}^{x}\kappa\,\mathrm{d}x'}\qquad (a&lt;x&lt;b),
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(|F'| = |F|\)</span> up to factors of order unity from the connection. Continuing this decaying solution to <span class="math notranslate nohighlight">\(x = a\)</span>, its magnitude has shrunk by the factor <span class="math notranslate nohighlight">\(\mathrm{e}^{-\gamma}\)</span> where <span class="math notranslate nohighlight">\(\gamma = \frac{1}{\hbar}\int_{a}^{b}\kappa\,\mathrm{d}x\)</span>.</p>
+<p>A second connection at <span class="math notranslate nohighlight">\(x = a\)</span> (forbidden <span class="math notranslate nohighlight">\(\to\)</span> allowed, leftward) maps this exponentially small value into an oscillatory wave on the left whose amplitude is therefore <span class="math notranslate nohighlight">\(\mathrm{e}^{-\gamma}\)</span> times the original outgoing amplitude. The transmission <em>probability</em> is the squared amplitude ratio,</p>
+<div class="math notranslate nohighlight">
+\[
+T = \frac{|F|^{2}}{|A_\text{in}|^{2}} \approx \mathrm{e}^{-2\gamma}.
+\]</div>
+<p>The factor of two comes from squaring; the connection-formula prefactors give corrections of order unity that are ignored at WKB accuracy.</p>
 </div>
-<p>The tunneling probability is exponentially sensitive to the barrier width and height. The penetration depth into the forbidden region is <span class="math notranslate nohighlight">\(\lambda_\mathrm{decay} = \hbar/\kappa\)</span>.</p>
+<p>The penetration depth at energy <span class="math notranslate nohighlight">\(E\)</span> is <span class="math notranslate nohighlight">\(\lambda_\text{decay}(x) = \hbar/\kappa(x)\)</span> — the length scale on which the wavefunction decays inside the barrier.</p>
 <div class="dropdown example admonition">
-<p class="admonition-title">Example: Electron Tunneling</p>
-<p><strong>Problem.</strong> Estimate the tunneling probability for an electron through a 1 nm barrier with height 1 eV above its energy.</p>
-<p><strong>Solution.</strong> <span class="math notranslate nohighlight">\(\gamma \approx (10^{-9}\;\mathrm{m})\sqrt{2(9.1\times 10^{-31}\;\mathrm{kg})(1.6\times 10^{-19}\;\mathrm{J})}/(10^{-34}\;\mathrm{J{\cdot}s}) \approx 5\)</span>, giving <span class="math notranslate nohighlight">\(T \sim \mathrm{e}^{-10} \approx 10^{-4.3}\)</span>. Rare but non-negligible at atomic scales — this is why quantum tunneling drives processes like alpha decay and scanning tunneling microscopy.</p>
-</div>
-</section>
-<section id="validity-of-wkb">
-<h3>Validity of WKB<a class="headerlink" href="#validity-of-wkb" title="Link to this heading">#</a></h3>
-<p>The WKB approximation requires the potential to vary slowly on the scale of the local de Broglie wavelength:</p>
+<p class="admonition-title">Example: electron tunneling</p>
+<p><strong>Problem.</strong> Estimate <span class="math notranslate nohighlight">\(T\)</span> for an electron through a <span class="math notranslate nohighlight">\(1\,\text{nm}\)</span> barrier with <span class="math notranslate nohighlight">\(V - E = 1\,\text{eV}\)</span>.</p>
+<p><strong>Solution.</strong> With <span class="math notranslate nohighlight">\(a = 1\,\text{nm}\)</span>, <span class="math notranslate nohighlight">\(V - E = 1.6\times 10^{-19}\,\text{J}\)</span>, <span class="math notranslate nohighlight">\(m = 9.1\times 10^{-31}\,\text{kg}\)</span>, and a constant <span class="math notranslate nohighlight">\(\kappa = \sqrt{2m(V-E)}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\left|\frac{\mathrm{d}\ln p}{\mathrm{d}x}\right| = \left|\frac{V'(x)}{2(E - V(x))}\right| \ll 1
+\gamma = \frac{a\,\sqrt{2m(V-E)}}{\hbar} \approx 5,
 \]</div>
-<p>This breaks down at turning points (remedied by connection formulas), potential discontinuities, and rapidly oscillating potentials.</p>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="3-3-1-stationary-phase-approximation.html"><span class="doc std std-doc">3.3.1 Stationary Phase Approximation</span></a>: Mathematical foundation of the semiclassical limit</p></li>
-<li><p><a class="reference internal" href="3-3-3-bohr-sommerfeld-quantization.html"><span class="doc std std-doc">3.3.3 Bohr-Sommerfeld Quantization</span></a>: Quantization from WKB connection formulas</p></li>
-<li><p><a class="reference internal" href="3-4-3-instantons.html"><span class="doc std std-doc">3.4.3 Instantons</span></a>: Tunneling via imaginary-time classical paths</p></li>
-</ul>
+<p>so <span class="math notranslate nohighlight">\(T \sim \mathrm{e}^{-10} \approx 5\times 10^{-5}\)</span>. Rare but observable — this is why scanning tunneling microscopy and alpha decay work.</p>
+</div>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion: WKB exactness and surprises</p>
+<p>WKB is an approximation, yet it gives the <em>exact</em> energy spectrum of the harmonic oscillator (§3.3.3) and of hydrogen. For which potentials is WKB exact, and what hidden structure makes that possible? When does WKB fail dramatically?</p>
 </div>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: WKB and tunneling</p>
-<p>The WKB approximation gives <span class="math notranslate nohighlight">\(\psi(x) \propto p(x)^{-1/2} \exp(\pm \mathrm{i}\int p(x) \mathrm{d}x / \hbar)\)</span> in classically allowed regions where <span class="math notranslate nohighlight">\(p^2 = 2m(E - V) &gt; 0\)</span>. In a classically forbidden region where <span class="math notranslate nohighlight">\(V &gt; E\)</span>, the momentum <span class="math notranslate nohighlight">\(p\)</span> becomes imaginary. What does the WKB wavefunction predict in this region?</p>
-<p>(A) The wavefunction oscillates with increasing frequency as we penetrate deeper into the barrier.</p>
-<p>(B) The wavefunction decays exponentially, consistent with quantum tunneling through the barrier.</p>
-<p>(C) The wavefunction becomes complex and unphysical, indicating WKB breaks down.</p>
-<p>(D) The wavefunction remains constant, matching the classical expectation that particles never enter classically forbidden regions.</p>
+<p class="admonition-title">Poll: WKB in a forbidden region</p>
+<p>In the classically forbidden region where <span class="math notranslate nohighlight">\(V &gt; E\)</span>, the local momentum <span class="math notranslate nohighlight">\(p = \sqrt{2m(E-V)}\)</span> becomes imaginary. What does WKB predict for <span class="math notranslate nohighlight">\(\psi(x)\)</span> there?</p>
+<p>(A) It oscillates with increasing frequency the deeper one penetrates.</p>
+<p>(B) It decays (or grows) exponentially with rate <span class="math notranslate nohighlight">\(\kappa(x)/\hbar = \sqrt{2m(V-E)}/\hbar\)</span>, consistent with quantum tunneling.</p>
+<p>(C) It becomes complex and unphysical, signaling the breakdown of WKB.</p>
+<p>(D) It is constant, since classically the particle never enters the forbidden region.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>WKB ansatz</strong> <span class="math notranslate nohighlight">\(\psi = A\,\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>: phase obeys Hamilton-Jacobi (classical mechanics); amplitude fixed by probability conservation</p></li>
-<li><p><strong>Connection formulas</strong>: match oscillating and decaying solutions across turning points with <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shifts</p></li>
-<li><p><strong>Tunneling</strong>: <span class="math notranslate nohighlight">\(T \approx \mathrm{e}^{-2\gamma}\)</span> with <span class="math notranslate nohighlight">\(\gamma = \hbar^{-1}\int \kappa\,\mathrm{d}x\)</span> — exponentially suppressed by barrier width and height</p></li>
-<li><p><strong>Validity</strong>: excellent for smooth, slowly varying potentials; breaks down at turning points and sharp features</p></li>
+<li><p><strong>WKB ansatz</strong> <a class="reference internal" href="#equation-eq-wkb-ansatz">(100)</a>: <span class="math notranslate nohighlight">\(\psi = A(x)\,\mathrm{e}^{\mathrm{i}W(x)/\hbar}\,\mathrm{e}^{-\mathrm{i}Et/\hbar}\)</span>.</p></li>
+<li><p><strong>Phase obeys Hamilton-Jacobi</strong> <a class="reference internal" href="#equation-eq-hj-stationary">(101)</a>; phase gradient is the local momentum <span class="math notranslate nohighlight">\(p(x) = \pm\sqrt{2m(E-V)}\)</span>.</p></li>
+<li><p><strong>Amplitude</strong> <a class="reference internal" href="#equation-eq-wkb-amplitude-form">(106)</a>: <span class="math notranslate nohighlight">\(A(x) = C/\sqrt{p}\)</span> from probability conservation — large where the particle moves slowly.</p></li>
+<li><p><strong>Allowed vs forbidden:</strong> real <span class="math notranslate nohighlight">\(p\)</span> → oscillation <a class="reference internal" href="#equation-eq-wkb-allowed">(107)</a>; imaginary <span class="math notranslate nohighlight">\(p\)</span> → exponential decay <a class="reference internal" href="#equation-eq-wkb-forbidden">(108)</a>.</p></li>
+<li><p><strong>Connection formula</strong> <a class="reference internal" href="#equation-eq-connection">(111)</a>: across a soft turning point, decaying exponential matches a cosine with <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift.</p></li>
+<li><p><strong>Tunneling</strong> <a class="reference internal" href="#equation-eq-wkb-tunneling">(112)</a>: <span class="math notranslate nohighlight">\(T \approx \mathrm{e}^{-2\gamma}\)</span> with <span class="math notranslate nohighlight">\(\gamma = \int\kappa\,\mathrm{d}x/\hbar\)</span>.</p></li>
+<li><p><strong>Validity</strong> <a class="reference internal" href="#equation-eq-wkb-validity-explicit">(110)</a>: <span class="math notranslate nohighlight">\(\hbar|V'| \ll 2\sqrt{2m}(E-V)^{3/2}\)</span>; fails at turning points and discontinuities.</p></li>
 </ul>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Hamilton-Jacobi equation.</strong> Substitute the WKB ansatz <span class="math notranslate nohighlight">\(\psi(x) = A(x)\,\mathrm{e}^{\mathrm{i}S(x)/\hbar}\)</span> into the time-independent Schrödinger equation <span class="math notranslate nohighlight">\(-\frac{\hbar^2}{2m}\psi'' + V(x)\psi = E\psi\)</span>.</p>
-<p>(a) Collect terms by powers of <span class="math notranslate nohighlight">\(\hbar\)</span> and show that at leading order (<span class="math notranslate nohighlight">\(\hbar^0\)</span>) the phase <span class="math notranslate nohighlight">\(S(x)\)</span> satisfies <span class="math notranslate nohighlight">\(\frac{1}{2m}(S')^2 + V(x) = E\)</span>.</p>
-<p>(b) At next order (<span class="math notranslate nohighlight">\(\hbar^1\)</span>), show that the amplitude satisfies <span class="math notranslate nohighlight">\(2A'S' + AS'' = 0\)</span>. Integrate this to obtain <span class="math notranslate nohighlight">\(A \propto 1/\sqrt{S'} = 1/\sqrt{p(x)}\)</span>.</p>
+<p><strong>1. Hamilton-Jacobi from WKB.</strong> Substitute the WKB ansatz <span class="math notranslate nohighlight">\(\psi(x) = A(x)\,\mathrm{e}^{\mathrm{i}W(x)/\hbar}\)</span> into the time-independent Schrödinger equation <span class="math notranslate nohighlight">\(-\frac{\hbar^{2}}{2m}\psi'' + V(x)\psi = E\psi\)</span>.</p>
+<p>(a) Collect terms by powers of <span class="math notranslate nohighlight">\(\hbar\)</span> and show that at leading order (<span class="math notranslate nohighlight">\(\hbar^{0}\)</span>) the phase <span class="math notranslate nohighlight">\(W(x)\)</span> satisfies the Hamilton-Jacobi equation <span class="math notranslate nohighlight">\(\frac{1}{2m}(W')^{2} + V(x) = E\)</span>.</p>
+<p>(b) At next order (<span class="math notranslate nohighlight">\(\hbar^{1}\)</span>), show that <span class="math notranslate nohighlight">\(2A'W' + AW'' = 0\)</span>. Integrate this to obtain <span class="math notranslate nohighlight">\(A \propto 1/\sqrt{W'} = 1/\sqrt{p(x)}\)</span>.</p>
 <p><strong>2. Allowed and forbidden regions.</strong> A particle of energy <span class="math notranslate nohighlight">\(E\)</span> moves in a slowly varying potential <span class="math notranslate nohighlight">\(V(x)\)</span>.</p>
-<p>(a) In a classically allowed region (<span class="math notranslate nohighlight">\(E &gt; V\)</span>), write the WKB wavefunction <span class="math notranslate nohighlight">\(\psi \sim p^{-1/2}\exp(\pm\frac{\mathrm{i}}{\hbar}\int^x p\,\mathrm{d}x')\)</span> and explain physically why the amplitude <span class="math notranslate nohighlight">\(1/\sqrt{p}\)</span> means the particle is more likely to be found where it moves slowly.</p>
-<p>(b) In a classically forbidden region (<span class="math notranslate nohighlight">\(E &lt; V\)</span>), write <span class="math notranslate nohighlight">\(p \to \mathrm{i}\kappa\)</span> with <span class="math notranslate nohighlight">\(\kappa = \sqrt{2m(V-E)}\)</span> and show that the wavefunction decays as <span class="math notranslate nohighlight">\(\psi \sim \kappa^{-1/2}\exp(-\frac{1}{\hbar}\int^x\kappa\,\mathrm{d}x')\)</span>.</p>
-<p><strong>3. Validity condition.</strong> The WKB approximation requires <span class="math notranslate nohighlight">\(\vert\mathrm{d}\lambda/\mathrm{d}x\vert \ll 1\)</span> where <span class="math notranslate nohighlight">\(\lambda(x) = 2\pi\hbar/p(x)\)</span> is the local de Broglie wavelength.</p>
-<p>(a) Show that this is equivalent to <span class="math notranslate nohighlight">\(\vert V'(x)\vert \ll 2(E - V(x))^{3/2}\sqrt{2m}/\hbar\)</span> in the allowed region.</p>
-<p>(b) For a linear potential <span class="math notranslate nohighlight">\(V(x) = Fx\)</span> (constant force), identify where the WKB condition fails. Relate this to the turning point <span class="math notranslate nohighlight">\(x_0 = E/F\)</span>.</p>
-<p>(c) For a Gaussian barrier <span class="math notranslate nohighlight">\(V(x) = V_0\,\mathrm{e}^{-x^2/a^2}\)</span> with energy <span class="math notranslate nohighlight">\(E = V_0/4\)</span>, estimate the classical turning points and discuss whether WKB is reliable throughout the allowed region.</p>
-<p><strong>4. Square barrier tunneling.</strong> A particle of mass <span class="math notranslate nohighlight">\(m\)</span> and energy <span class="math notranslate nohighlight">\(E &lt; V_0\)</span> encounters a rectangular barrier <span class="math notranslate nohighlight">\(V(x) = V_0\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; a\)</span> and <span class="math notranslate nohighlight">\(V = 0\)</span> elsewhere.</p>
-<p>(a) Using the WKB tunneling formula <span class="math notranslate nohighlight">\(T \approx \mathrm{e}^{-2\gamma}\)</span> with <span class="math notranslate nohighlight">\(\gamma = \frac{1}{\hbar}\int_0^a\kappa\,\mathrm{d}x\)</span>, show that <span class="math notranslate nohighlight">\(T \approx \exp\!\left(-\frac{2a}{\hbar}\sqrt{2m(V_0 - E)}\right)\)</span>.</p>
-<p>(b) Evaluate <span class="math notranslate nohighlight">\(T\)</span> for an electron (<span class="math notranslate nohighlight">\(m \approx 9.1\times 10^{-31}\,\text{kg}\)</span>) with <span class="math notranslate nohighlight">\(V_0 - E = 2\,\text{eV}\)</span> and <span class="math notranslate nohighlight">\(a = 0.2\,\text{nm}\)</span>. Is tunneling significant at this scale?</p>
-<p>(c) By what factor does <span class="math notranslate nohighlight">\(T\)</span> change if the barrier width doubles to <span class="math notranslate nohighlight">\(a = 0.4\,\text{nm}\)</span>? Explain why tunneling is exponentially sensitive to barrier width.</p>
-<p><strong>5. Penetration depth.</strong> The characteristic decay length of the wavefunction in a forbidden region is <span class="math notranslate nohighlight">\(\lambda_\text{decay} = \hbar/\kappa\)</span> where <span class="math notranslate nohighlight">\(\kappa = \sqrt{2m(V - E)}\)</span>.</p>
-<p>(a) Compute <span class="math notranslate nohighlight">\(\lambda_\text{decay}\)</span> for an electron at a metal surface with work function <span class="math notranslate nohighlight">\(\phi = V - E = 5\,\text{eV}\)</span>. Express the answer in angstroms.</p>
-<p>(b) Explain why this length scale is relevant for scanning tunneling microscopy (STM): the tunneling current depends exponentially on the tip-surface distance.</p>
-<p>(c) Repeat the calculation for a proton (<span class="math notranslate nohighlight">\(m \approx 1.67\times 10^{-27}\,\text{kg}\)</span>) with the same barrier height. Why is proton tunneling much harder than electron tunneling?</p>
-<p><strong>6. Connection formula.</strong> At a classical turning point <span class="math notranslate nohighlight">\(x_0\)</span> where <span class="math notranslate nohighlight">\(E = V(x_0)\)</span>, the WKB solutions diverge because <span class="math notranslate nohighlight">\(p(x_0) = 0\)</span>.</p>
-<p>(a) Near <span class="math notranslate nohighlight">\(x_0\)</span>, linearize the potential as <span class="math notranslate nohighlight">\(V(x) \approx V(x_0) + V'(x_0)(x - x_0)\)</span> and show that the Schrödinger equation reduces to the Airy equation <span class="math notranslate nohighlight">\(\psi'' = z\psi\)</span> (identify the variable <span class="math notranslate nohighlight">\(z\)</span>).</p>
-<p>(b) The Airy function smoothly connects the oscillating and decaying WKB forms. Explain why the connection formula includes a phase shift of <span class="math notranslate nohighlight">\(\pi/4\)</span>: on the allowed side, <span class="math notranslate nohighlight">\(\psi \sim p^{-1/2}\sin\!\left(\frac{1}{\hbar}\int_x^{x_0}p\,\mathrm{d}x' + \frac{\pi}{4}\right)\)</span>.</p>
-<p>(c) What goes wrong if one ignores the <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift when applying quantization conditions?</p>
-<p><strong>7. Double-well tunneling.</strong> Consider a symmetric double-well potential with two minima separated by a barrier of height <span class="math notranslate nohighlight">\(V_0\)</span> and width <span class="math notranslate nohighlight">\(\sim a\)</span>.</p>
-<p>(a) Using the WKB tunneling formula, estimate the tunneling amplitude <span class="math notranslate nohighlight">\(\Delta \sim \hbar\omega\,\mathrm{e}^{-\gamma}\)</span> where <span class="math notranslate nohighlight">\(\omega\)</span> is the classical oscillation frequency in one well and <span class="math notranslate nohighlight">\(\gamma = \frac{1}{\hbar}\int_\text{barrier}\kappa\,\mathrm{d}x\)</span>.</p>
-<p>(b) Explain why the tunneling amplitude <span class="math notranslate nohighlight">\(\Delta\)</span> lifts the degeneracy of the two ground states (one per well), producing a splitting <span class="math notranslate nohighlight">\(\Delta E \approx 2\Delta\)</span>.</p>
-<p>(c) For the ammonia molecule NH<span class="math notranslate nohighlight">\(_3\)</span>, the nitrogen atom tunnels through a barrier with <span class="math notranslate nohighlight">\(\gamma \approx 5\)</span>. Estimate the ratio <span class="math notranslate nohighlight">\(\Delta E/(\hbar\omega)\)</span>. Is the splitting large or small compared to the oscillation frequency?</p>
+<p>(a) In the classically allowed region (<span class="math notranslate nohighlight">\(E &gt; V\)</span>), write the WKB wavefunction <span class="math notranslate nohighlight">\(\psi \sim p^{-1/2}\,\exp(\pm\frac{\mathrm{i}}{\hbar}\int^{x}p\,\mathrm{d}x')\)</span> and explain physically why the amplitude <span class="math notranslate nohighlight">\(1/\sqrt{p}\)</span> means the particle is more likely found where it moves slowly.</p>
+<p>(b) In the classically forbidden region (<span class="math notranslate nohighlight">\(E &lt; V\)</span>), set <span class="math notranslate nohighlight">\(p \to \mathrm{i}\kappa\)</span> with <span class="math notranslate nohighlight">\(\kappa = \sqrt{2m(V-E)}\)</span> and show that the wavefunction decays as <span class="math notranslate nohighlight">\(\psi \sim \kappa^{-1/2}\,\exp(-\frac{1}{\hbar}\int^{x}\kappa\,\mathrm{d}x')\)</span>.</p>
+<p><strong>3. Validity criterion.</strong> The WKB approximation requires <span class="math notranslate nohighlight">\(\vert\mathrm{d}\lambda/\mathrm{d}x\vert \ll 2\pi\)</span>, where <span class="math notranslate nohighlight">\(\lambda(x) = 2\pi\hbar/p(x)\)</span> is the local de Broglie wavelength.</p>
+<p>(a) Show that this is equivalent to the dimensionful condition <span class="math notranslate nohighlight">\(\hbar\,\vert V'(x)\vert \ll 2\sqrt{2m}\,(E - V(x))^{3/2}\)</span> in the allowed region.</p>
+<p>(b) For a linear potential <span class="math notranslate nohighlight">\(V(x) = Fx\)</span> (constant force), identify where the criterion fails. Relate this to the turning point <span class="math notranslate nohighlight">\(x_{0} = E/F\)</span>.</p>
+<p>(c) For a Gaussian barrier <span class="math notranslate nohighlight">\(V(x) = V_{0}\,\mathrm{e}^{-x^{2}/a^{2}}\)</span> with energy <span class="math notranslate nohighlight">\(E = V_{0}/4\)</span>, identify the classical turning points and discuss whether WKB is reliable away from them.</p>
+<p><strong>4. Square-barrier tunneling (heuristic).</strong> A particle of mass <span class="math notranslate nohighlight">\(m\)</span> and energy <span class="math notranslate nohighlight">\(E &lt; V_{0}\)</span> encounters a rectangular barrier <span class="math notranslate nohighlight">\(V(x) = V_{0}\)</span> for <span class="math notranslate nohighlight">\(0 &lt; x &lt; a\)</span> and <span class="math notranslate nohighlight">\(V = 0\)</span> elsewhere. The discontinuous walls <strong>violate</strong> the WKB validity criterion <a class="reference internal" href="#equation-eq-wkb-validity-explicit">(110)</a>, so the formula below captures only the dominant exponential factor — the true transmission coefficient has an additional reflection-coefficient prefactor of order unity.</p>
+<p>(a) Apply <span class="math notranslate nohighlight">\(T \approx \mathrm{e}^{-2\gamma}\)</span> with <span class="math notranslate nohighlight">\(\gamma = \frac{1}{\hbar}\int_{0}^{a}\kappa\,\mathrm{d}x\)</span> to obtain <span class="math notranslate nohighlight">\(T \approx \exp\!\left(-\frac{2a}{\hbar}\sqrt{2m(V_{0} - E)}\right)\)</span>.</p>
+<p>(b) Evaluate <span class="math notranslate nohighlight">\(T\)</span> for an electron (<span class="math notranslate nohighlight">\(m \approx 9.1\times 10^{-31}\,\text{kg}\)</span>) with <span class="math notranslate nohighlight">\(V_{0} - E = 2\,\text{eV}\)</span> and <span class="math notranslate nohighlight">\(a = 0.2\,\text{nm}\)</span>. Is tunneling significant?</p>
+<p>(c) Show that doubling the barrier width <span class="math notranslate nohighlight">\(a\to 2a\)</span> replaces <span class="math notranslate nohighlight">\(T\)</span> by <span class="math notranslate nohighlight">\(T^{2}\)</span> (much smaller). Explain why tunneling is exponentially sensitive to barrier width.</p>
+<p><strong>5. Penetration depth.</strong> The characteristic decay length of the wavefunction in a forbidden region is <span class="math notranslate nohighlight">\(\lambda_\text{decay} = \hbar/\kappa\)</span> with <span class="math notranslate nohighlight">\(\kappa = \sqrt{2m(V - E)}\)</span>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\lambda_\text{decay}\)</span> for an electron at a metal surface with work function <span class="math notranslate nohighlight">\(V - E = 5\,\text{eV}\)</span>. Express the answer in angstroms.</p>
+<p>(b) Explain why this length scale makes scanning tunneling microscopy (STM) work: the tunneling current depends exponentially on the tip-surface distance.</p>
+<p>(c) Repeat for a proton (<span class="math notranslate nohighlight">\(m \approx 1.67\times 10^{-27}\,\text{kg}\)</span>) with the same barrier. Why is proton tunneling much harder than electron tunneling?</p>
+<p><strong>6. Airy connection formula.</strong> At a soft turning point <span class="math notranslate nohighlight">\(x_{0}\)</span> with <span class="math notranslate nohighlight">\(V'(x_{0}) &gt; 0\)</span>, linearize the potential as <span class="math notranslate nohighlight">\(V(x) \approx E + V'(x_{0})(x - x_{0})\)</span>.</p>
+<p>(a) Show that the Schrödinger equation reduces to the Airy equation <span class="math notranslate nohighlight">\(\psi'' = z\psi\)</span> with <span class="math notranslate nohighlight">\(z = (x - x_{0})/\ell\)</span>, and identify the length scale <span class="math notranslate nohighlight">\(\ell = \bigl(\hbar^{2}/(2m\,V'(x_{0}))\bigr)^{1/3}\)</span>.</p>
+<p>(b) The Airy function <span class="math notranslate nohighlight">\(\mathrm{Ai}(z)\)</span> decays exponentially for <span class="math notranslate nohighlight">\(z\to+\infty\)</span> (forbidden side) and oscillates for <span class="math notranslate nohighlight">\(z\to-\infty\)</span> (allowed side). Use its asymptotic forms to recover the connection formula <a class="reference internal" href="#equation-eq-connection">(111)</a> with the <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift.</p>
+<p>(c) Explain in one sentence why omitting the <span class="math notranslate nohighlight">\(\pi/4\)</span> shift in the bound-state quantization rule of §3.3.3 would mis-predict the harmonic-oscillator zero-point energy.</p>
+<p><strong>7. Double-well tunnel splitting.</strong> Consider a symmetric double-well potential with two minima separated by a barrier of width <span class="math notranslate nohighlight">\(\sim a\)</span>. Let <span class="math notranslate nohighlight">\(\omega\)</span> be the small-oscillation frequency in either well and <span class="math notranslate nohighlight">\(\gamma = \frac{1}{\hbar}\int_\text{barrier}\kappa\,\mathrm{d}x\)</span>.</p>
+<p>(a) Estimate the tunneling amplitude <span class="math notranslate nohighlight">\(\Delta \sim \hbar\omega\,\mathrm{e}^{-\gamma}\)</span> from the WKB tunneling formula.</p>
+<p>(b) Explain why <span class="math notranslate nohighlight">\(\Delta\)</span> lifts the degeneracy of the two single-well ground states, splitting them by <span class="math notranslate nohighlight">\(\Delta E \approx 2\Delta\)</span>.</p>
+<p>(c) For the ammonia molecule NH<span class="math notranslate nohighlight">\(_{3}\)</span> the nitrogen tunnels with <span class="math notranslate nohighlight">\(\gamma \approx 5\)</span>. Estimate <span class="math notranslate nohighlight">\(\Delta E/(\hbar\omega)\)</span>. Is the splitting large or small compared to a single-well excitation?</p>
 </section>
 </section>
 
@@ -782,10 +872,9 @@ T \approx \mathrm{e}^{-2\gamma}, \quad \gamma = \frac{1}{\hbar}\int_a^b \kappa(x
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wkb-ansatz">The WKB Ansatz</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-states-allowed-and-forbidden-regions">Stationary States: Allowed and Forbidden Regions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-formulas-at-turning-points">Connection Formulas at Turning Points</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tunneling">Tunneling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validity-of-wkb">Validity of WKB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allowed-and-forbidden-regions">Allowed and Forbidden Regions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-at-a-turning-point">Connection at a Turning Point</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tunneling-through-a-smooth-barrier">Tunneling Through a Smooth Barrier</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

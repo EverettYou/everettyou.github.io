@@ -234,7 +234,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">3.4 Imaginary Time</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-4-3-instantons.html">3.4.3 Instantons</a></li>
 </ul>
 </details></li>
@@ -528,15 +528,15 @@
 <h1>3.4 Imaginary Time<a class="headerlink" href="#imaginary-time" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The path integral was developed as a tool for computing quantum dynamics (real time evolution). Yet a remarkable <strong>analytic continuation</strong> to imaginary time reveals a deep connection between quantum mechanics and classical statistical mechanics. By replacing time <span class="math notranslate nohighlight">\(t\)</span> with imaginary time <span class="math notranslate nohighlight">\(\tau = -it\)</span>, the path integral becomes a sum weighted by the Boltzmann factor, connecting the quantum propagator to thermal averages and the partition function. This section explores this powerful duality: how imaginary-time path integrals encode thermal physics, how they project ground states from long-time evolution, and how tunneling processes in real time correspond to classical paths (instantons) in imaginary time.</p>
+<p>Quantum amplitudes carry oscillating phases <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>; thermal averages carry real Boltzmann weights <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\hat{H}}\)</span>.
+Both feature <em>the same operator</em> <span class="math notranslate nohighlight">\(\hat{H}\)</span> inside an exponential, related by the analytic continuation <span class="math notranslate nohighlight">\(t = -\mathrm{i}\hbar\beta\)</span> — the <strong>Wick rotation</strong>.
+This unit unpacks how that single substitution reveals three deep structures of physics.
+§3.4.1 starts from the statistical-mechanics setup, identifies the partition function <span class="math notranslate nohighlight">\(Z(\beta) = \mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}}\)</span> as a periodic Euclidean path integral, and delivers the punchline that <em>imaginary time is a circle whose circumference is the inverse temperature</em>.
+§3.4.2 puts this to dramatic use: demanding that the Wick-rotated Schwarzschild geometry be smooth at the horizon forces a definite period in imaginary time, which reads off the <strong>Hawking temperature</strong> of a black hole — without quantizing a single field.
+§3.4.3 exploits a third consequence: the Euclidean equation of motion lives in the <em>inverted</em> potential <span class="math notranslate nohighlight">\(-V(x)\)</span>, where classically forbidden quantum tunneling becomes a real classical trajectory — the <strong>instanton</strong>.</p>
 <section id="topics">
 <h3>Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 10.0%" />
-<col style="width: 40.0%" />
-<col style="width: 50.0%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Lesson</p></th>
 <th class="head"><p>Title</p></th>
@@ -546,15 +546,15 @@
 <tbody>
 <tr class="row-even"><td><p>3.4.1</p></td>
 <td><p><a class="reference internal" href="3-4-1-wick-rotation.html"><span class="doc std std-doc">Wick Rotation</span></a></p></td>
-<td><p>What is Wick rotation, and how does it connect quantum amplitudes to Boltzmann factors?</p></td>
+<td><p>Why is the partition function <span class="math notranslate nohighlight">\(Z(\beta)\)</span> a path integral on a circle of circumference <span class="math notranslate nohighlight">\(\hbar\beta\)</span>, and what does it mean that “imaginary time is temperature”?</p></td>
 </tr>
 <tr class="row-odd"><td><p>3.4.2</p></td>
-<td><p><a class="reference internal" href="3-4-2-statistical-mechanics.html"><span class="doc std std-doc">Statistical Mechanics</span></a></p></td>
-<td><p>How does the imaginary-time path integral compute thermal partition functions and expectation values?</p></td>
+<td><p><a class="reference internal" href="3-4-2-black-hole-temperature.html"><span class="doc std std-doc">Black Hole Temperature</span></a></p></td>
+<td><p>How does demanding a smooth Euclidean black-hole geometry assign a temperature to a black hole, with no QFT input?</p></td>
 </tr>
 <tr class="row-even"><td><p>3.4.3</p></td>
 <td><p><a class="reference internal" href="3-4-3-instantons.html"><span class="doc std std-doc">Instantons</span></a></p></td>
-<td><p>How do imaginary-time bounce solutions (instantons) encode quantum tunneling through classical barriers?</p></td>
+<td><p>How does an imaginary-time classical solution (the instanton) explain quantum tunneling non-perturbatively?</p></td>
 </tr>
 </tbody>
 </table>
@@ -563,21 +563,27 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Wick rotation</strong>: <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> transforms oscillatory path integral into convergent Euclidean integral.</p></li>
-<li><p><strong>Partition function</strong>: <span class="math notranslate nohighlight">\(Z = \operatorname{Tr}(\mathrm{e}^{-\beta H})\)</span> as imaginary-time path integral with periodic boundary conditions.</p></li>
-<li><p><strong>Ground state projection</strong>: Long imaginary-time evolution <span class="math notranslate nohighlight">\(\mathrm{e}^{-\tau H}\)</span> projects out excited states, isolating the ground state.</p></li>
-<li><p><strong>Quantum-classical correspondence</strong>: <span class="math notranslate nohighlight">\(d\)</span>-dimensional quantum system at temperature <span class="math notranslate nohighlight">\(T\)</span> maps to <span class="math notranslate nohighlight">\((d+1)\)</span>-dimensional classical system.</p></li>
-<li><p><strong>Instantons</strong>: Tunneling amplitude computed as integral over non-perturbative “bounce” solutions in imaginary time.</p></li>
+<li><p><strong>Boltzmann distribution from max entropy:</strong> <span class="math notranslate nohighlight">\(p_n = \mathrm{e}^{-\beta E_n}/Z\)</span> with <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span>.</p></li>
+<li><p><strong>Partition function:</strong> <span class="math notranslate nohighlight">\(Z(\beta) = \sum_n \mathrm{e}^{-\beta E_n} = \mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}}\)</span> — generating function of equilibrium statistical mechanics.</p></li>
+<li><p><strong>Wick rotation:</strong> <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span>; action <span class="math notranslate nohighlight">\(S \to +\mathrm{i}S_E\)</span>; weight <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\to\mathrm{e}^{-S_E/\hbar}\)</span>.</p></li>
+<li><p><strong>Euclidean action:</strong> <span class="math notranslate nohighlight">\(S_E = \int(\frac{m}{2}\,x'(\tau)^2 + V)\,\mathrm{d}\tau\)</span> — both terms positive.</p></li>
+<li><p><strong>Thermal circle:</strong> <span class="math notranslate nohighlight">\(Z(\beta) = \oint_{x(\hbar\beta)=x(0)}\mathcal{D}[x]\,\mathrm{e}^{-S_E/\hbar}\)</span>; the trace forces imaginary time to be periodic with period <span class="math notranslate nohighlight">\(\hbar\beta\)</span>, set by temperature.</p></li>
+<li><p><strong>Quantum-classical duality (sketch):</strong> <span class="math notranslate nohighlight">\(d\)</span>-dim QM at temperature <span class="math notranslate nohighlight">\(T\)</span> ⇔ <span class="math notranslate nohighlight">\((d{+}1)\)</span>-dim classical stat mech with one periodic direction of length <span class="math notranslate nohighlight">\(\hbar\beta\)</span>.</p></li>
+<li><p><strong>Schwarzschild metric:</strong> <span class="math notranslate nohighlight">\(\mathrm{d}s^2 = -f c^2\,\mathrm{d}t^2 + f^{-1}\,\mathrm{d}r^2 + r^2\,\mathrm{d}\Omega^2\)</span> with <span class="math notranslate nohighlight">\(f = 1 - r_s/r\)</span>, <span class="math notranslate nohighlight">\(r_s = 2GM/c^2\)</span>.</p></li>
+<li><p><strong>No conical singularity:</strong> smoothness of the Euclidean horizon forces <span class="math notranslate nohighlight">\(\tau\)</span> to have period <span class="math notranslate nohighlight">\(\Delta\tau = 8\pi GM/c^3\)</span>.</p></li>
+<li><p><strong>Hawking temperature:</strong> <span class="math notranslate nohighlight">\(T_H = \hbar c^3/(8\pi G M k_B)\)</span>; Bekenstein–Hawking entropy <span class="math notranslate nohighlight">\(S_{\mathrm{BH}} = k_B c^3 A/(4 G\hbar)\)</span>.</p></li>
+<li><p><strong>Inverted potential and instantons:</strong> Euclidean Newton’s law <span class="math notranslate nohighlight">\(m\,x'' = +V'(x)\)</span>; finite-action kink solutions cross barriers and produce non-perturbative splittings <span class="math notranslate nohighlight">\(\Delta \propto \mathrm{e}^{-S_{\mathrm{inst}}/\hbar}\)</span>.</p></li>
 </ul>
 </section>
 <section id="learning-objectives">
 <h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Perform Wick rotation to transform the real-time path integral into the imaginary-time (Euclidean) formulation.</p></li>
-<li><p>Compute partition functions and thermal expectation values using imaginary-time path integrals.</p></li>
-<li><p>Explain how long imaginary-time evolution projects onto the ground state of a system.</p></li>
-<li><p>Relate quantum systems in <span class="math notranslate nohighlight">\(d\)</span> dimensions to classical statistical mechanics in <span class="math notranslate nohighlight">\(d+1\)</span> dimensions.</p></li>
-<li><p>Connect imaginary-time bounce solutions (instantons) to tunneling rates in quantum mechanics.</p></li>
+<li><p>Derive the Boltzmann distribution from the maximum-entropy principle and define the partition function in both spectral and trace forms.</p></li>
+<li><p>Explain how the identification <span class="math notranslate nohighlight">\(t = -\mathrm{i}\hbar\beta\)</span> motivates the Wick rotation; perform it inside the path integral and obtain the Euclidean action with the correct signs.</p></li>
+<li><p>State and use the central result <span class="math notranslate nohighlight">\(Z(\beta) = \oint\mathcal{D}[x]\,\mathrm{e}^{-S_E/\hbar}\)</span> over closed loops of period <span class="math notranslate nohighlight">\(\hbar\beta\)</span> in imaginary time.</p></li>
+<li><p>Wick-rotate the Schwarzschild metric, switch to proper-distance coordinates near the horizon, and recognize the resulting flat 2D polar form.</p></li>
+<li><p>Use the no-conical-singularity condition to derive the period of imaginary time and read off the Hawking temperature; integrate the first law to obtain the Bekenstein–Hawking entropy.</p></li>
+<li><p>Construct the instanton solution for a double-well potential, compute its Euclidean action, and use the dilute-instanton-gas argument to obtain the energy splitting.</p></li>
 </ul>
 </section>
 </section>

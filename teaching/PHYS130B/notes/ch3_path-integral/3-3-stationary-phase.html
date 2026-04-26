@@ -234,7 +234,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-4-3-instantons.html">3.4.3 Instantons</a></li>
 </ul>
 </details></li>
@@ -528,15 +528,10 @@
 <h1>3.3 Stationary Phase<a class="headerlink" href="#stationary-phase" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The path integral sums over all possible paths, each weighted by a phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>. Yet macroscopic objects follow definite classical trajectories. The <strong>stationary phase approximation</strong> resolves this: when <span class="math notranslate nohighlight">\(S \gg \hbar\)</span>, most paths cancel by destructive interference, and only the classical path (where <span class="math notranslate nohighlight">\(\delta S = 0\)</span>) survives. This section develops the semiclassical limit of quantum mechanics, yielding the powerful WKB approximation and Bohr-Sommerfeld quantization rule.</p>
+<p>The path integral sums over all paths weighted by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>, yet macroscopic objects follow definite classical trajectories. The <strong>stationary-phase principle</strong> resolves this: for <span class="math notranslate nohighlight">\(S \gg \hbar\)</span>, all but a narrow tube of paths around the classical trajectory cancel by destructive interference. This unit makes the resolution quantitative — first as the mathematical SPA in §3.3.1, then as the WKB wavefunction it implies in §3.3.2, then as the Bohr-Sommerfeld quantization rule for bound states in §3.3.3 — and shows that bound-state energies arise from constructive interference of classical periodic orbits.</p>
 <section id="topics">
 <h3>Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 8.0%" />
-<col style="width: 35.0%" />
-<col style="width: 57.0%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Lesson</p></th>
 <th class="head"><p>Title</p></th>
@@ -546,15 +541,15 @@
 <tbody>
 <tr class="row-even"><td><p>3.3.1</p></td>
 <td><p><a class="reference internal" href="3-3-1-stationary-phase-approximation.html"><span class="doc std std-doc">Stationary Phase Approximation</span></a></p></td>
-<td><p>How does classical mechanics emerge from the path integral as <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>?</p></td>
+<td><p>How does classical mechanics emerge from the path integral as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>?</p></td>
 </tr>
 <tr class="row-odd"><td><p>3.3.2</p></td>
 <td><p><a class="reference internal" href="3-3-2-wkb-approximation.html"><span class="doc std std-doc">WKB Approximation</span></a></p></td>
-<td><p>How does separating phase from amplitude turn Schrödinger into Hamilton-Jacobi?</p></td>
+<td><p>What approximate wavefunction does the WKB ansatz build, and how does it predict tunneling?</p></td>
 </tr>
 <tr class="row-even"><td><p>3.3.3</p></td>
 <td><p><a class="reference internal" href="3-3-3-bohr-sommerfeld-quantization.html"><span class="doc std std-doc">Bohr-Sommerfeld Quantization</span></a></p></td>
-<td><p>Why does constructive interference of periodic orbits produce discrete energy levels?</p></td>
+<td><p>Why do bound-state energies arise from constructive interference of periodic orbits?</p></td>
 </tr>
 </tbody>
 </table>
@@ -563,20 +558,21 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Stationary phase</strong>: oscillatory integrals dominated by <span class="math notranslate nohighlight">\(\Phi'(x_0)=0\)</span>; in the path integral, this selects the classical path</p></li>
-<li><p><strong>WKB wavefunctions</strong>: <span class="math notranslate nohighlight">\(\psi \sim (1/\sqrt{p})\,\mathrm{e}^{\mathrm{i}\int p\,\mathrm{d}x/\hbar}\)</span> with phase from Hamilton-Jacobi, amplitude from probability conservation</p></li>
-<li><p><strong>Connection formulas</strong>: match oscillating and decaying solutions across turning points with <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shifts</p></li>
-<li><p><strong>Bohr-Sommerfeld rule</strong>: <span class="math notranslate nohighlight">\(\oint p\,\mathrm{d}x = 2\pi\hbar(n + \tfrac{1}{2})\)</span> quantizes bound-state energies</p></li>
-<li><p><strong>Maslov index</strong>: the <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span> from turning-point phases gives zero-point energy</p></li>
+<li><p><strong>Stationary-phase approximation:</strong> oscillatory integrals <span class="math notranslate nohighlight">\(\int\mathrm{e}^{\mathrm{i}\Phi/\hbar}\mathrm{d}x\)</span> are dominated by points <span class="math notranslate nohighlight">\(\Phi'(x_{0}) = 0\)</span>; in the path integral this picks out the classical path.</p></li>
+<li><p><strong>WKB wavefunction:</strong> <span class="math notranslate nohighlight">\(\psi \sim p(x)^{-1/2}\,\mathrm{e}^{\pm\mathrm{i}\int p\,\mathrm{d}x/\hbar}\)</span> in classically allowed regions; exponentially decaying in forbidden regions.</p></li>
+<li><p><strong>Connection formulas:</strong> match oscillating and decaying WKB solutions across turning points with a <span class="math notranslate nohighlight">\(\pi/4\)</span> phase shift (Maslov correction).</p></li>
+<li><p><strong>WKB tunneling:</strong> <span class="math notranslate nohighlight">\(T \approx \mathrm{e}^{-2\gamma}\)</span> with <span class="math notranslate nohighlight">\(\gamma = \int\kappa\,\mathrm{d}x/\hbar\)</span>.</p></li>
+<li><p><strong>Bohr-Sommerfeld rule:</strong> <span class="math notranslate nohighlight">\(\oint p\,\mathrm{d}x = 2\pi\hbar(n + 1/2)\)</span> for two soft turning points; gives the exact harmonic-oscillator and hydrogen spectra.</p></li>
+<li><p><strong>Periodic-orbit interpretation:</strong> discrete energies are the energies at which a classical periodic orbit interferes constructively with itself under repeated traversal.</p></li>
 </ul>
 </section>
 <section id="learning-objectives">
 <h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Apply stationary phase to evaluate oscillatory integrals and explain why the classical path dominates the path integral</p></li>
-<li><p>Construct WKB wavefunctions in allowed and forbidden regions; use connection formulas at turning points</p></li>
-<li><p>Derive energy levels from the Bohr-Sommerfeld quantization rule and verify for the harmonic oscillator</p></li>
-<li><p>Explain tunneling rates from WKB and the correspondence principle as <span class="math notranslate nohighlight">\(S/\hbar \to \infty\)</span></p></li>
+<li><p>Apply stationary phase to evaluate oscillatory integrals and explain why the classical path dominates the path integral as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>.</p></li>
+<li><p>Construct WKB wavefunctions in allowed and forbidden regions; use connection formulas at soft turning points to compute tunneling probabilities.</p></li>
+<li><p>Derive the Bohr-Sommerfeld rule from single-valuedness and verify it for the harmonic oscillator and the particle in a box.</p></li>
+<li><p>Articulate the path-integral origin of Bohr-Sommerfeld as constructive interference of periodic orbits, and the correspondence principle as <span class="math notranslate nohighlight">\(S/\hbar \to \infty\)</span>.</p></li>
 </ul>
 </section>
 </section>

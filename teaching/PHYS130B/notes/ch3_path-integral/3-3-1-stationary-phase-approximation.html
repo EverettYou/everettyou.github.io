@@ -234,7 +234,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-4-3-instantons.html">3.4.3 Instantons</a></li>
 </ul>
 </details></li>
@@ -505,10 +505,13 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mathematical-result">The Mathematical Result</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-classical-path-dominates">Why the Classical Path Dominates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-fluctuations-the-second-variation">Quantum Fluctuations: The Second Variation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-correspondence-principle">The Correspondence Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stationary-phase-formula">The Stationary-Phase Formula</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-a-mexican-hat-action">Worked Example: A Mexican-Hat Action</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-saddles-in-x-to-classical-paths">From Saddles in <span class="math notranslate nohighlight">\(x\)</span> to Classical Paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-fluctuations-the-semiclassical-propagator">Quantum Fluctuations: The Semiclassical Propagator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correspondence-principle">Correspondence Principle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -529,177 +532,227 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the stationary phase approximation? Under what conditions does it apply to oscillatory integrals?</p></li>
-<li><p>Why does the classical path (<span class="math notranslate nohighlight">\(\delta S = 0\)</span>) dominate the path integral as <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>?</p></li>
-<li><p>How do quantum fluctuations around the classical path contribute corrections at finite <span class="math notranslate nohighlight">\(\hbar\)</span>?</p></li>
-<li><p>How does stationary phase make the correspondence principle precise — classical mechanics as a limit of quantum mechanics?</p></li>
+<li><p>What is the stationary-phase approximation, and when does it apply to oscillatory integrals <span class="math notranslate nohighlight">\(\int A(x)\,\mathrm{e}^{\mathrm{i}S(x)/\hbar}\mathrm{d}x\)</span>?</p></li>
+<li><p>Why does the classical path (<span class="math notranslate nohighlight">\(\delta S = 0\)</span>) dominate the path integral as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>, just as ordinary saddles dominate ordinary integrals?</p></li>
+<li><p>How do Gaussian fluctuations around the classical path produce the semiclassical prefactor <span class="math notranslate nohighlight">\(1/\sqrt{\det\hat{D}}\)</span>?</p></li>
+<li><p>How does applying SPA to the path integral produce a semiclassical propagator with phase <span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\)</span> and a Gaussian fluctuation prefactor?</p></li>
+<li><p>How does stationary phase make the correspondence principle precise — classical mechanics as the <span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\to\infty\)</span> limit of quantum mechanics?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The <strong>stationary phase approximation</strong> (SPA) is the mathematical mechanism by which classical mechanics emerges from quantum mechanics. For integrals of the form <span class="math notranslate nohighlight">\(I = \int f(x)\, \mathrm{e}^{\mathrm{i}\Phi(x)/\hbar}\,\mathrm{d}x\)</span> with small <span class="math notranslate nohighlight">\(\hbar\)</span>, the dominant contribution comes from stationary points where <span class="math notranslate nohighlight">\(\Phi'(x_0) = 0\)</span>. Applied to the path integral, this selects the <strong>classical path</strong> — the trajectory where <span class="math notranslate nohighlight">\(\delta S = 0\)</span>. This is the correspondence principle made precise.</p>
+<p>Path-integral interference selects classical paths through <em>stationarity of the action</em>. To make this precise, we first develop the <strong>stationary-phase approximation (SPA)</strong> for ordinary 1D integrals — using exactly the symbols <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(A\)</span> that appear in the path integral, so the analogy is transparent. We then promote SPA from saddles in <span class="math notranslate nohighlight">\(x\)</span> to <strong>classical paths</strong> in the path integral, obtain the <strong>semiclassical propagator</strong> with its Gaussian fluctuation prefactor, and use <span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\)</span> to state the correspondence principle.</p>
 </section>
-<section id="the-mathematical-result">
-<h3>The Mathematical Result<a class="headerlink" href="#the-mathematical-result" title="Link to this heading">#</a></h3>
-<p>Many integrals in quantum mechanics take the form</p>
-<div class="math notranslate nohighlight">
-\[
-I = \int \mathrm{e}^{\mathrm{i}\Phi(x)/\hbar} f(x) \, \mathrm{d}x
+<section id="the-stationary-phase-formula">
+<h3>The Stationary-Phase Formula<a class="headerlink" href="#the-stationary-phase-formula" title="Link to this heading">#</a></h3>
+<p>Many quantum-mechanical calculations reduce to an oscillatory 1D integral of the form</p>
+<div class="math notranslate nohighlight" id="equation-eq-spa-integral">
+<span class="eqno">(93)<a class="headerlink" href="#equation-eq-spa-integral" title="Link to this equation">#</a></span>\[
+I = \int A(x)\,\mathrm{e}^{\mathrm{i}S(x)/\hbar}\,\mathrm{d}x,
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi(x)\)</span> is a phase function, <span class="math notranslate nohighlight">\(f(x)\)</span> is a slowly-varying amplitude, and <span class="math notranslate nohighlight">\(\hbar\)</span> is small. When <span class="math notranslate nohighlight">\(\hbar\)</span> is tiny, the integrand oscillates wildly — contributions cancel everywhere except near points where <span class="math notranslate nohighlight">\(\Phi\)</span> varies slowly.</p>
+<p>with <span class="math notranslate nohighlight">\(S(x)\)</span> a real “action-like” phase function and <span class="math notranslate nohighlight">\(A(x)\)</span> a slowly varying amplitude. (Calling the phase function <span class="math notranslate nohighlight">\(S\)</span> — not a separate symbol like <span class="math notranslate nohighlight">\(\Phi\)</span> — is intentional: the path integral has the same form, only with <span class="math notranslate nohighlight">\(x\)</span> replaced by an entire path.) When <span class="math notranslate nohighlight">\(\hbar\)</span> is small, the phase <span class="math notranslate nohighlight">\(S(x)/\hbar\)</span> oscillates rapidly and contributions cancel everywhere except near points where the phase is <em>stationary</em>, <span class="math notranslate nohighlight">\(S'(x_{0}) = 0\)</span>.</p>
 <div class="important admonition">
-<p class="admonition-title">Stationary Phase Formula</p>
-<p>For an oscillatory integral with a single stationary point <span class="math notranslate nohighlight">\(\Phi'(x_0) = 0\)</span>, the leading approximation is</p>
-<div class="math notranslate nohighlight">
-\[
-I \approx f(x_0) \sqrt{\frac{2\pi\hbar}{\mathrm{i}\Phi''(x_0)}} \, \mathrm{e}^{\mathrm{i}\Phi(x_0)/\hbar}
+<p class="admonition-title">Stationary-phase approximation</p>
+<p>For an isolated stationary point <span class="math notranslate nohighlight">\(x_{0}\)</span> where <span class="math notranslate nohighlight">\(S'(x_{0}) = 0\)</span>, the leading contribution as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-spa-formula">
+<span class="eqno">(94)<a class="headerlink" href="#equation-eq-spa-formula" title="Link to this equation">#</a></span>\[
+I \;\approx\; A(x_{0})\,\sqrt{\frac{2\pi\mathrm{i}\hbar}{S''(x_{0})}}\,\mathrm{e}^{\mathrm{i}S(x_{0})/\hbar},
 \]</div>
-<p>Valid when: (1) isolated stationary point with <span class="math notranslate nohighlight">\(|\Phi''(x_0)|\)</span> not too small, (2) <span class="math notranslate nohighlight">\(f(x)\)</span> slowly varying, (3) <span class="math notranslate nohighlight">\(\Phi \gg \hbar\)</span>.</p>
+<p>with the principal-branch square root: <span class="math notranslate nohighlight">\(\sqrt{2\pi\mathrm{i}\hbar/S''} = \sqrt{2\pi\hbar/\vert S''\vert}\,\mathrm{e}^{\mathrm{i}\pi/4\,\mathrm{sgn}(S'')}\)</span>. For multiple isolated saddles, sum their contributions.</p>
+<p>Validity: each saddle is isolated, <span class="math notranslate nohighlight">\(A\)</span> varies slowly compared with <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>, and <span class="math notranslate nohighlight">\(\vert S''(x_{0})\vert\ne 0\)</span>.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Stationary Phase Formula</p>
-<p>Near the stationary point <span class="math notranslate nohighlight">\(x_0\)</span>, expand the phase to second order:</p>
+<p class="admonition-title">Derivation: SPA from a Taylor expansion</p>
+<p>Near <span class="math notranslate nohighlight">\(x_{0}\)</span>, expand <span class="math notranslate nohighlight">\(S(x) \approx S(x_{0}) + \tfrac{1}{2}S''(x_{0})(x - x_{0})^{2}\)</span> — the linear term vanishes by stationarity. Replace the slowly varying <span class="math notranslate nohighlight">\(A(x)\)</span> by <span class="math notranslate nohighlight">\(A(x_{0})\)</span>. The integral becomes Gaussian:</p>
 <div class="math notranslate nohighlight">
 \[
-\Phi(x) \approx \Phi(x_0) + \frac{1}{2}\Phi''(x_0)(x - x_0)^2
+I \;\approx\; A(x_{0})\,\mathrm{e}^{\mathrm{i}S(x_{0})/\hbar}\int\mathrm{e}^{\mathrm{i}\,S''(x_{0})\,(x - x_{0})^{2}/(2\hbar)}\,\mathrm{d}x.
 \]</div>
-<p>The integral becomes Gaussian:</p>
-<div class="math notranslate nohighlight">
-\[
-I \approx \mathrm{e}^{\mathrm{i}\Phi(x_0)/\hbar} f(x_0) \int \mathrm{e}^{\mathrm{i}\Phi''(x_0)(x-x_0)^2/(2\hbar)} \mathrm{d}x
-\]</div>
-<p>Using the Fresnel integral <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i} a x^2}\,\mathrm{d}x = \mathrm{e}^{\mathrm{i}\,\operatorname{sgn}(a)\,\pi/4}\sqrt{\frac{\pi}{|a|}}\)</span> for real <span class="math notranslate nohighlight">\(a \neq 0\)</span> (single-valued; equivalently <span class="math notranslate nohighlight">\(\sqrt{\pi/(\mathrm{i}a)}\)</span> once a branch is chosen), the result follows.</p>
+<p>Use the Fresnel integral <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\alpha y^{2}}\,\mathrm{d}y = \sqrt{\mathrm{i}\pi/\alpha}\)</span> (for real <span class="math notranslate nohighlight">\(\alpha\neq 0\)</span>, with <span class="math notranslate nohighlight">\(\sqrt{\mathrm{i}} = \mathrm{e}^{\mathrm{i}\pi/4}\)</span>) at <span class="math notranslate nohighlight">\(\alpha = S''(x_{0})/(2\hbar)\)</span> to get <span class="math notranslate nohighlight">\(\sqrt{2\pi\mathrm{i}\hbar/S''(x_{0})}\)</span>, completing <a class="reference internal" href="#equation-eq-spa-formula">(94)</a>.</p>
 </div>
-<p>The width of the region that contributes is <span class="math notranslate nohighlight">\(\Delta x \sim \sqrt{\hbar/|\Phi''|}\)</span>. As <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, this region shrinks to zero — only the stationary point survives.</p>
-</section>
-<section id="why-the-classical-path-dominates">
-<h3>Why the Classical Path Dominates<a class="headerlink" href="#why-the-classical-path-dominates" title="Link to this heading">#</a></h3>
-<p>In the path integral</p>
-<div class="math notranslate nohighlight">
-\[
-K(\boldsymbol{x}_f, t_f; \boldsymbol{x}_i, t_i) = \int \mathrm{e}^{\mathrm{i}S[\boldsymbol{x}]/\hbar} \, \mathcal{D}[\boldsymbol{x}]
+<p>The width of the contributing region around <span class="math notranslate nohighlight">\(x_{0}\)</span> is <span class="math notranslate nohighlight">\(\Delta x \sim \sqrt{\hbar/\vert S''(x_{0})\vert}\)</span> — it shrinks to zero as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>, leaving only the saddle.</p>
+<section id="worked-example-a-mexican-hat-action">
+<h4>Worked Example: A Mexican-Hat Action<a class="headerlink" href="#worked-example-a-mexican-hat-action" title="Link to this heading">#</a></h4>
+<p>To see SPA in action — and to see when it breaks down — consider the <strong>Mexican-hat phase</strong></p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<figure class="align-default" id="fig-mexican-hat">
+<a class="reference internal image-reference" href="../images/3-3-1-mexican-hat.png"><img alt="The Mexican-hat phase S(x) = (x^2-1)^2 with three saddle points marked at x = -1 (red), x = 0 (green), and x = +1 (blue)." src="../images/3-3-1-mexican-hat.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">The Mexican-hat phase <span class="math notranslate nohighlight">\(S(x) = (x^{2}-1)^{2}\)</span> has three stationary points: minima at <span class="math notranslate nohighlight">\(x_{0} = \pm 1\)</span> (red, blue) and a maximum at <span class="math notranslate nohighlight">\(x_{0} = 0\)</span> (green).</span><a class="headerlink" href="#fig-mexican-hat" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</aside>
+<div class="docutils">
+<div class="math notranslate nohighlight" id="equation-eq-spa-example-s">
+<span class="eqno">(95)<a class="headerlink" href="#equation-eq-spa-example-s" title="Link to this equation">#</a></span>\[
+S(x) = (x^{2} - 1)^{2},\qquad A(x) = \mathrm{e}^{\mathrm{i}kx},
 \]</div>
-<p>the phase function is the classical action <span class="math notranslate nohighlight">\(S[\boldsymbol{x}]\)</span>. The stationary point is the <strong>classical path</strong> <span class="math notranslate nohighlight">\(\boldsymbol{x}_\mathrm{cl}(t)\)</span>, defined by <span class="math notranslate nohighlight">\(\delta S/\delta \boldsymbol{x} = 0\)</span> — the Euler-Lagrange (Newton’s) equations.</p>
-<p><strong>Constructive interference at <span class="math notranslate nohighlight">\(\boldsymbol{x}_\mathrm{cl}\)</span>:</strong> Nearby paths have actions differing only at second order, so their phases nearly agree — they add coherently.</p>
-<p><strong>Destructive interference away from <span class="math notranslate nohighlight">\(\boldsymbol{x}_\mathrm{cl}\)</span>:</strong> Paths far from the classical trajectory have first-order action differences <span class="math notranslate nohighlight">\(\Delta S \gg \hbar\)</span>, producing rapidly oscillating phases that cancel.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: Classical Emergence</p>
-<p>The stationary phase approximation says that as <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, only classical paths survive. This raises several questions:</p>
-<ul class="simple">
-<li><p>In the limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, does stationary phase become <em>exact</em> or just increasingly accurate? What controls the error?</p></li>
-<li><p>For a potential with multiple classical paths (e.g., reflection and transmission), do they interfere constructively or destructively?</p></li>
-<li><p>Tunneling has no classical path, yet it occurs. How does the path integral handle contributions from classically forbidden trajectories?</p></li>
-</ul>
+<p>so the SPA integral is the Fourier transform of <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S(x)/\hbar}\)</span> at wavevector <span class="math notranslate nohighlight">\(k\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-spa-example-ik">
+<span class="eqno">(96)<a class="headerlink" href="#equation-eq-spa-example-ik" title="Link to this equation">#</a></span>\[
+I(k) = \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}S(x)/\hbar}\,\mathrm{e}^{\mathrm{i}kx}\,\mathrm{d}x.
+\]</div>
+<p>The saddles are <span class="math notranslate nohighlight">\(S'(x_{0}) = 4x_{0}(x_{0}^{2} - 1) = 0\)</span>, giving three points: <span class="math notranslate nohighlight">\(x_{0} = -1, 0, +1\)</span>, with <span class="math notranslate nohighlight">\(S(\pm 1) = 0\)</span>, <span class="math notranslate nohighlight">\(S(0) = 1\)</span>, <span class="math notranslate nohighlight">\(S''(\pm 1) = 8\)</span>, <span class="math notranslate nohighlight">\(S''(0) = -4\)</span> (<a class="reference internal" href="#fig-mexican-hat"><span class="std std-numref">Fig. 14</span></a>). Applying <a class="reference internal" href="#equation-eq-spa-formula">(94)</a> to each and summing,</p>
+<div class="math notranslate nohighlight" id="equation-eq-spa-example-result">
+<span class="eqno">(97)<a class="headerlink" href="#equation-eq-spa-example-result" title="Link to this equation">#</a></span>\[
+I_{\mathrm{SPA}}(k) = \sum_{x_{0}\in\{-1, 0, +1\}} \mathrm{e}^{\mathrm{i}kx_{0}}\,\sqrt{\frac{2\pi\mathrm{i}\hbar}{S''(x_{0})}}\,\mathrm{e}^{\mathrm{i}S(x_{0})/\hbar}.
+\]</div>
+<p>The SPA result is a <strong>sum of three plane waves <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}kx_{0}}\)</span></strong>, one per saddle. Inverse-Fourier-transforming back to position space yields three delta peaks located precisely at <span class="math notranslate nohighlight">\(x_{0} = -1, 0, +1\)</span> — the SPA literally reads off the saddle positions from the <span class="math notranslate nohighlight">\(k\)</span>-space oscillation pattern.</p>
+<figure class="align-center" id="fig-saddle-point">
+<a class="reference internal image-reference" href="../images/3-3-1-saddle_point.png"><img alt="Four panels: at small and larger ℏ, a complex-plane trace of the cumulative integral showing spirals at saddle points, alongside |I(k)| comparing exact vs SPA." src="../images/3-3-1-saddle_point.png" style="width: 72%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">For each value of <span class="math notranslate nohighlight">\(\hbar\)</span> (top: <span class="math notranslate nohighlight">\(\hbar = 0.05\)</span>; bottom: <span class="math notranslate nohighlight">\(\hbar = 0.5\)</span>). <strong>Left column:</strong> the running integral <span class="math notranslate nohighlight">\(\int_{0}^{x}\mathrm{e}^{\mathrm{i}S(x')/\hbar}\,\mathrm{d}x'\)</span> traced in the complex plane. The walker accumulates length only where the phase is stationary — at small <span class="math notranslate nohighlight">\(\hbar\)</span> each saddle (red, green, blue dots) appears as a <em>spiral burst</em>, while between saddles the path stalls. The total integral <span class="math notranslate nohighlight">\(I(k=0)\)</span> is the vector from start to end. <strong>Right column:</strong> <span class="math notranslate nohighlight">\(\vert I(k)\vert\)</span> — exact numerical (black) versus the SPA prediction (red, dashed). At small <span class="math notranslate nohighlight">\(\hbar\)</span>, SPA is essentially indistinguishable from exact. At larger <span class="math notranslate nohighlight">\(\hbar\)</span>, the saddles’ contributing widths <span class="math notranslate nohighlight">\(\Delta x\sim\sqrt{\hbar/\vert S''\vert}\)</span> overlap and SPA degrades.</span><a class="headerlink" href="#fig-saddle-point" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </div>
+<p>Two lessons from this example:</p>
+<ol class="arabic simple">
+<li><p><strong>SPA picks out saddles.</strong> The complex-plane traces in <a class="reference internal" href="#fig-saddle-point"><span class="std std-numref">Fig. 15</span></a> (left column) make the geometric meaning of “rapid-oscillation cancellation” concrete: the integral spirals only where the phase is stationary; everywhere else it stalls. The SPA sum <a class="reference internal" href="#equation-eq-spa-example-result">(97)</a> is exactly the analytic prediction for these jumps.</p></li>
+<li><p><strong>SPA breaks down when saddles overlap.</strong> The contributing width around each saddle is <span class="math notranslate nohighlight">\(\sqrt{\hbar/\vert S''\vert}\)</span>. When <span class="math notranslate nohighlight">\(\hbar\)</span> becomes large enough that adjacent saddles’ contributing regions overlap (compare the saddle separation <span class="math notranslate nohighlight">\(\sim 1\)</span> here with <span class="math notranslate nohighlight">\(\sqrt{\hbar/\vert S''\vert}\sim\sqrt{\hbar/4}\)</span>), neighbouring saddles cease to be isolated and SPA fails (<a class="reference internal" href="#fig-saddle-point"><span class="std std-numref">Fig. 15</span></a>, lower-right).</p></li>
+</ol>
 </section>
-<section id="quantum-fluctuations-the-second-variation">
-<h3>Quantum Fluctuations: The Second Variation<a class="headerlink" href="#quantum-fluctuations-the-second-variation" title="Link to this heading">#</a></h3>
-<p>Expanding the action to second order around the classical path:</p>
+</section>
+<section id="from-saddles-in-x-to-classical-paths">
+<h3>From Saddles in <span class="math notranslate nohighlight">\(x\)</span> to Classical Paths<a class="headerlink" href="#from-saddles-in-x-to-classical-paths" title="Link to this heading">#</a></h3>
+<p>Promote the SPA from an ordinary integral to a path integral. Writing the propagator schematically as</p>
 <div class="math notranslate nohighlight">
 \[
-S[\boldsymbol{x}_\mathrm{cl} + \delta\boldsymbol{x}] \approx S_\mathrm{cl} + \frac{1}{2}\int \mathrm{d}t \, \delta\boldsymbol{x} \cdot M \cdot \delta\boldsymbol{x}
+K \;=\; \int \mathcal{D}[x]\;\mathrm{e}^{\mathrm{i}S[x]/\hbar},
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(M = -m\frac{\mathrm{d}^2}{\mathrm{d}t^2} - V''(\boldsymbol{x}_\mathrm{cl})\)</span> is the second-variation operator. The Gaussian integral over fluctuations gives the <strong>semiclassical propagator</strong>:</p>
+<p>the <em>configurations</em> are no longer real numbers <span class="math notranslate nohighlight">\(x\)</span> but full paths <span class="math notranslate nohighlight">\(x(t)\)</span>. Stationarity becomes the functional condition <span class="math notranslate nohighlight">\(\delta S[x]/\delta x(t) = 0\)</span>, which is the <strong>Euler-Lagrange (Newton’s) equation</strong> — the saddles are the <strong>classical paths</strong> <span class="math notranslate nohighlight">\(x_\mathrm{cl}(t)\)</span>. The structural translation is exact:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ordinary SPA</p></th>
+<th class="head"><p>Path-integral SPA</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Configuration: <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span></p></td>
+<td><p>Configuration: path <span class="math notranslate nohighlight">\(x(t)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stationary point: <span class="math notranslate nohighlight">\(S'(x_{0}) = 0\)</span></p></td>
+<td><p>Stationary path: <span class="math notranslate nohighlight">\(\delta S/\delta x = 0\)</span> (classical path <span class="math notranslate nohighlight">\(x_\mathrm{cl}(t)\)</span>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Quadratic expansion: <span class="math notranslate nohighlight">\(S(x_{0}) + \tfrac{1}{2}S''(x_{0})(x-x_{0})^{2}\)</span></p></td>
+<td><p>Quadratic expansion: <span class="math notranslate nohighlight">\(S_\mathrm{cl} + \tfrac{1}{2}\!\int\delta x\,\hat{D}\,\delta x\,\mathrm{d}t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Gaussian width: <span class="math notranslate nohighlight">\(\sqrt{\hbar/\vert S''\vert}\)</span></p></td>
+<td><p>Gaussian width: <span class="math notranslate nohighlight">\(\sqrt{\hbar/\vert\hat{D}\vert}\)</span> in path space</p></td>
+</tr>
+<tr class="row-even"><td><p>Result: <span class="math notranslate nohighlight">\(A(x_{0})\sqrt{2\pi\mathrm{i}\hbar/S''}\,\mathrm{e}^{\mathrm{i}S(x_{0})/\hbar}\)</span></p></td>
+<td><p>Result: <span class="math notranslate nohighlight">\((\det\hat{D})^{-1/2}\,\mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Nearby paths have nearly equal action and add coherently around <span class="math notranslate nohighlight">\(x_\mathrm{cl}(t)\)</span>; far-from-classical paths cancel. As <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>, only an infinitesimally thin tube of paths around <span class="math notranslate nohighlight">\(x_\mathrm{cl}\)</span> contributes — classical mechanics emerges from the path integral.</p>
+</section>
+<section id="quantum-fluctuations-the-semiclassical-propagator">
+<h3>Quantum Fluctuations: The Semiclassical Propagator<a class="headerlink" href="#quantum-fluctuations-the-semiclassical-propagator" title="Link to this heading">#</a></h3>
+<p>Expand the action to second order around the classical path,</p>
+<div class="math notranslate nohighlight" id="equation-eq-second-variation">
+<span class="eqno">(98)<a class="headerlink" href="#equation-eq-second-variation" title="Link to this equation">#</a></span>\[
+S[x_\mathrm{cl} + \delta x] \;\approx\; S_\mathrm{cl} \;+\; \frac{1}{2}\int_{0}^{T}\delta x(t)\,\hat{D}\,\delta x(t)\,\mathrm{d}t,
+\]</div>
+<p>with the <strong>second-variation operator</strong> <span class="math notranslate nohighlight">\(\hat{D} = -m\,\mathrm{d}^{2}/\mathrm{d}t^{2} - V''(x_\mathrm{cl})\)</span> (1D for clarity). The Gaussian path integral over the fluctuation <span class="math notranslate nohighlight">\(\delta x(t)\)</span> — which vanishes at the endpoints — gives</p>
 <div class="important admonition">
-<p class="admonition-title">Semiclassical Propagator</p>
-<div class="math notranslate nohighlight">
-\[
-K \approx \mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar} \cdot \frac{1}{\sqrt{\det M}}
+<p class="admonition-title">Semiclassical propagator</p>
+<div class="math notranslate nohighlight" id="equation-eq-semiclassical-k">
+<span class="eqno">(99)<a class="headerlink" href="#equation-eq-semiclassical-k" title="Link to this equation">#</a></span>\[
+K \;\approx\; \frac{1}{\sqrt{\det\hat{D}}}\;\mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar}.
 \]</div>
-<p>The phase comes from the classical action; the prefactor encodes quantum fluctuations.</p>
-</div>
-<div class="dropdown example admonition">
-<p class="admonition-title">Example: Electron vs Baseball</p>
-<p><strong>Problem.</strong> Compare <span class="math notranslate nohighlight">\(S/\hbar\)</span> for an electron moving 1 cm in 1 s versus a baseball (0.1 kg) moving 1 m in 1 s.</p>
-<p><strong>Solution.</strong> The classical action is <span class="math notranslate nohighlight">\(S \sim md^2/t\)</span>.</p>
-<ul class="simple">
-<li><p>Electron: <span class="math notranslate nohighlight">\(S \sim (10^{-30})(10^{-2})^2/1 = 10^{-34}\)</span> J·s <span class="math notranslate nohighlight">\(\approx \hbar\)</span>. Quantum regime — all paths matter.</p></li>
-<li><p>Baseball: <span class="math notranslate nohighlight">\(S \sim (0.1)(1)^2/1 = 0.1\)</span> J·s <span class="math notranslate nohighlight">\(= 10^{33}\hbar\)</span>. Classical regime — only the classical path survives.</p></li>
-</ul>
+<p>The phase comes from the classical action; the <span class="math notranslate nohighlight">\(1/\sqrt{\det\hat{D}}\)</span> prefactor encodes Gaussian quantum fluctuations around the classical path.</p>
 </div>
 </section>
-<section id="the-correspondence-principle">
-<h3>The Correspondence Principle<a class="headerlink" href="#the-correspondence-principle" title="Link to this heading">#</a></h3>
-<p>Stationary phase quantifies the <strong>correspondence principle</strong>: quantum mechanics reduces to classical mechanics when <span class="math notranslate nohighlight">\(S \gg \hbar\)</span>.</p>
+<section id="correspondence-principle">
+<h3>Correspondence Principle<a class="headerlink" href="#correspondence-principle" title="Link to this heading">#</a></h3>
+<p>The ratio <span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\)</span> controls the quantum-to-classical crossover:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Regime</p></th>
-<th class="head"><p><span class="math notranslate nohighlight">\(S/\hbar\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\)</span></p></th>
 <th class="head"><p>Behavior</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Classical</p></td>
 <td><p><span class="math notranslate nohighlight">\(\gg 1\)</span></p></td>
-<td><p>Single path dominates; definite trajectory</p></td>
+<td><p>Single saddle dominates; definite trajectory</p></td>
 </tr>
 <tr class="row-odd"><td><p>Semiclassical</p></td>
 <td><p><span class="math notranslate nohighlight">\(\sim 1\)</span></p></td>
-<td><p>Classical path + quantum corrections</p></td>
+<td><p>Saddle path + Gaussian quantum corrections</p></td>
 </tr>
 <tr class="row-even"><td><p>Quantum</p></td>
 <td><p><span class="math notranslate nohighlight">\(\lesssim 1\)</span></p></td>
-<td><p>All paths contribute; wave-like behavior</p></td>
+<td><p>All paths contribute; full wave behavior</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="3-2-2-schrodinger-equation.html"><span class="doc std std-doc">3.2.2 Schrödinger Equation</span></a>: Path integral derivation of the Schrödinger equation</p></li>
-<li><p><a class="reference internal" href="3-3-2-wkb-approximation.html"><span class="doc std std-doc">3.3.2 WKB Approximation</span></a>: Semiclassical wavefunctions from stationary phase</p></li>
-<li><p><a class="reference internal" href="3-4-1-wick-rotation.html"><span class="doc std std-doc">3.4.1 Wick Rotation</span></a>: Analytic continuation to imaginary time</p></li>
-</ul>
+<div class="dropdown example admonition">
+<p class="admonition-title">Example: electron vs baseball</p>
+<p><strong>Problem.</strong> Compare <span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\)</span> for an electron moving <span class="math notranslate nohighlight">\(1\,\mathrm{cm}\)</span> in <span class="math notranslate nohighlight">\(1\,\mathrm{s}\)</span> versus a baseball (<span class="math notranslate nohighlight">\(0.1\,\mathrm{kg}\)</span>) moving <span class="math notranslate nohighlight">\(1\,\mathrm{m}\)</span> in <span class="math notranslate nohighlight">\(1\,\mathrm{s}\)</span>.</p>
+<p><strong>Solution.</strong> <span class="math notranslate nohighlight">\(S_\mathrm{cl}\sim md^{2}/t\)</span>. Electron: <span class="math notranslate nohighlight">\(S\sim 10^{-30}\cdot 10^{-4}/1 = 10^{-34}\,\mathrm{J\,s}\sim\hbar\)</span> — quantum regime, all paths matter. Baseball: <span class="math notranslate nohighlight">\(S\sim 0.1\cdot 1/1 = 0.1\,\mathrm{J\,s}\sim 10^{33}\hbar\)</span> — classical regime, single saddle dominates.</p>
 </div>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Stationary phase and classical limit</p>
-<p>The stationary phase approximation evaluates integrals of the form <span class="math notranslate nohighlight">\(\int \mathrm{d}\mathcal{C} \, \mathrm{e}^{\mathrm{i}S[\mathcal{C}]/\hbar}\)</span> by finding paths where <span class="math notranslate nohighlight">\(\delta S / \delta \mathcal{C} = 0\)</span> (the phase is stationary). Paths far from this stationary point contribute wildly oscillating phases that cancel. Why is this consistent with the classical limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>?</p>
-<p>(A) In the limit <span class="math notranslate nohighlight">\(\hbar \to 0\)</span>, the phase <span class="math notranslate nohighlight">\(S/\hbar\)</span> becomes large everywhere, so oscillations become very rapid except at the stationary point.</p>
-<p>(B) The classical path minimizes the action, so nearby paths have the same action to leading order.</p>
-<p>(C) When <span class="math notranslate nohighlight">\(\hbar\)</span> is small, only paths with integer action <span class="math notranslate nohighlight">\(S/\hbar = \text{integer}\)</span> contribute.</p>
-<p>(D) The stationary phase approximation only applies when <span class="math notranslate nohighlight">\(\hbar &gt; 0\)</span>; in the classical limit it fails.</p>
+<p class="admonition-title">Poll: stationary phase and the classical limit</p>
+<p>In the path integral <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span>, paths far from a stationary point of <span class="math notranslate nohighlight">\(S\)</span> have rapidly varying phases that cancel. Why does this become <em>more</em> selective as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>?</p>
+<p>(A) The phase <span class="math notranslate nohighlight">\(S/\hbar\)</span> becomes large everywhere except at saddles, so neighboring paths oscillate more rapidly and cancel more sharply.</p>
+<p>(B) The classical path minimizes the action, so nearby paths share its action exactly.</p>
+<p>(C) Only paths with integer action <span class="math notranslate nohighlight">\(S/\hbar = n\)</span> contribute; the spacing tightens as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>.</p>
+<p>(D) The SPA fails as <span class="math notranslate nohighlight">\(\hbar\to 0\)</span>; the classical limit must be imposed by hand.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Stationary phase</strong>: oscillatory integrals are dominated by points where <span class="math notranslate nohighlight">\(\Phi'(x_0) = 0\)</span>; the contributing region has width <span class="math notranslate nohighlight">\(\sim \sqrt{\hbar}\)</span></p></li>
-<li><p><strong>Classical path selection</strong>: the path integral selects <span class="math notranslate nohighlight">\(\delta S = 0\)</span> through constructive interference; all other paths cancel</p></li>
-<li><p><strong>Semiclassical propagator</strong>: <span class="math notranslate nohighlight">\(K \approx \mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar}/\sqrt{\det \hat{D}}\)</span> includes quantum corrections from the second variation</p></li>
-<li><p><strong>Correspondence principle</strong>: classical mechanics emerges when <span class="math notranslate nohighlight">\(S \gg \hbar\)</span>; the ratio <span class="math notranslate nohighlight">\(S/\hbar\)</span> controls the quantum-to-classical transition</p></li>
+<li><p><strong>Stationary-phase approximation</strong> <a class="reference internal" href="#equation-eq-spa-formula">(94)</a>: oscillatory integrals <span class="math notranslate nohighlight">\(\int A(x)\,\mathrm{e}^{\mathrm{i}S(x)/\hbar}\,\mathrm{d}x\)</span> are dominated by points where <span class="math notranslate nohighlight">\(S'(x_{0}) = 0\)</span>. The contributing region has width <span class="math notranslate nohighlight">\(\sqrt{\hbar/\vert S''(x_{0})\vert}\)</span>.</p></li>
+<li><p><strong>Worked example</strong> (<a class="reference internal" href="#fig-saddle-point"><span class="std std-numref">Fig. 15</span></a>): for <span class="math notranslate nohighlight">\(S(x) = (x^{2}-1)^{2}\)</span> and <span class="math notranslate nohighlight">\(A(x) = \mathrm{e}^{\mathrm{i}kx}\)</span>, SPA gives a sum of three plane waves whose Fourier inverse pinpoints the saddle locations <span class="math notranslate nohighlight">\(x_{0} = -1, 0, +1\)</span>. Agreement with the exact <span class="math notranslate nohighlight">\(I(k)\)</span> is essentially perfect at small <span class="math notranslate nohighlight">\(\hbar\)</span> and degrades when adjacent saddles overlap at larger <span class="math notranslate nohighlight">\(\hbar\)</span>.</p></li>
+<li><p><strong>Promoted to path integrals</strong>: saddles in <span class="math notranslate nohighlight">\(x\)</span> become <strong>classical paths</strong> (<span class="math notranslate nohighlight">\(\delta S/\delta x = 0\)</span>); the same argument selects <span class="math notranslate nohighlight">\(x_\mathrm{cl}(t)\)</span> from <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\)</span>.</p></li>
+<li><p><strong>Semiclassical propagator</strong> <a class="reference internal" href="#equation-eq-semiclassical-k">(99)</a>: <span class="math notranslate nohighlight">\(K \approx \mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar}/\sqrt{\det\hat{D}}\)</span>, with Gaussian fluctuations encoded in <span class="math notranslate nohighlight">\(\hat{D}\)</span>.</p></li>
+<li><p><strong>Correspondence principle</strong>: classical mechanics is the <span class="math notranslate nohighlight">\(S_\mathrm{cl}/\hbar\to\infty\)</span> limit of SPA.</p></li>
 </ul>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Gaussian check.</strong> Apply the stationary phase approximation (SPA) to the pure Gaussian integral <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty} \mathrm{e}^{\mathrm{i}ax^2/\hbar}\,\mathrm{d}x\)</span> with <span class="math notranslate nohighlight">\(a &gt; 0\)</span> real.</p>
-<p>(a) Find the stationary point <span class="math notranslate nohighlight">\(x_0\)</span> where <span class="math notranslate nohighlight">\(\Phi'(x_0) = 0\)</span> for <span class="math notranslate nohighlight">\(\Phi(x) = ax^2\)</span>.</p>
-<p>(b) Evaluate the SPA formula <span class="math notranslate nohighlight">\(I \approx \sqrt{2\pi\hbar/(\mathrm{i}\Phi''(x_0))}\,\mathrm{e}^{\mathrm{i}\Phi(x_0)/\hbar}\)</span> and compare with the exact Fresnel result <span class="math notranslate nohighlight">\(\sqrt{\pi\hbar/(\mathrm{i}a)}\)</span>. Show that the SPA is exact. Why?</p>
-<p><strong>2. Cubic phase.</strong> Consider the integral <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}(x^2 + \epsilon x^3)/\hbar}\,\mathrm{d}x\)</span> with <span class="math notranslate nohighlight">\(\epsilon\)</span> small and positive.</p>
-<p>(a) Find all stationary points of <span class="math notranslate nohighlight">\(\Phi(x) = x^2 + \epsilon x^3\)</span>.</p>
+<p><strong>1. Gaussian check.</strong> Apply the stationary-phase approximation to the pure Gaussian integral <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\alpha x^{2}/\hbar}\,\mathrm{d}x\)</span> with <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> real.</p>
+<p>(a) Find the stationary point <span class="math notranslate nohighlight">\(x_{0}\)</span> where <span class="math notranslate nohighlight">\(S'(x_{0}) = 0\)</span> for <span class="math notranslate nohighlight">\(S(x) = \alpha x^{2}\)</span>.</p>
+<p>(b) Evaluate the SPA formula <a class="reference internal" href="#equation-eq-spa-formula">(94)</a> and compare with the exact Fresnel result <span class="math notranslate nohighlight">\(\sqrt{\pi\hbar/(-\mathrm{i}\alpha)} = \sqrt{\pi\hbar/\alpha}\,\mathrm{e}^{\mathrm{i}\pi/4}\)</span>. Show that SPA is <strong>exact</strong> here. Why?</p>
+<p><strong>2. Cubic phase.</strong> Consider <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}(x^{2} + \epsilon x^{3})/\hbar}\,\mathrm{d}x\)</span> with <span class="math notranslate nohighlight">\(\epsilon\)</span> small and positive.</p>
+<p>(a) Find all stationary points of <span class="math notranslate nohighlight">\(S(x) = x^{2} + \epsilon x^{3}\)</span>.</p>
 <p>(b) For the stationary point near <span class="math notranslate nohighlight">\(x = 0\)</span>, apply the SPA formula and write the leading approximation to <span class="math notranslate nohighlight">\(I\)</span>.</p>
-<p>(c) Explain why the other stationary point (at <span class="math notranslate nohighlight">\(x = -2/3\epsilon\)</span>) gives a subdominant contribution when <span class="math notranslate nohighlight">\(\epsilon\)</span> is small.</p>
-<p><strong>3. Stationary region width.</strong> The SPA integral receives its dominant contribution from a region of width <span class="math notranslate nohighlight">\(\Delta x\)</span> around the stationary point.</p>
-<p>(a) Using <span class="math notranslate nohighlight">\(\Phi''(x_0)(x - x_0)^2/(2\hbar) \sim 1\)</span> as the criterion for significant phase variation, show that <span class="math notranslate nohighlight">\(\Delta x \sim \sqrt{\hbar/\vert\Phi''(x_0)\vert}\)</span>.</p>
-<p>(b) For a free particle with action <span class="math notranslate nohighlight">\(S = m(\Delta x)^2/(2t)\)</span>, interpret <span class="math notranslate nohighlight">\(\Phi'' = m/t\)</span> and estimate the width of the contributing region in position space. How does it scale with <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(t\)</span>?</p>
-<p>(c) Evaluate this width for an electron (<span class="math notranslate nohighlight">\(m \approx 10^{-30}\,\text{kg}\)</span>, <span class="math notranslate nohighlight">\(t = 10^{-15}\,\text{s}\)</span>) and for a baseball (<span class="math notranslate nohighlight">\(m = 0.15\,\text{kg}\)</span>, <span class="math notranslate nohighlight">\(t = 1\,\text{s}\)</span>). Explain why the baseball has a negligible quantum uncertainty region.</p>
-<p><strong>4. Second variation.</strong> For a particle in a potential <span class="math notranslate nohighlight">\(V(x)\)</span>, the second variation of the action around the classical path is <span class="math notranslate nohighlight">\(\delta^2 S = \int_0^T \delta x(t)\left[-m\frac{\mathrm{d}^2}{\mathrm{d}t^2} - V''(x_\text{cl}(t))\right]\delta x(t)\,\mathrm{d}t\)</span>.</p>
-<p>(a) For the harmonic oscillator <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2\)</span>, show that the second-variation operator is <span class="math notranslate nohighlight">\(\hat{D} = -m(\mathrm{d}^2/\mathrm{d}t^2 + \omega^2)\)</span>.</p>
-<p>(b) Argue that <span class="math notranslate nohighlight">\(\hat{D}\)</span> has eigenvalues <span class="math notranslate nohighlight">\(m(\pi^2 n^2/T^2 - \omega^2)\)</span> for <span class="math notranslate nohighlight">\(n = 1, 2, \ldots\)</span> (with boundary conditions <span class="math notranslate nohighlight">\(\delta x(0) = \delta x(T) = 0\)</span>). For what values of <span class="math notranslate nohighlight">\(T\)</span> does a zero eigenvalue appear, and what does this mean physically?</p>
-<p><strong>5. Validity breakdown.</strong> One might naively apply the SPA to <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}x^4/\hbar}\,\mathrm{d}x\)</span>.</p>
-<p>(a) Find the stationary point(s) of <span class="math notranslate nohighlight">\(\Phi(x) = x^4\)</span>. Compute <span class="math notranslate nohighlight">\(\Phi''(x_0)\)</span> at each.</p>
-<p>(b) Explain why the SPA formula fails here. What condition of the standard SPA is violated?</p>
-<p>(c) The correct leading behavior for this integral involves <span class="math notranslate nohighlight">\(\hbar^{1/4}\)</span> rather than <span class="math notranslate nohighlight">\(\hbar^{1/2}\)</span>. Argue on dimensional grounds why a degenerate stationary point (<span class="math notranslate nohighlight">\(\Phi'' = 0\)</span> but <span class="math notranslate nohighlight">\(\Phi^{(4)} \neq 0\)</span>) changes the <span class="math notranslate nohighlight">\(\hbar\)</span>-scaling of the result.</p>
-<p><strong>6. Semiclassical free particle.</strong> The semiclassical propagator is <span class="math notranslate nohighlight">\(K \approx \mathrm{e}^{\mathrm{i}S_\text{cl}/\hbar}/\sqrt{\det(\delta^2 S/\delta x^2)}\)</span>. Verify this for the free particle.</p>
-<p>(a) The classical action for a free particle going from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x\)</span> in time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(S_\text{cl} = m(x - x_0)^2/(2t)\)</span>. Show that <span class="math notranslate nohighlight">\(-\partial^2 S_\text{cl}/\partial x\,\partial x_0 = m/t\)</span>.</p>
-<p>(b) The Van Vleck prefactor is <span class="math notranslate nohighlight">\(\left(\frac{1}{2\pi\mathrm{i}\hbar}\right)^{1/2}\left\vert -\frac{\partial^2 S_\text{cl}}{\partial x\,\partial x_0}\right\vert^{1/2}\)</span>. Combine this with <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S_\text{cl}/\hbar}\)</span> and confirm that the semiclassical propagator reproduces the exact free-particle propagator from §3.2.3.</p>
-<p><strong>7. Correspondence principle.</strong> The ratio <span class="math notranslate nohighlight">\(S_\text{cl}/\hbar\)</span> controls whether a system is quantum or classical.</p>
-<p>(a) For a particle of mass <span class="math notranslate nohighlight">\(m\)</span> traversing distance <span class="math notranslate nohighlight">\(d\)</span> in time <span class="math notranslate nohighlight">\(t\)</span>, the free-particle action is <span class="math notranslate nohighlight">\(S_\text{cl} = md^2/(2t)\)</span>. Compute <span class="math notranslate nohighlight">\(S_\text{cl}/\hbar\)</span> for an electron (<span class="math notranslate nohighlight">\(m \approx 10^{-30}\,\text{kg}\)</span>) moving <span class="math notranslate nohighlight">\(1\,\text{nm}\)</span> in <span class="math notranslate nohighlight">\(1\,\text{ns}\)</span>, and for a ball (<span class="math notranslate nohighlight">\(m = 0.1\,\text{kg}\)</span>) moving <span class="math notranslate nohighlight">\(1\,\text{m}\)</span> in <span class="math notranslate nohighlight">\(1\,\text{s}\)</span>.</p>
-<p>(b) For the ball, the SPA selects one dominant path. Estimate the number of full <span class="math notranslate nohighlight">\(2\pi\)</span> oscillations in the phase as the endpoint <span class="math notranslate nohighlight">\(x\)</span> varies over <span class="math notranslate nohighlight">\(1\,\text{mm}\)</span>. Why does this make the propagator effectively a delta function on macroscopic scales?</p>
-<p>(c) Explain how this quantitative argument embodies the correspondence principle: classical mechanics emerges from quantum mechanics when <span class="math notranslate nohighlight">\(S \gg \hbar\)</span>.</p>
+<p>(c) Explain why the other stationary point (at <span class="math notranslate nohighlight">\(x = -2/(3\epsilon)\)</span>) gives a subdominant contribution when <span class="math notranslate nohighlight">\(\epsilon\)</span> is small.</p>
+<p><strong>3. Stationary-region width.</strong> The SPA integral receives its dominant contribution from a region of width <span class="math notranslate nohighlight">\(\Delta x\)</span> around each stationary point.</p>
+<p>(a) Using <span class="math notranslate nohighlight">\(\vert S''(x_{0})\vert(x - x_{0})^{2}/(2\hbar)\sim 1\)</span> as the criterion for significant phase variation, show <span class="math notranslate nohighlight">\(\Delta x \sim \sqrt{\hbar/\vert S''(x_{0})\vert}\)</span>.</p>
+<p>(b) For the free-particle classical action <span class="math notranslate nohighlight">\(S_\text{cl} = m(\Delta x)^{2}/(2t)\)</span>, identify <span class="math notranslate nohighlight">\(S'' = m/t\)</span> and estimate <span class="math notranslate nohighlight">\(\Delta x\)</span> in position space. How does it scale with <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(t\)</span>?</p>
+<p>(c) Evaluate this width for an electron (<span class="math notranslate nohighlight">\(m \approx 10^{-30}\,\text{kg}\)</span>, <span class="math notranslate nohighlight">\(t = 10^{-15}\,\text{s}\)</span>) and a baseball (<span class="math notranslate nohighlight">\(m = 0.15\,\text{kg}\)</span>, <span class="math notranslate nohighlight">\(t = 1\,\text{s}\)</span>). Why is the baseball’s quantum uncertainty negligible?</p>
+<p><strong>4. Second variation.</strong> For a particle in a potential <span class="math notranslate nohighlight">\(V(x)\)</span>, the second variation of the action around the classical path is <span class="math notranslate nohighlight">\(\delta^{2}S = \int_{0}^{T}\delta x(t)\,\hat{D}\,\delta x(t)\,\mathrm{d}t\)</span> with <span class="math notranslate nohighlight">\(\hat{D} = -m\,\mathrm{d}^{2}/\mathrm{d}t^{2} - V''(x_\mathrm{cl})\)</span>.</p>
+<p>(a) For the harmonic oscillator <span class="math notranslate nohighlight">\(V = \tfrac{1}{2}m\omega^{2}x^{2}\)</span>, show that <span class="math notranslate nohighlight">\(\hat{D} = -m(\mathrm{d}^{2}/\mathrm{d}t^{2} + \omega^{2})\)</span>.</p>
+<p>(b) Fluctuations <span class="math notranslate nohighlight">\(\delta x(t)\)</span> vanish at the endpoints (paths have fixed boundary conditions), so <span class="math notranslate nohighlight">\(\hat{D}\,\delta x = \lambda\,\delta x\)</span> has Dirichlet boundary conditions <span class="math notranslate nohighlight">\(\delta x(0) = \delta x(T) = 0\)</span>, with eigenfunctions <span class="math notranslate nohighlight">\(\sin(n\pi t/T)\)</span> for <span class="math notranslate nohighlight">\(n = 1, 2, \ldots\)</span>. Find the eigenvalues, identify the values of <span class="math notranslate nohighlight">\(T\)</span> at which a zero eigenvalue appears, and explain what goes wrong with the semiclassical propagator at those special times.</p>
+<p><strong>5. Validity breakdown.</strong> Apply the SPA naively to <span class="math notranslate nohighlight">\(I = \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}x^{4}/\hbar}\,\mathrm{d}x\)</span>.</p>
+<p>(a) Find the stationary points of <span class="math notranslate nohighlight">\(S(x) = x^{4}\)</span> and compute <span class="math notranslate nohighlight">\(S''\)</span> at each.</p>
+<p>(b) Why does the SPA formula <a class="reference internal" href="#equation-eq-spa-formula">(94)</a> fail here? Which condition of the standard SPA is violated?</p>
+<p>(c) The correct leading behaviour is <span class="math notranslate nohighlight">\(I \sim \hbar^{1/4}\)</span>, not <span class="math notranslate nohighlight">\(\hbar^{1/2}\)</span>. Argue on dimensional grounds why a <em>degenerate</em> stationary point (<span class="math notranslate nohighlight">\(S'' = 0\)</span> but <span class="math notranslate nohighlight">\(S^{(4)}\neq 0\)</span>) changes the <span class="math notranslate nohighlight">\(\hbar\)</span>-scaling.</p>
+<p><strong>6. Mexican-hat saddles.</strong> For the example <a class="reference internal" href="#equation-eq-spa-example-s">(95)</a>–<a class="reference internal" href="#equation-eq-spa-example-ik">(96)</a> with <span class="math notranslate nohighlight">\(S(x) = (x^{2}-1)^{2}\)</span> and <span class="math notranslate nohighlight">\(A(x) = \mathrm{e}^{\mathrm{i}kx}\)</span>:</p>
+<p>(a) Verify that <span class="math notranslate nohighlight">\(S'(x_{0}) = 0\)</span> has the three solutions <span class="math notranslate nohighlight">\(x_{0} = -1, 0, +1\)</span> and compute <span class="math notranslate nohighlight">\(S(x_{0})\)</span> and <span class="math notranslate nohighlight">\(S''(x_{0})\)</span> at each.</p>
+<p>(b) Apply <a class="reference internal" href="#equation-eq-spa-formula">(94)</a> to write down <span class="math notranslate nohighlight">\(I_{\mathrm{SPA}}(k)\)</span> as a sum of three plane waves in <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>(c) Compute the inverse Fourier transform <span class="math notranslate nohighlight">\(\tilde{I}(x) = (1/2\pi)\int I_{\mathrm{SPA}}(k)\,\mathrm{e}^{-\mathrm{i}kx}\,\mathrm{d}k\)</span>. Show that it is a sum of three delta peaks at the saddle positions, with relative weights set by <span class="math notranslate nohighlight">\(1/\sqrt{\vert S''(x_{0})\vert}\)</span>.</p>
+<p>(d) From the criterion <span class="math notranslate nohighlight">\(\sqrt{\hbar/\vert S''\vert}\ll\)</span> saddle separation, estimate the value of <span class="math notranslate nohighlight">\(\hbar\)</span> at which adjacent saddles begin to overlap and SPA breaks down. Compare with <a class="reference internal" href="#fig-saddle-point"><span class="std std-numref">Fig. 15</span></a>.</p>
+<p><strong>7. Free particle from SPA.</strong> The free-particle action <span class="math notranslate nohighlight">\(S[x] = \int_{0}^{t}\tfrac{1}{2}m\dot{x}^{2}\,\mathrm{d}\tau\)</span> is purely quadratic in the path, so SPA applied to the path integral is <strong>exact</strong>.</p>
+<p>(a) Compute the classical action <span class="math notranslate nohighlight">\(S_\text{cl}(x,t;x_{0},0) = m(x - x_{0})^{2}/(2t)\)</span> along the straight-line trajectory.</p>
+<p>(b) Compute the mixed derivative <span class="math notranslate nohighlight">\(-\partial^{2}S_\text{cl}/(\partial x\,\partial x_{0})\)</span> and show it equals <span class="math notranslate nohighlight">\(m/t\)</span>.</p>
+<p>(c) The semiclassical propagator from a quadratic action is <span class="math notranslate nohighlight">\(K \approx \sqrt{-\partial^{2}S_\text{cl}/(\partial x\,\partial x_{0})/(2\pi\mathrm{i}\hbar)}\,\exp(\mathrm{i}S_\text{cl}/\hbar)\)</span> (the <strong>Van Vleck formula</strong> — the SPA result for a path integral with quadratic action). Verify that this reproduces the exact free propagator from §3.2.3.</p>
+<p><strong>8. Correspondence principle.</strong> The ratio <span class="math notranslate nohighlight">\(S_\text{cl}/\hbar\)</span> controls whether a system is quantum or classical.</p>
+<p>(a) For a free particle of mass <span class="math notranslate nohighlight">\(m\)</span> traversing distance <span class="math notranslate nohighlight">\(d\)</span> in time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(S_\text{cl} = md^{2}/(2t)\)</span>. Compute <span class="math notranslate nohighlight">\(S_\text{cl}/\hbar\)</span> for an electron (<span class="math notranslate nohighlight">\(m\approx 10^{-30}\,\text{kg}\)</span>) moving <span class="math notranslate nohighlight">\(1\,\text{nm}\)</span> in <span class="math notranslate nohighlight">\(1\,\text{ns}\)</span>, and for a ball (<span class="math notranslate nohighlight">\(m = 0.1\,\text{kg}\)</span>) moving <span class="math notranslate nohighlight">\(1\,\text{m}\)</span> in <span class="math notranslate nohighlight">\(1\,\text{s}\)</span>.</p>
+<p>(b) For the ball, the SPA selects one dominant path. Estimate the number of <span class="math notranslate nohighlight">\(2\pi\)</span> phase oscillations as the endpoint <span class="math notranslate nohighlight">\(x\)</span> varies over <span class="math notranslate nohighlight">\(1\,\text{mm}\)</span>. Why does this make the propagator effectively a delta function on macroscopic scales?</p>
+<p>(c) Explain how this quantitative argument embodies the correspondence principle: classical mechanics emerges from quantum mechanics when <span class="math notranslate nohighlight">\(S_\text{cl}\gg\hbar\)</span>.</p>
 </section>
 </section>
 
@@ -771,10 +824,13 @@ K \approx \mathrm{e}^{\mathrm{i}S_\mathrm{cl}/\hbar} \cdot \frac{1}{\sqrt{\det M
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mathematical-result">The Mathematical Result</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-classical-path-dominates">Why the Classical Path Dominates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-fluctuations-the-second-variation">Quantum Fluctuations: The Second Variation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-correspondence-principle">The Correspondence Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stationary-phase-formula">The Stationary-Phase Formula</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-a-mexican-hat-action">Worked Example: A Mexican-Hat Action</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-saddles-in-x-to-classical-paths">From Saddles in <span class="math notranslate nohighlight">\(x\)</span> to Classical Paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-fluctuations-the-semiclassical-propagator">Quantum Fluctuations: The Semiclassical Propagator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correspondence-principle">Correspondence Principle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

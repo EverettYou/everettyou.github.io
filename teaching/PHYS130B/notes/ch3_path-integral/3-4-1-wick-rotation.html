@@ -70,7 +70,7 @@
     <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/ch3_path-integral/3-4-1-wick-rotation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.4.2 Statistical Mechanics" href="3-4-2-statistical-mechanics.html" />
+    <link rel="next" title="3.4.2 Black Hole Temperature" href="3-4-2-black-hole-temperature.html" />
     <link rel="prev" title="3.4 Imaginary Time" href="3-4-imaginary-time.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -234,7 +234,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="3-4-imaginary-time.html">3.4 Imaginary Time</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">3.4.1 Wick Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-4-2-statistical-mechanics.html">3.4.2 Statistical Mechanics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-4-3-instantons.html">3.4.3 Instantons</a></li>
 </ul>
 </details></li>
@@ -505,9 +505,17 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wick-rotation">The Wick Rotation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-path-integral">Euclidean Path Integral</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-the-partition-function">Connection to the Partition Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-statistical-mechanics-in-one-page">Recap: Statistical Mechanics in One Page</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-function-is-all-you-need">Partition Function is All You Need</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-spectral-sum-to-trace">From Spectral Sum to Trace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-quantum-evolution-to-thermal-averaging">From Quantum Evolution to Thermal Averaging</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wick-rotation">The Wick Rotation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#action-and-path-integral-weight">Action and Path-Integral Weight</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-function-as-a-periodic-path-integral">Partition Function as a Periodic Path Integral</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -528,155 +536,202 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the Wick rotation and why does transforming <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> turn oscillatory integrals into exponentially damped ones?</p></li>
-<li><p>How does the real-time action transform under Wick rotation, and what is the resulting Euclidean action?</p></li>
-<li><p>Why does the imaginary-time path integral converge when the real-time version oscillates wildly?</p></li>
-<li><p>How is the partition function <span class="math notranslate nohighlight">\(Z(\beta)\)</span> related to the imaginary-time propagator?</p></li>
-<li><p>What does it mean to analytically continue results from imaginary time back to real time, and are there subtleties in this procedure?</p></li>
+<li><p>What is the maximum-entropy principle, and why does it force the thermal occupation probabilities to take the Boltzmann form <span class="math notranslate nohighlight">\(p_n \propto \mathrm{e}^{-\beta E_n}\)</span>?</p></li>
+<li><p>Why is the partition function <span class="math notranslate nohighlight">\(Z(\beta)\)</span> the only quantity needed in equilibrium thermodynamics? How do thermal observables emerge from its derivatives?</p></li>
+<li><p>Why are real-time evolution <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> and the thermal weight <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\hat{H}}\)</span> the same operator under <span class="math notranslate nohighlight">\(t = -\mathrm{i}\hbar\beta\)</span>? What does this identification motivate?</p></li>
+<li><p>Why does the Wick rotation turn the oscillating weight <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> into a real positive weight <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span>, and why does the potential pick up a <span class="math notranslate nohighlight">\(+V\)</span> in the Euclidean action?</p></li>
+<li><p>Why does taking the trace force imaginary-time paths to be periodic with period <span class="math notranslate nohighlight">\(\hbar\beta\)</span>? In what sense is imaginary time a circle whose circumference is set by temperature?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The path integral oscillates as <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>, making it difficult to evaluate directly. The <strong>Wick rotation</strong> <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> replaces oscillating phases with exponentially decaying weights <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span>, where <span class="math notranslate nohighlight">\(S_E\)</span> is the <strong>Euclidean action</strong>. This transform reveals a deep connection: the imaginary-time propagator for interval <span class="math notranslate nohighlight">\(\beta\hbar\)</span> is precisely the thermal density matrix <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta \hat{H}}\)</span>, linking quantum dynamics to statistical mechanics.</p>
+<p>Quantum mechanics and statistical mechanics look like two unrelated theories. Quantum amplitudes carry oscillating phases <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span>; thermal averages carry real Boltzmann weights <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\hat{H}}\)</span>. Yet both feature <em>the same operator</em> <span class="math notranslate nohighlight">\(\hat{H}\)</span> inside an exponential. This lesson traces that coincidence to its source. Starting from the partition function of statistical mechanics, we recognize <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\hat{H}}\)</span> as the same evolution operator we already met in §3.2, with imaginary time <span class="math notranslate nohighlight">\(\tau\)</span> playing the role of inverse temperature. The substitution <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> — the <strong>Wick rotation</strong> — turns the oscillating real-time path integral into a positive-measure Euclidean path integral, and the trace forces the imaginary-time direction to <em>close into a circle of circumference <span class="math notranslate nohighlight">\(\hbar\beta\)</span></em>. Time, in this language, is temperature.</p>
+</section>
+<section id="recap-statistical-mechanics-in-one-page">
+<h3>Recap: Statistical Mechanics in One Page<a class="headerlink" href="#recap-statistical-mechanics-in-one-page" title="Link to this heading">#</a></h3>
+<p>Take a quantum system with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> and energy eigenstates <span class="math notranslate nohighlight">\(\hat{H}\vert n\rangle = E_n\vert n\rangle\)</span>. Place it in contact with a heat bath at temperature <span class="math notranslate nohighlight">\(T\)</span>. What is the probability <span class="math notranslate nohighlight">\(p_n\)</span> of finding the system in state <span class="math notranslate nohighlight">\(\vert n\rangle\)</span>?</p>
+<p>The bath knows nothing about the system except its average energy <span class="math notranslate nohighlight">\(U = \langle E\rangle\)</span>, so <span class="math notranslate nohighlight">\(p_n\)</span> should be the <em>least biased</em> distribution consistent with that single constraint. Maximizing the Shannon entropy <span class="math notranslate nohighlight">\(S = -k_B\sum_n p_n\,\ln p_n\)</span> subject to <span class="math notranslate nohighlight">\(\sum_n p_n = 1\)</span> and <span class="math notranslate nohighlight">\(\sum_n p_n E_n = U\)</span> yields the <strong>Boltzmann distribution</strong></p>
+<div class="math notranslate nohighlight" id="equation-eq-boltzmann">
+<span class="eqno">(116)<a class="headerlink" href="#equation-eq-boltzmann" title="Link to this equation">#</a></span>\[
+p_n \;=\; \frac{\mathrm{e}^{-\beta E_n}}{Z(\beta)},\qquad \beta \;\equiv\; \frac{1}{k_B T},
+\]</div>
+<p>where the Lagrange multiplier <span class="math notranslate nohighlight">\(\beta\)</span> acquires its physical meaning as inverse temperature. (Detailed derivation in <a class="reference internal" href="#6-1-2-entropy"><span class="xref myst">§6.1.2 Entropy</span></a>.)</p>
+<section id="partition-function-is-all-you-need">
+<h4>Partition Function is All You Need<a class="headerlink" href="#partition-function-is-all-you-need" title="Link to this heading">#</a></h4>
 <div class="important admonition">
-<p class="admonition-title">Wick Rotation</p>
-<p>The <strong>Wick rotation</strong> from real time <span class="math notranslate nohighlight">\(t\)</span> to imaginary time <span class="math notranslate nohighlight">\(\tau = it/\hbar\)</span> transforms the oscillatory quantum path integral into an exponentially damped sum. This analytic continuation reveals that quantum mechanics and thermal statistical mechanics are intimately related—they are two faces of the same mathematical structure.</p>
+<p class="admonition-title">Partition function</p>
+<p>The normalization defines the <strong>partition function</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-z-spectral-sum">
+<span class="eqno">(117)<a class="headerlink" href="#equation-eq-z-spectral-sum" title="Link to this equation">#</a></span>\[
+Z(\beta) \;=\; \sum_n \mathrm{e}^{-\beta E_n}.
+\]</div>
 </div>
+<p><span class="math notranslate nohighlight">\(Z(\beta)\)</span> is the central object of equilibrium statistical mechanics: every thermodynamic observable follows from its derivatives,</p>
+<div class="math notranslate nohighlight" id="equation-eq-thermo-derivatives">
+<span class="eqno">(118)<a class="headerlink" href="#equation-eq-thermo-derivatives" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{aligned}
+\langle E\rangle &amp;\;=\; -\frac{\partial \ln Z}{\partial \beta},\\
+F &amp;\;=\; -k_B T\,\ln Z,\\
+S &amp;\;=\; -\frac{\partial F}{\partial T},\\
+C &amp;\;=\; \frac{\partial \langle E\rangle}{\partial T}.
+\end{aligned}
+\end{split}\]</div>
+<p>In this sense <span class="math notranslate nohighlight">\(Z(\beta)\)</span> is the <em>generating function</em> of statistical mechanics. To do equilibrium thermodynamics is to compute <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+</section>
+<section id="from-spectral-sum-to-trace">
+<h4>From Spectral Sum to Trace<a class="headerlink" href="#from-spectral-sum-to-trace" title="Link to this heading">#</a></h4>
+<p>Equation <a class="reference internal" href="#equation-eq-z-spectral-sum">(117)</a> is written in the energy eigenbasis. Rewrite it without referring to <span class="math notranslate nohighlight">\(\{\vert n\rangle\}\)</span> at all. The sum of diagonal matrix elements is a <strong>trace</strong>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-z-trace">
+<span class="eqno">(119)<a class="headerlink" href="#equation-eq-z-trace" title="Link to this equation">#</a></span>\[
+Z(\beta) \;=\; \sum_n\langle n\vert \mathrm{e}^{-\beta\hat{H}}\vert n\rangle \;=\; \mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}}.
+\]</div>
+<p>The same expression now makes sense in any basis. In the position basis,</p>
+<div class="math notranslate nohighlight" id="equation-eq-z-position">
+<span class="eqno">(120)<a class="headerlink" href="#equation-eq-z-position" title="Link to this equation">#</a></span>\[
+Z(\beta) \;=\; \int \mathrm{d}x\;\langle x\vert \mathrm{e}^{-\beta\hat{H}}\vert x\rangle.
+\]</div>
+<p>This rewriting innocuously moves <span class="math notranslate nohighlight">\(\beta\)</span> into the exponent of an operator. But that operator looks oddly familiar.</p>
+</section>
+<section id="from-quantum-evolution-to-thermal-averaging">
+<h4>From Quantum Evolution to Thermal Averaging<a class="headerlink" href="#from-quantum-evolution-to-thermal-averaging" title="Link to this heading">#</a></h4>
+<p>Compare two operators we have met:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Object</p></th>
+<th class="head"><p>Where it appears</p></th>
+<th class="head"><p>Physics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{U}(t) \;=\; \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span></p></td>
+<td><p>Real-time evolution (§3.2)</p></td>
+<td><p>Quantum amplitudes</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\hat{\rho}(\beta) \;\propto\; \mathrm{e}^{-\beta\hat{H}}\)</span></p></td>
+<td><p>Thermal density matrix</p></td>
+<td><p>Statistical averages</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>They differ only in the <em>prefactor of <span class="math notranslate nohighlight">\(\hat{H}\)</span></em>: <span class="math notranslate nohighlight">\(-\mathrm{i}t/\hbar\)</span> versus <span class="math notranslate nohighlight">\(-\beta\)</span>. Setting them equal,</p>
+<div class="math notranslate nohighlight" id="equation-eq-time-temperature-identification">
+<span class="eqno">(121)<a class="headerlink" href="#equation-eq-time-temperature-identification" title="Link to this equation">#</a></span>\[
+\frac{-\mathrm{i}\,t}{\hbar} \;=\; -\beta \quad\Longleftrightarrow\quad t \;=\; -\mathrm{i}\,\hbar\beta.
+\]</div>
+<p><strong>Real time and inverse temperature are related by analytic continuation.</strong> Quantum evolution at imaginary time <span class="math notranslate nohighlight">\(t = -\mathrm{i}\hbar\beta\)</span> <em>is</em> thermal averaging at temperature <span class="math notranslate nohighlight">\(T = 1/(k_B\beta)\)</span>. This is not a metaphor — the same operator appears on both sides. The two pillars of physics are two faces of one mathematical structure.</p>
+</section>
 </section>
 <section id="the-wick-rotation">
 <h3>The Wick Rotation<a class="headerlink" href="#the-wick-rotation" title="Link to this heading">#</a></h3>
-<p>In quantum field theory and statistical mechanics, analytic continuation from real time <span class="math notranslate nohighlight">\(t\)</span> to <strong>imaginary time</strong> <span class="math notranslate nohighlight">\(\tau = -it/\hbar\)</span> simplifies calculations.</p>
-<p><strong>Definition.</strong></p>
-<p>The <strong>Wick rotation</strong> is the transformation</p>
-<div class="math notranslate nohighlight">
-\[t \to -\mathrm{i}\tau, \quad \text{where} \quad \tau \in \mathbb{R}\]</div>
-<p>Equivalently, <span class="math notranslate nohighlight">\(\tau = it/\hbar\)</span> is the <strong>imaginary time</strong>, with dimension of time. If thermal context applies, write <span class="math notranslate nohighlight">\(\tau \in [0, \beta\hbar]\)</span> where <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span> is the <strong>inverse temperature</strong>.</p>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Wick Rotation Transform</p>
-<p>The <strong>real-time action</strong> is</p>
-<div class="math notranslate nohighlight">
-\[S[x] = \int_0^T \left(\frac{m}{2}\dot{x}^2 - V(x)\right)\,\mathrm{d}t\]</div>
-<p>Under <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span>, we have <span class="math notranslate nohighlight">\(\mathrm{d}t \to -\mathrm{i}\,\mathrm{d}\tau\)</span> and <span class="math notranslate nohighlight">\(\dot{x} = \mathrm{d}x/\mathrm{d}t \to \mathrm{i}\,\mathrm{d}x/\mathrm{d}\tau\)</span>. Thus:</p>
-<div class="math notranslate nohighlight">
-\[S[x] \to \int_0^{\beta\hbar} \left(\frac{m}{2}(\mathrm{i}\dot{x})^2 - V(x)\right) (-\mathrm{i})\,\mathrm{d}\tau = -\mathrm{i} \int_0^{\beta\hbar} \left(-\frac{m}{2}\dot{x}^2 - V(x)\right)\,\mathrm{d}\tau\]</div>
-<p>The minus signs combine to give:</p>
-<div class="math notranslate nohighlight">
-\[S[x] \to -\int_0^{\beta\hbar} \left(\frac{m}{2}\dot{x}^2 + V(x)\right)\,\mathrm{d}\tau\]</div>
-<p>Defining the <strong>Euclidean action</strong> as</p>
-<div class="math notranslate nohighlight">
-\[S_E[x] = \int_0^{\beta\hbar} \left(\frac{m}{2}\dot{x}^2 + V(x)\right)\,\mathrm{d}\tau\]</div>
-<p>we have <span class="math notranslate nohighlight">\(S \to -iS_E\)</span>, so</p>
-<div class="math notranslate nohighlight">
-\[\mathrm{e}^{\mathrm{i}S/\hbar} \to \mathrm{e}^{-S_E/\hbar}\]</div>
-</div>
-<p>The <strong>rapidly oscillating phase</strong> <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> becomes a <strong>rapidly decaying exponential</strong> <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span>. This convergence is crucial for numerical simulations and analytical approximations.</p>
-<div class="attention admonition">
-<p class="admonition-title">Why Wick Rotation Matters</p>
-<p>Real-time path integrals with <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> are <strong>highly oscillatory</strong>—contributions from different paths interfere constructively and destructively, making direct integration intractable.</p>
-<p>After Wick rotation, the Euclidean path integral with <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span> is <strong>exponentially damped</strong>—contributions from paths with large action are exponentially suppressed, enabling:</p>
-<ul class="simple">
-<li><p>Numerical Monte Carlo simulations</p></li>
-<li><p>Perturbative expansions</p></li>
-<li><p>Semi-classical approximations</p></li>
-</ul>
-</div>
-</section>
-<section id="euclidean-path-integral">
-<h3>Euclidean Path Integral<a class="headerlink" href="#euclidean-path-integral" title="Link to this heading">#</a></h3>
-<p>The <strong>Euclidean path integral</strong> is</p>
-<div class="math notranslate nohighlight">
-\[Z(\beta) = \int_{\text{periodic}} \mathrm{e}^{-S_E[x]/\hbar} \, \mathcal{D}[x]\]</div>
-<p>where the integral is over paths that are <strong>periodic in imaginary time</strong>: <span class="math notranslate nohighlight">\(x(\tau + \beta\hbar) = x(\tau)\)</span>.</p>
-<p><strong>Key properties</strong>:</p>
-<ol class="arabic simple">
-<li><p><strong>Convergence</strong>: The exponential <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span> decays exponentially for large actions. Paths with large Euclidean action are suppressed. This makes numerical simulation feasible.</p></li>
-<li><p><strong>Positive measure</strong>: Unlike the oscillating real-time path integral, the Euclidean integral has a well-defined probability measure (positive definite). This is essential for Monte Carlo simulations.</p></li>
-<li><p><strong>Periodicity</strong>: The periodicity in imaginary time <span class="math notranslate nohighlight">\(\tau\)</span> reflects the <strong>cyclic nature</strong> of the thermal density matrix in quantum statistical mechanics.</p></li>
-</ol>
-</section>
-<section id="connection-to-the-partition-function">
-<h3>Connection to the Partition Function<a class="headerlink" href="#connection-to-the-partition-function" title="Link to this heading">#</a></h3>
-<p>In quantum statistical mechanics, the <strong>partition function</strong> at temperature <span class="math notranslate nohighlight">\(T\)</span> is</p>
-<div class="math notranslate nohighlight">
-\[Z(T) = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}}), \quad \beta = \frac{1}{k_B T}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{H}\)</span> is the Hamiltonian and the trace sums over all quantum states.</p>
+<p>To make the identification <a class="reference internal" href="#equation-eq-time-temperature-identification">(121)</a> precise, introduce a real variable <span class="math notranslate nohighlight">\(\tau\)</span> along the imaginary axis:</p>
+<div class="math notranslate nohighlight" id="equation-eq-wick-rot">
+<span class="eqno">(122)<a class="headerlink" href="#equation-eq-wick-rot" title="Link to this equation">#</a></span>\[
+t \;\to\; -\mathrm{i}\,\tau,\qquad \tau\in\mathbb{R}.
+\]</div>
+<p>Geometrically, this rotates the time contour by <span class="math notranslate nohighlight">\(-\pi/2\)</span> in the complex plane. The new variable <span class="math notranslate nohighlight">\(\tau\)</span> has dimensions of time and is called <strong>imaginary time</strong>. The matrix element of the evolution operator becomes</p>
+<div class="math notranslate nohighlight" id="equation-eq-evolution-rotation">
+<span class="eqno">(123)<a class="headerlink" href="#equation-eq-evolution-rotation" title="Link to this equation">#</a></span>\[
+\langle x'\vert \mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\vert x\rangle \;\xrightarrow{t\,\to\,-\mathrm{i}\tau}\; \langle x'\vert \mathrm{e}^{-\hat{H}\tau/\hbar}\vert x\rangle.
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(\tau = \hbar\beta\)</span> recovers the thermal density matrix; setting <span class="math notranslate nohighlight">\(\tau = \mathrm{i}t\)</span> recovers real-time quantum mechanics. <strong>One operator, two physics.</strong></p>
+<section id="action-and-path-integral-weight">
+<h4>Action and Path-Integral Weight<a class="headerlink" href="#action-and-path-integral-weight" title="Link to this heading">#</a></h4>
+<p>Apply the Wick rotation inside the real-time path integral <span class="math notranslate nohighlight">\(\int\mathcal{D}[x]\,\mathrm{e}^{\mathrm{i}S[x]/\hbar}\)</span>. With <span class="math notranslate nohighlight">\(\mathrm{d}t = -\mathrm{i}\,\mathrm{d}\tau\)</span> and <span class="math notranslate nohighlight">\(\dot{x} = \mathrm{i}\,x'(\tau)\)</span> (where <span class="math notranslate nohighlight">\(x'(\tau)\equiv\mathrm{d}x/\mathrm{d}\tau\)</span>), the kinetic term flips sign while <span class="math notranslate nohighlight">\(\mathrm{d}t\)</span> contributes another <span class="math notranslate nohighlight">\(-\mathrm{i}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-s-to-ise">
+<span class="eqno">(124)<a class="headerlink" href="#equation-eq-s-to-ise" title="Link to this equation">#</a></span>\[
+S \;=\; \int\!\Bigl(\tfrac{1}{2}m\dot{x}^2 - V\Bigr)\,\mathrm{d}t \;\xrightarrow{t\,\to\,-\mathrm{i}\tau}\; \mathrm{i}\int\!\Bigl(\tfrac{1}{2}m\,x'(\tau)^2 + V(x)\Bigr)\,\mathrm{d}\tau \;\equiv\; \mathrm{i}\,S_E[x].
+\]</div>
+<p>Both terms in the <strong>Euclidean action</strong> <span class="math notranslate nohighlight">\(S_E\)</span> are positive:</p>
 <div class="important admonition">
-<p class="admonition-title">Path Integral Representation of Partition Function</p>
-<div class="math notranslate nohighlight">
-\[Z(\beta) = \int_{\text{periodic}} \mathrm{e}^{-S_E[x]/\hbar} \, \mathcal{D}[x]\]</div>
-<p>where the sum is over all paths periodic in imaginary time with period <span class="math notranslate nohighlight">\(\beta\hbar = 1/(k_B T)\)</span>.</p>
-<p>The partition function <span class="math notranslate nohighlight">\(Z = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> equals the functional integral over periodic paths in Euclidean time. This is a profound connection:</p>
-<ul class="simple">
-<li><p><strong>Trace</strong>: sums over all eigenstates</p></li>
-<li><p><strong>Path integral</strong>: sums over all closed paths in imaginary time</p></li>
-</ul>
+<p class="admonition-title">Euclidean action</p>
+<div class="math notranslate nohighlight" id="equation-eq-s-euclidean">
+<span class="eqno">(125)<a class="headerlink" href="#equation-eq-s-euclidean" title="Link to this equation">#</a></span>\[
+S_E[x] \;=\; \int_0^{\tau_f}\!\Bigl(\tfrac{1}{2}m\,x'(\tau)^2 + V(x)\Bigr)\,\mathrm{d}\tau \;\ge\; 0.
+\]</div>
+<p>The kinetic and potential terms <em>add</em> (no minus sign), so <span class="math notranslate nohighlight">\(S_E\)</span> is a genuine sum of energies along the path.</p>
+</div>
+<p>Consequently the path-integral weight rotates from oscillation to exponential damping:</p>
+<div class="math notranslate nohighlight" id="equation-eq-weight-rotation">
+<span class="eqno">(126)<a class="headerlink" href="#equation-eq-weight-rotation" title="Link to this equation">#</a></span>\[
+\mathrm{e}^{\mathrm{i}S/\hbar} \;\to\; \mathrm{e}^{-S_E/\hbar}.
+\]</div>
+<p>A wildly oscillating quantum integrand becomes a <em>real, positive, exponentially-suppressed</em> weight — a probability measure on path space.</p>
+</section>
+<section id="partition-function-as-a-periodic-path-integral">
+<h4>Partition Function as a Periodic Path Integral<a class="headerlink" href="#partition-function-as-a-periodic-path-integral" title="Link to this heading">#</a></h4>
+<p>Now combine the trace <a class="reference internal" href="#equation-eq-z-trace">(119)</a> with the Wick-rotated path integral. The trace is the essential point: it identifies the initial and final quantum state. In a position basis this means the imaginary-time path starts at some <span class="math notranslate nohighlight">\(x_0\)</span> and must return to the same <span class="math notranslate nohighlight">\(x_0\)</span> after imaginary time <span class="math notranslate nohighlight">\(\tau_f=\hbar\beta\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Partition function as a periodic Euclidean path integral</p>
+<div class="math notranslate nohighlight" id="equation-eq-z-pathintegral">
+<span class="eqno">(127)<a class="headerlink" href="#equation-eq-z-pathintegral" title="Link to this equation">#</a></span>\[
+Z(\beta) \;=\; \mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}} \;=\; \oint_{x(\hbar\beta)\,=\,x(0)} \mathcal{D}[x]\;\mathrm{e}^{-S_E[x]/\hbar}.
+\]</div>
+<p>Equivalently, imaginary time is periodic with thermal period</p>
+<div class="math notranslate nohighlight" id="equation-eq-imaginary-time-period">
+<span class="eqno">(128)<a class="headerlink" href="#equation-eq-imaginary-time-period" title="Link to this equation">#</a></span>\[
+\tau \;\sim\; \tau + \hbar\beta \;=\; \tau + \frac{\hbar}{k_B T}.
+\]</div>
+</div>
+<p>The partition function is therefore not a transition amplitude between different states. It is a sum over closed Euclidean histories. The word “circle” is just this periodic identification of imaginary time.</p>
+<div class="attention admonition">
+<p class="admonition-title">Quantum-classical duality</p>
+<p>Equation <a class="reference internal" href="#equation-eq-z-pathintegral">(127)</a> quietly delivers a profound reinterpretation: a <span class="math notranslate nohighlight">\(d\)</span>-dimensional quantum system at temperature <span class="math notranslate nohighlight">\(T\)</span> is <em>mathematically identical</em> to a <span class="math notranslate nohighlight">\((d{+}1)\)</span>-dimensional classical statistical system, with the extra dimension being imaginary time, of finite extent <span class="math notranslate nohighlight">\(\hbar\beta\)</span>, with periodic boundary conditions. Modern many-body simulation methods (path-integral Monte Carlo, lattice gauge theory) exploit this duality directly; quantum critical points in <span class="math notranslate nohighlight">\(d\)</span> dimensions can be mapped to classical critical points in <span class="math notranslate nohighlight">\(d{+}1\)</span>. These applications are beyond the scope of this course.</p>
 </div>
 <div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>Is “imaginary time” merely a mathematical convenience—a trick to make calculations simpler—or does it represent something physically real? After all, we performed an analytic continuation of the path integral from real time to imaginary time, but real clocks tick forward in real time, not imaginary time. Yet the Wick-rotated formalism reveals that the thermal partition function <span class="math notranslate nohighlight">\(Z(\beta) = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> equals a path integral over periodic paths in imaginary time. Does this mean temperature and imaginary time are two sides of the same coin in quantum mechanics?</p>
+<p class="admonition-title">Discussion: is imaginary time physical?</p>
+<p>Wick rotation looks like a mathematical trick — real clocks tick in real time, not imaginary time. Yet the same Euclidean structure that turns the path integral into a positive measure also makes the partition function of statistical mechanics fall out as a closed loop of period <span class="math notranslate nohighlight">\(\hbar\beta\)</span>. Is this a coincidence of formulas, or a hint that thermal equilibration is fundamentally a process in imaginary time? A second manifestation appears in §3.4.2: a black-hole spacetime, Wick-rotated to a smooth Euclidean geometry, acquires a definite temperature through the same periodic-time construction.</p>
 </div>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Wick rotation and convergence</p>
-<p>Wick rotation replaces <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> (time to imaginary time) in the path integral. The action <span class="math notranslate nohighlight">\(S = \int (\frac{1}{2}m\dot{x}^2 - V(x)) \mathrm{d}t\)</span> becomes <span class="math notranslate nohighlight">\(S_E = \int (\frac{1}{2}m(\dot{x}^\tau)^2 + V(x)) \mathrm{d}\tau\)</span> (Euclidean action). Why does this rotation improve mathematical convergence of the path integral?</p>
-<p>(A) The kinetic term <span class="math notranslate nohighlight">\(\propto (\dot{x}^\tau)^2\)</span> remains positive, while the potential <span class="math notranslate nohighlight">\(+V(x)\)</span> suppresses paths that visit high-potential regions.</p>
-<p>(B) Imaginary time <span class="math notranslate nohighlight">\(\tau\)</span> has no physical meaning, so the path integral converges by definition.</p>
-<p>(C) The Euclidean action <span class="math notranslate nohighlight">\(S_E\)</span> is always positive, unlike the real-time action which can be negative.</p>
-<p>(D) Wick rotation converts the oscillatory Feynman integral into a Gaussian path integral, which is easier to evaluate.</p>
+<p class="admonition-title">Poll: thermal time is periodic — why?</p>
+<p>In the partition-function path integral <a class="reference internal" href="#equation-eq-z-pathintegral">(127)</a>, paths must satisfy <span class="math notranslate nohighlight">\(x(\hbar\beta) = x(0)\)</span>. Where does this periodic boundary condition come from?</p>
+<p>(A) It is imposed by hand to make the path integral converge.</p>
+<p>(B) The trace <span class="math notranslate nohighlight">\(\mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}} = \int\mathrm{d}x_0\,\langle x_0\vert\mathrm{e}^{-\beta\hat{H}}\vert x_0\rangle\)</span> identifies the start and end positions of the imaginary-time evolution.</p>
+<p>(C) Wave functions are required to be periodic in time at finite temperature.</p>
+<p>(D) Energy conservation in imaginary time forces the path to return to its starting position.</p>
 </div>
+</section>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Wick rotation</strong>: <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> converts oscillating phases <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span> to decaying exponentials <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span></p></li>
-<li><p><strong>Euclidean action</strong>: <span class="math notranslate nohighlight">\(S_E = \int(\frac{m}{2}\dot{x}^2 + V)\,\mathrm{d}\tau\)</span> — same form as Hamiltonian but in imaginary time</p></li>
-<li><p><strong>Partition function</strong>: <span class="math notranslate nohighlight">\(Z(\beta) = \int_{\text{periodic}}\mathrm{e}^{-S_E/\hbar}\mathcal{D}[x]\)</span> — path integral over periodic paths of period <span class="math notranslate nohighlight">\(\beta\hbar\)</span></p></li>
-<li><p><strong>Temperature duality</strong>: quantum mechanics in imaginary time <span class="math notranslate nohighlight">\(\beta\hbar\)</span> is thermal statistical mechanics at temperature <span class="math notranslate nohighlight">\(T = 1/(k_B \beta)\)</span></p></li>
+<li><p><strong>Boltzmann from max entropy</strong> <a class="reference internal" href="#equation-eq-boltzmann">(116)</a>: <span class="math notranslate nohighlight">\(p_n = \mathrm{e}^{-\beta E_n}/Z\)</span> is the maximum-entropy distribution at fixed mean energy; <span class="math notranslate nohighlight">\(\beta\)</span> is the Lagrange multiplier interpreted as inverse temperature.</p></li>
+<li><p><strong>Partition function</strong> <a class="reference internal" href="#equation-eq-z-spectral-sum">(117)</a>, <a class="reference internal" href="#equation-eq-z-trace">(119)</a>: <span class="math notranslate nohighlight">\(Z(\beta) = \sum_n\mathrm{e}^{-\beta E_n} = \mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}}\)</span>. Generating function of equilibrium thermodynamics.</p></li>
+<li><p><strong>Time becomes temperature</strong> <a class="reference internal" href="#equation-eq-time-temperature-identification">(121)</a>: the operators <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\hat{H}}\)</span> coincide under <span class="math notranslate nohighlight">\(t = -\mathrm{i}\hbar\beta\)</span>.</p></li>
+<li><p><strong>Wick rotation</strong> <a class="reference internal" href="#equation-eq-wick-rot">(122)</a>: <span class="math notranslate nohighlight">\(t\to -\mathrm{i}\tau\)</span> analytically continues real-time evolution into imaginary time.</p></li>
+<li><p><strong>Euclidean action and weight</strong> <a class="reference internal" href="#equation-eq-s-euclidean">(125)</a>, <a class="reference internal" href="#equation-eq-weight-rotation">(126)</a>: kinetic and potential add (both positive); <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\to\mathrm{e}^{-S_E/\hbar}\)</span>.</p></li>
+<li><p><strong>Periodic Euclidean path integral</strong> <a class="reference internal" href="#equation-eq-z-pathintegral">(127)</a>: <span class="math notranslate nohighlight">\(Z(\beta)\)</span> is a path integral over closed loops of circumference <span class="math notranslate nohighlight">\(\hbar\beta\)</span> in imaginary time. The trace forces periodicity; temperature sets the period.</p></li>
 </ul>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="3-2-1-path-integral-formulation.html"><span class="doc std std-doc">3.2.1 Path Integral Formulation</span></a> — Euclidean path integrals and saddle points</p></li>
-<li><p><a class="reference internal" href="3-4-2-statistical-mechanics.html"><span class="doc std std-doc">3.4.2 Statistical Mechanics</span></a> — imaginary time and thermal physics</p></li>
-<li><p><a class="reference internal" href="3-4-3-instantons.html"><span class="doc std std-doc">3.4.3 Instantons</span></a> — non-perturbative saddle points in Euclidean formalism</p></li>
-</ul>
-</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Free-particle Wick rotation.</strong> For a free particle (<span class="math notranslate nohighlight">\(V = 0\)</span>), the real-time action is <span class="math notranslate nohighlight">\(S[x] = \int_0^T \frac{m}{2}\dot{x}^2\,\mathrm{d}t\)</span>.</p>
-<p>(a) Perform the substitution <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> and show that <span class="math notranslate nohighlight">\(S \to -\mathrm{i}S_E\)</span> with <span class="math notranslate nohighlight">\(S_E = \int_0^{\beta\hbar}\frac{m}{2}\dot{x}^2\,\mathrm{d}\tau &gt; 0\)</span>.</p>
-<p>(b) Explain why the Euclidean path integral weight <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E/\hbar}\)</span> suppresses paths with large kinetic energy, in contrast to the oscillatory <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\)</span>.</p>
-<p><strong>2. Harmonic oscillator Euclidean action.</strong> For the harmonic oscillator <span class="math notranslate nohighlight">\(V(x) = \frac{1}{2}m\omega^2 x^2\)</span>, the real-time action is <span class="math notranslate nohighlight">\(S = \int_0^T\left(\frac{m}{2}\dot{x}^2 - \frac{m\omega^2}{2}x^2\right)\mathrm{d}t\)</span>.</p>
-<p>(a) Apply the Wick rotation to derive the Euclidean action <span class="math notranslate nohighlight">\(S_E = \int_0^{\beta\hbar}\left(\frac{m}{2}\dot{x}^2 + \frac{m\omega^2}{2}x^2\right)\mathrm{d}\tau\)</span>.</p>
-<p>(b) Note that both terms in <span class="math notranslate nohighlight">\(S_E\)</span> are positive. Explain why this guarantees convergence of the Euclidean path integral.</p>
-<p>(c) For a classical path <span class="math notranslate nohighlight">\(x(\tau) = A\cos(\omega\tau)\)</span> with <span class="math notranslate nohighlight">\(A\)</span> small, compute <span class="math notranslate nohighlight">\(S_E\)</span> and verify that it is positive.</p>
-<p><strong>3. Convergence comparison.</strong> Consider two paths for a free particle traveling from <span class="math notranslate nohighlight">\(x_0 = 0\)</span> to <span class="math notranslate nohighlight">\(x = L\)</span> in time <span class="math notranslate nohighlight">\(T\)</span>: the straight-line path <span class="math notranslate nohighlight">\(x_1(t) = Lt/T\)</span> and a wildly oscillating path <span class="math notranslate nohighlight">\(x_2(t) = Lt/T + a\sin(100\pi t/T)\)</span> with <span class="math notranslate nohighlight">\(a \ll L\)</span>.</p>
-<p>(a) Compute the action <span class="math notranslate nohighlight">\(S[x_1]\)</span> and <span class="math notranslate nohighlight">\(S[x_2]\)</span> and show that <span class="math notranslate nohighlight">\(S[x_2] &gt; S[x_1]\)</span>.</p>
-<p>(b) In real time, the integrand weights are <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S[x_1]/\hbar}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S[x_2]/\hbar}\)</span>. Both have the same magnitude. Explain why summing such contributions is numerically difficult (the sign problem).</p>
-<p>(c) After Wick rotation, compare <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E[x_1]/\hbar}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{e}^{-S_E[x_2]/\hbar}\)</span>. Which path is exponentially suppressed? Why does this make Monte Carlo sampling practical?</p>
-<p><strong>4. Trace and periodic paths.</strong> The partition function is <span class="math notranslate nohighlight">\(Z(\beta) = \operatorname{Tr}(\mathrm{e}^{-\beta\hat{H}})\)</span>. Insert a position-basis resolution of identity to write</p>
-<div class="math notranslate nohighlight">
-\[
-Z(\beta) = \int \mathrm{d}x\,\langle x\vert\mathrm{e}^{-\beta\hat{H}}\vert x\rangle.
-\]</div>
-<p>(a) Explain why the matrix element <span class="math notranslate nohighlight">\(\langle x\vert\mathrm{e}^{-\beta\hat{H}}\vert x\rangle\)</span> is the imaginary-time propagator from <span class="math notranslate nohighlight">\(x\)</span> back to <span class="math notranslate nohighlight">\(x\)</span> in Euclidean time <span class="math notranslate nohighlight">\(\beta\hbar\)</span>.</p>
-<p>(b) Argue that the path integral representation of <span class="math notranslate nohighlight">\(Z(\beta)\)</span> must therefore sum over paths satisfying <span class="math notranslate nohighlight">\(x(0) = x(\beta\hbar)\)</span> (periodic boundary conditions).</p>
-<p>(c) What is the physical meaning of the periodicity period <span class="math notranslate nohighlight">\(\beta\hbar = \hbar/(k_B T)\)</span>? If the temperature increases, does the period grow or shrink?</p>
-<p><strong>5. High-temperature limit.</strong> In the limit <span class="math notranslate nohighlight">\(\beta \to 0\)</span> (high <span class="math notranslate nohighlight">\(T\)</span>), the imaginary-time interval <span class="math notranslate nohighlight">\(\beta\hbar\)</span> becomes very short.</p>
-<p>(a) Argue that for very short <span class="math notranslate nohighlight">\(\beta\hbar\)</span>, the kinetic term <span class="math notranslate nohighlight">\(\frac{m}{2}\dot{x}^2\)</span> in <span class="math notranslate nohighlight">\(S_E\)</span> becomes large for any path that deviates from a constant, so the dominant paths have <span class="math notranslate nohighlight">\(x(\tau) \approx \text{const}\)</span>.</p>
-<p>(b) Show that the partition function reduces to <span class="math notranslate nohighlight">\(Z \approx \int\mathrm{d}x\,\left(\frac{m}{2\pi\hbar^2\beta}\right)^{1/2}\mathrm{e}^{-\beta V(x)}\)</span>, recovering the classical partition function (up to the thermal de Broglie wavelength prefactor).</p>
-<p>(c) Identify the thermal de Broglie wavelength <span class="math notranslate nohighlight">\(\lambda_\text{th} = \sqrt{2\pi\hbar^2\beta/m}\)</span> in this expression. What does it represent physically?</p>
-<p><strong>6. Ground-state dominance.</strong> In the opposite limit <span class="math notranslate nohighlight">\(\beta \to \infty\)</span> (low <span class="math notranslate nohighlight">\(T\)</span>), expand <span class="math notranslate nohighlight">\(Z(\beta) = \sum_n \mathrm{e}^{-\beta E_n}\)</span> in energy eigenstates.</p>
-<p>(a) Show that <span class="math notranslate nohighlight">\(Z(\beta) \to \mathrm{e}^{-\beta E_0}\)</span> as <span class="math notranslate nohighlight">\(\beta \to \infty\)</span>, where <span class="math notranslate nohighlight">\(E_0\)</span> is the ground-state energy.</p>
-<p>(b) Explain how this allows extraction of <span class="math notranslate nohighlight">\(E_0\)</span> from the Euclidean path integral: <span class="math notranslate nohighlight">\(E_0 = -\lim_{\beta\to\infty}\frac{1}{\beta}\ln Z(\beta)\)</span>.</p>
-<p>(c) In lattice simulations, one computes <span class="math notranslate nohighlight">\(Z(\beta)\)</span> numerically via Monte Carlo. Why is this method for finding ground-state energies more practical in Euclidean time than in real time?</p>
-<p><strong>7. Euclidean free propagator.</strong> The exact real-time free-particle propagator is <span class="math notranslate nohighlight">\(K(x,t;x_0,0) = (m/2\pi\mathrm{i}\hbar t)^{1/2}\exp(\mathrm{i}m(x-x_0)^2/2\hbar t)\)</span>.</p>
-<p>(a) Perform the Wick rotation <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span> to obtain the Euclidean propagator <span class="math notranslate nohighlight">\(K_E(x,\tau;x_0,0)\)</span>. Show that it is a real Gaussian: <span class="math notranslate nohighlight">\(K_E = (m/2\pi\hbar\tau)^{1/2}\exp(-m(x-x_0)^2/2\hbar\tau)\)</span>.</p>
-<p>(b) Verify that <span class="math notranslate nohighlight">\(K_E\)</span> satisfies the imaginary-time Schrödinger equation (diffusion equation) <span class="math notranslate nohighlight">\(-\hbar\partial_\tau K_E = -\frac{\hbar^2}{2m}\partial_x^2 K_E\)</span>.</p>
-<p>(c) Compare the form of <span class="math notranslate nohighlight">\(K_E\)</span> with the diffusion kernel <span class="math notranslate nohighlight">\(G(x,\tau) = (4\pi D\tau)^{-1/2}\exp(-x^2/4D\tau)\)</span>. What is the diffusion constant <span class="math notranslate nohighlight">\(D\)</span> in terms of <span class="math notranslate nohighlight">\(\hbar\)</span> and <span class="math notranslate nohighlight">\(m\)</span>?</p>
+<p><strong>1. Boltzmann from maximum entropy.</strong> Maximize the Shannon entropy <span class="math notranslate nohighlight">\(S = -k_B\sum_n p_n\,\ln p_n\)</span> subject to <span class="math notranslate nohighlight">\(\sum_n p_n = 1\)</span> and <span class="math notranslate nohighlight">\(\sum_n p_n E_n = U\)</span> using two Lagrange multipliers <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>(a) Show that the stationary distribution is <span class="math notranslate nohighlight">\(p_n = \mathrm{e}^{-\beta E_n}/Z\)</span> with <span class="math notranslate nohighlight">\(Z = \sum_n\mathrm{e}^{-\beta E_n}\)</span>, and identify <span class="math notranslate nohighlight">\(\beta\)</span> as the Lagrange multiplier conjugate to the energy constraint.</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(\partial S/\partial U\)</span> at fixed <span class="math notranslate nohighlight">\(\{E_n\}\)</span> and verify <span class="math notranslate nohighlight">\(\partial S/\partial U = k_B\beta\)</span>, recovering the thermodynamic definition <span class="math notranslate nohighlight">\(1/T = (\partial S/\partial U)\)</span> that fixes <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span>.</p>
+<p><strong>2. Partition function derivatives.</strong> A two-level system has <span class="math notranslate nohighlight">\(\hat{H} = E_0\vert 0\rangle\langle 0\vert + E_1\vert 1\rangle\langle 1\vert\)</span> with <span class="math notranslate nohighlight">\(E_0 &lt; E_1\)</span> and gap <span class="math notranslate nohighlight">\(\Delta = E_1 - E_0\)</span>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(Z(\beta)\)</span> explicitly.</p>
+<p>(b) From <a class="reference internal" href="#equation-eq-thermo-derivatives">(118)</a>, compute <span class="math notranslate nohighlight">\(\langle E\rangle(T)\)</span> and the heat capacity <span class="math notranslate nohighlight">\(C(T)\)</span>. Sketch <span class="math notranslate nohighlight">\(C(T)\)</span> and identify the Schottky peak temperature <span class="math notranslate nohighlight">\(k_B T \sim \Delta\)</span>.</p>
+<p>(c) Verify the limits <span class="math notranslate nohighlight">\(\langle E\rangle\to E_0\)</span> as <span class="math notranslate nohighlight">\(T\to 0\)</span> and <span class="math notranslate nohighlight">\(\langle E\rangle\to (E_0+E_1)/2\)</span> as <span class="math notranslate nohighlight">\(T\to\infty\)</span>.</p>
+<p><strong>3. Spectral sum equals trace.</strong> For the qubit of HW 3.4.1.2, verify <span class="math notranslate nohighlight">\(Z(\beta) = \mathrm{Tr}\,\mathrm{e}^{-\beta\hat{H}}\)</span> in two ways: (a) directly from the definition <span class="math notranslate nohighlight">\(\sum_n\mathrm{e}^{-\beta E_n}\)</span>, and (b) by computing the matrix exponential <span class="math notranslate nohighlight">\(\mathrm{e}^{-\beta\hat{H}}\)</span> in the <span class="math notranslate nohighlight">\(\{\vert 0\rangle,\vert 1\rangle\}\)</span> basis and tracing. Confirm the two results agree.</p>
+<p><strong>4. Free-particle Wick rotation.</strong> For a free particle (<span class="math notranslate nohighlight">\(V = 0\)</span>) with real-time action <span class="math notranslate nohighlight">\(S = \int_0^T\tfrac{1}{2}m\dot{x}^2\,\mathrm{d}t\)</span>:</p>
+<p>(a) Apply <span class="math notranslate nohighlight">\(t \to -\mathrm{i}\tau\)</span>, <span class="math notranslate nohighlight">\(\dot{x}\to\mathrm{i}\,x'(\tau)\)</span>, <span class="math notranslate nohighlight">\(\mathrm{d}t\to -\mathrm{i}\,\mathrm{d}\tau\)</span> and show <span class="math notranslate nohighlight">\(S \to +\mathrm{i}\,S_E\)</span> with <span class="math notranslate nohighlight">\(S_E = \int_0^{T_E}\tfrac{1}{2}m\,x'(\tau)^2\,\mathrm{d}\tau \ge 0\)</span>.</p>
+<p>(b) Verify <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S/\hbar}\to\mathrm{e}^{-S_E/\hbar}\)</span>, and explain why this exponentially suppresses paths with large kinetic energy.</p>
+<p><strong>5. Harmonic oscillator Euclidean action.</strong> For <span class="math notranslate nohighlight">\(V(x) = \tfrac{1}{2}m\omega^2 x^2\)</span>:</p>
+<p>(a) Apply the Wick rotation to derive <span class="math notranslate nohighlight">\(S_E = \int_0^{T_E}\bigl(\tfrac{1}{2}m\,x'(\tau)^2 + \tfrac{1}{2}m\omega^2 x^2\bigr)\,\mathrm{d}\tau\)</span>.</p>
+<p>(b) Both terms in <span class="math notranslate nohighlight">\(S_E\)</span> are positive. Explain in one sentence why this guarantees convergence of the Euclidean path integral.</p>
+<p>(c) For the trial path <span class="math notranslate nohighlight">\(x(\tau) = A\cos(\omega\tau)\)</span> with small <span class="math notranslate nohighlight">\(A\)</span>, compute <span class="math notranslate nohighlight">\(S_E\)</span> over one period <span class="math notranslate nohighlight">\(T_E = 2\pi/\omega\)</span> and verify it is positive.</p>
+<p><strong>6. Time becomes temperature: numerical estimate.</strong> Estimate <span class="math notranslate nohighlight">\(\hbar\beta\)</span> for an electronic system at room temperature (<span class="math notranslate nohighlight">\(T = 300\,\mathrm{K}\)</span>).</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\hbar\beta\)</span> in seconds. How does this compare to the inverse Bohr-orbit frequency <span class="math notranslate nohighlight">\(\hbar/E_{\mathrm{Ry}}\)</span> where <span class="math notranslate nohighlight">\(E_{\mathrm{Ry}} \approx 13.6\,\mathrm{eV}\)</span>?</p>
+<p>(b) On what physical timescale does Wick rotation matter for thermal physics? In one sentence, why is room-temperature electronic structure essentially “frozen” on the thermal-circle scale?</p>
+<p><strong>7. Free-particle thermal trace and equipartition.</strong> The Euclidean propagator of a free particle is <span class="math notranslate nohighlight">\(K_E(x,\tau;x_0,0) = \sqrt{m/(2\pi\hbar\tau)}\,\exp[-m(x-x_0)^2/(2\hbar\tau)]\)</span>.</p>
+<p>(a) Set <span class="math notranslate nohighlight">\(\tau = \hbar\beta\)</span>, <span class="math notranslate nohighlight">\(x = x_0\)</span>, and integrate over <span class="math notranslate nohighlight">\(x_0\)</span> in a box of length <span class="math notranslate nohighlight">\(L\)</span> to obtain <span class="math notranslate nohighlight">\(Z_{\mathrm{free}}(\beta) = L/\lambda_{\mathrm{th}}\)</span> with <span class="math notranslate nohighlight">\(\lambda_{\mathrm{th}} = \sqrt{2\pi\hbar^2\beta/m}\)</span>.</p>
+<p>(b) From <span class="math notranslate nohighlight">\(\langle E\rangle = -\partial\ln Z/\partial\beta\)</span>, recover the 1D classical equipartition result <span class="math notranslate nohighlight">\(\langle E\rangle = \tfrac{1}{2}k_B T\)</span>.</p>
+<p><strong>8. Thermal circle, geometrically.</strong> Sketch the imaginary-time circle of circumference <span class="math notranslate nohighlight">\(\hbar\beta\)</span> for two regimes: <span class="math notranslate nohighlight">\(\hbar\beta \ll \lambda_{\mathrm{th}}/v\)</span> (high <span class="math notranslate nohighlight">\(T\)</span>) and <span class="math notranslate nohighlight">\(\hbar\beta \gg \lambda_{\mathrm{th}}/v\)</span> (low <span class="math notranslate nohighlight">\(T\)</span>), where <span class="math notranslate nohighlight">\(v = \sqrt{k_B T/m}\)</span> is a typical thermal velocity.</p>
+<p>(a) Argue that in the high-<span class="math notranslate nohighlight">\(T\)</span> limit a typical path barely moves during one trip around the circle, so the thermal trace reduces to a classical Boltzmann integral over a single position <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>(b) Argue that in the low-<span class="math notranslate nohighlight">\(T\)</span> limit only the lowest-energy eigenstate contributes to <span class="math notranslate nohighlight">\(Z(\beta)\)</span>. Show <span class="math notranslate nohighlight">\(Z(\beta)\to \mathrm{e}^{-\beta E_0}\)</span> as <span class="math notranslate nohighlight">\(\beta\to\infty\)</span> and conclude <span class="math notranslate nohighlight">\(E_0 = -\lim_{\beta\to\infty}\beta^{-1}\ln Z(\beta)\)</span> — the long-<span class="math notranslate nohighlight">\(\beta\)</span> projection onto the ground state.</p>
 </section>
 </section>
 
@@ -720,11 +775,11 @@ Z(\beta) = \int \mathrm{d}x\,\langle x\vert\mathrm{e}^{-\beta\hat{H}}\vert x\ran
       </div>
     </a>
     <a class="right-next"
-       href="3-4-2-statistical-mechanics.html"
+       href="3-4-2-black-hole-temperature.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">3.4.2 Statistical Mechanics</p>
+        <p class="prev-next-title">3.4.2 Black Hole Temperature</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -748,9 +803,17 @@ Z(\beta) = \int \mathrm{d}x\,\langle x\vert\mathrm{e}^{-\beta\hat{H}}\vert x\ran
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wick-rotation">The Wick Rotation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-path-integral">Euclidean Path Integral</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-the-partition-function">Connection to the Partition Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-statistical-mechanics-in-one-page">Recap: Statistical Mechanics in One Page</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-function-is-all-you-need">Partition Function is All You Need</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-spectral-sum-to-trace">From Spectral Sum to Trace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-quantum-evolution-to-thermal-averaging">From Quantum Evolution to Thermal Averaging</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wick-rotation">The Wick Rotation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#action-and-path-integral-weight">Action and Path-Integral Weight</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-function-as-a-periodic-path-integral">Partition Function as a Periodic Path Integral</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
