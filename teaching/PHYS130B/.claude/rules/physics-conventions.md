@@ -22,6 +22,30 @@ Constants and operators that are not variables use upright (roman) type:
 | Pauli matrices (explicit 2x2) | Plain with superscript | `\sigma^x`, `\sigma^y`, `\sigma^z` |
 | Vectorized Pauli | Both | `\hat{\boldsymbol{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)` |
 
+## Chapter 4 Electromagnetic Units
+
+Chapter 4 (`notes_src/ch4_phase-and-gauge/`) uses **SI units only**.
+
+- Minimal coupling: `\hat{\boldsymbol\pi}=\hat{\boldsymbol p}-q\boldsymbol A` (no `(q/c)\boldsymbol A`).
+- Aharonov-Bohm phase: `q\oint\boldsymbol A\cdot\mathrm{d}\boldsymbol l/\hbar` (no `/(\hbar c)`).
+- Maxwell equations: `\nabla\cdot\boldsymbol E=\rho_e/\epsilon_0`, `\nabla\times\boldsymbol E=-\partial_t\boldsymbol B`, and `\nabla\times\boldsymbol B=\mu_0\boldsymbol j_e+\mu_0\epsilon_0\partial_t\boldsymbol E` (no `1/c` factors).
+- Point-charge fields: `\boldsymbol E=q\hat{\boldsymbol r}/(4\pi\epsilon_0 r^2)` and `\boldsymbol B=\mu_0 g\,\hat{\boldsymbol r}/(4\pi r^2)`.
+- Monopole convention: `\nabla\cdot\boldsymbol B=\mu_0\rho_m`; a point monopole has total flux `\mu_0 g`.
+- Use scalar electric potential `\phi`, so `\boldsymbol E=-\nabla\phi-\partial_t\boldsymbol A`.
+- Gauge transformations use a dimensionful gauge function: `\psi\to\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi`, `\boldsymbol A\to\boldsymbol A+\nabla\alpha`, and `\phi\to\phi-\partial_t\alpha`.
+- Do not introduce Chapter 4 lecture material as using Gaussian units. `validate_project.py --scope ch4` flags Gaussian-only markers.
+
+## Phase Symbols
+
+- Use uppercase `\Phi` for phase variables, consistent with path-integral phase notation.
+- Magnetic flux should use `\Phi`; the flux quantum should use `\Phi_0`.
+- Flux-count degeneracy should use `N_\Phi` (and flux density `n_\Phi` if needed), not `N_\phi` or `N_{\mathrm{flux}}`.
+- Path-integral accumulated phase should use `\Phi_{\mathrm{path}}`.
+- Berry phases should use `\Phi_{\mathrm{Berry}}`; do not use `\Phi_{\mathrm{B}}`, which is too easy to confuse with magnetic flux.
+- Aharonov-Bohm/monopole phases should use `\Phi_{\mathrm{AB}}` or `\Delta\Phi_{\mathrm{AB}}`.
+- Reserve lowercase `\phi` for scalar electric potential.
+- Use curly `\varphi` for azimuthal angles and azimuthal components, e.g. `(\theta,\varphi)`, `\mathrm{d}\varphi`, `A_\varphi`.
+
 ## Dot Product (`\cdot`)
 
 - `\cdot` is **only** for dot products between vectors: `\boldsymbol{a} \cdot \boldsymbol{b}`, `\nabla \cdot \boldsymbol{j}`.

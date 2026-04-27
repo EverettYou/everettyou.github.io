@@ -249,6 +249,96 @@ def _iter_math_segments(text: str) -> Iterable[str]:
             yield seg
 
 
+
+# --------------------------------------------------------------------------------------
+# Admonition title hygiene (rules/content-style.md "Title rule" — class is the role tag)
+# --------------------------------------------------------------------------------------
+ADMONITION_RE = re.compile(
+    r":::\{admonition\}\s*(?P<title>[^\n]*)\n"
+    r"(?:\s*:[a-z-]+:[^\n]*\n)*?"
+    r"\s*:class:\s*(?P<cls>[^\n]+)\n",
+    re.MULTILINE,
+)
+
+# Bare role-name titles forbidden everywhere (must extend with ': <topic>').
+# 'Prompts' and 'See Also' are allowed bare because they are uniform conventions.
+BARE_TITLE_BANNED = {
+    "example", "discussion", "derivation", "proof", "attention",
+    "key insight", "definition", "theorem", "caution", "warning",
+    "danger", "error", "hint", "tip", "note", "important",
+}
+
+# When a title starts with "<RolePrefix>:", the class must include the matching
+# class. Prevents e.g. "Important: ..." inside a :class: note box.
+PREFIX_TO_REQUIRED_CLASS = {
+    "important": {"important"},
+    "note": {"note"},
+    "attention": {"attention"},
+    "caution": {"caution"},
+    "warning": {"warning"},
+    "danger": {"danger"},
+    "error": {"error"},
+    "hint": {"hint"},
+    "tip": {"tip"},
+    "discussion": {"tip"},        # Discussion lives in dropdown tip
+    "prompts": {"tip"},
+    "derivation": {"information"},
+    "proof": {"information"},
+    "example": {"example"},
+    "poll": {"poll"},
+}
+
+IMPORTANT_BOX_CAP = 6  # warn when a single notebook exceeds this many `important` boxes
+
+
+def _check_admonition_titles(text: str, label: str) -> list[Issue]:
+    """Flag bare role-name titles and class/prefix mismatches."""
+    issues: list[Issue] = []
+    for m in ADMONITION_RE.finditer(text):
+        title = m.group("title").strip()
+        cls_parts = set(m.group("cls").split())
+        if not title:
+            issues.append(Issue(label, "admonition has no title (use a descriptive title)"))
+            continue
+        # Bare role-name title (no ": ..." and not on the allow-list).
+        bare = title.lower().rstrip(".:")
+        if bare in BARE_TITLE_BANNED and ":" not in title:
+            issues.append(Issue(
+                label,
+                f"admonition title is bare role-name {title!r}; use {title}: <topic>"
+            ))
+            continue
+        # Title starts with "<RolePrefix>: ..." — class must include the matching class.
+        prefix_match = re.match(r"^([A-Za-z][A-Za-z ]*?):", title)
+        if prefix_match:
+            prefix = prefix_match.group(1).strip().lower()
+            required = PREFIX_TO_REQUIRED_CLASS.get(prefix)
+            if required is not None and not (required & cls_parts):
+                issues.append(Issue(
+                    label,
+                    f"title prefix '{prefix.title()}:' does not match :class: "
+                    f"{' '.join(sorted(cls_parts))!r}; let the class signal the role "
+                    f"or use a matching :class:",
+                ))
+    return issues
+
+
+def _check_admonition_density(text_all: str, label: str) -> list[Issue]:
+    """Notebook-level cap: too many `important` boxes dilute the meaning."""
+    issues: list[Issue] = []
+    n_important = sum(
+        1 for m in ADMONITION_RE.finditer(text_all)
+        if "important" in m.group("cls").split()
+    )
+    if n_important > IMPORTANT_BOX_CAP:
+        issues.append(Issue(
+            label,
+            f"has {n_important} 'important' admonitions (cap = {IMPORTANT_BOX_CAP}); "
+            f"downgrade non-memorize-grade ones to 'note'",
+        ))
+    return issues
+
+
 def _check_content_style(text: str, label: str) -> list[Issue]:
     """Checks from rules/content-style.md that are safe to enforce globally."""
     issues: list[Issue] = []
@@ -393,6 +483,112 @@ def _check_physics_conventions(text: str, label: str) -> list[Issue]:
     return issues
 
 
+def _check_ch4_si_units(path: str, text: str, label: str) -> list[Issue]:
+    """Flag Chapter 4 electromagnetic unit and notation convention drift."""
+    norm_path = path.replace("\\", "/")
+    if "/notes_src/ch4_phase-and-gauge/" not in norm_path:
+        return []
+    monopole_flux_convention_ok = any(
+        s in norm_path
+        for s in (
+            "/4-4-1-classical-spin.ipynb",
+            "/4-4-2-dirac-monopole.ipynb",
+            "/4-4-3-monopole-harmonics.ipynb",
+        )
+    )
+
+    issues: list[Issue] = []
+    checks = [
+        (
+            re.compile(r"\bGaussian[- ]units?\b|\bGaussian convention\b", re.IGNORECASE),
+            "mentions Gaussian units; Chapter 4 lecture notes must use SI units",
+        ),
+        (
+            re.compile(r"\\frac\{1\}\{c\}|(?<![A-Za-z])1/c(?![A-Za-z])"),
+            r"uses 1/c electromagnetic factors; Chapter 4 uses SI Maxwell equations",
+        ),
+        (
+            re.compile(
+                r"(?:qg|eg|e\s+g|q\s+g)[^\n]{0,40}\\hbar\s*c"
+                r"|\\hbar\s*c[^\n]{0,40}(?:qg|eg|e\s+g|q\s+g)"
+                r"|/\s*\(?\\hbar\s*c\)?"
+            ),
+            r"uses Gaussian monopole/AB phase normalization with \hbar c; use SI phases with q/\hbar and SI monopole normalization",
+        ),
+        (
+            re.compile(r"\\(?:dfrac|frac)\{q\}\{c\}|\bq/c\b"),
+            r"uses Gaussian coupling q/c; in SI use q",
+        ),
+        (
+            re.compile(r"(?:2|4)\\pi\s*qg\s*/\s*\(\\hbar\s*c\)|(?:2|4)\\pi\s*g"),
+            r"uses Gaussian monopole flux/phase normalization; in SI use \mu_0 g flux normalization",
+        ),
+        (
+            re.compile(
+                r"\\boldsymbol\{B\}\s*=\s*g\\hat"
+                r"|\\boldsymbol\{B\}\s*=\s*\(g/r\^2\)"
+                r"|\\nabla\s*\\times\s*\\boldsymbol\{A\}[^$\n]*=\s*\\frac\{g\}\{r\^2\}"
+                r"|\\boldsymbol\{E\}\s*=\s*q\\hat"
+            ),
+            r"uses point-source fields without SI factors; use E=q rhat/(4\pi\epsilon_0 r^2) and B=\mu_0 g rhat/(4\pi r^2)",
+        ),
+        (
+            re.compile(
+                r"Aharonov-Bohm phase\s*\$\\phi"
+                r"|Berry phase[^\n]{0,120}\$\\gamma"
+                r"|\\Phi_\{\\mathrm\{B\}"
+                r"|\\Phi_B"
+                r"|\\Delta\\phi"
+                r"|\\phi\["
+                r"|\\phi_\{?\\text\{path\}"
+                r"|\\Phi_\\text\{(?:upper|lower)\}"
+                r"|\\phi\^\{\([NS]\)\}"
+                r"|\\gamma\s*(?:\[|=)"
+            ),
+            r"uses ambiguous phase/flux notation; use \Phi for magnetic flux, \Phi_0 for flux quantum, \Phi_{\mathrm{path}} for path phase, \Phi_{\mathrm{Berry}} for Berry phase, and \Phi_{\mathrm{AB}} for AB/monopole phase",
+        ),
+        (
+            re.compile(
+                r"\\boldsymbol\{E\}\s*=\s*-\\nabla\\Phi"
+                r"|\\Phi\s*\\to\s*\\Phi\s*-"
+                r"|scalar potential\s*\$\\Phi"
+                r"|Potential energy\s*\|\s*\$q\\Phi"
+                r"|\\+\s*q\\Phi(?:\s|\$|[.,;])"
+                r"|Temporal gauge[^\n]*\\Phi"
+                r"|Coulomb gauge[^\n]*\\Phi"
+            ),
+            r"uses \Phi for scalar electric potential; use lowercase \phi and reserve \Phi for magnetic flux or phase variables",
+        ),
+        (
+            re.compile(
+                r"\\theta,\s*\\phi"
+                r"|\\mathrm\{d\}\\phi"
+                r"|\\partial_\\phi"
+                r"|(?:A|\\mathcal\{A\})_\\phi"
+                r"|\\chi\(\\phi"
+                r"|\\hat\{\\phi\}"
+                r"|[Nn]_\\phi"
+                r"|N_\{\\mathrm\{flux\}\}"
+                r"|n_\{\\mathrm\{flux\}\}"
+            ),
+            r"uses \phi for azimuthal or flux-counting notation; use \varphi for azimuthal angles/components and N_\Phi for flux counts",
+        ),
+        (
+            re.compile(r"\\frac\{\\hbar\}\{q\}\\nabla\\alpha|\\hbar/q\s*\\nabla\\alpha|\\psi\s*\\to\s*\\mathrm\{e\}\^\{\\mathrm\{i\}\\alpha"),
+            r"uses a dimensionless gauge-function convention; Chapter 4 uses dimensionful alpha: psi -> exp(i q alpha/hbar) psi and A -> A + grad alpha",
+        ),
+    ]
+    for pattern, message in checks:
+        # In the 4.4 spin/monopole sequence we adopt the flux-defined magnetic
+        # charge convention B = g rhat/(4π r^2), so this SI-point-source check
+        # (which expects explicit μ0 factors) should not fire there.
+        if monopole_flux_convention_ok and "point-source fields without SI factors" in message:
+            continue
+        if pattern.search(text):
+            issues.append(Issue(label, message))
+    return issues
+
+
 def _check_subsection_cell_layout(cells: list, base: str) -> list[Issue]:
     """
     Enforce content-style.md / notebook-architecture.md for x.y.z notebooks (4 cells).
@@ -523,12 +719,20 @@ def validate_notebook(path: str) -> list[Issue]:
         if "plt.show()" in text:
             issues.append(Issue(label, "contains plt.show(); use display(fig) + plt.close(fig)"))
         issues.extend(_check_content_style(text, label))
+        issues.extend(_check_admonition_titles(text, label))
         issues.extend(_check_physics_conventions(text, label))
+        issues.extend(_check_ch4_si_units(path, text, label))
 
         if kind == "subsection" and len(cells) == 4 and ci == 3:
             for hf in check_homework_cell(text):
                 issues.append(Issue(label, f"homework: [{hf.code}] {hf.message}"))
 
+
+    # Notebook-level admonition density (e.g. cap on 'important' boxes).
+    nb_text = '\n'.join(
+        ''.join(c.get('source', [])) for c in cells if c.get('cell_type') == 'markdown'
+    )
+    issues.extend(_check_admonition_density(nb_text, base))
     return issues
 
 

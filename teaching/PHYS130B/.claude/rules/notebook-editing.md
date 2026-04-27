@@ -50,6 +50,16 @@ def text_to_source(text):
 
 1. `safe_edit.py validate <path>` and/or `validate_project.py --scope …` (`rules/validation.md`).
 2. No char-by-char corruption, missing `\n`, or lines >1000 chars (collapsed cells).
+3. **Notation consistency sweep across the entire cell.** After substantive edits, grep the cell for every operator/symbol introduced or modified and confirm only one symbol is used per physical quantity. Local edits often inherit a symbol from their immediate context that conflicts with an upstream definition; this only surfaces when the whole cell is read end-to-end. Common collisions: `\hat{p}_\theta` vs `\hat{L}_\theta`, `\Phi(t)` vs `\phi(t)` for flux, bare `X, Z` vs `\hat{X}, \hat{Z}` for Pauli operators.
+
+4. **Related-symbol audit (case/super/sub variants of the same letter).** When a derivation introduces *two* symbols built from the same letter that denote *different* physical quantities — e.g. `\hat{j}` (single-particle current) vs `\hat{J}` (current density), `\rho` (charge density) vs `\rho_e` (electric resistivity), `E` (energy) vs `\mathcal{E}` (electric field), `\sigma_{xy}` (conductivity) vs `\rho_{xy}` (resistivity) — apply the following discipline before writing the derivation:
+
+   - **Define both symbols explicitly upfront**, in one place, before either is used. Do not let the first symbol's definition do double duty.
+   - **State the relationship as a labeled equation.** Example: `\hat{J}_a = (1/A)\sum_n \hat{j}_a^{(n)}` with `(eq-current-density-def)`. Whenever the relationship is *invoked* mid-derivation (e.g. when a $1/A$ or $\sum_n$ factor appears), cite that label.
+   - **Watch for "smoking-gun" prefactors.** A lone `1/A`, `1/V`, `1/N`, or `\sum_\alpha` in a final formula must trace back to an explicit symbol-conversion step. If you cannot point at the line where it entered, you have probably conflated the two symbols.
+   - **No silent reassignment.** A generic placeholder like "take $\hat{O} = \cdots$" mid-derivation is a red flag — it usually masks a symbol switch the reader cannot follow. Either keep the placeholder generic to the end, or substitute the *defined* symbol with explicit citation.
+
+   **Failure mode (pattern to recognise):** copy-pasting a target formula from a reference notebook and reverse-engineering the derivation to match it. The target formula's prefactors get pulled in without a corresponding definition step, and the reader sees a $1/A$ (or similar) appear out of nowhere.
 
 ## LaTeX in JSON — escape character hazards
 
