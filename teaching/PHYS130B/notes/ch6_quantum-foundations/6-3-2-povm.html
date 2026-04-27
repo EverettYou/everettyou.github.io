@@ -553,12 +553,12 @@
 <p>A <strong>positive operator-valued measure (POVM)</strong> is a set of operators <span class="math notranslate nohighlight">\(\{\hat{M}_1, \hat{M}_2, \ldots, \hat{M}_n\}\)</span> on Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> satisfying two conditions:</p>
 <p><strong>1. Positive semidefiniteness</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-positive">
-<span class="eqno">(208)<a class="headerlink" href="#equation-eq-povm-positive" title="Link to this equation">#</a></span>\[
+<span class="eqno">(236)<a class="headerlink" href="#equation-eq-povm-positive" title="Link to this equation">#</a></span>\[
 \hat{M}_i \geq 0 \quad \text{for all } i \quad (\text{all eigenvalues} \geq 0)
 \]</div>
 <p><strong>2. Completeness</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-complete">
-<span class="eqno">(209)<a class="headerlink" href="#equation-eq-povm-complete" title="Link to this equation">#</a></span>\[
+<span class="eqno">(237)<a class="headerlink" href="#equation-eq-povm-complete" title="Link to this equation">#</a></span>\[
 \sum_i \hat{M}_i = I
 \]</div>
 <p>These conditions ensure that measurement probabilities are non-negative and sum to one.</p>
@@ -568,18 +568,18 @@
 <p>If a system in state <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is measured using POVM <span class="math notranslate nohighlight">\(\{\hat{M}_i\}\)</span>:</p>
 <p><strong>Outcome probability</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-probability">
-<span class="eqno">(210)<a class="headerlink" href="#equation-eq-povm-probability" title="Link to this equation">#</a></span>\[
+<span class="eqno">(238)<a class="headerlink" href="#equation-eq-povm-probability" title="Link to this equation">#</a></span>\[
 p_i = \operatorname{Tr}(\hat{M}_i \hat{\rho})
 \]</div>
 <p><strong>Post-measurement state</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-collapse">
-<span class="eqno">(211)<a class="headerlink" href="#equation-eq-povm-collapse" title="Link to this equation">#</a></span>\[
+<span class="eqno">(239)<a class="headerlink" href="#equation-eq-povm-collapse" title="Link to this equation">#</a></span>\[
 \hat{\rho}'_i = \frac{\sqrt{\hat{M}_i} \hat{\rho} \sqrt{\hat{M}_i}}{\operatorname{Tr}(\hat{M}_i \hat{\rho})}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\sqrt{\hat{M}_i}\)</span> is the unique positive square root (defined via spectral decomposition: <span class="math notranslate nohighlight">\(\hat{M}_i = \sum_j \lambda_{i,j} \vert v_{i,j}\rangle\langle v_{i,j}\vert  \Rightarrow \sqrt{\hat{M}_i} = \sum_j \sqrt{\lambda_{i,j}} \vert v_{i,j}\rangle\langle v_{i,j}\vert\)</span>).</p>
 <p><strong>Normalization check</strong>: <span class="math notranslate nohighlight">\(\sum_i p_i = \sum_i \operatorname{Tr}(\hat{M}_i \hat{\rho}) = \operatorname{Tr}(I \hat{\rho}) = 1\)</span> ✓</p>
 <div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
+<p class="admonition-title">Discussion: more outcomes than dimensions</p>
 <p>A POVM can have more outcomes than the Hilbert space dimension (<span class="math notranslate nohighlight">\(n &gt; \dim(\mathcal{H})\)</span>). Why is this impossible for projective measurements? What does this overcomplete structure enable?</p>
 </div>
 <div class="dropdown poll admonition">
@@ -680,7 +680,7 @@ p_i = \operatorname{Tr}(\hat{M}_i \hat{\rho})
 </ul>
 <p>such that:</p>
 <div class="math notranslate nohighlight" id="equation-eq-povm-neumark">
-<span class="eqno">(212)<a class="headerlink" href="#equation-eq-povm-neumark" title="Link to this equation">#</a></span>\[
+<span class="eqno">(240)<a class="headerlink" href="#equation-eq-povm-neumark" title="Link to this equation">#</a></span>\[
 \hat{M}_i = \operatorname{Tr}_\text{aux}(\hat{P}_i (\hat{\rho} \otimes \vert 0\rangle\langle 0\vert_\text{aux}))
 \]</div>
 <p><strong>Physical picture</strong>: Entangle the system with an ancilla, perform a projective measurement on the combined system, and trace out (discard) the ancilla measurement outcome.</p>
@@ -690,20 +690,21 @@ p_i = \operatorname{Tr}(\hat{M}_i \hat{\rho})
 <section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
 <div class="dropdown example admonition">
-<p class="admonition-title">Example: Six-State (SIC-POVM) on a Qubit</p>
-<p>Define 6 POVM elements:</p>
+<p class="admonition-title">Example: Six-State Octahedral IC-POVM on a Qubit</p>
+<p>One convenient informationally complete POVM for a qubit uses the six eigenstates of <span class="math notranslate nohighlight">\(\hat{\sigma}^{x}\)</span>, <span class="math notranslate nohighlight">\(\hat{\sigma}^{y}\)</span>, and <span class="math notranslate nohighlight">\(\hat{\sigma}^{z}\)</span>. These states sit at the vertices of a regular <strong>octahedron</strong> on the Bloch sphere. Define</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{M}_k = \frac{1}{3}\vert \phi_k\rangle\langle\phi_k\vert \quad (k=1,\ldots,6)
+\hat{M}_{k} = \tfrac{1}{3}\vert\phi_{k}\rangle\langle\phi_{k}\vert\quad (k = 1,\ldots,6).
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\vert \phi_k\rangle\)</span> are 6 equally-spaced directions on the Bloch sphere (vertices of a regular polyhedron).</p>
-<p><strong>Properties</strong>:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\sum_k \hat{M}_k = I\)</span> (completeness verified by symmetry)</p></li>
-<li><p><strong>Informationally complete</strong>: Probabilities <span class="math notranslate nohighlight">\(\{p_k\}\)</span> uniquely determine any qubit state <span class="math notranslate nohighlight">\(\hat{\rho}\)</span></p></li>
-<li><p>6 outcomes (overcomplete) for a 2-dimensional space</p></li>
-</ul>
-<p><strong>Application</strong>: Quantum state tomography with minimal number of outcomes.</p>
+<p>This is a valid POVM because each Pauli axis contributes a pair of opposite projectors summing to <span class="math notranslate nohighlight">\(\hat{I}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{k=1}^{6}\hat{M}_{k}
+= \frac{1}{3}\sum_{i=x,y,z}\left(\vert{+}_{i}\rangle\langle{+}_{i}\vert + \vert{-}_{i}\rangle\langle{-}_{i}\vert\right)
+= \hat{I}.
+\]</div>
+<p>The six probabilities are informationally complete: they contain enough data to reconstruct the Bloch vector of any qubit state. This octahedral POVM is therefore useful for tomography from three mutually unbiased bases.</p>
+<p>A different standard construction is the qubit <strong>SIC-POVM</strong>, which uses four tetrahedral states (the minimal number <span class="math notranslate nohighlight">\(d^{2}=4\)</span> for informational completeness in dimension <span class="math notranslate nohighlight">\(d=2\)</span>). Both are IC-POVMs; the octahedral version is overcomplete, while the SIC-POVM is minimal and symmetric.</p>
 </div>
 <div class="dropdown example admonition">
 <p class="admonition-title">Example: Heterodyne Detection (Optical POVM)</p>
@@ -726,10 +727,17 @@ p_i = \operatorname{Tr}(\hat{M}_i \hat{\rho})
 <ul class="simple">
 <li><p><strong>POVM definition:</strong> Positive operator-valued measures <span class="math notranslate nohighlight">\(\{E_m\}\)</span> satisfy <span class="math notranslate nohighlight">\(E_m \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_m E_m = I\)</span>, but are not required to be orthogonal or satisfy <span class="math notranslate nohighlight">\(E_m^2 = E_m\)</span> (unlike projectors).</p></li>
 <li><p><strong>Measurement probabilities:</strong> <span class="math notranslate nohighlight">\(p_m = \operatorname{Tr}(E_m \hat{\rho})\)</span> (same formula as projective), but post-measurement state is <strong>not</strong> determined by POVM alone—different physical realizations can give same outcome statistics.</p></li>
-<li><p><strong>Krauss operators:</strong> POVM arises from unitary evolution on extended space: <span class="math notranslate nohighlight">\(E_m = M_m^\dagger M_m\)</span> where <span class="math notranslate nohighlight">\(\sum_m M_m^\dagger M_m = I\)</span>. This links measurements to quantum channels.</p></li>
 <li><p><strong>Advantages over projectors:</strong> More general; one outcome can have multiple post-measurement states (depends on probe details); allows finer-grained outcome statistics with fewer outcomes than dimension of Hilbert space.</p></li>
 <li><p><strong>Unambiguous state discrimination:</strong> POVM enables non-projective measurements that sometimes identify unknown quantum states with zero ambiguity (no error-free projective equivalent exists).</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="6-3-1-projective-measurement.html"><span class="doc std std-doc">6.3.1 Projective Measurement</span></a>: Projection-valued measures as the special case of POVMs.</p></li>
+<li><p><a class="reference internal" href="6-3-3-quantum-channels.html"><span class="doc std std-doc">6.3.3 Quantum Channels</span></a>: CPTP maps and instruments that realize POVM outcomes with auxiliary systems.</p></li>
+<li><p><a class="reference internal" href="../ch1_qubit/1-2-3-measurement-operators.html"><span class="doc std std-doc">1.2.3 Measurement Operators</span></a>: Effects, Kraus rank-one updates, and generalized outcomes.</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="homework">

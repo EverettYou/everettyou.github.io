@@ -506,10 +506,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hamiltonian-particle-on-a-ring">The Hamiltonian: Particle on a Ring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-eigenvalues-periodic-in-flux-quantum">Energy Eigenvalues: Periodic in Flux Quantum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenstate-and-eigenenergy">Eigenstate and Eigenenergy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ground-state-and-persistent-current">Ground State and Persistent Current</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tunneling-across-the-ring-flux-dependence">Tunneling Across the Ring: Flux Dependence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-pi-flux-phi-phi-0-2">Special Case: Pi-Flux (<span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#half-integer-flux-anomalous-degeneracy">Half-Integer Flux: Anomalous Degeneracy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-the-squid">Application — The SQUID</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
@@ -547,72 +547,99 @@
 <section id="the-hamiltonian-particle-on-a-ring">
 <h3>The Hamiltonian: Particle on a Ring<a class="headerlink" href="#the-hamiltonian-particle-on-a-ring" title="Link to this heading">#</a></h3>
 <p>Consider a particle of mass <span class="math notranslate nohighlight">\(m\)</span> and charge <span class="math notranslate nohighlight">\(q\)</span> confined to move on a ring of radius <span class="math notranslate nohighlight">\(R\)</span> in the <span class="math notranslate nohighlight">\(xy\)</span>-plane. A uniform magnetic field perpendicular to the ring creates an enclosed magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span> through the ring’s interior.</p>
-<p>Using angular coordinate <span class="math notranslate nohighlight">\(\theta\)</span> (with <span class="math notranslate nohighlight">\(0 \leq \theta &lt; 2\pi\)</span>), the kinetic energy involves the canonical angular momentum:</p>
+<p>Using angular coordinate <span class="math notranslate nohighlight">\(\theta\)</span> (with <span class="math notranslate nohighlight">\(0\leq\theta&lt;2\pi\)</span>), the canonical angular momentum is</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{L}_{\theta} = -\mathrm{i}\hbar\frac{\partial}{\partial\theta}
+\hat{L}_{\theta} = -\mathrm{i}\hbar\,\frac{\partial}{\partial\theta}.
 \]</div>
-<p>In the presence of the magnetic field, the canonical momentum is shifted by the vector potential contribution. Via the Peierls substitution, the Hamiltonian becomes:</p>
+<p>In a perpendicular magnetic field, the kinetic angular momentum is shifted by the vector-potential contribution (Peierls substitution), and the Hamiltonian becomes:</p>
 <div class="important admonition">
 <p class="admonition-title">The Flux Ring Hamiltonian</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{H} = \frac{1}{2mR^2}\left(\hat{p}_{\theta} - \frac{q\Phi}{2\pi}\right)^2
+\hat{H}(\Phi) = \frac{1}{2mR^{2}}\left(\hat{L}_{\theta} - \frac{q\Phi}{2\pi}\right)^{2},
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{p}_{\theta} = -\mathrm{i}\hbar\frac{\partial}{\partial\theta}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> is the total magnetic flux threading the ring. The term <span class="math notranslate nohighlight">\(q\Phi/(2\pi)\)</span> is the <strong>flux-dependent shift</strong> in angular momentum, expressed in dimensionless units.</p>
+<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the total magnetic flux threading the ring. The shift <span class="math notranslate nohighlight">\(q\Phi/(2\pi)\)</span> is the dimensionless angular-momentum offset induced by the flux.</p>
 </div>
-<p><strong>Intuition:</strong> The magnetic field creates an effective “boost” to the angular momentum of the particle. A particle moving in one direction sees the flux-induced potential aiding or opposing its motion.</p>
 </section>
-<section id="energy-eigenvalues-periodic-in-flux-quantum">
-<h3>Energy Eigenvalues: Periodic in Flux Quantum<a class="headerlink" href="#energy-eigenvalues-periodic-in-flux-quantum" title="Link to this heading">#</a></h3>
-<p>Since the Hamiltonian commutes with <span class="math notranslate nohighlight">\(\hat{p}_{\theta}\)</span>, eigenstates are momentum eigenstates:</p>
+<section id="eigenstate-and-eigenenergy">
+<h3>Eigenstate and Eigenenergy<a class="headerlink" href="#eigenstate-and-eigenenergy" title="Link to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../images/4-2-3-flux_ring_energy.png"><img alt="Flux-ring energy branches E_n versus flux Phi/Phi_0, showing periodic parabolic bands and crossings at half-integer flux" src="../images/4-2-3-flux_ring_energy.png" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Flux-ring energy branches <span class="math notranslate nohighlight">\(E_n(\Phi)\)</span> versus <span class="math notranslate nohighlight">\(\Phi/\Phi_0\)</span>.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</aside>
+<div class="docutils">
+<p>The Hamiltonian commutes with <span class="math notranslate nohighlight">\(\hat{L}_{\theta}\)</span>, so we can label simultaneous eigenstates of <span class="math notranslate nohighlight">\(\hat{L}_{\theta}\)</span> and <span class="math notranslate nohighlight">\(\hat{H}\)</span> by the <strong>angular-momentum quantum number</strong> <span class="math notranslate nohighlight">\(n\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\psi_n(\theta) = \frac{1}{\sqrt{2\pi}}\mathrm{e}^{\mathrm{i}n\theta}
+\hat{L}_{\theta}\,|n\rangle = \hbar n\,|n\rangle.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(n \in \mathbb{Z}\)</span> (quantization from periodicity: <span class="math notranslate nohighlight">\(\psi(\theta + 2\pi) = \psi(\theta)\)</span>).</p>
-<p>The eigenvalues are:</p>
+<p>Single-valuedness on the ring, <span class="math notranslate nohighlight">\(\psi(\theta+2\pi)=\psi(\theta)\)</span>, quantizes <span class="math notranslate nohighlight">\(n\in\mathbb{Z}\)</span> to integers. The corresponding wavefunctions are plane waves,</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_n(\theta) = \langle\theta|n\rangle = \frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{\mathrm{i}n\theta}.
+\]</div>
+<p>In the angular position basis <span class="math notranslate nohighlight">\(\{|\theta\rangle:\theta\in[0,2\pi)\}\)</span>, the same state reads</p>
+<div class="math notranslate nohighlight" id="equation-eq-ring-ndef">
+<span class="eqno">(150)<a class="headerlink" href="#equation-eq-ring-ndef" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+|n\rangle &amp; \;=\; \int_{0}^{2\pi}\psi_n(\theta)|\theta\rangle\,\mathrm{d}\theta\\
+&amp; \;=\; \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\mathrm{e}^{\mathrm{i}n\theta}|\theta\rangle\,\mathrm{d}\theta.
+\end{split}
+\end{split}\]</div>
+<p>The energies follow by direct substitution. With <span class="math notranslate nohighlight">\(\hat{L}_{\theta}|n\rangle = \hbar n\,|n\rangle\)</span>, the flux-dependent Hamiltonian satisfies
+<span class="math notranslate nohighlight">\(\hat{H}(\Phi)\,|n\rangle = E_n(\Phi)|n\rangle\)</span>, giving the eigenvalue</p>
 <div class="important admonition">
 <p class="admonition-title">Flux Ring Energy Spectrum</p>
+<div class="math notranslate nohighlight" id="equation-eq-ring-spectrum">
+<span class="eqno">(151)<a class="headerlink" href="#equation-eq-ring-spectrum" title="Link to this equation">#</a></span>\[
+E_n(\Phi) = \frac{\hbar^2}{2mR^2}\left(n - \frac{\Phi}{\Phi_0}\right)^2,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_0\)</span> is the flux quantum (defined in <strong><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a></strong>). Shifting flux by one quantum relabels levels but preserves the spectrum,</p>
 <div class="math notranslate nohighlight">
 \[
-E_n(\Phi) = \frac{\hbar^2}{2mR^2}\left(n - \frac{\Phi}{\Phi_0}\right)^2
+E_n(\Phi + \Phi_0) = E_{n-1}(\Phi),
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi_0 = \frac{h}{q}\)</span> is the <strong>flux quantum</strong> (or <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e)\)</span> for electron pairs in superconductivity).</p>
-<p><strong>Key feature:</strong> The spectrum is <strong>periodic</strong> in flux with period <span class="math notranslate nohighlight">\(\Phi_0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-E_n(\Phi + \Phi_0) = E_n(\Phi)
-\]</div>
+<p>so the <em>set</em> <span class="math notranslate nohighlight">\(\{E_n(\Phi)\}_{n\in\mathbb{Z}}\)</span> is periodic in <span class="math notranslate nohighlight">\(\Phi\)</span> with period <span class="math notranslate nohighlight">\(\Phi_0\)</span>.</p>
 </div>
-<p><strong>Derivation:</strong> Setting <span class="math notranslate nohighlight">\(\hat{p}_{\theta}\psi_n = \hbar n\psi_n\)</span> and inserting into the Hamiltonian:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{H}\psi_n = \frac{\hbar^2}{2mR^2}\left(n - \frac{\Phi}{2\pi\hbar}\right)^2\psi_n = \frac{\hbar^2}{2mR^2}\left(n - \frac{\Phi}{\Phi_0}\right)^2\psi_n
-\]</div>
-<p>The periodicity follows because the energy depends only on <span class="math notranslate nohighlight">\(n - \Phi/\Phi_0\)</span>, and shifting <span class="math notranslate nohighlight">\(\Phi \to \Phi + \Phi_0\)</span> is equivalent to shifting <span class="math notranslate nohighlight">\(n \to n-1\)</span>, which relabels the same set of energy levels.</p>
+</div>
 </section>
 <section id="ground-state-and-persistent-current">
 <h3>Ground State and Persistent Current<a class="headerlink" href="#ground-state-and-persistent-current" title="Link to this heading">#</a></h3>
-<p>The ground state is the lowest-energy level. Since energies are minimized when <span class="math notranslate nohighlight">\(|n - \Phi/\Phi_0|\)</span> is smallest, the ground state quantum number shifts with flux:</p>
-<ul class="simple">
-<li><p>For <span class="math notranslate nohighlight">\(0 \leq \Phi/\Phi_0 \leq 1\)</span>: ground state is approximately <span class="math notranslate nohighlight">\(n = 0\)</span> if <span class="math notranslate nohighlight">\(\Phi/\Phi_0 &lt; 1/2\)</span>, or <span class="math notranslate nohighlight">\(n = 1\)</span> if <span class="math notranslate nohighlight">\(\Phi/\Phi_0 &gt; 1/2\)</span>.</p></li>
-</ul>
-<p>The <strong>persistent current</strong> is the expectation value of the angular momentum current:</p>
-<div class="math notranslate nohighlight">
-\[
-I(\Phi) = -\frac{\partial E_0}{\partial\Phi}
-\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../images/4-2-3-flux_ring_current.png"><img alt="Flux-ring ground-state energy and persistent current versus flux Phi/Phi_0, showing sawtooth current and periodicity" src="../images/4-2-3-flux_ring_current.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Ground-state response: <span class="math notranslate nohighlight">\(E_0(\Phi)\)</span> and sawtooth persistent current <span class="math notranslate nohighlight">\(I(\Phi)\)</span>.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</aside>
+<div class="docutils">
+<p>The ground state at flux <span class="math notranslate nohighlight">\(\Phi\)</span> is the eigenstate <span class="math notranslate nohighlight">\(|n_*\rangle\)</span> whose quantum number is the integer closest to <span class="math notranslate nohighlight">\(\Phi/\Phi_0\)</span>. The flux axis decomposes into branches: for <span class="math notranslate nohighlight">\(\Phi/\Phi_0\in(n-1/2,\,n+1/2)\)</span> the ground state has quantum number <span class="math notranslate nohighlight">\(n\)</span>, with adjacent branches degenerate at every half-integer flux. As flux is tuned through any half-integer value the ground-state quantum number jumps by one — so although the <em>spectrum</em> is periodic in flux, the <em>ground-state momentum</em> is not.</p>
 <div class="important admonition">
-<p class="admonition-title">Persistent Current in the Flux Ring</p>
-<p>For <span class="math notranslate nohighlight">\(\Phi/\Phi_0 = \delta\)</span> with <span class="math notranslate nohighlight">\(0 &lt; \delta &lt; 1\)</span> and ground state <span class="math notranslate nohighlight">\(n=0\)</span>:</p>
+<p class="admonition-title">Persistent Current</p>
+<p>The persistent current is the response of the ground state energy to flux,</p>
+<div class="math notranslate nohighlight" id="equation-eq-persistent-current">
+<span class="eqno">(152)<a class="headerlink" href="#equation-eq-persistent-current" title="Link to this equation">#</a></span>\[
+I(\Phi) \;=\; -\frac{\partial E_0(\Phi)}{\partial\Phi}.
+\]</div>
+<p>On the branch <span class="math notranslate nohighlight">\(\Phi/\Phi_0\in(n-1/2,\,n+1/2)\)</span> where the ground state has quantum number <span class="math notranslate nohighlight">\(n\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-I(\delta) = -\frac{\hbar^2}{mR^2\Phi_0}\left(0 - \delta\right) = \frac{\hbar^2}{mR^2\Phi_0}\delta
+I(\Phi) \;=\; \frac{\hbar^{2}}{mR^{2}\,\Phi_0}\!\left(n-\frac{\Phi}{\Phi_0}\right).
 \]</div>
-<p>The current <strong>flows continuously</strong> in the ground state, even at zero temperature and with no applied voltage. This current reverses sign when the flux crosses <span class="math notranslate nohighlight">\(\Phi_0/2\)</span>.</p>
+<p>It flows continuously in the ground state at zero temperature with no applied voltage, opposes the applied flux (Lenz-like), and reverses sign each time the flux crosses a half-integer — giving the sawtooth <span class="math notranslate nohighlight">\(I(\Phi)\)</span> characteristic of mesoscopic flux rings.</p>
 </div>
-<p><strong>Remarkable consequence:</strong> In a superconducting ring (where resistance vanishes), this persistent current is truly permanent and can be detected via the magnetic field it generates.</p>
+</div>
+<p>In a superconducting ring (zero resistance), the persistent current is truly permanent and can be measured via the magnetic field it generates.</p>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: The Persistent Current Puzzle</p>
 <p>The persistent current seems to violate the classical intuition that a ground state should be static. Yet here the ground state carries a current that flows indefinitely.</p>
@@ -627,53 +654,109 @@ I(\delta) = -\frac{\hbar^2}{mR^2\Phi_0}\left(0 - \delta\right) = \frac{\hbar^2}{
 <p>For a path that goes halfway around the ring and acquires a flux-dependent phase:</p>
 <div class="math notranslate nohighlight">
 \[
-\phi_{\text{path}} = \frac{q\Phi}{2\hbar c}
+\Phi_{\mathrm{path}} = \frac{q\Phi}{2\hbar} = \frac{\pi\Phi}{\Phi_0}
 \]</div>
 <p>The tunneling amplitude oscillates with flux, reaching maximum when <span class="math notranslate nohighlight">\(\Phi = m\Phi_0\)</span> (integer multiples) and minimum when <span class="math notranslate nohighlight">\(\Phi = (m+1/2)\Phi_0\)</span>.</p>
 <div class="note admonition">
 <p class="admonition-title">Aharonov-Bohm Effect in the Flux Ring</p>
-<p>The tunneling rate <span class="math notranslate nohighlight">\(\Gamma(\Phi) = \Gamma_0|\cos(\pi\Phi/\Phi_0)|\)</span> oscillates with period <span class="math notranslate nohighlight">\(\Phi_0\)</span>. This direct observation of flux modulation is a hallmark AB effect: the particle’s dynamics depend on the enclosed flux even though the particle never enters the field region.</p>
+<p>The tunneling rate <span class="math notranslate nohighlight">\(\Gamma(\Phi) = \Gamma_{0}\cos^{2}(\pi\Phi/\Phi_{0})\)</span> oscillates with period <span class="math notranslate nohighlight">\(\Phi_{0}\)</span> — it is the squared modulus of the tunneling amplitude <span class="math notranslate nohighlight">\(\mathcal{T}\propto\cos(\pi\Phi/\Phi_{0})\)</span>, so <span class="math notranslate nohighlight">\(\Gamma\propto\vert\mathcal{T}\vert^{2}\)</span>. This direct observation of flux modulation is a hallmark AB effect: the particle’s dynamics depend on the enclosed flux even though the particle never enters the field region.</p>
 </div>
 </section>
-<section id="special-case-pi-flux-phi-phi-0-2">
-<h3>Special Case: Pi-Flux (<span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>)<a class="headerlink" href="#special-case-pi-flux-phi-phi-0-2" title="Link to this heading">#</a></h3>
-<p>At half a flux quantum, a remarkable symmetry emerges.</p>
+<section id="half-integer-flux-anomalous-degeneracy">
+<h3>Half-Integer Flux: Anomalous Degeneracy<a class="headerlink" href="#half-integer-flux-anomalous-degeneracy" title="Link to this heading">#</a></h3>
+<p>At every half-integer flux <span class="math notranslate nohighlight">\(\Phi=(n+1/2)\Phi_0\)</span> two adjacent branches of the spectrum cross. The simplest case is <span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>, where <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> become degenerate.</p>
 <div class="important admonition">
-<p class="admonition-title">Degeneracy at Pi-Flux</p>
-<p>When <span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>:</p>
+<p class="admonition-title">The half-flux doublet</p>
+<p>Specializing <a class="reference internal" href="#equation-eq-ring-ndef">(150)</a> to <span class="math notranslate nohighlight">\(n=0\)</span> and <span class="math notranslate nohighlight">\(n=1\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-E_n\left(\frac{\Phi_0}{2}\right) = \frac{\hbar^2}{2mR^2}\left(n - \frac{1}{2}\right)^2
+|0\rangle \;=\; \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}|\theta\rangle\,\mathrm{d}\theta,
+\qquad
+|1\rangle \;=\; \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\mathrm{e}^{\mathrm{i}\theta}|\theta\rangle\,\mathrm{d}\theta.
 \]</div>
-<p>The ground state is <strong>doubly degenerate</strong>: both <span class="math notranslate nohighlight">\(n=0\)</span> and <span class="math notranslate nohighlight">\(n=1\)</span> have the same energy.</p>
-<p>This degeneracy is protected by a combination of <strong>time-reversal symmetry</strong> (the Hamiltonian is invariant under <span class="math notranslate nohighlight">\(\theta \to -\theta\)</span> up to a relabeling) and <strong>translational symmetry</strong> (shifts in <span class="math notranslate nohighlight">\(\theta\)</span> by <span class="math notranslate nohighlight">\(\pi\)</span> interchange the two states).</p>
+<p><span class="math notranslate nohighlight">\(|0\rangle\)</span> is uniform amplitude on the ring (no winding); <span class="math notranslate nohighlight">\(|1\rangle\)</span> carries one full winding of phase. At <span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span> both have the same energy:</p>
+<div class="math notranslate nohighlight">
+\[
+E_0(\Phi_0/2) \;=\; E_1(\Phi_0/2) \;=\; \frac{\hbar^{2}}{8mR^{2}}.
+\]</div>
+<p>This degeneracy is not a coincidence — it is forced by a <strong>quantum anomaly</strong>.</p>
 </div>
-<p>Physically, at pi-flux, the effective “momentum kick” from the field is exactly half a quantum, and the quantum numbers <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(n+1\)</span> experience equal and opposite shifts, leading to a crossing in the spectrum.</p>
+<p><strong>The anomaly.</strong> Two symmetries protect the doublet at <span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>:</p>
+<ul class="simple">
+<li><p><strong>Translation by <span class="math notranslate nohighlight">\(\pi\)</span></strong>, <span class="math notranslate nohighlight">\(\hat{T}_\pi:\theta\to\theta+\pi\)</span>, multiplies <span class="math notranslate nohighlight">\(|n\rangle\)</span> by <span class="math notranslate nohighlight">\((-1)^n\)</span>, so <span class="math notranslate nohighlight">\(\hat{T}_\pi|0\rangle = +|0\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{T}_\pi|1\rangle = -|1\rangle\)</span> — Pauli <span class="math notranslate nohighlight">\(\hat{Z}\)</span>.</p></li>
+<li><p><strong>Reflection with large gauge</strong>, <span class="math notranslate nohighlight">\(\hat{S} = \hat{R}\,\hat{U}_{LG}\)</span>, with <span class="math notranslate nohighlight">\(\hat{R}:\theta\to-\theta\)</span> and <span class="math notranslate nohighlight">\(\hat{U}_{LG}\psi(\theta) = \mathrm{e}^{-\mathrm{i}\theta}\psi(\theta)\)</span> (shifts the flux by one quantum); on the doublet <span class="math notranslate nohighlight">\(\hat{S}|0\rangle = |1\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{S}|1\rangle = |0\rangle\)</span> — Pauli <span class="math notranslate nohighlight">\(\hat{X}\)</span>.</p></li>
+</ul>
+<p>As geometric operations on the ring both are abelian, but their lift to the Hilbert space picks up an extra phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi}=-1\)</span> that makes them <strong>anticommute</strong>: <span class="math notranslate nohighlight">\(\{\hat{T}_\pi,\hat{S}\}=0\)</span>. This extra phase <em>is</em> the anomaly. The smallest unitary representation of two anticommuting operators is two-dimensional, so any perturbation preserving both symmetries cannot lift the doublet.</p>
+<div class="dropdown note admonition">
+<p class="admonition-title">What is a quantum anomaly?</p>
+<p>A <strong>quantum anomaly</strong> is a symmetry that closes naively at the classical level but acquires an extra phase when lifted to operators on the Hilbert space. Here, <span class="math notranslate nohighlight">\(\hat{T}_\pi\)</span> and the geometric part of <span class="math notranslate nohighlight">\(\hat{S}\)</span> are abelian as ring transformations: translating then reflecting and reflecting then translating give the same point. But once they act on quantum states the lift carries an extra phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi}=-1\)</span>, turning ordinary commutation into anticommutation.</p>
+<p>This <em>projective</em> realization of the symmetry algebra is called a <strong>‘t Hooft anomaly</strong>. Its consequence here is sharp: the smallest faithful representation is forced to be larger than 1-dimensional, so a non-degenerate ground state is <em>forbidden</em> as long as both symmetries are intact.</p>
+<p>Anomalies of this kind are central to modern condensed matter and quantum field theory: they classify symmetry-protected topological phases, protect the gapless edge modes of topological insulators, and constrain the low-energy spectra of strongly-correlated systems. The flux ring is among the simplest concrete examples — accessible without quantum field theory yet capturing the same essential mechanism.</p>
+</div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Why the Degeneracy Cannot Be Lifted</p>
-<p>At <span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>, any perturbation that breaks the time-reversal or translational symmetry of the ring (e.g., a local potential or asymmetry) can lift the degeneracy. However, within the ideal symmetric ring, the degeneracy is <strong>protected by symmetry</strong> and cannot be removed by continuous deformations of the Hamiltonian that preserve those symmetries.</p>
-<p>This is an example of a <strong>quantum anomaly</strong>: a degeneracy that survives because the symmetries form an anomaly-free representation. Lifting it requires explicitly breaking a fundamental symmetry.</p>
+<p class="admonition-title">Derivation: Symmetry Action on the Doublet</p>
+<p>Each symmetry <span class="math notranslate nohighlight">\(\hat{O}\)</span> satisfies <span class="math notranslate nohighlight">\(\hat{O}\hat{H}(\Phi_0/2)\hat{O}^{-1}=\hat{H}(\Phi_0/2)\)</span>. We compute its action using <span class="math notranslate nohighlight">\(|n\rangle = (1/\sqrt{2\pi})\int_{0}^{2\pi}\mathrm{e}^{\mathrm{i}n\theta}|\theta\rangle\,\mathrm{d}\theta\)</span>.</p>
+<p><strong>Translation by <span class="math notranslate nohighlight">\(\pi\)</span>.</strong> Define <span class="math notranslate nohighlight">\(\hat{T}_\pi|\theta\rangle = |\theta+\pi\rangle\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\hat{T}_\pi|n\rangle
+&amp;= \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\mathrm{e}^{\mathrm{i}n\theta}|\theta+\pi\rangle\,\mathrm{d}\theta\\
+&amp;= \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\mathrm{e}^{\mathrm{i}n(\theta'-\pi)}|\theta'\rangle\,\mathrm{d}\theta'\\
+&amp;= \mathrm{e}^{-\mathrm{i}n\pi}|n\rangle = (-1)^{n}|n\rangle,
+\end{split}
+\end{split}\]</div>
+<p>(substituting <span class="math notranslate nohighlight">\(\theta'=\theta+\pi\)</span> and using <span class="math notranslate nohighlight">\(2\pi\)</span>-periodicity to keep the integration limits). On the doublet, <span class="math notranslate nohighlight">\(\hat{T}_\pi=\mathrm{diag}(+1,-1) = \hat{Z}\)</span>.</p>
+<p><strong>Reflection.</strong> Define <span class="math notranslate nohighlight">\(\hat{R}|\theta\rangle = |-\theta\rangle\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{R}|n\rangle = \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\mathrm{e}^{\mathrm{i}n\theta}|-\theta\rangle\,\mathrm{d}\theta = \frac{1}{\sqrt{2\pi}}\int_{0}^{2\pi}\mathrm{e}^{-\mathrm{i}n\theta'}|\theta'\rangle\,\mathrm{d}\theta' = |-n\rangle.
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(\hat{R}|0\rangle=|0\rangle\)</span> but <span class="math notranslate nohighlight">\(\hat{R}|1\rangle=|-1\rangle\)</span> — outside the doublet. Reflection alone is not a symmetry of <span class="math notranslate nohighlight">\(\hat{H}(\Phi_0/2)\)</span> either: <span class="math notranslate nohighlight">\(\hat{R}\hat{H}(\Phi)\hat{R}^{-1}=\hat{H}(-\Phi)\)</span>, since <span class="math notranslate nohighlight">\(\hat{R}\hat{L}_\theta\hat{R}^{-1}=-\hat{L}_\theta\)</span> flips the canonical momentum (equivalent to flipping the flux).</p>
+<p><strong>Large gauge transformation.</strong> <span class="math notranslate nohighlight">\(\hat{U}_{LG}\)</span> multiplies wavefunctions by <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\theta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{U}_{LG}\psi_{n}(\theta) = \mathrm{e}^{-\mathrm{i}\theta}\,\frac{\mathrm{e}^{\mathrm{i}n\theta}}{\sqrt{2\pi}} = \psi_{n-1}(\theta), \qquad \hat{U}_{LG}|n\rangle = |n-1\rangle.
+\]</div>
+<p>This shifts the canonical-momentum eigenvalue <span class="math notranslate nohighlight">\(\hbar n\to\hbar(n-1)\)</span>. Since <span class="math notranslate nohighlight">\(\hat{L}_\theta\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> enter the Hamiltonian only through the combination <span class="math notranslate nohighlight">\(\hat{L}_\theta - q\Phi/(2\pi)\)</span>, the same shift is equivalent to advancing the flux, <span class="math notranslate nohighlight">\(\Phi\to(\Phi-\Phi_0)\)</span>, (using <span class="math notranslate nohighlight">\(q\Phi_0/(2\pi)=\hbar\)</span>). Hence <span class="math notranslate nohighlight">\(\hat{U}_{LG}\hat{H}(\Phi)\hat{U}_{LG}^{-1}=\hat{H}(\Phi-\Phi_0)\)</span> — this is why <span class="math notranslate nohighlight">\(\hat{U}_{LG}\)</span> is called a <em>large</em> gauge transformation: it changes the flux by a full quantum, an operation that small (continuous) gauge transformations cannot accomplish.</p>
+<p><strong>Combination <span class="math notranslate nohighlight">\(\hat{S}=\hat{R}\,\hat{U}_{LG}\)</span>.</strong> Acting on <span class="math notranslate nohighlight">\(|n\rangle\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{S}|n\rangle = \hat{R}\hat{U}_{LG}|n\rangle = \hat{R}|n-1\rangle = |-(n-1)\rangle = |1-n\rangle.
+\]</div>
+<p>On the doublet, <span class="math notranslate nohighlight">\(\hat{S}|0\rangle=|1\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{S}|1\rangle=|0\rangle\)</span> — Pauli <span class="math notranslate nohighlight">\(\hat{X}\)</span>. As a symmetry check,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{S}\hat{H}(\Phi)\hat{S}^{-1} = \hat{R}\hat{H}(\Phi-\Phi_0)\hat{R}^{-1} = \hat{H}(\Phi_0-\Phi),
+\]</div>
+<p>which equals <span class="math notranslate nohighlight">\(\hat{H}(\Phi_0/2)\)</span> when <span class="math notranslate nohighlight">\(\Phi=\Phi_0/2\)</span>.</p>
+<p><strong>Anticommutation.</strong> On a general <span class="math notranslate nohighlight">\(|n\rangle\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{T}_\pi\hat{S}|n\rangle = \hat{T}_\pi|1-n\rangle = (-1)^{1-n}|1-n\rangle,\qquad \hat{S}\hat{T}_\pi|n\rangle = \hat{S}\,(-1)^{n}|n\rangle = (-1)^{n}|1-n\rangle.
+\]</div>
+<p>The ratio <span class="math notranslate nohighlight">\((-1)^{1-n}/(-1)^{n} = (-1)^{1-2n} = -1\)</span>, so <span class="math notranslate nohighlight">\(\hat{T}_\pi\hat{S} = -\hat{S}\hat{T}_\pi\)</span> on every <span class="math notranslate nohighlight">\(|n\rangle\)</span>, hence on the entire Hilbert space.</p>
 </div>
 </section>
 <section id="application-the-squid">
 <h3>Application — The SQUID<a class="headerlink" href="#application-the-squid" title="Link to this heading">#</a></h3>
-<p>A <strong>SQUID</strong> (Superconducting Quantum Interference Device) is a superconducting loop with two Josephson junctions—essentially a <strong>two-path interferometer for supercurrent</strong>. The physics is the same AB logic as the flux ring: enclosed flux <span class="math notranslate nohighlight">\(\Phi\)</span> controls the relative phase between the two paths, modulating the maximum supercurrent the loop can carry.</p>
-<figure class="align-default" id="id1">
+<p>A <strong>SQUID</strong> (Superconducting Quantum Interference Device) replaces the single-particle ring of this section with a superconducting loop containing two Josephson junctions. The loop carries a macroscopic Cooper-pair wavefunction with a well-defined phase, and the two arms of the loop act as the two paths of an Aharonov-Bohm interferometer.</p>
+<figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../images/4-2-3-squid.png"><img alt="DC SQUID schematic: superconducting ring with two Josephson junctions, bias current leads, and magnetic flux threading the loop" src="../images/4-2-3-squid.png" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Schematic dc SQUID: bias current splits through two arms that meet at Josephson junctions, while magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span> threads the loop.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Schematic dc SQUID: bias current splits through two arms that meet at Josephson junctions, while magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span> threads the loop.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For Cooper pairs (charge <span class="math notranslate nohighlight">\(2e\)</span>), the phase accumulated around the loop is <span class="math notranslate nohighlight">\(2\pi\Phi/\Phi_0\)</span> with flux quantum <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e)\)</span>. The two-path interference gives:</p>
-<div class="math notranslate nohighlight">
-\[
-I_{\text{max}}(\Phi) = 2I_c\left|\cos\left(\frac{\pi\Phi}{\Phi_0}\right)\right|
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(I_c\)</span> is the critical current of each junction. Maximum current at integer flux quanta (constructive interference), zero at half-integer (destructive)—exactly the double-slit pattern, but for supercurrent instead of probability amplitude. This makes the SQUID one of the most sensitive magnetometers in existence.</p>
+<p>Two features of the flux ring carry over directly:</p>
+<ul class="simple">
+<li><p><strong>AB phase from enclosed flux.</strong> Cooper pairs traversing the two arms pick up a relative phase <span class="math notranslate nohighlight">\(2\pi\Phi/\Phi_0\)</span> — the same flux-controlled phase that modulates the tunneling rate of the single-particle ring, but now between two macroscopically occupied superconducting paths.</p></li>
+<li><p><strong>Superconducting flux quantum.</strong> The carriers are Cooper pairs of charge <span class="math notranslate nohighlight">\(q = 2e\)</span>, so <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e)\)</span> — half the electron flux quantum. SQUID interference repeats with this <em>superconducting</em> flux quantum.</p></li>
+</ul>
+<p>Sweeping the external flux modulates the maximum supercurrent the device can sustain: constructive interference at integer <span class="math notranslate nohighlight">\(\Phi/\Phi_0\)</span>, destructive interference at half-integer. Because tiny flux changes cause measurable changes in the supercurrent, the SQUID is among the most sensitive magnetometers in existence — capable of detecting changes as small as <span class="math notranslate nohighlight">\(10^{-6}\Phi_0\)</span>. The detailed derivation of the modulation involves the Josephson current-phase relation <span class="math notranslate nohighlight">\(I = I_c\sin\delta\)</span> at each junction together with flux quantization around the loop; we use the <span class="math notranslate nohighlight">\(|\cos|\)</span> form of <span class="math notranslate nohighlight">\(I_{\max}(\Phi)\)</span> as a known result in the homework 6.</p>
 <div class="dropdown poll admonition">
 <p class="admonition-title">Poll: Interference and flux quantization</p>
-<p>Consider a charged particle in a ring geometry with a solenoid passing through the center, creating a quantized flux <span class="math notranslate nohighlight">\(\Phi\)</span>. The particle can take two paths around the ring, and the phase difference is <span class="math notranslate nohighlight">\(\Delta \phi = q \Phi / \hbar\)</span>. For destructive interference between the two paths, what condition must <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy?</p>
+<p>Consider a charged particle in a ring geometry with a solenoid passing through the center, creating a quantized flux <span class="math notranslate nohighlight">\(\Phi\)</span>. The particle can take two paths around the ring, and the phase difference is <span class="math notranslate nohighlight">\(\Delta\Phi_{\mathrm{AB}} = q \Phi / \hbar\)</span>. For destructive interference between the two paths, what condition must <span class="math notranslate nohighlight">\(\Phi\)</span> satisfy?</p>
 <p>(A) <span class="math notranslate nohighlight">\(\Phi = h / q\)</span> (one flux quantum).</p>
 <p>(B) <span class="math notranslate nohighlight">\(\Phi = (n + 1/2) h / q\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is an integer.</p>
 <p>(C) <span class="math notranslate nohighlight">\(\Phi = n h / q\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is an integer.</p>
@@ -691,19 +774,19 @@ I_{\text{max}}(\Phi) = 2I_c\left|\cos\left(\frac{\pi\Phi}{\Phi_0}\right)\right|
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a></strong>: Foundational AB phase and topological interpretation</p></li>
-<li><p><strong><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a></strong>: Why flux is quantized in superconductors</p></li>
-<li><p><strong><a class="reference internal" href="4-3-2-landau-quantization.html"><span class="doc std std-doc">4.3.2 Landau Quantization</span></a></strong>: Particle in 2D magnetic field, Landau levels</p></li>
-<li><p><strong><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a></strong>: Global vs local gauge invariance and the origin of gauge fields</p></li>
+<li><p><a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a>: Foundational AB phase and topological interpretation</p></li>
+<li><p><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a>: Why flux is quantized in superconductors</p></li>
+<li><p><a class="reference internal" href="4-3-2-landau-quantization.html"><span class="doc std std-doc">4.3.2 Landau Quantization</span></a>: Particle in 2D magnetic field, Landau levels</p></li>
+<li><p><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a>: Global vs local gauge invariance and the origin of gauge fields</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Ring eigenstates.</strong> A particle of charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> is confined to a ring of radius <span class="math notranslate nohighlight">\(R\)</span> threaded by perpendicular magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span>. The Hamiltonian is <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2mR^2}(\hat{p}_\theta - q\Phi/(2\pi))^2\)</span>.</p>
+<p><strong>1. Ring eigenstates.</strong> A particle of charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> is confined to a ring of radius <span class="math notranslate nohighlight">\(R\)</span> threaded by perpendicular magnetic flux <span class="math notranslate nohighlight">\(\Phi\)</span>. The Hamiltonian is <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2mR^2}(\hat{L}_\theta - q\Phi/(2\pi))^2\)</span>.</p>
 <p>(a) Solve the eigenvalue equation and write the normalized eigenstates <span class="math notranslate nohighlight">\(\psi_n(\theta)\)</span> and eigenvalues <span class="math notranslate nohighlight">\(E_n(\Phi)\)</span>.</p>
-<p>(b) Show that <span class="math notranslate nohighlight">\(E_n(\Phi + \Phi_0) = E_{n+1}(\Phi)\)</span> where <span class="math notranslate nohighlight">\(\Phi_0 = h/q\)</span>, so the spectrum is periodic in flux.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\(E_{n}(\Phi + \Phi_{0}) = E_{n-1}(\Phi)\)</span> where <span class="math notranslate nohighlight">\(\Phi_{0} = h/q\)</span> — the entire spectrum shifts by <em>one</em> unit in the quantum number <span class="math notranslate nohighlight">\(n\)</span> as the flux advances by one quantum, so the <em>set</em> of energies <span class="math notranslate nohighlight">\(\{E_{n}(\Phi)\}\)</span> is periodic in <span class="math notranslate nohighlight">\(\Phi\)</span> with period <span class="math notranslate nohighlight">\(\Phi_{0}\)</span>.</p>
 <p>(c) For an electron (<span class="math notranslate nohighlight">\(q = -e\)</span>), sketch <span class="math notranslate nohighlight">\(E_n(\Phi)\)</span> for <span class="math notranslate nohighlight">\(n = -1, 0, 1\)</span> over <span class="math notranslate nohighlight">\(0 \leq \Phi/\Phi_0 \leq 2\)</span>. Identify the ground state quantum number in each region.</p>
 <p><strong>2. Persistent current.</strong> The persistent current is <span class="math notranslate nohighlight">\(I(\Phi) = -\partial E_0/\partial\Phi\)</span>, the thermodynamic response of the ground state to flux.</p>
 <p>(a) For <span class="math notranslate nohighlight">\(\Phi/\Phi_0 = 0.3\)</span>, which <span class="math notranslate nohighlight">\(n\)</span> is the ground state? Compute <span class="math notranslate nohighlight">\(I\)</span> in terms of <span class="math notranslate nohighlight">\(\hbar\)</span>, <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(R\)</span>, and <span class="math notranslate nohighlight">\(e\)</span>.</p>
@@ -711,8 +794,8 @@ I_{\text{max}}(\Phi) = 2I_c\left|\cos\left(\frac{\pi\Phi}{\Phi_0}\right)\right|
 <p>(c) At zero temperature, the current has sharp jumps. Argue qualitatively how thermal fluctuations at temperature <span class="math notranslate nohighlight">\(T\)</span> smooth out the sawtooth when <span class="math notranslate nohighlight">\(k_BT \sim E_1 - E_0\)</span>.</p>
 <p><strong>3. Pi-flux degeneracy.</strong> At <span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>, the energy spectrum has a special structure.</p>
 <p>(a) Show that states <span class="math notranslate nohighlight">\(n = 0\)</span> and <span class="math notranslate nohighlight">\(n = 1\)</span> are degenerate at this flux. Compute the degenerate energy.</p>
-<p>(b) This degeneracy is protected by time-reversal symmetry combined with the periodicity of the ring. Identify the symmetry operation and explain why it pairs <span class="math notranslate nohighlight">\(n = 0\)</span> with <span class="math notranslate nohighlight">\(n = 1\)</span> at half-flux.</p>
-<p>(c) A weak potential <span class="math notranslate nohighlight">\(V(\theta) = V_0\cos\theta\)</span> is added to the ring. Does it lift the pi-flux degeneracy? Set up the <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix in the degenerate subspace and find the gap.</p>
+<p>(b) Show that translation by <span class="math notranslate nohighlight">\(\pi\)</span>, <span class="math notranslate nohighlight">\(\hat{T}_\pi\)</span>, acts as the Pauli matrix <span class="math notranslate nohighlight">\(Z\)</span> on the doublet <span class="math notranslate nohighlight">\(\{|0\rangle, |1\rangle\}\)</span>, and that the combination <span class="math notranslate nohighlight">\(\hat{S} = \hat{R}\hat{U}_{LG}\)</span> (reflection <span class="math notranslate nohighlight">\(\hat{R}:\theta\to-\theta\)</span> followed by the large gauge transformation <span class="math notranslate nohighlight">\(\hat{U}_{LG}\psi(\theta) = \mathrm{e}^{-\mathrm{i}\theta}\psi(\theta)\)</span>) acts as <span class="math notranslate nohighlight">\(X\)</span>. Verify explicitly that <span class="math notranslate nohighlight">\(\{\hat{T}_\pi, \hat{S}\} = 0\)</span> on every <span class="math notranslate nohighlight">\(|n\rangle\)</span>.</p>
+<p>(c) A weak potential <span class="math notranslate nohighlight">\(V(\theta) = V_0\cos\theta\)</span> is added to the ring. Determine which of <span class="math notranslate nohighlight">\(\hat{T}_\pi\)</span> and <span class="math notranslate nohighlight">\(\hat{S}\)</span> it preserves and which it breaks. Use this to predict — before computing — the form of its matrix on the doublet (a multiple of which Pauli matrix?). Then compute the matrix explicitly and find the gap.</p>
 <p><strong>4. Cooper pair versus electron.</strong> Compare the flux response of a ring carrying a single electron (<span class="math notranslate nohighlight">\(q = -e\)</span>) with a superconducting ring carrying Cooper pairs (<span class="math notranslate nohighlight">\(q = -2e\)</span>).</p>
 <p>(a) What is the flux quantum for each case? Compute both numerically.</p>
 <p>(b) A normal ring shows AB oscillations in resistance with period <span class="math notranslate nohighlight">\(h/e\)</span>. A superconducting ring quantizes flux in units of <span class="math notranslate nohighlight">\(h/(2e)\)</span>. Explain the physical origin of the factor-of-two difference.</p>
@@ -805,10 +888,10 @@ I_{\text{max}}(\Phi) = 2I_c\left|\cos\left(\frac{\pi\Phi}{\Phi_0}\right)\right|
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hamiltonian-particle-on-a-ring">The Hamiltonian: Particle on a Ring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-eigenvalues-periodic-in-flux-quantum">Energy Eigenvalues: Periodic in Flux Quantum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenstate-and-eigenenergy">Eigenstate and Eigenenergy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ground-state-and-persistent-current">Ground State and Persistent Current</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tunneling-across-the-ring-flux-dependence">Tunneling Across the Ring: Flux Dependence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-pi-flux-phi-phi-0-2">Special Case: Pi-Flux (<span class="math notranslate nohighlight">\(\Phi = \Phi_0/2\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#half-integer-flux-anomalous-degeneracy">Half-Integer Flux: Anomalous Degeneracy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-the-squid">Application — The SQUID</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>

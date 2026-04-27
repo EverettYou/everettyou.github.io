@@ -505,10 +505,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classical-spinning-top">The Classical Spinning Top</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precession-in-a-torque-field">Precession in a Torque Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gyromagnetic-ratio">The Gyromagnetic Ratio</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-puzzle-integer-vs-half-integer-angular-momentum">The Puzzle: Integer vs Half-Integer Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-axis-and-angular-momentum">Spin Axis and Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equation-of-motion-for-the-spin-axis">Equation of Motion for the Spin Axis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-as-a-charged-particle-on-a-monopole-sphere">Spin as a Charged Particle on a Monopole Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monopole-vector-potential-on-the-spin-sphere">Monopole Vector Potential on the Spin Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-from-berry-phase">Quantization from Berry Phase</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -529,212 +530,319 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Explain the decomposition of a spinning top’s angular momentum into orbital and spin parts. How do the moments of inertia determine the motion?</p></li>
-<li><p>Walk me through Larmor precession of a magnetic dipole in a uniform field. What determines the precession frequency?</p></li>
-<li><p>What is the gyromagnetic ratio, and why does the classical prediction <span class="math notranslate nohighlight">\(g=1\)</span> differ from the electron’s <span class="math notranslate nohighlight">\(g\approx 2\)</span>?</p></li>
-<li><p>Orbital angular momentum on a sphere is always integer-valued. Why? What experimental evidence shows that half-integer angular momentum exists?</p></li>
+<li><p>A classical spin can be represented by a unit vector <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> on the sphere of possible spin-axis directions. What is moving when the spin precesses?</p></li>
+<li><p>Starting from torque balance, why does the equation for <span class="math notranslate nohighlight">\(\boldsymbol n(t)\)</span> contain a transverse gyroscopic term <span class="math notranslate nohighlight">\(-\dot{\boldsymbol n}\times S\boldsymbol n\)</span>?</p></li>
+<li><p>Compare the spin-axis equation with the Lorentz force for a charged particle moving on a sphere. Which term plays the role of the monopole magnetic field?</p></li>
+<li><p>Why does the vector potential for this effective monopole have a string singularity, and how does requiring a single-valued quantum wavefunction quantize <span class="math notranslate nohighlight">\(S/\hbar\)</span>?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The classical spinning top provides the physical intuition for angular momentum: a rigid body possesses both orbital angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span> from translational motion and spin angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> from rotation about its own axis. A spinning charge generates a magnetic dipole, coupling angular momentum to electromagnetic fields through the gyromagnetic ratio. Precession in a magnetic field — Larmor precession — is the classical prototype for quantum spin dynamics. Yet a deep puzzle remains: orbital angular momentum on a sphere is always integer-valued, while experiments (Stern-Gerlach) reveal half-integer angular momentum. Where does spin-1/2 come from? The answer, developed in §4.4.2–4.4.3, lies in gauge topology.</p>
+<p>For the purposes of §4.4, the useful classical picture is simple and deep: a spin is an oriented axis. Its direction is a point <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> on the unit sphere, and precession is motion of that point on the sphere. The surprising fact is that the gyroscopic term in the equation of motion has exactly the form of a Lorentz force from a magnetic monopole sitting at the center of that sphere. This turns the classical spin problem into the classical limit of a charged particle on a sphere threaded by monopole flux. Quantizing that flux gives half-integer spin and prepares the Dirac monopole and monopole harmonics of §4.4.2–§4.4.3.</p>
 </section>
-<section id="the-classical-spinning-top">
-<h3>The Classical Spinning Top<a class="headerlink" href="#the-classical-spinning-top" title="Link to this heading">#</a></h3>
-<p>A rigid body rotating about its center of mass has angular momentum:</p>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{L} = I \boldsymbol{\omega}
+<section id="spin-axis-and-angular-momentum">
+<h3>Spin Axis and Angular Momentum<a class="headerlink" href="#spin-axis-and-angular-momentum" title="Link to this heading">#</a></h3>
+<p>Assume the spinning object is spherically symmetric, so a single moment of inertia <span class="math notranslate nohighlight">\(I\)</span> describes rotations. The configuration variable is the direction of the spin axis,</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-axis-unit">
+<span class="eqno">(159)<a class="headerlink" href="#equation-eq-spin-axis-unit" title="Link to this equation">#</a></span>\[
+\boldsymbol n(t),\qquad \boldsymbol n^2=1.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(I\)</span> is the moment of inertia tensor and <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is the angular velocity. For a symmetric top with symmetry axis <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span>, the angular momentum decomposes into two parts:</p>
+<p>The main object is the <strong>angular momentum</strong> carried by this moving axis:</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-total-angular-momentum">
+<span class="eqno">(160)<a class="headerlink" href="#equation-eq-spin-total-angular-momentum" title="Link to this equation">#</a></span>\[
+\boldsymbol L
+=
+\boldsymbol S+I\boldsymbol\Omega
+=
+S\boldsymbol n+I\boldsymbol n\times\dot{\boldsymbol n}.
+\]</div>
+<p>This formula sets up the whole problem.</p>
 <ul class="simple">
-<li><p><strong>Orbital part</strong> <span class="math notranslate nohighlight">\(\boldsymbol{L}_\text{orb} = \boldsymbol{r} \times \boldsymbol{p}\)</span>: angular momentum from the center-of-mass motion</p></li>
-<li><p><strong>Spin part</strong> <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>: angular momentum from rotation about the body’s own axis</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol S=S\boldsymbol n\)</span> is the <strong>spin angular momentum</strong> along the body axis. The magnitude <span class="math notranslate nohighlight">\(S\)</span> is fixed; the direction <span class="math notranslate nohighlight">\(\boldsymbol n(t)\)</span> can move.</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\boldsymbol\Omega\)</span> is the <strong>transverse angular momentum</strong> of spinning body as its axis moves on the unit sphere, where <span class="math notranslate nohighlight">\(I\)</span> is the <strong>moment of inertia</strong> and <span class="math notranslate nohighlight">\(\boldsymbol\Omega=\boldsymbol n\times\dot{\boldsymbol n}\)</span> is the <strong>angular velocity</strong> associated with changing the axis direction. It is transverse to <span class="math notranslate nohighlight">\(\boldsymbol n\)</span>.</p></li>
 </ul>
-<p>The total angular momentum is <span class="math notranslate nohighlight">\(\boldsymbol{J} = \boldsymbol{L}_\text{orb} + \boldsymbol{S}\)</span>.</p>
-<div class="important admonition">
-<p class="admonition-title">Orbital vs Spin Angular Momentum</p>
-<p><strong>Orbital angular momentum</strong> <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span> arises from motion through space. It depends on the choice of origin.</p>
-<p><strong>Spin angular momentum</strong> <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> is intrinsic rotation about the body’s own axis. It is independent of the choice of origin.</p>
-<p>Both obey the same dynamical equation: <span class="math notranslate nohighlight">\(\mathrm{d}\boldsymbol{J}/\mathrm{d}t = \boldsymbol{\tau}\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> is the applied torque.</p>
+<p>So the dynamics is not about a particle moving through ordinary space. It is about a point <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> moving on the sphere of possible spin directions, while carrying both the intrinsic spin <span class="math notranslate nohighlight">\(S\boldsymbol n\)</span> and the transverse angular momentum <span class="math notranslate nohighlight">\(I\boldsymbol n\times\dot{\boldsymbol n}\)</span>.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: kinematics of the spin axis</p>
+<p>If an angular velocity <span class="math notranslate nohighlight">\(\boldsymbol\Omega\)</span> rotates the axis, then</p>
+<div class="math notranslate nohighlight" id="equation-eq-axis-kinematics">
+<span class="eqno">(161)<a class="headerlink" href="#equation-eq-axis-kinematics" title="Link to this equation">#</a></span>\[
+\dot{\boldsymbol n}=\boldsymbol\Omega\times\boldsymbol n.
+\]</div>
+<p>Because <span class="math notranslate nohighlight">\(\boldsymbol n^2=1\)</span>, differentiating gives <span class="math notranslate nohighlight">\(\boldsymbol n\cdot\dot{\boldsymbol n}=0\)</span>: the velocity of <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> is tangent to the sphere. We choose <span class="math notranslate nohighlight">\(\boldsymbol\Omega\)</span> to be the transverse angular velocity that changes the axis direction; any component parallel to <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> would describe additional rotation about the axis and is already contained in <span class="math notranslate nohighlight">\(S\boldsymbol n\)</span>. With this transverse choice,</p>
+<div class="math notranslate nohighlight" id="equation-eq-omega-from-n">
+<span class="eqno">(162)<a class="headerlink" href="#equation-eq-omega-from-n" title="Link to this equation">#</a></span>\[
+\boldsymbol\Omega=\boldsymbol n\times\dot{\boldsymbol n}.
+\]</div>
 </div>
-<p>For a symmetric top with moment of inertia <span class="math notranslate nohighlight">\(I_\parallel\)</span> about the symmetry axis and <span class="math notranslate nohighlight">\(I_\perp\)</span> about any transverse axis, the kinetic energy is:</p>
-<div class="math notranslate nohighlight">
-\[
-T = \frac{1}{2} I_\perp \omega_\perp^2 + \frac{1}{2} I_\parallel \omega_\parallel^2
-\]</div>
-<p>The spin component <span class="math notranslate nohighlight">\(S = I_\parallel \omega_\parallel\)</span> along the symmetry axis is conserved when no torque acts along that axis.</p>
 </section>
-<section id="precession-in-a-torque-field">
-<h3>Precession in a Torque Field<a class="headerlink" href="#precession-in-a-torque-field" title="Link to this heading">#</a></h3>
-<p>When a torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> acts on a spinning body, the angular momentum evolves as:</p>
+<section id="equation-of-motion-for-the-spin-axis">
+<h3>Equation of Motion for the Spin Axis<a class="headerlink" href="#equation-of-motion-for-the-spin-axis" title="Link to this heading">#</a></h3>
+<p>The equation of motion comes from torque balance,</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\boldsymbol{L}}{\mathrm{d}t} = \boldsymbol{\tau}
+\dot{\boldsymbol L}=\boldsymbol\tau.
 \]</div>
-<p>For a magnetic dipole <span class="math notranslate nohighlight">\(\boldsymbol{\mu}\)</span> in a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>, the torque is <span class="math notranslate nohighlight">\(\boldsymbol{\tau} = \boldsymbol{\mu} \times \boldsymbol{B}\)</span>. If the magnetic moment is proportional to the angular momentum, <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \gamma \boldsymbol{L}\)</span>, then:</p>
-<div class="math notranslate nohighlight" id="equation-eq-classical-spin-precession">
-<span class="eqno">(145)<a class="headerlink" href="#equation-eq-classical-spin-precession" title="Link to this equation">#</a></span>\[
-\frac{\mathrm{d}\boldsymbol{L}}{\mathrm{d}t} = \gamma \boldsymbol{L} \times \boldsymbol{B}
+<p>The transverse spin-axis dynamics is</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-axis-dynamics">
+<span class="eqno">(163)<a class="headerlink" href="#equation-eq-spin-axis-dynamics" title="Link to this equation">#</a></span>\[
+\boxed{
+\begin{aligned}
+I\left.\ddot{\boldsymbol n}\right|_\perp
+&amp;=
+\boldsymbol\tau\times\boldsymbol n
+-
+\dot{\boldsymbol n}\times\boldsymbol S
+\end{aligned}}
 \]</div>
-<p>This equation describes <strong>precession</strong>: the angular momentum vector traces a cone around <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> at a constant angle <span class="math notranslate nohighlight">\(\theta\)</span>, with angular frequency:</p>
-<div class="math notranslate nohighlight" id="equation-eq-larmor-frequency">
-<span class="eqno">(146)<a class="headerlink" href="#equation-eq-larmor-frequency" title="Link to this equation">#</a></span>\[
-\omega_L = -\gamma B
+<p>Here the vertical bar means “take the tangent component on the spin sphere”:</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-axis-tangent-acceleration">
+<span class="eqno">(164)<a class="headerlink" href="#equation-eq-spin-axis-tangent-acceleration" title="Link to this equation">#</a></span>\[
+\left.\ddot{\boldsymbol n}\right|_\perp
+\equiv
+\ddot{\boldsymbol n}-\boldsymbol n\left(\boldsymbol n\cdot\ddot{\boldsymbol n}\right).
 \]</div>
-<p>This is the <strong>Larmor frequency</strong>. The magnitude <span class="math notranslate nohighlight">\(|\boldsymbol{L}|\)</span> and the component <span class="math notranslate nohighlight">\(L_z = \boldsymbol{L} \cdot \hat{\boldsymbol{B}}\)</span> are both conserved — only the transverse components rotate.</p>
+<p>Read the right-hand side term by term:</p>
+<ul class="simple">
+<li><p><strong>Applied torque:</strong> <span class="math notranslate nohighlight">\(\boldsymbol\tau\times\boldsymbol n\)</span> is the force that the external torque produces on the spin axis.</p></li>
+<li><p><strong>Gyroscopic term:</strong> <span class="math notranslate nohighlight">\(-\dot{\boldsymbol n}\times\boldsymbol S\)</span> is the sideways response caused by the pre-existing spin angular momentum <span class="math notranslate nohighlight">\(\boldsymbol S=S\boldsymbol n\)</span>.</p></li>
+</ul>
+<p>The second term is the key structure: it has the form of a <strong>monopole Lorentz force</strong> on the sphere of spin directions.</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: spin-axis equation</p>
+<p>Starting from <a class="reference internal" href="#equation-eq-spin-total-angular-momentum">(160)</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol L=S\boldsymbol n+I\boldsymbol n\times\dot{\boldsymbol n}.
+\]</div>
+<p>Taking a time derivative gives</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol\tau
+=\dot{\boldsymbol L}
+=S\dot{\boldsymbol n}+I\boldsymbol n\times\ddot{\boldsymbol n},
+\]</div>
+<p>where the term <span class="math notranslate nohighlight">\(\dot{\boldsymbol n}\times\dot{\boldsymbol n}\)</span> vanishes. Cross both sides with <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> on the right:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol\tau\times\boldsymbol n
+=S\dot{\boldsymbol n}\times\boldsymbol n
++I(\boldsymbol n\times\ddot{\boldsymbol n})\times\boldsymbol n.
+\]</div>
+<p>The last factor is the tangent acceleration,</p>
+<div class="math notranslate nohighlight">
+\[
+(\boldsymbol n\times\ddot{\boldsymbol n})\times\boldsymbol n
+=\ddot{\boldsymbol n}-\boldsymbol n(\boldsymbol n\cdot\ddot{\boldsymbol n})
+=\left.\ddot{\boldsymbol n}\right|_\perp.
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\(\boldsymbol S=S\boldsymbol n\)</span> then gives <a class="reference internal" href="#equation-eq-spin-axis-dynamics">(163)</a>.</p>
+</div>
+</section>
+<section id="spin-as-a-charged-particle-on-a-monopole-sphere">
+<h3>Spin as a Charged Particle on a Monopole Sphere<a class="headerlink" href="#spin-as-a-charged-particle-on-a-monopole-sphere" title="Link to this heading">#</a></h3>
+<p>Now compare <a class="reference internal" href="#equation-eq-spin-axis-dynamics">(163)</a> with the Lorentz-force equation for a charged particle constrained to a sphere. Using the same vertical-bar notation for the tangent component,</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{
+\begin{aligned}
+m\left.\ddot{\boldsymbol x}\right|_\perp
+&amp;=
+\boldsymbol E_\perp
++q\dot{\boldsymbol x}\times\boldsymbol B
+\end{aligned}}
+\]</div>
+<p>The dictionary is</p>
 <div class="important admonition">
-<p class="admonition-title">Larmor Precession</p>
-<p>A magnetic dipole with <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \gamma \boldsymbol{L}\)</span> in a field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B \hat{\boldsymbol{z}}\)</span> precesses at the <strong>Larmor frequency</strong> <span class="math notranslate nohighlight">\(\omega_L = -\gamma B\)</span>. The equation of motion,</p>
+<p class="admonition-title">Spin-monopole dictionary</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ccl}
+\text{charged particle} &amp; &amp; \text{classical spin axis}\\[2mm]
+m &amp; \leftrightarrow &amp; I\\
+\boldsymbol x &amp; \leftrightarrow &amp; \boldsymbol n\\
+\left.\ddot{\boldsymbol x}\right|_\perp &amp; \leftrightarrow &amp; \left.\ddot{\boldsymbol n}\right|_\perp\\
+\boldsymbol E_\perp &amp; \leftrightarrow &amp; \boldsymbol\tau\times\boldsymbol n\\
+q\boldsymbol B(\boldsymbol n) &amp; \leftrightarrow &amp; -S\boldsymbol n
+\end{array}
+\end{split}\]</div>
+<p>Thus the gyroscopic force is the Lorentz force of a radial monopole field on the spin sphere.</p>
+</div>
+<p>If we write the monopole field as</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\boldsymbol{L}}{\mathrm{d}t} = \gamma \boldsymbol{L} \times \boldsymbol{B}
+\boldsymbol B(\boldsymbol n)=\frac{g}{4\pi}\boldsymbol n,
 \]</div>
-<p>is formally identical to the Lorentz force on a charged particle, with <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> playing the role of velocity and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> playing the role of the magnetic field.</p>
+<p>then the spin system corresponds to</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-monopole-identification">
+<span class="eqno">(165)<a class="headerlink" href="#equation-eq-spin-monopole-identification" title="Link to this equation">#</a></span>\[
+\frac{qg}{4\pi}=-S.
+\]</div>
+<p>The sign depends on orientation conventions. The important point is the magnitude: the spin angular momentum <span class="math notranslate nohighlight">\(S\)</span> is proportional to the electric-magnetic coupling <span class="math notranslate nohighlight">\(qg/(4\pi)\)</span>. In dimensionless form,</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-monopole-qnum-preview">
+<span class="eqno">(166)<a class="headerlink" href="#equation-eq-spin-monopole-qnum-preview" title="Link to this equation">#</a></span>\[
+s_{\rm spin}=\frac{S}{\hbar}\quad\leftrightarrow\quad |s_{\rm mono}|=\left|\frac{qg}{4\pi\hbar}\right|.
+\]</div>
+<p>This is the bridge to the monopole quantum number used in §4.4.3.</p>
+</section>
+<section id="monopole-vector-potential-on-the-spin-sphere">
+<h3>Monopole Vector Potential on the Spin Sphere<a class="headerlink" href="#monopole-vector-potential-on-the-spin-sphere" title="Link to this heading">#</a></h3>
+<p>A radial monopole field on the unit sphere can be generated locally by a vector potential. One northern-patch choice for the spin sphere is</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-monopole-potential">
+<span class="eqno">(167)<a class="headerlink" href="#equation-eq-spin-monopole-potential" title="Link to this equation">#</a></span>\[
+\boldsymbol A(\boldsymbol n)=S\frac{\cos\theta-1}{\sin\theta}\,\boldsymbol e_\varphi.
+\]</div>
+<p>It satisfies</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-monopole-field">
+<span class="eqno">(168)<a class="headerlink" href="#equation-eq-spin-monopole-field" title="Link to this equation">#</a></span>\[
+\nabla_\perp\times\boldsymbol A=-S\boldsymbol n,
+\]</div>
+<p>which is exactly the effective monopole field in <a class="reference internal" href="#equation-eq-spin-axis-dynamics">(163)</a>.</p>
+<div class="attention admonition">
+<p class="admonition-title">Why a string appears</p>
+<p>The potential <a class="reference internal" href="#equation-eq-spin-monopole-potential">(167)</a> diverges at the south pole. This is not a physical force singularity; the field strength is smooth on the sphere away from the monopole at the center. The singularity says that one gauge patch cannot cover a sphere threaded by nonzero monopole flux.</p>
+<p>This is the same obstruction that becomes the Dirac string in §4.4.2.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Solving the Precession Equation</p>
-<p>For <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{\boldsymbol{z}}\)</span>, the component equations are:</p>
+<p class="admonition-title">Check: curl of the spin-sphere potential</p>
+<p>For a vector potential with only a <span class="math notranslate nohighlight">\(\varphi\)</span> component on the unit sphere,</p>
 <div class="math notranslate nohighlight">
 \[
-\dot{L}_x = \gamma B L_y, \quad \dot{L}_y = -\gamma B L_x, \quad \dot{L}_z = 0
+(\nabla_\perp\times\boldsymbol A)\cdot\boldsymbol n
+=\frac{1}{\sin\theta}\partial_\theta\left(A_\varphi\sin\theta\right).
 \]</div>
-<p>Define <span class="math notranslate nohighlight">\(L_\pm = L_x \pm \mathrm{i} L_y\)</span>. Then <span class="math notranslate nohighlight">\(\dot{L}_\pm = \mp \mathrm{i} \gamma B L_\pm\)</span>, with solution:</p>
+<p>Using <span class="math notranslate nohighlight">\(A_\varphi=S(\cos\theta-1)/\sin\theta\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-L_\pm(t) = L_\pm(0) \, \mathrm{e}^{\mp \mathrm{i} \omega_L t}
+\frac{1}{\sin\theta}\partial_\theta\left[S(\cos\theta-1)\right]
+=-S.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\omega_L = \gamma B\)</span>. The tip of <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> traces a circle in the <span class="math notranslate nohighlight">\(xy\)</span>-plane at frequency <span class="math notranslate nohighlight">\(\omega_L\)</span>, while <span class="math notranslate nohighlight">\(L_z\)</span> remains constant.</p>
-</div>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>The precession equation <span class="math notranslate nohighlight">\(\mathrm{d}\boldsymbol{L}/\mathrm{d}t = \gamma \boldsymbol{L} \times \boldsymbol{B}\)</span> has the same mathematical form as the Lorentz force equation <span class="math notranslate nohighlight">\(m\mathrm{d}\boldsymbol{v}/\mathrm{d}t = q\boldsymbol{v} \times \boldsymbol{B}\)</span>. What physical quantity plays the role of charge? What plays the role of velocity? Where does the analogy break down?</p>
+<p>Therefore <span class="math notranslate nohighlight">\(\nabla_\perp\times\boldsymbol A=-S\boldsymbol n\)</span>.</p>
 </div>
 </section>
-<section id="the-gyromagnetic-ratio">
-<h3>The Gyromagnetic Ratio<a class="headerlink" href="#the-gyromagnetic-ratio" title="Link to this heading">#</a></h3>
-<p>A spinning charged body generates a magnetic dipole moment. For a classical charge distribution with charge-to-mass ratio <span class="math notranslate nohighlight">\(q/m\)</span> rotating rigidly:</p>
+<section id="quantization-from-berry-phase">
+<h3>Quantization from Berry Phase<a class="headerlink" href="#quantization-from-berry-phase" title="Link to this heading">#</a></h3>
+<p>The monopole flux through the spin sphere appears as a Berry phase. For a closed path <span class="math notranslate nohighlight">\(\mathcal C\)</span> of the spin axis,</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-berry-phase">
+<span class="eqno">(169)<a class="headerlink" href="#equation-eq-spin-berry-phase" title="Link to this equation">#</a></span>\[
+\Phi_{\mathrm{Berry}}[\mathcal C]=\frac{1}{\hbar}\oint_\mathcal C \boldsymbol A\cdot\mathrm d\boldsymbol l.
+\]</div>
+<p>For a loop enclosing solid angle <span class="math notranslate nohighlight">\(\Omega\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-berry-solid-angle">
+<span class="eqno">(170)<a class="headerlink" href="#equation-eq-spin-berry-solid-angle" title="Link to this equation">#</a></span>\[
+\Phi_{\mathrm{Berry}}=-\frac{S}{\hbar}\Omega.
+\]</div>
+<p>A full sphere has <span class="math notranslate nohighlight">\(\Omega=4\pi\)</span>. Single-valuedness requires the phase around the full flux to be physically trivial:</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{\mu} = \frac{q}{2m} \boldsymbol{L}
+\frac{4\pi S}{\hbar}=2\pi n,
+\qquad n\in\mathbb Z.
 \]</div>
-<p>The proportionality constant <span class="math notranslate nohighlight">\(\gamma = q/(2m)\)</span> is the <strong>gyromagnetic ratio</strong>. We define the dimensionless <strong><span class="math notranslate nohighlight">\(g\)</span>-factor</strong> by:</p>
-<div class="math notranslate nohighlight" id="equation-eq-g-factor">
-<span class="eqno">(147)<a class="headerlink" href="#equation-eq-g-factor" title="Link to this equation">#</a></span>\[
-\boldsymbol{\mu} = g \frac{q}{2m} \boldsymbol{S}
-\]</div>
+<p>Therefore</p>
 <div class="important admonition">
-<p class="admonition-title">Classical vs Quantum <span class="math notranslate nohighlight">\(g\)</span>-factor</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>System</p></th>
-<th class="head"><p><span class="math notranslate nohighlight">\(g\)</span>-factor</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Classical orbital motion</p></td>
-<td><p><span class="math notranslate nohighlight">\(g = 1\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p>Electron spin</p></td>
-<td><p><span class="math notranslate nohighlight">\(g \approx 2.002\)</span> (Dirac equation gives exactly 2; QED corrections add 0.002)</p></td>
-</tr>
-<tr class="row-even"><td><p>Proton spin</p></td>
-<td><p><span class="math notranslate nohighlight">\(g \approx 5.586\)</span> (anomalous, due to internal quark structure)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Neutron spin</p></td>
-<td><p><span class="math notranslate nohighlight">\(g \approx -3.826\)</span> (nonzero despite zero charge — reveals internal structure)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The electron’s <span class="math notranslate nohighlight">\(g \approx 2\)</span> cannot be explained classically and was one of the triumphs of the Dirac equation.</p>
-</div>
-<p>For an electron with charge <span class="math notranslate nohighlight">\(-e\)</span> and spin <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{\mu}_e = -g_e \frac{e}{2m_e} \boldsymbol{S} = -g_e \mu_B \frac{\boldsymbol{S}}{\hbar}
+<p class="admonition-title">Spin quantization as monopole flux quantization</p>
+<div class="math notranslate nohighlight" id="equation-eq-spin-quantization">
+<span class="eqno">(171)<a class="headerlink" href="#equation-eq-spin-quantization" title="Link to this equation">#</a></span>\[
+S=\hbar\frac{n}{2},
+\qquad
+s\equiv\frac{S}{\hbar}=\frac{n}{2}.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\mu_B = e\hbar/(2m_e)\)</span> is the <strong>Bohr magneton</strong>.</p>
-</section>
-<section id="the-puzzle-integer-vs-half-integer-angular-momentum">
-<h3>The Puzzle: Integer vs Half-Integer Angular Momentum<a class="headerlink" href="#the-puzzle-integer-vs-half-integer-angular-momentum" title="Link to this heading">#</a></h3>
-<p>In quantum mechanics, orbital angular momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}} = \hat{\boldsymbol{r}} \times \hat{\boldsymbol{p}}\)</span> acts on wavefunctions <span class="math notranslate nohighlight">\(\psi(\theta, \phi)\)</span> on the unit sphere. The eigenvalue problem:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{L}^2 Y_l^m = \hbar^2 l(l+1) Y_l^m, \quad \hat{L}_z Y_l^m = \hbar m \, Y_l^m
-\]</div>
-<p>requires <strong>single-valued wavefunctions</strong> on the sphere: <span class="math notranslate nohighlight">\(\psi(\theta, \phi + 2\pi) = \psi(\theta, \phi)\)</span>. This forces <span class="math notranslate nohighlight">\(m \in \mathbb{Z}\)</span>, and consequently:</p>
-<div class="math notranslate nohighlight">
-\[
-l = 0, 1, 2, \ldots \quad \text{(integers only)}
-\]</div>
-<div class="important admonition">
-<p class="admonition-title">Orbital Angular Momentum Is Always Integer</p>
-<p>Because wavefunctions must be single-valued on the sphere <span class="math notranslate nohighlight">\(S^2\)</span>, orbital angular momentum quantum numbers are restricted to non-negative integers. The eigenfunctions are the spherical harmonics <span class="math notranslate nohighlight">\(Y_l^m(\theta, \phi)\)</span>.</p>
-</div>
-<p>Yet the Stern-Gerlach experiment (1922) showed that silver atoms split into <strong>two</strong> beams in an inhomogeneous magnetic field — corresponding to <span class="math notranslate nohighlight">\(m = \pm 1/2\)</span>. This half-integer angular momentum cannot arise from any orbital motion of a particle on a sphere.</p>
-<div class="attention admonition">
-<p class="admonition-title">The Stern-Gerlach Puzzle</p>
-<p>The algebra <span class="math notranslate nohighlight">\([\hat{J}_i, \hat{J}_j] = \mathrm{i}\hbar \epsilon_{ijk} \hat{J}_k\)</span> allows both integer and half-integer representations (<span class="math notranslate nohighlight">\(j = 0, 1/2, 1, 3/2, \ldots\)</span>). But orbital angular momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{L}} = \hat{\boldsymbol{r}} \times \hat{\boldsymbol{p}}\)</span> only produces integer <span class="math notranslate nohighlight">\(l\)</span>, because wavefunctions on <span class="math notranslate nohighlight">\(S^2\)</span> must be single-valued.</p>
-<p>Half-integer spin was introduced as an additional postulate (Uhlenbeck and Goudsmit, 1925). But is it truly independent, or does it have a deeper origin?</p>
-</div>
-<p>The resolution comes from <strong>gauge topology</strong>: when a particle moves on a sphere threaded by a magnetic monopole (§4.4.2), the single-valuedness condition is modified. The monopole’s gauge field shifts the minimum angular momentum to <span class="math notranslate nohighlight">\(l_\text{min} = |s|\)</span>, where <span class="math notranslate nohighlight">\(s = qg/(2\hbar c)\)</span> is the monopole quantum number. For <span class="math notranslate nohighlight">\(s = 1/2\)</span>, the lowest orbital states are a doublet with <span class="math notranslate nohighlight">\(l = 1/2\)</span> — precisely spin-1/2. Thus half-integer angular momentum emerges from topology, not as an independent axiom.</p>
-<div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Spin as magnetic moment</p>
-<p>A classical spinning sphere carries angular momentum <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and, if charged, generates a magnetic moment <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = g \mathbf{L} / 2m_e\)</span> where <span class="math notranslate nohighlight">\(g\)</span> is the gyromagnetic ratio. For a classical electron spin, <span class="math notranslate nohighlight">\(g \approx 1\)</span>. However, for the quantum electron spin, the measured gyromagnetic ratio is <span class="math notranslate nohighlight">\(g \approx 2\)</span>. Which statement correctly addresses this discrepancy?</p>
-<p>(A) The classical model of a spinning sphere is correct; quantum mechanics must be wrong.</p>
-<p>(B) Quantum spin is not “real” rotation; it is an intrinsic angular momentum with no classical analog, and the factor of 2 arises from quantum relativistic effects (Dirac equation).</p>
-<p>(C) The factor of 2 is a correction due to the anomalous magnetic moment, calculated from quantum electrodynamics.</p>
-<p>(D) Both (B) and (C).</p>
+<p>Half-integer spin is the statement that monopole flux through the spin sphere is quantized.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A classical spinning top has orbital angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{r} \times \boldsymbol{p}\)</span> and spin angular momentum <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> from body rotation</p></li>
-<li><p>A magnetic dipole in a field precesses at the Larmor frequency <span class="math notranslate nohighlight">\(\omega_L = \gamma B\)</span>, with the precession equation formally identical to the Lorentz force</p></li>
-<li><p>The gyromagnetic ratio <span class="math notranslate nohighlight">\(g\)</span> relates magnetic moment to angular momentum; <span class="math notranslate nohighlight">\(g = 1\)</span> classically, <span class="math notranslate nohighlight">\(g \approx 2\)</span> for the electron (a relativistic quantum effect)</p></li>
-<li><p>Orbital angular momentum on a sphere is restricted to integers by single-valuedness of wavefunctions</p></li>
-<li><p>Half-integer angular momentum (spin-1/2) is observed experimentally but cannot arise from orbital motion — its origin lies in gauge topology (§4.4.2–4.4.3)</p></li>
+<li><p>A classical spin direction is a point <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> on the sphere of possible axes.</p></li>
+<li><p>For a spherical top, the spin-axis dynamics is governed by <span class="math notranslate nohighlight">\(I\left.\ddot{\boldsymbol n}\right|_\perp=\boldsymbol\tau\times\boldsymbol n-\dot{\boldsymbol n}\times S\boldsymbol n\)</span>.</p></li>
+<li><p>The gyroscopic term has the same form as a Lorentz force from a radial monopole field on the spin sphere.</p></li>
+<li><p>The effective monopole vector potential has a string singularity, so it must be described patchwise.</p></li>
+<li><p>Quantizing the Berry phase of the monopole flux gives <span class="math notranslate nohighlight">\(S=\hbar n/2\)</span>, preparing the Dirac monopole and monopole harmonics in §4.4.2–§4.4.3.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html"><span class="doc std std-doc">2.2.2 Spin Representations</span></a>: Lie algebra of angular momentum and spin-<span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span> as the quantum upgrade of classical <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>.</p></li>
+<li><p><a class="reference internal" href="4-4-2-dirac-monopole.html"><span class="doc std std-doc">4.4.2 Dirac Monopole</span></a>: Dirac string, vector potentials on patches, and the geometric phase preview for monopole harmonics.</p></li>
+<li><p><a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a>: Geometric phases when parameters (or <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>) adiabatically traverse a closed path.</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Gyromagnetic ratio.</strong> A particle of charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> moves in a circle of radius <span class="math notranslate nohighlight">\(R\)</span> at speed <span class="math notranslate nohighlight">\(v\)</span>, constituting a current loop.</p>
-<p>(a) The magnetic moment is <span class="math notranslate nohighlight">\(\mu = IA\)</span> where <span class="math notranslate nohighlight">\(I = q/(2\pi R/v)\)</span> is the current and <span class="math notranslate nohighlight">\(A = \pi R^2\)</span>. Show that <span class="math notranslate nohighlight">\(\mu = qvR/2\)</span>.</p>
-<p>(b) The orbital angular momentum is <span class="math notranslate nohighlight">\(L = mvR\)</span>. Show that <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = (q/2m)\boldsymbol{L}\)</span>, confirming <span class="math notranslate nohighlight">\(g = 1\)</span> for classical orbital motion.</p>
-<p>(c) Compute <span class="math notranslate nohighlight">\(\mu\)</span> for an electron in the <span class="math notranslate nohighlight">\(n = 1\)</span> Bohr orbit (<span class="math notranslate nohighlight">\(v = \alpha c\)</span>, <span class="math notranslate nohighlight">\(R = a_0\)</span>). Express the result in units of the Bohr magneton <span class="math notranslate nohighlight">\(\mu_B = e\hbar/(2m_e)\)</span>.</p>
-<p><strong>2. Larmor precession.</strong> A magnetic dipole <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = \gamma\boldsymbol{L}\)</span> is placed in a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>.</p>
-<p>(a) From the torque equation <span class="math notranslate nohighlight">\(\mathrm{d}\boldsymbol{L}/\mathrm{d}t = \boldsymbol{\mu}\times\boldsymbol{B}\)</span>, show that <span class="math notranslate nohighlight">\(L_z\)</span> and <span class="math notranslate nohighlight">\(\vert\boldsymbol{L}\vert\)</span> are both conserved.</p>
-<p>(b) Show that <span class="math notranslate nohighlight">\(L_x(t)\)</span> and <span class="math notranslate nohighlight">\(L_y(t)\)</span> oscillate at the Larmor frequency <span class="math notranslate nohighlight">\(\omega_L = \gamma B\)</span>.</p>
-<p>(c) The tip of <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> traces a circle on a cone. Explain why the precession frequency is independent of the cone angle (i.e., independent of <span class="math notranslate nohighlight">\(\vert\boldsymbol{L}\vert\)</span>).</p>
-<p><strong>3. Larmor frequency.</strong> The electron’s <span class="math notranslate nohighlight">\(g\)</span>-factor is <span class="math notranslate nohighlight">\(g_e \approx 2.002\)</span>.</p>
-<p>(a) Compute the electron Larmor frequency <span class="math notranslate nohighlight">\(\omega_L = g_e eB/(2m_e)\)</span> for <span class="math notranslate nohighlight">\(B = 1\,\text{T}\)</span>. Express the result in GHz.</p>
-<p>(b) Compare to the classical prediction with <span class="math notranslate nohighlight">\(g = 1\)</span>. By what factor do they differ?</p>
-<p>(c) NMR uses proton precession (<span class="math notranslate nohighlight">\(g_p \approx 5.586\)</span>, mass <span class="math notranslate nohighlight">\(m_p\)</span>). Compute the proton Larmor frequency at <span class="math notranslate nohighlight">\(B = 1\,\text{T}\)</span> and explain why NMR operates at MHz rather than GHz.</p>
-<p><strong>4. Stern-Gerlach quantization.</strong> Silver atoms pass through an inhomogeneous magnetic field. The force on a dipole is <span class="math notranslate nohighlight">\(F_z = \mu_z(\partial B/\partial z)\)</span>.</p>
-<p>(a) If the angular momentum quantum number is <span class="math notranslate nohighlight">\(j\)</span>, the beam splits into <span class="math notranslate nohighlight">\(2j + 1\)</span> spots. The experiment shows exactly 2 spots. What value of <span class="math notranslate nohighlight">\(j\)</span> does this imply?</p>
-<p>(b) Orbital angular momentum gives <span class="math notranslate nohighlight">\(j = l = 0, 1, 2, \ldots\)</span> (integer). Explain why <span class="math notranslate nohighlight">\(j = 1/2\)</span> cannot arise from orbital motion.</p>
-<p>(c) One might argue: “Maybe <span class="math notranslate nohighlight">\(l = 1\)</span> but only <span class="math notranslate nohighlight">\(m = \pm 1\)</span> are populated.” Explain why this interpretation fails.</p>
-<p><strong>5. Anomalous magnetic moment.</strong> The electron has <span class="math notranslate nohighlight">\(g_e \approx 2\)</span>, not <span class="math notranslate nohighlight">\(g = 1\)</span>.</p>
-<p>(a) Explain why <span class="math notranslate nohighlight">\(g \neq 1\)</span> implies the electron’s magnetic moment cannot arise from classical orbital motion of a charged sphere.</p>
-<p>(b) The deviation <span class="math notranslate nohighlight">\(a_e = (g_e - 2)/2 \approx 0.00116\)</span> is predicted by QED. Explain qualitatively why virtual photon emission and reabsorption modifies the effective magnetic moment.</p>
-<p>(c) The muon anomalous moment <span class="math notranslate nohighlight">\(a_\mu\)</span> is more sensitive to heavy virtual particles. Explain why <span class="math notranslate nohighlight">\(a_\mu\)</span> is a better probe of new physics than <span class="math notranslate nohighlight">\(a_e\)</span>.</p>
-<p><strong>6. Representations of SU(2).</strong> The angular momentum algebra <span class="math notranslate nohighlight">\([\hat{J}_i, \hat{J}_j] = \mathrm{i}\hbar\epsilon_{ijk}\hat{J}_k\)</span> admits representations with <span class="math notranslate nohighlight">\(j = 0, 1/2, 1, 3/2, \ldots\)</span> of dimension <span class="math notranslate nohighlight">\(2j+1\)</span>.</p>
-<p>(a) List the dimensions for <span class="math notranslate nohighlight">\(j = 0, 1/2, 1, 3/2, 2\)</span>. Which can arise from orbital angular momentum, and which require spin?</p>
-<p>(b) The direct product <span class="math notranslate nohighlight">\(\frac{1}{2}\otimes\frac{1}{2} = 0 \oplus 1\)</span>. Verify by counting dimensions: <span class="math notranslate nohighlight">\(2 \times 2 = 1 + 3\)</span>. What physical states correspond to each irreducible component?</p>
-<p>(c) For two spin-1 particles, decompose <span class="math notranslate nohighlight">\(1 \otimes 1\)</span> and list all possible total <span class="math notranslate nohighlight">\(j\)</span> values.</p>
-<p><strong>7. Quantum spin precession.</strong> A spin-1/2 particle in <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> has Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = -\gamma B\hat{S}_z\)</span>.</p>
-<p>(a) Find the time evolution of <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \alpha\mathrm{e}^{\mathrm{i}\omega_L t/2}\vert\uparrow\rangle + \beta\mathrm{e}^{-\mathrm{i}\omega_L t/2}\vert\downarrow\rangle\)</span>. Show that <span class="math notranslate nohighlight">\(\langle\hat{S}_x\rangle(t)\)</span> and <span class="math notranslate nohighlight">\(\langle\hat{S}_y\rangle(t)\)</span> precess at <span class="math notranslate nohighlight">\(\omega_L\)</span> while <span class="math notranslate nohighlight">\(\langle\hat{S}_z\rangle\)</span> is constant.</p>
-<p>(b) Compare to the classical precession from Problem 2. In what sense is the quantum result “the same”?</p>
-<p>(c) The state <span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span> has <span class="math notranslate nohighlight">\(\langle\hat{S}_x\rangle = \langle\hat{S}_y\rangle = 0\)</span> — no precession. Explain why some quantum states precess and others do not.</p>
-<p><strong>8. Half-integer from topology.</strong> Single-valuedness on the sphere requires <span class="math notranslate nohighlight">\(\psi(\phi + 2\pi) = \psi(\phi)\)</span>, which forces integer <span class="math notranslate nohighlight">\(m\)</span> and hence integer <span class="math notranslate nohighlight">\(l\)</span>.</p>
-<p>(a) Show this: <span class="math notranslate nohighlight">\(\psi \propto \mathrm{e}^{\mathrm{i}m\phi}\)</span> requires <span class="math notranslate nohighlight">\(m \in \mathbb{Z}\)</span>.</p>
-<p>(b) In a Dirac monopole background (§4.4.2), the condition becomes <span class="math notranslate nohighlight">\(\psi(\phi + 2\pi) = \mathrm{e}^{2\pi\mathrm{i}s}\psi(\phi)\)</span> with <span class="math notranslate nohighlight">\(s = qg/(2\hbar)\)</span>. For <span class="math notranslate nohighlight">\(s = 1/2\)</span>, what is the minimum allowed <span class="math notranslate nohighlight">\(j\)</span>? How many states does the lowest multiplet contain?</p>
-<p>(c) This means half-integer angular momentum can emerge from topology without postulating intrinsic spin. In what sense does this unify orbital and spin angular momentum?</p>
+<p><strong>1. Spin-axis kinematics.</strong> Let <span class="math notranslate nohighlight">\(\boldsymbol n(t)\)</span> be a unit vector and suppose its motion is generated by an angular velocity <span class="math notranslate nohighlight">\(\boldsymbol\Omega\)</span> through <span class="math notranslate nohighlight">\(\dot{\boldsymbol n}=\boldsymbol\Omega\times\boldsymbol n\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(\boldsymbol n\cdot\dot{\boldsymbol n}=0\)</span>.</p>
+<p>(b) Assuming <span class="math notranslate nohighlight">\(\boldsymbol\Omega\)</span> is tangent to the sphere, show that <span class="math notranslate nohighlight">\(\boldsymbol\Omega=\boldsymbol n\times\dot{\boldsymbol n}\)</span>.</p>
+<p>(c) Explain why this means the spin axis behaves like a particle constrained to move on <span class="math notranslate nohighlight">\(S^2\)</span>.</p>
+<p><strong>2. Deriving the spin-axis equation.</strong> For a spherical top, take</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol L=S\boldsymbol n+I\boldsymbol n\times\dot{\boldsymbol n}.
+\]</div>
+<p>(a) Use <span class="math notranslate nohighlight">\(\dot{\boldsymbol L}=\boldsymbol\tau\)</span> to show</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol\tau=S\dot{\boldsymbol n}+I\boldsymbol n\times\ddot{\boldsymbol n}.
+\]</div>
+<p>(b) Define <span class="math notranslate nohighlight">\(\left.\ddot{\boldsymbol n}\right|_\perp=\ddot{\boldsymbol n}-\boldsymbol n(\boldsymbol n\cdot\ddot{\boldsymbol n})\)</span>. Cross with <span class="math notranslate nohighlight">\(\boldsymbol n\)</span> and show that</p>
+<div class="math notranslate nohighlight">
+\[
+I\left.\ddot{\boldsymbol n}\right|_\perp=\boldsymbol\tau\times\boldsymbol n-\dot{\boldsymbol n}\times S\boldsymbol n.
+\]</div>
+<p>(c) Identify which term is the ordinary force and which term is the gyroscopic/Lorentz-like force.</p>
+<p><strong>3. Spin-monopole dictionary.</strong> Compare</p>
+<div class="math notranslate nohighlight">
+\[
+I\left.\ddot{\boldsymbol n}\right|_\perp=\boldsymbol\tau\times\boldsymbol n-\dot{\boldsymbol n}\times S\boldsymbol n
+\]</div>
+<p>with the Lorentz-force equation</p>
+<div class="math notranslate nohighlight">
+\[
+m\left.\ddot{\boldsymbol x}\right|_\perp=\boldsymbol E_\perp+q\dot{\boldsymbol x}\times\boldsymbol B.
+\]</div>
+<p>(a) Give the dictionary between <span class="math notranslate nohighlight">\(m,\boldsymbol x,\left.\ddot{\boldsymbol x}\right|_\perp,\boldsymbol E_\perp,\boldsymbol B\)</span> and <span class="math notranslate nohighlight">\(I,\boldsymbol n,\left.\ddot{\boldsymbol n}\right|_\perp,\boldsymbol\tau\)</span>.</p>
+<p>(b) If <span class="math notranslate nohighlight">\(\boldsymbol B=g\boldsymbol n\)</span>, show that the analogy identifies <span class="math notranslate nohighlight">\(qg/(4\pi)=-S\)</span> up to orientation convention.</p>
+<p>(c) Explain why this means <span class="math notranslate nohighlight">\(S/\hbar\)</span> plays the same role as the monopole quantum number <span class="math notranslate nohighlight">\(qg/(4\pi\hbar)\)</span>.</p>
+<p><strong>4. Curl of the monopole potential.</strong> On the unit sphere, take</p>
+<div class="math notranslate nohighlight">
+\[
+A_\theta=0,
+\qquad
+A_\varphi=S\frac{\cos\theta-1}{\sin\theta}.
+\]</div>
+<p>(a) Use</p>
+<div class="math notranslate nohighlight">
+\[
+(\nabla_\perp\times\boldsymbol A)\cdot\boldsymbol n
+=\frac{1}{\sin\theta}\partial_\theta(A_\varphi\sin\theta)
+\]</div>
+<p>to show <span class="math notranslate nohighlight">\(\nabla_\perp\times\boldsymbol A=-S\boldsymbol n\)</span>.</p>
+<p>(b) Where is this vector potential singular?</p>
+<p>(c) Explain why a singular vector potential can still represent a smooth monopole field away from the center.</p>
+<p><strong>5. Latitude Berry Phase.</strong> Consider a loop at fixed polar angle <span class="math notranslate nohighlight">\(\theta\)</span> on the spin sphere.</p>
+<p>(a) Compute</p>
+<div class="math notranslate nohighlight">
+\[
+\oint \boldsymbol A\cdot\mathrm d\boldsymbol l
+\]</div>
+<p>using <span class="math notranslate nohighlight">\(A_\varphi=S(\cos\theta-1)/\sin\theta\)</span>.</p>
+<p>(b) Show that the result is <span class="math notranslate nohighlight">\(-S\Omega(\theta)\)</span>, where <span class="math notranslate nohighlight">\(\Omega(\theta)=2\pi(1-\cos\theta)\)</span> is the solid angle of the cap.</p>
+<p>(c) Interpret <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}=\hbar^{-1}\oint\boldsymbol A\cdot\mathrm d\boldsymbol l\)</span> as a Berry phase.</p>
+<p><strong>6. Spin quantization from flux.</strong> The full sphere encloses solid angle <span class="math notranslate nohighlight">\(4\pi\)</span>.</p>
+<p>(a) Use the Berry phase of the full monopole flux to show that single-valuedness requires <span class="math notranslate nohighlight">\(4\pi S/\hbar=2\pi n\)</span>.</p>
+<p>(b) Conclude that <span class="math notranslate nohighlight">\(S=\hbar n/2\)</span>.</p>
+<p>(c) Explain why <span class="math notranslate nohighlight">\(n=1\)</span> gives a spin-<span class="math notranslate nohighlight">\(1/2\)</span> object.</p>
+<p><strong>7. Connecting to Dirac monopoles.</strong> In §4.4.2 a charged particle near a magnetic monopole has dimensionless monopole quantum number</p>
+<div class="math notranslate nohighlight">
+\[
+s=\frac{qg}{4\pi\hbar}.
+\]</div>
+<p>(a) Compare this with the spin quantum number <span class="math notranslate nohighlight">\(s=S/\hbar\)</span>.</p>
+<p>(b) Explain why the identification <span class="math notranslate nohighlight">\(S\leftrightarrow |qg|/(4\pi)\)</span> makes spin quantization and Dirac quantization the same mathematical condition.</p>
+<p>(c) Preview §4.4.3: why should wavefunctions on the spin sphere be related to monopole harmonics rather than ordinary spherical harmonics?</p>
 </section>
 </section>
 
@@ -806,10 +914,11 @@ l = 0, 1, 2, \ldots \quad \text{(integers only)}
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classical-spinning-top">The Classical Spinning Top</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precession-in-a-torque-field">Precession in a Torque Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gyromagnetic-ratio">The Gyromagnetic Ratio</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-puzzle-integer-vs-half-integer-angular-momentum">The Puzzle: Integer vs Half-Integer Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-axis-and-angular-momentum">Spin Axis and Angular Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equation-of-motion-for-the-spin-axis">Equation of Motion for the Spin Axis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spin-as-a-charged-particle-on-a-monopole-sphere">Spin as a Charged Particle on a Monopole Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monopole-vector-potential-on-the-spin-sphere">Monopole Vector Potential on the Spin Sphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-from-berry-phase">Quantization from Berry Phase</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

@@ -508,7 +508,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonic-perturbation">Harmonic Perturbation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-dipole-transitions">Electric Dipole Transitions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifetime-and-linewidth">Lifetime and Linewidth</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-hall-conductance">Linear Response and Hall Conductance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-the-kubo-formula">Linear Response and the Kubo Formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hall-conductance">Quantum Hall Conductance</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -532,8 +533,9 @@
 <li><p>How does a harmonic perturbation <span class="math notranslate nohighlight">\(V(t) = V_0 \cos(\omega t)\)</span> create resonant transitions between quantum states? What determines the Rabi frequency?</p></li>
 <li><p>What are the electric dipole selection rules for hydrogen, and why do they follow from the symmetry of the dipole operator?</p></li>
 <li><p>How does Fermi’s golden rule connect the decay rate <span class="math notranslate nohighlight">\(\Gamma\)</span> to the lifetime <span class="math notranslate nohighlight">\(\tau\)</span> and the natural linewidth <span class="math notranslate nohighlight">\(\Delta E\)</span> of a spectral line?</p></li>
-<li><p>What is linear response theory, and how does the Kubo formula express conductivity in terms of current-current correlations?</p></li>
-<li><p>Why is the Hall conductance <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span> exactly quantized for filled Landau levels?</p></li>
+<li><p>What is linear response theory? Sketch how the Kubo formula expresses conductivity in terms of current matrix elements between filled and empty single-particle states.</p></li>
+<li><p>Walk through the time-dependent perturbation theory derivation of the Kubo formula. Why does coupling via the vector potential give the perturbation <span class="math notranslate nohighlight">\(\delta\hat{H}=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span>?</p></li>
+<li><p>Why does evaluating the Kubo formula on <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels give exactly <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>? See §4.3.3 for the explicit calculation.</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
@@ -582,7 +584,7 @@ V(t) = -\boldsymbol{d} \cdot \boldsymbol{E}(t) = -(-e\boldsymbol{r}) \cdot \bold
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{d} = -e\boldsymbol{r}\)</span> is the electric dipole moment. The transition amplitude depends on the dipole matrix element <span class="math notranslate nohighlight">\(\langle f \vert \boldsymbol{r} \vert i \rangle\)</span>.</p>
 <p>Not all transitions are allowed. The parity and angular momentum structure of wavefunctions impose <strong>selection rules</strong>. For hydrogen (or any single-electron atom):</p>
-<div class="important admonition">
+<div class="note admonition">
 <p class="admonition-title">Selection Rules for Electric Dipole Transitions</p>
 <p>For a transition <span class="math notranslate nohighlight">\(n\ell m_\ell \to n'\ell' m_{\ell}'\)</span>:</p>
 <ul class="simple">
@@ -624,42 +626,96 @@ V(t) = -\boldsymbol{d} \cdot \boldsymbol{E}(t) = -(-e\boldsymbol{r}) \cdot \bold
 <p>This gives a <strong>natural linewidth</strong> in the emission spectrum. The lineshape is Lorentzian, centered at the transition energy <span class="math notranslate nohighlight">\(E_i - E_f\)</span> with width <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
 </div>
 <p>For instance, the 2p state of hydrogen has <span class="math notranslate nohighlight">\(\tau \sim 1.6 \times 10^{-9}\)</span> s (lifetime), corresponding to <span class="math notranslate nohighlight">\(\Gamma \sim 0.1\)</span> eV (linewidth).</p>
-<p>So far we have focused on single isolated atoms or simple two-level systems. To understand the macroscopic response of a material—how currents flow under applied electric or magnetic fields—we must study many-body systems and extend our perturbative framework to continuous media.</p>
+<p>So far we have focused on single isolated atoms or simple two-level systems. The same first-order machinery extends to many-body response functions: how a macroscopic observable (e.g. electric current) responds to a weak external field. The result is <strong>linear-response theory</strong>, whose central object is the Kubo formula.</p>
 </section>
-<section id="linear-response-and-hall-conductance">
-<h3>Linear Response and Hall Conductance<a class="headerlink" href="#linear-response-and-hall-conductance" title="Link to this heading">#</a></h3>
-<p>An electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}(t)\)</span> drives currents in the material. For weak fields, the response is <strong>linear</strong>:</p>
+<section id="linear-response-and-the-kubo-formula">
+<h3>Linear Response and the Kubo Formula<a class="headerlink" href="#linear-response-and-the-kubo-formula" title="Link to this heading">#</a></h3>
+<p>Consider non-interacting electrons in a single-particle Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> with eigenstates <span class="math notranslate nohighlight">\(\{|\alpha\rangle\}\)</span> and energies <span class="math notranslate nohighlight">\(\{E_\alpha\}\)</span>. At zero temperature every state below the Fermi level is occupied, every state above is empty. The single-particle current operator is <span class="math notranslate nohighlight">\(\hat{\boldsymbol{j}} = q\hat{\boldsymbol{v}} = q\hat{\boldsymbol{\pi}}/m\)</span> (charge times velocity), and the <strong>macroscopic current density</strong> is its expectation value summed over occupied single-particle states, per unit area:</p>
+<div class="math notranslate nohighlight" id="equation-eq-current-density-def">
+<span class="eqno">(197)<a class="headerlink" href="#equation-eq-current-density-def" title="Link to this equation">#</a></span>\[
+\boldsymbol{j} \;\equiv\; \frac{1}{A}\sum_{\alpha\in\mathrm{occ}}\langle\alpha|\hat{\boldsymbol{j}}|\alpha\rangle.
+\]</div>
+<p>A weak electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}(t)\)</span> induces a current linear in the field,</p>
 <div class="math notranslate nohighlight">
 \[
-j_\alpha(t) = \sum_\beta \sigma_{\alpha\beta} E_\beta(t)
+j_a(t) = \sigma_{ab}(\omega)\,E_b(t),
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma_{\alpha\beta}\)</span> is the conductivity tensor. Computing <span class="math notranslate nohighlight">\(\sigma\)</span> from first-order perturbation theory requires summing the current-current correlation:</p>
+<p>defining the conductivity tensor <span class="math notranslate nohighlight">\(\sigma_{ab}(\omega)\)</span>. We now compute it from first-order time-dependent perturbation theory (§5.2.1).</p>
+<p><strong>Coupling to the field via the vector potential.</strong> A spatially uniform, oscillatory <span class="math notranslate nohighlight">\(\boldsymbol{E}(t) = \boldsymbol{E}\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t}\)</span> (adiabatically turned on from <span class="math notranslate nohighlight">\(t = -\infty\)</span>, hence the <span class="math notranslate nohighlight">\(0^+\)</span> regulator) is implemented by a vector-potential perturbation</p>
+<div class="math notranslate nohighlight">
+\[
+\delta\boldsymbol{A}(t) = \frac{\mathrm{i}\boldsymbol{E}}{\omega+\mathrm{i}0^+}\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t}, \qquad \boldsymbol{E}(t) = -\partial_t\,\delta\boldsymbol{A}(t).
+\]</div>
+<p>Expanding the minimal-coupling Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2/(2m) + V\)</span> to first order in <span class="math notranslate nohighlight">\(\delta\boldsymbol{A}\)</span> gives the perturbation</p>
+<div class="math notranslate nohighlight" id="equation-eq-kubo-perturbation">
+<span class="eqno">(198)<a class="headerlink" href="#equation-eq-kubo-perturbation" title="Link to this equation">#</a></span>\[
+\delta\hat{H}(t) = \frac{\partial\hat{H}}{\partial\boldsymbol{A}}\cdot\delta\boldsymbol{A}(t) = -\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}(t),
+\]</div>
+<p>(the partial derivative is taken at fixed canonical <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span>).</p>
+<p><strong>Result.</strong> Applying first-order perturbation theory state-by-state and summing over occupied states yields the <strong>Kubo formula</strong> for the Hall (transverse) conductivity in the DC limit <span class="math notranslate nohighlight">\(\omega\to 0\)</span>:</p>
 <div class="important admonition">
-<p class="admonition-title">Kubo Formula for Conductivity</p>
+<p class="admonition-title">Kubo formula</p>
+<div class="math notranslate nohighlight" id="equation-eq-kubo-hall-523">
+<span class="eqno">(199)<a class="headerlink" href="#equation-eq-kubo-hall-523" title="Link to this equation">#</a></span>\[
+\sigma_{xy} = \frac{\mathrm{i}\hbar}{A}\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha|\hat{j}_x|\beta\rangle\langle\beta|\hat{j}_y|\alpha\rangle - \langle\alpha|\hat{j}_y|\beta\rangle\langle\beta|\hat{j}_x|\alpha\rangle}{(E_\beta - E_\alpha)^2}.
+\]</div>
+<p>The sum runs over occupied single-particle states <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> and empty states <span class="math notranslate nohighlight">\(|\beta\rangle\)</span> (no Fermi-Dirac function needed at <span class="math notranslate nohighlight">\(T=0\)</span>). The numerator is the antisymmetric current-matrix-element combination; the denominator is the squared energy gap <span class="math notranslate nohighlight">\(E_\beta - E_\alpha &gt; 0\)</span> across the Fermi level. The same formula appears in §4.3.3 (<a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html#equation-eq-kubo-hall">(158)</a>), where it is evaluated explicitly on Landau-level eigenstates.</p>
+</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Kubo formula</p>
+<p>Each electron occupies a state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> that evolves independently under <span class="math notranslate nohighlight">\(\hat{H}_0 + \delta\hat{H}(t)\)</span>. We compute the response state-by-state, then sum over occupied states and divide by <span class="math notranslate nohighlight">\(A\)</span> to assemble the macroscopic current density <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> via <a class="reference internal" href="#equation-eq-current-density-def">(197)</a>.</p>
+<p><strong>Step 1 — First-order response of one occupied state.</strong></p>
+<p>Each occupied single-particle state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> evolves under the interaction-picture operator <span class="math notranslate nohighlight">\(\hat{U}_I(t)\)</span> from §5.2.1. The expectation value of the single-particle current in that state is</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{xy} = \frac{2\pi e^2}{\hbar} \sum_{n \neq m} \frac{f(E_n) - f(E_m)}{(E_n - E_m)^2} \cdot 2\operatorname{Im}\langle n \vert \hat{j}_x \vert m \rangle \langle m \vert \hat{j}_y \vert n \rangle
+\langle\hat{j}_a(t)\rangle_\alpha \equiv \langle\alpha|\hat{U}_I^\dagger(t)\,\hat{j}_a^I(t)\,\hat{U}_I(t)|\alpha\rangle.
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(f(E)\)</span> is the Fermi-Dirac distribution and <span class="math notranslate nohighlight">\(\hat{j}\)</span> is the current operator. For <span class="math notranslate nohighlight">\(T = 0\)</span>, the sum is over occupied (<span class="math notranslate nohighlight">\(n\)</span>) and empty (<span class="math notranslate nohighlight">\(m\)</span>) states.</p>
-</div>
-<div class="note admonition">
-<p class="admonition-title">Quantum Hall Conductance from Filled Landau Levels</p>
-<p>When a Landau level is completely filled (all <span class="math notranslate nohighlight">\(N_\phi\)</span> states occupied, where <span class="math notranslate nohighlight">\(N_\phi = B A / \phi_0\)</span> is the number of states), the Kubo formula yields an exact, quantized result:</p>
+<p>Expanding to first order in <span class="math notranslate nohighlight">\(\delta\hat{H}\)</span> gives the standard first-order Kubo identity,</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{xy} = \frac{\nu e^2}{h}
+\langle\hat{j}_a(t)\rangle_\alpha = \langle\alpha|\hat{j}_a^I(t)|\alpha\rangle - \frac{\mathrm{i}}{\hbar}\int_{-\infty}^{t}\!\mathrm{d}t'\,\langle\alpha|[\hat{j}_a^I(t),\delta\hat{H}_I(t')]|\alpha\rangle,
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\nu\)</span> is the filling factor (number of filled Landau levels). For a single filled level, <span class="math notranslate nohighlight">\(\sigma_{xy} = e^2/h\)</span>—<strong>exact</strong> to all orders in perturbation theory, independent of disorder or interactions.</p>
-<p>This connects back to §4.3 (Landau levels and cyclotron motion): the quantum Hall effect is not just a band structure curiosity—it is a fundamental linear response result. Perturbation theory reveals its quantization.</p>
+<p>with <span class="math notranslate nohighlight">\(\hat{j}_a^I(t) = \mathrm{e}^{\mathrm{i}\hat{H}_0 t/\hbar}\hat{j}_a\,\mathrm{e}^{-\mathrm{i}\hat{H}_0 t/\hbar}\)</span>.</p>
+<p><strong>Step 2 — Sum over occupied states; assemble the current density.</strong></p>
+<p>Substitute <span class="math notranslate nohighlight">\(\delta\hat{H}_I(t') = -\hat{j}_b^I(t')\,\delta A_b(t')\)</span>, sum over occupied states, and divide by <span class="math notranslate nohighlight">\(A\)</span>. The zeroth-order term <span class="math notranslate nohighlight">\(\sum_{\alpha\in\mathrm{occ}}\langle\alpha|\hat{j}_a|\alpha\rangle = 0\)</span> vanishes (no current without a driving field), leaving</p>
+<div class="math notranslate nohighlight">
+\[
+j_a(t) = \frac{\mathrm{i}}{\hbar A}\!\int_{-\infty}^{t}\!\mathrm{d}t'\,\delta A_b(t')\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^I(t),\hat{j}_b^I(t')]|\alpha\rangle.
+\]</div>
+<p><strong>Step 3 — Substitute the harmonic field.</strong></p>
+<p>Using <span class="math notranslate nohighlight">\(\delta A_b(t') = (\mathrm{i}E_b/(\omega+\mathrm{i}0^+))\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t'}\)</span> and the change of variable <span class="math notranslate nohighlight">\(\tau = t-t'\)</span> (with time-translation invariance of the unperturbed system), the result <span class="math notranslate nohighlight">\(j_a(t) = \sigma_{ab}(\omega)\,E_b\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t}\)</span> defines</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{ab}(\omega) = -\frac{1}{\hbar(\omega+\mathrm{i}0^+) A}\int_0^{\infty}\!\mathrm{d}\tau\,\mathrm{e}^{\mathrm{i}(\omega+\mathrm{i}0^+)\tau}\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^I(\tau),\hat{j}_b^I(0)]|\alpha\rangle.
+\]</div>
+<p><strong>Step 4 — Insert eigenbasis and evaluate the time integral.</strong></p>
+<p>Insert <span class="math notranslate nohighlight">\(\sum_\gamma|\gamma\rangle\langle\gamma|\)</span> between the two single-particle current operators and use <span class="math notranslate nohighlight">\(\hat{j}_a^I(\tau)|\gamma\rangle = \mathrm{e}^{\mathrm{i}\omega_{\gamma\alpha}\tau}\hat{j}_a|\gamma\rangle\)</span> on each <span class="math notranslate nohighlight">\(\langle\alpha|\cdots|\alpha\rangle\)</span> matrix element (with <span class="math notranslate nohighlight">\(\omega_{\gamma\alpha} = (E_\gamma-E_\alpha)/\hbar\)</span>),</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^I(\tau),\hat{j}_b^I(0)]|\alpha\rangle = \sum_{\alpha\in\mathrm{occ}}\sum_\gamma\Big(j^a_{\alpha\gamma}j^b_{\gamma\alpha}\,\mathrm{e}^{\mathrm{i}\omega_{\gamma\alpha}\tau} - j^b_{\alpha\gamma}j^a_{\gamma\alpha}\,\mathrm{e}^{-\mathrm{i}\omega_{\gamma\alpha}\tau}\Big),
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(j^a_{\alpha\gamma} \equiv \langle\alpha|\hat{j}_a|\gamma\rangle\)</span> a single-particle matrix element. The <span class="math notranslate nohighlight">\(\tau\)</span> integral gives <span class="math notranslate nohighlight">\(\int_0^\infty\!\mathrm{d}\tau\,\mathrm{e}^{\mathrm{i}(\omega+\mathrm{i}0^+ \pm\omega_{\gamma\alpha})\tau} = \mathrm{i}/(\omega+\mathrm{i}0^+\pm\omega_{\gamma\alpha})\)</span>.</p>
+<p><strong>Step 5 — DC limit.</strong></p>
+<p>For <span class="math notranslate nohighlight">\(\gamma = \alpha\)</span> (intra-band), the integrand is finite but the prefactor <span class="math notranslate nohighlight">\(1/\omega\)</span> produces a pole — the Drude weight, which is absent for a gapped insulator and irrelevant to the antisymmetric Hall part. For <span class="math notranslate nohighlight">\(\gamma\neq\alpha\)</span> (inter-band), expand <span class="math notranslate nohighlight">\(1/(\omega\pm\omega_{\gamma\alpha}) = \pm 1/\omega_{\gamma\alpha} - \omega/\omega_{\gamma\alpha}^2 + O(\omega^2)\)</span>. The <span class="math notranslate nohighlight">\(\pm 1/\omega_{\gamma\alpha}\)</span> piece, divided by <span class="math notranslate nohighlight">\(\omega\)</span>, gives the symmetric (longitudinal) divergence that cancels in clean systems with current conservation. The <span class="math notranslate nohighlight">\(-\omega/\omega_{\gamma\alpha}^2\)</span> piece gives a finite <strong>antisymmetric</strong> contribution. Restricting <span class="math notranslate nohighlight">\(\gamma\notin\mathrm{occ}\)</span> — terms with <span class="math notranslate nohighlight">\(\gamma\in\mathrm{occ}\)</span> pair-cancel because both <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> run over the occupied set — yields</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy} = \frac{\mathrm{i}\hbar}{A}\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha|\hat{j}_x|\beta\rangle\langle\beta|\hat{j}_y|\alpha\rangle - \langle\alpha|\hat{j}_y|\beta\rangle\langle\beta|\hat{j}_x|\alpha\rangle}{(E_\beta-E_\alpha)^2},
+\]</div>
+<p>the Kubo formula above. All matrix elements are single-particle (<span class="math notranslate nohighlight">\(\hat{j}\)</span>); the <span class="math notranslate nohighlight">\(1/A\)</span> traces back to the current-density definition <a class="reference internal" href="#equation-eq-current-density-def">(197)</a>.</p>
 </div>
+<p><strong>Physical content.</strong> The Kubo formula expresses transport coefficients in terms of current-current matrix elements between filled and empty single-particle states. It is the perturbative expression of the <em>fluctuation-dissipation</em> relation: response coefficients are determined by ground-state correlation functions. The denominator <span class="math notranslate nohighlight">\((E_\beta - E_\alpha)^2\)</span> shows that low-energy interband excitations dominate.</p>
+</section>
+<section id="quantum-hall-conductance">
+<h3>Quantum Hall Conductance<a class="headerlink" href="#quantum-hall-conductance" title="Link to this heading">#</a></h3>
+<p>For 2D electrons in a perpendicular magnetic field with <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels, the Kubo formula evaluates to the exact integer-quantized result <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span>, independent of disorder, geometry, or microscopic details (provided the bulk gap stays open). The explicit Landau-level evaluation, and the complementary topological (charge-pumping) interpretation of the same quantization, are in <strong>§4.3.3</strong>.</p>
 <div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: Why Is the Hall Conductance Exactly Quantized?</p>
-<p>The Kubo formula gives <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span> for filled Landau levels—an integer times a fundamental constant.</p>
+<p class="admonition-title">Discussion: Why is the Hall conductance exactly quantized?</p>
+<p>The Kubo formula is a first-order perturbative result, yet it gives an <em>exact</em> integer for filled Landau levels. Some questions to chew on:</p>
 <ul class="simple">
-<li><p>Fermi’s golden rule is perturbative and approximate. Yet <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> is exact to all orders. What makes this quantity topologically protected?</p></li>
-<li><p>The conductance is independent of disorder, sample geometry, and interaction strength. Why does perturbation theory capture an exact result at all?</p></li>
-<li><p>The integer <span class="math notranslate nohighlight">\(\nu\)</span> counts filled Landau levels. What is the physical meaning of this number from the perspective of topology and winding numbers?</p></li>
-<li><p>If we gradually deform the Hamiltonian without closing a gap, can <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> change? What happens if we allow the gap to close?</p></li>
+<li><p>The Kubo expression sums over all occupied/empty pairs and weights each by <span class="math notranslate nohighlight">\(1/(E_\beta-E_\alpha)^2\)</span>. Why does the answer become a pure integer when the occupied set is a <em>full</em> Landau level?</p></li>
+<li><p>Disorder localizes most states inside each broadened Landau level. Why does the Kubo sum, which references <em>all</em> states, not move off the integer plateau?</p></li>
+<li><p>Compare the Kubo derivation (a perturbation-theory calculation) with the Laughlin charge-pumping argument in §4.3.3 (a topological argument). What does it mean that two completely different methods give the same exact answer?</p></li>
+<li><p>If you slowly deform the Hamiltonian without closing the bulk gap, can <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> change continuously? What if you close the gap?</p></li>
 </ul>
 </div>
 </section>
@@ -669,8 +725,16 @@ j_\alpha(t) = \sum_\beta \sigma_{\alpha\beta} E_\beta(t)
 <li><p><strong>Harmonic driving</strong> at frequency <span class="math notranslate nohighlight">\(\omega\)</span> induces resonant transitions when <span class="math notranslate nohighlight">\(\omega = \omega_{fi}\)</span>; Rabi oscillations probe the coupling strength.</p></li>
 <li><p><strong>Dipole selection rules</strong> (<span class="math notranslate nohighlight">\(\Delta \ell = \pm 1\)</span>, etc.) determine which transitions are allowed; metastable states bypass these rules.</p></li>
 <li><p><strong>Finite lifetime</strong> <span class="math notranslate nohighlight">\(\tau = 1/\Gamma\)</span> produces natural linewidth <span class="math notranslate nohighlight">\(\Delta E \sim \hbar/\tau\)</span>; spectral lines have intrinsic width.</p></li>
-<li><p><strong>Linear response</strong> and the Kubo formula predict exact Hall quantization for filled Landau levels—a triumph of first-order perturbation theory.</p></li>
+<li><p><strong>Linear response and the Kubo formula:</strong> first-order time-dependent perturbation theory in the vector-potential perturbation <span class="math notranslate nohighlight">\(\delta\hat{H}=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span> yields a zero-temperature, occupied-vs-empty form for <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span>. Evaluated on <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels (§4.3.3), it gives the exact quantized <span class="math notranslate nohighlight">\(\sigma_{xy}=\nu e^2/h\)</span>.</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="5-2-2-fermis-golden-rule.html"><span class="doc std std-doc">5.2.2 Fermi’s Golden Rule</span></a>: Rates, linewidth, and resonance—the formulas applied here to spectroscopy and response.</p></li>
+<li><p><a class="reference internal" href="5-2-1-interaction-picture.html"><span class="doc std std-doc">5.2.1 Interaction Picture</span></a>: Time-ordered evolution and amplitudes <span class="math notranslate nohighlight">\(c_f^{(1)}(t)\)</span> that underlie harmonic driving and Kubo response in this lesson.</p></li>
+<li><p><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html"><span class="doc std std-doc">4.3.3 Quantum Hall Effect</span></a>: The Kubo–Landau-level calculation of <span class="math notranslate nohighlight">\(\sigma_{xy}=\nu e^2/h\)</span> cited from this lesson’s prompts and Overview.</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="homework">
@@ -696,12 +760,17 @@ j_\alpha(t) = \sum_\beta \sigma_{\alpha\beta} E_\beta(t)
 <p><strong>5. Energy-time uncertainty.</strong> A metastable state has a natural linewidth <span class="math notranslate nohighlight">\(\Delta E = 10^{-5}\,\text{eV}\)</span>.</p>
 <p>(a) What is its lifetime?</p>
 <p>(b) Over what minimum time scale must one measure to resolve the energy to better than <span class="math notranslate nohighlight">\(\Delta E\)</span>?</p>
-<p><strong>6. Kubo formula.</strong> A two-level system with <span class="math notranslate nohighlight">\(\hat{H}_0 = -\frac{\hbar\omega_0}{2}\hat{\sigma}^z\)</span> is perturbed by a weak time-dependent field coupling via <span class="math notranslate nohighlight">\(\hat{H}_1(t) = -\hat{\sigma}^x E_x(t)\)</span>.</p>
-<p>(a) Identify the current operators <span class="math notranslate nohighlight">\(\hat{j}_x \propto \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{j}_y \propto \hat{\sigma}^y\)</span> appropriate for computing linear response.</p>
-<p>(b) Compute the matrix elements <span class="math notranslate nohighlight">\(\langle 0\vert\hat{\sigma}^x\vert 1\rangle\)</span> and <span class="math notranslate nohighlight">\(\langle 1\vert\hat{\sigma}^y\vert 0\rangle\)</span>.</p>
-<p>(c) Write down the Kubo formula for the Hall conductivity <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> at <span class="math notranslate nohighlight">\(T = 0\)</span>. Does <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> vanish or not?</p>
-<p><strong>7. Hall conductance.</strong> For a 2D electron gas in a perpendicular magnetic field with one fully filled Landau level containing <span class="math notranslate nohighlight">\(N_\phi\)</span> states:</p>
-<p>(a) What is the total charge? Express in terms of <span class="math notranslate nohighlight">\(N_\phi\)</span> and <span class="math notranslate nohighlight">\(e\)</span>.</p>
+<p><strong>6. Kubo on a qubit.</strong> A two-level system has <span class="math notranslate nohighlight">\(\hat{H}_0 = -\tfrac{1}{2}\hbar\omega_0\,\hat{\sigma}^z\)</span> with eigenstates <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (occupied, energy <span class="math notranslate nohighlight">\(-\tfrac{1}{2}\hbar\omega_0\)</span>) and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> (empty, energy <span class="math notranslate nohighlight">\(+\tfrac{1}{2}\hbar\omega_0\)</span>). Take effective current operators <span class="math notranslate nohighlight">\(\hat{j}_x = \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{j}_y = \hat{\sigma}^y\)</span> (treat overall prefactors as <span class="math notranslate nohighlight">\(1\)</span>).</p>
+<p>(a) Compute the matrix elements <span class="math notranslate nohighlight">\(\langle 0\vert\hat{j}_x\vert 1\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 1\vert\hat{j}_x\vert 0\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 0\vert\hat{j}_y\vert 1\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 1\vert\hat{j}_y\vert 0\rangle\)</span>.</p>
+<p>(b) Substitute into the zero-temperature Kubo formula</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy} = \mathrm{i}\hbar\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha\vert\hat{j}_x\vert\beta\rangle\langle\beta\vert\hat{j}_y\vert\alpha\rangle - \langle\alpha\vert\hat{j}_y\vert\beta\rangle\langle\beta\vert\hat{j}_x\vert\alpha\rangle}{(E_\beta-E_\alpha)^2}
+\]</div>
+<p>and obtain <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> in units of <span class="math notranslate nohighlight">\(1/(\hbar\omega_0)\)</span>.</p>
+<p>(c) The result is nonzero: a single occupied/empty pair already produces a Hall response. Identify which feature of the matrix elements is responsible (compare to a model with <span class="math notranslate nohighlight">\(\hat{j}_y \to \hat{\sigma}^x\)</span>, where <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> should vanish).</p>
+<p><strong>7. Hall conductance.</strong> For a 2D electron gas in a perpendicular magnetic field with one fully filled Landau level containing <span class="math notranslate nohighlight">\(N_\Phi\)</span> states:</p>
+<p>(a) What is the total charge? Express in terms of <span class="math notranslate nohighlight">\(N_\Phi\)</span> and <span class="math notranslate nohighlight">\(e\)</span>.</p>
 <p>(b) Show that the Hall conductance is <span class="math notranslate nohighlight">\(\sigma_{xy} = e^2/h\)</span> per filled Landau level using dimensional analysis and the Landau level degeneracy.</p>
 <p>(c) Why is this result exact, independent of disorder or electron-electron interactions?</p>
 <p>(d) If the system has filling <span class="math notranslate nohighlight">\(\nu = 1 + 1/3\)</span> (one full Landau level plus a <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> fractional state), what is the net Hall conductance?</p>
@@ -779,7 +848,8 @@ j_\alpha(t) = \sum_\beta \sigma_{\alpha\beta} E_\beta(t)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonic-perturbation">Harmonic Perturbation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-dipole-transitions">Electric Dipole Transitions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifetime-and-linewidth">Lifetime and Linewidth</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-hall-conductance">Linear Response and Hall Conductance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-the-kubo-formula">Linear Response and the Kubo Formula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hall-conductance">Quantum Hall Conductance</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

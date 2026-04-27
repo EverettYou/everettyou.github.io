@@ -37,7 +37,7 @@
   $H = \frac{1}{2m}(\mathbf{p} - q\mathbf{A})^2 + q\Phi$.
 
 **Aharonov-Bohm effect**
-  Phase shift $\Delta\phi = \frac{q}{\hbar}\oint \mathbf{A}\cdot d\mathbf{l} = \frac{q\Phi_B}{\hbar}$ from enclosed magnetic flux, even where $\mathbf{B}=0$.
+  Phase shift $\Delta\Phi_{\mathrm{AB}} = \frac{q}{\hbar}\oint \mathbf{A}\cdot d\mathbf{l} = \frac{q\Phi}{\hbar}$ from enclosed magnetic flux, even where $\mathbf{B}=0$.
 
 **Landau levels**
   $E_n = \hbar\omega_c(n+\tfrac{1}{2})$, with cyclotron frequency $\omega_c = eB/m$ and magnetic length $\ell_B = \sqrt{\hbar/eB}$.
@@ -46,5 +46,5 @@
   $eg = n\hbar c/2$. Magnetic monopoles imply electric charge quantization.
 
 **Berry phase**
-  $\gamma = i\oint \langle n(\mathbf{R})|\nabla_{\mathbf{R}} n(\mathbf{R})\rangle \cdot d\mathbf{R}$. Geometric phase from adiabatic cyclic evolution.
+  $\Phi_{\mathrm{Berry}} = i\oint \langle n(\mathbf{R})|\nabla_{\mathbf{R}} n(\mathbf{R})\rangle \cdot d\mathbf{R}$. Geometric phase from adiabatic cyclic evolution.
 :::

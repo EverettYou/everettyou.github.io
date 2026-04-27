@@ -505,10 +505,12 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-landau-levels">Filling Landau Levels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charge-pumping-argument">Charge Pumping Argument</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-hall-conductance">Linear Response and Hall Conductance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fractional-quantum-hall-effect">Fractional Quantum Hall Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-factor-and-incompressibility">Filling Factor and Incompressibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quantized-hall-conductance">The Quantized Hall Conductance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-1-laughlin-s-charge-pumping">Argument 1: Laughlin’s Charge Pumping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-2-kubo-formula-linear-response">Argument 2: Kubo Formula (Linear Response)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-from-disorder">Robustness from Disorder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-iqhe-fractional-filling">Beyond IQHE: Fractional Filling</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -529,182 +531,258 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the filling factor <span class="math notranslate nohighlight">\(\nu\)</span>? How does it relate the number of electrons to flux quanta?</p></li>
-<li><p>Explain Laughlin’s charge pumping argument: how does threading a flux quantum through a Corbino disk quantize the Hall conductance?</p></li>
-<li><p>At fractional filling, why does the Hall conductance become <span class="math notranslate nohighlight">\(\sigma_{xy} = (p/q) e^2/h\)</span>? What is an anyonic quasiparticle, and how do anyons and fractional statistics emerge at fractional filling?</p></li>
-<li><p>Why is the quantum Hall conductance robust to disorder and sample impurities, despite the apparent delicacy of quantum effects?</p></li>
+<li><p>Define the filling factor <span class="math notranslate nohighlight">\(\nu = N_e/N_\Phi\)</span>. What does it mean physically when <span class="math notranslate nohighlight">\(\nu\)</span> is an integer, and why is the system <em>incompressible</em> there?</p></li>
+<li><p>The Hall conductance at integer <span class="math notranslate nohighlight">\(\nu\)</span> is <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span>. Why is this exact, and why is it independent of microscopic details like sample geometry or disorder?</p></li>
+<li><p>Walk through Laughlin’s charge-pumping argument on a Corbino disk. How does threading one flux quantum <span class="math notranslate nohighlight">\(\Phi_0\)</span> pump exactly <span class="math notranslate nohighlight">\(\nu\)</span> electrons across, and why does this force quantized <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span>?</p></li>
+<li><p>The Kubo (linear-response) formula gives <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span> from a dynamical calculation. What is the physical content of summing matrix elements between filled and empty Landau levels?</p></li>
+<li><p>Why are the Hall plateaus <em>wide</em> in <span class="math notranslate nohighlight">\(B\)</span>, not just isolated points at integer <span class="math notranslate nohighlight">\(\nu\)</span>? What role do disorder-induced localized states play?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The quantum Hall effect reveals one of the most robust and universal phenomena in condensed matter physics. When a 2D electron gas is placed in a strong perpendicular magnetic field, the Hall conductance becomes quantized in units of <span class="math notranslate nohighlight">\(e^2/h\)</span>. Integer quantum Hall effect (IQHE) occurs when Landau levels are completely filled; fractional quantum Hall effect (FQHE) occurs at rational filling factors, where interactions dominate. The charge pumping argument elegantly shows why quantization emerges and connects gauge physics to topological properties.</p>
-</section>
-<section id="filling-landau-levels">
-<h3>Filling Landau Levels<a class="headerlink" href="#filling-landau-levels" title="Link to this heading">#</a></h3>
-<p>In a perpendicular magnetic field <span class="math notranslate nohighlight">\(B\)</span>, electron energy levels organize into Landau levels, each with degeneracy <span class="math notranslate nohighlight">\(N_\phi = BA\Phi_0^{-1} = BAe/h\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is the sample area.</p>
-<div class="important admonition">
-<p class="admonition-title">Filling Factor</p>
-<p>The filling factor is</p>
+<p>The integer quantum Hall effect (IQHE) is the most precisely-quantized macroscopic phenomenon in condensed matter: at integer filling of Landau levels, the Hall conductance of a 2D electron gas takes the value</p>
 <div class="math notranslate nohighlight">
 \[
-\nu = \frac{N_e}{N_\phi}
+\sigma_{xy} = \nu\,\frac{e^2}{h}, \qquad \nu = 1, 2, 3, \ldots,
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(N_e\)</span> is the number of electrons and <span class="math notranslate nohighlight">\(N_\phi\)</span> is the number of flux quanta. When <span class="math notranslate nohighlight">\(\nu\)</span> is an integer, exactly <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are completely filled, and the Fermi level lies in a gap. The energy cost to excite an electron across the gap is <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> (cyclotron energy), which is crucial for protecting quantization against disorder.</p>
-</div>
+<p>accurate to better than one part in <span class="math notranslate nohighlight">\(10^9\)</span> and <em>independent</em> of sample geometry, disorder, and material details. This section explains why. The story has a clear arc:</p>
+<ol class="arabic simple">
+<li><p>At integer filling, the Fermi level lies in a Landau-level gap — the system is <strong>incompressible</strong>.</p></li>
+<li><p>Two complementary arguments give the quantization <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>: Laughlin’s <strong>charge pumping</strong> (topological) and the <strong>Kubo formula</strong> (linear response). Their agreement reveals the topological origin of the result.</p></li>
+<li><p>Disorder broadens Landau levels but preserves the quantized plateaus, because only states at the level center carry current.</p></li>
+</ol>
+<p>The same logic extends to fractional fillings, where electron-electron interactions produce richer phases — the <strong>fractional QHE</strong> (§2.3.2).</p>
 </section>
-<section id="charge-pumping-argument">
-<h3>Charge Pumping Argument<a class="headerlink" href="#charge-pumping-argument" title="Link to this heading">#</a></h3>
-<p>The most elegant derivation uses Laughlin’s <strong>charge pumping</strong> picture. Consider a Corbino disk: a 2D sample shaped like an annulus, with inner and outer edges. Imagine slowly threading a single flux quantum <span class="math notranslate nohighlight">\(\Phi_0 = h/e\)</span> through the hole, adiabatically, while maintaining filled Landau levels. As the flux increases, <span class="math notranslate nohighlight">\(N_\phi\)</span> increases by exactly one.</p>
-<p><strong>Key insight:</strong> If <span class="math notranslate nohighlight">\(N_e\)</span> is fixed and <span class="math notranslate nohighlight">\(N_\phi\)</span> increases by 1, the system must adjust. Since one Landau level is completely filled and a new flux quantum appears, one electron must be “pumped” out to make room. This pumping occurs adiabatically at the edge.</p>
+<section id="filling-factor-and-incompressibility">
+<h3>Filling Factor and Incompressibility<a class="headerlink" href="#filling-factor-and-incompressibility" title="Link to this heading">#</a></h3>
+<p>§4.3.2 established that a 2D electron in a perpendicular field <span class="math notranslate nohighlight">\(B\)</span> has Landau levels <span class="math notranslate nohighlight">\(E_n = (n+\tfrac{1}{2})\hbar\omega_c\)</span>, each with degeneracy <span class="math notranslate nohighlight">\(N_\Phi = BA/\Phi_0 = qBA/h\)</span>.</p>
 <div class="important admonition">
-<p class="admonition-title">Charge Pumping and Quantized Conductance</p>
-<p>When one flux quantum <span class="math notranslate nohighlight">\(\Phi_0\)</span> is threaded through the sample at filling <span class="math notranslate nohighlight">\(\nu\)</span>, exactly <span class="math notranslate nohighlight">\(\nu\)</span> electrons are pumped out. This pumping is adiabatic: the Landau level gap remains open, preventing level mixing.</p>
-<p>For each pumped charge <span class="math notranslate nohighlight">\(\nu e\)</span>, the Hall conductance is:</p>
+<p class="admonition-title">Filling factor</p>
+<p>The <strong>filling factor</strong> is the ratio of electrons to flux quanta,</p>
+<div class="math notranslate nohighlight" id="equation-eq-filling-factor">
+<span class="eqno">(155)<a class="headerlink" href="#equation-eq-filling-factor" title="Link to this equation">#</a></span>\[
+\nu \;=\; \frac{N_e}{N_\Phi} \;=\; \frac{n_e\,h}{eB}.
+\]</div>
+<p>When <span class="math notranslate nohighlight">\(\nu\)</span> is an integer, exactly <span class="math notranslate nohighlight">\(\nu\)</span> Landau levels are completely filled and the Fermi level sits in the gap <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> between the last filled and first empty level. Adding one more electron costs <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>, so the system is <strong>incompressible</strong>: its electron density cannot change in response to a small chemical-potential shift.</p>
+</div>
+<p>Incompressibility at integer <span class="math notranslate nohighlight">\(\nu\)</span> is the precondition for everything that follows. The gap protects the ground state from local perturbations, and the macroscopic degeneracy <span class="math notranslate nohighlight">\(N_\Phi\)</span> provides the rigidity needed to pump charge coherently across the sample.</p>
+</section>
+<section id="the-quantized-hall-conductance">
+<h3>The Quantized Hall Conductance<a class="headerlink" href="#the-quantized-hall-conductance" title="Link to this heading">#</a></h3>
+<p>The central experimental fact is that at integer <span class="math notranslate nohighlight">\(\nu\)</span>, the Hall response is exactly</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{xy} = \nu \frac{e^2}{h}
+\sigma_{xy} = \nu\,\frac{e^2}{h}, \qquad \rho_{xy} = \frac{1}{\sigma_{xy}} = \frac{h}{\nu e^2}.
 \]</div>
-<p>This is exact and depends only on <span class="math notranslate nohighlight">\(\nu\)</span>, <span class="math notranslate nohighlight">\(e\)</span>, <span class="math notranslate nohighlight">\(h\)</span>—not on disorder, sample geometry, or microscopic details. The quantization emerges from a global constraint (flux conservation and filling factor) combined with a gap that prevents local scattering from destroying the state.</p>
-</div>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>(a) Why is adiabaticity essential? What would happen if the flux were threaded <strong>quickly</strong> instead of slowly?</p>
-<p>(b) Can strong disorder nucleate a scattering channel that would violate charge quantization?</p>
-<p>(c) In real devices, explain how the pumped charge actually leaves the sample: through the bulk, or along the edge?</p>
-<p>(d) For fractional fillings (e.g., <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>), what is the physical meaning of pumping <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> of an electron in one cycle?</p>
-</div>
+<p>The Hall resistivity <span class="math notranslate nohighlight">\(\rho_{xy}\)</span> is the inverse of <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> on the plateau, where the longitudinal conductivity <span class="math notranslate nohighlight">\(\sigma_{xx}=0\)</span> (the bulk is gapped). In 2D, <span class="math notranslate nohighlight">\(\rho_{xy}\)</span> has units of resistance, so its plateau value <span class="math notranslate nohighlight">\(h/(\nu e^2)\)</span> matches the directly measured transverse resistance.</p>
+<p>Compared to the classical prediction <span class="math notranslate nohighlight">\(\rho_{xy}^{\mathrm{cl}} = B/(n_e e)\)</span> (a smooth straight line, §4.3.1), the quantum result is <strong>flat plateaus at integer <span class="math notranslate nohighlight">\(\nu\)</span> with sharp jumps between them</strong>. We give two derivations.</p>
 </section>
-<section id="linear-response-and-hall-conductance">
-<h3>Linear Response and Hall Conductance<a class="headerlink" href="#linear-response-and-hall-conductance" title="Link to this heading">#</a></h3>
-<p>Apply a weak oscillatory electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}(t) = \boldsymbol{E}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}\)</span> adiabatically switched on from the infinite past. First-order time-dependent perturbation theory yields the <strong>Kubo formula</strong> for the Hall conductivity, which gives the same quantization <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\, e^2/h\)</span> from a completely different approach.</p>
+<section id="argument-1-laughlin-s-charge-pumping">
+<h3>Argument 1: Laughlin’s Charge Pumping<a class="headerlink" href="#argument-1-laughlin-s-charge-pumping" title="Link to this heading">#</a></h3>
+<p>Consider a <strong>Corbino-disk geometry</strong> — a 2D sample shaped as an annulus, threaded by the uniform field <span class="math notranslate nohighlight">\(B\)</span> through its plane plus an extra flux <span class="math notranslate nohighlight">\(\Phi(t)\)</span> through its central hole. Ramp <span class="math notranslate nohighlight">\(\Phi(t)\)</span> slowly from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(\Phi_0\)</span> over a long time <span class="math notranslate nohighlight">\(T \gg 1/\omega_c\)</span> (adiabatic), keeping the sample at integer filling <span class="math notranslate nohighlight">\(\nu\)</span> throughout.</p>
+<p><strong>Step 1 — Orbit radii from AB-phase quantization.</strong></p>
+<p>In the symmetric gauge, each occupied Landau-level state circulates at a definite radius <span class="math notranslate nohighlight">\(r_m\)</span>. Single-valuedness of the wavefunction around the orbit requires the enclosed Aharonov-Bohm phase to be a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span> (same logic as §4.2.2 and §4.2.3),</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{e\,\Phi_{\mathrm{encl}}}{\hbar} = 2\pi m,
+\qquad
+\Phi_{\mathrm{encl}} = \pi r_m^{2}\,B + \Phi(t),
+\]</div>
+<p>with the enclosed flux being the uniform-field flux through the orbit’s interior plus the threaded flux through the hole. Solving for <span class="math notranslate nohighlight">\(r_m^{2}\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-pumping-radius">
+<span class="eqno">(156)<a class="headerlink" href="#equation-eq-pumping-radius" title="Link to this equation">#</a></span>\[
+r_m^{2}(t) \;=\; \frac{\Phi_0}{\pi B}\bigl(m - t/T\bigr).
+\]</div>
+<p><strong>Step 2 — Radii shrink as flux is threaded.</strong></p>
+<p>As <span class="math notranslate nohighlight">\(\Phi(t)\)</span> ramps from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(\Phi_0\)</span> (so <span class="math notranslate nohighlight">\(t/T\)</span> goes from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(1\)</span>), <span class="math notranslate nohighlight">\(r_m^{2}\)</span> decreases by <span class="math notranslate nohighlight">\(\Phi_0/(\pi B)\)</span> — equivalently <span class="math notranslate nohighlight">\(r_m \to r_{m-1}\)</span>. <strong>Every orbit shifts inward by one slot.</strong> The innermost orbit <span class="math notranslate nohighlight">\(m=0\)</span> collapses onto the inner edge; a new vacant slot opens at the outer edge. Net result: per filled Landau level, <strong>one electron is pumped from the outer edge to the inner edge</strong> during one flux-quantum cycle.</p>
+<p><strong>Step 3 — Hall conductivity from the local current.</strong></p>
+<p>At a generic radius <span class="math notranslate nohighlight">\(r\)</span> inside the annulus, one electron crosses the circle of circumference <span class="math notranslate nohighlight">\(2\pi r\)</span> during time <span class="math notranslate nohighlight">\(T\)</span>, giving the radial current density</p>
+<div class="math notranslate nohighlight">
+\[
+j_r \;=\; \frac{e}{2\pi r\,T}.
+\]</div>
+<p>Faraday’s law converts the changing flux into an azimuthal electric field,</p>
+<div class="math notranslate nohighlight">
+\[
+E_\theta \;=\; \frac{1}{2\pi r}\,\frac{\mathrm{d}\Phi}{\mathrm{d}t} \;=\; \frac{\Phi_0}{2\pi r\,T}.
+\]</div>
+<p>Their ratio is the Hall conductivity contribution from one filled Landau level,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_H \;=\; \frac{j_r}{E_\theta} \;=\; \frac{e}{\Phi_0} \;=\; \frac{e^2}{h}.
+\]</div>
+<p><strong>Step 4 — Sum over filled levels.</strong></p>
+<p>For <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels, each contributes <span class="math notranslate nohighlight">\(e^2/h\)</span> independently:</p>
 <div class="important admonition">
-<p class="admonition-title">Kubo Formula for Hall Conductivity</p>
+<p class="admonition-title">Charge-pumping result</p>
+<p>Threading one flux quantum through the Corbino geometry pumps a quantized charge across the sample.</p>
+<div class="math notranslate nohighlight" id="equation-eq-iqhe-pumping">
+<span class="eqno">(157)<a class="headerlink" href="#equation-eq-iqhe-pumping" title="Link to this equation">#</a></span>\[
+\boxed{\;\sigma_{xy} \;=\; \nu\,\frac{e^2}{h}\;}
+\]</div>
+<p>Each filled Landau level contributes one unit <span class="math notranslate nohighlight">\(e^2/h\)</span>, so quantized flux insertion leads directly to quantized Hall transport.</p>
+</div>
+<p>The argument is <strong>topological</strong>: it uses only flux quantization, the Landau-level gap, and integer counting of filled orbits — never the microscopic Hamiltonian. The quantization therefore survives disorder and local deformations of the sample, so long as the gap remains open.</p>
+</section>
+<section id="argument-2-kubo-formula-linear-response">
+<h3>Argument 2: Kubo Formula (Linear Response)<a class="headerlink" href="#argument-2-kubo-formula-linear-response" title="Link to this heading">#</a></h3>
+<p>The same answer emerges from standard linear-response theory. A weak applied electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> drives a current <span class="math notranslate nohighlight">\(\boldsymbol{j} = \sigma\boldsymbol{E}\)</span>; the antisymmetric (Hall) component of the conductivity tensor is given by the <strong>Kubo formula</strong>, derived in §5.2.3 from first-order time-dependent perturbation theory in the vector-potential perturbation <span class="math notranslate nohighlight">\(\delta\hat{H} = -\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span>. We quote it here and evaluate it on Landau-level eigenstates.</p>
+<div class="important admonition">
+<p class="admonition-title">Kubo formula for the Hall conductivity</p>
 <div class="math notranslate nohighlight" id="equation-eq-kubo-hall">
-<span class="eqno">(144)<a class="headerlink" href="#equation-eq-kubo-hall" title="Link to this equation">#</a></span>\[
-\sigma_H = \frac{1}{\mathrm{i} N_\phi} \sum_{\substack{n,m \in \text{occ}}} \sum_{n' \neq n} \frac{\langle n,m \vert \hat{\pi}_x \vert n',m \rangle \langle n',m \vert \hat{\pi}_y \vert n,m \rangle - \text{h.c.}}{(E_{n'} - E_n)^2}
+<span class="eqno">(158)<a class="headerlink" href="#equation-eq-kubo-hall" title="Link to this equation">#</a></span>\[
+\sigma_{xy} = \frac{\mathrm{i}\hbar}{A}\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha|\hat{j}_x|\beta\rangle\langle\beta|\hat{j}_y|\alpha\rangle - \langle\alpha|\hat{j}_y|\beta\rangle\langle\beta|\hat{j}_x|\alpha\rangle}{(E_\beta - E_\alpha)^2},
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\vert n,m\rangle\)</span> are Landau level states, <span class="math notranslate nohighlight">\(E_n = \hbar\omega_c(n + \tfrac{1}{2})\)</span>, and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - e\boldsymbol{A}/c\)</span> is the kinetic momentum.</p>
-<p>Evaluating this sum gives <span class="math notranslate nohighlight">\(\sigma_H = \nu \frac{e^2}{h}\)</span>: each occupied state contributes exactly <span class="math notranslate nohighlight">\(1/N_\phi\)</span> to the Hall conductivity.</p>
+<p>with <span class="math notranslate nohighlight">\(\hat{\boldsymbol{j}} = q\hat{\boldsymbol{\pi}}/m\)</span> the single-particle current operator. The sum runs over occupied <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> and empty <span class="math notranslate nohighlight">\(|\beta\rangle\)</span> single-particle eigenstates of <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> (no Fermi-Dirac function — at <span class="math notranslate nohighlight">\(T=0\)</span>, occupancy is sharp). For Landau-level eigenstates <span class="math notranslate nohighlight">\(|n,m\rangle\)</span>, the formula evaluates to <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span> — <em>one unit of <span class="math notranslate nohighlight">\(e^2/h\)</span> per filled Landau level</em>. See §5.2.3 (<a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html#equation-eq-kubo-hall-523">(199)</a>) for the derivation.</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Kubo Formula Evaluation</p>
-<p>In units <span class="math notranslate nohighlight">\(m = e = \hbar = 1\)</span>, the Landau level Hamiltonian is <span class="math notranslate nohighlight">\(\hat{H} = \tfrac{1}{2}\hat{\boldsymbol{\pi}}^2\)</span> with energies <span class="math notranslate nohighlight">\(E_n = B(n + \tfrac{1}{2})\)</span>.</p>
-<p><strong>Setup:</strong> An oscillatory electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}(t) = \boldsymbol{E}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}\)</span> corresponds to a vector potential perturbation</p>
+<p class="admonition-title">Derivation: Kubo evaluation on Landau-level eigenstates</p>
+<p><strong>Goal.</strong> Evaluate the Kubo formula <a class="reference internal" href="#equation-eq-kubo-hall">(158)</a> on Landau-level eigenstates <span class="math notranslate nohighlight">\(|n,m\rangle\)</span> from §4.3.2 — Landau index <span class="math notranslate nohighlight">\(n\)</span>, energy <span class="math notranslate nohighlight">\(E_n = (n+\tfrac{1}{2})\hbar\omega_c\)</span>, guiding-center label <span class="math notranslate nohighlight">\(m\)</span> (<span class="math notranslate nohighlight">\(N_\Phi\)</span> values per level) — and show that for <span class="math notranslate nohighlight">\(\nu\)</span> completely filled levels, <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span>.</p>
+<p><strong>Three observations make the calculation tractable:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Selection rules from the ladder.</strong> <span class="math notranslate nohighlight">\(\hat{\pi}_x, \hat{\pi}_y\)</span> are linear in <span class="math notranslate nohighlight">\(\hat{a},\hat{a}^\dagger\)</span> and commute with the guiding-center ladder <span class="math notranslate nohighlight">\(\hat{b},\hat{b}^\dagger\)</span>, so <span class="math notranslate nohighlight">\(\langle n',m'|\hat{\pi}_a|n,m\rangle\)</span> vanishes unless <span class="math notranslate nohighlight">\(m'=m\)</span> and <span class="math notranslate nohighlight">\(n' = n\pm 1\)</span>.</p></li>
+<li><p><strong>Antisymmetrization <span class="math notranslate nohighlight">\(=\)</span> “twice the imaginary part.”</strong> The numerator <span class="math notranslate nohighlight">\(\langle\alpha|\hat{j}_x|\beta\rangle\langle\beta|\hat{j}_y|\alpha\rangle - (x\leftrightarrow y)\)</span> is <span class="math notranslate nohighlight">\(2\mathrm{i}\,\mathrm{Im}\)</span> of a single matrix-element product, which the ladder identities deliver in closed form.</p></li>
+<li><p><strong>The constrained occ↔empty sum collapses.</strong> Pairs of states both inside the filled set cancel; only the <em>count</em> of occupied states survives.</p></li>
+</ol>
+<p><strong>Step 1 — Matrix elements.</strong></p>
+<p>In ladder form (§4.3.2),</p>
 <div class="math notranslate nohighlight">
 \[
-\delta\boldsymbol{A}(t) = -\frac{\boldsymbol{E}}{\mathrm{i}\omega}\,\mathrm{e}^{-\mathrm{i}(\omega + \mathrm{i}0^+)t}
+\hat{\pi}_x = \sqrt{q\hbar B/2}\,(\hat{a}^\dagger + \hat{a}),
+\qquad
+\hat{\pi}_y = \mathrm{i}\sqrt{q\hbar B/2}\,(\hat{a}^\dagger - \hat{a}).
 \]</div>
-<p>which perturbs <span class="math notranslate nohighlight">\(\hat{H}\)</span> as <span class="math notranslate nohighlight">\(\delta\hat{H}(t) = -\hat{\boldsymbol{\pi}} \cdot \delta\boldsymbol{A}(t)\)</span>.</p>
-<p><strong>First-order perturbation:</strong> Time-dependent perturbation theory (Dyson series) gives the current density <span class="math notranslate nohighlight">\(\langle \boldsymbol{j}(t)\rangle = \langle \boldsymbol{j}^{(0)}\rangle + \langle \boldsymbol{j}^{(1)}(t)\rangle\)</span>. The zeroth-order term vanishes because <span class="math notranslate nohighlight">\(\langle n,m\vert\hat{\boldsymbol{\pi}}\vert n,m\rangle = 0\)</span> (<span class="math notranslate nohighlight">\(\hat{\pi}_x, \hat{\pi}_y\)</span> are off-diagonal in Landau level index). The first-order term yields:</p>
+<p>Acting on <span class="math notranslate nohighlight">\(|n,m\rangle\)</span> with <span class="math notranslate nohighlight">\(\hat{a}|n\rangle = \sqrt{n}|n-1\rangle\)</span>, <span class="math notranslate nohighlight">\(\hat{a}^\dagger|n\rangle = \sqrt{n+1}|n+1\rangle\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{ji}(\omega) = \frac{\mathrm{i}B}{\omega N_\phi} \sum_{n,m \in \text{occ}} \sum_{n' \neq n} \left(\frac{\langle n,m\vert \hat{\pi}_j\vert n',m\rangle\langle n',m\vert \hat{\pi}_i\vert n,m\rangle}{\omega - E_n + E_{n'}} - \frac{\langle n,m\vert \hat{\pi}_i\vert n',m\rangle\langle n',m\vert \hat{\pi}_j\vert n,m\rangle}{\omega + E_n - E_{n'}}\right)
+\langle n,m|\hat{\pi}_x|n',m\rangle = \sqrt{\tfrac{q\hbar B}{2}}\,\big(\sqrt{n+1}\,\delta_{n',n+1} + \sqrt{n}\,\delta_{n',n-1}\big),
 \]</div>
-<p><strong>DC limit:</strong> Expand each denominator to first order in <span class="math notranslate nohighlight">\(\omega\)</span>. The antisymmetric piece (contributing to Hall conductivity) is:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_H = \frac{B}{\mathrm{i}N_\phi} \sum_{n,m \in \text{occ}} \sum_{n' \neq n} \frac{\langle n,m\vert \hat{\pi}_x\vert n',m\rangle\langle n',m\vert \hat{\pi}_y\vert n,m\rangle - \text{h.c.}}{(E_{n'} - E_n)^2}
+\langle n',m|\hat{\pi}_y|n,m\rangle = \mathrm{i}\sqrt{\tfrac{q\hbar B}{2}}\,\big(\sqrt{n+1}\,\delta_{n',n+1} - \sqrt{n}\,\delta_{n',n-1}\big).
 \]</div>
-<p><strong>Ladder operators:</strong> Using <span class="math notranslate nohighlight">\(\hat{\pi}_x = \sqrt{B/2}\,(\hat{a}^\dagger + \hat{a})\)</span> and <span class="math notranslate nohighlight">\(\hat{\pi}_y = \mathrm{i}\sqrt{B/2}\,(\hat{a}^\dagger - \hat{a})\)</span>:</p>
+<p><strong>Step 2 — Antisymmetric current product.</strong></p>
+<p>Multiplying (cross-terms vanish since different deltas don’t overlap),</p>
 <div class="math notranslate nohighlight">
 \[
-\langle n,m\vert \hat{\pi}_x\vert n',m\rangle\langle n',m\vert \hat{\pi}_y\vert n,m\rangle = \frac{\mathrm{i}B}{2}\Big((n+1)\,\delta_{n', n+1} - n\,\delta_{n', n-1}\Big)
+\langle n,m|\hat{\pi}_x|n',m\rangle\,\langle n',m|\hat{\pi}_y|n,m\rangle = \frac{\mathrm{i}q\hbar B}{2}\,\big[(n+1)\,\delta_{n',n+1} - n\,\delta_{n',n-1}\big].
 \]</div>
-<p>Since <span class="math notranslate nohighlight">\(E_{n'} - E_n = B(n' - n)\)</span>, both denominators equal <span class="math notranslate nohighlight">\(B^2\)</span>, so:</p>
+<p>The swap <span class="math notranslate nohighlight">\((x\leftrightarrow y)\)</span> gives the complex conjugate (Hermiticity of <span class="math notranslate nohighlight">\(\hat{\pi}_x, \hat{\pi}_y\)</span>); subtracting doubles the imaginary part,</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_H = \frac{1}{N_\phi} \sum_{n,m \in \text{occ}} \Big((n+1) - n\Big) = \frac{1}{N_\phi} \sum_{n,m \in \text{occ}} 1
+\langle n,m|\hat{\pi}_x|n',m\rangle\langle n',m|\hat{\pi}_y|n,m\rangle - (x\leftrightarrow y) = \mathrm{i}\,q\hbar B\,\big[(n+1)\,\delta_{n',n+1} - n\,\delta_{n',n-1}\big].
 \]</div>
-<p>For <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels: <span class="math notranslate nohighlight">\(\sigma_H = \nu\, e^2/h\)</span>. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
-</div>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>Why do the charge pumping argument and the Kubo formula agree, despite using completely different reasoning?</p>
+<p><strong>Step 3 — Plug into the Kubo formula.</strong></p>
+<p>The energy gap <span class="math notranslate nohighlight">\((E_{n'} - E_n)^2 = (\hbar\omega_c)^2\)</span> is the same for <span class="math notranslate nohighlight">\(n' = n\pm 1\)</span>. With <span class="math notranslate nohighlight">\(\hat{j}_a = (q/m)\hat{\pi}_a\)</span>, eq. <a class="reference internal" href="#equation-eq-kubo-hall">(158)</a> becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\sigma_{xy} &amp;= \frac{\mathrm{i}\hbar}{A}\cdot\frac{(q/m)^2\,\mathrm{i}\,q\hbar B}{(\hbar\omega_c)^2}\;S,
+\\
+S &amp;\;\equiv\!\sum_{(n,m)\,\mathrm{occ}}\;\sum_{(n',m)\,\mathrm{empty}}\big[(n+1)\,\delta_{n',n+1} - n\,\delta_{n',n-1}\big].
+\end{split}
+\end{split}\]</div>
+<p><strong>Step 4 — The constrained sum <span class="math notranslate nohighlight">\(S\)</span> collapses to <span class="math notranslate nohighlight">\(N_\mathrm{occ}\)</span>.</strong></p>
+<p>Drop the empty-state restriction first: each occupied <span class="math notranslate nohighlight">\((n,m)\)</span> contributes <span class="math notranslate nohighlight">\((n+1) - n = 1\)</span> via the two delta terms, so the <em>unconstrained</em> sum equals <span class="math notranslate nohighlight">\(N_\mathrm{occ}\)</span>, the total number of occupied single-particle states.</p>
+<p>The empty-state restriction adds nothing because the “blocked” pairs cancel. If both <span class="math notranslate nohighlight">\((n,m)\)</span> and <span class="math notranslate nohighlight">\((n+1,m)\)</span> are occupied, the pair contributes twice to the unconstrained sum, with opposite signs:</p>
 <ul class="simple">
-<li><p>Charge pumping is <strong>topological</strong>: it counts electron transfer when flux is threaded, independent of the microscopic Hamiltonian.</p></li>
-<li><p>Kubo is <strong>dynamical</strong>: it sums current operator matrix elements between all occupied and unoccupied states.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha=(n,m)\to\beta=(n+1,m)\)</span>: weight <span class="math notranslate nohighlight">\((n+1)\)</span> from the <span class="math notranslate nohighlight">\(\delta_{n',n+1}\)</span> term.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha=(n+1,m)\to\beta=(n,m)\)</span>: weight <span class="math notranslate nohighlight">\(-(n+1)\)</span> from the <span class="math notranslate nohighlight">\(-n_\alpha\,\delta_{n',n_\alpha-1}\)</span> term.</p></li>
 </ul>
-<p>What property of Landau levels guarantees that each level contributes exactly <span class="math notranslate nohighlight">\(e^2/h\)</span>?</p>
+<p>These cancel pairwise, so the constrained sum equals the unconstrained sum: <span class="math notranslate nohighlight">\(S = N_\mathrm{occ}\)</span>.</p>
+<p><strong>Step 5 — Simplify the prefactor.</strong></p>
+<p>Using <span class="math notranslate nohighlight">\(\omega_c = qB/m\)</span> and the Landau-level degeneracy <span class="math notranslate nohighlight">\(N_\Phi = qBA/h\)</span> (§4.3.2),</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{(q/m)^2\,q\hbar B}{(\hbar\omega_c)^2} = \frac{q}{\hbar},
+\qquad
+\frac{1}{A} = \frac{qB}{h\,N_\Phi}.
+\]</div>
+<p>The two <span class="math notranslate nohighlight">\(\mathrm{i}\)</span> factors out front give <span class="math notranslate nohighlight">\(\mathrm{i}^2 = -1\)</span>, which absorbs into the carrier-sign convention. The magnitude is</p>
+<div class="math notranslate nohighlight">
+\[
+|\sigma_{xy}| = \frac{q^2}{h}\cdot\frac{N_\mathrm{occ}}{N_\Phi}.
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels, <span class="math notranslate nohighlight">\(N_\mathrm{occ}/N_\Phi = \nu\)</span> and <span class="math notranslate nohighlight">\(|q| = e\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy} = \nu\,\frac{e^2}{h}.
+\]</div>
+<p>Each filled Landau level contributes exactly <span class="math notranslate nohighlight">\(e^2/h\)</span>, independent of its index <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</div>
+<p>The two arguments — pumping and Kubo — agree on the same quantization but spotlight different aspects: pumping reveals the <em>topological</em> nature (no microscopic Hamiltonian needed); Kubo (derived perturbatively in §5.2.3) reveals the <em>dynamical</em> mechanism (interlevel coherence between filled and empty states, with universal cancellation of energy denominators against matrix elements).</p>
+</section>
+<section id="robustness-from-disorder">
+<h3>Robustness from Disorder<a class="headerlink" href="#robustness-from-disorder" title="Link to this heading">#</a></h3>
+<p>Real samples have disorder, which broadens each Landau level into a band of width <span class="math notranslate nohighlight">\(\Gamma\)</span>. Yet the Hall plateaus persist over wide ranges of <span class="math notranslate nohighlight">\(B\)</span> — they are not razor-thin lines at integer <span class="math notranslate nohighlight">\(\nu\)</span>. The reason is the structure of disorder-induced states.</p>
+<div class="note admonition">
+<p class="admonition-title">Localized vs extended states</p>
+<p>Disorder creates <strong>localized states</strong> in the tails of each broadened Landau level and <strong>extended states</strong> near the center. As <span class="math notranslate nohighlight">\(B\)</span> varies (changing <span class="math notranslate nohighlight">\(\nu\)</span> continuously), filling localized states changes the electron count but not the current — they don’t carry charge across the sample. Only the few extended states at the level center contribute to transport, and they do so with the same topological quantization argued above.</p>
+<p>Result: the Hall conductance stays at the integer value <span class="math notranslate nohighlight">\(\nu e^2/h\)</span> over a finite range of <span class="math notranslate nohighlight">\(B\)</span> — the <em>plateau width</em> — and jumps only when the Fermi level passes through extended states at the next Landau-level center.</p>
 </div>
 </section>
-<section id="fractional-quantum-hall-effect">
-<h3>Fractional Quantum Hall Effect<a class="headerlink" href="#fractional-quantum-hall-effect" title="Link to this heading">#</a></h3>
-<p>At fractional fillings <span class="math notranslate nohighlight">\(\nu = p/q\)</span> (coprime integers), many-body electron-electron interactions become essential. The ground state is a highly entangled quantum fluid with no simple mean-field description.</p>
-<div class="note admonition">
-<p class="admonition-title">Laughlin Wavefunction</p>
-<p>For <span class="math notranslate nohighlight">\(\nu = 1/m\)</span> (odd <span class="math notranslate nohighlight">\(m\)</span>), Laughlin proposed:</p>
-<div class="math notranslate nohighlight">
-\[
-\Psi_{\text{Laughlin}} = \prod_{i&lt;j} (z_i - z_j)^m \exp\left(-\frac{1}{4\ell_B^2}\sum_i |z_i|^2\right)
-\]</div>
-<p>The factor <span class="math notranslate nohighlight">\((z_i - z_j)^m\)</span> enforces strong repulsion between electrons, creating an incompressible quantum fluid with a gap to excitations.</p>
-</div>
-<p>The charge pumping argument extends: when one flux quantum is added at <span class="math notranslate nohighlight">\(\nu = p/q\)</span>, exactly <span class="math notranslate nohighlight">\(p/q\)</span> of an electron is pumped out. This fractional pumping is possible because the quantum fluid redistributes charge non-locally. The <strong>quasiparticles</strong> (hole excitations) carry fractional charge <span class="math notranslate nohighlight">\(e/q\)</span> and obey <strong>fractional statistics</strong>—the anyons from <a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html"><span class="doc std std-doc">2.3.2 Fractional Quantum Hall Anyons</span></a>.</p>
-<div class="important admonition">
-<p class="admonition-title">Hall Conductance at Fractional Filling</p>
-<p>At fractional filling <span class="math notranslate nohighlight">\(\nu = p/q\)</span>, the Hall conductance is:</p>
-<div class="math notranslate nohighlight">
-\[
-\sigma_{xy} = \nu \frac{e^2}{h} = \frac{p}{q} \frac{e^2}{h}
-\]</div>
-<p>Quasiparticles carry charge <span class="math notranslate nohighlight">\(\pm e/q\)</span> and obey fractional Bragg statistics: exchanging two quasiparticles introduces a phase <span class="math notranslate nohighlight">\(\exp(2\pi \mathrm{i} p/q)\)</span>.</p>
-</div>
+<section id="beyond-iqhe-fractional-filling">
+<h3>Beyond IQHE: Fractional Filling<a class="headerlink" href="#beyond-iqhe-fractional-filling" title="Link to this heading">#</a></h3>
+<p>At fractional filling <span class="math notranslate nohighlight">\(\nu = p/q\)</span> (with <span class="math notranslate nohighlight">\(q\)</span> odd), electron-electron interactions are essential. The non-interacting picture predicts a metal — partially filled Landau level, no gap. Interactions open an <strong>interaction-induced gap</strong> and produce an incompressible quantum fluid with <em>fractional</em> Hall conductance <span class="math notranslate nohighlight">\(\sigma_{xy} = (p/q)\,e^2/h\)</span>. The elementary excitations carry fractional charge <span class="math notranslate nohighlight">\(e/q\)</span> and obey <strong>anyon</strong> statistics.</p>
+<p>The full story of the fractional QHE — including the Laughlin wavefunction and anyonic quasiparticles — is developed in <strong>§2.3.2 Fractional Quantum Hall Anyons</strong> (Chapter 2 on identical particles). The IQHE charge-pumping argument generalizes to fractional <span class="math notranslate nohighlight">\(\nu\)</span>, but quantization is now achieved through the same topological mechanism applied to a strongly-correlated incompressible fluid.</p>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Hall resistance quantization</p>
-<p>In the quantum Hall effect, the Hall resistance is quantized as <span class="math notranslate nohighlight">\(R_H = h / (q^2 \nu)\)</span> where <span class="math notranslate nohighlight">\(\nu\)</span> is the filling factor (ratio of electrons to flux quanta). The remarkable feature is that <span class="math notranslate nohighlight">\(R_H\)</span> depends only on fundamental constants and the filling factor, independent of material details like the sample geometry or the magnetic field strength (over wide ranges). Which statement correctly explains this universal quantization?</p>
-<p>(A) At integer filling factors, all Landau levels below a certain energy are completely filled, so the system is insulating and all electrons contribute equally to transport.</p>
-<p>(B) The quantized nature of Landau levels means only a fixed number of electrons can carry current, regardless of other parameters.</p>
-<p>(C) The Hall resistance is determined by topological properties of the electron states, which are robust against disorder and material variations.</p>
+<p class="admonition-title">Poll: Hall resistivity quantization</p>
+<p>In the integer quantum Hall effect, the Hall resistivity <span class="math notranslate nohighlight">\(\rho_{xy} = h/(\nu e^2)\)</span> depends only on fundamental constants and the integer <span class="math notranslate nohighlight">\(\nu\)</span> — not on sample geometry, disorder, or material. Which statement best explains this universality?</p>
+<p>(A) At integer <span class="math notranslate nohighlight">\(\nu\)</span>, all Landau levels below the Fermi level are completely filled, so the system is insulating and all electrons contribute equally to transport.</p>
+<p>(B) The quantized nature of Landau levels means only a fixed number of electrons can carry current.</p>
+<p>(C) The Hall response is determined by topological properties of the filled bands, robust against local perturbations as long as the gap remains open.</p>
 <p>(D) Both (A) and (C).</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Filling factor</strong> <span class="math notranslate nohighlight">\(\nu = N_e/N_\phi\)</span> counts filled Landau levels; integer <span class="math notranslate nohighlight">\(\nu\)</span> means a gap protects the state.</p></li>
-<li><p><strong>Charge pumping:</strong> Threading a flux quantum through an adiabatic cycle pumps out <span class="math notranslate nohighlight">\(\nu\)</span> electrons, giving exact quantization <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>.</p></li>
-<li><p><strong>Robustness</strong> comes from the Landau level gap: disorder cannot mix states within a filled level, and quantization depends only on global filling.</p></li>
-<li><p><strong>Fractional QHE</strong> at <span class="math notranslate nohighlight">\(\nu = p/q\)</span> produces incompressible quantum fluids with fractional charge and fractional statistics.</p></li>
-<li><p>The QHE unifies <strong>gauge physics</strong>, <strong>topology</strong>, and <strong>many-body physics</strong> (Laughlin wavefunction and anyons).</p></li>
+<li><p><strong>Filling factor</strong> <span class="math notranslate nohighlight">\(\nu = N_e/N_\Phi\)</span>: integer <span class="math notranslate nohighlight">\(\nu\)</span> means filled Landau levels, gap <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span>, and an <em>incompressible</em> state.</p></li>
+<li><p><strong>Quantized Hall conductance</strong> <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span> at integer <span class="math notranslate nohighlight">\(\nu\)</span>: exact and material-independent.</p></li>
+<li><p><strong>Charge pumping (Laughlin):</strong> topological argument — threading one flux quantum pumps <span class="math notranslate nohighlight">\(\nu\)</span> electrons across the sample, forcing <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>.</p></li>
+<li><p><strong>Kubo formula:</strong> dynamical confirmation — each filled Landau level contributes exactly <span class="math notranslate nohighlight">\(e^2/h\)</span> via inter-level matrix elements.</p></li>
+<li><p><strong>Robustness:</strong> disorder localizes most states in each Landau level; only the central extended states carry current, so Hall plateaus persist over wide ranges of <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
+<li><p><strong>Fractional QHE:</strong> at <span class="math notranslate nohighlight">\(\nu = p/q\)</span>, interactions open an incompressibility gap and produce fractional plateaus, fractional charge, and anyons (§2.3.2).</p></li>
 </ul>
+<div class="seealso admonition">
+<p class="admonition-title">See Also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="4-3-2-landau-quantization.html"><span class="doc std std-doc">4.3.2 Landau Quantization</span></a>: Landau levels, degeneracy <span class="math notranslate nohighlight">\(N_\Phi\)</span>, and the quantum spectrum in uniform <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
+<li><p><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a>: Gauge potentials, flux threading, and interference—edge transport and topology motifs.</p></li>
+<li><p><a class="reference internal" href="4-3-1-cyclotron-motion.html"><span class="doc std std-doc">4.3.1 Cyclotron Motion</span></a>: Classical cyclotron frequency and kinetic momentum algebra underlying the quantum plateau problem.</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Filling factor.</strong> A 2D electron system with density <span class="math notranslate nohighlight">\(n = 2.4\times 10^{15}\,\text{m}^{-2}\)</span> is placed in a perpendicular field <span class="math notranslate nohighlight">\(B = 5\,\text{T}\)</span>.</p>
-<p>(a) Compute the number of flux quanta per unit area <span class="math notranslate nohighlight">\(n_\phi = eB/h\)</span> and the filling factor <span class="math notranslate nohighlight">\(\nu = n/n_\phi\)</span>.</p>
-<p>(b) How many Landau levels are completely filled? Is the system in an integer quantum Hall regime?</p>
-<p>(c) At what magnetic field <span class="math notranslate nohighlight">\(B^*\)</span> would the filling factor be exactly <span class="math notranslate nohighlight">\(\nu = 1\)</span>? What about <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>?</p>
-<p><strong>2. Edge state transport.</strong> At filling <span class="math notranslate nohighlight">\(\nu\)</span>, there are <span class="math notranslate nohighlight">\(\nu\)</span> chiral edge branches propagating along the sample boundary.</p>
-<p>(a) Each edge branch carries conductance <span class="math notranslate nohighlight">\(e^2/h\)</span>. Derive the total Hall conductance <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span> for integer <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
-<p>(b) Chiral means the edge states propagate in one direction only. Explain why backscattering is forbidden and why disorder along the edge does not destroy the quantized conductance.</p>
-<p>(c) An edge state at filling <span class="math notranslate nohighlight">\(\nu = 2\)</span> encounters an impurity. Compare its behavior to a 1D wire with the same impurity. Why is the Hall plateau robust while the 1D wire shows Anderson localization?</p>
-<p><strong>3. Disorder and plateaus.</strong> The classical Hall conductance <span class="math notranslate nohighlight">\(\sigma_{xy}^\text{cl} = ne/B\)</span> is a smooth function of <span class="math notranslate nohighlight">\(B\)</span>, but the quantum Hall conductance shows flat plateaus.</p>
-<p>(a) Explain qualitatively how Landau level broadening by disorder creates localized states in the tails and extended states at the center of each level.</p>
-<p>(b) As <span class="math notranslate nohighlight">\(B\)</span> increases and the filling factor passes through <span class="math notranslate nohighlight">\(\nu = 2\)</span>, explain why <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> remains fixed at <span class="math notranslate nohighlight">\(2e^2/h\)</span> over a range of <span class="math notranslate nohighlight">\(B\)</span> rather than decreasing continuously.</p>
-<p>(c) At what filling factors do transitions between plateaus occur? What role do the extended states at the Landau level centers play?</p>
-<p><strong>4. Charge pumping argument.</strong> Laughlin’s thought experiment threads flux <span class="math notranslate nohighlight">\(\Phi\)</span> through a cylindrical quantum Hall sample.</p>
-<p>(a) When one flux quantum <span class="math notranslate nohighlight">\(\Phi_0 = h/e\)</span> is adiabatically inserted, the induced EMF drives a Hall current. Using <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>, show that exactly <span class="math notranslate nohighlight">\(\nu\)</span> electrons are pumped from one edge to the other.</p>
-<p>(b) The pumped charge must be an integer (in units of <span class="math notranslate nohighlight">\(e\)</span>) because the system returns to its original state after inserting <span class="math notranslate nohighlight">\(\Phi_0\)</span>. Use this to argue that <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> must be quantized as <span class="math notranslate nohighlight">\(\nu e^2/h\)</span> with integer <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
-<p>(c) Extend the argument to fractional <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>: inserting one flux quantum pumps <span class="math notranslate nohighlight">\(e/3\)</span> of charge. What does this imply about the existence of fractionally charged quasiparticles?</p>
-<p><strong>5. Laughlin quasiparticles.</strong> At <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>, quasihole excitations carry charge <span class="math notranslate nohighlight">\(e^* = e/3\)</span>.</p>
-<p>(a) Use the charge pumping argument: threading one flux quantum through a <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> droplet creates one quasihole. Show that its charge must be <span class="math notranslate nohighlight">\(e/3\)</span>.</p>
-<p>(b) For <span class="math notranslate nohighlight">\(\nu = 2/5\)</span>, what would the quasiparticle charge be? What is the Hall conductance?</p>
-<p>(c) The quasiparticles at <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> obey fractional (anyonic) statistics: exchanging two quasiholes produces a phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi/3}\)</span> instead of <span class="math notranslate nohighlight">\(\pm 1\)</span>. Explain why this is neither bosonic nor fermionic, and why it is only possible in 2D.</p>
-<p><strong>6. Landau level gap.</strong> The energy gap between Landau levels is <span class="math notranslate nohighlight">\(\hbar\omega_c = \hbar eB/m^*\)</span>.</p>
-<p>(a) For GaAs (<span class="math notranslate nohighlight">\(m^* = 0.067m_e\)</span>) at <span class="math notranslate nohighlight">\(B = 10\,\text{T}\)</span>, compute <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> in meV and the corresponding temperature <span class="math notranslate nohighlight">\(T^* = \hbar\omega_c/k_B\)</span>.</p>
-<p>(b) Explain why the integer QHE requires <span class="math notranslate nohighlight">\(k_BT \ll \hbar\omega_c\)</span> and why GaAs (small <span class="math notranslate nohighlight">\(m^*\)</span>) is preferred over silicon (<span class="math notranslate nohighlight">\(m^* \approx 0.2m_e\)</span>).</p>
-<p>(c) Disorder broadens Landau levels by <span class="math notranslate nohighlight">\(\Gamma\)</span>. For the QHE to be observable, we need <span class="math notranslate nohighlight">\(\Gamma &lt; \hbar\omega_c\)</span>. Estimate the maximum scattering rate <span class="math notranslate nohighlight">\(1/\tau = \Gamma/\hbar\)</span> and the minimum mobility <span class="math notranslate nohighlight">\(\mu = e\tau/m^*\)</span> required.</p>
-<p><strong>7. Von Klitzing constant.</strong> The quantum of resistance <span class="math notranslate nohighlight">\(R_K = h/e^2 \approx 25.8\,\text{k}\Omega\)</span> is known to extraordinary precision.</p>
-<p>(a) The metrological value of the QHE is that <span class="math notranslate nohighlight">\(R_K\)</span> depends only on fundamental constants, not on material properties. Why is the Hall resistance at <span class="math notranslate nohighlight">\(\nu = 1\)</span> exactly <span class="math notranslate nohighlight">\(R_K\)</span>, independent of sample geometry, material, or disorder?</p>
-<p>(b) Before 2019, the SI ohm was defined using a physical artifact. Explain how the QHE now provides a resistance standard.</p>
-<p>(c) The fine structure constant is <span class="math notranslate nohighlight">\(\alpha = e^2/(4\pi\epsilon_0\hbar c)\)</span>. Show that <span class="math notranslate nohighlight">\(R_K = h/e^2 = 1/(2\alpha\epsilon_0 c)\)</span>. How does a precision measurement of <span class="math notranslate nohighlight">\(R_K\)</span> constrain <span class="math notranslate nohighlight">\(\alpha\)</span>?</p>
-<p><strong>8. Composite fermions.</strong> The fractional QHE at <span class="math notranslate nohighlight">\(\nu = p/(2ps + 1)\)</span> can be understood by attaching <span class="math notranslate nohighlight">\(2s\)</span> flux quanta to each electron, forming composite fermions (CFs).</p>
-<p>(a) At <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>, each electron binds two flux quanta. Show that the effective magnetic field seen by CFs is <span class="math notranslate nohighlight">\(B^* = B - 2n\Phi_0\)</span> and that CFs fill exactly one effective Landau level (<span class="math notranslate nohighlight">\(\nu^* = 1\)</span>).</p>
-<p>(b) The sequence <span class="math notranslate nohighlight">\(\nu = 1/3, 2/5, 3/7, \ldots\)</span> corresponds to CFs filling <span class="math notranslate nohighlight">\(p = 1, 2, 3, \ldots\)</span> effective levels. Derive the general formula <span class="math notranslate nohighlight">\(\nu = p/(2p+1)\)</span>.</p>
-<p>(c) At <span class="math notranslate nohighlight">\(\nu = 1/2\)</span>, the effective field <span class="math notranslate nohighlight">\(B^* = 0\)</span> and CFs form a Fermi sea rather than filling Landau levels. What experimental signature would distinguish this composite fermion Fermi sea from an ordinary electron Fermi sea?</p>
+<p><strong>1. Filling factor.</strong> A 2D electron system with density <span class="math notranslate nohighlight">\(n_e = 2.4\times 10^{15}\,\mathrm{m}^{-2}\)</span> is placed in a perpendicular field <span class="math notranslate nohighlight">\(B = 5\,\mathrm{T}\)</span>.</p>
+<p>(a) Compute the flux-quantum density <span class="math notranslate nohighlight">\(n_\Phi = eB/h\)</span> and the filling factor <span class="math notranslate nohighlight">\(\nu = n_e/n_\Phi\)</span>.</p>
+<p>(b) How many Landau levels are completely filled? Is the system at integer <span class="math notranslate nohighlight">\(\nu\)</span>?</p>
+<p>(c) At what magnetic field <span class="math notranslate nohighlight">\(B^*\)</span> would <span class="math notranslate nohighlight">\(\nu = 1\)</span>? At what field would <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>?</p>
+<p><strong>2. Edge states and Hall transport.</strong> At integer <span class="math notranslate nohighlight">\(\nu\)</span>, the bulk is gapped but the edges support <span class="math notranslate nohighlight">\(\nu\)</span> chiral 1D channels.</p>
+<p>(a) Each chiral channel has conductance <span class="math notranslate nohighlight">\(e^2/h\)</span>. Argue that the total Hall conductance is <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>.</p>
+<p>(b) “Chiral” means edge electrons travel in only one direction along a given edge. Explain why backscattering by impurities is forbidden, and why this is the microscopic reason the Hall plateau is robust.</p>
+<p>(c) Compare an edge state at <span class="math notranslate nohighlight">\(\nu = 2\)</span> to a 1D wire with the same impurity profile. Why does the 1D wire show Anderson localization while the edge state retains quantized conductance?</p>
+<p><strong>3. Disorder and plateau width.</strong> Without disorder, the Hall conductance jumps at integer <span class="math notranslate nohighlight">\(\nu\)</span> but spends zero “time” at each plateau as <span class="math notranslate nohighlight">\(B\)</span> varies. With disorder, plateaus widen.</p>
+<p>(a) Explain how disorder broadens each Landau level into a band, with localized states in the tails and extended states near the center.</p>
+<p>(b) As <span class="math notranslate nohighlight">\(B\)</span> decreases from a value where <span class="math notranslate nohighlight">\(\nu = 2\)</span> exactly, why does <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> remain at <span class="math notranslate nohighlight">\(2\,e^2/h\)</span> over a finite interval rather than dropping continuously?</p>
+<p>(c) Where in the level structure do plateau-to-plateau transitions occur? What role do extended states play?</p>
+<p><strong>4. Charge pumping in detail.</strong> Laughlin’s argument threads flux <span class="math notranslate nohighlight">\(\Phi\)</span> through a Corbino disk at filling <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
+<p>(a) Compute the EMF around the inner edge as <span class="math notranslate nohighlight">\(\Phi\)</span> ramps from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(\Phi_0\)</span> over time <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>(b) The Hall response converts the azimuthal EMF into a radial current. Show that the total charge transferred from inner to outer edge over the cycle is <span class="math notranslate nohighlight">\(Q = \sigma_{xy}\,\Phi_0\)</span>.</p>
+<p>(c) Single-valuedness of the many-body state forces <span class="math notranslate nohighlight">\(Q\)</span> to be an integer multiple of <span class="math notranslate nohighlight">\(e\)</span>. Use this to derive <span class="math notranslate nohighlight">\(\sigma_{xy} = N e^2/h\)</span>, then identify <span class="math notranslate nohighlight">\(N = \nu\)</span> from particle-counting.</p>
+<p>(d) Extend the argument heuristically to <span class="math notranslate nohighlight">\(\nu = 1/3\)</span>: why must <span class="math notranslate nohighlight">\(Q = e/3\)</span> per flux quantum, and what does this imply about quasiparticle charge?</p>
+<p><strong>5. Landau-level gap and temperature.</strong> The cyclotron gap is <span class="math notranslate nohighlight">\(\hbar\omega_c = \hbar eB/m^*\)</span>.</p>
+<p>(a) For GaAs (<span class="math notranslate nohighlight">\(m^* = 0.067\,m_e\)</span>) at <span class="math notranslate nohighlight">\(B = 10\,\mathrm{T}\)</span>, compute <span class="math notranslate nohighlight">\(\hbar\omega_c\)</span> in meV and the equivalent temperature <span class="math notranslate nohighlight">\(T^* = \hbar\omega_c/k_B\)</span>.</p>
+<p>(b) Why does the IQHE require <span class="math notranslate nohighlight">\(k_B T \ll \hbar\omega_c\)</span>? Why is GaAs preferred over Si (<span class="math notranslate nohighlight">\(m^* \approx 0.2\,m_e\)</span>)?</p>
+<p>(c) Disorder broadens Landau levels by <span class="math notranslate nohighlight">\(\Gamma\)</span>. To resolve plateaus, <span class="math notranslate nohighlight">\(\Gamma &lt; \hbar\omega_c\)</span>. Estimate the maximum scattering rate <span class="math notranslate nohighlight">\(1/\tau\)</span> and the minimum mobility <span class="math notranslate nohighlight">\(\mu = e\tau/m^*\)</span>.</p>
+<p><strong>6. Von Klitzing constant.</strong> <span class="math notranslate nohighlight">\(R_K \equiv h/e^2 \approx 25\,812.807\,\Omega\)</span>.</p>
+<p>(a) Why is the Hall resistivity at <span class="math notranslate nohighlight">\(\nu = 1\)</span> exactly <span class="math notranslate nohighlight">\(\rho_{xy} = R_K\)</span>, independent of sample, geometry, or disorder? Cite the topological argument from the lecture.</p>
+<p>(b) Since 2019 the SI ohm is realized via the QHE rather than via a physical artifact. Explain the metrological logic.</p>
+<p>(c) The fine-structure constant satisfies <span class="math notranslate nohighlight">\(\alpha = e^2/(4\pi\epsilon_0\hbar c)\)</span>, so <span class="math notranslate nohighlight">\(R_K = 1/(2\alpha\epsilon_0 c)\)</span>. How does a high-precision measurement of <span class="math notranslate nohighlight">\(R_K\)</span> constrain <span class="math notranslate nohighlight">\(\alpha\)</span>?</p>
 </section>
 </section>
 
@@ -776,10 +854,12 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-landau-levels">Filling Landau Levels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charge-pumping-argument">Charge Pumping Argument</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-hall-conductance">Linear Response and Hall Conductance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fractional-quantum-hall-effect">Fractional Quantum Hall Effect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-factor-and-incompressibility">Filling Factor and Incompressibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quantized-hall-conductance">The Quantized Hall Conductance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-1-laughlin-s-charge-pumping">Argument 1: Laughlin’s Charge Pumping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-2-kubo-formula-linear-response">Argument 2: Kubo Formula (Linear Response)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-from-disorder">Robustness from Disorder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-iqhe-fractional-filling">Beyond IQHE: Fractional Filling</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

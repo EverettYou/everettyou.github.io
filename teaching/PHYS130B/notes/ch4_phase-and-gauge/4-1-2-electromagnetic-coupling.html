@@ -508,7 +508,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-momentum">Kinetic Momentum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lorentz-force-law">The Lorentz Force Law</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-and-magnetic-fields-from-potentials">Electric and Magnetic Fields from Potentials</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gauge-principle-requires-electromagnetism">The Gauge Principle Requires Electromagnetism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-redundancy-to-dynamics">From Redundancy to Dynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -530,33 +530,77 @@
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
 <li><p>What is kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>, and how does it differ from canonical momentum? Use Heisenberg equations to show how both relate to observable motion.</p></li>
-<li><p>How does the kinetic momentum evolve under the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m} + q\Phi\)</span>? Show that the equation of motion reproduces the Lorentz force.</p></li>
-<li><p>How do <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> arise from the gauge potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span>? Write the explicit expressions.</p></li>
-<li><p>We derived electromagnetism from the requirement of local U(1) phase invariance. What assumptions went in, and what came out? Why does gauge theory demand the existence of electromagnetism?</p></li>
+<li><p>How does the kinetic momentum evolve under the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2/(2m) + q\phi\)</span>? Show that the equation of motion reproduces the Lorentz force.</p></li>
+<li><p>How do <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> arise from the gauge potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>? Write the explicit expressions.</p></li>
+<li><p>What is the field strength tensor <span class="math notranslate nohighlight">\(F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\)</span>, and why is it gauge-invariant? How does it package <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> into one object?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The gauge-invariant Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m} + q\Phi\)</span>, derived in §4.1.1 purely from local U(1) phase symmetry, contains a profound discovery: it automatically describes charged particles interacting with electromagnetic fields. By computing equations of motion, we extract the Lorentz force and identify the electric and magnetic fields. The gauge principle transforms a mathematical symmetry requirement into the fundamental interaction that shapes the universe.</p>
+<p>The gauge connection <span class="math notranslate nohighlight">\((\phi, \boldsymbol{A})\)</span> was forced in §4.1.1 by the local phase redundancy of <span class="math notranslate nohighlight">\(\psi\)</span>. This section turns to its dynamical content: the Heisenberg equation for the minimally coupled <span class="math notranslate nohighlight">\(\hat{H}\)</span> identifies the kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> as the velocity operator, produces the <strong>quantum Lorentz force</strong>, and reads off the physical electric and magnetic fields <span class="math notranslate nohighlight">\(\boldsymbol{E}, \boldsymbol{B}\)</span> from the potentials. The gauge connection is not bookkeeping — its dynamics <em>is</em> electromagnetism.</p>
 </section>
 <section id="kinetic-momentum">
 <h3>Kinetic Momentum<a class="headerlink" href="#kinetic-momentum" title="Link to this heading">#</a></h3>
-<p>The Heisenberg equation for position gives:</p>
+<p>From §4.1.1, local U(1) covariance gives the minimally coupled Hamiltonian</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\langle\boldsymbol{x}\rangle}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}\langle[\hat{\boldsymbol{x}}, \hat{H}]\rangle = \frac{\langle\hat{\boldsymbol{p}} - q\boldsymbol{A}\rangle}{m}
+\hat{H}=\frac{(\hat{\boldsymbol{p}}-q\boldsymbol{A})^{2}}{2m}+q\phi.
 \]</div>
-<p>using <span class="math notranslate nohighlight">\([\hat{x}_i, \hat{p}_j] = \mathrm{i}\hbar\delta_{ij}\)</span> and <span class="math notranslate nohighlight">\([\hat{x}_i, \boldsymbol{A}(\hat{\boldsymbol{x}})] = 0\)</span>.</p>
+<p>We now ask what this Hamiltonian means dynamically. In the Heisenberg picture, operators carry the time dependence, so we study equations of motion directly. The position equation is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{\boldsymbol{x}}}{\mathrm{d}t}
+=\frac{1}{\mathrm{i}\hbar}[\hat{\boldsymbol{x}},\hat{H}]
+=\frac{\hat{\boldsymbol{p}}-q\boldsymbol{A}}{m}.
+\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Velocity from the Hamiltonian</p>
+<p>Use the minimally coupled Hamiltonian</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}=\frac{1}{2m}(\hat{p}_j-qA_j)(\hat{p}_j-qA_j)+q\phi,
+\]</div>
+<p>where repeated spatial indices are summed. Since <span class="math notranslate nohighlight">\(\hat{x}_i\)</span> commutes with any function of position,</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{x}_i,A_j(\hat{\boldsymbol{x}},t)]=0,\qquad [\hat{x}_i,\phi(\hat{\boldsymbol{x}},t)]=0.
+\]</div>
+<p>Using <span class="math notranslate nohighlight">\([A,BC]=[A,B]C+B[A,C]\)</span> and <span class="math notranslate nohighlight">\([\hat{x}_i,\hat{p}_j]=\mathrm{i}\hbar\delta_{ij}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+[\hat{x}_i,\hat{H}]
+&amp;=\frac{1}{2m}\left([\hat{x}_i,\hat{p}_j-qA_j](\hat{p}_j-qA_j)+(\hat{p}_j-qA_j)[\hat{x}_i,\hat{p}_j-qA_j]\right)\\
+&amp;=\frac{1}{2m}\left(\mathrm{i}\hbar\delta_{ij}(\hat{p}_j-qA_j)+(\hat{p}_j-qA_j)\mathrm{i}\hbar\delta_{ij}\right)\\
+&amp;=\frac{\mathrm{i}\hbar}{m}(\hat{p}_i-qA_i).
+\end{split}
+\end{split}\]</div>
+<p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{x}_i}{\mathrm{d}t}
+=\frac{1}{\mathrm{i}\hbar}[\hat{x}_i,\hat{H}]
+=\frac{\hat{p}_i-qA_i}{m},
+\]</div>
+<p>or, in vector form,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{\boldsymbol{x}}}{\mathrm{d}t}
+=\frac{\hat{\boldsymbol{p}}-q\boldsymbol{A}}{m}.
+\]</div>
+</div>
+<p>This identifies the velocity operator and kinetic momentum operator:</p>
 <div class="important admonition">
 <p class="admonition-title">Kinetic Momentum</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}, \qquad \boldsymbol{v} = \frac{\hat{\boldsymbol{\pi}}}{m}
+\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}, \qquad \hat{\boldsymbol{v}} = \frac{\hat{\boldsymbol{\pi}}}{m}.
 \]</div>
-<p>The <strong>kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> determines the particle’s velocity. The canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} = -\mathrm{i}\hbar\nabla\)</span> is gauge-dependent; only <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> is directly observable.</p>
+<p>The <strong>kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> determines motion. The canonical momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}=-\mathrm{i}\hbar\nabla\)</span> is gauge-dependent; <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> is the mechanical momentum that appears in the velocity.</p>
 </div>
+<p>Taking expectation values of this operator equation gives the measurable average velocity, but the dynamics itself is already valid at the operator level.</p>
 <div class="caution admonition">
 <p class="admonition-title">Caution: Kinetic Momentum Does Not Commute</p>
 <p>Unlike canonical momentum (<span class="math notranslate nohighlight">\([\hat{p}_i, \hat{p}_j] = 0\)</span>), kinetic momentum components satisfy <span class="math notranslate nohighlight">\([\hat{\pi}_i, \hat{\pi}_j] = \mathrm{i}q\hbar\epsilon_{ijk}B_k\)</span> in a magnetic field. This noncommutativity is central to Landau quantization (§4.3).</p>
@@ -564,116 +608,111 @@
 </section>
 <section id="the-lorentz-force-law">
 <h3>The Lorentz Force Law<a class="headerlink" href="#the-lorentz-force-law" title="Link to this heading">#</a></h3>
-<p>Computing <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\langle\hat{\boldsymbol{\pi}}\rangle}{\mathrm{d}t}\)</span> requires the commutator <span class="math notranslate nohighlight">\([\hat{\boldsymbol{p}}, \hat{H}]\)</span>. Using <span class="math notranslate nohighlight">\([\hat{p}_i, A_j] = -\mathrm{i}\hbar\partial_i A_j\)</span> and the product rule on <span class="math notranslate nohighlight">\((\hat{\boldsymbol{p}} - q\boldsymbol{A})^2\)</span>, one extracts gradient and curl terms from the gauge potentials.</p>
+<p>Having identified <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}}=\hat{\boldsymbol{\pi}}/m\)</span>, the next question is how this velocity changes in time. Since <span class="math notranslate nohighlight">\(\boldsymbol{A}(\hat{\boldsymbol{x}},t)\)</span> may depend explicitly on time, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}}\)</span> has both a commutator term and an explicit time-derivative term:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{\boldsymbol{v}}}{\mathrm{d}t}
+=\frac{1}{\mathrm{i}\hbar}\left[\frac{\hat{\boldsymbol{\pi}}}{m},\hat{H}\right]
+-\frac{q}{m}\partial_t\boldsymbol{A}.
+\]</div>
+<p>Evaluating this equation gives the quantum Lorentz force:</p>
 <div class="important admonition">
 <p class="admonition-title">Lorentz Force from Gauge Theory</p>
 <div class="math notranslate nohighlight">
 \[
-m\frac{\mathrm{d}\langle\hat{\boldsymbol{v}}\rangle}{\mathrm{d}t} = q\left\langle\boldsymbol{E} + \frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})\right\rangle
+m\frac{\mathrm{d}\hat{\boldsymbol{v}}}{\mathrm{d}t}
+=q\left[\boldsymbol{E}+\frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B}-\boldsymbol{B}\times\hat{\boldsymbol{v}})\right].
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}} = \hat{\boldsymbol{\pi}}/m\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \frac{\partial\boldsymbol{A}}{\partial t}\)</span>, and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span>.</p>
-<p>This is the <strong>quantum Lorentz force law</strong>, derived entirely from the gauge-invariant Hamiltonian. The magnetic force involves the symmetrized product <span class="math notranslate nohighlight">\(\frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})\)</span> because <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}(\hat{\boldsymbol{x}})\)</span> do not commute.</p>
+<p>Here <span class="math notranslate nohighlight">\(\boldsymbol{E}= -\nabla\phi-\partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}=\nabla\times\boldsymbol{A}\)</span>, evaluated at the position operator <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}\)</span>. The magnetic term is symmetrized because <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}}\)</span> need not commute with <span class="math notranslate nohighlight">\(\boldsymbol{B}(\hat{\boldsymbol{x}},t)\)</span>.</p>
+</div>
+<p>For uniform fields, or in the classical limit where ordering is irrelevant, this reduces to the familiar Lorentz force <span class="math notranslate nohighlight">\(m\boldsymbol{a}=q(\boldsymbol{E}+\boldsymbol{v}\times\boldsymbol{B})\)</span>.</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion: Lorentz force from gauge invariance</p>
+<p>In classical mechanics, the Lorentz force <span class="math notranslate nohighlight">\(m\boldsymbol{a} = q(\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B})\)</span> is an empirical law. In quantum mechanics, we derived it from the gauge principle alone. Does this mean quantum mechanics is “deeper” than classical mechanics? Could a different gauge group produce a different force law?</p>
 </div>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Equation of Motion for Kinetic Momentum</p>
-<p><strong>Step 1 — Split into canonical momentum and vector potential.</strong>
-We want <span class="math notranslate nohighlight">\(m\frac{\mathrm{d}\langle \hat{v}_i\rangle}{\mathrm{d}t}\)</span> where <span class="math notranslate nohighlight">\(\hat{v}_i = \hat{\pi}_i/m = (\hat{p}_i - qA_i)/m\)</span>. Since <span class="math notranslate nohighlight">\(A_i(\boldsymbol{x},t)\)</span> depends on both position and time,</p>
+<p class="admonition-title">Derivation: Operator Equation for Kinetic Momentum</p>
+<p><strong>Step 1 — Use the Heisenberg equation for velocity.</strong></p>
+<p>Switch to components so the commutators and operator ordering are explicit. The previous section identified <span class="math notranslate nohighlight">\(\hat{v}_i=\hat{\pi}_i/m\)</span>. Since <span class="math notranslate nohighlight">\(\hat{\pi}_i=\hat{p}_i-qA_i(\hat{\boldsymbol{x}},t)\)</span> has explicit time dependence through <span class="math notranslate nohighlight">\(A_i\)</span>, its equation of motion is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{v}_i}{\mathrm{d}t}
+=\frac{1}{\mathrm{i}\hbar}\left[\frac{\hat{\pi}_i}{m},\hat{H}\right]
+-\frac{q}{m}\partial_t A_i,
+\]</div>
+<p>or equivalently,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{d}\hat{\pi}_i}{\mathrm{d}t}
+=\frac{1}{\mathrm{i}\hbar}[\hat{\pi}_i,\hat{H}]-q\partial_t A_i.
+\]</div>
+<p><strong>Step 2 — Compute the basic commutators.</strong></p>
+<p>For a function <span class="math notranslate nohighlight">\(f(\hat{\boldsymbol{x}},t)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{p}_i,f]=-\mathrm{i}\hbar\partial_i f.
+\]</div>
+<p>Therefore the kinetic momentum components do not commute:</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\pi}_i,\hat{\pi}_j]
+=\mathrm{i}\hbar q(\partial_i A_j-\partial_j A_i)
+=\mathrm{i}\hbar q\epsilon_{ijk}B_k.
+\]</div>
+<p>The scalar potential contributes</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\pi}_i,q\phi]=[\hat{p}_i,q\phi]=-\mathrm{i}\hbar q\partial_i\phi.
+\]</div>
+<p><strong>Step 3 — Evaluate <span class="math notranslate nohighlight">\([\hat{\pi}_i,\hat{H}]\)</span>.</strong></p>
+<p>Using <span class="math notranslate nohighlight">\(\hat{H}=\hat{\pi}_j\hat{\pi}_j/(2m)+q\phi\)</span> and <span class="math notranslate nohighlight">\([A,BC]=[A,B]C+B[A,C]\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{split}
-m\frac{\mathrm{d}\langle \hat{v}_i\rangle}{\mathrm{d}t}
-&amp;= \frac{\mathrm{d}\langle\hat{p}_i\rangle}{\mathrm{d}t} - q\frac{\mathrm{d}\langle A_i\rangle}{\mathrm{d}t}
+\frac{1}{\mathrm{i}\hbar}[\hat{\pi}_i,\hat{H}]
+&amp;=\frac{q}{2m}\epsilon_{ijk}\left(B_k\hat{\pi}_j+\hat{\pi}_jB_k\right)-q\partial_i\phi.
 \end{split}
 \]</div>
-<p>We evaluate each term separately.</p>
-<p><strong>Step 2 — Heisenberg equation for canonical momentum.</strong>
-<span class="math notranslate nohighlight">\(\frac{\mathrm{d}\langle\hat{p}_i\rangle}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}\langle[\hat{p}_i, \hat{H}]\rangle\)</span> with <span class="math notranslate nohighlight">\(\hat{H} = \frac{1}{2m}\hat{\pi}_j\hat{\pi}_j + q\Phi\)</span>. Since <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{p}_j^2]=0\)</span>, the only contributions come from terms involving <span class="math notranslate nohighlight">\(A_j\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
-<p><strong>Step 3 — Evaluate each commutator</strong> using <span class="math notranslate nohighlight">\([\hat{p}_i, f(\boldsymbol{x})] = -\mathrm{i}\hbar\,\partial_i f\)</span> and the product rule <span class="math notranslate nohighlight">\([A, BC] = [A,B]C + B[A,C]\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-[\hat{p}_i, A_j\hat{p}_j] = [\hat{p}_i, A_j]\hat{p}_j = -\mathrm{i}\hbar(\partial_i A_j)\hat{p}_j
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-[\hat{p}_i, \hat{p}_j A_j] = \hat{p}_j[\hat{p}_i, A_j] = -\mathrm{i}\hbar\,\hat{p}_j(\partial_i A_j)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-[\hat{p}_i, q^2 A_j^2] = -\mathrm{i}\hbar\,q^2\,\partial_i(A_j^2) = -2\mathrm{i}\hbar\,q^2 A_j(\partial_i A_j)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-[\hat{p}_i, q\Phi] = -\mathrm{i}\hbar\,q\,\partial_i\Phi
-\]</div>
-<p><strong>Step 4 — Collect and factor out <span class="math notranslate nohighlight">\(\hat{\pi}_j\)</span>.</strong>
-Assembling <span class="math notranslate nohighlight">\([\hat{p}_i, \hat{H}]\)</span> from the four commutators above (the cross term in <span class="math notranslate nohighlight">\(\hat{\pi}^2 = \hat{p}^2 - q\hat{p}\cdot A - qA\cdot\hat{p} + q^2 A^2\)</span> carries a factor <span class="math notranslate nohighlight">\(-q\)</span> on the first two and <span class="math notranslate nohighlight">\(+q^2\)</span> on the last):</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{split}
-\frac{1}{\mathrm{i}\hbar}[\hat{p}_i, \hat{H}]
-&amp;= \frac{q}{2m}\bigl[(\partial_i A_j)\hat{p}_j + \hat{p}_j(\partial_i A_j) - 2q A_j(\partial_i A_j)\bigr] - q\,\partial_i\Phi
-\end{split}
-\]</div>
-<p>Recognizing <span class="math notranslate nohighlight">\(\hat{p}_j - qA_j = \hat{\pi}_j\)</span> in the bracket:</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{split}
-\frac{\mathrm{d}\langle\hat{p}_i\rangle}{\mathrm{d}t}
-&amp;= \frac{q}{2m}\bigl\langle(\partial_i A_j)\hat{\pi}_j + \hat{\pi}_j(\partial_i A_j)\bigr\rangle - q\langle\partial_i\Phi\rangle
-\end{split}
-\]</div>
-<p>The symmetrized product <span class="math notranslate nohighlight">\((\partial_i A_j)\hat{\pi}_j + \hat{\pi}_j(\partial_i A_j)\)</span> appears because <span class="math notranslate nohighlight">\(\hat{\pi}_j\)</span> and <span class="math notranslate nohighlight">\(\partial_i A_j\)</span> do not commute.</p>
-<p><strong>Step 5 — Total time derivative of <span class="math notranslate nohighlight">\(A_i\)</span>.</strong>
-By the Heisenberg equation for <span class="math notranslate nohighlight">\(A_i(\hat{\boldsymbol{x}}, t)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{split}
-\frac{\mathrm{d}\langle A_i\rangle}{\mathrm{d}t}
-&amp;= \left\langle\frac{\partial A_i}{\partial t}\right\rangle + \frac{1}{2m}\bigl\langle(\partial_j A_i)\hat{\pi}_j + \hat{\pi}_j(\partial_j A_i)\bigr\rangle
-\end{split}
-\]</div>
-<p>The second term is the symmetrized convective derivative <span class="math notranslate nohighlight">\(\hat{v}_j\,\partial_j A_i\)</span>.</p>
-<p><strong>Step 6 — Combine and identify <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>.</strong>
-Substituting Steps 4 and 5 into Step 1:</p>
+<p><strong>Step 4 — Add the explicit time derivative and identify the fields.</strong></p>
+<p>Since <span class="math notranslate nohighlight">\(\partial_t\hat{\pi}_i=-q\partial_tA_i\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-m\frac{\mathrm{d}\langle \hat{v}_i\rangle}{\mathrm{d}t}
-&amp;= -q\left\langle\partial_i\Phi + \frac{\partial A_i}{\partial t}\right\rangle \\
-&amp;\quad + \frac{q}{2m}\bigl\langle\hat{\pi}_j(\partial_i A_j - \partial_j A_i) + (\partial_i A_j - \partial_j A_i)\hat{\pi}_j\bigr\rangle
+\frac{\mathrm{d}\hat{\pi}_i}{\mathrm{d}t}
+&amp;=q(-\partial_i\phi-\partial_tA_i)
++\frac{q}{2m}\epsilon_{ijk}\left(B_k\hat{\pi}_j+\hat{\pi}_jB_k\right)\\
+&amp;=qE_i+\frac{q}{2}\epsilon_{ijk}\left(B_k\hat{v}_j+\hat{v}_jB_k\right).
 \end{split}
 \end{split}\]</div>
-<p>The first line gives <span class="math notranslate nohighlight">\(q\langle E_i\rangle\)</span> since <span class="math notranslate nohighlight">\(E_i = -\partial_i\Phi - \partial_t A_i\)</span>. In the second line, recognize <span class="math notranslate nohighlight">\(\partial_i A_j - \partial_j A_i = \epsilon_{ijk}B_k\)</span>, so</p>
+<p>Using</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-m\frac{\mathrm{d}\langle \hat{v}_i\rangle}{\mathrm{d}t}
-&amp;= q\langle E_i\rangle + \frac{q}{2m}\,\epsilon_{ijk}\bigl\langle\hat{\pi}_j B_k + B_k\hat{\pi}_j\bigr\rangle \\
-&amp;= q\left\langle E_i + \frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})_i\right\rangle
-\end{split}
-\end{split}\]</div>
-<p>The magnetic term is <strong>not</strong> a simple cross product: because <span class="math notranslate nohighlight">\(\hat{v}_j\)</span> and <span class="math notranslate nohighlight">\(B_k\)</span> do not commute, the symmetrized combination <span class="math notranslate nohighlight">\(\frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})\)</span> is the correct quantum-mechanical operator ordering.</p>
-</div>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>In classical mechanics, the Lorentz force <span class="math notranslate nohighlight">\(m\boldsymbol{a} = q(\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B})\)</span> is an empirical law. In quantum mechanics, we derived it from the gauge principle alone. Does this mean quantum mechanics is “deeper” than classical mechanics? Could a different gauge group produce a different force law?</p>
+\[
+(\hat{\boldsymbol{v}}\times\boldsymbol{B}-\boldsymbol{B}\times\hat{\boldsymbol{v}})_i
+=\epsilon_{ijk}\left(\hat{v}_jB_k+B_k\hat{v}_j\right),
+\]</div>
+<p>we obtain the operator Lorentz force:</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{\mathrm{d}\hat{\boldsymbol{v}}}{\mathrm{d}t}
+=q\left[\boldsymbol{E}+\frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B}-\boldsymbol{B}\times\hat{\boldsymbol{v}})\right].
+\]</div>
 </div>
 </section>
 <section id="electric-and-magnetic-fields-from-potentials">
 <h3>Electric and Magnetic Fields from Potentials<a class="headerlink" href="#electric-and-magnetic-fields-from-potentials" title="Link to this heading">#</a></h3>
-<p>The gauge potentials <span class="math notranslate nohighlight">\((\Phi, \boldsymbol{A})\)</span> are gauge-dependent and not directly observable. The physical fields are:</p>
+<p>The gauge potentials <span class="math notranslate nohighlight">\((\phi, \boldsymbol{A})\)</span> are gauge-dependent and not directly observable. The physical fields are:</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{E} = -\nabla\Phi - \frac{\partial\boldsymbol{A}}{\partial t}, \qquad \boldsymbol{B} = \nabla \times \boldsymbol{A}
+\boldsymbol{E} = -\nabla\phi - \frac{\partial\boldsymbol{A}}{\partial t}, \qquad \boldsymbol{B} = \nabla \times \boldsymbol{A}
 \]</div>
-<p>In spacetime notation with <span class="math notranslate nohighlight">\(A_\mu = (\Phi, \boldsymbol{A})\)</span>, both fields are encoded in the <strong>field strength tensor</strong>:</p>
+<p>In spacetime notation with <span class="math notranslate nohighlight">\(A_\mu = (\phi, \boldsymbol{A})\)</span>, both fields are encoded in the <strong>field strength tensor</strong>:</p>
 <div class="important admonition">
 <p class="admonition-title">Field Strength Tensor</p>
 <div class="math notranslate nohighlight">
 \[
 F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
 \]</div>
-<p><span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span> is <strong>gauge-invariant</strong>: under <span class="math notranslate nohighlight">\(A_\mu \to A_\mu + \partial_\mu\chi\)</span>, the antisymmetry gives <span class="math notranslate nohighlight">\(F'_{\mu\nu} = F_{\mu\nu}\)</span> because <span class="math notranslate nohighlight">\(\partial_\mu\partial_\nu\chi = \partial_\nu\partial_\mu\chi\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span> is <strong>gauge-invariant</strong>: under <span class="math notranslate nohighlight">\(A_\mu \to A_\mu + \partial_\mu\alpha\)</span>, the antisymmetry gives <span class="math notranslate nohighlight">\(F'_{\mu\nu} = F_{\mu\nu}\)</span> because <span class="math notranslate nohighlight">\(\partial_\mu\partial_\nu\alpha = \partial_\nu\partial_\mu\alpha\)</span>.</p>
 </div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Spacetime Notation: A Gentle Introduction</p>
@@ -700,43 +739,43 @@ F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
 <td class="text-left"><p><span class="math notranslate nohighlight">\(\boldsymbol{p} = (p^1, p^2, p^3)\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>Gauge field <span class="math notranslate nohighlight">\(A_\mu\)</span></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\(A_0 = \Phi\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(A_0 = \phi\)</span></p></td>
 <td class="text-left"><p><span class="math notranslate nohighlight">\(\boldsymbol{A} = (A_1, A_2, A_3)\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>Covariant derivative <span class="math notranslate nohighlight">\(D_\mu\)</span></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\(D_0 = \partial_t + \mathrm{i}(q/\hbar)\Phi\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(D_0 = \partial_t + \mathrm{i}(q/\hbar)\phi\)</span></p></td>
 <td class="text-left"><p><span class="math notranslate nohighlight">\(\boldsymbol{D} = \nabla - \mathrm{i}(q/\hbar)\boldsymbol{A}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>Notice the pattern: every familiar pair (energy and momentum, scalar and vector potential, time and space derivatives) is unified into a single four-vector.</p>
-<p><strong>Index conventions.</strong> Upper and lower indices are related by the Lorentz metric <span class="math notranslate nohighlight">\(g_{\mu\nu} = \mathrm{diag}(-1, +1, +1, +1)\)</span>:</p>
+<p><strong>Index conventions.</strong> Upper and lower indices are related by the Lorentz metric <span class="math notranslate nohighlight">\(g_{\mu\nu} = \mathrm{diag}(+1, -1, -1, -1)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-a_\mu = g_{\mu\nu}\, a^\nu \quad \Longrightarrow \quad a_0 = -a^0, \quad a_i = a^i \; (i = 1,2,3)
+a_\mu = g_{\mu\nu}\, a^\nu \quad \Longrightarrow \quad a_0 = a^0, \quad a_i = -a^i \; (i = 1,2,3)
 \]</div>
-<p>Repeated indices (one upper, one lower) are summed over: <span class="math notranslate nohighlight">\(a^\mu b_\mu = -a^0 b^0 + a^1 b^1 + a^2 b^2 + a^3 b^3\)</span>. This is the <strong>Einstein summation convention</strong>.</p>
+<p>Repeated indices (one upper, one lower) are summed over: <span class="math notranslate nohighlight">\(a^\mu b_\mu = a^0 b^0 - \boldsymbol{a}\cdot\boldsymbol{b}\)</span>. This is the <strong>Einstein summation convention</strong>.</p>
 <p><strong>The field strength tensor.</strong> With this notation, <span class="math notranslate nohighlight">\(F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\)</span> is a <span class="math notranslate nohighlight">\(4 \times 4\)</span> antisymmetric matrix whose components are exactly <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 F_{\mu\nu} = \begin{pmatrix} 0 &amp; E_x &amp; E_y &amp; E_z \\ -E_x &amp; 0 &amp; -B_z &amp; B_y \\ -E_y &amp; B_z &amp; 0 &amp; -B_x \\ -E_z &amp; -B_y &amp; B_x &amp; 0 \end{pmatrix}
 \end{split}\]</div>
-<p>For example, <span class="math notranslate nohighlight">\(F_{01} = \partial_0 A_1 - \partial_1 A_0 = \partial_t A_x + \partial_x \Phi = -(-\partial_x \Phi - \partial_t A_x) = E_x\)</span>, and <span class="math notranslate nohighlight">\(F_{12} = \partial_1 A_2 - \partial_2 A_1 = -(\nabla \times \boldsymbol{A})_z = -B_z\)</span>.</p>
+<p>For example, with <span class="math notranslate nohighlight">\(A^{\mu} = (\phi, \boldsymbol{A})\)</span> and lowered components <span class="math notranslate nohighlight">\(A_{\mu} = (\phi, -\boldsymbol{A})\)</span>, <span class="math notranslate nohighlight">\(F_{01} = \partial_{t}(-A_{x}) - \partial_{x}\phi = -\partial_{t}A_{x} - \partial_{x}\phi = E_{x}\)</span> (using <span class="math notranslate nohighlight">\(E_{x} = -\partial_{x}\phi - \partial_{t}A_{x}\)</span>), and <span class="math notranslate nohighlight">\(F_{12} = \partial_{x}(-A_{y}) - \partial_{y}(-A_{x}) = -(\partial_{x}A_{y} - \partial_{y}A_{x}) = -B_{z}\)</span>, in agreement with the matrix above.</p>
 <p>The beauty of <span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span> is that it packages six quantities (<span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>) into one geometric object that transforms simply under changes of reference frame.</p>
 </div>
 </section>
-<section id="the-gauge-principle-requires-electromagnetism">
-<h3>The Gauge Principle Requires Electromagnetism<a class="headerlink" href="#the-gauge-principle-requires-electromagnetism" title="Link to this heading">#</a></h3>
-<div class="important admonition">
-<p class="admonition-title">The Gauge Principle</p>
-<p>Starting from only two inputs:</p>
-<ol class="arabic simple">
-<li><p>Local U(1) phase invariance: <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x},t) \to \mathrm{e}^{\mathrm{i}q\chi(\boldsymbol{x},t)}\psi(\boldsymbol{x},t)\)</span></p></li>
-<li><p>The Schrödinger equation retains its form</p></li>
-</ol>
-<p>we were <strong>forced</strong> to introduce a gauge field <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, replace <span class="math notranslate nohighlight">\(\nabla \to \nabla - \mathrm{i}(q/\hbar)\boldsymbol{A}\)</span> (covariant derivative), and adopt <span class="math notranslate nohighlight">\(\hat{H} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m} + q\Phi\)</span>. From this, the Lorentz force and the electric/magnetic fields emerged automatically.</p>
-<p><strong>Symmetry <span class="math notranslate nohighlight">\(\to\)</span> Interaction</strong>: The gauge field is not freely chosen—it is required by quantum consistency. Every charged particle couples to the same universal gauge field.</p>
+<section id="from-redundancy-to-dynamics">
+<h3>From Redundancy to Dynamics<a class="headerlink" href="#from-redundancy-to-dynamics" title="Link to this heading">#</a></h3>
+<div class="attention admonition">
+<p class="admonition-title">From redundancy to dynamics</p>
+<p>§4.1.1 forced the gauge connection <span class="math notranslate nohighlight">\((\phi, \boldsymbol{A})\)</span> from the local phase redundancy of <span class="math notranslate nohighlight">\(\psi\)</span>. This section showed that the connection is not bookkeeping: its dynamics — read off from Heisenberg equations of the minimally coupled <span class="math notranslate nohighlight">\(\hat{H}\)</span> — <em>is</em> electromagnetism.</p>
+<ul class="simple">
+<li><p>The kinetic momentum <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>, not the canonical <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span>, sets the velocity.</p></li>
+<li><p>The equation of motion for <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\)</span> is the quantum <strong>Lorentz force</strong>, with the gauge-invariant fields <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\phi - \partial_{t}\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla\times\boldsymbol{A}\)</span> in their familiar roles.</p></li>
+<li><p>The full content of <span class="math notranslate nohighlight">\((\phi,\boldsymbol{A})\)</span> is packaged in the gauge-invariant field-strength tensor <span class="math notranslate nohighlight">\(F_{\mu\nu}=\partial_\mu A_\nu - \partial_\nu A_\mu\)</span>.</p></li>
+</ul>
+<p>The redundancy alone determines <em>what</em> couples and <em>how</em>. Every charged particle inherits the same connection — the source of the universality of electromagnetism.</p>
 </div>
 </section>
 <section id="summary">
@@ -744,17 +783,17 @@ F_{\mu\nu} = \begin{pmatrix} 0 &amp; E_x &amp; E_y &amp; E_z \\ -E_x &amp; 0 &am
 <ul class="simple">
 <li><p><strong>Kinetic momentum</strong> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> determines velocity; its components do not commute in a magnetic field.</p></li>
 <li><p>The <strong>Lorentz force</strong> <span class="math notranslate nohighlight">\(m\boldsymbol{a} = q(\boldsymbol{E} + \boldsymbol{v}\times\boldsymbol{B})\)</span> is derived from the gauge-invariant Hamiltonian, not assumed.</p></li>
-<li><p><strong>Electric and magnetic fields</strong> arise from gauge potentials: <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla\times\boldsymbol{A}\)</span>.</p></li>
+<li><p><strong>Electric and magnetic fields</strong> arise from gauge potentials: <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\phi - \partial_t\boldsymbol{A}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla\times\boldsymbol{A}\)</span>.</p></li>
 <li><p>The <strong>field strength tensor</strong> <span class="math notranslate nohighlight">\(F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\)</span> is gauge-invariant.</p></li>
-<li><p>The <strong>gauge principle</strong> transforms symmetry into interaction: local U(1) invariance requires electromagnetism.</p></li>
+<li><p>The gauge connection of §4.1.1 carries dynamics: redundancy + minimally coupled <span class="math notranslate nohighlight">\(\hat{H}\)</span> ⇒ electromagnetism, with <span class="math notranslate nohighlight">\(F_{\mu\nu}\)</span> as the gauge-invariant content of <span class="math notranslate nohighlight">\((\phi,\boldsymbol{A})\)</span>.</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a></strong>: Local U(1) symmetry and covariant derivative</p></li>
-<li><p><strong><a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a></strong>: Gauge transformations and physical observables</p></li>
-<li><p><strong><a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a></strong>: Phase accumulation in electromagnetic fields</p></li>
-<li><p><strong><a class="reference internal" href="4-3-landau-level.html"><span class="doc std std-doc">4.3 Landau Level</span></a></strong>: Landau quantization and cyclotron motion in a magnetic field.</p></li>
+<li><p><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a>: Local U(1) symmetry and covariant derivative</p></li>
+<li><p><a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a>: Gauge transformations and physical observables</p></li>
+<li><p><a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a>: Phase accumulation in electromagnetic fields</p></li>
+<li><p><a class="reference internal" href="4-3-landau-level.html"><span class="doc std std-doc">4.3 Landau Level</span></a>: Landau quantization and cyclotron motion in a magnetic field.</p></li>
 </ul>
 </div>
 </section>
@@ -764,7 +803,7 @@ F_{\mu\nu} = \begin{pmatrix} 0 &amp; E_x &amp; E_y &amp; E_z \\ -E_x &amp; 0 &am
 <p><strong>1. Velocity from kinetic momentum.</strong> Compute the commutator <span class="math notranslate nohighlight">\([\hat{x}_i, (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2]\)</span> using <span class="math notranslate nohighlight">\([\hat{x}_i, \hat{p}_j] = \mathrm{i}\hbar\delta_{ij}\)</span> and <span class="math notranslate nohighlight">\([\hat{x}_i, \boldsymbol{A}(\hat{\boldsymbol{x}})] = 0\)</span>. Show that</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\mathrm{d}\langle\boldsymbol{x}\rangle}{\mathrm{d}t} = \frac{\langle\hat{\boldsymbol{p}} - q\boldsymbol{A}\rangle}{m} = \frac{\langle\hat{\boldsymbol{\pi}}\rangle}{m}
+\frac{\mathrm{d}\hat{\boldsymbol{x}}}{\mathrm{d}t} = \frac{\hat{\boldsymbol{p}} - q\boldsymbol{A}}{m} = \frac{\hat{\boldsymbol{\pi}}}{m}
 \]</div>
 <p>Explain why this result identifies the kinetic momentum with the momentum that determines velocity.</p>
 <p><strong>2. Kinetic momentum commutator.</strong> Show that the kinetic momentum components <span class="math notranslate nohighlight">\(\hat{\pi}_i = \hat{p}_i - qA_i\)</span> do not commute:</p>
@@ -775,25 +814,25 @@ F_{\mu\nu} = \begin{pmatrix} 0 &amp; E_x &amp; E_y &amp; E_z \\ -E_x &amp; 0 &am
 <p>(a) Start from <span class="math notranslate nohighlight">\([\hat{\pi}_i, \hat{\pi}_j] = [\hat{p}_i - qA_i,\, \hat{p}_j - qA_j]\)</span> and use <span class="math notranslate nohighlight">\([\hat{p}_i, A_j] = -\mathrm{i}\hbar\,\partial_i A_j\)</span>.</p>
 <p>(b) Show that the result simplifies to <span class="math notranslate nohighlight">\(\mathrm{i}q\hbar\,(\partial_i A_j - \partial_j A_i) = \mathrm{i}q\hbar\,\epsilon_{ijk}B_k\)</span>.</p>
 <p>(c) Evaluate explicitly for a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span> and verify <span class="math notranslate nohighlight">\([\hat{\pi}_x, \hat{\pi}_y] = \mathrm{i}\hbar qB\)</span>.</p>
-<p><strong>3. Lorentz force from Heisenberg equation.</strong> Derive the Lorentz force law from the Heisenberg equation of motion. Starting with <span class="math notranslate nohighlight">\(\hat{H} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m} + q\Phi\)</span>:</p>
-<p>(a) Compute <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\boldsymbol{p}}}{\mathrm{d}t} = \frac{1}{\mathrm{i}\hbar}[\hat{\boldsymbol{p}}, \hat{H}]\)</span> by evaluating the commutators step by step.</p>
-<p>(b) Combine terms using <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> to recover</p>
+<p><strong>3. Lorentz force from Heisenberg equation.</strong> Derive the Lorentz force law from the Heisenberg equation of motion. Starting with <span class="math notranslate nohighlight">\(\hat{H} = \frac{(\hat{\boldsymbol{p}} - q\boldsymbol{A})^2}{2m} + q\phi\)</span>:</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\([\hat{\pi}_i,\hat{\pi}_j]\)</span> and <span class="math notranslate nohighlight">\([\hat{\pi}_i,q\phi]\)</span>, then use the Heisenberg equation with explicit time dependence, <span class="math notranslate nohighlight">\(\frac{\mathrm{d}\hat{\pi}_i}{\mathrm{d}t}=\frac{1}{\mathrm{i}\hbar}[\hat{\pi}_i,\hat{H}]-q\partial_t A_i\)</span>.</p>
+<p>(b) Combine terms using <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> to recover</p>
 <div class="math notranslate nohighlight">
 \[
-m\frac{\mathrm{d}\langle\hat{\boldsymbol{v}}\rangle}{\mathrm{d}t} = q\left\langle\boldsymbol{E} + \frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})\right\rangle
+m\frac{\mathrm{d}\hat{\boldsymbol{v}}}{\mathrm{d}t} = q\left[\boldsymbol{E} + \frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})\right]
 \]</div>
 <p>(c) Explain why the symmetrized cross product <span class="math notranslate nohighlight">\(\frac{1}{2}(\hat{\boldsymbol{v}}\times\boldsymbol{B} - \boldsymbol{B}\times\hat{\boldsymbol{v}})\)</span> is needed instead of a simple <span class="math notranslate nohighlight">\(\hat{\boldsymbol{v}}\times\boldsymbol{B}\)</span>.</p>
 <p><strong>4. Symmetric gauge verification.</strong> In a uniform magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>, use the symmetric gauge <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span>.</p>
 <p>(a) Verify that <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> gives <span class="math notranslate nohighlight">\(B\hat{z}\)</span>.</p>
 <p>(b) Compute <span class="math notranslate nohighlight">\([\hat{\pi}_x, \hat{\pi}_y]\)</span> explicitly using this gauge and confirm <span class="math notranslate nohighlight">\([\hat{\pi}_x, \hat{\pi}_y] = \mathrm{i}\hbar qB\)</span>.</p>
 <p>(c) Interpret this non-zero commutator physically: what does it say about simultaneous measurability of velocity components?</p>
-<p><strong>5. Gauge invariance of fields.</strong> Under the gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\chi\)</span> and <span class="math notranslate nohighlight">\(\Phi \to \Phi - \partial_t\chi\)</span>, show that <span class="math notranslate nohighlight">\(\boldsymbol{E}' = \boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}' = \boldsymbol{B}\)</span>. Explain why this guarantees that all observable physics is independent of gauge choice.</p>
+<p><strong>5. Gauge invariance of fields.</strong> Under the gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span> and <span class="math notranslate nohighlight">\(\phi \to \phi - \partial_t\alpha\)</span>, show that <span class="math notranslate nohighlight">\(\boldsymbol{E}' = \boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}' = \boldsymbol{B}\)</span>. Explain why this guarantees that all observable physics is independent of gauge choice.</p>
 <p><strong>6. Comparing gauge choices.</strong> Compute <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> from <span class="math notranslate nohighlight">\(\nabla \times \boldsymbol{A}\)</span> for each of the following vector potentials, all describing a uniform field <span class="math notranslate nohighlight">\(\boldsymbol{B} = B\hat{z}\)</span>:</p>
 <p>(a) <span class="math notranslate nohighlight">\(\boldsymbol{A} = (0, Bx, 0)\)</span></p>
 <p>(b) <span class="math notranslate nohighlight">\(\boldsymbol{A} = \frac{B}{2}(-y, x, 0)\)</span></p>
 <p>(c) <span class="math notranslate nohighlight">\(\boldsymbol{A} = (-By, 0, 0)\)</span></p>
-<p>Verify that all three produce the same <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>. Write down the gauge transformation <span class="math notranslate nohighlight">\(\chi\)</span> that takes (a) to (b).</p>
-<p><strong>7. Field strength tensor components.</strong> Write out all components of <span class="math notranslate nohighlight">\(F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\)</span> as a <span class="math notranslate nohighlight">\(4\times 4\)</span> matrix (rows and columns labeled <span class="math notranslate nohighlight">\(0, x, y, z\)</span>). Verify that <span class="math notranslate nohighlight">\(F_{0i} = E_i\)</span> and <span class="math notranslate nohighlight">\(F_{ij} = -\epsilon_{ijk}B_k\)</span> by computing a few entries explicitly from the definitions <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\Phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla\times\boldsymbol{A}\)</span>.</p>
+<p>Verify that all three produce the same <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>. Write down the gauge transformation <span class="math notranslate nohighlight">\(\alpha\)</span> that takes (a) to (b).</p>
+<p><strong>7. Field strength tensor components.</strong> Write out all components of <span class="math notranslate nohighlight">\(F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\)</span> as a <span class="math notranslate nohighlight">\(4\times 4\)</span> matrix (rows and columns labeled <span class="math notranslate nohighlight">\(0, x, y, z\)</span>). Verify that <span class="math notranslate nohighlight">\(F_{0i} = E_i\)</span> and <span class="math notranslate nohighlight">\(F_{ij} = -\epsilon_{ijk}B_k\)</span> by computing a few entries explicitly from the definitions <span class="math notranslate nohighlight">\(\boldsymbol{E} = -\nabla\phi - \partial_t\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla\times\boldsymbol{A}\)</span>.</p>
 <p><strong>8. Gauge principle and beyond.</strong> Explain why the gauge principle (local U(1) invariance) forces the existence of a gauge field that couples to charged particles.</p>
 <p>(a) What would change if one demanded only global phase invariance instead?</p>
 <p>(b) What additional structure arises if one replaces U(1) with a non-Abelian group such as SU(2)?</p>
@@ -872,7 +911,7 @@ m\frac{\mathrm{d}\langle\hat{\boldsymbol{v}}\rangle}{\mathrm{d}t} = q\left\langl
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-momentum">Kinetic Momentum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lorentz-force-law">The Lorentz Force Law</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-and-magnetic-fields-from-potentials">Electric and Magnetic Fields from Potentials</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gauge-principle-requires-electromagnetism">The Gauge Principle Requires Electromagnetism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-redundancy-to-dynamics">From Redundancy to Dynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
