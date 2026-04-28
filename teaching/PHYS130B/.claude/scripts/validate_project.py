@@ -613,6 +613,30 @@ def _check_subsection_cell_layout(cells: list, base: str) -> list[Issue]:
         t2 = "".join(c2.get("source", []))
         if not re.search(r"(?m)^## Lecture Notes\s*$", t2):
             issues.append(Issue(f"{base}:cell2", "missing `## Lecture Notes` heading (subsection cell 2)"))
+        else:
+            # content-style.md / notebook-architecture.md: `## Lecture Notes`
+            # must be immediately followed by `### Overview` (no preface prose).
+            lec = re.search(r"(?m)^## Lecture Notes\s*$", t2)
+            after = t2[lec.end():]
+            nxt = re.search(r"(?m)^###\s+(.+)$", after)
+            if nxt is None:
+                issues.append(Issue(f"{base}:cell2", "no `### ` subheading found after `## Lecture Notes`"))
+            else:
+                between = after[:nxt.start()].strip()
+                if between:
+                    snippet = between[:60].replace("\n", " ")
+                    issues.append(Issue(
+                        f"{base}:cell2",
+                        f"prose between `## Lecture Notes` and first `### ` heading "
+                        f"(must live inside `### Overview`): \"{snippet}...\"",
+                    ))
+                first_heading = nxt.group(1).strip()
+                if not first_heading.lower().startswith("overview"):
+                    issues.append(Issue(
+                        f"{base}:cell2",
+                        f"first `### ` heading after `## Lecture Notes` must be "
+                        f"`### Overview` (found `### {first_heading}`)",
+                    ))
 
     c3 = cells[3]
     if c3.get("cell_type") != "markdown":

@@ -13,7 +13,7 @@
 | Rules/docs consistency only | `python3 .claude/scripts/validate_project.py --docs-only` |
 | Homework-format report only (subsection cell 3) | `python3 .claude/scripts/audit_homework_format.py` |
 
-`validate_project.py` checks corruption patterns, cell structure, MyST `$$` spacing, banned patterns, notation heuristics, Chapter 4 SI-only electromagnetic unit markers, Chapter 4 phase/flux/scalar-potential/azimuth notation, and **homework problem lines** in subsection notebooks (`content-style.md` § Homework Design — shared logic in `scripts/homework_format.py`).
+`validate_project.py` checks corruption patterns, cell structure, **subsection content arc** (`## Lecture Notes` must be immediately followed by `### Overview` — no preface prose), MyST `$$` spacing, banned patterns, notation heuristics, Chapter 4 SI-only electromagnetic unit markers, Chapter 4 phase/flux/scalar-potential/azimuth notation, and **homework problem lines** in subsection notebooks (`content-style.md` § Homework Design — shared logic in `scripts/homework_format.py`).
 
 ## What agents do **not** run for validation
 
