@@ -25,7 +25,8 @@ Markdown (`.md`), not notebooks. Contains: course title heading, `{list-table}` 
 
 Within `## Lecture Notes` (cell 2):
 
-- `### Overview` (heading only, no repeated title)
+- `### Overview` (heading only, no repeated title): high-level motivation and roadmap; avoid detailed development and display-heavy setup here
+- Put central formal setup (Hamiltonian definitions, expansion ansatz, target equations) in the first body `###` section (e.g., `### General Setup`), not in `Overview`
 - Body: `###` subsections; key results visible; derivations in `:::{dropdown}`
 - `:::{tab-set}`: compare alternatives (e.g., Schrödinger vs Heisenberg picture)
 - Discussion (`dropdown tip`) inline where debate helps

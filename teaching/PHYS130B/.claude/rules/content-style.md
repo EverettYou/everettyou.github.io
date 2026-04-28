@@ -185,6 +185,8 @@ After the vote, do not immediately reveal the answer. If the class is split, ask
 
 - Keep content minimal and concise — teach essential ideas, cut the rest
 - Lead with **why** before **how**
+- In subsection notebooks (`x.y.z`), `### Overview` is high-level orientation only: motivation, scope, and conceptual roadmap. Do **not** use `Overview` for derivations or detailed content development.
+- Avoid display equations in `### Overview` unless a single anchor equation is strictly necessary for orientation; place formal setup and equations in the next body section (typically `### General Setup`).
 - Key results stay visible; extended derivations go in `:::{dropdown}`
 - Each `###` section is a self-contained conceptual unit
 - End subsections with `### Summary` (3–5 bullets)
