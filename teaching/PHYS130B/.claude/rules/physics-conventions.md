@@ -83,6 +83,8 @@ Two notation systems coexist for qubit operators and states. **Never mix them wi
 - Cross-reference: `` {eq}`eq-section-name` ``
 - For multiline equations, always use `\begin{split} ... \end{split}` inside `$$...$$`
 - Do NOT use `align` or `aligned` environments in notebooks (unsafe parsing around leading commutators like `[A,B]`)
+- Do NOT use `\quad` or `\qquad` to lay out multiple equations side-by-side in one display block.
+- When presenting multiple equations/definitions, stack them vertically (one relation per line), using `\begin{split}...\end{split}` where needed.
 
 ## Ket/Bra Notation and Pipe Characters
 
