@@ -71,7 +71,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Chapter 6: Quantum Foundations" href="../ch6_quantum-foundations/index.html" />
-    <link rel="prev" title="5.2.2 Fermi’s Golden Rule" href="5-2-2-fermis-golden-rule.html" />
+    <link rel="prev" title="5.2.2 Dyson Series" href="5-2-2-dyson-series.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -276,7 +276,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">5.2.3 Applications</a></li>
 </ul>
 </details></li>
@@ -505,11 +505,10 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonic-perturbation">Harmonic Perturbation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-dipole-transitions">Electric Dipole Transitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifetime-and-linewidth">Lifetime and Linewidth</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-the-kubo-formula">Linear Response and the Kubo Formula</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hall-conductance">Quantum Hall Conductance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability">Transition Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fermi-s-golden-rule">Fermi’s Golden Rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-process">Adiabatic Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kubo-formula">Kubo Formula</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -530,169 +529,245 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>How does a harmonic perturbation <span class="math notranslate nohighlight">\(V(t) = V_0 \cos(\omega t)\)</span> create resonant transitions between quantum states? What determines the Rabi frequency?</p></li>
-<li><p>What are the electric dipole selection rules for hydrogen, and why do they follow from the symmetry of the dipole operator?</p></li>
-<li><p>How does Fermi’s golden rule connect the decay rate <span class="math notranslate nohighlight">\(\Gamma\)</span> to the lifetime <span class="math notranslate nohighlight">\(\tau\)</span> and the natural linewidth <span class="math notranslate nohighlight">\(\Delta E\)</span> of a spectral line?</p></li>
-<li><p>What is linear response theory? Sketch how the Kubo formula expresses conductivity in terms of current matrix elements between filled and empty single-particle states.</p></li>
-<li><p>Walk through the time-dependent perturbation theory derivation of the Kubo formula. Why does coupling via the vector potential give the perturbation <span class="math notranslate nohighlight">\(\delta\hat{H}=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span>?</p></li>
-<li><p>Why does evaluating the Kubo formula on <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels give exactly <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu e^2/h\)</span>? See §4.3.3 for the explicit calculation.</p></li>
+<li><p>What does first-order time-dependent perturbation theory compute in practice, and why can many applications be reduced to transition amplitudes and probabilities?</p></li>
+<li><p>For a harmonic drive, why does the transition probability develop a resonance profile, and what controls the peak position and spectral width?</p></li>
+<li><p>Why does the long-time limit lead to Fermi’s golden rule, and what makes the resonance condition <span class="math notranslate nohighlight">\(E_f-E_i=\hbar\omega\)</span> emerge in that limit?</p></li>
+<li><p>For an adiabatic exponential turn-on, why is the transition profile Lorentzian in detuning, and how does the adiabatic limit connect to the stationary perturbative picture?</p></li>
+<li><p>In linear response, why is <span class="math notranslate nohighlight">\(\delta\hat{H}=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span> the right perturbation for weak electromagnetic driving, and how does this lead to the Kubo view of Hall conductivity?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>This lesson applies first-order time-dependent perturbation theory to four key physical systems: harmonic driving that reveals resonance and Rabi oscillations, electric dipole transitions with selection rules, decay and linewidth from finite lifetime, and linear response theory leading to the quantum Hall conductance—a remarkable exact result from perturbation theory.</p>
+<p>Section 5.2.2 produced the <strong>Dyson series for the dressed Green’s function</strong> <span class="math notranslate nohighlight">\(\hat{G}(t,t_0)\)</span> (Eq. <a class="reference internal" href="5-2-2-dyson-series.html#equation-eq-5-2-2-dyson-g">(192)</a>). This subsection answers the experimentally meaningful question: <em>if a system is prepared in <span class="math notranslate nohighlight">\(\vert i\rangle\)</span> at time <span class="math notranslate nohighlight">\(t_0\)</span>, what is the probability to find it in <span class="math notranslate nohighlight">\(\vert f\rangle\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>?</em> The answer is the squared first-order matrix element of <span class="math notranslate nohighlight">\(\hat{G}\)</span>, which evaluates differently for different shapes of <span class="math notranslate nohighlight">\(\hat{V}(t)\)</span>. Three iconic results follow:</p>
+<ol class="arabic simple">
+<li><p><strong>Fermi’s golden rule</strong> — sudden harmonic drive in the long-time limit gives a transition rate <span class="math notranslate nohighlight">\(\propto\vert V_{fi}\vert^2\,\delta(E_f-E_i-\hbar\omega)\)</span>.</p></li>
+<li><p><strong>Adiabatic process</strong> — exponential ramp gives a Lorentzian in <span class="math notranslate nohighlight">\(\Delta E\)</span> and recovers the time-independent perturbation result (<a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2</span></a>) as <span class="math notranslate nohighlight">\(\tau\to\infty\)</span>.</p></li>
+<li><p><strong>Kubo formula</strong> — replace the drive by a vector potential and the observable by a current; first-order linear response gives the conductivity, with quantized Hall response on filled Landau levels.</p></li>
+</ol>
+<p>All three share the <strong>same one-line input</strong>, Eq. <a class="reference internal" href="#equation-eq-5-2-3-p1st">(194)</a> below; the differences are entirely in the time profile of <span class="math notranslate nohighlight">\(\hat{V}(t)\)</span>.</p>
 </section>
-<section id="harmonic-perturbation">
-<h3>Harmonic Perturbation<a class="headerlink" href="#harmonic-perturbation" title="Link to this heading">#</a></h3>
-<p>The simplest time-dependent perturbation is a harmonic (oscillating) drive:</p>
+<section id="transition-probability">
+<h3>Transition Probability<a class="headerlink" href="#transition-probability" title="Link to this heading">#</a></h3>
+<p>Prepare the system in an eigenstate <span class="math notranslate nohighlight">\(\vert i\rangle\)</span> of <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> at time <span class="math notranslate nohighlight">\(t_0\)</span>. After time <span class="math notranslate nohighlight">\(t\)</span>, evolution under <span class="math notranslate nohighlight">\(\hat{H}=\hat{H}_0+\hat{V}(t)\)</span> takes it to <span class="math notranslate nohighlight">\(\hat{G}(t,t_0)\vert i\rangle\)</span>. The probability to measure <span class="math notranslate nohighlight">\(\vert f\rangle\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-5-2-3-p-def">
+<span class="eqno">(193)<a class="headerlink" href="#equation-eq-5-2-3-p-def" title="Link to this equation">#</a></span>\[
+\boxed{\;
+P_{i\to f}(t,t_0)=\bigl\vert\langle f\vert\hat{G}(t,t_0)\vert i\rangle\bigr\vert^2.\;}
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(f\neq i\)</span>, the leading nonzero contribution comes from the first-order Dyson term in Eq. <a class="reference internal" href="5-2-2-dyson-series.html#equation-eq-5-2-2-dyson-g">(192)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
-V(t) = V_0 \cos(\omega t)
+\hat{G}(t,t_0)\simeq \hat{G}_0(t,t_0)-\frac{\mathrm{i}}{\hbar}\!\int_{t_0}^{t}\!\mathrm{d}t_1\,\hat{G}_0(t,t_1)\,\hat{V}(t_1)\,\hat{G}_0(t_1,t_0).
 \]</div>
-<p>We can rewrite this as a sum of positive and negative frequency components:</p>
+<p>Sandwich between <span class="math notranslate nohighlight">\(\langle f\vert\)</span> and <span class="math notranslate nohighlight">\(\vert i\rangle\)</span>. Since <span class="math notranslate nohighlight">\(f\neq i\)</span>, <span class="math notranslate nohighlight">\(\langle f\vert\hat{G}_0(t,t_0)\vert i\rangle=0\)</span>. Insert the spectral form Eq. <a class="reference internal" href="5-2-2-dyson-series.html#equation-eq-5-2-2-g0">(189)</a> to extract Bohr phases:</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: phase cancellation in the first-order amplitude</p>
+<p>Eigenstate shortcuts give <span class="math notranslate nohighlight">\(\hat{G}_0(t,t_1)\to\mathrm{e}^{-\mathrm{i}E_f(t-t_1)/\hbar}\)</span> on <span class="math notranslate nohighlight">\(\langle f\vert\)</span> and <span class="math notranslate nohighlight">\(\hat{G}_0(t_1,t_0)\vert i\rangle\to\mathrm{e}^{-\mathrm{i}E_i(t_1-t_0)/\hbar}\vert i\rangle\)</span>. Hence</p>
 <div class="math notranslate nohighlight">
 \[
-V(t) = \frac{V_0}{2} \left( \mathrm{e}^{\mathrm{i}\omega t} + \mathrm{e}^{-\mathrm{i}\omega t} \right)
+\langle f\vert\hat{G}(t,t_0)\vert i\rangle
+\simeq -\frac{\mathrm{i}}{\hbar}\!\int_{t_0}^{t}\!\mathrm{d}t_1\,\mathrm{e}^{-\mathrm{i}E_f(t-t_1)/\hbar}\,V_{fi}(t_1)\,\mathrm{e}^{-\mathrm{i}E_i(t_1-t_0)/\hbar},
 \]</div>
-<p>The transition amplitude from state <span class="math notranslate nohighlight">\(\vert i \rangle\)</span> to <span class="math notranslate nohighlight">\(\vert f \rangle\)</span> picks up resonance when the driving frequency matches the energy gap:</p>
+<p>where <span class="math notranslate nohighlight">\(V_{fi}(t_1)\equiv\langle f\vert\hat{V}(t_1)\vert i\rangle\)</span>. Collect the <span class="math notranslate nohighlight">\(t_1\)</span>-independent phases:</p>
 <div class="math notranslate nohighlight">
 \[
-c_f^{(1)}(t) \propto \langle f \vert V_0 \vert i \rangle \left[ \frac{\mathrm{e}^{\mathrm{i}(\omega - \omega_{fi})t} - 1}{\omega - \omega_{fi}} + \frac{\mathrm{e}^{-\mathrm{i}(\omega + \omega_{fi})t} - 1}{\omega + \omega_{fi}} \right]
+\langle f\vert\hat{G}(t,t_0)\vert i\rangle
+\simeq -\frac{\mathrm{i}}{\hbar}\,\mathrm{e}^{-\mathrm{i}E_f t/\hbar}\,\mathrm{e}^{\mathrm{i}E_i t_0/\hbar}\!\int_{t_0}^{t}\!\mathrm{d}t_1\,V_{fi}(t_1)\,\mathrm{e}^{\mathrm{i}\omega_{fi}t_1},
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\omega_{fi} = (E_f - E_i)/\hbar\)</span>. The first term dominates when <span class="math notranslate nohighlight">\(\omega \approx \omega_{fi}\)</span> (absorption), and the second when <span class="math notranslate nohighlight">\(\omega \approx -\omega_{fi}\)</span> (stimulated emission). This is the rotating wave approximation: we keep only the resonant term and drop the rapidly oscillating counter-rotating term.</p>
-<p>Near resonance, the transition probability oscillates at the <strong>Rabi frequency</strong>:</p>
-<div class="important admonition">
-<p class="admonition-title">Rabi Oscillations</p>
-<p>In the rotating frame near resonance, the transition probability is</p>
-<div class="math notranslate nohighlight">
-\[
-P(t) = \sin^2\left(\frac{\Omega_R t}{2}\right) \quad \text{where} \quad \Omega_R = \frac{\vert V_{fi}\vert}{\hbar}
-\]</div>
-<p>is the Rabi frequency. Population coherently oscillates between the two states at rate <span class="math notranslate nohighlight">\(\Omega_R\)</span>. A <span class="math notranslate nohighlight">\(\pi\)</span>-pulse (<span class="math notranslate nohighlight">\(\Omega_R t = \pi\)</span>) completely flips the state.</p>
+<p>with <span class="math notranslate nohighlight">\(\omega_{fi}\equiv(E_f-E_i)/\hbar\)</span>. The leading <span class="math notranslate nohighlight">\(t_1\)</span>-independent phases drop out of <span class="math notranslate nohighlight">\(\vert\cdot\vert^2\)</span>.</p>
 </div>
-<p>A key application: <strong>scanning the driving frequency <span class="math notranslate nohighlight">\(\omega\)</span> probes the energy level spacing</strong>. Each resonance reveals <span class="math notranslate nohighlight">\(E_f - E_i\)</span>, forming the basis of spectroscopy.</p>
-<p>This resonant behavior provides a framework for understanding which transitions are actually possible in real systems. Specifically, not all transitions allowed by energy conservation are allowed by the quantum mechanical structure of the wavefunctions themselves—selection rules determine this.</p>
+<p>The transition probability to first order in <span class="math notranslate nohighlight">\(\hat{V}\)</span> is then</p>
+<div class="math notranslate nohighlight" id="equation-eq-5-2-3-p1st">
+<span class="eqno">(194)<a class="headerlink" href="#equation-eq-5-2-3-p1st" title="Link to this equation">#</a></span>\[
+\boxed{\;
+P_{i\to f}^{(1)}(t,t_0)=\frac{1}{\hbar^2}\left\vert\int_{t_0}^{t}\!\mathrm{d}t_1\,V_{fi}(t_1)\,\mathrm{e}^{\mathrm{i}\omega_{fi}t_1}\right\vert^{2}.\;}
+\]</div>
+<p>This is the <strong>single time integral</strong> that the rest of the lecture evaluates for different time profiles of <span class="math notranslate nohighlight">\(\hat{V}(t)\)</span>.</p>
 </section>
-<section id="electric-dipole-transitions">
-<h3>Electric Dipole Transitions<a class="headerlink" href="#electric-dipole-transitions" title="Link to this heading">#</a></h3>
-<p>When light couples to matter, the interaction is dominated by the dipole term:</p>
+<section id="fermi-s-golden-rule">
+<h3>Fermi’s Golden Rule<a class="headerlink" href="#fermi-s-golden-rule" title="Link to this heading">#</a></h3>
+<p>Take a <strong>sudden harmonic</strong> perturbation switched on at <span class="math notranslate nohighlight">\(t_0=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{V}(t)=\begin{cases}
+\hat{V}\,\mathrm{e}^{-\mathrm{i}\omega t}, &amp; t&gt;0,\\[4pt]
+0, &amp; t\le 0,
+\end{cases}
+\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(V_{fi}(t_1)=V_{fi}\,\mathrm{e}^{-\mathrm{i}\omega t_1}\)</span> with <span class="math notranslate nohighlight">\(V_{fi}\equiv\langle f\vert\hat{V}\vert i\rangle\)</span> time-independent. Substituting into Eq. <a class="reference internal" href="#equation-eq-5-2-3-p1st">(194)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
-V(t) = -\boldsymbol{d} \cdot \boldsymbol{E}(t) = -(-e\boldsymbol{r}) \cdot \boldsymbol{E}(t) = e \boldsymbol{r} \cdot \boldsymbol{E}(t)
+\int_0^t\!\mathrm{d}t_1\,\mathrm{e}^{\mathrm{i}(\omega_{fi}-\omega)t_1}=\frac{\mathrm{e}^{\mathrm{i}(\omega_{fi}-\omega)t}-1}{\mathrm{i}(\omega_{fi}-\omega)},
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{d} = -e\boldsymbol{r}\)</span> is the electric dipole moment. The transition amplitude depends on the dipole matrix element <span class="math notranslate nohighlight">\(\langle f \vert \boldsymbol{r} \vert i \rangle\)</span>.</p>
-<p>Not all transitions are allowed. The parity and angular momentum structure of wavefunctions impose <strong>selection rules</strong>. For hydrogen (or any single-electron atom):</p>
-<div class="note admonition">
-<p class="admonition-title">Selection Rules for Electric Dipole Transitions</p>
-<p>For a transition <span class="math notranslate nohighlight">\(n\ell m_\ell \to n'\ell' m_{\ell}'\)</span>:</p>
+<p>and taking the squared modulus:</p>
+<div class="math notranslate nohighlight" id="equation-eq-5-2-3-sinc-driven">
+<span class="eqno">(195)<a class="headerlink" href="#equation-eq-5-2-3-sinc-driven" title="Link to this equation">#</a></span>\[
+\boxed{\;
+P_{i\to f}^{(1)}(t)=\frac{\vert V_{fi}\vert^{2}}{\hbar^{2}}\left[\frac{\sin\!\bigl((\omega_{fi}-\omega)t/2\bigr)}{(\omega_{fi}-\omega)/2}\right]^{2}.\;}
+\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: exponential to sinc-squared</p>
+<p>Let <span class="math notranslate nohighlight">\(\alpha=(\omega_{fi}-\omega)/2\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{e}^{\mathrm{i}2\alpha t}-1}{2\mathrm{i}\alpha}
+=\mathrm{e}^{\mathrm{i}\alpha t}\,\frac{\mathrm{e}^{\mathrm{i}\alpha t}-\mathrm{e}^{-\mathrm{i}\alpha t}}{2\mathrm{i}\alpha}
+=\mathrm{e}^{\mathrm{i}\alpha t}\,\frac{\sin(\alpha t)}{\alpha},
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\vert(\mathrm{e}^{\mathrm{i}2\alpha t}-1)/(2\mathrm{i}\alpha)\vert^{2}=\sin^{2}(\alpha t)/\alpha^{2}\)</span>.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Properties of the sinc-squared kernel</p>
+<p>Setting <span class="math notranslate nohighlight">\(\alpha=(\omega_{fi}-\omega)/2\)</span>, the kernel <span class="math notranslate nohighlight">\((\sin\alpha t/\alpha)^{2}\)</span> has</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\Delta \ell = \pm 1\)</span> (change parity)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta m_\ell = 0, \pm 1\)</span> (depends on light polarization)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta S = 0\)</span> (spin unchanged in non-relativistic theory)</p></li>
+<li><p>a <strong>peak</strong> at <span class="math notranslate nohighlight">\(\alpha=0\)</span> (resonance) of height <span class="math notranslate nohighlight">\(t^{2}\)</span>,</p></li>
+<li><p>a <strong>width</strong> of order <span class="math notranslate nohighlight">\(1/t\)</span>,</p></li>
+<li><p>a <strong>total weight</strong> <span class="math notranslate nohighlight">\(\int\mathrm{d}\alpha\,(\sin\alpha t/\alpha)^{2}=\pi t\)</span> that grows linearly in <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 </ul>
-<p>Transitions violating these are forbidden and have suppressed amplitude. States that can only decay via forbidden transitions become <strong>metastable</strong> (long-lived).</p>
+<p>The product <em>(peak height)</em><span class="math notranslate nohighlight">\(\times\)</span><em>(width)</em><span class="math notranslate nohighlight">\(\sim t\)</span> is what makes a <strong>constant rate</strong> emerge after summing over a continuum of final states.</p>
 </div>
-<p>For example, the 2s state of hydrogen cannot decay to 1s by electric dipole radiation (both <span class="math notranslate nohighlight">\(\ell = 0\)</span>, so <span class="math notranslate nohighlight">\(\Delta \ell = 0\)</span>), making 2s metastable. The 2p state, however, can decay resonantly.</p>
+<p><strong>Long-time limit.</strong> Use the distribution identity</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{t\to\infty}\frac{1}{t}\left(\frac{\sin\alpha t}{\alpha}\right)^{\!2}=\pi\,\delta(\alpha)=2\pi\,\delta(2\alpha),
+\]</div>
+<p>and define the <strong>transition rate</strong> <span class="math notranslate nohighlight">\(W_{i\to f}\equiv\lim_{t\to\infty}P_{i\to f}^{(1)}(t)/t\)</span>. Then</p>
+<div class="important admonition">
+<p class="admonition-title">Fermi’s golden rule</p>
+<div class="math notranslate nohighlight" id="equation-eq-5-2-3-fgr">
+<span class="eqno">(196)<a class="headerlink" href="#equation-eq-5-2-3-fgr" title="Link to this equation">#</a></span>\[
+\boxed{\;
+W_{i\to f}=\frac{2\pi}{\hbar}\,\vert\langle f\vert\hat{V}\vert i\rangle\vert^{2}\,\delta\!\bigl(E_f-E_i-\hbar\omega\bigr).\;}
+\]</div>
+<p>The delta enforces <strong>resonance</strong>: the perturbation transfers probability between levels separated by <span class="math notranslate nohighlight">\(\hbar\omega\)</span>. For static <span class="math notranslate nohighlight">\(\hat{V}\)</span> (<span class="math notranslate nohighlight">\(\omega=0\)</span>), the resonance is at <span class="math notranslate nohighlight">\(E_f=E_i\)</span>.</p>
+</div>
+<div class="dropdown note admonition">
+<p class="admonition-title">Continuum of final states</p>
+<p>Summing over final states with density of states <span class="math notranslate nohighlight">\(\rho(E_f)\)</span> (per unit energy),</p>
+<div class="math notranslate nohighlight">
+\[
+W_{i}=\int\mathrm{d}E_f\,\rho(E_f)\,W_{i\to f}=\frac{2\pi}{\hbar}\,\vert\langle f\vert\hat{V}\vert i\rangle\vert^{2}\,\rho(E_f)\Big\vert_{E_f=E_i+\hbar\omega}.
+\]</div>
+<p>The matrix element is evaluated at the resonance shell selected by <span class="math notranslate nohighlight">\(\delta(E_f-E_i-\hbar\omega)\)</span>.</p>
+</div>
+<div class="caution admonition">
+<p class="admonition-title">“But <span class="math notranslate nohighlight">\(P\to\infty\)</span> as <span class="math notranslate nohighlight">\(t\to\infty\)</span>”</p>
+<p>For a transition with <span class="math notranslate nohighlight">\(\omega_{fi}\neq\omega\)</span>, the long-time condition means <span class="math notranslate nohighlight">\(t\gg 1/\vert\omega_{fi}-\omega\vert\)</span> — a microscopic time that can still be <strong>short</strong> compared with the depletion time <span class="math notranslate nohighlight">\(\sim\hbar/\vert V_{fi}\vert\)</span>. The rate <span class="math notranslate nohighlight">\(W_{i\to f}=P/t\)</span> is meaningful in perturbation theory whenever <span class="math notranslate nohighlight">\(P\ll 1\)</span>. Once <span class="math notranslate nohighlight">\(P\)</span> is no longer small, depletion of <span class="math notranslate nohighlight">\(\vert i\rangle\)</span> must be tracked separately (master equations, self-energy).</p>
+</div>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Discussion: time–energy resolution</p>
+<p>The width <span class="math notranslate nohighlight">\(\sim 2\pi/t\)</span> of the sinc-squared peak is the <strong>finite-time energy resolution</strong>: a perturbation acting only for time <span class="math notranslate nohighlight">\(t\)</span> cannot distinguish energy differences smaller than <span class="math notranslate nohighlight">\(2\pi\hbar/t\)</span>. Strict <span class="math notranslate nohighlight">\(\delta\)</span>-function energy conservation only emerges in the limit <span class="math notranslate nohighlight">\(t\to\infty\)</span>. How does this connect to the time–energy uncertainty relation, and what changes if the perturbation is a <strong>finite pulse</strong> of duration <span class="math notranslate nohighlight">\(T\)</span>?</p>
+</div>
+</section>
+<section id="adiabatic-process">
+<h3>Adiabatic Process<a class="headerlink" href="#adiabatic-process" title="Link to this heading">#</a></h3>
+<p>Now take an <strong>exponential ramp</strong> from the infinite past, switched off at <span class="math notranslate nohighlight">\(t=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{V}(t)=\begin{cases}
+\hat{V}\,\mathrm{e}^{t/\tau}, &amp; t&lt;0,\\[4pt]
+0, &amp; t\ge 0,
+\end{cases}\qquad \tau&gt;0.
+\end{split}\]</div>
+<p>System prepared in <span class="math notranslate nohighlight">\(\vert i\rangle\)</span> in the infinite past; ask the transition probability to <span class="math notranslate nohighlight">\(\vert f\rangle\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>. Substitute into Eq. <a class="reference internal" href="#equation-eq-5-2-3-p1st">(194)</a> with <span class="math notranslate nohighlight">\(t_0\to-\infty\)</span> and <span class="math notranslate nohighlight">\(t\to 0\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-5-2-3-lorentzian">
+<span class="eqno">(197)<a class="headerlink" href="#equation-eq-5-2-3-lorentzian" title="Link to this equation">#</a></span>\[
+\boxed{\;
+P_{i\to f}=\frac{1}{\hbar^{2}}\left\vert\int_{-\infty}^{0}\!\mathrm{d}t_1\,V_{fi}\,\mathrm{e}^{t_1/\tau}\,\mathrm{e}^{\mathrm{i}\omega_{fi}t_1}\right\vert^{2}
+=\frac{\vert V_{fi}\vert^{2}}{(E_f-E_i)^{2}+(\hbar/\tau)^{2}}.\;}
+\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Lorentzian from the ramp integral</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{0}\!\mathrm{d}t_1\,\mathrm{e}^{(\mathrm{i}\omega_{fi}+1/\tau)t_1}
+=\Bigl[\frac{\mathrm{e}^{(\mathrm{i}\omega_{fi}+1/\tau)t_1}}{\mathrm{i}\omega_{fi}+1/\tau}\Bigr]_{-\infty}^{0}
+=\frac{1}{\mathrm{i}\omega_{fi}+1/\tau},
+\]</div>
+<p>(the lower limit vanishes because <span class="math notranslate nohighlight">\(\tau&gt;0\)</span>). Then</p>
+<div class="math notranslate nohighlight">
+\[
+\left\vert\frac{V_{fi}}{\mathrm{i}\omega_{fi}+1/\tau}\right\vert^{2}\!\!/\hbar^{2}
+=\frac{\vert V_{fi}\vert^{2}}{\hbar^{2}\bigl(\omega_{fi}^{2}+1/\tau^{2}\bigr)}
+=\frac{\vert V_{fi}\vert^{2}}{(E_f-E_i)^{2}+(\hbar/\tau)^{2}}.
+\]</div>
+</div>
+<p>The result is a <strong>Lorentzian</strong> in <span class="math notranslate nohighlight">\(\Delta E=E_f-E_i\)</span>, centered at zero with width <span class="math notranslate nohighlight">\(\hbar/\tau\)</span>. States closer in energy hybridize more readily; the finite ramp time <span class="math notranslate nohighlight">\(\tau\)</span> sets an energy resolution and <strong>regularizes</strong> the singularity that would otherwise appear at <span class="math notranslate nohighlight">\(\Delta E=0\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Adiabatic limit <span class="math notranslate nohighlight">\(\tau\to\infty\)</span>: matching to time-independent perturbation theory</p>
+<p>As <span class="math notranslate nohighlight">\(\tau\to\infty\)</span> the perturbation is turned on <strong>infinitely slowly</strong>, and the eigenstate <span class="math notranslate nohighlight">\(\vert i\rangle\)</span> of <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> evolves continuously into the corresponding eigenstate <span class="math notranslate nohighlight">\(\vert i(V)\rangle\)</span> of <span class="math notranslate nohighlight">\(\hat{H}_0+\hat{V}\)</span>. To first order in <span class="math notranslate nohighlight">\(\hat{V}\)</span> (cf. <a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2</span></a>),</p>
+<div class="math notranslate nohighlight">
+\[
+\vert i(V)\rangle = \vert i\rangle + \sum_{m\neq i}\vert m\rangle\,\frac{V_{mi}}{E_i-E_m}+\cdots,
+\]</div>
+<p>so</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\langle f\vert i(V)\rangle\vert^{2}=\frac{\vert V_{fi}\vert^{2}}{(E_i-E_f)^{2}},
+\]</div>
+<p>which <strong>matches</strong> the <span class="math notranslate nohighlight">\(\tau\to\infty\)</span> limit of Eq. <a class="reference internal" href="#equation-eq-5-2-3-lorentzian">(197)</a>. Time-dependent perturbation theory falls back to time-independent perturbation theory when the perturbation changes slowly enough.</p>
+</div>
+<p>For any realistic process, <span class="math notranslate nohighlight">\(\tau\)</span> is finite. The Lorentzian width <span class="math notranslate nohighlight">\(\hbar/\tau\)</span> is the <strong>uncertainty-principle resolution</strong>: the apparent singularity of the energy denominator in time-independent perturbation theory is smoothed out — a genuine physical fact, not an artefact of approximation.</p>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Photoabsorption and energy conservation</p>
-<p>A two-level atom with transition frequency <span class="math notranslate nohighlight">\(\omega_0 = (E_2 - E_1)/\hbar\)</span> is driven by a laser at frequency <span class="math notranslate nohighlight">\(\omega\)</span>. The rotating-wave approximation keeps only the on-resonance term (<span class="math notranslate nohighlight">\(\omega \approx \omega_0\)</span>). What is the physical meaning of neglecting the counter-rotating term?</p>
-<p>(A) It violates energy conservation and can be ignored without consequence.</p>
-<p>(B) It oscillates very rapidly (at frequency <span class="math notranslate nohighlight">\(2\omega_0\)</span>); its time-averaged effect is negligible when <span class="math notranslate nohighlight">\(\omega \approx \omega_0\)</span>.</p>
-<p>(C) It is suppressed by the small detuning <span class="math notranslate nohighlight">\(\Delta = \omega - \omega_0\)</span>.</p>
-<p>(D) It represents virtual absorption/emission and contributes only to second-order effects.</p>
+<p class="admonition-title">Poll: when does the Lorentzian narrow to the static answer?</p>
+<p>The transition probability <span class="math notranslate nohighlight">\(P_{i\to f}\)</span> from an exponential ramp is Eq. <a class="reference internal" href="#equation-eq-5-2-3-lorentzian">(197)</a>. As <span class="math notranslate nohighlight">\(\tau\to\infty\)</span> the Lorentzian narrows. Which statement best describes the limit?</p>
+<p>(A) <span class="math notranslate nohighlight">\(P_{i\to f}\to 0\)</span> for every fixed <span class="math notranslate nohighlight">\(\Delta E\neq 0\)</span>, but the <strong>integrated</strong> weight is finite and matches the static perturbation result <span class="math notranslate nohighlight">\(\vert V_{fi}/(E_i-E_f)\vert^{2}\)</span> at <span class="math notranslate nohighlight">\(\Delta E\neq 0\)</span>.</p>
+<p>(B) <span class="math notranslate nohighlight">\(P_{i\to f}\to\infty\)</span> at <span class="math notranslate nohighlight">\(\Delta E=0\)</span> regardless of <span class="math notranslate nohighlight">\(V_{fi}\)</span>.</p>
+<p>(C) <span class="math notranslate nohighlight">\(P_{i\to f}\to 1\)</span> uniformly, signaling complete state transfer.</p>
+<p>(D) The Lorentzian becomes a Gaussian.</p>
 </div>
 </section>
-<section id="lifetime-and-linewidth">
-<h3>Lifetime and Linewidth<a class="headerlink" href="#lifetime-and-linewidth" title="Link to this heading">#</a></h3>
-<p>An excited state coupled to a continuum of final states (e.g., radiating photons) decays exponentially. From Fermi’s golden rule applied to the emission process, the decay rate is</p>
+<section id="kubo-formula">
+<h3>Kubo Formula<a class="headerlink" href="#kubo-formula" title="Link to this heading">#</a></h3>
+<p>The same first-order machinery applies when the perturbation is a <strong>vector potential</strong> and the observable is a <strong>current</strong>. Couple the system to a uniform electric field switched on adiabatically (the same exponential ramp logic as the previous section, with <span class="math notranslate nohighlight">\(\tau^{-1}\to 0^{+}\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[
-\Gamma = \frac{2\pi}{\hbar} \sum_f \vert\langle f \vert V \vert i \rangle\vert^2 \delta(E_i - E_f - \hbar\omega_{\text{photon}})
+\boldsymbol{E}(t)=\boldsymbol{E}\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^{+})t},
+\qquad
+\delta\boldsymbol{A}(t)=\frac{\mathrm{i}\boldsymbol{E}}{\omega+\mathrm{i}0^{+}}\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^{+})t},
+\qquad
+\boldsymbol{E}(t)=-\partial_t\delta\boldsymbol{A}(t).
 \]</div>
-<p>The inverse is the <strong>lifetime</strong>:</p>
-<div class="important admonition">
-<p class="admonition-title">Lifetime and Natural Linewidth</p>
-<div class="math notranslate nohighlight">
-\[
-\tau = \frac{1}{\Gamma}
+<p>Minimal coupling gives the perturbation</p>
+<div class="math notranslate nohighlight" id="equation-eq-5-2-3-kubo-perturbation">
+<span class="eqno">(198)<a class="headerlink" href="#equation-eq-5-2-3-kubo-perturbation" title="Link to this equation">#</a></span>\[
+\delta\hat{H}(t)=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}(t).
 \]</div>
-<p>The energy-time uncertainty principle implies that a state with finite lifetime <span class="math notranslate nohighlight">\(\tau\)</span> has an intrinsic energy uncertainty:</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta E \sim \hbar \Gamma = \frac{\hbar}{\tau}
-\]</div>
-<p>This gives a <strong>natural linewidth</strong> in the emission spectrum. The lineshape is Lorentzian, centered at the transition energy <span class="math notranslate nohighlight">\(E_i - E_f\)</span> with width <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
-</div>
-<p>For instance, the 2p state of hydrogen has <span class="math notranslate nohighlight">\(\tau \sim 1.6 \times 10^{-9}\)</span> s (lifetime), corresponding to <span class="math notranslate nohighlight">\(\Gamma \sim 0.1\)</span> eV (linewidth).</p>
-<p>So far we have focused on single isolated atoms or simple two-level systems. The same first-order machinery extends to many-body response functions: how a macroscopic observable (e.g. electric current) responds to a weak external field. The result is <strong>linear-response theory</strong>, whose central object is the Kubo formula.</p>
-</section>
-<section id="linear-response-and-the-kubo-formula">
-<h3>Linear Response and the Kubo Formula<a class="headerlink" href="#linear-response-and-the-kubo-formula" title="Link to this heading">#</a></h3>
-<p>Consider non-interacting electrons in a single-particle Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> with eigenstates <span class="math notranslate nohighlight">\(\{|\alpha\rangle\}\)</span> and energies <span class="math notranslate nohighlight">\(\{E_\alpha\}\)</span>. At zero temperature every state below the Fermi level is occupied, every state above is empty. The single-particle current operator is <span class="math notranslate nohighlight">\(\hat{\boldsymbol{j}} = q\hat{\boldsymbol{v}} = q\hat{\boldsymbol{\pi}}/m\)</span> (charge times velocity), and the <strong>macroscopic current density</strong> is its expectation value summed over occupied single-particle states, per unit area:</p>
-<div class="math notranslate nohighlight" id="equation-eq-current-density-def">
-<span class="eqno">(197)<a class="headerlink" href="#equation-eq-current-density-def" title="Link to this equation">#</a></span>\[
-\boldsymbol{j} \;\equiv\; \frac{1}{A}\sum_{\alpha\in\mathrm{occ}}\langle\alpha|\hat{\boldsymbol{j}}|\alpha\rangle.
-\]</div>
-<p>A weak electric field <span class="math notranslate nohighlight">\(\boldsymbol{E}(t)\)</span> induces a current linear in the field,</p>
-<div class="math notranslate nohighlight">
-\[
-j_a(t) = \sigma_{ab}(\omega)\,E_b(t),
-\]</div>
-<p>defining the conductivity tensor <span class="math notranslate nohighlight">\(\sigma_{ab}(\omega)\)</span>. We now compute it from first-order time-dependent perturbation theory (§5.2.1).</p>
-<p><strong>Coupling to the field via the vector potential.</strong> A spatially uniform, oscillatory <span class="math notranslate nohighlight">\(\boldsymbol{E}(t) = \boldsymbol{E}\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t}\)</span> (adiabatically turned on from <span class="math notranslate nohighlight">\(t = -\infty\)</span>, hence the <span class="math notranslate nohighlight">\(0^+\)</span> regulator) is implemented by a vector-potential perturbation</p>
-<div class="math notranslate nohighlight">
-\[
-\delta\boldsymbol{A}(t) = \frac{\mathrm{i}\boldsymbol{E}}{\omega+\mathrm{i}0^+}\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t}, \qquad \boldsymbol{E}(t) = -\partial_t\,\delta\boldsymbol{A}(t).
-\]</div>
-<p>Expanding the minimal-coupling Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = (\hat{\boldsymbol{p}} - q\boldsymbol{A})^2/(2m) + V\)</span> to first order in <span class="math notranslate nohighlight">\(\delta\boldsymbol{A}\)</span> gives the perturbation</p>
-<div class="math notranslate nohighlight" id="equation-eq-kubo-perturbation">
-<span class="eqno">(198)<a class="headerlink" href="#equation-eq-kubo-perturbation" title="Link to this equation">#</a></span>\[
-\delta\hat{H}(t) = \frac{\partial\hat{H}}{\partial\boldsymbol{A}}\cdot\delta\boldsymbol{A}(t) = -\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}(t),
-\]</div>
-<p>(the partial derivative is taken at fixed canonical <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span>).</p>
-<p><strong>Result.</strong> Applying first-order perturbation theory state-by-state and summing over occupied states yields the <strong>Kubo formula</strong> for the Hall (transverse) conductivity in the DC limit <span class="math notranslate nohighlight">\(\omega\to 0\)</span>:</p>
-<div class="important admonition">
-<p class="admonition-title">Kubo formula</p>
-<div class="math notranslate nohighlight" id="equation-eq-kubo-hall-523">
-<span class="eqno">(199)<a class="headerlink" href="#equation-eq-kubo-hall-523" title="Link to this equation">#</a></span>\[
-\sigma_{xy} = \frac{\mathrm{i}\hbar}{A}\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha|\hat{j}_x|\beta\rangle\langle\beta|\hat{j}_y|\alpha\rangle - \langle\alpha|\hat{j}_y|\beta\rangle\langle\beta|\hat{j}_x|\alpha\rangle}{(E_\beta - E_\alpha)^2}.
-\]</div>
-<p>The sum runs over occupied single-particle states <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> and empty states <span class="math notranslate nohighlight">\(|\beta\rangle\)</span> (no Fermi-Dirac function needed at <span class="math notranslate nohighlight">\(T=0\)</span>). The numerator is the antisymmetric current-matrix-element combination; the denominator is the squared energy gap <span class="math notranslate nohighlight">\(E_\beta - E_\alpha &gt; 0\)</span> across the Fermi level. The same formula appears in §4.3.3 (<a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html#equation-eq-kubo-hall">(158)</a>), where it is evaluated explicitly on Landau-level eigenstates.</p>
-</div>
+<p>To match the convention used in <a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html"><span class="doc std std-doc">4.3.3 Quantum Hall Effect</span></a>, we keep the sample area <span class="math notranslate nohighlight">\(A\)</span> explicit (rather than setting <span class="math notranslate nohighlight">\(A=1\)</span>).</p>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Kubo formula</p>
-<p>Each electron occupies a state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> that evolves independently under <span class="math notranslate nohighlight">\(\hat{H}_0 + \delta\hat{H}(t)\)</span>. We compute the response state-by-state, then sum over occupied states and divide by <span class="math notranslate nohighlight">\(A\)</span> to assemble the macroscopic current density <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> via <a class="reference internal" href="#equation-eq-current-density-def">(197)</a>.</p>
+<p>Each electron occupies a state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> that evolves independently under <span class="math notranslate nohighlight">\(\hat{H}_0 + \delta\hat{H}(t)\)</span>. We compute the response state-by-state, then sum over occupied states and divide by <span class="math notranslate nohighlight">\(A\)</span> to assemble the macroscopic current density <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span> via the current-density definition.</p>
 <p><strong>Step 1 — First-order response of one occupied state.</strong></p>
-<p>Each occupied single-particle state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> evolves under the interaction-picture operator <span class="math notranslate nohighlight">\(\hat{U}_I(t)\)</span> from §5.2.1. The expectation value of the single-particle current in that state is</p>
+<p>Each occupied single-particle state <span class="math notranslate nohighlight">\(|\alpha\rangle\)</span> evolves under the interaction-picture operator <span class="math notranslate nohighlight">\(\hat{U}_{\mathcal{I}}(t)\)</span> from §5.2.1. The expectation value of the single-particle current in that state is</p>
 <div class="math notranslate nohighlight">
 \[
-\langle\hat{j}_a(t)\rangle_\alpha \equiv \langle\alpha|\hat{U}_I^\dagger(t)\,\hat{j}_a^I(t)\,\hat{U}_I(t)|\alpha\rangle.
+\langle\hat{j}_a(t)\rangle_\alpha \equiv \langle\alpha|\hat{U}_{\mathcal{I}}^\dagger(t)\,\hat{j}_a^{\mathcal{I}}(t)\,\hat{U}_{\mathcal{I}}(t)|\alpha\rangle.
 \]</div>
 <p>Expanding to first order in <span class="math notranslate nohighlight">\(\delta\hat{H}\)</span> gives the standard first-order Kubo identity,</p>
 <div class="math notranslate nohighlight">
 \[
-\langle\hat{j}_a(t)\rangle_\alpha = \langle\alpha|\hat{j}_a^I(t)|\alpha\rangle - \frac{\mathrm{i}}{\hbar}\int_{-\infty}^{t}\!\mathrm{d}t'\,\langle\alpha|[\hat{j}_a^I(t),\delta\hat{H}_I(t')]|\alpha\rangle,
+\langle\hat{j}_a(t)\rangle_\alpha = \langle\alpha|\hat{j}_a^{\mathcal{I}}(t)|\alpha\rangle - \frac{\mathrm{i}}{\hbar}\int_{-\infty}^{t}\!\mathrm{d}t'\,\langle\alpha|[\hat{j}_a^{\mathcal{I}}(t),\delta\hat{H}_{\mathcal{I}}(t')]|\alpha\rangle,
 \]</div>
-<p>with <span class="math notranslate nohighlight">\(\hat{j}_a^I(t) = \mathrm{e}^{\mathrm{i}\hat{H}_0 t/\hbar}\hat{j}_a\,\mathrm{e}^{-\mathrm{i}\hat{H}_0 t/\hbar}\)</span>.</p>
+<p>with <span class="math notranslate nohighlight">\(\hat{j}_a^{\mathcal{I}}(t) = \mathrm{e}^{\mathrm{i}\hat{H}_0 t/\hbar}\hat{j}_a\,\mathrm{e}^{-\mathrm{i}\hat{H}_0 t/\hbar}\)</span>.</p>
 <p><strong>Step 2 — Sum over occupied states; assemble the current density.</strong></p>
-<p>Substitute <span class="math notranslate nohighlight">\(\delta\hat{H}_I(t') = -\hat{j}_b^I(t')\,\delta A_b(t')\)</span>, sum over occupied states, and divide by <span class="math notranslate nohighlight">\(A\)</span>. The zeroth-order term <span class="math notranslate nohighlight">\(\sum_{\alpha\in\mathrm{occ}}\langle\alpha|\hat{j}_a|\alpha\rangle = 0\)</span> vanishes (no current without a driving field), leaving</p>
+<p>Substitute <span class="math notranslate nohighlight">\(\delta\hat{H}_{\mathcal{I}}(t') = -\hat{j}_b^{\mathcal{I}}(t')\,\delta A_b(t')\)</span>, sum over occupied states, and divide by <span class="math notranslate nohighlight">\(A\)</span>. The zeroth-order term <span class="math notranslate nohighlight">\(\sum_{\alpha\in\mathrm{occ}}\langle\alpha|\hat{j}_a|\alpha\rangle = 0\)</span> vanishes (no current without a driving field), leaving</p>
 <div class="math notranslate nohighlight">
 \[
-j_a(t) = \frac{\mathrm{i}}{\hbar A}\!\int_{-\infty}^{t}\!\mathrm{d}t'\,\delta A_b(t')\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^I(t),\hat{j}_b^I(t')]|\alpha\rangle.
+j_a(t) = \frac{\mathrm{i}}{\hbar A}\!\int_{-\infty}^{t}\!\mathrm{d}t'\,\delta A_b(t')\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^{\mathcal{I}}(t),\hat{j}_b^{\mathcal{I}}(t')]|\alpha\rangle.
 \]</div>
 <p><strong>Step 3 — Substitute the harmonic field.</strong></p>
 <p>Using <span class="math notranslate nohighlight">\(\delta A_b(t') = (\mathrm{i}E_b/(\omega+\mathrm{i}0^+))\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t'}\)</span> and the change of variable <span class="math notranslate nohighlight">\(\tau = t-t'\)</span> (with time-translation invariance of the unperturbed system), the result <span class="math notranslate nohighlight">\(j_a(t) = \sigma_{ab}(\omega)\,E_b\,\mathrm{e}^{-\mathrm{i}(\omega+\mathrm{i}0^+)t}\)</span> defines</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{ab}(\omega) = -\frac{1}{\hbar(\omega+\mathrm{i}0^+) A}\int_0^{\infty}\!\mathrm{d}\tau\,\mathrm{e}^{\mathrm{i}(\omega+\mathrm{i}0^+)\tau}\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^I(\tau),\hat{j}_b^I(0)]|\alpha\rangle.
+\sigma_{ab}(\omega) = -\frac{1}{\hbar(\omega+\mathrm{i}0^+) A}\int_0^{\infty}\!\mathrm{d}\tau\,\mathrm{e}^{\mathrm{i}(\omega+\mathrm{i}0^+)\tau}\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^{\mathcal{I}}(\tau),\hat{j}_b^{\mathcal{I}}(0)]|\alpha\rangle.
 \]</div>
 <p><strong>Step 4 — Insert eigenbasis and evaluate the time integral.</strong></p>
-<p>Insert <span class="math notranslate nohighlight">\(\sum_\gamma|\gamma\rangle\langle\gamma|\)</span> between the two single-particle current operators and use <span class="math notranslate nohighlight">\(\hat{j}_a^I(\tau)|\gamma\rangle = \mathrm{e}^{\mathrm{i}\omega_{\gamma\alpha}\tau}\hat{j}_a|\gamma\rangle\)</span> on each <span class="math notranslate nohighlight">\(\langle\alpha|\cdots|\alpha\rangle\)</span> matrix element (with <span class="math notranslate nohighlight">\(\omega_{\gamma\alpha} = (E_\gamma-E_\alpha)/\hbar\)</span>),</p>
+<p>Insert <span class="math notranslate nohighlight">\(\sum_\gamma|\gamma\rangle\langle\gamma|\)</span> between the two single-particle current operators and use <span class="math notranslate nohighlight">\(\hat{j}_a^{\mathcal{I}}(\tau)|\gamma\rangle = \mathrm{e}^{\mathrm{i}\omega_{\gamma\alpha}\tau}\hat{j}_a|\gamma\rangle\)</span> on each <span class="math notranslate nohighlight">\(\langle\alpha|\cdots|\alpha\rangle\)</span> matrix element (with <span class="math notranslate nohighlight">\(\omega_{\gamma\alpha} = (E_\gamma-E_\alpha)/\hbar\)</span>),</p>
 <div class="math notranslate nohighlight">
 \[
-\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^I(\tau),\hat{j}_b^I(0)]|\alpha\rangle = \sum_{\alpha\in\mathrm{occ}}\sum_\gamma\Big(j^a_{\alpha\gamma}j^b_{\gamma\alpha}\,\mathrm{e}^{\mathrm{i}\omega_{\gamma\alpha}\tau} - j^b_{\alpha\gamma}j^a_{\gamma\alpha}\,\mathrm{e}^{-\mathrm{i}\omega_{\gamma\alpha}\tau}\Big),
+\sum_{\alpha\in\mathrm{occ}}\langle\alpha|[\hat{j}_a^{\mathcal{I}}(\tau),\hat{j}_b^{\mathcal{I}}(0)]|\alpha\rangle = \sum_{\alpha\in\mathrm{occ}}\sum_\gamma\Big(j^a_{\alpha\gamma}j^b_{\gamma\alpha}\,\mathrm{e}^{\mathrm{i}\omega_{\gamma\alpha}\tau} - j^b_{\alpha\gamma}j^a_{\gamma\alpha}\,\mathrm{e}^{-\mathrm{i}\omega_{\gamma\alpha}\tau}\Big),
 \]</div>
 <p>with <span class="math notranslate nohighlight">\(j^a_{\alpha\gamma} \equiv \langle\alpha|\hat{j}_a|\gamma\rangle\)</span> a single-particle matrix element. The <span class="math notranslate nohighlight">\(\tau\)</span> integral gives <span class="math notranslate nohighlight">\(\int_0^\infty\!\mathrm{d}\tau\,\mathrm{e}^{\mathrm{i}(\omega+\mathrm{i}0^+ \pm\omega_{\gamma\alpha})\tau} = \mathrm{i}/(\omega+\mathrm{i}0^+\pm\omega_{\gamma\alpha})\)</span>.</p>
 <p><strong>Step 5 — DC limit.</strong></p>
@@ -701,79 +776,83 @@ j_a(t) = \frac{\mathrm{i}}{\hbar A}\!\int_{-\infty}^{t}\!\mathrm{d}t'\,\delta A_
 \[
 \sigma_{xy} = \frac{\mathrm{i}\hbar}{A}\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha|\hat{j}_x|\beta\rangle\langle\beta|\hat{j}_y|\alpha\rangle - \langle\alpha|\hat{j}_y|\beta\rangle\langle\beta|\hat{j}_x|\alpha\rangle}{(E_\beta-E_\alpha)^2},
 \]</div>
-<p>the Kubo formula above. All matrix elements are single-particle (<span class="math notranslate nohighlight">\(\hat{j}\)</span>); the <span class="math notranslate nohighlight">\(1/A\)</span> traces back to the current-density definition <a class="reference internal" href="#equation-eq-current-density-def">(197)</a>.</p>
+<p>the Kubo formula above. All matrix elements are single-particle (<span class="math notranslate nohighlight">\(\hat{j}\)</span>); the <span class="math notranslate nohighlight">\(1/A\)</span> traces back to using current density (current per unit area).</p>
 </div>
-<p><strong>Physical content.</strong> The Kubo formula expresses transport coefficients in terms of current-current matrix elements between filled and empty single-particle states. It is the perturbative expression of the <em>fluctuation-dissipation</em> relation: response coefficients are determined by ground-state correlation functions. The denominator <span class="math notranslate nohighlight">\((E_\beta - E_\alpha)^2\)</span> shows that low-energy interband excitations dominate.</p>
-</section>
-<section id="quantum-hall-conductance">
-<h3>Quantum Hall Conductance<a class="headerlink" href="#quantum-hall-conductance" title="Link to this heading">#</a></h3>
-<p>For 2D electrons in a perpendicular magnetic field with <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels, the Kubo formula evaluates to the exact integer-quantized result <span class="math notranslate nohighlight">\(\sigma_{xy} = \nu\,e^2/h\)</span>, independent of disorder, geometry, or microscopic details (provided the bulk gap stays open). The explicit Landau-level evaluation, and the complementary topological (charge-pumping) interpretation of the same quantization, are in <strong>§4.3.3</strong>.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: Why is the Hall conductance exactly quantized?</p>
-<p>The Kubo formula is a first-order perturbative result, yet it gives an <em>exact</em> integer for filled Landau levels. Some questions to chew on:</p>
-<ul class="simple">
-<li><p>The Kubo expression sums over all occupied/empty pairs and weights each by <span class="math notranslate nohighlight">\(1/(E_\beta-E_\alpha)^2\)</span>. Why does the answer become a pure integer when the occupied set is a <em>full</em> Landau level?</p></li>
-<li><p>Disorder localizes most states inside each broadened Landau level. Why does the Kubo sum, which references <em>all</em> states, not move off the integer plateau?</p></li>
-<li><p>Compare the Kubo derivation (a perturbation-theory calculation) with the Laughlin charge-pumping argument in §4.3.3 (a topological argument). What does it mean that two completely different methods give the same exact answer?</p></li>
-<li><p>If you slowly deform the Hamiltonian without closing the bulk gap, can <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> change continuously? What if you close the gap?</p></li>
-</ul>
+<p>Substitute into Eq. <a class="reference internal" href="#equation-eq-5-2-3-p1st">(194)</a> and compute the <strong>first-order response of the current</strong> <span class="math notranslate nohighlight">\(\langle\hat{\boldsymbol{j}}\rangle\)</span> on a filled-band ground state at <span class="math notranslate nohighlight">\(T=0\)</span>. The result is the Hall conductivity:</p>
+<div class="important admonition">
+<p class="admonition-title">Kubo formula (zero temperature)</p>
+<div class="math notranslate nohighlight" id="equation-eq-kubo-hall-523">
+<span class="eqno">(199)<a class="headerlink" href="#equation-eq-kubo-hall-523" title="Link to this equation">#</a></span>\[
+\sigma_{xy}=\frac{\mathrm{i}\hbar}{A}
+\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}
+\frac{\langle\alpha\vert\hat{j}_x\vert\beta\rangle\langle\beta\vert\hat{j}_y\vert\alpha\rangle-
+\langle\alpha\vert\hat{j}_y\vert\beta\rangle\langle\beta\vert\hat{j}_x\vert\alpha\rangle}
+{(E_\beta-E_\alpha)^{2}}.
+\]</div>
+<p>A transport coefficient written entirely in terms of <strong>virtual transitions</strong> between occupied <span class="math notranslate nohighlight">\(\vert\alpha\rangle\)</span> and empty <span class="math notranslate nohighlight">\(\vert\beta\rangle\)</span> states. The energy-denominator structure mirrors the time-independent perturbation theory of <a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2</span></a>, now for a many-body filled ground state.</p>
 </div>
+<p>Evaluating Eq. <a class="reference internal" href="#equation-eq-kubo-hall-523">(199)</a> for <span class="math notranslate nohighlight">\(\nu\)</span> completely filled Landau levels gives the exact integer Hall quantization</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy}=\nu\,\frac{e^2}{h},
+\]</div>
+<p>connecting first-order perturbation theory to a topologically protected observable (details in §4.3.3).</p>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Harmonic driving</strong> at frequency <span class="math notranslate nohighlight">\(\omega\)</span> induces resonant transitions when <span class="math notranslate nohighlight">\(\omega = \omega_{fi}\)</span>; Rabi oscillations probe the coupling strength.</p></li>
-<li><p><strong>Dipole selection rules</strong> (<span class="math notranslate nohighlight">\(\Delta \ell = \pm 1\)</span>, etc.) determine which transitions are allowed; metastable states bypass these rules.</p></li>
-<li><p><strong>Finite lifetime</strong> <span class="math notranslate nohighlight">\(\tau = 1/\Gamma\)</span> produces natural linewidth <span class="math notranslate nohighlight">\(\Delta E \sim \hbar/\tau\)</span>; spectral lines have intrinsic width.</p></li>
-<li><p><strong>Linear response and the Kubo formula:</strong> first-order time-dependent perturbation theory in the vector-potential perturbation <span class="math notranslate nohighlight">\(\delta\hat{H}=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span> yields a zero-temperature, occupied-vs-empty form for <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span>. Evaluated on <span class="math notranslate nohighlight">\(\nu\)</span> filled Landau levels (§4.3.3), it gives the exact quantized <span class="math notranslate nohighlight">\(\sigma_{xy}=\nu e^2/h\)</span>.</p></li>
+<li><p><strong>Transition probability:</strong> <span class="math notranslate nohighlight">\(P_{i\to f}=\vert\langle f\vert\hat{G}(t,t_0)\vert i\rangle\vert^{2}\)</span>; first order in <span class="math notranslate nohighlight">\(\hat{V}\)</span> collapses to the <strong>single time integral</strong> Eq. <a class="reference internal" href="#equation-eq-5-2-3-p1st">(194)</a> involving the matrix element <span class="math notranslate nohighlight">\(V_{fi}(t_1)\)</span> and the Bohr phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\omega_{fi}t_1}\)</span>.</p></li>
+<li><p><strong>Fermi’s golden rule:</strong> sudden harmonic drive <span class="math notranslate nohighlight">\(\hat{V}\mathrm{e}^{-\mathrm{i}\omega t}\)</span> produces a sinc-squared resonance whose long-time limit is a <strong>rate</strong> <span class="math notranslate nohighlight">\(\Gamma=\frac{2\pi}{\hbar}\vert V_{fi}\vert^{2}\,\delta(E_f-E_i-\hbar\omega)\)</span>.</p></li>
+<li><p><strong>Adiabatic process:</strong> exponential ramp <span class="math notranslate nohighlight">\(\hat{V}\mathrm{e}^{t/\tau}\)</span> produces a <strong>Lorentzian</strong> in <span class="math notranslate nohighlight">\(\Delta E\)</span> of width <span class="math notranslate nohighlight">\(\hbar/\tau\)</span>; the <span class="math notranslate nohighlight">\(\tau\to\infty\)</span> limit recovers the energy-denominator language of <a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2</span></a>.</p></li>
+<li><p><strong>Kubo formula:</strong> the same first-order machinery applied to <span class="math notranslate nohighlight">\(\delta\hat{H}=-\hat{\boldsymbol{j}}\cdot\delta\boldsymbol{A}\)</span> gives the Hall conductivity Eq. <a class="reference internal" href="#equation-eq-kubo-hall-523">(199)</a>; integer-filled Landau levels yield the topological quantization <span class="math notranslate nohighlight">\(\sigma_{xy}=\nu e^2/h\)</span>.</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="5-2-2-fermis-golden-rule.html"><span class="doc std std-doc">5.2.2 Fermi’s Golden Rule</span></a>: Rates, linewidth, and resonance—the formulas applied here to spectroscopy and response.</p></li>
-<li><p><a class="reference internal" href="5-2-1-interaction-picture.html"><span class="doc std std-doc">5.2.1 Interaction Picture</span></a>: Time-ordered evolution and amplitudes <span class="math notranslate nohighlight">\(c_f^{(1)}(t)\)</span> that underlie harmonic driving and Kubo response in this lesson.</p></li>
-<li><p><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html"><span class="doc std std-doc">4.3.3 Quantum Hall Effect</span></a>: The Kubo–Landau-level calculation of <span class="math notranslate nohighlight">\(\sigma_{xy}=\nu e^2/h\)</span> cited from this lesson’s prompts and Overview.</p></li>
+<li><p><a class="reference internal" href="5-2-2-dyson-series.html"><span class="doc std std-doc">5.2.2 Dyson Series</span></a>: bare/dressed Green’s functions and the time-ordered expansion that produce the first-order transition amplitude used here.</p></li>
+<li><p><a class="reference internal" href="5-2-1-interaction-picture.html"><span class="doc std std-doc">5.2.1 Interaction Picture</span></a>: definition of <span class="math notranslate nohighlight">\(\hat{V}_{\mathcal{I}}\)</span> and the Bohr phases that appear in <span class="math notranslate nohighlight">\(V_{fi}(t_1)\,\mathrm{e}^{\mathrm{i}\omega_{fi}t_1}\)</span>.</p></li>
+<li><p><a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2 Non-Degenerate Perturbation Theory</span></a>: the static counterpart whose energy denominators reappear in the adiabatic limit and in the Kubo formula.</p></li>
+<li><p><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html"><span class="doc std std-doc">4.3.3 Quantum Hall Effect</span></a>: explicit Landau-level evaluation of <span class="math notranslate nohighlight">\(\sigma_{xy}=\nu e^2/h\)</span>.</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Rabi frequency.</strong> A two-level system with transition frequency <span class="math notranslate nohighlight">\(\omega_{01} = 1.0\times 10^{15}\,\text{rad/s}\)</span> is driven by a resonant field <span class="math notranslate nohighlight">\(V(t) = V_0\cos(\omega_{01}t)\)</span> with <span class="math notranslate nohighlight">\(V_0 = 0.1\,\text{meV}\)</span>.</p>
-<p>(a) Calculate the Rabi frequency <span class="math notranslate nohighlight">\(\Omega_R = \vert V_{01}\vert/\hbar\)</span>.</p>
-<p>(b) What drive duration is needed for a <span class="math notranslate nohighlight">\(\pi\)</span>-pulse (complete population inversion)?</p>
-<p>(c) If the drive is on for half that duration, what is the final state starting from <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>?</p>
-<p><strong>2. Detuned driving.</strong> The same system is driven at frequency <span class="math notranslate nohighlight">\(\omega = \omega_{01} + \delta\)</span> with small detuning <span class="math notranslate nohighlight">\(\delta = 0.1\,\Omega_R\)</span>.</p>
-<p>(a) In the rotating frame, write the effective Hamiltonian including the detuning term.</p>
-<p>(b) What is the modified (generalized) Rabi frequency <span class="math notranslate nohighlight">\(\Omega' = \sqrt{\Omega_R^2 + \delta^2}\)</span>?</p>
-<p>(c) What is the maximum transition probability for long drive times? Explain why it is less than unity when <span class="math notranslate nohighlight">\(\delta \neq 0\)</span>.</p>
-<p><strong>3. Dipole selection rules.</strong> Which of the following electric dipole transitions in hydrogen are allowed? For each, check <span class="math notranslate nohighlight">\(\Delta\ell = \pm 1\)</span>, <span class="math notranslate nohighlight">\(\Delta m_\ell = 0, \pm 1\)</span>, and <span class="math notranslate nohighlight">\(\Delta S = 0\)</span>.</p>
-<p>(a) <span class="math notranslate nohighlight">\(1s \to 2s\)</span></p>
-<p>(b) <span class="math notranslate nohighlight">\(2p \to 1s\)</span></p>
-<p>(c) <span class="math notranslate nohighlight">\(2s \to 2p\)</span></p>
-<p>(d) <span class="math notranslate nohighlight">\(3d \to 2p\)</span></p>
-<p>(e) <span class="math notranslate nohighlight">\(3d \to 2s\)</span></p>
-<p><strong>4. Hydrogen 2p lifetime.</strong> The <span class="math notranslate nohighlight">\(2p\)</span> state of hydrogen decays to <span class="math notranslate nohighlight">\(1s\)</span> by emitting a Lyman-<span class="math notranslate nohighlight">\(\alpha\)</span> photon. The dipole matrix element is <span class="math notranslate nohighlight">\(\vert\langle 1s\vert r\vert 2p\rangle\vert = 2a_0/\sqrt{3}\)</span> and the transition frequency is <span class="math notranslate nohighlight">\(\omega = 1.55\times 10^{16}\,\text{rad/s}\)</span>.</p>
-<p>(a) Use <span class="math notranslate nohighlight">\(\Gamma = \frac{\omega^3}{3\pi\epsilon_0\hbar c^3}\vert\langle 1s\vert e r\vert 2p\rangle\vert^2\)</span> to estimate the decay rate.</p>
-<p>(b) Calculate the lifetime <span class="math notranslate nohighlight">\(\tau = 1/\Gamma\)</span> in nanoseconds.</p>
-<p>(c) What is the natural linewidth <span class="math notranslate nohighlight">\(\Delta E = \hbar\Gamma\)</span> in eV?</p>
-<p><strong>5. Energy-time uncertainty.</strong> A metastable state has a natural linewidth <span class="math notranslate nohighlight">\(\Delta E = 10^{-5}\,\text{eV}\)</span>.</p>
-<p>(a) What is its lifetime?</p>
-<p>(b) Over what minimum time scale must one measure to resolve the energy to better than <span class="math notranslate nohighlight">\(\Delta E\)</span>?</p>
-<p><strong>6. Kubo on a qubit.</strong> A two-level system has <span class="math notranslate nohighlight">\(\hat{H}_0 = -\tfrac{1}{2}\hbar\omega_0\,\hat{\sigma}^z\)</span> with eigenstates <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (occupied, energy <span class="math notranslate nohighlight">\(-\tfrac{1}{2}\hbar\omega_0\)</span>) and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> (empty, energy <span class="math notranslate nohighlight">\(+\tfrac{1}{2}\hbar\omega_0\)</span>). Take effective current operators <span class="math notranslate nohighlight">\(\hat{j}_x = \hat{\sigma}^x\)</span> and <span class="math notranslate nohighlight">\(\hat{j}_y = \hat{\sigma}^y\)</span> (treat overall prefactors as <span class="math notranslate nohighlight">\(1\)</span>).</p>
-<p>(a) Compute the matrix elements <span class="math notranslate nohighlight">\(\langle 0\vert\hat{j}_x\vert 1\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 1\vert\hat{j}_x\vert 0\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 0\vert\hat{j}_y\vert 1\rangle\)</span>, <span class="math notranslate nohighlight">\(\langle 1\vert\hat{j}_y\vert 0\rangle\)</span>.</p>
-<p>(b) Substitute into the zero-temperature Kubo formula</p>
+<p><strong>1. Phase cancellation.</strong> Verify in detail the cancellation of the overall <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E_f t/\hbar}\mathrm{e}^{\mathrm{i}E_i t_0/\hbar}\)</span> phase in the first-order amplitude <span class="math notranslate nohighlight">\(\langle f\vert\hat{G}(t,t_0)\vert i\rangle\)</span>, and conclude that <span class="math notranslate nohighlight">\(P_{i\to f}^{(1)}\)</span> depends only on <span class="math notranslate nohighlight">\(V_{fi}(t_1)\mathrm{e}^{\mathrm{i}\omega_{fi}t_1}\)</span>. Why is this cancellation expected on general grounds?</p>
+<p><strong>2. Sinc-squared properties.</strong> From Eq. <a class="reference internal" href="#equation-eq-5-2-3-sinc-driven">(195)</a> with <span class="math notranslate nohighlight">\(\alpha=(\omega_{fi}-\omega)/2\)</span>, derive each of the following:</p>
+<p>(a) Peak height <span class="math notranslate nohighlight">\(P^{(1)}\vert_{\alpha=0}=\vert V_{fi}\vert^{2}t^{2}/\hbar^{2}\)</span>.</p>
+<p>(b) First zero at <span class="math notranslate nohighlight">\(\alpha t=\pi\)</span>, i.e. width <span class="math notranslate nohighlight">\(\Delta\alpha\sim\pi/t\)</span>.</p>
+<p>(c) Integrated weight <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}\mathrm{d}\alpha\,(\sin\alpha t/\alpha)^{2}=\pi t\)</span>.</p>
+<p>Explain why (a)<span class="math notranslate nohighlight">\(\times\)</span>(b)<span class="math notranslate nohighlight">\(\sim\)</span>(c) is the algebraic origin of a <strong>constant rate</strong> in the long-time limit.</p>
+<p><strong>3. Sinc-to-delta.</strong> Prove the distributional identity</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_{xy} = \mathrm{i}\hbar\sum_{\alpha\in\mathrm{occ}}\sum_{\beta\notin\mathrm{occ}}\frac{\langle\alpha\vert\hat{j}_x\vert\beta\rangle\langle\beta\vert\hat{j}_y\vert\alpha\rangle - \langle\alpha\vert\hat{j}_y\vert\beta\rangle\langle\beta\vert\hat{j}_x\vert\alpha\rangle}{(E_\beta-E_\alpha)^2}
+\lim_{t\to\infty}\frac{1}{t}\left(\frac{\sin\alpha t}{\alpha}\right)^{\!2}=\pi\,\delta(\alpha).
 \]</div>
-<p>and obtain <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> in units of <span class="math notranslate nohighlight">\(1/(\hbar\omega_0)\)</span>.</p>
-<p>(c) The result is nonzero: a single occupied/empty pair already produces a Hall response. Identify which feature of the matrix elements is responsible (compare to a model with <span class="math notranslate nohighlight">\(\hat{j}_y \to \hat{\sigma}^x\)</span>, where <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> should vanish).</p>
-<p><strong>7. Hall conductance.</strong> For a 2D electron gas in a perpendicular magnetic field with one fully filled Landau level containing <span class="math notranslate nohighlight">\(N_\Phi\)</span> states:</p>
-<p>(a) What is the total charge? Express in terms of <span class="math notranslate nohighlight">\(N_\Phi\)</span> and <span class="math notranslate nohighlight">\(e\)</span>.</p>
-<p>(b) Show that the Hall conductance is <span class="math notranslate nohighlight">\(\sigma_{xy} = e^2/h\)</span> per filled Landau level using dimensional analysis and the Landau level degeneracy.</p>
-<p>(c) Why is this result exact, independent of disorder or electron-electron interactions?</p>
-<p>(d) If the system has filling <span class="math notranslate nohighlight">\(\nu = 1 + 1/3\)</span> (one full Landau level plus a <span class="math notranslate nohighlight">\(\nu = 1/3\)</span> fractional state), what is the net Hall conductance?</p>
+<p>Hint: act on a smooth test function <span class="math notranslate nohighlight">\(g(\alpha)\)</span> and use the change of variable <span class="math notranslate nohighlight">\(u=\alpha t\)</span> together with <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}(\sin u/u)^{2}\,\mathrm{d}u=\pi\)</span>.</p>
+<p><strong>4. Density of states.</strong> For free particles in three dimensions in a box of volume <span class="math notranslate nohighlight">\(V\)</span>,</p>
+<p>(a) Show that the density of states is <span class="math notranslate nohighlight">\(\rho(E)=\dfrac{V m}{2\pi^{2}\hbar^{3}}\sqrt{2mE}\)</span>.</p>
+<p>(b) Use Fermi’s golden rule with this <span class="math notranslate nohighlight">\(\rho\)</span> to express <span class="math notranslate nohighlight">\(W_i\)</span> in terms of <span class="math notranslate nohighlight">\(\vert V_{fi}\vert^{2}\)</span>, the drive frequency <span class="math notranslate nohighlight">\(\omega\)</span>, and the initial energy <span class="math notranslate nohighlight">\(E_i\)</span>. How does <span class="math notranslate nohighlight">\(W_i\)</span> scale with <span class="math notranslate nohighlight">\(E_i\)</span> at fixed <span class="math notranslate nohighlight">\(\vert V_{fi}\vert\)</span>?</p>
+<p><strong>5. Adiabatic ramp Lorentzian.</strong> Derive Eq. <a class="reference internal" href="#equation-eq-5-2-3-lorentzian">(197)</a> step by step, starting from <span class="math notranslate nohighlight">\(\hat{V}(t)=\hat{V}\mathrm{e}^{t/\tau}\)</span> for <span class="math notranslate nohighlight">\(t&lt;0\)</span>. State the FWHM in <span class="math notranslate nohighlight">\(\omega_{fi}\)</span> and in <span class="math notranslate nohighlight">\(\Delta E=E_f-E_i\)</span>, and sketch the lineshape.</p>
+<p><strong>6. Adiabatic to static perturbation.</strong> Take the <span class="math notranslate nohighlight">\(\tau\to\infty\)</span> limit of Eq. <a class="reference internal" href="#equation-eq-5-2-3-lorentzian">(197)</a> for <strong>fixed</strong> <span class="math notranslate nohighlight">\(\Delta E\neq 0\)</span>, and compare with <span class="math notranslate nohighlight">\(\vert\langle f\vert i(V)\rangle\vert^{2}\)</span> from non-degenerate perturbation theory (<a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2</span></a>). Explain physically why the two answers must agree.</p>
+<p><strong>7. Three-level Raman (long-time limit).</strong> Continue the setup from HW 5.2.2.8: <span class="math notranslate nohighlight">\(\hat{H}_0=\Delta\vert 3\rangle\langle 3\vert\)</span> with <span class="math notranslate nohighlight">\(E_1=E_2=0\)</span>, <span class="math notranslate nohighlight">\(E_3=\Delta&gt;0\)</span>, and <span class="math notranslate nohighlight">\(\hat{V}(t)=\lambda(t)[(\vert 1\rangle+\vert 2\rangle)\langle 3\vert+\mathrm{h.c.}]\)</span> with <span class="math notranslate nohighlight">\(\lambda(t)=\lambda_0\cos(\omega t)\)</span>.</p>
+<p>(a) Starting from the second-order amplitude <span class="math notranslate nohighlight">\(\langle 2\vert\hat{G}(t,0)\vert 1\rangle\)</span> obtained in HW 5.2.2.8, evaluate the double time integral in the long-time limit <span class="math notranslate nohighlight">\(\omega^{-1},\Delta^{-1}\ll t\ll\lambda_0^{-1}\)</span>. Identify which of the four oscillating terms contribute (those whose total exponent vanishes) and show</p>
+<div class="math notranslate nohighlight">
+\[
+\langle 2\vert\hat{G}(t,0)\vert 1\rangle\approx\frac{\mathrm{i}\,\lambda_0^{2}\,t}{2}\,\frac{\Delta}{\Delta^{2}-\omega^{2}}.
+\]</div>
+<p>(b) Compute <span class="math notranslate nohighlight">\(P_{1\to 2}(t)=\vert\langle 2\vert\hat{G}(t,0)\vert 1\rangle\vert^{2}\)</span> and identify the time scaling and the frequency dependence on <span class="math notranslate nohighlight">\(\omega/\Delta\)</span>.</p>
+<p>(c) Explain physically why the result is <strong>resonantly enhanced</strong> near <span class="math notranslate nohighlight">\(\omega/\Delta=1\)</span> and why the time scaling is <span class="math notranslate nohighlight">\(t^{2}\)</span> rather than <span class="math notranslate nohighlight">\(t\)</span> (compare to Fermi’s golden rule).</p>
+<p><strong>8. Minimal Kubo exercise.</strong> Take a two-level toy with <span class="math notranslate nohighlight">\(\hat{H}_0=-\frac{1}{2}\hbar\omega_0\hat{\sigma}^z\)</span>, occupied <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>, empty <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>, and current operators <span class="math notranslate nohighlight">\(\hat{j}_x=\hat{\sigma}^x\)</span>, <span class="math notranslate nohighlight">\(\hat{j}_y=\hat{\sigma}^y\)</span> (without charge or geometric prefactors).</p>
+<p>(a) Compute the four matrix elements entering the Kubo numerator.</p>
+<p>(b) Evaluate</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{xy}=\mathrm{i}\hbar\,
+\frac{\langle 0\vert\hat{j}_x\vert 1\rangle\langle 1\vert\hat{j}_y\vert 0\rangle-\langle 0\vert\hat{j}_y\vert 1\rangle\langle 1\vert\hat{j}_x\vert 0\rangle}{(E_1-E_0)^{2}}.
+\]</div>
+<p>(c) Replace <span class="math notranslate nohighlight">\(\hat{j}_y\to\hat{\sigma}^x\)</span> and show that <span class="math notranslate nohighlight">\(\sigma_{xy}\)</span> vanishes — i.e. why a Hall response requires <strong>non-commuting</strong> current operators.</p>
 </section>
 </section>
 
@@ -808,12 +887,12 @@ j_a(t) = \frac{\mathrm{i}}{\hbar A}\!\int_{-\infty}^{t}\!\mathrm{d}t'\,\delta A_
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="5-2-2-fermis-golden-rule.html"
+       href="5-2-2-dyson-series.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">5.2.2 Fermi’s Golden Rule</p>
+        <p class="prev-next-title">5.2.2 Dyson Series</p>
       </div>
     </a>
     <a class="right-next"
@@ -845,11 +924,10 @@ j_a(t) = \frac{\mathrm{i}}{\hbar A}\!\int_{-\infty}^{t}\!\mathrm{d}t'\,\delta A_
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonic-perturbation">Harmonic Perturbation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-dipole-transitions">Electric Dipole Transitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifetime-and-linewidth">Lifetime and Linewidth</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-response-and-the-kubo-formula">Linear Response and the Kubo Formula</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-hall-conductance">Quantum Hall Conductance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability">Transition Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fermi-s-golden-rule">Fermi’s Golden Rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-process">Adiabatic Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kubo-formula">Kubo Formula</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

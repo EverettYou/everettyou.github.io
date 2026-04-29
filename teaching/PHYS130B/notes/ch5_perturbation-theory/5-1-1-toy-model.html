@@ -276,7 +276,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="5-2-3-applications.html">5.2.3 Applications</a></li>
 </ul>
 </details></li>
@@ -505,11 +505,12 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qubit-hamiltonian">The Qubit Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-solution">Exact Solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-expansion-recovering-the-perturbative-series">Taylor Expansion: Recovering the Perturbative Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-repulsion">Level Repulsion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence">Convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-setup">General Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Toy Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-results">Exact Results</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tayler-expansions">Tayler Expansions</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -530,121 +531,178 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>Why do we need perturbation theory? What strategy does it use to approximate unsolvable quantum systems?</p></li>
-<li><p>For the qubit <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x\)</span>, find the exact eigenvalues and Taylor-expand them. What do the expansion coefficients represent?</p></li>
-<li><p>What is level repulsion? Why do the two eigenvalues of the qubit model never cross for real <span class="math notranslate nohighlight">\(\lambda\)</span>?</p></li>
-<li><p>When does the perturbative series converge, and what sets the convergence radius? What happens beyond it?</p></li>
+<li><p>Why is perturbation theory useful in quantum mechanics when exact solutions are rare, and what does it mean to treat a system as a small deformation of a solvable one?</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\hat{H}(\lambda)=\hat{H}_0+\lambda\hat{V}\)</span>, what information from <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> and <span class="math notranslate nohighlight">\(\hat{V}\)</span> is needed to predict behavior at small <span class="math notranslate nohighlight">\(\lambda\)</span>?</p></li>
+<li><p>In a two-level model, what does off-diagonal coupling do physically to level crossing/avoided crossing and to state mixing?</p></li>
+<li><p>A perturbative expansion is a Taylor series in <span class="math notranslate nohighlight">\(\lambda\)</span>. How should you judge, in practice, whether a low-order truncation is reliable for a chosen real <span class="math notranslate nohighlight">\(\lambda\)</span>?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>Most quantum systems cannot be solved exactly. <strong>Perturbation theory</strong> provides a systematic approximation: start from a solvable Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, add a small perturbation <span class="math notranslate nohighlight">\(\lambda V\)</span>, and expand eigenvalues and eigenstates as power series in <span class="math notranslate nohighlight">\(\lambda\)</span>. The qubit model <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x\)</span> is the ideal testing ground — a <span class="math notranslate nohighlight">\(2\times 2\)</span> system with an exact solution that we can Taylor-expand and compare order-by-order.</p>
+<p>Exact solutions in quantum mechanics are rare, but many physically important systems are only <em>small deformations</em> of solvable ones. <strong>Perturbation theory</strong> is the framework that turns this observation into a controlled method: start from a known reference problem, then track how energies and states deform as a <em>small</em> control parameter is turned on.</p>
+<p>This lecture sets the conceptual foundation for the chapter. The key idea is that perturbation theory is, at heart, a <strong>Taylor expansion</strong> problem: treat the eigenenergy <span class="math notranslate nohighlight">\(E_n(\lambda)\)</span> and eigenstate <span class="math notranslate nohighlight">\(\vert\psi_n(\lambda)\rangle\)</span> as functions of <span class="math notranslate nohighlight">\(\lambda\)</span>, then expand them around <span class="math notranslate nohighlight">\(\lambda=0\)</span>.</p>
+<p>So the central question is not “can we diagonalize <span class="math notranslate nohighlight">\(\hat{H}(\lambda)\)</span> exactly?” but “how much of the eigensystem can we recover from local data near <span class="math notranslate nohighlight">\(\lambda=0\)</span>?”</p>
 </section>
-<section id="the-qubit-hamiltonian">
-<h3>The Qubit Hamiltonian<a class="headerlink" href="#the-qubit-hamiltonian" title="Link to this heading">#</a></h3>
+<section id="general-setup">
+<h3>General Setup<a class="headerlink" href="#general-setup" title="Link to this heading">#</a></h3>
+<p>Start from the standard perturbative decomposition:</p>
+<div class="important admonition">
+<p class="admonition-title">Problem Setup</p>
+<p>The Hamiltonian is parameterized as</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}(\lambda)=\hat{H}_0+\lambda\hat{V}.
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{H}_0\)</span>: unperturbed Hamiltonian with known eigensystem at <span class="math notranslate nohighlight">\(\lambda=0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda\hat{V}\)</span>: perturbation term, where <span class="math notranslate nohighlight">\(\hat{V}\)</span> sets the deformation direction and <span class="math notranslate nohighlight">\(\lambda\)</span> sets its strength.</p></li>
+</ul>
+</div>
+<p>At <span class="math notranslate nohighlight">\(\lambda=0\)</span>, the spectrum of <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> is known. The goal is to find the eigenenergy <span class="math notranslate nohighlight">\(E_n(\lambda)\)</span> and corresponding eigenstate <span class="math notranslate nohighlight">\(\vert \psi_n(\lambda)\rangle\)</span> of <span class="math notranslate nohighlight">\(\hat{H}(\lambda)\)</span>, defined by the eigenvalue equation <span class="math notranslate nohighlight">\(\hat{H}(\lambda)\vert \psi_n(\lambda)\rangle=E_n(\lambda)\vert \psi_n(\lambda)\rangle\)</span>.</p>
+<p>Perturbation theory expands these quantities as</p>
+<div class="math notranslate nohighlight">
+\[
+E_n(\lambda)=E_n^{(0)}+\lambda E_n^{(1)}+\lambda^2E_n^{(2)}+\cdots,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\vert \psi_n(\lambda)\rangle=\vert \psi_n^{(0)}\rangle+\lambda\vert \psi_n^{(1)}\rangle+\lambda^2\vert \psi_n^{(2)}\rangle+\cdots.
+\]</div>
+<p>Each coefficient has physical meaning: zeroth order is the unperturbed problem, higher orders are corrections induced by <span class="math notranslate nohighlight">\(\hat{V}\)</span>. We now test this framework on an exactly solvable two-level benchmark.</p>
+</section>
+<section id="id1">
+<h3>Toy Model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Consider <span class="math notranslate nohighlight">\(\hat{H}_0=\hat{Z}\)</span> and <span class="math notranslate nohighlight">\(\hat{V}=\hat{X}\)</span>. Then</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-qubit-ham">
 <span class="eqno">(174)<a class="headerlink" href="#equation-eq-5a-qubit-ham" title="Link to this equation">#</a></span>\[\begin{split}
-\hat{H}(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x = \begin{pmatrix} 1 &amp; \lambda \\ \lambda &amp; -1 \end{pmatrix}
+\hat{H}(\lambda)=\hat{Z}+\lambda\hat{X}=\begin{pmatrix}1&amp;\lambda\\\lambda&amp;-1\end{pmatrix}
 \end{split}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\hat{H}_0 = \hat{\sigma}^z\)</span> is the unperturbed Hamiltonian with eigenstates <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> (energy <span class="math notranslate nohighlight">\(+1\)</span>) and <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> (energy <span class="math notranslate nohighlight">\(-1\)</span>), and <span class="math notranslate nohighlight">\(V = \hat{\sigma}^x\)</span> induces spin flips between them.</p>
-</section>
-<section id="exact-solution">
-<h3>Exact Solution<a class="headerlink" href="#exact-solution" title="Link to this heading">#</a></h3>
-<p>Diagonalizing:</p>
-<div class="math notranslate nohighlight">
-\[
-\det(H - E\hat{I}) = (1-E)(-1-E) - \lambda^2 = 0 \quad\Rightarrow\quad E^2 = 1 + \lambda^2
-\]</div>
-<div class="note admonition">
-<p class="admonition-title">Exact Eigenvalues</p>
+<p>At <span class="math notranslate nohighlight">\(\lambda=0\)</span>, the unperturbed eigenstates are <span class="math notranslate nohighlight">\(\vert 0\rangle,\vert 1\rangle\)</span> with energies <span class="math notranslate nohighlight">\(+1,-1\)</span>.</p>
+<section id="exact-results">
+<h4>Exact Results<a class="headerlink" href="#exact-results" title="Link to this heading">#</a></h4>
+<p>The exact energies are</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-exact-energies">
 <span class="eqno">(175)<a class="headerlink" href="#equation-eq-5a-exact-energies" title="Link to this equation">#</a></span>\[
-E_\pm(\lambda) = \pm\sqrt{1 + \lambda^2}
+E_\pm(\lambda)=\pm\sqrt{1+\lambda^2}.
 \]</div>
-<p>The energy gap <span class="math notranslate nohighlight">\(\Delta E = 2\sqrt{1+\lambda^2}\)</span> never closes for real <span class="math notranslate nohighlight">\(\lambda\)</span> — the two levels <strong>repel</strong> rather than cross.</p>
-</div>
+<p>The exact eigenstates are</p>
+<div class="math notranslate nohighlight">
+\[
+\vert \psi_+(\lambda)\rangle=\frac{\left(1+\sqrt{1+\lambda^2}\right)\vert 0\rangle+\lambda\vert 1\rangle}{\sqrt{2\left(1+\lambda^2+\sqrt{1+\lambda^2}\right)}},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\vert \psi_-(\lambda)\rangle=\frac{\left(1+\sqrt{1+\lambda^2}\right)\vert 1\rangle-\lambda\vert 0\rangle}{\sqrt{2\left(1+\lambda^2+\sqrt{1+\lambda^2}\right)}}.
+\]</div>
 </section>
-<section id="taylor-expansion-recovering-the-perturbative-series">
-<h3>Taylor Expansion: Recovering the Perturbative Series<a class="headerlink" href="#taylor-expansion-recovering-the-perturbative-series" title="Link to this heading">#</a></h3>
-<p>Expanding <span class="math notranslate nohighlight">\(\sqrt{1+\lambda^2}\)</span> for small <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<section id="tayler-expansions">
+<h4>Tayler Expansions<a class="headerlink" href="#tayler-expansions" title="Link to this heading">#</a></h4>
+<p>Before applying to this model, recall the Taylor expansion of a function around <span class="math notranslate nohighlight">\(x=0\)</span>:</p>
+<div class="note admonition">
+<p class="admonition-title">Taylor Series Expansion</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=f(0)+f'(0)x+\frac{f''(0)}{2!}x^2+\frac{f^{(3)}(0)}{3!}x^3+\cdots
+\]</div>
+<p>This expresses a function near <span class="math notranslate nohighlight">\(x=0\)</span> as zeroth-order value plus first-, second-, and higher-order corrections.</p>
+</div>
+<p>For perturbation theory, the same idea is applied to <span class="math notranslate nohighlight">\(E_\pm(\lambda)\)</span> and <span class="math notranslate nohighlight">\(\vert\psi_\pm(\lambda)\rangle\)</span> as functions of <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">Energy and State Expansions</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-energy-series">
 <span class="eqno">(176)<a class="headerlink" href="#equation-eq-5a-energy-series" title="Link to this equation">#</a></span>\[
-E_\pm(\lambda) = \pm\left(1 + \frac{\lambda^2}{2} - \frac{\lambda^4}{8} + O(\lambda^6)\right)
+E_\pm(\lambda)=\pm\left(1+\frac{\lambda^2}{2}-\frac{\lambda^4}{8}+O(\lambda^6)\right)
 \]</div>
-<p>Reading off the perturbative coefficients for the upper state:</p>
-<div class="math notranslate nohighlight">
-\[
-E_+^{(0)} = 1, \quad E_+^{(1)} = 0, \quad E_+^{(2)} = \frac{1}{2}, \quad E_+^{(3)} = 0, \quad E_+^{(4)} = -\frac{1}{8}
-\]</div>
-<p>All <strong>odd-order corrections vanish</strong> because <span class="math notranslate nohighlight">\(\hat{H}(\lambda)\)</span> has a <span class="math notranslate nohighlight">\(\lambda \to -\lambda\)</span> symmetry (equivalently, <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> has zero diagonal elements in the <span class="math notranslate nohighlight">\(\vert 0\rangle, \vert 1\rangle\)</span> basis, so <span class="math notranslate nohighlight">\(E_n^{(1)} = \langle n\vert\hat{\sigma}^x\vert n\rangle = 0\)</span>).</p>
-<p>The exact eigenstates expanded to low order:</p>
 <div class="math notranslate nohighlight" id="equation-eq-5a-state-series-plus">
-<span class="eqno">(177)<a class="headerlink" href="#equation-eq-5a-state-series-plus" title="Link to this equation">#</a></span>\[
-\vert \psi_+(\lambda)\rangle = \vert 0\rangle + \frac{\lambda}{2}\vert 1\rangle - \frac{\lambda^2}{8}\vert 0\rangle + O(\lambda^3)
-\]</div>
-<p>The admixture of <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> grows linearly with <span class="math notranslate nohighlight">\(\lambda\)</span>, controlled by the ratio coupling/gap.</p>
-</section>
-<section id="level-repulsion">
-<h3>Level Repulsion<a class="headerlink" href="#level-repulsion" title="Link to this heading">#</a></h3>
-<div class="important admonition">
-<p class="admonition-title">Level Repulsion</p>
-<p>Two energy levels coupled by a perturbation <span class="math notranslate nohighlight">\(V\)</span> repel each other rather than crossing. The minimum gap at any <span class="math notranslate nohighlight">\(\lambda\)</span> is proportional to the matrix element <span class="math notranslate nohighlight">\(\vert\langle 1\vert V\vert 0\rangle\vert\)</span>. In the qubit model, <span class="math notranslate nohighlight">\(\langle 1\vert\hat{\sigma}^x\vert 0\rangle = 1\)</span>, so the levels never touch.</p>
-<p>This is a general phenomenon: for a <span class="math notranslate nohighlight">\(2\times 2\)</span> block with off-diagonal coupling <span class="math notranslate nohighlight">\(v\)</span>, the eigenvalues are <span class="math notranslate nohighlight">\(E_\pm = \bar{E} \pm \sqrt{\delta^2 + v^2}\)</span>, where <span class="math notranslate nohighlight">\(\delta\)</span> is the half-gap and <span class="math notranslate nohighlight">\(\bar{E}\)</span> the midpoint. The minimum splitting <span class="math notranslate nohighlight">\(2\lvert v\rvert\)</span> occurs at <span class="math notranslate nohighlight">\(\delta = 0\)</span>.</p>
+<span class="eqno">(177)<a class="headerlink" href="#equation-eq-5a-state-series-plus" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{split}
+\vert \psi_+(\lambda)\rangle &amp;= \vert 0\rangle+\frac{\lambda}{2}\vert 1\rangle-\frac{\lambda^2}{8}\vert 0\rangle+O(\lambda^3),\\
+\vert \psi_-(\lambda)\rangle &amp;= \vert 1\rangle-\frac{\lambda}{2}\vert 0\rangle-\frac{\lambda^2}{8}\vert 1\rangle+O(\lambda^3).
+\end{split}
+\end{split}\]</div>
+</div>
+<p>This toy model is a benchmark: it shows what perturbation theory should reproduce order by order. The next subsection develops the general method to compute these coefficients directly from <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> and <span class="math notranslate nohighlight">\(\hat{V}\)</span>, without exact diagonalization.</p>
+<div class="note dropdown admonition">
+<p class="admonition-title">Radius of Convergence</p>
+<p>A perturbative expansion is a Taylor series in <span class="math notranslate nohighlight">\(\lambda\)</span>. Such series need not converge for all <span class="math notranslate nohighlight">\(\lambda\)</span>; in general there is a finite radius of convergence <span class="math notranslate nohighlight">\(R\)</span> around <span class="math notranslate nohighlight">\(\lambda=0\)</span>.</p>
+<p>Within <span class="math notranslate nohighlight">\(|\lambda|&lt;R\)</span>, higher-order truncations approach the exact result asymptotically order by order. Outside that range, adding more terms does not reliably improve the approximation.</p>
+<p>For practical use at real <span class="math notranslate nohighlight">\(\lambda\)</span>, always check behavior numerically by comparing successive truncations (first, second, fourth order, …) and monitoring relative error as <span class="math notranslate nohighlight">\(\lambda\)</span> increases.</p>
 </div>
 <div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Level repulsion</p>
-<p>For the qubit <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x\)</span>, the two exact eigenvalues are <span class="math notranslate nohighlight">\(E_\pm(\lambda) = \pm\sqrt{1+\lambda^2}\)</span>. At what value(s) of <span class="math notranslate nohighlight">\(\lambda\)</span> (real or complex) do the eigenvalues become equal?</p>
-<p>(A) Never — the levels repel for all real <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
-<p>(B) At <span class="math notranslate nohighlight">\(\lambda = 0\)</span>, where both levels coincide.</p>
-<p>(C) At <span class="math notranslate nohighlight">\(\lambda = \pm\mathrm{i}\)</span>, where <span class="math notranslate nohighlight">\(1 + \lambda^2 = 0\)</span>.</p>
-<p>(D) At <span class="math notranslate nohighlight">\(\lambda = \pm 1\)</span>, where the coupling equals the gap.</p>
+<p class="admonition-title">Poll: Practical convergence check</p>
+<p>For <span class="math notranslate nohighlight">\(E_+(\lambda)\approx 1+\lambda^2/2\)</span>, which workflow best checks whether second-order perturbation theory is trustworthy at a chosen real <span class="math notranslate nohighlight">\(\lambda\)</span>?</p>
+<p>(A) Assume it is always valid whenever the unperturbed gap is nonzero.</p>
+<p>(B) Compare the truncated result with exact (or higher-order) values and monitor relative error as <span class="math notranslate nohighlight">\(\lambda\)</span> increases.</p>
+<p>(C) Use only the sign of <span class="math notranslate nohighlight">\(E_+^{(2)}\)</span>.</p>
+<p>(D) Check whether first-order correction vanishes.</p>
 </div>
 </section>
-<section id="convergence">
-<h3>Convergence<a class="headerlink" href="#convergence" title="Link to this heading">#</a></h3>
-<div class="important admonition">
-<p class="admonition-title">Convergence Criterion</p>
-<p>The perturbative series converges when the perturbation is small compared to the energy gap:</p>
-<div class="math notranslate nohighlight">
-\[
-\lambda \|V\| \ll \Delta E
-\]</div>
-<p>For the qubit, the convergence radius is <span class="math notranslate nohighlight">\(R = 1\)</span>, set by the branch points at <span class="math notranslate nohighlight">\(\lambda = \pm\mathrm{i}\)</span> in the complex plane where <span class="math notranslate nohighlight">\(E^2 = 1 + \lambda^2 = 0\)</span>.</p>
-</div>
-<p>Beyond <span class="math notranslate nohighlight">\(|\lambda| = R\)</span>, the series diverges even though the exact solution remains valid. Perturbation theory breaks down precisely when the coupling becomes comparable to the energy gap — the perturbation can no longer be treated as “small.”</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: when does symmetry force a vanishing correction?</p>
-<p>The first-order corrections <span class="math notranslate nohighlight">\(E_\pm^{(1)} = 0\)</span> vanish because <span class="math notranslate nohighlight">\(\hat{\sigma}^x\)</span> has zero diagonal elements. This is not a coincidence but a consequence of parity symmetry. More generally, when does symmetry guarantee that certain perturbative corrections vanish? Can you think of physical examples where recognizing this saves enormous computational effort?</p>
-</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Perturbation theory</strong> expands eigenvalues as <span class="math notranslate nohighlight">\(E_n(\lambda) = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots\)</span>.</p></li>
-<li><p>The <strong>qubit model</strong> provides an exact benchmark: <span class="math notranslate nohighlight">\(E_\pm = \pm\sqrt{1+\lambda^2}\)</span> reproduces all perturbative coefficients when Taylor-expanded.</p></li>
-<li><p><strong>Level repulsion</strong>: coupled levels repel rather than cross; the gap is proportional to <span class="math notranslate nohighlight">\(\vert\langle 1\vert V\vert 0\rangle\vert\)</span>.</p></li>
-<li><p><strong>Convergence</strong>: the series converges for <span class="math notranslate nohighlight">\(\lambda \|V\| \ll \Delta E\)</span>; breakdown signals that the perturbation is no longer “small.”</p></li>
+<li><p>Perturbation theory starts from a solvable Hamiltonian and computes corrections order by order in <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>The general targets are <span class="math notranslate nohighlight">\(E_n(\lambda)\)</span> and <span class="math notranslate nohighlight">\(\vert \psi_n(\lambda)\rangle\)</span>, expanded around <span class="math notranslate nohighlight">\(\lambda=0\)</span>.</p></li>
+<li><p>The qubit toy model provides exact energies and states, so perturbative coefficients can be benchmarked directly.</p></li>
+<li><p>Practical validity is controlled by small perturbation scale and explicit error checks for real <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2 Non-Degenerate Perturbation Theory</span></a>: Systematic perturbative expansion formulas</p></li>
-<li><p><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html"><span class="doc std std-doc">1.1.3 Hermitian Operators</span></a>: Eigenvalues and spectral decomposition</p></li>
+<li><p><a class="reference internal" href="5-1-2-non-degenerate-perturbation-theory.html"><span class="doc std std-doc">5.1.2 Non-Degenerate Perturbation Theory</span></a>: Order-by-order algorithm for expansion coefficients</p></li>
+<li><p><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html"><span class="doc std std-doc">1.1.3 Hermitian Operators</span></a>: Spectral decomposition background</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Qubit eigenvalues.</strong> For the qubit <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{\sigma}^z + \lambda\hat{\sigma}^x\)</span>, compute the exact eigenvalues <span class="math notranslate nohighlight">\(E_\pm(\lambda) = \pm\sqrt{1+\lambda^2}\)</span> by diagonalizing the <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix. Taylor-expand to <span class="math notranslate nohighlight">\(O(\lambda^4)\)</span> and identify the perturbative coefficients <span class="math notranslate nohighlight">\(E_+^{(0)}\)</span> through <span class="math notranslate nohighlight">\(E_+^{(4)}\)</span>.</p>
-<p><strong>2. First-order energy.</strong> Verify that <span class="math notranslate nohighlight">\(E_+^{(1)} = \langle 0\vert\hat{\sigma}^x\vert 0\rangle = 0\)</span>. Explain why this vanishing is guaranteed by the <span class="math notranslate nohighlight">\(\lambda \to -\lambda\)</span> symmetry of <span class="math notranslate nohighlight">\(\hat{H}(\lambda)\)</span>.</p>
-<p><strong>3. Second-order energy.</strong> Compute <span class="math notranslate nohighlight">\(E_+^{(2)}\)</span> using the formula <span class="math notranslate nohighlight">\(E_n^{(2)} = \sum_{m\neq n} \vert\langle m\vert V\vert n\rangle\vert^2/(E_n^{(0)} - E_m^{(0)})\)</span>. Verify it matches the coefficient from the Taylor expansion of <span class="math notranslate nohighlight">\(\sqrt{1+\lambda^2}\)</span>.</p>
-<p><strong>4. Write first-order.</strong> Write the first-order state correction <span class="math notranslate nohighlight">\(\vert \psi_+^{(1)}\rangle = \frac{\langle 1\vert\hat{\sigma}^x\vert 0\rangle}{E_+^{(0)} - E_-^{(0)}}\vert 1\rangle\)</span>. Compare with the exact eigenstate expanded to <span class="math notranslate nohighlight">\(O(\lambda)\)</span>.</p>
-<p><strong>5. Second-order correction.</strong> The convergence radius is <span class="math notranslate nohighlight">\(R = 1\)</span>, set by branch points at <span class="math notranslate nohighlight">\(\lambda = \pm\mathrm{i}\)</span>. For <span class="math notranslate nohighlight">\(\lambda = 0.5\)</span> and <span class="math notranslate nohighlight">\(\lambda = 0.8\)</span>, compare the second-order approximation <span class="math notranslate nohighlight">\(E_+ \approx 1 + \lambda^2/2\)</span> to the exact value. At what <span class="math notranslate nohighlight">\(\lambda\)</span> does the error exceed 10%?</p>
-<p><strong>6. Eigenvalue structure.</strong> For a general <span class="math notranslate nohighlight">\(2\times 2\)</span> Hamiltonian <span class="math notranslate nohighlight">\(H = \begin{pmatrix} E_0 + \delta &amp; v \\ v &amp; E_0 - \delta \end{pmatrix}\)</span> (real <span class="math notranslate nohighlight">\(v\)</span>, <span class="math notranslate nohighlight">\(\delta\)</span>), show that the eigenvalues are <span class="math notranslate nohighlight">\(E_\pm = E_0 \pm \sqrt{\delta^2 + v^2}\)</span>. Explain why the levels never cross for <span class="math notranslate nohighlight">\(v \neq 0\)</span> (level repulsion).</p>
-<p><strong>7. Qubit dynamics.</strong> A modified qubit has gap <span class="math notranslate nohighlight">\(\Delta E = \epsilon\)</span> (very small) and coupling <span class="math notranslate nohighlight">\(\langle 1\vert V\vert 0\rangle = v\)</span>. Show that <span class="math notranslate nohighlight">\(E_+^{(2)} \sim v^2/\epsilon\)</span> diverges as <span class="math notranslate nohighlight">\(\epsilon \to 0\)</span>. What does this signal about the validity of non-degenerate perturbation theory near degeneracy?</p>
+<p><strong>1. Accuracy window.</strong> Use the approximation <span class="math notranslate nohighlight">\(E_+^{\text{(2nd)}}(\lambda)=1+\lambda^2/2\)</span> as a model prediction for the upper level. Find the largest real <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span> such that the relative error</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\left|E_+^{\text{exact}}-E_+^{\text{(2nd)}}\right|}{\left|E_+^{\text{exact}}\right|}
+\]</div>
+<p>is below <span class="math notranslate nohighlight">\(5\%\)</span>. Interpret the result as a practical criterion for when second-order perturbation theory is trustworthy.</p>
+<p><strong>2. Inverse design.</strong> Suppose spectroscopy reports an upper-level energy <span class="math notranslate nohighlight">\(E_+=1.18\)</span> for the toy model. Estimate <span class="math notranslate nohighlight">\(\lambda\)</span> using second-order perturbation theory, then compute the exact <span class="math notranslate nohighlight">\(\lambda\)</span> from <span class="math notranslate nohighlight">\(E_+=\sqrt{1+\lambda^2}\)</span>. Compare the two inferred couplings and discuss why the inverse problem can amplify approximation error.</p>
+<p><strong>3. Basis rotation: energies vs states.</strong> Consider</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}(\lambda,\phi)=\hat{Z}+\lambda\big(\cos\phi\,\hat{X}+\sin\phi\,\hat{Y}\big).
+\]</div>
+<p>(a) Find a unitary <span class="math notranslate nohighlight">\(\hat U(\phi)\)</span> that rotates about <span class="math notranslate nohighlight">\(\hat Z\)</span> and satisfies <span class="math notranslate nohighlight">\(\hat U(\phi)^\dagger\,\hat H(\lambda,\phi)\,\hat U(\phi)=\hat H(\lambda,0)\)</span>.</p>
+<p>(b) Use this unitary equivalence to argue that the eigenvalues <span class="math notranslate nohighlight">\(E_\pm(\lambda,\phi)\)</span> are <em>independent of <span class="math notranslate nohighlight">\(\phi\)</span></em> — the spectrum depends on <span class="math notranslate nohighlight">\(\lambda\)</span> alone.</p>
+<p>(c) Show that the eigenstates <em>do</em> depend on <span class="math notranslate nohighlight">\(\phi\)</span>: <span class="math notranslate nohighlight">\(|\psi_\pm(\lambda,\phi)\rangle=\hat U(\phi)\,|\psi_\pm(\lambda,0)\rangle\)</span>.</p>
+<p>(d) <strong>Implication for a perturbative series in <span class="math notranslate nohighlight">\(\phi\)</span>.</strong> Expand <span class="math notranslate nohighlight">\(E_+(\lambda,\phi)\)</span> as a Taylor series in <span class="math notranslate nohighlight">\(\phi\)</span> about <span class="math notranslate nohighlight">\(\phi=0\)</span>. What must every coefficient be? Now expand <span class="math notranslate nohighlight">\(|\psi_+(\lambda,\phi)\rangle\)</span> in <span class="math notranslate nohighlight">\(\phi\)</span> — is the first-order <span class="math notranslate nohighlight">\(\phi\)</span>-correction zero? If not, compute it explicitly.</p>
+<p>(e) State the general principle illustrated here: when a parameter enters <span class="math notranslate nohighlight">\(\hat H\)</span> only through a unitary similarity transformation, energies are invariant but eigenstates rotate.</p>
+<p><strong>4. Controlled asymmetry.</strong> Add a diagonal perturbation and study</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}(\lambda,\mu)=\hat{Z}+\lambda\hat{X}+\mu\hat{Z}.
+\]</div>
+<p>Treat <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> as small independent parameters and expand <span class="math notranslate nohighlight">\(E_+(\lambda,\mu)\)</span> to second order in both. Which terms are linear in <span class="math notranslate nohighlight">\(\mu\)</span>? Which terms are linear in <span class="math notranslate nohighlight">\(\lambda\)</span>? Use symmetry arguments to justify the pattern.</p>
+<p><strong>5. Avoided crossing width.</strong> For</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H=\begin{pmatrix}
+\delta &amp; v \\
+v &amp; -\delta
+\end{pmatrix},
+\end{split}\]</div>
+<p>show that the minimum gap over all <span class="math notranslate nohighlight">\(\delta\)</span> is <span class="math notranslate nohighlight">\(2|v|\)</span>. Then solve the inverse question: if an experiment measures a minimum gap of <span class="math notranslate nohighlight">\(0.12\,\mathrm{eV}\)</span>, what is <span class="math notranslate nohighlight">\(|v|\)</span>? Explain why this is a direct operational meaning of level repulsion.</p>
+<p><strong>6. Misconception test.</strong> One might claim: “If the unperturbed gap is nonzero, non-degenerate perturbation theory should remain valid even when <span class="math notranslate nohighlight">\(\lambda\)</span> is large.” Test this claim quantitatively by comparing exact and second-order energies at <span class="math notranslate nohighlight">\(\lambda=0.2,0.8,1.5\)</span>. Identify where the claim fails and explain the failure using error growth as <span class="math notranslate nohighlight">\(\lambda\)</span> increases.</p>
+<p><strong>7. Near-degeneracy diagnosis.</strong> Consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{H}(\lambda,\epsilon)=\begin{pmatrix}
+\epsilon/2 &amp; \lambda \\
+\lambda &amp; -\epsilon/2
+\end{pmatrix}, \qquad \epsilon&gt;0.
+\end{split}\]</div>
+<p>(a) Compute the exact eigenvalues and expand for small <span class="math notranslate nohighlight">\(\lambda\)</span> at fixed <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
+<p>(b) Determine the condition on <span class="math notranslate nohighlight">\(\lambda, \epsilon\)</span> under which the second-order term is a controlled correction.</p>
+<p>(c) Use your condition to explain why the limits <span class="math notranslate nohighlight">\(\epsilon\to 0\)</span> and <span class="math notranslate nohighlight">\(\lambda\to 0\)</span> do not commute in practice for perturbation theory.</p>
 </section>
 </section>
 
@@ -716,11 +774,12 @@ E_+^{(0)} = 1, \quad E_+^{(1)} = 0, \quad E_+^{(2)} = \frac{1}{2}, \quad E_+^{(3
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qubit-hamiltonian">The Qubit Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-solution">Exact Solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-expansion-recovering-the-perturbative-series">Taylor Expansion: Recovering the Perturbative Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-repulsion">Level Repulsion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence">Convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-setup">General Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Toy Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-results">Exact Results</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tayler-expansions">Tayler Expansions</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

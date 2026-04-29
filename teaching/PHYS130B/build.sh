@@ -33,6 +33,19 @@ for dir in _static _images _sources; do
     mv "notes/$dir" "notes/$newdir"
   fi
 done
+
+# Ensure raw HTML <img> references in notebooks resolve in built site.
+# Some pages intentionally use ../images/*.png inside markdown tables for
+# precise icon sizing; those files are not always tracked by Sphinx asset
+# discovery. Sync source figure PNGs into notes/images as a final step.
+mkdir -p notes/images
+if command -v rsync &> /dev/null; then
+  rsync -av --include '*/' --include '*.png' --exclude '*' \
+    notes_src/assets/figs/ notes/images/
+else
+  cp -f notes_src/assets/figs/*.png notes/images/
+fi
+
 python3 -c "
 import os, re
 

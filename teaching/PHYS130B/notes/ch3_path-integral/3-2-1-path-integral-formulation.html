@@ -276,7 +276,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
 </ul>
 </details></li>
@@ -689,10 +689,18 @@ K(x,t;x',t')
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Wave evolution from completeness.</strong> Starting from <span class="math notranslate nohighlight">\(\vert\psi(t)\rangle = \hat{U}(t,t')\vert\psi(t')\rangle\)</span> and the position completeness <span class="math notranslate nohighlight">\(\int\vert x'\rangle\langle x'\vert\,\mathrm{d}x' = \hat{I}\)</span>, derive the wave-evolution formula <a class="reference internal" href="#equation-eq-wave-evolution">(63)</a>. Identify each factor with a piece of the propagator definition <a class="reference internal" href="#equation-eq-propagator-def">(62)</a>.</p>
-<p><strong>2. Slicing into three.</strong> Apply the composition property <a class="reference internal" href="#equation-eq-propagator-composition">(64)</a> twice to express <span class="math notranslate nohighlight">\(K(x,t;x',t')\)</span> as a double integral over two intermediate positions <span class="math notranslate nohighlight">\(x_1,x_2\)</span> at times <span class="math notranslate nohighlight">\(t' &lt; t_1 &lt; t_2 &lt; t\)</span>.</p>
-<p>(a) Write the result as <span class="math notranslate nohighlight">\(K = \iint K_3\,K_2\,K_1\,\mathrm{d}x_1\,\mathrm{d}x_2\)</span> and identify each kernel.</p>
-<p>(b) Argue, by induction on <span class="math notranslate nohighlight">\(N\)</span>, that the same construction with <span class="math notranslate nohighlight">\(N-1\)</span> intermediate times reproduces the time-sliced formula <a class="reference internal" href="#equation-eq-time-slicing">(65)</a>.</p>
+<p><strong>1. Propagating a Gaussian wavepacket.</strong> A particle is in the Gaussian state <span class="math notranslate nohighlight">\(\psi(x,0) = (\pi\sigma^{2})^{-1/4}\exp(-x^{2}/(2\sigma^{2}))\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>. The free-particle propagator is</p>
+<div class="math notranslate nohighlight">
+\[
+K(x,t;x',0) = \sqrt{\frac{m}{2\pi\mathrm{i}\hbar t}}\,\exp\!\left(\frac{\mathrm{i}m(x-x')^{2}}{2\hbar t}\right).
+\]</div>
+<p>(a) Use <span class="math notranslate nohighlight">\(\psi(x,t) = \int K(x,t;x',0)\,\psi(x',0)\,\mathrm{d}x'\)</span> to compute <span class="math notranslate nohighlight">\(\psi(x,t)\)</span> by Gaussian integration over <span class="math notranslate nohighlight">\(x'\)</span>.</p>
+<p>(b) Show that <span class="math notranslate nohighlight">\(\vert\psi(x,t)\vert^{2}\)</span> remains Gaussian with time-dependent width <span class="math notranslate nohighlight">\(\sigma_{t} = \sigma\sqrt{1 + (\hbar t/(m\sigma^{2}))^{2}}\)</span>.</p>
+<p>(c) Identify the spreading time scale <span class="math notranslate nohighlight">\(\tau \sim m\sigma^{2}/\hbar\)</span> and verify it numerically for an electron with <span class="math notranslate nohighlight">\(\sigma = 1\,\text{Å}\)</span>.</p>
+<p><strong>2. Composition test.</strong> Verify the composition property of the free propagator (defined in Problem 1) by direct computation.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\int K(x,t;x_{1},t/2)\,K(x_{1},t/2;x',0)\,\mathrm{d}x_{1}\)</span> by completing the square in <span class="math notranslate nohighlight">\(x_{1}\)</span>, and show that the result equals <span class="math notranslate nohighlight">\(K(x,t;x',0)\)</span>.</p>
+<p>(b) Repeat with two intermediate times to verify <span class="math notranslate nohighlight">\(\iint K(x,t;x_{2},2t/3)\,K(x_{2},2t/3;x_{1},t/3)\,K(x_{1},t/3;x',0)\,\mathrm{d}x_{1}\,\mathrm{d}x_{2} = K(x,t;x',0)\)</span>.</p>
+<p>(c) Argue by induction that any uniform partition of <span class="math notranslate nohighlight">\([0,t]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> slices reproduces the same <span class="math notranslate nohighlight">\(K(x,t;x',0)\)</span>. This is the explicit verification that the time-sliced path integral converges to the propagator.</p>
 <p><strong>3. Free-particle slice action.</strong> Verify Eq. <a class="reference internal" href="#equation-eq-slice-action-free">(67)</a> by evaluating <span class="math notranslate nohighlight">\(S = \int_{t_n}^{t_{n+1}}\tfrac{1}{2}m\dot{x}^2\,\mathrm{d}\tau\)</span> along the straight-line path <span class="math notranslate nohighlight">\(x(\tau) = x_n + (x_{n+1}-x_n)(\tau-t_n)/\delta t\)</span>.</p>
 <p><strong>4. Slice action with a potential.</strong> For the Lagrangian <span class="math notranslate nohighlight">\(L = \tfrac{1}{2}m\dot{x}^2 - V(x)\)</span>, repeat the straight-line estimate over a single slice and show that, to first order in <span class="math notranslate nohighlight">\(\delta t\)</span>,</p>
 <div class="math notranslate nohighlight">

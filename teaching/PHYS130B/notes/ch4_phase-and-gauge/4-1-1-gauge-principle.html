@@ -276,7 +276,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
 </ul>
 </details></li>
@@ -732,10 +732,11 @@ D'_{t}\psi' &amp;= \bigl(\partial_{t} + \mathrm{i}(q/\hbar)(\phi - \partial_{t}\
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Redundancy or symmetry.</strong> A gauge transformation is sometimes called a “local symmetry,” but in modern language it is better described as a <em>redundancy of description</em>.</p>
-<p>(a) Explain the difference between a symmetry (such as rotation) and a redundancy in terms of how each acts on the physical state. Give one operational diagnostic that distinguishes them.</p>
-<p>(b) Two wavefunctions <span class="math notranslate nohighlight">\(\psi\)</span> and <span class="math notranslate nohighlight">\(\psi' = \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol{r})/\hbar}\psi\)</span> describe the same probability density <span class="math notranslate nohighlight">\(\vert\psi\vert^{2}\)</span>. Argue, from the position-basis decoherence picture, why these two should be treated as the <em>same</em> physical state.</p>
-<p>(c) Explain why the slogan “the gauge field is the price we pay for promoting a global symmetry to a local one” is misleading, and propose a better phrasing using the notion of a <em>connection</em>.</p>
+<p><strong>1. Diagnosing redundancy.</strong> For each pair <span class="math notranslate nohighlight">\((\psi, \psi')\)</span> below, compute <span class="math notranslate nohighlight">\(\vert\psi\vert^2\)</span>, <span class="math notranslate nohighlight">\(\arg\psi\)</span>, and <span class="math notranslate nohighlight">\(\langle\hat{p}_x\rangle\)</span>, and decide whether the two states represent the same physical system or different ones.</p>
+<p>(a) <span class="math notranslate nohighlight">\(\psi(x) = \mathrm{e}^{\mathrm{i}kx}\)</span> and <span class="math notranslate nohighlight">\(\psi'(x) = \mathrm{e}^{\mathrm{i}kx+\mathrm{i}\phi_0}\)</span> (constant overall phase).</p>
+<p>(b) <span class="math notranslate nohighlight">\(\psi(x) = \mathrm{e}^{\mathrm{i}kx}\)</span> and <span class="math notranslate nohighlight">\(\psi'(x) = \mathrm{e}^{\mathrm{i}(k+k_0)x}\)</span> (different wavevector).</p>
+<p>(c) <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) = f(\boldsymbol{r})\)</span> and <span class="math notranslate nohighlight">\(\psi'(\boldsymbol{r}) = \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol{r})/\hbar}f(\boldsymbol{r})\)</span>, <em>together with the simultaneous gauge transformation</em> <span class="math notranslate nohighlight">\(\boldsymbol{A}\to\boldsymbol{A}+\nabla\alpha\)</span>.</p>
+<p>State which transformation is a symmetry and which is a redundancy, and identify the operational diagnostic.</p>
 <p><strong>2. One spacetime gauge transform, clearly.</strong> Let <span class="math notranslate nohighlight">\(\psi(\boldsymbol r,t)\)</span> be an arbitrary state (not necessarily a plane wave). Use the single gauge function</p>
 <div class="math notranslate nohighlight">
 \[
@@ -779,15 +780,11 @@ D'_{t}\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}D_{t}\psi.
 <p>(b) Show that <span class="math notranslate nohighlight">\(\nabla\times\nabla\alpha=0\)</span> only away from the origin, so <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> is unchanged on the punctured plane. Then evaluate <span class="math notranslate nohighlight">\(\oint \nabla\alpha\cdot d\boldsymbol{\ell}\)</span> around a loop enclosing the hole and use Stokes/distribution language to explain why a singular magnetic flux <span class="math notranslate nohighlight">\(\Phi_{\mathrm{hole}}\)</span> at the hole is required.</p>
 <p>(c) Explain why this gauge function is not globally single-valued when <span class="math notranslate nohighlight">\(\varphi\to\varphi+2\pi\)</span>. What condition on <span class="math notranslate nohighlight">\(\kappa\)</span> (in terms of <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(\hbar\)</span>) makes the wavefunction phase factor <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}q\alpha/\hbar}\)</span> single-valued after one full loop?</p>
 <p>(d) Summarize the physical picture: outside the hole, local fields are unchanged; at the hole, a singular flux <span class="math notranslate nohighlight">\(\Phi_{\mathrm{hole}}\)</span> carries the nontrivial holonomy. Explain why both statements are needed for a consistent global description.</p>
-<p><strong>5. Minimal-coupling structure.</strong> Starting from the covariant Schrödinger equation <a class="reference internal" href="#equation-eq-cov-schrod">(148)</a>, substitute <span class="math notranslate nohighlight">\(D_{i}=\partial_{i}-\mathrm{i}(q/\hbar)A_{i}\)</span> and <span class="math notranslate nohighlight">\(D_{t}=\partial_{t}+\mathrm{i}(q/\hbar)\phi\)</span>.</p>
-<p>(a) Show that <span class="math notranslate nohighlight">\(-\mathrm{i}\hbar D_{i} = \hat{p}_{i}-qA_{i}\)</span>.</p>
-<p>(b) Show that the equation becomes <a class="reference internal" href="#equation-eq-min-coupling-h">(149)</a>.</p>
-<p>(c) Explain why this derivation fixes the form of the coupling without yet interpreting <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}-q\boldsymbol{A}\)</span> dynamically.</p>
-<p><strong>6. What gauge transformations cannot do.</strong> A particle moves in a <em>static</em> gravitational potential <span class="math notranslate nohighlight">\(V(\boldsymbol{r}) = mgz\)</span>. One might claim: “A spatial gauge transformation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol{r})/\hbar}\psi\)</span> should remove <span class="math notranslate nohighlight">\(V\)</span> from the Schrödinger equation, just as it removes a static <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>.”</p>
+<p><strong>5. What gauge transformations cannot do.</strong> A particle moves in a <em>static</em> gravitational potential <span class="math notranslate nohighlight">\(V(\boldsymbol{r}) = mgz\)</span>. One might claim: “A spatial gauge transformation <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol{r})/\hbar}\psi\)</span> should remove <span class="math notranslate nohighlight">\(V\)</span> from the Schrödinger equation, just as it removes a static <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>.”</p>
 <p>(a) Try to find <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{r})\)</span> that eliminates <span class="math notranslate nohighlight">\(V\)</span>. Where does the attempt fail?</p>
 <p>(b) Allow <span class="math notranslate nohighlight">\(\alpha\)</span> to depend on <span class="math notranslate nohighlight">\(t\)</span>. The only way to cancel <span class="math notranslate nohighlight">\(V\)</span> in the <span class="math notranslate nohighlight">\(q\phi\)</span> slot of the Hamiltonian is <span class="math notranslate nohighlight">\(-\partial_{t}\alpha = -V/q\)</span>, which forces <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{r}, t) = (V(\boldsymbol{r})/q)\,t + g(\boldsymbol{r})\)</span> for some <span class="math notranslate nohighlight">\(g\)</span>. Compute the resulting <span class="math notranslate nohighlight">\(\boldsymbol{A}' = \boldsymbol{A} + \nabla\alpha\)</span> and show it is now <em>time-dependent</em>. Conclude that <span class="math notranslate nohighlight">\(V\)</span> has not been removed — it has been shuffled into a time-dependent vector potential.</p>
 <p>(c) Conclude: gauge transformations can shuffle physical content between <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> but cannot erase it. The energy landscape of an external <span class="math notranslate nohighlight">\(V(\boldsymbol{r})\)</span> is gauge-invariant — gravity does not arise from a <span class="math notranslate nohighlight">\(U(1)\)</span> gauge redundancy.</p>
-<p><strong>7. Second-order bilinear covariance.</strong> Consider the same local phase redundancy</p>
+<p><strong>6. Second-order bilinear covariance.</strong> Consider the same local phase redundancy</p>
 <div class="math notranslate nohighlight">
 \[
 \psi' = \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol r)/\hbar}\psi.
@@ -797,7 +794,7 @@ D'_{t}\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}D_{t}\psi.
 \[
 \partial_{ij}[\psi]\equiv \psi\,\partial_i\partial_j\psi-(\partial_i\psi)(\partial_j\psi).
 \]</div>
-<p>(a) Expand <span class="math notranslate nohighlight">\(\partial_{ij}[\psi']\)</span> explicitly and show that the non-covariant remainder is proportional to <span class="math notranslate nohighlight">\((\partial_i\partial_j\alpha)\psi^2\)</span>.</p>
+<p>(a) Expand <span class="math notranslate nohighlight">\(\partial_{ij}[\psi']\)</span> explicitly and show that the non-covariant remainder equals <span class="math notranslate nohighlight">\((\mathrm{i}q/\hbar)(\partial_i\partial_j\alpha)\psi^2 \cdot \mathrm{e}^{2\mathrm{i}q\alpha/\hbar}\)</span>.</p>
 <p>(b) Introduce a symmetric rank-2 gauge field <span class="math notranslate nohighlight">\(A_{ij}=A_{ji}\)</span> and define</p>
 <div class="math notranslate nohighlight">
 \[
@@ -810,7 +807,7 @@ D'_{t}\psi' = \mathrm{e}^{\mathrm{i}q\alpha/\hbar}D_{t}\psi.
 \]</div>
 <p>(c) Explain why the first two terms must appear together (not separately) to make this construction work.</p>
 <p>(d) Build one gauge-invariant scalar density from <span class="math notranslate nohighlight">\(\mathcal{D}_{ij}[\psi]\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> (for example using index contraction and complex conjugation), and state in one sentence what physical type of constrained motion this kind of second-derivative gauge structure is designed to capture.</p>
-<p><strong>8. Gauge connection on links.</strong> Consider a one-dimensional tight-binding model with hopping between neighboring sites <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(n+1\)</span>:</p>
+<p><strong>7. Gauge connection on links.</strong> Consider a one-dimensional tight-binding model with hopping between neighboring sites <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(n+1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{H}_{\text{hop}}=-t\sum_n \left(U_{n,n+1}\,\hat{c}_{n+1}^{\dagger}\hat{c}_n+\text{h.c.}\right),

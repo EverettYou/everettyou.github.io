@@ -276,7 +276,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-fermis-golden-rule.html">5.2.2 Fermi’s Golden Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
 </ul>
 </details></li>
@@ -696,7 +696,7 @@ K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad 
 \[
 \mathcal{E}_\text{depol}(\hat{\rho}) = (1-p)\hat{\rho} + \frac{p}{2}I
 \]</div>
-<p>Express this in Kraus form using Pauli operators <span class="math notranslate nohighlight">\(\{I, \hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z\}\)</span>.</p>
+<p>Express this in Kraus form using Pauli operators <span class="math notranslate nohighlight">\(\{I, \hat{X}, \hat{Y}, \hat{Z}\}\)</span>.</p>
 <p>(a) Write down all four Kraus operators explicitly.</p>
 <p>(b) Verify the completeness relation <span class="math notranslate nohighlight">\(\sum_k K_k^\dagger K_k = I\)</span>.</p>
 <p>(c) Interpret the action on the <strong>Bloch vector</strong>: if <span class="math notranslate nohighlight">\(\hat{\rho} = \frac{1}{2}(I + \boldsymbol{r} \cdot \hat{\boldsymbol{\sigma}})\)</span> with Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>, show that the output has Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{r}' = (1-p)\boldsymbol{r}\)</span>.</p>
@@ -712,9 +712,9 @@ K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad 
 <p><strong>4. Completely Positive Trace-Preserving (CPTP) Maps.</strong> Consider the map <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> defined by:</p>
 <div class="math notranslate nohighlight">
 \[
-\mathcal{E}(\hat{\rho}) = \frac{1}{2}\hat{\rho} + \frac{1}{2}\sigma^z \hat{\rho} \sigma^z
+\mathcal{E}(\hat{\rho}) = \frac{1}{2}\hat{\rho} + \frac{1}{2}\hat{Z} \hat{\rho} \hat{Z}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma^z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(\hat{Z} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>.</p>
 <p>(a) Show that this map is <strong>linear</strong> and <strong>trace-preserving</strong>.</p>
 <p>(b) Express this map in Kraus form with operators <span class="math notranslate nohighlight">\(K_0\)</span> and <span class="math notranslate nohighlight">\(K_1\)</span>.</p>
 <p>(c) Verify complete positivity by checking that the map remains positive when tensored with identity: test on the maximally entangled state <span class="math notranslate nohighlight">\(\vert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\vert 00\rangle + \vert 11\rangle)\)</span> and confirm the resulting density matrix is positive semidefinite.</p>
@@ -724,7 +724,7 @@ K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad 
 <p>(c) Explain physically: why does amplitude damping not affect the ground state but does affect superpositions?</p>
 <p><strong>6. Composing Channels.</strong> Consider two channels:</p>
 <ul class="simple">
-<li><p><strong>Phase flip</strong>: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{phase}(\hat{\rho}) = (1-q)\hat{\rho} + q\sigma^z\hat{\rho}\sigma^z\)</span></p></li>
+<li><p><strong>Phase flip</strong>: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{phase}(\hat{\rho}) = (1-q)\hat{\rho} + q\hat{Z}\hat{\rho}\hat{Z}\)</span></p></li>
 <li><p><strong>Amplitude damping</strong>: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{amp}\)</span> from Problem 3 with <span class="math notranslate nohighlight">\(\gamma = 0.1\)</span></p></li>
 </ul>
 <p>(a) Express the phase-flip channel in Kraus form.</p>
@@ -732,11 +732,11 @@ K_0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; \sqrt{1-\gamma} \end{pmatrix}, \quad 
 <p>(c) Show that the composed channel is still CPTP. Is the composition <strong>commutative</strong>? Does <span class="math notranslate nohighlight">\(\mathcal{E}_\text{amp} \circ \mathcal{E}_\text{phase} = \mathcal{E}_\text{phase} \circ \mathcal{E}_\text{amp}\)</span>? Explain physically why or why not.</p>
 <p><strong>7. Distinguishing Quantum Noise Channels.</strong> Three noise channels (all with parameter <span class="math notranslate nohighlight">\(p = 0.5\)</span>) act on a qubit:</p>
 <ul class="simple">
-<li><p><strong>Bit-flip</strong> (X noise): <span class="math notranslate nohighlight">\(\mathcal{E}_X(\hat{\rho}) = (1-p)\hat{\rho} + p\sigma^x\hat{\rho}\sigma^x\)</span></p></li>
-<li><p><strong>Phase-flip</strong> (Z noise): <span class="math notranslate nohighlight">\(\mathcal{E}_Z(\hat{\rho}) = (1-p)\hat{\rho} + p\sigma^z\hat{\rho}\sigma^z\)</span></p></li>
+<li><p><strong>Bit-flip</strong> (X noise): <span class="math notranslate nohighlight">\(\mathcal{E}_X(\hat{\rho}) = (1-p)\hat{\rho} + p\hat{X}\hat{\rho}\hat{X}\)</span></p></li>
+<li><p><strong>Phase-flip</strong> (Z noise): <span class="math notranslate nohighlight">\(\mathcal{E}_Z(\hat{\rho}) = (1-p)\hat{\rho} + p\hat{Z}\hat{\rho}\hat{Z}\)</span></p></li>
 <li><p><strong>Depolarizing</strong>: <span class="math notranslate nohighlight">\(\mathcal{E}_\text{depol}(\hat{\rho}) = (1-p)\hat{\rho} + \frac{p}{2}I\)</span> (random Pauli, normalized)</p></li>
 </ul>
-<p>(a) Apply each channel to the input state <span class="math notranslate nohighlight">\(\hat{\rho}_\text{in} = \frac{1}{2}(I + \hat{\sigma}^x)\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\sigma^x\)</span>). Compare the outputs: which channel preserves the most information?</p>
+<p>(a) Apply each channel to the input state <span class="math notranslate nohighlight">\(\hat{\rho}_\text{in} = \frac{1}{2}(I + \hat{X})\)</span> (eigenstate of <span class="math notranslate nohighlight">\(\hat{X}\)</span>). Compare the outputs: which channel preserves the most information?</p>
 <p>(b) <strong>Conceptual</strong>: The depolarizing channel is called “universal noise” because it cannot distinguish the computational basis. Explain why bit-flip and phase-flip channels <strong>can</strong> be distinguished by an appropriate measurement on the output, but depolarizing cannot.</p>
 </section>
 </section>
