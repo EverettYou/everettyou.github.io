@@ -21,6 +21,7 @@ Constants and operators that are not variables use upright (roman) type:
 | Pauli operators | Superscript indices | `\hat{\sigma}^x`, `\hat{\sigma}^y`, `\hat{\sigma}^z` |
 | Pauli matrices (explicit 2x2) | Plain with superscript | `\sigma^x`, `\sigma^y`, `\sigma^z` |
 | Vectorized Pauli | Both | `\hat{\boldsymbol{\sigma}} = (\hat{\sigma}^x, \hat{\sigma}^y, \hat{\sigma}^z)` |
+| Nabla operator | Plain `\nabla` (never `\boldsymbol{\nabla}`) | `\nabla \cdot \boldsymbol{B}`, `\nabla \times \boldsymbol{A}`, `\nabla^2` |
 
 ## Chapter 4 Electromagnetic Units
 

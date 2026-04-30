@@ -19,6 +19,7 @@ Markdown (`.md`), not notebooks. Contains: course title heading, `{list-table}` 
 - No Prompts boxes at x.y level (only x.y.z)
 - No "Brief Introduction" or "Structure of Chapter" headings
 - Topics table links subsection filenames, not URLs
+- `### Key Concepts`: use **itemized bullets** (`- **Term**: description`), not tables. Every section parent follows this format.
 - `## Overview` first, `## Project` last
 
 ## Subsection content arc (x.y.z)
