@@ -37,5 +37,6 @@ We embrace AI and encourage students to use it. The real educational goals:
 
 ## Related rules
 
+- Full rule index: **`README.md`** (this folder)
 - Structure and admonitions: **`content-style.md`**
 - Notebook file layout and cells: **`notebook-architecture.md`**

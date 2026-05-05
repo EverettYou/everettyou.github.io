@@ -2,6 +2,8 @@
 
 Mandatory for any change to Jupyter notebooks in this project.
 
+**Related:** tooling rationale → **`tooling-security.md`**; MyST structure → **`myst-references.md`**; display math layout → **`physics-conventions.md`** § Display Math; derivation depth → **`derivation-quality.md`**.
+
 ## Banned tools
 
 See **`rules/tooling-security.md`** for why `NotebookEdit`, `Edit`, and `Write` are disallowed for agents and what to use instead.

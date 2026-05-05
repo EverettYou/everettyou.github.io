@@ -1,6 +1,6 @@
 # Rule: Content Style and Structure
 
-All notebooks must follow **`notebook-architecture.md`**, **`teaching-philosophy.md`** (course context), **`myst-references.md`**, **`prompt-templates.md`**, and this file.
+All notebooks must follow **`notebook-architecture.md`**, **`teaching-philosophy.md`** (course context), **`myst-references.md`**, **`prompt-preview.md`** (cell-1 prompt **law**), and this file. **MyST shells** for Prompts: **`skills/prompt-designer/TEMPLATES.md`**.
 
 ## Cell Structure
 
@@ -176,9 +176,8 @@ After the vote, do not immediately reveal the answer. If the class is split, ask
 
 ## Banned Patterns
 
-- `---` horizontal rules (causes docutils crash)
-- Nested `:::` admonitions (breaks rendering)
-- `plt.show()` in widgets (use `display(fig)` + `plt.close(fig)`)
+- **MyST structural bans** (`---`, nested `:::`, missing blank lines around fences): **`myst-references.md`** § MyST pitfalls.
+- `plt.show()` in widgets (use `display(fig)` + `plt.close(fig)`; see **`notebook-architecture.md`** § Jupyter widgets)
 - Bare `### Application:` headings (wrap in `example` admonition instead)
 
 ## Content Philosophy
@@ -189,15 +188,32 @@ After the vote, do not immediately reveal the answer. If the class is split, ask
 - Avoid display equations in `### Overview` unless a single anchor equation is strictly necessary for orientation; place formal setup and equations in the next body section (typically `### General Setup`).
 - Key results stay visible; extended derivations go in `:::{dropdown}`
 - Each `###` section is a self-contained conceptual unit
-- End subsections with `### Summary` (3–5 bullets)
+- End subsections with `### Summary` and optional See Also — **§ Summary and See Also** below (bulk tooling: **`skills/summary-designer/SKILL.md`**)
 - Connect new material to prior topics (build the knowledge graph)
+- **Derivation quality:** every derivation dropdown must meet the depth and alignment standards in **`derivation-quality.md`** — no skipped steps, no unmotivated notation, structural diff against `_refs/` after writing
+
+## Summary and See Also (normative)
+
+Single source for subsection **lecture cell** closing material (see also **`myst-references.md`** for link roles and fences).
+
+- **`### Summary`:** bullet-only recap (no prose paragraphs between bullets); **no markdown tables** in Summary (use parallel bullets or shallow sub-bullets for contrasts).
+- **Length:** typically **5–7** bullets (hard max **8**); allow **4** only when the lesson is intentionally short.
+- **Content:** outcomes and meaning—**not** a derivation replay; default **no** `{eq}` / equation-label spam (at most one short anchor if truly needed).
+- **`See Also`:** optional but expected; **separate** MyST admonition immediately after Summary bullets, title exactly `See Also`, line `:class: seealso`, own `:::` fences—**never** merge into Summary as list items.
+- **Links:** `- [Visible title](relative-stem-or-path): one-line gloss` using kebab-case stems per **`myst-references.md`**; **do not** bold-wrap the link token in See Also.
+- **Gloss:** content-forward after `:`; do not restate the link title; prefer **2–4** See Also bullets (up to **5** only at chapter hubs).
+- **Navigation:** prefer **prev / next** along `notes_src/_toc.yml` depth-first order, plus at most **one** lateral link; stem/path forms per **`myst-references.md`**.
+- **Grounding:** each `See Also` bullet must be defensible from that notebook’s lecture text (explicit `§` / in-note links / Summary); prefer **two strong** links over many weak ones.
+- **Common failures:** do **not** flatten `See Also` into Summary bullets; do **not** duplicate the same link line in Summary and in `See Also`; do **not** bold-wrap the link token inside `See Also` list items (`- **[Title](url)**:` is forbidden there).
+
+**Workflow / bulk scripts** for bootstrapping See Also: **`skills/summary-designer/SKILL.md`** (implementation still via **`notebook-writer`**).
 
 ## Ongoing maintenance (narrative and bloat)
 
 - **One thread per lesson**—each section advances the same main question; cut tangents that do not serve it.
 - **Prefer tightening** over adding: merge redundant paragraphs; do not duplicate derivations already standard elsewhere unless this lesson truly needs a self-contained version (then keep it short or in a dropdown).
 - **Worked examples** are welcome when they are **short, single-purpose, and on-topic** (e.g. one explicit calculation, or one “how to apply this definition” walkthrough). Skip examples that introduce new topics or long side stories.
-- **Prompts and homework** should track the lecture actually present—revise them when the lecture is trimmed or refocused (`skills/lecture-content/SKILL.md`).
+- **Prompts and homework** should track the lecture actually present—revise them when the lecture is trimmed or refocused (**`skills/lecture-designer/SKILL.md`**; prompt **law**: **`prompt-preview.md`**; **templates**: **`skills/prompt-designer/TEMPLATES.md`**; workflow: **`skills/prompt-designer/SKILL.md`**).
 
 ## Homework Design
 
@@ -228,8 +244,7 @@ Every problem starts with a **bold number and short title** (1–5 words), follo
 **Examples:**
 
 ```
-**3. Spin precession.** A spin-1/2 particle is placed in a magnetic field $\boldsymbol{B} = B\hat{z}$. Show that $\langle \hat{\sigma}^x 
-angle(t)$ oscillates at the Larmor frequency.
+**3. Spin precession.** A spin-1/2 particle is placed in a magnetic field $\boldsymbol{B} = B\hat{z}$. Show that $\langle \hat{\sigma}^x \rangle(t)$ oscillates at the Larmor frequency.
 
 **5. Landau-Zener transition.** Consider a two-level system with Hamiltonian $\hat{H}(t) = \alpha t\,\hat{\sigma}^z + \Delta\,\hat{\sigma}^x$.
 
@@ -305,7 +320,7 @@ More text` (blank lines above and below)
    - Right: `**5. Stationary Phase and Fermat.** In the short-wavelength limit ($\lambda \to 0$, so $k_0 \to \infty$), argue...`
    - Prevention: Keep `**N. Title.**` to ASCII words only; put every formula in the task after the closing `**` (see **§ Problem format** above).
 
-**Validation:** After editing a homework cell, inspect the raw markdown by comparing rendered output against these rules. `validate_project.py` enforces homework line format (see `scripts/homework_format.py`); run `audit_homework_format.py` for a homework-only listing (`rules/validation.md`).
+**Validation:** After editing a homework cell, inspect the raw markdown by comparing rendered output against these rules. `validate_project.py` enforces homework line format (see `skills/homework-designer/scripts/homework_format.py`); run `skills/homework-designer/scripts/audit_homework_format.py` for a homework-only listing (`rules/validation.md`).
 
 **Comprehensive homework guide:** For quality principles (Transfer, Inversion, Edge cases, Comparison, Connection, Misconception testing), anti-patterns, and the full design process, see **`skills/homework-designer/SKILL.md`**.
 

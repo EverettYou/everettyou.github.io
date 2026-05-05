@@ -8,7 +8,19 @@ import os
 import re
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+def _repo_root() -> str:
+    d = os.path.dirname(os.path.abspath(__file__))
+    while True:
+        if os.path.isdir(os.path.join(d, "notes_src")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
+ROOT = _repo_root()
 
 DUP = re.compile(r"\*\*(\d+)\.\s+(.+?)\.\*\*\s+\2\s*\.\*\*\s*")
 

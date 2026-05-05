@@ -94,114 +94,66 @@ Rare; only with explicit approval. Sketch:
 
 - `myst_footnote_transition: false` in `_config.yml` must stay (docutils).
 - GitHub Pages path rewrites are handled in `build.sh` (human build only).
+
 ## Homework cell formatting issues
 
-Homework cells (cell 3 in subsection notebooks) are frequently corrupted by automated reformatting, tool misuse, or bad merges. This section provides audit checklists and repair patterns.
+Homework cells (cell 3 in subsection notebooks) are often damaged by bad merges or tools.
 
-### Detection checklist
+### Detection
 
-Scan homework cells for these common problems:
+**Authoring rules and human checklist:** **`content-style.md`** § Homework Design (especially § Common formatting errors). Automated homework lines: **`validation.md`** (`validate_project.py`, `skills/homework-designer/scripts/audit_homework_format.py`).
 
-- [ ] **Mismatched bold markers**: Problem lines with unmatched trailing `**` (e.g., `**3. Title.** text **`)
-- [ ] **Missing blank lines around `$$`**: Display math without blank lines above/below (should be `
+### Repair patterns (mechanical)
 
-$$..$$
+Use Bash + Python (`notebook-editing.md`). Define `text_to_source` as in **`notebook-editing.md`**.
 
-`)
-- [ ] **Inline sub-parts**: Sub-parts `(a)`, `(b)` on same line as preceding text or each other (should be on separate lines)
-- [ ] **Lowercase titles**: Problem title first word not capitalized (should be `**N. Capitalized Title.**`)
-- [ ] **Mixed bullet syntax**: Inconsistent `-` and `*` markers in same problem's list
-- [ ] **LaTeX inside `**N. Title.**`**: Dollar signs or `\(` / `\)` inside the bold title span (breaks parsing; titles must be ASCII words only — see **`content-style.md`** § Homework Design § Problem format)
-- [ ] **Lines > 1000 chars**: Collapsed content (headings, admonitions, or multi-line math fused into single line)
-
-If any box is checked, proceed to repair.
-
-### Repair pattern: Mismatched bold markers
-
-When a problem line has a trailing `**` that should not be there:
-
-```python
-# Before: "**3. Spin precession.** A particle is placed in a field. **"
-# After:  "**3. Spin precession.** A particle is placed in a field."
-
-text = ''.join(cell['source'])
-text = re.sub(r'(\*\*\d+\. [^*]+\.\*\*[^
-]*?)\s*\*\*(
-)', r'', text)
-cell['source'] = text_to_source(text)
-```
-
-### Repair pattern: Missing blank lines around display math
-
-When `$$` blocks lack required blank lines:
+**Trailing stray `**` after a problem line** (heuristic—review output):
 
 ```python
 import re
 text = ''.join(cell['source'])
-# Ensure blank line before $$
-text = re.sub(r'([^
-])
-(\$\$)', r'
-
-', text)
-# Ensure blank line after $$
-text = re.sub(r'(\$\$)
-([^
-])', r'
-
-', text)
+text = re.sub(
+    r'^(\*\*\d+\.\s[^\n*]*\*\*[^\n]+?)\s+\*\*\s*$',
+    r'\1',
+    text,
+    flags=re.MULTILINE,
+)
 cell['source'] = text_to_source(text)
 ```
 
-### Repair pattern: Inline sub-parts
-
-When sub-parts `(a)`, `(b)`, etc. are on the same line or fused together:
+**Missing blank lines around `$$`:**
 
 ```python
 import re
 text = ''.join(cell['source'])
-# Separate sub-part labels onto new lines with blank lines before them
-text = re.sub(r'([^
-])\s+(\([a-z]\))', r'
-
-', text)
+text = re.sub(r'([^\n])\n(\$\$)', r'\1\n\n\2', text)
+text = re.sub(r'(\$\$)\n([^\n])', r'\1\n\n\2', text)
 cell['source'] = text_to_source(text)
 ```
 
-### Repair pattern: Collapsed content
-
-When long lines (> 1000 chars) indicate fused headings or admonitions:
+**Sub-parts `(a)`, `(b)` glued to prior text:**
 
 ```python
 import re
 text = ''.join(cell['source'])
-# Break headings from preceding text
-text = re.sub(r'([^
-])(#+\s)', r'
+text = re.sub(r'([^\n])\s+(\([a-z]\))', r'\1\n\n\2', text)
+cell['source'] = text_to_source(text)
+```
 
-', text)
-# Break admonition openings from preceding text
-text = re.sub(r'([^
-])(:::\{)', r'
+**Collapsed / fused lines** (same idea as § Collapsed content recovery):
 
-', text)
-# Break math blocks from adjacent text
-text = re.sub(r'([^
-$])
-?(\$\$)', r'
-
-', text)
+```python
+import re
+text = ''.join(cell['source'])
+text = re.sub(r'([^\n])(#{2,4}\s)', r'\1\n\n\2', text)
+text = re.sub(r'([^\n])(:::\{)', r'\1\n\n\2', text)
+text = re.sub(r'([^\n$])\n?(\$\$)', r'\1\n\n\2', text)
 cell['source'] = text_to_source(text)
 ```
 
 ### Workflow
 
-1. **Detect**: Run the checklist above on homework cells in question.
-2. **Repair**: Apply the appropriate repair pattern(s) using Bash + Python (`notebook-editing.md`).
-3. **Validate**: Run `safe_edit.py validate <path>` on the edited cell to confirm fixes.
-4. **Spot-check**: Visually inspect the cell in Jupyter to ensure rendered output matches the intended format (see **`content-style.md`** § Homework Design).
-
-### Prevention
-
-Follow **`content-style.md`** § Homework Design § Problem format and § Common formatting errors to avoid when authoring or refactoring homework cells. Always use programmatic edits (Bash + Python) for bulk changes to avoid tool-induced corruption.
-
+1. Confirm the issue against **`content-style.md`**.
+2. Apply the smallest repair; re-read the cell.
+3. Validate per **`validation.md`**.
+4. Prefer evolving **`content-style.md`** for new homework anti-patterns rather than duplicating checklists here.

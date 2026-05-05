@@ -2,7 +2,7 @@
 """Replace See Also bullets in the 34 notebooks that were TOC-auto-filled.
 
 Content-informed links + glosses (plain `- [Title](path): gloss` format).
-Run from teaching/PHYS130B/.
+Run from `teaching/PHYS130B/`. Edit the `CURATED` map in this file, then run this script (see `skills/summary-designer/SKILL.md`).
 """
 from __future__ import annotations
 
@@ -11,7 +11,15 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+
+def _repo_root() -> Path:
+    for d in Path(__file__).resolve().parents:
+        if (d / "notes_src").is_dir():
+            return d
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
+ROOT = _repo_root()
 SEE_ALSO_START = re.compile(r"(?m)^:::\{admonition\}\s+See Also\s*$")
 
 # Multiline: only the list lines (no admonition fences).

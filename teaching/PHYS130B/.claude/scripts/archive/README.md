@@ -12,4 +12,4 @@ These were used for past bulk migrations or repairs. **Do not run** unless you a
 | `update_section_parents.py` | Section parent structure update |
 | `unify_section_parents.py` | Section parent unification |
 
-Active tooling: `../validate_project.py` and `../../skills/notebook-writer/scripts/safe_edit.py`.
+Active tooling: `../validate_project.py`, `../README.md` (script index), `../../skills/notebook-writer/scripts/safe_edit.py`, and bulk helpers under `../../skills/{homework,summary}-designer/scripts/` (see each skill’s `scripts/README.md`).

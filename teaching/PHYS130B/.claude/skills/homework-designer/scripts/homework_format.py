@@ -1,6 +1,7 @@
 """
 Homework cell checks vs .claude/rules/content-style.md § Homework Design.
-Used by validate_project.py and audit_homework_format.py.
+
+Used by `.claude/scripts/validate_project.py` and `audit_homework_format.py` (this folder).
 """
 
 from __future__ import annotations

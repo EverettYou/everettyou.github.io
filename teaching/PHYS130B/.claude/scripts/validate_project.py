@@ -7,7 +7,7 @@ Examples:
   python3 .claude/scripts/validate_project.py --scope ch2
   python3 .claude/scripts/validate_project.py --scope 2-1-1-tensor-product
   python3 .claude/scripts/validate_project.py --docs-only
-  python3 .claude/scripts/audit_homework_format.py   # homework-only report
+  python3 .claude/skills/homework-designer/scripts/audit_homework_format.py   # homework-only report
 """
 
 from __future__ import annotations
@@ -22,8 +22,11 @@ from dataclasses import dataclass
 from typing import Iterable
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if _SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, _SCRIPT_DIR)
+_HOMEWORK_SCRIPTS = os.path.normpath(
+    os.path.join(_SCRIPT_DIR, "..", "skills", "homework-designer", "scripts")
+)
+if _HOMEWORK_SCRIPTS not in sys.path:
+    sys.path.insert(0, _HOMEWORK_SCRIPTS)
 from homework_format import check_homework_cell  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

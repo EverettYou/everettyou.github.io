@@ -16,6 +16,10 @@ Lecture notes are **mature**. Default stance: **preserve structure and physics**
 - Large-scale reorganization without human sign-off.
 - Replacing correct, stable content with speculative rewrites.
 
+## Derivation edits
+
+When editing or auditing a derivation, follow the full procedure in **`derivation-quality.md`**: read `_refs/` first, outline the logical chain, show every intermediate step, and structurally diff against the reference afterward. This rule does not license wholesale rewrites — it applies to the specific derivation being touched.
+
 ## When to stop and escalate
 
 - Ambiguous physics or conflicting sources → note in `feedback.md` or ask the instructor; do not guess.

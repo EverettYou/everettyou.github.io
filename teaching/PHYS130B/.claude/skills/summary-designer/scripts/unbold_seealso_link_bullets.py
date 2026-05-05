@@ -8,6 +8,13 @@ import json
 import re
 from pathlib import Path
 
+def _repo_root() -> Path:
+    for d in Path(__file__).resolve().parents:
+        if (d / "notes_src").is_dir():
+            return d
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
 SEE_ALSO_START = re.compile(r"(?m)^:::\{admonition\}\s+See Also\s*$")
 # List item: optional indent, - , space, **[link](url)**: rest
 BOLD_LINK_ITEM = re.compile(
@@ -76,7 +83,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("paths", nargs="*", help="Notebooks (default: all under notes_src)")
     args = ap.parse_args()
-    root = Path(__file__).resolve().parents[2]
+    root = _repo_root()
     if args.paths:
         paths = [Path(p) if Path(p).is_absolute() else root / p for p in args.paths]
     else:

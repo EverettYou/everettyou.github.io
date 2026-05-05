@@ -77,6 +77,8 @@ Two notation systems coexist for qubit operators and states. **Never mix them wi
 
 ## Display Math
 
+**Cross-referencing** labeled equations in prose: `` {eq}`label` `` and MyST figure/table conventions → **`myst-references.md`**.
+
 - `$$...$$` blocks MUST have blank lines above and below
 - Do NOT put blank lines inside a `$$...$$` block (equation lines must be contiguous)
 - Label important equations: `$$ E = mc^2 $$ (eq-section-description)`

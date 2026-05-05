@@ -1,24 +1,31 @@
 ---
 name: phys130b-homework-designer
-description: Design, audit, and rewrite homework problems for PHYS130B lecture notes. Enforces formatting rules, quality principles, and AI-era pedagogy. Use when creating new problems, reviewing existing homework, or fixing formatting issues.
+description: Design and audit homework problems for PHYS130B—quality, formatting specs, AI-era pedagogy; implementation via notebook-writer. Use for new problems, homework review, or formatting fix specs.
 ---
 
-# Skill: Homework Designer (PHYS130B)
+# Skill: Homework designer (PHYS130B)
 
-Unified reference for **designing**, **auditing**, and **formatting** homework problems in PHYS130B quantum mechanics lecture notes. Consolidates rules from `content-style.md`, `teaching-philosophy.md`, `prompt-templates.md`, and `physics-conventions.md`.
+## Role in the stack
+
+**Content designer:** produce problem text, ordering, and **formatting instructions** (or full cell-3 markdown) for **`notebook-writer`** to apply. **Do not** edit `.ipynb` JSON directly. **Do not** run validators. Proof / “show that” **chain** correctness: **`derivation-designer`** before writer implements heavy proofs.
+
+**Homework cell layout:** **`TEMPLATES.md`** (this folder)—match `rules/content-style.md` § Homework and a **gold** subsection homework cell.
+
+Workflow for **designing** and **auditing** homework. **Law** (counts, cell placement, banned patterns): **`rules/content-style.md`** § Homework + related bullets; notation and math layout: **`rules/physics-conventions.md`**. This skill adds **distribution, quality principles, and audit recipes**—when something conflicts, the **rule file** wins.
 
 ## Activation (auto)
 
-- Writing new homework problems for a subsection notebook.
+- Designing new homework problems for a subsection notebook (deliver markdown for **`notebook-writer`**).
 - Reviewing or auditing existing homework for quality, formatting, or alignment with lecture content.
-- Fixing homework formatting issues (bold markers, sub-parts, display math spacing, etc.).
+- Specifying fixes for homework formatting (bold markers, sub-parts, display math spacing, etc.).
 - Responding to feedback items about homework quality or style.
+- **Phase C** (style) pass in **`.claude/README.md`** / **`skills/maintenance-phases/SKILL.md`** when the homework cell needs a deep audit or rewrite.
 
 ## Non-goals
 
-- Physics correctness of "show that" targets or derivation endpoints — hand off to **`science-reviewer`**.
+- Mathematical correctness of **proof-style** “show that” chains — hand off to **`derivation-designer`** (this skill owns problem **design**, not step-by-step proof QC).
 - JSON / cell-level notebook editing mechanics — hand off to **`notebook-writer`**.
-- Lecture content changes — hand off to **`lecture-content`**.
+- Lecture narrative changes outside the homework cell — hand off to **`lecture-designer`**.
 
 ---
 
@@ -191,8 +198,8 @@ When creating or revising homework for a subsection notebook:
 2. **Map one problem per major concept.** Ensure each problem satisfies at least one quality principle from §2.
 3. **Check against anti-patterns** (§3). If a drafted problem matches an anti-pattern, redesign it.
 4. **Format** according to §4. Use the problem format template.
-5. **Verify physics** of "show that" targets — if unsure, flag for `science-reviewer` or note in `feedback.md`.
-6. **Validate** after editing: run `python3 .claude/scripts/validate_project.py --scope <stem>` and `python3 .claude/scripts/audit_homework_format.py`.
+5. **Proof-heavy “show that”** statements — get **`derivation-designer`** sign-off in the design report before **`notebook-writer`** implements; if unsure, use `feedback.md`.
+6. **Do not run validators** here—**`notebook-writer`** runs **`rules/validation.md`** after it applies your cell-3 markdown.
 
 ### Problem mix guidance
 
@@ -226,30 +233,23 @@ When reviewing existing homework:
 - [ ] At least 2–3 problems are solvable using only lecture content (no external knowledge needed)?
 - [ ] Display math has blank lines above and below `$$`?
 - [ ] No trailing `**` or other formatting errors (§5)?
-- [ ] Physics of "show that" targets verified?
+- [ ] Proof-style “show that” targets covered by **`derivation-designer`** report when non-trivial?
 
 ---
 
-## 8. Validation
+## 8. Validation (notebook-writer only)
 
-After editing homework cells, run:
-
-```bash
-# Single notebook
-python3 .claude/skills/notebook-writer/scripts/safe_edit.py validate <path.ipynb>
-
-# Full homework format audit
-python3 .claude/scripts/audit_homework_format.py
-
-# Scoped validation
-python3 .claude/scripts/validate_project.py --scope <stem>
-```
-
-The validators check: homework line format (bold titles, sub-parts), `$$` spacing, banned patterns, notation consistency, and control character corruption.
+This skill does not edit notebooks **and does not run** `validate_project.py` / `safe_edit.py validate`. After **`notebook-writer`** applies your homework cell, **it** runs validators per **`rules/validation.md`**.
 
 ---
 
-## 9. LaTeX Conventions in Homework
+## 9. Automation scripts (`scripts/`)
+
+Homework-specific CLIs and the **`homework_format`** library live beside this skill in **`scripts/`**. **When to use which:** **`scripts/README.md`**. **`notebook-writer`** executes them; you **specify** the command (e.g. after a refactor that might have duplicated problems, run **`check_duplicate_homework.py`**; for line-level homework reports before a big fix, **`audit_homework_format.py`**).
+
+---
+
+## 10. LaTeX Conventions in Homework
 
 Follow `rules/physics-conventions.md`:
 - Vectors: `\boldsymbol{v}` (not `\vec{v}`)
@@ -263,12 +263,14 @@ Follow `rules/physics-conventions.md`:
 
 ## References
 
+- **`scripts/README.md`** — homework automation entry point
 - `rules/content-style.md` § Homework Design (canonical formatting rules)
 - `rules/teaching-philosophy.md` (course strategy, role of homework)
 - `rules/physics-conventions.md` (LaTeX notation)
-- `rules/prompt-templates.md` (checklist for new notebooks)
-- `rules/validation.md` (which validators to run)
+- `skills/lecture-designer/TEMPLATES.md` (new-notebook integration checklist)
+- **`TEMPLATES.md`** (this folder) — problem MyST layout
+- `rules/validation.md` (validators are executed by **`notebook-writer`**, not this skill)
 - `rules/notebook-editing.md` (safe JSON editing)
-- `skills/lecture-content/SKILL.md` (content review context)
-- `skills/science-reviewer/SKILL.md` (physics verification)
+- `skills/lecture-designer/SKILL.md` (lecture-wide context)
+- `skills/derivation-designer/SKILL.md` (proof / derivation chain QC)
 - **`_refs/`** (project root): Professor's original lecture notes and `HOMEWORK.md` (original homework problems). Read the relevant `_refs/` file before designing problems to ensure alignment with the professor's presentation and notation. See `CLAUDE.md` § "Reference materials" for the chapter-to-file mapping.

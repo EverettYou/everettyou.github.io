@@ -7,8 +7,8 @@ and the original was never removed. Compares normalized problem bodies across
 every subsection `.ipynb` (cell 3) and reports high-similarity pairs.
 
 Usage:
-    python3 .claude/scripts/check_duplicate_homework.py
-    python3 .claude/scripts/check_duplicate_homework.py --threshold 0.75
+    python3 .claude/skills/homework-designer/scripts/check_duplicate_homework.py
+    python3 .claude/skills/homework-designer/scripts/check_duplicate_homework.py --threshold 0.75
 
 Recommended as part of post-refactor validation when a problem was intentionally
 moved between notebooks, and as a periodic audit.
@@ -25,7 +25,19 @@ import sys
 from collections import defaultdict
 from difflib import SequenceMatcher
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+def _repo_root() -> str:
+    d = os.path.dirname(os.path.abspath(__file__))
+    while True:
+        if os.path.isdir(os.path.join(d, "notes_src")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
+ROOT = _repo_root()
 NOTEBOOK_GLOB = os.path.join(ROOT, "notes_src", "**", "*.ipynb")
 
 

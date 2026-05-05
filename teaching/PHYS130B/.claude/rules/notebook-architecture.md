@@ -32,7 +32,7 @@ Within `## Lecture Notes` (cell 2):
 - `:::{tab-set}`: compare alternatives (e.g., Schrödinger vs Heisenberg picture)
 - Discussion (`dropdown tip`) inline where debate helps
 - Application blocks in `example` admonitions
-- `### Summary`: 3–5 recap bullets
+- `### Summary` (+ See Also when present): **`skills/summary-designer/SKILL.md`** + **`skills/summary-designer/TEMPLATES.md`**
 
 ## Figures and layout
 

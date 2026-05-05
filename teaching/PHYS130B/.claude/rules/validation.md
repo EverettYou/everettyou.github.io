@@ -1,5 +1,7 @@
 # Rule: Validation (agents)
 
+**Single source of truth:** All agent validation **commands**, scopes, and **build / no-build policy** live in this file. `CLAUDE.md` states only the high-level stance; `README.md` points here—do not duplicate command tables elsewhere.
+
 **Policy:** `.claude/settings.json` does **not** define a `build_command` for agents. Full Jupyter Book builds are **human-only** (local machine); sandboxes often error or block them.
 
 ## What agents run
@@ -11,9 +13,9 @@
 | One chapter | `python3 .claude/scripts/validate_project.py --scope ch3` |
 | One file by stem | `python3 .claude/scripts/validate_project.py --scope 6-1-1-mixed-states` |
 | Rules/docs consistency only | `python3 .claude/scripts/validate_project.py --docs-only` |
-| Homework-format report only (subsection cell 3) | `python3 .claude/scripts/audit_homework_format.py` |
+| Homework-format report only (subsection cell 3) | `python3 .claude/skills/homework-designer/scripts/audit_homework_format.py` |
 
-`validate_project.py` checks corruption patterns, cell structure, **subsection content arc** (`## Lecture Notes` must be immediately followed by `### Overview` — no preface prose), MyST `$$` spacing, banned patterns, notation heuristics, Chapter 4 SI-only electromagnetic unit markers, Chapter 4 phase/flux/scalar-potential/azimuth notation, and **homework problem lines** in subsection notebooks (`content-style.md` § Homework Design — shared logic in `scripts/homework_format.py`).
+`validate_project.py` checks corruption patterns, cell structure, **subsection content arc** (`## Lecture Notes` must be immediately followed by `### Overview` — no preface prose), MyST `$$` spacing, banned patterns, notation heuristics, Chapter 4 SI-only electromagnetic unit markers, Chapter 4 phase/flux/scalar-potential/azimuth notation, and **homework problem lines** in subsection notebooks (`content-style.md` § Homework Design — shared logic in `skills/homework-designer/scripts/homework_format.py`).
 
 ## What agents do **not** run for validation
 

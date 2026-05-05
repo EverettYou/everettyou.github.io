@@ -21,6 +21,13 @@ SEE_ALSO_START = re.compile(r"(?m)^:::\{admonition\}\s+See Also\s*$")
 SUMMARY_HDR = re.compile(r"(?m)^###\s+Summary$")
 
 
+def _repo_root() -> Path:
+    for d in Path(__file__).resolve().parents:
+        if (d / "notes_src").is_dir():
+            return d
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
 def text_to_source(text: str) -> list[str]:
     lines = text.split("\n")
     source = []
@@ -127,7 +134,7 @@ def main() -> int:
         "notes_src/ch6_quantum-foundations/6-2-3-bell-inequality.ipynb",
     ]
     paths = [Path(p) for p in (args.paths or default)]
-    root = Path(__file__).resolve().parents[2]
+    root = _repo_root()
     total_removed = 0
     for rel in paths:
         p = rel if rel.is_absolute() else root / rel

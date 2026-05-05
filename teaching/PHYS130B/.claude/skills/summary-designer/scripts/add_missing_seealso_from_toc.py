@@ -13,7 +13,15 @@ from pathlib import Path
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]
+
+def _repo_root() -> Path:
+    for d in Path(__file__).resolve().parents:
+        if (d / "notes_src").is_dir():
+            return d
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
+ROOT = _repo_root()
 NOTES = ROOT / "notes_src"
 TOC_PATH = NOTES / "_toc.yml"
 TITLE_RE = re.compile(r"(?m)^#\s+(.+)$")

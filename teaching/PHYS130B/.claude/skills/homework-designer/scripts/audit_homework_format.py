@@ -2,7 +2,7 @@
 """
 Homework audit CLI (subsection notebooks, cell 3). Same rules as validate_project homework checks.
 
-  python3 .claude/scripts/audit_homework_format.py
+  python3 .claude/skills/homework-designer/scripts/audit_homework_format.py
 """
 
 from __future__ import annotations
@@ -18,7 +18,20 @@ if SCRIPT_DIR not in sys.path:
 
 from homework_format import check_homework_cell  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _repo_root() -> str:
+    d = os.path.dirname(os.path.abspath(__file__))
+    while True:
+        if os.path.isdir(os.path.join(d, "notes_src")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    raise RuntimeError("Could not locate repo root (notes_src/)")
+
+
+ROOT = _repo_root()
 NOTEBOOK_GLOB = os.path.join(ROOT, "notes_src", "**", "*.ipynb")
 
 
