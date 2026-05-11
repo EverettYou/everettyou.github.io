@@ -32,7 +32,6 @@ from homework_format import check_homework_cell  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 NOTEBOOK_GLOB = os.path.join(ROOT, "notes_src", "**", "*.ipynb")
 RULES_PATH = os.path.join(ROOT, ".claude", "rules", "physics-conventions.md")
-MYST_RULES_PATH = os.path.join(ROOT, ".claude", "rules", "myst-references.md")
 
 
 @dataclass
@@ -580,6 +579,10 @@ def _check_ch4_si_units(path: str, text: str, label: str) -> list[Issue]:
             re.compile(r"\\frac\{\\hbar\}\{q\}\\nabla\\alpha|\\hbar/q\s*\\nabla\\alpha|\\psi\s*\\to\s*\\mathrm\{e\}\^\{\\mathrm\{i\}\\alpha"),
             r"uses a dimensionless gauge-function convention; Chapter 4 uses dimensionful alpha: psi -> exp(i q alpha/hbar) psi and A -> A + grad alpha",
         ),
+        (
+            re.compile(r"\\chi(?![A-Za-z])"),
+            r"uses \chi as a gauge / rephasing function symbol; Chapter 4 uses \alpha for every gauge function (EM, Berry parameter-space rephasing, monopole transition). See physics-conventions.md § Chapter 4 EM Units.",
+        ),
     ]
     for pattern, message in checks:
         # In the 4.4 spin/monopole sequence we adopt the flux-defined magnetic
@@ -777,27 +780,28 @@ def detect_rule_flags(text: str) -> dict[str, bool]:
 
 
 def validate_rule_docs() -> list[Issue]:
+    """Check that `physics-conventions.md` carries each ``$$``-spacing rule signal.
+
+    The single source of truth for display-math layout is
+    ``rules/physics-conventions.md`` § Display Math;
+    ``rules/myst-references.md`` defers to it (see ``rules/README.md``).
+    Only the source-of-truth file is scanned here.
+    """
     issues: list[Issue] = []
-    for p in (RULES_PATH, MYST_RULES_PATH):
-        if not os.path.exists(p):
-            issues.append(Issue(".claude docs", f"missing required file: {os.path.relpath(p, ROOT)}"))
-            return issues
+    if not os.path.exists(RULES_PATH):
+        issues.append(
+            Issue(".claude docs", f"missing required file: {os.path.relpath(RULES_PATH, ROOT)}")
+        )
+        return issues
 
     with open(RULES_PATH, encoding="utf-8") as f:
         rules_text = f.read()
-    with open(MYST_RULES_PATH, encoding="utf-8") as f:
-        myst_text = f.read()
 
     rules_flags = detect_rule_flags(rules_text)
-    myst_flags = detect_rule_flags(myst_text)
 
     for key in ("blank_lines_outside", "no_blank_inside", "split_required", "align_forbidden"):
         if not rules_flags[key]:
             issues.append(Issue("rules/physics-conventions.md", f"missing rule signal: {key}"))
-        if not myst_flags[key]:
-            issues.append(Issue("rules/myst-references.md", f"missing rule signal: {key}"))
-        if rules_flags[key] != myst_flags[key]:
-            issues.append(Issue(".claude docs", f"rule mismatch between docs: {key}"))
 
     return issues
 
@@ -842,7 +846,7 @@ def main() -> int:
     if not args.docs_only:
         print(f"Notebooks checked: {notebook_count}")
     if not args.notebooks_only:
-        print("Rule docs checked: .claude/rules/physics-conventions.md, .claude/rules/myst-references.md")
+        print("Rule docs checked: .claude/rules/physics-conventions.md")
 
     if all_issues:
         print(f"Total issues: {len(all_issues)}")

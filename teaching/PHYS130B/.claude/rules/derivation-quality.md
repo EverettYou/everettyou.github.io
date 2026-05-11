@@ -2,6 +2,25 @@
 
 This rule codifies lessons learned from recurring quality gaps between the lecture notes and the professor's original reference notes (`_refs/`). It applies to every derivation, worked example, and physics argument in the notebooks.
 
+## Scope of `_refs/` alignment
+
+Two layers — keep them separate:
+
+- **Math derivation and physics argument** (the *content* of each step): follow `_refs/` closely. Notation, sign conventions, intermediate algebraic steps, the chain of building-block identities, the physical interpretation of each move — these track the professor's reference. Step counts and granularity match `_refs/` line for line (see § Mandatory detail level).
+- **Lecture flow and narrative storyline** (the *order* in which concepts are introduced): the new lecture is **free** to design its own sequence. Section ordering, which concept motivates which, when each object enters, what bridges connect sections — these are pedagogical choices the new note makes; they are **not** required to mirror `_refs/`.
+
+A derivation that is technically correct against `_refs/` but **pulls concepts in from later sections** of the new lecture (objects the body has not yet introduced at the point the dropdown appears) is a rule violation, even if those concepts appear earlier in the reference. See § Scope and pedagogical fit and the corresponding anti-pattern below.
+
+## Scope and pedagogical fit
+
+Two scope rules — both required:
+
+1. **One focus per derivation.** Every derivation must isolate **a single point**: one identity, one chain-rule application, one commutator evaluation, one limiting argument. Combining unrelated steps into a single dropdown ("derive X *and* show Y *and also* establish Z") dilutes pedagogical purpose and almost always pulls the derivation out of context.
+
+2. **Stay in context with the surrounding lecture.** A derivation may **only** invoke concepts, definitions, and notation that the surrounding lecture body has *already* introduced by the point at which the dropdown appears. If a notion (e.g. covariant derivative, gauge potential, connection field) is introduced in a later section, do not name or use it inside an earlier derivation. The derivation can *motivate* the next section without preempting it — for example, by closing with "absorbing this requires a structure built next" rather than by writing down the structure itself.
+
+These rules separate the *flow of the lecture* (which the new note designs freely) from the *math and physics of each step* (which follows `_refs/`). "Adding detail" to a derivation always means slicing existing steps finer for student readability — never expanding the derivation's topical scope (see § Mandatory detail level).
+
 ## Root causes of quality gaps
 
 Five failure modes have been identified. Every one has occurred multiple times in this project; none is hypothetical.
@@ -20,7 +39,7 @@ Five failure modes have been identified. Every one has occurred multiple times i
 
 ### Before writing
 
-1. **Read the corresponding `_refs/` file.** Locate the matching section. Note its logical structure: what identities does it state first? What building-block results does it derive before the main result? What intermediate steps does it show?
+1. **Read the corresponding `_refs/` file.** Locate the matching section. Note its **logical structure**: what identities does it state first? What building-block results does it derive before the main result? What intermediate steps does it show? This sets the math content (chain of identities) and physics argument the new derivation must reproduce. **Do not** copy the reference's *narrative position* — section ordering, which idea motivates which, when each object enters — into the new note. The new lecture is free to sequence sections differently, and the derivation must respect the new lecture's flow (see § Scope and pedagogical fit). If `_refs/` derives the same identity *after* introducing an object that the new lecture introduces *later*, drop that object from the derivation rather than dragging it forward.
 
 2. **Outline the logical chain.** Before writing any LaTeX, write a numbered list (for yourself, not in the notebook) of the key steps: "Step 1: state commutator identity. Step 2: evaluate $[\hat{\pi}, \hat{x}]$ from $[\hat{p}, \hat{x}]$. Step 3: …" Each step must follow from the previous one without hidden algebra.
 
@@ -65,6 +84,8 @@ Short derivations (< 10 lines) are fine when the result genuinely follows in 2�
 
 The professor's original lecture notes (`_refs/`) set the **binding standard** for how many intermediate algebraic steps a derivation must show. The lecture notes must match that level of detail line for line — not compress it, summarize it, or "streamline" it.
 
+**What "match `_refs/`" means — and what it does not.** The line counts below set the *depth* of intermediate algebra each derivation must expose: how many product-rule applications, commutator expansions, or substitutions are visible, written for a student who needs every step. They do **not** set the *scope* of the derivation. *Adding detail* means making each step of the same focused calculation more student-friendly — slicing a 2-line jump into its 4 underlying lines — never importing additional building-block results, downstream conclusions, or material from later sections of the new lecture (see § Scope and pedagogical fit). A derivation that grows past its single focus, or that names objects the surrounding body has not yet introduced, is too long even if it nominally matches a `_refs/` line count.
+
 **Concrete calibration from `_refs/PhaseAndGauge.md`:**
 
 - **Canonical commutation relation** $[\hat{x}_i, \hat{p}_j] = \mathrm{i}\hbar\delta_{ij}$: 4 displayed lines (act on test function $\psi$, expand product rule, cancel, conclude).
@@ -91,6 +112,8 @@ The professor's original lecture notes (`_refs/`) set the **binding standard** f
 | A prefactor ($1/A$, $1/V$, $\sum_n$) appears without a definition step | Define both the per-particle and collective symbols before the derivation. |
 | Writing the final result first, then backfilling a "derivation" | Write forward: premises → building blocks → assembly → result. |
 | "By the Heisenberg equation, $\dot{O} = [O,H]/(i\hbar)$" for an operator with explicit $t$-dependence | State the full Heisenberg equation including $\partial_t O$, and explain why that term is present. |
+| **Importing concepts the lecture body has not yet introduced** (e.g. naming covariant derivatives, gauge potentials, or other later-section objects in an earlier dropdown) | Rewrite using only what the surrounding body has already established at this point. Close with a forward-pointer ("absorbing this requires a structure built next") if a tease is helpful, but **do not** name or use the not-yet-introduced object. If the derivation genuinely needs the later object, move the dropdown to that section. |
+| **Expanding scope under the banner of "more detail"** (turning a focused single-point derivation into a multi-topic chain that imports follow-on results) | Slice each existing step into finer student-friendly steps, but keep the derivation's topical focus unchanged. New topics → separate dropdowns (or no dropdown). |
 
 ## Relation to other rules
 

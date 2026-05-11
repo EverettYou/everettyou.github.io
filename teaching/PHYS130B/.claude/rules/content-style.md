@@ -179,6 +179,7 @@ After the vote, do not immediately reveal the answer. If the class is split, ask
 - **MyST structural bans** (`---`, nested `:::`, missing blank lines around fences): **`myst-references.md`** § MyST pitfalls.
 - `plt.show()` in widgets (use `display(fig)` + `plt.close(fig)`; see **`notebook-architecture.md`** § Jupyter widgets)
 - Bare `### Application:` headings (wrap in `example` admonition instead)
+- **References to agent / maintenance files** in cell content (paths under `.claude/`, `_refs/`, `progress.md`, `feedback.md`, `CLAUDE.md`, repo-root `README.md`, or section / heading names that exist only inside those files): **`myst-references.md`** § Student-facing scope.
 
 ## Content Philosophy
 
