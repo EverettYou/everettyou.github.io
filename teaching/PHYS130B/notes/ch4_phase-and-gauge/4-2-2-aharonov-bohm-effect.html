@@ -532,7 +532,7 @@
 <ul class="simple">
 <li><p>Describe the Aharonov-Bohm experimental setup. Why does a phase shift occur despite zero magnetic field outside the solenoid?</p></li>
 <li><p>How does the Aharonov-Bohm effect demonstrate that the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> has physical meaning in quantum mechanics?</p></li>
-<li><p>Derive the condition for flux quantization from the requirement that the wavefunction be single-valued around a closed loop.</p></li>
+<li><p>Why does single-valuedness of the superconducting order parameter quantize the enclosed magnetic flux into integer multiples of <span class="math notranslate nohighlight">\(\Phi_0 = h/q\)</span>? What is the role of the rigid-condensate identification <span class="math notranslate nohighlight">\(\nabla\Theta = (q/\hbar)\boldsymbol{A}\)</span> in connecting phase winding to magnetic flux?</p></li>
 <li><p>What is the general flux quantum <span class="math notranslate nohighlight">\(\Phi_0 = h/q\)</span>? How do <span class="math notranslate nohighlight">\(q=e\)</span> and <span class="math notranslate nohighlight">\(q=2e\)</span> appear in different materials?</p></li>
 <li><p>How do superconducting devices like SQUIDs use flux quantization to measure magnetic fields with extraordinary sensitivity?</p></li>
 </ul>
@@ -559,44 +559,102 @@
 <p>For a solenoid of radius <span class="math notranslate nohighlight">\(R\)</span> with internal field <span class="math notranslate nohighlight">\(B\)</span> along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{z}}\)</span>, the vector potential outside (<span class="math notranslate nohighlight">\(r &gt; R\)</span>) in cylindrical coordinates is</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{A}_\text{out} = \frac{\Phi}{2\pi r}\hat{\boldsymbol{\theta}}
+\boldsymbol{A}_\text{out} = \frac{\Phi}{2\pi r}\hat{\boldsymbol{\varphi}}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi = \pi R^2 B\)</span> is the enclosed flux. The curl vanishes (<span class="math notranslate nohighlight">\(\nabla \times \boldsymbol{A} = 0\)</span>), yet <span class="math notranslate nohighlight">\(\boldsymbol{A} 
-eq 0\)</span>. This is possible because the region is not simply connected—<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> cannot be written as a gradient globally.</p>
-<div class="important admonition">
-<p class="admonition-title">Aharonov-Bohm Phase Shift</p>
-<p>A charged particle traveling around a solenoid acquires a phase shift:</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta\Phi_{\mathrm{AB}} = \frac{q}{\hbar}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \frac{q\Phi}{\hbar}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the total magnetic flux enclosed by the path. This phase shift occurs despite <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> along the particle’s trajectory.</p>
-</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi = \pi R^2 B\)</span> is the enclosed flux. The curl vanishes (<span class="math notranslate nohighlight">\(\nabla \times \boldsymbol{A} = 0\)</span>), yet <span class="math notranslate nohighlight">\(\boldsymbol{A} \neq 0\)</span>. This is possible because the region is not simply connected—<span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> cannot be written as a gradient globally.</p>
 </section>
 <section id="two-path-interference">
 <h3>Two-Path Interference<a class="headerlink" href="#two-path-interference" title="Link to this heading">#</a></h3>
-<p>In quantum mechanics, a charged particle accumulates phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{path}}[\mathcal{C}] = (q/\hbar)\int_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span> from minimal coupling (<span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}} \to \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span>). Two paths around the solenoid acquire different phases:</p>
+<p>In a <span class="math notranslate nohighlight">\(\boldsymbol{B}=0\)</span> region, a charged particle traversing a path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> accumulates a single-path phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{path}}[\mathcal{C}] = (q/\hbar)\int_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span>, obtained by gauging <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> away locally with the gauge transformation of <a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">§4.1.3 Gauge Invariance</span></a> (derivation below).</p>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Single-path phase from local gauge transformation</p>
+<p><strong>Setup.</strong> In any simply connected sub-region where <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A} = 0\)</span>, the vector potential is curl-free and can be written as a pure gradient. Along a chosen path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{x}_0\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, define the gauge function</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha(\boldsymbol{x}) \equiv -\int_{\boldsymbol{x}_0,\,\mathcal{C}}^{\boldsymbol{x}} \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l}'.
+\]</div>
+<p>Path-independence of line integrals of a curl-free field within the simply connected region (Stokes’ theorem with <span class="math notranslate nohighlight">\(\nabla\times\boldsymbol{A}=0\)</span>) makes <span class="math notranslate nohighlight">\(\alpha\)</span> a well-defined function of the endpoint, and the fundamental theorem of calculus gives <span class="math notranslate nohighlight">\(\nabla\alpha = -\boldsymbol{A}\)</span>.</p>
+<p><strong>Apply the local gauge transformation</strong> from <a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">§4.1.3</span></a> § <em>Gauge Transformations</em> with this <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-\Delta\Phi_{\mathrm{AB}} &amp; = \Phi_{\mathrm{path},\text{upper}} - \Phi_{\mathrm{path},\text{lower}} \\
-&amp; = \frac{q}{\hbar}\oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \frac{q\Phi}{\hbar}
+\boldsymbol{A} &amp;\to \boldsymbol{A} + \nabla\alpha = 0, \\
+\psi &amp;\to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi.
 \end{split}
 \end{split}\]</div>
-<p>where the combined paths form a closed loop encircling the solenoid. The interference pattern shifts by <span class="math notranslate nohighlight">\(\Delta\Phi_{\mathrm{AB}}/(2\pi)\)</span> of a fringe spacing.</p>
+<p>The transformed wavefunction <span class="math notranslate nohighlight">\(\tilde\psi(\boldsymbol{x}) \equiv \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol{x})/\hbar}\psi(\boldsymbol{x})\)</span> satisfies the Schrödinger equation in the <span class="math notranslate nohighlight">\(\boldsymbol{A}=0\)</span> gauge along <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> and therefore carries <em>no</em> path-dependent EM phase.</p>
+<p><strong>Invert the transformation</strong> to read off the path-dependent phase of the original <span class="math notranslate nohighlight">\(\psi\)</span>. Using <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{x}) = -\int_{\mathcal{C}} \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l}'\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(\boldsymbol{x}) = \mathrm{e}^{-\mathrm{i}q\alpha(\boldsymbol{x})/\hbar}\,\tilde\psi(\boldsymbol{x}) = \tilde\psi(\boldsymbol{x})\,\exp\!\left(\frac{\mathrm{i}q}{\hbar}\int_{\mathcal{C}} \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l}'\right),
+\]</div>
+<p>so along <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> the wavefunction differs from its <span class="math notranslate nohighlight">\(\boldsymbol{A}=0\)</span> counterpart by the path-dependent phase</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_{\mathrm{path}}[\mathcal{C}] = \frac{q}{\hbar}\int_{\mathcal{C}} \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l}.
+\]</div>
+<p><strong>Connection to Berry phase.</strong> This is the line-integral Berry-phase form developed in <a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">§4.2.1 Berry Phase</span></a>, with the EM gauge connection <span class="math notranslate nohighlight">\(q\boldsymbol{A}/\hbar\)</span> playing the role of the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> (the identification noted there). Around the solenoid the field-free region is <em>multiply</em> connected, so a global <span class="math notranslate nohighlight">\(\boldsymbol{A}=0\)</span> gauge does not exist and the two interfering paths’ phases need not agree — that mismatch is the AB phase derived next.</p>
+</div>
+<p>The two interfering paths acquire different phases, so their relative phase is the difference of two line integrals:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\Delta\Phi_{\mathrm{AB}}
+  &amp;= \Phi_{\mathrm{path}}[\mathcal{C}_{\mathrm{upper}}] - \Phi_{\mathrm{path}}[\mathcal{C}_{\mathrm{lower}}] \\
+  &amp;= \frac{q}{\hbar}\int_{\mathcal{C}_{\mathrm{upper}}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}
+   - \frac{q}{\hbar}\int_{\mathcal{C}_{\mathrm{lower}}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}.
+\end{split}
+\end{split}\]</div>
+<p>Reversing the orientation of the lower path flips the sign of its line integral and joins the two segments into a single closed contour <span class="math notranslate nohighlight">\(\mathcal{C} = \mathcal{C}_{\mathrm{upper}} - \mathcal{C}_{\mathrm{lower}}\)</span> that encircles the solenoid:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta\Phi_{\mathrm{AB}} = \frac{q}{\hbar}\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}.
+\]</div>
+<p>Stokes’ theorem turns the loop integral into a flux through any surface <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> with <span class="math notranslate nohighlight">\(\partial\mathcal{S} = \mathcal{C}\)</span>, and <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> identifies the integrand as the magnetic field:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}
+  &amp;= \int_{\mathcal{S}} (\nabla \times \boldsymbol{A}) \cdot \mathrm{d}\boldsymbol{S} \\
+  &amp;= \int_{\mathcal{S}} \boldsymbol{B} \cdot \mathrm{d}\boldsymbol{S} \\
+  &amp;= \Phi,
+\end{split}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the total magnetic flux enclosed by the loop. Even though the trajectory itself stays in the field-free region (<span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> along <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>), any cap <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> spanning the loop must cut the solenoid and capture the full flux <span class="math notranslate nohighlight">\(\Phi = \pi R^2 B\)</span>. Substituting back gives the Aharonov-Bohm phase</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta\Phi_{\mathrm{AB}} = \frac{q\Phi}{\hbar},
+\]</div>
+<p>so the interference pattern shifts by <span class="math notranslate nohighlight">\(\Delta\Phi_{\mathrm{AB}}/(2\pi)\)</span> of a fringe spacing as the enclosed flux is varied.</p>
+<div class="important admonition">
+<p class="admonition-title">Aharonov-Bohm Phase Shift</p>
+<p>A charged particle traveling around a solenoid acquires a relative phase</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta\Phi_{\mathrm{AB}} = \frac{q}{\hbar}\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \frac{q\Phi}{\hbar}
+\]</div>
+<p>between the two interfering paths, where <span class="math notranslate nohighlight">\(\Phi\)</span> is the magnetic flux enclosed by the loop. This shift occurs despite <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> along the trajectory itself.</p>
+</div>
 <div class="important admonition">
 <p class="admonition-title">Topological Invariance</p>
-<p>The circulation <span class="math notranslate nohighlight">\(\oint_{\mathcal{C}} \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} = \Phi\)</span> depends only on whether the loop encircles the solenoid (winding number), not on its shape or size. By Stokes’ theorem, the circulation equals the enclosed flux <span class="math notranslate nohighlight">\(\int \boldsymbol{B} \cdot \mathrm{d}\boldsymbol{S}\)</span>.</p>
+<p>The AB phase <span class="math notranslate nohighlight">\(\Delta\Phi_{\mathrm{AB}} = q\Phi/\hbar\)</span> depends only on whether the loop encircles the solenoid (the winding number), not on its shape or size. Two loops that wind the same number of times around the solenoid produce the same phase shift; smoothly deforming a loop without crossing the solenoid leaves <span class="math notranslate nohighlight">\(\Delta\Phi_{\mathrm{AB}}\)</span> invariant.</p>
 </div>
 <div class="dropdown tip admonition">
 <p class="admonition-title">Discussion: is <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> more fundamental than <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span>?</p>
 <p>In classical mechanics, a particle’s trajectory depends only on <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{B}\)</span> (the Lorentz force). The vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> does not appear. In quantum mechanics, <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> enters the Schrödinger equation via minimal coupling, making it observable in gauge-invariant combinations. Is the AB effect a sign that quantum mechanics is “deeper” than classical mechanics, or simply that we must describe particles by wavefunctions rather than trajectories?</p>
 </div>
+<div class="dropdown poll admonition">
+<p class="admonition-title">Poll: Quantum phase from vector potential</p>
+<p>In the Aharonov-Bohm effect, a charged particle traveling in a region where <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> (no magnetic field) still experiences a phase shift due to the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>. The phase difference between two paths enclosing a solenoid is <span class="math notranslate nohighlight">\(\Delta \Phi_{\mathrm{AB}} = q \oint \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l} / \hbar = q \Phi / \hbar\)</span> where <span class="math notranslate nohighlight">\(\Phi\)</span> is the enclosed flux. Why does the particle acquire a phase even though <span class="math notranslate nohighlight">\(\boldsymbol{B} = 0\)</span> in the region where it travels?</p>
+<p>(A) The vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> is the fundamental physical quantity; the magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B} = \nabla \times \boldsymbol{A}\)</span> is a derived quantity with no direct physical meaning.</p>
+<p>(B) In quantum mechanics, the covariant derivative <span class="math notranslate nohighlight">\(\nabla - \mathrm{i}q\boldsymbol{A}/\hbar\)</span> couples directly to the vector potential, not just to the magnetic field.</p>
+<p>(C) The nonlocal nature of quantum mechanics allows the particle to “sense” the magnetic flux even if it never enters the region where <span class="math notranslate nohighlight">\(\boldsymbol{B} \neq 0\)</span>.</p>
+<p>(D) Both (B) and (C).</p>
+</div>
 </section>
 <section id="gauge-invariance-and-physical-meaning">
 <h3>Gauge Invariance and Physical Meaning<a class="headerlink" href="#gauge-invariance-and-physical-meaning" title="Link to this heading">#</a></h3>
-<p>Under a gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + 
-\nabla\chi\)</span>, <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\chi/\hbar}\psi\)</span>, the phase on a single path changes by <span class="math notranslate nohighlight">\((q/\hbar)[\chi(\text{end}) - \chi(\text{start})]\)</span>. But the <em>relative phase</em> between two interfering paths sharing the same endpoints is gauge-invariant:</p>
+<p>Under a gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>, <span class="math notranslate nohighlight">\(\psi \to \mathrm{e}^{\mathrm{i}q\alpha/\hbar}\psi\)</span>, the phase on a single path changes by <span class="math notranslate nohighlight">\((q/\hbar)[\alpha(\text{end}) - \alpha(\text{start})]\)</span>. But the <em>relative phase</em> between two interfering paths sharing the same endpoints is gauge-invariant:</p>
 <div class="math notranslate nohighlight">
 \[
 \Delta\Phi_{\mathrm{AB}}' = \Phi_{\mathrm{path},1}' - \Phi_{\mathrm{path},2}' = \Delta\Phi_{\mathrm{AB}}
@@ -612,16 +670,66 @@ eq 0\)</span>. This is possible because the region is not simply connected—<sp
 </section>
 <section id="flux-quantization">
 <h3>Flux Quantization<a class="headerlink" href="#flux-quantization" title="Link to this heading">#</a></h3>
-<p>A quantum wavefunction must be single-valued: traveling around a closed loop must return <span class="math notranslate nohighlight">\(\psi\)</span> to itself (up to a factor <span class="math notranslate nohighlight">\(\mathrm{e}^{2\pi\mathrm{i}n}\)</span>). For a superconductor, the macroscopic order parameter <span class="math notranslate nohighlight">\(\Psi(\boldsymbol{r})\)</span> describing the Cooper pair condensate (charge <span class="math notranslate nohighlight">\(q = 2e\)</span>) must satisfy:</p>
+<p>In a superconductor, the macroscopic order parameter is a complex field <span class="math notranslate nohighlight">\(\Psi(\boldsymbol{r}) = \vert\Psi\vert\,\mathrm{e}^{\mathrm{i}\Theta(\boldsymbol{r})}\)</span> describing the Cooper-pair condensate (charge <span class="math notranslate nohighlight">\(q = 2e\)</span>). Single-valuedness of <span class="math notranslate nohighlight">\(\Psi\)</span> requires that the phase <span class="math notranslate nohighlight">\(\Theta\)</span> winds by an integer multiple of <span class="math notranslate nohighlight">\(2\pi\)</span> around any closed loop in the bulk:</p>
+<div class="math notranslate nohighlight">
+\[
+\oint \nabla\Theta \cdot \mathrm{d}\boldsymbol{l} = 2\pi n, \qquad n \in \mathbb{Z}.
+\]</div>
+<p>Deep inside the superconductor (beyond the London penetration depth) the supercurrent vanishes. The condensate carries the charge supercurrent</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{j}_s = \frac{q\vert\Psi\vert^2}{m}\bigl(\hbar\nabla\Theta - q\boldsymbol{A}\bigr),
+\]</div>
+<p>obtained from the gauge-coupled probability current <span class="math notranslate nohighlight">\(\boldsymbol{j} = (1/m)\mathrm{Re}[\Psi^*\hat{\boldsymbol{\pi}}\Psi]\)</span> for the kinetic-momentum operator <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A}\)</span> of <a class="reference internal" href="4-1-2-electromagnetic-coupling.html"><span class="doc std std-doc">§4.1.2 Electromagnetic Coupling</span></a> (derivation below). Setting <span class="math notranslate nohighlight">\(\boldsymbol{j}_s = 0\)</span> in the bulk and using <span class="math notranslate nohighlight">\(\vert\Psi\vert \neq 0\)</span> then yields the <em>rigid-condensate</em> identification of the phase gradient with the vector potential:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-\oint 
-\nabla\alpha \cdot \mathrm{d}\boldsymbol{l} &amp;= 2\pi n \\
-\Longrightarrow \quad \frac{2e\Phi}{\hbar} &amp;= 2\pi n \\
-\quad \Longrightarrow \quad \Phi &amp;= n\Phi_0
+\boldsymbol{j}_s &amp;= \frac{q\vert\Psi\vert^2}{m}\bigl(\hbar\nabla\Theta - q\boldsymbol{A}\bigr) = 0 \\
+\Longrightarrow\quad \hbar\nabla\Theta - q\boldsymbol{A} &amp;= 0 \\
+\Longrightarrow\quad \nabla\Theta &amp;= \frac{q}{\hbar}\,\boldsymbol{A}.
 \end{split}
 \end{split}\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Supercurrent for a Cooper-pair condensate</p>
+<p>Starting from the gauge-coupled probability current <span class="math notranslate nohighlight">\(\boldsymbol{j} = (1/m)\mathrm{Re}[\Psi^*\hat{\boldsymbol{\pi}}\Psi]\)</span> and the kinetic-momentum operator <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}} = \hat{\boldsymbol{p}} - q\boldsymbol{A} = -\mathrm{i}\hbar\nabla - q\boldsymbol{A}\)</span>, write the macroscopic wavefunction in polar form <span class="math notranslate nohighlight">\(\Psi = \vert\Psi\vert\,\mathrm{e}^{\mathrm{i}\Theta}\)</span> with <span class="math notranslate nohighlight">\(\vert\Psi\vert\)</span> and <span class="math notranslate nohighlight">\(\Theta\)</span> real. Evaluating <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\pi}}\Psi\)</span> by the product rule on the exponential,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\hat{\boldsymbol{\pi}}\Psi
+  &amp;= -\mathrm{i}\hbar\,\nabla\bigl(\vert\Psi\vert\,\mathrm{e}^{\mathrm{i}\Theta}\bigr)
+     - q\boldsymbol{A}\,\vert\Psi\vert\,\mathrm{e}^{\mathrm{i}\Theta} \\
+  &amp;= \bigl(-\mathrm{i}\hbar\,\nabla\vert\Psi\vert
+     + \hbar\vert\Psi\vert\,\nabla\Theta
+     - q\boldsymbol{A}\,\vert\Psi\vert\bigr)\,\mathrm{e}^{\mathrm{i}\Theta}.
+\end{split}
+\end{split}\]</div>
+<p>Multiplying by <span class="math notranslate nohighlight">\(\Psi^* = \vert\Psi\vert\,\mathrm{e}^{-\mathrm{i}\Theta}\)</span> collapses the exponential:</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi^*\hat{\boldsymbol{\pi}}\Psi
+  = -\mathrm{i}\hbar\,\vert\Psi\vert\,\nabla\vert\Psi\vert
+     + \vert\Psi\vert^2\bigl(\hbar\nabla\Theta - q\boldsymbol{A}\bigr).
+\]</div>
+<p>The first term is purely imaginary (<span class="math notranslate nohighlight">\(\vert\Psi\vert\)</span> and <span class="math notranslate nohighlight">\(\nabla\vert\Psi\vert\)</span> are both real); the second is purely real. Taking the real part and dividing by <span class="math notranslate nohighlight">\(m\)</span> gives the probability current</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{j} = \frac{1}{m}\mathrm{Re}[\Psi^*\hat{\boldsymbol{\pi}}\Psi]
+  = \frac{\vert\Psi\vert^2}{m}\bigl(\hbar\nabla\Theta - q\boldsymbol{A}\bigr).
+\]</div>
+<p>The charge supercurrent is <span class="math notranslate nohighlight">\(\boldsymbol{j}_s = q\boldsymbol{j}\)</span> (one factor of <span class="math notranslate nohighlight">\(q\)</span> converts probability density to charge density), reproducing the formula used above.</p>
+</div>
+<p>Substituting this into the single-valuedness condition and using <span class="math notranslate nohighlight">\(\oint \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l} = \Phi\)</span> for the enclosed flux gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\oint \nabla\Theta \cdot \mathrm{d}\boldsymbol{l}
+  &amp;= \frac{q}{\hbar}\oint \boldsymbol{A}\cdot\mathrm{d}\boldsymbol{l}
+   = \frac{q\Phi}{\hbar} = 2\pi n \\
+\Longrightarrow \Phi
+  &amp;= n\,\frac{h}{q} = n\,\Phi_0,
+\end{split}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q = 2e\)</span> for Cooper pairs and <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e)\)</span> is the superconducting flux quantum.</p>
 <div class="important admonition">
 <p class="admonition-title">Flux Quantum (General Definition)</p>
 <div class="math notranslate nohighlight">
@@ -647,23 +755,6 @@ eq 0\)</span>. This is possible because the region is not simply connected—<sp
 <h3>Experimental Confirmation<a class="headerlink" href="#experimental-confirmation" title="Link to this heading">#</a></h3>
 <p><strong>Aharonov-Bohm effect:</strong> Tonomura et al. (1986) used electron holography on tiny solenoids (<span class="math notranslate nohighlight">\(\sim\)</span>500 nm diameter) to directly observe interference pattern shifts as solenoid current varied, in perfect agreement with theory.</p>
 <p><strong>Flux quantization:</strong> Doll &amp; Näbauer (1961) and Deaver &amp; Fairbank (1961) measured the superconducting value <span class="math notranslate nohighlight">\(\Phi_0 = h/(2e)\)</span> in tin cylinders. Modern SQUIDs routinely exploit flux quantization with extraordinary precision (see <a class="reference internal" href="4-2-3-flux-ring.html"><span class="doc std std-doc">§4.2.3 Flux Ring</span></a>).</p>
-<div class="seealso admonition">
-<p class="admonition-title">See Also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="4-2-1-berry-phase.html"><span class="doc std std-doc">4.2.1 Berry Phase</span></a>: Geometric phase in parameter space (AB effect as Berry phase in real space)</p></li>
-<li><p><a class="reference internal" href="4-2-3-flux-ring.html"><span class="doc std std-doc">4.2.3 Flux Ring</span></a>: The concrete model of a particle on a ring, persistent currents, and SQUID applications</p></li>
-<li><p><a class="reference internal" href="4-1-1-gauge-principle.html"><span class="doc std std-doc">4.1.1 Gauge Principle</span></a>: Minimal coupling and gauge freedom</p></li>
-</ul>
-</div>
-<div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Quantum phase from vector potential</p>
-<p>In the Aharonov-Bohm effect, a charged particle traveling in a region where <span class="math notranslate nohighlight">\(\mathbf{B} = 0\)</span> (no magnetic field) still experiences a phase shift due to the vector potential <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. The phase difference between two paths enclosing a solenoid is <span class="math notranslate nohighlight">\(\Delta \Phi_{\mathrm{AB}} = q \oint \mathbf{A} \cdot \mathrm{d}\ell / \hbar = q \Phi / \hbar\)</span> where <span class="math notranslate nohighlight">\(\Phi\)</span> is the enclosed flux. Why does the particle acquire a phase even though <span class="math notranslate nohighlight">\(\mathbf{B} = 0\)</span> in the region where it travels?</p>
-<p>(A) The vector potential <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the fundamental physical quantity; the magnetic field <span class="math notranslate nohighlight">\(\mathbf{B} = \nabla \times \mathbf{A}\)</span> is a derived quantity with no direct physical meaning.</p>
-<p>(B) In quantum mechanics, the covariant derivative <span class="math notranslate nohighlight">\(\nabla - \mathrm{i}q\mathbf{A}/\hbar\)</span> couples directly to the vector potential, not just to the magnetic field.</p>
-<p>(C) The nonlocal nature of quantum mechanics allows the particle to “sense” the magnetic flux even if it never enters the region where <span class="math notranslate nohighlight">\(\mathbf{B} 
-eq 0\)</span>.</p>
-<p>(D) Both (B) and (C).</p>
-</div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
@@ -694,9 +785,8 @@ eq 0\)</span>.</p>
 <p>(a) Show that the phase difference <span class="math notranslate nohighlight">\(\Delta\Phi_{\mathrm{AB}} = \Phi_1 - \Phi_2\)</span> depends only on whether the combined loop <span class="math notranslate nohighlight">\(\mathcal{C}_1 - \mathcal{C}_2\)</span> encloses flux, not on the shapes of the individual paths.</p>
 <p>(b) A third path <span class="math notranslate nohighlight">\(\mathcal{C}_3\)</span> also connects <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(B\)</span> but winds twice around the solenoid. What is <span class="math notranslate nohighlight">\(\Phi_3 - \Phi_1\)</span> in terms of <span class="math notranslate nohighlight">\(\Phi\)</span>?</p>
 <p>(c) Classify all paths from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(B\)</span> by their winding number around the solenoid. How does this connect to the topology of the multiply-connected region?</p>
-<p><strong>3. Gauge dependence of single paths.</strong> Under a gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + 
-\nabla\chi\)</span>, the phase accumulated along a single path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> from point <span class="math notranslate nohighlight">\(P\)</span> to point <span class="math notranslate nohighlight">\(Q\)</span> changes.</p>
-<p>(a) Show that <span class="math notranslate nohighlight">\(\Phi_{\mathrm{path}}'[\mathcal{C}] = \Phi_{\mathrm{path}}[\mathcal{C}] + (q/\hbar)[\chi(Q) - \chi(P)]\)</span>.</p>
+<p><strong>3. Gauge dependence of single paths.</strong> Under a gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>, the phase accumulated along a single path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> from point <span class="math notranslate nohighlight">\(P\)</span> to point <span class="math notranslate nohighlight">\(Q\)</span> changes.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(\Phi_{\mathrm{path}}'[\mathcal{C}] = \Phi_{\mathrm{path}}[\mathcal{C}] + (q/\hbar)[\alpha(Q) - \alpha(P)]\)</span>.</p>
 <p>(b) Explain why this makes the single-path phase unobservable, but the relative phase between two paths sharing endpoints remains gauge-invariant.</p>
 <p>(c) One might claim: “I can always choose a gauge where <span class="math notranslate nohighlight">\(\boldsymbol{A} = 0\)</span> outside the solenoid, so there is no AB effect.” Find the flaw in this argument. (Hint: can <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> be set to zero everywhere in a multiply-connected region with nonzero enclosed flux?)</p>
 <p><strong>4. AB ring spectrum.</strong> A charged particle is confined to a ring of radius <span class="math notranslate nohighlight">\(R\)</span> threaded by flux <span class="math notranslate nohighlight">\(\Phi\)</span>. The energy eigenvalues are <span class="math notranslate nohighlight">\(E_n = \frac{\hbar^2}{2mR^2}(n - \Phi/\Phi_0)^2\)</span>.</p>
@@ -713,8 +803,7 @@ eq 0\)</span>.</p>
 <p>(c) Is the electric AB effect topological in the same sense as the magnetic one? What role does the multiply-connected geometry play in each case?</p>
 <p><strong>7. AB phase as Berry phase.</strong> The Aharonov-Bohm phase can be viewed as a special case of Berry phase (§4.2.1).</p>
 <p>(a) Identify the parameter space: as the electron’s position <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> moves around the solenoid, what plays the role of the slowly varying parameter <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> in the Berry phase formalism?</p>
-<p>(b) Show that the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_\text{Berry} = \mathrm{i}\langle\psi(\boldsymbol{r})\vert
-\nabla_{\boldsymbol{r}}\vert\psi(\boldsymbol{r})\rangle\)</span> reduces to <span class="math notranslate nohighlight">\((q/\hbar)\boldsymbol{A}(\boldsymbol{r})\)</span> for a particle in a vector potential.</p>
+<p>(b) Show that the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_\text{Berry} = \mathrm{i}\langle\psi(\boldsymbol{r})\vert\nabla_{\boldsymbol{r}}\vert\psi(\boldsymbol{r})\rangle\)</span> reduces to <span class="math notranslate nohighlight">\((q/\hbar)\boldsymbol{A}(\boldsymbol{r})\)</span> for a particle in a vector potential.</p>
 <p>(c) The Berry phase is gauge-invariant for closed loops. Show explicitly that <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = \oint \boldsymbol{A}_\text{Berry}\cdot\mathrm{d}\boldsymbol{r} = (q/\hbar)\Phi\)</span> regardless of the gauge choice for <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>.</p>
 </section>
 </section>
