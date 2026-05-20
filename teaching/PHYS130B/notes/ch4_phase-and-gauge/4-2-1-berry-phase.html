@@ -505,11 +505,13 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem">The Adiabatic Theorem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-and-berry-connection">Berry Phase and Berry Connection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-phase-action-chapter-3">Connection to Phase = Action (Chapter 3)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-1-2-in-a-rotating-magnetic-field">Example: Spin-1/2 in a Rotating Magnetic Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-manifestations">Physical Manifestations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-dependent-eigenstates">Parameter-dependent eigenstates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-ambiguity-in-parameter-space">Phase ambiguity in parameter space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-connection">Berry connection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-along-a-path">Berry phase along a path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-curvature">Berry curvature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#same-gauge-structure-different-parameter-space">Same gauge structure, different parameter space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-1-2-on-the-bloch-sphere">Example: spin-1/2 on the Bloch sphere</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -530,215 +532,168 @@
 <div class="tip admonition">
 <p class="admonition-title">Prompts</p>
 <ul class="simple">
-<li><p>What is the adiabatic theorem and why does a system stay in an instantaneous eigenstate under slow changes?</p></li>
-<li><p>Explain the difference between dynamical phase (energy integral) and geometric (Berry) phase. How do they arise from the time-dependent Schrödinger equation?</p></li>
-<li><p>Derive the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n = \mathrm{i}\langle n(\boldsymbol{R}) \vert \nabla_{\boldsymbol{R}} \vert n(\boldsymbol{R})\rangle\)</span> and explain why it is a gauge field in parameter space.</p></li>
-<li><p>How does Berry phase connect to the Phase = Action framework? How are the phase potentials <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> and <span class="math notranslate nohighlight">\(\Phi\)</span> in parameter space related to momentum and energy?</p></li>
-<li><p>Why does the Berry phase of a spin-1/2 traversing a closed path on the Bloch sphere equal <strong>half</strong> the solid angle, rather than the full solid angle, the area, or the path length?</p></li>
+<li><p>If a Hamiltonian does not change in time, why do transitions between different energy levels have <em>exactly</em> zero probability? What does that say about long-time evolution at fixed <span class="math notranslate nohighlight">\(\hat{H}\)</span>?</p></li>
+<li><p>When the Hamiltonian shifts by a tiny amount, how do its eigenstates respond, and why does the system stay in approximately the same energy level? Where does the room for any nontrivial geometric effect come from?</p></li>
+<li><p>Why is the eigenstate <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> defined only up to a local phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\)</span>, and how is this the same kind of gauge freedom that a charged particle’s wavefunction has in real space?</p></li>
+<li><p>What does the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})\vert\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle\)</span> track, why is its open-path integral unphysical, and why is the closed-loop integral (the Berry phase) physical?</p></li>
+<li><p>Why is the Berry curvature of a spin-1/2 eigenstate a magnetic-monopole field at the centre of the Bloch sphere, and how does that picture explain precession as a Lorentz-type response?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>The <strong>Berry phase</strong> is a geometric phase acquired by a quantum system when it undergoes adiabatic evolution along a closed path in parameter space. Unlike the dynamical phase, which accumulates from the Hamiltonian eigenvalues, the Berry phase arises purely from the geometric structure of the quantum state. This fundamental concept reveals that quantum mechanics has a built-in gauge structure in parameter space—a deep connection to classical field theory that underpins topological physics.</p>
+<p>The eigenstates of a Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R})\)</span> depend on the parameters <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> that define <span class="math notranslate nohighlight">\(\hat{H}\)</span>. Tracking how the eigenstate moves through parameter space is a purely <em>geometric</em> problem: each diagonalisation leaves a local phase undetermined, and absorbing that ambiguity requires a gauge connection on parameter space. The line integral of that connection around a closed loop is the <strong>Berry phase</strong>, a gauge-invariant observable that mirrors the electromagnetic phase in real space, with parameter space playing the role of position.</p>
 </section>
-<section id="the-adiabatic-theorem">
-<h3>The Adiabatic Theorem<a class="headerlink" href="#the-adiabatic-theorem" title="Link to this heading">#</a></h3>
-<p>When a quantum system’s Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span> varies slowly in time, the system remains in its instantaneous eigenstate. We do not need to specify <em>how</em> the time-dependence enters <span class="math notranslate nohighlight">\(\hat{H}\)</span> at this stage — it could be a turn-on protocol, an externally driven matrix element, a slowly rotating magnetic field, or anything else. All that matters is the time profile <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span> itself.</p>
-<div class="important admonition">
-<p class="admonition-title">Adiabatic Theorem</p>
-<p>Let <span class="math notranslate nohighlight">\(\hat{H}(t)\vert n(t)\rangle = E_n(t)\vert n(t)\rangle\)</span> define the instantaneous eigenstates, with non-degenerate gaps to other levels. If the system starts in <span class="math notranslate nohighlight">\(\vert n(0)\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span> varies on a timescale <span class="math notranslate nohighlight">\(T \gg \hbar/\Delta E\)</span>, then the state remains in the instantaneous <span class="math notranslate nohighlight">\(n\)</span>-th eigenstate:</p>
+<section id="parameter-dependent-eigenstates">
+<h3>Parameter-dependent eigenstates<a class="headerlink" href="#parameter-dependent-eigenstates" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R})\)</span> depend smoothly on a set of parameters <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> — a magnetic-field direction, a lattice momentum, the position of a slow source, or any other variable. At each <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> the eigenvalue problem reads</p>
 <div class="math notranslate nohighlight">
 \[
-\vert\psi(t)\rangle \approx \mathrm{e}^{\mathrm{i}\Phi_{\mathrm{Berry}}(t)}\,\mathrm{e}^{\mathrm{i}\Phi_{\mathrm{dyn}}(t)}\,\vert n(t)\rangle,
+\hat{H}(\boldsymbol{R})\,\vert n(\boldsymbol{R})\rangle = E_n(\boldsymbol{R})\,\vert n(\boldsymbol{R})\rangle.
 \]</div>
-<p>picking up</p>
-<ul>
-<li><p>a <strong>dynamical phase</strong> <span class="math notranslate nohighlight">\(\Phi_{\mathrm{dyn}}\)</span> from the eigenenergy</p>
+<p>The question is how the eigenstate <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> in a chosen level <span class="math notranslate nohighlight">\(n\)</span> moves as <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> moves.</p>
+<div class="note admonition">
+<p class="admonition-title">Why levels do not mix</p>
+<p>If <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> is held fixed, eigenstates of distinct energies are orthogonal,</p>
 <div class="math notranslate nohighlight">
 \[
-    \Phi_{\mathrm{dyn}}(t) = -\frac{1}{\hbar}\int_0^t E_n(t')\,\mathrm{d}t',
-    \]</div>
-</li>
-<li><p>and a <strong>Berry phase</strong> <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}\)</span> from the way the eigenstate basis itself moves.</p>
+E_m \ne E_n \;\Longrightarrow\; \langle m(\boldsymbol{R})\vert n(\boldsymbol{R})\rangle = 0,
+\]</div>
+<p>so the transition probability <span class="math notranslate nohighlight">\(\vert\langle m\vert n\rangle\vert^{2}\)</span> between different levels is <em>exactly</em> zero. The system stays in level <span class="math notranslate nohighlight">\(n\)</span> indefinitely.</p>
+<p>When <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> shifts by a small amount, <span class="math notranslate nohighlight">\(\hat{H}\)</span> changes by a small amount, and each eigenstate is modified by a small amount. The overlap with the original level <span class="math notranslate nohighlight">\(n\)</span> remains close to one, and the overlap with any other level <span class="math notranslate nohighlight">\(m\)</span> remains small. The system continues to occupy level <span class="math notranslate nohighlight">\(n\)</span> — only the in-level eigenstate <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> itself moves with <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>.</p>
+<p>This picture fails only when the gap <span class="math notranslate nohighlight">\(E_m - E_n\)</span> closes at some <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>; the level under study then mixes resonantly with another level and is no longer well-defined on its own.</p>
+</div>
+<p>The interesting question is therefore not whether the system leaves level <span class="math notranslate nohighlight">\(n\)</span> — generically it does not — but how the in-level eigenstate <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> itself is parametrised across <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>.</p>
+</section>
+<section id="phase-ambiguity-in-parameter-space">
+<h3>Phase ambiguity in parameter space<a class="headerlink" href="#phase-ambiguity-in-parameter-space" title="Link to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> is an eigenstate of <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R})\)</span> in a non-degenerate level, then <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\,\vert n(\boldsymbol{R})\rangle\)</span> is also an eigenstate for any real <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{R})\)</span>. Diagonalising <span class="math notranslate nohighlight">\(\hat{H}\)</span> independently at each <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> leaves an <em>uncontrolled local phase choice</em> at every point:</p>
 <div class="math notranslate nohighlight">
 \[
-    \Phi_{\mathrm{Berry}}(t) = \int_0^t \phi_n(t')\,\mathrm{d}t'
-    \]</div>
-<p>where <span class="math notranslate nohighlight">\(\phi_n(t)\)</span> is the <strong>Berry connection in time</strong> (analog of the EM scalar potential <span class="math notranslate nohighlight">\(\phi\)</span>)</p>
+\vert n(\boldsymbol{R})\rangle \;\longrightarrow\; \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\,\vert n(\boldsymbol{R})\rangle.
+\]</div>
+<p>This is a gauge transformation — but on <strong>parameter space</strong>, not real space. A charged particle’s wavefunction <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})\)</span> has the same local phase ambiguity over position. In that case the resolution was to introduce a gauge connection (the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>) that keeps track of how the phase reference rotates between nearby points. The same recipe applies here.</p>
+</section>
+<section id="berry-connection">
+<h3>Berry connection<a class="headerlink" href="#berry-connection" title="Link to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title">Berry connection</p>
+<p>The <strong>Berry connection</strong> on parameter space is the real-valued vector field</p>
 <div class="math notranslate nohighlight">
 \[
-    \phi_n(t) = \mathrm{i}\langle n(t)\vert\partial_t n(t)\rangle.
-    \]</div>
-<p><span class="math notranslate nohighlight">\(\phi_n(t)\)</span> is real because <span class="math notranslate nohighlight">\(\langle n\vert\partial_t n\rangle\)</span> is purely imaginary (from <span class="math notranslate nohighlight">\(\langle n\vert n\rangle = 1\)</span>).</p>
-</li>
-</ul>
+\boldsymbol{A}_n(\boldsymbol{R}) = \mathrm{i}\,\langle n(\boldsymbol{R})\vert\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle.
+\]</div>
+<p>Under a rephasing <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n(\boldsymbol{R})\rangle\)</span>, it transforms as</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{A}_n(\boldsymbol{R}) \;\longrightarrow\; \boldsymbol{A}_n(\boldsymbol{R}) - \nabla_{\boldsymbol{R}}\alpha(\boldsymbol{R}),
+\]</div>
+<p>exactly the gauge form of a vector potential.</p>
 </div>
 <ul class="simple">
-<li><p>Under a rephasing <span class="math notranslate nohighlight">\(\vert n(t)\rangle \to \mathrm{e}^{\mathrm{i}\alpha(t)}\vert n(t)\rangle\)</span>, the Berry connection shifts as <span class="math notranslate nohighlight">\(\phi_n \to \phi_n - \dot\alpha\)</span> — exactly the EM gauge form <span class="math notranslate nohighlight">\(\phi \to \phi - \partial_t\alpha\)</span> from §4.1.3. The open-time integral <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}\)</span> therefore shifts by the boundary terms <span class="math notranslate nohighlight">\(\alpha(0) - \alpha(t)\)</span> and is <em>not</em> invariant on its own; the dynamical phase is invariant.</p></li>
-<li><p>The theorem fails when the gap closes (Landau-Zener transitions). To see when it holds: <span class="math notranslate nohighlight">\(\hat{H}\)</span> varies on timescale <span class="math notranslate nohighlight">\(T\)</span>, so its matrix elements change at rate <span class="math notranslate nohighlight">\(\dot{H}_{mn} \sim \Delta E / T\)</span>. The interband leakage rate is therefore <span class="math notranslate nohighlight">\(\hbar\dot{H}_{mn}/\Delta E^2 \sim \hbar/(T\Delta E)\)</span>, which is <span class="math notranslate nohighlight">\(\ll 1\)</span> exactly when <span class="math notranslate nohighlight">\(T \gg \hbar/\Delta E\)</span> — i.e. the slow-time condition is precisely the statement that this small parameter is small (explicit suppression: Step 3 of the derivation). When the gap closes, <span class="math notranslate nohighlight">\(\Delta E \to 0\)</span>, the small parameter blows up — there is no slow-time regime, and Landau-Zener transitions take over.</p></li>
+<li><p>The reality of <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> follows from normalisation: <span class="math notranslate nohighlight">\(\langle n\vert n\rangle = 1\)</span> forces <span class="math notranslate nohighlight">\(\langle n\vert\nabla_{\boldsymbol{R}}\vert n\rangle\)</span> to be purely imaginary, so the factor of <span class="math notranslate nohighlight">\(\mathrm{i}\)</span> makes <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> real.</p></li>
+<li><p>The gauge transformation rule mirrors the electromagnetic gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A}\to\boldsymbol{A}+\nabla\alpha\)</span> of <a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a>, with a sign that absorbs the rephasing of the eigenstate.</p></li>
 </ul>
 <div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Adiabatic Following and the Berry Phase</p>
-<p><strong>Setup.</strong> Suppose at anchor time <span class="math notranslate nohighlight">\(t\)</span> the system is in the <span class="math notranslate nohighlight">\(n\)</span>-th instantaneous eigenstate of <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span>:</p>
+<p class="admonition-title">Derivation: reality and gauge transformation</p>
+<p><strong>Reality.</strong> Differentiate <span class="math notranslate nohighlight">\(\langle n(\boldsymbol{R})\vert n(\boldsymbol{R})\rangle = 1\)</span> with respect to <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\vert\psi(t)\rangle = \psi_n(t)\,\vert n(t)\rangle,
+\langle\nabla_{\boldsymbol{R}} n\vert n\rangle + \langle n\vert\nabla_{\boldsymbol{R}} n\rangle = 0.
 \]</div>
-<p>with <span class="math notranslate nohighlight">\(\psi_n(t) = \langle n(t)\vert\psi(t)\rangle\)</span> a single complex coefficient (amplitude and phase). What is <span class="math notranslate nohighlight">\(\vert\psi(t+\mathrm{d}t)\rangle\)</span>, and what new coefficient <span class="math notranslate nohighlight">\(\psi_n(t+\mathrm{d}t)\)</span> does it have in the eigenstate basis at the <em>new</em> time <span class="math notranslate nohighlight">\(t+\mathrm{d}t\)</span>?</p>
-<p><strong>Step 1: direct Schrödinger evolution.</strong> The time-dependent Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\partial_t\vert\psi\rangle = \hat{H}(t)\vert\psi\rangle\)</span> propagates the state by <span class="math notranslate nohighlight">\(\mathrm{d}t\)</span>:</p>
+<p>The first term is the complex conjugate of the second, so <span class="math notranslate nohighlight">\(\langle n\vert\nabla_{\boldsymbol{R}} n\rangle = -\langle n\vert\nabla_{\boldsymbol{R}} n\rangle^{*}\)</span> is purely imaginary. Multiplying by <span class="math notranslate nohighlight">\(\mathrm{i}\)</span> gives a real field, <span class="math notranslate nohighlight">\(\boldsymbol{A}_n = \mathrm{i}\langle n\vert\nabla_{\boldsymbol{R}}\vert n\rangle \in \mathbb{R}\)</span>.</p>
+<p><strong>Gauge transformation.</strong> Under <span class="math notranslate nohighlight">\(\vert n\rangle \to \vert\tilde{n}\rangle = \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n\rangle\)</span>, the product rule gives</p>
 <div class="math notranslate nohighlight">
 \[
-\vert\psi(t+\mathrm{d}t)\rangle = \Bigl(1 - \tfrac{\mathrm{i}}{\hbar}\hat{H}(t)\,\mathrm{d}t\Bigr)\vert\psi(t)\rangle = \psi_n(t)\Bigl(1 - \tfrac{\mathrm{i}}{\hbar}E_n(t)\,\mathrm{d}t\Bigr)\,\vert n(t)\rangle.
+\nabla_{\boldsymbol{R}}\vert\tilde{n}\rangle = \mathrm{i}\,(\nabla_{\boldsymbol{R}}\alpha)\,\mathrm{e}^{\mathrm{i}\alpha}\vert n\rangle + \mathrm{e}^{\mathrm{i}\alpha}\,\nabla_{\boldsymbol{R}}\vert n\rangle.
 \]</div>
-<p>Direct evolution rotates the <em>coefficient</em> by the dynamical-phase factor but leaves the basis ket alone. The state is still expressed in the <em>anchor-time</em> basis <span class="math notranslate nohighlight">\(\vert n(t)\rangle\)</span>, which is no longer the instantaneous eigenstate at <span class="math notranslate nohighlight">\(t+\mathrm{d}t\)</span>.</p>
-<p><strong>Step 2: re-express in the new instantaneous basis.</strong> Define</p>
+<p>Taking the inner product with <span class="math notranslate nohighlight">\(\langle\tilde{n}\vert = \langle n\vert\mathrm{e}^{-\mathrm{i}\alpha}\)</span> kills the phase factors:</p>
 <div class="math notranslate nohighlight">
 \[
-\psi_n(t+\mathrm{d}t) = \langle n(t+\mathrm{d}t)\vert\psi(t+\mathrm{d}t)\rangle.
+\langle\tilde{n}\vert\nabla_{\boldsymbol{R}}\vert\tilde{n}\rangle = \mathrm{i}\,\nabla_{\boldsymbol{R}}\alpha + \langle n\vert\nabla_{\boldsymbol{R}}\vert n\rangle.
 \]</div>
-<p>Taylor expand <span class="math notranslate nohighlight">\(\langle n(t+\mathrm{d}t)\vert = \langle n(t)\vert + \mathrm{d}t\,\langle\partial_t n(t)\vert\)</span>. Differentiating <span class="math notranslate nohighlight">\(\langle n\vert n\rangle = 1\)</span> gives <span class="math notranslate nohighlight">\(\langle\partial_t n\vert n\rangle = -\langle n\vert\partial_t n\rangle\)</span>, so</p>
+<p>Multiplying by <span class="math notranslate nohighlight">\(\mathrm{i}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\langle n(t+\mathrm{d}t)\vert n(t)\rangle = 1 - \mathrm{d}t\,\langle n\vert\partial_t n\rangle + O(\mathrm{d}t^2).
+\tilde{\boldsymbol{A}}_n = \mathrm{i}\langle\tilde{n}\vert\nabla_{\boldsymbol{R}}\vert\tilde{n}\rangle = -\nabla_{\boldsymbol{R}}\alpha + \boldsymbol{A}_n = \boldsymbol{A}_n - \nabla_{\boldsymbol{R}}\alpha.
 \]</div>
-<p>Combining with Step 1,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-\psi_n(t+\mathrm{d}t) &amp;= \psi_n(t)\Bigl(1 - \tfrac{\mathrm{i}}{\hbar}E_n\,\mathrm{d}t\Bigr)\Bigl(1 - \mathrm{d}t\,\langle n\vert\partial_t n\rangle\Bigr) \\
-&amp;= \psi_n(t)\Bigl(1 - \tfrac{\mathrm{i}}{\hbar}E_n\,\mathrm{d}t - \mathrm{d}t\,\langle n\vert\partial_t n\rangle\Bigr) + O(\mathrm{d}t^2).
-\end{split}
-\end{split}\]</div>
-<p><strong>Step 3: adiabatic following.</strong> Projecting onto <span class="math notranslate nohighlight">\(\langle m(t+\mathrm{d}t)\vert\)</span> for <span class="math notranslate nohighlight">\(m\ne n\)</span> gives interband amplitudes <span class="math notranslate nohighlight">\(\propto \mathrm{d}t\,\langle m\vert\partial_t n\rangle\)</span>. Differentiating the eigenvalue equation <span class="math notranslate nohighlight">\(\hat{H}\vert n\rangle = E_n\vert n\rangle\)</span> rewrites these as <span class="math notranslate nohighlight">\(\langle m\vert\partial_t n\rangle = \langle m\vert\partial_t\hat{H}\vert n\rangle/(E_n - E_m)\)</span>, so they are suppressed by the adiabatic small parameter <span class="math notranslate nohighlight">\(\hbar\dot{H}_{mn}/\Delta E^2\)</span>. In the adiabatic limit they are dropped: the system <em>remains</em> in the instantaneous eigenstate <span class="math notranslate nohighlight">\(\vert n(t+\mathrm{d}t)\rangle\)</span>. <strong>Adiabatic following is an output of the time-stepping argument, not an input.</strong></p>
-<p><strong>Step 4: ODE and solution.</strong> Recognising <span class="math notranslate nohighlight">\(\langle n\vert\partial_t n\rangle = -\mathrm{i}\,\phi_n(t)\)</span>, the recursion <span class="math notranslate nohighlight">\(\psi_n(t+\mathrm{d}t) = \psi_n(t)\bigl(1 - \tfrac{\mathrm{i}}{\hbar}E_n\,\mathrm{d}t + \mathrm{i}\,\phi_n(t)\,\mathrm{d}t\bigr)\)</span> gives the ODE</p>
-<div class="math notranslate nohighlight">
-\[
-\dot{\psi}_n(t) = -\tfrac{\mathrm{i}}{\hbar}E_n(t)\,\psi_n(t) + \mathrm{i}\,\phi_n(t)\,\psi_n(t),
-\]</div>
-<p>which integrates to</p>
-<div class="math notranslate nohighlight">
-\[
-\psi_n(t) = \psi_n(0)\,\mathrm{e}^{\mathrm{i}\Phi_{\mathrm{dyn}}(t)}\,\mathrm{e}^{\mathrm{i}\Phi_{\mathrm{Berry}}(t)},
-\]</div>
-<p>reproducing the <em>Adiabatic Theorem</em> box. The dynamical phase comes from direct Schrödinger evolution at fixed Hamiltonian (Step 1); the Berry phase comes from the bookkeeping correction needed when the eigenstate basis itself moves (Step 2).</p>
 </div>
 </section>
-<section id="berry-phase-and-berry-connection">
-<h3>Berry Phase and Berry Connection<a class="headerlink" href="#berry-phase-and-berry-connection" title="Link to this heading">#</a></h3>
-<p>In realistic settings the time-dependence of <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span> enters through a finite set of <em>parameters</em> <span class="math notranslate nohighlight">\(\boldsymbol{R}(t)\)</span> — the direction of an external magnetic field, the lattice momentum in a Bloch band, the position of a slowly moving classical source, and so on — so that <span class="math notranslate nohighlight">\(\hat{H}(t) = \hat{H}(\boldsymbol{R}(t))\)</span> and the instantaneous eigenstates inherit the same parameter dependence: <span class="math notranslate nohighlight">\(\vert n(t)\rangle = \vert n(\boldsymbol{R}(t))\rangle\)</span>. The Berry connection in time then reorganizes into a vector field on parameter space.</p>
+<section id="berry-phase-along-a-path">
+<h3>Berry phase along a path<a class="headerlink" href="#berry-phase-along-a-path" title="Link to this heading">#</a></h3>
+<p>The Berry connection lets one compare the phase reference at two parameter points. The accumulated rephasing along a path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{R}_a\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{R}_b\)</span> in parameter space is the line integral</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_{\mathrm{Berry}}(\mathcal{C}) = \int_{\mathcal{C}} \boldsymbol{A}_n(\boldsymbol{R})\cdot\mathrm{d}\boldsymbol{R}.
+\]</div>
 <div class="important admonition">
-<p class="admonition-title">Berry Connection and Berry Curvature</p>
+<p class="admonition-title">Berry phase</p>
 <ul>
-<li><p>The <strong>Berry connection</strong> on parameter space is (analogous to a vector potential)</p>
+<li><p>Along an <strong>open path</strong> <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>, the line integral shifts under a gauge transformation by</p>
 <div class="math notranslate nohighlight">
 \[
-  \boxed{
-  \boldsymbol{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})\vert\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle.}
+  \Phi_{\mathrm{Berry}}(\mathcal{C}) \;\longrightarrow\; \Phi_{\mathrm{Berry}}(\mathcal{C}) + \alpha(\boldsymbol{R}_a) - \alpha(\boldsymbol{R}_b),
   \]</div>
+<p>so it depends on the phase convention at the endpoints and is <strong>not</strong> a physical observable on its own.</p>
 </li>
-<li><p>The <strong>Berry curvature</strong> is the curl of the connection (analogous to a magnetic field in parameter space),</p>
+<li><p>Along a <strong>closed loop</strong> <span class="math notranslate nohighlight">\(\mathcal{C} = \partial\Sigma\)</span>, the boundary terms cancel and the loop integral is gauge-invariant. The <strong>Berry phase</strong></p>
 <div class="math notranslate nohighlight">
 \[
-  \boldsymbol{\Omega}_n(\boldsymbol{R}) = \nabla_{\boldsymbol{R}}\times\boldsymbol{A}_n(\boldsymbol{R}).
+  \Phi_{\mathrm{Berry}}(\mathcal{C}) = \oint_{\mathcal{C}} \boldsymbol{A}_n(\boldsymbol{R})\cdot\mathrm{d}\boldsymbol{R}
   \]</div>
+<p>is a genuine physical observable: a phase the eigenstate picks up relative to itself after being parallel-transported once around <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.</p>
 </li>
 </ul>
 </div>
-<p>The time trajectory <span class="math notranslate nohighlight">\(t \mapsto \boldsymbol{R}(t)\)</span> traces a geometric path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> in parameter space. Using <span class="math notranslate nohighlight">\(\phi_n(t)=\dot{\boldsymbol{R}}(t)\cdot\boldsymbol{A}_n(\boldsymbol{R}(t))\)</span>, the time-integrated Berry phase becomes</p>
-<div class="math notranslate nohighlight">
-\[
-\Phi_{\mathrm{Berry}} = \int \phi_n(t)\,\mathrm{d}t
-= \int \dot{\boldsymbol{R}}(t)\cdot\boldsymbol{A}_n(\boldsymbol{R}(t))\,\mathrm{d}t
-= \int_{\mathcal{C}} \boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R},
-\]</div>
-<p>This shows why the Berry phase is geometric: for a fixed path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>, <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}\)</span> depends on the curve in parameter space, not on how fast it is traversed (provided the evolution remains adiabatic).</p>
+<p>This is the same open-vs-closed dichotomy as the electromagnetic holonomy of <a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a> § <em>Open path vs closed loop</em>, lifted from real space to parameter space.</p>
+</section>
+<section id="berry-curvature">
+<h3>Berry curvature<a class="headerlink" href="#berry-curvature" title="Link to this heading">#</a></h3>
+<p>A <em>local</em> gauge-invariant version of the Berry phase is obtained by taking the curl of the Berry connection.</p>
 <div class="important admonition">
-<p class="admonition-title">Berry Phase</p>
-<ul>
-<li><p>Along a path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> in parameter space, the Berry phase is the line integral</p>
+<p class="admonition-title">Berry curvature</p>
+<p>The <strong>Berry curvature</strong> is</p>
 <div class="math notranslate nohighlight">
 \[
-  \Phi_{\mathrm{Berry}}(\mathcal{C}) = \int_{\mathcal{C}}\boldsymbol{A}_n(\boldsymbol{R})\cdot\mathrm{d}\boldsymbol{R}.
-  \]</div>
-</li>
-<li><p>For a closed loop <span class="math notranslate nohighlight">\(\mathcal{C}=\partial\Sigma\)</span>, Stokes’ theorem gives the equivalent flux form</p>
-<div class="math notranslate nohighlight">
-\[
-  \Phi_{\mathrm{Berry}}(\mathcal{C}) = \oint_{\mathcal{C}}\boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R}
-  = \int_{\Sigma}\boldsymbol{\Omega}_n\cdot\mathrm{d}\boldsymbol{S}.
-  \]</div>
-</li>
-</ul>
-</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Time to Parameter-Space Connection</p>
-<p>The previous section established the Berry connection in time, <span class="math notranslate nohighlight">\(\phi_n(t) = \mathrm{i}\langle n(t)\vert\partial_t n(t)\rangle\)</span>, as a real-valued one-form along the trajectory. When the time-dependence enters through parameters <span class="math notranslate nohighlight">\(\boldsymbol{R}(t)\)</span>, the chain rule <span class="math notranslate nohighlight">\(\partial_t\vert n(\boldsymbol{R}(t))\rangle = \dot{\boldsymbol{R}}(t)\cdot\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle\)</span> factors <span class="math notranslate nohighlight">\(\phi_n\)</span> into a directional derivative along the path:</p>
-<div class="math notranslate nohighlight">
-\[
-\phi_n(t) = \mathrm{i}\langle n(t)\vert\partial_t n(t)\rangle = \dot{\boldsymbol{R}}(t)\cdot\boldsymbol{A}_n(\boldsymbol{R}(t)),
+\boldsymbol{\Omega}_n(\boldsymbol{R}) = \nabla_{\boldsymbol{R}}\times\boldsymbol{A}_n(\boldsymbol{R}).
 \]</div>
-<p>where the velocity-independent vector field <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})\vert\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle\)</span> on parameter space is the Berry connection. Integrating over time accumulates the Berry phase along the path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> traced by <span class="math notranslate nohighlight">\(\boldsymbol{R}(t)\)</span>:</p>
+<p>Under a gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A}_n \to \boldsymbol{A}_n - \nabla_{\boldsymbol{R}}\alpha\)</span>, the curvature is unchanged because the curl of a gradient vanishes. By Stokes’ theorem the closed-loop Berry phase equals the curvature flux through any surface <span class="math notranslate nohighlight">\(\Sigma\)</span> bounded by <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\Phi_{\mathrm{Berry}}(\mathcal{C}) = \int_0^t \phi_n(t')\,\mathrm{d}t' = \int_0^t \dot{\boldsymbol{R}}(t')\cdot\boldsymbol{A}_n(\boldsymbol{R}(t'))\,\mathrm{d}t' = \int_{\mathcal{C}}\boldsymbol{A}_n(\boldsymbol{R})\cdot\mathrm{d}\boldsymbol{R}.
-\]</div>
-<p>The Berry phase is now a <em>geometric</em> quantity: it depends only on the path <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> in parameter space, not on the speed at which it is traversed (provided the speed stays in the adiabatic regime).</p>
-<p>For a closed loop <span class="math notranslate nohighlight">\(\mathcal{C} = \partial\Sigma\)</span>, Stokes’ theorem turns the line integral into a surface integral of the curl <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n = \nabla_{\boldsymbol{R}}\times\boldsymbol{A}_n\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\oint_{\mathcal{C}}\boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R} = \int_{\Sigma}(\nabla_{\boldsymbol{R}}\times\boldsymbol{A}_n)\cdot\mathrm{d}\boldsymbol{S} = \int_{\Sigma}\boldsymbol{\Omega}_n\cdot\mathrm{d}\boldsymbol{S}.
+\oint_{\mathcal{C}} \boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R} = \int_{\Sigma} \boldsymbol{\Omega}_n\cdot\mathrm{d}\boldsymbol{S}.
 \]</div>
 </div>
-<p>This is the same gauge structure as in §4.1, lifted from real space to parameter space. The local phase ambiguity <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n(\boldsymbol{R})\rangle\)</span> here plays the role of <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})\)</span> in §4.1.3, and the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> plays the role of the EM gauge connection <span class="math notranslate nohighlight">\(q\boldsymbol{A}/\hbar\)</span>.</p>
-<p>Direct computation gives <span class="math notranslate nohighlight">\(\boldsymbol{A}_n \to \boldsymbol{A}_n - \nabla_{\boldsymbol{R}}\alpha\)</span>, mirroring the EM gauge transformation <span class="math notranslate nohighlight">\(\boldsymbol{A} \to \boldsymbol{A} + \nabla\alpha\)</span>. The open-vs-closed dichotomy carries over verbatim: along an <em>open</em> path, <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}\)</span> shifts by boundary terms <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{R}_{\text{end}}) - \alpha(\boldsymbol{R}_{\text{start}})\)</span> and is <em>not</em> a physical observable; for a <em>closed loop</em> the boundary terms cancel, so <span class="math notranslate nohighlight">\(\oint_{\mathcal{C}}\boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R}\)</span> is gauge-invariant — the holonomy. See <a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a> § <em>Open path vs closed loop</em> for the EM analog.</p>
-<div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: gauge dependence of the Berry connection</p>
-<p>The Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> depends on the phase convention for <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span>. If we redefine <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n(\boldsymbol{R})\rangle\)</span>, how does <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> change? Is the closed-loop integral (Berry phase) still gauge-independent?</p>
-</div>
+<p>The analogy is direct: <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> plays the role of a vector potential and <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n\)</span> the role of a magnetic field — both living on parameter space rather than real space.</p>
 </section>
-<section id="connection-to-phase-action-chapter-3">
-<h3>Connection to Phase = Action (Chapter 3)<a class="headerlink" href="#connection-to-phase-action-chapter-3" title="Link to this heading">#</a></h3>
-<p>Recall from Chapter 3 that the phase of a wavefunction encodes spacetime evolution:</p>
+<section id="same-gauge-structure-different-parameter-space">
+<h3>Same gauge structure, different parameter space<a class="headerlink" href="#same-gauge-structure-different-parameter-space" title="Link to this heading">#</a></h3>
+<p>In §4.1, the local phase ambiguity was <span class="math notranslate nohighlight">\(\psi(\boldsymbol{r}) \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{r})}\psi(\boldsymbol{r})\)</span> on <strong>real space</strong>, and the gauge connection that absorbed it was the electromagnetic vector potential <span class="math notranslate nohighlight">\(q\boldsymbol{A}/\hbar\)</span>. Here the local ambiguity <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n(\boldsymbol{R})\rangle\)</span> lives on <strong>parameter space</strong>, and the connection is the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{R})\)</span>. The structure — connection, curvature, open-path gauge dependence, closed-loop physical observable — is identical. The electromagnetic case is the special instance in which the parameter happens to be the position of the particle.</p>
+</section>
+<section id="example-spin-1-2-on-the-bloch-sphere">
+<h3>Example: spin-1/2 on the Bloch sphere<a class="headerlink" href="#example-spin-1-2-on-the-bloch-sphere" title="Link to this heading">#</a></h3>
+<p>Consider a spin-1/2 whose eigenstate is parametrised by a unit vector <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span> on the Bloch sphere (the field direction, the easy axis, or any other unit-vector parameter). Use spherical angles</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{n}}(\theta,\varphi) = (\sin\theta\cos\varphi,\,\sin\theta\sin\varphi,\,\cos\theta).
+\]</div>
+<p>The eigenstate pointing along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span> in the standard “north-pole” gauge is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vert\uparrow(\hat{\boldsymbol{n}})\rangle = \begin{pmatrix}\cos(\theta/2)\\\mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\end{pmatrix}.
+\end{split}\]</div>
+<div class="dropdown information admonition">
+<p class="admonition-title">Derivation: Berry connection and curvature for spin-1/2</p>
+<p>Use the eigenstate and its bra:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-\boldsymbol{p} &amp;= \hbar\boldsymbol{k} \sim \nabla_{\boldsymbol{x}} \Phi_{\mathrm{path}},\\
-E &amp;= \hbar\omega \sim \partial_t \Phi_{\mathrm{path}},
-\end{split}
-\end{split}\]</div>
-<p>Berry phase plays the same role in parameter space:</p>
-<div class="note admonition">
-<p class="admonition-title">Berry Phase as Generalized Action</p>
-<p>A charged particle moving through a gauge field in real space accumulates phase <span class="math notranslate nohighlight">\((q/\hbar)\int \boldsymbol{A} \cdot \mathrm{d}\boldsymbol{l}\)</span>. Similarly, a quantum system evolving adiabatically through parameter space accumulates Berry phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = \oint \boldsymbol{A}_n(\boldsymbol{R}) \cdot \mathrm{d}\boldsymbol{R}\)</span>. Both are examples of how gauge fields—whether electromagnetic or geometric—shift the phase of quantum amplitudes.</p>
-</div>
-<p>There is in fact no fundamental difference between the two. The <em>parameter</em> can be position (giving the electromagnetic gauge phase), the direction of a magnetic field (giving the spin Berry phase), or any other variable that <span class="math notranslate nohighlight">\(\hat{H}\)</span> depends on — in every case the wavefunction lives on a fiber bundle over the parameter manifold, and the gauge field is the connection on that bundle. Real-space electromagnetic phase is the Berry phase whose parameter happens to be position.</p>
-</section>
-<section id="example-spin-1-2-in-a-rotating-magnetic-field">
-<h3>Example: Spin-1/2 in a Rotating Magnetic Field<a class="headerlink" href="#example-spin-1-2-in-a-rotating-magnetic-field" title="Link to this heading">#</a></h3>
-<p>Consider a spin-1/2 in a slowly rotating magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t) = B\,\boldsymbol{n}(t)\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{n}(t)\)</span> traces a closed path on the unit sphere. The Hamiltonian is <span class="math notranslate nohighlight">\(\hat{H}(t) = -\mu B\,\hat{\boldsymbol{\sigma}} \cdot \boldsymbol{n}(t)\)</span>, with <span class="math notranslate nohighlight">\(\mu\)</span> the magnetic-moment magnitude associated with <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\sigma}}\)</span>. Parametrize the unit vector by spherical angles <span class="math notranslate nohighlight">\((\theta, \varphi)\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{n}(\theta, \varphi) = (\sin\theta\cos\varphi,\,\sin\theta\sin\varphi,\,\cos\theta).
-\]</div>
-<p>The instantaneous “spin-up” eigenstate along <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\vert\uparrow(\boldsymbol{n})\rangle = \begin{pmatrix}\cos(\theta/2)\\\mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\end{pmatrix}
-\end{split}\]</div>
-<div class="dropdown information admonition">
-<p class="admonition-title">Derivation: Berry Connection for Spin-1/2</p>
-<p>Use</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-\vert\uparrow(\boldsymbol{n})\rangle &amp;=
+\vert\uparrow(\hat{\boldsymbol{n}})\rangle &amp;=
 \begin{pmatrix}
 \cos(\theta/2)\\
 \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)
 \end{pmatrix},\\
-\langle\uparrow(\boldsymbol{n})\vert &amp;=
+\langle\uparrow(\hat{\boldsymbol{n}})\vert &amp;=
 \begin{pmatrix}
 \cos(\theta/2) &amp; \mathrm{e}^{-\mathrm{i}\varphi}\sin(\theta/2)
 \end{pmatrix}.
@@ -748,11 +703,11 @@ E &amp;= \hbar\omega \sim \partial_t \Phi_{\mathrm{path}},
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-A_\theta &amp;=\mathrm{i}\langle\uparrow\vert\partial_\theta\vert\uparrow\rangle,\\
-A_\varphi &amp;=\mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle.
+A_\theta &amp;= \mathrm{i}\langle\uparrow\vert\partial_\theta\vert\uparrow\rangle,\\
+A_\varphi &amp;= \mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle.
 \end{split}
 \end{split}\]</div>
-<p>First compute derivatives:</p>
+<p>First the derivatives:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
@@ -764,131 +719,132 @@ A_\varphi &amp;=\mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rang
 \partial_\varphi\vert\uparrow\rangle &amp;=
 \begin{pmatrix}
 0\\
-\mathrm{i}\mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)
+\mathrm{i}\,\mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)
 \end{pmatrix}.
 \end{split}
 \end{split}\]</div>
-<p>Then take inner products:</p>
+<p>Then the inner products:</p>
 <div class="math notranslate nohighlight">
 \[
 \langle\uparrow\vert\partial_\theta\vert\uparrow\rangle
-=\cos(\theta/2)\left(-\tfrac12\sin(\theta/2)\right)
-+\mathrm{e}^{-\mathrm{i}\varphi}\sin(\theta/2)\left(\tfrac12\mathrm{e}^{\mathrm{i}\varphi}\cos(\theta/2)\right)=0,
+= \cos(\theta/2)\bigl(-\tfrac12\sin(\theta/2)\bigr) + \mathrm{e}^{-\mathrm{i}\varphi}\sin(\theta/2)\bigl(\tfrac12\mathrm{e}^{\mathrm{i}\varphi}\cos(\theta/2)\bigr) = 0,
 \]</div>
-<p>so <span class="math notranslate nohighlight">\(A_\theta=0\)</span>, and</p>
+<p>so <span class="math notranslate nohighlight">\(A_\theta = 0\)</span>, and</p>
 <div class="math notranslate nohighlight">
 \[
 \langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle
-=\mathrm{e}^{-\mathrm{i}\varphi}\sin(\theta/2)
-\left(\mathrm{i}\mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\right)
-=\mathrm{i}\sin^2(\theta/2),
+= \mathrm{e}^{-\mathrm{i}\varphi}\sin(\theta/2)\bigl(\mathrm{i}\,\mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\bigr)
+= \mathrm{i}\sin^{2}(\theta/2),
 \]</div>
 <p>hence</p>
 <div class="math notranslate nohighlight">
 \[
-A_\varphi = \mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle
-= -\sin^2(\theta/2)= -\frac{1-\cos\theta}{2}.
+A_\varphi = \mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle = -\sin^{2}(\theta/2) = -\frac{1-\cos\theta}{2}.
 \]</div>
-<p>(With the opposite phase convention for <span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span>, this flips sign; physical curvature and closed-loop phase are gauge-invariant.)</p>
-<p>Now take the curl on the sphere:</p>
+<p>The curl in <span class="math notranslate nohighlight">\((\theta,\varphi)\)</span> coordinates is</p>
 <div class="math notranslate nohighlight">
 \[
-\Omega_{\theta\varphi}=\partial_\theta A_\varphi-\partial_\varphi A_\theta
-= -\frac12\sin\theta.
+\Omega_{\theta\varphi} = \partial_\theta A_\varphi - \partial_\varphi A_\theta = -\tfrac12\sin\theta.
 \]</div>
-<p>To convert from the coordinate-component curvature <span class="math notranslate nohighlight">\(\Omega_{\theta\varphi}\)</span> to a vector-field form <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span> on the unit sphere (<span class="math notranslate nohighlight">\(R=1\)</span>), match surface-flux integrals. The sphere’s vector area element is <span class="math notranslate nohighlight">\(\mathrm{d}\boldsymbol{S} = \hat{\boldsymbol{n}}\,\sin\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi\)</span>, so for any patch <span class="math notranslate nohighlight">\(S\)</span></p>
+<p>To convert the coordinate-component curvature to a vector field on the unit sphere, match surface-flux integrals. The sphere’s vector area element is <span class="math notranslate nohighlight">\(\mathrm{d}\boldsymbol{S} = \hat{\boldsymbol{n}}\,\sin\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi\)</span>, so for any patch <span class="math notranslate nohighlight">\(\Sigma\)</span></p>
 <div class="math notranslate nohighlight">
 \[
-\int_S\boldsymbol{\Omega}\cdot\mathrm{d}\boldsymbol{S} = \int_S(\boldsymbol{\Omega}\cdot\hat{\boldsymbol{n}})\sin\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi = \int_S \Omega_{\theta\varphi}\,\mathrm{d}\theta\,\mathrm{d}\varphi,
+\int_\Sigma \boldsymbol{\Omega}\cdot\mathrm{d}\boldsymbol{S} = \int_\Sigma (\boldsymbol{\Omega}\cdot\hat{\boldsymbol{n}})\sin\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi = \int_\Sigma \Omega_{\theta\varphi}\,\mathrm{d}\theta\,\mathrm{d}\varphi,
 \]</div>
-<p>which forces <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\cdot\hat{\boldsymbol{n}} = \Omega_{\theta\varphi}/\sin\theta = -\tfrac12\)</span>. The eigenstate depends only on the field direction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span>, so the curvature is purely radial,</p>
+<p>which forces <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\cdot\hat{\boldsymbol{n}} = \Omega_{\theta\varphi}/\sin\theta = -\tfrac12\)</span>. The eigenstate depends only on <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span>, so the curvature is purely radial,</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{\Omega} = -\frac12\,\hat{\boldsymbol{n}}.
+\boldsymbol{\Omega} = -\tfrac12\,\hat{\boldsymbol{n}}.
 \]</div>
-<p>This is exactly the field of a unit monopole in parameter space (cf. §4.4.3).</p>
+<p>This is exactly the field of a magnetic monopole of strength <span class="math notranslate nohighlight">\(-1/2\)</span> sitting at the centre of the Bloch sphere.</p>
 </div>
-<p>When the field direction traces a closed path subtending solid angle <span class="math notranslate nohighlight">\(\Omega\)</span>, the Berry phase is:</p>
 <div class="important admonition">
-<p class="admonition-title">Spin-1/2 Berry Phase</p>
-<p>For a closed loop <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> traced by <span class="math notranslate nohighlight">\(\boldsymbol{n}(t)\)</span> on the Bloch sphere, substituting <span class="math notranslate nohighlight">\(\boldsymbol{\Omega} = -\tfrac{1}{2}\hat{\boldsymbol{n}}\)</span> from the derivation above and using the unit-sphere identification <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\cdot\mathrm{d}\boldsymbol{S} = \mathrm{d}\Omega_{\text{solid}}\)</span> gives</p>
+<p class="admonition-title">Spin-1/2 Berry phase</p>
+<p>For a closed loop <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> that subtends solid angle <span class="math notranslate nohighlight">\(\Omega_{\text{solid}}\)</span> on the Bloch sphere, the spin-up eigenstate <span class="math notranslate nohighlight">\(\vert\uparrow(\hat{\boldsymbol{n}})\rangle\)</span> acquires Berry phase</p>
 <div class="math notranslate nohighlight">
 \[
-\Phi_{\mathrm{Berry}} = -\frac{\Omega_{\text{solid}}}{2}.
+\Phi_{\mathrm{Berry}}(\mathcal{C}) = -\frac{\Omega_{\text{solid}}}{2}.
 \]</div>
-<p>The Berry phase of a spin-1/2 equals <strong>half the solid angle</strong> subtended by the field’s path on the Bloch sphere.</p>
+<p>The Berry phase of a spin-1/2 equals <strong>minus half the solid angle</strong> subtended by the path on the Bloch sphere.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Monopole-Lorentz picture of precession</p>
+<p>The Berry curvature <span class="math notranslate nohighlight">\(\boldsymbol{\Omega} = -\hat{\boldsymbol{n}}/2\)</span> on the Bloch sphere is a radial field with no source on the sphere itself: it is the field of a magnetic monopole at the centre. The quantum spin therefore lives on a parameter sphere threaded by monopole flux.</p>
+<p>A torque from an external field pushes the spin direction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span> tangentially on the Bloch sphere — analogous to an “electric” force on a charged particle constrained to that sphere. On a sphere threaded by a monopole, the Lorentz response to such a tangential force is <em>perpendicular</em> to it: instead of relaxing along the torque, the particle moves sideways, tracing a small circle around the force axis. That sideways motion is <strong>precession</strong>. The same dictionary — the gyroscopic term as a monopole Lorentz force — appears at the classical level in <a class="reference internal" href="4-4-1-classical-spin.html"><span class="doc std std-doc">4.4.1 Classical Spin</span></a>.</p>
 </div>
 <div class="dropdown example admonition">
-<p class="admonition-title">Example: Precessing Magnetic Field</p>
-<p><strong>Problem.</strong> A spin-1/2 starts in state <span class="math notranslate nohighlight">\(\vert\uparrow\rangle\)</span>. The magnetic field is adiabatically rotated around a great circle (equator): <span class="math notranslate nohighlight">\(\boldsymbol{B}(t) = B(\cos(2\pi t/T)\hat{x} + \sin(2\pi t/T)\hat{y})\)</span> over one period <span class="math notranslate nohighlight">\(T\)</span>. Find the Berry phase.</p>
-<p><strong>Solution.</strong> The field sweeps the equator, subtending solid angle <span class="math notranslate nohighlight">\(\Omega_{\text{solid}} = 2\pi\)</span>. The Berry phase is <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = -\Omega_{\text{solid}}/2 = -\pi\)</span>. After one cycle, the state acquires <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\pi} = -1\)</span> — the state returns to itself up to a geometric sign flip.</p>
+<p class="admonition-title">Example: spin along the equator</p>
+<p><strong>Problem.</strong> A spin-1/2 eigenstate <span class="math notranslate nohighlight">\(\vert\uparrow(\hat{\boldsymbol{n}})\rangle\)</span> is carried once around a great circle of the Bloch sphere (the equator). What Berry phase does it acquire?</p>
+<p><strong>Solution.</strong> The equator bounds a hemisphere of solid angle <span class="math notranslate nohighlight">\(\Omega_{\text{solid}} = 2\pi\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_{\mathrm{Berry}} = -\frac{\Omega_{\text{solid}}}{2} = -\pi,
+\]</div>
+<p>and the eigenstate returns to itself up to a geometric sign flip <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\pi} = -1\)</span>. This is the geometric content of the statement that a spin-1/2 requires a <span class="math notranslate nohighlight">\(4\pi\)</span> rotation to return to itself.</p>
 </div>
-</section>
-<section id="physical-manifestations">
-<h3>Physical Manifestations<a class="headerlink" href="#physical-manifestations" title="Link to this heading">#</a></h3>
-<p>The Berry phase appears in measurable quantities across physics: the <strong>quantum Hall effect</strong> (Berry curvature in momentum space drives anomalous transport), <strong>topological insulators</strong> (non-trivial Berry curvature gives robust edge states), the <strong>spin Hall effect</strong> (spin-dependent Berry phases produce spin currents without magnetic fields), and <strong>molecular dynamics</strong> (geometric phases govern nonadiabatic transitions in photochemistry).</p>
-<div class="dropdown poll admonition">
-<p class="admonition-title">Poll: Adiabatic phase accumulation</p>
-<p>The Berry phase is a phase acquired by a quantum system that evolves adiabatically (slowly) around a closed cycle in parameter space, even though the system returns to the same energy eigenstate. For a spin-1/2 in a slowly rotating magnetic field, the system accumulates both a dynamic phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{dyn}} = -\int E(t) \mathrm{d}t / \hbar\)</span> and a geometric (Berry) phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}\)</span>. Which statement correctly describes the Berry phase?</p>
-<p>(A) It arises because the system cannot follow the instantaneous energy eigenstate perfectly during adiabatic evolution; the actual state differs by a phase.</p>
-<p>(B) It equals (minus) half the solid angle subtended by the closed loop in field-direction space: <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = -\Omega_{\text{solid}}/2\)</span> for the spin-up eigenstate.</p>
-<p>(C) It is proportional to the area enclosed by the closed loop in the space of magnetic field parameters.</p>
-<p>(D) Both (B) and (C).</p>
+<div class="poll dropdown admonition">
+<p class="admonition-title">Poll: Berry phase on the Bloch sphere</p>
+<p>A spin-1/2 eigenstate <span class="math notranslate nohighlight">\(\vert\uparrow(\hat{\boldsymbol{n}})\rangle\)</span> is parallel-transported around a closed loop <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> on the Bloch sphere subtending solid angle <span class="math notranslate nohighlight">\(\Omega_{\text{solid}}\)</span>. Which statement is correct?</p>
+<p>(A) The Berry phase equals the loop’s enclosed area divided by the total surface area of the Bloch sphere.</p>
+<p>(B) The Berry phase is <span class="math notranslate nohighlight">\(-\Omega_{\text{solid}}/2\)</span> — a gauge-invariant geometric quantity unrelated to the eigenenergy.</p>
+<p>(C) The Berry phase vanishes because the eigenstate returns to itself; any nonzero phase would violate single-valuedness.</p>
+<p>(D) The Berry phase depends on how fast the loop is traversed: slower traversal gives a smaller Berry phase.</p>
 </div>
 </section>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Adiabatic evolution</strong> keeps a system in its instantaneous eigenstate, acquiring both dynamical and geometric phases.</p></li>
-<li><p><strong>Berry phase</strong> <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = \oint \boldsymbol{A}_n \cdot \mathrm{d}\boldsymbol{R}\)</span> is a gauge-invariant geometric phase accumulated along a closed path in parameter space.</p></li>
-<li><p><strong>Berry connection</strong> <span class="math notranslate nohighlight">\(\boldsymbol{A}_n = \mathrm{i}\langle n\vert\nabla_{\boldsymbol{R}}\vert n\rangle\)</span> is a gauge field; <strong>Berry curvature</strong> <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n = \nabla \times \boldsymbol{A}_n\)</span> is gauge-invariant.</p></li>
-<li><p>For <strong>spin-1/2</strong>, the Berry phase equals <strong>half the solid angle</strong> subtended by the path on the Bloch sphere.</p></li>
-<li><p>Berry phases connect quantum mechanics to <strong>topological physics</strong> and explain anomalous transport.</p></li>
+<li><p>A Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R})\)</span> that depends on parameters <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> defines an eigenstate <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> at each <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>; a system in level <span class="math notranslate nohighlight">\(n\)</span> stays in level <span class="math notranslate nohighlight">\(n\)</span> as <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> moves, but the in-level eigenstate itself moves with <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>.</p></li>
+<li><p>The eigenstate is defined only up to a local phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\)</span>, a gauge freedom on parameter space.</p></li>
+<li><p>The <strong>Berry connection</strong> <span class="math notranslate nohighlight">\(\boldsymbol{A}_n = \mathrm{i}\langle n\vert\nabla_{\boldsymbol{R}}\vert n\rangle\)</span> absorbs this ambiguity; it is real and transforms like a vector potential, <span class="math notranslate nohighlight">\(\boldsymbol{A}_n \to \boldsymbol{A}_n - \nabla_{\boldsymbol{R}}\alpha\)</span>.</p></li>
+<li><p>The open-path integral of <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span> shifts by boundary terms under gauge transformations and is not physical; the closed-loop integral, the <strong>Berry phase</strong>, is gauge-invariant and physical.</p></li>
+<li><p>The <strong>Berry curvature</strong> <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n = \nabla_{\boldsymbol{R}}\times\boldsymbol{A}_n\)</span> is locally gauge-invariant; the Berry phase is the flux of <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n\)</span> through the enclosed surface.</p></li>
+<li><p>For a spin-1/2 the Berry curvature is the field of a unit monopole at the centre of the Bloch sphere, <span class="math notranslate nohighlight">\(\boldsymbol{\Omega} = -\hat{\boldsymbol{n}}/2\)</span>, and the closed-loop Berry phase is <span class="math notranslate nohighlight">\(-\Omega_{\text{solid}}/2\)</span>; precession is the Lorentz-type response of the spin in this monopole field.</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a>: Local gauge transformations and the connection one-form</p></li>
-<li><p><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a>: Topological quantization from Berry phase</p></li>
-<li><p><a class="reference internal" href="../ch3_path-integral/index.html"><span class="doc std std-doc">Ch3 Path Integral</span></a>: Phase as action and semiclassical limit</p></li>
+<li><p><a class="reference internal" href="4-1-3-gauge-invariance.html"><span class="doc std std-doc">4.1.3 Gauge Invariance</span></a>: the same connection, curvature, and holonomy structure on real space, with the electromagnetic vector potential playing the role of <span class="math notranslate nohighlight">\(\boldsymbol{A}_n\)</span>.</p></li>
+<li><p><a class="reference internal" href="4-2-2-aharonov-bohm-effect.html"><span class="doc std std-doc">4.2.2 Aharonov-Bohm Effect</span></a>: Berry phase in the special case where the parameter is the position of a charged particle around a flux-threaded loop.</p></li>
+<li><p><a class="reference internal" href="4-4-1-classical-spin.html"><span class="doc std std-doc">4.4.1 Classical Spin</span></a>: classical version of the spin-monopole dictionary; the gyroscopic term in the spin-axis equation is precisely a monopole Lorentz force.</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Spin-1/2 Berry phase.</strong> A spin-1/2 particle is placed in a magnetic field <span class="math notranslate nohighlight">\(\boldsymbol{B}(t)\)</span> that rotates slowly around a cone of half-angle <span class="math notranslate nohighlight">\(\theta_0\)</span>, completing one full cycle. The spin-up eigenstate along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}(\theta,\varphi)\)</span> is <span class="math notranslate nohighlight">\(\vert\uparrow(\theta,\varphi)\rangle = \cos(\theta/2)\vert\uparrow\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert\downarrow\rangle\)</span>.</p>
-<p>(a) Compute the Berry connection components <span class="math notranslate nohighlight">\(A_\theta = \mathrm{i}\langle\uparrow\vert\partial_\theta\vert\uparrow\rangle\)</span> and <span class="math notranslate nohighlight">\(A_\varphi = \mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle\)</span>.</p>
-<p>(b) For a circular path at <span class="math notranslate nohighlight">\(\theta = \theta_0\)</span> (the cone), compute the Berry phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = \oint A_\varphi\,\mathrm{d}\varphi\)</span>.</p>
-<p>(c) Verify that <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = -\Omega_\text{solid}/2\)</span> where <span class="math notranslate nohighlight">\(\Omega_\text{solid} = 2\pi(1-\cos\theta_0)\)</span> is the solid angle subtended by the cone.</p>
-<p><strong>2. Berry curvature on Bloch sphere.</strong> The Berry curvature in the 2D parameter space <span class="math notranslate nohighlight">\((\theta,\varphi)\)</span> is <span class="math notranslate nohighlight">\(\Omega = \partial_\theta A_\varphi - \partial_\varphi A_\theta\)</span>.</p>
-<p>(a) Using <span class="math notranslate nohighlight">\(A_\theta = 0\)</span> and <span class="math notranslate nohighlight">\(A_\varphi = -(1-\cos\theta)/2\)</span> from Problem 1, compute <span class="math notranslate nohighlight">\(\Omega(\theta,\varphi)\)</span>.</p>
-<p>(b) The Chern number is the parameter-space integral <span class="math notranslate nohighlight">\(c_1 = \tfrac{1}{2\pi}\int_0^{2\pi}\mathrm{d}\varphi\int_0^\pi\mathrm{d}\theta\,\Omega\)</span> (note: no <span class="math notranslate nohighlight">\(\sin\theta\)</span> Jacobian when integrating the curvature in the parameter coordinates). Verify <span class="math notranslate nohighlight">\(c_1 = -1\)</span> for the spin-up state, consistent with the negative Berry phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = -\Omega_{\mathrm{solid}}/2\)</span> found in Problem 1.</p>
-<p>(c) Use Stokes’ theorem to rederive the Berry phase from Problem 1(b) as a parameter-space integral of <span class="math notranslate nohighlight">\(\Omega\)</span> over the region bounded by the cone.</p>
-<p><strong>3. Gauge dependence of connection.</strong> The Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})\vert\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle\)</span> is gauge-dependent, but the Berry phase for a closed loop is not.</p>
-<p>(a) Under <span class="math notranslate nohighlight">\(\vert n\rangle \to \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n\rangle\)</span>, show that <span class="math notranslate nohighlight">\(\boldsymbol{A}_n \to \boldsymbol{A}_n - \nabla_{\boldsymbol{R}}\alpha\)</span>.</p>
-<p>(b) Show that for a closed loop, <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = \oint \boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R}\)</span> is gauge-invariant.</p>
-<p>(c) For an open path from <span class="math notranslate nohighlight">\(\boldsymbol{R}_a\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{R}_b\)</span>, explain why the line integral depends on the gauge choice. What gauge-invariant quantity can you define instead?</p>
-<p><strong>4. Spin-1 Berry phase.</strong> Extend the spin-1/2 result to spin-1.</p>
-<p>(a) For a spin-1 system, the Berry phase of eigenstate <span class="math notranslate nohighlight">\(\vert m\rangle\)</span> (<span class="math notranslate nohighlight">\(m = -1, 0, 1\)</span>) in a field rotating around a cone of half-angle <span class="math notranslate nohighlight">\(\theta_0\)</span> is <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry},m} = -m\,\Omega_\text{solid}\)</span>. Verify this for <span class="math notranslate nohighlight">\(m = 1\)</span> by computing the solid angle for a full revolution.</p>
-<p>(b) For a great circle (<span class="math notranslate nohighlight">\(\theta_0 = \pi/2\)</span>), compute <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry},m}\)</span> for each <span class="math notranslate nohighlight">\(m\)</span>. Which eigenstate acquires no geometric phase?</p>
-<p>(c) The Chern number of eigenstate <span class="math notranslate nohighlight">\(\vert m\rangle\)</span> is <span class="math notranslate nohighlight">\(c_1 = -2m\)</span> (consistent with the sign convention used in Problem 2). Verify for <span class="math notranslate nohighlight">\(m = 1\)</span> by integrating the parameter-space curvature <span class="math notranslate nohighlight">\(\Omega = -m\sin\theta\)</span> over <span class="math notranslate nohighlight">\(\int\mathrm{d}\theta\,\mathrm{d}\varphi\)</span>.</p>
-<p><strong>5. Dynamical versus geometric phase.</strong> After one adiabatic cycle of period <span class="math notranslate nohighlight">\(T\)</span>, the total phase is <span class="math notranslate nohighlight">\(\Phi_\text{total} = \Phi_\text{dyn} + \Phi_{\mathrm{Berry}}\)</span> where <span class="math notranslate nohighlight">\(\Phi_\text{dyn} = -\frac{1}{\hbar}\int_0^T E_n(t)\,\mathrm{d}t\)</span>.</p>
-<p>(a) For spin-1/2 in a field of magnitude <span class="math notranslate nohighlight">\(B\)</span> rotating at angular velocity <span class="math notranslate nohighlight">\(\omega\)</span>, compute the dynamical phase <span class="math notranslate nohighlight">\(\Phi_{\mathrm{dyn}}\)</span> after one cycle. Express it in terms of <span class="math notranslate nohighlight">\(\omega_L = \gamma B\)</span> (Larmor frequency) and <span class="math notranslate nohighlight">\(T = 2\pi/\omega\)</span>.</p>
-<p>(b) Compute the ratio <span class="math notranslate nohighlight">\(\vert\Phi_{\mathrm{Berry}}/\Phi_\text{dyn}\vert\)</span>. Show it equals <span class="math notranslate nohighlight">\(\omega/\omega_L \ll 1\)</span> in the adiabatic regime.</p>
-<p>(c) Despite being small, the Berry phase is measurable because it depends on the path geometry, not the speed. Design a measurement that isolates <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}}\)</span> from <span class="math notranslate nohighlight">\(\Phi_\text{dyn}\)</span>. (Hint: compare two spins traversing the same cone at different speeds.)</p>
-<p><strong>6. Adiabatic breakdown.</strong> The adiabatic theorem requires a nonzero energy gap <span class="math notranslate nohighlight">\(\Delta E\)</span> throughout the parameter evolution.</p>
-<p>(a) For a two-level system with gap <span class="math notranslate nohighlight">\(\Delta E\)</span>, the adiabatic condition is <span class="math notranslate nohighlight">\(\hbar\vert\dot{\boldsymbol{R}}\vert/\Delta E \ll 1\)</span>. Explain this criterion in words: why does a small gap require slower evolution?</p>
-<p>(b) If two energy levels cross (<span class="math notranslate nohighlight">\(\Delta E = 0\)</span>) at a point in parameter space, the adiabatic approximation breaks down. Explain why the Berry curvature is typically concentrated near such degeneracy points.</p>
-<p>(c) A path that encloses a degeneracy point can acquire a nontrivial Berry phase even if it stays far from the degeneracy. Explain why this is possible using the flux interpretation of Berry curvature.</p>
-<p><strong>7. Chern number and quantization.</strong> The Chern number <span class="math notranslate nohighlight">\(c_1 = \frac{1}{2\pi}\int_{S^2}\Omega\,\mathrm{d}S\)</span> over a closed surface must be an integer.</p>
-<p>(a) Verify the integer quantization for spin-<span class="math notranslate nohighlight">\(s\)</span>: the Berry curvature of <span class="math notranslate nohighlight">\(\vert m\rangle\)</span> is <span class="math notranslate nohighlight">\(\Omega = -m\sin\theta\)</span>, and <span class="math notranslate nohighlight">\(c_1 = -2m\)</span> is always an integer for allowed <span class="math notranslate nohighlight">\(m\)</span> values.</p>
-<p>(b) The integer quantization is topological — <span class="math notranslate nohighlight">\(c_1\)</span> cannot change under smooth deformations of the Hamiltonian. Explain why this implies robustness of the quantum Hall conductance <span class="math notranslate nohighlight">\(\sigma_{xy} = (e^2/h)\,c_1\)</span>.</p>
-<p>(c) Berry curvature acts like a “magnetic field in parameter space.” The Chern number is the total “flux.” How does this analogy connect to the Dirac monopole of §4.4.2?</p>
-<p><strong>8. Berry phase in crystals.</strong> In a crystalline solid, Bloch electrons have wavevector <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> in the Brillouin zone as the parameter.</p>
-<p>(a) The Berry connection is <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{k}) = \mathrm{i}\langle u_{n\boldsymbol{k}}\vert\nabla_{\boldsymbol{k}}\vert u_{n\boldsymbol{k}}\rangle\)</span>. Explain why the Brillouin zone, being a torus, is a closed manifold on which the Chern number is well-defined.</p>
-<p>(b) A nonzero Chern number <span class="math notranslate nohighlight">\(c_1 \neq 0\)</span> for a filled band implies quantized Hall conductance. Why can <span class="math notranslate nohighlight">\(c_1\)</span> not change as long as the band gap remains open?</p>
-<p>(c) Time-reversal symmetry forces <span class="math notranslate nohighlight">\(c_1 = 0\)</span> for every band. Explain why, and describe what happens in materials that break time-reversal symmetry.</p>
+<p><strong>1. Static orthogonality.</strong> Let <span class="math notranslate nohighlight">\(\hat{H}\)</span> be a parameter-independent Hermitian operator with <span class="math notranslate nohighlight">\(\hat{H}\vert n\rangle = E_n\vert n\rangle\)</span> and <span class="math notranslate nohighlight">\(\hat{H}\vert m\rangle = E_m\vert m\rangle\)</span>, <span class="math notranslate nohighlight">\(E_m \ne E_n\)</span>.</p>
+<p>(a) Evaluate <span class="math notranslate nohighlight">\(\langle m\vert\hat{H}\vert n\rangle\)</span> two ways and conclude <span class="math notranslate nohighlight">\((E_m - E_n)\langle m\vert n\rangle = 0\)</span>, hence <span class="math notranslate nohighlight">\(\langle m\vert n\rangle = 0\)</span>.</p>
+<p>(b) Argue that if the system is prepared in <span class="math notranslate nohighlight">\(\vert n\rangle\)</span> and evolves under unitary time evolution generated by <span class="math notranslate nohighlight">\(\hat{H}\)</span>, then the probability of being found in <span class="math notranslate nohighlight">\(\vert m\rangle\)</span> at any later time is exactly zero. State which property of <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> you used.</p>
+<p>(c) Now let <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{R})\)</span> depend on parameters and let <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> shift by a small amount. Explain qualitatively why the leakage probability between distinct levels remains small, while the in-level eigenstate <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle\)</span> itself can change noticeably.</p>
+<p><strong>2. Reality of the Berry connection.</strong> The Berry connection is <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{R}) = \mathrm{i}\langle n(\boldsymbol{R})\vert\nabla_{\boldsymbol{R}}\vert n(\boldsymbol{R})\rangle\)</span> for a normalised eigenstate.</p>
+<p>(a) Differentiate <span class="math notranslate nohighlight">\(\langle n(\boldsymbol{R})\vert n(\boldsymbol{R})\rangle = 1\)</span> with respect to <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> and show <span class="math notranslate nohighlight">\(\langle n\vert\nabla_{\boldsymbol{R}} n\rangle\)</span> is purely imaginary.</p>
+<p>(b) Conclude that <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{R})\)</span> is a real-valued vector field on parameter space.</p>
+<p>(c) Without the factor of <span class="math notranslate nohighlight">\(\mathrm{i}\)</span>, identify <span class="math notranslate nohighlight">\(\mathrm{Re}\langle n\vert\nabla_{\boldsymbol{R}} n\rangle\)</span> as a total derivative of a quantity that is fixed by normalisation, and explain why this real part carries no geometric information.</p>
+<p><strong>3. Gauge transformation of the connection.</strong> Under the rephasing <span class="math notranslate nohighlight">\(\vert n(\boldsymbol{R})\rangle \to \vert\tilde{n}(\boldsymbol{R})\rangle = \mathrm{e}^{\mathrm{i}\alpha(\boldsymbol{R})}\vert n(\boldsymbol{R})\rangle\)</span>:</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol{R}}\vert\tilde{n}\rangle\)</span> via the product rule and show <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{A}}_n = \boldsymbol{A}_n - \nabla_{\boldsymbol{R}}\alpha\)</span>.</p>
+<p>(b) Show that the Berry curvature <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n = \nabla_{\boldsymbol{R}}\times\boldsymbol{A}_n\)</span> is unchanged by the gauge transformation.</p>
+<p>(c) Show that the open-path line integral <span class="math notranslate nohighlight">\(\int_{\boldsymbol{R}_a}^{\boldsymbol{R}_b}\boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R}\)</span> shifts by <span class="math notranslate nohighlight">\(\alpha(\boldsymbol{R}_a) - \alpha(\boldsymbol{R}_b)\)</span>, while the closed-loop integral <span class="math notranslate nohighlight">\(\oint_{\mathcal{C}}\boldsymbol{A}_n\cdot\mathrm{d}\boldsymbol{R}\)</span> is gauge-invariant.</p>
+<p><strong>4. Spin-1/2 Berry connection.</strong> The spin-up eigenstate along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}(\theta,\varphi) = (\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)\)</span> is <span class="math notranslate nohighlight">\(\vert\uparrow(\hat{\boldsymbol{n}})\rangle = \cos(\theta/2)\vert\uparrow\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert\downarrow\rangle\)</span>.</p>
+<p>(a) Compute <span class="math notranslate nohighlight">\(A_\theta = \mathrm{i}\langle\uparrow\vert\partial_\theta\vert\uparrow\rangle\)</span> and <span class="math notranslate nohighlight">\(A_\varphi = \mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle\)</span>.</p>
+<p>(b) Compute the Berry phase along a latitude circle at fixed polar angle <span class="math notranslate nohighlight">\(\theta = \theta_0\)</span>, <span class="math notranslate nohighlight">\(\varphi \in [0, 2\pi)\)</span>.</p>
+<p>(c) Verify <span class="math notranslate nohighlight">\(\Phi_{\mathrm{Berry}} = -\Omega_{\text{solid}}/2\)</span>, where <span class="math notranslate nohighlight">\(\Omega_{\text{solid}} = 2\pi(1 - \cos\theta_0)\)</span> is the solid angle of the spherical cap above the latitude.</p>
+<p><strong>5. Two gauges on Bloch sphere.</strong> Consider two phase conventions for the spin-up eigenstate along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span>:</p>
+<ul class="simple">
+<li><p>gauge (N): <span class="math notranslate nohighlight">\(\vert\uparrow_N(\hat{\boldsymbol{n}})\rangle = \cos(\theta/2)\vert\uparrow\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert\downarrow\rangle\)</span>,</p></li>
+<li><p>gauge (S): <span class="math notranslate nohighlight">\(\vert\uparrow_S(\hat{\boldsymbol{n}})\rangle = \mathrm{e}^{-\mathrm{i}\varphi}\cos(\theta/2)\vert\uparrow\rangle + \sin(\theta/2)\vert\downarrow\rangle\)</span>.</p></li>
+</ul>
+<p>(a) Find the rephasing function <span class="math notranslate nohighlight">\(\alpha(\theta,\varphi)\)</span> that relates the two gauges and verify <span class="math notranslate nohighlight">\(\vert\uparrow_S\rangle = \mathrm{e}^{\mathrm{i}\alpha}\vert\uparrow_N\rangle\)</span>.</p>
+<p>(b) Compute <span class="math notranslate nohighlight">\(A_\varphi\)</span> in both gauges and check the two values differ by <span class="math notranslate nohighlight">\(-\partial_\varphi\alpha\)</span>, consistent with the Berry-connection transformation rule.</p>
+<p>(c) Show that the closed-loop Berry phase around any latitude <span class="math notranslate nohighlight">\(\theta = \theta_0\)</span> is the same in both gauges, even though <span class="math notranslate nohighlight">\(A_\varphi\)</span> itself is not.</p>
+<p><strong>6. Precession from monopole field.</strong> Take the Berry curvature on the Bloch sphere of unit-vector parameters to be <span class="math notranslate nohighlight">\(\boldsymbol{\Omega} = -\hat{\boldsymbol{n}}/2\)</span> — a unit monopole at the centre.</p>
+<p>(a) For a fictitious charged “particle” whose position is <span class="math notranslate nohighlight">\(\hat{\boldsymbol{n}}\)</span> on the unit sphere, write down the equation of motion that balances a tangential applied force <span class="math notranslate nohighlight">\(\boldsymbol{F}\)</span> against the Lorentz force from the monopole field <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}\)</span> (use the analogy <span class="math notranslate nohighlight">\(\boldsymbol{F}_{\mathrm{Lorentz}} \propto \dot{\hat{\boldsymbol{n}}}\times\boldsymbol{\Omega}\)</span>).</p>
+<p>(b) Show that the force-balanced trajectory traces a small circle (a latitude) about the axis along <span class="math notranslate nohighlight">\(\boldsymbol{F}\)</span>, rather than moving along <span class="math notranslate nohighlight">\(\boldsymbol{F}\)</span>.</p>
+<p>(c) Identify this small-circle motion with Larmor precession of the spin, and explain why precession is the geometric signature of a Berry curvature concentrated as a monopole field on the parameter sphere.</p>
+<p><strong>7. Berry phase in Bloch band.</strong> Consider a Bloch electron in a crystalline solid, with the wavevector <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> in the Brillouin zone (BZ) as the parameter and the periodic part <span class="math notranslate nohighlight">\(\vert u_{n\boldsymbol{k}}\rangle\)</span> of the Bloch function as the eigenstate of the Bloch Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{k})\)</span>.</p>
+<p>(a) Write the Berry connection <span class="math notranslate nohighlight">\(\boldsymbol{A}_n(\boldsymbol{k}) = \mathrm{i}\langle u_{n\boldsymbol{k}}\vert\nabla_{\boldsymbol{k}}\vert u_{n\boldsymbol{k}}\rangle\)</span> and the Berry curvature <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n(\boldsymbol{k})\)</span>. Explain why the BZ being a torus (a closed manifold) makes the total curvature flux well-defined and independent of gauge.</p>
+<p>(b) Define the Chern number <span class="math notranslate nohighlight">\(c_1 = \frac{1}{2\pi}\int_{\mathrm{BZ}}\boldsymbol{\Omega}_n\cdot\mathrm{d}\boldsymbol{S}\)</span> for a filled band, and argue that it cannot change under smooth deformations of <span class="math notranslate nohighlight">\(\hat{H}(\boldsymbol{k})\)</span> that keep the band gap open.</p>
+<p>(c) Time-reversal symmetry forces <span class="math notranslate nohighlight">\(c_1 = 0\)</span> for every band. Without proving this, explain qualitatively how time reversal constrains <span class="math notranslate nohighlight">\(\boldsymbol{\Omega}_n(\boldsymbol{k})\)</span>, and what kind of physical mechanism is required to obtain a nonzero <span class="math notranslate nohighlight">\(c_1\)</span>.</p>
 </section>
 </section>
 
@@ -960,11 +916,13 @@ A_\varphi = \mathrm{i}\langle\uparrow\vert\partial_\varphi\vert\uparrow\rangle
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-notes">Lecture Notes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-adiabatic-theorem">The Adiabatic Theorem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-and-berry-connection">Berry Phase and Berry Connection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-phase-action-chapter-3">Connection to Phase = Action (Chapter 3)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-1-2-in-a-rotating-magnetic-field">Example: Spin-1/2 in a Rotating Magnetic Field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-manifestations">Physical Manifestations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-dependent-eigenstates">Parameter-dependent eigenstates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-ambiguity-in-parameter-space">Phase ambiguity in parameter space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-connection">Berry connection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-phase-along-a-path">Berry phase along a path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berry-curvature">Berry curvature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#same-gauge-structure-different-parameter-space">Same gauge structure, different parameter space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spin-1-2-on-the-bloch-sphere">Example: spin-1/2 on the Bloch sphere</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>

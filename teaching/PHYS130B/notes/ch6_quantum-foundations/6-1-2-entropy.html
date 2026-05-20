@@ -533,15 +533,15 @@
 <li><p>What is von Neumann entropy? How does it generalize Shannon entropy to quantum states?</p></li>
 <li><p>Why is entropy zero for pure states but positive for mixed states? What does this tell you about uncertainty?</p></li>
 <li><p>How does the maximum entropy principle connect to the thermal state and the Boltzmann distribution?</p></li>
-<li><p>Why is the partition function <span class="math notranslate nohighlight">\(Z = \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> the key bridge between quantum mechanics and thermodynamics?</p></li>
-<li><p>Can you derive free energy <span class="math notranslate nohighlight">\(F = -k_B T \ln Z\)</span> from the partition function?</p></li>
+<li><p>Why is the partition function <span class="math notranslate nohighlight">\(Z = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> the key bridge between quantum mechanics and thermodynamics?</p></li>
+<li><p>Why is the Helmholtz free energy <span class="math notranslate nohighlight">\(F = -k_B T \ln Z\)</span> the natural thermodynamic potential built from the partition function? How does <span class="math notranslate nohighlight">\(F = \langle E \rangle - TS\)</span> balance energy against entropy?</p></li>
 </ul>
 </div>
 <section id="lecture-notes">
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>Von Neumann entropy <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\mathrm{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> quantifies how much we don’t know about a quantum state. It is zero for pure states (perfect knowledge) and positive for mixed states (ignorance). The maximum entropy principle shows that thermal states—those that maximize entropy subject to a constraint on average energy—are precisely the Boltzmann distributions. This simple principle bridges quantum mechanics to thermodynamics without assuming temperature a priori.</p>
+<p>Von Neumann entropy <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> quantifies how much we don’t know about a quantum state. It is zero for pure states (perfect knowledge) and positive for mixed states (ignorance). The maximum entropy principle shows that thermal states—those that maximize entropy subject to a constraint on average energy—are precisely the Boltzmann distributions. This simple principle bridges quantum mechanics to thermodynamics without assuming temperature a priori.</p>
 </section>
 <section id="von-neumann-entropy">
 <h3>Von Neumann Entropy<a class="headerlink" href="#von-neumann-entropy" title="Link to this heading">#</a></h3>
@@ -550,7 +550,7 @@
 <p>For a density matrix <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> on a <span class="math notranslate nohighlight">\(d\)</span>-dimensional Hilbert space, the <strong>von Neumann entropy</strong> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-definition">
 <span class="eqno">(208)<a class="headerlink" href="#equation-eq-entropy-definition" title="Link to this equation">#</a></span>\[
-S(\hat{\rho}) = -\mathrm{Tr}(\hat{\rho} \ln \hat{\rho})
+S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \ln \hat{\rho})
 \]</div>
 <p>Equivalently, using spectral decomposition <span class="math notranslate nohighlight">\(\hat{\rho} = \sum_i \lambda_i \vert \psi_i\rangle\langle\psi_i\vert\)</span> (eigenvalues <span class="math notranslate nohighlight">\(\lambda_i \geq 0\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-spectral">
@@ -585,11 +585,11 @@ S(\hat{\rho}) = -2 \cdot \frac{1}{2} \ln\frac{1}{2} = \ln 2
 </div>
 <div class="dropdown poll admonition">
 <p class="admonition-title">Poll: Entropy and mixedness</p>
-<p>The von Neumann entropy <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \log_2 \hat{\rho})\)</span> measures the lack of information. Which statement is correct?</p>
+<p>The von Neumann entropy <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> measures the lack of information. Which statement is correct?</p>
 <p>(A) <span class="math notranslate nohighlight">\(S = 0\)</span> if and only if <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is a pure state; <span class="math notranslate nohighlight">\(S\)</span> is maximal for the maximally mixed state.</p>
 <p>(B) <span class="math notranslate nohighlight">\(S\)</span> is always positive and increases with the number of eigenstates.</p>
 <p>(C) <span class="math notranslate nohighlight">\(S = 1\)</span> for any two-level system, regardless of whether it is pure or mixed.</p>
-<p>(D) <span class="math notranslate nohighlight">\(S\)</span> can exceed 1 for systems with more than two dimensions.</p>
+<p>(D) <span class="math notranslate nohighlight">\(S(\hat{\rho})\)</span> depends on the basis in which <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is measured.</p>
 </div>
 </section>
 <section id="properties-of-entropy">
@@ -599,7 +599,7 @@ S(\hat{\rho}) = -2 \cdot \frac{1}{2} \ln\frac{1}{2} = \ln 2
 <ol class="arabic simple">
 <li><p><strong>Non-negativity:</strong> <span class="math notranslate nohighlight">\(S(\hat{\rho}) \geq 0\)</span>, with equality iff <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is a pure state. — <em>zero</em> entropy means <em>perfect</em> knowledge of the state.</p></li>
 <li><p><strong>Upper bound:</strong> <span class="math notranslate nohighlight">\(S(\hat{\rho}) \leq \ln d\)</span> for <span class="math notranslate nohighlight">\(d\)</span>-dimensional systems, with equality iff <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{I}/d\)</span>. — <em>complete ignorance</em> corresponds to the maximally mixed state <span class="math notranslate nohighlight">\(\hat{I}/d\)</span>.</p></li>
-<li><p><strong>Unitary invariance:</strong> <span class="math notranslate nohighlight">\(S(U\hat{\rho} U^\dagger) = S(\hat{\rho})\)</span> for any unitary <span class="math notranslate nohighlight">\(U\)</span>. Entropy is unchanged by reversible quantum operations — unitaries are <em>information-preserving</em>.</p></li>
+<li><p><strong>Unitary invariance:</strong> <span class="math notranslate nohighlight">\(S(\hat{U}\hat{\rho} \hat{U}^\dagger) = S(\hat{\rho})\)</span> for any unitary <span class="math notranslate nohighlight">\(\hat{U}\)</span>. Entropy is unchanged by reversible quantum operations — unitaries are <em>information-preserving</em>.</p></li>
 <li><p><strong>Concavity:</strong> For <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>,</p></li>
 </ol>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-concavity">
@@ -625,18 +625,18 @@ H(P) = -\sum_i p_i \ln p_i
 </section>
 <section id="maximum-entropy-principle">
 <h3>Maximum Entropy Principle<a class="headerlink" href="#maximum-entropy-principle" title="Link to this heading">#</a></h3>
-<p>Among all density matrices with a fixed average energy <span class="math notranslate nohighlight">\(\langle E \rangle = \mathrm{Tr}(\hat{\rho} \hat{H})\)</span>, which one maximizes entropy?</p>
+<p>Among all density matrices with a fixed average energy <span class="math notranslate nohighlight">\(\langle E \rangle = \operatorname{Tr}(\hat{\rho} \hat{H})\)</span>, which one maximizes entropy?</p>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Maximum Entropy and Thermal State</p>
-<p>We maximize <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\mathrm{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> subject to:</p>
+<p>We maximize <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> subject to:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}) = 1\)</span> (normalization)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho} \hat{H}) = E\)</span> (fixed average energy)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\operatorname{Tr}(\hat{\rho}) = 1\)</span> (normalization)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\operatorname{Tr}(\hat{\rho} \hat{H}) = E\)</span> (fixed average energy)</p></li>
 </ul>
 <p>Using Lagrange multipliers, we form the functional:</p>
 <div class="math notranslate nohighlight">
 \[
-L = S(\hat{\rho}) - \alpha \mathrm{Tr}(\hat{\rho}) - \beta \mathrm{Tr}(\hat{\rho} \hat{H})
+L = S(\hat{\rho}) - \alpha \operatorname{Tr}(\hat{\rho}) - \beta \operatorname{Tr}(\hat{\rho} \hat{H})
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are Lagrange multipliers to be determined by the constraints.</p>
 <p>The extremum condition is:</p>
@@ -644,10 +644,10 @@ L = S(\hat{\rho}) - \alpha \mathrm{Tr}(\hat{\rho}) - \beta \mathrm{Tr}(\hat{\rho
 \[
 \frac{\delta L}{\delta \hat{\rho}} = 0
 \]</div>
-<p>Varying <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\mathrm{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> with respect to <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> yields:</p>
+<p>Varying <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \ln \hat{\rho})\)</span> with respect to <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> yields:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\delta S}{\delta \hat{\rho}} = -\frac{\delta}{\delta \hat{\rho}}[\mathrm{Tr}(\hat{\rho} \ln \hat{\rho})] = -(\ln \hat{\rho} + \hat{I} )
+\frac{\delta S}{\delta \hat{\rho}} = -\frac{\delta}{\delta \hat{\rho}}[\operatorname{Tr}(\hat{\rho} \ln \hat{\rho})] = -(\ln \hat{\rho} + \hat{I} )
 \]</div>
 <p>Thus the extremum condition becomes:</p>
 <div class="math notranslate nohighlight">
@@ -660,18 +660,18 @@ L = S(\hat{\rho}) - \alpha \mathrm{Tr}(\hat{\rho}) - \beta \mathrm{Tr}(\hat{\rho
 \[
 \ln \hat{\rho} = -\alpha' \hat{I} - \beta \hat{H} \quad \Rightarrow \quad \hat{\rho} = \mathrm{e}^{-\alpha' \hat{I} - \beta \hat{H}} = \mathrm{e}^{-\alpha'} \mathrm{e}^{-\beta \hat{H}}
 \]</div>
-<p>The factor <span class="math notranslate nohighlight">\(\mathrm{e}^{-\alpha'}\)</span> is a normalization constant. Applying the constraint <span class="math notranslate nohighlight">\(\mathrm{Tr}(\hat{\rho}) = 1\)</span>:</p>
+<p>The factor <span class="math notranslate nohighlight">\(\mathrm{e}^{-\alpha'}\)</span> is a normalization constant. Applying the constraint <span class="math notranslate nohighlight">\(\operatorname{Tr}(\hat{\rho}) = 1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\mathrm{e}^{-\alpha'} \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}}) = 1
+\mathrm{e}^{-\alpha'} \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}}) = 1
 \]</div>
-<p>Define the <strong>partition function</strong> <span class="math notranslate nohighlight">\(Z(\beta) = \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span>. Then <span class="math notranslate nohighlight">\(\mathrm{e}^{-\alpha'} = 1/Z\)</span>, so:</p>
+<p>Define the <strong>partition function</strong> <span class="math notranslate nohighlight">\(Z(\beta) = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span>. Then <span class="math notranslate nohighlight">\(\mathrm{e}^{-\alpha'} = 1/Z\)</span>, so:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{\rho}_{\text{th}} = \frac{\mathrm{e}^{-\beta \hat{H}}}{Z}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span> is the <strong>inverse temperature</strong>.</p>
-<p>The Lagrange multiplier <span class="math notranslate nohighlight">\(\beta\)</span> is determined by the constraint <span class="math notranslate nohighlight">\(\langle E \rangle = \mathrm{Tr}(\hat{\rho}_{\text{th}} \hat{H})\)</span>: it adjusts to match the prescribed average energy.</p>
+<p>The Lagrange multiplier <span class="math notranslate nohighlight">\(\beta\)</span> is determined by the constraint <span class="math notranslate nohighlight">\(\langle E \rangle = \operatorname{Tr}(\hat{\rho}_{\text{th}} \hat{H})\)</span>: it adjusts to match the prescribed average energy.</p>
 </div>
 <div class="important admonition">
 <p class="admonition-title">Thermal State and Boltzmann Distribution</p>
@@ -680,7 +680,7 @@ L = S(\hat{\rho}) - \alpha \mathrm{Tr}(\hat{\rho}) - \beta \mathrm{Tr}(\hat{\rho
 <span class="eqno">(212)<a class="headerlink" href="#equation-eq-entropy-thermal" title="Link to this equation">#</a></span>\[
 \hat{\rho}_{\text{th}} = \frac{\mathrm{e}^{-\beta \hat{H}}}{Z}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(Z = \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> is the <strong>partition function</strong> and <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(Z = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> is the <strong>partition function</strong> and <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span>.</p>
 <p>In the energy eigenbasis, diagonal elements are <strong>Boltzmann weights</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-boltzmann">
 <span class="eqno">(213)<a class="headerlink" href="#equation-eq-entropy-boltzmann" title="Link to this equation">#</a></span>\[
@@ -696,11 +696,11 @@ P_n = \frac{\mathrm{e}^{-\beta E_n}}{Z}
 </section>
 <section id="partition-function-and-thermodynamics">
 <h3>Partition Function and Thermodynamics<a class="headerlink" href="#partition-function-and-thermodynamics" title="Link to this heading">#</a></h3>
-<p>The partition function <span class="math notranslate nohighlight">\(Z(\beta) = \mathrm{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> counts the effective number of thermally accessible energy levels — it is the bridge between microscopic quantum mechanics and macroscopic thermodynamics.</p>
+<p>The partition function <span class="math notranslate nohighlight">\(Z(\beta) = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> counts the effective number of thermally accessible energy levels — it is the bridge between microscopic quantum mechanics and macroscopic thermodynamics.</p>
 <p><strong>Average Energy:</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-average-energy">
 <span class="eqno">(214)<a class="headerlink" href="#equation-eq-entropy-average-energy" title="Link to this equation">#</a></span>\[
-\langle E \rangle = \mathrm{Tr}(\hat{\rho}_{\text{th}} \hat{H}) = -\frac{\mathrm{d} \ln Z}{\mathrm{d} \beta}
+\langle E \rangle = \operatorname{Tr}(\hat{\rho}_{\text{th}} \hat{H}) = -\frac{\mathrm{d} \ln Z}{\mathrm{d} \beta}
 \]</div>
 <p><strong>Free Energy (Helmholtz):</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-entropy-free-energy">
@@ -714,7 +714,7 @@ F = -k_B T \ln Z
 <span class="eqno">(216)<a class="headerlink" href="#equation-eq-entropy-from-partition" title="Link to this equation">#</a></span>\[
 S(\hat{\rho}_{\text{th}}) = k_B [\beta \langle E \rangle + \ln Z]
 \]</div>
-<p>Equivalently, <span class="math notranslate nohighlight">\(S = -(\partial F/\partial T)|_V\)</span> (standard thermodynamic relation).</p>
+<p>Equivalently, <span class="math notranslate nohighlight">\(S = -(\partial F/\partial T)\vert_V\)</span> (standard thermodynamic relation).</p>
 <p><strong>Thermodynamic Identities:</strong></p>
 <p>The first law connects all three:</p>
 <div class="math notranslate nohighlight">
@@ -731,30 +731,36 @@ S = \frac{\langle E \rangle - F}{T} = \frac{\langle E \rangle + k_B T \ln Z}{T}
 <section id="summary">
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Von Neumann entropy:</strong> <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \log \hat{\rho}) = -\sum_i p_i \log p_i\)</span> measures classical ignorance (diagonal terms); for pure states <span class="math notranslate nohighlight">\(S = 0\)</span>, for maximally mixed <span class="math notranslate nohighlight">\(S = \log d\)</span>.</p></li>
-<li><p><strong>Purity and mixedness:</strong> <span class="math notranslate nohighlight">\(\operatorname{Tr}(\hat{\rho}^2) = 1\)</span> iff pure (<span class="math notranslate nohighlight">\(S = 0\)</span>); smaller purity means larger entropy. Both purity and entropy quantify mixedness, with <span class="math notranslate nohighlight">\(S\)</span> ranging from <span class="math notranslate nohighlight">\(0\)</span> (pure) to <span class="math notranslate nohighlight">\(\ln d\)</span> (maximally mixed).</p></li>
-<li><p><strong>Information and thermodynamics:</strong> Entropy links to information loss and heat in quantum processes. Measurement collapses entropy to a minimum (collapse to a definite outcome).</p></li>
+<li><p><strong>Von Neumann entropy:</strong> <span class="math notranslate nohighlight">\(S(\hat{\rho}) = -\operatorname{Tr}(\hat{\rho} \ln \hat{\rho}) = -\sum_i \lambda_i \ln \lambda_i\)</span> over the eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> of <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> quantifies how much is unknown about a quantum state.</p></li>
+<li><p><strong>Bounds:</strong> <span class="math notranslate nohighlight">\(0 \leq S(\hat{\rho}) \leq \ln d\)</span> — the minimum <span class="math notranslate nohighlight">\(S = 0\)</span> is attained only by pure states, the maximum <span class="math notranslate nohighlight">\(S = \ln d\)</span> only by the maximally mixed state <span class="math notranslate nohighlight">\(\hat{I}/d\)</span>.</p></li>
+<li><p><strong>Structural properties:</strong> entropy is non-negative, invariant under unitary evolution (reversible dynamics preserve information), and concave — mixing states can only increase entropy.</p></li>
+<li><p><strong>Link to information theory:</strong> <span class="math notranslate nohighlight">\(S(\hat{\rho})\)</span> is the quantum generalization of the Shannon entropy <span class="math notranslate nohighlight">\(-\sum_i p_i \ln p_i\)</span>; measuring <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> in a fixed basis returns the Shannon entropy of the outcome distribution, while <span class="math notranslate nohighlight">\(S(\hat{\rho})\)</span> itself is basis-independent and captures the intrinsic quantum uncertainty.</p></li>
+<li><p><strong>Maximum entropy principle:</strong> maximizing <span class="math notranslate nohighlight">\(S\)</span> at fixed average energy <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> singles out the thermal state <span class="math notranslate nohighlight">\(\hat{\rho}_{\text{th}} = \mathrm{e}^{-\beta \hat{H}}/Z\)</span>; the Boltzmann weights <span class="math notranslate nohighlight">\(P_n = \mathrm{e}^{-\beta E_n}/Z\)</span> are derived, not assumed, with <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span> the Lagrange multiplier fixing the energy.</p></li>
+<li><p><strong>Partition function bridges to thermodynamics:</strong> <span class="math notranslate nohighlight">\(Z = \operatorname{Tr}(\mathrm{e}^{-\beta \hat{H}})\)</span> generates the macroscopic quantities — average energy <span class="math notranslate nohighlight">\(\langle E \rangle = -\mathrm{d}\ln Z/\mathrm{d}\beta\)</span>, free energy <span class="math notranslate nohighlight">\(F = -k_B T \ln Z\)</span>, and entropy <span class="math notranslate nohighlight">\(S = k_B[\beta \langle E \rangle + \ln Z]\)</span> — connecting microscopic quantum mechanics to thermodynamics.</p></li>
 </ul>
 <div class="seealso admonition">
 <p class="admonition-title">See Also</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="6-1-1-mixed-states.html"><span class="doc std std-doc">6.1.1 Mixed States</span></a>: Density matrices, convex combinations, and the state space on which entropy is defined.</p></li>
-<li><p><a class="reference internal" href="6-1-3-quantum-statistics.html"><span class="doc std std-doc">6.1.3 Quantum Statistics</span></a>: Thermal states from entropy maximization—entropy as a variational principle.</p></li>
-<li><p><a class="reference internal" href="6-2-2-entanglement-entropy.html"><span class="doc std std-doc">6.2.2 Entanglement Entropy</span></a>: Entropy of subsystems—distinct but related use of partial trace and <span class="math notranslate nohighlight">\(\mathrm{Tr}\,\rho\ln\rho\)</span>.</p></li>
+<li><p><a class="reference internal" href="6-1-3-quantum-statistics.html"><span class="doc std std-doc">6.1.3 Quantum Statistics</span></a>: Bose-Einstein and Fermi-Dirac occupation numbers, obtained by applying the thermal state and partition function to single bosonic and fermionic modes.</p></li>
+<li><p><a class="reference internal" href="6-2-2-entanglement-entropy.html"><span class="doc std std-doc">6.2.2 Entanglement Entropy</span></a>: Entropy of subsystems—distinct but related use of partial trace and <span class="math notranslate nohighlight">\(\operatorname{Tr}\,\hat{\rho}\ln\hat{\rho}\)</span>.</p></li>
 </ul>
 </div>
 </section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
-<p><strong>1. Thermal equilibrium entropy.</strong> For a two-level system (qubit) with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H} = E_0 \vert 0\rangle\langle 0\vert  + E_1 \vert 1\rangle\langle 1\vert\)</span> where <span class="math notranslate nohighlight">\(E_0 &lt; E_1\)</span>, compute the thermal state <span class="math notranslate nohighlight">\(\hat{\rho}_{\text{th}} = \mathrm{e}^{-\beta \hat{H}}/Z\)</span> and its entropy <span class="math notranslate nohighlight">\(S(\beta)\)</span>. Show that <span class="math notranslate nohighlight">\(S \to 0\)</span> as <span class="math notranslate nohighlight">\(\beta \to \infty\)</span> (zero temperature) and <span class="math notranslate nohighlight">\(S \to \ln 2\)</span> as <span class="math notranslate nohighlight">\(\beta \to 0\)</span> (infinite temperature).</p>
-<p><strong>2. Purity of mixed qubits.</strong> A qubit is in state <span class="math notranslate nohighlight">\(\hat{\rho} = p\vert 0\rangle\langle 0\vert  + (1-p)\vert 1\rangle\langle 1\vert\)</span> (diagonal mixture). Compute entropy <span class="math notranslate nohighlight">\(S(\hat{\rho})\)</span> as a function of <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>. Show that <span class="math notranslate nohighlight">\(S\)</span> is maximized when <span class="math notranslate nohighlight">\(p = 1/2\)</span>. What is the physical interpretation?</p>
+<p><strong>1. Entropy and measurement outcomes.</strong> A density matrix <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> is measured in an orthonormal basis <span class="math notranslate nohighlight">\(\{\vert e_i\rangle\}\)</span>, producing outcome <span class="math notranslate nohighlight">\(i\)</span> with probability <span class="math notranslate nohighlight">\(p_i = \langle e_i\vert \hat{\rho}\vert e_i\rangle\)</span>.</p>
+<p>(a) Show that <span class="math notranslate nohighlight">\(\{p_i\}\)</span> is a valid probability distribution: <span class="math notranslate nohighlight">\(p_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_i p_i = 1\)</span>.</p>
+<p>(b) For the maximally mixed qubit <span class="math notranslate nohighlight">\(\hat{\rho} = \hat{I}/2\)</span>, compute the Shannon entropy <span class="math notranslate nohighlight">\(H = -\sum_i p_i \ln p_i\)</span> of the outcome distribution and verify that it equals the von Neumann entropy <span class="math notranslate nohighlight">\(S(\hat{\rho})\)</span> for <em>any</em> choice of measurement basis.</p>
+<p>(c) For the pure state <span class="math notranslate nohighlight">\(\hat{\rho} = \vert 0\rangle\langle 0\vert\)</span>, compute <span class="math notranslate nohighlight">\(H\)</span> when the measurement uses (i) the basis <span class="math notranslate nohighlight">\(\{\vert 0\rangle, \vert 1\rangle\}\)</span> and (ii) the basis <span class="math notranslate nohighlight">\(\{\vert +\rangle, \vert -\rangle\}\)</span>. Explain why <span class="math notranslate nohighlight">\(H\)</span> depends on the basis while the von Neumann entropy <span class="math notranslate nohighlight">\(S(\hat{\rho}) = 0\)</span> does not.</p>
+<p><strong>2. Entropy of a diagonal mixture.</strong> A qubit is in state <span class="math notranslate nohighlight">\(\hat{\rho} = p\vert 0\rangle\langle 0\vert  + (1-p)\vert 1\rangle\langle 1\vert\)</span> (diagonal mixture). Compute entropy <span class="math notranslate nohighlight">\(S(\hat{\rho})\)</span> as a function of <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>. Show that <span class="math notranslate nohighlight">\(S\)</span> is maximized when <span class="math notranslate nohighlight">\(p = 1/2\)</span>. What is the physical interpretation?</p>
 <p><strong>3. Entropy concavity.</strong> Prove that entropy is concave: for any <span class="math notranslate nohighlight">\(\hat{\rho}_1, \hat{\rho}_2\)</span> and <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
 S(p\hat{\rho}_1 + (1-p)\hat{\rho}_2) \geq pS(\hat{\rho}_1) + (1-p)S(\hat{\rho}_2)
 \]</div>
-<p><strong>4. Unitary invariance.</strong> Show that von Neumann entropy is invariant under unitary transformations: <span class="math notranslate nohighlight">\(S(U\hat{\rho} U^\dagger) = S(\hat{\rho})\)</span> for any unitary <span class="math notranslate nohighlight">\(U\)</span>. Why does this make physical sense?</p>
+<p><strong>4. Unitary invariance.</strong> Show that von Neumann entropy is invariant under unitary transformations: <span class="math notranslate nohighlight">\(S(\hat{U}\hat{\rho} \hat{U}^\dagger) = S(\hat{\rho})\)</span> for any unitary <span class="math notranslate nohighlight">\(\hat{U}\)</span>. Why does this make physical sense?</p>
 <p><strong>5. Thermal state entropy.</strong> For a thermal state <span class="math notranslate nohighlight">\(\hat{\rho} = \mathrm{e}^{-\beta \hat{H}}/Z\)</span> with Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span> having energy levels <span class="math notranslate nohighlight">\(E_n\)</span> with multiplicity <span class="math notranslate nohighlight">\(g_n\)</span> (degeneracy), write the partition function as <span class="math notranslate nohighlight">\(Z = \sum_n g_n \mathrm{e}^{-\beta E_n}\)</span>. Express <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> and <span class="math notranslate nohighlight">\(S\)</span> in terms of <span class="math notranslate nohighlight">\(Z(\beta)\)</span>.</p>
 <p><strong>6. Free energy relations.</strong> Starting from <span class="math notranslate nohighlight">\(F = -k_B T \ln Z\)</span>, show that <span class="math notranslate nohighlight">\(S = -(\partial F/\partial T)\vert _V\)</span> and <span class="math notranslate nohighlight">\(\langle E \rangle = F + TS\)</span>. Verify that these satisfy the first law of thermodynamics.</p>
 <p><strong>7. Partition function and entropy.</strong> A system has partition function <span class="math notranslate nohighlight">\(Z(\beta) = 1 + 2\mathrm{e}^{-\beta}\)</span>. Compute the free energy <span class="math notranslate nohighlight">\(F(\beta)\)</span>, average energy <span class="math notranslate nohighlight">\(\langle E \rangle(\beta)\)</span>, and entropy <span class="math notranslate nohighlight">\(S(\beta)\)</span>. At what temperature do <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> and <span class="math notranslate nohighlight">\(S\)</span> reach half their maximum values?</p>
