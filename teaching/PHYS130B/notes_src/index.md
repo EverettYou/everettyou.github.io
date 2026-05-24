@@ -141,3 +141,9 @@ Welcome to the course notes for Quantum Mechanics.
   - [Open Quantum Systems](ch6_quantum-foundations/6-4-open-quantum-systems)
   - §16.5
 ```
+
+---
+
+## Homework
+
+[**Homework Solutions**](homework/homework) — one file per subsection lesson, with full worked solutions to every problem.

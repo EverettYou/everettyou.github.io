@@ -7,6 +7,10 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
+# Sync homework problems from notes_src/homework/*_solutions.md into the
+# matching lecture notebook's Homework cell (idempotent; no-op if up to date).
+python3 .claude/scripts/sync_homework_to_lectures.py
+
 # Clear Sphinx cache to force full rebuild (avoids stale _static e.g. custom.css)
 rm -rf notes_src/_build
 
