@@ -319,7 +319,7 @@ jump directly to the one you need.
 
 1. Persistent current at finite temperature
 2. Many fermions on the ring
-3. Half-flux doublet under perturbation
+3. **Half-flux doublet under perturbation**
 4. Cooper pair versus electron
 5. Flux-dependent tunneling
 6. SQUID magnetometry
