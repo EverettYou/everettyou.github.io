@@ -326,6 +326,32 @@ jump directly to the one you need.
 7. Ground state phase transition
 8. Dimensional analysis
 
+**[4.3.1 Cyclotron Motion](4-3-1_solutions.md)**
+
+1. Cyclotron drift in crossed fields
+2. Helical motion and scales
+3. Drude resistivity and Hall robustness
+4. Misconception: heavier particle, larger orbit
+5. Bridge to quantum scales
+
+**[4.3.2 Landau Quantization](4-3-2_solutions.md)**
+
+1. Lowest Landau level wavefunctions
+2. Cyclotron resonance
+3. Degeneracy and filling factor
+4. Gauge equivalence
+5. Numerical scales
+6. Landau levels in graphene
+
+**[4.3.3 Quantum Hall Effect](4-3-3_solutions.md)**
+
+1. Filling factor
+2. Disorder and plateau width
+3. Charge pumping in detail
+4. Edge states and Hall transport
+5. Landau-level gap and temperature
+6. Von Klitzing constant
+
 ### Chapter 5 — Perturbation Theory
 
 **[5.1.1 Toy Model](5-1-1_solutions.md)**
