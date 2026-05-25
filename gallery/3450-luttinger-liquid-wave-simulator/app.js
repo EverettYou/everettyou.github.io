@@ -359,15 +359,32 @@ function combineRk4(phi, k1, k2, k3, k4, dt) {
   );
 }
 
-function firstDerivative(phi, dx, boundary) {
+function firstDerivative(phi, dx, boundary, velocities) {
   const pointCount = phi[0].length;
-  return phi.map((channel) => {
+  return phi.map((channel, channelIndex) => {
     const derivative = new Array(pointCount);
     if (boundary === "periodic") {
       for (let index = 0; index < pointCount; index += 1) {
         const left = index === 0 ? pointCount - 1 : index - 1;
         const right = index === pointCount - 1 ? 0 : index + 1;
         derivative[index] = (channel[right] - channel[left]) / (2 * dx);
+      }
+      return derivative;
+    }
+
+    if (boundary === "absorbing") {
+      const waveSign = K_INV_DIAG[channelIndex] * velocities[channelIndex];
+      if (waveSign > 0) {
+        for (let index = 0; index < pointCount - 1; index += 1) {
+          derivative[index] = (channel[index + 1] - channel[index]) / dx;
+        }
+        derivative[pointCount - 1] = 0;
+        return derivative;
+      }
+
+      derivative[0] = 0;
+      for (let index = 1; index < pointCount; index += 1) {
+        derivative[index] = (channel[index] - channel[index - 1]) / dx;
       }
       return derivative;
     }
@@ -414,7 +431,7 @@ function integrateAlongX(source, dx) {
 }
 
 function rhs(phi, grid, payload, gProfile) {
-  const phiX = firstDerivative(phi, grid.dx, payload.boundary);
+  const phiX = firstDerivative(phi, grid.dx, payload.boundary, payload.v_diag);
   const force = nonlinearForce(phi, gProfile);
   const source = force.map((channel, channelIndex) =>
     channel.map((value) => K_INV_DIAG[channelIndex] * value),
