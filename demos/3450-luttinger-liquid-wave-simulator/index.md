@@ -6,47 +6,245 @@ sitemap: false
 robots: noindex,nofollow
 ---
 
-<style>
-.demo-frame-wrap {
-  margin: 1.5rem 0 2rem;
-  border: 1px solid rgba(40, 44, 48, 0.16);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 12px 32px rgba(40, 44, 48, 0.08);
-}
-.demo-frame {
-  display: block;
-  width: 100%;
-  height: min(1020px, 92vh);
-  border: 0;
-  background: #f6f3ec;
-}
-.demo-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 0.75rem 0 1.5rem;
-}
-.demo-actions a {
-  display: inline-block;
-  padding: 0.55rem 0.8rem;
-  border: 1px solid rgba(40, 44, 48, 0.18);
-  border-radius: 999px;
-  text-decoration: none;
-}
-</style>
+<link rel="stylesheet" href="./app.css">
 
 This unlisted project page hosts a small numerical playground for the bosonized
-3-4-5-0 model.  The simulator runs entirely in the visitor's browser; GitHub
+3-4-5-0 model. The simulator runs entirely in the visitor's browser; GitHub
 Pages only serves static files.
 
-<div class="demo-actions">
-  <a href="./simulator.html">Open the simulator full screen</a>
+<div class="simulator-embed">
+<div class="page-shell">
+      <header class="topbar">
+        <h1>3-4-5-0 Luttinger Liquid Wave Simulator</h1>
+      </header>
+
+      <main class="monitor-layout">
+        <section class="monitor-stage" aria-label="Four channel wave monitor">
+          <div class="stage-head">
+            <div>
+              <p class="eyebrow">Four compact bosons</p>
+              <h2>Field profile on \([-\pi,\pi)\)</h2>
+            </div>
+            <div class="time-pill">
+              <span>\(t\)</span>
+              <strong id="time-label">0.00</strong>
+            </div>
+          </div>
+
+          <div class="screen-grid">
+            <article class="wave-screen">
+              <div class="screen-label">
+                <span>\(\phi_1\)</span>
+                <small>left moving</small>
+              </div>
+              <div class="axis-gutter" aria-hidden="true">
+                <span>\(\pi\)</span>
+                <span>0</span>
+                <span>\(-\pi\)</span>
+              </div>
+              <svg class="channel-plot" id="channel-plot-0" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
+            </article>
+
+            <article class="wave-screen">
+              <div class="screen-label">
+                <span>\(\phi_2\)</span>
+                <small>left moving</small>
+              </div>
+              <div class="axis-gutter" aria-hidden="true">
+                <span>\(\pi\)</span>
+                <span>0</span>
+                <span>\(-\pi\)</span>
+              </div>
+              <svg class="channel-plot" id="channel-plot-1" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
+            </article>
+
+            <article class="wave-screen">
+              <div class="screen-label">
+                <span>\(\phi_3\)</span>
+                <small>right moving</small>
+              </div>
+              <div class="axis-gutter" aria-hidden="true">
+                <span>\(\pi\)</span>
+                <span>0</span>
+                <span>\(-\pi\)</span>
+              </div>
+              <svg class="channel-plot" id="channel-plot-2" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
+            </article>
+
+            <article class="wave-screen">
+              <div class="screen-label">
+                <span>\(\phi_4\)</span>
+                <small>right moving</small>
+              </div>
+              <div class="axis-gutter" aria-hidden="true">
+                <span>\(\pi\)</span>
+                <span>0</span>
+                <span>\(-\pi\)</span>
+              </div>
+              <svg class="channel-plot" id="channel-plot-3" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
+            </article>
+          </div>
+
+          <div class="shared-x-axis" aria-label="Shared x axis">
+            <div class="x-axis-spacer"></div>
+            <div class="x-axis-spacer"></div>
+            <div class="x-axis-main">
+              <div class="x-axis-line" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="x-axis-labels">
+                <span id="x-min-label"></span>
+                <span id="x-mid-label"></span>
+                <span id="x-max-label"></span>
+              </div>
+              <div class="x-axis-name">\(x\)</div>
+            </div>
+          </div>
+
+          <div class="transport-bar">
+            <button class="transport-button icon-button" id="play-toggle" type="button" aria-label="Play simulation">
+              <i class="fa-solid fa-play" aria-hidden="true"></i>
+            </button>
+            <input id="time-slider" type="range" min="0" max="0" step="1" value="0" />
+            <select class="speed-select" id="speed-select" aria-label="Playback speed">
+              <option value="0.5">x0.5</option>
+              <option value="1" selected>x1</option>
+              <option value="1.5">x1.5</option>
+              <option value="2">x2</option>
+            </select>
+            <button class="ghost-button icon-button" id="restart-button" type="button" aria-label="Restart simulation">
+              <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+            </button>
+          </div>
+        </section>
+
+        <aside class="control-dock" aria-label="Simulation controls">
+          <form id="control-form">
+            <p id="status-text" class="status dock-status">Ready.</p>
+
+            <details class="fold-panel" open>
+              <summary>Initial condition</summary>
+              <div class="panel-body">
+                <label>
+                  <span>Launch channel</span>
+                  <select name="packet_channel">
+                    <option value="0" selected>phi_1</option>
+                    <option value="1">phi_2</option>
+                    <option value="2">phi_3</option>
+                    <option value="3">phi_4</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Amplitude</span>
+                  <input name="packet_amplitude" type="number" step="0.1" value="1.0" />
+                </label>
+                <label>
+                  <span>Center</span>
+                  <input name="packet_center" type="number" step="0.5" value="10.0" />
+                </label>
+                <label>
+                  <span>Width</span>
+                  <input name="packet_width" type="number" step="0.1" value="3.0" />
+                </label>
+              </div>
+            </details>
+
+            <details class="fold-panel" open>
+              <summary>SMG interface</summary>
+              <div class="panel-body">
+                <label>
+                  <span>SMG strength g0</span>
+                  <input name="g0" type="number" step="0.1" value="1.0" />
+                </label>
+                <label>
+                  <span>Crossover width w</span>
+                  <input name="interface_width" type="number" step="0.1" value="0.4" />
+                </label>
+                <label>
+                  <span>Interface center c</span>
+                  <input name="interface_center" type="number" step="0.5" value="-10.0" />
+                </label>
+                <fieldset class="segmented-control">
+                  <legend>Interaction side</legend>
+                  <label>
+                    <input name="interaction_side" type="radio" value="left" checked />
+                    <span>Left</span>
+                  </label>
+                  <label>
+                    <input name="interaction_side" type="radio" value="right" />
+                    <span>Right</span>
+                  </label>
+                </fieldset>
+              </div>
+            </details>
+
+            <details class="fold-panel">
+              <summary>Discretization</summary>
+              <div class="panel-body">
+                <label>
+                  <span>x min</span>
+                  <input name="x_min" type="number" step="1" value="-24.0" />
+                </label>
+                <label>
+                  <span>x max</span>
+                  <input name="x_max" type="number" step="1" value="24.0" />
+                </label>
+                <label>
+                  <span>Grid points</span>
+                  <input name="num_points" type="number" step="1" value="256" />
+                </label>
+                <label>
+                  <span>dt</span>
+                  <input name="dt" type="number" step="0.005" value="0.05" />
+                </label>
+                <label>
+                  <span>Steps</span>
+                  <input name="num_steps" type="number" step="10" value="1200" />
+                </label>
+                <label>
+                  <span>Sample every</span>
+                  <input name="sample_every" type="number" step="1" value="20" />
+                </label>
+                <label>
+                  <span>Boundary</span>
+                  <select name="boundary">
+                    <option value="neumann" selected>Neumann</option>
+                    <option value="periodic">Periodic</option>
+                  </select>
+                </label>
+              </div>
+            </details>
+
+            <details class="fold-panel">
+              <summary>Velocity matrix</summary>
+              <div class="panel-body compact-grid">
+                <label>
+                  <span>v1</span>
+                  <input name="v1" type="number" step="0.1" value="1.0" />
+                </label>
+                <label>
+                  <span>v2</span>
+                  <input name="v2" type="number" step="0.1" value="1.0" />
+                </label>
+                <label>
+                  <span>v3</span>
+                  <input name="v3" type="number" step="0.1" value="1.0" />
+                </label>
+                <label>
+                  <span>v4</span>
+                  <input name="v4" type="number" step="0.1" value="1.0" />
+                </label>
+              </div>
+            </details>
+          </form>
+        </aside>
+      </main>
+    </div>
 </div>
 
-<div class="demo-frame-wrap">
-  <iframe class="demo-frame" src="./simulator.html" title="3-4-5-0 Luttinger Liquid Wave Simulator"></iframe>
-</div>
+<script src="./app.js" defer></script>
 
 ## Setup
 
@@ -103,7 +301,7 @@ $$
 g_1(x)=g_2(x)=g(x),
 $$
 
-where \(g(x)\) is a sigmoid profile.  Choosing the interaction on the right
+where \(g(x)\) is a sigmoid profile. Choosing the interaction on the right
 uses
 
 $$
@@ -127,13 +325,13 @@ K_{IJ}\partial_t\partial_x\phi_J
 $$
 
 The compact fields are displayed modulo \(2\pi\) in the interval
-\([-\pi,\pi)\).  The shaded monitor background encodes the local strength
+\([-\pi,\pi)\). The shaded monitor background encodes the local strength
 of \(g(x)\), from white in the gapless region to a darker tone in the SMG
 region.
 
 ## Notes
 
 This demo is meant as an exploratory visualization, not yet a controlled
-scattering calculation.  In particular, the nonlinear SMG region can be stiff,
+scattering calculation. In particular, the nonlinear SMG region can be stiff,
 and the numerical result should be checked against the free-wave solution by
 setting \(g_0=0\).
