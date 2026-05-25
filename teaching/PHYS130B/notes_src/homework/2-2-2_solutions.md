@@ -232,7 +232,7 @@ in unit steps. Counting endpoints inclusive, that is $2j+1$ values, hence a $(2j
 
 <!-- ─── -->
 
-**7. Spin-1 time evolution.** A spin-1 particle is prepared in $\vert 1, +1\rangle$ and evolves under $\hat{H} = \omega\hat{J}_x^2$ (set $\hbar = 1$).
+★ **7. Spin-1 time evolution.** A spin-1 particle is prepared in $\vert 1, +1\rangle$ and evolves under $\hat{H} = \omega\hat{J}_x^2$ (set $\hbar = 1$).
 
 (a) Write $\hat{J}_x^2$ as a $3\times 3$ matrix in the $\{\vert 1,+1\rangle, \vert 1,0\rangle, \vert 1,-1\rangle\}$ basis. Show that $\vert 1,0\rangle$ is an eigenstate, and find the two eigenvalues and eigenstates of $\hat{J}_x^2$ in the $\{\vert 1,+1\rangle, \vert 1,-1\rangle\}$ subspace.
 

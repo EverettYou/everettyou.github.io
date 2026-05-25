@@ -302,7 +302,7 @@ The transformation moved the physics out of $\phi$ and into $\boldsymbol{A}$ wit
 
 <!-- ─── -->
 
-**6. Second-order bilinear covariance.** Consider the same local phase redundancy
+★ **6. Second-order bilinear covariance.** Consider the same local phase redundancy
 
 $$
 \psi' = \mathrm{e}^{\mathrm{i}q\alpha(\boldsymbol r)/\hbar}\psi.

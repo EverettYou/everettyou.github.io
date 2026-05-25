@@ -141,7 +141,7 @@ The connection to classical magnetism is exact: a classical magnetic moment $\bo
 
 <!-- ─── -->
 
-**4. Harmonic oscillator dynamics.** Consider a harmonic oscillator $\hat{H} = \hbar\omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)$, with ladder operators satisfying $[\hat{a}, \hat{a}^\dagger] = 1$. Show that:
+★ **4. Harmonic oscillator dynamics.** Consider a harmonic oscillator $\hat{H} = \hbar\omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)$, with ladder operators satisfying $[\hat{a}, \hat{a}^\dagger] = 1$. Show that:
 
 $$
 [\hat{H}, \hat{a}] = -\hbar\omega\hat{a}, \quad [\hat{H}, \hat{a}^\dagger] = \hbar\omega\hat{a}^\dagger

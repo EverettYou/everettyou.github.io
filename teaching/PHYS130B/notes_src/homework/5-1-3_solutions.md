@@ -394,7 +394,7 @@ then perturb in the coupling to remote bands.
 
 <!-- ─── -->
 
-**7. Flux ring with cosine perturbation.** Recall the flux ring of §4.2.3: a particle on a ring of radius $R$ threaded by flux $\Phi$ has angular-momentum eigenstates $\vert n\rangle$ with wavefunctions $\psi_n(\theta) = \mathrm{e}^{\mathrm{i}n\theta}/\sqrt{2\pi}$, $n \in \mathbb{Z}$, and energies
+★ **7. Flux ring with cosine perturbation.** Recall the flux ring of §4.2.3: a particle on a ring of radius $R$ threaded by flux $\Phi$ has angular-momentum eigenstates $\vert n\rangle$ with wavefunctions $\psi_n(\theta) = \mathrm{e}^{\mathrm{i}n\theta}/\sqrt{2\pi}$, $n \in \mathbb{Z}$, and energies
 
 $$
 E_n(\Phi) = E_0\,(n - \varphi)^{2}, \qquad E_0 = \frac{\hbar^{2}}{2mR^{2}}, \qquad \varphi = \Phi/\Phi_0.
