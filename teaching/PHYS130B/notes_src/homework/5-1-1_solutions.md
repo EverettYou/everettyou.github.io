@@ -117,16 +117,16 @@ large baseline.
 **3. Basis rotation: energies vs states.** Consider
 
 $$
-\hat{H}(\lambda,\phi)=\hat{Z}+\lambda\big(\cos\phi\,\hat{X}+\sin\phi\,\hat{Y}\big).
+\hat{H}(\lambda,\varphi)=\hat{Z}+\lambda\big(\cos\varphi\,\hat{X}+\sin\varphi\,\hat{Y}\big).
 $$
 
-(a) Find a unitary $\hat U(\phi)$ that rotates about $\hat Z$ and satisfies $\hat U(\phi)^\dagger\,\hat H(\lambda,\phi)\,\hat U(\phi)=\hat H(\lambda,0)$.
+(a) Find a unitary $\hat U(\varphi)$ that rotates about $\hat Z$ and satisfies $\hat U(\varphi)^\dagger\,\hat H(\lambda,\varphi)\,\hat U(\varphi)=\hat H(\lambda,0)$.
 
-(b) Use this unitary equivalence to argue that the eigenvalues $E_\pm(\lambda,\phi)$ are *independent of $\phi$* — the spectrum depends on $\lambda$ alone.
+(b) Use this unitary equivalence to argue that the eigenvalues $E_\pm(\lambda,\varphi)$ are *independent of $\varphi$* — the spectrum depends on $\lambda$ alone.
 
-(c) Show that the eigenstates *do* depend on $\phi$: $\vert\psi_\pm(\lambda,\phi)\rangle=\hat U(\phi)\,\vert\psi_\pm(\lambda,0)\rangle$.
+(c) Show that the eigenstates *do* depend on $\varphi$: $\vert\psi_\pm(\lambda,\varphi)\rangle=\hat U(\varphi)\,\vert\psi_\pm(\lambda,0)\rangle$.
 
-(d) **Implication for a perturbative series in $\phi$.** Expand $E_+(\lambda,\phi)$ as a Taylor series in $\phi$ about $\phi=0$. What must every coefficient be? Now expand $\vert\psi_+(\lambda,\phi)\rangle$ in $\phi$ — is the first-order $\phi$-correction zero? If not, compute it explicitly.
+(d) Expand $E_+(\lambda,\varphi)$ as a Taylor series in $\varphi$ about $\varphi=0$. What must every coefficient be? Now expand $\vert\psi_+(\lambda,\varphi)\rangle$ in $\varphi$ — is the first-order $\varphi$-correction zero? If not, compute it explicitly.
 
 (e) State the general principle illustrated here: when a parameter enters $\hat H$ only through a unitary similarity transformation, energies are invariant but eigenstates rotate.
 
@@ -135,22 +135,22 @@ $$
 **(a)** Take the $\hat Z$-rotation
 
 $$
-\hat U(\phi) = \mathrm{e}^{-\mathrm{i}\phi\hat Z/2}.
+\hat U(\varphi) = \mathrm{e}^{-\mathrm{i}\varphi\hat Z/2}.
 $$
 
 Its conjugation action on the Pauli operators follows from $[\hat Z,\hat X] =
-2\mathrm{i}\hat Y$ and $[\hat Z,\hat Y] = -2\mathrm{i}\hat X$. Writing $f(\phi)
-= \mathrm{e}^{\mathrm{i}\phi\hat Z/2}\hat X\,\mathrm{e}^{-\mathrm{i}\phi\hat Z/2}$,
-differentiation gives $f'(\phi) = \tfrac{\mathrm{i}}{2}\,
-\mathrm{e}^{\mathrm{i}\phi\hat Z/2}[\hat Z,\hat X]\,\mathrm{e}^{-\mathrm{i}\phi\hat Z/2}
-= -\,\mathrm{e}^{\mathrm{i}\phi\hat Z/2}\hat Y\,\mathrm{e}^{-\mathrm{i}\phi\hat Z/2}$,
+2\mathrm{i}\hat Y$ and $[\hat Z,\hat Y] = -2\mathrm{i}\hat X$. Writing $f(\varphi)
+= \mathrm{e}^{\mathrm{i}\varphi\hat Z/2}\hat X\,\mathrm{e}^{-\mathrm{i}\varphi\hat Z/2}$,
+differentiation gives $f'(\varphi) = \tfrac{\mathrm{i}}{2}\,
+\mathrm{e}^{\mathrm{i}\varphi\hat Z/2}[\hat Z,\hat X]\,\mathrm{e}^{-\mathrm{i}\varphi\hat Z/2}
+= -\,\mathrm{e}^{\mathrm{i}\varphi\hat Z/2}\hat Y\,\mathrm{e}^{-\mathrm{i}\varphi\hat Z/2}$,
 and likewise for $\hat Y$; solving the coupled pair with $f(0)=\hat X$,
 $g(0)=\hat Y$ yields
 
 $$
-\hat U^\dagger \hat X\,\hat U = \hat X\cos\phi - \hat Y\sin\phi,
+\hat U^\dagger \hat X\,\hat U = \hat X\cos\varphi - \hat Y\sin\varphi,
 \qquad
-\hat U^\dagger \hat Y\,\hat U = \hat X\sin\phi + \hat Y\cos\phi,
+\hat U^\dagger \hat Y\,\hat U = \hat X\sin\varphi + \hat Y\cos\varphi,
 \qquad
 \hat U^\dagger \hat Z\,\hat U = \hat Z.
 $$
@@ -159,62 +159,62 @@ Therefore
 
 $$
 \begin{split}
-\hat U^\dagger \hat H(\lambda,\phi)\,\hat U
-&= \hat Z + \lambda\Big[\cos\phi\,(\hat X\cos\phi - \hat Y\sin\phi) + \sin\phi\,(\hat X\sin\phi + \hat Y\cos\phi)\Big]\\
-&= \hat Z + \lambda\big[\hat X(\cos^2\phi+\sin^2\phi) + \hat Y(-\cos\phi\sin\phi+\sin\phi\cos\phi)\big]\\
+\hat U^\dagger \hat H(\lambda,\varphi)\,\hat U
+&= \hat Z + \lambda\Big[\cos\varphi\,(\hat X\cos\varphi - \hat Y\sin\varphi) + \sin\varphi\,(\hat X\sin\varphi + \hat Y\cos\varphi)\Big]\\
+&= \hat Z + \lambda\big[\hat X(\cos^2\varphi+\sin^2\varphi) + \hat Y(-\cos\varphi\sin\varphi+\sin\varphi\cos\varphi)\big]\\
 &= \hat Z + \lambda\hat X = \hat H(\lambda,0).
 \end{split}
 $$
 
-So $\hat U(\phi) = \mathrm{e}^{-\mathrm{i}\phi\hat Z/2}$ does the job:
-geometrically it rotates the in-plane field direction $(\cos\phi,\sin\phi)$
+So $\hat U(\varphi) = \mathrm{e}^{-\mathrm{i}\varphi\hat Z/2}$ does the job:
+geometrically it rotates the in-plane field direction $(\cos\varphi,\sin\varphi)$
 back onto the $x$-axis.
 
-**(b)** Rearranging part (a), $\hat H(\lambda,\phi) = \hat U(\phi)\,\hat
-H(\lambda,0)\,\hat U(\phi)^\dagger$. This is a **unitary similarity
+**(b)** Rearranging part (a), $\hat H(\lambda,\varphi) = \hat U(\varphi)\,\hat
+H(\lambda,0)\,\hat U(\varphi)^\dagger$. This is a **unitary similarity
 transformation**, and similar matrices have identical characteristic
 polynomials, hence identical eigenvalues. Therefore
 
 $$
-E_\pm(\lambda,\phi) = E_\pm(\lambda,0) = \pm\sqrt{1+\lambda^2},
+E_\pm(\lambda,\varphi) = E_\pm(\lambda,0) = \pm\sqrt{1+\lambda^2},
 $$
 
-independent of $\phi$ — the spectrum depends on the coupling strength
-$\lambda$ alone, not on the in-plane direction $\phi$.
+independent of $\varphi$ — the spectrum depends on the coupling strength
+$\lambda$ alone, not on the in-plane direction $\varphi$.
 
 **(c)** Let $\hat H(\lambda,0)\,\vert\psi_\pm(\lambda,0)\rangle = E_\pm\,
-\vert\psi_\pm(\lambda,0)\rangle$. Apply $\hat U(\phi)$ and insert $\hat
+\vert\psi_\pm(\lambda,0)\rangle$. Apply $\hat U(\varphi)$ and insert $\hat
 U^\dagger\hat U = \hat 1$:
 
 $$
-\hat H(\lambda,\phi)\,\hat U(\phi)\vert\psi_\pm(\lambda,0)\rangle
+\hat H(\lambda,\varphi)\,\hat U(\varphi)\vert\psi_\pm(\lambda,0)\rangle
 = \hat U\hat H(\lambda,0)\hat U^\dagger\,\hat U\vert\psi_\pm(\lambda,0)\rangle
-= E_\pm\,\hat U(\phi)\vert\psi_\pm(\lambda,0)\rangle.
+= E_\pm\,\hat U(\varphi)\vert\psi_\pm(\lambda,0)\rangle.
 $$
 
-So $\hat U(\phi)\vert\psi_\pm(\lambda,0)\rangle$ is an eigenstate of $\hat
-H(\lambda,\phi)$ with the same eigenvalue, i.e.
+So $\hat U(\varphi)\vert\psi_\pm(\lambda,0)\rangle$ is an eigenstate of $\hat
+H(\lambda,\varphi)$ with the same eigenvalue, i.e.
 
 $$
-\vert\psi_\pm(\lambda,\phi)\rangle = \hat U(\phi)\,\vert\psi_\pm(\lambda,0)\rangle
+\vert\psi_\pm(\lambda,\varphi)\rangle = \hat U(\varphi)\,\vert\psi_\pm(\lambda,0)\rangle
 $$
 
-(up to an irrelevant overall phase). The eigenstates **do** depend on $\phi$:
-they are carried around the $z$-axis by $\hat U(\phi)$.
+(up to an irrelevant overall phase). The eigenstates **do** depend on $\varphi$:
+they are carried around the $z$-axis by $\hat U(\varphi)$.
 
-**(d)** Since $E_+(\lambda,\phi) = \sqrt{1+\lambda^2}$ is exactly constant in
-$\phi$, its Taylor series about $\phi=0$ is just that constant: **every
-coefficient of $\phi^k$ with $k\ge 1$ vanishes.** A perturbative expansion of
-the *energy* in $\phi$ is trivial at all orders.
+**(d)** Since $E_+(\lambda,\varphi) = \sqrt{1+\lambda^2}$ is exactly constant in
+$\varphi$, its Taylor series about $\varphi=0$ is just that constant: **every
+coefficient of $\varphi^k$ with $k\ge 1$ vanishes.** A perturbative expansion of
+the *energy* in $\varphi$ is trivial at all orders.
 
 The *state* is a different story. Expand the rotation:
 
 $$
-\vert\psi_+(\lambda,\phi)\rangle = \mathrm{e}^{-\mathrm{i}\phi\hat Z/2}\vert\psi_+(\lambda,0)\rangle
-= \Big[\hat 1 - \frac{\mathrm{i}\phi}{2}\hat Z + O(\phi^2)\Big]\vert\psi_+(\lambda,0)\rangle.
+\vert\psi_+(\lambda,\varphi)\rangle = \mathrm{e}^{-\mathrm{i}\varphi\hat Z/2}\vert\psi_+(\lambda,0)\rangle
+= \Big[\hat 1 - \frac{\mathrm{i}\varphi}{2}\hat Z + O(\varphi^2)\Big]\vert\psi_+(\lambda,0)\rangle.
 $$
 
-The first-order $\phi$-correction is
+The first-order $\varphi$-correction is
 
 $$
 \vert\psi_+^{(1)}\rangle = -\frac{\mathrm{i}}{2}\,\hat Z\,\vert\psi_+(\lambda,0)\rangle,
@@ -231,7 +231,7 @@ $$
 \vert\psi_+^{(1)}\rangle = -\frac{\mathrm{i}}{2}\Big(\cos\tfrac\theta2\,\vert 0\rangle - \sin\tfrac\theta2\,\vert 1\rangle\Big).
 $$
 
-So a perturbative series in $\phi$ has all-zero energy coefficients but a
+So a perturbative series in $\varphi$ has all-zero energy coefficients but a
 genuine, computable first-order state correction.
 
 **(e)** **Principle.** When a parameter enters the Hamiltonian only through a
@@ -417,13 +417,13 @@ the second.
 
 <!-- ─── -->
 
-**7. Near-degeneracy diagnosis.** Consider
+**7. Near-degeneracy diagnosis.** Consider the Hamiltonian (with $\epsilon>0$)
 
 $$
 \hat{H}(\lambda,\epsilon)=\begin{pmatrix}
 \epsilon & \lambda \\
 \lambda & -\epsilon
-\end{pmatrix}, \qquad \epsilon>0.
+\end{pmatrix}.
 $$
 
 (a) Compute the exact eigenvalues and expand for small $\lambda$ at fixed $\epsilon$.

@@ -129,13 +129,13 @@ $$
 
 with real $\mu,\lambda$ and $\vert\mu\vert,\vert\lambda\vert\ll\Delta$.
 
-(a) Compute $\hat P_d\hat V\hat P_d$ in $\{\vert 1\rangle,\vert 2\rangle\}$, where $\hat P_d$ projects onto the degenerate subspace. Read off the first-order splitting.
+(a) Compute $\hat P_d\hat V\hat P_d$ in $\{\vert 1\rangle,\vert 2\rangle\}$, where $\hat P_d$ projects onto the degenerate subspace. Read off the first-order splitting, and identify the good zeroth-order basis $\vert\pm\rangle=(\vert 1\rangle\pm\vert 2\rangle)/\sqrt 2$.
 
-(b) Set $\mu=0$. Build the second-order effective Hamiltonian $\hat H^{(2)}_{\mathrm{eff}}$ in $\{\vert 1\rangle,\vert 2\rangle\}$ from virtual transitions through $\vert 3\rangle$. Diagonalize and identify the bright state with shift $-2\lambda^2/\Delta$ and the dark state with zero shift.
+(b) The lecture's worked Example on the three-level bright/dark mechanism constructs the second-order effective Hamiltonian for the case $\mu=0$ by summing virtual transitions through $\vert 3\rangle$. Quote that result, specialized to equal cross-manifold couplings, and write the second-order block $(\hat H^{\text{eff}})^{(2)}$ as a $2\times 2$ matrix in $\{\vert 1\rangle,\vert 2\rangle\}$ — do not rebuild it from the virtual-transition sum.
 
-(c) Still with $\mu=0$, show that the dark state is an *exact* zero-energy eigenstate of $\hat H_0+\hat V$ (not only at second order), and explain in one sentence why.
+(c) Restore $\mu\ne 0$. Show that the first-order matrix from (a) and the second-order matrix from (b) commute, so a single basis diagonalizes both. Write the two ground-manifold energies through order $\mu$ and $\lambda^2$.
 
-(d) Restore $\mu\ne 0$. Show that for the symmetric coupling here (equal $\vert 3\rangle\langle 1\vert$ and $\vert 3\rangle\langle 2\vert$ matrix elements), $\hat P_d\hat V\hat P_d=\mu\hat X$ and the second-order rank-1 matrix $\propto\begin{pmatrix}1&1\\1&1\end{pmatrix}$ commute, so the two splittings share an eigenbasis and combine independently. Write the two ground-manifold energies to order $\mu+\lambda^2$.
+(d) Show that the dark state $\vert-\rangle=(\vert 1\rangle-\vert 2\rangle)/\sqrt 2$ is an *exact* eigenstate of $\hat H_0+\hat V$ for any $\mu,\lambda$, and find its exact eigenvalue. Contrast this with the Example's $\mu=0$ dark state, and explain in one sentence what protects $\vert-\rangle$ from the coupling to $\vert 3\rangle$.
 
 **Solution.**
 
@@ -153,104 +153,109 @@ $$
 
 in the ordered basis $(\vert1\rangle,\vert2\rangle)$. Its eigenvalues are
 $\pm\mu$, with eigenvectors $\vert\pm\rangle=(\vert1\rangle\pm\vert2\rangle)/\sqrt2$.
-The first-order energies in the manifold are therefore $E^{(1)}_\pm=\pm\mu$:
-the degeneracy is lifted already at first order, with splitting $2\mu$, and the
-first-order good basis is $\{\vert+\rangle,\vert-\rangle\}$.
+The first-order energies in the manifold are $E^{(1)}_\pm=\pm\mu$: the degeneracy
+is lifted already at first order, with splitting $2\mu$. Because the two
+eigenvalues $\pm\mu$ are distinct, the diagonalizing basis is forced — the good
+zeroth-order basis is $\vert\pm\rangle=(\vert1\rangle\pm\vert2\rangle)/\sqrt2$.
 
-**(b)** Set $\mu=0$, so
-$\hat V=\lambda(\vert3\rangle\langle1\vert+\vert3\rangle\langle2\vert+\vert1\rangle\langle3\vert+\vert2\rangle\langle3\vert)$.
-The first-order block $\hat P_d\hat V\hat P_d$ now vanishes entirely, so any
-splitting is a second-order effect. The only state outside the manifold is
-$\vert3\rangle$ at energy $\Delta$, so for $i,j\in\{1,2\}$
-
-$$
-(H^{(2)}_{\mathrm{eff}})_{ij}
-=\sum_{m\notin d}\frac{\langle i\vert\hat V\vert m\rangle\langle m\vert\hat V\vert j\rangle}{E_d-E_m}
-=-\frac{1}{\Delta}\langle i\vert\hat V\vert3\rangle\langle3\vert\hat V\vert j\rangle.
-$$
-
-Every coupling matrix element is the same: $\langle i\vert\hat V\vert3\rangle=\lambda$
-and $\langle3\vert\hat V\vert j\rangle=\lambda$ for $i,j\in\{1,2\}$. Hence all
-four entries equal $-\lambda^2/\Delta$:
+**(b)** With $\mu=0$ the first-order block vanishes, and the surviving
+perturbation $\lambda(\vert3\rangle\langle1\vert+\vert3\rangle\langle2\vert+\mathrm{h.c.})$
+is exactly the cross-manifold coupling of the lecture's worked Example
+(*Three-Level Bright/Dark Mechanism*), with the Example's two couplings
+$\lambda_1,\lambda_2$ both set equal to $\lambda$. That Example sums the virtual
+transitions through $\vert3\rangle$ once and for all and returns the rank-one
+projector form
 
 $$
-\hat H^{(2)}_{\mathrm{eff}}=-\frac{\lambda^2}{\Delta}\begin{pmatrix}1&1\\1&1\end{pmatrix}.
-$$
-
-The matrix $\begin{pmatrix}1&1\\1&1\end{pmatrix}$ is rank one, with eigenvalue
-$2$ (eigenvector $\vert+\rangle=(\vert1\rangle+\vert2\rangle)/\sqrt2$) and
-eigenvalue $0$ (eigenvector $\vert-\rangle=(\vert1\rangle-\vert2\rangle)/\sqrt2$).
-Therefore
-
-$$
-\hat H^{(2)}_{\mathrm{eff}}\vert+\rangle=-\frac{2\lambda^2}{\Delta}\vert+\rangle,
+(\hat H^{\text{eff}})^{(2)}=-\frac{1}{\Delta}\vert\lambda\rangle\langle\lambda\vert,
 \qquad
-\hat H^{(2)}_{\mathrm{eff}}\vert-\rangle=0.
+\vert\lambda\rangle=\lambda_1\vert1\rangle+\lambda_2\vert2\rangle.
 $$
 
-The **bright state** is $\vert B\rangle=\vert+\rangle=(\vert1\rangle+\vert2\rangle)/\sqrt2$,
-with second-order shift $-2\lambda^2/\Delta$; the **dark state** is
-$\vert D\rangle=\vert-\rangle=(\vert1\rangle-\vert2\rangle)/\sqrt2$, with zero
-shift.
-
-**(c)** Still $\mu=0$. Check $\vert D\rangle=(\vert1\rangle-\vert2\rangle)/\sqrt2$
-against $\hat H_0+\hat V$ directly.
-
-For $\hat H_0$: $\hat H_0\vert D\rangle=\Delta\vert3\rangle\langle3\vert D\rangle=0$,
-since $\vert D\rangle$ has no $\vert3\rangle$ component.
-
-For $\hat V$, group the terms by which bra they carry:
+Specializing to equal couplings $\lambda_1=\lambda_2=\lambda$ gives
+$\vert\lambda\rangle=\lambda(\vert1\rangle+\vert2\rangle)$, so
 
 $$
-\hat V=\lambda\,\vert3\rangle(\langle1\vert+\langle2\vert)+\lambda\,(\vert1\rangle+\vert2\rangle)\langle3\vert.
+(\hat H^{\text{eff}})^{(2)}
+=-\frac{\lambda^2}{\Delta}(\vert1\rangle+\vert2\rangle)(\langle1\vert+\langle2\vert)
+=-\frac{\lambda^2}{\Delta}\begin{pmatrix}1&1\\1&1\end{pmatrix}
 $$
 
-Acting on $\vert D\rangle$: the second term gives
-$\lambda(\vert1\rangle+\vert2\rangle)\langle3\vert D\rangle=0$ because
-$\langle3\vert D\rangle=0$; the first term gives
+in the ordered basis $(\vert1\rangle,\vert2\rangle)$ — the Example's result read
+off at $\lambda_1=\lambda_2$, with no need to re-sum the virtual transitions.
+
+**(c)** Restore $\mu\neq0$. From (a) the first-order block is $\mu\hat X$; from
+(b) the second-order block is $-\tfrac{\lambda^2}{\Delta}M$ with
+$M=\begin{pmatrix}1&1\\1&1\end{pmatrix}=\hat I+\hat X$. The two matrices commute:
+
+$$
+\Big[\mu\hat X,\;-\tfrac{\lambda^2}{\Delta}(\hat I+\hat X)\Big]
+=-\frac{\mu\lambda^2}{\Delta}\big([\hat X,\hat I]+[\hat X,\hat X]\big)=0.
+$$
+
+Commuting Hermitian matrices share an eigenbasis. Here it is
+$\{\vert+\rangle,\vert-\rangle\}$, the eigenbasis of $\hat X$, which also
+diagonalizes $M$ ($M\vert+\rangle=2\vert+\rangle$, $M\vert-\rangle=0$). So the
+single basis $\{\vert+\rangle,\vert-\rangle\}$ diagonalizes both blocks, and the
+first-order ($\mu$) and second-order ($\lambda^2$) shifts simply add on each
+vector. The two ground-manifold energies, through order $\mu$ and $\lambda^2$,
+are
+
+$$
+E_+=+\mu-\frac{2\lambda^2}{\Delta},
+\qquad
+E_-=-\mu.
+$$
+
+The bright state $\vert+\rangle$ collects both the $+\mu$ first-order shift and
+the $-2\lambda^2/\Delta$ second-order shift; the dark state $\vert-\rangle$
+collects only the $-\mu$ first-order shift.
+
+**(d)** The dark state $\vert-\rangle=(\vert1\rangle-\vert2\rangle)/\sqrt2$ is an
+*exact* eigenstate of $\hat H_0+\hat V$ for any $\mu,\lambda$ — no truncation in
+perturbation order. Check the three pieces directly.
+
+For $\hat H_0$: $\hat H_0\vert-\rangle=\Delta\vert3\rangle\langle3\vert-\rangle=0$,
+since $\vert-\rangle$ has no $\vert3\rangle$ component.
+
+For the $\lambda$ part, group its terms by which bra they carry:
+
+$$
+\lambda(\vert3\rangle\langle1\vert+\vert3\rangle\langle2\vert+\mathrm{h.c.})
+=\lambda\,\vert3\rangle(\langle1\vert+\langle2\vert)
++\lambda\,(\vert1\rangle+\vert2\rangle)\langle3\vert.
+$$
+
+Acting on $\vert-\rangle$: the $(\vert1\rangle+\vert2\rangle)\langle3\vert$ term
+gives $0$ because $\langle3\vert-\rangle=0$; the
+$\vert3\rangle(\langle1\vert+\langle2\vert)$ term gives
 
 $$
 \lambda\,\vert3\rangle(\langle1\vert+\langle2\vert)\frac{\vert1\rangle-\vert2\rangle}{\sqrt2}
 =\lambda\,\vert3\rangle\,\frac{1-1}{\sqrt2}=0.
 $$
 
-So $\hat V\vert D\rangle=0$ and $(\hat H_0+\hat V)\vert D\rangle=0$ — exactly,
-for any $\lambda$, not merely at second order. In one sentence: the
-perturbation couples $\vert3\rangle$ only to the *symmetric* combination
-$\vert1\rangle+\vert2\rangle$, so the antisymmetric $\vert D\rangle$ lies in the
-kernel of $\hat V$ (the two coupling paths $3\to1$ and $3\to2$ interfere
-destructively) and stays decoupled from $\vert3\rangle$ to all orders.
+So the $\lambda$ part annihilates $\vert-\rangle$.
 
-**(d)** Restore $\mu\neq0$. From (a), $\hat P_d\hat V\hat P_d=\mu\hat X$. From
-(b), the second-order matrix is $-\tfrac{\lambda^2}{\Delta}M$ with
-$M=\begin{pmatrix}1&1\\1&1\end{pmatrix}=\hat I+\hat X$. They commute:
+For the $\mu$ part: $\mu\hat X\vert-\rangle=-\mu\vert-\rangle$, since
+$\hat X\vert-\rangle=-\vert-\rangle$.
+
+Adding the three pieces,
 
 $$
-\Big[\mu\hat X,\;-\tfrac{\lambda^2}{\Delta}(\hat I+\hat X)\Big]
-=-\tfrac{\mu\lambda^2}{\Delta}\big([\hat X,\hat I]+[\hat X,\hat X]\big)=0.
+(\hat H_0+\hat V)\vert-\rangle=-\mu\,\vert-\rangle,
 $$
 
-Commuting Hermitian matrices share an eigenbasis — here
-$\{\vert+\rangle,\vert-\rangle\}$, the eigenbasis of $\hat X$, which also
-diagonalizes $M$ ($M\vert+\rangle=2\vert+\rangle$, $M\vert-\rangle=0$). So the
-first-order ($\mu$) and second-order ($\lambda^2$) contributions add
-independently on each of $\vert+\rangle,\vert-\rangle$. The two ground-manifold
-energies, kept to first order in $\mu$ and second order in $\lambda$, are
+so $\vert-\rangle$ is an exact eigenstate with exact eigenvalue $E_-=-\mu$.
 
-$$
-E_B=E_+=+\mu-\frac{2\lambda^2}{\Delta},
-\qquad
-E_D=E_-=-\mu.
-$$
-
-The bright state $\vert B\rangle=\vert+\rangle$ collects the $+\mu$ first-order
-shift *and* the $-2\lambda^2/\Delta$ second-order shift; the dark state
-$\vert D\rangle=\vert-\rangle$ collects only the $-\mu$ first-order shift and
-stays dark ($0$ at second order). In fact $\vert D\rangle$ remains an *exact*
-eigenstate even for $\mu\neq0$: $\hat H_0\vert D\rangle=0$, the $\lambda$ part
-of $\hat V$ still annihilates it as in (c), and the $\mu$ part gives
-$\mu\hat X\vert D\rangle=-\mu\vert D\rangle$, so $(\hat H_0+\hat V)\vert D\rangle=-\mu\vert D\rangle$
-with $E_D=-\mu$ holding to all orders.
+Contrast with the Example, where $\mu=0$ and the dark state is an exact
+*zero*-energy eigenstate; here $\mu\neq0$ slides the dark level down to $-\mu$,
+but it stays exact — the perturbative $E_-=-\mu$ of (c) receives no further
+corrections. In one sentence: the $\lambda$ coupling reaches $\vert3\rangle$
+only through the *symmetric* combination $\vert1\rangle+\vert2\rangle$, so the
+antisymmetric $\vert-\rangle$ lies in the kernel of the $\lambda$ part of
+$\hat V$ — the two paths $3\to1$ and $3\to2$ interfere destructively — and never
+mixes with $\vert3\rangle$ at any order.
 
 <!-- ─── -->
 
@@ -307,7 +312,7 @@ same $m$ in the shell and so cannot be split until second order.
 <!-- ─── -->
 
 **5. Residual degeneracy.** For
-$\hat H_{\text{eff}}=\begin{pmatrix}a&b\\b^*&c\end{pmatrix}$:
+$\hat H^{\text{eff}}=\begin{pmatrix}a&b\\b^*&c\end{pmatrix}$:
 
 (a) find eigenvalues,
 
@@ -317,7 +322,7 @@ $\hat H_{\text{eff}}=\begin{pmatrix}a&b\\b^*&c\end{pmatrix}$:
 
 **Solution.**
 
-**(a)** For $\hat H_{\text{eff}}=\begin{pmatrix}a&b\\b^*&c\end{pmatrix}$
+**(a)** For $\hat H^{\text{eff}}=\begin{pmatrix}a&b\\b^*&c\end{pmatrix}$
 (Hermitian, so $a,c$ real), the characteristic equation is
 $(a-E)(c-E)-\vert b\vert^2=0$, i.e. $E^2-(a+c)E+(ac-\vert b\vert^2)=0$. Hence
 
@@ -334,18 +339,18 @@ $$
 a=c\qquad\text{and}\qquad b=0,
 $$
 
-i.e. $\hat H_{\text{eff}}=a\,\hat I$ is a multiple of the identity. Then the
+i.e. $\hat H^{\text{eff}}=a\,\hat I$ is a multiple of the identity. Then the
 manifold stays degenerate: first-order perturbation theory produces no
 splitting at all.
 
-**(c)** When $\hat H^{(1)}_{\text{eff}}\propto\hat I$, the first-order matrix is
+**(c)** When $(\hat H^{\text{eff}})^{(1)}\propto\hat I$, the first-order matrix is
 itself degenerate and carries no information — every basis diagonalizes it, so
 it can pick out neither a good basis nor a splitting. One must build the
 *second-order* effective Hamiltonian, the matrix of virtual excursions to
 states outside the manifold,
 
 $$
-(H^{(2)}_{\text{eff}})_{\alpha\beta}
+(H^{\text{eff}})_{\alpha\beta}^{(2)}
 =\sum_{m\notin d}\frac{\langle\alpha\vert\hat V\vert m\rangle\langle m\vert\hat V\vert\beta\rangle}{E_d-E_m},
 $$
 
@@ -412,13 +417,13 @@ At $\varphi = 1/2$ the two lowest branches $\vert 0\rangle$ and $\vert 1\rangle$
 
 (a) Compute the matrix elements $\langle n\vert\cos\theta\vert m\rangle$ in the angular-momentum basis. Show that $\hat V$ couples only **nearest neighbours** $n \leftrightarrow n \pm 1$, and identify the value of the coupling.
 
-(b) At $\varphi = 1/2$, build the $2 \times 2$ effective Hamiltonian $\hat H_\text{eff}$ for the doublet at first order in $\hat V$ and write it in the form $\hat H_\text{eff} = (\text{const})\,\hat I + (\text{coupling})\,\hat\sigma^{x}$.
+(b) At $\varphi = 1/2$, build the $2 \times 2$ effective Hamiltonian $\hat H^{\text{eff}}$ for the doublet at first order in $\hat V$ and write it in the form $\hat H^{\text{eff}} = (\text{const})\,\hat I + (\text{coupling})\,\hat\sigma^{x}$.
 
-(c) Diagonalise $\hat H_\text{eff}$ to obtain the first-order energy shifts and the gap $\Delta E$ that opens at the crossing. Identify the **good zeroth-order basis** — the symmetric and antisymmetric combinations of $\vert 0\rangle$ and $\vert 1\rangle$ — and write the corresponding probability densities $\vert\psi_{\pm}(\theta)\vert^{2}$.
+(c) Diagonalise $\hat H^{\text{eff}}$ to obtain the first-order energy shifts and the gap $\Delta E$ that opens at the crossing. Identify the **good zeroth-order basis** — the symmetric and antisymmetric combinations of $\vert 0\rangle$ and $\vert 1\rangle$ — and write the corresponding probability densities $\vert\psi_{\pm}(\theta)\vert^{2}$.
 
 (d) Slightly off the crossing, set $\varphi = 1/2 + \delta$ with $\vert\delta\vert$ small. Build the $2 \times 2$ matrix at general $\delta$ (within the same doublet truncation) and find the perturbed energies $E_{\pm}(\delta)$. Describe in words the shape of $E_{\pm}(\varphi)$ near $\varphi = 1/2$ — the **avoided crossing**.
 
-(e) **Generic flux: non-degenerate perturbation theory.** Move away from the crossing. For $\vert\varphi\vert < 1/2$ the ground state is the non-degenerate angular-momentum state $\vert 0\rangle$ with energy $E_0(\varphi) = E_0\varphi^{2}$. Apply the second-order non-degenerate perturbation formula
+(e) Move away from the crossing. For $\vert\varphi\vert < 1/2$ the ground state is the non-degenerate angular-momentum state $\vert 0\rangle$ with energy $E_0(\varphi) = E_0\varphi^{2}$. Apply the second-order non-degenerate perturbation formula
 
 $$
 E_n(\varphi) = E_n^{(0)}(\varphi) + \langle n\vert\hat V\vert n\rangle + \sum_{m\neq n}\frac{\vert\langle m\vert\hat V\vert n\rangle\vert^{2}}{E_n^{(0)}(\varphi) - E_m^{(0)}(\varphi)} + \mathcal{O}(V_0^{3})
@@ -451,7 +456,7 @@ $$
 using $\langle 0\vert\cos\theta\vert 1\rangle = 1/2$ from (a) and zero diagonal entries. The first-order effective Hamiltonian on the doublet is therefore
 
 $$
-\hat H_\text{eff} = \frac{E_0}{4}\hat I + \frac{V_0}{2}\hat\sigma^{x}.
+\hat H^{\text{eff}} = \frac{E_0}{4}\hat I + \frac{V_0}{2}\hat\sigma^{x}.
 $$
 
 **(c)** The $\hat\sigma^{x}$ block has eigenvalues $\pm 1$ with eigenstates $\vert\pm\rangle = (\vert 0\rangle \pm \vert 1\rangle)/\sqrt 2$. So
@@ -506,7 +511,7 @@ This is the standard **avoided-crossing** profile:
 
 In the $(\varphi, E)$ plane, what would have been a sharp X-shaped crossing of the two linear unperturbed branches at $\varphi = 1/2$ has been rounded into a **hyperbolic anti-crossing** with minimum gap $V_0$ at the centre. The perturbation has lifted the degeneracy and replaced level crossing by level repulsion — the same mechanism that opens **band gaps** in periodic potentials at the boundary of every Brillouin zone.
 
-**(e) Generic flux: non-degenerate perturbation theory.** For $\vert\varphi\vert < 1/2$ the diagonal element vanishes by the selection rule of (a), $\langle 0\vert\hat V\vert 0\rangle = 0$, so $E_0^{(1)}(\varphi) = 0$. The second-order sum is restricted to $m = \pm 1$ by the same rule, with $\vert\langle\pm 1\vert\hat V\vert 0\rangle\vert^{2} = V_0^{2}/4$. The unperturbed gaps are
+**(e)** For $\vert\varphi\vert < 1/2$ the diagonal element vanishes by the selection rule of (a), $\langle 0\vert\hat V\vert 0\rangle = 0$, so $E_0^{(1)}(\varphi) = 0$. The second-order sum is restricted to $m = \pm 1$ by the same rule, with $\vert\langle\pm 1\vert\hat V\vert 0\rangle\vert^{2} = V_0^{2}/4$. The unperturbed gaps are
 
 $$
 E_0^{(0)}(\varphi) - E_{+1}^{(0)}(\varphi) = E_0\bigl[\varphi^{2} - (1 - \varphi)^{2}\bigr] = E_0(2\varphi - 1),
