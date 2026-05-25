@@ -484,6 +484,14 @@ $$
 
 (c) Explain physically why the result is **resonantly enhanced** near $\omega/\Delta=1$ and why the time scaling is $t^{2}$ rather than $t$ (compare to Fermi's golden rule).
 
+(d) **Near-resonance limit and the rotating wave approximation.** Set $\omega \approx \Delta$ (close to but not exactly at single-photon resonance) and re-evaluate the second-order amplitude under the **rotating wave approximation (RWA)**: of the four $(\Omega_1, \Omega_2)$ combinations identified in (a), keep only the one for which *both* exponents are slow in the limit $\omega \to \Delta$, and drop the other three as fast-oscillating. Show that the RWA amplitude is
+
+$$
+\langle 2\vert\hat G(t,0)\vert 1\rangle \approx \frac{\mathrm{i}\,\lambda_0^{2}\,t}{4(\Delta - \omega)},
+$$
+
+and verify that this agrees with the full off-resonant result of (a) in the near-resonant limit $\vert\Delta - \omega\vert \ll \Delta + \omega$.
+
 **Solution.**
 
 *Convention.* The level-3 energy $E_3=\Delta$ enters the Bohr phase as
@@ -661,6 +669,66 @@ before any continuum sum. The $t^2$ law signals **coherent Rabi-like
 oscillation** (valid only for $t\ll\lambda_0^{-1}$, before the linearised
 amplitude saturates), whereas the linear $t$ law of the golden rule signals
 **incoherent decay**.
+
+**(d) Near-resonance limit and the RWA.** Inspect the four $(\Omega_1, \Omega_2)$
+combinations with $\Omega_1 = \Delta \pm \omega$ and $\Omega_2 = -\Delta \pm \omega$
+near $\omega \approx \Delta$:
+
+- $(\Delta + \omega, -\Delta + \omega)$: $\Omega_1 \approx 2\Delta$ fast, $\Omega_2 \approx 0$ slow, sum $\approx 2\omega$ fast.
+- $(\Delta + \omega, -\Delta - \omega)$: both exponents fast ($\sim\pm 2\Delta$); a mixed-sign sum-frequency contribution irrelevant near resonance.
+- $(\Delta - \omega, -\Delta + \omega)$: both exponents slow ($\approx \pm 0$), sum exactly zero.
+- $(\Delta - \omega, -\Delta - \omega)$: $\Omega_1 \approx 0$ slow, $\Omega_2 \approx -2\Delta$ fast.
+
+The RWA discards any term whose exponent oscillates on the fast scale
+$1/(2\Delta)$ during the time window $t \gg \Delta^{-1}$ of interest — these
+contributions average to zero and give only bounded $\mathcal{O}(1/\Delta)$
+pieces. Of the four, only the third combination — with both exponents
+$\sim(\Delta - \omega)t$ — survives. Following the generic nested-integral
+identity of (a) with $\Omega_2 = -\Omega_1$ and $\Omega_1 = \Delta - \omega$,
+
+$$
+\int_{0}^{t}\!\mathrm{d}t_2\!\int_{0}^{t_2}\!\mathrm{d}t_1\,
+\mathrm{e}^{\mathrm{i}(\Delta - \omega)t_1}\,\mathrm{e}^{\mathrm{i}(\omega - \Delta)t_2}
+\;\approx\; \frac{t}{\mathrm{i}(\Delta - \omega)}
+$$
+
+in the regime $\vert\Delta - \omega\vert^{-1} \ll t$. Multiplying by the
+$-\lambda_0^{2}/4$ prefactor of the Dyson expansion,
+
+$$
+\langle 2\vert\hat G(t,0)\vert 1\rangle
+\approx -\frac{\lambda_0^{2}}{4}\cdot\frac{t}{\mathrm{i}(\Delta - \omega)}
+= \frac{\mathrm{i}\,\lambda_0^{2}\,t}{4(\Delta - \omega)}.
+$$
+
+**Consistency with (a).** The full off-resonant amplitude derived in (a) is
+$\langle 2\vert\hat G(t,0)\vert 1\rangle \approx \mathrm{i}\lambda_0^{2}\,t\,\Delta/[2(\Delta^{2} - \omega^{2})]$.
+In the near-resonant limit $\vert\Delta - \omega\vert \ll \Delta + \omega$,
+
+$$
+\frac{\Delta}{\Delta^{2} - \omega^{2}}
+= \frac{\Delta}{(\Delta - \omega)(\Delta + \omega)}
+\approx \frac{\Delta}{2\Delta\,(\Delta - \omega)}
+= \frac{1}{2(\Delta - \omega)},
+$$
+
+so the off-resonant formula reduces to
+$\mathrm{i}\lambda_0^{2}\,t/[4(\Delta - \omega)]$, matching the RWA result exactly.
+
+**Physical content of the RWA.** The surviving combination is the
+*near-resonant Raman pathway* — a drive quantum of frequency $\omega \approx \Delta$
+absorbed at the $\vert 1\rangle \to \vert 3\rangle$ leg, then re-emitted at the
+$\vert 3\rangle \to \vert 2\rangle$ leg also near resonance. The discarded
+counter-rotating partners — absorption-absorption and emission-emission, both
+carrying $\mathrm{e}^{\pm\mathrm{i}(\Delta + \omega)t}$ — are non-zero, but their
+contributions to the amplitude oscillate too rapidly to accumulate over the
+relevant time scale. RWA is the natural and most commonly used approximation in
+coherent-control settings (cavity QED, two-level atoms driven by near-resonant
+lasers, NV centres), precisely because near-resonant drive is the regime of
+interest in such systems. Away from resonance ($\omega/\Delta$ not close to $1$),
+RWA must be abandoned and the full off-resonant calculation of (a) used
+instead — they agree in the overlap regime but differ as $\omega/\Delta$ departs
+from unity.
 
 <!-- ─── -->
 

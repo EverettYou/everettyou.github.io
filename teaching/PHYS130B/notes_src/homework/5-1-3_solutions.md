@@ -418,6 +418,14 @@ At $\varphi = 1/2$ the two lowest branches $\vert 0\rangle$ and $\vert 1\rangle$
 
 (d) Slightly off the crossing, set $\varphi = 1/2 + \delta$ with $\vert\delta\vert$ small. Build the $2 \times 2$ matrix at general $\delta$ (within the same doublet truncation) and find the perturbed energies $E_{\pm}(\delta)$. Describe in words the shape of $E_{\pm}(\varphi)$ near $\varphi = 1/2$ — the **avoided crossing**.
 
+(e) **Generic flux: non-degenerate perturbation theory.** Move away from the crossing. For $\vert\varphi\vert < 1/2$ the ground state is the non-degenerate angular-momentum state $\vert 0\rangle$ with energy $E_0(\varphi) = E_0\varphi^{2}$. Apply the second-order non-degenerate perturbation formula
+
+$$
+E_n(\varphi) = E_n^{(0)}(\varphi) + \langle n\vert\hat V\vert n\rangle + \sum_{m\neq n}\frac{\vert\langle m\vert\hat V\vert n\rangle\vert^{2}}{E_n^{(0)}(\varphi) - E_m^{(0)}(\varphi)} + \mathcal{O}(V_0^{3})
+$$
+
+to compute the perturbed ground-state energy $E_0(\varphi)$ through order $V_0^{2}$. Show that the expression diverges at $\varphi = \pm 1/2$, recovering the breakdown signalled by the doublet treatment in (b)–(c).
+
 **Solution.**
 
 **(a)** Matrix element of $\cos\theta$ in the plane-wave basis:
@@ -497,3 +505,29 @@ This is the standard **avoided-crossing** profile:
 - For $\vert E_0\delta\vert \gg V_0/2$: $E_\pm \approx E_0/4 \pm E_0\vert\delta\vert$ — the unperturbed linear branches $E_0(\varphi) = E_0(1/4 + \delta)$ and $E_1(\varphi) = E_0(1/4 - \delta)$, with eigenstates approaching $\vert 0\rangle$ and $\vert 1\rangle$.
 
 In the $(\varphi, E)$ plane, what would have been a sharp X-shaped crossing of the two linear unperturbed branches at $\varphi = 1/2$ has been rounded into a **hyperbolic anti-crossing** with minimum gap $V_0$ at the centre. The perturbation has lifted the degeneracy and replaced level crossing by level repulsion — the same mechanism that opens **band gaps** in periodic potentials at the boundary of every Brillouin zone.
+
+**(e) Generic flux: non-degenerate perturbation theory.** For $\vert\varphi\vert < 1/2$ the diagonal element vanishes by the selection rule of (a), $\langle 0\vert\hat V\vert 0\rangle = 0$, so $E_0^{(1)}(\varphi) = 0$. The second-order sum is restricted to $m = \pm 1$ by the same rule, with $\vert\langle\pm 1\vert\hat V\vert 0\rangle\vert^{2} = V_0^{2}/4$. The unperturbed gaps are
+
+$$
+E_0^{(0)}(\varphi) - E_{+1}^{(0)}(\varphi) = E_0\bigl[\varphi^{2} - (1 - \varphi)^{2}\bigr] = E_0(2\varphi - 1),
+$$
+
+$$
+E_0^{(0)}(\varphi) - E_{-1}^{(0)}(\varphi) = E_0\bigl[\varphi^{2} - (-1 - \varphi)^{2}\bigr] = -E_0(2\varphi + 1).
+$$
+
+Hence
+
+$$
+\begin{split}
+E_0(\varphi) &= E_0\varphi^{2} + \frac{V_0^{2}}{4}\left[\frac{1}{E_0(2\varphi - 1)} + \frac{1}{-E_0(2\varphi + 1)}\right] + \mathcal{O}(V_0^{3})\\
+&= E_0\varphi^{2} + \frac{V_0^{2}}{4 E_0}\cdot\frac{(2\varphi + 1) - (2\varphi - 1)}{(2\varphi - 1)(2\varphi + 1)} + \mathcal{O}(V_0^{3})\\
+&= E_0\varphi^{2} - \frac{V_0^{2}}{2 E_0\,(1 - 4\varphi^{2})} + \mathcal{O}(V_0^{3}).
+\end{split}
+$$
+
+The second-order shift is finite throughout the open interval $\vert\varphi\vert < 1/2$ and is *negative* — the bottom branch always bends down under a perturbation that couples it only to higher levels (each term in the sum carries a negative denominator).
+
+**Breakdown at $\varphi = \pm 1/2$.** The factor $1 - 4\varphi^{2}$ vanishes there, and the non-degenerate formula diverges. This divergence is not a calculational mistake but a *signal* that the basic premise — non-degenerate level $\vert 0\rangle$ with all other levels well separated — fails: at $\varphi = +1/2$ the level $\vert 0\rangle$ becomes degenerate with $\vert 1\rangle$, and at $\varphi = -1/2$ with $\vert -1\rangle$. The first-order matrix element $V_0/2$ between $\vert 0\rangle$ and its degenerate partner can no longer be treated as a small denominator-suppressed correction; one must instead diagonalise it exactly within the degenerate doublet, exactly as in (b)–(c).
+
+**Order-of-magnitude contrast.** Away from the crossing, the perturbative shift is of order $V_0^{2}/E_0$ — quadratic in the perturbation strength and suppressed by the (open) gap. At the crossing the splitting is of order $V_0$ — *linear* in the perturbation strength. This promotion from $\mathcal{O}(V_0^{2}/E_0)$ to $\mathcal{O}(V_0)$ is the qualitative fingerprint of degeneracy lifting and explains why states near a level crossing respond so much more strongly to small perturbations than states far from any crossing — a phenomenon that underlies, for example, the giant susceptibility of materials near quantum critical points and the high responsivity of qubits operated at sweet-spot flux degeneracies.

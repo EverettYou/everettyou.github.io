@@ -222,6 +222,15 @@ This is a *complex* number. A genuine probability distribution always has a *rea
 
 (c) Integrate over all $x$, assuming $\psi\to 0$ at infinity, to conclude that $\frac{\mathrm{d}}{\mathrm{d}t}\int\vert\psi\vert^{2}\,\mathrm{d}x = 0$.
 
+(d) **Continuity on the Gaussian wavepacket.** Take the free-particle limit $V = 0$. The Gaussian wavepacket of HW 3.2.1.1 admits the closed-form wave function at time $t > 0$,
+
+$$
+\psi(x,t) = \frac{1}{(\pi\sigma^{2})^{1/4}}\,\frac{1}{\sqrt{1 + \mathrm{i}t/\tau}}\,\exp\!\left[-\frac{x^{2}}{2\sigma^{2}\,(1 + \mathrm{i}t/\tau)}\right],
+\qquad \tau = \frac{m\sigma^{2}}{\hbar}.
+$$
+
+Compute the probability density $\rho(x,t) = \vert\psi(x,t)\vert^{2}$ and the probability current $j(x,t)$ identified in (b). Verify that the continuity equation $\partial_{t}\rho + \partial_{x}j = 0$ derived in (a)–(b) is satisfied identically at all $(x,t)$.
+
 **Solution.**
 
 The Schrödinger equation and its complex conjugate (with $V(x)$ real, so $V^{*} = V$) are
@@ -324,6 +333,61 @@ $$
 $$
 
 The total probability is constant in time: if $\psi$ is normalized once, it stays normalized under Schrödinger evolution. Probability is locally conserved (continuity equation) and globally conserved (constant norm) — this is the statement that Schrödinger time evolution is unitary.
+
+**(d) Continuity on the Gaussian wavepacket.** Squaring the magnitude of the given $\psi(x,t)$ and using $\vert 1 + \mathrm{i}t/\tau\vert = \sqrt{1 + (t/\tau)^{2}}$ together with $\operatorname{Re}\!\left[1/(1 + \mathrm{i}t/\tau)\right] = 1/(1 + (t/\tau)^{2})$,
+
+$$
+\rho(x,t) = \frac{1}{\sqrt\pi\,\sigma_{t}}\,\exp\!\left(-\frac{x^{2}}{\sigma_{t}^{2}}\right),
+\qquad \sigma_{t} = \sigma\sqrt{1 + (t/\tau)^{2}}.
+$$
+
+For the current, differentiate the wave function,
+
+$$
+\partial_{x}\psi = \psi\cdot\!\left[-\frac{x}{\sigma^{2}\,(1 + \mathrm{i}t/\tau)}\right],
+\qquad
+\psi^{*}\partial_{x}\psi = \rho\cdot\!\left[-\frac{x}{\sigma^{2}\,(1 + \mathrm{i}t/\tau)}\right].
+$$
+
+The bracket equals $-x\,(1 - \mathrm{i}t/\tau)/[\sigma^{2}(1 + (t/\tau)^{2})]$, whose imaginary part is $x\,t/(\tau\,\sigma_{t}^{2})$. Hence
+
+$$
+j(x,t) = \frac{\hbar}{m}\,\operatorname{Im}(\psi^{*}\partial_{x}\psi) = \frac{\hbar\,t\,x}{m\,\tau\,\sigma_{t}^{2}}\,\rho(x,t).
+$$
+
+Using $\hbar/(m\tau) = \hbar^{2}/(m^{2}\sigma^{2})$ and $\sigma_{t}^{2} = \sigma^{2}(\tau^{2} + t^{2})/\tau^{2}$, this simplifies to the compact form
+
+$$
+j(x,t) = \frac{x\,t}{\tau^{2} + t^{2}}\,\rho(x,t).
+$$
+
+**Verifying $\partial_{t}\rho + \partial_{x}j = 0$.** Differentiate $\rho$ in time, using $\sigma_{t}^{2} = \sigma^{2}(\tau^{2} + t^{2})/\tau^{2}$ so that $(\sigma_{t}^{2})'/\sigma_{t}^{2} = 2t/(\tau^{2} + t^{2})$:
+
+$$
+\partial_{t}\rho = \rho\left[-\frac{t}{\tau^{2} + t^{2}} + \frac{2\tau^{2}\,t\,x^{2}}{\sigma^{2}\,(\tau^{2} + t^{2})^{2}}\right],
+$$
+
+where the two terms come from differentiating the prefactor $1/\sigma_{t}$ and the Gaussian exponent, respectively. For the current,
+
+$$
+\partial_{x}j = \frac{t}{\tau^{2} + t^{2}}\,\rho + \frac{x\,t}{\tau^{2} + t^{2}}\,\partial_{x}\rho,
+\qquad
+\partial_{x}\rho = -\frac{2\tau^{2}\,x}{\sigma^{2}(\tau^{2} + t^{2})}\,\rho,
+$$
+
+so
+
+$$
+\partial_{x}j = \rho\left[\frac{t}{\tau^{2} + t^{2}} - \frac{2\tau^{2}\,t\,x^{2}}{\sigma^{2}\,(\tau^{2} + t^{2})^{2}}\right].
+$$
+
+Adding the two,
+
+$$
+\partial_{t}\rho + \partial_{x}j = 0
+$$
+
+identically — the prefactor pieces cancel and the $x^{2}$ pieces cancel separately. The free Gaussian realises probability conservation explicitly: the spreading governed by $\sigma_{t}$ and the local flow $j(x,t) = x\,t\,\rho/(\tau^{2} + t^{2})$ are exactly matched, so no probability leaks anywhere. The "outflow velocity" $j/\rho = x\,t/(\tau^{2} + t^{2})$ approaches $x/t$ at late times, exactly the free-expansion rate $\partial_{t}\langle x^{2}\rangle^{1/2}$ — the cloud spreads like a distribution of classical free particles labelled by their asymptotic velocity $x/t$.
 
 <!-- ─── -->
 

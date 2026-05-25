@@ -127,6 +127,10 @@ $$
 
 (Hint: build each Pauli-string matrix and sum, or use the trace-projection method from 1.1.3 P5 on the 2-qubit Pauli basis.)
 
+(e) Take the SWAP operator itself as the Hamiltonian, $\hat H = J\hat S$ with coupling $J > 0$, and prepare the system in the initial state $\vert\psi(0)\rangle = \vert 01\rangle$. Evolve the state under the Schrödinger equation, $\vert\psi(t)\rangle = \mathrm{e}^{-\mathrm{i}\hat H t/\hbar}\vert\psi(0)\rangle$, and find $\vert\psi(t)\rangle$ in closed form. Determine the smallest positive time $t^*$ at which $\vert\psi(t^*)\rangle = \vert 10\rangle$ (up to a global phase).
+
+(f) At an arbitrary time $t$, measure the SWAP operator $\hat S$ as an observable on the evolved state. List the possible outcomes, the corresponding probabilities, and the post-measurement states. Are the probabilities the same as at $t = 0$? Identify the conserved quantity responsible.
+
 **Solution.**
 
 (a) The action $\hat S\vert ab\rangle = \vert ba\rangle$ gives: $\vert 00\rangle\to\vert 00\rangle$, $\vert 01\rangle\to\vert 10\rangle$, $\vert 10\rangle\to\vert 01\rangle$, $\vert 11\rangle\to\vert 11\rangle$. So the matrix (column $j$ is the image of basis vector $j$) is
@@ -164,6 +168,37 @@ $$
 $$
 
 This decomposition is the operator-level statement of the **identity for the swap of two spin-1/2 particles**, $\hat S = \tfrac{1}{2}(\hat I + \hat\sigma_1\cdot\hat\sigma_2)$ — where $\hat\sigma_1\cdot\hat\sigma_2 = \sum_a \hat\sigma_1^a\hat\sigma_2^a$. It connects directly to the Heisenberg interaction of Problem 6: a Heisenberg coupling is essentially "twice the SWAP minus the identity," and its symmetric/antisymmetric eigenstates are exactly the SWAP eigenstates (triplet/singlet).
+
+**(e) Exchange dynamics.** Decompose the initial state into SWAP eigenstates,
+
+$$
+\vert 01\rangle = \tfrac{1}{\sqrt 2}\bigl(\vert s\rangle + \vert a\rangle\bigr),
+\qquad
+\vert s\rangle = \tfrac{1}{\sqrt 2}(\vert 01\rangle + \vert 10\rangle),
+\quad
+\vert a\rangle = \tfrac{1}{\sqrt 2}(\vert 01\rangle - \vert 10\rangle),
+$$
+
+with $\hat S\vert s\rangle = +\vert s\rangle$ and $\hat S\vert a\rangle = -\vert a\rangle$. Under $\hat H = J\hat S$ each eigenstate picks up a phase $\mathrm{e}^{\mp\mathrm{i}Jt/\hbar}$:
+
+$$
+\vert\psi(t)\rangle = \tfrac{1}{\sqrt 2}\bigl(\mathrm{e}^{-\mathrm{i}Jt/\hbar}\vert s\rangle + \mathrm{e}^{+\mathrm{i}Jt/\hbar}\vert a\rangle\bigr).
+$$
+
+For $\vert\psi(t)\rangle \propto \vert 10\rangle = \tfrac{1}{\sqrt 2}(\vert s\rangle - \vert a\rangle)$, we need $\mathrm{e}^{-\mathrm{i}Jt/\hbar} = -\mathrm{e}^{+\mathrm{i}Jt/\hbar}$, i.e. $\mathrm{e}^{2\mathrm{i}Jt/\hbar} = -1$. The smallest positive solution is
+
+$$
+t^* = \frac{\pi\hbar}{2J},
+$$
+
+at which $\vert\psi(t^*)\rangle = -\mathrm{i}\vert 10\rangle$. The two-qubit system therefore performs a coherent SWAP gate in finite time, set by the inverse coupling — a basic primitive of exchange-based quantum gates.
+
+**(f) Measurement of SWAP and conservation.** The closed-form $\vert\psi(t)\rangle$ above has unit-modulus amplitudes on each SWAP eigenspace at every $t$. Measuring $\hat S$ on the evolved state:
+
+- Outcome $+1$ with probability $\tfrac{1}{2}$, post-measurement state $\vert s\rangle$.
+- Outcome $-1$ with probability $\tfrac{1}{2}$, post-measurement state $\vert a\rangle$.
+
+These probabilities equal the $t = 0$ values: $\hat H = J\hat S$ commutes trivially with $\hat S$, so $\hat S$ is a conserved observable, and the probability distribution of its measurement outcomes on the evolved state is time-independent — even though the state itself oscillates back and forth between $\vert 01\rangle$ and $\vert 10\rangle$. This is a direct instance of the general principle that $[\hat H, \hat O] = 0$ implies time-independent statistics for $\hat O$.
 
 <!-- ─── -->
 
