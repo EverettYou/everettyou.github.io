@@ -12,6 +12,7 @@ const TAU = 2 * Math.PI;
 const PLAYBACK_BASE_MS = 90;
 const AUTO_RUN_DELAY_MS = 450;
 const CHANNEL_COLORS = ["#c93300", "#ff8f29", "#009926", "#0073e6"];
+const ABSORBING_LAYER_FRACTION = 0.1;
 const K_INV_DIAG = [1, 1, -1, -1];
 const ELL_1 = [1, -2, 1, 2];
 const ELL_2 = [-3, 1, 1, -3];
@@ -370,6 +371,24 @@ function applyFieldBoundary(phi, boundary) {
   });
 }
 
+function centeredDerivativeAt(channel, index, dx) {
+  const pointCount = channel.length;
+  const left = index === 0 ? channel[1] : channel[index - 1];
+  const right = index === pointCount - 1 ? channel[pointCount - 2] : channel[index + 1];
+  return (right - left) / (2 * dx);
+}
+
+function smoothstep(value) {
+  const t = Math.max(0, Math.min(1, value));
+  return t * t * (3 - 2 * t);
+}
+
+function absorbingBlendWeight(index, pointCount, waveSign) {
+  const layerWidth = Math.max(8, Math.round((pointCount - 1) * ABSORBING_LAYER_FRACTION));
+  const distanceToOutflow = waveSign > 0 ? index : pointCount - 1 - index;
+  return smoothstep((layerWidth - distanceToOutflow) / layerWidth);
+}
+
 function firstDerivative(phi, dx, boundary, velocities) {
   const pointCount = phi[0].length;
   return phi.map((channel, channelIndex) => {
@@ -385,18 +404,17 @@ function firstDerivative(phi, dx, boundary, velocities) {
 
     if (boundary === "absorbing") {
       const waveSign = K_INV_DIAG[channelIndex] * velocities[channelIndex];
-      if (waveSign > 0) {
-        for (let index = 0; index < pointCount - 1; index += 1) {
-          derivative[index] = (channel[index + 1] - channel[index]) / dx;
-        }
-        derivative[pointCount - 1] = 0;
-        return derivative;
-      }
-
-      derivative[0] = 0;
       for (let index = 1; index < pointCount; index += 1) {
-        derivative[index] = (channel[index] - channel[index - 1]) / dx;
+        const centered = centeredDerivativeAt(channel, index, dx);
+        const upwind = waveSign > 0
+          ? (channel[Math.min(index + 1, pointCount - 1)] - channel[index]) / dx
+          : (channel[index] - channel[Math.max(index - 1, 0)]) / dx;
+        const blend = absorbingBlendWeight(index, pointCount, waveSign);
+        derivative[index] = (1 - blend) * centered + blend * upwind;
       }
+      derivative[0] = waveSign > 0
+        ? (channel[1] - channel[0]) / dx
+        : centeredDerivativeAt(channel, 0, dx);
       return derivative;
     }
 
@@ -410,9 +428,7 @@ function firstDerivative(phi, dx, boundary, velocities) {
     }
 
     for (let index = 0; index < pointCount; index += 1) {
-      const left = index === 0 ? channel[1] : channel[index - 1];
-      const right = index === pointCount - 1 ? channel[pointCount - 2] : channel[index + 1];
-      derivative[index] = (right - left) / (2 * dx);
+      derivative[index] = centeredDerivativeAt(channel, index, dx);
     }
     return derivative;
   });
