@@ -97,11 +97,9 @@ function createCouplingBackground(width, height, channelIndex) {
   for (let stopIndex = 0; stopIndex < stopCount; stopIndex += 1) {
     const sourceIndex = Math.round((stopIndex / Math.max(1, stopCount - 1)) * (gValues.length - 1));
     const strength = Math.max(0, Math.min(1, gValues[sourceIndex]));
-    const red = Math.round(255 - 28 * strength);
-    const green = Math.round(255 - 34 * strength);
-    const blue = Math.round(255 - 47 * strength);
+    const opacity = (0.24 * strength).toFixed(3);
     stops.push(
-      `<stop offset="${((stopIndex / Math.max(1, stopCount - 1)) * 100).toFixed(2)}%" stop-color="rgb(${red},${green},${blue})"></stop>`,
+      `<stop offset="${((stopIndex / Math.max(1, stopCount - 1)) * 100).toFixed(2)}%" stop-color="var(--sim-muted)" stop-opacity="${opacity}"></stop>`,
     );
   }
 
