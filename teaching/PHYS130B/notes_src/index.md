@@ -2,7 +2,7 @@
 
 Welcome to the course notes for Quantum Mechanics.
 
-‚ˇˇ <a href="/teaching/PHYS130B">Back to the PHYS 130B course page</a>
+‚Üê <a href="/teaching/PHYS130B">Back to the PHYS 130B course page</a>
 
 **Textbook**: David Tong, *Quantum Mechanics* (Lectures on Theoretical Physics Volume 3), Cambridge University Press.
 
@@ -146,4 +146,4 @@ Welcome to the course notes for Quantum Mechanics.
 
 ## Homework
 
-[**Homework Solutions**](homework/homework) ‚ˇˇ one file per subsection lesson, with full worked solutions to every problem.
+[**Homework Solutions**](homework/homework) ‚Äî one file per subsection lesson, with full worked solutions to every problem.
