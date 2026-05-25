@@ -25,21 +25,34 @@ const SVG_STYLE = {
   marker: "stroke: var(--sim-muted); stroke-width: 1.2; stroke-dasharray: 6 7; vector-effect: non-scaling-stroke;",
 };
 
-const form = document.getElementById("control-form");
-const statusText = document.getElementById("status-text");
-const playToggle = document.getElementById("play-toggle");
-const restartButton = document.getElementById("restart-button");
-const speedSelect = document.getElementById("speed-select");
-const timeSlider = document.getElementById("time-slider");
-const timeLabel = document.getElementById("time-label");
-const multiPanelPlot = document.getElementById("multi-panel-plot");
+let form = null;
+let statusText = null;
+let playToggle = null;
+let restartButton = null;
+let speedSelect = null;
+let timeSlider = null;
+let timeLabel = null;
+let multiPanelPlot = null;
+
+function cacheElements() {
+  form = document.getElementById("control-form");
+  statusText = document.getElementById("status-text");
+  playToggle = document.getElementById("play-toggle");
+  restartButton = document.getElementById("restart-button");
+  speedSelect = document.getElementById("speed-select");
+  timeSlider = document.getElementById("time-slider");
+  timeLabel = document.getElementById("time-label");
+  multiPanelPlot = document.getElementById("multi-panel-plot");
+}
 
 function setStatus(message, isError = false) {
+  if (!statusText) return;
   statusText.textContent = message;
   statusText.style.color = isError ? "#ffb0a0" : "";
 }
 
 function setPlayIcon(isPlaying) {
+  if (!playToggle) return;
   playToggle.innerHTML = `<i class="fa-solid ${isPlaying ? "fa-pause" : "fa-play"}" aria-hidden="true"></i>`;
   playToggle.setAttribute("aria-label", isPlaying ? "Pause simulation" : "Play simulation");
 }
@@ -49,6 +62,9 @@ function wrapCompactField(value) {
 }
 
 function collectPayload() {
+  if (!form) {
+    throw new Error("Simulator controls were not found on this page.");
+  }
   const data = new FormData(form);
   return {
     g0: Number(data.get("g0")),
@@ -236,7 +252,7 @@ function formatTick(value) {
 }
 
 function updateFrameDisplay() {
-  if (!state.data) return;
+  if (!state.data || !timeSlider || !timeLabel) return;
 
   state.currentFrame = Math.min(state.currentFrame, state.data.times.length - 1);
   timeSlider.max = String(state.data.times.length - 1);
@@ -509,6 +525,7 @@ function scheduleAutoRun() {
 }
 
 function reflectCentersAboutOrigin() {
+  if (!form) return;
   for (const name of ["packet_center", "interface_center"]) {
     const input = form.elements.namedItem(name);
     if (!(input instanceof HTMLInputElement)) continue;
@@ -520,50 +537,72 @@ function reflectCentersAboutOrigin() {
   }
 }
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-});
+function initSimulator() {
+  cacheElements();
+  const requiredElements = [
+    form,
+    statusText,
+    playToggle,
+    restartButton,
+    speedSelect,
+    timeSlider,
+    timeLabel,
+    multiPanelPlot,
+  ];
 
-form.addEventListener("input", (event) => {
-  if (event.target instanceof HTMLInputElement && event.target.type === "submit") return;
-  scheduleAutoRun();
-});
-
-form.addEventListener("change", (event) => {
-  if (event.target instanceof HTMLInputElement && event.target.name === "interaction_side") {
-    reflectCentersAboutOrigin();
+  if (requiredElements.some((element) => !element)) {
+    return;
   }
-  scheduleAutoRun();
-});
 
-timeSlider.addEventListener("input", () => {
-  stopPlayback();
-  state.currentFrame = Number(timeSlider.value);
-  updateFrameDisplay();
-});
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
 
-speedSelect.addEventListener("change", () => {
-  state.playbackSpeed = Number(speedSelect.value);
-  if (state.isPlaying) {
-    startPlayback();
-  }
-});
+  form.addEventListener("input", (event) => {
+    if (event.target instanceof HTMLInputElement && event.target.type === "submit") return;
+    scheduleAutoRun();
+  });
 
-playToggle.addEventListener("click", () => {
-  if (state.isPlaying) {
+  form.addEventListener("change", (event) => {
+    if (event.target instanceof HTMLInputElement && event.target.name === "interaction_side") {
+      reflectCentersAboutOrigin();
+    }
+    scheduleAutoRun();
+  });
+
+  timeSlider.addEventListener("input", () => {
     stopPlayback();
-  } else {
-    startPlayback();
-  }
-});
+    state.currentFrame = Number(timeSlider.value);
+    updateFrameDisplay();
+  });
 
-restartButton.addEventListener("click", () => {
-  stopPlayback();
-  state.currentFrame = 0;
-  updateFrameDisplay();
-});
+  speedSelect.addEventListener("change", () => {
+    state.playbackSpeed = Number(speedSelect.value);
+    if (state.isPlaying) {
+      startPlayback();
+    }
+  });
 
-window.addEventListener("load", () => {
+  playToggle.addEventListener("click", () => {
+    if (state.isPlaying) {
+      stopPlayback();
+    } else {
+      startPlayback();
+    }
+  });
+
+  restartButton.addEventListener("click", () => {
+    stopPlayback();
+    state.currentFrame = 0;
+    updateFrameDisplay();
+  });
+
   setPlayIcon(false);
   runSimulation();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initSimulator);
+} else {
+  initSimulator();
+}
