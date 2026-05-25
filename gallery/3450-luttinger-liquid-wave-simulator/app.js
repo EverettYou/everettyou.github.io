@@ -359,6 +359,17 @@ function combineRk4(phi, k1, k2, k3, k4, dt) {
   );
 }
 
+function applyFieldBoundary(phi, boundary) {
+  if (boundary !== "dirichlet") return phi;
+
+  return phi.map((channel) => {
+    const next = channel.slice();
+    next[0] = 0;
+    next[next.length - 1] = 0;
+    return next;
+  });
+}
+
 function firstDerivative(phi, dx, boundary, velocities) {
   const pointCount = phi[0].length;
   return phi.map((channel, channelIndex) => {
@@ -385,6 +396,15 @@ function firstDerivative(phi, dx, boundary, velocities) {
       derivative[0] = 0;
       for (let index = 1; index < pointCount; index += 1) {
         derivative[index] = (channel[index] - channel[index - 1]) / dx;
+      }
+      return derivative;
+    }
+
+    if (boundary === "dirichlet") {
+      derivative[0] = 0;
+      derivative[pointCount - 1] = 0;
+      for (let index = 1; index < pointCount - 1; index += 1) {
+        derivative[index] = (channel[index + 1] - channel[index - 1]) / (2 * dx);
       }
       return derivative;
     }
@@ -431,8 +451,9 @@ function integrateAlongX(source, dx) {
 }
 
 function rhs(phi, grid, payload, gProfile) {
-  const phiX = firstDerivative(phi, grid.dx, payload.boundary, payload.v_diag);
-  const force = nonlinearForce(phi, gProfile);
+  const field = applyFieldBoundary(phi, payload.boundary);
+  const phiX = firstDerivative(field, grid.dx, payload.boundary, payload.v_diag);
+  const force = nonlinearForce(field, gProfile);
   const source = force.map((channel, channelIndex) =>
     channel.map((value) => K_INV_DIAG[channelIndex] * value),
   );
@@ -451,7 +472,7 @@ function rk4Step(phi, grid, payload, gProfile) {
   const k2 = rhs(addScaledField(phi, k1, 0.5 * payload.dt), grid, payload, gProfile);
   const k3 = rhs(addScaledField(phi, k2, 0.5 * payload.dt), grid, payload, gProfile);
   const k4 = rhs(addScaledField(phi, k3, payload.dt), grid, payload, gProfile);
-  return combineRk4(phi, k1, k2, k3, k4, payload.dt);
+  return applyFieldBoundary(combineRk4(phi, k1, k2, k3, k4, payload.dt), payload.boundary);
 }
 
 function simulateInBrowser(payload) {
@@ -459,7 +480,7 @@ function simulateInBrowser(payload) {
   const endpoint = payload.boundary !== "periodic";
   const grid = linspace(payload.x_min, payload.x_max, payload.num_points, endpoint);
   const gProfile = sigmoidProfile(grid.values, payload);
-  let phi = createInitialField(grid.values, payload);
+  let phi = applyFieldBoundary(createInitialField(grid.values, payload), payload.boundary);
   const fields = [cloneField(phi)];
   const times = [0];
 

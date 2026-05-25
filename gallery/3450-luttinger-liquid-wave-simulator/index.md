@@ -163,6 +163,7 @@ Pages only serves static files.
                   <span>Boundary</span>
                   <select name="boundary">
                     <option value="absorbing" selected>Absorbing</option>
+                    <option value="dirichlet">Dirichlet</option>
                     <option value="neumann">Neumann</option>
                     <option value="periodic">Periodic</option>
                   </select>
