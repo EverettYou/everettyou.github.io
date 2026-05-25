@@ -15,6 +15,15 @@ const CHANNEL_COLORS = ["#c93300", "#ff8f29", "#009926", "#0073e6"];
 const K_INV_DIAG = [1, 1, -1, -1];
 const ELL_1 = [1, -2, 1, 2];
 const ELL_2 = [-3, 1, 1, -3];
+const SVG_STYLE = {
+  text: "fill: var(--sim-ink); font-size: 18px;",
+  tickText: "fill: var(--sim-muted); font-size: 15px;",
+  grid: "stroke: color-mix(in srgb, var(--sim-muted) 20%, transparent); stroke-width: 0.75; vector-effect: non-scaling-stroke;",
+  gridVertical: "stroke: color-mix(in srgb, var(--sim-muted) 16%, transparent); stroke-width: 0.75; vector-effect: non-scaling-stroke;",
+  gridStrong: "stroke: color-mix(in srgb, var(--sim-muted) 32%, transparent); stroke-width: 0.75; stroke-dasharray: 5 7; vector-effect: non-scaling-stroke;",
+  frame: "stroke: color-mix(in srgb, var(--sim-muted) 72%, transparent); stroke-width: 1.2; fill: none; vector-effect: non-scaling-stroke;",
+  marker: "stroke: var(--sim-muted); stroke-width: 1.2; stroke-dasharray: 6 7; vector-effect: non-scaling-stroke;",
+};
 
 const form = document.getElementById("control-form");
 const statusText = document.getElementById("status-text");
@@ -23,12 +32,7 @@ const restartButton = document.getElementById("restart-button");
 const speedSelect = document.getElementById("speed-select");
 const timeSlider = document.getElementById("time-slider");
 const timeLabel = document.getElementById("time-label");
-const xMinLabel = document.getElementById("x-min-label");
-const xMidLabel = document.getElementById("x-mid-label");
-const xMaxLabel = document.getElementById("x-max-label");
-const channelPlots = Array.from({ length: 4 }, (_, index) =>
-  document.getElementById(`channel-plot-${index}`),
-);
+const multiPanelPlot = document.getElementById("multi-panel-plot");
 
 function setStatus(message, isError = false) {
   statusText.textContent = message;
@@ -76,18 +80,16 @@ function scale(value, min, max, outputMin, outputMax) {
   return outputMin + ((value - min) / (max - min)) * (outputMax - outputMin);
 }
 
-function createWavePath(values, xValues, width, height) {
-  const paddingX = 18;
-  const paddingY = 20;
+function createWavePath(values, xValues, plot) {
   const commands = values.map((value, index) => {
-    const x = scale(xValues[index], xValues[0], xValues[xValues.length - 1], paddingX, width - paddingX);
-    const y = scale(wrapCompactField(value), -Math.PI, Math.PI, height - paddingY, paddingY);
+    const x = scale(xValues[index], xValues[0], xValues[xValues.length - 1], plot.left, plot.right);
+    const y = scale(wrapCompactField(value), -Math.PI, Math.PI, plot.bottom, plot.top);
     return `${index === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`;
   });
   return commands.join(" ");
 }
 
-function createCouplingBackground(width, height, channelIndex) {
+function createCouplingBackground(channelIndex) {
   if (!state.data?.g_profile) return "";
 
   const gValues = state.data.g_profile;
@@ -104,73 +106,125 @@ function createCouplingBackground(width, height, channelIndex) {
   }
 
   return `
-    <defs>
-      <linearGradient id="coupling-gradient-${channelIndex}" x1="0" x2="1" y1="0" y2="0">
-        ${stops.join("")}
-      </linearGradient>
-    </defs>
-    <rect x="18" y="0" width="${width - 36}" height="${height}" fill="url(#coupling-gradient-${channelIndex})"></rect>
+    <linearGradient id="coupling-gradient-${channelIndex}" x1="0" x2="1" y1="0" y2="0">
+      ${stops.join("")}
+    </linearGradient>
   `;
 }
 
-function createPlotGrid(width, height) {
-  const paddingX = 18;
-  const paddingY = 20;
-  const left = paddingX;
-  const right = width - paddingX;
-  const top = paddingY;
-  const bottom = height - paddingY;
+function createPlotGrid(plot) {
   const tick = 8;
   const vertical = Array.from({ length: 7 }, (_, index) => {
-    const x = paddingX + (index / 6) * (width - 2 * paddingX);
-    return `<line x1="${x.toFixed(2)}" y1="${top}" x2="${x.toFixed(2)}" y2="${bottom}" class="screen-grid-line vertical"></line>`;
+    const x = plot.left + (index / 6) * plot.width;
+    return `<line x1="${x.toFixed(2)}" y1="${plot.top}" x2="${x.toFixed(2)}" y2="${plot.bottom}" style="${SVG_STYLE.gridVertical}"></line>`;
   }).join("");
-  const horizontal = [top, height / 2, bottom]
+  const horizontal = [plot.top, plot.midY, plot.bottom]
     .map((y, index) => {
-      const className = index === 1 ? "screen-grid-line strong" : "screen-grid-line";
-      return `<line x1="${left}" y1="${y}" x2="${right}" y2="${y}" class="${className}"></line>`;
+      const style = index === 1 ? SVG_STYLE.gridStrong : SVG_STYLE.grid;
+      return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" style="${style}"></line>`;
     })
     .join("");
-  const yTicks = [top, height / 2, bottom]
-    .map((y) => `<line x1="${left}" y1="${y}" x2="${(left + tick).toFixed(2)}" y2="${y}" class="plot-tick"></line><line x1="${right}" y1="${y}" x2="${(right - tick).toFixed(2)}" y2="${y}" class="plot-tick"></line>`)
+  const yTicks = [plot.top, plot.midY, plot.bottom]
+    .map((y) => `<line x1="${plot.left}" y1="${y}" x2="${plot.left + tick}" y2="${y}" style="${SVG_STYLE.frame}"></line><line x1="${plot.right}" y1="${y}" x2="${plot.right - tick}" y2="${y}" style="${SVG_STYLE.frame}"></line>`)
     .join("");
-  const xTicks = [left, (left + right) / 2, right]
-    .map((x) => `<line x1="${x}" y1="${bottom}" x2="${x}" y2="${(bottom - tick).toFixed(2)}" class="plot-tick"></line>`)
+  const xTicks = [plot.left, plot.left + plot.width / 2, plot.right]
+    .map((x) => `<line x1="${x}" y1="${plot.bottom}" x2="${x}" y2="${plot.bottom - tick}" style="${SVG_STYLE.frame}"></line>`)
     .join("");
-  const frame = `<rect x="${left}" y="${top}" width="${right - left}" height="${bottom - top}" class="plot-frame"></rect>`;
+  const frame = `<rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}" style="${SVG_STYLE.frame}"></rect>`;
   return `${vertical}${horizontal}${frame}${yTicks}${xTicks}`;
 }
 
-function interfaceMarkerX(width) {
+function interfaceMarkerX(plot) {
   if (!state.data?.meta) return null;
   const center = state.data.meta.interface_center;
   if (typeof center !== "number") return null;
   const xValues = state.data.x;
   if (center < xValues[0] || center > xValues[xValues.length - 1]) return null;
-  return scale(center, xValues[0], xValues[xValues.length - 1], 18, width - 18);
+  return scale(center, xValues[0], xValues[xValues.length - 1], plot.left, plot.right);
 }
 
-function renderChannel(channelIndex) {
-  if (!state.data) return;
+function panelGeometry(channelIndex) {
+  const topMargin = 22;
+  const panelHeight = 116;
+  const panelGap = 6;
+  const top = topMargin + channelIndex * (panelHeight + panelGap);
+  const left = 96;
+  const right = 872;
+  const bottom = top + panelHeight;
+  return {
+    top,
+    bottom,
+    left,
+    right,
+    width: right - left,
+    height: panelHeight,
+    midY: top + panelHeight / 2,
+    labelX: 36,
+    tickLabelX: 72,
+  };
+}
+
+function mathText(content, x, y, style = SVG_STYLE.text, anchor = "middle") {
+  return `<text x="${x}" y="${y}" text-anchor="${anchor}" dominant-baseline="middle" style="${style}">${content}</text>`;
+}
+
+function renderMultiPanelPlot() {
+  if (!state.data || !multiPanelPlot) return;
 
   const width = 900;
-  const height = 180;
-  const svg = channelPlots[channelIndex];
-  const frame = state.data.fields[state.currentFrame][channelIndex];
-  const path = createWavePath(frame, state.data.x, width, height);
-  const color = CHANNEL_COLORS[channelIndex];
-  const marker = interfaceMarkerX(width);
-  const markerMarkup =
-    marker === null
-      ? ""
-      : `<line x1="${marker.toFixed(2)}" y1="20" x2="${marker.toFixed(2)}" y2="${height - 20}" class="interface-marker"></line>`;
+  const height = 620;
+  const frame = state.data.fields[state.currentFrame];
+  const defs = [];
+  const panels = [];
 
-  svg.innerHTML = `
-    <rect x="0" y="0" width="${width}" height="${height}" class="screen-bg"></rect>
-    ${createCouplingBackground(width, height, channelIndex)}
-    ${createPlotGrid(width, height)}
-    ${markerMarkup}
-    <path d="${path}" fill="none" stroke="${color}" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"></path>
+  for (let channelIndex = 0; channelIndex < 4; channelIndex += 1) {
+    const plot = panelGeometry(channelIndex);
+    const clipId = `plot-clip-${channelIndex}`;
+    const shadeId = `coupling-gradient-${channelIndex}`;
+    const marker = interfaceMarkerX(plot);
+    const path = createWavePath(frame[channelIndex], state.data.x, plot);
+    const color = CHANNEL_COLORS[channelIndex];
+    const markerMarkup =
+      marker === null
+        ? ""
+        : `<line x1="${marker.toFixed(2)}" y1="${plot.top}" x2="${marker.toFixed(2)}" y2="${plot.bottom}" style="${SVG_STYLE.marker}"></line>`;
+
+    defs.push(createCouplingBackground(channelIndex));
+    defs.push(`<clipPath id="${clipId}"><rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}"></rect></clipPath>`);
+
+    panels.push(`
+      <g class="plot-panel" data-channel="${channelIndex + 1}">
+        ${mathText(`φ${channelIndex + 1}`, plot.labelX, plot.midY)}
+        ${mathText("π", plot.tickLabelX, plot.top, SVG_STYLE.tickText, "end")}
+        ${mathText("0", plot.tickLabelX, plot.midY, SVG_STYLE.tickText, "end")}
+        ${mathText("−π", plot.tickLabelX, plot.bottom, SVG_STYLE.tickText, "end")}
+        <rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}" fill="url(#${shadeId})" clip-path="url(#${clipId})"></rect>
+        ${createPlotGrid(plot)}
+        <g clip-path="url(#${clipId})">
+          ${markerMarkup}
+          <path d="${path}" fill="none" stroke="${color}" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+      </g>
+    `);
+  }
+
+  const lastPlot = panelGeometry(3);
+  const xValues = state.data.x;
+  const xTicks = [xValues[0], 0.5 * (xValues[0] + xValues[xValues.length - 1]), xValues[xValues.length - 1]];
+  const xTickMarkup = xTicks
+    .map((value, index) => {
+      const x = index === 0 ? lastPlot.left : index === 1 ? lastPlot.left + lastPlot.width / 2 : lastPlot.right;
+      return mathText(formatTick(value), x, lastPlot.bottom + 26, SVG_STYLE.tickText);
+    })
+    .join("");
+  const xLabel = mathText("x", lastPlot.left + lastPlot.width / 2, lastPlot.bottom + 50);
+
+  multiPanelPlot.innerHTML = `
+    <defs>${defs.join("")}</defs>
+    <rect x="0" y="0" width="${width}" height="${height}" fill="transparent"></rect>
+    ${panels.join("")}
+    ${xTickMarkup}
+    ${xLabel}
   `;
 }
 
@@ -181,18 +235,6 @@ function formatTick(value) {
   return value.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
 }
 
-function updateSharedXAxis() {
-  if (!state.data?.x?.length) return;
-  const xValues = state.data.x;
-  const xMin = xValues[0];
-  const xMax = xValues[xValues.length - 1];
-  const xMid = 0.5 * (xMin + xMax);
-
-  xMinLabel.textContent = formatTick(xMin);
-  xMidLabel.textContent = formatTick(xMid);
-  xMaxLabel.textContent = formatTick(xMax);
-}
-
 function updateFrameDisplay() {
   if (!state.data) return;
 
@@ -200,8 +242,7 @@ function updateFrameDisplay() {
   timeSlider.max = String(state.data.times.length - 1);
   timeSlider.value = String(state.currentFrame);
   timeLabel.textContent = state.data.times[state.currentFrame].toFixed(3);
-  updateSharedXAxis();
-  channelPlots.forEach((_, index) => renderChannel(index));
+  renderMultiPanelPlot();
 }
 
 function validatePayload(payload) {

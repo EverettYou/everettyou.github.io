@@ -27,77 +27,7 @@ Pages only serves static files.
             </div>
           </div>
 
-          <div class="screen-grid">
-            <article class="wave-screen">
-              <div class="screen-label">
-                <span>\(\phi_1\)</span>
-                <small>left moving</small>
-              </div>
-              <div class="axis-gutter" aria-hidden="true">
-                <span>\(\pi\)</span>
-                <span>0</span>
-                <span>\(-\pi\)</span>
-              </div>
-              <svg class="channel-plot" id="channel-plot-0" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
-            </article>
-
-            <article class="wave-screen">
-              <div class="screen-label">
-                <span>\(\phi_2\)</span>
-                <small>left moving</small>
-              </div>
-              <div class="axis-gutter" aria-hidden="true">
-                <span>\(\pi\)</span>
-                <span>0</span>
-                <span>\(-\pi\)</span>
-              </div>
-              <svg class="channel-plot" id="channel-plot-1" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
-            </article>
-
-            <article class="wave-screen">
-              <div class="screen-label">
-                <span>\(\phi_3\)</span>
-                <small>right moving</small>
-              </div>
-              <div class="axis-gutter" aria-hidden="true">
-                <span>\(\pi\)</span>
-                <span>0</span>
-                <span>\(-\pi\)</span>
-              </div>
-              <svg class="channel-plot" id="channel-plot-2" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
-            </article>
-
-            <article class="wave-screen">
-              <div class="screen-label">
-                <span>\(\phi_4\)</span>
-                <small>right moving</small>
-              </div>
-              <div class="axis-gutter" aria-hidden="true">
-                <span>\(\pi\)</span>
-                <span>0</span>
-                <span>\(-\pi\)</span>
-              </div>
-              <svg class="channel-plot" id="channel-plot-3" viewBox="0 0 900 180" preserveAspectRatio="none"></svg>
-            </article>
-          </div>
-
-          <div class="shared-x-axis" aria-label="Shared x axis">
-            <div class="x-axis-spacer"></div>
-            <div class="x-axis-spacer"></div>
-            <div class="x-axis-main">
-              <div class="x-axis-line" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="x-axis-labels">
-                <span id="x-min-label"></span>
-                <span id="x-mid-label"></span>
-                <span id="x-max-label"></span>
-              </div>
-              <div class="x-axis-name">\(x\)</div>
-            </div>
-          </div>
+          <svg class="multi-panel-plot" id="multi-panel-plot" viewBox="0 0 900 620" preserveAspectRatio="none" role="img" aria-label="Four compact boson field profiles"></svg>
 
           <div class="transport-bar">
             <button class="transport-button icon-button" id="play-toggle" type="button" aria-label="Play simulation">
