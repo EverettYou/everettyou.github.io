@@ -19,10 +19,10 @@ Pages only serves static files.
           <div class="stage-head">
             <div>
               <p class="eyebrow">Four compact bosons</p>
-              <h2>Field profile on \([-\pi,\pi)\)</h2>
+              <h2>Field profile on [-π, π)</h2>
             </div>
             <div class="time-pill">
-              <span>\(t\)</span>
+              <span class="math-lite">t</span>
               <strong id="time-label">0.00</strong>
             </div>
           </div>
@@ -30,28 +30,28 @@ Pages only serves static files.
           <div class="plot-shell">
             <svg class="multi-panel-plot" id="multi-panel-plot" viewBox="0 0 900 620" preserveAspectRatio="none" role="img" aria-label="Four compact boson field profiles"></svg>
             <div class="plot-labels" aria-hidden="true">
-              <span class="plot-text panel-symbol" style="left: 4%; top: 12.9%;">\(\phi_1\)</span>
-              <span class="plot-text panel-symbol" style="left: 4%; top: 32.6%;">\(\phi_2\)</span>
-              <span class="plot-text panel-symbol" style="left: 4%; top: 52.3%;">\(\phi_3\)</span>
-              <span class="plot-text panel-symbol" style="left: 4%; top: 71.9%;">\(\phi_4\)</span>
+              <span class="plot-text panel-symbol" style="left: 4%; top: 12.9%;">φ₁</span>
+              <span class="plot-text panel-symbol" style="left: 4%; top: 32.6%;">φ₂</span>
+              <span class="plot-text panel-symbol" style="left: 4%; top: 52.3%;">φ₃</span>
+              <span class="plot-text panel-symbol" style="left: 4%; top: 71.9%;">φ₄</span>
 
-              <span class="plot-text y-tick" style="top: 3.5%;">\(\pi\)</span>
+              <span class="plot-text y-tick" style="top: 3.5%;">π</span>
               <span class="plot-text y-tick" style="top: 12.9%;">0</span>
-              <span class="plot-text y-tick" style="top: 22.3%;">\(-\pi\)</span>
-              <span class="plot-text y-tick" style="top: 23.2%;">\(\pi\)</span>
+              <span class="plot-text y-tick" style="top: 22.3%;">−π</span>
+              <span class="plot-text y-tick" style="top: 23.2%;">π</span>
               <span class="plot-text y-tick" style="top: 32.6%;">0</span>
-              <span class="plot-text y-tick" style="top: 41.9%;">\(-\pi\)</span>
-              <span class="plot-text y-tick" style="top: 42.9%;">\(\pi\)</span>
+              <span class="plot-text y-tick" style="top: 41.9%;">−π</span>
+              <span class="plot-text y-tick" style="top: 42.9%;">π</span>
               <span class="plot-text y-tick" style="top: 52.3%;">0</span>
-              <span class="plot-text y-tick" style="top: 61.6%;">\(-\pi\)</span>
-              <span class="plot-text y-tick" style="top: 62.6%;">\(\pi\)</span>
+              <span class="plot-text y-tick" style="top: 61.6%;">−π</span>
+              <span class="plot-text y-tick" style="top: 62.6%;">π</span>
               <span class="plot-text y-tick" style="top: 71.9%;">0</span>
-              <span class="plot-text y-tick" style="top: 81.3%;">\(-\pi\)</span>
+              <span class="plot-text y-tick" style="top: 81.3%;">−π</span>
 
               <span class="plot-text x-tick" id="x-min-label" style="left: 10.7%; top: 85.5%;"></span>
               <span class="plot-text x-tick" id="x-mid-label" style="left: 53.8%; top: 85.5%;"></span>
               <span class="plot-text x-tick" id="x-max-label" style="left: 96.9%; top: 85.5%;"></span>
-              <span class="plot-text x-label" style="left: 53.8%; top: 89.4%;">\(x\)</span>
+              <span class="plot-text x-label math-lite" style="left: 53.8%; top: 89.4%;">x</span>
             </div>
           </div>
 
@@ -224,8 +224,8 @@ $$
 K=\operatorname{diag}(1,1,-1,-1),\qquad V_{IJ}=\delta_{IJ}.
 $$
 
-Thus \(\phi_1,\phi_2\) are left-moving fields and
-\(\phi_3,\phi_4\) are right-moving fields in the free region.
+Thus $$\phi_1,\phi_2$$ are left-moving fields and
+$$\phi_3,\phi_4$$ are right-moving fields in the free region.
 
 ## SMG Interface
 
@@ -247,13 +247,13 @@ g_1(x)\cos(\ell_1^\intercal\phi)
 g_2(x)\cos(\ell_2^\intercal\phi).
 $$
 
-The default simulation uses the \(\mathbb{Z}_2\)-symmetric case
+The default simulation uses the $$\mathbb{Z}_2$$-symmetric case
 
 $$
 g_1(x)=g_2(x)=g(x),
 $$
 
-where \(g(x)\) is a sigmoid profile. Choosing the interaction on the right
+where $$g(x)$$ is a sigmoid profile. Choosing the interaction on the right
 uses
 
 $$
@@ -261,7 +261,7 @@ g(x)=\frac{g_0}{1+\exp[-(x-c)/w]},
 $$
 
 while choosing the interaction on the left reflects the profile about the
-interface center \(c\).
+interface center $$c$$.
 
 ## Equation Solved
 
@@ -276,9 +276,9 @@ K_{IJ}\partial_t\partial_x\phi_J
 =0.
 $$
 
-The compact fields are displayed modulo \(2\pi\) in the interval
-\([-\pi,\pi)\). The shaded monitor background encodes the local strength
-of \(g(x)\), from white in the gapless region to a darker tone in the SMG
+The compact fields are displayed modulo $$2\pi$$ in the interval
+$$[-\pi,\pi)$$. The shaded monitor background encodes the local strength
+of $$g(x)$$, from white in the gapless region to a darker tone in the SMG
 region.
 
 ## Notes
@@ -286,4 +286,4 @@ region.
 This demo is meant as an exploratory visualization, not yet a controlled
 scattering calculation. In particular, the nonlinear SMG region can be stiff,
 and the numerical result should be checked against the free-wave solution by
-setting \(g_0=0\).
+setting $$g_0=0$$.
