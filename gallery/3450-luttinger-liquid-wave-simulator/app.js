@@ -361,7 +361,7 @@ function combineRk4(phi, k1, k2, k3, k4, dt) {
 
 function firstDerivative(phi, dx, boundary) {
   const pointCount = phi[0].length;
-  return phi.map((channel) => {
+  return phi.map((channel, channelIndex) => {
     const derivative = new Array(pointCount);
     if (boundary === "periodic") {
       for (let index = 0; index < pointCount; index += 1) {
@@ -372,8 +372,11 @@ function firstDerivative(phi, dx, boundary) {
       return derivative;
     }
 
-    derivative[0] = (channel[1] - channel[0]) / dx;
-    derivative[pointCount - 1] = (channel[pointCount - 1] - channel[pointCount - 2]) / dx;
+    const isLeftMoving = K_INV_DIAG[channelIndex] > 0;
+    derivative[0] = isLeftMoving ? (channel[1] - channel[0]) / dx : 0;
+    derivative[pointCount - 1] = isLeftMoving
+      ? 0
+      : (channel[pointCount - 1] - channel[pointCount - 2]) / dx;
     for (let index = 1; index < pointCount - 1; index += 1) {
       derivative[index] = (channel[index + 1] - channel[index - 1]) / (2 * dx);
     }
@@ -402,14 +405,25 @@ function nonlinearForce(phi, gProfile) {
   return force;
 }
 
-function integrateAlongX(source, dx) {
-  return source.map((channel) => {
+function integrateAlongX(source, dx, boundary) {
+  return source.map((channel, channelIndex) => {
     const integral = new Array(channel.length).fill(0);
     for (let index = 1; index < channel.length; index += 1) {
       integral[index] = integral[index - 1] + 0.5 * (channel[index] + channel[index - 1]) * dx;
     }
-    const mean = integral.reduce((sum, value) => sum + value, 0) / integral.length;
-    return integral.map((value) => value - mean);
+
+    if (boundary === "periodic") {
+      const mean = integral.reduce((sum, value) => sum + value, 0) / integral.length;
+      return integral.map((value) => value - mean);
+    }
+
+    // Choose the integration constant so the nonlinear drive vanishes on the
+    // no-incoming side of each chiral channel.
+    if (K_INV_DIAG[channelIndex] > 0) {
+      const total = integral[integral.length - 1];
+      return integral.map((value) => value - total);
+    }
+    return integral;
   });
 }
 
@@ -419,7 +433,7 @@ function rhs(phi, grid, payload, gProfile) {
   const source = force.map((channel, channelIndex) =>
     channel.map((value) => K_INV_DIAG[channelIndex] * value),
   );
-  const interactionVelocity = integrateAlongX(source, grid.dx);
+  const interactionVelocity = integrateAlongX(source, grid.dx, payload.boundary);
 
   return phi.map((channel, channelIndex) =>
     channel.map((_, pointIndex) =>

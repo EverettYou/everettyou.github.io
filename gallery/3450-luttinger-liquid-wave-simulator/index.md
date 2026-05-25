@@ -162,7 +162,7 @@ Pages only serves static files.
                 <label>
                   <span>Boundary</span>
                   <select name="boundary">
-                    <option value="neumann" selected>Neumann</option>
+                    <option value="open" selected>Open, no incoming</option>
                     <option value="periodic">Periodic</option>
                   </select>
                 </label>
