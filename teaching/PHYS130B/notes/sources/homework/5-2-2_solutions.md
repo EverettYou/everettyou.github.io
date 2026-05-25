@@ -71,7 +71,7 @@ order by order.)
 
 <!-- ─── -->
 
-**2. Iteration to second order.** Substitute $\hat{U}_{\mathcal{I}}(t)=\hat{I}-(\mathrm{i}/\hbar)\int_0^t\mathrm{d}t'\,\hat{V}_{\mathcal{I}}(t')\hat{U}_{\mathcal{I}}(t')$ for $\hat{U}_{\mathcal{I}}(t')$ on its own right-hand side once, and verify the $k=2$ term of the Dyson series $\hat{U}_{\mathcal{I}}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{V}_{\mathcal{I}}(t_k)\cdots\hat{V}_{\mathcal{I}}(t_1)$. Pay attention to the ordering of the two integration variables and the signs.
+**2. Iteration to second order.** Substitute $\hat{U}_{\mathcal{I}}(t)=\hat{I}-(\mathrm{i}/\hbar)\int_0^t\mathrm{d}t'\,\hat{V}_{\mathcal{I}}(t')\hat{U}_{\mathcal{I}}(t')$ for $\hat{U}_{\mathcal{I}}(t')$ on its own right-hand side once, and verify the $k=2$ term of the Dyson series $\hat{U}_{\mathcal{I}}(t)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{V}_{\mathcal{I}}(t_k)\cdots\hat{V}_{\mathcal{I}}(t_1)$. Pay attention to the ordering of the two integration variables and the signs.
 
 **Solution.**
 
@@ -115,7 +115,7 @@ $$
 \hat{U}_{\mathcal{I}}^{(2)}(t)=\left(-\frac{\mathrm{i}}{\hbar}\right)^{\!2}\int_0^t\mathrm{d}t_1\int_0^{t_1}\mathrm{d}t_2\;\hat{V}_{\mathcal{I}}(t_1)\,\hat{V}_{\mathcal{I}}(t_2).
 $$
 
-Compare with the general Dyson term in $\hat{U}_{\mathcal{I}}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{V}_{\mathcal{I}}(t_k)\cdots\hat{V}_{\mathcal{I}}(t_1)$, which for
+Compare with the general Dyson term in $\hat{U}_{\mathcal{I}}(t)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{V}_{\mathcal{I}}(t_k)\cdots\hat{V}_{\mathcal{I}}(t_1)$, which for
 $k=2$ reads
 
 $$
@@ -137,7 +137,7 @@ Two points to note, as flagged in the problem:
   *ordered simplex* $0\le t_2\le t_1\le t$ rather than the full square — and it
   is the simplex that produces the time ordering.
 - **Signs.** Each substitution brings down one factor of $-\mathrm{i}/\hbar$, so
-  the $k$-th term carries $(-\mathrm{i})^k$. For $k=2$ this is
+  the $k$-th term carries $(-\mathrm{i}/\hbar)^k$. For $k=2$ this is
   $(-\mathrm{i}/\hbar)^2=-1/\hbar^2$ — a real, negative prefactor; the
   individual minus signs do *not* cancel against the $\mathrm{i}^2$ in a way
   that flips the result, they combine to $-1/\hbar^2$.
@@ -272,7 +272,7 @@ The two factors are the same number, viewed from the two sides of the identity.
 
 <!-- ─── -->
 
-**4. Bare Green's function.** From $\hat{G}_0(t,t')=\hat{U}_0(t)\hat{U}_0^{\dagger}(t')=\sum_n |n\rangle\,\mathrm{e}^{-\mathrm{i}E_n(t-t')/\hbar}\,\langle n|$,
+**4. Bare Green's function.** From $\hat{G}_0(t,t')=\hat{U}_0(t)\hat{U}_0^{\dagger}(t')=\sum_n \vert n\rangle\,\mathrm{e}^{-\mathrm{i}E_n(t-t')/\hbar}\,\langle n\vert$,
 
 (a) Show $\hat{G}_0(t,t'')\hat{G}_0(t'',t')=\hat{G}_0(t,t')$ using the spectral form.
 
@@ -365,7 +365,7 @@ that drives the resonance physics of the next section.
 
 <!-- ─── -->
 
-**5. Schrödinger-picture Dyson series.** Starting from $\hat{U}(t)=\hat{U}_0(t)\hat{U}_{\mathcal{I}}(t)$ and the second-order term of $\hat{U}_{\mathcal{I}}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{V}_{\mathcal{I}}(t_k)\cdots\hat{V}_{\mathcal{I}}(t_1)$, derive the second-order term of $\hat{U}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$ explicitly. Show step by step where each $\hat{G}_0$ link comes from.
+**5. Schrödinger-picture Dyson series.** Starting from $\hat{U}(t)=\hat{U}_0(t)\hat{U}_{\mathcal{I}}(t)$ and the second-order term of $\hat{U}_{\mathcal{I}}(t)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{V}_{\mathcal{I}}(t_k)\cdots\hat{V}_{\mathcal{I}}(t_1)$, derive the second-order term of $\hat{U}(t)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$ explicitly. Show step by step where each $\hat{G}_0$ link comes from.
 
 **Solution.**
 
@@ -417,7 +417,7 @@ $$
 \hat{U}^{(2)}(t)=\left(-\frac{\mathrm{i}}{\hbar}\right)^{\!2}\int_0^t\mathrm{d}t_2\int_0^{t_2}\mathrm{d}t_1\;\hat{G}_0(t,t_2)\,\hat{V}(t_2)\,\hat{G}_0(t_2,t_1)\,\hat{V}(t_1)\,\hat{G}_0(t_1,0),
 $$
 
-which is exactly the $k=2$ term of $\hat{U}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$. Each $\hat{G}_0$
+which is exactly the $k=2$ term of $\hat{U}(t)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$. Each $\hat{G}_0$
 link is a free-propagation segment; each $\hat{V}$ is an instantaneous
 scattering. The expression reads, right to left along the ket,
 **free $\to$ scatter at $t_1$ $\to$ free $\to$ scatter at $t_2$ $\to$ free** —
@@ -427,14 +427,14 @@ inserting $\hat{G}_0$ links between them.
 
 <!-- ─── -->
 
-**6. Recursive Dyson equation.** Show that $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$ is equivalent to the closed recursion
+**6. Recursive Dyson equation.** Show that $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$ is equivalent to the closed recursion
 
 $$
 \hat{G}(t,t_0)=\hat{G}_0(t,t_0)
 -\frac{\mathrm{i}}{\hbar}\!\int_{t_0}^{t}\!\mathrm{d}t_1\,\hat{G}_0(t,t_1)\,\hat{V}(t_1)\,\hat{G}(t_1,t_0).
 $$
 
-Iterate this recursion once and verify the $k=1$ and $k=2$ terms of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
+Iterate this recursion once and verify the $k=1$ and $k=2$ terms of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
 
 **Solution.**
 
@@ -501,10 +501,10 @@ $$
 
 Now read off the orders in $\hat{V}$:
 
-- **$k=0$:** $\hat{G}_0(t,t_0)$ — matches the zeroth term of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
+- **$k=0$:** $\hat{G}_0(t,t_0)$ — matches the zeroth term of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
 - **$k=1$:** with $s\to t_1$,
   $-\dfrac{\mathrm{i}}{\hbar}\displaystyle\int_{t_0}^{t}\mathrm{d}t_1\;\hat{G}_0(t,t_1)\,\hat{V}(t_1)\,\hat{G}_0(t_1,t_0)$
-  — exactly the $k=1$ term of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
+  — exactly the $k=1$ term of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
 - **$k=2$:** the last line is already $O(\hat{V}^2)$ *before* counting the
   $\hat{G}(s',t_0)$ tail; to isolate the pure $k=2$ term, replace that tail by
   its leading piece $\hat{G}(s',t_0)\to\hat{G}_0(s',t_0)$. Renaming
@@ -514,7 +514,7 @@ Now read off the orders in $\hat{V}$:
   \left(-\frac{\mathrm{i}}{\hbar}\right)^{\!2}\int_{t_0}^{t}\mathrm{d}t_2\int_{t_0}^{t_2}\mathrm{d}t_1\;\hat{G}_0(t,t_2)\,\hat{V}(t_2)\,\hat{G}_0(t_2,t_1)\,\hat{V}(t_1)\,\hat{G}_0(t_1,t_0),
   $$
 
-  which is the $k=2$ term of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
+  which is the $k=2$ term of $\hat{G}(t,t_0)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_{t_0}^{t}\!\mathrm{d}t_k\cdots\int_{t_0}^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,t_0)$.
 
 Each further substitution of the recursion peels off one more vertex and raises
 the order by one, regenerating the full Dyson series term by term. The
@@ -533,11 +533,11 @@ $$
 
 with $\hat{V}$ time-independent.
 
-(a) Write the second-order amplitude $\langle 1\vert\hat{U}(t)\vert 0\rangle$ from $\hat{U}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$.
+(a) Write the second-order ($k=2$) term of the survival amplitude $\langle 0\vert\hat{U}(t)\vert 0\rangle$ from $\hat{U}(t)=\sum_{k=0}^{\infty}\Bigl(-\frac{\mathrm{i}}{\hbar}\Bigr)^{\!k}\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$ as an explicit double time integral, using the spectral form of $\hat{G}_0$.
 
-(b) Identify which intermediate states contribute and draw the corresponding Feynman diagram.
+(b) Identify the intermediate state that contributes and draw the corresponding Feynman diagram.
 
-(c) Argue physically why this term is *not* the dominant contribution to $\vert 0\rangle\to\vert 1\rangle$ at small $\Omega t$ (compare with the first-order amplitude).
+(c) Show that the first-order term $\langle 0\vert\hat{U}^{(1)}(t)\vert 0\rangle$ vanishes, and explain the selection rule responsible. Conclude that the $k=2$ term is the leading correction to the survival amplitude beyond the free-evolution phase $\langle 0\vert\hat{G}_0(t,0)\vert 0\rangle$.
 
 **Solution.**
 
@@ -559,18 +559,18 @@ $$
 and the perturbation is a pure spin-flip,
 $\hat{V}=\hbar\Omega\,\hat{X}=\hbar\Omega\bigl(\vert 0\rangle\langle 1\vert+\vert 1\rangle\langle 0\vert\bigr)$.
 
-**(a) Second-order amplitude.** The $k=2$ term of $\hat{U}(t)=\sum_{k=0}^{\infty}(-\mathrm{i})^k\int_0^t\!\mathrm{d}t_k\cdots\int_0^{t_2}\!\mathrm{d}t_1\;\hat{G}_0(t,t_k)\hat{V}(t_k)\hat{G}_0(t_k,t_{k-1})\cdots\hat{V}(t_1)\hat{G}_0(t_1,0)$,
-sandwiched between $\langle 1\vert$ and $\vert 0\rangle$, is
+**(a) Second-order term of the survival amplitude.** The $k=2$ term of the
+Dyson series, sandwiched between $\langle 0\vert$ and $\vert 0\rangle$, is
 
 $$
-\langle 1\vert\hat{U}^{(2)}(t)\vert 0\rangle
+\langle 0\vert\hat{U}^{(2)}(t)\vert 0\rangle
 =\left(-\frac{\mathrm{i}}{\hbar}\right)^{\!2}\int_0^t\mathrm{d}t_2\int_0^{t_2}\mathrm{d}t_1\;
-\langle 1\vert\hat{G}_0(t,t_2)\,\hat{V}\,\hat{G}_0(t_2,t_1)\,\hat{V}\,\hat{G}_0(t_1,0)\vert 0\rangle.
+\langle 0\vert\hat{G}_0(t,t_2)\,\hat{V}\,\hat{G}_0(t_2,t_1)\,\hat{V}\,\hat{G}_0(t_1,0)\vert 0\rangle.
 $$
 
-Evaluate the operator string acting on $\vert 0\rangle$, right to left. The bare
-propagators only attach phases; each $\hat{V}=\hbar\Omega\hat{X}$ flips the
-qubit:
+Evaluate the operator string acting on $\vert 0\rangle$ from right to left. Each
+bare propagator only attaches a phase; each $\hat{V}=\hbar\Omega\hat{X}$ flips
+the qubit:
 
 $$
 \vert 0\rangle
@@ -581,24 +581,8 @@ $$
 \xrightarrow{\;\hat{G}_0(t,t_2)\;}\cdots\vert 0\rangle.
 $$
 
-Two flips return the qubit to $\vert 0\rangle$. The surviving ket is
-proportional to $\vert 0\rangle$, and $\langle 1\vert 0\rangle=0$, so **every
-term in the integrand vanishes**:
-
-$$
-\boxed{\;\langle 1\vert\hat{U}^{(2)}(t)\vert 0\rangle=0.\;}
-$$
-
-This is a selection rule: $\hat{V}\propto\hat{X}$ flips the qubit exactly once
-per vertex, so the $k$-th order term connects $\vert 0\rangle$ to $\vert 1\rangle$
-only when $k$ is **odd**. The second-order amplitude for $0\to1$ is identically
-zero.
-
-**(b) Intermediate states and diagram.** A non-vanishing second-order process
-*does* exist — but it returns to the starting level. The single intermediate
-state available is $\vert 1\rangle$ (the only state $\hat{X}$ connects to
-$\vert 0\rangle$), and the surviving second-order matrix element is the
-*diagonal* one:
+Two flips return the qubit to $\vert 0\rangle$, and $\langle 0\vert 0\rangle=1$,
+so the matrix element survives. Substituting the three phases gives
 
 $$
 \langle 0\vert\hat{U}^{(2)}(t)\vert 0\rangle
@@ -606,7 +590,26 @@ $$
 \mathrm{e}^{-\mathrm{i}\omega_0(t-t_2)/2}\,\mathrm{e}^{+\mathrm{i}\omega_0(t_2-t_1)/2}\,\mathrm{e}^{-\mathrm{i}\omega_0 t_1/2}.
 $$
 
-Its Feynman diagram has the internal segment running on level $\vert 1\rangle$:
+Collecting the prefactor $(-\mathrm{i}/\hbar)^2(\hbar\Omega)^2=-\Omega^2$ and the
+combined phase $-\omega_0(t-t_2)/2+\omega_0(t_2-t_1)/2-\omega_0 t_1/2=-\omega_0 t/2+\omega_0(t_2-t_1)$,
+
+$$
+\boxed{\;\langle 0\vert\hat{U}^{(2)}(t)\vert 0\rangle
+=-\Omega^2\,\mathrm{e}^{-\mathrm{i}\omega_0 t/2}\int_0^t\mathrm{d}t_2\int_0^{t_2}\mathrm{d}t_1\;
+\mathrm{e}^{\mathrm{i}\omega_0(t_2-t_1)}.\;}
+$$
+
+The double integral is elementary; part (a) asks only for this explicit
+double-integral form, so we leave it unevaluated.
+
+**(b) Intermediate state and Feynman diagram.** The operator string in part (a)
+routes the qubit through exactly one intermediate state: the first $\hat{V}$
+flips $\vert 0\rangle\to\vert 1\rangle$, the bare propagator $\hat{G}_0(t_2,t_1)$
+carries it on level $\vert 1\rangle$, and the second $\hat{V}$ flips it back
+$\vert 1\rangle\to\vert 0\rangle$. The single intermediate state is
+$\vert 1\rangle$ — the only level $\hat{X}$ connects to $\vert 0\rangle$.
+
+The Feynman diagram has its internal segment running on level $\vert 1\rangle$:
 
 ```
    |0>          |1>          |0>
@@ -616,55 +619,48 @@ Its Feynman diagram has the internal segment running on level $\vert 1\rangle$:
 ```
 
 a $\hat{G}_0$ line on $\vert 0\rangle$ from $0$ to the first vertex at $t_1$, a
-$\hat{G}_0$ line on the **intermediate** state $\vert 1\rangle$ from $t_1$ to
-$t_2$, and a $\hat{G}_0$ line back on $\vert 0\rangle$ from $t_2$ to $t$. For the
-*requested* transition $\vert 0\rangle\to\vert 1\rangle$ there is **no**
-second-order diagram at all: two flips cannot connect $\vert 0\rangle$ to
-$\vert 1\rangle$, so the diagram simply does not close on $\langle 1\vert$.
+$\hat{G}_0$ line on the intermediate state $\vert 1\rangle$ from $t_1$ to $t_2$,
+and a $\hat{G}_0$ line back on $\vert 0\rangle$ from $t_2$ to the final time $t$.
+Reading right to left, the operator product is
+$\hat{G}_0(t,t_2)\,\hat{V}\,\hat{G}_0(t_2,t_1)\,\hat{V}\,\hat{G}_0(t_1,0)$ — the
+mirror image of the diagram, as required by the mirror rule.
 
-**(c) Why second order is not the dominant $0\to1$ contribution.** Compute the
-first-order amplitude for comparison:
-
-$$
-\langle 1\vert\hat{U}^{(1)}(t)\vert 0\rangle
-=-\frac{\mathrm{i}}{\hbar}\int_0^t\mathrm{d}t_1\;\langle 1\vert\hat{G}_0(t,t_1)\,\hat{V}\,\hat{G}_0(t_1,0)\vert 0\rangle.
-$$
-
-Here a *single* flip lands on $\vert 1\rangle$, so the amplitude is non-zero:
+**(c) First-order term and the selection rule.** The $k=1$ term of the survival
+amplitude is
 
 $$
-\langle 1\vert\hat{U}^{(1)}(t)\vert 0\rangle
-=-\mathrm{i}\Omega\int_0^t\mathrm{d}t_1\;\mathrm{e}^{+\mathrm{i}\omega_0(t-t_1)/2}\,\mathrm{e}^{-\mathrm{i}\omega_0 t_1/2}
-=-\mathrm{i}\Omega\,\mathrm{e}^{\mathrm{i}\omega_0 t/2}\int_0^t\mathrm{d}t_1\;\mathrm{e}^{-\mathrm{i}\omega_0 t_1}.
+\langle 0\vert\hat{U}^{(1)}(t)\vert 0\rangle
+=-\frac{\mathrm{i}}{\hbar}\int_0^t\mathrm{d}t_1\;\langle 0\vert\hat{G}_0(t,t_1)\,\hat{V}\,\hat{G}_0(t_1,0)\vert 0\rangle.
 $$
 
-The integral is $(1-\mathrm{e}^{-\mathrm{i}\omega_0 t})/(\mathrm{i}\omega_0)$, and
-$\mathrm{e}^{\mathrm{i}\omega_0 t/2}(1-\mathrm{e}^{-\mathrm{i}\omega_0 t})=\mathrm{e}^{\mathrm{i}\omega_0 t/2}-\mathrm{e}^{-\mathrm{i}\omega_0 t/2}=2\mathrm{i}\sin(\omega_0 t/2)$,
-so
+A single $\hat{V}=\hbar\Omega\hat{X}$ flips $\vert 0\rangle\to\vert 1\rangle$, and
+$\hat{G}_0(t,t_1)$ keeps the state on level $\vert 1\rangle$; projecting on
+$\langle 0\vert$ then gives $\langle 0\vert 1\rangle=0$. Every term in the
+integrand vanishes, so
 
 $$
-\langle 1\vert\hat{U}^{(1)}(t)\vert 0\rangle=-\frac{2\mathrm{i}\Omega}{\omega_0}\sin\!\left(\frac{\omega_0 t}{2}\right)
-\;\xrightarrow[\;\Omega t,\,\omega_0 t\ll 1\;]{}\;-\mathrm{i}\,\Omega t.
+\boxed{\;\langle 0\vert\hat{U}^{(1)}(t)\vert 0\rangle=0.\;}
 $$
 
-The first-order amplitude is $O(\Omega t)$ — linear in the coupling and
-*non-zero*. The second-order amplitude for $0\to1$ is exactly zero, by the
-flip-parity selection rule of part (a). The first correction to $0\to1$ beyond
-first order is therefore the **third**-order term, of size $O((\Omega t)^3)$.
+This is a flip-parity selection rule. The perturbation $\hat{V}\propto\hat{X}$
+flips the qubit exactly once per vertex, so the order-$k$ term carries $k$ flips
+and returns $\vert 0\rangle$ to $\vert 0\rangle$ only when $k$ is **even**. Odd
+orders instead carry the *transition* amplitude
+$\langle 1\vert\hat{U}\vert 0\rangle$; even orders dress the *survival*
+amplitude $\langle 0\vert\hat{U}\vert 0\rangle$.
 
-So at small $\Omega t$ the hierarchy of $0\to1$ contributions is
+The $k=0$ term of the survival amplitude is pure free evolution,
 
 $$
-\underbrace{O(\Omega t)}_{k=1}\;\gg\;\underbrace{0}_{k=2}\;,\qquad
-\text{next correction }O\!\bigl((\Omega t)^3\bigr)\ \text{at }k=3.
+\langle 0\vert\hat{G}_0(t,0)\vert 0\rangle=\mathrm{e}^{-\mathrm{i}\omega_0 t/2},
 $$
 
-The second-order term is not "subdominant" in the usual sense — it is
-identically absent. The physical reason is the parity of spin flips: reaching
-$\vert 1\rangle$ from $\vert 0\rangle$ requires an **odd** number of $\hat{X}$
-vertices, and order $k=2$ supplies an even number. Even orders dress the
-*survival* amplitude $\langle 0\vert\hat{U}\vert 0\rangle$; odd orders carry the
-*transition* amplitude $\langle 1\vert\hat{U}\vert 0\rangle$.
+a phase of unit modulus that carries no information about the perturbation. The
+$k=1$ term vanishes. Hence the $k=2$ term of part (a) is the **leading
+correction** to the survival amplitude beyond free evolution — the first
+nonzero term that depends on $\hat{V}$, entering at order $\Omega^2$. (For the
+*transition* amplitude $\langle 1\vert\hat{U}\vert 0\rangle$ the hierarchy is
+mirrored: the $k=1$ term is leading and the $k=2$ term is identically zero.)
 
 <!-- ─── -->
 

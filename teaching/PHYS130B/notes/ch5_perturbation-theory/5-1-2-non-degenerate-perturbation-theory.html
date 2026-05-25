@@ -579,7 +579,7 @@
 <h2>Lecture Notes<a class="headerlink" href="#lecture-notes" title="Link to this heading">#</a></h2>
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
-<p>Sec. 5.1.1 used an exactly solvable toy model as a benchmark. This subsection takes the next step: derive the perturbative coefficients directly from unperturbed data, without exact diagonalization.</p>
+<p>§5.1.1 used an exactly solvable toy model as a benchmark. This subsection takes the next step: derive the perturbative coefficients directly from unperturbed data, without exact diagonalization.</p>
 <p>We focus on the non-degenerate case and build formulas for first- and second-order energy shifts, first-order state mixing, and the validity condition that tells us when this method breaks down and degenerate perturbation theory is needed.</p>
 </section>
 <section id="problem-setup">
@@ -636,7 +636,8 @@ E_n^{(k)}\equiv \left.\frac{1}{k!}\partial_\lambda^k E_n(\lambda)\right\vert_{\l
 <p>From the Taylor-expansion viewpoint, perturbation theory is a derivative problem: we need derivatives of energies and states with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <p>The Hellmann-Feynman identities are exactly the tool we need: they convert those derivatives into matrix elements of <span class="math notranslate nohighlight">\(\hat V\)</span>, giving a recursive route to higher-order corrections.</p>
 <div class="important admonition">
-<p class="admonition-title">Hellmann-Feynman identities (non-degenerate)</p>
+<p class="admonition-title">Hellmann-Feynman Identities (Non-Degenerate)</p>
+<p>The perturbation <span class="math notranslate nohighlight">\(\hat V\)</span> is Hermitian (it is a piece of the Hamiltonian), so its matrix elements obey <span class="math notranslate nohighlight">\(V_{nm}=\overline{V_{mn}}\)</span>.</p>
 <p>Differentiating the eigenvalue equation with respect to <span class="math notranslate nohighlight">\(\lambda\)</span> gives the two Hellmann-Feynman identities below.</p>
 <ul class="simple">
 <li><p><strong>1st Hellmann-Feynman Identity</strong> (energy derivative):</p></li>
@@ -646,13 +647,16 @@ E_n^{(k)}\equiv \left.\frac{1}{k!}\partial_\lambda^k E_n(\lambda)\right\vert_{\l
 \partial_\lambda E_n = V_{nn}.
 \]</div>
 <ul class="simple">
-<li><p><strong>2nd Hellmann-Feynman Identity</strong> (state derivative):</p></li>
+<li><p><strong>2nd Hellmann-Feynman Identity</strong> (state derivative): for <span class="math notranslate nohighlight">\(m\neq n\)</span>, the ket- and bra-derivative overlaps are</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[
-\langle m\vert\partial_\lambda n\rangle = \frac{V_{mn}}{E_n-E_m}
-\text{ for }m\neq n.
-\]</div>
+\[\begin{split}
+\begin{split}
+\langle m\vert\partial_\lambda n\rangle &amp;= \frac{V_{mn}}{E_n-E_m},\\
+\langle\partial_\lambda n\vert m\rangle &amp;= \frac{V_{nm}}{E_n-E_m}.
+\end{split}
+\end{split}\]</div>
+<p>The energy denominator always carries the energy of the state being <em>differentiated</em> minus that of the other state.</p>
 </div>
 <div class="dropdown information admonition">
 <p class="admonition-title">Derivation: Hellmann-Feynman identities</p>
@@ -697,6 +701,11 @@ V_{mn}=(E_n-E_m)\langle m\vert\partial_\lambda n\rangle,
 <div class="math notranslate nohighlight">
 \[
 \langle m\vert\partial_\lambda n\rangle=\frac{V_{mn}}{E_n-E_m}.
+\]</div>
+<p>Taking the complex conjugate gives the bra-derivative form of the same identity. The overlap conjugates as <span class="math notranslate nohighlight">\(\langle\partial_\lambda n\vert m\rangle=\overline{\langle m\vert\partial_\lambda n\rangle}\)</span>, the energy denominator <span class="math notranslate nohighlight">\(E_n-E_m\)</span> is real, and Hermiticity of <span class="math notranslate nohighlight">\(\hat V\)</span> gives <span class="math notranslate nohighlight">\(\overline{V_{mn}}=V_{nm}\)</span>, so for <span class="math notranslate nohighlight">\(m\neq n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\partial_\lambda n\vert m\rangle=\overline{\left(\frac{V_{mn}}{E_n-E_m}\right)}=\frac{V_{nm}}{E_n-E_m}.
 \]</div>
 <p>This is the coupling-over-gap structure that controls state mixing.</p>
 </div>
@@ -755,7 +764,7 @@ E_n(\lambda)&amp;=E_n+(\partial_\lambda E_n)\lambda+\frac{1}{2}(\partial_\lambda
 +V_{nn}\left(\langle\partial_\lambda n\vert n\rangle+\langle n\vert\partial_\lambda n\rangle\right).
 \end{split}
 \end{split}\]</div>
-<p>Here the second Hellmann-Feynman identity is used only for <span class="math notranslate nohighlight">\(m\neq n\)</span>. For the <span class="math notranslate nohighlight">\(m=n\)</span> piece,</p>
+<p>The second Hellmann-Feynman identity is used only for <span class="math notranslate nohighlight">\(m\neq n\)</span> — the bra-derivative form <span class="math notranslate nohighlight">\(\langle\partial_\lambda n\vert m\rangle=V_{nm}/(E_n-E_m)\)</span> for the first overlap, the ket-derivative form <span class="math notranslate nohighlight">\(\langle m\vert\partial_\lambda n\rangle=V_{mn}/(E_n-E_m)\)</span> for the second. For the <span class="math notranslate nohighlight">\(m=n\)</span> piece,</p>
 <div class="math notranslate nohighlight">
 \[
 \langle\partial_\lambda n\vert n\rangle+\langle n\vert\partial_\lambda n\rangle
@@ -767,6 +776,12 @@ E_n(\lambda)&amp;=E_n+(\partial_\lambda E_n)\lambda+\frac{1}{2}(\partial_\lambda
 \[
 \partial_\lambda^2E_n=2\sum_{m\neq n}\frac{V_{nm}V_{mn}}{E_n-E_m}.
 \]</div>
+<p>Finally, Hermiticity of <span class="math notranslate nohighlight">\(\hat V\)</span> (<span class="math notranslate nohighlight">\(V_{nm}=\overline{V_{mn}}\)</span>) turns each numerator into a squared modulus, <span class="math notranslate nohighlight">\(V_{nm}V_{mn}=\overline{V_{mn}}V_{mn}=\vert V_{mn}\vert^2\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_\lambda^2E_n=2\sum_{m\neq n}\frac{\vert V_{mn}\vert^2}{E_n-E_m}.
+\]</div>
+<p>Halving this gives the <span class="math notranslate nohighlight">\(\lambda^2\)</span> Taylor coefficient <span class="math notranslate nohighlight">\(\frac{1}{2}\partial_\lambda^2E_n=\sum_{m\neq n}\vert V_{mn}\vert^2/(E_n-E_m)\)</span> shown in the Energy Expansion box above.</p>
 </div>
 <div class="dropdown poll admonition">
 <p class="admonition-title">Poll: sign of ground-state shift</p>
@@ -782,7 +797,7 @@ E_n(\lambda)&amp;=E_n+(\partial_\lambda E_n)\lambda+\frac{1}{2}(\partial_\lambda
 <h3>State Corrections<a class="headerlink" href="#state-corrections" title="Link to this heading">#</a></h3>
 <p>Apply the same Taylor logic to states:</p>
 <div class="important admonition">
-<p class="admonition-title">State expansion and first-order correction</p>
+<p class="admonition-title">State Expansion and First-Order Correction</p>
 <p>Using the second Hellmann-Feynman identity, the state correction is given by:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -808,11 +823,12 @@ E_n(\lambda)&amp;=E_n+(\partial_\lambda E_n)\lambda+\frac{1}{2}(\partial_\lambda
 \]</div>
 <p>For <span class="math notranslate nohighlight">\(m=n\)</span>, normalization gives</p>
 <div class="math notranslate nohighlight">
-\[
-\partial_\lambda\langle n\vert n\rangle=0
-\quad\Rightarrow\quad
-\langle\partial_\lambda n\vert n\rangle+\langle n\vert\partial_\lambda n\rangle=0,
-\]</div>
+\[\begin{split}
+\begin{split}
+\partial_\lambda\langle n\vert n\rangle&amp;=0\\
+\Rightarrow\quad\langle\partial_\lambda n\vert n\rangle+\langle n\vert\partial_\lambda n\rangle&amp;=0,
+\end{split}
+\end{split}\]</div>
 <p>so <span class="math notranslate nohighlight">\(\langle n\vert\partial_\lambda n\rangle\)</span> is pure imaginary. One may choose the phase convention (parallel-transport gauge) so that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -834,10 +850,10 @@ E_n(\lambda)&amp;=E_n+(\partial_\lambda E_n)\lambda+\frac{1}{2}(\partial_\lambda
 <li><p><strong>Level repulsion</strong>: virtual transitions push levels apart.</p></li>
 <li><p><strong>Breakdown criterion</strong>: if <span class="math notranslate nohighlight">\(\vert E_n-E_m\vert\)</span> becomes comparable to <span class="math notranslate nohighlight">\(\vert V_{mn}\vert\)</span>, denominators become large and non-degenerate perturbation theory loses validity.</p></li>
 </ul>
-<p>Then we must switch to <strong>degenerate perturbation theory</strong> (Sec. 5.1.3).</p>
+<p>Then we must switch to <strong>degenerate perturbation theory</strong> (§5.1.3).</p>
 <div class="dropdown example admonition">
-<p class="admonition-title">Example: check against the qubit toy model</p>
-<p>Take exactly the toy model from Sec. 5.1.1:</p>
+<p class="admonition-title">Example: Check Against the Qubit Toy Model</p>
+<p>Take exactly the toy model from §5.1.1:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat H(\lambda)=\hat H_0+\lambda\hat V.
@@ -914,7 +930,7 @@ E_\pm(\lambda)=\pm\sqrt{1+\lambda^2}
 <p>which is also consistent with the exact eigenvector expansion.</p>
 </div>
 <div class="dropdown tip admonition">
-<p class="admonition-title">Discussion: what does divergence mean?</p>
+<p class="admonition-title">Discussion: What Does Divergence Mean?</p>
 <p>When <span class="math notranslate nohighlight">\(E_n-E_m\to 0\)</span>, formulas like <span class="math notranslate nohighlight">\(V_{mn}/(E_n-E_m)\)</span> diverge. Is this a physical singularity, or a sign that our basis choice is no longer appropriate? Explain how block-diagonalization inside the nearly degenerate subspace resolves this issue.</p>
 </div>
 </section>
@@ -948,7 +964,9 @@ E_\pm(\lambda)=\pm\sqrt{1+\lambda^2}
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \hat H_0=\begin{pmatrix}1&amp;0&amp;0\\0&amp;2&amp;0\\0&amp;0&amp;4\end{pmatrix},
-\qquad
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \hat V=\begin{pmatrix}1&amp;1&amp;1\\1&amp;0&amp;1\\1&amp;1&amp;-1\end{pmatrix}.
 \end{split}\]</div>
 <p>(a) Apply the first-order energy formula <span class="math notranslate nohighlight">\(E_n^{(1)} = \langle n^{(0)}\vert\hat V\vert n^{(0)}\rangle\)</span> to obtain <span class="math notranslate nohighlight">\(E_n^{(1)}\)</span> for all three states.</p>
@@ -971,10 +989,10 @@ E_n^{(2)}=\sum_{m\neq n}\frac{\vert V_{mn}\vert^2}{E_n-E_m},
 <p>(a) show <span class="math notranslate nohighlight">\(E_0^{(2)}\le 0\)</span> for the non-degenerate ground state,</p>
 <p>(b) interpret the result as level repulsion,</p>
 <p>(c) connect it to the variational principle.</p>
-<p><strong>5. Toy-model consistency check.</strong> For <span class="math notranslate nohighlight">\(\hat H=\hat Z+\lambda \hat X\)</span>:</p>
-<p>(a) compute <span class="math notranslate nohighlight">\(E_\pm^{(1)}\)</span> and <span class="math notranslate nohighlight">\(E_\pm^{(2)}\)</span> by perturbation theory,</p>
-<p>(b) compute <span class="math notranslate nohighlight">\(\vert\pm^{(1)}\rangle\)</span>,</p>
-<p>(c) compare with the exact expansion of <span class="math notranslate nohighlight">\(E_\pm(\lambda)=\pm\sqrt{1+\lambda^2}\)</span> and comment on agreement order-by-order.</p>
+<p><strong>5. Diagonal and off-diagonal perturbation.</strong> For the qubit Hamiltonian <span class="math notranslate nohighlight">\(\hat H=\hat Z+\lambda\hat V\)</span> with <span class="math notranslate nohighlight">\(\hat V=\hat Z+2\hat X\)</span> — a perturbation carrying both a diagonal and an off-diagonal part in the <span class="math notranslate nohighlight">\(\hat Z\)</span> eigenbasis:</p>
+<p>(a) compute the matrix elements <span class="math notranslate nohighlight">\(V_{00}\)</span>, <span class="math notranslate nohighlight">\(V_{11}\)</span>, <span class="math notranslate nohighlight">\(V_{10}\)</span>, <span class="math notranslate nohighlight">\(V_{01}\)</span>, and obtain <span class="math notranslate nohighlight">\(E_0^{(1)}\)</span>, <span class="math notranslate nohighlight">\(E_1^{(1)}\)</span>, <span class="math notranslate nohighlight">\(E_0^{(2)}\)</span>, <span class="math notranslate nohighlight">\(E_1^{(2)}\)</span>,</p>
+<p>(b) compute the first-order state corrections <span class="math notranslate nohighlight">\(\vert 0^{(1)}\rangle\)</span> and <span class="math notranslate nohighlight">\(\vert 1^{(1)}\rangle\)</span>,</p>
+<p>(c) diagonalize <span class="math notranslate nohighlight">\(\hat H\)</span> exactly, expand both eigenvalues through order <span class="math notranslate nohighlight">\(\lambda^2\)</span>, and confirm the perturbative result; explain why the diagonal part of <span class="math notranslate nohighlight">\(\hat V\)</span> shifts the energies already at first order while the off-diagonal part contributes only at second order.</p>
 <p>★ <strong>6. Harmonic oscillator with linear perturbation.</strong> Let</p>
 <div class="math notranslate nohighlight">
 \[
@@ -982,7 +1000,7 @@ E_n^{(2)}=\sum_{m\neq n}\frac{\vert V_{mn}\vert^2}{E_n-E_m},
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\hat V=\lambda \hat{x},
+\hat V=\hat{x},
 \]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -991,7 +1009,7 @@ E_n^{(2)}=\sum_{m\neq n}\frac{\vert V_{mn}\vert^2}{E_n-E_m},
 <p>(a) Compute <span class="math notranslate nohighlight">\(V_{nn}\)</span>, <span class="math notranslate nohighlight">\(V_{n+1,n}\)</span>, <span class="math notranslate nohighlight">\(V_{n-1,n}\)</span>.</p>
 <p>(b) Use non-degenerate perturbation theory to obtain <span class="math notranslate nohighlight">\(E_n\)</span> up to second order.</p>
 <p>(c) Solve the full Hamiltonian by completing the square and compare with perturbation theory.</p>
-<p><strong>7. Selection rules and parity.</strong> For a 1D parity-symmetric potential with odd perturbation <span class="math notranslate nohighlight">\(\hat V=\lambda \hat{x}\)</span>:</p>
+<p><strong>7. Selection rules and parity.</strong> For a 1D parity-symmetric potential with odd perturbation <span class="math notranslate nohighlight">\(\hat V=\hat{x}\)</span>:</p>
 <p>(a) show <span class="math notranslate nohighlight">\(E_n^{(1)}=0\)</span> for all <span class="math notranslate nohighlight">\(n\)</span>,</p>
 <p>(b) identify which matrix elements contribute to <span class="math notranslate nohighlight">\(E_n^{(2)}\)</span>,</p>
 <p>(c) explain how symmetry controls which virtual transitions are allowed.</p>

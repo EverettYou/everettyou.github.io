@@ -318,101 +318,136 @@ energetic statement that "letting the ground state mix downhill always helps."
 
 <!-- ─── -->
 
-**5. Toy-model consistency check.** For $\hat H=\hat Z+\lambda \hat X$:
+**5. Diagonal and off-diagonal perturbation.** For the qubit Hamiltonian $\hat H=\hat Z+\lambda\hat V$ with $\hat V=\hat Z+2\hat X$ — a perturbation carrying both a diagonal and an off-diagonal part in the $\hat Z$ eigenbasis:
 
-(a) compute $E_\pm^{(1)}$ and $E_\pm^{(2)}$ by perturbation theory,
+(a) compute the matrix elements $V_{00}$, $V_{11}$, $V_{10}$, $V_{01}$, and obtain $E_0^{(1)}$, $E_1^{(1)}$, $E_0^{(2)}$, $E_1^{(2)}$,
 
-(b) compute $\vert\pm^{(1)}\rangle$,
+(b) compute the first-order state corrections $\vert 0^{(1)}\rangle$ and $\vert 1^{(1)}\rangle$,
 
-(c) compare with the exact expansion of $E_\pm(\lambda)=\pm\sqrt{1+\lambda^2}$ and comment on agreement order-by-order.
+(c) diagonalize $\hat H$ exactly, expand both eigenvalues through order $\lambda^2$, and confirm the perturbative result; explain why the diagonal part of $\hat V$ shifts the energies already at first order while the off-diagonal part contributes only at second order.
 
 **Solution.**
 
 Work in the $\hat Z$ eigenbasis $\{\vert 0\rangle,\vert 1\rangle\}$ with $\hat
 Z\vert 0\rangle=+\vert 0\rangle$, $\hat Z\vert 1\rangle=-\vert 1\rangle$, so
-$\hat H_0=\hat Z$ has $E_0=+1$, $E_1=-1$. The "$+$" branch is the one connected
-to $\vert 0\rangle$ at $\lambda=0$, the "$-$" branch to $\vert 1\rangle$. The
-perturbation is $\hat V=\hat X$, whose matrix elements are
+$\hat H_0=\hat Z$ has $E_0=+1$, $E_1=-1$. The branch connected to
+$\vert 0\rangle$ at $\lambda=0$ is labeled $0$; the branch connected
+to $\vert 1\rangle$ is labeled $1$. The perturbation $\hat V=\hat Z+2\hat X$
+differs from the purely off-diagonal $\hat V=\hat X$ of Sec. 5.1.1 by the extra
+diagonal piece $\hat Z$ — and that one change is what switches on a first-order
+energy shift.
+
+**(a) Matrix elements and energies.** In the $\hat Z$ eigenbasis $\hat Z$ is
+diagonal and $\hat X$ purely off-diagonal, so
 
 $$
-V_{00}=\langle 0\vert\hat X\vert 0\rangle = 0,
-\quad
-V_{11}=0,
-\quad
-V_{01}=V_{10}=1.
-$$
-
-**(a) Energies.** First order is the diagonal element:
-
-$$
-E_+^{(1)} = V_{00} = 0,
+V_{00}=\langle 0\vert(\hat Z+2\hat X)\vert 0\rangle = +1,
 \qquad
-E_-^{(1)} = V_{11} = 0.
-$$
-
-Second order is the single virtual term:
-
-$$
-E_+^{(2)} = \frac{\vert V_{10}\vert^2}{E_0-E_1} = \frac{1}{1-(-1)} = \frac{1}{2},
+V_{11}=\langle 1\vert(\hat Z+2\hat X)\vert 1\rangle = -1,
 $$
 
 $$
-E_-^{(2)} = \frac{\vert V_{01}\vert^2}{E_1-E_0} = \frac{1}{-1-1} = -\frac{1}{2}.
+V_{10}=V_{01}=\langle 1\vert(\hat Z+2\hat X)\vert 0\rangle = 2.
+$$
+
+The first-order shift is the diagonal element, and unlike the toy model of
+Sec. 5.1.1 it is now **nonzero**:
+
+$$
+E_0^{(1)} = V_{00} = +1,
+\qquad
+E_1^{(1)} = V_{11} = -1.
+$$
+
+The second-order shift is the single virtual term linking the two levels:
+
+$$
+E_0^{(2)} = \frac{\vert V_{10}\vert^2}{E_0-E_1} = \frac{4}{1-(-1)} = +2,
+$$
+
+$$
+E_1^{(2)} = \frac{\vert V_{01}\vert^2}{E_1-E_0} = \frac{4}{-1-1} = -2.
 $$
 
 So perturbation theory predicts
 
 $$
-E_+(\lambda) = 1 + \tfrac{1}{2}\lambda^2 + O(\lambda^3),
+E_0(\lambda) = 1 + \lambda + 2\lambda^2 + O(\lambda^3),
 \qquad
-E_-(\lambda) = -1 - \tfrac{1}{2}\lambda^2 + O(\lambda^3).
+E_1(\lambda) = -1 - \lambda - 2\lambda^2 + O(\lambda^3).
 $$
 
-**(b) States.** The first-order correction is coupling over gap:
+**(b) States.** The first-order state correction is coupling over gap, and it
+sees only the off-diagonal matrix element:
 
 $$
-\vert +^{(1)}\rangle = \vert 1\rangle\,\frac{V_{10}}{E_0-E_1} = \tfrac{1}{2}\vert 1\rangle,
+\vert 0^{(1)}\rangle = \vert 1\rangle\,\frac{V_{10}}{E_0-E_1} = \vert 1\rangle,
 $$
 
 $$
-\vert -^{(1)}\rangle = \vert 0\rangle\,\frac{V_{01}}{E_1-E_0} = -\tfrac{1}{2}\vert 0\rangle.
+\vert 1^{(1)}\rangle = \vert 0\rangle\,\frac{V_{01}}{E_1-E_0} = -\vert 0\rangle.
 $$
 
-Hence $\vert +(\lambda)\rangle = \vert 0\rangle + \tfrac{\lambda}{2}\vert
-1\rangle + O(\lambda^2)$ and $\vert -(\lambda)\rangle = \vert 1\rangle -
-\tfrac{\lambda}{2}\vert 0\rangle + O(\lambda^2)$.
+Hence $\vert 0(\lambda)\rangle = \vert 0\rangle + \lambda\vert 1\rangle +
+O(\lambda^2)$ and $\vert 1(\lambda)\rangle = \vert 1\rangle - \lambda\vert
+0\rangle + O(\lambda^2)$. The diagonal $\hat Z$ piece of $\hat V$ commutes with
+$\hat H_0$ and mixes nothing; the entire state correction comes from the
+off-diagonal $2\hat X$ piece.
 
-**(c) Comparison with the exact result.** The exact energies are
-$E_\pm(\lambda)=\pm\sqrt{1+\lambda^2}$. Taylor-expanding,
+**(c) Comparison with the exact result.** In the $\hat Z$ eigenbasis the full
+Hamiltonian is
 
 $$
-\sqrt{1+\lambda^2} = 1 + \tfrac{1}{2}\lambda^2 - \tfrac{1}{8}\lambda^4 + O(\lambda^6),
+\hat H = \hat Z + \lambda(\hat Z+2\hat X)
+= \begin{pmatrix}1+\lambda & 2\lambda\\ 2\lambda & -(1+\lambda)\end{pmatrix},
 $$
 
-so $E_+ = 1 + \tfrac12\lambda^2 - \tfrac18\lambda^4+\cdots$ and $E_- = -1 -
-\tfrac12\lambda^2 + \tfrac18\lambda^4-\cdots$. Matching order by order:
+a traceless $2\times2$ matrix whose exact eigenvalues are
 
-- $O(\lambda^0)$: exact $\pm 1$ equals the unperturbed $E_\pm^{(0)}$. ✓
-- $O(\lambda^1)$: the exact expansion has **no** linear term, matching
-  $E_\pm^{(1)}=0$. ✓
-- $O(\lambda^2)$: exact coefficient $\pm\tfrac12$ equals $E_\pm^{(2)}$. ✓
+$$
+E_\pm(\lambda) = \pm\sqrt{(1+\lambda)^2 + (2\lambda)^2}
+= \pm\sqrt{1 + 2\lambda + 5\lambda^2}.
+$$
 
-For the states, the exact "$+$" eigenvector of $\hat H=\begin{pmatrix}1 &
-\lambda\\\lambda & -1\end{pmatrix}$ is $\vert +(\lambda)\rangle =
-\cos\tfrac\theta2\vert 0\rangle + \sin\tfrac\theta2\vert 1\rangle$ with
-$\tan\theta=\lambda$. For small $\lambda$, $\theta=\lambda+O(\lambda^3)$, so
-$\cos\tfrac\theta2 = 1+O(\lambda^2)$ and $\sin\tfrac\theta2 =
-\tfrac\lambda2+O(\lambda^3)$, giving $\vert +(\lambda)\rangle = \vert 0\rangle +
-\tfrac\lambda2\vert 1\rangle + O(\lambda^2)$ — exactly the perturbative result.
-A numerical check confirms it: at $\lambda=0.3$ the exact eigenvalues are
-$\pm1.04403$ while the truncation gives $\pm(1+\tfrac12(0.09))=\pm1.045$,
-agreeing to better than $0.1\%$.
+Taylor-expand the square root with $u = 2\lambda + 5\lambda^2$, using
+$\sqrt{1+u}=1+\tfrac12 u-\tfrac18 u^2+O(u^3)$ and keeping terms through
+$\lambda^2$ (note $u^2 = 4\lambda^2 + O(\lambda^3)$):
 
-The agreement is **order-by-order**, and that is the whole point: perturbation
-theory *is* the Taylor expansion of the exact answer, reconstructed without ever
-diagonalizing $\hat H$. Each perturbative coefficient is the corresponding
-Taylor coefficient; the only error is the truncation, here $O(\lambda^4)$,
-because the model's parity (Sec. 5.1.1) kills all odd powers.
+$$
+\sqrt{1 + 2\lambda + 5\lambda^2}
+= 1 + \tfrac12(2\lambda+5\lambda^2) - \tfrac18(4\lambda^2) + O(\lambda^3)
+= 1 + \lambda + 2\lambda^2 + O(\lambda^3).
+$$
+
+So $E_0 = 1 + \lambda + 2\lambda^2 + O(\lambda^3)$ and $E_1 = -1 - \lambda -
+2\lambda^2 + O(\lambda^3)$, matching part (a) coefficient by coefficient:
+
+- $O(\lambda^0)$: the exact values $\pm1$ are the unperturbed $E_0^{(0)}$ and $E_1^{(0)}$. ✓
+- $O(\lambda^1)$: the exact linear coefficients $\pm1$ equal $E_0^{(1)}=+1$ and $E_1^{(1)}=-1$. ✓
+- $O(\lambda^2)$: the exact quadratic coefficients $\pm2$ equal $E_0^{(2)}$ and $E_1^{(2)}$. ✓
+
+**Why the diagonal part acts first and the off-diagonal part acts second.** The
+order at which each piece of $\hat V$ enters is fixed by the Hellmann-Feynman
+identities:
+
+- The **diagonal** part feeds $E_n^{(1)}=V_{nn}$. Here $V_{nn}$ comes entirely
+  from the $\hat Z$ piece ($\hat X$ has $V_{nn}=0$), so the energy responds
+  *linearly* in $\lambda$. Geometrically, $\lambda\hat Z$ added to
+  $\hat H_0=\hat Z$ simply rescales the splitting to $(1+\lambda)\hat Z$: a
+  perturbation parallel to $\hat H_0$ reorients no state and shifts the levels
+  directly.
+- The **off-diagonal** part cannot appear in $E_n^{(1)}$ at all — that formula
+  sees only $V_{nn}$ — and first enters
+  $E_n^{(2)}=\sum_{m\neq n}\vert V_{mn}\vert^2/(E_n-E_m)$. Mixing is intrinsically
+  a two-step, hence second-order, process: the state must virtually hop to the
+  other level (one factor of $V_{mn}$) and hop back (a second factor), so the
+  leading energy shift it produces is quadratic in the coupling.
+
+This is the diagonal/off-diagonal dichotomy of the lecture's *Physical
+Intuition* section, made quantitative on the smallest possible system. The toy
+model of Sec. 5.1.1 ($\hat V=\hat X$, purely off-diagonal) is the special case
+$E_n^{(1)}=0$; restoring the diagonal $\hat Z$ piece is exactly what turns the
+linear term on.
 
 <!-- ─── -->
 
@@ -423,7 +458,7 @@ $$
 $$
 
 $$
-\hat V=\lambda \hat{x},
+\hat V=\hat{x},
 $$
 
 $$
@@ -438,18 +473,20 @@ $$
 
 **Solution.**
 
-Write $x_0\equiv\sqrt{\hbar/2m\omega}$ for the oscillator length scale, so $\hat{x} = x_0(\hat a+\hat a^\dagger)$ and $\hat V=\lambda x_0(\hat a+\hat a^\dagger)$.
-The unperturbed levels are $E_n=\hbar\omega(n+\tfrac12)$. Here $\hat V$ is the
-*full* perturbation (it already contains $\lambda$), so the perturbative series
-is organized in powers of $\lambda$ with $V_{mn}$ the matrix elements of
-$\lambda x_0(\hat a+\hat a^\dagger)$.
+Write $x_0\equiv\sqrt{\hbar/2m\omega}$ for the oscillator length scale, so the
+perturbation operator is $\hat V=\hat{x} = x_0(\hat a+\hat a^\dagger)$.
+The unperturbed levels are $E_n=\hbar\omega(n+\tfrac12)$. The Hamiltonian is
+$\hat H=\hat H_0+\lambda\hat V$, so the perturbative series is organized in
+powers of $\lambda$, and the matrix elements $V_{mn}=\langle m\vert\hat V\vert
+n\rangle$ are those of the $\lambda$-independent operator
+$x_0(\hat a+\hat a^\dagger)$.
 
 **(a) Matrix elements.** Using $\hat a\vert n\rangle=\sqrt n\,\vert n-1\rangle$
 and $\hat a^\dagger\vert n\rangle=\sqrt{n+1}\,\vert n+1\rangle$,
 
 $$
 V_{mn} = \langle m\vert\hat V\vert n\rangle
-= \lambda x_0\left(\sqrt n\,\delta_{m,n-1} + \sqrt{n+1}\,\delta_{m,n+1}\right).
+= x_0\left(\sqrt n\,\delta_{m,n-1} + \sqrt{n+1}\,\delta_{m,n+1}\right).
 $$
 
 The ladder operators have no diagonal part, so
@@ -457,37 +494,38 @@ The ladder operators have no diagonal part, so
 $$
 V_{nn} = 0,
 \qquad
-V_{n+1,n} = \lambda x_0\sqrt{n+1},
+V_{n+1,n} = x_0\sqrt{n+1},
 \qquad
-V_{n-1,n} = \lambda x_0\sqrt{n}.
+V_{n-1,n} = x_0\sqrt{n}.
 $$
 
 $\hat{x}$ connects a level only to its immediate neighbors — the harmonic
 oscillator's selection rule $\Delta n=\pm1$.
 
 **(b) Energy to second order.** The first-order shift vanishes,
-$E_n^{(1)}=V_{nn}=0$. The second-order sum has only the two neighbor terms:
+$E_n^{(1)}=V_{nn}=0$. The second-order coefficient has only the two neighbor terms:
 
 $$
-E_n^{(2)\text{-sum}}
+E_n^{(2)}
 = \frac{V_{n,n+1}V_{n+1,n}}{E_n-E_{n+1}} + \frac{V_{n,n-1}V_{n-1,n}}{E_n-E_{n-1}}.
 $$
 
-Since $\hat V$ is Hermitian and real here, $V_{n,n+1}=V_{n+1,n}=\lambda
-x_0\sqrt{n+1}$ and $V_{n,n-1}=V_{n-1,n}=\lambda x_0\sqrt n$. The energy
+Since $\hat V$ is Hermitian and real here, $V_{n,n+1}=V_{n+1,n}=x_0\sqrt{n+1}$ and
+$V_{n,n-1}=V_{n-1,n}=x_0\sqrt n$. The energy
 denominators are $E_n-E_{n+1}=-\hbar\omega$ and $E_n-E_{n-1}=+\hbar\omega$.
 Therefore
 
 $$
-E_n^{(2)\text{-sum}}
-= \frac{\lambda^2 x_0^2(n+1)}{-\hbar\omega} + \frac{\lambda^2 x_0^2\,n}{+\hbar\omega}
-= \frac{\lambda^2 x_0^2}{\hbar\omega}\big[-(n+1)+n\big]
-= -\frac{\lambda^2 x_0^2}{\hbar\omega}.
+E_n^{(2)}
+= \frac{x_0^2(n+1)}{-\hbar\omega} + \frac{x_0^2\,n}{+\hbar\omega}
+= \frac{x_0^2}{\hbar\omega}\big[-(n+1)+n\big]
+= -\frac{x_0^2}{\hbar\omega}.
 $$
 
 The $n$-dependence cancels: the upward neighbor ($\Delta n=+1$, negative
 denominator) and the downward neighbor ($\Delta n=-1$, positive denominator)
-contribute with opposite sign, and the difference is a constant. Substituting
+contribute with opposite sign, and the difference is a constant. Assembling
+$E_n(\lambda)=E_n^{(0)}+\lambda E_n^{(1)}+\lambda^2 E_n^{(2)}$ and substituting
 $x_0^2=\hbar/2m\omega$,
 
 $$
@@ -539,7 +577,7 @@ approximation — it is exact.
 
 <!-- ─── -->
 
-**7. Selection rules and parity.** For a 1D parity-symmetric potential with odd perturbation $\hat V=\lambda \hat{x}$:
+**7. Selection rules and parity.** For a 1D parity-symmetric potential with odd perturbation $\hat V=\hat{x}$:
 
 (a) show $E_n^{(1)}=0$ for all $n$,
 
@@ -563,7 +601,7 @@ i.e. each $\psi_n(x)$ is either even or odd. The perturbation operator $\hat{x}$
 $\hat\Pi\hat{x}=-\hat{x}\hat\Pi$), since $\hat\Pi^\dagger=\hat\Pi$ and
 $\hat\Pi^2=\hat 1$.
 
-**(a) First-order shift vanishes.** $E_n^{(1)}=V_{nn}=\lambda\langle n\vert\hat{x}\vert n\rangle$. Insert $\hat\Pi^\dagger\hat\Pi=\hat 1$ on both sides of $\hat{x}$ and use the parity-odd property:
+**(a) First-order shift vanishes.** $E_n^{(1)}=V_{nn}=\langle n\vert\hat{x}\vert n\rangle$. Insert $\hat\Pi^\dagger\hat\Pi=\hat 1$ on both sides of $\hat{x}$ and use the parity-odd property:
 
 $$
 \langle n\vert\hat{x}\vert n\rangle
@@ -585,7 +623,7 @@ vanishes.
 
 **(b) Which matrix elements feed $E_n^{(2)}$.** The second-order shift is
 $E_n^{(2)}=\sum_{m\neq n}\vert V_{mn}\vert^2/(E_n-E_m)$ with
-$V_{mn}=\lambda\langle m\vert\hat{x}\vert n\rangle$. Repeat the parity argument
+$V_{mn}=\langle m\vert\hat{x}\vert n\rangle$. Repeat the parity argument
 for the *off-diagonal* element:
 
 $$

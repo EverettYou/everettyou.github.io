@@ -343,7 +343,7 @@ jump directly to the one you need.
 2. **Three-level perturbation**
 3. Coupling over gap
 4. Second-order energy correction and sign
-5. Toy-model consistency check
+5. Diagonal and off-diagonal perturbation
 6. **Harmonic oscillator with linear perturbation**
 7. Selection rules and parity
 8. Near-degeneracy and breakdown

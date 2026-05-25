@@ -86,7 +86,7 @@ the answer respects both invariances.
 
 <!-- ─── -->
 
-**2. Sinc-squared properties.** From $P_{i\to f}^{(1)}(t)=\frac{|V_{fi}|^2}{\hbar^2}\bigl[\sin((\omega_{fi}-\omega)t/2)/((\omega_{fi}-\omega)/2)\bigr]^2$ with $\alpha=(\omega_{fi}-\omega)/2$, derive each of the following:
+**2. Sinc-squared properties.** From $P_{i\to f}^{(1)}(t)=\frac{\vert V_{fi}\vert^2}{\hbar^2}\bigl[\sin((\omega_{fi}-\omega)t/2)/((\omega_{fi}-\omega)/2)\bigr]^2$ with $\alpha=(\omega_{fi}-\omega)/2$, derive each of the following:
 
 (a) Peak height $P^{(1)}\vert_{\alpha=0}=\vert V_{fi}\vert^{2}t^{2}/\hbar^{2}$.
 
@@ -98,7 +98,7 @@ Explain why (a)$\times$(b)$\sim$(c) is the algebraic origin of a **constant rate
 
 **Solution.**
 
-With $\alpha=(\omega_{fi}-\omega)/2$, $P_{i\to f}^{(1)}(t)=\frac{|V_{fi}|^2}{\hbar^2}\bigl[\sin((\omega_{fi}-\omega)t/2)/((\omega_{fi}-\omega)/2)\bigr]^2$ reads
+With $\alpha=(\omega_{fi}-\omega)/2$, $P_{i\to f}^{(1)}(t)=\frac{\vert V_{fi}\vert^2}{\hbar^2}\bigl[\sin((\omega_{fi}-\omega)t/2)/((\omega_{fi}-\omega)/2)\bigr]^2$ reads
 
 $$
 P^{(1)}(t)=\frac{\vert V_{fi}\vert^{2}}{\hbar^{2}}\left(\frac{\sin\alpha t}{\alpha}\right)^{2}.
@@ -290,7 +290,7 @@ $$
 W_i=\frac{2\pi}{\hbar}\,\vert V_{fi}\vert^{2}\,\rho(E_f)\Big\vert_{E_f=E_i+\hbar\omega},
 $$
 
-where the energy-conserving delta of $W_{i\to f}=\frac{2\pi}{\hbar}\,|V_{fi}|^2\,\delta(E_f-E_i-\hbar\omega)$ has pinned the final
+where the energy-conserving delta of $W_{i\to f}=\frac{2\pi}{\hbar}\,\vert V_{fi}\vert^2\,\delta(E_f-E_i-\hbar\omega)$ has pinned the final
 energy to the resonance shell $E_f=E_i+\hbar\omega$. Insert the
 density of states evaluated at that energy:
 
@@ -315,7 +315,7 @@ there are simply very few states for the particle to scatter into.
 
 <!-- ─── -->
 
-**5. Adiabatic ramp Lorentzian.** Derive $P_{i\to f}=\frac{|V_{fi}|^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$ step by step, starting from $\hat{V}(t)=\hat{V}\mathrm{e}^{t/\tau}$ for $t<0$. State the FWHM in $\omega_{fi}$ and in $\Delta E=E_f-E_i$, and sketch the lineshape.
+**5. Adiabatic ramp Lorentzian.** Derive $P_{i\to f}=\frac{\vert V_{fi}\vert^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$ step by step, starting from $\hat{V}(t)=\hat{V}\mathrm{e}^{t/\tau}$ for $t<0$. State the FWHM in $\omega_{fi}$ and in $\Delta E=E_f-E_i$, and sketch the lineshape.
 
 **Solution.**
 
@@ -375,7 +375,7 @@ $$
 P_{i\to f}=\frac{\vert V_{fi}\vert^{2}}{(E_f-E_i)^{2}+(\hbar/\tau)^{2}}\;}
 $$
 
-which is $P_{i\to f}=\frac{|V_{fi}|^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$.
+which is $P_{i\to f}=\frac{\vert V_{fi}\vert^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$.
 
 **FWHM.** The result is a Lorentzian of the generic form
 $\mathcal{L}(x)=C/(x^2+\gamma^2)$, peaked at $x=0$ with maximum $C/\gamma^2$. The
@@ -412,11 +412,11 @@ energy mismatches smaller than $\hbar/\tau$.
 
 <!-- ─── -->
 
-**6. Adiabatic to static perturbation.** Take the $\tau\to\infty$ limit of $P_{i\to f}=\frac{|V_{fi}|^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$ for **fixed** $\Delta E\neq 0$, and compare with $\vert\langle f\vert i(V)\rangle\vert^{2}$ from non-degenerate perturbation theory ([5.1.2](../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory)). Explain physically why the two answers must agree.
+**6. Adiabatic to static perturbation.** Take the $\tau\to\infty$ limit of $P_{i\to f}=\frac{\vert V_{fi}\vert^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$ for **fixed** $\Delta E\neq 0$, and compare with $\vert\langle f\vert i(V)\rangle\vert^{2}$ from non-degenerate perturbation theory ([5.1.2](../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory)). Explain physically why the two answers must agree.
 
 **Solution.**
 
-**The limit.** Start from $P_{i\to f}=\frac{|V_{fi}|^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$,
+**The limit.** Start from $P_{i\to f}=\frac{\vert V_{fi}\vert^2}{(E_f-E_i)^2+(\hbar/\tau)^2}$,
 
 $$
 P_{i\to f}=\frac{\vert V_{fi}\vert^{2}}{(E_f-E_i)^{2}+(\hbar/\tau)^{2}}.
@@ -484,10 +484,10 @@ $$
 
 (c) Explain physically why the result is **resonantly enhanced** near $\omega/\Delta=1$ and why the time scaling is $t^{2}$ rather than $t$ (compare to Fermi's golden rule).
 
-(d) **Near-resonance limit and the rotating wave approximation.** Set $\omega \approx \Delta$ (close to but not exactly at single-photon resonance) and re-evaluate the second-order amplitude under the **rotating wave approximation (RWA)**: of the four $(\Omega_1, \Omega_2)$ combinations identified in (a), keep only the one for which *both* exponents are slow in the limit $\omega \to \Delta$, and drop the other three as fast-oscillating. Show that the RWA amplitude is
+(d) **Near-resonance limit and the rotating wave approximation.** Set $\omega \approx \Delta$ (close to but not exactly at single-photon resonance) and re-evaluate the second-order amplitude under the **rotating wave approximation (RWA)**: of the four oscillating terms identified in (a), keep only the one whose two exponent frequencies are *both* slow in the limit $\omega \to \Delta$, and drop the other three as fast-oscillating. Show that the RWA amplitude is
 
 $$
-\langle 2\vert\hat G(t,0)\vert 1\rangle \approx \frac{\mathrm{i}\,\lambda_0^{2}\,t}{4(\Delta - \omega)},
+\langle 2\vert\hat{G}(t,0)\vert 1\rangle \approx \frac{\mathrm{i}\,\lambda_0^{2}\,t}{4(\Delta - \omega)},
 $$
 
 and verify that this agrees with the full off-resonant result of (a) in the near-resonant limit $\vert\Delta - \omega\vert \ll \Delta + \omega$.
@@ -696,13 +696,13 @@ in the regime $\vert\Delta - \omega\vert^{-1} \ll t$. Multiplying by the
 $-\lambda_0^{2}/4$ prefactor of the Dyson expansion,
 
 $$
-\langle 2\vert\hat G(t,0)\vert 1\rangle
+\langle 2\vert\hat{G}(t,0)\vert 1\rangle
 \approx -\frac{\lambda_0^{2}}{4}\cdot\frac{t}{\mathrm{i}(\Delta - \omega)}
 = \frac{\mathrm{i}\,\lambda_0^{2}\,t}{4(\Delta - \omega)}.
 $$
 
 **Consistency with (a).** The full off-resonant amplitude derived in (a) is
-$\langle 2\vert\hat G(t,0)\vert 1\rangle \approx \mathrm{i}\lambda_0^{2}\,t\,\Delta/[2(\Delta^{2} - \omega^{2})]$.
+$\langle 2\vert\hat{G}(t,0)\vert 1\rangle \approx \mathrm{i}\lambda_0^{2}\,t\,\Delta/[2(\Delta^{2} - \omega^{2})]$.
 In the near-resonant limit $\vert\Delta - \omega\vert \ll \Delta + \omega$,
 
 $$
