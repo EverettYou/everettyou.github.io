@@ -372,10 +372,10 @@ function firstDerivative(phi, dx, boundary) {
       return derivative;
     }
 
-    derivative[0] = (channel[1] - channel[0]) / dx;
-    derivative[pointCount - 1] = (channel[pointCount - 1] - channel[pointCount - 2]) / dx;
-    for (let index = 1; index < pointCount - 1; index += 1) {
-      derivative[index] = (channel[index + 1] - channel[index - 1]) / (2 * dx);
+    for (let index = 0; index < pointCount; index += 1) {
+      const left = index === 0 ? channel[1] : channel[index - 1];
+      const right = index === pointCount - 1 ? channel[pointCount - 2] : channel[index + 1];
+      derivative[index] = (right - left) / (2 * dx);
     }
     return derivative;
   });
