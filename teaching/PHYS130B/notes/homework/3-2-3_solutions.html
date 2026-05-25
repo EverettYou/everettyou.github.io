@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.2.3 Free Particle Propagator &#8212; Quantum Mechanics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../static/lightbox.css?v=d6efd4d2" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../static/doctools.js?v=9a2dae69"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../static/copybutton.js?v=f281be69"></script>
+    <script src="../static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/boldsymbol"]}, "tex": {"packages": {"[+]": ["boldsymbol"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'homework/3-2-3_solutions';</script>
+    <script src="../static/fullscreen-sidebar.js?v=2a9d79a1"></script>
+    <script src="../static/lightbox.js?v=d270d91b"></script>
+    <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/homework/3-2-3_solutions.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.3.1 Stationary Phase Approximation" href="3-3-1_solutions.html" />
+    <link rel="prev" title="3.2.2 Schrödinger Equation" href="3-2-2_solutions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quantum Mechanics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PHYS 130B Lecture Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch1_qubit/index.html">Chapter 1: Qubit</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-1-states-and-observables.html">1.1 States and Observables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-1-what-is-a-qubit.html">1.1.1 What is a Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-2-measurement.html">1.2 Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-1-measurement-postulate.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-2-uncertainty-and-incompatibility.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-3-measurement-operators.html">1.2.3 Measurement Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2_identical-particles/index.html">Chapter 2: Identical Particles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-1-bosons-and-fermions.html">2.1 Bosons and Fermions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-2-symmetrization.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-3-second-quantization.html">2.1.3 Second Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-2-angular-momentum.html">2.2 Angular Momentum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html">2.2.3 Addition of Angular Momenta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html">2.3.2 Fractional Quantum Hall Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html">2.3.3 Toric Code</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch3_path-integral/index.html">Chapter 3: Path Integral</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-geometric-optics.html">3.1.1 Geometric Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-wave-particle-duality.html">3.1.3 Wave-Particle Duality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-1-path-integral-formulation.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-2-schrodinger-equation.html">3.2.2 Schrödinger Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-3-free-particle-propagator.html">3.2.3 Free Particle Propagator</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-3-stationary-phase.html">3.3 Stationary Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-1-stationary-phase-approximation.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-2-wkb-approximation.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-3-instantons.html">3.4.3 Instantons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/index.html">Chapter 4: Phase and Gauge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-gauge-field.html">4.1 Gauge Field</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-1-gauge-principle.html">4.1.1 Gauge Principle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-electromagnetic-coupling.html">4.1.2 Electromagnetic Coupling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-3-gauge-invariance.html">4.1.3 Gauge Invariance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-berry-phase.html">4.2 Berry Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-berry-phase.html">4.2.1 Berry Phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-2-aharonov-bohm-effect.html">4.2.2 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-flux-ring.html">4.2.3 Flux Ring</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-landau-level.html">4.3 Landau Level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-1-cyclotron-motion.html">4.3.1 Cyclotron Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-2-landau-quantization.html">4.3.2 Landau Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html">4.3.3 Quantum Hall Effect</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-spin-and-monopole.html">4.4 Spin and Monopole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-1-classical-spin.html">4.4.1 Classical Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-2-dirac-monopole.html">4.4.2 Dirac Monopole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-3-monopole-harmonics.html">4.4.3 Monopole Harmonics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch5_perturbation-theory/index.html">Chapter 5: Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html">5.1 Time-Independent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory.html">5.1.2 Non-Degenerate Perturbation Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-3-degenerate-perturbation-theory.html">5.1.3 Degenerate Perturbation Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch6_quantum-foundations/index.html">Chapter 6: Quantum Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-1-density-matrix.html">6.1 Density Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-1-mixed-states.html">6.1.1 Mixed States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-2-entropy.html">6.1.2 Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-3-quantum-statistics.html">6.1.3 Quantum Statistics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-2-entanglement.html">6.2 Entanglement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-1-product-and-entangled-states.html">6.2.1 Product and Entangled States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-2-entanglement-entropy.html">6.2.2 Entanglement Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-3-bell-inequality.html">6.2.3 Bell Inequality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-3-generalized-measurement.html">6.3 Generalized Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-1-projective-measurement.html">6.3.1 Projective Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-2-povm.html">6.3.2 POVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-3-quantum-channels.html">6.3.3 Quantum Channels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-4-open-quantum-systems.html">6.4 Open Quantum Systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-1-decoherence.html">6.4.1 Decoherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-2-lindblad-master-equation.html">6.4.2 Lindblad Master Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-3-error-correction.html">6.4.3 Error Correction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="homework.html">PHYS 130B Homework Solutions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-1-1_solutions.html">1.1.1 What is a Qubit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-1-2_solutions.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-1-3_solutions.html">1.1.3 Hermitian Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-2-1_solutions.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-2-2_solutions.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-2-3_solutions.html">1.2.3 Measurement Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-3-1_solutions.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-3-2_solutions.html">1.3.2 Schrödinger Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-3-3_solutions.html">1.3.3 Heisenberg Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-1_solutions.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-2_solutions.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-3_solutions.html">2.1.3 Second Quantization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-1_solutions.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-2_solutions.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-3_solutions.html">2.2.3 Addition of Angular Momenta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-1_solutions.html">3.1.1 Geometric Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-2_solutions.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-3_solutions.html">3.1.3 Wave-Particle Duality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-2-1_solutions.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-2-2_solutions.html">3.2.2 Schrödinger Equation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2.3 Free Particle Propagator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-3-1_solutions.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-3-2_solutions.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-3-3_solutions.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-1-1_solutions.html">4.1.1 Gauge Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-1-2_solutions.html">4.1.2 Electromagnetic Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-1-3_solutions.html">4.1.3 Gauge Invariance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-2-1_solutions.html">4.2.1 Berry Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-2-2_solutions.html">4.2.2 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-2-3_solutions.html">4.2.3 Flux Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-1-1_solutions.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-1-2_solutions.html">5.1.2 Non-degenerate Perturbation Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-1-3_solutions.html">5.1.3 Degenerate Perturbation Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-2-1_solutions.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-2-2_solutions.html">5.2.2 Dyson Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-2-3_solutions.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../sources/homework/3-2-3_solutions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.2.3 Free Particle Propagator</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="free-particle-propagator">
+<h1>3.2.3 Free Particle Propagator<a class="headerlink" href="#free-particle-propagator" title="Link to this heading">#</a></h1>
+<p>Worked solutions for the homework problems in the <a class="reference internal" href="../ch3_path-integral/3-2-3-free-particle-propagator.html"><span class="doc std std-doc">3.2.3 Free Particle Propagator</span></a> lecture. Each problem statement is reproduced verbatim, followed by a complete worked solution.</p>
+<!-- ─── -->
+<p><strong>1. Dispersion relation.</strong> Substitute the 3D plane wave <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x},t) = \exp[\mathrm{i}(\boldsymbol{k}\cdot\boldsymbol{x} - \omega t)]\)</span> into the free Schrödinger equation <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\partial_t\psi(\boldsymbol{x},t) = -(\hbar^2/2m)\,\nabla^2\psi(\boldsymbol{x},t)\)</span> and show that a solution exists if and only if <span class="math notranslate nohighlight">\(\omega = \hbar\boldsymbol{k}^{2}/(2m)\)</span>. Identify the energy and momentum of this state via the de Broglie relations.</p>
+<p><strong>Solution.</strong></p>
+<p>The free 3D Schrödinger equation is <span class="math notranslate nohighlight">\(\mathrm{i}\hbar\,\partial_{t}\psi = -(\hbar^{2}/2m)\,\nabla^{2}\psi\)</span>. Insert the plane-wave ansatz and evaluate the derivatives:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_{t}\psi = -\mathrm{i}\omega\,\psi,\qquad
+\nabla\psi = \mathrm{i}\boldsymbol{k}\,\psi,\qquad
+\nabla^{2}\psi = (\mathrm{i}\boldsymbol{k})\cdot(\mathrm{i}\boldsymbol{k})\,\psi = -\boldsymbol{k}^{2}\,\psi.
+\]</div>
+<p>Substituting into the equation,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}\hbar(-\mathrm{i}\omega)\,\psi = -\frac{\hbar^{2}}{2m}(-\boldsymbol{k}^{2})\,\psi,
+\]</div>
+<p>i.e. <span class="math notranslate nohighlight">\(\hbar\omega\,\psi = \hbar^{2}\boldsymbol{k}^{2}\psi/(2m)\)</span>.</p>
+<p>The plane wave never vanishes — <span class="math notranslate nohighlight">\(\vert\psi\vert = 1\)</span> at every point — so the two sides agree everywhere if and only if their coefficients agree:</p>
+<div class="math notranslate nohighlight">
+\[
+\hbar\omega = \frac{\hbar^{2}\boldsymbol{k}^{2}}{2m},
+\]</div>
+<p>equivalent to <span class="math notranslate nohighlight">\(\omega = \hbar\boldsymbol{k}^{2}/(2m)\)</span>.</p>
+<p>This condition is necessary (the equation must hold somewhere) and sufficient (if it holds, <span class="math notranslate nohighlight">\(\psi\)</span> solves the equation everywhere); for any other <span class="math notranslate nohighlight">\(\omega\)</span> the ansatz fails. Hence a plane-wave solution of wavevector <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> exists precisely when <span class="math notranslate nohighlight">\(\omega = \hbar\boldsymbol{k}^{2}/(2m)\)</span>.</p>
+<p>The de Broglie relations identify the momentum <span class="math notranslate nohighlight">\(\boldsymbol{p} = \hbar\boldsymbol{k}\)</span> and the energy <span class="math notranslate nohighlight">\(E = \hbar\omega\)</span>. The dispersion relation then becomes</p>
+<div class="math notranslate nohighlight">
+\[
+E = \hbar\omega = \frac{\hbar^{2}\boldsymbol{k}^{2}}{2m} = \frac{(\hbar\boldsymbol{k})^{2}}{2m} = \frac{\boldsymbol{p}^{2}}{2m},
+\]</div>
+<p>exactly the classical kinetic energy of a free particle of mass <span class="math notranslate nohighlight">\(m\)</span>. The plane wave is therefore a simultaneous eigenstate of momentum (eigenvalue <span class="math notranslate nohighlight">\(\boldsymbol{p} = \hbar\boldsymbol{k}\)</span>) and energy (eigenvalue <span class="math notranslate nohighlight">\(E = \boldsymbol{p}^{2}/2m\)</span>).</p>
+<!-- ─── -->
+<p><strong>2. Momentum-space form of the free propagator.</strong> The position-space free propagator <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x}, t; \boldsymbol{x}', 0)\)</span> has a remarkably simple form in momentum space.</p>
+<p>(a) Compute the Fourier transform <span class="math notranslate nohighlight">\(\tilde K(\boldsymbol{p}, t) = \int K_{\mathrm{free}}(\boldsymbol{x}, t; 0, 0)\,\mathrm{e}^{-\mathrm{i}\boldsymbol{p}\cdot\boldsymbol{x}/\hbar}\,\mathrm{d}^{3}x\)</span>.</p>
+<p>(b) Show the result is <span class="math notranslate nohighlight">\(\tilde K(\boldsymbol{p}, t) = \exp[-\mathrm{i}\boldsymbol{p}^{2}t/(2m\hbar)]\)</span> — a <em>pure phase</em>, depending only on the kinetic energy <span class="math notranslate nohighlight">\(\boldsymbol{p}^{2}/(2m)\)</span>.</p>
+<p>(c) Interpret: in momentum space, free evolution multiplies each plane-wave component by a phase. Why is the momentum-space propagator dramatically simpler than the position-space one? What does this say about <span class="math notranslate nohighlight">\(\hat{H}_{\mathrm{free}}\)</span> and the momentum operator <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span>?</p>
+<p>(d) Show that the position-space propagator <span class="math notranslate nohighlight">\(K_{\mathrm{free}}\)</span> is recovered as the inverse Fourier transform of <span class="math notranslate nohighlight">\(\tilde K\)</span>. Conclude that <span class="math notranslate nohighlight">\(K_{\mathrm{free}}\)</span> is exactly the result of multiplying each momentum-space plane wave by its individual kinetic phase <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E(\boldsymbol{p})t/\hbar}\)</span> and reassembling — the “spectral decomposition” of free evolution.</p>
+<p><strong>Solution.</strong></p>
+<p>(a) Substitute the closed-form propagator <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x}, t; 0, 0) = (m/(2\pi\mathrm{i}\hbar t))^{3/2}\exp[\mathrm{i}m\boldsymbol{x}^{2}/(2\hbar t)]\)</span> into the Fourier transform:</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde K(\boldsymbol{p}, t) = \left(\frac{m}{2\pi\mathrm{i}\hbar t}\right)^{3/2}\int \exp\!\left[\frac{\mathrm{i}m\boldsymbol{x}^{2}}{2\hbar t} - \frac{\mathrm{i}\boldsymbol{p}\cdot\boldsymbol{x}}{\hbar}\right]\mathrm{d}^{3}x.
+\]</div>
+<p>The integrand factorises Cartesian-wise. Complete the square in each Cartesian component (write <span class="math notranslate nohighlight">\(a = m/(2\hbar t)\)</span> and <span class="math notranslate nohighlight">\(b = p/\hbar\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{i}ax^{2} - \mathrm{i}bx = \mathrm{i}a\Bigl(x - \frac{b}{2a}\Bigr)^{2} - \frac{\mathrm{i}b^{2}}{4a}.
+\]</div>
+<p>The leftover constant uses <span class="math notranslate nohighlight">\(b^{2}/(4a) = (p^{2}/\hbar^{2})/(2m/(\hbar t)) = p^{2}t/(2m\hbar)\)</span>.</p>
+<p>(b) Shift the integration variable to <span class="math notranslate nohighlight">\(u = x - b/(2a)\)</span>, leaving a pure Fresnel integral <span class="math notranslate nohighlight">\(\int \mathrm{e}^{\mathrm{i}au^{2}}\,\mathrm{d}u = \sqrt{\pi/(\mathrm{i}a)} = \sqrt{2\pi\mathrm{i}\hbar t/m}\)</span> (from Problem 3 / HW 3.2.2.1). The full 3D result is the cube:</p>
+<div class="math notranslate nohighlight">
+\[
+\int \mathrm{e}^{\mathrm{i}a\boldsymbol{u}^{2}}\,\mathrm{d}^{3}u = \left(\frac{2\pi\mathrm{i}\hbar t}{m}\right)^{3/2}.
+\]</div>
+<p>Multiplying by the prefactor <span class="math notranslate nohighlight">\((m/(2\pi\mathrm{i}\hbar t))^{3/2}\)</span>, the prefactors <strong>cancel exactly</strong> — leaving only the constant from the square completion:</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde K(\boldsymbol{p}, t) = \exp\!\left[-\frac{\mathrm{i}\boldsymbol{p}^{2}t}{2m\hbar}\right] = \exp\!\left[-\frac{\mathrm{i}E(\boldsymbol{p})\,t}{\hbar}\right],
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(E(\boldsymbol{p}) = \boldsymbol{p}^{2}/(2m)\)</span> the kinetic energy. <strong>Pure phase, no Gaussian envelope.</strong> <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p>(c) <strong>Why simpler in momentum space.</strong> The free Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}_{\mathrm{free}} = \hat{\boldsymbol{p}}^{2}/(2m)\)</span> is a <em>function of <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> alone</em>. In the momentum basis where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{p}}\)</span> is diagonal, <span class="math notranslate nohighlight">\(\hat{H}_{\mathrm{free}}\)</span> is also diagonal — eigenvalues <span class="math notranslate nohighlight">\(E(\boldsymbol{p}) = \boldsymbol{p}^{2}/(2m)\)</span> — and the evolution operator <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\)</span> acts as <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E(\boldsymbol{p})t/\hbar}\)</span> on each momentum eigenstate independently. <strong>Momentum is conserved</strong>, so different momenta do not mix; their evolution is just a phase rotation. In position space, by contrast, no single position eigenstate is preserved — different positions evolve into mixtures of one another — so the propagator has a non-trivial kernel.</p>
+<p>(d) The inverse Fourier transform reconstructs <span class="math notranslate nohighlight">\(K_{\mathrm{free}}\)</span> from <span class="math notranslate nohighlight">\(\tilde K\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\mathrm{free}}(\boldsymbol{x}, t; 0, 0) = \int \frac{\mathrm{d}^{3}p}{(2\pi\hbar)^{3}}\,\mathrm{e}^{+\mathrm{i}\boldsymbol{p}\cdot\boldsymbol{x}/\hbar}\,\tilde K(\boldsymbol{p}, t) = \int \frac{\mathrm{d}^{3}p}{(2\pi\hbar)^{3}}\,\exp\!\left[\frac{\mathrm{i}(\boldsymbol{p}\cdot\boldsymbol{x} - E(\boldsymbol{p})t)}{\hbar}\right].
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(\boldsymbol{k} = \boldsymbol{p}/\hbar\)</span> and using <span class="math notranslate nohighlight">\(\mathrm{d}^{3}p/(2\pi\hbar)^{3} = \mathrm{d}^{3}k/(2\pi)^{3}\)</span> converts this to the form used in Problem 3:</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\mathrm{free}}(\boldsymbol{x}, t; 0, 0) = \int \frac{\mathrm{d}^{3}k}{(2\pi)^{3}}\,\exp\!\bigl[\mathrm{i}\boldsymbol{k}\cdot\boldsymbol{x} - \mathrm{i}\omega(\boldsymbol{k})t\bigr].
+\]</div>
+<p>This is the <strong>spectral decomposition</strong> of free evolution: write any state as a momentum-space superposition <span class="math notranslate nohighlight">\(\psi = \int \mathrm{d}^{3}p\,\tilde\psi(\boldsymbol{p})\vert\boldsymbol{p}\rangle\)</span>, evolve each component by its own kinetic phase <span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}E(\boldsymbol{p})t/\hbar}\)</span>, then transform back to position space. The position-space propagator <span class="math notranslate nohighlight">\(K_{\mathrm{free}}\)</span> is the assembly of these phase-rotated plane waves into a single integration kernel.</p>
+<p>The position-space picture is rich (spreading, interference, classical-quantum correspondence — Problems 6 and 8) but algebraically heavy; the momentum-space picture is trivial — just phase rotation — but loses the geometric clarity. Choosing the right basis to diagonalise the Hamiltonian transforms the dynamics from a complicated integral kernel into elementary phase rotation. <strong>This basis-choice is one of the most powerful problem-solving moves in quantum mechanics</strong>: it converts time evolution into an algebra problem in the momentum (or any other) Hamiltonian-eigenbasis.</p>
+<!-- ─── -->
+<p><strong>3. Direct Gaussian integration.</strong> Verify the closed form <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x},t;\boldsymbol{x}',0) = \bigl(m/(2\pi\mathrm{i}\hbar t)\bigr)^{3/2}\exp\!\bigl[\mathrm{i}\,m(\boldsymbol{x}-\boldsymbol{x}')^2/(2\hbar t)\bigr]\)</span> by carrying out the <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> integral in <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x},t;\boldsymbol{x}',0) = \int \frac{\mathrm{d}^3k}{(2\pi)^3}\,\exp\!\bigl[\mathrm{i}\boldsymbol{k}\cdot(\boldsymbol{x}-\boldsymbol{x}') - \mathrm{i}\omega(\boldsymbol{k})t\bigr]\)</span>.</p>
+<p>(a) Complete the square in <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>.</p>
+<p>(b) Shift the integration variable and reduce to three Cartesian Fresnel integrals.</p>
+<p>(c) Combine prefactors and the surviving exponent and confirm the result.</p>
+<p><strong>Solution.</strong></p>
+<p>Start from the plane-wave construction, <span class="math notranslate nohighlight">\(K_{\text{free}} = \int\frac{\mathrm{d}^{3}k}{(2\pi)^{3}}\exp[\mathrm{i}\boldsymbol{k}\cdot\boldsymbol{r} - \mathrm{i}\beta\boldsymbol{k}^{2}]\)</span>, with <span class="math notranslate nohighlight">\(\boldsymbol{r} = \boldsymbol{x}-\boldsymbol{x}'\)</span> and <span class="math notranslate nohighlight">\(\beta = \hbar t/(2m)\)</span>.</p>
+<p><strong>(a) Complete the square.</strong> Factor <span class="math notranslate nohighlight">\(-\mathrm{i}\beta\)</span> out of the quadratic and linear terms in <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\mathrm{i}\boldsymbol{k}\cdot\boldsymbol{r} - \mathrm{i}\beta\boldsymbol{k}^{2}
+&amp;= -\mathrm{i}\beta\Bigl(\boldsymbol{k}^{2} - \frac{\boldsymbol{k}\cdot\boldsymbol{r}}{\beta}\Bigr)\\
+&amp;= -\mathrm{i}\beta\Bigl[\Bigl(\boldsymbol{k}-\frac{\boldsymbol{r}}{2\beta}\Bigr)^{2} - \frac{\boldsymbol{r}^{2}}{4\beta^{2}}\Bigr]\\
+&amp;= -\mathrm{i}\beta\Bigl(\boldsymbol{k}-\frac{\boldsymbol{r}}{2\beta}\Bigr)^{2} + \frac{\mathrm{i}\,\boldsymbol{r}^{2}}{4\beta}.
+\end{split}
+\end{split}\]</div>
+<p>The final term is independent of <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> and factors out of the integral.</p>
+<p><strong>(b) Shift and reduce to Fresnel integrals.</strong> Substitute <span class="math notranslate nohighlight">\(\boldsymbol{q} = \boldsymbol{k} - \boldsymbol{r}/(2\beta)\)</span>, a real translation with <span class="math notranslate nohighlight">\(\mathrm{d}^{3}k = \mathrm{d}^{3}q\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\text{free}} = \mathrm{e}^{\mathrm{i}\boldsymbol{r}^{2}/(4\beta)}\int\frac{\mathrm{d}^{3}q}{(2\pi)^{3}}\,\mathrm{e}^{-\mathrm{i}\beta\boldsymbol{q}^{2}}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\boldsymbol{q}^{2} = q_{1}^{2}+q_{2}^{2}+q_{3}^{2}\)</span>, the integrand is a product over the three Cartesian components, so the integral splits into three identical 1D Fresnel integrals:</p>
+<div class="math notranslate nohighlight">
+\[
+\int\frac{\mathrm{d}^{3}q}{(2\pi)^{3}}\,\mathrm{e}^{-\mathrm{i}\beta\boldsymbol{q}^{2}} = \left[\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\beta q^{2}}\,\mathrm{d}q\right]^{3}.
+\]</div>
+<p>Each 1D integral is the Fresnel result (HW 3.2.2.1 — the analytic continuation of <span class="math notranslate nohighlight">\(\int\mathrm{e}^{-bq^{2}}\mathrm{d}q = \sqrt{\pi/b}\)</span> to <span class="math notranslate nohighlight">\(b = \mathrm{i}\beta\)</span>, with <span class="math notranslate nohighlight">\(\beta&gt;0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\beta q^{2}}\,\mathrm{d}q = \sqrt{\frac{\pi}{\mathrm{i}\beta}}.
+\]</div>
+<p><strong>(c) Combine prefactors and exponent.</strong> Cube the single-integral result:</p>
+<div class="math notranslate nohighlight">
+\[
+\int\frac{\mathrm{d}^{3}q}{(2\pi)^{3}}\,\mathrm{e}^{-\mathrm{i}\beta\boldsymbol{q}^{2}}
+= \frac{1}{(2\pi)^{3}}\left(\frac{\pi}{\mathrm{i}\beta}\right)^{3/2}
+= \left(\frac{1}{4\pi\mathrm{i}\beta}\right)^{3/2},
+\]</div>
+<p>using <span class="math notranslate nohighlight">\((2\pi)^{-3}\pi^{3/2} = (4\pi)^{-3/2}\)</span>. Substituting <span class="math notranslate nohighlight">\(\beta = \hbar t/(2m)\)</span> gives <span class="math notranslate nohighlight">\(4\pi\mathrm{i}\beta = 2\pi\mathrm{i}\hbar t/m\)</span>, so the prefactor is <span class="math notranslate nohighlight">\((m/(2\pi\mathrm{i}\hbar t))^{3/2}\)</span>. The surviving exponent is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\mathrm{i}\,\boldsymbol{r}^{2}}{4\beta} = \frac{\mathrm{i}\,\boldsymbol{r}^{2}}{4}\cdot\frac{2m}{\hbar t} = \frac{\mathrm{i}m\,\boldsymbol{r}^{2}}{2\hbar t}.
+\]</div>
+<p>Assembling the two pieces,</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\text{free}}(\boldsymbol{x},t;\boldsymbol{x}',0) = \left(\frac{m}{2\pi\mathrm{i}\hbar t}\right)^{3/2}\exp\!\left[\frac{\mathrm{i}m(\boldsymbol{x}-\boldsymbol{x}')^{2}}{2\hbar t}\right],
+\]</div>
+<p>exactly the closed form <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x},t;\boldsymbol{x}',0) = \bigl(m/(2\pi\mathrm{i}\hbar t)\bigr)^{3/2}\exp\!\bigl[\mathrm{i}\,m(\boldsymbol{x}-\boldsymbol{x}')^2/(2\hbar t)\bigr]\)</span>. The plane-wave superposition and the closed-form propagator are the same object.</p>
+<!-- ─── -->
+<p><strong>4. Slice agreement (1D).</strong> Specialize <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x},t;\boldsymbol{x}',0) = \bigl(m/(2\pi\mathrm{i}\hbar t)\bigr)^{3/2}\exp\!\bigl[\mathrm{i}\,m(\boldsymbol{x}-\boldsymbol{x}')^2/(2\hbar t)\bigr]\)</span> to one dimension and set <span class="math notranslate nohighlight">\(t = \delta t\)</span>. Show that the result is identical to the closed-form slice propagator <span class="math notranslate nohighlight">\(K_{\delta t}^{\mathrm{free}}(x,x') = \sqrt{m/(2\pi\mathrm{i}\hbar\,\delta t)}\,\exp\!\bigl[\mathrm{i}\,m(x-x')^2/(2\hbar\delta t)\bigr]\)</span> from §3.2.2. Comment on what this verifies about the path integral.</p>
+<p><strong>Solution.</strong></p>
+<p>Specialize the closed form to one spatial dimension by suppressing two Cartesian components. The single Cartesian factor of the prefactor <span class="math notranslate nohighlight">\((m/(2\pi\mathrm{i}\hbar t))^{3/2}\)</span> is <span class="math notranslate nohighlight">\((m/(2\pi\mathrm{i}\hbar t))^{1/2}\)</span>, and <span class="math notranslate nohighlight">\((\boldsymbol{x}-\boldsymbol{x}')^{2}\to(x-x')^{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\text{free}}^{\text{1D}}(x,t;x',0) = \left(\frac{m}{2\pi\mathrm{i}\hbar t}\right)^{1/2}\exp\!\left[\frac{\mathrm{i}m(x-x')^{2}}{2\hbar t}\right].
+\]</div>
+<p>Now set <span class="math notranslate nohighlight">\(t = \delta t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\text{free}}^{\text{1D}}(x,\delta t;x',0) = \left(\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}\right)^{1/2}\exp\!\left[\frac{\mathrm{i}m(x-x')^{2}}{2\hbar\,\delta t}\right].
+\]</div>
+<p>The closed-form single-slice propagator derived in §3.2.2 is</p>
+<div class="math notranslate nohighlight">
+\[
+K_{\delta t}^{\text{free}}(x,x') = \sqrt{\frac{m}{2\pi\mathrm{i}\hbar\,\delta t}}\,\exp\!\left[\frac{\mathrm{i}m(x-x')^{2}}{2\hbar\,\delta t}\right].
+\]</div>
+<p>The two expressions are term-by-term identical — same prefactor, same phase.</p>
+<p><strong>What this verifies.</strong> The finite-time propagator <span class="math notranslate nohighlight">\(K_{\text{free}}\)</span> was constructed with no reference to slicing at all: it came from superposing the exact plane-wave eigenmodes of the Schrödinger equation. The single-slice propagator <span class="math notranslate nohighlight">\(K_{\delta t}^{\text{free}}\)</span>, by contrast, was obtained in §3.2.2 from the path-integral construction — its kinetic phase set by the slice action and its prefactor <span class="math notranslate nohighlight">\(A(\delta t) = \sqrt{m/(2\pi\mathrm{i}\hbar\,\delta t)}\)</span> fixed by the zero-duration condition. That these two independently derived objects coincide at <span class="math notranslate nohighlight">\(t = \delta t\)</span> shows that the slice formula was <em>not</em> an approximation valid only for small <span class="math notranslate nohighlight">\(\delta t\)</span>: it is the exact free propagator at any duration. Equivalently, composing many slices reconstructs the very same closed form (HW 3.2.2.4), so refining the slicing produces no new physics for the free particle. The path integral is internally self-consistent — the discrete slice picture and the continuum eigenmode picture deliver one and the same propagator.</p>
+<!-- ─── -->
+<p><strong>5. Action conjugate relations.</strong> For the free-particle classical action <span class="math notranslate nohighlight">\(S_{\text{cl}}(\boldsymbol{x},t;\boldsymbol{x}',0) = m\,(\boldsymbol{x}-\boldsymbol{x}')^{2}/(2t)\)</span>,</p>
+<p>(a) compute <span class="math notranslate nohighlight">\(\nabla S_{\text{cl}}\)</span> and identify it with the final momentum <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span>;</p>
+<p>(b) compute <span class="math notranslate nohighlight">\(-\partial_{t}S_{\text{cl}}\)</span> and identify it with the energy <span class="math notranslate nohighlight">\(E\)</span>;</p>
+<p>(c) explain how these two relations make the propagator phase <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}S_{\text{cl}}/\hbar}\)</span> act locally as a plane wave <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}(\boldsymbol{p}\cdot\boldsymbol{x} - Et)/\hbar}\)</span> near the classical trajectory.</p>
+<p><strong>Solution.</strong></p>
+<p>Write <span class="math notranslate nohighlight">\(\boldsymbol{r} = \boldsymbol{x}-\boldsymbol{x}'\)</span>, so <span class="math notranslate nohighlight">\(S_{\text{cl}} = m\boldsymbol{r}^{2}/(2t)\)</span>, and let <span class="math notranslate nohighlight">\(\boldsymbol{v} = \boldsymbol{r}/t = (\boldsymbol{x}-\boldsymbol{x}')/t\)</span> be the constant velocity of the straight-line classical trajectory.</p>
+<p><strong>(a) Gradient = final momentum.</strong> Differentiate with respect to the endpoint <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, which enters only through <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>. Using <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol{x}}\boldsymbol{r}^{2} = 2\boldsymbol{r}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla S_{\text{cl}} = \frac{m}{2t}\,\nabla_{\boldsymbol{x}}\boldsymbol{r}^{2} = \frac{m}{2t}\,(2\boldsymbol{r}) = \frac{m\boldsymbol{r}}{t} = m\boldsymbol{v}.
+\]</div>
+<p>For a free particle <span class="math notranslate nohighlight">\(\boldsymbol{p} = m\boldsymbol{v}\)</span>, so <span class="math notranslate nohighlight">\(\nabla S_{\text{cl}} = \boldsymbol{p}\)</span> — the momentum with which the particle <em>arrives</em> at <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. This is the Hamilton–Jacobi relation <span class="math notranslate nohighlight">\(\boldsymbol{p} = \nabla S\)</span>.</p>
+<p><strong>(b) Time derivative = energy.</strong> Differentiate with respect to the arrival time <span class="math notranslate nohighlight">\(t\)</span> at fixed endpoints, using <span class="math notranslate nohighlight">\(\partial_{t}(1/t) = -1/t^{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial_{t}S_{\text{cl}} = \frac{m\boldsymbol{r}^{2}}{2}\,\partial_{t}\!\left(\frac{1}{t}\right) = -\frac{m\boldsymbol{r}^{2}}{2t^{2}}.
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+-\partial_{t}S_{\text{cl}} = \frac{m\boldsymbol{r}^{2}}{2t^{2}} = \frac{1}{2}m\Bigl(\frac{\boldsymbol{r}}{t}\Bigr)^{2} = \frac{1}{2}m\boldsymbol{v}^{2} = \frac{\boldsymbol{p}^{2}}{2m} = E,
+\]</div>
+<p>the kinetic energy carried by the particle. This is the second Hamilton–Jacobi relation, <span class="math notranslate nohighlight">\(E = -\partial_{t}S\)</span>.</p>
+<p><strong>(c) Local plane wave.</strong> Expand the action for a small change of the observation point, <span class="math notranslate nohighlight">\(\boldsymbol{x}\to\boldsymbol{x}+\delta\boldsymbol{x}\)</span>, <span class="math notranslate nohighlight">\(t\to t+\delta t\)</span>, about a point <span class="math notranslate nohighlight">\((\boldsymbol{x},t)\)</span> on the classical trajectory:</p>
+<div class="math notranslate nohighlight">
+\[
+S_{\text{cl}}(\boldsymbol{x}+\delta\boldsymbol{x},\,t+\delta t) \approx S_{\text{cl}}(\boldsymbol{x},t) + \nabla S_{\text{cl}}\cdot\delta\boldsymbol{x} + \partial_{t}S_{\text{cl}}\,\delta t = S_{\text{cl}}(\boldsymbol{x},t) + \boldsymbol{p}\cdot\delta\boldsymbol{x} - E\,\delta t,
+\]</div>
+<p>inserting the results of (a) and (b). The propagator phase factor therefore behaves, in a small neighbourhood of any point on the classical trajectory, as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{e}^{\mathrm{i}S_{\text{cl}}/\hbar} \approx \mathrm{e}^{\mathrm{i}S_{\text{cl}}(\boldsymbol{x},t)/\hbar}\;\mathrm{e}^{\mathrm{i}(\boldsymbol{p}\cdot\delta\boldsymbol{x} - E\,\delta t)/\hbar}.
+\]</div>
+<p>The second factor is precisely a plane wave <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}(\boldsymbol{p}\cdot\boldsymbol{x} - Et)/\hbar}\)</span>, with local wavevector <span class="math notranslate nohighlight">\(\boldsymbol{k} = \boldsymbol{p}/\hbar\)</span> and frequency <span class="math notranslate nohighlight">\(\omega = E/\hbar\)</span> — the de Broglie wave of a particle carrying momentum <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> and energy <span class="math notranslate nohighlight">\(E\)</span>. So although <span class="math notranslate nohighlight">\(K_{\text{free}}\)</span> is <em>globally</em> a spreading spherical wave — its momentum <span class="math notranslate nohighlight">\(\boldsymbol{p} = m\boldsymbol{r}/t\)</span> varies from point to point — it is <em>locally</em> indistinguishable from a plane wave whose momentum and energy are exactly the classical values at that point. The two Hamilton–Jacobi relations are what make this work: <span class="math notranslate nohighlight">\(\nabla S_{\text{cl}}\)</span> supplies the local wavevector, and <span class="math notranslate nohighlight">\(-\partial_{t}S_{\text{cl}}\)</span> supplies the local frequency. This is the eikonal (geometric-optics) content of “phase = action”: <span class="math notranslate nohighlight">\(S_{\text{cl}}/\hbar\)</span> is a position- and time-dependent phase whose gradients reproduce the classical momentum and energy.</p>
+<!-- ─── -->
+<p><strong>6. Phase velocity vs group velocity.</strong> A plane-wave matter wave <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}(\boldsymbol{k}\cdot\boldsymbol{x} - \omega t)}\)</span> with <span class="math notranslate nohighlight">\(\omega = \hbar\boldsymbol{k}^{2}/(2m)\)</span> propagates with two distinct velocities, which a <em>single</em> plane wave cannot reveal.</p>
+<p>(a) From a surface of constant phase <span class="math notranslate nohighlight">\(\boldsymbol{k}\cdot\boldsymbol{x} - \omega t = \mathrm{const}\)</span>, compute the <strong>phase velocity</strong> <span class="math notranslate nohighlight">\(v_{\mathrm{phase}} = \omega/k\)</span> in terms of the particle’s momentum <span class="math notranslate nohighlight">\(p = \hbar k\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>(b) For a wavepacket centred on momentum <span class="math notranslate nohighlight">\(\boldsymbol{p}_{0}\)</span>, the centroid of <span class="math notranslate nohighlight">\(\vert\psi\vert^{2}\)</span> moves at the <strong>group velocity</strong> <span class="math notranslate nohighlight">\(v_{\mathrm{group}} = \mathrm{d}\omega/\mathrm{d}k\)</span> evaluated at <span class="math notranslate nohighlight">\(k_{0} = p_{0}/\hbar\)</span>. Compute it.</p>
+<p>(c) Show that <span class="math notranslate nohighlight">\(v_{\mathrm{group}} = 2v_{\mathrm{phase}}\)</span>, and identify <span class="math notranslate nohighlight">\(v_{\mathrm{group}}\)</span> with the <em>classical</em> particle velocity <span class="math notranslate nohighlight">\(p_{0}/m\)</span>.</p>
+<p>(d) Explain physically: why is the “particle velocity” the group velocity, not the phase velocity? What is the analogue for an electromagnetic wave in vacuum, where <span class="math notranslate nohighlight">\(\omega = ck\)</span> — and why do photons not exhibit this factor of <span class="math notranslate nohighlight">\(2\)</span> ambiguity?</p>
+<p><strong>Solution.</strong></p>
+<p>(a) <strong>Phase velocity.</strong> A surface of constant phase satisfies <span class="math notranslate nohighlight">\(\boldsymbol{k}\cdot\boldsymbol{x} - \omega t = \mathrm{const}\)</span>, so under translation <span class="math notranslate nohighlight">\(\boldsymbol{x}\to\boldsymbol{x} + \delta\boldsymbol{x}\)</span> and <span class="math notranslate nohighlight">\(t\to t + \delta t\)</span> on the surface, <span class="math notranslate nohighlight">\(\boldsymbol{k}\cdot\delta\boldsymbol{x} = \omega\,\delta t\)</span>. Taking <span class="math notranslate nohighlight">\(\delta\boldsymbol{x}\)</span> along <span class="math notranslate nohighlight">\(\boldsymbol{k}/k\)</span> gives <span class="math notranslate nohighlight">\(k\,\vert\delta\boldsymbol{x}\vert = \omega\,\delta t\)</span>, i.e. <span class="math notranslate nohighlight">\(v_{\mathrm{phase}} = \vert\delta\boldsymbol{x}\vert/\delta t = \omega/k\)</span>. For the matter-wave dispersion <span class="math notranslate nohighlight">\(\omega = \hbar k^{2}/(2m)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\mathrm{phase}} = \frac{\omega}{k} = \frac{\hbar k}{2m} = \frac{p}{2m}.
+\]</div>
+<p>(b) <strong>Group velocity.</strong> Differentiating <span class="math notranslate nohighlight">\(\omega(k) = \hbar k^{2}/(2m)\)</span> with respect to <span class="math notranslate nohighlight">\(k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\mathrm{group}} = \frac{\mathrm{d}\omega}{\mathrm{d}k} = \frac{2\hbar k}{2m} = \frac{\hbar k}{m} = \frac{p}{m}.
+\]</div>
+<p>(c) <strong>The factor of 2.</strong> Comparing,</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\mathrm{group}} = \frac{p}{m} = 2\cdot\frac{p}{2m} = 2v_{\mathrm{phase}}.
+\]</div>
+<p>The group velocity is twice the phase velocity, and <strong>it equals the classical particle velocity</strong> <span class="math notranslate nohighlight">\(v_{\mathrm{cl}} = p/m\)</span>. The phase velocity <span class="math notranslate nohighlight">\(p/(2m)\)</span> has no classical interpretation as a particle speed.</p>
+<p>(d) <strong>Why the classical particle velocity is the group velocity.</strong></p>
+<p>A <em>single</em> plane wave has constant amplitude <span class="math notranslate nohighlight">\(\vert\psi\vert^{2} = 1\)</span> everywhere — its phase moves at <span class="math notranslate nohighlight">\(v_{\mathrm{phase}}\)</span>, but there is no localised “particle” to track; the wave is uniformly spread. To localise the particle one builds a <em>wavepacket</em> — a superposition of plane waves with momenta clustered around <span class="math notranslate nohighlight">\(\boldsymbol{p}_{0}\)</span>. The envelope of <span class="math notranslate nohighlight">\(\vert\psi\vert^{2}\)</span> is what one would measure as a “particle”; this envelope moves at the group velocity.</p>
+<p>The mathematical reason: for a narrow momentum spread <span class="math notranslate nohighlight">\(\Delta p \ll p_{0}\)</span>, Taylor-expand <span class="math notranslate nohighlight">\(\omega(p) \approx \omega(p_{0}) + (\mathrm{d}\omega/\mathrm{d}p)\vert_{p_{0}}\cdot(p - p_{0})\)</span>. Substituting into the wavepacket integral,</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x, t) \approx \mathrm{e}^{\mathrm{i}(k_{0}x - \omega_{0}t)}\int \tilde\psi(p)\,\mathrm{e}^{\mathrm{i}(p - p_{0})(x - v_{\mathrm{group}}t)/\hbar}\,\mathrm{d}p,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\vert\psi(x, t)\vert^{2}\)</span> depends on <span class="math notranslate nohighlight">\(x\)</span> only through the combination <span class="math notranslate nohighlight">\(x - v_{\mathrm{group}}t\)</span>. The envelope translates at <span class="math notranslate nohighlight">\(v_{\mathrm{group}}\)</span> — this is <em>where the particle is at time <span class="math notranslate nohighlight">\(t\)</span></em>, and it matches the classical <span class="math notranslate nohighlight">\(p_{0}/m\)</span>.</p>
+<p><strong>Electromagnetic waves in vacuum.</strong> For light <span class="math notranslate nohighlight">\(\omega = ck\)</span>, so <span class="math notranslate nohighlight">\(v_{\mathrm{phase}} = \omega/k = c\)</span> and <span class="math notranslate nohighlight">\(v_{\mathrm{group}} = \mathrm{d}\omega/\mathrm{d}k = c\)</span>. <strong>The two are equal</strong> — there is no factor-of-<span class="math notranslate nohighlight">\(2\)</span> discrepancy, because the dispersion is linear (<span class="math notranslate nohighlight">\(\omega \propto k\)</span>) rather than quadratic (<span class="math notranslate nohighlight">\(\omega \propto k^{2}\)</span>). A photon’s “phase speed” <em>is</em> its group speed <em>is</em> the speed of light. The factor-of-<span class="math notranslate nohighlight">\(2\)</span> ambiguity of matter waves traces directly to the <em>quadratic</em> non-relativistic dispersion <span class="math notranslate nohighlight">\(E = p^{2}/(2m)\)</span>, distinct from the relativistic linear <span class="math notranslate nohighlight">\(E = pc\)</span> of photons.</p>
+<p>This is the simplest possible illustration of the <strong>dispersion principle</strong>: in any medium where <span class="math notranslate nohighlight">\(\omega(k)\)</span> is non-linear, signal-carrying wavepackets travel at <span class="math notranslate nohighlight">\(v_{\mathrm{group}}\)</span>, while the underlying wave crests travel at the (typically different) <span class="math notranslate nohighlight">\(v_{\mathrm{phase}}\)</span>. The factor of <span class="math notranslate nohighlight">\(2\)</span> in <span class="math notranslate nohighlight">\(v_{\mathrm{group}}/v_{\mathrm{phase}}\)</span> for free matter waves is the algebraic signature of <span class="math notranslate nohighlight">\(E \propto p^{2}\)</span> — quadratic kinetic energy makes the group velocity twice the phase velocity for any monoenergetic mode.</p>
+<!-- ─── -->
+<p><strong>7. Magnitude and normalization.</strong> Compute <span class="math notranslate nohighlight">\(\vert K_{\text{free}}(\boldsymbol{x},t;\boldsymbol{x}',0)\vert^{2}\)</span> from <span class="math notranslate nohighlight">\(K_{\mathrm{free}}(\boldsymbol{x},t;\boldsymbol{x}',0) = \bigl(m/(2\pi\mathrm{i}\hbar t)\bigr)^{3/2}\exp\!\bigl[\mathrm{i}\,m(\boldsymbol{x}-\boldsymbol{x}')^2/(2\hbar t)\bigr]\)</span> and show that it is independent of position, equal to <span class="math notranslate nohighlight">\(\bigl(m/(2\pi\hbar t)\bigr)^{3}\)</span>.</p>
+<p>(a) Explain why this <em>position-independence</em> of the modulus is consistent with the propagator being normalized as <span class="math notranslate nohighlight">\(\int K_{\text{free}}\,\mathrm{d}^{3}x = 1\)</span> (cf. HW 3.2.2.3) at every <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>(b) Why is it nevertheless inappropriate to interpret <span class="math notranslate nohighlight">\(\vert K_{\text{free}}\vert^{2}\)</span> as a probability density of finding the particle at <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>? (Hint: the propagator describes the response to a singular delta-function initial state; physical probability densities require a normalizable initial wavefunction.)</p>
+<p><strong>Solution.</strong></p>
+<p>From the closed form, <span class="math notranslate nohighlight">\(K_{\text{free}} = (m/(2\pi\mathrm{i}\hbar t))^{3/2}\exp[\mathrm{i}m\boldsymbol{r}^{2}/(2\hbar t)]\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{r} = \boldsymbol{x}-\boldsymbol{x}'\)</span>. The exponent <span class="math notranslate nohighlight">\(\mathrm{i}m\boldsymbol{r}^{2}/(2\hbar t)\)</span> is purely imaginary — every factor <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{r}^{2}\)</span>, <span class="math notranslate nohighlight">\(\hbar\)</span>, <span class="math notranslate nohighlight">\(t\)</span> is real — so the exponential is a pure phase of unit modulus: <span class="math notranslate nohighlight">\(\vert\exp[\mathrm{i}m\boldsymbol{r}^{2}/(2\hbar t)]\vert = 1\)</span>. Only the prefactor contributes to the modulus:</p>
+<div class="math notranslate nohighlight">
+\[
+\vert K_{\text{free}}\vert^{2} = \left\vert\left(\frac{m}{2\pi\mathrm{i}\hbar t}\right)^{3/2}\right\vert^{2} = \left\vert\frac{m}{2\pi\mathrm{i}\hbar t}\right\vert^{3} = \left(\frac{m}{2\pi\hbar t}\right)^{3},
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\vert\mathrm{i}\vert = 1\)</span> and (for <span class="math notranslate nohighlight">\(t&gt;0\)</span>) <span class="math notranslate nohighlight">\(\vert 2\pi\mathrm{i}\hbar t\vert = 2\pi\hbar t\)</span>. The result depends only on <span class="math notranslate nohighlight">\(t\)</span> — it is the same for every pair <span class="math notranslate nohighlight">\((\boldsymbol{x},\boldsymbol{x}')\)</span>.</p>
+<p><strong>(a) Consistency with <span class="math notranslate nohighlight">\(\int K_{\text{free}}\,\mathrm{d}^{3}x = 1\)</span>.</strong> There is no contradiction, because the two statements concern different objects. The normalization <span class="math notranslate nohighlight">\(\int K_{\text{free}}\,\mathrm{d}^{3}x = 1\)</span> integrates the <em>complex amplitude</em> <span class="math notranslate nohighlight">\(K_{\text{free}}\)</span>, not its modulus. That integral is finite (indeed equal to <span class="math notranslate nohighlight">\(1\)</span>) not because the integrand decays — it does not, <span class="math notranslate nohighlight">\(\vert K_{\text{free}}\vert\)</span> is constant — but because the rapidly varying phase <span class="math notranslate nohighlight">\(m\boldsymbol{r}^{2}/(2\hbar t)\)</span> produces destructive interference: it is a convergent Fresnel integral, evaluated in HW 3.2.2.3 and reused in Problem 2(b) above. A function of constant modulus but rapidly oscillating phase can perfectly well integrate to a finite number. So a position-independent <span class="math notranslate nohighlight">\(\vert K_{\text{free}}\vert\)</span> is fully compatible with <span class="math notranslate nohighlight">\(\int K_{\text{free}}\,\mathrm{d}^{3}x = 1\)</span>: here normalization is enforced by phase cancellation, not by spatial decay of the amplitude.</p>
+<p><strong>(b) Why <span class="math notranslate nohighlight">\(\vert K_{\text{free}}\vert^{2}\)</span> is not a probability density.</strong> A probability density must be normalizable, <span class="math notranslate nohighlight">\(\int(\text{density})\,\mathrm{d}^{3}x = 1\)</span>. But <span class="math notranslate nohighlight">\(\vert K_{\text{free}}\vert^{2} = (m/(2\pi\hbar t))^{3}\)</span> is constant in space, so</p>
+<div class="math notranslate nohighlight">
+\[
+\int\vert K_{\text{free}}\vert^{2}\,\mathrm{d}^{3}x = \left(\frac{m}{2\pi\hbar t}\right)^{3}\int\mathrm{d}^{3}x = \infty
+\]</div>
+<p>— it cannot be normalized. The reason is built into what the propagator <em>is</em>: <span class="math notranslate nohighlight">\(K_{\text{free}}(\boldsymbol{x},t;\boldsymbol{x}',0)\)</span> is the response to the singular initial state <span class="math notranslate nohighlight">\(\psi(\cdot,0) = \delta^{3}(\cdot-\boldsymbol{x}')\)</span>, a perfectly localized “particle.” Such a state has infinite position certainty, hence (by the uncertainty principle) infinite momentum spread, so after any time <span class="math notranslate nohighlight">\(t&gt;0\)</span> its amplitude is smeared over all of space with equal magnitude — there is literally no preferred location, the opposite of a localized probability distribution. A genuine probability density requires a <em>normalizable</em> initial wavefunction <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x},0)\)</span> with <span class="math notranslate nohighlight">\(\int\vert\psi\vert^{2}\,\mathrm{d}^{3}x = 1\)</span>. Propagating that state via <span class="math notranslate nohighlight">\(\psi(\boldsymbol{x},t) = \int K_{\text{free}}\,\psi(\boldsymbol{x}',0)\,\mathrm{d}^{3}x'\)</span> yields a wavefunction whose <span class="math notranslate nohighlight">\(\vert\psi(\boldsymbol{x},t)\vert^{2}\)</span> <em>is</em> a legitimate, normalized, position-dependent density — for example the spreading Gaussian of Problem 6. The propagator itself is a transition amplitude (an integration kernel), not a physical state, and <span class="math notranslate nohighlight">\(\vert K\vert^{2}\)</span> is not a probability.</p>
+<!-- ─── -->
+<p><strong>8. Macroscopic phase factors.</strong> The phase of the free propagator is <span class="math notranslate nohighlight">\(\Phi = m\,(\boldsymbol{x}-\boldsymbol{x}')^{2}/(2\hbar t)\)</span>.</p>
+<p>(a) Evaluate <span class="math notranslate nohighlight">\(\Phi\)</span> as a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span> for a baseball with <span class="math notranslate nohighlight">\(m = 0.15\,\)</span>kg, displacement <span class="math notranslate nohighlight">\(1\,\)</span>m, time <span class="math notranslate nohighlight">\(1\,\)</span>s.</p>
+<p>(b) Evaluate <span class="math notranslate nohighlight">\(\Phi\)</span> as a multiple of <span class="math notranslate nohighlight">\(2\pi\)</span> for an electron with <span class="math notranslate nohighlight">\(m\approx 9\times 10^{-31}\,\)</span>kg, displacement <span class="math notranslate nohighlight">\(1\,\)</span>nm, time <span class="math notranslate nohighlight">\(1\,\)</span>ps.</p>
+<p>(c) Use the two numbers to explain why classical objects show no observable quantum interference, while electrons routinely do.</p>
+<p><strong>Solution.</strong></p>
+<p>The propagator phase is <span class="math notranslate nohighlight">\(\Phi = m\,r^{2}/(2\hbar t)\)</span> with <span class="math notranslate nohighlight">\(r = \vert\boldsymbol{x}-\boldsymbol{x}'\vert\)</span> the displacement. Use <span class="math notranslate nohighlight">\(\hbar = 1.05\times 10^{-34}\,\mathrm{J\cdot s}\)</span>.</p>
+<p><strong>(a) Baseball.</strong> <span class="math notranslate nohighlight">\(m = 0.15\,\)</span>kg, <span class="math notranslate nohighlight">\(r = 1\,\)</span>m, <span class="math notranslate nohighlight">\(t = 1\,\)</span>s:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \frac{(0.15)(1)^{2}}{2(1.05\times 10^{-34})(1)} \approx 7.1\times 10^{32}\ \text{rad},
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\Phi/(2\pi) \approx 1.1\times 10^{32}\)</span>.</p>
+<p>The phase amounts to about <span class="math notranslate nohighlight">\(10^{32}\)</span> full cycles.</p>
+<p><strong>(b) Electron.</strong> <span class="math notranslate nohighlight">\(m\approx 9\times 10^{-31}\,\)</span>kg, <span class="math notranslate nohighlight">\(r = 1\,\)</span>nm <span class="math notranslate nohighlight">\(= 10^{-9}\,\)</span>m, <span class="math notranslate nohighlight">\(t = 1\,\)</span>ps <span class="math notranslate nohighlight">\(= 10^{-12}\,\)</span>s:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi = \frac{(9\times 10^{-31})(10^{-9})^{2}}{2(1.05\times 10^{-34})(10^{-12})} \approx 4.3\times 10^{-3}\ \text{rad},
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\Phi/(2\pi) \approx 6.8\times 10^{-4}\)</span>.</p>
+<p>The phase is a tiny fraction of a single cycle.</p>
+<p><strong>(c) Why classical objects show no interference.</strong> Interference is observable only when the phase varies by an amount <em>of order</em> <span class="math notranslate nohighlight">\(2\pi\)</span> across the experimentally controllable spread of paths — enough variation to build up fringes, yet not so much that neighbouring paths average to zero. What matters is therefore the <em>rate of change</em> of <span class="math notranslate nohighlight">\(\Phi\)</span> with the path, captured by</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\Phi}{\partial r} = \frac{m r}{\hbar t}.
+\]</div>
+<p><em>Baseball:</em> <span class="math notranslate nohighlight">\(\partial\Phi/\partial r = (0.15)(1)/[(1.05\times 10^{-34})(1)]\approx 1.4\times 10^{33}\,\)</span>rad/m. The phase sweeps through a full <span class="math notranslate nohighlight">\(2\pi\)</span> over a displacement change of only <span class="math notranslate nohighlight">\(\Delta r\approx 2\pi/(1.4\times 10^{33})\approx 4\times 10^{-33}\,\)</span>m — far smaller than an atomic nucleus. Any two macroscopically indistinguishable trajectories differ in phase by an enormous, effectively random multiple of <span class="math notranslate nohighlight">\(2\pi\)</span>; summing their amplitudes gives complete destructive interference except along the single stationary-phase (classical) path. The baseball follows a sharp classical trajectory and exhibits no interference fringes, because the fringes — insofar as they exist — are spaced far below any conceivable measurement resolution. The huge count <span class="math notranslate nohighlight">\(\Phi/2\pi\sim 10^{32}\)</span> is the quantitative signature of this regime.</p>
+<p><em>Electron:</em> <span class="math notranslate nohighlight">\(\partial\Phi/\partial r = (9\times 10^{-31})(10^{-9})/[(1.05\times 10^{-34})(10^{-12})]\approx 8.6\times 10^{6}\,\)</span>rad/m. A full <span class="math notranslate nohighlight">\(2\pi\)</span> now requires <span class="math notranslate nohighlight">\(\Delta r\approx 0.7\,\mu\)</span>m — a macroscopic, readily resolved length. The phase varies smoothly and by experimentally accessible amounts over nanometre–picosecond scales (the modest total <span class="math notranslate nohighlight">\(\Phi/2\pi\sim 10^{-3}\)</span> confirms the phase is “gentle”), so amplitudes from neighbouring paths interfere coherently and produce visible fringes. This is why electron diffraction and double-slit interference are routine while a baseball’s are not: the same formula <span class="math notranslate nohighlight">\(\Phi = m r^{2}/(2\hbar t)\)</span>, evaluated with everyday versus microscopic values of <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, and <span class="math notranslate nohighlight">\(t\)</span>, places the fringe spacing either absurdly below — or comfortably above — the scale at which measurements are made.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./homework"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3-2-2_solutions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.2.2 Schrödinger Equation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3-3-1_solutions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.3.1 Stationary Phase Approximation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yi-Zhuang You
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    <div class="extra_footer">
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

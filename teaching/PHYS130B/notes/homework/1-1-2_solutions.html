@@ -1,0 +1,933 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.1.2 State and Representation &#8212; Quantum Mechanics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../static/lightbox.css?v=d6efd4d2" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=fb6a0f6f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../static/doctools.js?v=9a2dae69"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../static/copybutton.js?v=f281be69"></script>
+    <script src="../static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/boldsymbol"]}, "tex": {"packages": {"[+]": ["boldsymbol"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'homework/1-1-2_solutions';</script>
+    <script src="../static/fullscreen-sidebar.js?v=2a9d79a1"></script>
+    <script src="../static/lightbox.js?v=d270d91b"></script>
+    <link rel="canonical" href="https://everettyou.github.io/teaching/PHYS130B/notes/homework/1-1-2_solutions.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.1.3 Hermitian Operators" href="1-1-3_solutions.html" />
+    <link rel="prev" title="1.1.1 What is a Qubit" href="1-1-1_solutions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <link rel="icon" href="https://everettyou.github.io/assets/img/logos/avatar.svg" type="image/svg+xml"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quantum Mechanics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    PHYS 130B Lecture Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch1_qubit/index.html">Chapter 1: Qubit</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-1-states-and-observables.html">1.1 States and Observables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-1-what-is-a-qubit.html">1.1.1 What is a Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html">1.1.2 State and Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-1-3-hermitian-operators.html">1.1.3 Hermitian Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-2-measurement.html">1.2 Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-1-measurement-postulate.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-2-uncertainty-and-incompatibility.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-2-3-measurement-operators.html">1.2.3 Measurement Operators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch1_qubit/1-3-time-evolution.html">1.3 Time Evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-1-unitary-evolution.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-2-schrodinger-picture.html">1.3.2 Schrödinger Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch1_qubit/1-3-3-heisenberg-picture.html">1.3.3 Heisenberg Picture</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2_identical-particles/index.html">Chapter 2: Identical Particles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-1-bosons-and-fermions.html">2.1 Bosons and Fermions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-1-tensor-product.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-2-symmetrization.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-1-3-second-quantization.html">2.1.3 Second Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-2-angular-momentum.html">2.2 Angular Momentum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-1-angular-momentum-algebra.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-2-spin-representations.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-2-3-addition-of-angular-momenta.html">2.2.3 Addition of Angular Momenta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch2_identical-particles/2-3-anyons.html">2.3 Anyons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-1-exchange-statistics.html">2.3.1 Exchange Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-2-fractional-quantum-hall-anyons.html">2.3.2 Fractional Quantum Hall Anyons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch2_identical-particles/2-3-3-toric-code.html">2.3.3 Toric Code</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch3_path-integral/index.html">Chapter 3: Path Integral</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-1-quantization.html">3.1 Quantization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-1-geometric-optics.html">3.1.1 Geometric Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-2-physical-optics.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-1-3-wave-particle-duality.html">3.1.3 Wave-Particle Duality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-2-propagator.html">3.2 Propagator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-1-path-integral-formulation.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-2-schrodinger-equation.html">3.2.2 Schrödinger Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-2-3-free-particle-propagator.html">3.2.3 Free Particle Propagator</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-3-stationary-phase.html">3.3 Stationary Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-1-stationary-phase-approximation.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-2-wkb-approximation.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-3-3-bohr-sommerfeld-quantization.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch3_path-integral/3-4-imaginary-time.html">3.4 Imaginary Time</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-1-wick-rotation.html">3.4.1 Wick Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-2-black-hole-temperature.html">3.4.2 Black Hole Temperature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch3_path-integral/3-4-3-instantons.html">3.4.3 Instantons</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/index.html">Chapter 4: Phase and Gauge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-gauge-field.html">4.1 Gauge Field</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-1-gauge-principle.html">4.1.1 Gauge Principle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-2-electromagnetic-coupling.html">4.1.2 Electromagnetic Coupling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-1-3-gauge-invariance.html">4.1.3 Gauge Invariance</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-berry-phase.html">4.2 Berry Phase</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-1-berry-phase.html">4.2.1 Berry Phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-2-aharonov-bohm-effect.html">4.2.2 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-2-3-flux-ring.html">4.2.3 Flux Ring</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-landau-level.html">4.3 Landau Level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-1-cyclotron-motion.html">4.3.1 Cyclotron Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-2-landau-quantization.html">4.3.2 Landau Quantization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-3-3-quantum-hall-effect.html">4.3.3 Quantum Hall Effect</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-spin-and-monopole.html">4.4 Spin and Monopole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-1-classical-spin.html">4.4.1 Classical Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-2-dirac-monopole.html">4.4.2 Dirac Monopole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch4_phase-and-gauge/4-4-3-monopole-harmonics.html">4.4.3 Monopole Harmonics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch5_perturbation-theory/index.html">Chapter 5: Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-1-time-independent-perturbation-theory.html">5.1 Time-Independent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-1-toy-model.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-2-non-degenerate-perturbation-theory.html">5.1.2 Non-Degenerate Perturbation Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-1-3-degenerate-perturbation-theory.html">5.1.3 Degenerate Perturbation Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch5_perturbation-theory/5-2-time-dependent-perturbation-theory.html">5.2 Time-Dependent Perturbation Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-1-interaction-picture.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-2-dyson-series.html">5.2.2 Dyson Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch5_perturbation-theory/5-2-3-applications.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch6_quantum-foundations/index.html">Chapter 6: Quantum Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-1-density-matrix.html">6.1 Density Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-1-mixed-states.html">6.1.1 Mixed States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-2-entropy.html">6.1.2 Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-1-3-quantum-statistics.html">6.1.3 Quantum Statistics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-2-entanglement.html">6.2 Entanglement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-1-product-and-entangled-states.html">6.2.1 Product and Entangled States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-2-entanglement-entropy.html">6.2.2 Entanglement Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-2-3-bell-inequality.html">6.2.3 Bell Inequality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-3-generalized-measurement.html">6.3 Generalized Measurement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-1-projective-measurement.html">6.3.1 Projective Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-2-povm.html">6.3.2 POVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-3-3-quantum-channels.html">6.3.3 Quantum Channels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ch6_quantum-foundations/6-4-open-quantum-systems.html">6.4 Open Quantum Systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-1-decoherence.html">6.4.1 Decoherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-2-lindblad-master-equation.html">6.4.2 Lindblad Master Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ch6_quantum-foundations/6-4-3-error-correction.html">6.4.3 Error Correction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="homework.html">PHYS 130B Homework Solutions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-1-1_solutions.html">1.1.1 What is a Qubit</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1.2 State and Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-1-3_solutions.html">1.1.3 Hermitian Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-2-1_solutions.html">1.2.1 Measurement Postulate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-2-2_solutions.html">1.2.2 Uncertainty and Incompatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-2-3_solutions.html">1.2.3 Measurement Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-3-1_solutions.html">1.3.1 Unitary Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-3-2_solutions.html">1.3.2 Schrödinger Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-3-3_solutions.html">1.3.3 Heisenberg Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-1_solutions.html">2.1.1 Tensor Product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-2_solutions.html">2.1.2 Symmetrization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-3_solutions.html">2.1.3 Second Quantization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-1_solutions.html">2.2.1 Angular Momentum Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-2_solutions.html">2.2.2 Spin Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-3_solutions.html">2.2.3 Addition of Angular Momenta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-1_solutions.html">3.1.1 Geometric Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-2_solutions.html">3.1.2 Physical Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-3_solutions.html">3.1.3 Wave-Particle Duality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-2-1_solutions.html">3.2.1 Path Integral Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-2-2_solutions.html">3.2.2 Schrödinger Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-2-3_solutions.html">3.2.3 Free Particle Propagator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-3-1_solutions.html">3.3.1 Stationary Phase Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-3-2_solutions.html">3.3.2 WKB Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-3-3_solutions.html">3.3.3 Bohr-Sommerfeld Quantization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-1-1_solutions.html">4.1.1 Gauge Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-1-2_solutions.html">4.1.2 Electromagnetic Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-1-3_solutions.html">4.1.3 Gauge Invariance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-2-1_solutions.html">4.2.1 Berry Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-2-2_solutions.html">4.2.2 Aharonov-Bohm Effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-2-3_solutions.html">4.2.3 Flux Ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-1-1_solutions.html">5.1.1 Toy Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-1-2_solutions.html">5.1.2 Non-degenerate Perturbation Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-1-3_solutions.html">5.1.3 Degenerate Perturbation Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-2-1_solutions.html">5.2.1 Interaction Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-2-2_solutions.html">5.2.2 Dyson Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-2-3_solutions.html">5.2.3 Applications</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../sources/homework/1-1-2_solutions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.1.2 State and Representation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="state-and-representation">
+<h1>1.1.2 State and Representation<a class="headerlink" href="#state-and-representation" title="Link to this heading">#</a></h1>
+<p>Worked solutions for the homework problems in the <a class="reference internal" href="../ch1_qubit/1-1-2-state-and-representation.html"><span class="doc std std-doc">1.1.2 State and Representation</span></a> lecture. Each problem statement is reproduced verbatim, followed by a complete worked solution.</p>
+<!-- ─── -->
+<p><strong>1. Qubit state decomposition.</strong> A qubit is in the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \frac{1}{\sqrt{3}}\vert 0\rangle + \sqrt{\frac{2}{3}}\,\mathrm{e}^{\mathrm{i}\pi/4}\vert 1\rangle\)</span>. Find the Bloch sphere angles <span class="math notranslate nohighlight">\((\theta, \varphi)\)</span> for this state by matching against the standard parametrization <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert 1\rangle\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<p>The Bloch parametrization requires the amplitude of <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> to be <strong>real and non-negative</strong>, with the entire phase carried by the <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span> component. Here the <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> amplitude is already <span class="math notranslate nohighlight">\(1/\sqrt{3} &gt; 0\)</span>, so no global-phase rotation is needed — we can read off the angles by matching term by term:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos\tfrac{\theta}{2} = \frac{1}{\sqrt{3}},
+\qquad
+\mathrm{e}^{\mathrm{i}\varphi}\sin\tfrac{\theta}{2} = \sqrt{\tfrac{2}{3}}\,\mathrm{e}^{\mathrm{i}\pi/4}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\sqrt{2/3} &gt; 0\)</span>, the second relation splits into a modulus and a phase:</p>
+<div class="math notranslate nohighlight">
+\[
+\sin\tfrac{\theta}{2} = \sqrt{\tfrac{2}{3}},
+\qquad
+\varphi = \frac{\pi}{4}.
+\]</div>
+<p>The two moduli are consistent with normalization, <span class="math notranslate nohighlight">\(\cos^2(\theta/2) + \sin^2(\theta/2) = \tfrac13 + \tfrac23 = 1\)</span>. Dividing sine by cosine,</p>
+<div class="math notranslate nohighlight">
+\[
+\tan\tfrac{\theta}{2} = \frac{\sin(\theta/2)}{\cos(\theta/2)} = \frac{\sqrt{2/3}}{\sqrt{1/3}} = \sqrt{2},
+\]</div>
+<p>so</p>
+<div class="math notranslate nohighlight">
+\[
+\theta = 2\arctan\sqrt{2} \approx 109.47^\circ \approx 1.911\ \mathrm{rad}.
+\]</div>
+<p>The Bloch angles are therefore</p>
+<div class="math notranslate nohighlight">
+\[
+(\theta, \varphi) = \left(2\arctan\sqrt{2},\ \tfrac{\pi}{4}\right) \approx (109.47^\circ,\ 45^\circ).
+\]</div>
+<p>(The polar angle <span class="math notranslate nohighlight">\(109.47^\circ\)</span> is the tetrahedral angle, <span class="math notranslate nohighlight">\(\arccos(-1/3)\)</span>; equivalently <span class="math notranslate nohighlight">\(\cos\theta = \cos^2(\theta/2) - \sin^2(\theta/2) = \tfrac13 - \tfrac23 = -\tfrac13\)</span>.) The state sits just below the equator of the Bloch sphere, rotated <span class="math notranslate nohighlight">\(45^\circ\)</span> around the <span class="math notranslate nohighlight">\(z\)</span>-axis from the <span class="math notranslate nohighlight">\(x\)</span>-direction.</p>
+<!-- ─── -->
+<p><strong>2. State reconstruction from Pauli expectations.</strong> A qubit is identically prepared on many copies, and the three Pauli expectation values are measured to be</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\hat X\rangle = 0, \qquad \langle\hat Y\rangle = \tfrac{1}{\sqrt{2}}, \qquad \langle\hat Z\rangle = \tfrac{1}{\sqrt{2}}.
+\]</div>
+<p>(a) Read off the Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> and verify <span class="math notranslate nohighlight">\(\vert\boldsymbol{n}\vert = 1\)</span>. Why is this consistent with the assertion that the state is pure?</p>
+<p>(b) Convert <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> to Bloch angles <span class="math notranslate nohighlight">\((\theta, \varphi)\)</span>.</p>
+<p>(c) Write the state in the standard form <span class="math notranslate nohighlight">\(\vert\psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert 1\rangle\)</span>.</p>
+<p>(d) Are there any other physical states (up to global phase) with the same three Pauli expectation values? Justify your answer by counting the parameters of the qubit Hilbert space against the parameters of the data.</p>
+<p><strong>Solution.</strong></p>
+<p>(a) The Bloch vector is read directly from the three Pauli expectations:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{n} = (\langle\hat X\rangle,\, \langle\hat Y\rangle,\, \langle\hat Z\rangle) = (0,\, \tfrac{1}{\sqrt{2}},\, \tfrac{1}{\sqrt{2}}).
+\]</div>
+<p>Its squared length is</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\boldsymbol{n}\vert^2 = 0^2 + \left(\tfrac{1}{\sqrt2}\right)^{\!2} + \left(\tfrac{1}{\sqrt2}\right)^{\!2} = 0 + \tfrac12 + \tfrac12 = 1,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(\vert\boldsymbol{n}\vert = 1\)</span>. Pure qubit states sit on the <strong>surface</strong> of the Bloch sphere, so a unit Bloch vector is the signature of purity (mixed states have <span class="math notranslate nohighlight">\(\vert\boldsymbol{n}\vert &lt; 1\)</span> — to be developed in Chapter 6). The measurement output is self-consistent with the assumption that the source produces a pure state.</p>
+<p>(b) From the parametrization <span class="math notranslate nohighlight">\(\boldsymbol n = (\sin\theta\cos\varphi,\ \sin\theta\sin\varphi,\ \cos\theta)\)</span>, the polar angle is fixed by <span class="math notranslate nohighlight">\(n_z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos\theta = \tfrac{1}{\sqrt2} \quad\Longrightarrow\quad \theta = \tfrac{\pi}{4}.
+\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\sin\theta = \sqrt{1 - 1/2} = 1/\sqrt{2}\)</span> (positive root, since <span class="math notranslate nohighlight">\(\theta\in[0,\pi]\)</span>). The azimuth follows from <span class="math notranslate nohighlight">\((n_x, n_y) = (\sin\theta\cos\varphi,\, \sin\theta\sin\varphi)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos\varphi = \frac{n_x}{\sin\theta} = 0, \qquad \sin\varphi = \frac{n_y}{\sin\theta} = \frac{1/\sqrt2}{1/\sqrt2} = 1 \quad\Longrightarrow\quad \varphi = \tfrac{\pi}{2}.
+\]</div>
+<p>So <span class="math notranslate nohighlight">\((\theta,\varphi) = (\pi/4,\ \pi/2)\)</span>.</p>
+<p>(c) Substituting into the standard form,</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\psi\rangle = \cos\tfrac{\pi}{8}\,\vert 0\rangle + \mathrm{e}^{\mathrm{i}\pi/2}\sin\tfrac{\pi}{8}\,\vert 1\rangle = \cos\tfrac{\pi}{8}\,\vert 0\rangle + \mathrm{i}\sin\tfrac{\pi}{8}\,\vert 1\rangle.
+\]</div>
+<p>Numerically, <span class="math notranslate nohighlight">\(\cos(\pi/8) \approx 0.924\)</span> and <span class="math notranslate nohighlight">\(\sin(\pi/8) \approx 0.383\)</span>.</p>
+<p>(d) No — the state is uniquely determined (up to global phase). The argument is by parameter counting:</p>
+<ul class="simple">
+<li><p>The space of pure qubit states is 2-dimensional (the Bloch sphere <span class="math notranslate nohighlight">\(S^2\)</span>).</p></li>
+<li><p>The Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> is constrained to have unit length, <span class="math notranslate nohighlight">\(\vert\boldsymbol{n}\vert = 1\)</span>: 3 real numbers minus 1 constraint = 2 parameters.</p></li>
+<li><p>So <strong>the Bloch vector uniquely encodes the pure state</strong>, and the three Pauli expectations are sufficient to reconstruct it.</p></li>
+</ul>
+<p>This is the operational content of <strong>single-qubit state tomography</strong>: measuring the three Pauli expectations on enough copies pins down the state to within statistical uncertainty. (Contrast with Problem 2 of 1.1.1: there, only two probabilities were given — <span class="math notranslate nohighlight">\(Z\)</span>- and <span class="math notranslate nohighlight">\(X\)</span>-basis — which left a sign ambiguity in <span class="math notranslate nohighlight">\(n_y\)</span>, hence two candidate states. The third measurement breaks that degeneracy.)</p>
+<!-- ─── -->
+<p><strong>3. State representation in different bases.</strong> Express the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle + \vert 1\rangle)\)</span> in the <span class="math notranslate nohighlight">\(X\)</span>-basis <span class="math notranslate nohighlight">\(\{\vert +\rangle, \vert -\rangle\}\)</span>. Then express <span class="math notranslate nohighlight">\(\vert \phi\rangle = \tfrac{1}{\sqrt{2}}(\vert 0\rangle + \mathrm{i}\vert 1\rangle)\)</span> in the <span class="math notranslate nohighlight">\(X\)</span>-basis. Compute the inner product <span class="math notranslate nohighlight">\(\langle\phi\vert \psi\rangle\)</span> in both the <span class="math notranslate nohighlight">\(Z\)</span>-basis and the <span class="math notranslate nohighlight">\(X\)</span>-basis representations and verify you get the same result.</p>
+<p><strong>Solution.</strong></p>
+<p>A state <span class="math notranslate nohighlight">\(\vert\chi\rangle = a\vert 0\rangle + b\vert 1\rangle\)</span> is rewritten in the X-basis by substituting the inverse relations <span class="math notranslate nohighlight">\(\vert 0\rangle = \tfrac{1}{\sqrt2}(\vert +\rangle + \vert -\rangle)\)</span> and <span class="math notranslate nohighlight">\(\vert 1\rangle = \tfrac{1}{\sqrt2}(\vert +\rangle - \vert -\rangle)\)</span>, which gives the general formula</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\chi\rangle = \frac{a+b}{\sqrt{2}}\,\vert +\rangle + \frac{a-b}{\sqrt{2}}\,\vert -\rangle.
+\]</div>
+<p><em>State <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>.</em> Here <span class="math notranslate nohighlight">\(a = b = 1/\sqrt{2}\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{a+b}{\sqrt2} = 1,
+\qquad
+\frac{a-b}{\sqrt2} = 0
+\quad\Longrightarrow\quad
+\vert\psi\rangle = \vert +\rangle.
+\]</div>
+<p>This is no surprise: <span class="math notranslate nohighlight">\(\tfrac{1}{\sqrt2}(\vert 0\rangle + \vert 1\rangle)\)</span> is the definition of <span class="math notranslate nohighlight">\(\vert +\rangle\)</span> — in the X-basis it is the first basis vector.</p>
+<p><em>State <span class="math notranslate nohighlight">\(\vert\phi\rangle\)</span>.</em> Here <span class="math notranslate nohighlight">\(a = 1/\sqrt{2}\)</span>, <span class="math notranslate nohighlight">\(b = \mathrm{i}/\sqrt{2}\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{a+b}{\sqrt2} = \frac{1+\mathrm{i}}{2},
+\qquad
+\frac{a-b}{\sqrt2} = \frac{1-\mathrm{i}}{2},
+\]</div>
+<p>giving</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\phi\rangle = \frac{1+\mathrm{i}}{2}\,\vert +\rangle + \frac{1-\mathrm{i}}{2}\,\vert -\rangle.
+\]</div>
+<p>(Sanity check: <span class="math notranslate nohighlight">\(\vert(1+\mathrm{i})/2\vert^2 + \vert(1-\mathrm{i})/2\vert^2 = \tfrac24 + \tfrac24 = 1\)</span>, so <span class="math notranslate nohighlight">\(\vert\phi\rangle\)</span> is still normalized — as it must be, since a change of orthonormal basis is unitary.)</p>
+<p><em>Inner product in the Z-basis.</em> With <span class="math notranslate nohighlight">\(\vert\phi\rangle \leftrightarrow (1/\sqrt2,\ \mathrm{i}/\sqrt2)\)</span> and <span class="math notranslate nohighlight">\(\vert\psi\rangle \leftrightarrow (1/\sqrt2,\ 1/\sqrt2)\)</span>, the inner product conjugates the components of the bra:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\phi\vert\psi\rangle = \left(\tfrac{1}{\sqrt2}\right)^{\!*}\tfrac{1}{\sqrt2} + \left(\tfrac{\mathrm{i}}{\sqrt2}\right)^{\!*}\tfrac{1}{\sqrt2}
+= \tfrac12 - \tfrac{\mathrm{i}}{2} = \frac{1-\mathrm{i}}{2}.
+\]</div>
+<p><em>Inner product in the X-basis.</em> With <span class="math notranslate nohighlight">\(\vert\phi\rangle \leftrightarrow \bigl(\tfrac{1+\mathrm{i}}{2},\ \tfrac{1-\mathrm{i}}{2}\bigr)\)</span> and <span class="math notranslate nohighlight">\(\vert\psi\rangle \leftrightarrow (1,\ 0)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\phi\vert\psi\rangle = \left(\tfrac{1+\mathrm{i}}{2}\right)^{\!*}\!(1) + \left(\tfrac{1-\mathrm{i}}{2}\right)^{\!*}\!(0)
+= \frac{1-\mathrm{i}}{2}.
+\]</div>
+<p>Both representations give <span class="math notranslate nohighlight">\(\langle\phi\vert\psi\rangle = \dfrac{1-\mathrm{i}}{2}\)</span>. The agreement is guaranteed: the inner product is a basis-independent geometric quantity, and any change of orthonormal basis is a unitary map that preserves all inner products.</p>
+<!-- ─── -->
+<p><strong>4. Bloch vector calculation.</strong> Compute the Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\langle \hat{X}\rangle, \langle\hat{Y}\rangle, \langle\hat{Z}\rangle)\)</span> for the state <span class="math notranslate nohighlight">\(\vert \psi\rangle = \cos(\pi/8)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\pi/3}\sin(\pi/8)\vert 1\rangle\)</span>. Verify that <span class="math notranslate nohighlight">\(\vert \boldsymbol{n}\vert = 1\)</span> as a sanity check that the state is pure.</p>
+<p><strong>Solution.</strong></p>
+<p>The state is already in the standard Bloch parametrization <span class="math notranslate nohighlight">\(\cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert 1\rangle\)</span>. Matching:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\theta}{2} = \frac{\pi}{8} \;\Longrightarrow\; \theta = \frac{\pi}{4},
+\qquad
+\varphi = \frac{\pi}{3}.
+\]</div>
+<p>The Bloch vector is then read off from <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\varphi,\ \sin\theta\sin\varphi,\ \cos\theta)\)</span>. With <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> and <span class="math notranslate nohighlight">\(\varphi = \pi/3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sin\theta = \cos\theta = \frac{1}{\sqrt2},
+\qquad
+\cos\varphi = \frac12,
+\qquad
+\sin\varphi = \frac{\sqrt3}{2}.
+\]</div>
+<p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+n_x = \frac{1}{\sqrt2}\cdot\frac12 = \frac{1}{2\sqrt2} \approx 0.354,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+n_y = \frac{1}{\sqrt2}\cdot\frac{\sqrt3}{2} = \frac{\sqrt6}{4} \approx 0.612,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+n_z = \cos\theta = \frac{1}{\sqrt2} \approx 0.707.
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(\boldsymbol{n} = \bigl(\tfrac{1}{2\sqrt2},\ \tfrac{\sqrt6}{4},\ \tfrac{1}{\sqrt2}\bigr)\)</span>. Its length squared is</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\boldsymbol{n}\vert^2 = n_x^2 + n_y^2 + n_z^2 = \frac{1}{8} + \frac{3}{8} + \frac{1}{2} = \frac{1 + 3 + 4}{8} = 1,
+\]</div>
+<p>hence <span class="math notranslate nohighlight">\(\vert\boldsymbol{n}\vert = 1\)</span>. The sanity check passes: the Bloch vector of any <em>pure</em> qubit state is a unit vector, which is the geometric statement that pure states sit on the <em>surface</em> of the Bloch sphere. (Independent cross-check: <span class="math notranslate nohighlight">\(\langle\hat{Z}\rangle = P(0) - P(1) = \cos^2(\theta/2) - \sin^2(\theta/2) = \cos\theta = n_z\)</span>.)</p>
+<!-- ─── -->
+<p><strong>5. Antipodal states on Bloch sphere.</strong> On the Bloch sphere, orthogonal quantum states correspond to antipodal points (diametrically opposite). Verify this explicitly: show that if <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> has Bloch angles <span class="math notranslate nohighlight">\((\theta, \varphi)\)</span>, then the orthogonal state <span class="math notranslate nohighlight">\(\vert \psi^\perp\rangle\)</span> (satisfying <span class="math notranslate nohighlight">\(\langle\psi^\perp\vert \psi\rangle = 0\)</span>) has Bloch angles <span class="math notranslate nohighlight">\((\pi - \theta, \varphi + \pi)\)</span>, and that its Bloch vector equals <span class="math notranslate nohighlight">\(-\boldsymbol{n}\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<p>Write <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span> in standard form and build the candidate <span class="math notranslate nohighlight">\(\vert\psi^\perp\rangle\)</span> from the proposed angles <span class="math notranslate nohighlight">\((\pi - \theta,\ \varphi + \pi)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\psi\rangle = \cos\tfrac{\theta}{2}\,\vert 0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin\tfrac{\theta}{2}\,\vert 1\rangle,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\vert\psi^\perp\rangle = \cos\!\left(\tfrac{\pi-\theta}{2}\right)\vert 0\rangle + \mathrm{e}^{\mathrm{i}(\varphi+\pi)}\sin\!\left(\tfrac{\pi-\theta}{2}\right)\vert 1\rangle.
+\]</div>
+<p>Simplify the half-angle factors using <span class="math notranslate nohighlight">\(\tfrac{\pi-\theta}{2} = \tfrac{\pi}{2} - \tfrac{\theta}{2}\)</span> together with the co-function identities <span class="math notranslate nohighlight">\(\cos(\tfrac{\pi}{2}-x) = \sin x\)</span> and <span class="math notranslate nohighlight">\(\sin(\tfrac{\pi}{2}-x) = \cos x\)</span>, and the phase factor with <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\pi} = -1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos\!\left(\tfrac{\pi-\theta}{2}\right) = \sin\tfrac{\theta}{2},
+\qquad
+\sin\!\left(\tfrac{\pi-\theta}{2}\right) = \cos\tfrac{\theta}{2},
+\qquad
+\mathrm{e}^{\mathrm{i}(\varphi+\pi)} = -\,\mathrm{e}^{\mathrm{i}\varphi}.
+\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\psi^\perp\rangle = \sin\tfrac{\theta}{2}\,\vert 0\rangle - \mathrm{e}^{\mathrm{i}\varphi}\cos\tfrac{\theta}{2}\,\vert 1\rangle.
+\]</div>
+<p>Now take the inner product with <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>. The bra is <span class="math notranslate nohighlight">\(\langle\psi^\perp\vert = \sin\tfrac{\theta}{2}\,\langle 0\vert - \mathrm{e}^{-\mathrm{i}\varphi}\cos\tfrac{\theta}{2}\,\langle 1\vert\)</span>, and using orthonormality <span class="math notranslate nohighlight">\(\langle 0\vert 0\rangle = \langle 1\vert 1\rangle = 1\)</span>, <span class="math notranslate nohighlight">\(\langle 0\vert 1\rangle = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\psi^\perp\vert\psi\rangle
+= \sin\tfrac{\theta}{2}\cos\tfrac{\theta}{2}
+\;-\; \mathrm{e}^{-\mathrm{i}\varphi}\cos\tfrac{\theta}{2}\,\cdot\,\mathrm{e}^{\mathrm{i}\varphi}\sin\tfrac{\theta}{2}.
+\]</div>
+<p>The phase factors cancel (<span class="math notranslate nohighlight">\(\mathrm{e}^{-\mathrm{i}\varphi}\mathrm{e}^{\mathrm{i}\varphi} = 1\)</span>), leaving</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\psi^\perp\vert\psi\rangle = \sin\tfrac{\theta}{2}\cos\tfrac{\theta}{2} - \cos\tfrac{\theta}{2}\sin\tfrac{\theta}{2} = 0.
+\]</div>
+<p>So the state with angles <span class="math notranslate nohighlight">\((\pi-\theta,\ \varphi+\pi)\)</span> is indeed orthogonal to <span class="math notranslate nohighlight">\(\vert\psi\rangle\)</span>. That these angles describe the <strong>antipodal point</strong> is seen directly from the Bloch vector: under <span class="math notranslate nohighlight">\(\theta \mapsto \pi-\theta\)</span>, <span class="math notranslate nohighlight">\(\varphi \mapsto \varphi+\pi\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\sin(\pi-\theta) = \sin\theta,\quad \cos(\pi-\theta) = -\cos\theta,\quad
+\cos(\varphi+\pi) = -\cos\varphi,\quad \sin(\varphi+\pi) = -\sin\varphi,
+\]</div>
+<p>so</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{n}^\perp = \bigl(-\sin\theta\cos\varphi,\, -\sin\theta\sin\varphi,\, -\cos\theta\bigr) = -\,\boldsymbol{n}.
+\]</div>
+<p>The orthogonal state’s Bloch vector is exactly <span class="math notranslate nohighlight">\(-\boldsymbol{n}\)</span> — diametrically opposite on the sphere. (Note: <span class="math notranslate nohighlight">\(\sin\tfrac{\theta}{2}\ge 0\)</span> for <span class="math notranslate nohighlight">\(\theta\in[0,\pi]\)</span>, so <span class="math notranslate nohighlight">\(\vert\psi^\perp\rangle\)</span> is already in standard form with a real non-negative <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span> amplitude; the orthogonal state is unique up to the usual global phase.)</p>
+<!-- ─── -->
+<p><strong>6. Bloch vector rotation.</strong> A qubit state <span class="math notranslate nohighlight">\(\vert \psi\rangle\)</span> has Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\sin\theta\cos\varphi, \sin\theta\sin\varphi, \cos\theta)\)</span>. Show that a measurement in the computational basis gives</p>
+<div class="math notranslate nohighlight">
+\[
+P(0) = \frac{1 + n_z}{2}, \qquad P(1) = \frac{1 - n_z}{2}.
+\]</div>
+<p>Interpret this geometrically: how does the measurement probability relate to the “height” of the Bloch vector along the <span class="math notranslate nohighlight">\(z\)</span>-axis?</p>
+<p><strong>Solution.</strong></p>
+<p>In the Bloch parametrization the state is <span class="math notranslate nohighlight">\(\vert\psi\rangle = \cos(\theta/2)\vert 0\rangle + \mathrm{e}^{\mathrm{i}\varphi}\sin(\theta/2)\vert 1\rangle\)</span>, so by the Born rule the computational-basis probabilities are the squared moduli of the amplitudes:</p>
+<div class="math notranslate nohighlight">
+\[
+P(0) = \left\vert\cos\tfrac{\theta}{2}\right\vert^2 = \cos^2\tfrac{\theta}{2},
+\qquad
+P(1) = \left\vert\mathrm{e}^{\mathrm{i}\varphi}\sin\tfrac{\theta}{2}\right\vert^2 = \sin^2\tfrac{\theta}{2}.
+\]</div>
+<p>The relative phase <span class="math notranslate nohighlight">\(\varphi\)</span> has dropped out, as it must — the computational basis is the eigenbasis of <span class="math notranslate nohighlight">\(\hat{Z}\)</span> and is insensitive to azimuthal rotations about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now apply the half-angle identities <span class="math notranslate nohighlight">\(\cos^2 x = \tfrac{1+\cos 2x}{2}\)</span> and <span class="math notranslate nohighlight">\(\sin^2 x = \tfrac{1-\cos 2x}{2}\)</span> with <span class="math notranslate nohighlight">\(x = \theta/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(0) = \cos^2\tfrac{\theta}{2} = \frac{1 + \cos\theta}{2} = \frac{1 + n_z}{2},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P(1) = \sin^2\tfrac{\theta}{2} = \frac{1 - \cos\theta}{2} = \frac{1 - n_z}{2},
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(n_z = \cos\theta\)</span>. The two probabilities sum to <span class="math notranslate nohighlight">\(1\)</span> as required, and their difference is <span class="math notranslate nohighlight">\(P(0) - P(1) = n_z = \langle\hat{Z}\rangle\)</span>.</p>
+<p><em>Geometric interpretation.</em> The quantity <span class="math notranslate nohighlight">\(n_z\)</span> is the projection of the Bloch vector onto the <span class="math notranslate nohighlight">\(z\)</span>-axis — literally the <strong>height</strong> of the state’s point above the equatorial plane of the Bloch sphere. The measurement probability is a <em>linear</em> function of this height:</p>
+<ul class="simple">
+<li><p>North pole, <span class="math notranslate nohighlight">\(n_z = +1\)</span> (state <span class="math notranslate nohighlight">\(\vert 0\rangle\)</span>): <span class="math notranslate nohighlight">\(P(0) = 1\)</span> — a certain outcome.</p></li>
+<li><p>South pole, <span class="math notranslate nohighlight">\(n_z = -1\)</span> (state <span class="math notranslate nohighlight">\(\vert 1\rangle\)</span>): <span class="math notranslate nohighlight">\(P(0) = 0\)</span>.</p></li>
+<li><p>Equator, <span class="math notranslate nohighlight">\(n_z = 0\)</span> (states <span class="math notranslate nohighlight">\(\vert+\rangle\)</span>, <span class="math notranslate nohighlight">\(\vert-\rangle\)</span>, <span class="math notranslate nohighlight">\(\vert\mathrm{i}\rangle\)</span>, <span class="math notranslate nohighlight">\(\vert\bar{\mathrm{i}}\rangle\)</span>): <span class="math notranslate nohighlight">\(P(0) = P(1) = \tfrac12\)</span> — a maximally uncertain outcome.</p></li>
+</ul>
+<p>As the state slides from the north pole down to the south pole, <span class="math notranslate nohighlight">\(P(0)\)</span> decreases linearly from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(0\)</span>. The “how likely is outcome <span class="math notranslate nohighlight">\(0\)</span>” question is answered entirely by how high the Bloch vector points along the <span class="math notranslate nohighlight">\(z\)</span>-axis; the azimuthal angle <span class="math notranslate nohighlight">\(\varphi\)</span> is irrelevant to a <span class="math notranslate nohighlight">\(Z\)</span>-basis measurement.</p>
+<!-- ─── -->
+<p><strong>7. Spin expectation along an arbitrary axis.</strong> For a unit vector <span class="math notranslate nohighlight">\(\boldsymbol{m} = (m_x, m_y, m_z) \in \mathbb{R}^3\)</span>, define the spin observable along <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{m}\cdot\hat{\boldsymbol{\sigma}} \equiv m_x\,\hat{X} + m_y\,\hat{Y} + m_z\,\hat{Z}.
+\]</div>
+<p>(a) Using linearity of the expectation value, show that for any qubit state with Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n} = (\langle\hat X\rangle, \langle\hat Y\rangle, \langle\hat Z\rangle)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\boldsymbol{m}\cdot\hat{\boldsymbol{\sigma}}\rangle = \boldsymbol{m}\cdot\boldsymbol{n}.
+\]</div>
+<p>State the geometric meaning of this identity.</p>
+<p>(b) Find the axis <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> that <strong>maximizes</strong> <span class="math notranslate nohighlight">\(\langle\boldsymbol{m}\cdot\hat{\boldsymbol{\sigma}}\rangle\)</span> at fixed Bloch vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>. What is the maximum value? What is the relation between the optimal <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span>?</p>
+<p>(c) Apply to the state <span class="math notranslate nohighlight">\(\vert+\rangle = \tfrac{1}{\sqrt 2}(\vert 0\rangle + \vert 1\rangle)\)</span>. Compute its Bloch vector. Along which axis <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> is the spin maximally aligned? Verify the answer by direct calculation of <span class="math notranslate nohighlight">\(\langle\hat X\rangle_+\)</span> and <span class="math notranslate nohighlight">\(\langle\hat Z\rangle_+\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<p>(a) The expectation-value operation is linear in its argument operator, so</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\langle\boldsymbol{m}\cdot\hat{\boldsymbol{\sigma}}\rangle
+&amp;= \langle m_x\hat X + m_y\hat Y + m_z\hat Z\rangle \\
+&amp;= m_x\langle\hat X\rangle + m_y\langle\hat Y\rangle + m_z\langle\hat Z\rangle \\
+&amp;= m_x n_x + m_y n_y + m_z n_z \\
+&amp;= \boldsymbol{m}\cdot\boldsymbol{n}.
+\end{split}
+\end{split}\]</div>
+<p><strong>Geometric meaning.</strong> The expectation value of the spin operator along axis <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> is the <strong>projection of the Bloch vector onto <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span></strong>. The 3-vector <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> has the same status as a classical vector under inner products: physical observables along any spatial direction read off by ordinary dot products.</p>
+<p>(b) Since <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> are both 3-vectors,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{m}\cdot\boldsymbol{n} = \vert\boldsymbol{m}\vert\,\vert\boldsymbol{n}\vert\,\cos\alpha = \vert\boldsymbol{n}\vert\cos\alpha,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the angle between <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{n}\)</span> (using <span class="math notranslate nohighlight">\(\vert\boldsymbol{m}\vert = 1\)</span>). This is maximized at <span class="math notranslate nohighlight">\(\alpha = 0\)</span>, giving</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{\boldsymbol{m}}\,\langle\boldsymbol{m}\cdot\hat{\boldsymbol{\sigma}}\rangle = \vert\boldsymbol{n}\vert.
+\]</div>
+<p>For a pure state, <span class="math notranslate nohighlight">\(\vert\boldsymbol{n}\vert = 1\)</span> (Problem 4), so the maximum equals <strong><span class="math notranslate nohighlight">\(1\)</span></strong> — the largest eigenvalue of any spin observable. The optimal axis is <span class="math notranslate nohighlight">\(\boldsymbol{m} = \boldsymbol{n}/\vert\boldsymbol{n}\vert\)</span>: the Bloch vector direction itself.</p>
+<p><strong>Payload.</strong> The Bloch vector is not just a parameterisation — its <em>direction</em> is the unique axis along which the state has definite spin. A state is “spin up” along <em>exactly one</em> axis (its own Bloch axis), and the value of the Bloch vector’s magnitude tells how sharp that alignment is. For pure states, alignment is perfect; for mixed states it is partial.</p>
+<p>(c) The state <span class="math notranslate nohighlight">\(\vert+\rangle\)</span> has <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> and <span class="math notranslate nohighlight">\(\varphi = 0\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{n}_+ = (\sin\theta\cos\varphi,\, \sin\theta\sin\varphi,\, \cos\theta) = (1,\, 0,\, 0).
+\]</div>
+<p>By part (b), the spin is maximally aligned along <span class="math notranslate nohighlight">\(\boldsymbol{m} = \boldsymbol{e}_x\)</span> (with <span class="math notranslate nohighlight">\(\boldsymbol{e}_x\)</span> the unit vector along the <span class="math notranslate nohighlight">\(x\)</span>-axis), with <span class="math notranslate nohighlight">\(\langle\hat X\rangle_+ = 1\)</span>. Direct check:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat X\vert+\rangle = \vert+\rangle\)</span> (since <span class="math notranslate nohighlight">\(\vert+\rangle\)</span> is the <span class="math notranslate nohighlight">\(+1\)</span> eigenstate of <span class="math notranslate nohighlight">\(\hat X\)</span>), so <span class="math notranslate nohighlight">\(\langle+\vert\hat X\vert+\rangle = \langle+\vert+\rangle = 1\)</span>. ✓</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat Z\vert+\rangle = \tfrac{1}{\sqrt 2}(\vert 0\rangle - \vert 1\rangle) = \vert-\rangle\)</span>, which is orthogonal to <span class="math notranslate nohighlight">\(\vert+\rangle\)</span>, so <span class="math notranslate nohighlight">\(\langle+\vert\hat Z\vert+\rangle = 0\)</span>. ✓</p></li>
+</ul>
+<p>The Bloch vector lies entirely along <span class="math notranslate nohighlight">\(\boldsymbol{e}_x\)</span>, consistent with <span class="math notranslate nohighlight">\(\vert+\rangle\)</span> being the eastern point of the equator on the Bloch sphere. The state “knows” its preferred axis: it is the unique direction <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span> for which the spin observable has definite value <span class="math notranslate nohighlight">\(+1\)</span>.</p>
+<!-- ─── -->
+<p><strong>8. Parametrization of n-level systems.</strong> How many real parameters are needed to specify a general <span class="math notranslate nohighlight">\(n\)</span>-level quantum state (a “qudit”)? Start with the naive count of <span class="math notranslate nohighlight">\(2n\)</span> real numbers (from <span class="math notranslate nohighlight">\(n\)</span> complex amplitudes), then subtract constraints from normalization and global phase. Verify your formula gives <span class="math notranslate nohighlight">\(2\)</span> for <span class="math notranslate nohighlight">\(n = 2\)</span> (the qubit), and identify the geometric space of states for general <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<p>A general state of an <span class="math notranslate nohighlight">\(n\)</span>-level system is expanded in an orthonormal basis <span class="math notranslate nohighlight">\(\{\vert e_1\rangle, \dots, \vert e_n\rangle\}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\vert\psi\rangle = \sum_{k=1}^{n} c_k \vert e_k\rangle,
+\qquad c_k \in \mathbb{C}.
+\]</div>
+<p><em>Naive count.</em> There are <span class="math notranslate nohighlight">\(n\)</span> complex amplitudes, each carrying a real and an imaginary part, for a naive total of</p>
+<div class="math notranslate nohighlight">
+\[
+2n \quad\text{real parameters.}
+\]</div>
+<p><em>Normalization.</em> Physical states obey <span class="math notranslate nohighlight">\(\langle\psi\vert\psi\rangle = \sum_k \vert c_k\vert^2 = 1\)</span>. This is a <strong>single real equation</strong> relating the <span class="math notranslate nohighlight">\(2n\)</span> numbers, so it removes <strong>1</strong> parameter:</p>
+<div class="math notranslate nohighlight">
+\[
+2n - 1.
+\]</div>
+<p><em>Global phase.</em> Multiplying the whole state by <span class="math notranslate nohighlight">\(\mathrm{e}^{\mathrm{i}\alpha}\)</span> (<span class="math notranslate nohighlight">\(\alpha\in\mathbb{R}\)</span>) leaves every measurement probability unchanged (lecture, and Problem 3 of 1.1.1), so it does not produce a new physical state. We may spend this freedom to fix one parameter — for instance, rotate the overall phase so that <span class="math notranslate nohighlight">\(c_1\)</span> is real and non-negative. That removes <strong>1</strong> further parameter:</p>
+<div class="math notranslate nohighlight">
+\[
+2n - 1 - 1 = 2n - 2.
+\]</div>
+<p>So a general pure qudit state is specified by</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{\,2n - 2\,}\quad\text{independent real parameters.}
+\]</div>
+<p><em>Check for <span class="math notranslate nohighlight">\(n = 2\)</span>.</em> The qubit gives <span class="math notranslate nohighlight">\(2(2) - 2 = 2\)</span>, the two Bloch-sphere angles <span class="math notranslate nohighlight">\((\theta, \varphi)\)</span>.</p>
+<p><em>Geometry for general <span class="math notranslate nohighlight">\(n\)</span>.</em> The space of pure <span class="math notranslate nohighlight">\(n\)</span>-level states is the <strong>complex projective space</strong> <span class="math notranslate nohighlight">\(\mathbb{CP}^{\,n-1}\)</span>, with real dimension <span class="math notranslate nohighlight">\(2(n-1) = 2n-2\)</span>. A qutrit (<span class="math notranslate nohighlight">\(n=3\)</span>) needs <span class="math notranslate nohighlight">\(4\)</span> real parameters and lives on <span class="math notranslate nohighlight">\(\mathbb{CP}^2\)</span>; a ququart (<span class="math notranslate nohighlight">\(n=4\)</span>) needs <span class="math notranslate nohighlight">\(6\)</span> and lives on <span class="math notranslate nohighlight">\(\mathbb{CP}^3\)</span>; and so on. Only for <span class="math notranslate nohighlight">\(n=2\)</span> does <span class="math notranslate nohighlight">\(\mathbb{CP}^1\)</span> happen to be an ordinary 2-sphere (<span class="math notranslate nohighlight">\(\mathbb{CP}^1 \cong S^2\)</span>, the Bloch sphere). For <span class="math notranslate nohighlight">\(n\ge 3\)</span> no such simple low-dimensional sphere exists, which is why the Bloch-sphere picture is special to the qubit and does not straightforwardly generalize to qudits.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./homework"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-1-1_solutions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.1.1 What is a Qubit</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-1-3_solutions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1.1.3 Hermitian Operators</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yi-Zhuang You
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    <div class="extra_footer">
+  <p class="text-muted">Lecture notes prepared with <a href="https://www.anthropic.com/claude-code/" target="_blank" rel="noopener">Claude Code</a> and <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor AI</a>.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
