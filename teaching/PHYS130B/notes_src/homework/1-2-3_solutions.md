@@ -179,7 +179,7 @@ The spectral form turned a $2\times 2$ matrix squaring into eigenvalue squaring 
 
 <!-- ─── -->
 
-**4. Two-qubit measurement.** Consider measuring $\hat{Z}$ on the equal-weight two-qubit superposition $\vert\Psi\rangle = \tfrac{1}{2}(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle + \vert 11\rangle)$. The first qubit's $\hat{Z}$ — i.e. $\hat Z \otimes \hat I$ acting on the two-qubit space — has a degenerate $+1$ eigenspace.
+★ **4. Two-qubit measurement.** Consider measuring $\hat{Z}$ on the equal-weight two-qubit superposition $\vert\Psi\rangle = \tfrac{1}{2}(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle + \vert 11\rangle)$. The first qubit's $\hat{Z}$ — i.e. $\hat Z \otimes \hat I$ acting on the two-qubit space — has a degenerate $+1$ eigenspace.
 
 (a) Write the projector $\hat P_{+1}$ onto the $+1$ eigenspace as an outer-product sum, and as an explicit $4\times 4$ matrix in the ordered basis $\{\vert 00\rangle, \vert 01\rangle, \vert 10\rangle, \vert 11\rangle\}$.
 

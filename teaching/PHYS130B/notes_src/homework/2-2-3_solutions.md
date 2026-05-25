@@ -170,7 +170,7 @@ The three triplet states are **forbidden**: pairing a symmetric spatial part wit
 
 <!-- ─── -->
 
-**4. Spin-orbit coupling.** A particle of orbital angular momentum $\hat{\boldsymbol L}$ and spin $\hat{\boldsymbol S}$ (with spin quantum number $s = 1/2$) has a **spin-orbit interaction**
+★ **4. Spin-orbit coupling.** A particle of orbital angular momentum $\hat{\boldsymbol L}$ and spin $\hat{\boldsymbol S}$ (with spin quantum number $s = 1/2$) has a **spin-orbit interaction**
 
 $$
 \hat H_\text{SO} = \lambda\,\hat{\boldsymbol L}\cdot\hat{\boldsymbol S},
@@ -242,7 +242,7 @@ For $\lambda > 0$ the $2p_{3/2}$ level lies above $2p_{1/2}$. As a check, the de
 
 <!-- ─── -->
 
-**5. Spin-1 and spin-1/2 coupling.** Consider spin-1 particle $A$ and spin-1/2 particle $B$, with total $\hat{\boldsymbol J}=\hat{\boldsymbol S}_A+\hat{\boldsymbol S}_B$ and Hamiltonian
+★ **5. Spin-1 and spin-1/2 coupling.** Consider spin-1 particle $A$ and spin-1/2 particle $B$, with total $\hat{\boldsymbol J}=\hat{\boldsymbol S}_A+\hat{\boldsymbol S}_B$ and Hamiltonian
 
 $$
 \hat H=-\hat{\boldsymbol S}_A\cdot\hat{\boldsymbol S}_B.

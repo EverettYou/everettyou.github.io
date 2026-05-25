@@ -347,7 +347,7 @@ So slicing $t$ into $N$ equal pieces and evolving through each piece in sequence
 
 <!-- ─── -->
 
-**9. Observable evolution in time.** A Hermitian operator $\hat{A}$ has eigenvalues $a_1 = 2$ and $a_2 = -3$ with orthonormal eigenstates $\vert a_1\rangle$ and $\vert a_2\rangle$. Compute $\mathrm{e}^{\mathrm{i}\hat{A}\pi}$ as an explicit operator using the spectral decomposition formula. What happens if you use the Taylor series instead?
+★ **9. Observable evolution in time.** A Hermitian operator $\hat{A}$ has eigenvalues $a_1 = 2$ and $a_2 = -3$ with orthonormal eigenstates $\vert a_1\rangle$ and $\vert a_2\rangle$. Compute $\mathrm{e}^{\mathrm{i}\hat{A}\pi}$ as an explicit operator using the spectral decomposition formula. What happens if you use the Taylor series instead?
 
 **Solution.**
 

@@ -331,7 +331,7 @@ exactly the quantum result. The vector model is internally consistent: $\boldsym
 
 <!-- ─── -->
 
-**8. Quantum bootstrap.** Two operators $\hat{\alpha}$ and $\hat{\beta}$ satisfy the algebraic relations
+★ **8. Quantum bootstrap.** Two operators $\hat{\alpha}$ and $\hat{\beta}$ satisfy the algebraic relations
 
 $$
 [\hat{\alpha}, \hat{\beta}] = 2\hat{\alpha}, \quad [\hat{\alpha}^\dagger, \hat{\beta}] = -2\hat{\alpha}^\dagger, \quad [\hat{\alpha}^\dagger, \hat{\alpha}] = 2\hat{\beta}, \quad \{\hat{\alpha}^\dagger, \hat{\alpha}\} = 2\hat{I},

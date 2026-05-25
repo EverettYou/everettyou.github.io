@@ -339,7 +339,7 @@ The $\pi/4$ is not an extra assumption: it is forced by the asymptotic phase of 
 
 <!-- ─── -->
 
-**7. Double-well tunnel splitting.** Consider a symmetric double-well potential with two minima separated by a barrier of width $\sim a$. Let $\omega$ be the small-oscillation frequency in either well and $\gamma = \frac{1}{\hbar}\int_\text{barrier}\kappa\,\mathrm{d}x$.
+★ **7. Double-well tunnel splitting.** Consider a symmetric double-well potential with two minima separated by a barrier of width $\sim a$. Let $\omega$ be the small-oscillation frequency in either well and $\gamma = \frac{1}{\hbar}\int_\text{barrier}\kappa\,\mathrm{d}x$.
 
 (a) Estimate the tunneling amplitude $\Delta \sim \tfrac{1}{2}\hbar\omega\,\mathrm{e}^{-\gamma}$ from the WKB tunneling formula (the same energy scale as the uncoupled ground state in part (b)).
 

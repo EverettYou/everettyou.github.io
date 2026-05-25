@@ -91,7 +91,7 @@ order.
 
 <!-- ─── -->
 
-**2. Three-level perturbation.** Find the perturbative corrections to the energies and to the ground state of $\hat H(\lambda) = \hat H_0 + \lambda\hat V$ with
+★ **2. Three-level perturbation.** Find the perturbative corrections to the energies and to the ground state of $\hat H(\lambda) = \hat H_0 + \lambda\hat V$ with
 
 $$
 \hat H_0=\begin{pmatrix}1&0&0\\0&2&0\\0&0&4\end{pmatrix},
@@ -416,7 +416,7 @@ because the model's parity (Sec. 5.1.1) kills all odd powers.
 
 <!-- ─── -->
 
-**6. Harmonic oscillator with linear perturbation.** Let
+★ **6. Harmonic oscillator with linear perturbation.** Let
 
 $$
 \hat H_0=\hbar\omega\left(\hat a^\dagger \hat a+\frac12\right),

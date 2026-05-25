@@ -668,7 +668,7 @@ vertices, and order $k=2$ supplies an even number. Even orders dress the
 
 <!-- ─── -->
 
-**8. Three-level virtual transition.** Let $\hat{H}_0=\Delta\vert 3\rangle\langle 3\vert$ with $E_1=E_2=0$ and $E_3=\Delta$. Take a perturbation that connects $\vert 1\rangle\leftrightarrow\vert 3\rangle\leftrightarrow\vert 2\rangle$ but has no direct $\vert 1\rangle\leftrightarrow\vert 2\rangle$ matrix element:
+★ **8. Three-level virtual transition.** Let $\hat{H}_0=\Delta\vert 3\rangle\langle 3\vert$ with $E_1=E_2=0$ and $E_3=\Delta$. Take a perturbation that connects $\vert 1\rangle\leftrightarrow\vert 3\rangle\leftrightarrow\vert 2\rangle$ but has no direct $\vert 1\rangle\leftrightarrow\vert 2\rangle$ matrix element:
 
 $$
 \begin{split}

@@ -226,7 +226,7 @@ here from the canonical many-body ground state.
 
 <!-- ─── -->
 
-**3. Half-flux doublet under perturbation.** At $\Phi=\Phi_0/2$ the doublet $\{\vert 0\rangle,\vert 1\rangle\}$ is protected by the anticommuting pair $\hat T_\pi$ (translation by $\pi$) and $\hat S=\hat R\hat U_{LG}$ (reflection plus large gauge) derived in lecture. Add a static potential $V(\theta)$ to the ring and study which symmetries survive, and when a gap opens.
+★ **3. Half-flux doublet under perturbation.** At $\Phi=\Phi_0/2$ the doublet $\{\vert 0\rangle,\vert 1\rangle\}$ is protected by the anticommuting pair $\hat T_\pi$ (translation by $\pi$) and $\hat S=\hat R\hat U_{LG}$ (reflection plus large gauge) derived in lecture. Add a static potential $V(\theta)$ to the ring and study which symmetries survive, and when a gap opens.
 
 (a) Show that $\hat T_\pi V(\theta)\hat T_\pi^{-1}=V(\theta+\pi)$ and $\hat S V(\theta)\hat S^{-1}=V(-\theta)$. (Hint: $\hat U_{LG}$ is a rephasing by $\mathrm{e}^{-\mathrm{i}\theta}$, which commutes with any function of $\theta$.)
 

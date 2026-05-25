@@ -214,7 +214,7 @@ This is a *complex* number. A genuine probability distribution always has a *rea
 
 <!-- ─── -->
 
-**5. Probability conservation.** Starting from $\mathrm{i}\hbar\,\partial_t\psi = \hat{H}\psi,\quad\hat{H} = -(\hbar^2/2m)\partial_x^2 + V(x)$ with real $V(x)$, derive the continuity equation $\partial_{t}\rho + \partial_{x}j = 0$ with $\rho = \vert\psi\vert^{2}$ and $j = (\hbar/m)\operatorname{Im}(\psi^{*}\partial_{x}\psi)$.
+★ **5. Probability conservation.** Starting from $\mathrm{i}\hbar\,\partial_t\psi = \hat{H}\psi,\quad\hat{H} = -(\hbar^2/2m)\partial_x^2 + V(x)$ with real $V(x)$, derive the continuity equation $\partial_{t}\rho + \partial_{x}j = 0$ with $\rho = \vert\psi\vert^{2}$ and $j = (\hbar/m)\operatorname{Im}(\psi^{*}\partial_{x}\psi)$.
 
 (a) Compute $\partial_{t}\vert\psi\vert^{2}$ using the Schrödinger equation and its complex conjugate.
 

@@ -65,9 +65,9 @@ jump directly to the one you need.
 
 **[1.2.3 Measurement Operators](1-2-3_solutions.md)**
 
-1. Projector for an arbitrary spin axis
+1. Spin-axis projector
 2. Born rule via projector formula
-3. Spectral decomposition of a Hermitian operator
+3. Spectral decomposition
 4. **Two-qubit measurement**
 5. Sequential projectors and non-commutativity
 6. Repeatability from idempotence

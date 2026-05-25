@@ -167,7 +167,7 @@ with the magnetic length $\ell_B^2 = \hbar/(qB)$. The cyclotron orbit therefore 
 
 <!-- ─── -->
 
-**3. Cyclotron motion from Heisenberg.** A particle of charge $q$ moves in a uniform $\boldsymbol{B} = B\boldsymbol{e}_z$ with $\hat{H} = \hat{\boldsymbol{\pi}}^2/(2m)$ and $\boldsymbol{E} = 0$.
+★ **3. Cyclotron motion from Heisenberg.** A particle of charge $q$ moves in a uniform $\boldsymbol{B} = B\boldsymbol{e}_z$ with $\hat{H} = \hat{\boldsymbol{\pi}}^2/(2m)$ and $\boldsymbol{E} = 0$.
 
 (a) Use the Heisenberg equation $\mathrm{d}\hat{\pi}_i/\mathrm{d}t = [\hat{\pi}_i, \hat{H}]/(\mathrm{i}\hbar)$ together with $[\hat{\pi}_x, \hat{\pi}_y] = \mathrm{i}q\hbar B$ to derive coupled equations of motion for $\hat{\pi}_x$ and $\hat{\pi}_y$.
 

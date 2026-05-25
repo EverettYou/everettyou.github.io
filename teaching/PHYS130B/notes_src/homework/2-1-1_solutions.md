@@ -107,7 +107,7 @@ So squaring any "single Pauli on each qubit" string gives $\hat I\otimes\hat I =
 
 <!-- ─── -->
 
-**3. The SWAP operator.** Define the **SWAP** operator $\hat S$ on two qubits by its action on the computational basis:
+★ **3. The SWAP operator.** Define the **SWAP** operator $\hat S$ on two qubits by its action on the computational basis:
 
 $$
 \hat S\vert ab\rangle = \vert ba\rangle \quad\text{for all } a, b \in \{0, 1\}.

@@ -567,7 +567,7 @@
 <h1>5.1 Time-Independent Perturbation Theory<a class="headerlink" href="#time-independent-perturbation-theory" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p><strong>Perturbation theory</strong> is the art of extending exact solutions to nearly-solvable problems. Given <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> with known spectrum and a small perturbation <span class="math notranslate nohighlight">\(V\)</span>, we find the spectrum of <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{H}_0 + \lambda V\)</span> as a power series in <span class="math notranslate nohighlight">\(\lambda\)</span>. The organizing principle is the <strong>Hellmann-Feynman theorem</strong>: the exact derivative of an eigenvalue with respect to a parameter equals the expectation value of the Hamiltonian’s derivative in that eigenstate.</p>
+<p><strong>Perturbation theory</strong> is the art of extending exact solutions to nearly-solvable problems. Given <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> with known spectrum and a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span>, we find the spectrum of <span class="math notranslate nohighlight">\(\hat{H}(\lambda) = \hat{H}_0 + \lambda \hat{V}\)</span> as a power series in <span class="math notranslate nohighlight">\(\lambda\)</span>. The organizing principle is the <strong>Hellmann-Feynman theorem</strong>: the exact derivative of an eigenvalue with respect to a parameter equals the expectation value of the Hamiltonian’s derivative in that eigenstate.</p>
 <section id="topics">
 <h3>Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -602,11 +602,11 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Hellmann-Feynman theorem</strong>: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}E_n}{\mathrm{d}\lambda} = \langle n(\lambda)\vert \partial H/\partial\lambda \vert n(\lambda)\rangle\)</span> — the energy derivative equals the expectation value of the Hamiltonian’s derivative.</p></li>
+<li><p><strong>Hellmann-Feynman theorem</strong>: <span class="math notranslate nohighlight">\(\frac{\mathrm{d}E_n}{\mathrm{d}\lambda} = \langle n(\lambda)\vert \partial \hat{H}/\partial\lambda \vert n(\lambda)\rangle\)</span> — the energy derivative equals the expectation value of the Hamiltonian’s derivative.</p></li>
 <li><p><strong>Level repulsion</strong>: Perturbation pushes nearby levels apart; energy levels of the same symmetry never cross.</p></li>
 <li><p><strong>State hybridization</strong>: Perturbed eigenstates mix unperturbed states; mixing is proportional to the matrix element divided by the energy gap.</p></li>
-<li><p><strong>Convergence</strong>: The series in <span class="math notranslate nohighlight">\(\lambda\)</span> converges when <span class="math notranslate nohighlight">\(\lambda\|V\| \ll \min(\Delta E)\)</span> (coupling much smaller than the gap).</p></li>
-<li><p><strong>Effective Hamiltonian</strong>: <span class="math notranslate nohighlight">\(\hat{H}_\text{eff}\)</span> diagonalize within the degenerate subspace to repair the breakdown of non-degenerate perturbation theory.</p></li>
+<li><p><strong>Convergence</strong>: The series in <span class="math notranslate nohighlight">\(\lambda\)</span> converges when <span class="math notranslate nohighlight">\(\lambda\|\hat{V}\| \ll \min(\Delta E)\)</span> (coupling much smaller than the gap).</p></li>
+<li><p><strong>Effective Hamiltonian</strong>: diagonalizing <span class="math notranslate nohighlight">\(\hat{H}_\text{eff}\)</span> within the degenerate subspace repairs the breakdown of non-degenerate perturbation theory.</p></li>
 </ul>
 </section>
 <section id="learning-objectives">
@@ -629,12 +629,12 @@
 <ol class="arabic">
 <li><p><strong>Variational baseline</strong>: Use the variational principle with a trial wavefunction</p>
 <div class="math notranslate nohighlight">
-\[\psi(r_1, r_2) = \psi_{1s}(r_1; Z_{\text{eff}}) \psi_{1s}(r_2; Z_{\text{eff}})\]</div>
+\[\psi(\boldsymbol{r}_1, \boldsymbol{r}_2) = \psi_{1s}(r_1; Z_{\text{eff}}) \psi_{1s}(r_2; Z_{\text{eff}})\]</div>
 <p>where <span class="math notranslate nohighlight">\(Z_{\text{eff}}\)</span> is screened by electron-electron repulsion. Optimize over <span class="math notranslate nohighlight">\(Z_{\text{eff}}\)</span> to find the best upper bound on the ground state energy.</p>
 </li>
-<li><p><strong>Perturbation theory</strong>: Treat the electron-electron repulsion <span class="math notranslate nohighlight">\(V = e^2/|r_1 - r_2|\)</span> as a perturbation around independent-particle hydrogen-like atoms. Compute first and second-order corrections to the ground state energy.</p></li>
+<li><p><strong>Perturbation theory</strong>: Treat the electron-electron repulsion <span class="math notranslate nohighlight">\(\hat{V} = e^2/\vert\boldsymbol{r}_1 - \boldsymbol{r}_2\vert\)</span> as a perturbation around independent-particle hydrogen-like atoms. Compute first and second-order corrections to the ground state energy.</p></li>
 <li><p><strong>Exact reference</strong>: Use numerical full configuration interaction or benchmark against published CI results (e.g., FCI energy for helium).</p></li>
-<li><p><strong>Extension</strong>: Compute the fine structure of hydrogen using relativistic perturbation theory (relativistic kinetic energy + Darwin term + spin-orbit coupling). Compare perturbative and Dirac equation results.</p></li>
+<li><p><strong>Extension</strong>: Apply the same electron-repulsion perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span> to the lowest excited configuration <span class="math notranslate nohighlight">\(1s2s\)</span> of helium. Show that first-order perturbation theory splits this level into a singlet (para-helium) and a triplet (ortho-helium) state separated by twice the exchange integral, and compare the predicted splitting against the measured ortho/para-helium energy difference.</p></li>
 </ol>
 <p><strong>Expected Deliverable</strong>:</p>
 <ul class="simple">

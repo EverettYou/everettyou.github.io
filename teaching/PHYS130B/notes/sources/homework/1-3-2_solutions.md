@@ -333,7 +333,7 @@ The separation $\Omega \ll \omega_0$ is what justifies the **rotating-wave appro
 
 <!-- ─── -->
 
-**8. Three-state evolution.** Consider a 3-level system with basis $\{\vert 1\rangle, \vert 2\rangle, \vert 3\rangle\}$ and Hamiltonian $\hat{H} = \vert 1\rangle\langle 2\vert + \vert 2\rangle\langle 1\vert - \vert 1\rangle\langle 3\vert - \vert 3\rangle\langle 1\vert$ (in units where the coupling is 1, and $\hbar = 1$).
+★ **8. Three-state evolution.** Consider a 3-level system with basis $\{\vert 1\rangle, \vert 2\rangle, \vert 3\rangle\}$ and Hamiltonian $\hat{H} = \vert 1\rangle\langle 2\vert + \vert 2\rangle\langle 1\vert - \vert 1\rangle\langle 3\vert - \vert 3\rangle\langle 1\vert$ (in units where the coupling is 1, and $\hbar = 1$).
 
 (a) Find the eigenvalues and eigenstates of $\hat{H}$.
 

@@ -499,7 +499,7 @@ The **commutator-vs-anticommutator** distinction at the algebraic level is there
 
 <!-- ─── -->
 
-**9. Equal partition theorem.** Consider the harmonic oscillator $\hat{H} = \hbar\omega(\hat{a}^\dagger\hat{a} + \tfrac{1}{2})$ with position $\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a} + \hat{a}^\dagger)$ and momentum $\hat{p} = \mathrm{i}\sqrt{\frac{m\hbar\omega}{2}}(\hat{a}^\dagger - \hat{a})$.
+★ **9. Equal partition theorem.** Consider the harmonic oscillator $\hat{H} = \hbar\omega(\hat{a}^\dagger\hat{a} + \tfrac{1}{2})$ with position $\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a} + \hat{a}^\dagger)$ and momentum $\hat{p} = \mathrm{i}\sqrt{\frac{m\hbar\omega}{2}}(\hat{a}^\dagger - \hat{a})$.
 
 (a) Show that in the energy eigenstate $\vert n\rangle$, $\langle n\vert\hat{x}^2\vert n\rangle = \frac{\hbar}{2m\omega}(2n+1)$ and $\langle n\vert\hat{p}^2\vert n\rangle = \frac{m\hbar\omega}{2}(2n+1)$.
 
@@ -555,7 +555,7 @@ If one mixes $\vert 0\rangle$ and $\vert 2\rangle$ instead (states differing by 
 
 <!-- ─── -->
 
-**10. Schwinger boson.** Define two independent bosonic modes with operators $(\hat{a}, \hat{a}^\dagger)$ and $(\hat{b}, \hat{b}^\dagger)$, and construct
+★ **10. Schwinger boson.** Define two independent bosonic modes with operators $(\hat{a}, \hat{a}^\dagger)$ and $(\hat{b}, \hat{b}^\dagger)$, and construct
 
 $$
 \hat{S}_+ = \hat{a}^\dagger\hat{b}, \quad \hat{S}_- = \hat{b}^\dagger\hat{a}, \quad \hat{S}_z = \tfrac{1}{2}(\hat{a}^\dagger\hat{a} - \hat{b}^\dagger\hat{b}).

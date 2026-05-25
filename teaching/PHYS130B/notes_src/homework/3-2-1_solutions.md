@@ -3,7 +3,7 @@ Worked solutions for the homework problems in the [3.2.1 Path Integral Formulati
 
 <!-- ─── -->
 
-**1. Wavepacket spreading.** A free particle begins in the Gaussian state $\psi(x,0) = (\pi\sigma^{2})^{-1/4}\exp(-x^{2}/(2\sigma^{2}))$ with width $\sigma$.
+★ **1. Wavepacket spreading.** A free particle begins in the Gaussian state $\psi(x,0) = (\pi\sigma^{2})^{-1/4}\exp(-x^{2}/(2\sigma^{2}))$ with width $\sigma$.
 
 (a) Treat $\Delta x \sim \sigma$ and use $\Delta x\,\Delta p \gtrsim \hbar$ to estimate the momentum spread and the position spread after time $t$. Identify the characteristic time $\tau \sim m\sigma^{2}/\hbar$ at which the packet width is no longer $\mathcal{O}(\sigma)$.
 
