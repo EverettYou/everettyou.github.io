@@ -132,16 +132,33 @@ function createCouplingBackground(channelIndex) {
   `;
 }
 
-function createPlotGrid(plot) {
+function createPlotGrid(plot, xValues) {
   const tick = 8;
-  const vertical = Array.from({ length: 7 }, (_, index) => {
-    const x = plot.left + (index / 6) * plot.width;
-    return `<line x1="${x.toFixed(2)}" y1="${plot.top}" x2="${x.toFixed(2)}" y2="${plot.bottom}" style="${SVG_STYLE.gridVertical}"></line>`;
-  }).join("");
-  const horizontal = [plot.top, plot.midY, plot.bottom]
-    .map((y, index) => {
-      const style = index === 1 ? SVG_STYLE.gridStrong : SVG_STYLE.grid;
-      return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" style="${style}"></line>`;
+  const xMin = xValues[0];
+  const xMax = xValues[xValues.length - 1];
+  const xStep = 5;
+  const firstGridX = Math.ceil(xMin / xStep) * xStep;
+  const verticalValues = [];
+
+  for (let value = firstGridX; value <= xMax + 1e-9; value += xStep) {
+    if (value >= xMin - 1e-9) {
+      verticalValues.push(value);
+    }
+  }
+
+  const vertical = verticalValues
+    .map((value) => {
+      const x = scale(value, xMin, xMax, plot.left, plot.right);
+      const style = Math.abs(value) < 1e-9 ? SVG_STYLE.gridStrong : SVG_STYLE.gridVertical;
+      return `<line x1="${x.toFixed(2)}" y1="${plot.top}" x2="${x.toFixed(2)}" y2="${plot.bottom}" style="${style}"></line>`;
+    })
+    .join("");
+  const horizontal = Array.from({ length: 9 }, (_, index) => -4 + index)
+    .map((unit) => {
+      const value = (unit * Math.PI) / 5;
+      const y = scale(value, -Math.PI, Math.PI, plot.bottom, plot.top);
+      const style = unit === 0 ? SVG_STYLE.gridStrong : SVG_STYLE.grid;
+      return `<line x1="${plot.left}" y1="${y.toFixed(2)}" x2="${plot.right}" y2="${y.toFixed(2)}" style="${style}"></line>`;
     })
     .join("");
   const yTicks = [plot.top, plot.midY, plot.bottom]
@@ -209,7 +226,7 @@ function renderMultiPanelPlot() {
     panels.push(`
       <g class="plot-panel" data-channel="${channelIndex + 1}">
         <rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}" fill="url(#${shadeId})" clip-path="url(#${clipId})"></rect>
-        ${createPlotGrid(plot)}
+        ${createPlotGrid(plot, state.data.x)}
         <g clip-path="url(#${clipId})">
           ${markerMarkup}
           <path d="${path}" fill="none" stroke="${color}" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"></path>

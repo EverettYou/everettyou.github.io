@@ -35,18 +35,18 @@ Pages only serves static files.
               <span class="plot-text panel-symbol" style="left: 4%; top: 52.3%;">φ₃</span>
               <span class="plot-text panel-symbol" style="left: 4%; top: 71.9%;">φ₄</span>
 
-              <span class="plot-text y-tick" style="top: 3.5%;">π</span>
+              <span class="plot-text y-tick" style="top: 4.8%;">π</span>
               <span class="plot-text y-tick" style="top: 12.9%;">0</span>
-              <span class="plot-text y-tick" style="top: 22.3%;">−π</span>
-              <span class="plot-text y-tick" style="top: 23.2%;">π</span>
+              <span class="plot-text y-tick" style="top: 21.0%;">−π</span>
+              <span class="plot-text y-tick" style="top: 24.5%;">π</span>
               <span class="plot-text y-tick" style="top: 32.6%;">0</span>
-              <span class="plot-text y-tick" style="top: 41.9%;">−π</span>
-              <span class="plot-text y-tick" style="top: 42.9%;">π</span>
+              <span class="plot-text y-tick" style="top: 40.6%;">−π</span>
+              <span class="plot-text y-tick" style="top: 44.2%;">π</span>
               <span class="plot-text y-tick" style="top: 52.3%;">0</span>
-              <span class="plot-text y-tick" style="top: 61.6%;">−π</span>
-              <span class="plot-text y-tick" style="top: 62.6%;">π</span>
+              <span class="plot-text y-tick" style="top: 60.3%;">−π</span>
+              <span class="plot-text y-tick" style="top: 63.9%;">π</span>
               <span class="plot-text y-tick" style="top: 71.9%;">0</span>
-              <span class="plot-text y-tick" style="top: 81.3%;">−π</span>
+              <span class="plot-text y-tick" style="top: 80.0%;">−π</span>
 
               <span class="plot-text x-tick" id="x-min-label" style="left: 10.7%; top: 85.5%;"></span>
               <span class="plot-text x-tick" id="x-mid-label" style="left: 53.8%; top: 85.5%;"></span>
