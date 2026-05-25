@@ -4,6 +4,7 @@ title: Research Project Gallery
 subtitle: Interactive demos and exploratory research tools
 permalink: /gallery/
 feature-img: "assets/img/figures/research-min.png"
+hide: true
 ---
 
 This gallery collects small interactive research tools, simulations, and visual notebooks that support ongoing projects.

@@ -2,6 +2,7 @@
 layout: page
 title: 3-4-5-0 Luttinger Liquid Wave Simulator
 subtitle: Browser-side demo for compact-boson scattering near an SMG interface
+hide: true
 ---
 
 <link rel="stylesheet" href="./app.css">
