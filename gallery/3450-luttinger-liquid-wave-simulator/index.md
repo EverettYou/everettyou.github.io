@@ -90,7 +90,7 @@ Pages only serves static files.
                 </label>
                 <label>
                   <span>Amplitude</span>
-                  <input name="packet_amplitude" type="number" step="0.0001" value="3.1416" />
+                  <input name="packet_amplitude" type="number" step="0.0001" value="3.141" />
                 </label>
                 <label>
                   <span>Center</span>
