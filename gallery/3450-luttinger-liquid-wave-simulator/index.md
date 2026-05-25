@@ -137,15 +137,15 @@ Pages only serves static files.
               <div class="panel-body">
                 <label>
                   <span>x min</span>
-                  <input name="x_min" type="number" step="1" value="-24.0" />
+                  <input name="x_min" type="number" step="1" value="-25.0" />
                 </label>
                 <label>
                   <span>x max</span>
-                  <input name="x_max" type="number" step="1" value="24.0" />
+                  <input name="x_max" type="number" step="1" value="25.0" />
                 </label>
                 <label>
                   <span>Grid points</span>
-                  <input name="num_points" type="number" step="1" value="256" />
+                  <input name="num_points" type="number" step="1" value="500" />
                 </label>
                 <label>
                   <span>dt</span>
