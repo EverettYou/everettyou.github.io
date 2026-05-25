@@ -90,7 +90,7 @@ Pages only serves static files.
                 </label>
                 <label>
                   <span>Amplitude</span>
-                  <input name="packet_amplitude" type="number" step="0.1" value="1.0" />
+                  <input name="packet_amplitude" type="number" step="0.0001" value="3.1416" />
                 </label>
                 <label>
                   <span>Center</span>
@@ -112,7 +112,7 @@ Pages only serves static files.
                 </label>
                 <label>
                   <span>Crossover width w</span>
-                  <input name="interface_width" type="number" step="0.1" value="0.4" />
+                  <input name="interface_width" type="number" step="0.1" value="0.1" />
                 </label>
                 <label>
                   <span>Interface center c</span>
