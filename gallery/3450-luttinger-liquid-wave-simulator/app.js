@@ -16,8 +16,6 @@ const K_INV_DIAG = [1, 1, -1, -1];
 const ELL_1 = [1, -2, 1, 2];
 const ELL_2 = [-3, 1, 1, -3];
 const SVG_STYLE = {
-  text: "fill: var(--sim-ink); font-size: 18px;",
-  tickText: "fill: var(--sim-muted); font-size: 15px;",
   grid: "stroke: color-mix(in srgb, var(--sim-muted) 20%, transparent); stroke-width: 0.75; vector-effect: non-scaling-stroke;",
   gridVertical: "stroke: color-mix(in srgb, var(--sim-muted) 16%, transparent); stroke-width: 0.75; vector-effect: non-scaling-stroke;",
   gridStrong: "stroke: color-mix(in srgb, var(--sim-muted) 32%, transparent); stroke-width: 0.75; stroke-dasharray: 5 7; vector-effect: non-scaling-stroke;",
@@ -33,6 +31,9 @@ let speedSelect = null;
 let timeSlider = null;
 let timeLabel = null;
 let multiPanelPlot = null;
+let xMinLabel = null;
+let xMidLabel = null;
+let xMaxLabel = null;
 
 function cacheElements() {
   form = document.getElementById("control-form");
@@ -43,6 +44,9 @@ function cacheElements() {
   timeSlider = document.getElementById("time-slider");
   timeLabel = document.getElementById("time-label");
   multiPanelPlot = document.getElementById("multi-panel-plot");
+  xMinLabel = document.getElementById("x-min-label");
+  xMidLabel = document.getElementById("x-mid-label");
+  xMaxLabel = document.getElementById("x-max-label");
 }
 
 function setStatus(message, isError = false) {
@@ -175,13 +179,7 @@ function panelGeometry(channelIndex) {
     width: right - left,
     height: panelHeight,
     midY: top + panelHeight / 2,
-    labelX: 36,
-    tickLabelX: 72,
   };
-}
-
-function mathText(content, x, y, style = SVG_STYLE.text, anchor = "middle") {
-  return `<text x="${x}" y="${y}" text-anchor="${anchor}" dominant-baseline="middle" style="${style}">${content}</text>`;
 }
 
 function renderMultiPanelPlot() {
@@ -210,10 +208,6 @@ function renderMultiPanelPlot() {
 
     panels.push(`
       <g class="plot-panel" data-channel="${channelIndex + 1}">
-        ${mathText(`φ${channelIndex + 1}`, plot.labelX, plot.midY)}
-        ${mathText("π", plot.tickLabelX, plot.top, SVG_STYLE.tickText, "end")}
-        ${mathText("0", plot.tickLabelX, plot.midY, SVG_STYLE.tickText, "end")}
-        ${mathText("−π", plot.tickLabelX, plot.bottom, SVG_STYLE.tickText, "end")}
         <rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}" fill="url(#${shadeId})" clip-path="url(#${clipId})"></rect>
         ${createPlotGrid(plot)}
         <g clip-path="url(#${clipId})">
@@ -224,23 +218,10 @@ function renderMultiPanelPlot() {
     `);
   }
 
-  const lastPlot = panelGeometry(3);
-  const xValues = state.data.x;
-  const xTicks = [xValues[0], 0.5 * (xValues[0] + xValues[xValues.length - 1]), xValues[xValues.length - 1]];
-  const xTickMarkup = xTicks
-    .map((value, index) => {
-      const x = index === 0 ? lastPlot.left : index === 1 ? lastPlot.left + lastPlot.width / 2 : lastPlot.right;
-      return mathText(formatTick(value), x, lastPlot.bottom + 26, SVG_STYLE.tickText);
-    })
-    .join("");
-  const xLabel = mathText("x", lastPlot.left + lastPlot.width / 2, lastPlot.bottom + 50);
-
   multiPanelPlot.innerHTML = `
     <defs>${defs.join("")}</defs>
     <rect x="0" y="0" width="${width}" height="${height}" fill="transparent"></rect>
     ${panels.join("")}
-    ${xTickMarkup}
-    ${xLabel}
   `;
 }
 
@@ -258,7 +239,20 @@ function updateFrameDisplay() {
   timeSlider.max = String(state.data.times.length - 1);
   timeSlider.value = String(state.currentFrame);
   timeLabel.textContent = state.data.times[state.currentFrame].toFixed(3);
+  updatePlotLabels();
   renderMultiPanelPlot();
+}
+
+function updatePlotLabels() {
+  if (!state.data?.x?.length || !xMinLabel || !xMidLabel || !xMaxLabel) return;
+
+  const xValues = state.data.x;
+  const xMin = xValues[0];
+  const xMax = xValues[xValues.length - 1];
+  const xMid = 0.5 * (xMin + xMax);
+  xMinLabel.textContent = formatTick(xMin);
+  xMidLabel.textContent = formatTick(xMid);
+  xMaxLabel.textContent = formatTick(xMax);
 }
 
 function validatePayload(payload) {
@@ -548,6 +542,9 @@ function initSimulator() {
     timeSlider,
     timeLabel,
     multiPanelPlot,
+    xMinLabel,
+    xMidLabel,
+    xMaxLabel,
   ];
 
   if (requiredElements.some((element) => !element)) {
