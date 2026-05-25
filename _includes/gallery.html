@@ -1,3 +1,85 @@
+{% assign gallery_mode = include.mode | default: "images" %}
+
+{% if gallery_mode == "projects" %}
+<style>
+.project-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.1rem;
+  margin: 1.5rem 0 2.5rem;
+}
+.project-card {
+  display: grid;
+  gap: 0.8rem;
+  min-height: 220px;
+  padding: 1.2rem;
+  border: 1px solid rgba(40, 44, 48, 0.14);
+  border-radius: 18px;
+  color: inherit;
+  text-decoration: none;
+  background:
+    linear-gradient(135deg, rgba(168, 90, 52, 0.1), rgba(47, 111, 136, 0.08)),
+    var(--card-background, rgba(255, 255, 255, 0.72));
+  box-shadow: 0 12px 30px rgba(40, 44, 48, 0.08);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(168, 90, 52, 0.34);
+  box-shadow: 0 18px 38px rgba(40, 44, 48, 0.13);
+  text-decoration: none;
+}
+.project-card__eyebrow {
+  color: #a85a34;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.project-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+.project-card p {
+  margin: 0;
+  color: var(--text-muted, #667179);
+  line-height: 1.45;
+}
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-self: end;
+}
+.project-card__tags span {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(40, 44, 48, 0.12);
+  border-radius: 999px;
+  color: var(--text-muted, #667179);
+  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.58);
+}
+</style>
+
+{% assign project_items = site.data[include.data] %}
+<div class="project-gallery-grid">
+{% for project in project_items %}
+  <a class="project-card" href="{{ project.url | relative_url }}">
+    <span class="project-card__eyebrow">{{ project.eyebrow }}</span>
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+    {% if project.tags %}
+    <div class="project-card__tags" aria-label="Project tags">
+      {% for tag in project.tags %}
+      <span>{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </a>
+{% endfor %}
+</div>
+{% else %}
 <style>
 /* force scrollbar */
 html { overflow-y: scroll; }
@@ -20,3 +102,4 @@ html { overflow-y: scroll; }
 
 <script src="{{ '/assets/js/vendor/imagesloaded.min.js' | relative_url }}" type="text/javascript"></script>
 <script src="{{ '/assets/js/vendor/masonry.pkgd.min.js' | relative_url }}" type="text/javascript"></script>
+{% endif %}
