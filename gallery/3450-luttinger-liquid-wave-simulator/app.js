@@ -115,17 +115,30 @@ function createCouplingBackground(width, height, channelIndex) {
 
 function createPlotGrid(width, height) {
   const paddingX = 18;
+  const paddingY = 20;
+  const left = paddingX;
+  const right = width - paddingX;
+  const top = paddingY;
+  const bottom = height - paddingY;
+  const tick = 8;
   const vertical = Array.from({ length: 7 }, (_, index) => {
     const x = paddingX + (index / 6) * (width - 2 * paddingX);
-    return `<line x1="${x.toFixed(2)}" y1="0" x2="${x.toFixed(2)}" y2="${height}" class="screen-grid-line vertical"></line>`;
+    return `<line x1="${x.toFixed(2)}" y1="${top}" x2="${x.toFixed(2)}" y2="${bottom}" class="screen-grid-line vertical"></line>`;
   }).join("");
-  const horizontal = [20, height / 2, height - 20]
+  const horizontal = [top, height / 2, bottom]
     .map((y, index) => {
       const className = index === 1 ? "screen-grid-line strong" : "screen-grid-line";
-      return `<line x1="${paddingX}" y1="${y}" x2="${width - paddingX}" y2="${y}" class="${className}"></line>`;
+      return `<line x1="${left}" y1="${y}" x2="${right}" y2="${y}" class="${className}"></line>`;
     })
     .join("");
-  return `${vertical}${horizontal}`;
+  const yTicks = [top, height / 2, bottom]
+    .map((y) => `<line x1="${left}" y1="${y}" x2="${(left + tick).toFixed(2)}" y2="${y}" class="plot-tick"></line><line x1="${right}" y1="${y}" x2="${(right - tick).toFixed(2)}" y2="${y}" class="plot-tick"></line>`)
+    .join("");
+  const xTicks = [left, (left + right) / 2, right]
+    .map((x) => `<line x1="${x}" y1="${bottom}" x2="${x}" y2="${(bottom - tick).toFixed(2)}" class="plot-tick"></line>`)
+    .join("");
+  const frame = `<rect x="${left}" y="${top}" width="${right - left}" height="${bottom - top}" class="plot-frame"></rect>`;
+  return `${vertical}${horizontal}${frame}${yTicks}${xTicks}`;
 }
 
 function interfaceMarkerX(width) {
@@ -150,7 +163,7 @@ function renderChannel(channelIndex) {
   const markerMarkup =
     marker === null
       ? ""
-      : `<line x1="${marker.toFixed(2)}" y1="18" x2="${marker.toFixed(2)}" y2="${height - 18}" class="interface-marker"></line>`;
+      : `<line x1="${marker.toFixed(2)}" y1="20" x2="${marker.toFixed(2)}" y2="${height - 20}" class="interface-marker"></line>`;
 
   svg.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" class="screen-bg"></rect>
