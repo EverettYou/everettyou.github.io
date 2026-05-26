@@ -3,11 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>3-4-5-0 Luttinger Liquid Wave Simulator</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <title>3-4-5-0 Model Simulator</title>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="./app.css" />
     <script>
       window.MathJax = {
@@ -17,7 +15,7 @@
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
-  <body>
+  <body class="simulator-standalone">
     <div class="simulator-embed">
     <div class="page-shell">
 
@@ -37,10 +35,10 @@
           <div class="plot-shell">
             <svg class="multi-panel-plot" id="multi-panel-plot" viewBox="0 0 900 620" preserveAspectRatio="none" role="img" aria-label="Four compact boson field profiles"></svg>
             <div class="plot-labels" aria-hidden="true">
-              <span class="plot-text panel-symbol" style="left: 4%; top: 12.9%;">φ₁</span>
-              <span class="plot-text panel-symbol" style="left: 4%; top: 32.6%;">φ₂</span>
-              <span class="plot-text panel-symbol" style="left: 4%; top: 52.3%;">φ₃</span>
-              <span class="plot-text panel-symbol" style="left: 4%; top: 71.9%;">φ₄</span>
+              <span class="plot-text panel-symbol" style="left: 2.5%; top: 12.9%;">φ₁</span>
+              <span class="plot-text panel-symbol" style="left: 2.5%; top: 32.6%;">φ₂</span>
+              <span class="plot-text panel-symbol" style="left: 2.5%; top: 52.3%;">φ₃</span>
+              <span class="plot-text panel-symbol" style="left: 2.5%; top: 71.9%;">φ₄</span>
 
               <span class="plot-text y-tick" style="top: 4.8%;">π</span>
               <span class="plot-text y-tick" style="top: 12.9%;">0</span>
@@ -81,20 +79,41 @@
 
         <aside class="control-dock" aria-label="Simulation controls">
           <form id="control-form">
-            <p id="status-text" class="status dock-status">Ready.</p>
+            <div id="status-text" class="status dock-status" data-state="idle" role="status" aria-live="polite">
+              <span class="status-light" aria-hidden="true"></span>
+              <span class="status-label">Ready</span>
+            </div>
 
-            <details class="fold-panel" open>
+            <section class="scheme-controls" aria-label="Simulation scheme">
+              <fieldset class="segmented-control">
+                <legend>SMG Region</legend>
+                <label>
+                  <input name="interaction_side" type="radio" value="left" checked />
+                  <span>Left</span>
+                </label>
+                <label>
+                  <input name="interaction_side" type="radio" value="right" />
+                  <span>Right</span>
+                </label>
+                <label>
+                  <input name="interaction_side" type="radio" value="both" />
+                  <span>Both</span>
+                </label>
+              </fieldset>
+              <label>
+                <span>Launch channel</span>
+                <select name="packet_channel">
+                  <option value="0" selected>phi_1</option>
+                  <option value="1">phi_2</option>
+                  <option value="2">phi_3</option>
+                  <option value="3">phi_4</option>
+                </select>
+              </label>
+            </section>
+
+            <details class="fold-panel">
               <summary>Initial condition</summary>
               <div class="panel-body">
-                <label>
-                  <span>Launch channel</span>
-                  <select name="packet_channel">
-                    <option value="0" selected>phi_1</option>
-                    <option value="1">phi_2</option>
-                    <option value="2">phi_3</option>
-                    <option value="3">phi_4</option>
-                  </select>
-                </label>
                 <label>
                   <span>Amplitude</span>
                   <input name="packet_amplitude" type="number" step="0.0001" value="3.141" />
@@ -110,7 +129,7 @@
               </div>
             </details>
 
-            <details class="fold-panel" open>
+            <details class="fold-panel">
               <summary>SMG interface</summary>
               <div class="panel-body">
                 <label>
@@ -125,17 +144,6 @@
                   <span>Interface center c</span>
                   <input name="interface_center" type="number" step="0.5" value="-10.0" />
                 </label>
-                <fieldset class="segmented-control">
-                  <legend>Interaction side</legend>
-                  <label>
-                    <input name="interaction_side" type="radio" value="left" checked />
-                    <span>Left</span>
-                  </label>
-                  <label>
-                    <input name="interaction_side" type="radio" value="right" />
-                    <span>Right</span>
-                  </label>
-                </fieldset>
               </div>
             </details>
 
@@ -173,6 +181,17 @@
                     <option value="dirichlet">Dirichlet</option>
                     <option value="neumann">Neumann</option>
                     <option value="periodic">Periodic</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Solver</span>
+                  <select name="solver">
+                    <option value="auto" selected>Automatic</option>
+                    <option value="constrained_sbp_sat_rk4">Stable default</option>
+                    <option value="constrained_split_imex_sbp_sat">Stiff interface</option>
+                    <option value="averaged_projected_constrained_sbp_sat_rk4">Plateau pinning</option>
+                    <option value="characteristic_fv">Conservative transport</option>
+                    <option value="finite_difference_rk4">Legacy baseline</option>
                   </select>
                 </label>
               </div>

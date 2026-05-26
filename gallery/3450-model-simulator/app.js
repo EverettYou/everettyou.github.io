@@ -6,9 +6,11 @@ const state = {
   playbackSpeed: 1,
   autoRunTimer: null,
   requestSerial: 0,
+  lastInteractionSide: "left",
 };
 
 const TAU = 2 * Math.PI;
+const ANGLE_WRAP_BUFFER = 0.2;
 const PLAYBACK_BASE_MS = 90;
 const AUTO_RUN_DELAY_MS = 450;
 const CHANNEL_COLORS = ["#c93300", "#ff8f29", "#009926", "#0073e6"];
@@ -16,6 +18,31 @@ const ABSORBING_LAYER_FRACTION = 0.1;
 const K_INV_DIAG = [1, 1, -1, -1];
 const ELL_1 = [1, -2, 1, 2];
 const ELL_2 = [-3, 1, 1, -3];
+const RECOMMENDED_FINITE_DOMAIN_SOLVER = "constrained_sbp_sat_rk4";
+const PERIODIC_BROWSER_FALLBACK_SOLVER = "finite_difference_rk4";
+const BROWSER_SUPPORTED_SOLVERS = new Set([
+  "auto",
+  "finite_difference_rk4",
+  "constrained_sbp_sat_rk4",
+  "constrained_split_imex_sbp_sat",
+  "averaged_projected_constrained_sbp_sat_rk4",
+  "characteristic_fv",
+]);
+const FINITE_DOMAIN_SOLVERS = new Set([
+  "constrained_sbp_sat_rk4",
+  "constrained_split_imex_sbp_sat",
+  "averaged_projected_constrained_sbp_sat_rk4",
+  "characteristic_fv",
+]);
+const IMPLICIT_ITERATIONS = 10;
+const IMPLICIT_RELAXATION = 0.8;
+const PROJECTION_THRESHOLD = 0.75;
+const THETA_PROJECTION_CORRECTION = [
+  [0, 0],
+  [0, 0],
+  [0.6, 0.4],
+  [0.2, -0.2],
+];
 const SVG_STYLE = {
   grid: "stroke: color-mix(in srgb, var(--sim-muted) 20%, transparent); stroke-width: 0.75; vector-effect: non-scaling-stroke;",
   gridVertical: "stroke: color-mix(in srgb, var(--sim-muted) 16%, transparent); stroke-width: 0.75; vector-effect: non-scaling-stroke;",
@@ -52,8 +79,30 @@ function cacheElements() {
 
 function setStatus(message, isError = false) {
   if (!statusText) return;
-  statusText.textContent = message;
-  statusText.style.color = isError ? "#ffb0a0" : "";
+  const label = statusText.querySelector(".status-label");
+  const normalized = String(message || "");
+  let stateName = "idle";
+  let displayText = normalized || "Ready";
+
+  const frameMatch = normalized.match(/(\d+)\s+frames?/i);
+  if (isError) {
+    stateName = "error";
+    displayText = "Error";
+  } else if (/complete/i.test(normalized)) {
+    stateName = "complete";
+    displayText = frameMatch ? `(${frameMatch[1]} frames)` : "Complete";
+  } else if (/running|auto-running|parameter changed/i.test(normalized)) {
+    stateName = "running";
+    displayText = frameMatch ? `(${frameMatch[1]} frames)` : "Running";
+  }
+
+  statusText.dataset.state = stateName;
+  statusText.setAttribute("aria-label", isError ? normalized : displayText);
+  if (label) {
+    label.textContent = displayText;
+  } else {
+    statusText.textContent = displayText;
+  }
 }
 
 function setPlayIcon(isPlaying) {
@@ -64,6 +113,40 @@ function setPlayIcon(isPlaying) {
 
 function wrapCompactField(value) {
   return ((value + Math.PI) % TAU + TAU) % TAU - Math.PI;
+}
+
+function clampPlotAngle(value) {
+  return Math.max(-Math.PI, Math.min(Math.PI, value));
+}
+
+function chooseBufferedPlotAngle(value, previousAngle) {
+  const wrapped = wrapCompactField(value);
+  if (previousAngle === null) {
+    return wrapped;
+  }
+
+  const candidates = [wrapped - TAU, wrapped, wrapped + TAU];
+  const closest = candidates.reduce((best, candidate) => (
+    Math.abs(candidate - previousAngle) < Math.abs(best - previousAngle) ? candidate : best
+  ), wrapped);
+
+  if (closest >= -Math.PI - ANGLE_WRAP_BUFFER && closest <= Math.PI + ANGLE_WRAP_BUFFER) {
+    return clampPlotAngle(closest);
+  }
+  return wrapped;
+}
+
+function bufferedPlotAngles(values) {
+  const angles = [];
+  let previousAngle = null;
+
+  for (const value of values) {
+    const angle = chooseBufferedPlotAngle(value, previousAngle);
+    angles.push(angle);
+    previousAngle = angle;
+  }
+
+  return angles;
 }
 
 function collectPayload() {
@@ -87,6 +170,7 @@ function collectPayload() {
     num_steps: Number(data.get("num_steps")),
     sample_every: Number(data.get("sample_every")),
     boundary: data.get("boundary"),
+    solver: data.get("solver"),
     v_diag: [
       Number(data.get("v1")),
       Number(data.get("v2")),
@@ -102,10 +186,12 @@ function scale(value, min, max, outputMin, outputMax) {
 }
 
 function createWavePath(values, xValues, plot) {
-  const commands = values.map((value, index) => {
+  const angles = bufferedPlotAngles(values);
+  const commands = angles.map((angle, index) => {
     const x = scale(xValues[index], xValues[0], xValues[xValues.length - 1], plot.left, plot.right);
-    const y = scale(wrapCompactField(value), -Math.PI, Math.PI, plot.bottom, plot.top);
-    return `${index === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`;
+    const y = scale(angle, -Math.PI, Math.PI, plot.bottom, plot.top);
+    const command = index === 0 || Math.abs(angle - angles[index - 1]) > Math.PI ? "M" : "L";
+    return `${command} ${x.toFixed(2)} ${y.toFixed(2)}`;
   });
   return commands.join(" ");
 }
@@ -172,13 +258,17 @@ function createPlotGrid(plot, xValues) {
   return `${vertical}${horizontal}${frame}${yTicks}${xTicks}`;
 }
 
-function interfaceMarkerX(plot) {
+function interfaceMarkerXs(plot) {
   if (!state.data?.meta) return null;
   const center = state.data.meta.interface_center;
   if (typeof center !== "number") return null;
   const xValues = state.data.x;
-  if (center < xValues[0] || center > xValues[xValues.length - 1]) return null;
-  return scale(center, xValues[0], xValues[xValues.length - 1], plot.left, plot.right);
+  const centers = state.data.meta.interaction_side === "both"
+    ? [-Math.abs(center), Math.abs(center)]
+    : [center];
+  return centers
+    .filter((value) => value >= xValues[0] && value <= xValues[xValues.length - 1])
+    .map((value) => scale(value, xValues[0], xValues[xValues.length - 1], plot.left, plot.right));
 }
 
 function panelGeometry(channelIndex) {
@@ -213,13 +303,14 @@ function renderMultiPanelPlot() {
     const plot = panelGeometry(channelIndex);
     const clipId = `plot-clip-${channelIndex}`;
     const shadeId = `coupling-gradient-${channelIndex}`;
-    const marker = interfaceMarkerX(plot);
+    const markers = interfaceMarkerXs(plot);
     const path = createWavePath(frame[channelIndex], state.data.x, plot);
     const color = CHANNEL_COLORS[channelIndex];
-    const markerMarkup =
-      marker === null
-        ? ""
-        : `<line x1="${marker.toFixed(2)}" y1="${plot.top}" x2="${marker.toFixed(2)}" y2="${plot.bottom}" style="${SVG_STYLE.marker}"></line>`;
+    const markerMarkup = markers === null
+      ? ""
+      : markers
+        .map((marker) => `<line x1="${marker.toFixed(2)}" y1="${plot.top}" x2="${marker.toFixed(2)}" y2="${plot.bottom}" style="${SVG_STYLE.marker}"></line>`)
+        .join("");
 
     defs.push(createCouplingBackground(channelIndex));
     defs.push(`<clipPath id="${clipId}"><rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}"></rect></clipPath>`);
@@ -283,8 +374,8 @@ function validatePayload(payload) {
   if (payload.dt <= 0 || payload.dt > 0.2) {
     throw new Error("dt must be in the interval (0, 0.2].");
   }
-  if (payload.num_steps < 1 || payload.num_steps > 5000) {
-    throw new Error("Steps must be between 1 and 5000.");
+  if (payload.num_steps < 1 || payload.num_steps > 10000) {
+    throw new Error("Steps must be between 1 and 10000.");
   }
   if (payload.sample_every < 1 || payload.sample_every > 200) {
     throw new Error("Sample every must be between 1 and 200.");
@@ -292,8 +383,8 @@ function validatePayload(payload) {
   if (payload.g0 < 0 || payload.g0 > 10) {
     throw new Error("g0 must be between 0 and 10.");
   }
-  if (payload.interface_width <= 0.05 || payload.interface_width > 20) {
-    throw new Error("w must be in the interval (0.05, 20].");
+  if (payload.interface_width < 0.01 || payload.interface_width > 20) {
+    throw new Error("w must be in the interval [0.01, 20].");
   }
   if (payload.packet_amplitude <= 0 || payload.packet_amplitude > 5) {
     throw new Error("Amplitude must be in the interval (0, 5].");
@@ -303,6 +394,9 @@ function validatePayload(payload) {
   }
   if (payload.v_diag.some((value) => value <= 0)) {
     throw new Error("All diagonal velocities must be positive.");
+  }
+  if (!BROWSER_SUPPORTED_SOLVERS.has(payload.solver)) {
+    throw new Error("The selected browser solver is not supported.");
   }
 }
 
@@ -317,6 +411,14 @@ function linspace(xMin, xMax, count, endpoint = true) {
 }
 
 function sigmoidProfile(xValues, payload) {
+  const center = Math.abs(payload.interface_center);
+  const leftProfile = (x) => payload.g0 / (1 + Math.exp((x + center) / payload.interface_width));
+  const rightProfile = (x) => payload.g0 / (1 + Math.exp(-(x - center) / payload.interface_width));
+
+  if (payload.interaction_side === "both") {
+    return xValues.map((x) => leftProfile(x) + rightProfile(x));
+  }
+
   return xValues.map((x) => {
     const argument = payload.interaction_side === "right"
       ? -(x - payload.interface_center) / payload.interface_width
@@ -455,44 +557,314 @@ function nonlinearForce(phi, gProfile) {
   return force;
 }
 
-function integrateAlongX(source, dx) {
+function balancedIntegralAlongX(source, dx) {
   return source.map((channel) => {
-    const integral = new Array(channel.length).fill(0);
+    const primitive = new Array(channel.length).fill(0);
     for (let index = 1; index < channel.length; index += 1) {
-      integral[index] = integral[index - 1] + 0.5 * (channel[index] + channel[index - 1]) * dx;
+      primitive[index] = primitive[index - 1] + 0.5 * (channel[index] + channel[index - 1]) * dx;
     }
-    const mean = integral.reduce((sum, value) => sum + value, 0) / integral.length;
-    return integral.map((value) => value - mean);
+    const total = primitive[primitive.length - 1];
+    return primitive.map((value) => value - 0.5 * total);
   });
 }
 
-function rhs(phi, grid, payload, gProfile) {
+function leftZeroIntegralAlongX(source, dx) {
+  return source.map((channel) => {
+    const primitive = new Array(channel.length).fill(0);
+    for (let index = 1; index < channel.length; index += 1) {
+      primitive[index] = primitive[index - 1] + 0.5 * (channel[index] + channel[index - 1]) * dx;
+    }
+    return primitive;
+  });
+}
+
+function meanZeroIntegralAlongX(source, dx, boundary) {
+  return source.map((channel) => {
+    const primitive = new Array(channel.length).fill(0);
+    for (let index = 1; index < channel.length; index += 1) {
+      primitive[index] = primitive[index - 1] + 0.5 * (channel[index] + channel[index - 1]) * dx;
+    }
+
+    const endpoint = boundary !== "periodic";
+    const weights = new Array(channel.length).fill(dx);
+    if (endpoint) {
+      weights[0] *= 0.5;
+      weights[weights.length - 1] *= 0.5;
+    }
+    const totalWeight = weights.reduce((total, value) => total + value, 0);
+    const weightedMean = primitive.reduce((total, value, index) => total + value * weights[index], 0) / totalWeight;
+    return primitive.map((value) => value - weightedMean);
+  });
+}
+
+function freeVelocity(phi, grid, payload) {
   const field = applyFieldBoundary(phi, payload.boundary);
   const phiX = firstDerivative(field, grid.dx, payload.boundary, payload.v_diag);
-  const force = nonlinearForce(field, gProfile);
-  const source = force.map((channel, channelIndex) =>
-    channel.map((value) => K_INV_DIAG[channelIndex] * value),
-  );
-  const interactionVelocity = integrateAlongX(source, grid.dx);
-
   return phi.map((channel, channelIndex) =>
     channel.map((_, pointIndex) =>
-      K_INV_DIAG[channelIndex] * payload.v_diag[channelIndex] * phiX[channelIndex][pointIndex]
-      - interactionVelocity[channelIndex][pointIndex],
+      K_INV_DIAG[channelIndex] * payload.v_diag[channelIndex] * phiX[channelIndex][pointIndex],
     ),
   );
 }
 
-function rk4Step(phi, grid, payload, gProfile) {
-  const k1 = rhs(phi, grid, payload, gProfile);
-  const k2 = rhs(addScaledField(phi, k1, 0.5 * payload.dt), grid, payload, gProfile);
-  const k3 = rhs(addScaledField(phi, k2, 0.5 * payload.dt), grid, payload, gProfile);
-  const k4 = rhs(addScaledField(phi, k3, payload.dt), grid, payload, gProfile);
-  return applyFieldBoundary(combineRk4(phi, k1, k2, k3, k4, payload.dt), payload.boundary);
+function interactionVelocity(phi, grid, payload, gProfile, integrationMode = "balanced") {
+  const field = applyFieldBoundary(phi, payload.boundary);
+  const force = nonlinearForce(field, gProfile);
+  const source = force.map((channel, channelIndex) =>
+    channel.map((value) => K_INV_DIAG[channelIndex] * value),
+  );
+  let primitive;
+  if (integrationMode === "left_zero") {
+    primitive = leftZeroIntegralAlongX(source, grid.dx);
+  } else if (integrationMode === "mean_zero") {
+    primitive = meanZeroIntegralAlongX(source, grid.dx, payload.boundary);
+  } else {
+    primitive = balancedIntegralAlongX(source, grid.dx);
+  }
+  return primitive.map((channel) => channel.map((value) => -value));
+}
+
+function rhsFiniteDifference(phi, grid, payload, gProfile) {
+  const freePart = freeVelocity(phi, grid, payload);
+  const interactionPart = interactionVelocity(phi, grid, payload, gProfile, "balanced");
+  return phi.map((channel, channelIndex) =>
+    channel.map((_, pointIndex) =>
+      freePart[channelIndex][pointIndex] + interactionPart[channelIndex][pointIndex],
+    ),
+  );
+}
+
+function rhsConstrained(phi, grid, payload, gProfile) {
+  const freePart = freeVelocity(phi, grid, payload);
+  const interactionPart = interactionVelocity(phi, grid, payload, gProfile, "mean_zero");
+  return phi.map((channel, channelIndex) =>
+    channel.map((_, pointIndex) =>
+      freePart[channelIndex][pointIndex] + interactionPart[channelIndex][pointIndex],
+    ),
+  );
+}
+
+function rk4StepWithRhs(phi, stepDt, rhsFn) {
+  const k1 = rhsFn(phi);
+  const k2 = rhsFn(addScaledField(phi, k1, 0.5 * stepDt));
+  const k3 = rhsFn(addScaledField(phi, k2, 0.5 * stepDt));
+  const k4 = rhsFn(addScaledField(phi, k3, stepDt));
+  return combineRk4(phi, k1, k2, k3, k4, stepDt);
+}
+
+function finiteDifferenceRk4Step(phi, grid, payload, gProfile, stepDt) {
+  return applyFieldBoundary(
+    rk4StepWithRhs(
+      phi,
+      stepDt,
+      (field) => rhsFiniteDifference(field, grid, payload, gProfile),
+    ),
+    payload.boundary,
+  );
+}
+
+function constrainedSbpRk4Step(phi, grid, payload, gProfile, stepDt) {
+  return applyFieldBoundary(
+    rk4StepWithRhs(
+      phi,
+      stepDt,
+      (field) => rhsConstrained(field, grid, payload, gProfile),
+    ),
+    payload.boundary,
+  );
+}
+
+function strongSmgProjectionWeight(gProfile) {
+  const gMax = Math.max(...gProfile);
+  if (gMax <= 0) {
+    return new Array(gProfile.length).fill(0);
+  }
+  return gProfile.map((value) => Math.max(0, Math.min(1, (value / gMax - PROJECTION_THRESHOLD) / (1 - PROJECTION_THRESHOLD))));
+}
+
+function applyAveragedProjection(phi, gProfile) {
+  const weight = strongSmgProjectionWeight(gProfile);
+  let totalWeight = 0;
+  let averagedTheta1 = 0;
+  let averagedTheta2 = 0;
+
+  for (let index = 0; index < weight.length; index += 1) {
+    const w = weight[index];
+    if (w <= 0) continue;
+    totalWeight += w;
+    let theta1 = 0;
+    let theta2 = 0;
+    for (let channelIndex = 0; channelIndex < 4; channelIndex += 1) {
+      theta1 += ELL_1[channelIndex] * phi[channelIndex][index];
+      theta2 += ELL_2[channelIndex] * phi[channelIndex][index];
+    }
+    averagedTheta1 += w * theta1;
+    averagedTheta2 += w * theta2;
+  }
+
+  if (totalWeight <= 0) {
+    return phi;
+  }
+
+  averagedTheta1 /= totalWeight;
+  averagedTheta2 /= totalWeight;
+
+  return phi.map((channel, channelIndex) =>
+    channel.map((value, pointIndex) =>
+      value - weight[pointIndex] * (
+        THETA_PROJECTION_CORRECTION[channelIndex][0] * averagedTheta1
+        + THETA_PROJECTION_CORRECTION[channelIndex][1] * averagedTheta2
+      ),
+    ),
+  );
+}
+
+function averagedProjectedConstrainedStep(phi, grid, payload, gProfile, stepDt) {
+  const stepped = constrainedSbpRk4Step(phi, grid, payload, gProfile, stepDt);
+  return applyFieldBoundary(applyAveragedProjection(stepped, gProfile), payload.boundary);
+}
+
+function interactionMidpointStep(phi, grid, payload, gProfile, stepDt) {
+  if (stepDt <= 0) return cloneField(phi);
+
+  const base = applyFieldBoundary(phi, payload.boundary);
+  let guess = applyFieldBoundary(
+    addScaledField(base, interactionVelocity(base, grid, payload, gProfile, "mean_zero"), stepDt),
+    payload.boundary,
+  );
+
+  for (let iteration = 0; iteration < IMPLICIT_ITERATIONS; iteration += 1) {
+    const midpoint = base.map((channel, channelIndex) =>
+      channel.map((value, pointIndex) => 0.5 * (value + guess[channelIndex][pointIndex])),
+    );
+    const updated = applyFieldBoundary(
+      addScaledField(base, interactionVelocity(midpoint, grid, payload, gProfile, "mean_zero"), stepDt),
+      payload.boundary,
+    );
+    guess = applyFieldBoundary(
+      updated.map((channel, channelIndex) =>
+        channel.map((value, pointIndex) =>
+          IMPLICIT_RELAXATION * value + (1 - IMPLICIT_RELAXATION) * guess[channelIndex][pointIndex],
+        ),
+      ),
+      payload.boundary,
+    );
+  }
+
+  return guess;
+}
+
+function constrainedSplitImexStep(phi, grid, payload, gProfile, stepDt) {
+  const halfInteraction = interactionMidpointStep(phi, grid, payload, gProfile, 0.5 * stepDt);
+  const freeStep = applyFieldBoundary(
+    rk4StepWithRhs(halfInteraction, stepDt, (field) => freeVelocity(field, grid, payload)),
+    payload.boundary,
+  );
+  return interactionMidpointStep(freeStep, grid, payload, gProfile, 0.5 * stepDt);
+}
+
+function transportRhs(phi, grid, payload) {
+  const field = applyFieldBoundary(phi, payload.boundary);
+  const pointCount = field[0].length;
+  const dx = grid.dx;
+
+  return field.map((channel, channelIndex) => {
+    const transportVelocity = K_INV_DIAG[channelIndex] * payload.v_diag[channelIndex];
+    const physicalSpeed = -transportVelocity;
+    const rhs = new Array(pointCount).fill(0);
+
+    if (payload.boundary === "periodic") {
+      for (let index = 0; index < pointCount; index += 1) {
+        const leftIndex = index === 0 ? pointCount - 1 : index - 1;
+        const rightIndex = index === pointCount - 1 ? 0 : index + 1;
+        const fluxLeft = physicalSpeed >= 0 ? physicalSpeed * channel[leftIndex] : physicalSpeed * channel[index];
+        const fluxRight = physicalSpeed >= 0 ? physicalSpeed * channel[index] : physicalSpeed * channel[rightIndex];
+        rhs[index] = -(fluxRight - fluxLeft) / dx;
+      }
+      return rhs;
+    }
+
+    const flux = new Array(pointCount + 1).fill(0);
+    if (physicalSpeed >= 0) {
+      for (let index = 1; index <= pointCount; index += 1) {
+        flux[index] = physicalSpeed * channel[index - 1];
+      }
+      flux[0] = payload.boundary === "neumann" ? physicalSpeed * channel[0] : 0;
+    } else {
+      for (let index = 0; index < pointCount; index += 1) {
+        flux[index] = physicalSpeed * channel[index];
+      }
+      flux[pointCount] = payload.boundary === "neumann" ? physicalSpeed * channel[pointCount - 1] : 0;
+    }
+
+    for (let index = 0; index < pointCount; index += 1) {
+      rhs[index] = -(flux[index + 1] - flux[index]) / dx;
+    }
+    return rhs;
+  });
+}
+
+function characteristicFvRhs(phi, grid, payload, gProfile) {
+  const transport = transportRhs(phi, grid, payload);
+  const interaction = interactionVelocity(phi, grid, payload, gProfile, "mean_zero");
+  return phi.map((channel, channelIndex) =>
+    channel.map((_, pointIndex) => transport[channelIndex][pointIndex] + interaction[channelIndex][pointIndex]),
+  );
+}
+
+function characteristicFvStep(phi, grid, payload, gProfile, stepDt) {
+  const stage1 = applyFieldBoundary(addScaledField(phi, characteristicFvRhs(phi, grid, payload, gProfile), stepDt), payload.boundary);
+  const rhs1 = characteristicFvRhs(stage1, grid, payload, gProfile);
+  const stage2 = applyFieldBoundary(
+    phi.map((channel, channelIndex) =>
+      channel.map((value, pointIndex) =>
+        0.75 * value + 0.25 * (stage1[channelIndex][pointIndex] + stepDt * rhs1[channelIndex][pointIndex]),
+      ),
+    ),
+    payload.boundary,
+  );
+  const rhs2 = characteristicFvRhs(stage2, grid, payload, gProfile);
+  return applyFieldBoundary(
+    phi.map((channel, channelIndex) =>
+      channel.map((value, pointIndex) =>
+        (1 / 3) * value + (2 / 3) * (stage2[channelIndex][pointIndex] + stepDt * rhs2[channelIndex][pointIndex]),
+      ),
+    ),
+    payload.boundary,
+  );
+}
+
+function resolveBrowserSolver(payload) {
+  if (payload.solver === "auto") {
+    return payload.boundary === "periodic"
+      ? PERIODIC_BROWSER_FALLBACK_SOLVER
+      : RECOMMENDED_FINITE_DOMAIN_SOLVER;
+  }
+  if (payload.boundary === "periodic" && FINITE_DOMAIN_SOLVERS.has(payload.solver)) {
+    throw new Error("Finite-domain browser solvers require absorbing, dirichlet, or neumann boundaries.");
+  }
+  return payload.solver;
+}
+
+function browserStep(phi, grid, payload, gProfile, solverName, stepDt) {
+  if (solverName === "constrained_sbp_sat_rk4") {
+    return constrainedSbpRk4Step(phi, grid, payload, gProfile, stepDt);
+  }
+  if (solverName === "constrained_split_imex_sbp_sat") {
+    return constrainedSplitImexStep(phi, grid, payload, gProfile, stepDt);
+  }
+  if (solverName === "averaged_projected_constrained_sbp_sat_rk4") {
+    return averagedProjectedConstrainedStep(phi, grid, payload, gProfile, stepDt);
+  }
+  if (solverName === "characteristic_fv") {
+    return characteristicFvStep(phi, grid, payload, gProfile, stepDt);
+  }
+  return finiteDifferenceRk4Step(phi, grid, payload, gProfile, stepDt);
 }
 
 function simulateInBrowser(payload) {
   validatePayload(payload);
+  const solverName = resolveBrowserSolver(payload);
   const endpoint = payload.boundary !== "periodic";
   const grid = linspace(payload.x_min, payload.x_max, payload.num_points, endpoint);
   const gProfile = sigmoidProfile(grid.values, payload);
@@ -501,7 +873,7 @@ function simulateInBrowser(payload) {
   const times = [0];
 
   for (let step = 1; step <= payload.num_steps; step += 1) {
-    phi = rk4Step(phi, grid, payload, gProfile);
+    phi = browserStep(phi, grid, payload, gProfile, solverName, payload.dt);
     if (step % payload.sample_every === 0) {
       fields.push(cloneField(phi));
       times.push(step * payload.dt);
@@ -520,6 +892,9 @@ function simulateInBrowser(payload) {
       boundary: payload.boundary,
       interface_center: payload.interface_center,
       interaction_side: payload.interaction_side,
+      solver: solverName,
+      requested_solver: payload.solver,
+      integration_constant: FINITE_DOMAIN_SOLVERS.has(solverName) ? "mean_zero" : "balanced",
       runtime: "browser",
     },
   };
@@ -574,7 +949,6 @@ async function runSimulation({ keepStatus = false } = {}) {
     if (requestId === state.requestSerial) {
       setStatus(error.message || "Simulation failed.", true);
     }
-  } finally {
   }
 }
 
@@ -599,6 +973,41 @@ function reflectCentersAboutOrigin() {
     if (Number.isFinite(value)) {
       input.value = String(-value);
     }
+  }
+}
+
+function setInputValue(name, value) {
+  if (!form) return;
+  const input = form.elements.namedItem(name);
+  if (input instanceof HTMLInputElement || input instanceof HTMLSelectElement) {
+    input.value = String(value);
+  }
+}
+
+function applySmgRegionPreset(side) {
+  if (side === "both") {
+    setInputValue("interface_center", 15);
+    setInputValue("packet_center", 0);
+  } else if (state.lastInteractionSide === "both") {
+    setInputValue("interface_center", side === "left" ? -10 : 10);
+    setInputValue("packet_center", side === "left" ? 10 : -10);
+  } else {
+    reflectCentersAboutOrigin();
+  }
+  state.lastInteractionSide = side;
+}
+
+function syncRecommendedSolverForBoundary(boundaryValue) {
+  if (!form) return;
+  const solverInput = form.elements.namedItem("solver");
+  if (!(solverInput instanceof HTMLSelectElement)) return;
+
+  if (solverInput.value === "auto") {
+    return;
+  }
+
+  if (boundaryValue === "periodic" && FINITE_DOMAIN_SOLVERS.has(solverInput.value)) {
+    solverInput.value = PERIODIC_BROWSER_FALLBACK_SOLVER;
   }
 }
 
@@ -633,7 +1042,10 @@ function initSimulator() {
 
   form.addEventListener("change", (event) => {
     if (event.target instanceof HTMLInputElement && event.target.name === "interaction_side") {
-      reflectCentersAboutOrigin();
+      applySmgRegionPreset(event.target.value);
+    }
+    if (event.target instanceof HTMLSelectElement && event.target.name === "boundary") {
+      syncRecommendedSolverForBoundary(event.target.value);
     }
     scheduleAutoRun();
   });
@@ -666,6 +1078,10 @@ function initSimulator() {
   });
 
   setPlayIcon(false);
+  const boundaryInput = form.elements.namedItem("boundary");
+  if (boundaryInput instanceof HTMLSelectElement) {
+    syncRecommendedSolverForBoundary(boundaryInput.value);
+  }
   runSimulation();
 }
 
