@@ -65,7 +65,7 @@ The SMG interaction is built from two integer **Haldane null vectors**
 $$
 \ell_1=(1,-2,1,2)^\intercal,
 \qquad
-\ell_2=(-3,1,1,-3)^\intercal,
+\ell_2=(2,1,-2,1)^\intercal,
 $$
 
 which satisfy $$\ell_a^\intercal K^{-1}\ell_b=0$$ and which preserve the full
