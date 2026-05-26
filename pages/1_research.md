@@ -108,4 +108,4 @@ Artificial intelligence is influencing all scientific fields, including physics.
 
 Interactive demos and exploratory tools are collected in the [Research Project Gallery](/gallery/). These projects are meant to make theoretical structures easier to inspect, tune, and discuss.
 
-- [3-4-5-0 Luttinger Liquid Wave Simulator](/gallery/3450-luttinger-liquid-wave-simulator/)
+- [3-4-5-0 Model Simulator](/gallery/3450-model-simulator/)
