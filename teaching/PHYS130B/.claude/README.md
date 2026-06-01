@@ -1,4 +1,4 @@
-# PHYS130B `.claude` — ch4–6 maintenance program
+# PHYS130B maintenance program
 
 Read after **`CLAUDE.md`** when doing agent work on this course.
 
