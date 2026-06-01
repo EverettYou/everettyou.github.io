@@ -14,6 +14,8 @@ tags: [Course Syllabus]
 
 * *Discussion session*: Thu. 6:30 PM - 7:20 PM, WLH 2204
 
+* *Final exam*: Wed, June 10, 2026. 3:00 PM - 5:59 PM, MOS 0204
+
 * *Instructor*: Yi-Zhuang You (尤亦庄) (sounds like EACH-ONE, YOU) (He/Him/His)
 
   * *Email*: <yzyou@ucsd.edu>
@@ -52,6 +54,7 @@ Each student completes **two research projects** during the quarter, with AI ass
 
 The final exam is held in person with no AI access. Problems are drawn directly from the homework assignments, with possible slight variations. This is the primary test of whether students have internalized the physical worldview and problem-solving skills — not merely copied AI-generated solutions.
 
+- **Date & location:** Wednesday, June 10, 2026, 3:00 PM - 5:59 PM, MOS 0204.
 - **Format:** In-person, closed-book, closed-AI. **5** problems.
 - **Content:** Problems selected from the homework sets across all six chapters.
 - **Philosophy:** Students who genuinely learned from working with AI throughout the quarter — who built intuition, checked AI answers against physical reasoning, and developed their own understanding — will succeed.
@@ -68,7 +71,7 @@ The final exam is held in person with no AI access. Problems are drawn directly 
 #### Submission
 
 - **Preview reports**, **homework**, and **research projects** are submitted online on **Canvas**: [https://canvas.ucsd.edu/courses/75310](https://canvas.ucsd.edu/courses/75310){:target="_blank"}.
-- **Final exam:** in person during **finals week**.
+- **Final exam:** in person on **Wednesday, June 10, 2026, 3:00 PM - 5:59 PM, MOS 0204**.
 
 #### AI Policy
 
